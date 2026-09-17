@@ -250,3 +250,25 @@ gg_peace_assumed_war_debt = {
 	country_loan_interest_rate_mult = 0.15
 	interest_group_ig_petty_bourgeoisie_approval_add = -3
 }
+
+# T1 (FX-1). Military victory: the defeated chiefs in exile.
+gg_victory_proscription = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	country_authority_add = 20
+}
+
+# T1 (FX-1). Military victory: terror in the countryside.
+gg_victory_terror = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = 40
+	country_legitimacy_base_add = -15
+	country_prestige_add = -10
+}
+
+# T1 (FX-1). Military victory: the defeated chief handed to his patron.
+gg_victory_chief_handed_over = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+	country_influence_add = 25
+}

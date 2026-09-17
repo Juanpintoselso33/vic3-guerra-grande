@@ -97,3 +97,17 @@
 
  gg_peace_assumed_war_debt:0 "Their Debt Is Now the Nation's"
  gg_peace_assumed_war_debt_desc:0 "The Republic shall recognise as a national debt that which general Oribe contracted, in accordance with what public law establishes for such cases. It is the third article of the pact, and it is what the formula actually cost: the government that won pays for the war the other one fought."
+
+# T1 (FX-1)
+ gg_peace.5.t:0 "Victory Without a Table"
+ gg_peace.5.desc:0 "There were no terms and no plenipotentiaries. The other government no longer exists: its departments, its barracks and its debts are ours, and its chiefs wait to learn what will be done with them. What is decided now is what the Republic will remember of this war."
+ gg_peace.5.desc_third_party:0 "We did not end the war. A foreign power swallowed the other government and left us the whole Republic by default. Nobody signed anything with us, but the other side's chiefs are still here, and we must decide what to do with them."
+ gg_peace.5.desc_timeout:0 "Twenty years of war and nobody won it. Both governments still stand, but there is no one left to fight: the war burned itself out. What remains is to decide how to live with those who stood across the line."
+ gg_peace.5.flav:0 "Nobody sat down to negotiate."
+ gg_peace.5.a:0 "Clemency. Let them go home."
+ gg_peace.5.b:0 "The chiefs leave the country."
+ gg_peace.5.c:0 "Let the countryside learn."
+ gg_peace.5.d:0 "Hand the defeated chief to his patron."
+ gg_victory_proscription:0 "Defeated Chiefs Proscribed"
+ gg_victory_terror:0 "Terror in the Countryside"
+ gg_victory_chief_handed_over:0 "The Defeated Chief Handed Over"

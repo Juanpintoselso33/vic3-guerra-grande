@@ -63,7 +63,8 @@ gg_peace.1 = {
 	duration = 3
 
 	trigger = {
-		has_global_variable = guerra_grande_open_war
+		# EN/ES: T1, C5 -- the menu reads its own mark, set by whoever scheduled it (I3, I6).
+		has_global_variable = gg_peace_offered
 		has_global_variable = guerra_grande_split_done
 		NOT = { has_global_variable = gg_peace_settled }
 		# EN: HOTFIX 2026-09-16 -- this used to require the loser's country to still exist,
@@ -83,7 +84,6 @@ gg_peace.1 = {
 
 	immediate = {
 		hidden_effect = {
-			set_global_variable = guerra_grande_peace_offered
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
 				save_scope_as = gg_peace_loser
@@ -105,6 +105,8 @@ gg_peace.1 = {
 	#     le pidio garantias a Urquiza, Urquiza las dio, y se quedo en su quinta hasta 1857.
 	option = {
 		name = gg_peace.1.a
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 		default_option = yes
 
 		custom_tooltip = gg_peace_formula_tt
@@ -139,7 +141,6 @@ gg_peace.1 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_no_victors
 		}
 
@@ -174,6 +175,8 @@ gg_peace.1 = {
 	#     este lado. Esta opcion es esa diferencia, tomada aca.
 	option = {
 		name = gg_peace.1.b
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_proscription_defensa_tt
 
@@ -226,7 +229,6 @@ gg_peace.1 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_punished
 		}
 
@@ -255,6 +257,8 @@ gg_peace.1 = {
 	#     restablecio.
 	option = {
 		name = gg_peace.1.c
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_treaties_tt
 
@@ -299,7 +303,6 @@ gg_peace.1 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_no_victors
 		}
 
@@ -326,6 +329,8 @@ gg_peace.1 = {
 	#     se resuelve aca: se resuelve en gg_peace.3.
 	option = {
 		name = gg_peace.1.d
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_protectorate_asked_tt
 
@@ -338,7 +343,6 @@ gg_peace.1 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_no_victors
 			# EN: six requests went out between 1838 and 1865; London refused every one of them.
 			#     The odds are weighted accordingly, and the answer takes four months to arrive.
@@ -375,6 +379,8 @@ gg_peace.1 = {
 	#     hombres. Rosas cayo en Caseros el 3 de febrero de 1852.
 	option = {
 		name = gg_peace.1.e
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_caseros_tt
 
@@ -415,7 +421,6 @@ gg_peace.1 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_no_victors
 		}
 
@@ -434,6 +439,8 @@ gg_peace.1 = {
 	#     Nacional de Francia. La oferta vuelve en dos anios, como volvio.
 	option = {
 		name = gg_peace.1.f
+		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
+		trigger = { NOT = { has_global_variable = gg_white_peace } }
 
 		add_modifier = {
 			name = guerra_grande_divided_country
@@ -441,9 +448,10 @@ gg_peace.1 = {
 			is_decaying = yes
 		}
 
+		# EN/ES: T1, C7 -- two years in which the arbiter offers nothing; it offers again after that.
 		hidden_effect = {
-			remove_global_variable = guerra_grande_peace_offered
-			trigger_event = { id = gg_peace.1 days = 730 popup = yes }
+			remove_global_variable = gg_peace_offered
+			set_global_variable = { name = gg_peace_cooldown days = 730 }
 		}
 
 		ai_chance = {
@@ -498,7 +506,8 @@ gg_peace.2 = {
 	duration = 3
 
 	trigger = {
-		has_global_variable = guerra_grande_open_war
+		# EN/ES: T1, C5 -- the menu reads its own mark, set by whoever scheduled it (I3, I6).
+		has_global_variable = gg_peace_offered
 		has_global_variable = guerra_grande_split_done
 		NOT = { has_global_variable = gg_peace_settled }
 		# EN: HOTFIX 2026-09-16 -- this used to require the loser's country to still exist,
@@ -522,12 +531,11 @@ gg_peace.2 = {
 		#     solo si las escuadras no vinieron, porque la via del mar abierta es la unica razon por
 		#     la que aguanto nueve anios. La entrada del diario tambien rutea por esto: tenerlo en
 		#     los dos lados hace que un cambio futuro en el ruteo no lo pueda perder en silencio.
-		NOT = { has_global_variable = guerra_grande_foreign_intervention }
+		# EN/ES: T1, C5 -- the intervention gate moved to the arbiter (and, in T3b, to the open sea).
 	}
 
 	immediate = {
 		hidden_effect = {
-			set_global_variable = guerra_grande_peace_offered
 			random_country = {
 				limit = { has_variable = guerra_grande_defensa_government }
 				save_scope_as = gg_peace_loser
@@ -548,6 +556,8 @@ gg_peace.2 = {
 	#     acepten el pliego entero.
 	option = {
 		name = gg_peace.2.a
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 		default_option = yes
 
 		custom_tooltip = gg_peace_oribe_pliego_tt
@@ -581,7 +591,6 @@ gg_peace.2 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_no_victors
 		}
 
@@ -610,6 +619,8 @@ gg_peace.2 = {
 	#     extranjeras se van.
 	option = {
 		name = gg_peace.2.b
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_legal_presidency_tt
 
@@ -644,7 +655,6 @@ gg_peace.2 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 		}
 
 		ai_chance = {
@@ -682,6 +692,8 @@ gg_peace.2 = {
 	#     leyenda es propaganda colorada y este archivo lo dice; el parte a Rosas no lo es.
 	option = {
 		name = gg_peace.2.c
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_proscription_cerrito_tt
 
@@ -741,7 +753,6 @@ gg_peace.2 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 			set_global_variable = gg_peace_punished
 		}
 
@@ -773,6 +784,8 @@ gg_peace.2 = {
 	#     juego deja tomar la decision que el hombre no tomo. No afirma que la quisiera.
 	option = {
 		name = gg_peace.2.d
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_confederation_tt
 
@@ -820,7 +833,6 @@ gg_peace.2 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 		}
 
 		ai_chance = {
@@ -849,6 +861,8 @@ gg_peace.2 = {
 	#     Rosas a la division argentina. Esto es la clientela sin esa segunda mitad.
 	option = {
 		name = gg_peace.2.e
+		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
+		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_rosista_client_tt
 
@@ -893,7 +907,6 @@ gg_peace.2 = {
 		}
 
 		hidden_effect = {
-			set_global_variable = gg_peace_settled
 		}
 
 		ai_chance = {
@@ -909,6 +922,8 @@ gg_peace.2 = {
 	#     oferta vuelve en dos anios.
 	option = {
 		name = gg_peace.2.f
+		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
+		trigger = { NOT = { has_global_variable = gg_white_peace } }
 
 		add_modifier = {
 			name = guerra_grande_divided_country
@@ -916,9 +931,10 @@ gg_peace.2 = {
 			is_decaying = yes
 		}
 
+		# EN/ES: T1, C7 -- two years in which the arbiter offers nothing; it offers again after that.
 		hidden_effect = {
-			remove_global_variable = guerra_grande_peace_offered
-			trigger_event = { id = gg_peace.2 days = 730 popup = yes }
+			remove_global_variable = gg_peace_offered
+			set_global_variable = { name = gg_peace_cooldown days = 730 }
 		}
 
 		ai_chance = {
@@ -944,6 +960,8 @@ gg_peace.2 = {
 # -------------------------------------------------------------------------------------------------
 gg_peace.3 = {
 	type = country_event
+	# EN/ES: T1, I17 -- only after the peace is signed.
+	trigger = { has_global_variable = gg_peace_settled }
 	placement = ROOT
 
 	title = gg_peace.3.t
@@ -1015,6 +1033,8 @@ gg_peace.3 = {
 # -------------------------------------------------------------------------------------------------
 gg_peace.4 = {
 	type = country_event
+	# EN/ES: T1, I17 -- only after the peace is signed.
+	trigger = { has_global_variable = gg_peace_settled }
 	placement = ROOT
 
 	title = gg_peace.4.t
@@ -1050,5 +1070,147 @@ gg_peace.4 = {
 		ai_chance = {
 			base = 100
 		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.5 -- MILITARY VICTORY (T1, C8/FX-1). Sent by the journal's completion when the war
+#     ended without a signed peace: a conquest, a play one side conceded, a third country that
+#     swallowed the other government, or the 1860 safety net. The annexation already happened;
+#     what is left is how the winner treats the defeated. There was no table.
+# ES: gg_peace.5 -- VICTORIA MILITAR. Lo manda el cierre del journal cuando la guerra termino sin
+#     paz firmada: una conquista, una jugada cedida, un tercer pais que se trago al otro gobierno,
+#     o el tope de 1860. La anexion ya ocurrio; queda como trata el vencedor a los vencidos.
+#     No hubo mesa.
+# -------------------------------------------------------------------------------------------------
+gg_peace.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.5.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_peace.5.desc_third_party
+				trigger = { has_global_variable = gg_victory_third_party }
+			}
+			triggered_desc = {
+				desc = gg_peace.5.desc_timeout
+				trigger = { has_global_variable = gg_victory_timeout }
+			}
+			triggered_desc = {
+				desc = gg_peace.5.desc
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = gg_peace.5.flav
+
+	# EN/ES: reused until T9 / reusado hasta T9
+	event_image = {
+		video = "gg_two_governments"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gg_victory_pending
+		OR = {
+			has_variable = guerra_grande_defensa_government
+			has_variable = guerra_grande_cerrito_government
+		}
+	}
+
+	# a -- clemency / clemencia
+	option = {
+		name = gg_peace.5.a
+		default_option = yes
+		set_global_variable = gg_peace_no_victors
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+		add_loyalists = { value = small_radicals }
+		ai_chance = { base = 45 }
+	}
+
+	# b -- proscription: the defeated chiefs go into exile / proscripcion: exilio de los jefes
+	option = {
+		name = gg_peace.5.b
+		if = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
+				}
+				exile_character = yes
+			}
+		}
+		else = {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Fructuoso_Rivera
+						has_template = URU_venancio_flores
+					}
+				}
+				exile_character = yes
+			}
+		}
+		add_modifier = {
+			name = gg_victory_proscription
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = { base = 30 }
+	}
+
+	# c -- terror / deguello
+	option = {
+		name = gg_peace.5.c
+		set_global_variable = gg_peace_punished
+		every_scope_state = {
+			kill_population_percent_in_state = { percent = 0.04 }
+		}
+		add_modifier = {
+			name = gg_victory_terror
+			years = 15
+			is_decaying = yes
+		}
+		add_radicals = { value = large_radicals }
+		ai_chance = { base = 10 }
+	}
+
+	# d -- hand the defeated chief to his own patron, for that patron's goodwill
+	# d -- entregarle el jefe vencido a su padrino, a cambio de la buena voluntad del padrino
+	option = {
+		name = gg_peace.5.d
+		if = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			random_scope_character = {
+				limit = { has_template = URU_Manuel_Oribe }
+				exile_character = yes
+			}
+			c:ARG ?= { change_relations = { country = ROOT value = 50 } }
+		}
+		else = {
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				exile_character = yes
+			}
+			c:BRZ ?= { change_relations = { country = ROOT value = 50 } }
+		}
+		add_modifier = {
+			name = gg_victory_chief_handed_over
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = { base = 15 }
 	}
 }

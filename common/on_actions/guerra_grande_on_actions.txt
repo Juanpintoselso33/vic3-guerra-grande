@@ -168,63 +168,34 @@ on_war_end = {
 	}
 }
 
+# EN: T1, C4 -- only the white peace comes through here: both governments still exist and nobody
+#     annexed anybody. A war that ended with an annexation is closed by the journal (C11). The menu
+#     goes to whoever leads (a tie goes to the Defensa, FA-1) and has no 'wait' option.
+# ES: T1, C4 -- por aca solo pasa la paz blanca: los dos gobiernos existen y nadie anexo a nadie.
+#     Una guerra terminada con anexion la cierra el journal. El menu va al que va arriba (el
+#     empate va a la Defensa) y no tiene opcion de esperar.
 guerra_grande_on_war_end = {
 	trigger = {
 		# Root = the diplomatic play that just concluded.
-		# EN: BUG FOUND 2026-09-16 (real conquest tested, no popup fired). Gating on
-		#     guerra_grande_open_war raced against the journal entry's own complete condition,
-		#     which polls territorial control continuously and can clear open_war (via
-		#     on_complete_all_involved's hidden_effect) before or in the same tick this on_action
-		#     runs -- so a real, decisive conquest silently failed this trigger with no error.
-		#     guerra_grande_split_done is set once at the split and never cleared afterward, so it
-		#     cannot lose that race.
-		# ES: BUG ENCONTRADO 2026-09-16 (conquista real probada, no salto el popup). Depender de
-		#     guerra_grande_open_war corria una carrera contra la propia condicion complete del
-		#     journal, que sondea el control territorial todo el tiempo y puede apagar open_war
-		#     (via el hidden_effect de on_complete_all_involved) antes o en el mismo tick en que
-		#     corre este on_action -- asi que una conquista real y decisiva fallaba este trigger en
-		#     silencio, sin error. guerra_grande_split_done se prende una sola vez en el corte y
-		#     nunca se apaga despues, asi que no puede perder esa carrera.
 		is_diplomatic_play_type = dp_guerra_grande
 		has_global_variable = guerra_grande_split_done
 		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_peace_offered }
+		exists = c:CER
+		exists = c:URU
 	}
 
 	effect = {
-		# EN: no winner/loser scope exists at on_war_end (only scope:actor/scope:target, the
-		#     initiator and the target), so the winner is read off the same world-state check
-		#     the journal's own complete/fail conditions already use: who still exists, and who
-		#     holds what.
-		# ES: on_war_end no expone quien gano (solo scope:actor/scope:target, el iniciador y el
-		#     objetivo), asi que el ganador se lee del mismo chequeo de estado del mundo que ya
-		#     usan las condiciones complete/fail del journal: quien sigue existiendo, y quien
-		#     tiene que.
+		set_global_variable = gg_peace_offered
+		set_global_variable = gg_white_peace
 		if = {
-			limit = {
-				OR = {
-					NOT = { exists = c:URU }
-					c:URU ?= {
-						NOR = {
-							any_scope_state = { state_region = s:STATE_SAN_JOSE }
-							any_scope_state = { state_region = s:STATE_MONTEVIDEO }
-						}
-					}
-				}
-				exists = c:CER
-			}
+			limit = { guerra_grande_blanco_lead > 0 }
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
 				trigger_event = { id = gg_peace.2 days = 3 popup = yes }
 			}
 		}
-		else_if = {
-			limit = {
-				OR = {
-					NOT = { exists = c:CER }
-					c:CER ?= { NOT = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
-				}
-				exists = c:URU
-			}
+		else = {
 			random_country = {
 				limit = { has_variable = guerra_grande_defensa_government }
 				trigger_event = { id = gg_peace.1 days = 3 popup = yes }

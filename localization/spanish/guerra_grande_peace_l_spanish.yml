@@ -97,3 +97,17 @@
 
  gg_peace_assumed_war_debt:0 "La deuda de ellos es ahora la de la Nación"
  gg_peace_assumed_war_debt_desc:0 "La República reconocerá como deuda nacional aquella que haya contraído el general Oribe con arreglo a lo que para tales casos estatuye el derecho público. Es el artículo tercero del pacto, y es lo que costó de verdad la fórmula: el gobierno que ganó paga la guerra que peleó el otro."
+
+# T1 (FX-1)
+ gg_peace.5.t:0 "La victoria sin mesa"
+ gg_peace.5.desc:0 "No hubo pliegos ni plenipotenciarios. El otro gobierno ya no existe: sus departamentos, sus cuarteles y sus deudas son nuestros, y sus jefes esperan saber qué se hace con ellos. Lo que se decida ahora es lo que la República va a recordar de esta guerra."
+ gg_peace.5.desc_third_party:0 "La guerra no la terminamos nosotros. Una potencia extranjera se tragó al otro gobierno y nos dejó la República entera por descarte. Nadie firmó nada con nosotros, pero los jefes del otro bando siguen acá, y hay que decidir qué se hace con ellos."
+ gg_peace.5.desc_timeout:0 "Pasaron veinte años de guerra y nadie la ganó. Los dos gobiernos siguen en pie, pero ya no hay quien pelee: la guerra se apagó sola. Lo que queda es decidir cómo se vive con los que estuvieron enfrente."
+ gg_peace.5.flav:0 "Nadie se sentó a negociar."
+ gg_peace.5.a:0 "Clemencia. Que vuelvan a sus casas."
+ gg_peace.5.b:0 "Que los jefes salgan del país."
+ gg_peace.5.c:0 "Que la campaña aprenda."
+ gg_peace.5.d:0 "Entregarle el jefe vencido a su padrino."
+ gg_victory_proscription:0 "Los jefes vencidos, proscriptos"
+ gg_victory_terror:0 "El terror en la campaña"
+ gg_victory_chief_handed_over:0 "El jefe vencido, entregado"

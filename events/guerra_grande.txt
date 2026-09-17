@@ -262,10 +262,7 @@ guerra_grande.3 = {
 
 	immediate = {
 		hidden_effect = {
-			set_global_variable = guerra_grande_open_war
-			c:ARG ?= {
-				trigger_event = { id = guerra_grande.4 days = 5 popup = yes }
-			}
+			# EN/ES: T1, C13 -- open_war and Rosas's event moved into the options, after the Cerrito exists.
 			# EN: the foreign contingents, each on the day it actually arrived, counted from
 			#     the split of February 1839. ES: los contingentes extranjeros, cada uno el dia
 			#     en que de verdad llegaron, contados desde el corte de febrero de 1839.
@@ -841,6 +838,11 @@ guerra_grande.3 = {
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
 		gg_partition_calendar = yes
+		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
+		set_global_variable = guerra_grande_open_war
+		c:ARG ?= {
+			trigger_event = { id = guerra_grande.4 days = 5 popup = yes }
+		}
 		# EN: the split is finished here, and only here. Both governments exist, both hold their
 		#     states, and only now is it safe to say so.
 		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the
@@ -1372,6 +1374,11 @@ guerra_grande.3 = {
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
 		gg_partition_calendar = yes
+		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
+		set_global_variable = guerra_grande_open_war
+		c:ARG ?= {
+			trigger_event = { id = guerra_grande.4 days = 5 popup = yes }
+		}
 		# EN: the split is finished here, and only here. Both governments exist, both hold their
 		#     states, and only now is it safe to say so.
 		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the

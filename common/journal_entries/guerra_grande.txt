@@ -179,143 +179,111 @@ je_guerra_grande = {
 					c:URU ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
+				# EN/ES: T1, C1 -- the peace is no longer scheduled here: the weekly arbiter does it.
+			}
+		}
+	}
+
+	# EN: T1, C2 -- the weekly arbiter (score only; T2 adds war support, occupation and siege).
+	#     The only place that offers a negotiated peace (I2). It sets gg_peace_offered in the
+	#     same effect that schedules the menu (I6), so no other path can offer a second one.
+	#     From 1851 the war is tired and half the lead is enough (FA-2).
+	# ES: T1, C2 -- el arbitro semanal (solo puntaje; T2 suma apoyo a la guerra, ocupacion y
+	#     asedio). El unico lugar que ofrece una paz negociada. Prende gg_peace_offered en el mismo
+	#     efecto que agenda el menu, asi ningun otro camino ofrece un segundo. Desde 1851 la guerra
+	#     esta cansada y alcanza la mitad de la ventaja.
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_global_variable = guerra_grande_open_war
+					has_global_variable = guerra_grande_split_done
+					NOT = { has_global_variable = gg_peace_offered }
+					NOT = { has_global_variable = gg_peace_settled }
+					NOT = { has_global_variable = gg_peace_cooldown }
+					exists = c:CER
+					exists = c:URU
+				}
 				if = {
 					limit = {
 						OR = {
 							guerra_grande_blanco_lead >= 10
+							AND = {
+								year >= 1851
+								guerra_grande_blanco_lead >= 5
+							}
+						}
+					}
+					set_global_variable = gg_peace_offered
+					random_country = {
+						limit = { has_variable = guerra_grande_cerrito_government }
+						trigger_event = { id = gg_peace.2 days = 3 popup = yes }
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
 							guerra_grande_colorado_lead >= 10
-						}
-						exists = c:CER
-						NOT = { has_global_variable = guerra_grande_peace_offered }
-					}
-					# EN: the peace goes to the side that earned it. This used to go to c:URU always, so
-					#     the Cerrito could reach ten of lead and still only get an offer made TO the
-					#     other side, whose default answer was to annex it.
-					# ES: la paz va al bando que la gano. Antes iba siempre a c:URU, asi que el Cerrito
-					#     podia llegar a diez de ventaja y aun asi solo conseguia una oferta hecha AL
-					#     otro bando, cuya respuesta por defecto era anexarlo.
-					# EN: routed by government mark, not by tag, so it survives the change_tag in option .b.
-					# ES: ruteado por marca de gobierno y no por tag, asi sobrevive al change_tag de .b.
-					if = {
-						limit = { guerra_grande_blanco_lead >= 10 }
-						random_country = {
-							limit = { has_variable = guerra_grande_cerrito_government }
-							trigger_event = { id = gg_peace.2 days = 3 popup = yes }
-						}
-					}
-					else = {
-						random_country = {
-							limit = { has_variable = guerra_grande_defensa_government }
-							trigger_event = { id = gg_peace.1 days = 3 popup = yes }
-						}
-					}
-				}
-			}
-
-			# From 1851 on, the historical way out: a peace with neither victors nor vanquished.
-			if = {
-				limit = {
-					has_global_variable = guerra_grande_open_war
-					year >= 1851
-					exists = c:CER
-					NOT = { has_global_variable = guerra_grande_peace_offered }
-				}
-				c:URU ?= {
-					random_list = {
-						23 = {}
-						1 = {
-							if = {
-								limit = { guerra_grande_blanco_lead >= 1 }
-								random_country = {
-									limit = { has_variable = guerra_grande_cerrito_government }
-									trigger_event = { id = gg_peace.2 popup = yes }
-								}
-							}
-							else = {
-								random_country = {
-									limit = { has_variable = guerra_grande_defensa_government }
-									trigger_event = { id = gg_peace.1 popup = yes }
-								}
+							AND = {
+								year >= 1851
+								guerra_grande_colorado_lead >= 5
 							}
 						}
+					}
+					set_global_variable = gg_peace_offered
+					random_country = {
+						limit = { has_variable = guerra_grande_defensa_government }
+						trigger_event = { id = gg_peace.1 days = 3 popup = yes }
 					}
 				}
 			}
 		}
 	}
 
-	# Se cierra cuando uno de los dos gobiernos absorbe al otro: la Republica vuelve a ser una.
+	# EN: T1, C11 -- the entry closes on a signed peace, or when only one government is left and
+	#     Montevideo is still oriental (a conquest, a conceded play or a third country), or at the
+	#     1860 safety net. It never asks for guerra_grande_open_war, which its own closing clears.
+	# ES: T1, C11 -- se cierra con la paz firmada, o cuando queda un solo gobierno y Montevideo sigue
+	#     siendo oriental (conquista, jugada cedida o tercer pais), o en el tope de 1860. Nunca pide
+	#     guerra_grande_open_war, que su propio cierre borra.
 	complete = {
 		custom_tooltip = {
 			text = je_guerra_grande_complete_tt
 			AND = {
-				has_global_variable = guerra_grande_open_war
-				# EN: the war cannot end before the Republic has actually been divided.
-				# ES: la guerra no puede terminar antes de que la Republica se haya partido.
 				has_global_variable = guerra_grande_split_done
-				NAND = {
-					exists = c:CER
-					exists = c:URU
+				OR = {
+					c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+					c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
 				}
 				OR = {
-					# EN: the Defensa marched out and took the countryside back...
-					# ES: la Defensa salio de la plaza y recupero la campania...
-					c:URU ?= { any_scope_state = { state_region = s:STATE_SAN_JOSE } }
-					# EN: ...or the Cerrito finally walked into the city.
-					# ES: ...o el Cerrito por fin entro en la ciudad.
-					c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+					has_global_variable = gg_peace_settled
+					NAND = {
+						exists = c:CER
+						exists = c:URU
+					}
+					year >= 1860
 				}
 			}
 		}
 	}
 
-	# Si el pais quedo repartido entre terceros, esto no es una victoria: es el fracaso.
+	# EN: T1, C12 -- Montevideo in foreign hands is the failure, and it wins over complete (complete
+	#     requires an oriental Montevideo). The dead pre-split chain keeps its own branch.
+	# ES: T1, C12 -- Montevideo extranjera es el fracaso, y manda sobre complete. La cadena muerta
+	#     previa a la particion conserva su rama.
 	fail = {
 		custom_tooltip = {
 			text = je_guerra_grande_fail_tt
 			OR = {
 				AND = {
-					has_global_variable = guerra_grande_open_war
-					# EN: the war cannot end before the Republic has actually been divided.
-					# ES: la guerra no puede terminar antes de que la Republica se haya partido.
 					has_global_variable = guerra_grande_split_done
-					# EN: Montevideo in nobody's hands but a foreign power's is the failure
-					#     condition: whoever wins the civil war, the city must stay oriental.
-					# ES: Montevideo en manos de una potencia extranjera es la condicion de
-					#     fracaso: gane quien gane la guerra civil, la ciudad debe ser oriental.
 					NOR = {
 						c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
 						c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
 					}
 				}
-				# EN: DEAD CHAIN, PRE-SPLIT. guerra_grande.3 is the only place that sets open_war and
-				#     split_done, and its own trigger demands that URU still exist and still hold Banda
-				#     Oriental and a state in Montevideo. If a foreign power strips URU of either between
-				#     Carpinteria (1836) and the split date (1839) -- mostly closed off elsewhere by a
-				#     diplomatic-play guard, but not impossible by other means -- or URU stops existing
-				#     outright, guerra_grande.3 silently never fires and open_war/split_done never get
-				#     set. Without this branch the entry then sits forever, unable to complete (needs
-				#     open_war) or fail (same), blocking the player's journal UI for the rest of the
-				#     campaign. This mirrors guerra_grande.3's own trigger, negated, plus a deadline: by
-				#     1840 every scheduled step of the chain (.1 at start+262 days, .2 at +765 more, .3 at
-				#     +110 more) has already either fired or died with its country, so nothing is still
-				#     in flight to rescue this after that.
-				# ES: CADENA MUERTA, PRE-PARTICION. guerra_grande.3 es el unico lugar que pone open_war y
-				#     split_done, y su propio trigger exige que URU siga existiendo y siga teniendo la
-				#     Banda Oriental y un estado en Montevideo. Si una potencia extranjera le saca a URU
-				#     cualquiera de las dos entre Carpinteria (1836) y la fecha de la particion (1839) --
-				#     en su mayoria cerrado por un guardia de diplomatic play en otro lado, pero no
-				#     imposible por otros medios -- o URU deja de existir directamente, guerra_grande.3
-				#     nunca dispara y open_war/split_done nunca se ponen. Sin esta rama la entrada queda
-				#     entonces trabada para siempre, sin poder completarse (necesita open_war) ni
-				#     fracasar (lo mismo), bloqueando la interfaz de diario del jugador el resto de la
-				#     partida. Es el espejo, negado, del propio trigger de guerra_grande.3, mas un plazo:
-				#     para 1840 cada paso agendado de la cadena (.1 al inicio+262 dias, .2 a +765 mas, .3
-				#     a +110 mas) ya disparo o murio con su pais, asi que despues de eso no queda nada en
-				#     vuelo que lo pueda salvar.
 				AND = {
-					NOT = { has_global_variable = guerra_grande_open_war }
-					# EN/ES: T6 -- the split moved to 1843 (latest 17 August 1843) / la particion paso a 1843
+					NOT = { has_global_variable = guerra_grande_split_done }
 					year >= 1844
 					OR = {
 						NOT = { exists = c:URU }
@@ -334,25 +302,61 @@ je_guerra_grande = {
 			is_decaying = yes
 		}
 		hidden_effect = {
+			# EN/ES: T1, C14 -- the loans' watcher reads this / el vigia de los prestamos lee esto
+			set_global_variable = gg_war_failed
 			remove_global_variable = guerra_grande_open_war
 		}
 	}
 
+	# EN: T1, C11 -- a war closed without a signed peace ends in gg_peace.5. The mark goes first, so
+	#     the second involved country's pass does nothing (I5, I6).
+	# ES: T1, C11 -- una guerra cerrada sin paz firmada termina en gg_peace.5. La marca va primero,
+	#     asi la pasada del segundo pais involucrado no hace nada.
 	on_complete_all_involved = {
-		# EN: the peace menu already applied the modifier that fits -- or deliberately applied none.
-		#     Only a war that ended OUTSIDE the menu gets the default reconciliation. Without this,
-		#     a player who chose the proscriptions and the killings still collected a modifier
-		#     called "neither victors nor vanquished".
-		# ES: el menu de paz ya aplico el modificador que corresponde, o a proposito no aplico
-		#     ninguno. Solo una guerra terminada AFUERA del menu recibe la reconciliacion por
-		#     defecto. Sin esto, el que elegia las proscripciones y los degüellos igual se llevaba
-		#     un modificador llamado "ni vencidos ni vencedores".
 		if = {
 			limit = { NOT = { has_global_variable = gg_peace_settled } }
-			add_modifier = {
-				name = guerra_grande_no_victors_no_vanquished
-				years = 10
-				is_decaying = yes
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_victory_pending
+			if = {
+				limit = {
+					exists = c:CER
+					exists = c:URU
+				}
+				set_global_variable = gg_victory_timeout
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							NOT = { exists = c:CER }
+							c:URU ?= { NOT = { any_scope_state = { state_region = s:STATE_SAN_JOSE } } }
+						}
+						AND = {
+							NOT = { exists = c:URU }
+							c:CER ?= { NOT = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
+						}
+					}
+				}
+				set_global_variable = gg_victory_third_party
+			}
+			if = {
+				limit = {
+					exists = c:CER
+					OR = {
+						NOT = { exists = c:URU }
+						guerra_grande_blanco_lead > 0
+					}
+				}
+				random_country = {
+					limit = { has_variable = guerra_grande_cerrito_government }
+					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+				}
+			}
+			else = {
+				random_country = {
+					limit = { has_variable = guerra_grande_defensa_government }
+					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+				}
 			}
 		}
 		hidden_effect = {

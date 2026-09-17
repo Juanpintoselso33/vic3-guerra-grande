@@ -266,6 +266,8 @@ gg_loan.3 = {
 	trigger = {
 		this = c:CER
 		NOT = { has_variable = gg_loan_settled }
+		# EN/ES: T1, C14 -- only while the war is open / solo con la guerra abierta
+		has_global_variable = guerra_grande_open_war
 	}
 
 	option = {
@@ -380,6 +382,8 @@ gg_loan.4 = {
 	trigger = {
 		this = c:CER
 		NOT = { has_variable = gg_loan_settled }
+		# EN/ES: T1, C14 -- only while the war is open / solo con la guerra abierta
+		has_global_variable = guerra_grande_open_war
 	}
 
 	# EN: accept the reunification, and the Confederation's whole treasury with it.
@@ -396,11 +400,15 @@ gg_loan.4 = {
 		add_modifier = { name = guerra_grande_reunification_accepted years = 20 }
 		c:ARG ?= {
 			change_relations = { country = ROOT value = 100 }
-			create_diplomatic_pact = {
-				country = ROOT
-				type = vassal
-			}
 		}
+		# EN: T1, FE-6/FE-12 -- no vassal pact during the war (R9, I19). Rosas to the top, the powers
+		#     harden, and the pledge is collected at the peace (T8).
+		# ES: T1, FE-6/FE-12 -- sin pacto de vasallaje durante la guerra. Rosas al maximo, las
+		#     potencias se endurecen, y el compromiso se cobra en la paz (T8).
+		gg_patron_change = { PATRON = rosas DELTA = 50 }
+		gg_patron_change = { PATRON = francia DELTA = -5 }
+		gg_patron_change = { PATRON = britania DELTA = -5 }
+		set_global_variable = gg_reunification_pledged
 		ai_chance = { base = 10 }
 	}
 
@@ -710,9 +718,10 @@ gg_loan.7 = {
 	immediate = {
 		if = {
 			limit = {
+				# EN/ES: T1, C14 -- a signed peace or a failed war, not any closing of open_war.
 				OR = {
 					has_global_variable = gg_peace_settled
-					NOT = { has_global_variable = guerra_grande_open_war }
+					has_global_variable = gg_war_failed
 					year >= 1855
 				}
 			}

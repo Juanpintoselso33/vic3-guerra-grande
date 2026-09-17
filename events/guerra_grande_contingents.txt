@@ -37,6 +37,8 @@ gg_contingent.1 = {
 	trigger = {
 		this = c:URU
 		exists = c:CER
+		# EN/ES: T1, I18 -- the legion is raised once / la legion se levanta una vez
+		NOT = { has_variable = guerra_grande_argentine_legion_raised }
 	}
 
 	# EN: Arming the proscripts is the grievance Rosas had been pressing on Montevideo since the
@@ -541,10 +543,10 @@ gg_contingent.8 = {
 			#     which routes by government mark instead of by tag.
 			# ES: la capitulacion que sigue. guerra_grande.8 fue reemplazado por el menu de paz,
 			#     que rutea por marca de gobierno en vez de por tag.
-			random_country = {
-				limit = { has_variable = guerra_grande_defensa_government }
-				trigger_event = { id = gg_peace.1 days = 34 popup = yes }
-			}
+			# EN/ES: T1, C9 -- Caxias no longer hands the Defensa the peace: the arbiter decides.
+			#     T2/T3b turn this into a war-support blow and a Brazilian patron rise.
+			gg_patron_change = { PATRON = brasil DELTA = 20 }
+			gg_score_colorado = { AMOUNT = 3 }
 		}
 		ai_chance = {
 			base = 85
