@@ -1,1 +1,153 @@
-﻿
+﻿l_english:
+
+# Country
+ CER:0 "Cerrito Government"
+ CER_ADJ:0 "Cerrito"
+
+# Interest groups renamed by the ribbons of Carpinteria
+ ig_blanco_party:0 "Blanco Party"
+ ig_blanco_party_desc:0 "Those who wore Oribe's white ribbon, lettered 'Defensores de las Leyes' - Defenders of the Laws. Estancieros, parish priests and the militias of the countryside, who claim to be the lawful government and the party of order."
+ ig_colorado_party:0 "Colorado Party"
+ ig_colorado_party_desc:0 "Those who wore Rivera's ribbon, cut from the red lining of their own ponchos after the sky-blue one bleached white in the sun. The port, the customs house, the printers and the foreign merchants of Montevideo."
+
+# Journal entry
+ je_group_guerra_grande:0 "The Guerra Grande"
+ je_guerra_grande:0 "The Guerra Grande"
+ je_guerra_grande_desc:0 "Between 1838 and 1851 the Republic had two governments: the #R Defensa#!, shut inside Montevideo, and the #blue_value Cerrito#!, which Oribe set up before the city and which governed the rest of the country. Each claimed to be the lawful government.\n\n#b How it works#!\n• @battalions! #b The score:#! every battle won and every decision adds to one side; the bar shows who is ahead.\n• #V 5#! ahead gives the leader the upper hand and wears the other down. #V 10#! ahead forces the other side to the table.\n• Before 1843 the lead turns into troops: when the Republic splits, the side ahead arms one more battalion for every #V 2#! points (up to #V 8#!).\n• @information! #b How it ends:#! the Defensa negotiates if its war support runs out, if the siege reaches #V 24#! months or if the blancos lead by #V 10#!. The Cerrito negotiates if its war support runs out, if half its countryside is occupied or if the colorados lead by #V 10#!. From 1851, half is enough. If nothing closes, the powers may impose their peace, and in 1860 the war is considered over.\n• The winner dictates the peace from a menu. If the Cerrito wins, it becomes the Oriental Republic of Uruguay again.\n• @warning! It fails if a foreign power takes Montevideo. Neither Argentina nor Brazil joins as a belligerent: they send troops and money.\n\nThe other journals follow the rest: #b The Foreign Intervention#!, #b The Great Siege#! and #b Doctors and Caudillos#!."
+ je_guerra_grande_reason:0 "Between 1838 and 1851 the Republic had two governments: the #R Defensa#!, shut inside Montevideo, and the #blue_value Cerrito#!, which Oribe set up before the city and which governed the rest of the country. Each claimed to be the lawful government.\n\n#b How it works#!\n• @battalions! #b The score:#! every battle won and every decision adds to one side; the bar shows who is ahead.\n• #V 5#! ahead gives the leader the upper hand and wears the other down. #V 10#! ahead forces the other side to the table.\n• Before 1843 the lead turns into troops: when the Republic splits, the side ahead arms one more battalion for every #V 2#! points (up to #V 8#!).\n• @information! #b How it ends:#! the Defensa negotiates if its war support runs out, if the siege reaches #V 24#! months or if the blancos lead by #V 10#!. The Cerrito negotiates if its war support runs out, if half its countryside is occupied or if the colorados lead by #V 10#!. From 1851, half is enough. If nothing closes, the powers may impose their peace, and in 1860 the war is considered over.\n• The winner dictates the peace from a menu. If the Cerrito wins, it becomes the Oriental Republic of Uruguay again.\n• @warning! It fails if a foreign power takes Montevideo. Neither Argentina nor Brazil joins as a belligerent: they send troops and money.\n\nThe other journals follow the rest: #b The Foreign Intervention#!, #b The Great Siege#! and #b Doctors and Caudillos#!."
+ je_guerra_grande_status_factions:0 "There is no war yet: every decision of these years adds to one side, and the bar already counts it."
+ je_guerra_grande_status_siege:0 "Two governments: the #R Defensa#! in Montevideo and the #blue_value Cerrito#! in the countryside."
+ je_guerra_grande_complete_tt:0 "Only one of the two governments is left standing."
+
+# Progress bar
+ guerra_grande_war_score_bar:0 "Which Divisa Prevails"
+
+# Buttons
+ guerra_grande_foreign_intervention_button:0 "Call In the Squadrons"
+ guerra_grande_foreign_intervention_button_desc:0 "Britain and France want the Parana and the Uruguay open to their trade. Invite their squadrons in and every port of the Confederation is closed to commerce except our own - the blockade of 1845 to 1850, which the Argentines call the Parana War. It cost them Vuelta de Obligado, and it ended with the powers acknowledging Rosas' sovereignty over his rivers anyway."
+ guerra_grande_italian_legion_button:0 "Raise the Italian Legion"
+ guerra_grande_italian_legion_button_desc:0 "Montevideo is full of Italian exiles, and one of them is a sailor from Nice named Giuseppe Garibaldi. The city has a cheap lot of red shirts on its hands - work clothes meant for the saladeros across the river, which the blockade has left unsold. Put the legion in them."
+ guerra_grande_requires_open_war:0 "The Guerra Grande must be under way"
+ guerra_grande_requires_great_power_interest:0 "A Great Power must have an interest in the Rio de la Plata"
+ guerra_grande_requires_montevideo:0 "We must hold Montevideo"
+
+# Diplomatic play
+ dp_guerra_grande:0 "Guerra Grande"
+ guerra_grande_play:0 "The Guerra Grande"
+
+# Modifiers
+ guerra_grande_blanco_order:0 "Blanco Order"
+ guerra_grande_colorado_order:0 "Colorado Order"
+ guerra_grande_armed_truce:0 "Armed Truce"
+ guerra_grande_divided_country:0 "A Country Divided"
+ guerra_grande_river_plate_blockade:0 "Blockade of the Plata"
+ guerra_grande_montevideo_resupplied:0 "Montevideo Resupplied"
+ guerra_grande_italian_legion:0 "Italian Legion"
+ guerra_grande_rosista_support:0 "Rosista Support"
+ guerra_grande_no_victors_no_vanquished:0 "Neither Victors nor Vanquished"
+
+# 1 - Carpinteria, 19 September 1836
+ guerra_grande.1.t:0 "The Ribbons of Carpinteria"
+ guerra_grande.1.d:0 "Last August the President decreed that every man, soldier or civilian, wear a white badge on hat or coat lettered 'Defensores de las Leyes' - the same white the patriots of 1811 had worn. Rivera's rebels answered with the sky blue of the national cockade, but sun and rain bleached it white within weeks, so they cut new ribbons from the red lining of their ponchos.\n\nOn the banks of the Carpinteria stream in Durazno the two met at last: three thousand men under Oribe and Lavalleja against fourteen hundred under Rivera and the exiled Argentine unitarian Juan Lavalle. The government won the field. What was born there outlived every man on it - from this day the Republic has two parties, and every estancia, parish and regiment will be asked which ribbon it wears. The white ribbon makes a #b blanco#!, the red one a #b colorado#! - the plain Spanish for white and red, and the only names these two will answer to for the next century and a half."
+ guerra_grande.1.f:0 "Blancos and Colorados, and the country between them."
+ guerra_grande.1.a:0 "The white ribbon: the laws, the church and the countryside."
+ guerra_grande.1.b:0 "The red ribbon: the port, the press and the liberal cause."
+ guerra_grande.1.c:0 "The Republic wears no ribbon at all."
+
+# 2 - The fall of Oribe, 24 October 1838
+ guerra_grande.2.t:0 "The Fall of Oribe"
+ guerra_grande.2.d:0 "A French squadron blockades Buenos Aires, Rivera's riders are at the gates, and the President has run out of money and of friends. Manuel Oribe can resign and take ship for Buenos Aires - where Rosas will go on receiving him as the lawful president of Uruguay, and where a government of the Cerrito will be waiting to be formed - or he can stay, and turn the capital into a fortress."
+ guerra_grande.2.f:0 "A president with two ways out of the city."
+ guerra_grande.2.a:0 "Let him resign. The Colorados take the government."
+ guerra_grande.2.b:0 "He does not resign. The Blancos hold the state."
+
+# 3 - The split
+ guerra_grande.3.t:0 "The Great War Begins"
+ guerra_grande.3.d:0 "The Republic breaks in two. Behind the walls sits the Gobierno de la Defensa - the government of the defence, and the Defensa from here on - with the customs house, the foreign merchants and the sea. Out on the little hill that gives it its name, beside the Villa de la Restauracion, sits the Gobierno del Cerrito, with the cattle, the caudillos and Rosas at its back. It has reconvened the Chambers Rivera dissolved in 1838 and had them renew his mandate, so that both governments can call themselves lawful and neither has room for the other.\n\n'The army of Rosas is before this capital,' the Defensa decrees on the day the siege begins. 'The Government counts on the patriotism of its inhabitants: it rests on that, and on victory.'"
+ guerra_grande.3.f:0 "Two governments, nine years, one country."
+ guerra_grande.3.a:0 "Montevideo will hold."
+ guerra_grande.3.b:0 "Ride out to the Cerrito with Oribe."
+
+# 4 - Rosas
+ guerra_grande.4.t:0 "Rosas and the Cerrito"
+ guerra_grande.4.d:0 "Oribe writes from the Cerrito as the lawful president of Uruguay, asking for what he was promised in exile: men, money and cattle. Backing him puts the Confederation into a war on the far bank and brings the British and French squadrons across our rivers - but the far bank has never been a foreign question, and a friendly government in Montevideo would close the Plata to the unitarians for good."
+ guerra_grande.4.f:0 "The far bank has always been our business."
+ guerra_grande.4.a:0 "Back Oribe. The Plata is one country."
+ guerra_grande.4.b:0 "Let them settle it themselves."
+
+# 5 - The Italian Legion
+ guerra_grande.5.t:0 "The Red Shirts of Montevideo"
+ guerra_grande.5.d:0 "The legion has its commander: Giuseppe Garibaldi, a sailor from Nice condemned to death in Genoa, who came to the Plata to privateer for Rio Grande and stayed. His men drill in the shirts nobody else wanted - a lot of red work smocks meant for the saladeros of the Confederation, stranded here by the war. Sixteen years from now the same shirt will be worn in Sicily."
+ guerra_grande.5.f:0 "A uniform bought by accident, and kept on purpose."
+ guerra_grande.5.a:0 "Put them on the line."
+
+# 6 - Flavour: the siege
+ guerra_grande.6.t:0 "The Rooftops"
+ guerra_grande.6.d:0 "From the rooftops of Montevideo you can see the line: the ditches, the Cerrito's trenches, the smoke of the campfires on the other side. Inside, the city goes on: the port open, the market stocked with what comes by water, the presses of the exiles. Half the men on the wall were born in another country."
+ guerra_grande.6.f:0 "A city that learned to live under siege."
+ guerra_grande.6.a:0 "Let the world watch us hold."
+
+# 7 - Flavour: the countryside
+ guerra_grande.7.t:0 "The Herds Are Gone"
+ guerra_grande.7.d:0 "Both armies live off the countryside, and the countryside is running out. Estancias are stripped of cattle by whichever column passes first, and the men who worked them ride off with it - to one side or the other, depending on the day."
+ guerra_grande.7.f:0 "A war paid for in hides."
+ guerra_grande.7.a:0 "The country will pay for this for a generation."
+
+# 8 - Peace of 8 October 1851
+
+# 9 - Intervention
+ guerra_grande.9.t:0 "The Squadrons Enter the Plata"
+ guerra_grande.9.d:0 "British and French men-of-war have forced the river. Every port of the Confederation is closed to trade but ours, the convoys reach the besieged city, and the powers have made it plain what they are buying: free navigation of the Parana and the Uruguay, for their merchants, once the shooting stops."
+ guerra_grande.9.f:0 "The river belongs to whoever can sail it."
+ guerra_grande.9.a:0 "Let them come."
+
+# 11 - Portrait: Manuel Oribe
+ guerra_grande.11.t:0 "The President and the Laws"
+ guerra_grande.11.d:0 "Manuel Oribe was born in Montevideo in 1792, joined the revolution as a boy and was second in command of the Thirty-Three Orientals: Lavalleja led them, Oribe organised the crossing. He is a lodge man, of the Caballeros Orientales, and a legalist to the bone - when Lavalleja rose against President Rivera in 1832 and again in 1834, it was Oribe who stood by the government he disliked, because it was the lawful one.\n\nThat is the whole of him: the cult of discipline and of authority, and a badge that says Defenders of the Laws. He has already refused Rosas once, when Buenos Aires suggested the Banda Oriental might return to the Argentine Confederation."
+ guerra_grande.11.f:0 "A president who would rather be obeyed than loved."
+ guerra_grande.11.a:0 "The law stands above the man."
+ guerra_grande.11.b:0 "A republic is not a barracks."
+
+# 12 - Portrait: Juan Antonio Lavalleja
+ guerra_grande.12.t:0 "The Chief of the Thirty-Three"
+ guerra_grande.12.d:0 "On 19 April 1825 Juan Antonio Lavalleja landed at the beach of La Agraciada with thirty-three men and set the whole countryside alight; the Congress of Florida made him Captain General. What came after was less kind. Rivera took the presidency he thought was his, and Lavalleja rose against him in 1832 and in 1834, and was beaten both times, easily.\n\nAt Carpinteria he rode with the government - as did almost every man of the Thirty-Three. He is loyal to the laws now, and to himself, and nobody is quite sure in which order."
+ guerra_grande.12.f:0 "The man who started it all, and finished nothing."
+ guerra_grande.12.a:0 "Give him a command. He has earned it twice over."
+ guerra_grande.12.b:0 "No command for the caudillos. The Republic is governed from the capital."
+
+# 13 - Portrait: Fructuoso Rivera
+ guerra_grande.13.t:0 "Don Frutos"
+ guerra_grande.13.d:0 "Fructuoso Rivera, born on an estancia and barely schooled, was the most effective chief Artigas ever had - unpredictable strikes, and the countryside in his hand. When the Portuguese won he signed at Tres Arboles and served the Baron de la Laguna, who offered him a barony he declined. He came back with the Thirty-Three at the embrace of Monzon, took the Misiones Orientales on his own account, became the first president of the Republic, and governed from Durazno while lawyers ran the state.\n\nThe British consul Hood wrote of him in 1829: 'He is a man without any kind of talent, but he is popular with the majority of the people'. He fled towards Porto Alegre, into the land of the farrapos, and he will be back."
+ guerra_grande.13.f:0 "Beaten at Carpinteria, and not finished."
+ guerra_grande.13.a:0 "Ask Brazil to hand him over."
+ guerra_grande.13.b:0 "Let him wear out his welcome in exile."
+
+# 14 - Portrait: Artigas
+ guerra_grande.14.t:0 "The Old Man of Curuguaty"
+ guerra_grande.14.d:0 "Jose Gervasio Artigas crossed the Parana in September 1820 with a hundred and fifty men and never came back. Doctor Francia gave him asylum and made sure he would have no politics with it: no correspondence, no visitors, and eighteen years in the villa of San Isidro de Curuguaty, which the Paraguayans call their Siberia. The dictator never once agreed to see him.\n\nThey say Francia sends him a gold ounce a month, and that he gives most of it away to the poor of the village. He farms, he prays the rosary at dusk with his neighbours answering in Guarani, and he has asked for nothing. He is seventy-four. The Republic his men invented has just seen its president fall, and nobody in Montevideo has written to him."
+ guerra_grande.14.f:0 "The father of the country, farming in someone else's."
+ guerra_grande.14.a:0 "Send word to Curuguaty."
+ guerra_grande.14.b:0 "Let the old man rest. This war is not his."
+
+ je_guerra_grande_fail_tt:0 "The country has been carved up by foreign powers."
+ guerra_grande_dismembered_republic:0 "A Dismembered Republic"
+ guerra_grande_walls_of_montevideo:0 "The Walls of Montevideo"
+ guerra_grande_bar_blancos_desc:0 "#blue_value Blancos#! #V [GetGlobalVariable('guerra_grande_blanco_score').GetValue|v0]#!"
+ guerra_grande_bar_colorados_desc:0 "#V [GetGlobalVariable('guerra_grande_colorado_score').GetValue|v0]#! #R Colorados#!"
+ guerra_grande_upper_hand:0 "The Upper Hand"
+ guerra_grande_upper_hand_desc:0 "Five battles of lead. The other side is giving ground, and everyone in the Republic can see it."
+ guerra_grande_losing_ground:0 "Losing Ground"
+ guerra_grande_losing_ground_desc:0 "Five battles behind. The estancias are reading the war correctly and beginning to hedge."
+ Ejercito_del_Cerrito:0 "Army of the Cerrito"
+ Guarnicion_de_Montevideo:0 "Garrison of Montevideo"
+ Ejercito_Aliado:0 "The Allied Army"
+ Auxiliares_Argentinos:0 "Argentine Auxiliaries"
+ Legion_Italiana:0 "The Italian Legion"
+ Legion_Francesa:0 "The French Legion"
+ gg_rosas_provisional_lock:0 "Rosas Holds the Reins (Provisional)"
+ gg_rosas_provisional_lock_desc:0 "A blunt, provisional lock: no law reform of any kind while this holds. Added because the Confederation's government was destabilising into unrelated forms mid-campaign -- likely a conflict between the flags mod's dictatorship classification and Rosas's own starting laws. Should come off once that conflict is fixed at its root, not stay stacked on top of it."
+
+# T3b
+ guerra_grande.9.b:0 "Let them come to mediate, not to fight."
+ gg_intervention_early_price:0 "A Port Offered as a Factory"
+ guerra_grande_requires_rosas_backing:0 "Rosas must back the blockade (Rosas support 40 or more)."
