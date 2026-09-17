@@ -23,7 +23,7 @@ gg_prewar.1 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rosas_cerrito"
+		video = "gg_fl_rosas"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -69,7 +69,7 @@ gg_prewar.2 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rivera"
+		video = "gg_fl_farrapos"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -179,7 +179,7 @@ gg_prewar.4 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_herds"
+		video = "gg_fl_map"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -224,7 +224,7 @@ gg_prewar.5 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_carpinteria"
+		video = "gg_fl_lancero"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -270,7 +270,7 @@ gg_prewar.6 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_carpinteria"
+		video = "gg_fl_lancero"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -360,7 +360,7 @@ gg_prewar.8 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_fl_larranaga"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -405,7 +405,7 @@ gg_prewar.9 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_riv_india_muerta"
+		video = "gg_fl_palmar"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

@@ -99,9 +99,8 @@ gg_powers.10 = {
 	desc = gg_powers.10.d
 	flavor = gg_powers.10.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_fl_aduana"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -151,9 +150,8 @@ gg_powers.11 = {
 	desc = gg_powers.11.d
 	flavor = gg_powers.11.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_fl_barry"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -396,9 +394,8 @@ gg_powers.16 = {
 	desc = gg_powers.16.d
 	flavor = gg_powers.16.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_fl_oribe"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -469,9 +466,8 @@ gg_powers.17 = {
 	desc = gg_powers.17.d
 	flavor = gg_powers.17.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_rivera"
+		video = "gg_fl_urquiza"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -613,9 +609,8 @@ gg_powers.19 = {
 	desc = gg_powers.19.d
 	flavor = gg_powers.19.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_fl_barry"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -772,9 +767,8 @@ gg_powers.23 = {
 	desc = gg_powers.23.d
 	flavor = gg_powers.23.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_leg_caxias"
+		video = "gg_fl_servando"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -842,9 +836,8 @@ gg_powers.24 = {
 	desc = gg_powers.24.d
 	flavor = gg_powers.24.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_new_troy"
+		video = "gg_fl_pacheco"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -891,9 +884,8 @@ gg_powers.25 = {
 	desc = gg_powers.25.d
 	flavor = gg_powers.25.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_money_reunification"
+		video = "gg_fl_giro"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -936,9 +928,8 @@ gg_powers.26 = {
 	desc = gg_powers.26.d
 	flavor = gg_powers.26.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_new_troy"
+		video = "gg_fl_varela"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -1000,9 +991,8 @@ gg_powers.28 = {
 	desc = gg_powers.28.d
 	flavor = gg_powers.28.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_fl_larranaga"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -1078,9 +1068,8 @@ gg_powers.29 = {
 	desc = gg_powers.29.d
 	flavor = gg_powers.29.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_new_troy"
+		video = "gg_fl_pacheco"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -1141,9 +1130,8 @@ gg_powers.31 = {
 	desc = gg_powers.31.d
 	flavor = gg_powers.31.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_fl_matriz"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -1194,9 +1182,8 @@ gg_powers.32 = {
 	desc = gg_powers.32.d
 	flavor = gg_powers.32.f
 
-	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_money_maua"
+		video = "gg_fl_pedro2"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"

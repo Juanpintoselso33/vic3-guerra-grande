@@ -188,9 +188,8 @@ gg_postwar.4 = {
 	}
 	flavor = gg_postwar.4.f
 
-	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_fl_giro"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -198,6 +197,11 @@ gg_postwar.4 = {
 	duration = 3
 
 	immediate = {
+		# EN/ES: T9 -- Garzon died on 1 December 1851 / Garzon murio el 1 de diciembre de 1851
+		every_scope_character = {
+			limit = { has_template = URU_gg_eugenio_garzon }
+			kill_character = yes
+		}
 		if = {
 			limit = { has_global_variable = gg_powers_peace }
 			add_modifier = { name = gg_postwar_observed_election years = 5 is_decaying = yes }
@@ -209,6 +213,15 @@ gg_postwar.4 = {
 		name = gg_postwar.4.a
 		default_option = yes
 		set_ruling_interest_groups = { ig_landowners ig_intelligentsia }
+		# EN/ES: T9 -- Giro takes office / Giro asume
+		if = {
+			limit = { NOT = { any_scope_character = { has_template = URU_gg_juan_francisco_giro } } }
+			create_character = { template = URU_gg_juan_francisco_giro }
+		}
+		random_scope_character = {
+			limit = { has_template = URU_gg_juan_francisco_giro }
+			set_character_as_ruler = yes
+		}
 		add_radicals = { value = small_radicals interest_group = ig:ig_armed_forces }
 		ai_chance = { base = 50 }
 	}

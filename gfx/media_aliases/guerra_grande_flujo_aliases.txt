@@ -1,0 +1,128 @@
+﻿# Media aliases for the Guerra Grande flow events (T9). Sources: SOURCES_flujo_images.md.
+# Alias de medios de los eventos del flujo de la Guerra Grande (T9). Fuentes: SOURCES_flujo_images.md.
+
+# Fernando Garcia del Molino, Retrato del General Juan Manuel de Rosas (1843)
+gg_fl_rosas = {
+	video = "gfx/media_aliases/gg_fl_rosas.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# anon., General Bento Goncalves da Silva (1840-1847), Google Art Project
+gg_fl_farrapos = {
+	video = "gfx/media_aliases/gg_fl_farrapos.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Jose Maria Reyes / Erhard Schieble, Carta geografica de la republica oriental del Uruguay (c. 1850)
+gg_fl_map = {
+	video = "gfx/media_aliases/gg_fl_map.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Juan Manuel Blanes, Lancero de la epoca de Rivera
+gg_fl_lancero = {
+	video = "gfx/media_aliases/gg_fl_lancero.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Carlos Morel, Combate de caballeria en la epoca de Rosas (c. 1839)
+gg_fl_palmar = {
+	video = "gfx/media_aliases/gg_fl_palmar.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# anon., Damaso Antonio Larranaga
+gg_fl_larranaga = {
+	video = "gfx/media_aliases/gg_fl_larranaga.bk2"
+	audio = "event:/SFX/Events/southamerica/christianity"
+}
+
+# anon., Vista de la Matriz (1840), lithograph
+gg_fl_matriz = {
+	video = "gfx/media_aliases/gg_fl_matriz.bk2"
+	audio = "event:/SFX/Events/southamerica/christianity"
+}
+
+# Johann Moritz Rugendas, General Fructuoso Rivera (1846)
+gg_fl_rivera_rugendas = {
+	video = "gfx/media_aliases/gg_fl_rivera_rugendas.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Juan Manuel Blanes, Batalla de San Cala (1876) -- not Cagancha; used as an oriental cavalry action
+gg_fl_cagancha = {
+	video = "gfx/media_aliases/gg_fl_cagancha.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Juan Manuel Estrada, Lavalle
+gg_fl_lavalle = {
+	video = "gfx/media_aliases/gg_fl_lavalle.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Francois Barry, Prise des batteries de Punta Obligado (1846)
+gg_fl_barry = {
+	video = "gfx/media_aliases/gg_fl_barry.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Juan Manuel Blanes, Mazorquero
+gg_fl_mazorquero = {
+	video = "gfx/media_aliases/gg_fl_mazorquero.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Emile Desmaisons, Jose Maria Paz (lithograph, before 1854)
+gg_fl_paz = {
+	video = "gfx/media_aliases/gg_fl_paz.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Roberto Castellanos, Aduana de Oribe (the Buceo customs house)
+gg_fl_aduana = {
+	video = "gfx/media_aliases/gg_fl_aduana.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Jules Daufrene, Manuel Oribe (c. 1840)
+gg_fl_oribe = {
+	video = "gfx/media_aliases/gg_fl_oribe.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Josefa Diaz y Clucellas, Justo Jose de Urquiza (1880)
+gg_fl_urquiza = {
+	video = "gfx/media_aliases/gg_fl_urquiza.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# anon., Servando Gomez (Gran Enciclopedia del Uruguay)
+gg_fl_servando = {
+	video = "gfx/media_aliases/gg_fl_servando.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Eduardo Dionisio Carbajal, Melchor Pacheco y Obes
+gg_fl_pacheco = {
+	video = "gfx/media_aliases/gg_fl_pacheco.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# daguerreotype of Juan Francisco Giro (CC BY-SA 4.0 upload of a PD original)
+gg_fl_giro = {
+	video = "gfx/media_aliases/gg_fl_giro.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# Alfredo Godel, Florencio Varela, El Indiscreto no. 48 (1885)
+gg_fl_varela = {
+	video = "gfx/media_aliases/gg_fl_varela.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Ferdinand Krumholz, Dom Pedro II (1849)
+gg_fl_pedro2 = {
+	video = "gfx/media_aliases/gg_fl_pedro2.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}

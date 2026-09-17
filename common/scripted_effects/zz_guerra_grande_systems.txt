@@ -78,6 +78,16 @@ gg_patron_change = {
 gg_defensa_line_set = {
 	set_global_variable = { name = gg_defensa_line value = $LINE$ }
 	debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_LINE $LINE$"
+	# EN/ES: T9, FG-1 -- line 1 is Pacheco y Obes's / la linea 1 es la de Pacheco y Obes
+	if = {
+		limit = { global_var:gg_defensa_line <= 1 }
+		c:URU ?= {
+			random_scope_character = {
+				limit = { has_template = URU_gg_melchor_pacheco_y_obes }
+				set_as_interest_group_leader = yes
+			}
+		}
+	}
 }
 
 # EN: usage: gg_cerrito_balance_change = { DELTA = 10 }  (positive = towards the doctores)
@@ -108,6 +118,8 @@ gg_cerrito_balance_change = {
 #     meses), asi que cada variante tiene sus demoras. Lo que ya paso al partirse dispara al dia
 #     siguiente (demora 1).
 gg_partition_calendar = {
+	# EN/ES: T9 -- the new characters, once both governments exist / los personajes nuevos
+	gg_spawn_war_characters = yes
 	if = {
 		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
 		# split on 1842-08-17
@@ -137,7 +149,7 @@ gg_partition_calendar = {
 		c:CER ?= {
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.10 days = 227 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 1019 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.25 days = 1019 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_powers.11 days = 1069 popup = yes }   # 1845-07-21 la escuadra de Brown
 			trigger_event = { id = gg_powers.12 days = 1426 popup = yes }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_powers.14 days = 1787 popup = yes }   # 1847-07-09 Howden
@@ -176,7 +188,7 @@ gg_partition_calendar = {
 		c:CER ?= {
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.10 days = 409 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 1201 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.25 days = 1201 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_powers.11 days = 1251 popup = yes }   # 1845-07-21 la escuadra de Brown
 			trigger_event = { id = gg_powers.12 days = 1608 popup = yes }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_powers.14 days = 1969 popup = yes }   # 1847-07-09 Howden
@@ -215,7 +227,7 @@ gg_partition_calendar = {
 		c:CER ?= {
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.10 days = 1 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 654 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.25 days = 654 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_powers.11 days = 704 popup = yes }   # 1845-07-21 la escuadra de Brown
 			trigger_event = { id = gg_powers.12 days = 1061 popup = yes }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_powers.14 days = 1422 popup = yes }   # 1847-07-09 Howden
@@ -253,7 +265,7 @@ gg_partition_calendar = {
 		c:CER ?= {
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.10 days = 44 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 836 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.25 days = 836 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_powers.11 days = 886 popup = yes }   # 1845-07-21 la escuadra de Brown
 			trigger_event = { id = gg_powers.12 days = 1243 popup = yes }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_powers.14 days = 1604 popup = yes }   # 1847-07-09 Howden
@@ -271,6 +283,22 @@ gg_partition_calendar = {
 #     oribistas se pasan, y el Cerrito responde (gg_powers.23).
 gg_urquiza_flip = {
 	set_global_variable = gg_urquiza_flipped
+	# EN/ES: T9, F4-3 -- Servando Gomez goes over; Garzon comes with Urquiza / Servando se pasa; Garzon viene con Urquiza
+	c:CER ?= {
+		random_scope_character = {
+			limit = { has_template = URU_gg_servando_gomez }
+			transfer_character = c:URU
+		}
+	}
+	c:URU ?= {
+		if = {
+			limit = { NOT = { any_scope_character = { has_template = URU_gg_eugenio_garzon } } }
+			create_character = {
+				template = URU_gg_eugenio_garzon
+				commander_rank = commander_rank_2
+			}
+		}
+	}
 	gg_patron_change = { PATRON = rosas DELTA = -20 }
 	c:CER ?= {
 		every_scope_war = {
@@ -296,5 +324,25 @@ gg_postwar_dispatch = {
 	}
 	else = {
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 60 } }
+	}
+}
+
+# EN: T9 -- the four characters of 1843, each on his side. Guarded so a second call does nothing.
+# ES: T9 -- los cuatro personajes de 1843, cada uno en su bando. Con guarda para no duplicar.
+gg_spawn_war_characters = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_war_characters_spawned } }
+		set_global_variable = gg_war_characters_spawned
+		c:URU ?= {
+			create_character = { template = URU_gg_melchor_pacheco_y_obes }
+		}
+		c:CER ?= {
+			create_character = { template = URU_gg_carlos_villademoros }
+			create_character = { template = URU_gg_juan_francisco_giro }
+			create_character = {
+				template = URU_gg_servando_gomez
+				commander_rank = commander_rank_1
+			}
+		}
 	}
 }

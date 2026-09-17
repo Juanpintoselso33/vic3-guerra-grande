@@ -88,7 +88,7 @@ gg_phase1.1 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rivera"
+		video = "gg_fl_rivera_rugendas"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -243,7 +243,7 @@ gg_phase1.3 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_carpinteria"
+		video = "gg_fl_cagancha"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -291,7 +291,7 @@ gg_phase1.4 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_leg_argentine"
+		video = "gg_fl_lavalle"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -337,7 +337,7 @@ gg_phase1.5 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_fl_barry"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -397,7 +397,7 @@ gg_phase1.6 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rosas_cerrito"
+		video = "gg_fl_mazorquero"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -441,7 +441,7 @@ gg_phase1.7 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rivera"
+		video = "gg_fl_paz"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
