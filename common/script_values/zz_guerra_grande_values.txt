@@ -102,3 +102,10 @@ gg_cerrito_subsidy = {
 	value = global_var:gg_patron_rosas
 	multiply = 30
 }
+
+# EN/ES: the sea bar, capped at the opening threshold / la barra del mar, topeada en el umbral
+gg_sea_bar_value = {
+	value = gg_sea_power
+	max = 60
+	min = 0
+}

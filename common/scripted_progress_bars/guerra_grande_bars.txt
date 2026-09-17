@@ -49,3 +49,27 @@ guerra_grande_war_score_bar = {
 	min_value = -10
 	max_value = 10
 }
+
+# EN: playtest 2026-09-17 -- the journal shows the sea and the siege as bars instead of paragraphs.
+#     Both are set every month (and the sea on every patron change) with set_bar_progress.
+# ES: el journal muestra el mar y el asedio como barras en vez de parrafos. Las dos se fijan cada
+#     mes (y el mar en cada cambio de padrino) con set_bar_progress.
+gg_sea_bar = {
+	name = "gg_sea_bar"
+	desc = "gg_sea_bar_desc"
+	second_desc = "gg_sea_bar_second_desc"
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+gg_siege_bar = {
+	name = "gg_siege_bar"
+	desc = "gg_siege_bar_desc"
+	second_desc = "gg_siege_bar_second_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 24
+}

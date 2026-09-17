@@ -9,6 +9,8 @@ guerra_grande_foreign_intervention_button = {
 
 	visible = {
 		c:URU ?= this
+		# EN/ES: playtest -- not before the split / no antes de la particion
+		has_global_variable = guerra_grande_split_done
 	}
 
 	possible = {
@@ -138,6 +140,8 @@ guerra_grande_italian_legion_button = {
 
 	visible = {
 		c:URU ?= this
+		# EN/ES: playtest -- not before the split / no antes de la particion
+		has_global_variable = guerra_grande_split_done
 	}
 
 	possible = {
