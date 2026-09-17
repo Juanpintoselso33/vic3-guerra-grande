@@ -169,3 +169,29 @@ guerra_grande_losing_ground = {
 	country_war_exhaustion_casualties_mult = 0.15
 	interest_group_ig_armed_forces_approval_add = -2
 }
+
+# T5 (fase 0). The departments of 1837 run by the government's political chiefs.
+gg_prewar_state_chiefs = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_add = 15
+	interest_group_ig_landowners_approval_add = -2
+}
+
+# T5 (fase 0). The same departments left to the local caudillos.
+gg_prewar_local_caudillos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_landowners_approval_add = 2
+	state_tax_waste_add = 0.05
+}
+
+# T5 (fase 0). After falling back from Yucutuja, the north answers to Rivera for a while.
+gg_prewar_north_lost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -15
+}
+
+# T5 (FE-3). A letter to Curuguaty: the government that writes to Artigas borrows his name.
+gg_artigas_letter = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+}

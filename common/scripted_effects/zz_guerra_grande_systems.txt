@@ -24,6 +24,34 @@ gg_systems_init = {
 	# EN: the Cerrito's balance, -100 (caudillos) to 100 (doctores).
 	# ES: la balanza del Cerrito, -100 (caudillos) a 100 (doctores).
 	set_global_variable = { name = gg_cerrito_balance value = 0 }
+	# EN: T5 -- phase 0 events score before Carpinteria creates the journal, so the score starts
+	#     here; the journal's own immediate only sets it if it is still missing.
+	# ES: T5 -- los eventos de la fase 0 puntuan antes de que Carpinteria cree el journal, asi que
+	#     el puntaje arranca aca; el immediate del journal solo lo pone si todavia falta.
+	set_global_variable = { name = guerra_grande_blanco_score value = 0 }
+	set_global_variable = { name = guerra_grande_colorado_score value = 0 }
+}
+
+# EN: usage: gg_score_blanco = { AMOUNT = 2 }. AMOUNT must be a positive literal: the colorado
+#     side writes -$AMOUNT$ for the bar, so a negative number or a named value would not parse.
+#     To take score away from one side, give it to the other. Moves the score, and the journal bar if the
+#     journal already exists (before Carpinteria it does not; .1 syncs the bar when it opens).
+# ES: uso: gg_score_blanco = { AMOUNT = 2 }. AMOUNT tiene que ser un numero positivo escrito tal
+#     cual: el lado colorado escribe -$AMOUNT$ para la barra. Para restarle a un bando, se le suma
+#     al otro. Mueve el puntaje, y la barra si el journal ya existe
+#     (antes de Carpinteria no existe; .1 sincroniza la barra al abrirlo).
+gg_score_blanco = {
+	change_global_variable = { name = guerra_grande_blanco_score add = $AMOUNT$ }
+	je:je_guerra_grande ?= {
+		add_progress = { value = $AMOUNT$ name = guerra_grande_war_score_bar }
+	}
+}
+
+gg_score_colorado = {
+	change_global_variable = { name = guerra_grande_colorado_score add = $AMOUNT$ }
+	je:je_guerra_grande ?= {
+		add_progress = { value = -$AMOUNT$ name = guerra_grande_war_score_bar }
+	}
 }
 
 # EN: usage: gg_patron_change = { PATRON = francia DELTA = -15 }

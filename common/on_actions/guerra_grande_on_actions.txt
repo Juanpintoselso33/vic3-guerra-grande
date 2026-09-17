@@ -45,6 +45,16 @@ guerra_grande_on_game_start = {
 				limit = { has_template = URU_Manuel_Oribe }
 				set_ideology = ideology:ideology_autonomist
 			}
+			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).
+			trigger_event = { id = gg_prewar.1 days = 2 popup = yes }     # 1836.01.03 El Moderador
+			trigger_event = { id = gg_prewar.2 days = 74 popup = yes }    # 1836.03.15 Farrapos
+			trigger_event = { id = gg_prewar.3 days = 160 popup = yes }   # 1836.06.09 cuentas de Rivera
+			trigger_event = { id = gg_prewar.4 days = 532 popup = yes }   # 1837.06.16 departamentos
+			trigger_event = { id = gg_prewar.5 days = 660 popup = yes }   # 1837.10.22 Yucutuja
+			trigger_event = { id = gg_prewar.6 days = 776 popup = yes }   # 1838.02.15 el Yi
+			trigger_event = { id = gg_prewar.7 days = 840 popup = yes }   # 1838.04.20 bloqueo frances
+			trigger_event = { id = gg_prewar.8 days = 877 popup = yes }   # 1838.05.27 Universidad
+			trigger_event = { id = gg_prewar.9 days = 896 popup = yes }   # 1838.06.15 Palmar
 			# 19 September 1836: the battle of Carpinteria, where the ribbons are born.
 			trigger_event = { id = guerra_grande.1 days = 262 popup = yes }
 		}

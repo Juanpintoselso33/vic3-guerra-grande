@@ -1,0 +1,442 @@
+﻿namespace = gg_prewar
+
+# EN: Phase 0 (1836-1838), docs/guerra-grande-flujo/fichas.md F0-1 to F0-8. Oribe's government
+#     before the fall. Every event is scheduled from guerra_grande_on_game_start on its historical
+#     date (Wikipedia ES, Guerra Grande / Manuel Oribe / Universidad de la Republica /
+#     Departamento de Tacuarembo / Guerra de los Farrapos; see historia.md section 0b).
+#     Score goes through gg_score_blanco / gg_score_colorado, which also move the journal bar once
+#     it exists; the first three events fire before Carpinteria creates the journal.
+# ES: Fase 0 (1836-1838), fichas F0-1 a F0-8. El gobierno de Oribe antes de la caida. Cada evento
+#     se agenda desde guerra_grande_on_game_start en su fecha historica (ver historia.md 0b).
+#     El puntaje pasa por gg_score_blanco / gg_score_colorado, que tambien mueven la barra cuando
+#     el journal existe; los tres primeros eventos disparan antes de que Carpinteria lo cree.
+
+
+# F0-2 - El Moderador and the unitarian emigres, late 1835 (fires on 3 January 1836)
+gg_prewar.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.1.t
+	desc = gg_prewar.1.d
+	flavor = gg_prewar.1.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rosas_cerrito"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.1.a
+		default_option = yes
+		# EN: historical. Rosas starts higher, France lower, and the emigres go to Rivera.
+		# ES: lo historico. Rosas arranca mas alto, Francia mas bajo, y los emigrados se van con Rivera.
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		gg_patron_change = { PATRON = francia DELTA = -5 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 65 }
+	}
+
+	option = {
+		name = gg_prewar.1.b
+		# EN: asylum respected. Rosas lower, France higher, Lavalle stays out for a while (read in T6).
+		# ES: se respeta el asilo. Rosas mas bajo, Francia mas alta, Lavalle queda neutral un tiempo (T6).
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		set_global_variable = gg_unitarian_asylum
+		ai_chance = { base = 35 }
+	}
+
+}
+
+
+# F0-3 - the Farrapos war in Rio Grande (since 20 September 1835)
+gg_prewar.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.2.t
+	desc = gg_prewar.2.d
+	flavor = gg_prewar.2.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.2.a
+		default_option = yes
+		# EN: historical: watched neutrality. Rivera still gets the riograndenses in 1837: the
+		#     consequence lands in gg_rivera_1837_strength, which counts the border as open.
+		# ES: lo historico: neutralidad vigilada. Rivera consigue igual a los riograndenses en 1837:
+		#     la consecuencia cae en gg_rivera_1837_strength, que cuenta la frontera como abierta.
+		gg_patron_change = { PATRON = brasil DELTA = -3 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_prewar.2.b
+		# EN: help the Empire close the border: Brazil up, Rivera weaker in 1837, the farrapos hostile.
+		# ES: ayudar al Imperio a cerrar la frontera: Brasil sube, Rivera mas debil en 1837.
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		set_global_variable = gg_farrapos_closed
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_prewar.2.c
+		# EN: tolerate the farrapos: the border stays open both ways, Brazil down.
+		# ES: tolerar a los farrapos: la frontera queda abierta para los dos lados, Brasil baja.
+		gg_patron_change = { PATRON = brasil DELTA = -10 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+
+# F0-1 - Rivera's accounts and the Comandancia de Campania (June 1836)
+gg_prewar.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.3.t
+	desc = gg_prewar.3.d
+	flavor = gg_prewar.3.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.3.a
+		default_option = yes
+		# EN: historical (June 1836): publish the commission and give the Comandancia to Ignacio Oribe.
+		#     The state is ordered and the doctores gain weight, but Rivera rises with all his force.
+		# ES: lo historico (junio de 1836): publicar la comision y darle la Comandancia a Ignacio Oribe.
+		gg_cerrito_balance_change = { DELTA = 10 }
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_score_colorado = { AMOUNT = 2 }
+		ai_chance = { base = 55 }
+	}
+
+	option = {
+		name = gg_prewar.3.b
+		# EN: publish without restoring the Comandancia: Rivera rises anyway, with less support.
+		# ES: publicarlas sin restituir la Comandancia: Rivera se alza igual, con menos apoyo.
+		gg_cerrito_balance_change = { DELTA = 5 }
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_prewar.3.c
+		# EN: shelve the accounts and give him a post: Oribe looks weak.
+		# ES: archivar las cuentas y darle un cargo: Oribe queda como debil.
+		gg_cerrito_balance_change = { DELTA = -5 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 15 }
+	}
+
+}
+
+
+# F0-4 - the law of 16 June 1837: Tacuarembo, Salto and Minas
+gg_prewar.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.4.t
+	desc = gg_prewar.4.d
+	flavor = gg_prewar.4.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_herds"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.4.a
+		default_option = yes
+		# EN: historical: political chiefs of the government. More control, but the northern caudillos go to Rivera.
+		# ES: lo historico: jefes politicos del gobierno. Mas control, pero los caudillos del norte se pasan a Rivera.
+		set_global_variable = gg_depts_state_chiefs
+		gg_score_blanco = { AMOUNT = 1 }
+		add_modifier = { name = gg_prewar_state_chiefs years = 5 is_decaying = yes }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_prewar.4.b
+		# EN: local caudillos in charge: less control, fewer defections in 1837.
+		# ES: caudillos locales al frente: menos control, menos adhesiones a Rivera en 1837.
+		set_global_variable = gg_depts_local_caudillos
+		add_modifier = { name = gg_prewar_local_caudillos years = 5 is_decaying = yes }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+
+# F0-5a - Yucutuja, 22 October 1837
+gg_prewar.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.5.t
+	desc = gg_prewar.5.d
+	flavor = gg_prewar.5.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_carpinteria"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.5.a
+		default_option = yes
+		# EN: give battle in the north. Rivera's strength depends on F0-3 and F0-4 (gg_rivera_1837_strength).
+		# ES: presentar batalla en el norte. La fuerza de Rivera depende de F0-3 y F0-4.
+		change_global_variable = { name = guerra_grande_colorado_score add = gg_rivera_1837_strength }
+		je:je_guerra_grande ?= {
+			add_progress = { value = gg_rivera_1837_strength_bar name = guerra_grande_war_score_bar }
+		}
+		ai_chance = { base = 55 }
+	}
+
+	option = {
+		name = gg_prewar.5.b
+		# EN: fall back to the centre: a smaller defeat, but the north is lost for a while.
+		# ES: replegarse al centro: una derrota mas chica, pero el norte se pierde un tiempo.
+		gg_score_colorado = { AMOUNT = 1 }
+		add_modifier = { name = gg_prewar_north_lost years = 2 is_decaying = yes }
+		ai_chance = { base = 45 }
+	}
+
+}
+
+
+# F0-5b - the action of the Yi (no exact date in the sources; placed in February 1838)
+gg_prewar.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.6.t
+	desc = gg_prewar.6.d
+	flavor = gg_prewar.6.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_carpinteria"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.6.a
+		default_option = yes
+		# EN: pursue Rivera after the Yi: the whole revenge.
+		# ES: perseguir a Rivera despues del Yi: la revancha entera.
+		gg_score_blanco = { AMOUNT = 2 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_prewar.6.b
+		# EN: consolidate: less score, but order in the countryside.
+		# ES: consolidar: menos puntaje, pero orden en la campania.
+		gg_score_blanco = { AMOUNT = 1 }
+		add_modifier = { name = guerra_grande_blanco_order years = 10 }
+		ai_chance = { base = 50 }
+	}
+
+}
+
+
+# F0-7 - the French blockade of Buenos Aires (March 1838) and Martin Garcia
+gg_prewar.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.7.t
+	desc = gg_prewar.7.d
+	flavor = gg_prewar.7.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.7.a
+		default_option = yes
+		# EN: historical: side with Rosas and deny the ports. Leblanc will disarm the flotilla (7 Oct 1838).
+		# ES: lo historico: alinearse con Rosas y negar los puertos. Leblanc desarmara la flotilla.
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		gg_patron_change = { PATRON = francia DELTA = -15 }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_prewar.7.b
+		# EN: deal with France: the flotilla is spared and the fall is delayed (read in T6), but Rosas
+		#     starts low and Rivera loses French help.
+		# ES: negociar con Francia: se salva la flotilla y la caida se atrasa (T6), pero Rosas arranca bajo.
+		gg_patron_change = { PATRON = rosas DELTA = -15 }
+		gg_patron_change = { PATRON = francia DELTA = 10 }
+		gg_score_blanco = { AMOUNT = 1 }
+		set_global_variable = gg_french_deal_1838
+		ai_chance = { base = 40 }
+	}
+
+}
+
+
+# F0-8 - the Universidad Mayor de la Republica, 27 May 1838
+gg_prewar.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.8.t
+	desc = gg_prewar.8.d
+	flavor = gg_prewar.8.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.8.a
+		default_option = yes
+		# EN: decree the Universidad Mayor (27 May 1838) on Larranaga's law of 1833. The second half is
+		#     the inauguration of 1849 (T7), which reads gg_university_decreed.
+		# ES: decretar la Universidad Mayor (27 de mayo de 1838) sobre la ley de Larraniaga de 1833.
+		gg_cerrito_balance_change = { DELTA = 10 }
+		add_treasury = -15000
+		set_global_variable = gg_university_decreed
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_prewar.8.b
+		# EN: postpone it: the money stays for the war, and the caudillos win the argument.
+		# ES: postergarla: la plata queda para la guerra, y los caudillos ganan la discusion.
+		gg_cerrito_balance_change = { DELTA = -5 }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+
+# F0-6 - Palmar, 15 June 1838
+gg_prewar.9 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_prewar.9.t
+	desc = gg_prewar.9.d
+	flavor = gg_prewar.9.f
+
+	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_riv_india_muerta"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = gg_prewar.9.a
+		default_option = yes
+		# EN: historical: Ignacio Oribe gives battle at Palmar and loses the Republic.
+		# ES: lo historico: Ignacio Oribe da batalla en Palmar y pierde la Republica.
+		gg_score_colorado = { AMOUNT = 3 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_prewar.9.b
+		trigger = {
+			guerra_grande_blanco_lead >= 3
+		}
+		# EN: only with the blancos ahead: refuse battle and fall back. The defeat shrinks and it opens
+		#     the blanco path of the fall (F1-0, read in T6).
+		# ES: solo con los blancos arriba: no dar batalla y replegarse. La derrota se achica y abre el
+		#     camino blanco de la caida (F1-0, T6).
+		gg_score_colorado = { AMOUNT = 1 }
+		set_global_variable = gg_palmar_avoided
+		ai_chance = { base = 50 }
+	}
+
+}

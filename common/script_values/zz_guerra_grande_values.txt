@@ -32,3 +32,34 @@ gg_cerrito_backing = {
 	value = global_var:gg_patron_rosas
 	add = global_var:gg_patron_urquiza
 }
+
+# EN: T5, F0-5. How hard Rivera hits at Yucutuja: 2, +1 if the border stayed open to the
+#     riograndenses, -1 if Oribe helped the Empire close it, +1 if the northern caudillos were
+#     passed over by the government's political chiefs, -1 if they were left in charge.
+# ES: T5, F0-5. Cuanto pega Rivera en Yucutuja: 2, +1 si la frontera quedo abierta a los
+#     riograndenses, -1 si Oribe ayudo al Imperio a cerrarla, +1 si los caudillos del norte fueron
+#     desplazados por jefes politicos, -1 si se los dejo al frente.
+gg_rivera_1837_strength = {
+	value = 2
+	if = {
+		limit = { has_global_variable = gg_farrapos_closed }
+		add = -1
+	}
+	else = {
+		add = 1
+	}
+	if = {
+		limit = { has_global_variable = gg_depts_state_chiefs }
+		add = 1
+	}
+	else_if = {
+		limit = { has_global_variable = gg_depts_local_caudillos }
+		add = -1
+	}
+}
+
+# EN/ES: the same, negative, for the journal bar (colorado moves it down) / lo mismo, en negativo, para la barra.
+gg_rivera_1837_strength_bar = {
+	value = gg_rivera_1837_strength
+	multiply = -1
+}

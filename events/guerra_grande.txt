@@ -25,6 +25,11 @@ guerra_grande.1 = {
 
 	immediate = {
 		add_contextless_journal_entry = je_guerra_grande
+		# EN: T5 -- phase 0 already scored before the journal existed; bring the bar up to date.
+		# ES: T5 -- la fase 0 ya puntuo antes de que existiera el journal; se pone la barra al dia.
+		je:je_guerra_grande ?= {
+			add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
+		}
 		hidden_effect = {
 			# EN: the ribbons name the parties. Vanilla groups only: Oribe sits with the
 			#     landowners and the countryside, Rivera with the city and the port. BPM renames
@@ -1671,6 +1676,8 @@ guerra_grande.11 = {
 
 	option = {
 		name = guerra_grande.11.a
+		# EN/ES: T5, FE-3 -- the law above the man: the doctores / la ley sobre el hombre: los doctores
+		gg_cerrito_balance_change = { DELTA = 10 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		change_global_variable = {
@@ -1702,6 +1709,8 @@ guerra_grande.11 = {
 
 	option = {
 		name = guerra_grande.11.b
+		# EN/ES: T5, FE-3 -- as chosen in fichas.md: towards the caudillos / segun la ficha: hacia los caudillos
+		gg_cerrito_balance_change = { DELTA = -10 }
 		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
 		#     it, so saying no to the cult of authority, or denying Lavalleja his command, is a
 		#     concession to the liberal side -- and it has to pay the colorados exactly what the
@@ -1754,6 +1763,8 @@ guerra_grande.12 = {
 
 	option = {
 		name = guerra_grande.12.a
+		# EN/ES: T5, FE-3 -- Lavalleja came back with Rosas's men / Lavalleja volvio con hombres de Rosas
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		change_global_variable = {
@@ -1827,6 +1838,8 @@ guerra_grande.13 = {
 
 	option = {
 		name = guerra_grande.13.a
+		# EN/ES: T5, FE-3 -- asking the Empire to hand him over sours Rio / pedirle al Imperio que lo entregue agria a Rio
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		change_global_variable = {
@@ -1891,6 +1904,8 @@ guerra_grande.14 = {
 
 	option = {
 		name = guerra_grande.14.a
+		# EN/ES: T5, FE-3 -- the government that writes to Artigas borrows his name / el gobierno que le escribe a Artigas toma su nombre
+		add_modifier = { name = gg_artigas_letter years = 5 is_decaying = yes }
 		default_option = yes
 		add_loyalists = {
 			value = small_radicals
