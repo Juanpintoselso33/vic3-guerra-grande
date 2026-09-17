@@ -1638,7 +1638,7 @@ guerra_grande.9 = {
 		video = "gg_squadrons"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 
@@ -1666,7 +1666,7 @@ guerra_grande.11 = {
 		video = "gg_oribe_fall"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 
@@ -1894,7 +1894,7 @@ guerra_grande.14 = {
 		video = "gg_artigas"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 

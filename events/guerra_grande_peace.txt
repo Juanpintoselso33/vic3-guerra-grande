@@ -58,7 +58,7 @@ gg_peace.1 = {
 		video = "gg_peace"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 
@@ -955,7 +955,7 @@ gg_peace.3 = {
 		video = "gg_squadrons"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 
@@ -1026,7 +1026,7 @@ gg_peace.4 = {
 		video = "gg_squadrons"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	duration = 3
 
