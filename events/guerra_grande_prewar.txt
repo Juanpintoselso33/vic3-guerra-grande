@@ -13,6 +13,7 @@
 
 
 # F0-2 - El Moderador and the unitarian emigres, late 1835 (fires on 3 January 1836)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande: 'Factores internos' (Oribe closes El Moderador, Rivera protests) and 'Conclusion' (Correa Morales, 'muy firme y casi grosero').
 gg_prewar.1 = {
 	type = country_event
 	placement = ROOT
@@ -59,6 +60,7 @@ gg_prewar.1 = {
 
 
 # F0-3 - the Farrapos war in Rio Grande (since 20 September 1835)
+# SOURCE / FUENTE: Wikipedia ES, Guerra de los Farrapos (20.9.1835; leaders; jerky tariffs; inspired by the Uruguayan war) and Guerra Grande 'Factores internos' (Oribe marches north 'en acuerdo con el Comandante General de la Campania'; Bento Goncalves, Rivera's comrade in the Portuguese army: Manuel Oribe).
 gg_prewar.2 = {
 	type = country_event
 	placement = ROOT
@@ -113,6 +115,7 @@ gg_prewar.2 = {
 
 
 # F0-1 - Rivera's accounts and the Comandancia de Campania (June 1836)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Factores internos': 9.1.1836; Juan Maria Perez's letter to Giro; the Ramirez-Costa-Artagaveytia commission ('despilfarro y fraude'); the Command restored for Ignacio Oribe; the flavour quote is cited there.
 gg_prewar.3 = {
 	type = country_event
 	placement = ROOT
@@ -169,6 +172,7 @@ gg_prewar.3 = {
 
 
 # F0-4 - the law of 16 June 1837: Tacuarembo, Salto and Minas
+# SOURCE / FUENTE: Wikipedia ES, Departamento de Tacuarembo (law of 16.6.1837, split from Paysandu); fichas.md F0-4 (Salto and Minas). Nine departments in 1830.
 gg_prewar.4 = {
 	type = country_event
 	placement = ROOT
@@ -214,12 +218,28 @@ gg_prewar.4 = {
 
 
 # F0-5a - Yucutuja, 22 October 1837
+# SOURCE / FUENTE: Wikipedia ES, Batalla de Yucutuja: 22.10.1837, 785 men and four guns across the Cuaro, colonel Luna's 200, the chiefs, about 800 a side, Servando Gomez's charge absorbed.
 gg_prewar.5 = {
 	type = country_event
 	placement = ROOT
 
 	title = gg_prewar.5.t
-	desc = gg_prewar.5.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_prewar.5.d_closed
+				trigger = { has_global_variable = gg_farrapos_closed }
+			}
+			triggered_desc = {
+				desc = gg_prewar.5.d_local
+				trigger = { has_global_variable = gg_depts_local_caudillos }
+			}
+			triggered_desc = {
+				desc = gg_prewar.5.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_prewar.5.f
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
@@ -240,9 +260,12 @@ gg_prewar.5 = {
 		default_option = yes
 		# EN: give battle in the north. Rivera's strength depends on F0-3 and F0-4 (gg_rivera_1837_strength).
 		# ES: presentar batalla en el norte. La fuerza de Rivera depende de F0-3 y F0-4.
-		change_global_variable = { name = guerra_grande_colorado_score add = gg_rivera_1837_strength }
-		je:je_guerra_grande ?= {
-			add_progress = { value = gg_rivera_1837_strength_bar name = guerra_grande_war_score_bar }
+		custom_tooltip = {
+			text = gg_prewar.5.a_tt
+			change_global_variable = { name = guerra_grande_colorado_score add = gg_rivera_1837_strength }
+			je:je_guerra_grande ?= {
+				add_progress = { value = gg_rivera_1837_strength_bar name = guerra_grande_war_score_bar }
+			}
 		}
 		ai_chance = { base = 55 }
 	}
@@ -260,6 +283,7 @@ gg_prewar.5 = {
 
 
 # F0-5b - the action of the Yi (no exact date in the sources; placed in February 1838)
+# SOURCE / FUENTE: Wikipedia ES, Manuel Oribe ('poco despues, Rivera es derrotado en la accion del Yi'); the unitarian officers from Batalla de Palmar. No exact date in the sources.
 gg_prewar.6 = {
 	type = country_event
 	placement = ROOT
@@ -303,6 +327,7 @@ gg_prewar.6 = {
 
 
 # F0-7 - the French blockade of Buenos Aires (March 1838) and Martin Garcia
+# SOURCE / FUENTE: Wikipedia ES, Bloqueo frances al Rio de la Plata: Leblanc in Montevideo 21.2.1838; the anchorages; schooners bought in Montevideo; the request to use Montevideo as a naval base, refused, after which France backed Rivera.
 gg_prewar.7 = {
 	type = country_event
 	placement = ROOT
@@ -350,6 +375,7 @@ gg_prewar.7 = {
 
 
 # F0-8 - the Universidad Mayor de la Republica, 27 May 1838
+# SOURCE / FUENTE: Wikipedia ES, Universidad de la Republica: law of 11.6.1833 (Larranaga, nine chairs, decree when most are running); the five subjects taught in 1836; Oribe's decree of 27.5.1838.
 gg_prewar.8 = {
 	type = country_event
 	placement = ROOT
@@ -395,12 +421,24 @@ gg_prewar.8 = {
 
 
 # F0-6 - Palmar, 15 June 1838
+# SOURCE / FUENTE: Wikipedia ES, Batalla de Palmar: 15.6.1838, Paysandu; Ignacio Oribe and Lavalleja; Lavalle takes command; Piran's artillery; the named officers.
 gg_prewar.9 = {
 	type = country_event
 	placement = ROOT
 
 	title = gg_prewar.9.t
-	desc = gg_prewar.9.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_prewar.9.d_ahead
+				trigger = { guerra_grande_blanco_lead >= 3 }
+			}
+			triggered_desc = {
+				desc = gg_prewar.9.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_prewar.9.f
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
