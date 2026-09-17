@@ -14,6 +14,19 @@ gg_postwar.1 = {
 	hidden = yes
 
 	immediate = {
+		# EN: the handover of 1852, when the Defensa's government survives the war: Suarez resigned
+		#     his command to Bernardo Berro, president of the Senate, on 15 February 1852, and Juan
+		#     Francisco Giro took office as constitutional president (Wikipedia ES, Joaquin Suarez).
+		# ES: el traspaso de 1852, si el gobierno de la Defensa sobrevive a la guerra: Suarez resigno
+		#     el mando en Bernardo Berro, presidente del Senado, el 15 de febrero de 1852, y Juan
+		#     Francisco Giro asumio como presidente constitucional.
+		if = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			gg_ruler_set = { TEMPLATE = URU_bernardo_prudencio_berro }
+			hidden_effect = {
+				trigger_event = { id = gg_postwar.7 days = 15 }
+			}
+		}
 		if = {
 			limit = { has_global_variable = gg_peace_punished }
 			trigger_event = { id = gg_postwar.2 days = 1 popup = yes }
@@ -367,5 +380,15 @@ gg_postwar.6 = {
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_armed_forces }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
 		ai_chance = { base = 40 }
+	}
+}
+
+# EN/ES: gg_postwar.7 -- Giro takes office (hidden) / Giro asume (oculto)
+gg_postwar.7 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		gg_ruler_set = { TEMPLATE = URU_gg_juan_francisco_giro }
 	}
 }

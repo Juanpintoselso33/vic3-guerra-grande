@@ -247,13 +247,24 @@ guerra_grande_on_election_end = {
 	# ES: la misma guarda para LOS DOS caminos. En el camino blanco (Oribe no renuncio) una eleccion
 	#     le dio la presidencia a un politico de partido, y el gobierno que sale al Cerrito es el de
 	#     Oribe, no el que gano una votacion en medio de la guerra.
+	# EN: every government of this war, before and after the split: the Defensa never held an
+	#     election while the siege lasted, and the Cerrito's Asamblea General confirmed Oribe in 1845.
+	# ES: todos los gobiernos de esta guerra, antes y despues del corte: la Defensa no voto mientras
+	#     duro el sitio, y la Asamblea General del Cerrito confirmo a Oribe en 1845.
 	trigger = {
-		c:URU ?= this
-		NOT = { has_global_variable = guerra_grande_split_done }
 		OR = {
-			has_global_variable = gg_rivera_presidency
-			has_variable = guerra_grande_blanco_path
+			AND = {
+				c:URU ?= this
+				NOT = { has_global_variable = guerra_grande_split_done }
+				OR = {
+					has_global_variable = gg_rivera_presidency
+					has_variable = guerra_grande_blanco_path
+				}
+			}
+			has_variable = guerra_grande_defensa_government
+			has_variable = guerra_grande_cerrito_government
 		}
+		NOT = { has_global_variable = gg_peace_settled }
 	}
 	effect = {
 		trigger_event = { id = gg_phase1.10 days = 1 }

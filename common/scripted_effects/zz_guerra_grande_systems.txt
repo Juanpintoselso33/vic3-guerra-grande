@@ -392,3 +392,65 @@ gg_spawn_war_characters = {
 		}
 	}
 }
+
+# EN: THE PRESIDENCY, RAILROADED (Juan, 2026-09-17). The Republic's head of state follows history,
+#     not the ballot: an election in the middle of the war used to hand the presidency to whatever
+#     party politician won the vote, in either path. Sources (Wikipedia ES): Oribe president from
+#     1835 until he resigned on 24 October 1838; Gabriel Antonio Pereira holds the executive from
+#     1 November 1838, elected by the Senate because the president of the Senate, Carlos Anaya, had
+#     sailed for Buenos Aires; Rivera takes the presidency on 1 March 1839 and the Congress declares
+#     his term over on 1 March 1843, replacing him with Joaquin Suarez at the head of the Gobierno de
+#     la Defensa; the Cerrito is Oribe's, who claimed the mandate the revolution of 1838 cut short;
+#     Suarez hands over to Bernardo Berro on 15 February 1852, and Giro takes office on 1 March.
+# ES: LA PRESIDENCIA, POR CARRIL FIJO. La jefatura de Estado sigue la historia y no la urna: una
+#     eleccion en mitad de la guerra le daba la presidencia al politico de partido que ganara la
+#     votacion, en los dos caminos. Fuentes (Wikipedia ES) en el parrafo de arriba.
+gg_ruler_set = {
+	if = {
+		limit = { any_scope_character = { has_template = $TEMPLATE$ } }
+		random_scope_character = {
+			limit = { has_template = $TEMPLATE$ }
+			set_character_as_ruler = yes
+		}
+	}
+	else = {
+		create_character = {
+			template = $TEMPLATE$
+			ruler = yes
+		}
+	}
+}
+
+# EN/ES: who should be sitting in the chair right now, in this country / quien deberia estar en el
+#     sillon ahora mismo, en este pais
+gg_president_historical = {
+	if = {
+		limit = { has_variable = guerra_grande_cerrito_government }
+		gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
+	}
+	else_if = {
+		limit = {
+			has_variable = guerra_grande_defensa_government
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		gg_ruler_set = { TEMPLATE = URU_joaquin_suarez }
+	}
+	else_if = {
+		limit = {
+			has_variable = guerra_grande_blanco_path
+			NOT = { has_global_variable = gg_rivera_presidency }
+		}
+		gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
+	}
+	else_if = {
+		limit = {
+			has_global_variable = gg_rivera_presidency
+			year >= 1839
+		}
+		gg_ruler_set = { TEMPLATE = URU_Fructuoso_Rivera }
+	}
+	else_if = {
+		limit = { has_global_variable = gg_rivera_presidency }
+		gg_ruler_set = { TEMPLATE = URU_gg_gabriel_antonio_pereira }
+	}
+}

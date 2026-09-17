@@ -61,10 +61,7 @@ gg_phase1.9 = {
 		# EN: F1-0 -- the blanco path converges: Oribe falls anyway, and leaves with his army.
 		# ES: F1-0 -- el camino blanco converge: Oribe cae igual, y se va con su ejercito.
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
-		random_scope_character = {
-			limit = { has_template = URU_Fructuoso_Rivera }
-			set_character_as_ruler = yes
-		}
+		gg_president_historical = yes
 		gg_score_blanco = { AMOUNT = 1 }
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		ai_chance = { base = 60 }
@@ -614,30 +611,26 @@ gg_phase1.10 = {
 
 	# EN/ES: each path keeps its own man in the chair / cada camino conserva a su hombre
 	trigger = {
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	immediate = {
+		gg_president_historical = yes
+	}
+}
+
+# EN/ES: gg_phase1.11 -- 1 March 1839: Rivera takes the presidency that the Senate's interim held
+#     for four months (hidden) / Rivera asume la presidencia que el interinato sostuvo cuatro meses
+gg_phase1.11 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
 		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
 	immediate = {
-		if = {
-			limit = {
-				has_variable = guerra_grande_blanco_path
-				any_scope_character = { has_template = URU_Manuel_Oribe }
-			}
-			random_scope_character = {
-				limit = { has_template = URU_Manuel_Oribe }
-				set_character_as_ruler = yes
-			}
-		}
-		else_if = {
-			limit = {
-				has_global_variable = gg_rivera_presidency
-				any_scope_character = { has_template = URU_Fructuoso_Rivera }
-			}
-			random_scope_character = {
-				limit = { has_template = URU_Fructuoso_Rivera }
-				set_character_as_ruler = yes
-			}
-		}
+		gg_president_historical = yes
 	}
 }

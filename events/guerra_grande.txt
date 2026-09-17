@@ -190,10 +190,15 @@ guerra_grande.2 = {
 		#     y una renuncia que falla la validacion es un gobierno que no cambia nunca.
 		#     En vanilla, los colorados son la ciudad: comerciantes, doctores y el puerto.
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
-		# Rivera takes over as head of state. Oribe sails for Buenos Aires.
-		random_scope_character = {
-			limit = { has_template = URU_Fructuoso_Rivera }
-			set_character_as_ruler = yes
+		# EN: Oribe sails for Buenos Aires. The Senate's interim takes the executive on 1 November
+		#     1838 -- Gabriel Antonio Pereira, because the president of the Senate had sailed too --
+		#     and Rivera only takes the presidency on 1 March 1839.
+		# ES: Oribe se embarca a Buenos Aires. El interinato del Senado toma el Ejecutivo el 1 de
+		#     noviembre de 1838 -- Gabriel Antonio Pereira, porque el presidente del Senado tambien
+		#     se habia embarcado -- y Rivera asume recien el 1 de marzo de 1839.
+		gg_ruler_set = { TEMPLATE = URU_gg_gabriel_antonio_pereira }
+		hidden_effect = {
+			trigger_event = { id = gg_phase1.11 days = 128 }   # 1839.03.01
 		}
 		add_modifier = {
 			name = guerra_grande_colorado_order
