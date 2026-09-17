@@ -1,4 +1,4 @@
-# EN: Urquiza has no country in the playset (Entre Rios is a state of Argentina), so his flag is a
+﻿# EN: Urquiza has no country in the playset (Entre Rios is a state of Argentina), so his flag is a
 #     text icon: the flag of Entre Rios of 1833-1853 (Wikimedia Commons, public domain), with the
 #     same cloth shading and mask as vanilla's special flag icons (ibe_republic_1).
 # ES: Urquiza no tiene pais en el playset, asi que su bandera es un icono de texto: la bandera de
@@ -9,6 +9,6 @@ texticon = {
   iconsize = {
     offset = { 0 50 }
     texture = "gfx/coat_of_arms/special_coa_texticons/gg_entre_rios_1833.dds"
-    fontsize = 55
+    fontsize = 280
   }
 }
