@@ -29,6 +29,12 @@ gg_postwar.1 = {
 			trigger_event = { id = gg_postwar.5 days = 1825 popup = yes }
 			trigger_event = { id = gg_postwar.6 days = 1460 popup = yes }
 		}
+		# EN/ES: review -- a peace with neither mark (the presidency restored, Rosas's vassal or client):
+		#     elections and the caudillos, no fusion / una paz sin ninguna marca: elecciones y caudillos
+		else = {
+			trigger_event = { id = gg_postwar.4 days = 150 popup = yes }
+			trigger_event = { id = gg_postwar.5 days = 1095 popup = yes }
+		}
 	}
 }
 

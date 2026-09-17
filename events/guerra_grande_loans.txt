@@ -412,6 +412,7 @@ gg_loan.4 = {
 	#     Buenos Aires, y pone el peso entero de Rosas detras suyo.
 	option = {
 		name = gg_loan.4.a
+		custom_tooltip = gg_loan.4.a_tt
 		add_treasury = 25000
 		add_modifier = { name = guerra_grande_reunification_accepted years = 20 }
 		c:ARG ?= {
@@ -746,14 +747,18 @@ gg_loan.7 = {
 					year >= 1855
 				}
 			}
-			c:URU ?= {
-				if = {
-					limit = { NOT = { has_variable = gg_loan_settled } }
-					set_variable = gg_loan_settled
-					trigger_event = { id = gg_loan.5 days = 4 popup = yes }
+			# EN/ES: review -- by government, not by tag: the winning Cerrito is URU after gg_peace.8
+			#     / por gobierno y no por tag: el Cerrito ganador es URU despues de gg_peace.8
+			every_country = {
+				limit = {
+					has_variable = guerra_grande_defensa_government
+					NOT = { has_variable = gg_loan_settled }
 				}
+				set_variable = gg_loan_settled
+				trigger_event = { id = gg_loan.5 days = 4 popup = yes }
 			}
-			c:CER ?= {
+			every_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
 				if = {
 					limit = { NOT = { has_variable = gg_loan_settled } }
 					set_variable = gg_loan_settled

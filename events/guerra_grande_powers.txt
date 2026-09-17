@@ -23,7 +23,8 @@ gg_powers.1 = {
 gg_powers.2 = {
 	type = country_event
 	hidden = yes
-	trigger = { has_global_variable = guerra_grande_split_done }
+	# EN/ES: review -- no split requirement: a delayed partition must not lose it
+	#     / sin exigir la particion: una particion atrasada no puede perderlo
 	immediate = {
 		# EN/ES: balance, first playtest 2026-09-17: the sea was historically open from the start of
 		#     the siege (the French station, Purvis). 20 here plus Purvis's 15 opens it in 1843.
@@ -118,11 +119,12 @@ gg_powers.10 = {
 	immediate = {
 		# EN/ES: Purvis refuses to recognise the blockade whatever the Cerrito answers (historical).
 		#     / Purvis no reconoce el bloqueo conteste lo que conteste el Cerrito.
-		gg_patron_change = { PATRON = britania DELTA = 15 }
+		gg_patron_change = { PATRON = britania DELTA = 20 }
 	}
 
 	option = {
 		name = gg_powers.10.a
+		custom_tooltip = gg_powers.10.a_tt
 		default_option = yes
 		# EN: keep the blockade: Britain takes offence, and the ships are at risk.
 		# ES: sostener el bloqueo: Gran Bretania se ofende, y los barcos corren riesgo.
@@ -224,6 +226,7 @@ gg_powers.12 = {
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
+		NOT = { has_global_variable = gg_hood_done }
 		OR = {
 			gg_sea_open = yes
 			has_global_variable = gg_powers_mediators
@@ -240,6 +243,7 @@ gg_powers.12 = {
 
 	option = {
 		name = gg_powers.12.a
+		custom_tooltip = gg_powers.12.a_tt
 		default_option = yes
 		# EN: historical: accept with amendments (11 August 1846). The Defensa decides next.
 		# ES: lo historico: aceptar con retoques (11 de agosto de 1846). Despues decide la Defensa.
@@ -286,6 +290,7 @@ gg_powers.13 = {
 
 	option = {
 		name = gg_powers.13.a
+		custom_tooltip = gg_powers.13.a_tt
 		# EN: accept the powers' peace: elections, amnesty, the foreigners disarmed (final F12).
 		# ES: aceptar la paz de las potencias: elecciones, amnistia, desarme de los extranjeros (F12).
 		set_global_variable = gg_peace_offered
@@ -331,6 +336,7 @@ gg_powers.14 = {
 
 	option = {
 		name = gg_powers.14.a
+		custom_tooltip = gg_powers.14.a_tt
 		default_option = yes
 		# EN: historical: no peace without Rosas, but six months of truce and cattle for the city.
 		# ES: lo historico: sin paz sin Rosas, pero seis meses de tregua y ganado para la ciudad.
@@ -373,6 +379,7 @@ gg_powers.15 = {
 
 	option = {
 		name = gg_powers.15.a
+		custom_tooltip = gg_powers.15.a_tt
 		default_option = yes
 		# EN: accept the truce: six months without peace offers or siege, food for the city; Britain
 		#     lifts its blockade and steps back (I15).
@@ -429,6 +436,7 @@ gg_powers.16 = {
 
 	option = {
 		name = gg_powers.16.a
+		custom_tooltip = gg_powers.16.a_tt
 		# EN: accept the presidency under a European guarantee and leave Rosas (final F13). With the
 		#     caudillos in charge, the camp resents it.
 		# ES: aceptar la presidencia con garantia europea y dejar a Rosas (F13). Con los caudillos al
@@ -816,6 +824,7 @@ gg_powers.23 = {
 
 	option = {
 		name = gg_powers.23.b
+		custom_tooltip = gg_powers.23.b_tt
 		default_option = yes
 		# EN: historical: send Lucas Moreno to Urquiza and ask for terms (the arbiter ripens the Cerrito).
 		# ES: lo historico: mandar a Lucas Moreno ante Urquiza y pedir condiciones.
@@ -825,6 +834,7 @@ gg_powers.23 = {
 
 	option = {
 		name = gg_powers.23.c
+		custom_tooltip = gg_powers.23.c_tt
 		# EN: ask for a naval guarantee to leave with the Argentine troops (exit S12): the Cerrito
 		#     dissolves in peace and Urquiza does not keep the park.
 		# ES: pedir la garantia naval para irse con las tropas argentinas (salida S12): el Cerrito se
@@ -1015,6 +1025,7 @@ gg_powers.28 = {
 
 	option = {
 		name = gg_powers.28.a
+		custom_tooltip = gg_powers.28.a_tt
 		default_option = yes
 		# EN: sound out a peace 'between orientales'. It only goes anywhere with the doctores strong in
 		#     the Cerrito or Herrera leading the Defensa; then the side ahead gets the menu.
@@ -1031,7 +1042,7 @@ gg_powers.28 = {
 			}
 			set_global_variable = gg_peace_offered
 			if = {
-				limit = { guerra_grande_blanco_lead >= 0 }
+				limit = { guerra_grande_blanco_lead > 0 }
 				random_country = {
 					limit = { has_variable = guerra_grande_cerrito_government }
 					trigger_event = { id = gg_peace.2 days = 3 popup = yes }

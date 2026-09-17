@@ -1631,6 +1631,7 @@ guerra_grande.9 = {
 
 	option = {
 		name = guerra_grande.9.b
+		custom_tooltip = guerra_grande.9.b_tt
 		# EN/ES: T3b, FE-8 -- as mediators: less sea, but the powers' peace opens sooner (T7, F3-2)
 		#     / como mediadoras: menos mar, pero la paz de las potencias se abre antes
 		gg_patron_change = { PATRON = francia DELTA = -10 }

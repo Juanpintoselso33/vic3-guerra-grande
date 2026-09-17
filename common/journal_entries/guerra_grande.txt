@@ -200,7 +200,10 @@ je_guerra_grande = {
 						change_global_variable = { name = gg_siege_months add = 1 }
 					}
 					else_if = {
-						limit = { global_var:gg_siege_months > 0 }
+						limit = {
+							global_var:gg_siege_months > 0
+							NOT = { has_global_variable = gg_truce }
+						}
 						change_global_variable = { name = gg_siege_months add = -1 }
 					}
 					# EN: T3b, FE-9 -- when the squadrons hold the river, the blockade is lifted.
@@ -211,6 +214,14 @@ je_guerra_grande = {
 							if = {
 								limit = { has_modifier = guerra_grande_river_plate_blockade }
 								remove_modifier = guerra_grande_river_plate_blockade
+							}
+						}
+						# EN/ES: review -- the Cerrito may ask again if the sea shuts later
+						#     / el Cerrito puede volver a pedirlo si el mar se cierra despues
+						c:CER ?= {
+							if = {
+								limit = { has_variable = guerra_grande_river_blockade_asked }
+								remove_variable = guerra_grande_river_blockade_asked
 							}
 						}
 					}
@@ -276,7 +287,17 @@ je_guerra_grande = {
 					exists = c:URU
 				}
 				# EN/ES: T2 -- who is ripe (common/scripted_triggers) / quien esta maduro
+				# EN/ES: review 2026-09-17 -- a Cerrito that asked for terms (F4-3 b/c) goes first
+				#     / un Cerrito que pidio condiciones va primero
 				if = {
+					limit = { has_global_variable = gg_cerrito_negotiates }
+					set_global_variable = gg_peace_offered
+					random_country = {
+						limit = { has_variable = guerra_grande_defensa_government }
+						trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+					}
+				}
+				else_if = {
 					limit = { gg_defensa_ripe = yes }
 					set_global_variable = gg_peace_offered
 					random_country = {

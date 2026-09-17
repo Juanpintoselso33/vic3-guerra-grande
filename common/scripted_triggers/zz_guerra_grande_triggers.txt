@@ -136,7 +136,7 @@ gg_defensa_ripe = {
 # EN: T7, F3-2. A long stalemate under the squadrons: the arbiter may bring back the powers' peace.
 # ES: T7, F3-2. Un empate largo bajo las escuadras: el arbitro puede volver a traer la paz de las potencias.
 gg_powers_stalemate = {
-	year >= 1847
+	year >= 1845
 	year < 1851
 	gg_sea_open = yes
 	guerra_grande_blanco_lead < 3

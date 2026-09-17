@@ -10,6 +10,7 @@
 
 
 # F1-0 - the blanco path converges (1 February 1839)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande ('resignacion', 'licencia temporal'; Oribe received by Rosas as constitutional president).
 gg_phase1.9 = {
 	type = country_event
 	placement = ROOT
@@ -75,6 +76,7 @@ gg_phase1.9 = {
 
 
 # F1-1 - Rivera declares war on Rosas (21 February 1839)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande: Oribe to Buenos Aires 29.10.1838 on a British ship with 300 men; Rosas offers him command; Beron de Astrada's treaty and Corrientes' ports; the declaration of war quote; Lavalle's reluctance.
 gg_phase1.1 = {
 	type = country_event
 	placement = ROOT
@@ -124,6 +126,7 @@ gg_phase1.1 = {
 
 	option = {
 		name = gg_phase1.1.b
+		custom_tooltip = gg_phase1.1.b_tt
 		# EN: only the alliance with Corrientes: less France, a smaller invasion.
 		# ES: solo la alianza con Corrientes: menos Francia, una invasion mas chica.
 		gg_patron_change = { PATRON = francia DELTA = 5 }
@@ -149,6 +152,7 @@ gg_phase1.1 = {
 
 	option = {
 		name = gg_phase1.1.c
+		custom_tooltip = gg_phase1.1.c_tt
 		# EN: neutrality: France cools and nobody invades in 1839, but Rosas prepares anyway and
 		#     Arroyo Grande comes a year early -- and with it the split (gg_partition_calendar).
 		# ES: neutralidad: Francia se enfria y nadie invade en 1839, pero Rosas se prepara igual y
@@ -167,12 +171,24 @@ gg_phase1.1 = {
 
 
 # F1-2a - Echague and Lavalleja cross at Salto (29 July 1839)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Pago Largo' and 'Cagancha': 21.3.1839; Echague and Lavalleja cross at Salto 29.7.1839; Rivera's plan (Queguay, Negro, Santa Lucia, infantry from Montevideo).
 gg_phase1.2 = {
 	type = country_event
 	placement = ROOT
 
 	title = gg_phase1.2.t
-	desc = gg_phase1.2.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_phase1.2.d_small
+				trigger = { has_global_variable = gg_small_invasion }
+			}
+			triggered_desc = {
+				desc = gg_phase1.2.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_phase1.2.f
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
@@ -189,16 +205,14 @@ gg_phase1.2 = {
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
-	immediate = {
+	option = {
+		name = gg_phase1.2.a
 		# EN/ES: F1-1 b -- the invasion is smaller / la invasion es mas chica
 		if = {
 			limit = { has_global_variable = gg_small_invasion }
 			gg_score_colorado = { AMOUNT = 1 }
 		}
-	}
-
-	option = {
-		name = gg_phase1.2.a
+		custom_tooltip = gg_phase1.2.a_tt
 		default_option = yes
 		# EN: historical: a war of resources behind the Santa Lucia, waiting for the infantry.
 		# ES: lo historico: guerra de recursos detras del Santa Lucia, esperando la infanteria.
@@ -210,6 +224,12 @@ gg_phase1.2 = {
 
 	option = {
 		name = gg_phase1.2.b
+		# EN/ES: F1-1 b -- the invasion is smaller / la invasion es mas chica
+		if = {
+			limit = { has_global_variable = gg_small_invasion }
+			gg_score_colorado = { AMOUNT = 1 }
+		}
+		custom_tooltip = gg_phase1.2.b_tt
 		# EN: go out and fight now: it can be won early, or lost.
 		# ES: salir a pelear ya: se puede ganar antes, o perder.
 		random_list = {
@@ -230,6 +250,7 @@ gg_phase1.2 = {
 
 
 # F1-2b - Cagancha (29 December 1839)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Cagancha' (Medina at the Arias, Fortunato Silva at San Carlos 17.10, 3000 against 6000) and 'Nuevos alzamientos unitarios' (Rivera refuses to invade).
 gg_phase1.3 = {
 	type = country_event
 	placement = ROOT
@@ -258,6 +279,7 @@ gg_phase1.3 = {
 
 	option = {
 		name = gg_phase1.3.a
+		custom_tooltip = gg_phase1.3.a_tt
 		# EN: invade Entre Rios as the unitarians ask: France up, the army exposed (Arroyo Grande hits harder).
 		# ES: invadir Entre Rios como piden los unitarios: Francia sube, el ejercito queda expuesto.
 		gg_patron_change = { PATRON = francia DELTA = 5 }
@@ -278,6 +300,7 @@ gg_phase1.3 = {
 
 
 # F1-6 - Lavalle and the emigres (1 September 1839, half a year later with asylum)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Pago Largo' (Lavalle lands in Entre Rios, federalist proclamation, Corrientes under Ferre; Maza; 'Es accion santa matar a Rosas').
 gg_phase1.4 = {
 	type = country_event
 	placement = ROOT
@@ -324,6 +347,7 @@ gg_phase1.4 = {
 
 
 # F1-3 - the Arana-Mackau treaty: France leaves (29 October 1840)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Nuevos alzamientos unitarios' (San Pedro 5.8.1840, retreat 7.9, Arana-Mackau 29.10.1840 'golpe de muerte') and Tratado Mackau-Arana (indemnities; amnesty excludes generals and commanders).
 gg_phase1.5 = {
 	type = country_event
 	placement = ROOT
@@ -384,6 +408,7 @@ gg_phase1.5 = {
 
 
 # F1-8 - news of Famailla and of Lavalle's death (15 October 1841)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande (Quebracho Herrado 28.11.1840, Famailla 19.9.1841, Lavalle's death 9.10.1841); the Avellaneda dispatch is quoted from SOURCES_peace.md (see gg_peace.2.c).
 gg_phase1.6 = {
 	type = country_event
 	placement = ROOT
@@ -428,6 +453,7 @@ gg_phase1.6 = {
 
 
 # F1-5 - the 'greater Uruguay' (supreme command at Paysandu, 25 October 1842)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Arroyo Grande' (Caaguazu 28.11.1841, Urquiza, the February 1842 meeting, the new State, Paysandu 25.10.1842, Paz withdraws, Brown and Garibaldi).
 gg_phase1.7 = {
 	type = country_event
 	placement = ROOT
@@ -452,6 +478,7 @@ gg_phase1.7 = {
 
 	option = {
 		name = gg_phase1.7.a
+		custom_tooltip = gg_phase1.7.a_tt
 		default_option = yes
 		# EN: historical: head the project. Rivera takes the supreme command and Paz withdraws; Rosas and
 		#     Brazil turn against it, and Arroyo Grande hits harder.
@@ -476,6 +503,7 @@ gg_phase1.7 = {
 
 
 # F1-4 - Arroyo Grande: the news that Oribe is 'defenceless' (20 November 1842)
+# SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Arroyo Grande' (Rosas deceives Mandeville; 'Si el Pardejon supiera aprovecharse').
 gg_phase1.8 = {
 	type = country_event
 	placement = ROOT
@@ -500,6 +528,7 @@ gg_phase1.8 = {
 
 	option = {
 		name = gg_phase1.8.a
+		custom_tooltip = gg_phase1.8.a_tt
 		default_option = yes
 		# EN: historical: cross the Uruguay and look for him. Defeat; the split follows in 88 days.
 		# ES: lo historico: cruzar el Uruguay y buscarlo. Derrota; la particion llega a los 88 dias.
@@ -521,6 +550,7 @@ gg_phase1.8 = {
 
 	option = {
 		name = gg_phase1.8.b
+		custom_tooltip = gg_phase1.8.b_tt
 		# EN: wait on the coast: Oribe invades anyway and the split comes six months later, but the
 		#     colorado army is intact.
 		# ES: esperar en la costa: Oribe invade igual y la particion llega seis meses despues, pero el

@@ -144,6 +144,7 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
 		# split on 1842-08-17
 		c:URU ?= {
+			trigger_event = { id = gg_powers.32 days = 1871 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.17 days = 1657 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_powers.27 days = 2009 }   # 1848-02-16 exequias de Larraniaga
@@ -154,7 +155,7 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_powers.29 days = 2753 popup = yes }   # 1850-03-01 la Nueva Troya
 			trigger_event = { id = gg_powers.20 days = 2936 }   # 1850-08-31 Lepredour
 			trigger_event = { id = gg_powers.21 days = 3118 popup = yes }   # 1851-03-01 fin del subsidio
-			trigger_event = { id = gg_powers.22 days = 3179 }   # 1851-05-01 Urquiza, 1851
+			trigger_event = { id = gg_powers.22 days = 3210 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
 			trigger_event = { id = gg_contingent.3 days = 183 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 196 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 233 popup = yes }   # 1843-04-07 Legion Francesa
@@ -183,6 +184,7 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_early }
 		# split on 1842-02-16
 		c:URU ?= {
+			trigger_event = { id = gg_powers.32 days = 2053 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.17 days = 1839 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_powers.27 days = 2191 }   # 1848-02-16 exequias de Larraniaga
@@ -193,7 +195,7 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_powers.29 days = 2935 popup = yes }   # 1850-03-01 la Nueva Troya
 			trigger_event = { id = gg_powers.20 days = 3118 }   # 1850-08-31 Lepredour
 			trigger_event = { id = gg_powers.21 days = 3300 popup = yes }   # 1851-03-01 fin del subsidio
-			trigger_event = { id = gg_powers.22 days = 3361 }   # 1851-05-01 Urquiza, 1851
+			trigger_event = { id = gg_powers.22 days = 3392 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
 			trigger_event = { id = gg_contingent.3 days = 365 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 378 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 415 popup = yes }   # 1843-04-07 Legion Francesa
@@ -222,6 +224,7 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_delayed }
 		# split on 1843-08-17
 		c:URU ?= {
+			trigger_event = { id = gg_powers.32 days = 1506 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.17 days = 1292 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_powers.27 days = 1644 }   # 1848-02-16 exequias de Larraniaga
@@ -232,7 +235,7 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_powers.29 days = 2388 popup = yes }   # 1850-03-01 la Nueva Troya
 			trigger_event = { id = gg_powers.20 days = 2571 }   # 1850-08-31 Lepredour
 			trigger_event = { id = gg_powers.21 days = 2753 popup = yes }   # 1851-03-01 fin del subsidio
-			trigger_event = { id = gg_powers.22 days = 2814 }   # 1851-05-01 Urquiza, 1851
+			trigger_event = { id = gg_powers.22 days = 2845 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
 			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 1 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 1 popup = yes }   # 1843-04-07 Legion Francesa
@@ -260,6 +263,7 @@ gg_partition_calendar = {
 	else = {
 		# split on 1843-02-16 (historical)
 		c:URU ?= {
+			trigger_event = { id = gg_powers.32 days = 1688 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
 			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
 			trigger_event = { id = gg_powers.17 days = 1474 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_powers.27 days = 1826 }   # 1848-02-16 exequias de Larraniaga
@@ -270,7 +274,7 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_powers.29 days = 2570 popup = yes }   # 1850-03-01 la Nueva Troya
 			trigger_event = { id = gg_powers.20 days = 2753 }   # 1850-08-31 Lepredour
 			trigger_event = { id = gg_powers.21 days = 2935 popup = yes }   # 1851-03-01 fin del subsidio
-			trigger_event = { id = gg_powers.22 days = 2996 }   # 1851-05-01 Urquiza, 1851
+			trigger_event = { id = gg_powers.22 days = 3027 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
 			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 13 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 50 popup = yes }   # 1843-04-07 Legion Francesa

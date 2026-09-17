@@ -224,7 +224,7 @@ gg_peace.1 = {
 
 		custom_tooltip = gg_peace_proscription_defensa_tt
 
-		scope:gg_peace_loser = {
+		scope:gg_peace_loser ?= {
 			every_scope_character = {
 				limit = {
 					OR = {
@@ -556,7 +556,7 @@ gg_peace.1 = {
 		c:BRZ ?= {
 			create_diplomatic_pact = {
 				country = root
-				type = vassal
+				type = puppet
 			}
 			change_relations = {
 				country = root
@@ -613,6 +613,7 @@ gg_peace.1 = {
 	#     Nacional de Francia. La oferta vuelve en dos anios, como volvio.
 	option = {
 		name = gg_peace.1.f
+		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
 		trigger = {
 			NOT = { has_global_variable = gg_white_peace }
@@ -891,7 +892,7 @@ gg_peace.2 = {
 
 		custom_tooltip = gg_peace_proscription_cerrito_tt
 
-		scope:gg_peace_loser = {
+		scope:gg_peace_loser ?= {
 			every_scope_character = {
 				limit = {
 					OR = {
@@ -1185,6 +1186,7 @@ gg_peace.2 = {
 	#     oferta vuelve en dos anios.
 	option = {
 		name = gg_peace.2.f
+		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
 		trigger = { NOT = { has_global_variable = gg_white_peace } }
 
@@ -1403,6 +1405,7 @@ gg_peace.5 = {
 	# b -- proscription: the defeated chiefs go into exile / proscripcion: exilio de los jefes
 	option = {
 		name = gg_peace.5.b
+		set_global_variable = gg_peace_punished
 		if = {
 			limit = { has_variable = guerra_grande_defensa_government }
 			every_scope_character = {
@@ -1454,6 +1457,7 @@ gg_peace.5 = {
 	# d -- entregarle el jefe vencido a su padrino, a cambio de la buena voluntad del padrino
 	option = {
 		name = gg_peace.5.d
+		set_global_variable = gg_peace_punished
 		if = {
 			limit = { has_variable = guerra_grande_defensa_government }
 			random_scope_character = {
@@ -1524,19 +1528,6 @@ gg_peace.6 = {
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_peace_no_victors
 		set_global_variable = gg_powers_peace
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
-		# EN/ES: the election: the side that held more of the country governs
-		if = {
-			limit = { guerra_grande_blanco_lead >= 0 }
-			set_ruling_interest_groups = { ig_landowners ig_rural_folk }
-			random_scope_character = {
-				limit = { has_template = URU_Manuel_Oribe }
-				set_character_as_ruler = yes
-			}
-		}
-		else = {
-			set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
-		}
 		if = {
 			limit = { has_modifier = guerra_grande_foreign_legions }
 			remove_modifier = guerra_grande_foreign_legions
@@ -1545,7 +1536,23 @@ gg_peace.6 = {
 			limit = { has_modifier = guerra_grande_italian_legion }
 			remove_modifier = guerra_grande_italian_legion
 		}
-		add_modifier = { name = gg_peace_powers_tutelage years = 10 is_decaying = yes }
+		# EN/ES: review 2026-09-17 -- the election decides who governs the one Republic. If the blancos
+		#     win, the Cerrito absorbs the Defensa and takes the Republic's tag (gg_peace.9, gg_peace.8).
+		#     / la eleccion decide quien gobierna: si ganan los blancos, el Cerrito absorbe a la Defensa.
+		if = {
+			limit = { guerra_grande_blanco_lead > 0 }
+			custom_tooltip = gg_peace.6.blancos_tt
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.9 days = 1 popup = yes }
+			}
+		}
+		else = {
+			custom_tooltip = gg_peace.6.colorados_tt
+			if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+			set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+			add_modifier = { name = gg_peace_powers_tutelage years = 10 is_decaying = yes }
+		}
 		ai_chance = { base = 100 }
 	}
 }
@@ -1655,5 +1662,57 @@ gg_peace.8 = {
 			change_tag = URU
 		}
 		trigger_event = { id = gg_postwar.1 days = 60 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.9 -- THE BLANCOS WIN THE POWERS' ELECTION (F12). The Cerrito absorbs the Defensa in
+#     peace; gg_peace.8 then gives it the Republic's tag.
+# ES: gg_peace.9 -- LOS BLANCOS GANAN LA ELECCION DE LAS POTENCIAS (F12). El Cerrito absorbe a la
+#     Defensa en paz; despues gg_peace.8 le devuelve el tag de la Republica.
+# -------------------------------------------------------------------------------------------------
+gg_peace.9 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.9.t
+	desc = gg_peace.9.desc
+	flavor = gg_peace.9.flav
+
+	event_image = {
+		video = "gg_f2_idilio"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = gg_peace_settled
+		has_global_variable = gg_powers_peace
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				save_scope_as = gg_peace_loser
+			}
+		}
+	}
+
+	option = {
+		name = gg_peace.9.a
+		default_option = yes
+		custom_tooltip = gg_peace.9.a_tt
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		set_ruling_interest_groups = { ig_landowners ig_rural_folk }
+		random_scope_character = {
+			limit = { has_template = URU_Manuel_Oribe }
+			set_character_as_ruler = yes
+		}
+		add_modifier = { name = gg_peace_powers_tutelage years = 10 is_decaying = yes }
+		ai_chance = { base = 100 }
 	}
 }

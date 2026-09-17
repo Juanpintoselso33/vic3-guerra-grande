@@ -60,7 +60,6 @@ guerra_grande_on_game_start = {
 			# EN/ES: T4, C20 -- the patrons' dated moves / los movimientos fechados de los padrinos
 			trigger_event = { id = gg_powers.2 days = 2616 }   # 1843.03.01 subsidio frances
 			trigger_event = { id = gg_powers.3 days = 3548 }   # 1845.09.18 bloqueo anglo-frances
-			trigger_event = { id = gg_powers.32 days = 4291 popup = yes }   # 1847.10.01 Lamas en Rio (T8, FE-13)
 			trigger_event = { id = gg_powers.4 days = 4547 }   # 1848.06.13 la revolucion de febrero pega
 			trigger_event = { id = gg_powers.5 days = 5627 }   # 1851.05.29 alianza con el Brasil
 			# 19 September 1836: the battle of Carpinteria, where the ribbons are born.
@@ -197,15 +196,18 @@ guerra_grande_on_war_end = {
 		is_diplomatic_play_type = dp_guerra_grande
 		has_global_variable = guerra_grande_split_done
 		NOT = { has_global_variable = gg_peace_settled }
-		NOT = { has_global_variable = gg_peace_offered }
 		exists = c:CER
 		exists = c:URU
 	}
 
 	effect = {
-		set_global_variable = gg_peace_offered
+		# EN/ES: review 2026-09-17 -- also when a menu is already pending: its f option must go
+		#     / tambien con un menu pendiente: su opcion f tiene que desaparecer
 		set_global_variable = gg_white_peace
 		if = {
+			limit = { NOT = { has_global_variable = gg_peace_offered } }
+			set_global_variable = gg_peace_offered
+			if = {
 			limit = { guerra_grande_blanco_lead > 0 }
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
@@ -217,6 +219,7 @@ guerra_grande_on_war_end = {
 				limit = { has_variable = guerra_grande_defensa_government }
 				trigger_event = { id = gg_peace.1 days = 3 popup = yes }
 			}
+		}
 		}
 	}
 }
