@@ -264,7 +264,10 @@ guerra_grande_on_election_end = {
 			has_variable = guerra_grande_defensa_government
 			has_variable = guerra_grande_cerrito_government
 		}
-		NOT = { has_global_variable = gg_peace_settled }
+		OR = {
+			NOT = { has_global_variable = gg_peace_settled }
+			has_global_variable = gg_president_railroad
+		}
 	}
 	effect = {
 		trigger_event = { id = gg_phase1.10 days = 1 }

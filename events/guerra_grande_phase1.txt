@@ -611,7 +611,10 @@ gg_phase1.10 = {
 
 	# EN/ES: each path keeps its own man in the chair / cada camino conserva a su hombre
 	trigger = {
-		NOT = { has_global_variable = gg_peace_settled }
+		OR = {
+			NOT = { has_global_variable = gg_peace_settled }
+			has_global_variable = gg_president_railroad
+		}
 	}
 
 	immediate = {

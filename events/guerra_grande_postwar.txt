@@ -20,11 +20,41 @@ gg_postwar.1 = {
 		# ES: el traspaso de 1852, si el gobierno de la Defensa sobrevive a la guerra: Suarez resigno
 		#     el mando en Bernardo Berro, presidente del Senado, el 15 de febrero de 1852, y Juan
 		#     Francisco Giro asumio como presidente constitucional.
+		# EN: WHO GOVERNS AFTER THE WAR (Juan, 2026-09-17). History only rules while history holds:
+		#     - the Cerrito wins: the Assembly confirms Oribe for a new four-year term, and elections
+		#       come after it;
+		#     - the Defensa survives a peace with no victors: the handover of 1852, Suarez to Berro
+		#       and then to Giro, as it happened;
+		#     - the Defensa wins outright: Suarez finishes his interim and hands over to a colorado,
+		#       Flores, in 1852; from there the ballot decides.
+		# ES: QUIEN GOBIERNA DESPUES DE LA GUERRA. La historia manda mientras la historia se sostiene:
+		#     gana el Cerrito y la Asamblea confirma a Oribe por cuatro anios mas; sobrevive la
+		#     Defensa en una paz sin vencidos y va el traspaso de 1852 a Berro y a Giro; gana la
+		#     Defensa y Suarez termina su interinato y entrega a un colorado, Flores, en 1852.
 		if = {
-			limit = { has_variable = guerra_grande_defensa_government }
+			limit = { has_variable = guerra_grande_cerrito_government }
+			set_global_variable = gg_president_railroad
+			gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
+			hidden_effect = {
+				trigger_event = { id = gg_postwar.9 days = 1460 }
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = guerra_grande_defensa_government
+				has_global_variable = gg_peace_no_victors
+			}
 			gg_ruler_set = { TEMPLATE = URU_bernardo_prudencio_berro }
 			hidden_effect = {
 				trigger_event = { id = gg_postwar.7 days = 15 }
+			}
+		}
+		else_if = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			set_global_variable = gg_president_railroad
+			gg_ruler_set = { TEMPLATE = URU_joaquin_suarez }
+			hidden_effect = {
+				trigger_event = { id = gg_postwar.8 days = 365 }
 			}
 		}
 		if = {
@@ -390,5 +420,35 @@ gg_postwar.7 = {
 
 	immediate = {
 		gg_ruler_set = { TEMPLATE = URU_gg_juan_francisco_giro }
+	}
+}
+
+# EN/ES: gg_postwar.8 -- the Defensa won: Suarez holds the interim until 15 February 1852 and hands
+#     it to Flores; checks once a year until the date arrives (hidden) / la Defensa gano: Suarez
+#     sostiene el interinato hasta 1852 y entrega a Flores; chequea una vez por anio
+gg_postwar.8 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = { year >= 1852 }
+			gg_ruler_set = { TEMPLATE = URU_venancio_flores }
+			remove_global_variable = gg_president_railroad
+		}
+		else = {
+			trigger_event = { id = gg_postwar.8 days = 365 }
+		}
+	}
+}
+
+# EN/ES: gg_postwar.9 -- the four years the Assembly gave Oribe are up: the ballot decides again
+#     (hidden) / se acabaron los cuatro anios que la Asamblea le dio a Oribe: vuelve a decidir la urna
+gg_postwar.9 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		remove_global_variable = gg_president_railroad
 	}
 }
