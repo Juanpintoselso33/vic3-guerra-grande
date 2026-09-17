@@ -225,6 +225,8 @@ gg_abolition.3 = {
 	#     un techo que el otro no alcance: misma ley, los mismos dos batallones, la misma cuenta.
 	option = {
 		name = gg_abolition.3.a
+		# EN/ES: T4 -- FE-4: the Cerrito's decree, a doctores' act / el decreto del Cerrito, un acto de los doctores
+		gg_cerrito_balance_change = { DELTA = 10 }
 		default_option = yes
 		set_variable = guerra_grande_abolition_settled
 		set_variable = guerra_grande_abolition_decreed
@@ -378,6 +380,8 @@ gg_abolition.4 = {
 	# injusticia no puede volver al estado de esclavitud." Free soil, and the Empire's enmity.
 	option = {
 		name = gg_abolition.4.a
+		# EN/ES: T4 -- FE-4: free soil sours Rio / el suelo libre agria a Rio
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
 		default_option = yes
 		set_variable = guerra_grande_abolition_claims_answered
 		add_modifier = {
@@ -400,6 +404,8 @@ gg_abolition.4 = {
 	# Hand them back, the way the Siete de Abril did. The Empire is placated; the decree is a lie.
 	option = {
 		name = gg_abolition.4.b
+		# EN/ES: T4 -- FE-4: returning them buys the Empire / devolverlos compra al Imperio
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		set_variable = guerra_grande_abolition_claims_answered
 		add_modifier = {
 			name = guerra_grande_abolition_slaves_returned

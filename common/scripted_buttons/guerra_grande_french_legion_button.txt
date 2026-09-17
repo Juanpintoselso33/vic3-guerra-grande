@@ -56,8 +56,9 @@ guerra_grande_french_legion_button = {
 			text = guerra_grande_requires_open_war
 			has_global_variable = guerra_grande_open_war
 		}
+		# EN/ES: T4, FE-10 -- bring the legion forward, or reinforce it once / adelantar la legion, o reforzarla una vez
 		hidden_trigger = {
-			NOT = { has_variable = guerra_grande_french_legion_raised }
+			NOT = { has_variable = guerra_grande_french_legion_reinforced }
 		}
 		custom_tooltip = {
 			text = guerra_grande_requires_montevideo
@@ -75,15 +76,19 @@ guerra_grande_french_legion_button = {
 		#     corriendo guerra_grande_foreign_legions; mientras ese modificador este activo, este
 		#     boton esta gastado. Mirar el modificador es la unica forma de solo-lectura de ver el
 		#     resultado de ese evento: no fija ninguna variable propia.
-		custom_tooltip = {
-			text = guerra_grande_requires_no_foreign_legion_yet
-			NOT = { has_modifier = guerra_grande_foreign_legions }
+		# EN/ES: T4, FE-10 -- the 'no foreign legion yet' rule only applies to raising it / solo aplica al levantarla
+		OR = {
+			has_variable = guerra_grande_french_legion_raised
+			custom_tooltip = {
+				text = guerra_grande_requires_no_foreign_legion_yet
+				NOT = { has_modifier = guerra_grande_foreign_legions }
+			}
 		}
 		year >= 1843
 	}
 
 	selected = {
-		has_variable = guerra_grande_french_legion_raised
+		has_variable = guerra_grande_french_legion_reinforced
 	}
 
 	effect = {
@@ -107,32 +112,46 @@ guerra_grande_french_legion_button = {
 			name = gg_debug_french_presses
 			add = 1
 		}
-		set_variable = guerra_grande_french_legion_raised
-		create_character = {
-			first_name = "Jean-Chrysostome"
-			last_name = "Thiebaut"
-			historical = yes
-			is_general = yes
-			interest_group = ig_armed_forces
-			ideology = ideology_moderate
-			culture = cu:french
-			religion = rel:catholic
-			# EN: an old Napoleonic officer who held a line, not a raider. The Italian Legion's
-			#     Garibaldi gets the offensive traits; Thiebaut gets the wall.
-			# ES: un viejo oficial napoleonico que sostuvo una linea, no un asaltante. Garibaldi,
-			#     en la Legion Italiana, se lleva los rasgos ofensivos; Thiebaut, la muralla.
-			traits = {
-				experienced_defensive_strategist
-				persistent
-				meticulous
+		if = {
+			limit = { NOT = { has_variable = guerra_grande_french_legion_raised } }
+			set_variable = guerra_grande_french_legion_raised
+			create_character = {
+				first_name = "Jean-Chrysostome"
+				last_name = "Thiebaut"
+				historical = yes
+				is_general = yes
+				interest_group = ig_armed_forces
+				ideology = ideology_moderate
+				culture = cu:french
+				religion = rel:catholic
+				# EN: an old Napoleonic officer who held a line, not a raider. The Italian Legion's
+				#     Garibaldi gets the offensive traits; Thiebaut gets the wall.
+				# ES: un viejo oficial napoleonico que sostuvo una linea, no un asaltante. Garibaldi,
+				#     en la Legion Italiana, se lleva los rasgos ofensivos; Thiebaut, la muralla.
+				traits = {
+					experienced_defensive_strategist
+					persistent
+					meticulous
+				}
+			}
+			add_modifier = {
+				name = guerra_grande_foreign_legions
+				years = 10
+				is_decaying = yes
+			}
+			trigger_event = { id = gg_legion.1 popup = yes }
+		}
+		else = {
+			# EN/ES: T4, FE-10 -- reinforce: money and French goodwill / reforzar: plata y buena voluntad francesa
+			set_variable = guerra_grande_french_legion_reinforced
+			add_treasury = -20000
+			gg_patron_change = { PATRON = francia DELTA = -5 }
+			add_modifier = {
+				name = guerra_grande_foreign_legions
+				years = 5
+				is_decaying = yes
 			}
 		}
-		add_modifier = {
-			name = guerra_grande_foreign_legions
-			years = 10
-			is_decaying = yes
-		}
-		trigger_event = { id = gg_legion.1 popup = yes }
 	}
 
 	# EN: higher than the Italian Legion's 50. The Defensa took every man it could get, and this

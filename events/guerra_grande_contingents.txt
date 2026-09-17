@@ -141,6 +141,8 @@ gg_contingent.3 = {
 	#     asi que el jugador solo veia un modificador. Es el evento entero: va en la opcion.
 	option = {
 		name = gg_contingent.3.a
+		# EN/ES: T4 -- FE-4: the Basques go over: the caudillos' camp grows / los vascos se pasan: crece lo caudillesco
+		gg_cerrito_balance_change = { DELTA = -5 }
 		default_option = yes
 		# EN: "Los Aguerridos" walk out of the lines under arms and are merged into Oribe's
 		#     Batallon de Voluntarios (Etchechury 2017). The Cerrito gains the battalion.
@@ -241,6 +243,9 @@ gg_contingent.4 = {
 
 	option = {
 		name = gg_contingent.4.a
+		# EN/ES: T4 -- FE-4/FE-10: the legion hangs on France, and is raised once / la legion cuelga de Francia, y se levanta una vez
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		set_variable = guerra_grande_french_legion_raised
 		default_option = yes
 		create_military_formation = {
 			type = army
@@ -285,6 +290,8 @@ gg_contingent.4 = {
 	#     1843 no hay de que separarse en 1845.
 	option = {
 		name = gg_contingent.4.b
+		# EN/ES: T4 -- FE-4: Paris would rather they went home / Paris prefiere que vuelvan
+		gg_patron_change = { PATRON = francia DELTA = -5 }
 		set_variable = guerra_grande_french_legion_refused
 		c:FRA ?= {
 			change_relations = { country = ROOT value = 40 }
@@ -424,6 +431,8 @@ gg_contingent.7 = {
 
 	option = {
 		name = gg_contingent.7.a
+		# EN/ES: T4 -- FE-4: the Vanguard is Rosas's army / la Vanguardia es el ejercito de Rosas
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		default_option = yes
 		create_military_formation = {
 			type = army

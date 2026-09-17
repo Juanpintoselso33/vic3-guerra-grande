@@ -838,6 +838,18 @@ guerra_grande.3 = {
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
 		gg_partition_calendar = yes
+		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
+		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
+		if = {
+			limit = { global_var:gg_defensa_line <= 0 }
+			if = {
+				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
+				gg_defensa_line_set = { LINE = 1 }
+			}
+			else = {
+				gg_defensa_line_set = { LINE = 2 }
+			}
+		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
 		set_global_variable = guerra_grande_open_war
 		c:ARG ?= {
@@ -1374,6 +1386,18 @@ guerra_grande.3 = {
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
 		gg_partition_calendar = yes
+		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
+		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
+		if = {
+			limit = { global_var:gg_defensa_line <= 0 }
+			if = {
+				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
+				gg_defensa_line_set = { LINE = 1 }
+			}
+			else = {
+				gg_defensa_line_set = { LINE = 2 }
+			}
+		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
 		set_global_variable = guerra_grande_open_war
 		c:ARG ?= {
@@ -1432,6 +1456,8 @@ guerra_grande.4 = {
 
 	option = {
 		name = guerra_grande.4.a
+		# EN/ES: T4 -- FE-4: Rosas backs Oribe / Rosas respalda a Oribe
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		default_option = yes
 		# EN: no pact and no war. Rosas never declared war on the Republic: he recognised
 		#     Oribe as its lawful president and lent him the Ejercito Unido de Vanguardia.
@@ -1452,6 +1478,8 @@ guerra_grande.4 = {
 
 	option = {
 		name = guerra_grande.4.b
+		# EN/ES: T4 -- FE-4: let them sort it out / que lo arreglen entre ellos
+		gg_patron_change = { PATRON = rosas DELTA = -15 }
 		add_modifier = {
 			name = guerra_grande_armed_truce
 			years = 5

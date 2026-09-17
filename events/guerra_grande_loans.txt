@@ -72,6 +72,9 @@ gg_loan.1 = {
 
 	option = {
 		name = gg_loan.1.a
+		# EN/ES: T4 -- FE-2: signing keeps France in the Plata / firmar sostiene a Francia
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		set_global_variable = gg_french_convention
 		default_option = yes
 		add_treasury = 10000
 		add_modifier = {
@@ -101,6 +104,8 @@ gg_loan.1 = {
 
 	option = {
 		name = gg_loan.1.b
+		# EN/ES: T4 -- FE-2: no convention, France pulls back / sin convenio, Francia se retira
+		gg_patron_change = { PATRON = francia DELTA = -10 }
 		add_modifier = {
 			name = guerra_grande_defensa_self_reliance
 			years = 5
@@ -157,6 +162,9 @@ gg_loan.2 = {
 	# ES: firmar con el Imperio, y tomar la alianza junto con la plata.
 	option = {
 		name = gg_loan.2.a
+		# EN/ES: T4 -- FE-1: the Empire as ally / el Imperio como aliado
+		gg_patron_change = { PATRON = brasil DELTA = 25 }
+		set_global_variable = gg_brazil_deal
 		default_option = yes
 		add_treasury = 15000
 		add_modifier = {
@@ -188,6 +196,9 @@ gg_loan.2 = {
 	#     fuera del papel, al precio del banquero.
 	option = {
 		name = gg_loan.2.b
+		# EN/ES: T4 -- FE-1: through Souza's house, half the weight / por la casa de Souza, a medias
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		set_global_variable = gg_brazil_deal
 		add_treasury = 10000
 		add_modifier = {
 			name = guerra_grande_maua_paper
@@ -272,6 +283,9 @@ gg_loan.3 = {
 
 	option = {
 		name = gg_loan.3.a
+		# EN/ES: T4 -- FE-5: Rosas's till / la caja de Rosas
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		gg_cerrito_balance_change = { DELTA = -5 }
 		default_option = yes
 		add_treasury = 10000
 		add_modifier = {
@@ -318,6 +332,8 @@ gg_loan.3 = {
 
 	option = {
 		name = gg_loan.3.b
+		# EN/ES: T4 -- FE-5: the Buceo customs, the doctores' answer / la aduana del Buceo, la respuesta de los doctores
+		gg_cerrito_balance_change = { DELTA = 10 }
 		add_modifier = {
 			name = guerra_grande_cerrito_self_reliance
 			years = 5
@@ -418,6 +434,8 @@ gg_loan.4 = {
 	#     cuesta es la pretension de estar solo, que es lo unico que los blancos tenian.
 	option = {
 		name = gg_loan.4.d
+		# EN/ES: T4 -- FE-6: Rosas's auxiliaries / los auxiliares de Rosas
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		add_treasury = 15000
 		add_modifier = { name = guerra_grande_rosista_support years = 10 }
 		add_modifier = { name = guerra_grande_argentine_auxiliaries years = 10 }
@@ -451,6 +469,9 @@ gg_loan.4 = {
 	# ES: NEGATIVA. La Republica es una republica. Se cierra la caja de Rosas.
 	option = {
 		name = gg_loan.4.c
+		# EN/ES: T4 -- FE-6: the Republic is a republic / la Republica es una republica
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		gg_cerrito_balance_change = { DELTA = 10 }
 		add_modifier = { name = guerra_grande_cerrito_self_reliance years = 10 }
 		add_modifier = { name = guerra_grande_alone_against_the_siege years = 10 }
 		c:ARG ?= { change_relations = { country = ROOT value = -30 } }

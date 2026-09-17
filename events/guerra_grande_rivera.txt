@@ -112,6 +112,8 @@ gg_rivera.1 = {
 	#     costar: la muralla.
 	option = {
 		name = gg_rivera.1.a
+		# EN/ES: T4 -- FE-7: backing Rivera's army sets the military line / respaldar a Rivera fija la linea militar
+		gg_defensa_line_set = { LINE = 1 }
 		set_global_variable = gg_rivera_reinforced
 		random_scope_character = {
 			limit = { has_template = URU_Fructuoso_Rivera }
@@ -173,6 +175,8 @@ gg_rivera.1 = {
 	#     sin rentas y sin credito". Todo va a la muralla, y Rivera se arregla solo en la campania.
 	option = {
 		name = gg_rivera.1.b
+		# EN/ES: T4 -- FE-7: all to the walls, the doctores run the city / todo a la muralla, mandan los doctores
+		gg_defensa_line_set = { LINE = 2 }
 		default_option = yes
 		set_global_variable = gg_rivera_left_alone
 		create_military_formation = {
@@ -372,6 +376,8 @@ gg_rivera.2 = {
 	#     Imperio la archiva: el recibo se le lee de vuelta en 1847.
 	option = {
 		name = gg_rivera.2.b
+		# EN/ES: T4 -- FE-7: Brazilian arms / armas brasilenias
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		set_global_variable = gg_rivera_brazilian_arms
 		add_treasury = -25000
 		random_scope_character = {
@@ -436,6 +442,8 @@ gg_rivera.2 = {
 	#     libre de los doctores.
 	option = {
 		name = gg_rivera.2.c
+		# EN/ES: T4 -- FE-7: handed to the Empire / entregado al Imperio
+		gg_patron_change = { PATRON = brasil DELTA = 5 }
 		set_global_variable = gg_rivera_stripped
 		set_global_variable = gg_rivera_handed_to_brazil
 		random_scope_character = {
@@ -547,6 +555,8 @@ gg_rivera.3 = {
 	#     mando de un hombre al que el gobierno ya no puede decirle que no.
 	option = {
 		name = gg_rivera.3.a
+		# EN/ES: T4 -- FE-7: the Patron is back: the military line / vuelve el Patron: linea militar
+		gg_defensa_line_set = { LINE = 1 }
 		default_option = yes
 		set_global_variable = gg_rivera_restored
 		if = {
@@ -627,6 +637,8 @@ gg_rivera.3 = {
 	#     soldados no pueden extorsionar.
 	option = {
 		name = gg_rivera.3.b
+		# EN/ES: T4 -- FE-7: the decree stands: the doctores / se sostiene el decreto: los doctores
+		gg_defensa_line_set = { LINE = 2 }
 		set_global_variable = gg_rivera_never_returned
 		if = {
 			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }

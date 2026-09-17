@@ -146,8 +146,9 @@ guerra_grande_italian_legion_button = {
 			text = guerra_grande_requires_open_war
 			has_global_variable = guerra_grande_open_war
 		}
+		# EN/ES: T4, FE-10 -- bring the legion forward, or reinforce it once / adelantar la legion, o reforzarla una vez
 		hidden_trigger = {
-			NOT = { has_variable = guerra_grande_italian_legion_raised }
+			NOT = { has_variable = guerra_grande_italian_legion_reinforced }
 		}
 		custom_tooltip = {
 			text = guerra_grande_requires_montevideo
@@ -158,7 +159,7 @@ guerra_grande_italian_legion_button = {
 	}
 
 	selected = {
-		has_variable = guerra_grande_italian_legion_raised
+		has_variable = guerra_grande_italian_legion_reinforced
 	}
 
 	effect = {
@@ -182,28 +183,42 @@ guerra_grande_italian_legion_button = {
 			name = gg_debug_italian_presses
 			add = 1
 		}
-		set_variable = guerra_grande_italian_legion_raised
-		create_character = {
-			first_name = "Giuseppe"
-			last_name = "Garibaldi"
-			historical = yes
-			is_general = yes
-			interest_group = ig_armed_forces
-			ideology = ideology_radical
-			culture = cu:north_italian
-			religion = rel:catholic
-			traits = {
-				charismatic
-				brave
-				experienced_offensive_planner
+		if = {
+			limit = { NOT = { has_variable = guerra_grande_italian_legion_raised } }
+			set_variable = guerra_grande_italian_legion_raised
+			create_character = {
+				first_name = "Giuseppe"
+				last_name = "Garibaldi"
+				historical = yes
+				is_general = yes
+				interest_group = ig_armed_forces
+				ideology = ideology_radical
+				culture = cu:north_italian
+				religion = rel:catholic
+				traits = {
+					charismatic
+					brave
+					experienced_offensive_planner
+				}
+			}
+			add_modifier = {
+				name = guerra_grande_italian_legion
+				years = 10
+				is_decaying = yes
+			}
+			trigger_event = { id = guerra_grande.5 popup = yes }
+		}
+		else = {
+			# EN/ES: T4, FE-10 -- reinforce: money and French goodwill / reforzar: plata y buena voluntad francesa
+			set_variable = guerra_grande_italian_legion_reinforced
+			add_treasury = -20000
+			gg_patron_change = { PATRON = francia DELTA = -5 }
+			add_modifier = {
+				name = guerra_grande_italian_legion
+				years = 5
+				is_decaying = yes
 			}
 		}
-		add_modifier = {
-			name = guerra_grande_italian_legion
-			years = 10
-			is_decaying = yes
-		}
-		trigger_event = { id = guerra_grande.5 popup = yes }
 	}
 
 	ai_chance = {

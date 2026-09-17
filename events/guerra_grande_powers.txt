@@ -17,3 +17,74 @@ gg_powers.1 = {
 		gg_patron_change = { PATRON = britania DELTA = -20 }
 	}
 }
+
+# EN: T4, C20. 1 March 1843 -- the French monthly subsidy begins (SOURCES_siege.md).
+# ES: T4, C20. 1 de marzo de 1843 -- empieza el subsidio mensual frances.
+gg_powers.2 = {
+	type = country_event
+	hidden = yes
+	trigger = { has_global_variable = guerra_grande_split_done }
+	immediate = {
+		gg_patron_change = { PATRON = francia DELTA = 15 }
+	}
+}
+
+# EN: T4, C20/FE-8. 18 September 1845 -- the Anglo-French blockade of the Confederation. If
+#     nobody called the squadrons earlier, they come now, and the Defensa decides how to receive
+#     them (guerra_grande.9).
+# ES: T4, C20/FE-8. 18 de septiembre de 1845 -- el bloqueo anglo-frances. Si nadie llamo antes a
+#     las escuadras, llegan ahora, y la Defensa decide como recibirlas.
+gg_powers.3 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_global_variable = guerra_grande_split_done
+		NOT = { has_global_variable = gg_intervention_called }
+	}
+	immediate = {
+		set_global_variable = gg_intervention_called
+		gg_patron_change = { PATRON = francia DELTA = 30 }
+		gg_patron_change = { PATRON = britania DELTA = 30 }
+		c:URU ?= {
+			trigger_event = { id = guerra_grande.9 popup = yes }
+		}
+	}
+}
+
+# EN: T4, C20/FE-2. June 1848 -- the February revolution reaches the Plata. A signed convention
+#     (gg_loan.1.a) softens it; without one, France falls hard, and T7's departures follow.
+# ES: T4, C20/FE-2. Junio de 1848 -- la revolucion de febrero llega al Plata. Un convenio firmado
+#     la amortigua; sin el, Francia cae fuerte, y en T7 siguen las salidas.
+gg_powers.4 = {
+	type = country_event
+	hidden = yes
+	trigger = { has_global_variable = guerra_grande_split_done }
+	immediate = {
+		if = {
+			limit = { has_global_variable = gg_french_convention }
+			gg_patron_change = { PATRON = francia DELTA = -5 }
+		}
+		else = {
+			gg_patron_change = { PATRON = francia DELTA = -20 }
+		}
+	}
+}
+
+# EN: T4, C20. 29 May 1851 -- the alliance of the Defensa, Brazil and Entre Rios. It weighs what
+#     the Defensa already agreed with the Empire (gg_loan.2).
+# ES: T4, C20. 29 de mayo de 1851 -- la alianza de la Defensa, el Brasil y Entre Rios. Pesa lo que
+#     la Defensa ya haya pactado con el Imperio.
+gg_powers.5 = {
+	type = country_event
+	hidden = yes
+	trigger = { has_global_variable = guerra_grande_split_done }
+	immediate = {
+		if = {
+			limit = { has_global_variable = gg_brazil_deal }
+			gg_patron_change = { PATRON = brasil DELTA = 20 }
+		}
+		else = {
+			gg_patron_change = { PATRON = brasil DELTA = 5 }
+		}
+	}
+}

@@ -257,6 +257,8 @@ gg_peace.1 = {
 	#     restablecio.
 	option = {
 		name = gg_peace.1.c
+		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
+		trigger = { global_var:gg_patron_brasil > 0 }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -329,6 +331,8 @@ gg_peace.1 = {
 	#     se resuelve aca: se resuelve en gg_peace.3.
 	option = {
 		name = gg_peace.1.d
+		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
+		trigger = { gg_sea_power > 0 }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -784,6 +788,8 @@ gg_peace.2 = {
 	#     juego deja tomar la decision que el hombre no tomo. No afirma que la quisiera.
 	option = {
 		name = gg_peace.2.d
+		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
+		trigger = { global_var:gg_patron_rosas > 0 }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -861,6 +867,8 @@ gg_peace.2 = {
 	#     Rosas a la division argentina. Esto es la clientela sin esa segunda mitad.
 	option = {
 		name = gg_peace.2.e
+		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
+		trigger = { global_var:gg_patron_rosas > 0 }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
