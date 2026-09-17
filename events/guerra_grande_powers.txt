@@ -740,27 +740,33 @@ gg_powers.21 = {
 		has_global_variable = guerra_grande_open_war
 	}
 
+	# EN: research 2026-09-17 -- France never cut the subsidy: every credit passed the Assembly by a
+	#     landslide. Montevideo renounced it on 29 May 1851, through Pacheco y Obes and Ellauri, as
+	#     a political move before the Lepredour debate and in front of its new allies. The options
+	#     read that way now. SOURCES_powers.md, section 7.
+	# ES: el subsidio no lo corto Francia: la Asamblea lo voto siempre por goleada. Lo renuncio
+	#     Montevideo el 29 de mayo de 1851, por Pacheco y Obes y Ellauri, como jugada politica.
 	option = {
 		name = gg_powers.21.a
 		default_option = yes
-		# EN: mortgage the customs: more debt, but the city holds (read by the postwar in T8).
-		# ES: hipotecar la aduana: mas deuda, pero la ciudad aguanta (lo lee la posguerra en T8).
-		add_treasury = 40000
-		set_global_variable = gg_customs_mortgaged
-		ai_chance = { base = 60 }
+		gg_patron_change = { PATRON = francia DELTA = -10 }
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -10 }
+			}
+		}
+		ai_chance = { base = 55 }
 	}
 
 	option = {
 		name = gg_powers.21.b
-		# EN: cut back: the city is condemned, or looks it.
-		# ES: recortar: la ciudad queda condenada, o lo parece.
-		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -15 }
-			}
-		}
-		ai_chance = { base = 40 }
+		# EN/ES: keep drawing it, and keep paying for it in concessions / seguir cobrandolo y pagarlo en concesiones
+		add_treasury = 40000
+		set_global_variable = gg_customs_mortgaged
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
+		ai_chance = { base = 45 }
 	}
 
 }
