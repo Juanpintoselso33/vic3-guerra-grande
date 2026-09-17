@@ -193,6 +193,7 @@ gg_powers.11 = {
 
 	option = {
 		name = gg_powers.11.b
+		custom_tooltip = gg_powers.11.b_tt2
 		default_option = yes
 		# EN: historical: stand firm. The squadron is taken and the blockade dies until the powers leave,
 		#     but Rosas and American opinion rise.
@@ -267,6 +268,7 @@ gg_powers.12 = {
 
 	option = {
 		name = gg_powers.12.b
+		custom_tooltip = gg_powers.12.b_tt2
 		# EN: refuse: it ends here, and the powers harden against the Cerrito.
 		# ES: rechazar: se corta aca, y las potencias se endurecen con el Cerrito.
 		set_global_variable = gg_hood_done
@@ -476,6 +478,7 @@ gg_powers.16 = {
 
 	option = {
 		name = gg_powers.16.c
+		custom_tooltip = gg_powers.16.c_tt2
 		trigger = { NOT = { has_global_variable = gg_gore_gros_stalled } }
 		# EN: stall. The powers stay a little longer, Rosas grows suspicious, and the offer returns once.
 		# ES: dar largas. Las potencias se quedan un poco mas, Rosas desconfia, y la oferta vuelve una vez.
@@ -660,6 +663,7 @@ gg_powers.19 = {
 
 	option = {
 		name = gg_powers.19.a
+		custom_tooltip = gg_powers.19.a_tt2
 		default_option = yes
 		# EN: a mission to Paris (Pacheco y Obes): France falls more slowly. Cheaper with his line.
 		# ES: una mision a Paris (Pacheco y Obes): Francia baja mas lento. Mas barata con su linea.
@@ -670,6 +674,7 @@ gg_powers.19 = {
 
 	option = {
 		name = gg_powers.19.b
+		custom_tooltip = gg_powers.19.b_tt2
 		# EN: look for Brazil (Lamas): Brazil rises early, the treaties will be the price. Cheaper with Herrera.
 		# ES: buscar al Brasil (Lamas): el Brasil sube antes, el precio seran los tratados. Mas barato con Herrera.
 		gg_patron_change = { PATRON = brasil DELTA = 15 }
@@ -762,6 +767,7 @@ gg_powers.21 = {
 
 	option = {
 		name = gg_powers.21.b
+		custom_tooltip = gg_powers.21.b_tt2
 		# EN/ES: keep drawing it, and keep paying for it in concessions / seguir cobrandolo y pagarlo en concesiones
 		add_treasury = 40000
 		set_global_variable = gg_customs_mortgaged
@@ -975,6 +981,7 @@ gg_powers.26 = {
 
 	option = {
 		name = gg_powers.26.a
+		custom_tooltip = gg_powers.26.a_tt2
 		default_option = yes
 		# EN: blame Rosas and Oribe: European opinion rises, Gore-Gros gets harder.
 		# ES: culpar a Rosas y a Oribe: sube la opinion europea, Gore-Gros se endurece.

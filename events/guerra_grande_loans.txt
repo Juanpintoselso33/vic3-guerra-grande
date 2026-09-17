@@ -75,6 +75,7 @@ gg_loan.1 = {
 
 	option = {
 		name = gg_loan.1.a
+		custom_tooltip = gg_loan.1.a_tt2
 		# EN/ES: T4 -- FE-2: signing keeps France in the Plata / firmar sostiene a Francia
 		gg_patron_change = { PATRON = francia DELTA = 5 }
 		set_global_variable = gg_french_convention
@@ -165,6 +166,7 @@ gg_loan.2 = {
 	# ES: firmar con el Imperio, y tomar la alianza junto con la plata.
 	option = {
 		name = gg_loan.2.a
+		custom_tooltip = gg_loan.2.a_tt2
 		# EN/ES: T4 -- FE-1: the Empire as ally / el Imperio como aliado
 		gg_patron_change = { PATRON = brasil DELTA = 25 }
 		set_global_variable = gg_brazil_deal
@@ -199,6 +201,7 @@ gg_loan.2 = {
 	#     fuera del papel, al precio del banquero.
 	option = {
 		name = gg_loan.2.b
+		custom_tooltip = gg_loan.2.b_tt2
 		# EN/ES: T4 -- FE-1: through Souza's house, half the weight / por la casa de Souza, a medias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		set_global_variable = gg_brazil_deal
@@ -286,6 +289,7 @@ gg_loan.3 = {
 
 	option = {
 		name = gg_loan.3.a
+		custom_tooltip = gg_loan.3.a_tt2
 		# EN/ES: T4 -- FE-5: Rosas's till / la caja de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		gg_cerrito_balance_change = { DELTA = -5 }

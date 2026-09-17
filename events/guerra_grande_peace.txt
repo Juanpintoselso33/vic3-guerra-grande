@@ -1527,6 +1527,7 @@ gg_peace.6 = {
 
 	option = {
 		name = gg_peace.6.a
+		custom_tooltip = gg_peace.6.a_tt2
 		default_option = yes
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_peace_no_victors

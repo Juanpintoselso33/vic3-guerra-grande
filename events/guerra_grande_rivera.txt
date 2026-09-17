@@ -122,6 +122,7 @@ gg_rivera.1 = {
 	#     costar: la muralla.
 	option = {
 		name = gg_rivera.1.a
+		custom_tooltip = gg_rivera.1.a_tt2
 		# EN/ES: T4 -- FE-7: backing Rivera's army sets the military line / respaldar a Rivera fija la linea militar
 		gg_defensa_balance_change = { DELTA = -30 }
 		set_global_variable = gg_rivera_reinforced
@@ -188,6 +189,7 @@ gg_rivera.1 = {
 	#     sin rentas y sin credito". Todo va a la muralla, y Rivera se arregla solo en la campania.
 	option = {
 		name = gg_rivera.1.b
+		custom_tooltip = gg_rivera.1.b_tt2
 		# EN/ES: T4 -- FE-7: all to the walls, the doctores run the city / todo a la muralla, mandan los doctores
 		gg_defensa_balance_change = { DELTA = 30 }
 		default_option = yes
@@ -319,6 +321,7 @@ gg_rivera.2 = {
 	#     de Arroyo Grande fue el, con Olazabal, quien reorganizo lo que quedaba de la caballeria.
 	option = {
 		name = gg_rivera.2.a
+		custom_tooltip = gg_rivera.2.a_tt2
 		default_option = yes
 		set_global_variable = gg_rivera_stripped
 		random_scope_character = {
@@ -392,6 +395,7 @@ gg_rivera.2 = {
 	#     Imperio la archiva: el recibo se le lee de vuelta en 1847.
 	option = {
 		name = gg_rivera.2.b
+		custom_tooltip = gg_rivera.2.b_tt2
 		# EN/ES: T4 -- FE-7: Brazilian arms / armas brasilenias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		set_global_variable = gg_rivera_brazilian_arms
@@ -461,6 +465,7 @@ gg_rivera.2 = {
 	#     libre de los doctores.
 	option = {
 		name = gg_rivera.2.c
+		custom_tooltip = gg_rivera.2.c_tt2
 		# EN/ES: T4 -- FE-7: handed to the Empire / entregado al Imperio
 		gg_patron_change = { PATRON = brasil DELTA = 5 }
 		set_global_variable = gg_rivera_stripped
@@ -574,6 +579,7 @@ gg_rivera.3 = {
 	#     mando de un hombre al que el gobierno ya no puede decirle que no.
 	option = {
 		name = gg_rivera.3.a
+		custom_tooltip = gg_rivera.3.a_tt2
 		# EN/ES: T7, FR-1 -- back in the countryside, December 1846 / de vuelta en la campania, diciembre de 1846
 		trigger_event = { id = gg_rivera.7 days = 270 popup = yes }
 		# EN/ES: T4 -- FE-7: the Patron is back: the military line / vuelve el Patron: linea militar
@@ -661,6 +667,7 @@ gg_rivera.3 = {
 	#     soldados no pueden extorsionar.
 	option = {
 		name = gg_rivera.3.b
+		custom_tooltip = gg_rivera.3.b_tt2
 		# EN/ES: T4 -- FE-7: the decree stands: the doctores / se sostiene el decreto: los doctores
 		gg_defensa_balance_change = { DELTA = 30 }
 		set_global_variable = gg_rivera_never_returned
@@ -809,6 +816,7 @@ gg_rivera.4 = {
 	#     campania contra Oribe.
 	option = {
 		name = gg_rivera.4.a
+		custom_tooltip = gg_rivera.4.a_tt2
 		default_option = yes
 		set_global_variable = gg_rivera_exiled
 		if = {
@@ -880,6 +888,7 @@ gg_rivera.4 = {
 	#     dice pelear, no.
 	option = {
 		name = gg_rivera.4.b
+		custom_tooltip = gg_rivera.4.b_tt2
 		set_global_variable = gg_rivera_kept
 		if = {
 			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
@@ -968,6 +977,7 @@ gg_rivera.4 = {
 	#     Gabriel Antonio Pereira, Miguel Barreiro y el propio Venancio Flores, que se fue del pais.
 	option = {
 		name = gg_rivera.4.c
+		custom_tooltip = gg_rivera.4.c_tt2
 		set_global_variable = gg_rivera_eight_conditions
 		add_treasury = -25000
 		c:CER ?= {
@@ -1082,6 +1092,7 @@ gg_rivera.5 = {
 	#     su gobierno.
 	option = {
 		name = gg_rivera.5.a
+		custom_tooltip = gg_rivera.5.a_tt2
 		default_option = yes
 		set_global_variable = gg_rivera_recalled
 		if = {
@@ -1126,6 +1137,7 @@ gg_rivera.5 = {
 	#     hombre por el que media campania todavia cabalga.
 	option = {
 		name = gg_rivera.5.b
+		custom_tooltip = gg_rivera.5.b_tt2
 		set_global_variable = gg_rivera_left_in_rio
 		if = {
 			limit = { any_scope_character = { has_template = URU_venancio_flores } }
@@ -1342,6 +1354,7 @@ gg_rivera.7 = {
 
 	option = {
 		name = gg_rivera.7.a
+		custom_tooltip = gg_rivera.7.a_tt2
 		default_option = yes
 		# EN: historical: Mercedes and Paysandu, with excesses; the Cerro de las Animas is likely.
 		# ES: lo historico: Mercedes y Paysandu, con excesos; el Cerro de las Animas es probable.
@@ -1365,6 +1378,7 @@ gg_rivera.7 = {
 
 	option = {
 		name = gg_rivera.7.c
+		custom_tooltip = gg_rivera.7.c_tt2
 		# EN: go straight to Oribe with a peace 'between orientales': the eight conditions come early.
 		# ES: ir derecho a Oribe con una paz 'entre orientales': las ocho condiciones llegan antes.
 		set_global_variable = gg_rivera_eight_conditions
