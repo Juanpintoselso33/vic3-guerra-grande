@@ -67,9 +67,9 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_abolition.1 days = 2537 }
 			# EN/ES: T4, C20 -- the patrons' dated moves / los movimientos fechados de los padrinos
 			trigger_event = { id = gg_powers.2 days = 2616 }   # 1843.03.01 subsidio frances
-			trigger_event = { id = gg_powers.3 days = 3548 }   # 1845.09.18 bloqueo anglo-frances
-			trigger_event = { id = gg_powers.4 days = 4547 }   # 1848.06.13 la revolucion de febrero pega
-			trigger_event = { id = gg_powers.5 days = 5627 }   # 1851.05.29 alianza con el Brasil
+			trigger_event = { id = gg_powers.33 days = 3548 }   # 1845.09.18 bloqueo anglo-frances (gg_powers.3)
+			trigger_event = { id = gg_powers.34 days = 4547 }   # 1848.06.13 la revolucion de febrero pega (gg_powers.4)
+			trigger_event = { id = gg_powers.35 days = 5627 }   # 1851.05.29 alianza con el Brasil (gg_powers.5)
 			# 19 September 1836: the battle of Carpinteria, where the ribbons are born.
 			trigger_event = { id = guerra_grande.1 days = 262 popup = yes }
 		}
@@ -241,10 +241,19 @@ on_election_campaign_end = {
 }
 
 guerra_grande_on_election_end = {
+	# EN: playtest 2026-09-17 -- the same guard for BOTH paths. In the blanco path (Oribe did not
+	#     resign) an election handed the presidency to a party politician, and the government that
+	#     goes out to the Cerrito is Oribe's, not whoever won a vote in the middle of the war.
+	# ES: la misma guarda para LOS DOS caminos. En el camino blanco (Oribe no renuncio) una eleccion
+	#     le dio la presidencia a un politico de partido, y el gobierno que sale al Cerrito es el de
+	#     Oribe, no el que gano una votacion en medio de la guerra.
 	trigger = {
 		c:URU ?= this
-		has_global_variable = gg_rivera_presidency
 		NOT = { has_global_variable = guerra_grande_split_done }
+		OR = {
+			has_global_variable = gg_rivera_presidency
+			has_variable = guerra_grande_blanco_path
+		}
 	}
 	effect = {
 		trigger_event = { id = gg_phase1.10 days = 1 }

@@ -67,7 +67,10 @@ gg_naval.1 = {
 
 	icon = "gfx/interface/icons/event_icons/event_raiding.dds"
 
-	duration = 3
+	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
+	#     the game answered for the player. Every event of this mod has consequences, so they wait.
+	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -133,7 +136,7 @@ gg_naval.2 = {
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -184,7 +187,7 @@ gg_naval.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_raiding.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this

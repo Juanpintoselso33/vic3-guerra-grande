@@ -48,9 +48,21 @@ gg_abolition.1 = {
 
 	immediate = {
 		hidden_effect = {
-			# 1842.12.12 - the Defensa's law, the day the dispatcher itself lands.
-			c:URU ?= {
-				trigger_event = { id = gg_abolition.2 days = 0 popup = yes }
+			# EN: 1842.12.12 -- only if the defeat that produced the law already happened, or if this
+			#     run has no Arroyo Grande at all (gg_partition_delayed). Otherwise Arroyo Grande
+			#     itself schedules it six days later.
+			# ES: 12.12.1842 -- solo si la derrota que produjo la ley ya paso, o si en esta partida no
+			#     hay Arroyo Grande. Si no, la programa el propio Arroyo Grande seis dias despues.
+			if = {
+				limit = {
+					OR = {
+						has_global_variable = gg_rivera_arroyo_grande_settled
+						has_global_variable = gg_partition_delayed
+					}
+				}
+				c:URU ?= {
+					trigger_event = { id = gg_abolition.2 days = 0 popup = yes }
+				}
 			}
 			# EN/ES: T6 -- the Cerrito's decree (1846.10.26) is scheduled by gg_partition_calendar
 		}
@@ -74,15 +86,18 @@ gg_abolition.2 = {
 		first_valid = {
 			triggered_desc = {
 				desc = gg_abolition.2.d_early_delayed
-				trigger = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
-			}
-			triggered_desc = {
-				desc = gg_abolition.2.d_early
-				trigger = { has_global_variable = gg_partition_early }
+				trigger = {
+					NOT = { has_global_variable = gg_rivera_arroyo_grande_settled }
+					has_global_variable = guerra_grande_split_done
+				}
 			}
 			triggered_desc = {
 				desc = gg_abolition.2.d_delayed
-				trigger = { has_global_variable = gg_partition_delayed }
+				trigger = { NOT = { has_global_variable = gg_rivera_arroyo_grande_settled } }
+			}
+			triggered_desc = {
+				desc = gg_abolition.2.d_early
+				trigger = { has_global_variable = guerra_grande_split_done }
 			}
 			triggered_desc = {
 				desc = gg_abolition.2.d
@@ -99,7 +114,10 @@ gg_abolition.2 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
+	#     the game answered for the player. Every event of this mod has consequences, so they wait.
+	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -234,7 +252,7 @@ gg_abolition.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -392,7 +410,7 @@ gg_abolition.4 = {
 
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		has_variable = guerra_grande_abolition_decreed

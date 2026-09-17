@@ -150,6 +150,14 @@ gg_cerrito_balance_change = {
 gg_partition_calendar = {
 	# EN/ES: T9 -- the new characters, once both governments exist / los personajes nuevos
 	gg_spawn_war_characters = yes
+	# EN/ES: playtest 2026-09-17 -- backstop: the Defensa's law of 1842 must not be lost if neither
+	#     Arroyo Grande nor the dated dispatcher reached it / red de seguridad para la ley de 1842
+	c:URU ?= {
+		if = {
+			limit = { NOT = { has_variable = guerra_grande_abolition_settled } }
+			trigger_event = { id = gg_abolition.2 days = 2 popup = yes }
+		}
+	}
 	# EN/ES: the siege journal, opened by its event for both governments / el journal del sitio
 	c:URU ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
 	c:CER ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }

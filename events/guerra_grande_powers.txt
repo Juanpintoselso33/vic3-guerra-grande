@@ -109,7 +109,10 @@ gg_powers.10 = {
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
-	duration = 3
+	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
+	#     the game answered for the player. Every event of this mod has consequences, so they wait.
+	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -167,7 +170,7 @@ gg_powers.11 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -219,7 +222,7 @@ gg_powers.12 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -279,7 +282,7 @@ gg_powers.13 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -326,7 +329,7 @@ gg_powers.14 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -370,7 +373,7 @@ gg_powers.15 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -416,7 +419,7 @@ gg_powers.16 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -489,7 +492,7 @@ gg_powers.17 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -549,7 +552,7 @@ gg_powers.18 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -632,7 +635,7 @@ gg_powers.19 = {
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -720,7 +723,7 @@ gg_powers.21 = {
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -784,7 +787,7 @@ gg_powers.23 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -855,7 +858,7 @@ gg_powers.24 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -903,7 +906,7 @@ gg_powers.25 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:CER ?= this
@@ -947,7 +950,7 @@ gg_powers.26 = {
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -1010,7 +1013,7 @@ gg_powers.28 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		has_global_variable = guerra_grande_open_war
@@ -1088,7 +1091,7 @@ gg_powers.29 = {
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -1150,7 +1153,7 @@ gg_powers.31 = {
 
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		has_global_variable = gg_university_decreed
@@ -1202,7 +1205,7 @@ gg_powers.32 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 3
+	duration = 1825
 
 	trigger = {
 		c:URU ?= this
@@ -1237,5 +1240,46 @@ gg_powers.32 = {
 			interest_group = ig:ig_intelligentsia
 		}
 		ai_chance = { base = 70 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_powers.33 -- dispatcher for the three dated events of the powers (hidden). Found in the
+#     playtest of 2026-09-17: the engine checks a scheduled event's trigger WHEN IT IS SCHEDULED,
+#     and these three are scheduled on the first day of 1836 while asking for guerra_grande_split_done,
+#     a mark that cannot exist until 1843. They were dropped, silently, every game. This has no
+#     trigger of its own, so it always arrives; the real events are fired from here with days = 0,
+#     which checks their triggers at the moment that matters.
+# ES: gg_powers.33 -- despachador de los tres eventos fechados de las potencias (oculto). El motor
+#     chequea el trigger de un evento agendado CUANDO SE AGENDA, y estos tres se agendan el primer
+#     dia de 1836 pidiendo guerra_grande_split_done, una marca imposible hasta 1843: se descartaban
+#     en silencio en todas las partidas. Este no tiene trigger, asi que siempre llega, y dispara a
+#     los de verdad con days = 0, que es cuando el chequeo sirve.
+# -------------------------------------------------------------------------------------------------
+gg_powers.33 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		trigger_event = { id = gg_powers.3 days = 0 }
+	}
+}
+
+# EN/ES: the same for 1848 and for 1851 / lo mismo para 1848 y para 1851
+gg_powers.34 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		trigger_event = { id = gg_powers.4 days = 0 }
+	}
+}
+
+gg_powers.35 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		trigger_event = { id = gg_powers.5 days = 0 }
 	}
 }
