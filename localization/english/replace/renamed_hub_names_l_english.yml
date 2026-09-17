@@ -1,0 +1,44 @@
+﻿l_english:
+ 
+ # Argentina
+  HUB_NAME_STATE_CORRIENTES_city: "Corrientes"
+  HUB_NAME_STATE_CORRIENTES_farm: "Mercedes"
+
+  HUB_NAME_STATE_JUJUY_farm: "Purma Marca"
+  HUB_NAME_STATE_JUJUY_mine: "Tilcara"
+  HUB_NAME_STATE_JUJUY_wood: "Humahuaca"
+  HUB_NAME_STATE_JUJUY_city: "Jujuy"
+
+  HUB_NAME_STATE_TUCUMAN_farm: "Famaillá"
+  HUB_NAME_STATE_TUCUMAN_mine: "Tafi del Valle"
+  HUB_NAME_STATE_TUCUMAN_wood: "El Cadillal"
+
+  HUB_NAME_STATE_CHACO_wood: "Charata"
+  HUB_NAME_STATE_CHACO_mine: "Castelli"
+  HUB_NAME_STATE_CHACO_farm: "La Leona"
+
+  HUB_NAME_STATE_SANTA_FE_city: "Santa Fe"
+  HUB_NAME_STATE_SANTA_FE_farm: "Rosario"
+  HUB_NAME_STATE_SANTA_FE_wood: "Rafaela"
+  HUB_NAME_STATE_SANTA_FE_mine: "San Cristóbal"
+  
+   #La Pampa
+   HUB_NAME_STATE_LA_PAMPA_city: "Santa Rosa"
+   HUB_NAME_STATE_LA_PAMPA_farm: "Chacharramendi"
+   HUB_NAME_STATE_LA_PAMPA_wood: "Santa Isabel"
+   HUB_NAME_STATE_LA_PAMPA_mine: "Catriel"
+   
+    #Rio Negro
+   HUB_NAME_STATE_RIO_NEGRO_city: "Viedma"
+   HUB_NAME_STATE_RIO_NEGRO_farm: "Río Colorado"
+   HUB_NAME_STATE_RIO_NEGRO_wood: "San Carlos de Bariloche"
+   HUB_NAME_STATE_RIO_NEGRO_mine: "General Roca"
+   HUB_NAME_STATE_RIO_NEGRO_port: "Las Grutas"
+
+ #Uruguay
+  HUB_NAME_STATE_MONTEVIDEO_farm: "Las Piedras"
+  HUB_NAME_STATE_MONTEVIDEO_mine: "Villa del Cerro"
+ #Chile
+  STATE_LOS_LAGOS: "Los Lagos"
+  STATE_AYSEN: "Aysen"
+  STATE_MAGALLANES: "Magallanes"

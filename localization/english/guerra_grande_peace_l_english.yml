@@ -1,0 +1,99 @@
+﻿l_english:
+
+# EN: The peace menu of the Guerra Grande. Every clause, decree, date and quotation below is
+#     sourced in ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md and in the comments of
+#     events/guerra_grande_peace.txt. Nothing here is invented, and where the record is disputed
+#     the text says so instead of picking a side.
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.1 -- the Defensa dictates the peace
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.1.t:0 "The Terms of the Defensa"
+ gg_peace.1.desc:0 "The war is decided, and for the first time in nine years this government is the one writing the terms rather than waiting on somebody else's squadron to arrive.\n\nWhat comes next is not obvious. The formula being circulated from Rio de Janeiro would end the war by refusing to name a winner — and it would cost this government the confiscations, the proscriptions and the war debt of the men on the hill. The decrees of February 1843 are still on the books and were never repealed. The Empire is offering treaties. Two ministers in ten years have asked London and Paris to take the Republic under protection. And there is the other bank of the river, where the man who paid for this war is still standing."
+ gg_peace.1.flav:0 "Nine years inside a wall, and now a blank page."
+
+ gg_peace.1.a:0 "Neither vanquished nor victors. Sign, and pay their debts."
+ gg_peace.1.b:0 "The decrees of February 1843 were never repealed. Enforce them."
+ gg_peace.1.c:0 "Sign the five treaties with the Empire."
+ gg_peace.1.d:0 "Ask London and Paris to take the Republic under protection."
+ gg_peace.1.e:0 "Pacify the Republic — and then cross the river after Rosas."
+ gg_peace.1.f:0 "No terms. Not yet."
+
+ gg_peace_formula_tt:0 "The pact of 8 October 1851, in its signed wording: it is recognised that the resistance the soldiers and citizens made to the Anglo-French intervention was in the belief that they were defending the independence of the Republic; equal rights, equal merit and equal claim to public office for every oriental of whatever opinion; the Republic assumes as national the debt contracted by general Oribe; senators and representatives to be elected in every department, and they will name the President. And the sentence: among the different opinions that have divided the orientals, there shall be neither vanquished nor victors.\n\nOribe is not proscribed. A delegation of citizens asked Urquiza for guarantees for him and Urquiza gave them; he stayed in his quinta, unmolested, until he died in 1857."
+ gg_peace_proscription_defensa_tt:0 "10 February 1843: anyone in contact with the besieging army goes before a military commission, and anyone who materially assists it is shot. 12 February: every oriental taken with arms in hand or wearing the enemy's divisa is shot en el acto y por la espalda — on the spot, and in the back. 1 March: the families of the men in the invading army and of everyone the police edicts have declared a fugitive or a traitor are expelled from the city; some go to the isla Libertad.\n\nThe confiscations were this government's before they were the other's — the Cerrito's decree of June 1845 says so in its own preamble. Now the decrees reach the countryside that was never in reach. Across the river the coalition that wins at Caseros will hand the authors of the slaughters of 1840 and 1842 to the courts; Eduardo Acevedo calls that a notable difference with what was done on this bank. This is that difference, taken here."
+ gg_peace_treaties_tt:0 "Five treaties, Rio de Janeiro, 12 October 1851, signed by Andrés Lamas. Alliance: the Empire becomes guarantor of the Constitution, with the right to intervene to restore order. Aid: a monthly subsidy, secured on the customs revenue. Limits: the northern border on the Cuareim, the claim of San Ildefonso renounced, and no navigation of the Laguna Merín or the Yaguarón — a dry coast for fifty-eight years, until 1909. Commerce: ten years' exemption for Brazilian tasajo coming in and for oriental cattle going north. Extradition: fugitive slaves returned, against the Republic's own abolition law.\n\nIn December 1864 a Uruguayan government burned these treaties in a public square. In February 1865 the next one restored them by decree."
+ gg_peace_protectorate_asked_tt:0 "Manuel Herrera y Obes, foreign minister, put a joint protectorate of Great Britain and France to the two powers in 1848. It is the fourth such approach in ten years: Francisco José Muñoz asked London in 1838 for an arrangement like the one over the Ionian Islands, chancellor Vidal tried again through José Ellauri in 1841, and Florencio Varela was sent to London in 1843-44. Separately, men of the French colony here have been pushing a French protectorate of their own, with the goodwill of leading men of this government and the backing of the French ambassador in Rio.\n\nNone of the earlier approaches got an answer this government wanted to hear. There is no reason to be sure of this one."
+ gg_peace_caseros_tt:0 "Herrera y Obes to the British and French chargés d'affaires, early September 1851, protesting their readiness to ship Oribe's Argentine battalions home: this government is interested in the annihilation of that army, por cuanto una vez pacificado el territorio nacional se iniciará la acción militar contra Rosas — because once the national territory is pacified, military action against Rosas will begin — and there is a positive necessity that those troops do not go to reinforce the other bank of the Plata.\n\nAfter Urquiza sailed, a new alliance was signed in Montevideo between the Republic, the Empire, Entre Ríos and Corrientes. The Republic's share was a division of two thousand men. Rosas fell at Caseros on 3 February 1852."
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.2 -- the Cerrito dictates the peace
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.2.t:0 "The Terms of the Cerrito"
+ gg_peace.2.desc:0 "The gates are open. Nine years of sitting in front of a wall this army had no gun able to breach, and hunger did it in the end because no squadron came.\n\nThis government has claimed one thing since 1838 and never anything else: that it is the lawful government of the Republic, that its president's term was cut short by an armed rising, and that everything it has done out here — the Chambers, the courts, the customs house, the schools, the abolition of slavery — was done under the Constitution of 1830. It can now say so from the city. Or it can say something else. There is a letter from Buenos Aires, six years old, that has never been answered."
+ gg_peace.2.flav:0 "Thirty-five guns and not one of them able to open a wall. Hunger opened it."
+
+ gg_peace.2.a:0 "Neither vanquished nor victors. The clause was ours to begin with."
+ gg_peace.2.b:0 "The interrupted term resumes. Every decree of theirs is void."
+ gg_peace.2.c:0 "Mueran los salvages unitarios. Let the paper mean what it says."
+ gg_peace.2.d:0 "Answer Rosas: the Republic goes back into the Confederation."
+ gg_peace.2.e:0 "The Restaurador paid for this war. Let him keep paying."
+ gg_peace.2.f:0 "No terms. Not yet."
+
+ gg_peace_oribe_pliego_tt:0 "The clause did not come from the other side. Andrés Lamas coined the phrase in Rio de Janeiro, but it was Oribe who wrote it into the bases he sent in on 7 October 1851, and it went in with the rest of his pliego: that the resistance to the Anglo-French intervention be recognised as a defence of the independence of the Republic; that every governmental and judicial act performed in the territory his arms occupied be declared lawful, the confiscations not excepted; that the Nation recognise what his government owes; that his oriental battalions stay under his command until a President is constitutionally elected; and that among the different opinions that have divided the orientals there be neither vanquished nor victors.\n\nHe was given part of it. Winning means the whole pliego."
+ gg_peace_legal_presidency_tt:0 "The case has never changed: Oribe was the constitutional President, his term was cut short by an armed rising in 1838, and he never ceased to be President. On that theory this government reconvened the Chambers that had been dissolved and had them confirm his mandate, installed a Tribunal de Apelaciones on 12 May 1845, applied the Constitution of 1830 as its legal order, habilitated the Buceo as a port and raised a customs house there, founded a normal school at the Villa de la Restauración, and in 1846 abolished slavery totally and without restriction.\n\nSo: the term simply resumes, and elections follow under the Constitution. No proscriptions. But if that government was never lawful, then nothing it decreed was lawful either — the confiscations are void and must be unwound, and the foreign legions that made up more than half the men on those walls have no standing to remain."
+ gg_peace_proscription_cerrito_tt:0 "The masthead of El Defensor de la Independencia Americana, this government's own paper, from issue 43 of 27 October 1845 to the last number on 29 September 1851: Vivan los defensores de las Leyes! Mueran los salvages unitarios!! The camp cry added the filthy French and the pardejón Rivera.\n\nWhat that has meant when carried out rather than printed is on the record across the river, in the general's own dispatches. After Famaillá, more than 350 prisoners put to the knife at the Rincón de Ugarte on 21 September 1841. At Metán on 3 October he reported to Rosas that he had ordered the head cut from the savage unitarian Avellaneda and that it would be set for the inhabitants to look at in the public square of Tucumán. At Arroyo Grande the officers of the beaten army were executed.\n\nOf the 31,000 people inside those walls, only some 11,000 are orientals."
+ gg_peace_confederation_tt:0 "On 11 August 1845 Rosas proposed the reunification of the country: the Republic back inside the Provinces of the Río de la Plata, and the Preliminary Peace Convention of 1828 — dictated, he said, by the convenience of the British Empire — annulled. The President would not decide. He sent it to a parliamentary commission, and it dissolved there into nothing.\n\nThis is that answer given the other way, and it should be said plainly what is and is not known. Some historians hold that Oribe and Rosas meant to annex the Republic to the Confederation. Others state flatly that no document supports it, and note that Oribe had already refused the same suggestion once during his first presidency, and that in 1835-36 he fought the British commercial treaty rather than trade sovereignty for a three-million-peso loan. The choice is available. The claim that the man wanted it is not made here."
+ gg_peace_rosista_client_tt:0 "The other reading of the same relationship, and the one Montevideo's presses hammered for nine years. Rosas received Oribe in Buenos Aires as the lawful President of the Republic in exile, made him general in chief of the Ejército Unido de Vanguardia of the Confederation, lent him that army for the siege, and financed him to the last — in the final weeks he was still sending him eight hundred gold ounces. The village behind the lines was named for the Restaurador himself.\n\nAgainst that stands the other half of the record, and it is not small: when Rosas sent colonel Ramos back with orders to put the Argentine division under its own commander, Oribe put him under guard and threatened him with immediate execution if he passed them on. This option is the client relationship without that second half."
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.3 / gg_peace.4 -- the answer from London and Paris
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.3.t:0 "A Protectorate Granted"
+ gg_peace.3.desc:0 "The answer has come, and it is yes. France takes the Republic under protection, with Britain's acquiescence, and the subsidy that has been arriving by convention since June 1848 becomes an obligation instead of a favour.\n\nThe port will never be closed again, and the immigrants will keep coming. What has been signed away is harder to name than a province, because it is not written anywhere in the instrument: the Republic has asked a European power to stand over it, and it has been given what it asked for."
+ gg_peace.3.flav:0 "It is what was asked for. That is the difficulty."
+ gg_peace.3.a:0 "The flag stays. Everything under it is now negotiable elsewhere."
+
+ gg_peace.4.t:0 "A Protectorate Refused"
+ gg_peace.4.desc:0 "London says no, and this time it says it where everyone can hear.\n\nIt is the sixth refusal of the same request. Muñoz in 1838, asking for an arrangement like the Ionian Islands. Ellauri in 1841. Varela in London in 1843-44. And now this. The Republic has told the world it does not believe it can govern itself, and the world has declined to take it on. The proposal was in the papers before the answer was."
+ gg_peace.4.flav:0 "The humiliation without the protection."
+ gg_peace.4.a:0 "Then we do it alone, and everyone knows we did not want to."
+
+# ---------------------------------------------------------------------------------------------
+# Modifiers
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace_legal_presidency:0 "The Legal Presidency Restored"
+ gg_peace_legal_presidency_desc:0 "The term interrupted in 1838 resumes under the Constitution of 1830. The Chambers that were dissolved sit again, the Tribunal de Apelaciones installed on 12 May 1845 stands, and the administration that governed the countryside for nine years does not have to be invented — it simply moves into the city."
+
+ gg_peace_colorados_proscribed:0 "Mueran los Salvages Unitarios"
+ gg_peace_colorados_proscribed_desc:0 "The masthead of El Defensor de la Independencia Americana carried out. Of 31,000 people inside the walls only some 11,000 were orientals; the Legions were foreign, the merchant houses were foreign, and the presses belonged to the anti-rosista emigration. The port empties, and what made it worth taking leaves with the people who made it."
+
+ gg_peace_confederation_province:0 "Back into the Confederation"
+ gg_peace_confederation_province_desc:0 "Rosas's proposal of 11 August 1845 accepted instead of buried in a parliamentary commission: the Republic returns to the Provinces of the Río de la Plata and the Preliminary Peace Convention of 1828 is annulled. The countryside that fought the war approves. The city, the emigration and every chancellery in the basin do not."
+
+ gg_peace_rosista_client:0 "The Restaurador Keeps Paying"
+ gg_peace_rosista_client_desc:0 "Buenos Aires goes on financing and arming the Republic as it financed and armed the siege — in the last weeks before the capitulation Rosas was still sending eight hundred gold ounces. The money is real and so is the price of it: the Republic is now what its enemies always said it was."
+
+ gg_peace_blancos_proscribed:0 "The Decrees of February 1843"
+ gg_peace_blancos_proscribed_desc:0 "Shot on the spot and in the back for arms in hand or the enemy's divisa; military commissions for anyone in contact with the besiegers; families expelled, some to the isla Libertad; the confiscations upheld. Applied at last to the countryside, which spent nine years on the other side of the line and will remember it."
+
+ gg_peace_treaties_of_1851:0 "The Five Treaties of 1851"
+ gg_peace_treaties_of_1851_desc:0 "Alliance, aid, limits, commerce and extradition, signed in Rio de Janeiro on 12 October 1851. The Empire guarantees the Constitution and may intervene to restore order; the subsidy arrives monthly against the customs revenue; the northern border sits on the Cuareim and the coast of the Laguna Merín is dry for fifty-eight years; the tasajo comes in free for ten years and the cattle go north free for ten years; and fugitive slaves go back, against the Republic's own abolition law."
+
+ gg_peace_anglo_french_protectorate:0 "Under European Protection"
+ gg_peace_anglo_french_protectorate_desc:0 "Manuel Herrera y Obes's project of 1848, granted: the Republic under the protection of France, with Britain's acquiescence. The port cannot be closed, the immigrants keep landing and the subsidy is now owed rather than begged for. The army, which has spent nine years being told it was defending the independence of the Republic, has been told what that independence was worth."
+
+ gg_peace_protectorate_refused:0 "Turned Down in Public"
+ gg_peace_protectorate_refused_desc:0 "The sixth request of the same kind and the sixth refusal. The Republic asked a foreign power to govern it, the request was in the newspapers before the answer was, and the answer was no. Nothing has been gained and the asking cannot be unsaid."
+
+ gg_peace_march_on_buenos_aires:0 "And Then Across the River"
+ gg_peace_march_on_buenos_aires_desc:0 "Once the national territory is pacified, military action against Rosas begins — Herrera y Obes wrote exactly that to the British and French chargés in September 1851. The Republic puts a division into the alliance that will meet Rosas at Caseros. The army has never stood higher and the treasury has never been emptier."
+
+ gg_peace_national_cockade:0 "The National Cockade"
+ gg_peace_national_cockade_desc:0 "The divisas colorada and blanca are forbidden and the national cockade declared the only badge a citizen may wear, to make the opinions and the signs that divided the sons of the oriental people disappear. The Villa de la Restauración becomes the Villa de la Unión. Both parties lose something they were attached to, and the State gains an authority it never had."
+
+ gg_peace_assumed_war_debt:0 "Their Debt Is Now the Nation's"
+ gg_peace_assumed_war_debt_desc:0 "The Republic shall recognise as a national debt that which general Oribe contracted, in accordance with what public law establishes for such cases. It is the third article of the pact, and it is what the formula actually cost: the government that won pays for the war the other one fought."

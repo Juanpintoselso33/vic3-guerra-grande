@@ -1,0 +1,148 @@
+﻿l_spanish:
+
+# País
+ CER:0 "Gobierno del Cerrito"
+ CER_ADJ:0 "cerritense"
+
+# Grupos de interés rebautizados por las divisas de Carpintería
+ ig_blanco_party:0 "Partido Blanco"
+ ig_blanco_party_desc:0 "Los que llevaron la divisa blanca de Oribe con el lema «Defensores de las Leyes». Estancieros, curas de campaña y milicias del interior, que se dicen el gobierno legal y el partido del orden."
+ ig_colorado_party:0 "Partido Colorado"
+ ig_colorado_party_desc:0 "Los que llevaron la divisa de Rivera, cortada del forro colorado de los propios ponchos después de que la celeste de la escarapela nacional se destiñera al sol hasta quedar blanca. El puerto, la aduana, las imprentas y el comercio extranjero de Montevideo."
+
+# Journal entry
+ je_group_guerra_grande:0 "La Guerra Grande"
+ je_guerra_grande:0 "La Guerra Grande"
+ je_guerra_grande_desc:0 "Dos divisas, dos gobiernos, un solo país. Durante ocho años la República estuvo recorrida de norte a sur por ejércitos orientales, franceses, vascos, italianos y argentinos, partida entre el Gobierno del Cerrito de Oribe —que reinstaló las Cámaras disueltas por Rivera en 1838 y les hizo renovar su mandato— y el Gobierno de la Defensa, donde Joaquín Suárez fue presidente interino durante ocho años. Ninguno puede acabar con el otro por su cuenta: cada batalla ganada inclina la guerra para un lado o para el otro."
+ je_guerra_grande_reason:0 "Las divisas de Carpintería han partido en dos a la República."
+ je_guerra_grande_status_factions:0 "Las divisas se llevan a la vista y la República está partida en dos, pero todavía no marchó ningún ejército. La barra todavía no cuenta batallas: cuenta cada decisión tomada desde Carpintería, y cada una pesa para un lado.\n\n#b Blancos [GetGlobalVariable('guerra_grande_blanco_score').GetValue|v0]  —  Colorados [GetGlobalVariable('guerra_grande_colorado_score').GetValue|v0]#!\n\n#Y Cuando la República se parta, el lado que vaya adelante arma a los hombres que le compró su ventaja: dos puntos ponen un batallón más en el campo, cuatro ponen dos.#! Los blancos los juntan en San José, los colorados en Montevideo. Ninguno de los dos pasa de ocho, así que la guerra empieza donde vos la hayas dejado."
+ je_guerra_grande_status_siege:0 "Dos gobiernos, una República: la Defensa tras los muros de Montevideo, el Cerrito sobre la campaña.\n\n#b Cerrito [GetGlobalVariable('guerra_grande_blanco_score').GetValue|v0]  —  Defensa [GetGlobalVariable('guerra_grande_colorado_score').GetValue|v0]#!\n\nCada batalla ganada mueve la aguja un punto hacia el lado que la ganó, encima de la ventaja que cada bando trajo a la guerra.\n\n#Y Lo que compra la ventaja:#!\n  #b Cinco adelante#! — el gobierno que va ganando toma la iniciativa y el otro se desgasta; los dos modificadores se renuevan cada mes, así que se caen solos apenas el otro empata.\n  #b Diez adelante#! — la guerra está decidida y el que pierde se sienta a la mesa.\n\nNi la Argentina ni el Brasil pueden entrar como beligerantes: mandan batallones y plata, como hicieron de verdad.\n\nSe cierra cuando un gobierno absorbe al otro: la Defensa saliendo a recuperar la campaña, o el Cerrito entrando en la ciudad. Fracasa si una potencia extranjera se queda con Montevideo: gane quien gane la guerra civil, la ciudad tiene que ser oriental.\n\n#Y DEBUG, sacar cuando el balance quede confirmado:#! botones de la Defensa apretados -- escuadras [GetGlobalVariable('gg_debug_intervention_presses').GetValue|v0], Legión Italiana [GetGlobalVariable('gg_debug_italian_presses').GetValue|v0], Legión Francesa [GetGlobalVariable('gg_debug_french_presses').GetValue|v0]. Botones del Cerrito -- montonera [GetGlobalVariable('gg_debug_montonera_presses').GetValue|v0], bloqueo [GetGlobalVariable('gg_debug_blockade_presses').GetValue|v0]."
+ je_guerra_grande_complete_tt:0 "Queda en pie uno solo de los dos gobiernos."
+
+# Barra de progreso
+ guerra_grande_war_score_bar:0 "Qué divisa se impone"
+
+# Botones
+ guerra_grande_foreign_intervention_button:0 "Llamar a las escuadras"
+ guerra_grande_foreign_intervention_button_desc:0 "Inglaterra y Francia quieren el Paraná y el Uruguay abiertos a su comercio. Si se las invita, cierran al tráfico todos los puertos de la Confederación menos el nuestro: es el bloqueo de 1845 a 1850, la Guerra del Paraná. Les costó la Vuelta de Obligado y terminó igual, con las potencias reconociéndole a Rosas la soberanía sobre sus ríos."
+ guerra_grande_italian_legion_button:0 "Levantar la Legión Italiana"
+ guerra_grande_italian_legion_button_desc:0 "Montevideo está llena de exiliados italianos, y uno de ellos es un marino de Niza llamado Giuseppe Garibaldi. La plaza tiene además una partida barata de camisas coloradas: ropa de trabajo destinada a los saladeros de la otra orilla que el bloqueo dejó sin vender. Que se vistan con ellas."
+ guerra_grande_requires_open_war:0 "La Guerra Grande tiene que estar en curso"
+ guerra_grande_requires_great_power_interest:0 "Una gran potencia debe tener intereses en el Río de la Plata"
+ guerra_grande_requires_montevideo:0 "Debemos conservar Montevideo"
+
+# Jugada diplomática
+ dp_guerra_grande:0 "Guerra Grande"
+ guerra_grande_play:0 "La Guerra Grande"
+
+# Modificadores
+ guerra_grande_blanco_order:0 "Orden blanco"
+ guerra_grande_colorado_order:0 "Orden colorado"
+ guerra_grande_armed_truce:0 "Tregua armada"
+ guerra_grande_divided_country:0 "País partido en dos"
+ guerra_grande_river_plate_blockade:0 "Bloqueo del Plata"
+ guerra_grande_montevideo_resupplied:0 "Montevideo abastecida"
+ guerra_grande_italian_legion:0 "Legión Italiana"
+ guerra_grande_rosista_support:0 "Apoyo rosista"
+ guerra_grande_no_victors_no_vanquished:0 "Ni vencidos ni vencedores"
+
+# 1 - Carpintería, 19 de setiembre de 1836
+ guerra_grande.1.t:0 "Las divisas de Carpintería"
+ guerra_grande.1.d:0 "En agosto el Presidente decretó que toda la población, militar y civil, llevara en el sombrero o en la ropa una divisa blanca con el lema «Defensores de las Leyes» —el mismo blanco de las vinchas de los patriotas de 1811—. Los rebeldes de Rivera contestaron con el celeste de la escarapela nacional, pero el sol y la lluvia lo destiñeron hasta dejarlo blanco, así que cortaron divisas nuevas del forro colorado de los ponchos.\n\nEn las costas del arroyo Carpintería, en Durazno, los dos bandos se encontraron por fin: tres mil hombres de Oribe y Lavalleja contra mil cuatrocientos de Rivera y del unitario argentino exiliado Juan Lavalle. El gobierno ganó el campo. Lo que nació ahí sobrevivió a todos los que pelearon: desde hoy la República tiene dos partidos, y a cada estancia, parroquia y regimiento se le va a preguntar qué divisa lleva."
+ guerra_grande.1.f:0 "Blancos y colorados, y el país en el medio."
+ guerra_grande.1.a:0 "La divisa blanca: las leyes, la iglesia y la campaña."
+ guerra_grande.1.b:0 "La divisa colorada: el puerto, la prensa y la causa liberal."
+ guerra_grande.1.c:0 "La República no lleva divisa ninguna."
+
+# 2 - La caída de Oribe, 24 de octubre de 1838
+ guerra_grande.2.t:0 "La caída de Oribe"
+ guerra_grande.2.d:0 "Una escuadra francesa bloquea Buenos Aires, la caballada de Rivera está en las puertas y al Presidente se le acabaron la plata y los amigos. Manuel Oribe puede renunciar y embarcarse para Buenos Aires —donde Rosas va a seguir recibiéndolo como presidente legal del Uruguay, y donde espera por armarse un gobierno del Cerrito— o puede quedarse y hacer de la capital una fortaleza."
+ guerra_grande.2.f:0 "Un presidente con dos salidas de la ciudad."
+ guerra_grande.2.a:0 "Que renuncie. Los colorados toman el gobierno."
+ guerra_grande.2.b:0 "No renuncia. Los blancos conservan el Estado."
+
+# 3 - La partición
+ guerra_grande.3.t:0 "Empieza la Guerra Grande"
+ guerra_grande.3.d:0 "La República se parte en dos. Tras los muros queda la Defensa, con la aduana, el comercio extranjero y el mar; en la falda del Cerrito, al lado de la Villa de la Restauración, queda el gobierno de Oribe, con el ganado, los caudillos y Rosas atrás. Reinstaló las Cámaras que Rivera había disuelto en 1838 y les hizo renovar su mandato, de modo que los dos gobiernos pueden llamarse legales y ninguno tiene lugar para el otro.\n\n«El ejército de Rosas está delante de esta capital —dice el decreto de la Defensa el día en que empieza el sitio—. El Gobierno cuenta con el patriotismo de sus habitantes: reposa en él y en la victoria»."
+ guerra_grande.3.f:0 "Dos gobiernos, nueve años, un solo país."
+ guerra_grande.3.a:0 "Montevideo va a resistir."
+ guerra_grande.3.b:0 "Salir al Cerrito con Oribe."
+
+# 4 - Rosas
+ guerra_grande.4.t:0 "Rosas y el Cerrito"
+ guerra_grande.4.d:0 "Oribe escribe desde el Cerrito como presidente legal del Uruguay y pide lo que se le prometió en el destierro: hombres, plata y ganado. Respaldarlo mete a la Confederación en una guerra en la otra orilla y nos trae encima las escuadras inglesa y francesa —pero la otra orilla nunca fue un asunto extranjero, y un gobierno amigo en Montevideo cerraría el Plata a los unitarios para siempre."
+ guerra_grande.4.f:0 "La otra orilla siempre fue asunto nuestro."
+ guerra_grande.4.a:0 "Respaldar a Oribe. El Plata es un solo país."
+ guerra_grande.4.b:0 "Que lo arreglen entre ellos."
+
+# 5 - La Legión Italiana
+ guerra_grande.5.t:0 "Las camisas rojas de Montevideo"
+ guerra_grande.5.d:0 "La legión ya tiene jefe: Giuseppe Garibaldi, un marino de Niza condenado a muerte en Génova, que vino al Plata a corsear para Rio Grande y se quedó. Sus hombres hacen la instrucción con las camisas que nadie más quería: una partida de blusas coloradas de trabajo destinadas a los saladeros de la Confederación, que la guerra dejó varada acá. Dentro de dieciséis años esa misma camisa se va a usar en Sicilia."
+ guerra_grande.5.f:0 "Un uniforme comprado de casualidad y conservado a propósito."
+ guerra_grande.5.a:0 "Que salgan a la línea."
+
+# 6 - Ambiente: el sitio
+ guerra_grande.6.t:0 "La Nueva Troya"
+ guerra_grande.6.d:0 "A Melchor Pacheco y Obes lo mandamos a París a pedir ayuda y volvió con un novelista: Alejandro Dumas publicó «Montevideo, ou une nouvelle Troie», que convierte nuestro sitio en la guerra de Troya, a Rosas en un bárbaro y a esta ciudad en el último puesto de la civilización en el Plata. No hay en él una línea desinteresada y la mitad está equivocada, pero lo lee toda Europa."
+ guerra_grande.6.f:0 "Una ciudad que aprendió a vivir sitiada, y a que la escriban."
+ guerra_grande.6.a:0 "Que el mundo nos vea aguantar."
+
+# 7 - Ambiente: la campaña
+ guerra_grande.7.t:0 "Se acabaron las haciendas"
+ guerra_grande.7.d:0 "Los dos ejércitos viven de la campaña, y la campaña se está acabando. A las estancias las deja sin ganado la columna que pase primero, y los peones que las trabajaban se van con el arreo: para un bando o para el otro, según el día."
+ guerra_grande.7.f:0 "Una guerra pagada en cueros."
+ guerra_grande.7.a:0 "El país va a pagar esto por una generación."
+
+# 8 - La paz del 8 de octubre de 1851
+
+# 9 - Intervención
+ guerra_grande.9.t:0 "Las escuadras entran al Plata"
+ guerra_grande.9.d:0 "Los buques de guerra ingleses y franceses forzaron el río. Todos los puertos de la Confederación quedan cerrados al comercio menos el nuestro, los convoyes llegan a la plaza sitiada y las potencias dejaron en claro qué están comprando: la libre navegación del Paraná y del Uruguay para sus mercantes, una vez que se dejen de tirar tiros."
+ guerra_grande.9.f:0 "El río es de quien pueda navegarlo."
+ guerra_grande.9.a:0 "Que vengan."
+
+# 11 - Retrato: Manuel Oribe
+ guerra_grande.11.t:0 "El presidente y las leyes"
+ guerra_grande.11.d:0 "Manuel Oribe nació en Montevideo en 1792, entró a la revolución de muchacho y fue segundo jefe de los Treinta y Tres: Lavalleja los mandaba, Oribe organizó el cruce. Es hombre de logia, de los Caballeros Orientales, y legalista hasta el hueso: cuando Lavalleja se alzó contra el presidente Rivera en 1832 y otra vez en 1834, fue Oribe el que sostuvo al gobierno que no quería, porque era el legal.\n\nEn eso se resume: el culto a la disciplina y a la autoridad, y una divisa que dice Defensores de las Leyes. A Rosas ya le dijo que no una vez, cuando Buenos Aires insinuó que la Banda Oriental podía volver a la Confederación Argentina."
+ guerra_grande.11.f:0 "Un presidente que prefiere que lo obedezcan antes que lo quieran."
+ guerra_grande.11.a:0 "La ley está por encima del hombre."
+ guerra_grande.11.b:0 "Una república no es un cuartel."
+
+# 12 - Retrato: Juan Antonio Lavalleja
+ guerra_grande.12.t:0 "El jefe de los Treinta y Tres"
+ guerra_grande.12.d:0 "El 19 de abril de 1825 Juan Antonio Lavalleja desembarcó en la playa de la Agraciada con treinta y tres hombres y prendió fuego a toda la campaña; el Congreso de la Florida lo hizo Capitán General. Lo que vino después fue menos generoso. Rivera se quedó con la presidencia que él creía suya, y Lavalleja se alzó contra Rivera en 1832 y en 1834, y perdió las dos veces, fácil.\n\nEn Carpintería peleó del lado del gobierno, como casi todos los hombres de los Treinta y Tres. Hoy es leal a las leyes y a sí mismo, y nadie tiene del todo claro en qué orden."
+ guerra_grande.12.f:0 "El hombre que empezó todo y no terminó nada."
+ guerra_grande.12.a:0 "Darle mando. Se lo ganó dos veces."
+ guerra_grande.12.b:0 "Ningún mando para los caudillos. La República se gobierna desde la capital."
+
+# 13 - Retrato: Fructuoso Rivera
+ guerra_grande.13.t:0 "Don Frutos"
+ guerra_grande.13.d:0 "Fructuoso Rivera, criado en una estancia y con instrucción escasa, fue el jefe más eficaz que tuvo Artigas: golpes imprevisibles y la campaña en la mano. Cuando ganaron los portugueses firmó en Tres Árboles y sirvió al Barón de la Laguna, que le ofreció un título de barón que rechazó. Volvió con los Treinta y Tres en el abrazo del Monzón, se tomó las Misiones Orientales por cuenta propia, fue el primer presidente de la República y gobernó desde Durazno mientras unos abogados manejaban el Estado.\n\nEl cónsul británico Hood escribió de él en 1829: «Es un hombre sin ninguna clase de talento, pero es popular entre la mayoría del pueblo». Ahora está en Porto Alegre, entre los farrapos, y va a volver."
+ guerra_grande.13.f:0 "Derrotado en Carpintería, y lejos de terminado."
+ guerra_grande.13.a:0 "Pedirle al Brasil que lo entregue."
+ guerra_grande.13.b:0 "Que se le gaste el crédito en el destierro."
+
+# 14 - Retrato: Artigas
+ guerra_grande.14.t:0 "El viejo de Curuguaty"
+ guerra_grande.14.d:0 "José Gervasio Artigas cruzó el Paraná en setiembre de 1820 con ciento cincuenta hombres y no volvió nunca. El doctor Francia le dio asilo y se encargó de que no viniera con política adentro: sin correspondencia, sin visitas, y veinticinco años en la villa de San Isidro de Curuguaty, que los paraguayos llaman su Siberia. El dictador jamás aceptó recibirlo.\n\nDicen que Francia le manda una onza de oro por mes y que él reparte la mayor parte entre los pobres del pueblo. Labra la tierra, reza el rosario al atardecer con los vecinos contestando en guaraní, y no pidió nada. Tiene setenta y cuatro años. La República que inventaron sus hombres está por partirse al medio y nadie en Montevideo le escribió."
+ guerra_grande.14.f:0 "El padre de la patria, labrando la tierra de otra."
+ guerra_grande.14.a:0 "Mandarle carta a Curuguaty."
+ guerra_grande.14.b:0 "Que descanse el viejo. Esta guerra no es la suya."
+
+ je_guerra_grande_fail_tt:0 "El país quedó repartido entre potencias extranjeras."
+ guerra_grande_dismembered_republic:0 "República desmembrada"
+ guerra_grande_walls_of_montevideo:0 "Las murallas de Montevideo"
+ guerra_grande_bar_blancos_desc:0 "#b Cerrito [GetGlobalVariable('guerra_grande_blanco_score').GetValue|v0]#!"
+ guerra_grande_bar_colorados_desc:0 "#b Defensa [GetGlobalVariable('guerra_grande_colorado_score').GetValue|v0]#!"
+ guerra_grande_upper_hand:0 "La mano de arriba"
+ guerra_grande_upper_hand_desc:0 "Cinco batallas de ventaja. El otro bando está cediendo terreno, y en la República no hay quien no lo vea."
+ guerra_grande_losing_ground:0 "Cediendo terreno"
+ guerra_grande_losing_ground_desc:0 "Cinco batallas atrás. Las estancias están leyendo bien la guerra y empiezan a cubrirse."
+ Ejercito_del_Cerrito:0 "Ejército del Cerrito"
+ Guarnicion_de_Montevideo:0 "Guarnición de Montevideo"
+ Ejercito_Aliado:0 "Ejército Aliado"
+ Auxiliares_Argentinos:0 "Auxiliares Argentinos"
+ Legion_Italiana:0 "Legión Italiana"
+ Legion_Francesa:0 "Legión Francesa"
+ gg_rosas_provisional_lock:0 "Rosas sostiene las riendas (provisorio)"
+ gg_rosas_provisional_lock_desc:0 "Un candado contundente y provisorio: ninguna reforma de ley mientras dure. Se agregó porque el gobierno de la Confederación se desestabilizaba hacia formas ajenas a mitad de campaña -- probablemente un choque entre la clasificación de dictadura del mod de banderas y las leyes propias de Rosas al arrancar. Debería sacarse una vez que ese choque se corrija de raíz, no quedar apilado encima."

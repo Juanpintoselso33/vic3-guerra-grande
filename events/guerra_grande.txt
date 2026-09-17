@@ -1,0 +1,1914 @@
+﻿namespace = guerra_grande
+
+# 1836.9.19 - The battle of Carpinteria. Oribe's men wear white ribbons, Rivera's red ones:
+# the two parties of Uruguay are born here, three years before the war itself.
+guerra_grande.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.1.t
+	desc = guerra_grande.1.d
+	flavor = guerra_grande.1.f
+
+	# Carlos Morel, "Combate de caballeria en la epoca de Rosas" (c. 1840), public domain.
+	event_image = {
+		video = "gg_carpinteria"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	immediate = {
+		add_contextless_journal_entry = je_guerra_grande
+		hidden_effect = {
+			# EN: the ribbons name the parties. Vanilla groups only: Oribe sits with the
+			#     landowners and the countryside, Rivera with the city and the port. BPM renames
+			#     its own conservatives and liberals from the compatch.
+			# ES: las divisas le dan nombre a los partidos. Solo grupos de vanilla: Oribe va con
+			#     los terratenientes y la campania, Rivera con la ciudad y el puerto. BPM renombra
+			#     sus propios conservadores y liberales desde el compatch.
+			ig:ig_landowners ?= {
+				set_interest_group_name = ig_blanco_party
+			}
+			ig:ig_petty_bourgeoisie ?= {
+				set_interest_group_name = ig_colorado_party
+			}
+			# 1838.10.24 - Rivera marches on Montevideo.
+			trigger_event = { id = guerra_grande.2 days = 765 popup = yes }
+			# The four men the war is about, one every six months of the wait.
+			trigger_event = { id = guerra_grande.11 days = 100 popup = yes }
+			trigger_event = { id = guerra_grande.12 days = 280 popup = yes }
+			trigger_event = { id = guerra_grande.13 days = 460 popup = yes }
+			trigger_event = { id = guerra_grande.14 days = 640 popup = yes }
+		}
+	}
+
+	option = {
+		name = guerra_grande.1.a
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_blanco_score
+			add = 2
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = 2 name = guerra_grande_war_score_bar }
+		}
+		default_option = yes
+		set_variable = guerra_grande_blanco_path
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = guerra_grande.1.b
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_colorado_score
+			add = 2
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = -2 name = guerra_grande_war_score_bar }
+		}
+		set_variable = guerra_grande_colorado_path
+		add_modifier = {
+			name = guerra_grande_colorado_order
+			years = 10
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+
+	option = {
+		name = guerra_grande.1.c
+		add_modifier = {
+			name = guerra_grande_armed_truce
+			years = 10
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# 1838.10.24 - Rivera, backed by the French squadron blockading Buenos Aires, forces Oribe out.
+guerra_grande.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.2.t
+	desc = guerra_grande.2.d
+	flavor = guerra_grande.2.f
+
+	# Manuel Oribe, lithograph, c. 1840, public domain.
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	immediate = {
+		hidden_effect = {
+			# 1839.2.10 - Rivera declares war on Rosas and the war becomes open.
+			trigger_event = { id = guerra_grande.3 days = 110 popup = yes }
+		}
+	}
+
+	# Historical: Oribe resigns and sails to Buenos Aires, and Rivera takes the government.
+	option = {
+		name = guerra_grande.2.a
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_colorado_score
+			add = 3
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = -3 name = guerra_grande_war_score_bar }
+		}
+		default_option = yes
+		set_variable = guerra_grande_colorado_path
+		# EN: a resignation has to actually remove him. set_ruling_interest_groups replaces the
+		#     whole coalition -- add_ruling_interest_group only adds a partner and leaves the
+		#     blancos in power, which is why nothing seemed to happen.
+		# ES: una renuncia tiene que sacarlo de verdad. set_ruling_interest_groups reemplaza la
+		#     coalicion entera; add_ruling_interest_group solo suma un socio y deja a los blancos
+		#     en el gobierno, que es por lo que no pasaba nada.
+		# EN: vanilla interest groups, because this mod's baseline is vanilla -- Better
+		#     Politics Mod support belongs in la_argentina_bpm_compatch, not here. Naming
+		#     ig_liberals in the base mod made it fail PostValidate on every load without
+		#     BPM, and a resignation that fails validation is a government that never changes.
+		#     In vanilla, the colorados are the city: merchants, doctores and the port.
+		# ES: grupos de interes de vanilla, porque la base de este mod es vanilla: el soporte
+		#     de Better Politics Mod va en la_argentina_bpm_compatch, no aca. Nombrar
+		#     ig_liberals en el mod base hacia fallar el PostValidate en cada carga sin BPM,
+		#     y una renuncia que falla la validacion es un gobierno que no cambia nunca.
+		#     En vanilla, los colorados son la ciudad: comerciantes, doctores y el puerto.
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		# Rivera takes over as head of state. Oribe sails for Buenos Aires.
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			set_character_as_ruler = yes
+		}
+		add_modifier = {
+			name = guerra_grande_colorado_order
+			years = 10
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# The blanco government digs in instead: Oribe stays, and the blancos take the state alone.
+	option = {
+		name = guerra_grande.2.b
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_blanco_score
+			add = 3
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = 3 name = guerra_grande_war_score_bar }
+		}
+		set_variable = guerra_grande_blanco_path
+		# EN: vanilla interest groups, because this mod's baseline is vanilla -- Better
+		#     Politics Mod support belongs in la_argentina_bpm_compatch, not here. Naming
+		#     ig_conservatives in the base mod made it fail PostValidate on every load without
+		#     BPM, and a resignation that fails validation is a government that never changes.
+		#     In vanilla, the blancos are the countryside: estancieros and the men who ride for them.
+		# ES: grupos de interes de vanilla, porque la base de este mod es vanilla: el soporte
+		#     de Better Politics Mod va en la_argentina_bpm_compatch, no aca. Nombrar
+		#     ig_conservatives en el mod base hacia fallar el PostValidate en cada carga sin BPM,
+		#     y una renuncia que falla la validacion es un gobierno que no cambia nunca.
+		#     En vanilla, los blancos son la campania: estancieros y los hombres que cabalgan para ellos.
+		set_ruling_interest_groups = { ig_landowners ig_rural_folk }
+		random_scope_character = {
+			limit = { has_template = URU_Manuel_Oribe }
+			set_character_as_ruler = yes
+		}
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# 1839 - The country splits: the Defensa keeps Montevideo, the Cerrito takes the countryside.
+guerra_grande.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.3.t
+	desc = guerra_grande.3.d
+	flavor = guerra_grande.3.f
+
+	# "Vista de la Matriz", Montevideo lithograph, 1840, public domain.
+	event_image = {
+		video = "gg_two_governments"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { exists = c:CER }
+		exists = s:STATE_BANDA_ORIENTAL.region_state:URU
+		any_scope_state = {
+			state_region = s:STATE_MONTEVIDEO
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = guerra_grande_open_war
+			c:ARG ?= {
+				trigger_event = { id = guerra_grande.4 days = 5 popup = yes }
+			}
+			# EN: the foreign contingents, each on the day it actually arrived, counted from
+			#     the split of February 1839. ES: los contingentes extranjeros, cada uno el dia
+			#     en que de verdad llegaron, contados desde el corte de febrero de 1839.
+			# EN: replaces the old gg_contingent.2, which handed the Defensa the same 1842 decree
+			#     as two free battalions with no choice, no cost and no blanco counterpart. The
+			#     dispatcher routes each decree to the government that actually issued it, and
+			#     1400 days lands on 1842.12.12 exactly (1401 landed a day late).
+			# ES: reemplaza al viejo gg_contingent.2, que le daba a la Defensa ese mismo decreto
+			#     de 1842 como dos batallones gratis, sin eleccion, sin costo y sin contraparte
+			#     blanca. El despachador le da cada decreto al gobierno que lo firmo, y 1400 dias
+			#     caen justo en el 12.12.1842 (1401 caia un dia tarde).
+			trigger_event = { id = gg_abolition.1 days = 1400 }                # 1842.12.12 / 1846.10.26 aboliciones
+		}
+	}
+
+	option = {
+		name = guerra_grande.3.a
+		default_option = yes
+		# EN: you stay in Montevideo. The Cerrito secedes with the countryside and Oribe goes
+		#     with it -- the character is moved, never cloned.
+		# ES: te quedas en Montevideo. El Cerrito se separa con la campania y Oribe se va con
+		#     el: el personaje se muda, no se clona.
+		set_variable = guerra_grande_defensa_government
+		# EN: grab Oribe BEFORE the country is created. create_country copies characters from the
+		#     origin, so afterwards there can be two of him and the new government ends up ruled
+		#     by whoever the engine picked -- which is how Rivera ended up at the Cerrito.
+		# ES: hay que agarrar a Oribe ANTES de crear el pais. create_country copia personajes del
+		#     origen, asi que despues puede haber dos y el gobierno nuevo queda mandado por el que
+		#     el motor haya elegido, que es como Rivera terminaba en el Cerrito.
+		random_scope_character = {
+			limit = { has_template = URU_Manuel_Oribe }
+			save_scope_as = gg_oribe
+		}
+		# EN: same reason, same fix, for the rest of the divisa transferred below (every_scope_character
+		#     at line ~327): grab each ORIGINAL now, while ROOT is still URU and has never held a copy of
+		#     itself (create_country only clones the roster onto the NEW country, never back onto the
+		#     origin), so a random_scope_character here always resolves to the one real character,
+		#     whether it runs before or after create_country. Used after the transfer to tell the real
+		#     transferred man apart from the create_country clone that is about to join him in c:CER --
+		#     see the cleanup block after the transfers.
+		# ES: misma razon, mismo arreglo, para el resto de la divisa que se transfiere mas abajo
+		#     (every_scope_character en la linea ~327): agarrar cada ORIGINAL ahora, mientras ROOT todavia
+		#     es URU y nunca tuvo una copia de si mismo (create_country solo clona la lista hacia el pais
+		#     NUEVO, nunca de vuelta al origen), asi que un random_scope_character aca siempre resuelve al
+		#     unico personaje real, corra antes o despues de create_country. Se usa despues de la
+		#     transferencia para distinguir al hombre de verdad del clon de create_country que esta por
+		#     acompaniarlo en c:CER -- ver el bloque de limpieza despues de las transferencias.
+		random_scope_character = {
+			limit = { has_template = URU_Ignacio_Oribe }
+			save_scope_as = gg_ignacio_oribe
+		}
+		random_scope_character = {
+			limit = { has_template = URU_bernardo_prudencio_berro }
+			save_scope_as = gg_berro
+		}
+		random_scope_character = {
+			limit = { has_template = URU_timoteo_aparicio }
+			save_scope_as = gg_aparicio
+		}
+		random_scope_character = {
+			limit = { has_template = URU_Juan_Antonio_Lavalleja }
+			save_scope_as = gg_lavalleja
+		}
+		create_country = {
+			tag = CER
+			origin = this
+			state = s:STATE_BANDA_ORIENTAL.region_state:URU
+			on_created = {
+				set_variable = guerra_grande_cerrito_government
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_SAN_JOSE.region_state:URU }
+			s:STATE_SAN_JOSE.region_state:URU = { set_state_owner = c:CER }
+		}
+		if = {
+			limit = { exists = s:STATE_MALDONADO.region_state:URU }
+			s:STATE_MALDONADO.region_state:URU = { set_state_owner = c:CER }
+		}
+		# EN: everything that is not Montevideo goes to the Cerrito. Oribe held the whole country
+		#     except the walled city -- the Defensa never governed an inch of countryside.
+		# ES: todo lo que no es Montevideo va al Cerrito. Oribe controlaba el pais entero menos la
+		#     plaza amurallada: la Defensa no goberno una cuadra de campania.
+		if = {
+			limit = { exists = s:STATE_PAYSANDU.region_state:URU }
+			s:STATE_PAYSANDU.region_state:URU = { set_state_owner = c:CER }
+		}
+		if = {
+			limit = { exists = scope:gg_oribe }
+			scope:gg_oribe = { transfer_character = c:CER }
+		}
+		# EN: and the rest of the divisa goes with him. Ignacio Oribe commanded at Carpinteria,
+		#     Berro served the Cerrito government and Aparicio fought the whole war on that side.
+		#     Everyone else -- Suarez, Rivera, Flores, Cesar Diaz, Medina, Lorenzo Batlle, Anaya --
+		#     stays inside the walls, which is where they were.
+		# ES: y el resto de la divisa se va con el. Ignacio Oribe mando en Carpinteria, Berro
+		#     sirvio al gobierno del Cerrito y Aparicio peleo toda la guerra de ese lado. Los
+		#     demas -- Suarez, Rivera, Flores, Cesar Diaz, Medina, Lorenzo Batlle, Anaya -- se
+		#     quedan intramuros, que es donde estuvieron.
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+					has_template = URU_bernardo_prudencio_berro
+					has_template = URU_timoteo_aparicio
+					# EN: Lavalleja rode with Oribe. He was in the .b list and not this one, so on the
+					#     default branch a blanco caudillo stayed inside the Defensa's government --
+					#     the Aparicio bug again, on the side nobody re-checked.
+					# ES: Lavalleja cabalgo con Oribe. Estaba en la lista de .b y no en esta, asi que en
+					#     la rama por defecto un caudillo blanco se quedaba adentro del gobierno de la
+					#     Defensa: el bug de Aparicio otra vez, del lado que nadie reviso.
+					has_template = URU_Juan_Antonio_Lavalleja
+				}
+			}
+			transfer_character = c:CER
+		}
+		# EN: create_country cloned Oribe, Ignacio Oribe, Berro, Aparicio and Lavalleja onto CER along
+		#     with everyone else, and the transfers above then moved each ORIGINAL into CER too -- so
+		#     right now CER holds two of each of these five. The enemy-copy exile block further down
+		#     (has_template = URU_joaquin_suarez, etc.) does not touch this: those are a different set
+		#     of templates. Both instances share has_template, so filtering by template alone cannot
+		#     tell them apart anymore; the saved scopes from before create_country are what makes the
+		#     surviving original identifiable, via the this != scope:x idiom vanilla uses to exclude one
+		#     specific character from a limit (see events/commander_events.txt, arguing_commander_two's
+		#     limit: NOT = { this = scope:arguing_commander_one }). Excluding all five saved scopes here
+		#     leaves only the create_country clones matching, so this exiles exactly the five copies.
+		# ES: create_country clono a Oribe, Ignacio Oribe, Berro, Aparicio y Lavalleja hacia CER junto
+		#     con todos los demas, y las transferencias de arriba despues movieron cada ORIGINAL tambien
+		#     a CER -- asi que ahora mismo CER tiene dos de cada uno de estos cinco. El bloque de exilio
+		#     de copias enemigas de mas abajo (has_template = URU_joaquin_suarez, etc.) no toca esto: es
+		#     otro conjunto de templates. Las dos instancias comparten has_template, asi que filtrar solo
+		#     por template ya no alcanza para distinguirlas; los scopes guardados antes de create_country
+		#     son lo que permite identificar al original que sobrevive, con el modismo this != scope:x
+		#     que vanilla usa para excluir a un personaje puntual de un limit (ver
+		#     events/commander_events.txt, el limit de arguing_commander_two: NOT = { this =
+		#     scope:arguing_commander_one }). Excluir aca los cinco scopes guardados deja matcheando solo
+		#     a los clones de create_country, asi que esto exilia justo a las cinco copias.
+		c:CER ?= {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+						has_template = URU_bernardo_prudencio_berro
+						has_template = URU_timoteo_aparicio
+						has_template = URU_Juan_Antonio_Lavalleja
+					}
+					NOT = { this = scope:gg_oribe }
+					NOT = { this = scope:gg_ignacio_oribe }
+					NOT = { this = scope:gg_berro }
+					NOT = { this = scope:gg_aparicio }
+					NOT = { this = scope:gg_lavalleja }
+				}
+				exile_character = yes
+			}
+		}
+		# EN: the Defensa was presided over by Joaquin Suarez -- an interim presidency that lasted
+		#     eight years. Without naming him the engine picks a random character.
+		# ES: la Defensa la presidio Joaquin Suarez, una interinidad que duro ocho anios. Si no se
+		#     lo nombra, el motor elige un personaje cualquiera.
+		if = {
+			limit = { any_scope_character = { has_template = URU_joaquin_suarez } }
+			random_scope_character = {
+				limit = { has_template = URU_joaquin_suarez }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_joaquin_suarez
+				ruler = yes
+			}
+		}
+		c:CER ?= {
+			if = {
+				limit = { any_scope_state = { state_region = s:STATE_SAN_JOSE } }
+				set_capital = STATE_SAN_JOSE
+			}
+			else = {
+				set_capital = STATE_BANDA_ORIENTAL
+			}
+			if = {
+				limit = { exists = scope:gg_oribe }
+				scope:gg_oribe = { set_character_as_ruler = yes }
+			}
+			else_if = {
+				limit = { any_scope_character = { has_template = URU_Manuel_Oribe } }
+				random_scope_character = {
+					limit = { has_template = URU_Manuel_Oribe }
+					set_character_as_ruler = yes
+				}
+			}
+			else = {
+				create_character = {
+					template = URU_Manuel_Oribe
+					ruler = yes
+				}
+			}
+			# EN: the new government needs the journal too. The battle score requires BOTH sides to
+			#     have it (scope:enemy_country ?= { has_journal_entry }), so without this the bar
+			#     never moved and no battle ever counted.
+			# ES: el gobierno nuevo tambien necesita el journal. El marcador de batallas exige que
+			#     LOS DOS lo tengan (scope:enemy_country ?= { has_journal_entry }), asi que sin
+			#     esto la barra no se movia y ninguna batalla contaba.
+			add_contextless_journal_entry = je_guerra_grande
+			create_diplomatic_play = {
+				name = guerra_grande_play
+				target_country = c:URU
+				type = dp_guerra_grande
+			}
+		}
+		# EN: create_country copies the whole character roster from origin, so the new government
+		#     is born holding a duplicate of every man in the country -- including the enemy's.
+		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
+		#     Defensa. Transferring the other side's men is not enough: the transfers move the
+		#     originals, and these copies stay behind. They are exiled, which is also what actually
+		#     happened to a man caught on the wrong side of the lines in 1839.
+		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
+		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
+		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
+		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
+		#     estas copias quedan. Se los exilia, que es ademas lo que le pasaba de verdad a un
+		#     hombre que quedaba del lado equivocado de las lineas en 1839.
+		c:CER ?= {
+			every_scope_character = {
+				limit = {
+					OR = {
+					has_template = URU_joaquin_suarez
+					has_template = URU_Fructuoso_Rivera
+					has_template = URU_venancio_flores
+					has_template = URU_cesar_diaz
+					has_template = URU_anacleto_medina
+					has_template = URU_lorenzo_batlle
+					has_template = URU_manuel_herrera_y_obes
+					has_template = URU_andres_lamas
+					}
+				}
+				exile_character = yes
+			}
+		}
+		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.
+		#     Two things the research changed. First, the arm mix: Uruguay was a cavalry country
+		#     (Guardia Nacional 1836: 1,500 foot to 7,000 horse, as Oribe reported it himself), but
+		#     the men in front of Montevideo were mostly foot and guns -- Antonio Diaz, whose father
+		#     was Oribe's War Minister, lists the besieging infantry battalion by battalion at 3,430
+		#     in February 1843, and much of it was LINE, not irregular. The Defensa was the opposite
+		#     and almost purely infantry: 5,000 foot, 800 gunners and 600 horse in June 1843, with
+		#     exactly one mounted line unit on the January 1844 roll. Heavy cavalry for the Defensa
+		#     is wrong twice over -- there was barely any cavalry, and none of it heavy.
+		#     Second, the ratio: roughly 1.25 to 1, not the 2 to 1 this event used to give. Six
+		#     sources cluster the Cerrito at 7,000-9,000 against a garrison of 6,000-6,500.
+		#     Caveat, flagged honestly: nobody states Oribe's cavalry strength at the Cerrito. The
+		#     horse count below is arithmetic on sourced totals, not a figure anyone wrote down.
+		# ES: LOS EJERCITOS, DIMENSIONADOS CON FUENTES. Ver SOURCES_order_of_battle.md.
+		#     La investigacion cambio dos cosas. Primero, las armas: el Uruguay era pais de
+		#     caballeria (Guardia Nacional 1836: 1.500 de a pie contra 7.000 de a caballo, segun el
+		#     propio Oribe), pero los hombres frente a Montevideo eran sobre todo infanteria y
+		#     artilleria -- Antonio Diaz, hijo del ministro de guerra de Oribe, lista la infanteria
+		#     sitiadora batallon por batallon en 3.430 hombres en febrero de 1843, y buena parte era
+		#     de LINEA, no irregular. La Defensa era lo contrario y casi pura infanteria: 5.000 de a
+		#     pie, 800 artilleros y 600 de a caballo en junio de 1843, con exactamente una unidad
+		#     montada de linea en la revista de enero de 1844. Darle caballeria pesada a la Defensa
+		#     esta mal dos veces: casi no tenia caballeria, y nada de ella era pesada.
+		#     Segundo, la proporcion: alrededor de 1,25 a 1, no el 2 a 1 que daba este evento. Seis
+		#     fuentes agrupan al Cerrito entre 7.000 y 9.000 contra una guarnicion de 6.000 a 6.500.
+		#     Salvedad, dicha de frente: nadie da la caballeria de Oribe en el Cerrito. El numero de
+		#     jinetes de abajo es aritmetica sobre totales con fuente, no una cifra que alguien haya
+		#     escrito.
+		if = {
+			limit = { guerra_grande_blanco_lead >= 4 }
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 6
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { guerra_grande_blanco_lead >= 2 }
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 5
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		else = {
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		if = {
+			limit = { guerra_grande_colorado_lead >= 4 }
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 2
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { guerra_grande_colorado_lead >= 2 }
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
+				}
+			}
+		}
+		else = {
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
+				}
+			}
+		}
+		# EN: the guns, or the lack of them -- see SOURCES_order_of_battle.md and the header of
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
+		# ES: los canionies, o su ausencia -- ver SOURCES_order_of_battle.md y el encabezado de
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
+		c:CER ?= {
+			add_modifier = { name = gg_siege_no_breaching_guns years = 15 }
+		}
+		if = {
+			limit = { exists = s:STATE_MONTEVIDEO.region_state:URU }
+			s:STATE_MONTEVIDEO.region_state:URU = {
+				add_modifier = { name = gg_siege_guns_of_the_plaza years = 15 }
+			}
+		}
+		# EN: TWO WARTIME GOVERNMENTS, NO ELECTIONS. Neither of these governments faced a general
+		#     election between 1839 and the peace: one was besieged inside its own capital and the
+		#     other governed the countryside from a camp on a hill. Leaving them under a voting law
+		#     meant the game scheduled polls in the middle of a civil war -- the Cerrito was told it
+		#     had an election in 133 days while it was besieging Montevideo. law_oligarchy is the
+		#     shape both actually had: rule by whichever notables were on your side of the lines.
+		#     PARTY NAMES. The renaming happens back at Carpinteria, on the Republic that was still
+		#     one country, so whichever government keeps that country object inherits BOTH names and
+		#     ends up with the enemy's party sitting in its own cabinet -- a Colorado Party inside
+		#     the Cerrito. Each government now keeps only its own name and restores the other to the
+		#     vanilla default, which is what set_interest_group_name with the base key does.
+		# ES: DOS GOBIERNOS DE GUERRA, SIN ELECCIONES. Ninguno de los dos enfrento una eleccion
+		#     general entre 1839 y la paz: uno estaba sitiado dentro de su propia capital y el otro
+		#     gobernaba la campania desde un campamento en una cuchilla. Dejarlos bajo una ley de
+		#     voto hacia que el juego programara comicios en plena guerra civil: al Cerrito le
+		#     avisaba que tenia eleccion en 133 dias mientras sitiaba Montevideo. law_oligarchy es
+		#     la forma que de verdad tuvieron los dos: gobierno de los notables que te quedaron
+		#     de tu lado de las lineas.
+		#     NOMBRES DE PARTIDO. El renombre pasa alla en Carpinteria, sobre la Republica que
+		#     todavia era un solo pais, asi que el gobierno que se queda con ese objeto hereda LOS
+		#     DOS nombres y termina con el partido del enemigo en su propio gabinete: un Partido
+		#     Colorado adentro del Cerrito. Ahora cada gobierno conserva solo el suyo y le devuelve
+		#     al otro el nombre de vanilla, que es lo que hace set_interest_group_name con la clave
+		#     base.
+		c:CER ?= {
+			activate_law = law_type:law_oligarchy
+			ig:ig_landowners ?= {
+				set_interest_group_name = ig_blanco_party
+			}
+			ig:ig_petty_bourgeoisie ?= {
+				set_interest_group_name = ig_petty_bourgeoisie
+			}
+		}
+		c:URU ?= {
+			activate_law = law_type:law_oligarchy
+			ig:ig_petty_bourgeoisie ?= {
+				set_interest_group_name = ig_colorado_party
+			}
+			ig:ig_landowners ?= {
+				set_interest_group_name = ig_landowners
+			}
+		}
+		# EN: Rosas backed Oribe -- he is the Cerrito's patron, not its enemy. Without this the AI
+		#     Confederation happily opened a play against the very government it was funding, which
+		#     also broke the rule that no foreign power becomes a belligerent in this war.
+		# ES: Rosas bancaba a Oribe: es el padrino del Cerrito, no su enemigo. Sin esto la IA de la
+		#     Confederacion abria una jugada contra el mismo gobierno que financiaba, y de paso
+		#     rompia la regla de que ninguna potencia extranjera entra como beligerante.
+		c:ARG ?= {
+			change_relations = { country = c:CER value = 100 }
+			# EN: no pact here. create_diplomatic_pact cannot make an alliance -- vanilla only
+			#     ever creates puppet, protectorate, colony, personal_union, vassal, rivalry,
+			#     tributary and join_power_bloc with it, and asking for 'alliance' failed
+			#     PostValidate on load. Relations at 100 do the actual job, which is stopping
+			#     the Confederation from opening a play against the government it is funding.
+			# ES: sin pacto. create_diplomatic_pact no puede crear una alianza: vanilla solo crea
+			#     puppet, protectorate, colony, personal_union, vassal, rivalry, tributary y
+			#     join_power_bloc, y pedir 'alliance' fallaba el PostValidate al cargar. Las
+			#     relaciones en 100 hacen el trabajo real: que la Confederacion no le abra una
+			#     jugada al gobierno que esta financiando.
+		}
+		# EN: THE ASYMMETRY THAT EXPLAINS THE NINE-YEAR SIEGE. Montevideo keeps the customs house
+		#     and the port -- cash and the sea -- and has no countryside, so no cattle and no food.
+		#     The Cerrito keeps the countryside -- cattle, hides, saladeros and men -- and has no
+		#     port, so no customs revenue and no way to sell any of it. Each side holds exactly
+		#     what the other lacks, which is why neither can finish the other. The state modifiers
+		#     are exact mirror images: same six keys, opposite signs. Defined in
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt, sourced in SOURCES_siege.md.
+		# ES: LA ASIMETRIA QUE EXPLICA LOS NUEVE ANIOS DE SITIO. Montevideo se queda con la aduana
+		#     y el puerto -- plata y mar -- y no tiene campania: ni ganado ni comida. El Cerrito se
+		#     queda con la campania -- ganado, cueros, saladeros y hombres -- y no tiene puerto, asi
+		#     que no tiene renta de aduana ni forma de vender nada. Cada lado tiene justo lo que al
+		#     otro le falta, y por eso ninguno puede terminar con el otro.
+		if = {
+			limit = { exists = s:STATE_MONTEVIDEO.region_state:URU }
+			s:STATE_MONTEVIDEO.region_state:URU = {
+				add_modifier = { name = gg_siege_port_without_a_countryside years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_BANDA_ORIENTAL.region_state:CER }
+			s:STATE_BANDA_ORIENTAL.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_SAN_JOSE.region_state:CER }
+			s:STATE_SAN_JOSE.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_MALDONADO.region_state:CER }
+			s:STATE_MALDONADO.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_PAYSANDU.region_state:CER }
+			s:STATE_PAYSANDU.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		# EN: how each government paid for the war. Same three keys, opposite signs: the Defensa
+		#     has the cash and owes every peso of it; the Cerrito has a third of it, owes nobody,
+		#     and holds its own authority over the whole country.
+		# ES: como pago cada gobierno la guerra. Las mismas tres claves, al reves: la Defensa tiene
+		#     la plata y la debe hasta el ultimo peso; el Cerrito tiene un tercio, no le debe a
+		#     nadie, y manda sobre el pais entero.
+		c:URU ?= {
+			# EN: the walls. This used to exist only in the other branch, so the player who stayed in
+			#     Montevideo -- option .a, the default -- defended the plaza without them. The one
+			#     modifier the whole siege rests on, missing from the branch most people play.
+			# ES: las murallas. Esto existia solo en la otra rama, asi que el jugador que se quedaba
+			#     en Montevideo -- la opcion .a, la de por defecto -- defendia la plaza sin ellas. El
+			#     unico modificador sobre el que se apoya todo el sitio, ausente justo en la rama que
+			#     mas gente juega.
+			add_modifier = {
+				name = guerra_grande_walls_of_montevideo
+				years = 15
+			}
+			add_modifier = { name = gg_siege_mortgaged_customs years = 15 }
+			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
+			add_modifier = { name = gg_siege_the_sea_lane_stays_open years = 15 }
+		}
+		c:CER ?= {
+			add_modifier = { name = gg_siege_customs_house_at_the_buceo years = 15 }
+			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
+		}
+		# EN: ROUTING. These six are foreign support for the DEFENSA, and they used to be scheduled
+		#     in this event's immediate, on ROOT, before the player had chosen a side. In option .b
+		#     ROOT then becomes CER via change_tag, so all six fired on the Cerrito and failed their
+		#     own 'this = c:URU' trigger: whoever played the Cerrito faced a Defensa that never
+		#     received a single legion, silently, for the whole war. They are scheduled here instead,
+		#     at the end of the option, where both governments already exist, and addressed by tag --
+		#     so the Defensa gets them whether it is the player or the AI.
+		# ES: RUTEO. Estos seis son apoyo extranjero para la DEFENSA, y se programaban en el
+		#     immediate de este evento, sobre ROOT, antes de que el jugador eligiera bando. En la
+		#     opcion .b ROOT pasa a ser CER por change_tag, asi que los seis disparaban sobre el
+		#     Cerrito y fallaban su propio trigger 'this = c:URU': el que jugaba al Cerrito enfrentaba
+		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
+		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
+		#     por tag: la Defensa los recibe sea jugador o IA.
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.1 days = 202 popup = yes }    # 1839.9  Legion Argentina
+			trigger_event = { id = gg_contingent.3 days = 1466 popup = yes }   # 1843.2  desercion vasca
+			trigger_event = { id = gg_contingent.4 days = 1516 popup = yes }   # 1843.4.7 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 1518 popup = yes }   # 1843.4.9 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 2255 popup = yes }   # 1845.4  Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 4588 popup = yes }   # 1851.9.4 Caxias cruza
+			# EN: foreign money for the Defensa, and the watcher that presents the bill at the peace.
+			#     Defined in events/guerra_grande_loans.txt, sourced in SOURCES_loans.md. Same base
+			#     date as the contingents: 10 February 1839.
+			# ES: plata extranjera para la Defensa, y el vigia que pasa la cuenta en la paz. Definidos
+			#     en events/guerra_grande_loans.txt, con fuentes en SOURCES_loans.md. Misma fecha base
+			#     que los contingentes: 10 de febrero de 1839.
+			trigger_event = { id = gg_loan.1 days = 3409 popup = yes }   # 1848.6.12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 4225 popup = yes }   # 1850.9.6 contratos secretos
+			trigger_event = { id = gg_loan.7 days = 200 }                # vigia del ajuste de cuentas
+			# EN: Rivera, 1842-1854 -- events/guerra_grande_rivera.txt, sourced in SOURCES_rivera.md.
+			#     Only the first is scheduled; the other five chain from the option you pick.
+			# ES: Rivera, 1842-1854: events/guerra_grande_rivera.txt, con fuentes en SOURCES_rivera.md.
+			#     Solo se programa el primero; los otros cinco encadenan segun la opcion que elijas.
+			trigger_event = { id = gg_rivera.1 days = 1394 popup = yes }   # 1842.12.6 Arroyo Grande
+		}
+		# EN: and the mirror: Argentine money for the Cerrito, with its own price.
+		# ES: y el espejo: plata argentina para el Cerrito, con su propio precio.
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 1610 popup = yes }   # 1843.7.10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 2373 popup = yes }   # 1845.8.11 la reunificacion
+		}
+		# EN: the split is finished here, and only here. Both governments exist, both hold their
+		#     states, and only now is it safe to say so.
+		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the
+		#     Cerrito was following the war through this entry and would lose it at the very moment
+		#     it starts. It goes AFTER create_country, not before -- placed earlier it ran in the
+		#     window where the player was already CER, c:URU did not exist yet and the player still
+		#     held Montevideo, which satisfies every clause of the completion condition at once and
+		#     completed the war before it began.
+		#     guerra_grande_split_done is the guard against that whole class of accident: no matter
+		#     what order anything else runs in, this war cannot be won before it has been divided.
+		# ES: el corte termina aca, y solo aca. Existen los dos gobiernos, cada uno con sus estados,
+		#     y recien ahora es seguro decirlo.
+		#     La entrada de diario se le vuelve a poner a ROOT porque change_tag se la lleva: el que
+		#     agarra el Cerrito venia siguiendo la guerra por ahi y la perdia justo cuando empieza.
+		#     Va DESPUES del create_country, no antes: puesta antes corria en la ventana donde el
+		#     jugador ya era CER, c:URU todavia no existia y el jugador seguia teniendo Montevideo,
+		#     lo que cumple todas las clausulas de la condicion de victoria a la vez y daba la guerra
+		#     por ganada antes de empezarla.
+		#     guerra_grande_split_done es el candado contra esa clase entera de accidente: sin
+		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
+		set_global_variable = guerra_grande_split_done
+		add_contextless_journal_entry = je_guerra_grande
+		ai_chance = {
+			base = 80
+		}
+	}
+
+	# Only for a government that already threw in with the blancos: follow Oribe out of the city.
+	# EN: this is the mirror image of the option above, and the reason it works at all: vanilla's
+	#     change_tag only takes a tag that does NOT exist yet (see central_america_events, which
+	#     guards it with NOT = { exists = c:NIC }). So the Cerrito must not have been created --
+	#     the player's own country becomes it. Changing tag frees URU, and the Defensa then
+	#     secedes under that tag with the walled city, so every reference to c:URU keeps working.
+	# ES: es la imagen espejo de la opcion de arriba, y la razon por la que funciona: el change_tag
+	#     de vanilla solo acepta un tag que NO exista todavia (ver central_america_events, que lo
+	#     protege con NOT = { exists = c:NIC }). Por eso el Cerrito no puede estar creado: el pais
+	#     del jugador se convierte en el. Al cambiar de tag, URU queda libre, y la Defensa se
+	#     separa con ese tag y la plaza amurallada, asi que todo lo que apunta a c:URU sigue bien.
+	option = {
+		name = guerra_grande.3.b
+		trigger = {
+			has_variable = guerra_grande_blanco_path
+		}
+		change_tag = CER
+		set_variable = guerra_grande_cerrito_government
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_SAN_JOSE } }
+			set_capital = STATE_SAN_JOSE
+		}
+		else = {
+			set_capital = STATE_BANDA_ORIENTAL
+		}
+		# EN: same care as the other branch -- take Suarez out before the Defensa is created, or
+		#     it ends up ruled by whoever the engine happened to copy.
+		# ES: el mismo cuidado que en la otra rama: hay que sacar a Suarez antes de crear la
+		#     Defensa, o queda mandada por el personaje que el motor haya copiado.
+		random_scope_character = {
+			limit = { has_template = URU_joaquin_suarez }
+			save_scope_as = gg_suarez
+		}
+		# EN: same reason, same fix as guerra_grande.3.a: grab each ORIGINAL now, before create_country
+		#     clones the whole roster onto the new c:URU. ROOT (this CER) never receives a copy of
+		#     itself -- only the new country does -- so this resolves to the one real character no
+		#     matter when it runs relative to create_country. Used after the transfer below to tell the
+		#     real transferred man apart from his create_country clone; see the cleanup block after the
+		#     transfers.
+		# ES: misma razon, mismo arreglo que en guerra_grande.3.a: agarrar cada ORIGINAL ahora, antes de
+		#     que create_country clone toda la lista hacia el c:URU nuevo. ROOT (este CER) nunca recibe
+		#     una copia de si mismo -- solo el pais nuevo la recibe -- asi que esto resuelve al unico
+		#     personaje real sin importar cuando corra respecto de create_country. Se usa despues de la
+		#     transferencia de abajo para distinguir al hombre de verdad de su clon de create_country;
+		#     ver el bloque de limpieza despues de las transferencias.
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			save_scope_as = gg_rivera
+		}
+		random_scope_character = {
+			limit = { has_template = URU_venancio_flores }
+			save_scope_as = gg_flores
+		}
+		random_scope_character = {
+			limit = { has_template = URU_cesar_diaz }
+			save_scope_as = gg_diaz
+		}
+		random_scope_character = {
+			limit = { has_template = URU_anacleto_medina }
+			save_scope_as = gg_medina
+		}
+		random_scope_character = {
+			limit = { has_template = URU_lorenzo_batlle }
+			save_scope_as = gg_batlle
+		}
+		# Oribe stays where he already is: at the head of the Cerrito, which is now us.
+		random_scope_character = {
+			limit = { has_template = URU_Manuel_Oribe }
+			set_character_as_ruler = yes
+		}
+		# The Defensa secedes with Montevideo, under the tag the Republic just left behind.
+		create_country = {
+			tag = URU
+			origin = this
+			state = s:STATE_MONTEVIDEO.region_state:CER
+			on_created = {
+				set_variable = guerra_grande_defensa_government
+			}
+		}
+		if = {
+			limit = { exists = scope:gg_suarez }
+			scope:gg_suarez = { transfer_character = c:URU }
+		}
+		# EN: mirror of the other branch -- the colorados go into Montevideo with Suarez.
+		# ES: espejo de la otra rama: los colorados entran a Montevideo con Suarez.
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_joaquin_suarez
+					has_template = URU_Fructuoso_Rivera
+					has_template = URU_venancio_flores
+					has_template = URU_cesar_diaz
+					has_template = URU_anacleto_medina
+					has_template = URU_lorenzo_batlle
+				}
+			}
+			transfer_character = c:URU
+		}
+		# EN: mirror of guerra_grande.3.a's cleanup: create_country cloned Suarez, Rivera, Flores,
+		#     Diaz, Medina and Batlle onto URU along with everyone else, and the transfers above then
+		#     moved each ORIGINAL into URU too, so URU now holds two of each. Excluding the six saved
+		#     scopes leaves only the create_country clones matching, via the same this != scope:x
+		#     idiom vanilla uses to exclude one specific character from a limit (see
+		#     events/commander_events.txt, arguing_commander_two's limit).
+		# ES: espejo de la limpieza de guerra_grande.3.a: create_country clono a Suarez, Rivera,
+		#     Flores, Diaz, Medina y Batlle hacia URU junto con todos los demas, y las transferencias
+		#     de arriba despues movieron cada ORIGINAL tambien a URU, asi que URU tiene ahora dos de
+		#     cada uno. Excluir los seis scopes guardados deja matcheando solo a los clones de
+		#     create_country, con el mismo modismo this != scope:x que usa vanilla para excluir a un
+		#     personaje puntual de un limit (ver events/commander_events.txt, el limit de
+		#     arguing_commander_two).
+		c:URU ?= {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_joaquin_suarez
+						has_template = URU_Fructuoso_Rivera
+						has_template = URU_venancio_flores
+						has_template = URU_cesar_diaz
+						has_template = URU_anacleto_medina
+						has_template = URU_lorenzo_batlle
+					}
+					NOT = { this = scope:gg_suarez }
+					NOT = { this = scope:gg_rivera }
+					NOT = { this = scope:gg_flores }
+					NOT = { this = scope:gg_diaz }
+					NOT = { this = scope:gg_medina }
+					NOT = { this = scope:gg_batlle }
+				}
+				exile_character = yes
+			}
+		}
+		c:URU ?= {
+			set_capital = STATE_MONTEVIDEO
+			add_contextless_journal_entry = je_guerra_grande
+			add_modifier = {
+				name = guerra_grande_walls_of_montevideo
+				years = 15
+			}
+			if = {
+				limit = { exists = scope:gg_suarez }
+				scope:gg_suarez = { set_character_as_ruler = yes }
+			}
+			else = {
+				create_character = {
+					template = URU_joaquin_suarez
+					ruler = yes
+				}
+			}
+		}
+		create_diplomatic_play = {
+			name = guerra_grande_play
+			target_country = c:URU
+			type = dp_guerra_grande
+		}
+		# EN: create_country copies the whole character roster from origin, so the new government
+		#     is born holding a duplicate of every man in the country -- including the enemy's.
+		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
+		#     Defensa. Transferring the other side's men is not enough: the transfers move the
+		#     originals, and these copies stay behind. They are exiled, which is also what actually
+		#     happened to a man caught on the wrong side of the lines in 1839.
+		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
+		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
+		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
+		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
+		#     estas copias quedan. Se los exilia, que es ademas lo que le pasaba de verdad a un
+		#     hombre que quedaba del lado equivocado de las lineas en 1839.
+		c:URU ?= {
+			every_scope_character = {
+				limit = {
+					OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+					has_template = URU_bernardo_prudencio_berro
+					has_template = URU_timoteo_aparicio
+					has_template = URU_Juan_Antonio_Lavalleja
+					}
+				}
+				exile_character = yes
+			}
+		}
+		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.
+		#     Two things the research changed. First, the arm mix: Uruguay was a cavalry country
+		#     (Guardia Nacional 1836: 1,500 foot to 7,000 horse, as Oribe reported it himself), but
+		#     the men in front of Montevideo were mostly foot and guns -- Antonio Diaz, whose father
+		#     was Oribe's War Minister, lists the besieging infantry battalion by battalion at 3,430
+		#     in February 1843, and much of it was LINE, not irregular. The Defensa was the opposite
+		#     and almost purely infantry: 5,000 foot, 800 gunners and 600 horse in June 1843, with
+		#     exactly one mounted line unit on the January 1844 roll. Heavy cavalry for the Defensa
+		#     is wrong twice over -- there was barely any cavalry, and none of it heavy.
+		#     Second, the ratio: roughly 1.25 to 1, not the 2 to 1 this event used to give. Six
+		#     sources cluster the Cerrito at 7,000-9,000 against a garrison of 6,000-6,500.
+		#     Caveat, flagged honestly: nobody states Oribe's cavalry strength at the Cerrito. The
+		#     horse count below is arithmetic on sourced totals, not a figure anyone wrote down.
+		# ES: LOS EJERCITOS, DIMENSIONADOS CON FUENTES. Ver SOURCES_order_of_battle.md.
+		#     La investigacion cambio dos cosas. Primero, las armas: el Uruguay era pais de
+		#     caballeria (Guardia Nacional 1836: 1.500 de a pie contra 7.000 de a caballo, segun el
+		#     propio Oribe), pero los hombres frente a Montevideo eran sobre todo infanteria y
+		#     artilleria -- Antonio Diaz, hijo del ministro de guerra de Oribe, lista la infanteria
+		#     sitiadora batallon por batallon en 3.430 hombres en febrero de 1843, y buena parte era
+		#     de LINEA, no irregular. La Defensa era lo contrario y casi pura infanteria: 5.000 de a
+		#     pie, 800 artilleros y 600 de a caballo en junio de 1843, con exactamente una unidad
+		#     montada de linea en la revista de enero de 1844. Darle caballeria pesada a la Defensa
+		#     esta mal dos veces: casi no tenia caballeria, y nada de ella era pesada.
+		#     Segundo, la proporcion: alrededor de 1,25 a 1, no el 2 a 1 que daba este evento. Seis
+		#     fuentes agrupan al Cerrito entre 7.000 y 9.000 contra una guarnicion de 6.000 a 6.500.
+		#     Salvedad, dicha de frente: nadie da la caballeria de Oribe en el Cerrito. El numero de
+		#     jinetes de abajo es aritmetica sobre totales con fuente, no una cifra que alguien haya
+		#     escrito.
+		if = {
+			limit = { guerra_grande_blanco_lead >= 4 }
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 6
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { guerra_grande_blanco_lead >= 2 }
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 5
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		else = {
+			c:CER ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
+				}
+			}
+		}
+		if = {
+			limit = { guerra_grande_colorado_lead >= 4 }
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 2
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { guerra_grande_colorado_lead >= 2 }
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
+				}
+			}
+		}
+		else = {
+			c:URU ?= {
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
+				}
+			}
+		}
+		# EN: the guns, or the lack of them -- see SOURCES_order_of_battle.md and the header of
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
+		# ES: los canionies, o su ausencia -- ver SOURCES_order_of_battle.md y el encabezado de
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
+		c:CER ?= {
+			add_modifier = { name = gg_siege_no_breaching_guns years = 15 }
+		}
+		if = {
+			limit = { exists = s:STATE_MONTEVIDEO.region_state:URU }
+			s:STATE_MONTEVIDEO.region_state:URU = {
+				add_modifier = { name = gg_siege_guns_of_the_plaza years = 15 }
+			}
+		}
+		# EN: TWO WARTIME GOVERNMENTS, NO ELECTIONS. Neither of these governments faced a general
+		#     election between 1839 and the peace: one was besieged inside its own capital and the
+		#     other governed the countryside from a camp on a hill. Leaving them under a voting law
+		#     meant the game scheduled polls in the middle of a civil war -- the Cerrito was told it
+		#     had an election in 133 days while it was besieging Montevideo. law_oligarchy is the
+		#     shape both actually had: rule by whichever notables were on your side of the lines.
+		#     PARTY NAMES. The renaming happens back at Carpinteria, on the Republic that was still
+		#     one country, so whichever government keeps that country object inherits BOTH names and
+		#     ends up with the enemy's party sitting in its own cabinet -- a Colorado Party inside
+		#     the Cerrito. Each government now keeps only its own name and restores the other to the
+		#     vanilla default, which is what set_interest_group_name with the base key does.
+		# ES: DOS GOBIERNOS DE GUERRA, SIN ELECCIONES. Ninguno de los dos enfrento una eleccion
+		#     general entre 1839 y la paz: uno estaba sitiado dentro de su propia capital y el otro
+		#     gobernaba la campania desde un campamento en una cuchilla. Dejarlos bajo una ley de
+		#     voto hacia que el juego programara comicios en plena guerra civil: al Cerrito le
+		#     avisaba que tenia eleccion en 133 dias mientras sitiaba Montevideo. law_oligarchy es
+		#     la forma que de verdad tuvieron los dos: gobierno de los notables que te quedaron
+		#     de tu lado de las lineas.
+		#     NOMBRES DE PARTIDO. El renombre pasa alla en Carpinteria, sobre la Republica que
+		#     todavia era un solo pais, asi que el gobierno que se queda con ese objeto hereda LOS
+		#     DOS nombres y termina con el partido del enemigo en su propio gabinete: un Partido
+		#     Colorado adentro del Cerrito. Ahora cada gobierno conserva solo el suyo y le devuelve
+		#     al otro el nombre de vanilla, que es lo que hace set_interest_group_name con la clave
+		#     base.
+		c:CER ?= {
+			activate_law = law_type:law_oligarchy
+			ig:ig_landowners ?= {
+				set_interest_group_name = ig_blanco_party
+			}
+			ig:ig_petty_bourgeoisie ?= {
+				set_interest_group_name = ig_petty_bourgeoisie
+			}
+		}
+		c:URU ?= {
+			activate_law = law_type:law_oligarchy
+			ig:ig_petty_bourgeoisie ?= {
+				set_interest_group_name = ig_colorado_party
+			}
+			ig:ig_landowners ?= {
+				set_interest_group_name = ig_landowners
+			}
+		}
+		# EN: Rosas backed Oribe -- he is the Cerrito's patron, not its enemy. Without this the AI
+		#     Confederation happily opened a play against the very government it was funding, which
+		#     also broke the rule that no foreign power becomes a belligerent in this war.
+		# ES: Rosas bancaba a Oribe: es el padrino del Cerrito, no su enemigo. Sin esto la IA de la
+		#     Confederacion abria una jugada contra el mismo gobierno que financiaba, y de paso
+		#     rompia la regla de que ninguna potencia extranjera entra como beligerante.
+		c:ARG ?= {
+			change_relations = { country = c:CER value = 100 }
+			# EN: no pact here. create_diplomatic_pact cannot make an alliance -- vanilla only
+			#     ever creates puppet, protectorate, colony, personal_union, vassal, rivalry,
+			#     tributary and join_power_bloc with it, and asking for 'alliance' failed
+			#     PostValidate on load. Relations at 100 do the actual job, which is stopping
+			#     the Confederation from opening a play against the government it is funding.
+			# ES: sin pacto. create_diplomatic_pact no puede crear una alianza: vanilla solo crea
+			#     puppet, protectorate, colony, personal_union, vassal, rivalry, tributary y
+			#     join_power_bloc, y pedir 'alliance' fallaba el PostValidate al cargar. Las
+			#     relaciones en 100 hacen el trabajo real: que la Confederacion no le abra una
+			#     jugada al gobierno que esta financiando.
+		}
+		# EN: THE ASYMMETRY THAT EXPLAINS THE NINE-YEAR SIEGE. Montevideo keeps the customs house
+		#     and the port -- cash and the sea -- and has no countryside, so no cattle and no food.
+		#     The Cerrito keeps the countryside -- cattle, hides, saladeros and men -- and has no
+		#     port, so no customs revenue and no way to sell any of it. Each side holds exactly
+		#     what the other lacks, which is why neither can finish the other. The state modifiers
+		#     are exact mirror images: same six keys, opposite signs. Defined in
+		#     common/static_modifiers/guerra_grande_siege_modifiers.txt, sourced in SOURCES_siege.md.
+		# ES: LA ASIMETRIA QUE EXPLICA LOS NUEVE ANIOS DE SITIO. Montevideo se queda con la aduana
+		#     y el puerto -- plata y mar -- y no tiene campania: ni ganado ni comida. El Cerrito se
+		#     queda con la campania -- ganado, cueros, saladeros y hombres -- y no tiene puerto, asi
+		#     que no tiene renta de aduana ni forma de vender nada. Cada lado tiene justo lo que al
+		#     otro le falta, y por eso ninguno puede terminar con el otro.
+		if = {
+			limit = { exists = s:STATE_MONTEVIDEO.region_state:URU }
+			s:STATE_MONTEVIDEO.region_state:URU = {
+				add_modifier = { name = gg_siege_port_without_a_countryside years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_BANDA_ORIENTAL.region_state:CER }
+			s:STATE_BANDA_ORIENTAL.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_SAN_JOSE.region_state:CER }
+			s:STATE_SAN_JOSE.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_MALDONADO.region_state:CER }
+			s:STATE_MALDONADO.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_PAYSANDU.region_state:CER }
+			s:STATE_PAYSANDU.region_state:CER = {
+				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
+			}
+		}
+		# EN: how each government paid for the war. Same three keys, opposite signs: the Defensa
+		#     has the cash and owes every peso of it; the Cerrito has a third of it, owes nobody,
+		#     and holds its own authority over the whole country.
+		# ES: como pago cada gobierno la guerra. Las mismas tres claves, al reves: la Defensa tiene
+		#     la plata y la debe hasta el ultimo peso; el Cerrito tiene un tercio, no le debe a
+		#     nadie, y manda sobre el pais entero.
+		c:URU ?= {
+			add_modifier = { name = gg_siege_mortgaged_customs years = 15 }
+			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
+			add_modifier = { name = gg_siege_the_sea_lane_stays_open years = 15 }
+		}
+		c:CER ?= {
+			add_modifier = { name = gg_siege_customs_house_at_the_buceo years = 15 }
+			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
+		}
+		# EN: ROUTING. These six are foreign support for the DEFENSA, and they used to be scheduled
+		#     in this event's immediate, on ROOT, before the player had chosen a side. In option .b
+		#     ROOT then becomes CER via change_tag, so all six fired on the Cerrito and failed their
+		#     own 'this = c:URU' trigger: whoever played the Cerrito faced a Defensa that never
+		#     received a single legion, silently, for the whole war. They are scheduled here instead,
+		#     at the end of the option, where both governments already exist, and addressed by tag --
+		#     so the Defensa gets them whether it is the player or the AI.
+		# ES: RUTEO. Estos seis son apoyo extranjero para la DEFENSA, y se programaban en el
+		#     immediate de este evento, sobre ROOT, antes de que el jugador eligiera bando. En la
+		#     opcion .b ROOT pasa a ser CER por change_tag, asi que los seis disparaban sobre el
+		#     Cerrito y fallaban su propio trigger 'this = c:URU': el que jugaba al Cerrito enfrentaba
+		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
+		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
+		#     por tag: la Defensa los recibe sea jugador o IA.
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.1 days = 202 popup = yes }    # 1839.9  Legion Argentina
+			trigger_event = { id = gg_contingent.3 days = 1466 popup = yes }   # 1843.2  desercion vasca
+			trigger_event = { id = gg_contingent.4 days = 1516 popup = yes }   # 1843.4.7 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 1518 popup = yes }   # 1843.4.9 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 2255 popup = yes }   # 1845.4  Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 4588 popup = yes }   # 1851.9.4 Caxias cruza
+			# EN: foreign money for the Defensa, and the watcher that presents the bill at the peace.
+			#     Defined in events/guerra_grande_loans.txt, sourced in SOURCES_loans.md. Same base
+			#     date as the contingents: 10 February 1839.
+			# ES: plata extranjera para la Defensa, y el vigia que pasa la cuenta en la paz. Definidos
+			#     en events/guerra_grande_loans.txt, con fuentes en SOURCES_loans.md. Misma fecha base
+			#     que los contingentes: 10 de febrero de 1839.
+			trigger_event = { id = gg_loan.1 days = 3409 popup = yes }   # 1848.6.12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 4225 popup = yes }   # 1850.9.6 contratos secretos
+			trigger_event = { id = gg_loan.7 days = 200 }                # vigia del ajuste de cuentas
+			# EN: Rivera, 1842-1854 -- events/guerra_grande_rivera.txt, sourced in SOURCES_rivera.md.
+			#     Only the first is scheduled; the other five chain from the option you pick.
+			# ES: Rivera, 1842-1854: events/guerra_grande_rivera.txt, con fuentes en SOURCES_rivera.md.
+			#     Solo se programa el primero; los otros cinco encadenan segun la opcion que elijas.
+			trigger_event = { id = gg_rivera.1 days = 1394 popup = yes }   # 1842.12.6 Arroyo Grande
+		}
+		# EN: and the mirror: Argentine money for the Cerrito, with its own price.
+		# ES: y el espejo: plata argentina para el Cerrito, con su propio precio.
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 1610 popup = yes }   # 1843.7.10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 2373 popup = yes }   # 1845.8.11 la reunificacion
+		}
+		# EN: the split is finished here, and only here. Both governments exist, both hold their
+		#     states, and only now is it safe to say so.
+		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the
+		#     Cerrito was following the war through this entry and would lose it at the very moment
+		#     it starts. It goes AFTER create_country, not before -- placed earlier it ran in the
+		#     window where the player was already CER, c:URU did not exist yet and the player still
+		#     held Montevideo, which satisfies every clause of the completion condition at once and
+		#     completed the war before it began.
+		#     guerra_grande_split_done is the guard against that whole class of accident: no matter
+		#     what order anything else runs in, this war cannot be won before it has been divided.
+		# ES: el corte termina aca, y solo aca. Existen los dos gobiernos, cada uno con sus estados,
+		#     y recien ahora es seguro decirlo.
+		#     La entrada de diario se le vuelve a poner a ROOT porque change_tag se la lleva: el que
+		#     agarra el Cerrito venia siguiendo la guerra por ahi y la perdia justo cuando empieza.
+		#     Va DESPUES del create_country, no antes: puesta antes corria en la ventana donde el
+		#     jugador ya era CER, c:URU todavia no existia y el jugador seguia teniendo Montevideo,
+		#     lo que cumple todas las clausulas de la condicion de victoria a la vez y daba la guerra
+		#     por ganada antes de empezarla.
+		#     guerra_grande_split_done es el candado contra esa clase entera de accidente: sin
+		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
+		set_global_variable = guerra_grande_split_done
+		add_contextless_journal_entry = je_guerra_grande
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# Rosas is asked to back the Cerrito.
+guerra_grande.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.4.t
+	desc = guerra_grande.4.d
+	flavor = guerra_grande.4.f
+
+	# Fernando Garcia del Molino, "Retrato del General Juan Manuel de Rosas" (1843), public domain.
+	event_image = {
+		video = "gg_rosas_cerrito"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:ARG
+		exists = c:CER
+	}
+
+	option = {
+		name = guerra_grande.4.a
+		default_option = yes
+		# EN: no pact and no war. Rosas never declared war on the Republic: he recognised
+		#     Oribe as its lawful president and lent him the Ejercito Unido de Vanguardia.
+		# ES: ni pacto ni guerra. Rosas nunca le declaro la guerra a la Republica: reconocio a
+		#     Oribe como su presidente legitimo y le presto el Ejercito Unido de Vanguardia.
+		c:CER ?= {
+			add_modifier = {
+				name = guerra_grande_rosista_support
+				years = 10
+				is_decaying = yes
+			}
+			trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	option = {
+		name = guerra_grande.4.b
+		add_modifier = {
+			name = guerra_grande_armed_truce
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+# The Italian Legion is raised (fired by the button).
+guerra_grande.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.5.t
+	desc = guerra_grande.5.d
+	flavor = guerra_grande.5.f
+
+	# Gaetano Gallino, "Giuseppe Garibaldi", painted in Montevideo, public domain.
+	event_image = {
+		video = "gg_garibaldi"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	option = {
+		name = guerra_grande.5.a
+		# EN: this event is reached ONLY from guerra_grande_italian_legion_button, and that button
+		#     created Garibaldi and a modifier but no troops -- so pressing it raised a legion that
+		#     did not exist, AND locked you out of the automatic one, because gg_contingent.5 is
+		#     gated on NOT having guerra_grande_italian_legion_raised, which the button sets.
+		#     The legion ran 500-700 men and was down to a little over 300 by December 1850
+		#     (Etchechury 2017; Bourne, Garibaldi in South America, 2020). Same force as
+		#     gg_contingent.5, so both paths give the same legion and they can never both fire.
+		# ES: a este evento solo se llega por guerra_grande_italian_legion_button, y ese boton
+		#     creaba a Garibaldi y un modificador pero ningun soldado: apretarlo levantaba una
+		#     legion que no existia, Y ADEMAS te dejaba afuera de la automatica, porque
+		#     gg_contingent.5 exige NO tener guerra_grande_italian_legion_raised, que el boton pone.
+		#     La legion tuvo entre 500 y 700 hombres, y poco mas de 300 en diciembre de 1850
+		#     (Etchechury 2017; Bourne, 2020). Misma fuerza que gg_contingent.5, y nunca disparan
+		#     las dos.
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Legion_Italiana
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		default_option = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# Flavour: the siege of Montevideo drags on.
+guerra_grande.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.6.t
+	desc = guerra_grande.6.d
+	flavor = guerra_grande.6.f
+
+	# Adolphe d'Hastrel, "Azoteas de Montevideo" (1840), public domain.
+	event_image = {
+		video = "gg_new_troy"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = guerra_grande.6.a
+		default_option = yes
+		add_loyalists = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# Flavour: the countryside eats the herds.
+guerra_grande.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.7.t
+	desc = guerra_grande.7.d
+	flavor = guerra_grande.7.f
+
+	# Prilidiano Pueyrredon, "Los capataces", public domain.
+	event_image = {
+		video = "gg_herds"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = guerra_grande.7.a
+		default_option = yes
+		add_radicals = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+
+
+# EN: the squadrons arrive -- fired by guerra_grande_foreign_intervention_button.
+# ES: llegan las escuadras: lo dispara guerra_grande_foreign_intervention_button.
+guerra_grande.9 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.9.t
+	desc = guerra_grande.9.d
+	flavor = guerra_grande.9.f
+
+	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	option = {
+		name = guerra_grande.9.a
+		default_option = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+
+# Portrait: Manuel Oribe.
+guerra_grande.11 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.11.t
+	desc = guerra_grande.11.d
+	flavor = guerra_grande.11.f
+
+	# Manuel Oribe, lithograph, c. 1840, public domain.
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = guerra_grande.11.a
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_blanco_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = 1 name = guerra_grande_war_score_bar }
+		}
+		# EN: matches the 10-year grant from Carpinteria/the fall of Oribe on purpose. It was
+		#     never established here whether a repeated add_modifier on an already-active
+		#     modifier resets its timer, extends it, or stacks a second instance -- there is
+		#     no documented answer in 1.13.11. Giving every grant the same duration is the
+		#     one fix that is correct under all three possibilities.
+		# ES: coincide a proposito con la concesion de 10 anios de Carpinteria/la caida de
+		#     Oribe. Nunca se establecio si un add_modifier repetido sobre un modificador ya
+		#     activo reinicia su reloj, lo extiende, o apila una segunda instancia -- no hay
+		#     respuesta documentada en 1.13.11. Darle la misma duracion a cada concesion es
+		#     el unico arreglo correcto bajo las tres posibilidades.
+		default_option = yes
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	option = {
+		name = guerra_grande.11.b
+		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
+		#     it, so saying no to the cult of authority, or denying Lavalleja his command, is a
+		#     concession to the liberal side -- and it has to pay the colorados exactly what the
+		#     other door pays the blancos, or the choice is decorative.
+		# ES: negarle a Oribe no es un acto neutral. Estos eventos disparan sobre el Uruguay que el
+		#     mismo gobierna, asi que decirle que no al culto de la autoridad, o negarle el mando a
+		#     Lavalleja, es una concesion al bando liberal -- y tiene que pagarle a los colorados
+		#     exactamente lo que la otra puerta le paga a los blancos, o la eleccion es decorativa.
+		change_global_variable = {
+			name = guerra_grande_colorado_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = -1 name = guerra_grande_war_score_bar }
+		}
+		add_modifier = {
+			name = guerra_grande_colorado_order
+			years = 10
+		}
+		add_loyalists = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# Portrait: Juan Antonio Lavalleja.
+guerra_grande.12 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.12.t
+	desc = guerra_grande.12.d
+	flavor = guerra_grande.12.f
+
+	# Juan Antonio Lavalleja, 19th century portrait, public domain.
+	event_image = {
+		video = "gg_lavalleja"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = guerra_grande.12.a
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_blanco_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = 1 name = guerra_grande_war_score_bar }
+		}
+		default_option = yes
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	option = {
+		name = guerra_grande.12.b
+		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
+		#     it, so saying no to the cult of authority, or denying Lavalleja his command, is a
+		#     concession to the liberal side -- and it has to pay the colorados exactly what the
+		#     other door pays the blancos, or the choice is decorative.
+		# ES: negarle a Oribe no es un acto neutral. Estos eventos disparan sobre el Uruguay que el
+		#     mismo gobierna, asi que decirle que no al culto de la autoridad, o negarle el mando a
+		#     Lavalleja, es una concesion al bando liberal -- y tiene que pagarle a los colorados
+		#     exactamente lo que la otra puerta le paga a los blancos, o la eleccion es decorativa.
+		change_global_variable = {
+			name = guerra_grande_colorado_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = -1 name = guerra_grande_war_score_bar }
+		}
+		add_modifier = {
+			name = guerra_grande_colorado_order
+			years = 10
+		}
+		add_radicals = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# Portrait: Fructuoso Rivera in exile.
+guerra_grande.13 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.13.t
+	desc = guerra_grande.13.d
+	flavor = guerra_grande.13.f
+
+	# Johann Moritz Rugendas, "General Fructuoso Rivera" (1846), public domain.
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = guerra_grande.13.a
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_blanco_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = 1 name = guerra_grande_war_score_bar }
+		}
+		default_option = yes
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = guerra_grande.13.b
+		# EN: this is what the choice is worth when the war finally starts.
+		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
+		change_global_variable = {
+			name = guerra_grande_colorado_score
+			add = 1
+		}
+		je:je_guerra_grande ?= {
+			add_progress = { value = -1 name = guerra_grande_war_score_bar }
+		}
+		add_modifier = {
+			name = guerra_grande_colorado_order
+			years = 10
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+# Portrait: Artigas, thirty years in Paraguay.
+guerra_grande.14 = {
+	type = country_event
+	placement = ROOT
+
+	title = guerra_grande.14.t
+	desc = guerra_grande.14.d
+	flavor = guerra_grande.14.f
+
+	# Alfred Demersay's engraving, the only portrait taken from life, public domain.
+	event_image = {
+		video = "gg_artigas"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+	}
+
+	option = {
+		name = guerra_grande.14.a
+		default_option = yes
+		add_loyalists = {
+			value = small_radicals
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	option = {
+		name = guerra_grande.14.b
+		add_modifier = {
+			name = guerra_grande_armed_truce
+			years = 3
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}

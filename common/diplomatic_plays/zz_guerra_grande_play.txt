@@ -1,0 +1,49 @@
+﻿# Civil war play between the Defensa (URU) and the Cerrito (CER).
+# Modelled on vanilla's dp_taiping_rebellion: annexation war goal on both sides, no infamy,
+# not selectable from the diplomacy lens - it can only be created by the event chain.
+dp_guerra_grande = {
+	war_goal = annex_country
+	mirror_war_goal = yes
+	add_infamy_for_starting_initiator_wargoals = no
+
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		exists = c:CER
+		exists = c:URU
+		scope:target_country = {
+			OR = {
+				c:URU ?= THIS
+				c:CER ?= THIS
+			}
+		}
+	}
+
+	# EN: nobody else may join. This is the door through which Argentina or Brazil would enter the
+	#     civil war directly, and a great power on one side ends it in months -- which is also the
+	#     opposite of what happened: neither declared war on the Republic before 1851. Rosas
+	#     recognised Oribe as its lawful president and lent him the Ejercito Unido de Vanguardia;
+	#     Brazil stayed neutral and paid the Defensa in secret through Maua's loans. So foreign
+	#     intervention arrives here as battalions and subsidies -- events gg_contingent.* -- and
+	#     never as a belligerent.
+	# ES: no se suma nadie mas. Esta es la puerta por la que la Argentina o el Brasil entrarian
+	#     directo a la guerra civil, y con una potencia de un lado la guerra se termina en meses
+	#     -- que ademas es lo contrario de lo que paso: ninguno le declaro la guerra a la Republica
+	#     antes de 1851. Rosas reconocio a Oribe como presidente legitimo y le presto el Ejercito
+	#     Unido de Vanguardia; el Brasil se mantuvo neutral y pago la Defensa a escondidas con los
+	#     prestamos de Maua. Por eso la intervencion extranjera llega aca como batallones y
+	#     subsidios -- los eventos gg_contingent.* -- y nunca como beligerante.
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

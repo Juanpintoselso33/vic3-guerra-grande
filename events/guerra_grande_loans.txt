@@ -1,0 +1,774 @@
+﻿namespace = gg_loan
+
+# EN: The Guerra Grande was not paid for by the two governments that fought it. The Defensa
+#     lived on French and then Brazilian money, and the Cerrito on the Confederation's, and
+#     both pledged the only revenue either of them had -- the customs. This file gives that
+#     money a price. Taking it is worth taking: cash now, cheaper war materiel, better troops.
+#     Every instalment also pledges the customs, counts on a debt ledger, and is presented at
+#     the peace. Refusing is a real option and it costs a real amount.
+#
+#     Nothing here makes a foreign power a belligerent. Brazil, France and the Confederation
+#     appear only as money and paper, exactly as in events/guerra_grande_contingents.txt.
+#
+# ES: La Guerra Grande no la pagaron los dos gobiernos que la pelearon. La Defensa vivio de
+#     plata francesa y despues brasilena, y el Cerrito de la de la Confederacion, y los dos
+#     hipotecaron la unica renta que tenian: la aduana. Este archivo le pone precio a esa
+#     plata. Tomarla vale la pena: caja ahora, material de guerra mas barato, mejor tropa.
+#     Cada cuota tambien hipoteca la aduana, se anota en un libro de deuda y se cobra en la
+#     paz. Negarse es una opcion de verdad y cuesta una cifra de verdad.
+#
+#     Nada de aca convierte a una potencia extranjera en beligerante. Brasil, Francia y la
+#     Confederacion aparecen solo como plata y papel, igual que en
+#     events/guerra_grande_contingents.txt.
+#
+# Sources: SOURCES_loans.md in ~/dev/juegos/victoria3-uruguay/. In short -- Talita Alves de
+# Messias, "Irineu Evangelista de Souza na Guerra Grande", Historia Economica & Historia de
+# Empresas 24:3 (2021); Paulo Roberto de Almeida, "A diplomacia financeira do Brasil no
+# Imperio", on the Relatorio da Reparticao dos Negocios Estrangeiros of 1852; Claudia
+# Contente, "La fiscalidad de la guerra permanente" (UPF, 2010); Nicolas Duffau and Ana
+# Frega, "Definir, organizar y representar el territorio de la nacion" (2022); and the texts
+# of the treaties of 12 October 1851 and of the conventions Arana-Southern and
+# Arana-Le Predour.
+
+# =======================================================================================
+# THE DEFENSA -- 12 June 1848
+# =======================================================================================
+# EN: The convention of prestacion de socorros with France was signed on 12 June 1848 and
+#     came into force on the 15th, between the baron de Gros, vice-admiral Le Predour and the
+#     charge d'affaires Devoize on one side and Joaquin Suarez's government on the other. It
+#     established a reimbursable loan of 40,000 pesos corrientes at the end of every month,
+#     "en dinero o en letras sobre Francia", from 30 June, to be repaid out of the customs
+#     from 1852. Between June and December 1848 the Defensa drew 260,000 pesos in French
+#     bills; in 1849 it drew the whole 480,000.
+# ES: El convenio de prestacion de socorros con Francia se firmo el 12 de junio de 1848 y
+#     entro en vigor el 15, entre el baron de Gros, el vicealmirante Le Predour y el
+#     encargado de negocios Devoize por un lado y el gobierno de Joaquin Suarez por el otro.
+#     Establecia un prestamo reembolsable de 40.000 pesos corrientes a fin de cada mes, "en
+#     dinero o en letras sobre Francia", desde el 30 de junio, a pagarse con la aduana desde
+#     1852. Entre junio y diciembre de 1848 la Defensa saco 260.000 pesos en letras
+#     francesas; en 1849 saco los 480.000 enteros.
+gg_loan.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.1.t
+	desc = gg_loan.1.d
+	flavor = gg_loan.1.f
+
+	# EN: The French convention of 12 June 1848.
+	event_image = {
+		video = "gg_money_french_convention"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		NOT = { has_variable = gg_loan_settled }
+	}
+
+	option = {
+		name = gg_loan.1.a
+		default_option = yes
+		add_treasury = 10000
+		add_modifier = {
+			name = guerra_grande_french_subsidy
+			years = 5
+			is_decaying = yes
+		}
+		# EN: one instalment on the ledger, and the customs pledged for it.
+		# ES: una cuota en el libro, y la aduana hipotecada por ella.
+		if = {
+			limit = { NOT = { has_variable = gg_loan_debt } }
+			set_variable = { name = gg_loan_debt value = 0 }
+		}
+		change_variable = {
+			name = gg_loan_debt
+			add = 1
+		}
+		add_modifier = {
+			name = guerra_grande_customs_pledged
+			years = 12
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 85
+		}
+	}
+
+	option = {
+		name = gg_loan.1.b
+		add_modifier = {
+			name = guerra_grande_defensa_self_reliance
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# =======================================================================================
+# THE DEFENSA -- 6 September 1850
+# =======================================================================================
+# EN: With the French monthly payments falling away, Andres Lamas got the Empire to lend.
+#     The Relatorio da Reparticao dos Negocios Estrangeiros of 1852 records the decision: to
+#     stop the plaza of Montevideo from falling, the imperial government granted 18,000 pesos
+#     fortes a month for thirteen months, guaranteed on the Republic's fiscal revenues. The
+#     contracts of 6 September 1850 were secret, and the money went through Irineu Evangelista
+#     de Souza so that in public it read as one merchant supporting another. A further
+#     contract of 1 December 1850 added 4,000 pesos to cover the new cut in French payments.
+# ES: Con las mensualidades francesas cayendose, Andres Lamas consiguio que prestara el
+#     Imperio. El Relatorio da Reparticao dos Negocios Estrangeiros de 1852 anota la decision:
+#     para que no cayera la plaza de Montevideo, el gobierno imperial concedio 18.000 pesos
+#     fuertes por mes durante trece meses, garantidos sobre las rentas fiscales de la
+#     Republica. Los contratos del 6 de setiembre de 1850 eran secretos y la plata pasaba por
+#     Irineu Evangelista de Souza para que en publico se leyera como un comerciante
+#     sosteniendo a otro. Un contrato del 1 de diciembre de 1850 sumo 4.000 pesos mas para
+#     cubrir el nuevo recorte frances.
+gg_loan.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.2.t
+	desc = gg_loan.2.d
+	flavor = gg_loan.2.f
+
+	# EN: The secret Brazilian contracts of 6 Sept 1850, through Maua's house.
+	event_image = {
+		video = "gg_money_maua"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		NOT = { has_variable = gg_loan_settled }
+	}
+
+	# EN: sign with the Empire, and take the alliance with the money.
+	# ES: firmar con el Imperio, y tomar la alianza junto con la plata.
+	option = {
+		name = gg_loan.2.a
+		default_option = yes
+		add_treasury = 15000
+		add_modifier = {
+			name = guerra_grande_imperial_client
+			years = 8
+			is_decaying = yes
+		}
+		set_variable = gg_loan_political_price
+		if = {
+			limit = { NOT = { has_variable = gg_loan_debt } }
+			set_variable = { name = gg_loan_debt value = 0 }
+		}
+		change_variable = {
+			name = gg_loan_debt
+			add = 1
+		}
+		add_modifier = {
+			name = guerra_grande_customs_pledged
+			years = 12
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 55
+		}
+	}
+
+	# EN: take it through Maua's house, and keep the Empire's name off the paper -- at the
+	#     banker's price. ES: tomarla por la casa de Maua y mantener el nombre del Imperio
+	#     fuera del papel, al precio del banquero.
+	option = {
+		name = gg_loan.2.b
+		add_treasury = 10000
+		add_modifier = {
+			name = guerra_grande_maua_paper
+			years = 8
+			is_decaying = yes
+		}
+		if = {
+			limit = { NOT = { has_variable = gg_loan_debt } }
+			set_variable = { name = gg_loan_debt value = 0 }
+		}
+		change_variable = {
+			name = gg_loan_debt
+			add = 1
+		}
+		add_modifier = {
+			name = guerra_grande_customs_pledged
+			years = 12
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+
+	option = {
+		name = gg_loan.2.c
+		add_modifier = {
+			name = guerra_grande_defensa_self_reliance
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# =======================================================================================
+# THE CERRITO -- 10 July 1843
+# =======================================================================================
+# EN: The mirror, and the same month the siege settled in. Oribe held the whole country
+#     except the walled city, but the country was cattle, not cash. On 10 July 1843 he opened
+#     the Buceo by decree, "con caracter provisorio a fin de que mas facilmente se llenen las
+#     necesidades de la poblacion y se haga mas facil el percibo de los derechos para el
+#     estado", with a mole, an artilleried customs house and seventy officials under the first
+#     receptor Ignacio Soria. Montevideo answered by declaring every ship that called there a
+#     pirate. The other half of the Cerrito's budget came from Buenos Aires: Rosas had named
+#     Oribe general in chief of the Ejercito de Vanguardia in October 1840 and kept the army
+#     supplied with cattle and hard money throughout.
+# ES: El espejo, y el mismo mes en que se asento el sitio. Oribe controlaba el pais entero
+#     menos la plaza amurallada, pero el pais era ganado, no plata. El 10 de julio de 1843
+#     habilito el Buceo por decreto, "con caracter provisorio a fin de que mas facilmente se
+#     llenen las necesidades de la poblacion y se haga mas facil el percibo de los derechos
+#     para el estado", con muelle, una aduana en parte artillada y setenta empleados a las
+#     ordenes del primer receptor Ignacio Soria. Montevideo contesto declarando pirata a todo
+#     buque que recalara ahi. La otra mitad del presupuesto del Cerrito venia de Buenos Aires:
+#     Rosas habia nombrado a Oribe general en jefe del Ejercito de Vanguardia en octubre de
+#     1840 y mantuvo al ejercito abastecido de ganado y plata fuerte todo el tiempo.
+gg_loan.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.3.t
+	desc = gg_loan.3.d
+	flavor = gg_loan.3.f
+
+	# EN: The Buceo: Oribe's own customs house, and the ships Montevideo calls pirates.
+	event_image = {
+		video = "gg_money_buceo"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		NOT = { has_variable = gg_loan_settled }
+	}
+
+	option = {
+		name = gg_loan.3.a
+		default_option = yes
+		add_treasury = 10000
+		add_modifier = {
+			name = guerra_grande_confederation_chest
+			years = 5
+			is_decaying = yes
+		}
+		if = {
+			limit = { NOT = { has_variable = gg_loan_debt } }
+			set_variable = { name = gg_loan_debt value = 0 }
+		}
+		change_variable = {
+			name = gg_loan_debt
+			add = 1
+		}
+		add_modifier = {
+			name = guerra_grande_customs_pledged
+			years = 12
+			is_decaying = yes
+		}
+		# EN: the Cerrito's account is also kept globally, because by the Capitulacion del
+		#     Pantanoso of 8 October 1851 the government elected afterwards assumed the debts
+		#     the Cerrito had contracted -- so it has to survive the Cerrito itself.
+		# ES: la cuenta del Cerrito tambien se lleva global, porque por la Capitulacion del
+		#     Pantanoso del 8 de octubre de 1851 el gobierno electo despues asumio las deudas
+		#     que el Cerrito habia contraido, asi que tiene que sobrevivir al Cerrito mismo.
+		if = {
+			limit = { exists = global_var:gg_loan_cerrito_debt }
+			change_global_variable = {
+				name = gg_loan_cerrito_debt
+				add = 1
+			}
+		}
+		else = {
+			set_global_variable = {
+				name = gg_loan_cerrito_debt
+				value = 1
+			}
+		}
+		ai_chance = {
+			base = 85
+		}
+	}
+
+	option = {
+		name = gg_loan.3.b
+		add_modifier = {
+			name = guerra_grande_cerrito_self_reliance
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}
+
+# =======================================================================================
+# THE CERRITO -- 11 August 1845
+# =======================================================================================
+# EN: The Cerrito's political bill, and Rosas' real aim. Elections were called in June 1845
+#     and the Asamblea General was solemnly reinstalled on 11 August; its first resolutions
+#     were to confirm Oribe as lawful president and to authorise the entry of foreign troops
+#     in aid of his cause. In that same year Rosas proposed "reunifying the patria": the
+#     reincorporation of Uruguay into the Provincias Unidas del Rio de la Plata, annulling the
+#     Convencion Preliminar de Paz of 27 August 1828. Oribe would not decide and sent the
+#     question to a parliamentary commission that resolved nothing.
+#
+#     Honesty about the record: some historians hold that Oribe and Rosas meant to annex the
+#     Republic to the Confederation and others that no document supports it. What is not in
+#     dispute is that the offer was made and that Oribe buried it in committee, and that by
+#     article VI of the Arana-Southern convention of 24 November 1849 Rosas would only treat
+#     with Britain if "su aliado el Exmo. senor Presidente de la Republica Oriental del
+#     Uruguay, Brigadier D. Manuel Oribe, estuviese previamente conforme con ella" -- the
+#     Cerrito's war was negotiated in Buenos Aires.
+# ES: La factura politica del Cerrito, y el objetivo real de Rosas. Se convoco a elecciones en
+#     junio de 1845 y la Asamblea General se reinstalo solemnemente el 11 de agosto; sus
+#     primeras resoluciones fueron confirmar a Oribe como presidente legitimo y autorizar la
+#     entrada de tropas extranjeras en auxilio de su causa. Ese mismo ano Rosas propuso
+#     "reunificar la patria": la reincorporacion del Uruguay a las Provincias Unidas del Rio
+#     de la Plata, anulando la Convencion Preliminar de Paz del 27 de agosto de 1828. Oribe no
+#     quiso decidir y mando el tema a una comision parlamentaria que no resolvio nada.
+#
+#     Honestidad con la fuente: algunos historiadores sostienen que Oribe y Rosas pretendian
+#     anexar la Republica a la Confederacion y otros que ningun documento lo respalda. Lo que
+#     no se discute es que la propuesta se hizo y que Oribe la enterro en comision, y que por
+#     el articulo VI de la convencion Arana-Southern del 24 de noviembre de 1849 Rosas solo
+#     trataba con Gran Bretana si "su aliado el Exmo. senor Presidente de la Republica
+#     Oriental del Uruguay, Brigadier D. Manuel Oribe, estuviese previamente conforme con
+#     ella": la guerra del Cerrito se negociaba en Buenos Aires.
+gg_loan.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.4.t
+	desc = gg_loan.4.d
+	flavor = gg_loan.4.f
+
+	# EN: Rosas proposes reunification, 11 Aug 1845.
+	event_image = {
+		video = "gg_money_reunification"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		NOT = { has_variable = gg_loan_settled }
+	}
+
+	# EN: accept the reunification, and the Confederation's whole treasury with it.
+	# ES: aceptar la reunificacion, y con ella el tesoro entero de la Confederacion.
+	# EN: REINCORPORATION. Not a flavour choice and it must not read like one: Rosas is offering to
+	#     undo 1828. Taking it makes the Cerrito a member of the Confederation -- a subject of
+	#     Buenos Aires -- and puts the whole weight of Rosas behind it.
+	# ES: REINCORPORACION. No es una eleccion de color y no debe leerse como tal: Rosas ofrece
+	#     deshacer 1828. Aceptar convierte al Cerrito en parte de la Confederacion, subdito de
+	#     Buenos Aires, y pone el peso entero de Rosas detras suyo.
+	option = {
+		name = gg_loan.4.a
+		add_treasury = 25000
+		add_modifier = { name = guerra_grande_reunification_accepted years = 20 }
+		c:ARG ?= {
+			change_relations = { country = ROOT value = 100 }
+			create_diplomatic_pact = {
+				country = ROOT
+				type = vassal
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+
+	# EN: ALLIANCE. Rosas' army and Rosas' money, and the Republic stays a republic. What it costs
+	#     is the claim of standing alone, which is the one thing the blancos had.
+	# ES: ALIANZA. El ejercito y la plata de Rosas, y la Republica sigue siendo republica. Lo que
+	#     cuesta es la pretension de estar solo, que es lo unico que los blancos tenian.
+	option = {
+		name = gg_loan.4.d
+		add_treasury = 15000
+		add_modifier = { name = guerra_grande_rosista_support years = 10 }
+		add_modifier = { name = guerra_grande_argentine_auxiliaries years = 10 }
+		c:ARG ?= { change_relations = { country = ROOT value = 100 } }
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Auxiliares_Argentinos
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 3
+			}
+		}
+		default_option = yes
+		ai_chance = { base = 45 }
+	}
+
+	# EN: THE COMMISSION. What Oribe actually did: he did not say no, he sent it to a commission of
+	#     the Assembly and there it stayed. Nothing gained, nothing lost, and the offer does not
+	#     come back.
+	# ES: LA COMISION. Lo que Oribe hizo de verdad: no dijo que no, lo mando a una comision de la
+	#     Asamblea y ahi quedo. No se gana ni se pierde nada, y la oferta no vuelve.
+	option = {
+		name = gg_loan.4.b
+		add_modifier = { name = guerra_grande_commission_of_the_assembly years = 10 }
+		ai_chance = { base = 35 }
+	}
+
+	# EN: REFUSAL. The Republic is a republic. Rosas' chest closes.
+	# ES: NEGATIVA. La Republica es una republica. Se cierra la caja de Rosas.
+	option = {
+		name = gg_loan.4.c
+		add_modifier = { name = guerra_grande_cerrito_self_reliance years = 10 }
+		add_modifier = { name = guerra_grande_alone_against_the_siege years = 10 }
+		c:ARG ?= { change_relations = { country = ROOT value = -30 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+# =======================================================================================
+# THE RECKONING -- the Defensa
+# =======================================================================================
+# EN: The convention of 12 October 1851 was one of five signed in Rio de Janeiro by Andres
+#     Lamas on the same day: alliance, limits, extradition, commerce and navigation, and the
+#     prestacion de socorros. By the last, the Empire ceded 60,000 patacones a month from 1
+#     November 1851 "durante o prazo que se fizer necessario", lent 138,000 patacones
+#     immediately at 6% a year, and the oriental government recognised 288,791 pesos fortes of
+#     earlier loans plus interest. Article X: it "hipoteca todas las rentas del Estado, todas
+#     las contribuciones directas e indirectas, especialmente los derechos de aduana". Until
+#     the debt was cancelled, a Junta de Credito Publico with Brazilian members administered
+#     the Republic's finances. The monthly payments stopped in August 1852, when the Brazilian
+#     chambers made political objections.
+# ES: El convenio del 12 de octubre de 1851 fue uno de cinco firmados en Rio de Janeiro por
+#     Andres Lamas el mismo dia: alianza, limites, extradicion, comercio y navegacion, y
+#     prestacion de socorros. Por el ultimo, el Imperio cedia 60.000 patacones por mes desde
+#     el 1 de noviembre de 1851 "durante el plazo que fuere necesario", presto 138.000
+#     patacones en el acto al 6% anual, y el gobierno oriental reconocio 288.791 pesos fuertes
+#     de prestamos anteriores mas intereses. Articulo X: "hipoteca todas las rentas del
+#     Estado, todas las contribuciones directas e indirectas, especialmente los derechos de
+#     aduana". Mientras no se cancelara la deuda, una Junta de Credito Publico con
+#     representantes brasilenos administraba las finanzas de la Republica. Las mensualidades
+#     se cortaron en agosto de 1852, cuando las camaras brasilenas pusieron reparos politicos.
+gg_loan.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.5.t
+	desc = gg_loan.5.d
+	flavor = gg_loan.5.f
+
+	# EN: The reckoning: what the Defensa signed for.
+	event_image = {
+		video = "gg_money_reckoning"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	option = {
+		name = gg_loan.5.a
+		default_option = yes
+		# EN: two instalments is the full 1851 settlement; one is a mortgage; none is a clean
+		#     treasury and a poorer war. ES: dos cuotas son el arreglo entero de 1851; una es
+		#     una hipoteca; ninguna es un tesoro limpio y una guerra mas pobre.
+		if = {
+			limit = {
+				has_variable = gg_loan_debt
+				var:gg_loan_debt >= 2
+			}
+			add_modifier = {
+				name = guerra_grande_junta_de_credito_publico
+				years = 20
+				is_decaying = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = gg_loan_debt
+				var:gg_loan_debt >= 1
+			}
+			add_modifier = {
+				name = guerra_grande_mortgaged_revenues
+				years = 15
+				is_decaying = yes
+			}
+		}
+		else = {
+			add_modifier = {
+				name = guerra_grande_owes_nobody
+				years = 15
+				is_decaying = yes
+			}
+		}
+		# EN: the Pantanoso clause: the government elected after the peace assumes what the
+		#     Cerrito borrowed. It only lands here if the Cerrito is already gone.
+		# ES: la clausula del Pantanoso: el gobierno electo despues de la paz asume lo que el
+		#     Cerrito tomo prestado. Solo cae aca si el Cerrito ya no existe.
+		if = {
+			limit = {
+				NOT = { exists = c:CER }
+				exists = global_var:gg_loan_cerrito_debt
+				global_var:gg_loan_cerrito_debt >= 1
+			}
+			add_modifier = {
+				name = guerra_grande_debts_of_the_cerrito
+				years = 20
+				is_decaying = yes
+			}
+		}
+		ai_chance = {
+			base = 80
+		}
+	}
+
+	# EN: December 1864, by executive decree, in the Plaza Independencia. Tearing up the paper
+	#     cancels the pledge on the customs -- and, if the alliance was signed, ends the
+	#     protection that came with it. That is the whole trade: standing for solvency.
+	# ES: diciembre de 1864, por decreto del Poder Ejecutivo, en la plaza Independencia. Romper
+	#     el papel cancela la hipoteca de la aduana -- y, si se firmo la alianza, termina la
+	#     proteccion que venia con ella. El canje es ese: reputacion por solvencia.
+	option = {
+		name = gg_loan.5.b
+		trigger = {
+			has_variable = gg_loan_debt
+			var:gg_loan_debt >= 1
+		}
+		add_modifier = {
+			name = guerra_grande_treaties_repudiated
+			years = 15
+			is_decaying = yes
+		}
+		remove_modifier = guerra_grande_customs_pledged
+		if = {
+			limit = { has_variable = gg_loan_political_price }
+			remove_modifier = guerra_grande_imperial_client
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# =======================================================================================
+# THE RECKONING -- the Cerrito
+# =======================================================================================
+# EN: The Capitulacion del Pantanoso of 8 October 1851 left the country to the Defensa, freed
+#     Oribe, held the acts of the Cerrito government legal for every purpose, and bound the
+#     government that the coming elections produced to assume the debts the Cerrito had
+#     contracted. The war ended "sin vencidos ni vencedores" -- and with an account.
+# ES: La Capitulacion del Pantanoso del 8 de octubre de 1851 dejo el pais al gobierno de la
+#     Defensa, dejo libre a Oribe, dio por legales a todos los efectos los actos del Gobierno
+#     del Cerrito y obligo al gobierno que salieran de las elecciones proximas a asumir las
+#     deudas que el Cerrito habia contraido. La guerra termino "sin vencidos ni vencedores", y
+#     con una cuenta.
+gg_loan.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_loan.6.t
+	desc = gg_loan.6.d
+	flavor = gg_loan.6.f
+
+	# EN: The reckoning: the debts of the Cerrito.
+	event_image = {
+		video = "gg_money_cerrito_debts"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	option = {
+		name = gg_loan.6.a
+		default_option = yes
+		if = {
+			limit = {
+				has_variable = gg_loan_debt
+				var:gg_loan_debt >= 2
+			}
+			add_modifier = {
+				name = guerra_grande_debts_of_the_cerrito
+				years = 20
+				is_decaying = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = gg_loan_debt
+				var:gg_loan_debt >= 1
+			}
+			add_modifier = {
+				name = guerra_grande_mortgaged_revenues
+				years = 15
+				is_decaying = yes
+			}
+		}
+		else = {
+			add_modifier = {
+				name = guerra_grande_owes_nobody
+				years = 15
+				is_decaying = yes
+			}
+		}
+		ai_chance = {
+			base = 80
+		}
+	}
+
+	# EN: Caseros, 3 February 1852. The creditor is on a British ship to Southampton. Same
+	#     trade as on the other side of the wall: the pledge goes, and so does the protection.
+	# ES: Caseros, 3 de febrero de 1852. El acreedor va en un barco ingles a Southampton. El
+	#     mismo canje que del otro lado de la muralla: se cae la hipoteca y se cae el amparo.
+	option = {
+		name = gg_loan.6.b
+		trigger = {
+			has_variable = gg_loan_debt
+			var:gg_loan_debt >= 1
+		}
+		add_modifier = {
+			name = guerra_grande_creditor_overthrown
+			years = 15
+			is_decaying = yes
+		}
+		remove_modifier = guerra_grande_customs_pledged
+		if = {
+			limit = { has_modifier = guerra_grande_reunification_accepted }
+			remove_modifier = guerra_grande_reunification_accepted
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+# =======================================================================================
+# THE WATCHER
+# =======================================================================================
+# EN: Hidden, and the only piece of plumbing in the file. It presents both accounts when the
+#     war ends, so the reckoning needs no hook inside guerra_grande.8. It reschedules itself
+#     every 120 days and stops on its own.
+#
+#     It fires on three signals, in this order of likelihood: gg_peace_settled, which every
+#     accepted option of gg_peace.1/gg_peace.2/gg_peace.3 sets alongside its annex -- that is,
+#     once one side has actually won the peace, not merely been offered it; the disappearance
+#     of guerra_grande_open_war, which the journal entry removes on completion or on failure;
+#     and a backstop year, in case a campaign runs past the historical exit without ever
+#     reaching either.
+#     EN: this used to key off guerra_grande_peace_offered instead, set in gg_peace.1/.2's own
+#     immediate before the player even answers. Option f in both ("no terms") refuses the peace,
+#     clears that flag and reschedules the same event 730 days later -- but gg_loan.7 reschedules
+#     on its own 120-day clock and could land in the window while the offer was still pending or
+#     had just been refused, lock in gg_loan_settled off a mid-war snapshot, and then permanently
+#     block gg_loan.1-4 (all four are guarded by NOT has_variable=gg_loan_settled) for a war that
+#     was still going. gg_peace_settled is never set on the refuse branch, so this cannot happen.
+# ES: Oculto, y la unica fontaneria del archivo. Presenta las dos cuentas cuando la guerra
+#     termina, asi que el ajuste no necesita ningun hook adentro de gg_peace.1/.2. Se reagenda
+#     solo cada 120 dias y se apaga solo.
+#
+#     Dispara por tres senales, en este orden de probabilidad: gg_peace_settled, que toda opcion
+#     aceptada de gg_peace.1/gg_peace.2/gg_peace.3 deja puesta junto con su annex -- o sea, cuando
+#     alguno de los dos bandos gano de verdad la paz, no cuando apenas se la ofrecieron; la
+#     desaparicion de guerra_grande_open_war, que la entrada de diario saca al completarse o al
+#     fracasar; y un ano de respaldo, por si una partida pasa de largo la salida historica sin
+#     llegar a ninguna de las dos.
+#     ES: esto usaba guerra_grande_peace_offered, puesta en el immediate de gg_peace.1/.2 antes de
+#     que el jugador conteste. La opcion f de las dos ("sin condiciones") rechaza la paz, borra esa
+#     bandera y reagenda el mismo evento 730 dias despues -- pero gg_loan.7 se reagenda solo cada
+#     120 dias y podia caer justo con la oferta todavia pendiente o recien rechazada, dejar
+#     gg_loan_settled puesto con una foto de mitad de guerra, y bloquear para siempre gg_loan.1-4
+#     (los cuatro llevan NOT has_variable=gg_loan_settled) para una guerra que seguia. gg_peace_settled
+#     nunca se pone en la rama de rechazo, asi que esto ya no puede pasar.
+gg_loan.7 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+					has_global_variable = gg_peace_settled
+					NOT = { has_global_variable = guerra_grande_open_war }
+					year >= 1855
+				}
+			}
+			c:URU ?= {
+				if = {
+					limit = { NOT = { has_variable = gg_loan_settled } }
+					set_variable = gg_loan_settled
+					trigger_event = { id = gg_loan.5 days = 4 popup = yes }
+				}
+			}
+			c:CER ?= {
+				if = {
+					limit = { NOT = { has_variable = gg_loan_settled } }
+					set_variable = gg_loan_settled
+					trigger_event = { id = gg_loan.6 days = 4 popup = yes }
+				}
+			}
+		}
+		else_if = {
+			limit = { year < 1870 }
+			# EN: FORK, ONCE. guerra_grande.3 only ever schedules the first tick on c:URU (both
+			#     branches of its option, addressed by tag), so a plain self-reschedule on ROOT
+			#     keeps the whole watcher pinned to whichever country happened to be ROOT -- and
+			#     a scheduled country_event dies with its country. If the Cerrito wins by
+			#     annexing URU, that single chain is annexed with it and the reckoning never
+			#     reaches the survivor, even though gg_loan_debt/gg_loan_cerrito_debt are still
+			#     sitting there unpaid.
+			#     Fix: the first time this fires with the war still open, split into two
+			#     independent chains, one rooted on each government that exists right now (both
+			#     do -- c:CER is created, with its own loans already offered, before this event
+			#     is ever scheduled). From then on each chain only re-arms itself on its own
+			#     ROOT, so there is no fan-out and no exponential growth: two watchers instead of
+			#     one, and whichever government survives keeps ticking regardless of what happens
+			#     to the other.
+			# ES: BIFURCAR, UNA SOLA VEZ. guerra_grande.3 solo agenda el primer tick sobre c:URU
+			#     (las dos ramas de su opcion, por tag), asi que un simple reagendado sobre ROOT
+			#     deja todo el vigia clavado al pais que haya sido ROOT -- y un country_event
+			#     agendado muere con su pais. Si el Cerrito gana anexando a URU, esa unica cadena
+			#     se anexa con el y el ajuste nunca le llega al sobreviviente, aunque
+			#     gg_loan_debt/gg_loan_cerrito_debt sigan ahi sin cobrarse.
+			#     Solucion: la primera vez que esto dispara con la guerra todavia abierta, se
+			#     bifurca en dos cadenas independientes, una por cada gobierno que exista en ese
+			#     momento (los dos existen -- c:CER se crea, con sus propios prestamos ya
+			#     ofrecidos, antes de que este evento se agende siquiera). De ahi en mas cada
+			#     cadena se reagenda sola sobre su propio ROOT, asi que no hay abanico ni
+			#     crecimiento exponencial: son dos vigias en vez de uno, y el gobierno que
+			#     sobreviva sigue latiendo pase lo que le pase al otro.
+			if = {
+				limit = { NOT = { has_global_variable = gg_loan_watcher_split } }
+				set_global_variable = gg_loan_watcher_split
+				c:URU ?= { trigger_event = { id = gg_loan.7 days = 120 } }
+				c:CER ?= { trigger_event = { id = gg_loan.7 days = 120 } }
+			}
+			else = {
+				trigger_event = { id = gg_loan.7 days = 120 }
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+﻿l_spanish:
+
+# ES: Los botones del Cerrito. No son legiones extranjeras: son la campania y el rio. Fuentes en
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md, seccion 3.
+
+ guerra_grande_montonera_levy_button:0 "Levantar la campaña"
+ guerra_grande_montonera_levy_button_desc:0 "La ciudad compra sus soldados; nosotros no tenemos por qué. La República de afuera de las murallas es nuestra: dos circunscripciones militares, al norte y al sur del Río Negro, un comandante en cada departamento y una estancia detrás de cada uno. Se corre la voz y los paisanos vienen con caballo propio, que es lo único que ninguna aduana de Montevideo puede comprar. Lo que cuesta es la campaña misma: cada hombre que llega montado es un hombre que ya no está con la hacienda."
+ guerra_grande_requires_campana:0 "Tenemos que tener la campaña"
+
+ guerra_grande_river_blockade_button:0 "Cerrar el río"
+ guerra_grande_river_blockade_button_desc:0 "Ocho años de línea de sitio no tomaron Montevideo, porque el mar que tiene atrás no se cerró nunca. Pedirle la escuadra a Rosas. El almirante Guillermo Brown ya bloqueó ese puerto — desde abril de 1843, hasta que el comodoro inglés Purvis declaró que no lo reconocía y abasteció él mismo a la ciudad. Hecho en serio, hace caer a la Defensa en meses. Pero la escuadra no es nuestra, la Confederación no entra en esta guerra, y si las escuadras europeas se meten en el río no va a quedar nada con que bloquear."
+ guerra_grande_requires_rosas:0 "La Confederación tiene que seguir en pie"
+ guerra_grande_requires_river_unwatched:0 "No debe haber escuadra extranjera en el río"

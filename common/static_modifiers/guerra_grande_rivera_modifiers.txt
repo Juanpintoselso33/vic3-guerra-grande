@@ -1,0 +1,295 @@
+﻿# EN: Modifiers for the Rivera arc, 1842-1854. Every modifier key below exists in the base game's
+#     common/modifier_type_definitions in 1.13.11 -- checked one by one, because an invented key
+#     is NOT an error the game reports: it is silently dropped, so the modifier looks applied and
+#     does nothing. Scales follow the ones already in this mod (authority +/-25 to +/-50,
+#     approval +/-1 to +/-5, unit multipliers +/-0.05 to +/-0.15).
+#     The design rule for the whole file: the caudillo is worth soldiers and costs the state, and
+#     the doctores are worth the state and cost soldiers. No modifier here gives both.
+# ES: Modificadores del arco de Rivera, 1842-1854. Todas las claves de abajo existen en
+#     common/modifier_type_definitions del juego base en 1.13.11, verificadas una por una: una
+#     clave inventada NO es un error que el juego reporte, se descarta en silencio, asi que el
+#     modificador parece aplicado y no hace nada. Las escalas siguen las que ya usa este mod
+#     (autoridad +/-25 a +/-50, aprobacion +/-1 a +/-5, multiplicadores de unidad +/-0,05 a +/-0,15).
+#     La regla de disenio de todo el archivo: el caudillo vale soldados y cuesta Estado, y los
+#     doctores valen Estado y cuestan soldados. Ningun modificador de aca da las dos cosas.
+#
+# Sources for every claim in the comments: SOURCES_rivera.md.
+
+
+# ============================================================================================
+# 1842-1843 - the winter after Arroyo Grande
+# ============================================================================================
+
+# EN: The infantry that went out to the campania is infantry that is not on the wall. In February
+#     1843 the garrison had some 5,000 foot, 800 gunners and 600 horse; the line battalions were
+#     the only thing standing between Oribe and the city, and everything else was national guard
+#     and urban militia.
+# ES: La infanteria que salio a la campania es infanteria que no esta en la muralla. En febrero de
+#     1843 la guarnicion tenia unos 5.000 de a pie, 800 artilleros y 600 de a caballo; los
+#     batallones de linea eran lo unico que habia entre Oribe y la ciudad, y el resto era guardia
+#     nacional y milicia urbana.
+gg_rivera_walls_stripped = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_defense_mult = -0.10
+	interest_group_ig_petty_bourgeoisie_approval_add = -3
+	country_authority_add = -25
+}
+
+# EN: What Joaquin Suarez's government actually did in the weeks after Arroyo Grande: called out
+#     the Guardia Nacional, raised the first line corps, and remounted the colonial cannon that
+#     had been serving as posts in the pavements. The city discovered that the defence was the
+#     defence of its own houses, and after that it did not go back.
+# ES: Lo que de verdad hizo el gobierno de Joaquin Suarez en las semanas posteriores a Arroyo
+#     Grande: llamo a la Guardia Nacional, creo los primeros cuerpos de linea y volvio a montar
+#     los canionies coloniales que servian de postes en las veredas. La ciudad descubrio que la
+#     defensa era la defensa de sus propias casas, y despues de eso no volvio atras.
+gg_rivera_the_city_takes_the_war = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_defense_mult = 0.10
+	country_legitimacy_base_add = 5
+	interest_group_ig_petty_bourgeoisie_approval_add = 3
+	interest_group_ig_intelligentsia_approval_add = 3
+	unit_offense_mult = -0.05
+}
+
+
+# ============================================================================================
+# 1845 - after India Muerta
+# ============================================================================================
+
+# EN: Anacleto Medina, the general the Defensa put in Rivera's place. He had held the right at
+#     India Muerta and had advised against fighting at all until the reinforcements came; after
+#     Arroyo Grande it was he and Olazabal who reorganised what was left of the cavalry. A
+#     professional where there had been a caudillo -- and a man nobody in the campania will follow
+#     out of love.
+# ES: Anacleto Medina, el general que la Defensa puso en lugar de Rivera. Habia tenido la derecha
+#     en India Muerta y habia aconsejado no dar batalla hasta que llegaran los refuerzos; despues
+#     de Arroyo Grande fue el, con Olazabal, quien reorganizo lo que quedaba de la caballeria. Un
+#     profesional donde habia un caudillo, y un hombre al que nadie en la campania va a seguir por
+#     cariño.
+gg_rivera_medina_takes_the_army = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_morale_recovery_mult = 0.10
+	interest_group_ig_armed_forces_approval_add = 3
+	country_authority_add = 25
+	interest_group_ig_rural_folk_approval_add = -3
+}
+
+# EN: Arms, clothing and horses from the Empire's arsenals in Rio Grande, dealt for with the
+#     Marquis of Caxias through Rivera's secretary Jose Luis Bustamante. It puts a beaten army
+#     back in the field. It also puts the Republic in the Empire's ledger, and the Empire collects
+#     -- in 1851 the price of Brazilian intervention is the whole of Misiones Orientales.
+# ES: Armas, vestuario y caballos de los arsenales del Imperio en Rio Grande, tratados con el
+#     marques de Caxias por intermedio del secretario de Rivera, Jose Luis Bustamante. Pone un
+#     ejercito batido de vuelta en campania. Tambien pone a la Republica en el libro mayor del
+#     Imperio, y el Imperio cobra: en 1851 el precio de la intervencion brasileña es Misiones
+#     Orientales entero.
+gg_rivera_arms_from_the_empire = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	unit_offense_mult = 0.10
+	unit_recovery_rate_add = 0.05
+	country_leverage_generation_mult = -0.20
+	country_legitimacy_base_add = -5
+}
+
+# EN: The Empire holds him in Rio de Janeiro on a charge of conspiring with the riograndense
+#     republicans, and the government in Montevideo stops having to argue with a caudillo. This is
+#     the doctores' own account of what they were for: rule by ministers and by law instead of by
+#     the personal prestige of a man on a horse. It is also, on their own terms, a government that
+#     has asked a foreign empire to jail its own founder.
+# ES: El Imperio lo retiene en Rio de Janeiro acusado de conspirar con los republicanos
+#     riograndenses, y el gobierno de Montevideo deja de tener que discutir con un caudillo. Es el
+#     relato que los doctores hacian de si mismos: gobierno de ministros y de leyes en vez del
+#     prestigio personal de un hombre a caballo. Y es tambien, en sus propios terminos, un
+#     gobierno que le pidio a un imperio extranjero que encarcelara a su propio fundador.
+gg_rivera_the_doctors_free_hand = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_authority_add = 50
+	country_bureaucracy_mult = 0.10
+	interest_group_ig_intelligentsia_approval_add = 4
+	unit_offense_mult = -0.10
+	interest_group_ig_rural_folk_approval_add = -4
+}
+
+
+# ============================================================================================
+# 1846 - the landing
+# ============================================================================================
+
+# EN: Grand Marshal of the Republic and general-in-chief of the Army of Operations, both conferred
+#     within days of the mutiny by a government that had just tried to forbid him to come ashore.
+#     The men follow him: that is what the title is actually worth. The government's own authority
+#     is what paid for it -- it annulled its own decree under the guns of its own garrison.
+# ES: Gran mariscal de la Republica y general en jefe del Ejercito de Operaciones, las dos cosas
+#     concedidas a los pocos dias del motin por un gobierno que acababa de intentar prohibirle
+#     desembarcar. Los hombres lo siguen: eso es lo que el titulo vale de verdad. Lo que lo pago
+#     fue la autoridad del propio gobierno, que anulo su propio decreto bajo los fusiles de su
+#     propia guarnicion.
+gg_rivera_gran_mariscal = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds"
+	unit_offense_mult = 0.15
+	unit_morale_loss_mult = -0.10
+	interest_group_ig_armed_forces_approval_add = 4
+	interest_group_ig_rural_folk_approval_add = 4
+	country_authority_add = -50
+	interest_group_ig_intelligentsia_approval_add = -4
+}
+
+# EN: The mutiny of 1 April put down instead of obeyed. The Basque battalion and the liberto line
+#     infantry were the garrison's real soldiers, and the two colonels who led them out were the
+#     best field officers the Defensa had. What is left is a government that gives orders and is
+#     obeyed, standing on a wall it now has fewer men to hold.
+# ES: El motin del 1 de abril reprimido en vez de obedecido. El batallon de vascos y la infanteria
+#     de linea de libertos eran los soldados de verdad de la guarnicion, y los dos coroneles que
+#     los sacaron a la calle eran los mejores oficiales de campo que tenia la Defensa. Queda un
+#     gobierno que da ordenes y es obedecido, parado sobre una muralla que ahora tiene menos
+#     hombres para sostener.
+gg_rivera_the_mutiny_broken = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
+	country_authority_add = 50
+	country_legitimacy_base_add = 5
+	unit_offense_mult = -0.15
+	unit_defense_mult = -0.10
+	interest_group_ig_armed_forces_approval_add = -5
+}
+
+
+# ============================================================================================
+# 1847 - the banishment and the road not taken
+# ============================================================================================
+
+# EN: A republic of ministers. Herrera y Obes back at Gobierno and Relaciones Exteriores, the
+#     Asamblea de Notables sitting, the decree of banishment printed and published with all its
+#     papers -- and not one general in the field who has ever commanded an army against Oribe.
+#     This is the government that will win the war in 1851 by diplomacy, because it has nothing
+#     else left to win it with.
+# ES: Una republica de ministros. Herrera y Obes de vuelta en Gobierno y Relaciones Exteriores, la
+#     Asamblea de Notables sesionando, el decreto de destierro impreso y publicado con todos sus
+#     papeles, y ni un general en campania que haya mandado alguna vez un ejercito contra Oribe.
+#     Este es el gobierno que va a ganar la guerra en 1851 por la diplomacia, porque no le queda
+#     otra cosa con que ganarla.
+gg_rivera_the_doctors_republic = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_base_add = 10
+	country_authority_add = 50
+	country_bureaucracy_mult = 0.10
+	interest_group_ig_intelligentsia_approval_add = 5
+	country_loyalists_from_legitimacy_mult = 0.10
+	unit_offense_mult = -0.10
+	interest_group_ig_rural_folk_approval_add = -4
+}
+
+# EN: The mirror. A government that will not banish its caudillo is a government the caudillo
+#     runs, and the eight-year interim presidency of Joaquin Suarez ends the day it says so. The
+#     army follows him and the campania follows him; the Asamblea de Notables, the ministries and
+#     the whole case the Defensa has been making to France and Britain about civilisation against
+#     caudillo barbarism do not.
+# ES: El espejo. Un gobierno que no destierra a su caudillo es un gobierno que maneja el caudillo,
+#     y la interinidad de ocho anios de Joaquin Suarez termina el dia que eso se dice en voz alta.
+#     El ejercito lo sigue y la campania lo sigue; la Asamblea de Notables, los ministerios y todo
+#     el argumento que la Defensa le viene haciendo a Francia y a Inglaterra sobre la civilizacion
+#     contra la barbarie caudillesca, no.
+gg_rivera_the_caudillos_republic = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds"
+	unit_offense_mult = 0.15
+	unit_morale_recovery_mult = 0.10
+	interest_group_ig_armed_forces_approval_add = 5
+	interest_group_ig_rural_folk_approval_add = 5
+	country_legitimacy_base_add = -10
+	country_authority_add = -50
+	country_bureaucracy_mult = -0.10
+	interest_group_ig_intelligentsia_approval_add = -5
+}
+
+# EN: The eight conditions, sent over the ministry's head: end the war, return what was
+#     confiscated, hold elections, and send home the foreign troops of both sides. It is the only
+#     offer on the table that could have ended the war in 1847, and it is unaffordable for exactly
+#     the reason the doctores said: the Defensa IS the foreign troops. The French Legion, the
+#     Italian Legion, the Basques and the squadrons are what has been holding the line since 1843.
+# ES: Las ocho condiciones, mandadas por encima del ministerio: terminar la guerra, devolver lo
+#     confiscado, llamar a elecciones y mandar a su casa a las tropas extranjeras de los dos
+#     bandos. Es la unica oferta sobre la mesa que podia terminar la guerra en 1847, y es
+#     impagable justo por la razon que decian los doctores: la Defensa SON las tropas extranjeras.
+#     La Legion Francesa, la Legion Italiana, los vascos y las escuadras son lo que viene
+#     sosteniendo la linea desde 1843.
+gg_rivera_entre_orientales = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_war_exhaustion_casualties_mult = -0.25
+	interest_group_ig_rural_folk_approval_add = 5
+	country_loyalists_from_legitimacy_mult = 0.15
+	unit_offense_mult = -0.15
+	unit_defense_mult = -0.15
+	interest_group_ig_intelligentsia_approval_add = -5
+	country_influence_add = -25
+}
+
+
+# ============================================================================================
+# 1853-1854 - the triumvirate and after
+# ============================================================================================
+
+# EN: A three-man executive appointed by a colonel who has just forced a president out, to finish
+#     a constitutional term that is not his. Two of the three triumvirs are abroad when they are
+#     named and one of them is dead within a month. It is a government made of names, and the
+#     names are the two men who founded the two halves of the country's politics.
+# ES: Un ejecutivo de tres nombrado por un coronel que acaba de forzar la renuncia de un
+#     presidente, para terminar un periodo constitucional que no es suyo. Dos de los tres
+#     triunviros estan afuera cuando los nombran y uno se muere al mes. Es un gobierno hecho de
+#     nombres, y los nombres son los dos hombres que fundaron las dos mitades de la politica del
+#     pais.
+gg_rivera_the_triumvirate = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	interest_group_ig_rural_folk_approval_add = 4
+	interest_group_ig_armed_forces_approval_add = 3
+	country_authority_add = -25
+	country_bureaucracy_mult = -0.05
+}
+
+# EN: Flores governs alone with the army and the port. It is a clean chain of command and it is
+#     the government of one faction of one party -- the reading of the peace that the other half
+#     of the country does not accept, and by 1855 the Rebelion de los Conservadores is under way.
+# ES: Flores gobierna solo con el ejercito y el puerto. Es una cadena de mando limpia y es el
+#     gobierno de una faccion de un partido: la lectura de la paz que la otra mitad del pais no
+#     acepta, y para 1855 ya esta en marcha la Rebelion de los Conservadores.
+gg_rivera_flores_alone = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds"
+	country_authority_add = 50
+	interest_group_ig_armed_forces_approval_add = 5
+	country_legitimacy_base_add = -5
+	interest_group_ig_rural_folk_approval_add = -5
+	country_radicals_from_legitimacy_mult = 0.15
+}
+
+# EN: The politica de fusion, 1851-1856: blancos and colorados in one government, which is the
+#     only reading of "ni vencidos ni vencedores" with anything in it. The men who spent eight
+#     years besieging this city sit in its cabinet. The army that broke the siege is asked to
+#     shake their hands.
+# ES: La politica de fusion, 1851-1856: blancos y colorados en un mismo gobierno, que es la unica
+#     lectura de "ni vencidos ni vencedores" que tiene algo adentro. Los hombres que se pasaron
+#     ocho anios sitiando esta ciudad se sientan en su gabinete. Al ejercito que levanto el sitio
+#     se le pide que les de la mano.
+gg_rivera_the_politics_of_fusion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	interest_group_ig_landowners_approval_add = 5
+	interest_group_ig_rural_folk_approval_add = 4
+	country_loyalists_from_legitimacy_mult = 0.15
+	interest_group_ig_armed_forces_approval_add = -4
+}
+
+# EN: The other road, and the one the country took within two years: the government is the party,
+#     the party is the army and the port, and the countryside is somebody else's. Everything that
+#     the phrase "ni vencidos ni vencedores" was supposed to prevent.
+# ES: El otro camino, y el que el pais tomo a los dos anios: el gobierno es el partido, el partido
+#     es el ejercito y el puerto, y la campania es de otro. Todo lo que la frase "ni vencidos ni
+#     vencedores" tenia que evitar.
+gg_rivera_colorado_exclusivism = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = 50
+	interest_group_ig_armed_forces_approval_add = 4
+	interest_group_ig_petty_bourgeoisie_approval_add = 4
+	interest_group_ig_landowners_approval_add = -5
+	interest_group_ig_rural_folk_approval_add = -5
+	country_radicals_from_legitimacy_mult = 0.20
+}

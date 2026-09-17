@@ -1,0 +1,15 @@
+﻿l_spanish:
+
+# ES: La Legion Francesa de Montevideo. Todas las cifras estan documentadas en
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md y en los comentarios de
+#     common/scripted_buttons/guerra_grande_french_legion_button.txt.
+
+ guerra_grande_french_legion_button:0 "Levantar la Legión Francesa"
+ guerra_grande_french_legion_button_desc:0 "Hay más franceses en Montevideo que orientales sobre las armas. Le Patriote Français viene llamando a una toma de armas general «sin ridículas distinciones de clase o de posición», y en los primeros días de abril de 1843 responden: toma el mando Jean-Chrysostome Thiébaut, marsellés que marchó con la Grande Armée y hace quince años que quedó varado en el Plata. Este va a ser el batallón más poderoso de la guarnición: más de tres mil hombres en su mejor momento, contra unos setecientos italianos. No es Francia. París los quiere desarmados y su cónsul reparte dinero para que se queden en sus casas."
+ guerra_grande_requires_no_foreign_legion_yet:0 "Las legiones extranjeras no deben estar ya sobre las armas"
+
+ gg_legion.1.t:0 "Bajo qué bandera"
+ gg_legion.1.d:0 "La legión existe. Cómo se llama es lo difícil. El cónsul Théodore Pichon tiene sus instrucciones de París — Francia es neutral en los pleitos del Plata — y exigió el licenciamiento de los voluntarios, les prohibió los colores franceses y repartió dinero por lo bajo entre los hombres más propensos a enrolarse. Se enrolaron igual. Ahora el gobierno tiene que decidir si tres mil extranjeros armados desfilan por una ciudad sitiada bajo una bandera que no es la de la República, o si se les pide que entreguen lo único que el cónsul todavía puede quitarles: su nacionalidad."
+ gg_legion.1.f:0 "Once hombres dieron un paso al frente para tomar el pasaje de vuelta. El resto se quedó en la muralla."
+ gg_legion.1.a:0 "Que sirvan con bandera propia."
+ gg_legion.1.b:0 "Nacionalizarlos: la 2ª Legión de Guardia Nacional."

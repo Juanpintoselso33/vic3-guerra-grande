@@ -1,0 +1,24 @@
+﻿# Media aliases for the abolition events and two more Rivera events (India Muerta, the triumvirate).
+# Kept in a separate file from guerra_grande_aliases.txt; the game reads every .txt in this folder.
+# Alias de medios para los eventos de la abolición y dos eventos más de Rivera (India Muerta, el triunvirato).
+# Van en un archivo aparte de guerra_grande_aliases.txt; el juego lee todos los .txt de esta carpeta.
+
+gg_abol_defensa = {
+	video = "gfx/media_aliases/gg_abol_defensa.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_abol_cerrito = {
+	video = "gfx/media_aliases/gg_abol_cerrito.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_riv_india_muerta = {
+	video = "gfx/media_aliases/gg_riv_india_muerta.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_riv_triumvirate = {
+	video = "gfx/media_aliases/gg_riv_triumvirate.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}

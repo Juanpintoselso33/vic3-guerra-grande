@@ -1,0 +1,63 @@
+﻿# Media aliases for the Guerra Grande event pictures.
+# The .bk2 file alone is not enough: the alias name used in `video = "..."` has to be
+# declared here, pointing at the file. Same shape as vanilla's gfx/media_aliases.
+
+gg_carpinteria = {
+	video = "gfx/media_aliases/gg_carpinteria.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_oribe_fall = {
+	video = "gfx/media_aliases/gg_oribe_fall.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_two_governments = {
+	video = "gfx/media_aliases/gg_two_governments.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+gg_rosas_cerrito = {
+	video = "gfx/media_aliases/gg_rosas_cerrito.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_garibaldi = {
+	video = "gfx/media_aliases/gg_garibaldi.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_new_troy = {
+	video = "gfx/media_aliases/gg_new_troy.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_herds = {
+	video = "gfx/media_aliases/gg_herds.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_peace = {
+	video = "gfx/media_aliases/gg_peace.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_squadrons = {
+	video = "gfx/media_aliases/gg_squadrons.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_lavalleja = {
+	video = "gfx/media_aliases/gg_lavalleja.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_rivera = {
+	video = "gfx/media_aliases/gg_rivera.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_artigas = {
+	video = "gfx/media_aliases/gg_artigas.bk2"
+	audio = "event:/SFX/Events/southamerica/christianity"
+}

@@ -1,0 +1,363 @@
+﻿# Journal entry for the Guerra Grande. Structure copied from vanilla's je_the_first_carlist_war:
+# a battle-driven double sided bar, two scripted buttons, monthly flavour events, and a
+# completion condition that fires when one of the two rival governments stops existing.
+je_guerra_grande = {
+	group = je_group_guerra_grande
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	# EN: two fields, not one. The "_uninvolved_or_context" one is the only one vanilla ever uses,
+	#     and it does not cover a country that is involved -- which is exactly our case, since this
+	#     entry declares should_be_involved. The counterpart exists in the engine even though no
+	#     vanilla entry uses it, which is why grepping the game files never finds it.
+	# ES: son dos campos, no uno. El "_uninvolved_or_context" es el unico que usa vanilla, y no
+	#     cubre a un pais involucrado, que es justo nuestro caso porque esta JE declara
+	#     should_be_involved. El otro existe en el motor aunque ninguna JE de vanilla lo use, por
+	#     eso buscando en los archivos del juego no aparece nunca.
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	scripted_progress_bar = guerra_grande_war_score_bar
+	scripted_button = guerra_grande_foreign_intervention_button
+	scripted_button = guerra_grande_italian_legion_button
+	scripted_button = guerra_grande_french_legion_button
+	# EN: the Cerrito's own two. The mirror of a foreign legion is not another foreign legion:
+	#     the Defensa bought men from outside with foreign money and an open port, so the Cerrito
+	#     raises its own off the countryside it already holds, and its one road to victory is
+	#     shutting the sea. The blockade is the only button on this entry the other side can take
+	#     off the board -- calling in the European squadrons ends it, as it did in August 1845.
+	# ES: los dos propios del Cerrito. El espejo de una legion extranjera no es otra legion
+	#     extranjera: la Defensa compraba hombres de afuera con plata ajena y puerto abierto, asi
+	#     que el Cerrito levanta los suyos de la campania que ya tiene, y su unico camino a la
+	#     victoria es cerrar el mar. El bloqueo es el unico boton de esta entrada que el otro bando
+	#     puede sacar del tablero: llamar a las escuadras europeas lo termina, como en agosto de 1845.
+	scripted_button = guerra_grande_montonera_levy_button
+	scripted_button = guerra_grande_river_blockade_button
+
+	# EN: by tag or by mark. If the player took the Cerrito, the tags swap around -- the mark each
+	#     government carries is what identifies it either way.
+	# ES: por tag o por marca. Si el jugador se fue al Cerrito los tags se dan vuelta: la marca que
+	#     lleva cada gobierno es lo que lo identifica igual.
+	should_be_involved = {
+		OR = {
+			c:URU ?= this
+			c:CER ?= this
+			has_variable = guerra_grande_cerrito_government
+			has_variable = guerra_grande_defensa_government
+		}
+	}
+
+	should_show_when_not_involved = {
+		always = no
+	}
+
+	immediate = {
+		if = {
+			limit = { NOT = { has_global_variable = guerra_grande_blanco_score } }
+			set_global_variable = {
+				name = guerra_grande_blanco_score
+				value = 0
+			}
+		}
+		if = {
+			limit = { NOT = { has_global_variable = guerra_grande_colorado_score } }
+			set_global_variable = {
+				name = guerra_grande_colorado_score
+				value = 0
+			}
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_guerra_grande_status_factions
+				trigger = {
+					NOT = { has_global_variable = guerra_grande_open_war }
+				}
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_siege
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = { limit = { NOT = { has_global_variable = gg_debug_intervention_presses } } set_global_variable = { name = gg_debug_intervention_presses value = 0 } }
+			if = { limit = { NOT = { has_global_variable = gg_debug_italian_presses } } set_global_variable = { name = gg_debug_italian_presses value = 0 } }
+			if = { limit = { NOT = { has_global_variable = gg_debug_french_presses } } set_global_variable = { name = gg_debug_french_presses value = 0 } }
+			if = { limit = { NOT = { has_global_variable = gg_debug_montonera_presses } } set_global_variable = { name = gg_debug_montonera_presses value = 0 } }
+			if = { limit = { NOT = { has_global_variable = gg_debug_blockade_presses } } set_global_variable = { name = gg_debug_blockade_presses value = 0 } }
+			# EN/ES: instrumented 2026-09-16 -- Juan reported the Defensa's forces "evaporating"
+			#     across two playthroughs and asked for a way to log what is happening. First
+			#     attempt used .HasModifier('x')/.IsSet as text-interpolation functions; NEITHER
+			#     EXISTS in 1.13.11 (verified: .GetModifier returns an object, not a bool; no
+			#     .IsSet usage anywhere in the game's own localization). Rewritten to branch in
+			#     script with has_modifier as a TRIGGER (verified today against
+			#     common/scripted_buttons/caudillo_buttons.txt) and log a plain string per branch,
+			#     instead of trusting an unverified loc function -- the same mistake this session
+			#     spent all day catching in other people's code.
+			if = {
+				limit = { has_global_variable = guerra_grande_open_war }
+				c:URU ?= {
+					if = {
+						limit = { has_modifier = guerra_grande_walls_of_montevideo }
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa has walls_of_montevideo"
+					}
+					else = {
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa MISSING walls_of_montevideo"
+					}
+					if = {
+						limit = { has_modifier = gg_siege_the_sea_lane_stays_open }
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa has sea_lane_stays_open"
+					}
+					else = {
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa MISSING sea_lane_stays_open"
+					}
+				}
+				if = {
+					limit = { has_global_variable = guerra_grande_foreign_intervention }
+					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS foreign_intervention is SET"
+				}
+				else = {
+					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS foreign_intervention NOT set"
+				}
+				c:CER ?= {
+					if = {
+						limit = { has_modifier = gg_siege_no_breaching_guns }
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Cerrito has no_breaching_guns"
+					}
+					if = {
+						limit = { has_modifier = gg_siege_the_land_frontier_stays_open }
+						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Cerrito has land_frontier_stays_open"
+					}
+				}
+			}
+			# EN: the pre-war needle moves ONLY when the player chooses. It used to drift on a
+			#     monthly roll -- and it drifted the wrong way, pushing the bar towards the
+			#     colorados whenever the country was on the blanco path, because that roll did not
+			#     follow the sign convention the rest of the mod uses (blanco positive). Worse, the
+			#     drift never touched the score, so the needle and the numbers printed in this very
+			#     entry disagreed. A bar that moves on its own and contradicts its own tooltip
+			#     teaches the player nothing, so there is no drift: what you see is what you chose.
+			# ES: la aguja previa a la guerra se mueve SOLO cuando el jugador elige. Antes derivaba
+			#     con una tirada mensual, y derivaba para el lado equivocado: empujaba la barra
+			#     hacia los colorados cuando el pais iba por el camino blanco, porque esa tirada no
+			#     seguia la convencion de signo del resto del mod (blanco positivo). Peor: la deriva
+			#     nunca tocaba el marcador, asi que la aguja y los numeros que imprime esta misma
+			#     entrada se contradecian. Una barra que se mueve sola y se contradice a si misma no
+			#     le ensenia nada al jugador, asi que no hay deriva: lo que ves es lo que elegiste.
+			# Flavour only while the war is actually being fought.
+			if = {
+				limit = { has_global_variable = guerra_grande_open_war }
+				c:URU ?= { random_list = {
+					17 = {}
+					1 = { trigger_event = guerra_grande.6 }
+					1 = { trigger_event = guerra_grande.7 }
+				} }
+			}
+			# EN: the bar has to buy something. Five battles of lead give the leading government a
+			#     real advantage and grind the other down; ten decide the war and bring the losing
+			#     side to the table. Both modifiers are refreshed monthly, so they fade on their
+			#     own the moment the other side catches up.
+			# ES: la barra tiene que comprar algo. Cinco batallas de ventaja le dan al gobierno que
+			#     va ganando una ventaja de verdad y desgastan al otro; diez deciden la guerra y
+			#     sientan al que pierde a la mesa. Los dos modificadores se renuevan cada mes, asi
+			#     que se caen solos apenas el otro empata.
+			if = {
+				limit = { has_global_variable = guerra_grande_open_war }
+				if = {
+					limit = { guerra_grande_blanco_lead >= 5 }
+					c:CER ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
+					c:URU ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
+				}
+				else_if = {
+					limit = { guerra_grande_colorado_lead >= 5 }
+					c:URU ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
+					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
+				}
+				if = {
+					limit = {
+						OR = {
+							guerra_grande_blanco_lead >= 10
+							guerra_grande_colorado_lead >= 10
+						}
+						exists = c:CER
+						NOT = { has_global_variable = guerra_grande_peace_offered }
+					}
+					# EN: the peace goes to the side that earned it. This used to go to c:URU always, so
+					#     the Cerrito could reach ten of lead and still only get an offer made TO the
+					#     other side, whose default answer was to annex it.
+					# ES: la paz va al bando que la gano. Antes iba siempre a c:URU, asi que el Cerrito
+					#     podia llegar a diez de ventaja y aun asi solo conseguia una oferta hecha AL
+					#     otro bando, cuya respuesta por defecto era anexarlo.
+					# EN: routed by government mark, not by tag, so it survives the change_tag in option .b.
+					# ES: ruteado por marca de gobierno y no por tag, asi sobrevive al change_tag de .b.
+					if = {
+						limit = { guerra_grande_blanco_lead >= 10 }
+						random_country = {
+							limit = { has_variable = guerra_grande_cerrito_government }
+							trigger_event = { id = gg_peace.2 days = 3 popup = yes }
+						}
+					}
+					else = {
+						random_country = {
+							limit = { has_variable = guerra_grande_defensa_government }
+							trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+						}
+					}
+				}
+			}
+
+			# From 1851 on, the historical way out: a peace with neither victors nor vanquished.
+			if = {
+				limit = {
+					has_global_variable = guerra_grande_open_war
+					year >= 1851
+					exists = c:CER
+					NOT = { has_global_variable = guerra_grande_peace_offered }
+				}
+				c:URU ?= {
+					random_list = {
+						23 = {}
+						1 = {
+							if = {
+								limit = { guerra_grande_blanco_lead >= 1 }
+								random_country = {
+									limit = { has_variable = guerra_grande_cerrito_government }
+									trigger_event = { id = gg_peace.2 popup = yes }
+								}
+							}
+							else = {
+								random_country = {
+									limit = { has_variable = guerra_grande_defensa_government }
+									trigger_event = { id = gg_peace.1 popup = yes }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Se cierra cuando uno de los dos gobiernos absorbe al otro: la Republica vuelve a ser una.
+	complete = {
+		custom_tooltip = {
+			text = je_guerra_grande_complete_tt
+			AND = {
+				has_global_variable = guerra_grande_open_war
+				# EN: the war cannot end before the Republic has actually been divided.
+				# ES: la guerra no puede terminar antes de que la Republica se haya partido.
+				has_global_variable = guerra_grande_split_done
+				NAND = {
+					exists = c:CER
+					exists = c:URU
+				}
+				OR = {
+					# EN: the Defensa marched out and took the countryside back...
+					# ES: la Defensa salio de la plaza y recupero la campania...
+					c:URU ?= { any_scope_state = { state_region = s:STATE_SAN_JOSE } }
+					# EN: ...or the Cerrito finally walked into the city.
+					# ES: ...o el Cerrito por fin entro en la ciudad.
+					c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+				}
+			}
+		}
+	}
+
+	# Si el pais quedo repartido entre terceros, esto no es una victoria: es el fracaso.
+	fail = {
+		custom_tooltip = {
+			text = je_guerra_grande_fail_tt
+			OR = {
+				AND = {
+					has_global_variable = guerra_grande_open_war
+					# EN: the war cannot end before the Republic has actually been divided.
+					# ES: la guerra no puede terminar antes de que la Republica se haya partido.
+					has_global_variable = guerra_grande_split_done
+					# EN: Montevideo in nobody's hands but a foreign power's is the failure
+					#     condition: whoever wins the civil war, the city must stay oriental.
+					# ES: Montevideo en manos de una potencia extranjera es la condicion de
+					#     fracaso: gane quien gane la guerra civil, la ciudad debe ser oriental.
+					NOR = {
+						c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+						c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+					}
+				}
+				# EN: DEAD CHAIN, PRE-SPLIT. guerra_grande.3 is the only place that sets open_war and
+				#     split_done, and its own trigger demands that URU still exist and still hold Banda
+				#     Oriental and a state in Montevideo. If a foreign power strips URU of either between
+				#     Carpinteria (1836) and the split date (1839) -- mostly closed off elsewhere by a
+				#     diplomatic-play guard, but not impossible by other means -- or URU stops existing
+				#     outright, guerra_grande.3 silently never fires and open_war/split_done never get
+				#     set. Without this branch the entry then sits forever, unable to complete (needs
+				#     open_war) or fail (same), blocking the player's journal UI for the rest of the
+				#     campaign. This mirrors guerra_grande.3's own trigger, negated, plus a deadline: by
+				#     1840 every scheduled step of the chain (.1 at start+262 days, .2 at +765 more, .3 at
+				#     +110 more) has already either fired or died with its country, so nothing is still
+				#     in flight to rescue this after that.
+				# ES: CADENA MUERTA, PRE-PARTICION. guerra_grande.3 es el unico lugar que pone open_war y
+				#     split_done, y su propio trigger exige que URU siga existiendo y siga teniendo la
+				#     Banda Oriental y un estado en Montevideo. Si una potencia extranjera le saca a URU
+				#     cualquiera de las dos entre Carpinteria (1836) y la fecha de la particion (1839) --
+				#     en su mayoria cerrado por un guardia de diplomatic play en otro lado, pero no
+				#     imposible por otros medios -- o URU deja de existir directamente, guerra_grande.3
+				#     nunca dispara y open_war/split_done nunca se ponen. Sin esta rama la entrada queda
+				#     entonces trabada para siempre, sin poder completarse (necesita open_war) ni
+				#     fracasar (lo mismo), bloqueando la interfaz de diario del jugador el resto de la
+				#     partida. Es el espejo, negado, del propio trigger de guerra_grande.3, mas un plazo:
+				#     para 1840 cada paso agendado de la cadena (.1 al inicio+262 dias, .2 a +765 mas, .3
+				#     a +110 mas) ya disparo o murio con su pais, asi que despues de eso no queda nada en
+				#     vuelo que lo pueda salvar.
+				AND = {
+					NOT = { has_global_variable = guerra_grande_open_war }
+					year >= 1840
+					OR = {
+						NOT = { exists = c:URU }
+						c:URU ?= { NOT = { exists = s:STATE_BANDA_ORIENTAL.region_state:URU } }
+						c:URU ?= { NOT = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
+					}
+				}
+			}
+		}
+	}
+
+	on_fail_all_involved = {
+		add_modifier = {
+			name = guerra_grande_dismembered_republic
+			years = 15
+			is_decaying = yes
+		}
+		hidden_effect = {
+			remove_global_variable = guerra_grande_open_war
+		}
+	}
+
+	on_complete_all_involved = {
+		# EN: the peace menu already applied the modifier that fits -- or deliberately applied none.
+		#     Only a war that ended OUTSIDE the menu gets the default reconciliation. Without this,
+		#     a player who chose the proscriptions and the killings still collected a modifier
+		#     called "neither victors nor vanquished".
+		# ES: el menu de paz ya aplico el modificador que corresponde, o a proposito no aplico
+		#     ninguno. Solo una guerra terminada AFUERA del menu recibe la reconciliacion por
+		#     defecto. Sin esto, el que elegia las proscripciones y los degüellos igual se llevaba
+		#     un modificador llamado "ni vencidos ni vencedores".
+		if = {
+			limit = { NOT = { has_global_variable = gg_peace_settled } }
+			add_modifier = {
+				name = guerra_grande_no_victors_no_vanquished
+				years = 10
+				is_decaying = yes
+			}
+		}
+		hidden_effect = {
+			remove_global_variable = guerra_grande_open_war
+		}
+	}
+
+	weight = 100
+}

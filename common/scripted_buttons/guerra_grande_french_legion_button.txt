@@ -1,0 +1,145 @@
+﻿# EN: The French Legion of Montevideo. Sibling of guerra_grande_italian_legion_button in
+#     common/scripted_buttons/guerra_grande_buttons.txt: same visibility check, same gated
+#     possible block, same one-shot variable guard, same shape of effect. It is bigger because
+#     the corps was bigger -- see below.
+# ES: La Legion Francesa de Montevideo. Hermana de guerra_grande_italian_legion_button en
+#     common/scripted_buttons/guerra_grande_buttons.txt: mismo chequeo de visibilidad, mismo
+#     bloque possible, misma guarda de una sola vez, misma forma de efecto. Es mas grande
+#     porque el cuerpo era mas grande -- ver abajo.
+#
+# EN: The figures. The legion was raised in the first ten days of April 1843, with government
+#     authorisation, as an "auxiliary corps" of the line army of the capital. Its commander was
+#     colonel Jean-Chrysostome Thiebaut (1790-1851), a Marseillais veteran of the Grande Armee.
+#     It was "sin duda, el batallon mas poderoso de la guarnicion, llegando a reunir en algunos
+#     momentos mas [de] tres mil efectivos", falling to 1,134 effectives by March 1850. The
+#     garrison at the zenith of the mobilisation, February 1843, was about 6,500 combatants --
+#     so at its height this one corps was close to half of the defenders of Montevideo. The
+#     Italian Legion, by the same source, peaked around 700 militiamen and was down to a little
+#     over 300 by December 1850. That is the ratio this button is scaled to: roughly four to
+#     five French legionaries for every Italian one, not the other way round.
+#     Source: Mario Etchechury Barrera, "'Defensores de la humanidad y la civilizacion'. Las
+#     legiones extranjeras de Montevideo", Historia (PUC Chile) 50:II, 2017. Cited in full in
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md.
+# ES: Las cifras. La legion se formo en los diez primeros dias de abril de 1843, con
+#     autorizacion del gobierno, como "cuerpo auxiliar" del ejercito de linea de la capital. La
+#     mandaba el coronel Jean-Chrysostome Thiebaut (1790-1851), marsellés veterano de la Grande
+#     Armee. Fue "sin duda, el batallon mas poderoso de la guarnicion, llegando a reunir en
+#     algunos momentos mas [de] tres mil efectivos", y bajo a 1.134 efectivos en marzo de 1850.
+#     La guarnicion en el cenit de la movilizacion, febrero de 1843, era de unos 6.500
+#     combatientes: en su mejor momento este solo cuerpo era casi la mitad de los defensores de
+#     Montevideo. La Legion Italiana, segun la misma fuente, llego a unos 700 milicianos y cayo
+#     a poco mas de 300 en diciembre de 1850. Esa es la proporcion a la que esta escalado este
+#     boton: cuatro o cinco legionarios franceses por cada italiano, no al reves.
+#
+# EN: This is volunteers raised in Montevideo, NOT France entering the war. The French consul
+#     Theodore Pichon followed instructions from Paris and reaffirmed neutrality: he demanded
+#     the legionaries be discharged, banned the use of the French colours, and handed out money
+#     to discourage enlistment. The men served anyway, and in April 1844 they renounced French
+#     citizenship rather than disarm. No great power ever becomes a belligerent here.
+# ES: Son voluntarios reclutados en Montevideo, NO Francia entrando en la guerra. El consul
+#     frances Theodore Pichon siguio las instrucciones de Paris y reafirmo la neutralidad:
+#     exigio el licenciamiento de los legionarios, prohibio el uso de los colores franceses y
+#     repartio dinero para desalentar el enrolamiento. Sirvieron igual, y en abril de 1844
+#     renunciaron a la ciudadania francesa antes que desarmarse. Ninguna potencia se vuelve
+#     beligerante aca.
+guerra_grande_french_legion_button = {
+	name = guerra_grande_french_legion_button
+	desc = guerra_grande_french_legion_button_desc
+
+	visible = {
+		c:URU ?= this
+	}
+
+	possible = {
+		c:URU ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_variable = guerra_grande_french_legion_raised }
+		}
+		custom_tooltip = {
+			text = guerra_grande_requires_montevideo
+			any_scope_state = {
+				state_region = s:STATE_MONTEVIDEO
+			}
+		}
+		# EN: the legion cannot be raised twice. gg_contingent.4 in
+		#     events/guerra_grande_contingents.txt covers the same corps arriving on its own and
+		#     leaves guerra_grande_foreign_legions running; while that modifier is up, this
+		#     button is spent. Checking the modifier is the only read-only way to see that event's
+		#     outcome -- it sets no variable of its own.
+		# ES: la legion no se levanta dos veces. gg_contingent.4 en
+		#     events/guerra_grande_contingents.txt cubre el mismo cuerpo llegando solo y deja
+		#     corriendo guerra_grande_foreign_legions; mientras ese modificador este activo, este
+		#     boton esta gastado. Mirar el modificador es la unica forma de solo-lectura de ver el
+		#     resultado de ese evento: no fija ninguna variable propia.
+		custom_tooltip = {
+			text = guerra_grande_requires_no_foreign_legion_yet
+			NOT = { has_modifier = guerra_grande_foreign_legions }
+		}
+		year >= 1843
+	}
+
+	selected = {
+		has_variable = guerra_grande_french_legion_raised
+	}
+
+	effect = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON french_legion pressed by [THIS.GetNameNoFormatting]"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_french_presses } }
+			set_global_variable = { name = gg_debug_french_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_french_presses
+			add = 1
+		}
+		set_variable = guerra_grande_french_legion_raised
+		create_character = {
+			first_name = "Jean-Chrysostome"
+			last_name = "Thiebaut"
+			historical = yes
+			is_general = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			culture = cu:french
+			religion = rel:catholic
+			# EN: an old Napoleonic officer who held a line, not a raider. The Italian Legion's
+			#     Garibaldi gets the offensive traits; Thiebaut gets the wall.
+			# ES: un viejo oficial napoleonico que sostuvo una linea, no un asaltante. Garibaldi,
+			#     en la Legion Italiana, se lleva los rasgos ofensivos; Thiebaut, la muralla.
+			traits = {
+				experienced_defensive_strategist
+				persistent
+				meticulous
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_foreign_legions
+			years = 10
+			is_decaying = yes
+		}
+		trigger_event = { id = gg_legion.1 popup = yes }
+	}
+
+	# EN: higher than the Italian Legion's 50. The Defensa took every man it could get, and this
+	#     was the largest single body of them.
+	# ES: mas alto que el 50 de la Legion Italiana. La Defensa tomo todos los hombres que pudo, y
+	#     este era el cuerpo mas grande de todos.
+	ai_chance = {
+		value = 60
+	}
+}

@@ -1,0 +1,99 @@
+﻿l_spanish:
+
+# ES: El menú de paz de la Guerra Grande. Cada cláusula, decreto, fecha y cita de acá abajo está
+#     documentada en ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md y en los comentarios de
+#     events/guerra_grande_peace.txt. Acá no hay nada inventado, y donde el registro está en
+#     disputa el texto lo dice en vez de elegir bando.
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.1 -- la Defensa dicta la paz
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.1.t:0 "Las condiciones de la Defensa"
+ gg_peace.1.desc:0 "La guerra está decidida y, por primera vez en nueve años, este gobierno es el que escribe las condiciones en vez de esperar que llegue la escuadra de otro.\n\nLo que sigue no es obvio. La fórmula que circula desde Río de Janeiro termina la guerra negándose a nombrar un ganador, y le cuesta a este gobierno las confiscaciones, las proscripciones y la deuda de guerra de los del cerro. Los decretos de febrero de 1843 siguen vigentes: nunca se derogaron. El Imperio ofrece tratados. Dos ministros en diez años le pidieron a Londres y a París que tomaran la República bajo protección. Y está la otra orilla del río, donde el hombre que pagó esta guerra sigue en pie."
+ gg_peace.1.flav:0 "Nueve años adentro de una muralla, y ahora una hoja en blanco."
+
+ gg_peace.1.a:0 "Ni vencidos ni vencedores. Firmar, y pagarles las deudas."
+ gg_peace.1.b:0 "Los decretos de febrero de 1843 nunca se derogaron. Cumplirlos."
+ gg_peace.1.c:0 "Firmar los cinco tratados con el Imperio."
+ gg_peace.1.d:0 "Pedirle a Londres y a París que tomen la República bajo protección."
+ gg_peace.1.e:0 "Pacificar la República, y después cruzar el río a buscar a Rosas."
+ gg_peace.1.f:0 "Sin condiciones. Todavía no."
+
+ gg_peace_formula_tt:0 "El pacto del 8 de octubre de 1851, en su redacción firmada: se reconoce que la resistencia que hicieron los militares y ciudadanos a la intervención anglo-francesa fue en la creencia de que con ella defendían la independencia de la República; iguales derechos, iguales servicios y méritos y opción a los empleos públicos para todos los orientales, de la opinión que fueran; la República reconocerá como deuda nacional la que haya contraído el general Oribe; se elegirán senadores y representantes en todos los departamentos y ellos nombrarán al Presidente. Y la frase: entre las diferentes opiniones en que han estado divididos los orientales, no habrá vencidos ni vencedores.\n\nA Oribe no se lo proscribe. Una comisión de ciudadanos le pidió garantías a Urquiza y Urquiza las dio; se quedó en su quinta, sin que nadie lo molestara, hasta que murió en 1857."
+ gg_peace_proscription_defensa_tt:0 "10 de febrero de 1843: a comisión militar todo el que tenga trato con el ejército sitiador, y fusilado el que lo auxilie materialmente. 12 de febrero: fusilado «en el acto y por la espalda» todo oriental tomado con armas en la mano o con la divisa enemiga. 1 de marzo: expulsadas de la ciudad las familias de los que forman parte del ejército invasor y de todos los declarados prófugos y traidores por los edictos de Policía; algunas van a la isla Libertad.\n\nLas confiscaciones fueron de este gobierno antes que del otro: el decreto del Cerrito de junio de 1845 lo dice en su propio preámbulo. Ahora los decretos alcanzan a la campaña, que nunca estuvo al alcance. Del otro lado del río, la coalición que gana en Caseros va a entregar a los tribunales a los autores de las degollinas de 1840 y 1842; Eduardo Acevedo lo llama una diferencia notable con lo que se hizo de esta orilla. Esto es esa diferencia, tomada acá."
+ gg_peace_treaties_tt:0 "Cinco tratados, Río de Janeiro, 12 de octubre de 1851, firmados por Andrés Lamas. Alianza: el Imperio queda garante de la Constitución, con derecho a intervenir para restablecer el orden. Socorros: subsidio mensual, con la renta de aduana en garantía. Límites: frontera norte en el Cuareim, renuncia al reclamo de San Ildefonso y sin navegación de la Laguna Merín ni del Yaguarón —costa seca por cincuenta y ocho años, hasta 1909—. Comercio: diez años de exoneración al tasajo brasilero que entre y al ganado oriental que salga. Extradición: se devuelven los esclavos fugados, contra la propia ley de abolición de la República.\n\nEn diciembre de 1864 un gobierno oriental quemó estos tratados en una plaza pública. En febrero de 1865 el siguiente los restableció por decreto."
+ gg_peace_protectorate_asked_tt:0 "Manuel Herrera y Obes, canciller, les propuso a las dos potencias en 1848 un protectorado conjunto de Gran Bretaña y Francia. Es el cuarto acercamiento en diez años: Francisco José Muñoz le pidió a Londres en 1838 un arreglo como el de las Islas Jónicas, el canciller Vidal insistió por José Ellauri en 1841, y a Florencio Varela lo mandaron a Londres en 1843-44. Aparte, hombres de la colonia francesa de acá vienen empujando un protectorado francés propio, con el beneplácito de dirigentes de este gobierno y el respaldo del embajador francés en Río.\n\nNinguno de los acercamientos anteriores tuvo la respuesta que este gobierno quería oír. No hay razón para estar seguro de éste."
+ gg_peace_caseros_tt:0 "Herrera y Obes a los encargados de negocios inglés y francés, principios de setiembre de 1851, protestando por la disposición de ambos a embarcar de vuelta los batallones argentinos de Oribe: este gobierno está interesado en el aniquilamiento de ese ejército «por cuanto una vez pacificado el territorio nacional se iniciará la acción militar contra Rosas», y hay «positiva necesidad» de que esas tropas no vayan a reforzar las de la otra margen del Plata.\n\nDespués de que Urquiza se embarcó se firmó en Montevideo una nueva alianza entre la República, el Imperio, Entre Ríos y Corrientes. A la República le tocaba una división de dos mil hombres. Rosas cayó en Caseros el 3 de febrero de 1852."
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.2 -- el Cerrito dicta la paz
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.2.t:0 "Las condiciones del Cerrito"
+ gg_peace.2.desc:0 "Las puertas están abiertas. Nueve años sentados frente a un muro que este ejército no tenía un solo cañón capaz de abrir, y al final lo abrió el hambre, porque no vino ninguna escuadra.\n\nEste gobierno sostiene una sola cosa desde 1838 y nunca ninguna otra: que es el gobierno legal de la República, que a su presidente un alzamiento armado le cortó el mandato, y que todo lo que hizo acá afuera —las Cámaras, los tribunales, la aduana, las escuelas, la abolición de la esclavitud— lo hizo bajo la Constitución de 1830. Ahora puede decirlo desde la ciudad. O puede decir otra cosa. Hay una carta de Buenos Aires, de hace seis años, que nunca se contestó."
+ gg_peace.2.flav:0 "Treinta y cinco cañones y ninguno capaz de abrir un muro. Lo abrió el hambre."
+
+ gg_peace.2.a:0 "Ni vencidos ni vencedores. La cláusula era nuestra desde el principio."
+ gg_peace.2.b:0 "Sigue el mandato interrumpido. Todo decreto de ellos es nulo."
+ gg_peace.2.c:0 "Mueran los salvages unitarios. Que el diario diga lo que dice."
+ gg_peace.2.d:0 "Contestarle a Rosas: la República vuelve a la Confederación."
+ gg_peace.2.e:0 "El Restaurador pagó esta guerra. Que siga pagando."
+ gg_peace.2.f:0 "Sin condiciones. Todavía no."
+
+ gg_peace_oribe_pliego_tt:0 "La cláusula no vino del otro bando. Andrés Lamas acuñó la frase en Río de Janeiro, pero fue Oribe quien la escribió en las bases que mandó el 7 de octubre de 1851, y entró con el resto de su pliego: que se reconozca que la resistencia a la intervención anglo-francesa fue en defensa de la independencia de la República; que se declaren legales todos los actos gubernativos y judiciales ejercidos en el territorio que ocuparon sus armas, sin excluir las confiscaciones; que la Nación reconozca lo que su gobierno quedó adeudando; que sus batallones orientales queden bajo su mando hasta la elección constitucional de Presidente; y que entre las diferentes opiniones en que han estado divididos los orientales no haya vencidos ni vencedores.\n\nLe dieron una parte. Ganar es que le acepten el pliego entero."
+ gg_peace_legal_presidency_tt:0 "El argumento nunca cambió: Oribe era el Presidente constitucional, un alzamiento armado le cortó el mandato en 1838, y nunca dejó de ser Presidente. Sobre esa tesis este gobierno reunió las Cámaras disueltas y les hizo renovar el mandato, instaló el Tribunal de Apelaciones el 12 de mayo de 1845, aplicó la Constitución de 1830 como orden jurídico, habilitó el Buceo como puerto y levantó ahí una aduana, fundó una escuela normal en la Villa de la Restauración y en 1846 abolió la esclavitud en forma total e irrestricta.\n\nEntonces: el mandato sigue, y después hay elecciones bajo la Constitución. Sin proscripciones. Pero si aquel gobierno nunca fue legal, tampoco lo fue nada de lo que decretó: las confiscaciones son nulas y hay que deshacerlas, y las legiones extranjeras, que eran más de la mitad de los hombres de esos muros, no tienen título para quedarse."
+ gg_peace_proscription_cerrito_tt:0 "El encabezado de El Defensor de la Independencia Americana, el diario de este gobierno, desde el número 43 del 27 de octubre de 1845 hasta el último, el 29 de setiembre de 1851: «¡Vivan los defensores de las Leyes! ¡¡Mueran los salvages unitarios!!». El pregón del campamento agregaba los asquerosos franceses y el pardejón Rivera.\n\nLo que eso significó cuando se cumplió en vez de imprimirse está documentado del otro lado del río, en los partes del propio general. Después de Famaillá, más de 350 prisioneros pasados a cuchillo en el Rincón de Ugarte, el 21 de setiembre de 1841. En Metán, el 3 de octubre, le informó a Rosas que había mandado cortar la cabeza al salvaje unitario Avellaneda y que sería colocada a la expectación de los habitantes en la plaza pública de la ciudad de Tucumán. En Arroyo Grande fusilaron a los oficiales del ejército vencido.\n\nDe las 31.000 personas que hay adentro de esos muros, apenas unas 11.000 son orientales."
+ gg_peace_confederation_tt:0 "El 11 de agosto de 1845 Rosas propuso la reunificación de la patria: la República de vuelta en las Provincias Unidas del Río de la Plata, y anulada la Convención Preliminar de Paz de 1828, dictada —decía— por la conveniencia del Imperio Británico. El Presidente no quiso decidir. La mandó a una comisión parlamentaria y ahí se deshizo en nada.\n\nEsto es esa respuesta dada al revés, y conviene decir con claridad qué se sabe y qué no. Algunos historiadores sostienen que Oribe y Rosas pretendían anexar la República a la Confederación. Otros afirman lisa y llanamente que no existe documento que lo corrobore, y recuerdan que Oribe ya había rechazado la misma sugerencia en su primera presidencia, y que en 1835-36 peleó el tratado de comercio británico antes que cambiar soberanía por un empréstito de tres millones de pesos. La opción está disponible. Acá no se afirma que el hombre la quisiera."
+ gg_peace_rosista_client_tt:0 "La otra lectura de la misma relación, la que las imprentas de Montevideo martillaron durante nueve años. Rosas recibió a Oribe en Buenos Aires como Presidente legal de la República en el exilio, lo nombró general en jefe del Ejército Unido de Vanguardia de la Confederación, le prestó ese ejército para el sitio y lo financió hasta el final: en las últimas semanas todavía le mandaba ochocientas onzas de oro. El pueblo de atrás de la línea llevaba el nombre del Restaurador.\n\nEnfrente está la otra mitad del registro, y no es poca: cuando Rosas mandó de vuelta al coronel Ramos con órdenes de poner la división argentina bajo su propio jefe, Oribe lo puso bajo estricta vigilancia y lo amenazó con fusilarlo en el acto si las transmitía. Esta opción es la clientela sin esa segunda mitad."
+
+# ---------------------------------------------------------------------------------------------
+# gg_peace.3 / gg_peace.4 -- la respuesta de Londres y de París
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace.3.t:0 "Un protectorado concedido"
+ gg_peace.3.desc:0 "Llegó la respuesta, y es que sí. Francia toma la República bajo protección, con el consentimiento de Gran Bretaña, y el subsidio que viene por convención desde junio de 1848 pasa a ser una obligación en vez de un favor.\n\nEl puerto no se cierra nunca más y los inmigrantes van a seguir desembarcando. Lo que se entregó es más difícil de nombrar que una provincia, porque no está escrito en ninguna parte del instrumento: la República le pidió a una potencia europea que se parara encima de ella, y le dieron lo que pidió."
+ gg_peace.3.flav:0 "Es lo que se pidió. Ahí está el problema."
+ gg_peace.3.a:0 "La bandera queda. Todo lo que hay abajo se negocia en otra parte."
+
+ gg_peace.4.t:0 "Un protectorado rechazado"
+ gg_peace.4.desc:0 "Londres dice que no, y esta vez lo dice donde lo oye todo el mundo.\n\nEs el sexto rechazo del mismo pedido. Muñoz en 1838, pidiendo un arreglo como el de las Islas Jónicas. Ellauri en 1841. Varela en Londres en 1843-44. Y ahora éste. La República le dijo al mundo que no se cree capaz de gobernarse, y el mundo se negó a hacerse cargo. La propuesta salió en los diarios antes que la respuesta."
+ gg_peace.4.flav:0 "La humillación sin la protección."
+ gg_peace.4.a:0 "Entonces solos, y todos saben que no queríamos."
+
+# ---------------------------------------------------------------------------------------------
+# Modificadores
+# ---------------------------------------------------------------------------------------------
+
+ gg_peace_legal_presidency:0 "La presidencia legal restituida"
+ gg_peace_legal_presidency_desc:0 "El mandato interrumpido en 1838 sigue bajo la Constitución de 1830. Las Cámaras disueltas vuelven a sesionar, el Tribunal de Apelaciones instalado el 12 de mayo de 1845 queda en pie, y la administración que gobernó la campaña durante nueve años no hay que inventarla: se muda a la ciudad."
+
+ gg_peace_colorados_proscribed:0 "Mueran los salvages unitarios"
+ gg_peace_colorados_proscribed_desc:0 "El encabezado de El Defensor de la Independencia Americana, cumplido. De 31.000 personas adentro de las murallas apenas unas 11.000 eran orientales; las legiones eran extranjeras, las casas de comercio eran extranjeras y las imprentas eran de la emigración antirrosista. El puerto se vacía, y lo que lo hacía valioso se va con la gente que lo hacía."
+
+ gg_peace_confederation_province:0 "De vuelta en la Confederación"
+ gg_peace_confederation_province_desc:0 "La propuesta de Rosas del 11 de agosto de 1845 aceptada en vez de enterrada en una comisión parlamentaria: la República vuelve a las Provincias Unidas del Río de la Plata y se anula la Convención Preliminar de Paz de 1828. La campaña que peleó la guerra está de acuerdo. La ciudad, la emigración y todas las cancillerías de la cuenca, no."
+
+ gg_peace_rosista_client:0 "El Restaurador sigue pagando"
+ gg_peace_rosista_client_desc:0 "Buenos Aires sigue financiando y armando a la República como financió y armó el sitio: en las últimas semanas antes de la capitulación Rosas todavía mandaba ochocientas onzas de oro. La plata es real y el precio también: la República es ahora lo que sus enemigos dijeron siempre que era."
+
+ gg_peace_blancos_proscribed:0 "Los decretos de febrero de 1843"
+ gg_peace_blancos_proscribed_desc:0 "Fusilado en el acto y por la espalda el que tenga armas en la mano o la divisa enemiga; comisión militar para todo el que tenga trato con los sitiadores; familias expulsadas, algunas a la isla Libertad; las confiscaciones en pie. Aplicado por fin a la campaña, que pasó nueve años del otro lado de la línea y se va a acordar."
+
+ gg_peace_treaties_of_1851:0 "Los cinco tratados de 1851"
+ gg_peace_treaties_of_1851_desc:0 "Alianza, socorros, límites, comercio y extradición, firmados en Río de Janeiro el 12 de octubre de 1851. El Imperio garante de la Constitución y con derecho a intervenir para restablecer el orden; el subsidio llega todos los meses contra la renta de aduana; la frontera norte queda en el Cuareim y la costa de la Laguna Merín queda seca por cincuenta y ocho años; el tasajo entra libre diez años y el ganado sale libre diez años; y los esclavos fugados se devuelven, contra la propia ley de abolición de la República."
+
+ gg_peace_anglo_french_protectorate:0 "Bajo protección europea"
+ gg_peace_anglo_french_protectorate_desc:0 "El proyecto de Manuel Herrera y Obes de 1848, concedido: la República bajo la protección de Francia, con el consentimiento de Gran Bretaña. El puerto no se puede cerrar, los inmigrantes siguen desembarcando y el subsidio ahora se debe en vez de mendigarse. Al ejército, que pasó nueve años escuchando que defendía la independencia de la República, le acaban de decir cuánto valía esa independencia."
+
+ gg_peace_protectorate_refused:0 "Rechazados en público"
+ gg_peace_protectorate_refused_desc:0 "El sexto pedido de la misma clase y el sexto rechazo. La República le pidió a una potencia extranjera que la gobernara, el pedido salió en los diarios antes que la respuesta, y la respuesta fue que no. No se ganó nada y lo dicho no se puede desdecir."
+
+ gg_peace_march_on_buenos_aires:0 "Y después, al otro lado del río"
+ gg_peace_march_on_buenos_aires_desc:0 "Una vez pacificado el territorio nacional se iniciará la acción militar contra Rosas: Herrera y Obes escribió exactamente eso a los encargados de negocios inglés y francés en setiembre de 1851. La República pone una división en la alianza que va a encontrarse con Rosas en Caseros. El ejército nunca estuvo más alto y el tesoro nunca estuvo más vacío."
+
+ gg_peace_national_cockade:0 "La escarapela nacional"
+ gg_peace_national_cockade_desc:0 "Se prohíben las divisas colorada y blanca y se declara la escarapela nacional el único distintivo que puede llevar un ciudadano, con el fin de hacer desaparecer las opiniones y signos que separaban de los otros a los hijos del pueblo oriental. La Villa de la Restauración pasa a ser la Villa de la Unión. Los dos partidos pierden algo a lo que le tenían cariño, y el Estado gana una autoridad que nunca tuvo."
+
+ gg_peace_assumed_war_debt:0 "La deuda de ellos es ahora la de la Nación"
+ gg_peace_assumed_war_debt_desc:0 "La República reconocerá como deuda nacional aquella que haya contraído el general Oribe con arreglo a lo que para tales casos estatuye el derecho público. Es el artículo tercero del pacto, y es lo que costó de verdad la fórmula: el gobierno que ganó paga la guerra que peleó el otro."

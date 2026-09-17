@@ -1,0 +1,21 @@
+﻿# Cerrito Government - Manuel Oribe's blanco government during the Guerra Grande (1843-1851).
+# It is never present at game start: events/guerra_grande.txt creates it out of Uruguayan
+# territory once the war breaks out, the same way vanilla creates the Central American states.
+CER = {
+	# EN: the off-white washed out on the map against Uruguay's brown. This is the navy of Oribe's
+	#     own flag, #0020a6 -- the blue that told the Cerrito from the Defensa's celeste.
+	# ES: el blanco roto se lavaba en el mapa contra el marron de Uruguay. Este es el azul marino
+	#     de la bandera de Oribe, #0020a6: el que distinguia al Cerrito del celeste de la Defensa.
+	color = { 0 32 166 }
+
+	country_type = recognized
+
+	tier = principality
+
+	religion = catholic
+
+	cultures = { platinean }
+	# EN: the Cerrito camp sat on the hills just outside Montevideo -- that is Canelones now.
+	# ES: el campamento del Cerrito estaba en las cuchillas al lado de Montevideo: hoy Canelones.
+	capital = STATE_SAN_JOSE
+}

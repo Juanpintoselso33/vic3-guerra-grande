@@ -1,0 +1,53 @@
+﻿# EN: The flag of the Gobierno del Cerrito, as the image itself -- not redrawn from emblems.
+#     Source: Wikimedia Commons, "Flag of Uruguay (Oribe).svg" (Guilherme Paula, 2007), which the
+#     Spanish Wikipedia article "Gobierno del Cerrito" carries captioned "Bandera de Uruguay usada
+#     por el Gobierno del Cerrito". Rendered at 768x512 and stored as uncompressed ARGB8888 DDS,
+#     the same format la Argentina uses for its own flags.
+#     Oribe's government claimed to BE the lawful government of the Republic, so it flew the
+#     national flag. Its sister file, "Flag of Uruguay (Rivera).svg", is the one the Gobierno de
+#     la Defensa used: identical geometry, and the only difference is the blue -- #0020a6, a deep
+#     navy, against the Defensa's #75aadb celeste. That flag ships here too as te_defensa.dds, in
+#     case the Defensa is ever given its own wartime flag.
+#     What told Oribe's men apart in the field was not the flag but the divisa: by his decree of
+#     10 August 1836, a white ribbon on the hat with the motto "Defensor de las Leyes".
+# ES: La bandera del Gobierno del Cerrito, como imagen -- no redibujada con emblemas.
+#     Fuente: Wikimedia Commons, "Flag of Uruguay (Oribe).svg" (Guilherme Paula, 2007), que es la
+#     que lleva el articulo "Gobierno del Cerrito" de Wikipedia con el epigrafe "Bandera de Uruguay
+#     usada por el Gobierno del Cerrito". Renderizada a 768x512 y guardada como DDS ARGB8888 sin
+#     comprimir, el mismo formato que usa la Argentina para sus banderas.
+#     El gobierno de Oribe sostenia que ERA el gobierno legal de la Republica, asi que usaba la
+#     bandera nacional. Su archivo hermano, "Flag of Uruguay (Rivera).svg", es el que usaba el
+#     Gobierno de la Defensa: misma geometria, y lo unico que cambia es el azul -- #0020a6, marino,
+#     contra el celeste #75aadb de la Defensa. Esa bandera tambien viene incluida como
+#     te_defensa.dds, por si alguna vez le damos a la Defensa su bandera de guerra.
+#     Lo que distinguia a los suyos en el campo no era la bandera sino la divisa: por su decreto
+#     del 10 de agosto de 1836, cinta blanca en el sombrero con el lema "Defensor de las Leyes".
+
+CER = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_cerrito.dds"
+	}
+}
+
+# EN: And the Defensa's own flag, for Uruguay: "Flag of Uruguay (Rivera).svg", the file the
+#     Spanish Wikipedia article "Gobierno de la Defensa" carries captioned "Bandera de Uruguay
+#     usada por el Gobierno de la Defensa". Same image, downloaded and converted, not redrawn.
+#     It is the celeste variant of the national flag -- the period flag either way, so Uruguay
+#     flies it for the whole game.
+# ES: Y la bandera propia de la Defensa, para Uruguay: "Flag of Uruguay (Rivera).svg", el archivo
+#     que lleva el articulo "Gobierno de la Defensa" de Wikipedia con el epigrafe "Bandera de
+#     Uruguay usada por el Gobierno de la Defensa". La misma imagen, bajada y convertida, no
+#     redibujada. Es la variante celeste de la bandera nacional -- la bandera de la epoca de
+#     todos modos, asi que Uruguay la lleva toda la partida.
+URU = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_defensa.dds"
+	}
+}
+

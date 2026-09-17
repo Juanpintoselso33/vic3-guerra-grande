@@ -1,0 +1,586 @@
+﻿namespace = gg_contingent
+
+# EN: Neither Rosas nor the Empire of Brazil ever declared war on the Republic before 1851.
+#     They intervened through men: auxiliary battalions, subsidies and volunteers. These events
+#     reproduce that -- every contingent arrives as actual battalions, never as a war, so the
+#     Guerra Grande is not settled in one diplomatic play the month it starts.
+# ES: Ni Rosas ni el Imperio del Brasil le declararon la guerra a la Republica antes de 1851.
+#     Intervinieron con hombres: batallones auxiliares, subsidios y voluntarios. Estos eventos
+#     reproducen eso -- cada contingente llega como batallones de verdad, nunca como una guerra,
+#     para que la Guerra Grande no se resuelva en una sola jugada diplomatica el mes que empieza.
+#
+# Numbers are from Mario Etchechury Barrera, "'Defensores de la humanidad y la civilizacion'.
+# Las legiones extranjeras de Montevideo", Historia (PUC Chile) 50:II, 2017; Nicolas Duffau,
+# "Redes de espionaje y conspiraciones durante el inicio del Sitio Grande", ACHSC, 2019;
+# Alex Borucki, From Shipmates to Soldiers, UNM Press, 2015; and Mateo Magarinos de Mello,
+# El gobierno del Cerrito, 3 vols., Montevideo, 1948-1961.
+
+# 1839.9 - The Argentine emigres offer the Defensa a legion of their own. Etchechury 2017:
+# offered in September 1839, dissolved after the mutiny of April 1846.
+gg_contingent.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.1.t
+	desc = gg_contingent.1.d
+	flavor = gg_contingent.1.f
+
+	# EN: The Argentine Legion of the unitarian emigres.
+	event_image = {
+		video = "gg_leg_argentine"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+	}
+
+	# EN: Arming the proscripts is the grievance Rosas had been pressing on Montevideo since the
+	#     Correa Morales mission of 1836, whose written instructions (Arana to Correa Morales,
+	#     art. 2) were to obtain measures against "los Unitarios o perfidos Federales que han
+	#     emigrado". Taking the legion costs relations with Buenos Aires and the legion's pay --
+	#     the emigres asked for the same pay and rations as the other corps -- and buys the
+	#     Republic the corps that will bring it a commander -- but not yet: Paz was still under
+	#     libertad vigilada in Buenos Aires in September 1839 and did not reach Montevideo until
+	#     3 April 1840. He is created in gg_contingent.3, at the date he actually took the line.
+	# ES: armar a los proscriptos es el agravio que Rosas le venia reclamando a Montevideo desde
+	#     la mision Correa Morales de 1836, cuyas instrucciones escritas (Arana a Correa Morales,
+	#     art. 2) eran conseguir medidas contra "los Unitarios o perfidos Federales que han
+	#     emigrado". Tomar la legion cuesta relaciones con Buenos Aires y la paga del cuerpo, y
+	#     trae despues al general -- pero no todavia: en septiembre de 1839 Paz seguia en Buenos
+	#     Aires con libertad vigilada y recien llego a Montevideo el 3 de abril de 1840. Se crea
+	#     en gg_contingent.3, en la fecha en que de verdad tomo la linea.
+	option = {
+		name = gg_contingent.1.a
+		default_option = yes
+		set_variable = guerra_grande_argentine_legion_raised
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		add_treasury = -10000
+		c:ARG ?= {
+			change_relations = { country = ROOT value = -30 }
+		}
+		custom_tooltip = gg_contingent_paz_will_come
+		add_modifier = {
+			name = guerra_grande_argentine_emigres
+			years = 7
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 80
+		}
+	}
+
+	# EN: Paz and Iriarte both wrote that the emigres were a political faction as much as a corps.
+	#     Turning them away is the concession Buenos Aires had been asking for since 1836: it costs
+	#     the legion and the general, and it buys a thaw with Rosas that no modifier can fake.
+	# ES: Paz e Iriarte escribieron los dos que los emigrados eran tanto una faccion politica como
+	#     un cuerpo. Negarles la legion es la concesion que Buenos Aires venia pidiendo desde 1836:
+	#     cuesta la legion y el general, y compra un deshielo con Rosas.
+	option = {
+		name = gg_contingent.1.b
+		c:ARG ?= {
+			change_relations = { country = ROOT value = 30 }
+		}
+		c:CER ?= {
+			change_relations = { country = ROOT value = 15 }
+		}
+		add_modifier = {
+			name = guerra_grande_armed_truce
+			years = 3
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+
+# 1843.2 - The Basque-Navarrese battalion raised in May 1842 deserts to Oribe's camp, where it
+# is merged into the Batallon de Voluntarios, in effect a Spanish legion on the besiegers' side
+# (Etchechury 2017).
+gg_contingent.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.3.t
+	desc = gg_contingent.3.d
+	flavor = gg_contingent.3.f
+
+	# EN: The Basque desertion.
+	event_image = {
+		video = "gg_leg_basque_desertion"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+	}
+
+	# EN: the battalion changing sides was hidden in an immediate, so the player saw a modifier and
+	#     nothing else. It is the whole point of the event: it belongs in the option, where the
+	#     tooltip shows it. ES: el batallon que cambia de bando estaba escondido en un immediate,
+	#     asi que el jugador solo veia un modificador. Es el evento entero: va en la opcion.
+	option = {
+		name = gg_contingent.3.a
+		default_option = yes
+		# EN: "Los Aguerridos" walk out of the lines under arms and are merged into Oribe's
+		#     Batallon de Voluntarios (Etchechury 2017). The Cerrito gains the battalion.
+		# ES: "Los Aguerridos" se van de la linea con sus armas y se funden en el Batallon de
+		#     Voluntarios de Oribe (Etchechury 2017). El Cerrito gana el batallon.
+		c:CER ?= {
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = 1
+				}
+			}
+		}
+		# EN: and the plaza has to re-man and re-arm the sector they left, out of the siege
+		#     economy -- the decree of 7 January 1843 authorised up to 500,000 pesos raised by any
+		#     means short of printing money, "destinado solo exclusivamente a los gastos de la
+		#     defensa de la Republica" (Contente, La fiscalidad de la guerra permanente, 2010).
+		# ES: y la plaza tiene que rehacer y rearmar el sector que dejaron, con la economia de
+		#     sitio: el decreto del 7 de enero de 1843 autorizo hasta 500.000 pesos por cualquier
+		#     medio salvo emitir, "destinado solo exclusivamente a los gastos de la defensa".
+		add_treasury = -10000
+		# EN: and the emigres, if their legion was allowed in 1839, bring the plaza the one
+		#     professional soldier it had. Paz reached Montevideo on 3 April 1840 and, when the
+		#     news of Arroyo Grande arrived on 12 December 1842, was named commander in chief of
+		#     the Ejercito de Reserva; he organised the defence and held the command until he left
+		#     for Brazil in mid-1844. "Esto no es, ni puede ser egercito" is his own verdict on the
+		#     garrison he was handed. Refuse the legion in 1839 and no one takes the line here.
+		# ES: y los emigrados, si en 1839 se les dejo formar la legion, le traen a la plaza el
+		#     unico soldado profesional que tuvo. Paz llego a Montevideo el 3 de abril de 1840 y,
+		#     al llegar la noticia de Arroyo Grande el 12 de diciembre de 1842, fue nombrado
+		#     comandante en jefe del Ejercito de Reserva; organizo la defensa y mantuvo el mando
+		#     hasta que se fue al Brasil a mediados de 1844. Sin legion en 1839, nadie toma la linea.
+		if = {
+			limit = { has_variable = guerra_grande_argentine_legion_raised }
+			create_character = {
+				first_name = "Jose Maria"
+				last_name = "Paz"
+				historical = yes
+				is_general = yes
+				interest_group = ig_armed_forces
+				ideology = ideology_republican_leader
+				culture = cu:platinean
+				religion = rel:catholic
+				traits = {
+					experienced_defensive_strategist
+					meticulous
+				}
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_basque_desertion
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 1843.4.7 - Thiebaut gathers the French residents at the Teatro Nacional. The corps reaches more
+# than 3,000 effectives at its height and is still 1,134 strong in March 1850 (Etchechury 2017,
+# note 61, on the AGNU states of force). In October 1843 the legionaries renounce French
+# citizenship rather than disarm, and become the 2a Legion de Guardias Nacionales.
+gg_contingent.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.4.t
+	desc = gg_contingent.4.d
+	flavor = gg_contingent.4.f
+
+	# EN: The French Legion is raised in Montevideo.
+	event_image = {
+		video = "gg_leg_french"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		# EN: the button can raise this same legion from 1843, and it sets this variable. Without
+		#     the guard a Defensa player who pressed it between January and 7 April 1843 got
+		#     Thiebaut and his battalions, and then the event's on top. Its sibling
+		#     gg_contingent.5 already guards this way; this one did not.
+		# ES: el boton puede levantar esta misma legion desde 1843 y deja puesta esta variable.
+		#     Sin la guarda, el jugador de la Defensa que lo apretaba entre enero y el 7 de
+		#     abril de 1843 se llevaba a Thiebaut y sus batallones, y despues los del evento
+		#     encima. Su hermano gg_contingent.5 ya se guardaba asi; este no.
+		NOT = { has_variable = guerra_grande_french_legion_raised }
+		this = c:URU
+		exists = c:CER
+	}
+
+	option = {
+		name = gg_contingent.4.a
+		default_option = yes
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		# EN: Paris demanded the corps disarm and the consul was paying legionaries to go home.
+		#     In October 1843 they renounced French citizenship instead and took the oriental
+		#     flag -- five thousand French subjects lost to France in a month. France notices.
+		# ES: Paris exigio que el cuerpo se desarmara y el consul pagaba para que se volvieran.
+		#     En octubre de 1843 renunciaron a la ciudadania francesa y tomaron la bandera
+		#     oriental. Cinco mil subditos franceses perdidos en un mes: Francia lo registra.
+		c:FRA ?= {
+			change_relations = { country = ROOT value = -30 }
+		}
+		add_modifier = {
+			name = guerra_grande_foreign_legions
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 90
+		}
+	}
+
+	# EN: Paris pressed for the legion to be disbanded. Refusing it is not a mood -- it gives
+	#     France exactly what its consul was buying, and it kills the Cazadores Vascos of 1845,
+	#     because those companies were companies OF this legion (Etchechury 2017, n. 78). No
+	#     French Legion in 1843, nothing for the Basques to split from in 1845.
+	# ES: Paris presiono para que la legion se disolviera. Negarla no es un gesto: le da a Francia
+	#     lo que su consul estaba comprando, y mata a los Cazadores Vascos de 1845, porque esas
+	#     companias eran companias DE esta legion (Etchechury 2017, n. 78). Sin Legion Francesa en
+	#     1843 no hay de que separarse en 1845.
+	option = {
+		name = gg_contingent.4.b
+		set_variable = guerra_grande_french_legion_refused
+		c:FRA ?= {
+			change_relations = { country = ROOT value = 40 }
+		}
+		custom_tooltip = gg_contingent_no_basque_chasseurs
+		add_modifier = {
+			name = guerra_grande_armed_truce
+			years = 3
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# 1843.4.9 - Garibaldi's note to the Ministry of War. The Italian Legion runs between 500 and 700
+# men, down to a little over 300 by December 1850, and fights as an amphibious corps beyond the
+# walls -- Tres Cruces 1843, San Antonio 1846 (Etchechury 2017; Bourne, Garibaldi in South
+# America, Hurst, 2020).
+gg_contingent.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.5.t
+	desc = gg_contingent.5.d
+	flavor = gg_contingent.5.f
+
+	# EN: Garibaldi's Italian Legion.
+	event_image = {
+		video = "gg_leg_italian"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		NOT = { has_variable = guerra_grande_italian_legion_raised }
+	}
+
+	option = {
+		name = gg_contingent.5.a
+		default_option = yes
+		set_variable = guerra_grande_italian_legion_raised
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_italian_legion
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 90
+		}
+	}
+}
+
+# 1845.4 - The Basque companies split from the French Legion over regional pride and an
+# embezzlement row, and become the Regimiento de Cazadores Vascos under Jean Baptiste Brie,
+# between four and six hundred militiamen (Etchechury 2017, notes 61 and 78).
+gg_contingent.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.6.t
+	desc = gg_contingent.6.d
+	flavor = gg_contingent.6.f
+
+	# EN: The Regimiento de Cazadores Vascos splits off.
+	event_image = {
+		video = "gg_leg_basque_chasseurs"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		# The Basque companies were companies of the French Legion. No legion, no split.
+		NOT = { has_variable = guerra_grande_french_legion_refused }
+	}
+
+	option = {
+		name = gg_contingent.6.a
+		default_option = yes
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# Rosas' answer: not a war, a contingent. Oribe commanded the Ejercito Unido de Vanguardia of the
+# Argentine Confederation -- Batallon Libertad, Independencia, Patricios n3, Lanceros y Dragones
+# de Buenos Aires and a flying battery, all listed in Magarinos de Mello's documents. He crossed
+# with close to 7,000 men in 1842 (Duffau 2019).
+gg_contingent.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.7.t
+	desc = gg_contingent.7.d
+	flavor = gg_contingent.7.f
+
+	# EN: Rosas' auxiliaries reach the Cerrito.
+	event_image = {
+		video = "gg_leg_rosista"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+	}
+
+	option = {
+		name = gg_contingent.7.a
+		default_option = yes
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SAN_JOSE
+				count = 2
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_argentine_auxiliaries
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 1851.9.4 - Caxias crosses the Quarai and the Santana pass with 16,200 men in four divisions
+# (pt.wikipedia, Campanha do Uruguai, on the Brazilian army's own figures; the AHIMTB chronology
+# dates the junction with Urquiza to 14 October). Oribe capitulated on 8 October without a
+# battle. The price was signed four days later: the five treaties of 12 October 1851, with a
+# subsidy of 60,000 patacones a month and the customs of the Republic mortgaged as security.
+gg_contingent.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_contingent.8.t
+	desc = gg_contingent.8.d
+	flavor = gg_contingent.8.f
+
+	# EN: Caxias crosses the border, 4 Sept 1851.
+	event_image = {
+		video = "gg_leg_caxias"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		year >= 1851
+		NOT = { has_global_variable = guerra_grande_treaties_signed }
+	}
+
+	# EN: THE INTERVENTION THAT ENDED THE WAR. This is not a flavour choice and it must not read
+	#     like one. Signing puts the allied army in the field, ends the claim on the Laguna Merin
+	#     and brings Oribe's capitulation within the month; refusing leaves the claim standing, the
+	#     Empire as a declared rival, and the siege exactly where it was.
+	#     The money side of the 12 October treaties is not repeated here -- it belongs to the
+	#     gg_loan chain. Contingents hand over men, loans hand over money.
+	# ES: LA INTERVENCION QUE TERMINO LA GUERRA. No es una eleccion de color y no debe leerse como
+	#     tal. Firmar pone el ejercito aliado en campana, liquida el reclamo sobre la Laguna Merin
+	#     y trae la capitulacion de Oribe en el mes; negarse deja el reclamo en pie, al Imperio
+	#     como rival declarado y el sitio donde estaba.
+	#     La parte financiera de los tratados del 12 de octubre no se repite aca: es de la cadena
+	#     gg_loan. Los contingentes dan hombres, los emprestitos dan plata.
+	option = {
+		name = gg_contingent.8.a
+		default_option = yes
+		set_global_variable = guerra_grande_treaties_signed
+		# EN: the convention of alliance of 29 May 1851 (Brazil, Uruguay, Entre Rios), article I:
+		#     the allies bind themselves "a hacer salir del territorio de esta al General D. Manuel
+		#     Oribe y las fuerzas argentinas que manda". The Ejercito Aliado of the Campanha do
+		#     Uruguai took the field on that article. Scaled like Oribe's ~7.000 in gg_contingent.7.
+		# ES: la convencion de alianza del 29 de mayo de 1851 (Brasil, Uruguay, Entre Rios), art. I:
+		#     los aliados se obligan "a hacer salir del territorio de esta al General D. Manuel
+		#     Oribe y las fuerzas argentinas que manda". Escalado como los ~7.000 de Oribe en
+		#     gg_contingent.7.
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = Ejercito_Aliado
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+		}
+		c:BRZ ?= {
+			change_relations = { country = ROOT value = 100 }
+		}
+		add_modifier = {
+			name = guerra_grande_brazilian_subsidy
+			years = 15
+			is_decaying = yes
+		}
+		# The limits treaty of the same day: the Republic renounces the Laguna Merin and the
+		# Campos Neutrales. El tratado de limites del mismo dia: la Republica renuncia a la
+		# Laguna Merin y a los Campos Neutrales.
+		s:STATE_RIO_GRANDE_DO_SUL ?= {
+			remove_claim = c:URU
+		}
+		# EN: Oribe capitulated on 8 October 1851, thirty-four days after Caxias crossed, without a
+		#     battle. The chain was already here but it was buried in a hidden_effect, so the
+		#     player saw a modifier and nothing else. ES: Oribe capitulo el 8 de octubre de 1851,
+		#     treinta y cuatro dias despues del cruce, sin batalla. La cadena ya estaba, pero
+		#     enterrada en un hidden_effect: el jugador veia un modificador y nada mas.
+		custom_tooltip = gg_contingent_capitulation_follows
+		hidden_effect = {
+			# EN: the capitulation that follows. guerra_grande.8 was replaced by the peace menu,
+			#     which routes by government mark instead of by tag.
+			# ES: la capitulacion que sigue. guerra_grande.8 fue reemplazado por el menu de paz,
+			#     que rutea por marca de gobierno en vez de por tag.
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.1 days = 34 popup = yes }
+			}
+		}
+		ai_chance = {
+			base = 85
+		}
+	}
+
+	# EN: Refusing the Empire leaves the Republic nobody's client and nobody's ally. The limits
+	#     treaty is what extinguished the claim founded on the reserve of the 1821 incorporation
+	#     and the San Ildefonso line; unsigned, the claim stands -- and so does Brazil, which held
+	#     the Laguna Merin in fact since 1801, with sixteen thousand men on the frontier and its
+	#     own negotiator writing that "en cuestion de territorio el titulo verdadero es fuerza"
+	#     (Lamas to his minister, 13 October 1851). And there is no capitulation: the siege goes on.
+	# ES: negarse deja a la Republica sin patron y sin aliado. El tratado de limites es lo que
+	#     extinguio el reclamo fundado en la reserva de la incorporacion de 1821 y en la linea de
+	#     San Ildefonso; sin firma, el reclamo queda en pie -- y tambien el Brasil, que tenia la
+	#     Laguna Merin de hecho desde 1801, con dieciseis mil hombres en la frontera y su propio
+	#     negociador escribiendo que "en cuestion de territorio el titulo verdadero es fuerza"
+	#     (Lamas a su ministro, 13 de octubre de 1851). Y no hay capitulacion: el sitio sigue.
+	option = {
+		name = gg_contingent.8.b
+		c:BRZ ?= {
+			change_relations = { country = ROOT value = -50 }
+			create_diplomatic_pact = {
+				country = ROOT
+				type = rivalry
+			}
+		}
+		custom_tooltip = gg_contingent_claim_stands
+		custom_tooltip = gg_contingent_no_capitulation
+		add_modifier = {
+			name = guerra_grande_alone_against_the_siege
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+}

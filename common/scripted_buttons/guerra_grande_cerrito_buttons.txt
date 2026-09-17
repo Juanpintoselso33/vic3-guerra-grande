@@ -1,0 +1,246 @@
+﻿# EN: The Cerrito's two buttons, the counterpart to the Defensa's legion buttons. They are
+#     deliberately NOT foreign legions. The asymmetry is the historical point: the Defensa bought
+#     men from outside with foreign money and a port, while the Cerrito raised its own from the
+#     countryside it already held and squeezed the one thing the city could not do without --
+#     the sea. Neither button makes a foreign power a belligerent: the montonera is oriental, and
+#     Rosas lending Brown's squadron is support, exactly as Oribe's Argentine battalions in
+#     gg_contingent.7 are a contingent and not a declaration of war.
+# ES: Los dos botones del Cerrito, contraparte de los botones de legiones de la Defensa. A
+#     proposito NO son legiones extranjeras. La asimetria es el punto historico: la Defensa
+#     compraba hombres de afuera con plata extranjera y un puerto, mientras el Cerrito levantaba
+#     los suyos de la campania que ya tenia y apretaba lo unico sin lo que la ciudad no podia
+#     vivir: el mar. Ninguno de los dos vuelve beligerante a una potencia: la montonera es
+#     oriental, y que Rosas preste la escuadra de Brown es apoyo, igual que los batallones
+#     argentinos de Oribe en gg_contingent.7 son un contingente y no una declaracion de guerra.
+#
+# Sources / Fuentes: see ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md, section 3.
+
+# EN: Levy the countryside. The Cerrito held the whole Republic except Montevideo (and Colonia)
+#     from 1843 to 1851, and that relation with the rural world is what gave the Partido Blanco
+#     its profile. Oribe divided the country into two great military circumscriptions, north and
+#     south of the Rio Negro, under generals Servando Gomez and Ignacio Oribe, with military
+#     commanders in each department -- an apparatus for raising men off the estancias. It worked:
+#     in 1851, after eight years of war, he still had some 8,000 men and 25 guns at the siege
+#     lines, 4,000 more under Ignacio Oribe north of the Rio Negro and a 1,500-strong vanguard on
+#     the Uruguay. Horses were the currency of it -- Urquiza took some 6,000 head off Ignacio
+#     Oribe's retreating force in a single move.
+# ES: Levantar la campania. El Cerrito controlo toda la Republica menos Montevideo (y Colonia)
+#     entre 1843 y 1851, y esa relacion con el medio rural es lo que le dio su perfil al Partido
+#     Blanco. Oribe dividio el pais en dos grandes circunscripciones militares, al norte y al sur
+#     del Rio Negro, al mando de los generales Servando Gomez e Ignacio Oribe, con comandantes
+#     militares en cada departamento: un aparato para sacar hombres de las estancias. Funciono:
+#     en 1851, despues de ocho anios de guerra, todavia tenia unos 8.000 hombres y 25 piezas en
+#     la linea del sitio, 4.000 mas con Ignacio Oribe al norte del Rio Negro y una vanguardia de
+#     1.500 sobre el Uruguay. Los caballos eran la moneda -- Urquiza le saco unos 6.000 a la
+#     fuerza en retirada de Ignacio Oribe de un solo golpe.
+guerra_grande_montonera_levy_button = {
+	name = guerra_grande_montonera_levy_button
+	desc = guerra_grande_montonera_levy_button_desc
+
+	visible = {
+		c:CER ?= this
+	}
+
+	possible = {
+		c:CER ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_variable = guerra_grande_montonera_levy_raised }
+		}
+		# EN: the mirror of the Defensa's "we must hold Montevideo": the Cerrito levies the
+		#     countryside, so it has to hold some of it.
+		# ES: el espejo del "tenemos que tener Montevideo" de la Defensa: el Cerrito levanta la
+		#     campania, asi que tiene que tener campania.
+		custom_tooltip = {
+			text = guerra_grande_requires_campana
+			any_scope_state = {
+				state_region = s:STATE_SAN_JOSE
+			}
+		}
+	}
+
+	selected = {
+		has_variable = guerra_grande_montonera_levy_raised
+	}
+
+	effect = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON montonera pressed by [THIS.GetNameNoFormatting]"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_montonera_presses } }
+			set_global_variable = { name = gg_debug_montonera_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_montonera_presses
+			add = 1
+		}
+		set_variable = guerra_grande_montonera_levy_raised
+		# EN: cavalry first and most of it. This is the one thing the besiegers had that the city
+		#     could never buy: men who came with their own horses.
+		# ES: caballeria primero y casi todo. Es lo unico que tenian los sitiadores que la ciudad
+		#     no podia comprar: hombres que venian con caballo propio.
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SAN_JOSE
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 1
+			}
+		}
+		# EN: this modifier is already the mod's name for what the levy renews -- caudillos,
+		#     estancias and the parish militias. If the Cerrito already carries it from the
+		#     faction choice, applying it again refreshes the duration rather than stacking, which
+		#     is the intended reading: the countryside is called on a second time.
+		# ES: este modificador ya es el nombre que el mod le da a lo que renueva la leva:
+		#     caudillos, estancias y milicias de parroquia. Si el Cerrito ya lo trae de la eleccion
+		#     de bando, aplicarlo de nuevo renueva la duracion en vez de acumularse, que es la
+		#     lectura buscada: se llama a la campania por segunda vez.
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+			is_decaying = yes
+		}
+		# EN: and this is the price. Every man on a horse is a man off the estancia; the levy is
+		#     paid for by the rural economy, not by a customs house.
+		# ES: y este es el precio. Cada hombre a caballo es un hombre menos en la estancia; la leva
+		#     la paga la economia rural, no una aduana.
+		add_radicals = {
+			value = medium_radicals
+			strata = lower
+		}
+	}
+
+	ai_chance = {
+		value = 70
+	}
+}
+
+# EN: Ask Rosas to close the river. The Defensa's single strength is the port: Montevideo held
+#     out because the sea stayed open. Rosas saw it too. He decreed on 9 March 1843 that from 1
+#     April the port would be under blockade, and admiral Guillermo Brown -- commander-in-chief of
+#     the Confederation squadron since 3 February 1841 -- enforced it by sea while Oribe besieged
+#     by land from 16 February 1843. Had it held, it "hubiera provocado un rapido colapso de los
+#     defensores"; Britain forced it lifted, commodore John Brett Purvis refusing to recognise it
+#     and victualling the city, and it was reimposed from June 1843 once London disavowed him.
+#     It ended for good on 2-3 August 1845, when the Anglo-French squadrons seized Brown's six
+#     warships off Montevideo -- "el robo de la escuadra" -- and blockaded the Confederation
+#     instead, from 2 August 1845 to 31 August 1850, leaving Montevideo the one open port.
+# ES: Pedirle a Rosas que cierre el rio. La unica fuerza de la Defensa es el puerto: Montevideo
+#     aguanto porque el mar siguio abierto. Rosas tambien lo vio. Decreto el 9 de marzo de 1843
+#     que desde el 1 de abril el puerto quedaba bloqueado, y el almirante Guillermo Brown --
+#     comandante en jefe de la escuadra de la Confederacion desde el 3 de febrero de 1841 -- lo
+#     hizo cumplir por mar mientras Oribe sitiaba por tierra desde el 16 de febrero de 1843. Si
+#     se hubiera sostenido, "hubiera provocado un rapido colapso de los defensores"; Gran Bretania
+#     forzo su levantamiento, con el comodoro John Brett Purvis negandose a reconocerlo y
+#     abasteciendo a la ciudad, y se reimpuso desde junio de 1843 cuando Londres lo desautorizo.
+#     Se termino del todo el 2-3 de agosto de 1845, cuando las escuadras anglo-francesas se
+#     apoderaron de los seis buques de Brown frente a Montevideo -- "el robo de la escuadra" -- y
+#     bloquearon a la Confederacion, del 2 de agosto de 1845 al 31 de agosto de 1850, dejando a
+#     Montevideo como unico puerto abierto.
+guerra_grande_river_blockade_button = {
+	name = guerra_grande_river_blockade_button
+	desc = guerra_grande_river_blockade_button_desc
+
+	visible = {
+		c:CER ?= this
+	}
+
+	possible = {
+		c:CER ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_variable = guerra_grande_river_blockade_asked }
+		}
+		custom_tooltip = {
+			text = guerra_grande_requires_rosas
+			exists = c:ARG
+		}
+		# EN: the historical counterplay, and it is already in the mod. Once the Defensa has
+		#     pressed guerra_grande_foreign_intervention_button the Anglo-French squadrons are in
+		#     the river, and after August 1845 there was no Argentine squadron left to blockade
+		#     with. This is the one button in the pair that the other side can take off the board.
+		# ES: la contrajugada historica, y ya esta en el mod. Una vez que la Defensa apreto
+		#     guerra_grande_foreign_intervention_button, las escuadras anglo-francesas estan en el
+		#     rio, y despues de agosto de 1845 no quedaba escuadra argentina con que bloquear. Es
+		#     el unico boton del par que el otro bando puede sacar del tablero.
+		custom_tooltip = {
+			text = guerra_grande_requires_river_unwatched
+			NOT = { has_global_variable = guerra_grande_foreign_intervention }
+		}
+		year >= 1843
+	}
+
+	selected = {
+		has_variable = guerra_grande_river_blockade_asked
+	}
+
+	effect = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON blockade pressed by [THIS.GetNameNoFormatting]"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_blockade_presses } }
+			set_global_variable = { name = gg_debug_blockade_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_blockade_presses
+			add = 1
+		}
+		set_variable = guerra_grande_river_blockade_asked
+		# EN: Rosas' backing comes with the squadron: money, cattle and veterans.
+		# ES: el apoyo de Rosas viene con la escuadra: plata, ganado y veteranos.
+		add_modifier = {
+			name = guerra_grande_rosista_support
+			years = 8
+			is_decaying = yes
+		}
+		# EN: and the city gets the same blockade modifier the Defensa's own button puts on the
+		#     Confederation -- the exact mirror of guerra_grande_foreign_intervention_button,
+		#     pointed the other way.
+		# ES: y la ciudad recibe el mismo modificador de bloqueo que el boton de la Defensa le
+		#     pone a la Confederacion: el espejo exacto de
+		#     guerra_grande_foreign_intervention_button, apuntado para el otro lado.
+		c:URU ?= {
+			add_modifier = {
+				name = guerra_grande_river_plate_blockade
+				years = 8
+				is_decaying = yes
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 70
+	}
+}

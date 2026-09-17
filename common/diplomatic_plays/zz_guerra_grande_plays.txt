@@ -1,0 +1,114 @@
+﻿# EN: four vanilla plays, copied VERBATIM with exactly one line added at the TOP LEVEL of each
+#     possible block: guerra_grande_play_is_allowed.
+#     The top level is the whole point. A first version put that line inside the
+#     "scope:target_country = { ... }" block, where 'this' is the target instead of the initiator,
+#     which turned the trigger's OR into OR( not(A or B), A, B ) -- a tautology, true for every
+#     initiator on every date. The guard existed, validated, read correctly to a human, and did
+#     absolutely nothing. Brazil could still open a return_state play on the Cerrito in 1847.
+#     Insertion is done by brace counting, not by regex, because the regex is what put it in the
+#     wrong block in the first place.
+# ES: cuatro jugadas de vanilla, copiadas TAL CUAL con exactamente una linea agregada en el NIVEL
+#     SUPERIOR de cada bloque possible: guerra_grande_play_is_allowed.
+#     El nivel superior es todo el asunto. Una primera version metio esa linea adentro del bloque
+#     "scope:target_country = { ... }", donde 'this' es el objetivo y no el iniciador, lo que
+#     convertia el OR del trigger en OR( no(A o B), A, B ): una tautologia, verdadera para
+#     cualquier iniciador en cualquier fecha. La guarda existia, validaba, se leia bien, y no hacia
+#     absolutamente nada. Brasil le podia abrir igual una jugada de return_state al Cerrito en 1847.
+#     La insercion se hace contando llaves, no con regex: el regex es justamente lo que la metio en
+#     el bloque equivocado.
+
+REPLACE:dp_return_state = {
+	requires_interest_marker = no
+
+	war_goal = return_state
+
+	texture = "gfx/interface/icons/war_goals/return_state.dds"
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+		}
+		diplomatic_play_has_no_relations_blockers = yes
+		guerra_grande_play_is_allowed = yes
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_conquer_state = {
+	war_goal = conquer_state
+
+	texture = "gfx/interface/icons/war_goals/conquer_state.dds"
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			NOT = { is_subject_of = root }
+		}
+		diplomatic_play_has_no_relations_blockers = yes
+		guerra_grande_play_is_allowed = yes
+	}
+
+	ai_acceptance_max = 75
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_humiliation = {
+	war_goal = humiliation
+
+	texture = "gfx/interface/icons/war_goals/humiliation.dds"
+
+	possible = {
+		aggressive_diplomatic_plays_permitted = yes
+		guerra_grande_play_is_allowed = yes
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_regime_change = {
+	war_goal = regime_change
+
+	texture = "gfx/interface/icons/war_goals/regime_change.dds"
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			NOT = { is_subject_of = root }
+		}
+		guerra_grande_play_is_allowed = yes
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+

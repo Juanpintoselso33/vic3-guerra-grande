@@ -1,0 +1,252 @@
+﻿# EN: The peace menu of the Guerra Grande. Every modifier here answers a documented war aim of
+#     one of the two governments, and every figure or clause quoted in its localization is
+#     sourced in ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md. Nothing here is invented.
+#     Every key below is one the game itself defines (checked against 1.13.11).
+# ES: El menú de paz de la Guerra Grande. Cada modificador de acá responde a un objetivo de
+#     guerra documentado de uno de los dos gobiernos, y cada cifra o cláusula que se cita en su
+#     localización está en ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md. Acá no hay nada
+#     inventado. Todas las claves de abajo las define el juego (chequeadas contra 1.13.11).
+
+# ---------------------------------------------------------------------------------------------
+# The Cerrito's own programme / El programa propio del Cerrito
+# ---------------------------------------------------------------------------------------------
+
+# EN: The legal presidency restored. Oribe's whole public case was that he was the constitutional
+#     president whose term had been cut short by an armed rising in 1838, and the Cerrito governed
+#     on that theory: it reconvened the Chambers, had them renew his mandate, applied the
+#     Constitution of 1830 as its legal order, installed a Tribunal de Apelaciones on 12 May 1845,
+#     and ran schools, a customs house and a treasury. This is what winning on that claim buys:
+#     legitimacy, the countryside that had been governing itself under him for nine years, and an
+#     administration that does not have to be invented.
+# ES: La presidencia legal restituida. Todo el argumento público de Oribe era que él era el
+#     presidente constitucional a quien un alzamiento armado le había cortado el mandato en 1838,
+#     y el Cerrito gobernó sobre esa tesis: reunió las Cámaras, les hizo renovar el mandato,
+#     aplicó la Constitución de 1830 como orden jurídico, instaló el Tribunal de Apelaciones el 12
+#     de mayo de 1845, y tuvo escuelas, aduana y hacienda. Eso es lo que compra ganar con ese
+#     título.
+gg_peace_legal_presidency = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_headofstate_add = 15
+	country_legitimacy_base_add = 10
+	interest_group_ig_landowners_approval_add = 3
+	interest_group_ig_rural_folk_approval_add = 3
+	country_bureaucracy_mult = 0.10
+	country_loyalists_from_legitimacy_mult = 0.10
+}
+
+# EN: The masthead of El Defensor de la Independencia Americana, from issue 43 (27 October 1845)
+#     to the last one: "¡Vivan los defensores de las Leyes! ¡¡Mueran los salvages unitarios!!"
+#     A Cerrito that wins on that sentence empties the port. Two thirds of the 31,000 people
+#     inside the walls were foreign-born, the Legions were foreign, the presses were the
+#     anti-rosista emigration's — and all of it leaves or is driven out.
+# ES: El encabezado de El Defensor de la Independencia Americana, desde el número 43 (27 de
+#     octubre de 1845) hasta el último: «¡Vivan los defensores de las Leyes! ¡¡Mueran los salvages
+#     unitarios!!». Un Cerrito que gana con esa frase vacía el puerto. Dos tercios de los 31.000
+#     de adentro de las murallas eran extranjeros, las legiones eran extranjeras y las imprentas
+#     eran de la emigración antirrosista: todo eso se va o lo echan.
+gg_peace_colorados_proscribed = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	interest_group_ig_intelligentsia_pol_str_mult = -0.40
+	interest_group_ig_intelligentsia_approval_add = -8
+	interest_group_ig_petty_bourgeoisie_approval_add = -5
+	state_migration_pull_mult = -0.60
+	state_trade_capacity_mult = -0.30
+	country_prestige_mult = -0.20
+	country_authority_add = 100
+	country_radicals_from_legitimacy_mult = 0.20
+}
+
+# EN: The offer of 11 August 1845 taken up instead of buried in a commission. Rosas proposed
+#     reunification with the Provinces of the Río de la Plata, undoing the Preliminary Peace
+#     Convention of 1828; Oribe sent it to a parliamentary commission and it died there. Cashing
+#     it in means the Republic stops being one: a federal province again, with the blanco
+#     countryside behind it and every treaty of 1828 torn up.
+# ES: La oferta del 11 de agosto de 1845 aceptada en vez de enterrada en comisión. Rosas propuso
+#     la reunificación con las Provincias Unidas del Río de la Plata, anulando la Convención
+#     Preliminar de Paz de 1828; Oribe la mandó a una comisión parlamentaria y ahí murió.
+#     Cobrarla es dejar de ser república: provincia federal otra vez.
+gg_peace_confederation_province = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.35
+	country_influence_add = -50
+	interest_group_ig_landowners_approval_add = 4
+	interest_group_ig_intelligentsia_approval_add = -6
+	interest_group_ig_armed_forces_approval_add = 3
+	country_legitimacy_base_add = -10
+}
+
+# EN: The other reading of the same relationship, and the one the Defensa's presses insisted on:
+#     not a federal province but a client. Rosas recognised Oribe as the Republic's lawful
+#     president, lent him the Ejército Unido de Vanguardia and paid for it — in the last weeks he
+#     was still sending him eight hundred gold ounces. That money keeps coming, and so does
+#     everything else that comes with it.
+# ES: La otra lectura de la misma relación, la que insistían las imprentas de la Defensa: no una
+#     provincia federal, un cliente. Rosas reconoció a Oribe como presidente legal, le prestó el
+#     Ejército Unido de Vanguardia y lo pagó: en las últimas semanas todavía le mandaba ochocientas
+#     onzas de oro. Esa plata sigue llegando, y todo lo que viene con ella también.
+gg_peace_rosista_client = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 500
+	unit_offense_mult = 0.10
+	interest_group_ig_armed_forces_approval_add = 4
+	country_prestige_mult = -0.40
+	country_legitimacy_base_add = -20
+	country_radicals_from_legitimacy_mult = 0.25
+	country_influence_add = -75
+}
+
+# ---------------------------------------------------------------------------------------------
+# The Defensa's own programme / El programa propio de la Defensa
+# ---------------------------------------------------------------------------------------------
+
+# EN: The decrees of February 1843 carried out to the end. On 10 February the Ministry of War
+#     handed anyone in touch with the besiegers to a military commission and ordered that whoever
+#     materially helped Oribe's army be shot; on 12 February it ordered every oriental taken with
+#     arms in hand or wearing the enemy's divisa shot "en el acto y por la espalda"; on 1 March
+#     the Jefe Político expelled the families of the men in the invading army and of everyone the
+#     police edicts had declared a fugitive or a traitor, and some of them went to the isla
+#     Libertad. The confiscation decree the Cerrito answered in June 1845 was the Defensa's own.
+#     Enforcing all of it on a countryside that spent nine years under Oribe is what this is.
+# ES: Los decretos de febrero de 1843 llevados hasta el final. El 10 de febrero el Ministerio de
+#     Guerra entregó a comisión militar a todo el que tuviera trato con los sitiadores y mandó
+#     fusilar a quien auxiliara materialmente al ejército de Oribe; el 12 mandó fusilar «en el acto
+#     y por la espalda» a todo oriental tomado con armas o con la divisa enemiga; el 1 de marzo el
+#     Jefe Político expulsó a las familias de los del ejército invasor y de los declarados prófugos
+#     y traidores, y algunas fueron a parar a la isla Libertad. El decreto de confiscación que el
+#     Cerrito contestó en junio de 1845 era de la Defensa. Esto es aplicarlo todo a una campaña que
+#     pasó nueve años bajo Oribe.
+gg_peace_blancos_proscribed = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	interest_group_ig_landowners_pol_str_mult = -0.40
+	interest_group_ig_landowners_approval_add = -8
+	interest_group_ig_rural_folk_approval_add = -6
+	interest_group_ig_devout_approval_add = -3
+	state_conscription_rate_mult = -0.40
+	country_prestige_mult = -0.20
+	country_authority_add = 100
+	country_radicals_from_legitimacy_mult = 0.20
+}
+
+# EN: The five treaties signed in Rio de Janeiro by Andrés Lamas on 12 October 1851. Alliance:
+#     Brazil becomes guarantor of the Constitution with the right to intervene to restore order.
+#     Subsidies: monthly payments, with the customs revenue as security. Limits: the northern
+#     border on the Cuareim, the San Ildefonso claim renounced, and a dry coast on the Laguna
+#     Merín and the Yaguarón for 58 years. Commerce: ten years of exemption for Brazilian tasajo
+#     and for Uruguayan cattle going north. Extradition: fugitive slaves handed back, against the
+#     Republic's own abolition law. Money now, and a virtual protectorate for a decade.
+# ES: Los cinco tratados que Andrés Lamas firmó en Río de Janeiro el 12 de octubre de 1851.
+#     Alianza: el Brasil garante de la Constitución con derecho a intervenir. Socorros: subsidio
+#     mensual con la renta de aduana en garantía. Límites: frontera en el Cuareim, renuncia a San
+#     Ildefonso, costa seca sobre la Merín y el Yaguarón por 58 años. Comercio: diez años de
+#     exoneración al tasajo brasilero y al ganado oriental que cruce. Extradición: devolver los
+#     esclavos fugados, contra la propia ley de abolición. Plata hoy, y un protectorado de hecho.
+gg_peace_treaties_of_1851 = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 400
+	country_loan_interest_rate_mult = -0.20
+	country_prestige_mult = -0.25
+	country_influence_add = -50
+	country_authority_add = -75
+	interest_group_ig_intelligentsia_approval_add = -4
+	interest_group_ig_landowners_approval_add = -3
+}
+
+# EN: Manuel Herrera y Obes's project of 1848: a joint protectorate of Great Britain and France
+#     over the Republic. It was the fourth such request in ten years — Francisco José Muñoz asked
+#     London for an Ionian-Islands arrangement in 1838, Chancellor Vidal tried again through José
+#     Ellauri in 1841, Florencio Varela was sent to London in 1843-44 — and members of the French
+#     colony in Montevideo, with the backing of leading men of the Defensa and of the French
+#     ambassador in Rio, pushed a French protectorate of their own. This is that project granted.
+# ES: El proyecto de Manuel Herrera y Obes de 1848: un protectorado conjunto de Gran Bretaña y
+#     Francia sobre la República. Era el cuarto pedido en diez años —Francisco José Muñoz le pidió
+#     a Londres en 1838 un arreglo como el de las Islas Jónicas, el canciller Vidal insistió por
+#     José Ellauri en 1841, a Florencio Varela lo mandaron a Londres en 1843-44— y miembros de la
+#     colonia francesa de Montevideo, con el beneplácito de dirigentes de la Defensa y el respaldo
+#     del embajador francés en Río, empujaban un protectorado francés propio. Esto es concedérselo.
+gg_peace_anglo_french_protectorate = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_migration_pull_mult = 0.50
+	state_trade_capacity_mult = 0.30
+	state_blockade_resistance_add = 100
+	country_minting_add = 300
+	country_prestige_mult = -0.30
+	country_legitimacy_base_add = -15
+	interest_group_ig_intelligentsia_approval_add = 3
+	interest_group_ig_armed_forces_approval_add = -4
+}
+
+# EN: What actually happened to all six of those requests: London said no. The Republic has asked
+#     a foreign power to govern it and been turned down in public, which is the worst of both
+#     positions — the humiliation without the protection.
+# ES: Lo que pasó de verdad con los seis pedidos: Londres dijo que no. La República pidió que una
+#     potencia extranjera la gobernara y le dijeron que no en público, que es lo peor de los dos
+#     mundos: la humillación sin la protección.
+gg_peace_protectorate_refused = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.25
+	country_legitimacy_base_add = -10
+	country_influence_add = -25
+	interest_group_ig_intelligentsia_approval_add = -4
+	country_radicals_from_legitimacy_mult = 0.15
+}
+
+# EN: Herrera y Obes to the British and French chargés, early September 1851: the government wants
+#     that army destroyed and not shipped home, "por cuanto una vez pacificado el territorio
+#     nacional se iniciará la acción militar contra Rosas". The internal war ends and the war
+#     across the river begins. Uruguay put a division of 2,000 men into the alliance that beat
+#     Rosas at Caseros on 3 February 1852.
+# ES: Herrera y Obes a los encargados de negocios inglés y francés, principios de setiembre de
+#     1851: el gobierno quiere ese ejército aniquilado y no embarcado, «por cuanto una vez
+#     pacificado el territorio nacional se iniciará la acción militar contra Rosas». Termina la
+#     guerra de adentro y empieza la de la otra orilla. El Uruguay puso una división de 2.000
+#     hombres en la alianza que venció a Rosas en Caseros el 3 de febrero de 1852.
+gg_peace_march_on_buenos_aires = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.15
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+	interest_group_ig_armed_forces_approval_add = 5
+	country_prestige_mult = 0.25
+	country_war_exhaustion_casualties_mult = 0.25
+	country_minting_add = -200
+	interest_group_ig_petty_bourgeoisie_approval_add = -3
+}
+
+# ---------------------------------------------------------------------------------------------
+# Shared / Común a los dos
+# ---------------------------------------------------------------------------------------------
+
+# EN: The decree that followed the peace. The divisas colorada and blanca were forbidden and the
+#     national cockade declared the only badge a citizen could wear, "con el fin de hacer
+#     desaparecer las opiniones y signos que separaban de los otros a los hijos del pueblo
+#     oriental"; the Villa de la Restauración was renamed Villa de la Unión in November 1851 to
+#     erase the traces of the occupation. Abolishing both party colours by decree costs both
+#     parties something and buys the state authority it never had.
+# ES: El decreto que vino después de la paz. Se prohibieron las divisas colorada y blanca y se
+#     declaró la escarapela nacional el único distintivo que podía llevar un ciudadano, «con el fin
+#     de hacer desaparecer las opiniones y signos que separaban de los otros a los hijos del pueblo
+#     oriental»; en noviembre de 1851 la Villa de la Restauración pasó a llamarse Villa de la
+#     Unión, para borrar los rastros de la ocupación. Abolir por decreto los dos colores les cuesta
+#     algo a los dos partidos y le compra al Estado una autoridad que nunca tuvo.
+gg_peace_national_cockade = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_authority_add = 75
+	country_legitimacy_base_add = 5
+	interest_group_ig_landowners_approval_add = -2
+	interest_group_ig_intelligentsia_approval_add = -2
+	country_radicals_from_legitimacy_mult = -0.10
+}
+
+# EN: Article three of the pact of 8 October 1851: "La República reconocerá como deuda nacional
+#     aquella que haya contraído el general Oribe con arreglo a lo que para tales casos estatuye el
+#     derecho público." The winner pays the loser's war debt. That is what the formula costs, and
+#     it is the reason it was a concession and not a phrase.
+# ES: El artículo tercero del pacto del 8 de octubre de 1851: «La República reconocerá como deuda
+#     nacional aquella que haya contraído el general Oribe con arreglo a lo que para tales casos
+#     estatuye el derecho público.» El que gana paga la deuda de guerra del que pierde. Eso es lo
+#     que cuesta la fórmula, y por eso fue una concesión y no una frase.
+gg_peace_assumed_war_debt = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = -250
+	country_loan_interest_rate_mult = 0.15
+	interest_group_ig_petty_bourgeoisie_approval_add = -3
+}

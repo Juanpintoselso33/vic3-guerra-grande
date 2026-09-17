@@ -1,0 +1,13 @@
+﻿l_english:
+
+# EN: The Cerrito's buttons. Not foreign legions: the countryside, and the river. Sources in
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md, section 3.
+
+ guerra_grande_montonera_levy_button:0 "Levy the Countryside"
+ guerra_grande_montonera_levy_button_desc:0 "The city buys its soldiers; we do not have to. The Republic outside the walls is ours — two military circumscriptions, north and south of the Río Negro, a commander in every department, and an estancia behind each of them. Send the word out and the paisanos come in on their own horses, which is the one thing no customs house in Montevideo can purchase. What it costs is the countryside itself: every man who rides in is a man who is no longer working the herd."
+ guerra_grande_requires_campana:0 "We must hold the countryside"
+
+ guerra_grande_river_blockade_button:0 "Close the River"
+ guerra_grande_river_blockade_button_desc:0 "Eight years of siege lines have not taken Montevideo, because the sea behind it has never closed. Ask Rosas for the squadron. Admiral Guillermo Brown has blockaded that port before — from April 1843, until the British commodore Purvis declared he would not recognise it and victualled the city himself. Done properly, it collapses the Defensa in months. But the squadron is not ours, the Confederation does not enter this war, and if the European squadrons come into the river there will be nothing left to blockade with."
+ guerra_grande_requires_rosas:0 "The Confederation must still stand"
+ guerra_grande_requires_river_unwatched:0 "No foreign squadron may be in the river"

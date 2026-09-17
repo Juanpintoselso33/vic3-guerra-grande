@@ -1,0 +1,33 @@
+﻿l_spanish:
+
+# ES: Las dos aboliciones de la Guerra Grande: la ley de la Defensa del 12 de diciembre de 1842
+#     y el decreto del Cerrito del 26 de octubre de 1846. Cada fecha, cifra y cita de abajo esta
+#     documentada en SOURCES_abolition.md y en los comentarios de events/guerra_grande_abolition.txt.
+
+ gg_abolition.2.t:0 "La ley del 12 de diciembre"
+ gg_abolition.2.d:0 "Hace seis días Rivera perdió el ejército en Arroyo Grande y Oribe marcha sobre la ciudad. La Sala se reúne y escribe tres artículos. El primero: «Desde la promulgación de la presente resolución, no hay esclavos en todo el territorio de la República.» El segundo dice para qué es el primero: el gobierno destinará a los varones útiles que fueron esclavos, colonos o pupilos «al servicio de las armas por el tiempo que crea necesario». El tercero deja a las mujeres y a los no útiles con sus antiguos amos, en clase de pupilos. Es la Ley N.º 242, y es una ley de reclutamiento escrita como una emancipación. Unos 1.800 libertos entrarán a los batallones de línea, y los jefes de la guarnición dirán que son los únicos soldados de verdad que hay en la muralla."
+ gg_abolition.2.f:0 "La libertad en el artículo uno. Las filas en el artículo dos."
+ gg_abolition.2.a:0 "Promúlguese, con artículo dos y todo."
+ gg_abolition.2.b:0 "Sortéenlos, y páguenles a los dueños trescientos pesos por cabeza."
+ gg_abolition.2.c:0 "La República no le saca la propiedad a nadie para llenar un batallón."
+ gg_abolition.3.t:0 "El decreto del Cerrito"
+ gg_abolition.3.d:0 "A cuatro años de sitio, desde el campamento del Cerrito, el gobierno blanco decreta la abolición: total, irrestricta, y con la aplicación vigilada por Oribe en persona. El texto es más limpio que el de Montevideo: no dice una palabra sobre el ejército. El reglamento sí. A los pocos días las autoridades están haciendo listas de los hombres ahora libres y útiles para el servicio, y los enrolan antes de que sus dueños puedan llevárselos de vuelta cruzando la frontera. La mayoría de esos dueños son súbditos brasileños con estancias a caballo del límite; en distritos como Tacuarembó los esclavizados son un tercio de la población. Les prometen indemnización «en tiempo oportuno»."
+ gg_abolition.3.f:0 "El decreto se calla sobre el ejército. Las listas no."
+ gg_abolition.3.a:0 "Decrétese, y que las listas vayan al campamento."
+ gg_abolition.3.b:0 "Levantémoslos de a uno, y paguemos por cada hombre que se tome."
+ gg_abolition.3.c:0 "Las estancias son el gobierno. Que no les toquen la gente."
+ gg_abolition.4.t:0 "Su propiedad, nuestro suelo"
+ gg_abolition.4.d_defensa:0 "El encargado de negocios del Imperio está en la puerta con una lista. La mayoría de las personas liberadas por la ley pertenecían a súbditos brasileños, y Río de Janeiro las quiere de vuelta: si no por ley, por mar. Ya se hizo una vez: en diciembre de 1842, a días de sancionada la ley, más de doscientos esclavos salieron de Montevideo en la corbeta Siete de Abril y desembarcaron en Santa Catarina, para salvar la propiedad de los súbditos del Imperio de un decreto que la República acababa de firmar."
+ gg_abolition.4.d_cerrito:0 "Las reclamaciones llegan desde el decreto, y este año son una avalancha. Los dueños de la frontera quieren su gente de vuelta, y la respuesta del gobierno ha sido quedársela: los hombres que sirven en el ejército blanco no se entregan, los haya firmado quien los haya firmado. Al Imperio se le contesta que «el negro pasó de cosa a hombre porque podía cambiársele esa condición; y sin gran injusticia no puede volver al estado de esclavitud». Cada negativa es un párrafo más del expediente que Río de Janeiro le va armando en silencio a este gobierno."
+ gg_abolition.4.d_generic:0 "Los dueños del otro lado de la frontera quieren su gente de vuelta, y el Imperio se ha ofrecido a reclamar en su nombre. Los hombres en cuestión están de uniforme, en nuestra propia línea. Lo que se decida acá se va a leer en Río de Janeiro como la medida de cuánto vale de verdad nuestro decreto."
+ gg_abolition.4.f:0 "Un decreto vale lo que uno esté dispuesto a negar por él."
+ gg_abolition.4.a:0 "Pisaron suelo libre. Libres se quedan."
+ gg_abolition.4.b:0 "Devuélvanlos. No podemos pelear también contra el Imperio."
+ guerra_grande_abolition_liberto_battalions:0 "Batallones de libertos"
+ guerra_grande_abolition_slaveholders_alienated:0 "Los dueños desposeídos"
+ guerra_grande_abolition_saladeros_short_handed:0 "Los saladeros sin brazos"
+ guerra_grande_abolition_bought_recruits:0 "Reclutas comprados por cabeza"
+ guerra_grande_abolition_slaveholders_reassured:0 "La propiedad respetada"
+ guerra_grande_abolition_ranks_unfilled:0 "Las filas sin llenar"
+ guerra_grande_abolition_free_soil:0 "Suelo libre"
+ guerra_grande_abolition_slaves_returned:0 "Los fugitivos devueltos"

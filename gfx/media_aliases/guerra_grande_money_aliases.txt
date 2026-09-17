@@ -1,0 +1,39 @@
+﻿# Media aliases for the money event pictures (foreign money, treaties and the reckoning).
+# Kept in a separate file from guerra_grande_aliases.txt; the game reads every .txt in this folder.
+# Alias de medios para los eventos de dinero (dinero extranjero, tratados y la cuenta final).
+# Van en un archivo aparte de guerra_grande_aliases.txt; el juego lee todos los .txt de esta carpeta.
+
+gg_money_french_convention = {
+	video = "gfx/media_aliases/gg_money_french_convention.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+gg_money_maua = {
+	video = "gfx/media_aliases/gg_money_maua.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_money_buceo = {
+	video = "gfx/media_aliases/gg_money_buceo.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_money_reunification = {
+	video = "gfx/media_aliases/gg_money_reunification.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_money_reckoning = {
+	video = "gfx/media_aliases/gg_money_reckoning.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+gg_money_cerrito_debts = {
+	video = "gfx/media_aliases/gg_money_cerrito_debts.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_money_brazilian_claims = {
+	video = "gfx/media_aliases/gg_money_brazilian_claims.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}

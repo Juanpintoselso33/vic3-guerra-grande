@@ -1,0 +1,428 @@
+﻿namespace = gg_abolition
+
+# EN: Both governments of the Guerra Grande abolished slavery, and both did it to fill their
+#     ranks. The Defensa by law of 12 December 1842 -- Ley N. 242, six days after the defeat of
+#     Arroyo Grande -- whose article 2 sends the freed men "al servicio de las armas por el
+#     tiempo que crea necesario". The Cerrito by decree of 26 October 1846, whose text does not
+#     mention conscription but whose regulation did: days after it was promulgated the blanco
+#     authorities were drawing up lists of former slaves fit to serve.
+#     The men were not free: the slaveholders were the estancieros and the saladeristas who
+#     backed the government, and many of them were Brazilian subjects on the frontier. That is
+#     the whole loop -- battalions bought with the support of the class that owned the country.
+# ES: Los dos gobiernos de la Guerra Grande abolieron la esclavitud, y los dos lo hicieron para
+#     llenar sus filas. La Defensa por ley del 12 de diciembre de 1842 -- Ley N. 242, seis dias
+#     despues de la derrota de Arroyo Grande -- cuyo articulo 2 destina a los libertos "al
+#     servicio de las armas por el tiempo que crea necesario". El Cerrito por decreto del 26 de
+#     octubre de 1846, que no menciona el reclutamiento en su texto pero si en su reglamento:
+#     dias despues de promulgado ya se hacian listas de ex esclavos utiles para el ejercito.
+#     Los hombres no salieron gratis: los duenios de esclavos eran los estancieros y los
+#     saladeristas que sostenian al gobierno, y muchos eran subditos brasilenios de la frontera.
+#     Ese es el circuito entero: batallones pagados con el apoyo de la clase que tenia el pais.
+#
+# Sources: Ley N. 242, 12.XII.1842 (IMPO, Registro Nacional de Leyes y Decretos, t. II);
+# Keila Grinberg, "Emancipacion y guerra en el Rio de la Plata, 1840-1865", Historia Mexicana
+# 69:2, 2019; Florencia Thul Charbonier, "Mercado de trabajo y movilizacion militar en
+# Montevideo durante la Guerra Grande (1838-1851)", Claves 5:8, 2019; Mario Etchechury Barrera,
+# "'Defensores de la humanidad y la civilizacion'", Historia (PUC Chile) 50:II, 2017; Magdalena
+# Candioti, "Abolicion y post-abolicion de la esclavitud en la America Hispana", Anuario IHA,
+# 2022, on Alex Borucki, "Abolicionismo y trafico de esclavos en Montevideo", 2009; Ministerio
+# de Educacion y Cultura (Uruguay), "Esclavitud y afrodescendientes en Uruguay".
+# Full citations, bilingual, in SOURCES_abolition.md.
+
+# EN: Hidden dispatcher. The split event fires on ROOT, which is URU in one branch and CER in
+#     the other, so a decree event scheduled there directly would reach the wrong government
+#     half the time. This one fires on whoever ROOT is and then hands each decree to the country
+#     that actually made it, by tag, once both exist.
+# ES: Despachador oculto. El evento del corte dispara sobre ROOT, que es URU en una rama y CER
+#     en la otra, asi que un decreto agendado ahi le llegaria al gobierno equivocado la mitad de
+#     las veces. Este dispara sobre quien sea ROOT y le pasa cada decreto al pais que de verdad
+#     lo dicto, por tag, cuando los dos ya existen.
+gg_abolition.1 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		exists = c:URU
+		exists = c:CER
+	}
+
+	immediate = {
+		hidden_effect = {
+			# 1842.12.12 - the Defensa's law, the day the dispatcher itself lands.
+			c:URU ?= {
+				trigger_event = { id = gg_abolition.2 days = 0 popup = yes }
+			}
+			# 1846.10.26 - the Cerrito's decree, 1414 days later to the day.
+			c:CER ?= {
+				trigger_event = { id = gg_abolition.3 days = 1414 popup = yes }
+			}
+		}
+	}
+}
+
+# 1842.12.12 - Ley N. 242. Article 1: "Desde la promulgacion de la presente resolucion, no hay
+# esclavos en todo el territorio de la Republica." Article 2 sends the able-bodied men to the
+# army. Around 1,800 libertos form the line battalions that the garrison's own commanders
+# consider the only real soldiers on the walls (Etchechury 2017, note 28, on Borucki 2015).
+gg_abolition.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_abolition.2.t
+	desc = gg_abolition.2.d
+	flavor = gg_abolition.2.f
+
+	# EN: Ley N.o 242, 12 Dec 1842: the Defensa frees the slaves to fill its ranks.
+	event_image = {
+		video = "gg_abol_defensa"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		exists = c:CER
+		NOT = { has_variable = guerra_grande_abolition_settled }
+	}
+
+	# The decree as it was written: freedom in article 1, the army in article 2.
+	option = {
+		name = gg_abolition.2.a
+		default_option = yes
+		set_variable = guerra_grande_abolition_settled
+		set_variable = guerra_grande_abolition_decreed
+		activate_law = law_type:law_slavery_banned
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_liberto_battalions
+			years = 10
+			is_decaying = yes
+		}
+		# EN: and the bill. The owners were the estancieros and the saladeristas -- the class the
+		#     government rests on -- and the men who walked into the battalions were the hands
+		#     that salted the hides. They were promised compensation "en tiempo oportuno" and
+		#     most of them never saw it.
+		# ES: y la cuenta. Los duenios eran los estancieros y los saladeristas, la clase en la que
+		#     se apoya el gobierno, y los hombres que entraron a los batallones eran los brazos
+		#     que salaban los cueros. Les prometieron indemnizacion "en tiempo oportuno" y la
+		#     mayoria no la vio nunca.
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = guerra_grande_abolition_slaveholders_alienated
+				days = long_modifier_time
+				is_decaying = yes
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_saladeros_short_handed
+			years = 5
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = medium_radicals
+			strata = upper
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_abolition.4 days = 365 popup = yes }
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	# EN: the measure that came first, in mid-1842: slaves drawn by lot for the army, 300 pesos
+	#     paid to the owner for each man, and the man freed on the spot with four years to serve.
+	#     It did not raise enough men, which is why the law of December followed.
+	# ES: la medida que vino antes, a mediados de 1842: sorteo de esclavos para el servicio, 300
+	#     pesos al duenio por cada uno, y el hombre libre en el acto con cuatro anios por delante.
+	#     No alcanzo a juntar hombres, y por eso vino la ley de diciembre.
+	option = {
+		name = gg_abolition.2.b
+		set_variable = guerra_grande_abolition_settled
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		add_treasury = -20000
+		add_modifier = {
+			name = guerra_grande_abolition_bought_recruits
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	# Property before men: the ranks stay empty and the owners stay loyal.
+	option = {
+		name = gg_abolition.2.c
+		set_variable = guerra_grande_abolition_settled
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = guerra_grande_abolition_slaveholders_reassured
+				days = long_modifier_time
+				is_decaying = yes
+			}
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = upper
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_ranks_unfilled
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# 1846.10.26 - the Cerrito's decree, total and unrestricted, its application watched by Oribe
+# himself (Magarinos de Mello, El gobierno del Cerrito). The text says nothing about the army;
+# the regulation did, and days later the blanco authorities were enrolling the new libertos
+# before their Brazilian owners could take them back across the frontier (Grinberg 2019;
+# Candioti 2022 on Borucki 2009).
+gg_abolition.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_abolition.3.t
+	desc = gg_abolition.3.d
+	flavor = gg_abolition.3.f
+
+	# EN: The Cerrito's decree of 26 Oct 1846, four years behind its rival.
+	event_image = {
+		video = "gg_abol_cerrito"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		exists = c:URU
+		NOT = { has_variable = guerra_grande_abolition_settled }
+	}
+
+	# EN: the mirror of the Defensa's option a, to the last point. Neither government may reach a
+	#     ceiling the other cannot: same law, same two battalions, same bill.
+	# ES: el espejo de la opcion a de la Defensa, punto por punto. Ningun gobierno puede llegar a
+	#     un techo que el otro no alcance: misma ley, los mismos dos batallones, la misma cuenta.
+	option = {
+		name = gg_abolition.3.a
+		default_option = yes
+		set_variable = guerra_grande_abolition_settled
+		set_variable = guerra_grande_abolition_decreed
+		activate_law = law_type:law_slavery_banned
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 2
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_liberto_battalions
+			years = 10
+			is_decaying = yes
+		}
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = guerra_grande_abolition_slaveholders_alienated
+				days = long_modifier_time
+				is_decaying = yes
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_saladeros_short_handed
+			years = 5
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = medium_radicals
+			strata = upper
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_abolition.4 days = 365 popup = yes }
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	# The Cerrito had its own levies before the decree: men taken and paid for, one at a time.
+	option = {
+		name = gg_abolition.3.b
+		set_variable = guerra_grande_abolition_settled
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 1
+			}
+		}
+		add_treasury = -20000
+		add_modifier = {
+			name = guerra_grande_abolition_bought_recruits
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = {
+		name = gg_abolition.3.c
+		set_variable = guerra_grande_abolition_settled
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = guerra_grande_abolition_slaveholders_reassured
+				days = long_modifier_time
+				is_decaying = yes
+			}
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = upper
+		}
+		add_modifier = {
+			name = guerra_grande_abolition_ranks_unfilled
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# EN: the bill from across the frontier, and it came to both governments. Most of the slaves on
+#     Uruguayan soil belonged to Brazilian owners with estancias astride the border; in some
+#     districts, Tacuarembo among them, the enslaved were a third of the population. In December
+#     1842, days after the Defensa's law, more than two hundred slaves were carried out of
+#     Montevideo aboard the corvette Siete de Abril to Santa Catarina, to save the property of
+#     the Empire's subjects. After the Cerrito's decree the claims began in earnest in 1847, and
+#     Oribe's government refused to hand back fugitives who were serving in its army -- a refusal
+#     that went on hardening relations with Rio de Janeiro until 1851 (Grinberg 2019).
+# ES: la cuenta que llego de la otra orilla, y les llego a los dos gobiernos. La mayoria de los
+#     esclavos en suelo oriental eran de duenios brasilenios con estancias a caballo de la
+#     frontera; en algunos distritos, Tacuarembo entre ellos, llegaban a un tercio de la
+#     poblacion. En diciembre de 1842, dias despues de la ley de la Defensa, mas de doscientos
+#     esclavos salieron de Montevideo en la corbeta Siete de Abril rumbo a Santa Catarina, para
+#     salvar la propiedad de los subditos del Imperio. Despues del decreto del Cerrito las
+#     reclamaciones arreciaron en 1847, y el gobierno de Oribe se nego a devolver fugitivos que
+#     servian en su ejercito: una negativa que fue endureciendo la relacion con Rio de Janeiro
+#     hasta 1851.
+gg_abolition.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_abolition.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_abolition.4.d_defensa
+				trigger = {
+					has_variable = guerra_grande_defensa_government
+				}
+			}
+			triggered_desc = {
+				desc = gg_abolition.4.d_cerrito
+				trigger = {
+					has_variable = guerra_grande_cerrito_government
+				}
+			}
+			triggered_desc = {
+				desc = gg_abolition.4.d_generic
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = gg_abolition.4.f
+
+	# EN: Brazil's claims for the fugitives who crossed the border.
+	event_image = {
+		video = "gg_money_brazilian_claims"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_abolition_decreed
+		NOT = { has_variable = guerra_grande_abolition_claims_answered }
+	}
+
+	# "El negro paso de cosa a hombre porque podia cambiarsele esa condicion; y sin gran
+	# injusticia no puede volver al estado de esclavitud." Free soil, and the Empire's enmity.
+	option = {
+		name = gg_abolition.4.a
+		default_option = yes
+		set_variable = guerra_grande_abolition_claims_answered
+		add_modifier = {
+			name = guerra_grande_abolition_free_soil
+			years = 10
+			is_decaying = yes
+		}
+		if = {
+			limit = { exists = c:BRZ }
+			change_relations = {
+				country = c:BRZ
+				value = -20
+			}
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# Hand them back, the way the Siete de Abril did. The Empire is placated; the decree is a lie.
+	option = {
+		name = gg_abolition.4.b
+		set_variable = guerra_grande_abolition_claims_answered
+		add_modifier = {
+			name = guerra_grande_abolition_slaves_returned
+			years = 10
+			is_decaying = yes
+		}
+		if = {
+			limit = { exists = c:BRZ }
+			change_relations = {
+				country = c:BRZ
+				value = 20
+			}
+		}
+		add_radicals = {
+			value = medium_radicals
+			strata = lower
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}

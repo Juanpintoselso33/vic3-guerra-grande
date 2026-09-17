@@ -1,0 +1,38 @@
+﻿# EN: Is this diplomatic play a foreign power reaching into the Guerra Grande?
+#     Juan's design rule for this mod, stated twice and without room for doubt: "que no haya
+#     intervenciones directas de Brasil ni Argentina, sino mediante tropas o divisiones" and
+#     "que sea siempre por contingentes, pq si entra argentina o brasil la guerra termina
+#     enseguida". We had blocked third parties from JOINING our play, but nothing stopped them
+#     from opening their own -- and in a test game Brazil opened a return_state play on the
+#     Cerrito in 1847 demanding Maldonado, Paysandu, Cerro Largo and San Jose back for the
+#     Defensa, 55 mobilised against 14. That is the war ending in an afternoon, exactly as he said.
+#     This allows the play only when the two governments are fighting each other, or when it is
+#     1851 and the intervention is the historical one: Caxias crossing the border in September of
+#     that year, which is already scripted as gg_contingent.8.
+# ES: esta jugada diplomatica, es una potencia extranjera metiendose en la Guerra Grande?
+#     La regla de diseño de Juan para este mod, dicha dos veces y sin lugar a dudas: "que no haya
+#     intervenciones directas de Brasil ni Argentina, sino mediante tropas o divisiones" y "que sea
+#     siempre por contingentes, pq si entra argentina o brasil la guerra termina enseguida".
+#     Teniamos bloqueado que terceros se SUMARAN a nuestra jugada, pero nada les impedia abrir la
+#     suya: en una partida de prueba Brasil le abrio al Cerrito una jugada de return_state en 1847
+#     exigiendo Maldonado, Paysandu, Cerro Largo y San Jose para la Defensa, 55 movilizados contra
+#     14. Eso es la guerra terminada en una tarde, exactamente lo que el dijo.
+#     Esto permite la jugada solo si los dos gobiernos se pelean entre si, o si ya es 1851 y la
+#     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que ya
+#     esta escrita como gg_contingent.8.
+guerra_grande_play_is_allowed = {
+	OR = {
+		# the target is nobody's wartime government
+		scope:target_country = {
+			NOR = {
+				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
+			}
+		}
+		# or it is the other government: the civil war itself, which must stay possible
+		has_variable = guerra_grande_cerrito_government
+		has_variable = guerra_grande_defensa_government
+		# or the hour of the historical intervention has come
+		year >= 1851
+	}
+}

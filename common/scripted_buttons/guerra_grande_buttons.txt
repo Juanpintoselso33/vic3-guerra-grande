@@ -1,0 +1,194 @@
+﻿# Two buttons for je_guerra_grande, built like la Argentina's patagonia_button and vanilla's
+# carlist war buttons: a visibility check, a gated possible block and a one-shot effect.
+
+# The Anglo-French blockade of the Rio de la Plata (1845-1849). Only the side holding
+# Montevideo can call the squadrons in, and only once.
+guerra_grande_foreign_intervention_button = {
+	name = guerra_grande_foreign_intervention_button
+	desc = guerra_grande_foreign_intervention_button_desc
+
+	visible = {
+		c:URU ?= this
+	}
+
+	possible = {
+		c:URU ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_global_variable = guerra_grande_foreign_intervention }
+		}
+		year >= 1845.1.1
+		OR = {
+			custom_tooltip = {
+				text = guerra_grande_requires_great_power_interest
+				any_country = {
+					country_rank = rank_value:great_power
+					has_interest_marker_in_region = region_la_plata
+				}
+			}
+			year >= 1848.1.1
+		}
+	}
+
+	selected = {
+		has_global_variable = guerra_grande_foreign_intervention
+	}
+
+	effect = {
+		# EN/ES: instrumented 2026-09-16 to answer "is the AI ever pressing this button" --
+		#        writes to game.log so the next playthrough gives real data instead of a guess.
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON foreign_intervention pressed by [THIS.GetNameNoFormatting]"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_intervention_presses } }
+			set_global_variable = { name = gg_debug_intervention_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_intervention_presses
+			add = 1
+		}
+		set_global_variable = guerra_grande_foreign_intervention
+		add_modifier = {
+			name = guerra_grande_montevideo_resupplied
+			years = 5
+			is_decaying = yes
+		}
+		# The squadrons blockaded Buenos Aires, not the Cerrito camp itself.
+		c:ARG ?= {
+			add_modifier = {
+				name = guerra_grande_river_plate_blockade
+				years = 5
+				is_decaying = yes
+			}
+		}
+		c:CER ?= {
+			add_modifier = {
+				name = guerra_grande_river_plate_blockade
+				years = 5
+				is_decaying = yes
+			}
+		}
+		# EN: the blockade closes the Plata, so the trade walks north. Oribe habilitated the
+		#     Yaguaron, Merin and Chuy ports and moved the Administracion Central de la Aduana to
+		#     Melo; the saladeros resumed from about 1845 in the north, where the frontier was open
+		#     to the cattle trade while the Plata ports were shut, and the herds left overland into
+		#     Rio Grande do Sul. A squadron in the Plata cannot reach any of that. Sourced in
+		#     SOURCES_siege.md. This is why blockading the Cerrito's ports did not end the war.
+		# ES: el bloqueo cierra el Plata, asi que el comercio se va al norte. Oribe habilito los
+		#     puertos del Yaguaron, el Merin y el Chuy y mudo la Administracion Central de la Aduana
+		#     a Melo; los saladeros se reactivaron desde 1845 en el norte, donde la frontera estaba
+		#     abierta al comercio de ganado mientras los puertos del Plata estaban cerrados, y los
+		#     arreos salian por tierra al Rio Grande do Sul. Una escuadra en el Plata no llega a
+		#     nada de eso. Por eso bloquear los puertos del Cerrito no terminaba la guerra.
+		if = {
+			limit = { exists = s:STATE_BANDA_ORIENTAL.region_state:CER }
+			s:STATE_BANDA_ORIENTAL.region_state:CER = {
+				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_PAYSANDU.region_state:CER }
+			s:STATE_PAYSANDU.region_state:CER = {
+				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
+			}
+		}
+		trigger_event = { id = guerra_grande.9 popup = yes }
+	}
+
+	ai_chance = {
+		value = 50
+	}
+}
+
+# Garibaldi's Italian Legion, raised among the Italian community of Montevideo in 1843.
+guerra_grande_italian_legion_button = {
+	name = guerra_grande_italian_legion_button
+	desc = guerra_grande_italian_legion_button_desc
+
+	visible = {
+		c:URU ?= this
+	}
+
+	possible = {
+		c:URU ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_variable = guerra_grande_italian_legion_raised }
+		}
+		custom_tooltip = {
+			text = guerra_grande_requires_montevideo
+			any_scope_state = {
+				state_region = s:STATE_MONTEVIDEO
+			}
+		}
+	}
+
+	selected = {
+		has_variable = guerra_grande_italian_legion_raised
+	}
+
+	effect = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON italian_legion pressed by [THIS.GetNameNoFormatting]"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_italian_presses } }
+			set_global_variable = { name = gg_debug_italian_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_italian_presses
+			add = 1
+		}
+		set_variable = guerra_grande_italian_legion_raised
+		create_character = {
+			first_name = "Giuseppe"
+			last_name = "Garibaldi"
+			historical = yes
+			is_general = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_radical
+			culture = cu:north_italian
+			religion = rel:catholic
+			traits = {
+				charismatic
+				brave
+				experienced_offensive_planner
+			}
+		}
+		add_modifier = {
+			name = guerra_grande_italian_legion
+			years = 10
+			is_decaying = yes
+		}
+		trigger_event = { id = guerra_grande.5 popup = yes }
+	}
+
+	ai_chance = {
+		value = 50
+	}
+}

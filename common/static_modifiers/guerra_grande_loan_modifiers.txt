@@ -1,0 +1,239 @@
+﻿# EN: What foreign money buys, and what it costs. Every modifier type used here is one the
+#     base game defines in common/modifier_type_definitions/00_modifier_types.txt, checked
+#     against 1.13.11 -- note that country_tax_income_mult does NOT exist; the revenue that
+#     a mortgaged customs house stops producing is state_tax_capacity_mult, which vanilla
+#     applies at country level in modifier_consulted_headsmen and spc_state_fueros_restored.
+# ES: Lo que compra el dinero extranjero y lo que cuesta. Cada tipo de modificador de aca lo
+#     define el juego base en common/modifier_type_definitions/00_modifier_types.txt, chequeado
+#     contra 1.13.11 -- ojo que country_tax_income_mult NO existe; la renta que deja de rendir
+#     una aduana hipotecada es state_tax_capacity_mult, que vanilla aplica a nivel pais en
+#     modifier_consulted_headsmen y en spc_state_fueros_restored.
+#
+# EN: Every pair below is numerically identical across the two sides. The Defensa lived on
+#     French and Brazilian money and the Cerrito on the Confederation's; the flavour differs,
+#     the arithmetic does not, because the mod's symmetry rule is not decorative.
+# ES: Cada par de abajo es numericamente identico entre los dos bandos. La Defensa vivio de
+#     dinero frances y brasileno y el Cerrito del de la Confederacion; cambia el sabor, no la
+#     aritmetica, porque la regla de simetria del mod no es decorativa.
+
+# ---------------------------------------------------------------------------------------
+# FIRST INSTALMENT -- taking the money
+# ---------------------------------------------------------------------------------------
+
+# EN: 12 June 1848, the convention of prestacion de socorros with France: 40,000 pesos a
+#     month "en dinero o en letras sobre Francia", from 30 June, as reimbursable loans to be
+#     charged against the customs from 1852.
+# ES: 12 de junio de 1848, el convenio de prestacion de socorros con Francia: 40.000 pesos
+#     por mes "en dinero o en letras sobre Francia", desde el 30 de junio, como prestamos
+#     reembolsables a cargo de la aduana desde 1852.
+guerra_grande_french_subsidy = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 300
+	country_military_goods_cost_mult = -0.10
+	country_authority_add = -25
+	country_prestige_mult = -0.05
+}
+
+# EN: Rosas' chest. Oribe commanded the Ejercito Unido de Vanguardia and was resupplied with
+#     cattle and hard money from Buenos Aires for the whole campaign.
+# ES: La caja de Rosas. Oribe mandaba el Ejercito Unido de Vanguardia y se reabastecia de
+#     ganado y plata fuerte desde Buenos Aires durante toda la campania.
+guerra_grande_confederation_chest = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 300
+	country_military_goods_cost_mult = -0.10
+	country_authority_add = -25
+	country_prestige_mult = -0.05
+}
+
+# ---------------------------------------------------------------------------------------
+# FIRST INSTALMENT -- turning it down
+# ---------------------------------------------------------------------------------------
+
+guerra_grande_defensa_self_reliance = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 8
+	country_loyalists_from_legitimacy_mult = 0.10
+	country_authority_add = 25
+	country_minting_add = -100
+	country_war_exhaustion_casualties_mult = 0.10
+}
+
+# EN: The Cerrito's own resource: the Buceo, opened by decree of 10 July 1843 "con caracter
+#     provisorio... para que se haga mas facil el percibo de los derechos para el estado".
+#     Montevideo answered by declaring every ship that called there a pirate.
+# ES: El recurso propio del Cerrito: el Buceo, habilitado por decreto del 10 de julio de 1843
+#     "con caracter provisorio... para que se haga mas facil el percibo de los derechos para
+#     el estado". Montevideo contesto declarando pirata a todo buque que recalara ahi.
+guerra_grande_cerrito_self_reliance = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 8
+	country_loyalists_from_legitimacy_mult = 0.10
+	country_authority_add = 25
+	country_minting_add = -100
+	country_war_exhaustion_casualties_mult = 0.10
+}
+
+# ---------------------------------------------------------------------------------------
+# SECOND INSTALMENT -- signing openly, and paying the political price
+# ---------------------------------------------------------------------------------------
+
+# EN: The Empire as guarantor of the Republic's constitution and internal peace, with the
+#     right to intervene to restore order. That is the alliance treaty, and it is what the
+#     money was for.
+# ES: El Imperio como garante de la constitucion y de la paz interior de la Republica, con
+#     derecho a intervenir para restablecer el orden. Eso es el tratado de alianza, y es para
+#     lo que era la plata.
+guerra_grande_imperial_client = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 500
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+	country_military_goods_cost_mult = -0.15
+	country_legitimacy_base_add = -10
+	country_prestige_mult = -0.15
+}
+
+# EN: The mirror: reincorporation into the Provincias Unidas, and the Confederation's whole
+#     treasury behind the siege.
+# ES: El espejo: la reincorporacion a las Provincias Unidas, y el tesoro entero de la
+#     Confederacion detras del sitio.
+guerra_grande_reunification_accepted = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 500
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+	country_military_goods_cost_mult = -0.15
+	country_legitimacy_base_add = -10
+	country_prestige_mult = -0.15
+}
+
+# ---------------------------------------------------------------------------------------
+# SECOND INSTALMENT -- taking the money without signing for it
+# ---------------------------------------------------------------------------------------
+
+# EN: The secret contracts of 6 September 1850. Irineu Evangelista de Souza, the future baron
+#     of Maua, handed over the Empire's bills so that in public it looked like one merchant
+#     paying another. Article 6 had him collect the receipts, which became the titles of the
+#     Republic's debt to Brazil. The banker's cut was real: of the first three instalments of
+#     54,000 pesos fortes he retained 42,000, and of the ten monthly 18,000 he kept 13,200.
+# ES: Los contratos secretos del 6 de setiembre de 1850. Irineu Evangelista de Souza, el
+#     futuro baron de Maua, entregaba las letras del Imperio para que en publico pareciera un
+#     comerciante pagandole a otro. El articulo 6 lo hacia juntar los recibos, que quedaban
+#     como titulos de la deuda de la Republica con el Brasil. La tajada del banquero era real:
+#     de las tres primeras mensualidades de 54.000 pesos fuertes retuvo 42.000, y de las diez
+#     de 18.000 se quedaba con 13.200.
+guerra_grande_maua_paper = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 350
+	unit_defense_mult = 0.05
+	country_gold_reserve_limit_mult = -0.20
+	country_loan_interest_rate_add = 0.02
+}
+
+# EN: The mirror: Oribe's actual answer to Rosas in 1845 was to send the question of
+#     reunification to a parliamentary commission, which never decided anything. The money
+#     kept arriving; the signature never did.
+# ES: El espejo: la respuesta real de Oribe a Rosas en 1845 fue mandar la cuestion de la
+#     reunificacion a una comision parlamentaria, que nunca resolvio nada. La plata siguio
+#     llegando; la firma no llego nunca.
+guerra_grande_commission_of_the_assembly = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 350
+	unit_defense_mult = 0.05
+	country_gold_reserve_limit_mult = -0.20
+	country_loan_interest_rate_add = 0.02
+}
+
+# ---------------------------------------------------------------------------------------
+# THE PLEDGE ITSELF -- stacked once for every instalment either side takes
+# ---------------------------------------------------------------------------------------
+
+# EN: Neither side borrowed against anything but its customs, because in these economies the
+#     customs were the revenue: 85.6% of the Estado Oriental's fiscal income in 1830-1839.
+# ES: Ninguno de los dos bandos tenia mas garantia que su aduana, porque en estas economias
+#     la aduana era la renta: el 85,6% del ingreso fiscal del Estado Oriental en 1830-1839.
+guerra_grande_customs_pledged = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.10
+	country_gold_reserve_limit_mult = -0.15
+	country_loan_interest_rate_add = 0.01
+}
+
+# ---------------------------------------------------------------------------------------
+# THE RECKONING
+# ---------------------------------------------------------------------------------------
+
+guerra_grande_owes_nobody = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_prestige_mult = 0.10
+	country_loyalists_from_legitimacy_mult = 0.10
+}
+
+guerra_grande_mortgaged_revenues = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.15
+	country_minting_add = -150
+	country_prestige_mult = -0.10
+	country_loan_interest_rate_add = 0.01
+}
+
+# EN: Article X of the convention of 12 October 1851: the oriental government "hipoteca todas
+#     las rentas del Estado, todas las contribuciones directas e indirectas, especialmente los
+#     derechos de aduana", at 6% a year -- and until the debt was cancelled a Junta de Credito
+#     Publico with Brazilian members administered the Republic's finances.
+# ES: Articulo X del convenio del 12 de octubre de 1851: el gobierno oriental "hipoteca todas
+#     las rentas del Estado, todas las contribuciones directas e indirectas, especialmente los
+#     derechos de aduana", al 6% anual -- y mientras no se cancelara la deuda, una Junta de
+#     Credito Publico con representantes brasilenos administraba las finanzas de la Republica.
+guerra_grande_junta_de_credito_publico = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.25
+	country_minting_add = -300
+	country_prestige_mult = -0.20
+	country_authority_add = -50
+	country_loan_interest_rate_add = 0.02
+}
+
+# EN: The Capitulacion del Pantanoso of 8 October 1851 held that the acts of the Cerrito
+#     government were legal for all purposes and that the government elected afterwards would
+#     assume the debts it had contracted.
+# ES: La Capitulacion del Pantanoso del 8 de octubre de 1851 establecio que los actos del
+#     Gobierno del Cerrito se considerasen legales a todos los efectos y que el gobierno
+#     surgido de las elecciones asumiria las deudas que aquel habia contraido.
+guerra_grande_debts_of_the_cerrito = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.25
+	country_minting_add = -300
+	country_prestige_mult = -0.20
+	country_authority_add = -50
+	country_loan_interest_rate_add = 0.02
+}
+
+# EN: December 1864: by executive decree the treaties of 12 October 1851 were burned in the
+#     Plaza Independencia, declared "rotos, nulos y cancelados... arrancados violentamente a
+#     la Republica". Flores won in February 1865 and they were back in force.
+# ES: Diciembre de 1864: por decreto del Poder Ejecutivo los tratados del 12 de octubre de
+#     1851 se quemaron en la plaza Independencia, declarados "rotos, nulos y cancelados...
+#     arrancados violentamente a la Republica". Flores gano en febrero de 1865 y volvieron a
+#     regir.
+guerra_grande_treaties_repudiated = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.30
+	country_influence_add = -25
+	country_legitimacy_base_add = 10
+	country_radicals_from_legitimacy_mult = -0.10
+}
+
+# EN: The Cerrito's creditor stopped existing: Rosas was beaten at Caseros on 3 February 1852
+#     and sailed for England. An account nobody is left to present.
+# ES: El acreedor del Cerrito dejo de existir: a Rosas lo derrotaron en Caseros el 3 de
+#     febrero de 1852 y se embarco para Inglaterra. Una cuenta que ya no queda quien presente.
+guerra_grande_creditor_overthrown = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.30
+	country_influence_add = -25
+	country_legitimacy_base_add = 10
+	country_radicals_from_legitimacy_mult = -0.10
+}

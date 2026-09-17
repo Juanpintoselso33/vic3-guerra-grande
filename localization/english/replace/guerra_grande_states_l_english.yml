@@ -1,0 +1,46 @@
+﻿l_english:
+
+# EN: Every state and hub name checked against two things: the real coordinates of each town,
+#     read off the province map, and its documented year of foundation. Nothing here is named
+#     after a river or a hill, and nothing is named after a town that does not exist yet in
+#     1836 unless no settlement existed in that province at all -- Cerro Largo had exactly two.
+#     Sources in SOURCES.md.
+
+ # Estados / States
+ STATE_SAN_JOSE: "San José"
+ STATE_MALDONADO: "Maldonado"
+ STATE_BANDA_ORIENTAL: "Cerro Largo"
+
+ # Montevideo: la plaza fuerte / the fortress
+ HUB_NAME_STATE_MONTEVIDEO_city: "Montevideo"
+ HUB_NAME_STATE_MONTEVIDEO_port: "Montevideo"
+ HUB_NAME_STATE_MONTEVIDEO_farm: "Las Piedras"
+ HUB_NAME_STATE_MONTEVIDEO_mine: "Villa del Cerro"
+ HUB_NAME_STATE_MONTEVIDEO_wood: "Santa Lucía"
+
+ # San José: la campaña / the countryside
+ HUB_NAME_STATE_SAN_JOSE_city: "Florida"
+ HUB_NAME_STATE_SAN_JOSE_port: "Colonia del Sacramento"
+ HUB_NAME_STATE_SAN_JOSE_farm: "San José"
+ HUB_NAME_STATE_SAN_JOSE_mine: "Minas"
+ HUB_NAME_STATE_SAN_JOSE_wood: "Durazno"
+
+ # Maldonado
+ HUB_NAME_STATE_MALDONADO_city: "Maldonado"
+ HUB_NAME_STATE_MALDONADO_port: "Maldonado"
+ HUB_NAME_STATE_MALDONADO_mine: "San Carlos"
+ HUB_NAME_STATE_MALDONADO_farm: "Rocha"
+ HUB_NAME_STATE_MALDONADO_wood: "Santa Teresa"
+
+ # Cerro Largo
+ HUB_NAME_STATE_BANDA_ORIENTAL_city: "Melo"
+ HUB_NAME_STATE_BANDA_ORIENTAL_mine: "Pueblo Arredondo"
+ HUB_NAME_STATE_BANDA_ORIENTAL_farm: "Treinta y Tres"
+ HUB_NAME_STATE_BANDA_ORIENTAL_port: "Lascano"
+ HUB_NAME_STATE_BANDA_ORIENTAL_wood: "Santa Clara de Olimar"
+
+ # Paysandú
+ HUB_NAME_STATE_PAYSANDU_city: "Salto"
+ HUB_NAME_STATE_PAYSANDU_farm: "Paysandú"
+ HUB_NAME_STATE_PAYSANDU_mine: "San Fructuoso"
+ HUB_NAME_STATE_PAYSANDU_wood: "Mercedes"

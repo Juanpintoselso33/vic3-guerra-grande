@@ -1,0 +1,1054 @@
+﻿namespace = gg_peace
+
+# =================================================================================================
+# EN: THE PEACE MENU OF THE GUERRA GRANDE
+#
+#     The war ends in one of several ways, and the two governments do not end it the same way,
+#     because they did not want the same thing. Everything offered below is something one of the
+#     two actually proposed, decreed, signed or asked a foreign power for, between 1838 and 1852.
+#     The sources are in ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md, with URLs, and nothing
+#     in this file goes past them. Where the record is disputed -- most of all on whether Oribe
+#     ever meant to hand the Republic to Rosas -- the text says so instead of picking a side.
+#
+#     The menus are deliberately NOT symmetrical. The Defensa won by surviving until someone else
+#     broke Rosas, and its documented programme is foreign: Brazilian treaties, an Anglo-French
+#     protectorate, and a campaign across the river. The Cerrito would have won by walking into
+#     the city, and its documented programme is domestic and legalist: the interrupted
+#     presidency, the Constitution of 1830, the acts of its own government declared lawful --
+#     with reincorporation into the Confederation sitting there as an offer it never answered.
+#
+# ES: EL MENU DE PAZ DE LA GUERRA GRANDE
+#
+#     La guerra termina de varias maneras, y los dos gobiernos no la terminan igual, porque no
+#     querian lo mismo. Todo lo que se ofrece abajo es algo que uno de los dos propuso, decreto,
+#     firmo o le pidio a una potencia extranjera entre 1838 y 1852. Las fuentes estan en
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_peace.md, con URLs, y nada en este archivo va mas
+#     alla de ellas. Donde el registro esta en disputa -- sobre todo si Oribe penso alguna vez en
+#     entregarle la Republica a Rosas -- el texto lo dice en vez de elegir bando.
+#
+#     Los menus NO son simetricos a proposito. La Defensa gano sobreviviendo hasta que otro
+#     rompio a Rosas, y su programa documentado es de afuera: tratados con el Brasil, un
+#     protectorado anglofrances y una campania del otro lado del rio. El Cerrito habria ganado
+#     entrando a la ciudad, y su programa documentado es de adentro y legalista: la presidencia
+#     interrumpida, la Constitucion de 1830, los actos de su propio gobierno declarados legales
+#     -- con la reincorporacion a la Confederacion ahi, como una oferta que nunca contesto.
+# =================================================================================================
+
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.1 -- THE DEFENSA DICTATES THE PEACE.
+#     Reached when the government marked as the Defensa has the war won: it replaces the single
+#     fork of guerra_grande.8. The historical outcome is option a; everything else is a road the
+#     men of Montevideo actually proposed and did not get, or got later.
+# ES: gg_peace.1 -- LA DEFENSA DICTA LA PAZ.
+#     Se llega cuando el gobierno marcado como la Defensa tiene la guerra ganada: reemplaza la
+#     bifurcacion unica de guerra_grande.8. Lo historico es la opcion a; lo demas son caminos que
+#     los hombres de Montevideo propusieron de verdad y no consiguieron, o consiguieron despues.
+# -------------------------------------------------------------------------------------------------
+gg_peace.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.1.t
+	desc = gg_peace.1.desc
+	flavor = gg_peace.1.flav
+
+	# Adolphe d'Hastrel, "The Roads, Montevideo" (1840), public domain.
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = guerra_grande_split_done
+		NOT = { has_global_variable = gg_peace_settled }
+		# EN: HOTFIX 2026-09-16 -- this used to require the loser's country to still exist,
+		#     which left the event unable to ever fire after a decisive military conquest (the
+		#     real war annexing the loser outright, before our own score reached the peace
+		#     threshold). Dropped: the immediate's random_country below already handles "the
+		#     loser is already gone" gracefully by leaving scope:gg_peace_loser unset, and every
+		#     option that annexes it is now guarded to skip cleanly when that happens.
+		# ES: HOTFIX 2026-09-16 -- esto exigia que el pais del perdedor siguiera existiendo, lo
+		#     que dejaba al evento sin poder disparar nunca despues de una conquista militar
+		#     decisiva (la guerra real anexando al perdedor de una, antes de que nuestro propio
+		#     puntaje llegara al piso de paz). Sacado: el random_country del immediate de abajo
+		#     ya maneja bien que el perdedor ya no este, dejando el scope sin poner, y cada
+		#     opcion que lo anexa ahora se salta limpio cuando eso pasa.
+		has_variable = guerra_grande_defensa_government
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = guerra_grande_peace_offered
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				save_scope_as = gg_peace_loser
+			}
+		}
+	}
+
+	# EN: a -- THE FORMULA. 8 October 1851, the camp on the Pantanoso. The clause is the one that
+	#     was signed: "Se declara que entre las diferentes opiniones en que han estado divididos
+	#     los orientales, no habra vencidos ni vencedores." It came with a price the phrase hides:
+	#     equal rights and equal claim to public office for every oriental whatever side he had
+	#     been on, and the Republic assuming the war debt the Cerrito had run up. Oribe was not
+	#     exiled -- a delegation of citizens asked Urquiza for guarantees for him and Urquiza gave
+	#     them, and he stayed in his quinta, unmolested, until he died in 1857.
+	# ES: a -- LA FORMULA. 8 de octubre de 1851, el cuartel del Pantanoso. La clausula es la que se
+	#     firmo. Vino con un precio que la frase esconde: iguales derechos y opcion a los empleos
+	#     publicos para todos los orientales, del bando que fueran, y la Republica haciendose cargo
+	#     de la deuda de guerra del Cerrito. A Oribe no lo desterraron: una comision de ciudadanos
+	#     le pidio garantias a Urquiza, Urquiza las dio, y se quedo en su quinta hasta 1857.
+	option = {
+		name = gg_peace.1.a
+		default_option = yes
+
+		custom_tooltip = gg_peace_formula_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_national_cockade
+			years = 10
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_assumed_war_debt
+			years = 8
+			is_decaying = yes
+		}
+		add_treasury = -150000
+
+		add_loyalists = { value = large_radicals }
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_landowners
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_rural_folk
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_no_victors
+		}
+
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	# EN: b -- THE DECREES OF FEBRUARY 1843, CARRIED OUT. This is not invented and it is not the
+	#     mirror image of anything: it is the Defensa's own law, applied at last to the country it
+	#     had never been able to reach. 10 February 1843: anyone in contact with the besiegers to a
+	#     military commission, anyone materially helping them shot. 12 February: every oriental
+	#     taken with arms in hand or wearing the enemy's divisa shot "en el acto y por la espalda".
+	#     1 March: the families of the men in the invading army expelled from the city, some of
+	#     them to the isla Libertad. The confiscations were the Defensa's first -- the Cerrito's
+	#     decree of June 1845 says so in its own preamble, answering "una decision similar adoptada
+	#     por el Gobierno de la Defensa". And there is a precedent for doing it rather than saying
+	#     it: after Caseros, the new government in Buenos Aires handed the authors of the degollinas
+	#     of 1840 and 1842 to the courts. Eduardo Acevedo marks that as "una diferencia notable" with
+	#     what Urquiza imposed on this side of the river. This option is that difference, taken here.
+	# ES: b -- LOS DECRETOS DE FEBRERO DE 1843, CUMPLIDOS. Esto no esta inventado y no es el espejo
+	#     de nada: es la ley propia de la Defensa, aplicada por fin al pais que nunca habia podido
+	#     alcanzar. 10 de febrero de 1843: a comision militar el que tenga trato con los sitiadores,
+	#     fusilado el que los auxilie materialmente. 12 de febrero: fusilado "en el acto y por la
+	#     espalda" todo oriental tomado con armas o con la divisa enemiga. 1 de marzo: expulsadas de
+	#     la ciudad las familias de los del ejercito invasor, algunas a la isla Libertad. Las
+	#     confiscaciones las empezo la Defensa: el decreto del Cerrito de junio de 1845 lo dice en su
+	#     propio preambulo, contestando "una decision similar adoptada por el Gobierno de la
+	#     Defensa". Y hay precedente de hacerlo y no solo decirlo: despues de Caseros el nuevo
+	#     gobierno de Buenos Aires entrego a los tribunales a los autores de las degollinas de 1840 y
+	#     1842, y Eduardo Acevedo lo marca como "una diferencia notable" con lo que impuso Urquiza de
+	#     este lado. Esta opcion es esa diferencia, tomada aca.
+	option = {
+		name = gg_peace.1.b
+
+		custom_tooltip = gg_peace_proscription_defensa_tt
+
+		scope:gg_peace_loser = {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+						has_template = URU_bernardo_prudencio_berro
+					}
+				}
+				exile_character = yes
+			}
+		}
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = gg_peace_blancos_proscribed
+			years = 15
+			is_decaying = yes
+		}
+
+		# The confiscations stand, and they are worth money.
+		add_treasury = 250000
+		change_infamy = 15
+
+		# The countryside, which spent nine years under Oribe, pays for it.
+		every_scope_state = {
+			limit = {
+				NOT = { state_region = s:STATE_MONTEVIDEO }
+			}
+			kill_population_percent_in_state = {
+				percent = 0.04
+			}
+		}
+
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_landowners
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_punished
+		}
+
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	# EN: c -- THE FIVE TREATIES. Andres Lamas signed them in Rio de Janeiro on 12 October 1851,
+	#     four days after the formula. Alliance, with Brazil guarantor of the Constitution and a
+	#     right to intervene to restore order; subsidies against the customs revenue; limits, on
+	#     the Cuareim, renouncing the San Ildefonso claim and leaving a dry coast on the Laguna
+	#     Merin and the Yaguaron for fifty-eight years; commerce, ten years' exemption for
+	#     Brazilian tasajo and for cattle driven north; extradition of fugitive slaves, against the
+	#     Republic's own abolition. Contemporaries called it a diplomatic triumph and the country
+	#     spent the next fourteen years arguing about it; in December 1864 a Uruguayan government
+	#     burned the treaties in a public square, and in February 1865 the next one restored them.
+	# ES: c -- LOS CINCO TRATADOS. Andres Lamas los firmo en Rio el 12 de octubre de 1851, cuatro
+	#     dias despues de la formula. Alianza, con el Brasil garante de la Constitucion y derecho a
+	#     intervenir; socorros contra la renta de aduana; limites en el Cuareim, renuncia a San
+	#     Ildefonso y costa seca sobre la Merin y el Yaguaron por cincuenta y ocho anios; comercio,
+	#     diez anios de exoneracion al tasajo brasilero y al ganado que cruce; extradicion de
+	#     esclavos fugados, contra la propia abolicion. Los contemporaneos lo llamaron un triunfo
+	#     diplomatico y el pais se paso catorce anios discutiendolo: en diciembre de 1864 un
+	#     gobierno oriental quemo los tratados en una plaza, y en febrero de 1865 el siguiente los
+	#     restablecio.
+	option = {
+		name = gg_peace.1.c
+
+		custom_tooltip = gg_peace_treaties_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		c:BRZ ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = protectorate
+			}
+			change_relations = {
+				country = root
+				value = 60
+			}
+		}
+
+		add_modifier = {
+			name = gg_peace_treaties_of_1851
+			years = 14
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+		add_treasury = 200000
+
+		# Article 1 of the limits treaty: the San Ildefonso reserve renounced outright.
+		s:STATE_RIO_GRANDE_DO_SUL ?= {
+			remove_claim = root
+			remove_claim = c:URU
+		}
+
+		add_radicals = {
+			value = medium_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_landowners
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_no_victors
+		}
+
+		ai_chance = {
+			base = 25
+		}
+	}
+
+	# EN: d -- THE PROTECTORATE ASKED FOR. Manuel Herrera y Obes, foreign minister of the Defensa,
+	#     put a joint Anglo-French protectorate to the two powers in 1848. It was the fourth such
+	#     request in ten years: Francisco Jose Munioz asked London in 1838 for an arrangement like
+	#     the one over the Ionian Islands; chancellor Vidal tried again through Jose Ellauri in
+	#     1841; Florencio Varela was sent to London in 1843-44. Separately, men of the French colony
+	#     in Montevideo pushed a French protectorate with the goodwill of leading men of the Defensa
+	#     and the backing of the French ambassador in Rio. Every one of these was refused -- which
+	#     is why this option does not resolve here. It resolves in gg_peace.3.
+	# ES: d -- EL PROTECTORADO PEDIDO. Manuel Herrera y Obes, canciller de la Defensa, les propuso a
+	#     las dos potencias en 1848 un protectorado conjunto anglofrances. Era el cuarto pedido en
+	#     diez anios: Francisco Jose Munioz le pidio a Londres en 1838 un arreglo como el de las
+	#     Islas Jonicas, el canciller Vidal insistio por Jose Ellauri en 1841, a Florencio Varela lo
+	#     mandaron a Londres en 1843-44. Aparte, hombres de la colonia francesa de Montevideo
+	#     empujaban un protectorado frances con el beneplacito de dirigentes de la Defensa y el
+	#     respaldo del embajador frances en Rio. A todos les dijeron que no, y por eso esta opcion no
+	#     se resuelve aca: se resuelve en gg_peace.3.
+	option = {
+		name = gg_peace.1.d
+
+		custom_tooltip = gg_peace_protectorate_asked_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_no_victors
+			# EN: six requests went out between 1838 and 1865; London refused every one of them.
+			#     The odds are weighted accordingly, and the answer takes four months to arrive.
+			# ES: salieron seis pedidos entre 1838 y 1865 y Londres los rechazo todos. La tirada
+			#     esta cargada en consecuencia, y la respuesta tarda cuatro meses en llegar.
+			random_list = {
+				75 = { trigger_event = { id = gg_peace.4 days = 120 popup = yes } }
+				25 = { trigger_event = { id = gg_peace.3 days = 120 popup = yes } }
+			}
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	# EN: e -- AND THEN ACROSS THE RIVER. Herrera y Obes to the British and French charges
+	#     d'affaires, early September 1851, protesting their offer to ship Oribe's Argentine
+	#     battalions home: the government wants that army destroyed, "por cuanto una vez pacificado
+	#     el territorio nacional se iniciara la accion militar contra Rosas", and there is a
+	#     "positiva necesidad" that those troops not reinforce the other bank. That is the Defensa
+	#     saying, in its own diplomatic correspondence, that the war does not end with the siege.
+	#     After Urquiza sailed, a new alliance was signed in Montevideo between Uruguay, Brazil,
+	#     Entre Rios and Corrientes; Uruguay's share was a division of two thousand men. Rosas fell
+	#     at Caseros on 3 February 1852.
+	# ES: e -- Y DESPUES, AL OTRO LADO DEL RIO. Herrera y Obes a los encargados de negocios ingles y
+	#     frances, principios de setiembre de 1851, protestando por el ofrecimiento de embarcar los
+	#     batallones argentinos de Oribe: el gobierno quiere ese ejercito aniquilado, "por cuanto una
+	#     vez pacificado el territorio nacional se iniciara la accion militar contra Rosas", y hay
+	#     "positiva necesidad" de que esas tropas no refuercen la otra orilla. Eso es la Defensa
+	#     diciendo, en su propia correspondencia diplomatica, que la guerra no se termina con el
+	#     sitio. Despues de que Urquiza se embarco se firmo en Montevideo una nueva alianza entre el
+	#     Uruguay, el Brasil, Entre Rios y Corrientes; al Uruguay le tocaba una division de dos mil
+	#     hombres. Rosas cayo en Caseros el 3 de febrero de 1852.
+	option = {
+		name = gg_peace.1.e
+
+		custom_tooltip = gg_peace_caseros_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_march_on_buenos_aires
+			years = 6
+			is_decaying = yes
+		}
+		add_treasury = -100000
+
+		c:ARG ?= {
+			change_relations = {
+				country = root
+				value = -80
+			}
+		}
+		c:BRZ ?= {
+			change_relations = {
+				country = root
+				value = 40
+			}
+		}
+
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = medium_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_no_victors
+		}
+
+		ai_chance = {
+			base = 15
+		}
+	}
+
+	# EN: f -- NO TERMS. Montevideo did this for real: the armistice negotiated through admiral Le
+	#     Predour held from May 1849 to August 1851, two years and three months in which besiegers
+	#     and besieged looked at each other without firing a shot, waiting on a vote of the French
+	#     National Assembly. The offer comes back in two years, as it did.
+	# ES: f -- SIN CONDICIONES. Montevideo lo hizo de verdad: el armisticio negociado por el
+	#     almirante Le Predour rigio de mayo de 1849 a agosto de 1851, dos anios y tres meses en que
+	#     sitiadores y sitiados se miraron sin tirar un tiro, esperando un voto de la Asamblea
+	#     Nacional de Francia. La oferta vuelve en dos anios, como volvio.
+	option = {
+		name = gg_peace.1.f
+
+		add_modifier = {
+			name = guerra_grande_divided_country
+			years = 5
+			is_decaying = yes
+		}
+
+		hidden_effect = {
+			remove_global_variable = guerra_grande_peace_offered
+			trigger_event = { id = gg_peace.1 days = 730 popup = yes }
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.2 -- THE CERRITO DICTATES THE PEACE.
+#     Replaces the two-option fork of guerra_grande.15. It is reached the same way that event was:
+#     only if the squadrons never came, because the sea lane is the whole reason the city held.
+#     The gate is not repeated here -- the journal entry keeps it -- but nothing in this menu is
+#     reachable without it.
+#
+#     One note on the first option, because it cuts against a comment in guerra_grande.txt that
+#     says the Cerrito must not get the formula. It gets it, and the reason is documentary: the
+#     clause "no habra vencidos ni vencedores" appears in ORIBE'S OWN proposed bases, the pliego he
+#     sent in on 7 October 1851 and which Eduardo Acevedo prints in full. Lamas coined the phrase
+#     in Rio; Oribe wrote it into his terms. A Cerrito that has won is granting a clause its own
+#     chief drafted, not borrowing the other side's ending.
+#
+# ES: gg_peace.2 -- EL CERRITO DICTA LA PAZ.
+#     Reemplaza la bifurcacion de dos opciones de guerra_grande.15. Se llega igual que a ese
+#     evento: solo si las escuadras no vinieron, porque la via del mar es toda la razon por la que
+#     la ciudad aguanto. La condicion no se repite aca -- la mantiene la entrada del diario -- pero
+#     nada de este menu se alcanza sin ella.
+#
+#     Una nota sobre la primera opcion, porque va contra un comentario de guerra_grande.txt que
+#     dice que al Cerrito no le toca la formula. Le toca, y la razon es documental: la clausula "no
+#     habra vencidos ni vencedores" esta en las bases que propuso EL PROPIO ORIBE, el pliego que
+#     mando el 7 de octubre de 1851 y que Eduardo Acevedo transcribe entero. Lamas acunio la frase
+#     en Rio; Oribe la escribio en sus condiciones. Un Cerrito que gano esta concediendo una
+#     clausula que redacto su propio jefe, no pidiendo prestado el final del otro bando.
+# -------------------------------------------------------------------------------------------------
+gg_peace.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.2.t
+	desc = gg_peace.2.desc
+	flavor = gg_peace.2.flav
+
+	# Adolphe d'Hastrel, "The Roads, Montevideo" (1840), public domain.
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = guerra_grande_split_done
+		NOT = { has_global_variable = gg_peace_settled }
+		# EN: HOTFIX 2026-09-16 -- this used to require the loser's country to still exist,
+		#     which left the event unable to ever fire after a decisive military conquest (the
+		#     real war annexing the loser outright, before our own score reached the peace
+		#     threshold). Dropped: the immediate's random_country below already handles "the
+		#     loser is already gone" gracefully by leaving scope:gg_peace_loser unset, and every
+		#     option that annexes it is now guarded to skip cleanly when that happens.
+		# ES: HOTFIX 2026-09-16 -- esto exigia que el pais del perdedor siguiera existiendo, lo
+		#     que dejaba al evento sin poder disparar nunca despues de una conquista militar
+		#     decisiva (la guerra real anexando al perdedor de una, antes de que nuestro propio
+		#     puntaje llegara al piso de paz). Sacado: el random_country del immediate de abajo
+		#     ya maneja bien que el perdedor ya no este, dejando el scope sin poner, y cada
+		#     opcion que lo anexa ahora se salta limpio cuando eso pasa.
+		has_variable = guerra_grande_cerrito_government
+		# EN: the gate that used to live in guerra_grande.15, repeated here on purpose. The city
+		#     only falls if the Anglo-French squadrons never came, because the open sea lane is the
+		#     single reason it held for nine years. The journal entry routes on this too; having it
+		#     in both places means a future edit to the routing cannot silently drop it.
+		# ES: la condicion que vivia en guerra_grande.15, repetida aca a proposito. La ciudad cae
+		#     solo si las escuadras no vinieron, porque la via del mar abierta es la unica razon por
+		#     la que aguanto nueve anios. La entrada del diario tambien rutea por esto: tenerlo en
+		#     los dos lados hace que un cambio futuro en el ruteo no lo pueda perder en silencio.
+		NOT = { has_global_variable = guerra_grande_foreign_intervention }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = guerra_grande_peace_offered
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				save_scope_as = gg_peace_loser
+			}
+		}
+	}
+
+	# EN: a -- THE CLAUSE ORIBE WROTE. From his own bases of 7 October 1851, alongside equal rights
+	#     and equal claim to public office for every oriental of whatever opinion, and the Nation
+	#     recognising what his government owed. He asked for more than he got -- that the acts of
+	#     his government be declared lawful outright, confiscations included, and that his oriental
+	#     battalions stay under him until an election. Winning is getting the whole pliego.
+	# ES: a -- LA CLAUSULA QUE ESCRIBIO ORIBE. De sus propias bases del 7 de octubre de 1851, junto
+	#     con iguales derechos y opcion a los empleos publicos para todo oriental de cualquier
+	#     opinion, y la Nacion reconociendo lo que su gobierno debia. Pidio mas de lo que le dieron:
+	#     que se declararan legales los actos de su gobierno sin excluir las confiscaciones, y que
+	#     sus batallones orientales quedaran bajo su mando hasta la eleccion. Ganar es que le
+	#     acepten el pliego entero.
+	option = {
+		name = gg_peace.2.a
+		default_option = yes
+
+		custom_tooltip = gg_peace_oribe_pliego_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = guerra_grande_no_victors_no_vanquished
+			years = 10
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_legal_presidency
+			years = 10
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_national_cockade
+			years = 10
+			is_decaying = yes
+		}
+
+		add_loyalists = { value = large_radicals }
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_landowners
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_rural_folk
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_no_victors
+		}
+
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	# EN: b -- THE PRESIDENCY RESTORED, AND NOTHING ELSE CHANGED. The whole legal case of the
+	#     Cerrito: Oribe was the constitutional president whose term was cut short by an armed
+	#     rising in 1838, and he never stopped being it. So his government reconvened the Chambers
+	#     Rivera had dissolved, had them confirm him, installed a Tribunal de Apelaciones on 12 May
+	#     1845, applied the Constitution of 1830, ran a customs house at the Buceo and a normal
+	#     school at the Villa de la Restauracion, and abolished slavery outright in 1846. Winning on
+	#     that claim means the interrupted term simply resumes and elections follow under the
+	#     Constitution. No proscriptions -- but every decree of the men in the city is void, which
+	#     includes the ones that took property, and the foreign legions go home.
+	# ES: b -- LA PRESIDENCIA RESTITUIDA Y NADA MAS. Todo el argumento juridico del Cerrito: Oribe
+	#     era el presidente constitucional a quien un alzamiento armado le corto el mandato en 1838,
+	#     y nunca dejo de serlo. Por eso su gobierno reunio las Camaras que Rivera habia disuelto,
+	#     les hizo confirmarlo, instalo el Tribunal de Apelaciones el 12 de mayo de 1845, aplico la
+	#     Constitucion de 1830, tuvo aduana en el Buceo y escuela normal en la Villa de la
+	#     Restauracion, y abolio la esclavitud sin restricciones en 1846. Ganar con ese titulo es que
+	#     el mandato interrumpido siga y despues haya elecciones. Sin proscripciones, pero todo
+	#     decreto de los de la ciudad es nulo, incluidos los que tomaron bienes, y las legiones
+	#     extranjeras se van.
+	option = {
+		name = gg_peace.2.b
+
+		custom_tooltip = gg_peace_legal_presidency_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = gg_peace_legal_presidency
+			years = 15
+			is_decaying = yes
+		}
+		# Undoing the Defensa's confiscations costs the treasury what they brought in.
+		add_treasury = -200000
+
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_landowners
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		add_radicals = {
+			value = medium_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		# The Legions leave, and they were more than half the men on the walls.
+		every_scope_state = {
+			limit = { state_region = s:STATE_MONTEVIDEO }
+			kill_population_percent_in_state = {
+				percent = 0.05
+			}
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+		}
+
+		ai_chance = {
+			base = 25
+		}
+	}
+
+	# EN: c -- MUERAN LOS SALVAGES UNITARIOS. The masthead of El Defensor de la Independencia
+	#     Americana, the Cerrito's own paper, from issue 43 of 27 October 1845 to the last one on 29
+	#     September 1851: "Vivan los defensores de las Leyes! Mueran los salvages unitarios!!" The
+	#     camp cry added "los asquerosos franceses y el pardejon Rivera". What that meant when it
+	#     was done rather than printed is on record on the other side of the river, and it is
+	#     Oribe's own hand: after Famailla he had more than 350 prisoners put to the knife at the
+	#     Rincon de Ugarte on 21 September 1841, and on 3 October at Metan he reported to Rosas that
+	#     he had "mandado cortar la cabeza" to "el salvaje unitario Avellaneda" and that it "sera
+	#     colocada a la expectacion de los habitantes en la plaza publica de la ciudad de Tucuman".
+	#     At Arroyo Grande the officers of the beaten army were executed. Montevideo's presses did
+	#     the rest: in February 1842 the paper Muera Rosas ran a drawing of the head on its pike
+	#     captioned in Oribe's voice -- "Orientales, la plaza de Tucuman ha visto cumplirse los
+	#     deseos del Restaurador ROSAS. Falta ahora que la de Montevideo vea cumplirse los mios."
+	#     That caption is colorado propaganda and this file says so; the dispatch to Rosas is not.
+	# ES: c -- MUERAN LOS SALVAGES UNITARIOS. El encabezado de El Defensor de la Independencia
+	#     Americana, el diario del Cerrito, desde el numero 43 del 27 de octubre de 1845 hasta el
+	#     ultimo, el 29 de setiembre de 1851. El pregon del campamento agregaba "los asquerosos
+	#     franceses y el pardejon Rivera". Lo que eso significaba cuando se hacia en vez de
+	#     imprimirse esta documentado del otro lado del rio y es de puno de Oribe: despues de
+	#     Famailla mando pasar a cuchillo a mas de 350 prisioneros en el Rincon de Ugarte el 21 de
+	#     setiembre de 1841, y el 3 de octubre en Metan le informo a Rosas que habia "mandado cortar
+	#     la cabeza" al "salvaje unitario Avellaneda" y que "sera colocada a la expectacion de los
+	#     habitantes en la plaza publica de la ciudad de Tucuman". En Arroyo Grande fusilaron a los
+	#     oficiales del ejercito vencido. Las imprentas de Montevideo hicieron el resto: en febrero
+	#     de 1842 el periodico Muera Rosas publico un dibujo de la cabeza en la pica con una leyenda
+	#     puesta en boca de Oribe -- "Orientales, la plaza de Tucuman ha visto cumplirse los deseos
+	#     del Restaurador ROSAS. Falta ahora que la de Montevideo vea cumplirse los mios." Esa
+	#     leyenda es propaganda colorada y este archivo lo dice; el parte a Rosas no lo es.
+	option = {
+		name = gg_peace.2.c
+
+		custom_tooltip = gg_peace_proscription_cerrito_tt
+
+		scope:gg_peace_loser = {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Fructuoso_Rivera
+						has_template = URU_venancio_flores
+						has_template = URU_cesar_diaz
+						has_template = URU_lorenzo_batlle
+					}
+				}
+				exile_character = yes
+			}
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_andres_lamas
+						has_template = URU_manuel_herrera_y_obes
+					}
+				}
+				exile_character = yes
+			}
+		}
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		add_modifier = {
+			name = gg_peace_colorados_proscribed
+			years = 15
+			is_decaying = yes
+		}
+
+		add_treasury = 250000
+		change_infamy = 15
+
+		# The city empties: two thirds of the people inside the walls were foreign-born.
+		every_scope_state = {
+			limit = { state_region = s:STATE_MONTEVIDEO }
+			kill_population_percent_in_state = {
+				percent = 0.12
+			}
+		}
+
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_landowners
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+			set_global_variable = gg_peace_punished
+		}
+
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	# EN: d -- THE OFFER OF 11 AUGUST 1845, TAKEN UP. Rosas proposed the reunification of the
+	#     country, with the Republic going back into the Provinces of the Rio de la Plata and the
+	#     Preliminary Peace Convention of 1828 annulled. Oribe would not decide: he sent it to a
+	#     parliamentary commission, where it dissolved into nothing. This option is that answer
+	#     given the other way -- and it has to be marked honestly, because the historiography does
+	#     not agree on what it meant. Some historians hold that Oribe and Rosas meant to annex the
+	#     Republic to the Confederation; others say flatly that no document supports it, and point
+	#     out that Oribe had already refused the same suggestion once during his first presidency
+	#     and that he fought the British commercial treaty in 1835-36 rather than trade sovereignty
+	#     for a loan. The game lets the player make the choice the man did not make. It does not
+	#     claim he wanted to.
+	# ES: d -- LA OFERTA DEL 11 DE AGOSTO DE 1845, ACEPTADA. Rosas propuso la reunificacion de la
+	#     patria, con la Republica volviendo a las Provincias Unidas del Rio de la Plata y anulada
+	#     la Convencion Preliminar de Paz de 1828. Oribe no quiso decidir: la mando a una comision
+	#     parlamentaria y ahi se deshizo. Esta opcion es esa respuesta dada al reves, y hay que
+	#     marcarla con honestidad porque la historiografia no se pone de acuerdo sobre lo que
+	#     significaba. Algunos historiadores sostienen que Oribe y Rosas pretendian anexar la
+	#     Republica a la Confederacion; otros dicen que no hay documento que lo respalde, y recuerdan
+	#     que Oribe ya habia rechazado la misma sugerencia en su primera presidencia y que peleo el
+	#     tratado de comercio britanico en 1835-36 antes que cambiar soberania por un emprestito. El
+	#     juego deja tomar la decision que el hombre no tomo. No afirma que la quisiera.
+	option = {
+		name = gg_peace.2.d
+
+		custom_tooltip = gg_peace_confederation_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		c:ARG ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = vassal
+			}
+			change_relations = {
+				country = root
+				value = 80
+			}
+		}
+		c:BRZ ?= {
+			change_relations = {
+				country = root
+				value = -80
+			}
+		}
+
+		add_modifier = {
+			name = gg_peace_confederation_province
+			years = 15
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = gg_peace_legal_presidency
+			years = 10
+			is_decaying = yes
+		}
+
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_landowners
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = medium_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+		}
+
+		ai_chance = {
+			base = 15
+		}
+	}
+
+	# EN: e -- ROSAS'S MAN, AND PAID AS SUCH. The other reading of the same relationship, and the
+	#     one Montevideo's presses hammered for nine years: not a federal province but a client.
+	#     Rosas recognised Oribe as the Republic's lawful president in exile, made him general in
+	#     chief of the Ejercito Unido de Vanguardia, and financed him to the end -- in the last
+	#     weeks before the capitulation he was still sending him eight hundred gold ounces, and
+	#     Oribe's own camp cried "mueras" to the savage unitarians with the Villa de la Restauracion
+	#     named for the Restaurador himself. Against that stands the other half of the record: Oribe
+	#     put colonel Ramos under guard and threatened him with immediate execution rather than let
+	#     Rosas's orders reach the Argentine division. This is the client relationship without that
+	#     second half.
+	# ES: e -- EL HOMBRE DE ROSAS, Y PAGO COMO TAL. La otra lectura de la misma relacion, la que las
+	#     imprentas de Montevideo martillaron nueve anios: no una provincia federal, un cliente.
+	#     Rosas reconocio a Oribe como presidente legal de la Republica en el exilio, lo hizo general
+	#     en jefe del Ejercito Unido de Vanguardia y lo financio hasta el final: en las ultimas
+	#     semanas antes de la capitulacion todavia le mandaba ochocientas onzas de oro, y su propio
+	#     campamento daba mueras a los salvajes unitarios con la Villa de la Restauracion bautizada
+	#     por el Restaurador. Enfrente esta la otra mitad del registro: Oribe puso al coronel Ramos
+	#     bajo vigilancia y lo amenazo con fusilarlo en el acto antes que dejar llegar las ordenes de
+	#     Rosas a la division argentina. Esto es la clientela sin esa segunda mitad.
+	option = {
+		name = gg_peace.2.e
+
+		custom_tooltip = gg_peace_rosista_client_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		c:ARG ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = puppet
+			}
+			change_relations = {
+				country = root
+				value = 100
+			}
+		}
+		c:BRZ ?= {
+			change_relations = {
+				country = root
+				value = -100
+			}
+		}
+
+		add_modifier = {
+			name = gg_peace_rosista_client
+			years = 15
+			is_decaying = yes
+		}
+		add_treasury = 150000
+		change_infamy = 10
+
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_settled
+		}
+
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	# EN: f -- NO TERMS. Oribe sat before Montevideo for eight years and seven months without ever
+	#     ordering an assault, and why he never did is still an open question in the literature. The
+	#     offer comes back in two years.
+	# ES: f -- SIN CONDICIONES. Oribe estuvo ocho anios y siete meses frente a Montevideo sin ordenar
+	#     nunca un asalto, y por que no lo hizo sigue siendo una incognita en la bibliografia. La
+	#     oferta vuelve en dos anios.
+	option = {
+		name = gg_peace.2.f
+
+		add_modifier = {
+			name = guerra_grande_divided_country
+			years = 5
+			is_decaying = yes
+		}
+
+		hidden_effect = {
+			remove_global_variable = guerra_grande_peace_offered
+			trigger_event = { id = gg_peace.2 days = 730 popup = yes }
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.3 -- THE PROTECTORATE GRANTED. The unlikely branch, and it exists only because one
+#     of these projects was not a lone minister's idea: members of the French colony in Montevideo
+#     pushed a French protectorate with the goodwill of leading men of the Defensa and the backing
+#     of the French ambassador in Rio, and the Italian colony argued for something similar on the
+#     grounds of a civilising mission. France had already been paying the Defensa 40,000 pesos a
+#     month by the convention of 12 June 1848. This is that arrangement made formal.
+# ES: gg_peace.3 -- EL PROTECTORADO CONCEDIDO. La rama improbable, y existe solo porque uno de esos
+#     proyectos no era la idea suelta de un ministro: miembros de la colonia francesa de Montevideo
+#     empujaban un protectorado frances con el beneplacito de dirigentes de la Defensa y el respaldo
+#     del embajador frances en Rio, y la colonia italiana pedia algo parecido en nombre de una
+#     mision civilizadora. Francia ya le pagaba a la Defensa 40.000 pesos por mes por la convencion
+#     del 12 de junio de 1848. Esto es ese arreglo hecho formal.
+# -------------------------------------------------------------------------------------------------
+gg_peace.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.3.t
+	desc = gg_peace.3.desc
+	flavor = gg_peace.3.flav
+
+	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	option = {
+		name = gg_peace.3.a
+		default_option = yes
+
+		c:FRA ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = protectorate
+			}
+			change_relations = {
+				country = root
+				value = 80
+			}
+		}
+		c:GBR ?= {
+			change_relations = {
+				country = root
+				value = 60
+			}
+		}
+
+		add_modifier = {
+			name = gg_peace_anglo_french_protectorate
+			years = 15
+			is_decaying = yes
+		}
+		add_loyalists = {
+			value = medium_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.4 -- THE PROTECTORATE REFUSED. What actually happened, six times out of six: the
+#     British government turned down every one of these requests, from Munioz's in 1838 to the 1865
+#     approach that offered to take a prince of the reigning house as a monarch. Asking a foreign
+#     power to govern the Republic and being told no in public costs everything the asking cost and
+#     buys nothing.
+# ES: gg_peace.4 -- EL PROTECTORADO RECHAZADO. Lo que paso de verdad, seis de seis: el gobierno
+#     britanico rechazo todos los pedidos, desde el de Munioz en 1838 hasta el acercamiento de 1865
+#     que ofrecia tomar un principe de la casa reinante como monarca. Pedirle a una potencia
+#     extranjera que gobierne la Republica y que te digan que no en publico cuesta todo lo que costo
+#     pedirlo y no compra nada.
+# -------------------------------------------------------------------------------------------------
+gg_peace.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.4.t
+	desc = gg_peace.4.desc
+	flavor = gg_peace.4.flav
+
+	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	option = {
+		name = gg_peace.4.a
+		default_option = yes
+
+		add_modifier = {
+			name = gg_peace_protectorate_refused
+			years = 10
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}

@@ -1,0 +1,15 @@
+﻿l_english:
+
+# EN: The French Legion of Montevideo. Every figure here is sourced in
+#     ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md and in the comments of
+#     common/scripted_buttons/guerra_grande_french_legion_button.txt.
+
+ guerra_grande_french_legion_button:0 "Raise the French Legion"
+ guerra_grande_french_legion_button_desc:0 "There are more French in Montevideo than there are orientals under arms. Le Patriote Français has been calling them to a general taking up of arms 'without ridiculous distinctions of class or position', and on the first days of April 1843 they answer: Jean-Chrysostome Thiébaut, a Marseillais who marched with the Grande Armée and has been washed up in the Plata for fifteen years, takes the command. This will be the strongest battalion of the garrison — more than three thousand men at its height, against some seven hundred Italians. It is not France. Paris wants them disarmed and their consul is handing out money to keep them home."
+ guerra_grande_requires_no_foreign_legion_yet:0 "The foreign legions must not already be under arms"
+
+ gg_legion.1.t:0 "Under Whose Colours"
+ gg_legion.1.d:0 "The legion exists. What it is called is the harder question. Consul Théodore Pichon has his instructions from Paris — France is neutral in the quarrels of the Plata — and he has demanded the volunteers be discharged, forbidden them the French colours, and quietly distributed money among the men most likely to enlist. They enlisted anyway. Now the government must decide whether three thousand armed foreigners parade through a besieged city under a flag that is not the Republic's, or whether they are asked to give up the only thing the consul can still take from them: their nationality."
+ gg_legion.1.f:0 "Eleven men stepped forward to take the passage home. The rest stayed on the wall."
+ gg_legion.1.a:0 "Let them serve under their own colours."
+ gg_legion.1.b:0 "Nationalise them: the 2ª Legión de Guardia Nacional."

@@ -1,0 +1,171 @@
+﻿# Modifiers used by the Guerra Grande chain. Every key here is one the base game already
+# uses, checked against 1.13.11 - the carlist war rewards use the same shapes.
+
+# The white ribbon wins the countryside: caudillos, estancias and the parish militias.
+guerra_grande_blanco_order = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_landowners_pol_str_mult = 0.20
+	interest_group_ig_landowners_approval_add = 3
+	interest_group_ig_rural_folk_approval_add = 2
+	country_legitimacy_headofstate_add = 10
+}
+
+# The red ribbon wins the port: customs revenue, the presses and the merchant houses.
+guerra_grande_colorado_order = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_intelligentsia_pol_str_mult = 0.20
+	interest_group_ig_intelligentsia_approval_add = 3
+	interest_group_ig_petty_bourgeoisie_approval_add = 2
+	country_influence_add = 25
+}
+
+# Refusing both ribbons: legitimacy bought with authority.
+guerra_grande_armed_truce = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	country_authority_add = -25
+}
+
+# Two governments, one country, and both halves bleeding.
+guerra_grande_divided_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	character_advancement_speed_mult = -0.5
+	country_prestige_mult = -0.25
+	country_authority_add = -50
+	country_war_exhaustion_casualties_mult = 0.10
+}
+
+# The Anglo-French squadrons close every port of the Confederation but Montevideo.
+guerra_grande_river_plate_blockade = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_trade_capacity_mult = -0.25
+	state_weekly_trades_add = -2
+	state_migration_pull_mult = -0.25
+	country_prestige_mult = -0.10
+}
+
+# ...and keep the besieged city supplied by sea.
+guerra_grande_montevideo_resupplied = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	state_blockade_resistance_add = 100
+	state_trade_capacity_add = 20
+	state_weekly_trades_add = 2
+}
+
+# Garibaldi's Italian Legion, raised in Montevideo in 1843.
+guerra_grande_italian_legion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.10
+	country_military_goods_cost_mult = -0.05
+	interest_group_ig_armed_forces_approval_add = 2
+}
+
+# Rosas backs the Cerrito with money, cattle and veterans.
+guerra_grande_rosista_support = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	country_minting_add = 300
+	unit_offense_mult = 0.10
+	interest_group_ig_armed_forces_approval_add = 2
+}
+
+# The peace of 8 October 1851: neither vanquished nor victors.
+guerra_grande_no_victors_no_vanquished = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_loyalists_from_legitimacy_mult = 0.10
+	country_radicals_from_legitimacy_mult = -0.10
+	country_prestige_mult = 0.10
+}
+
+# La guerra la terminaron otros y el pais quedo repartido.
+guerra_grande_dismembered_republic = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	country_prestige_mult = -0.30
+	country_legitimacy_base_add = -15
+	country_radicals_from_legitimacy_mult = 0.15
+}
+
+# La plaza fuerte y el mar: lo que sostuvo a la Defensa durante nueve anios de sitio.
+guerra_grande_walls_of_montevideo = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.50
+	state_blockade_resistance_add = 100
+	military_formation_attrition_risk_mult = -0.25
+	country_war_exhaustion_casualties_mult = -0.25
+}
+
+# EN: the foreign contingents of the Defensa and of the Cerrito. Every one of them is a body of
+#     men that arrived without a declaration of war, which is how this war was actually fought.
+# ES: los contingentes extranjeros de la Defensa y del Cerrito. Todos son cuerpos de hombres que
+#     llegaron sin declaracion de guerra, que es como se peleo esta guerra de verdad.
+
+# Legion Argentina, offered September 1839 by the anti-rosista emigration.
+guerra_grande_argentine_emigres = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.05
+	interest_group_ig_intelligentsia_approval_add = 2
+	country_prestige_mult = 0.05
+}
+
+
+# February 1843: the Basque-Navarrese battalion walks over to the Cerrito.
+guerra_grande_basque_desertion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_defense_mult = -0.05
+	country_authority_add = -25
+	interest_group_ig_armed_forces_approval_add = -2
+}
+
+# The French Legion and the foreign militias: more than half the men on the walls in 1843.
+guerra_grande_foreign_legions = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.15
+	country_military_goods_cost_mult = -0.10
+	state_migration_pull_mult = 0.25
+	interest_group_ig_armed_forces_approval_add = 2
+}
+
+# Oribe's Argentine auxiliary battalions, lent and paid by Rosas.
+guerra_grande_argentine_auxiliaries = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.10
+	country_military_goods_cost_mult = -0.05
+	country_minting_add = 200
+}
+
+# The treaties of 12 October 1851: 60,000 patacones a month, and the customs mortgaged for them.
+guerra_grande_brazilian_subsidy = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 400
+	country_prestige_mult = -0.15
+	country_authority_add = -50
+}
+
+# Turning the Empire's money down: nobody's client, and nobody's ally either.
+guerra_grande_alone_against_the_siege = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = -100
+	country_legitimacy_base_add = 10
+	country_prestige_mult = 0.10
+	country_war_exhaustion_casualties_mult = 0.10
+}
+
+# EN: What a lead on the war bar actually buys. Refreshed monthly while the lead holds, so it
+#     fades on its own when the other side catches up.
+# ES: Lo que compra de verdad una ventaja en la barra. Se renueva mes a mes mientras la ventaja
+#     se mantenga, asi que se cae sola cuando el otro empata.
+guerra_grande_upper_hand = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.05
+	country_prestige_mult = 0.10
+	interest_group_ig_armed_forces_approval_add = 2
+}
+
+guerra_grande_losing_ground = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = -0.10
+	country_authority_add = -25
+	country_war_exhaustion_casualties_mult = 0.15
+	interest_group_ig_armed_forces_approval_add = -2
+}

@@ -1,0 +1,113 @@
+﻿# EN: Modifiers for the two abolitions of the Guerra Grande. Every modifier type here is one the
+#     base game already defines in 1.13.11 -- checked against common/static_modifiers and the
+#     interest group traits. The two country modifiers that carry the reward and the bill are
+#     applied identically by both governments, so neither side reaches a ceiling the other
+#     cannot: same battalions, same approval loss, same hands off the saladeros.
+# ES: Modificadores de las dos aboliciones de la Guerra Grande. Todos los tipos usados aca los
+#     define el juego base en 1.13.11 -- verificados contra common/static_modifiers y los rasgos
+#     de grupos de interes. Los dos modificadores de pais que llevan el premio y la cuenta los
+#     aplican igual los dos gobiernos, asi que ninguno llega a un techo que el otro no alcance:
+#     los mismos batallones, la misma caida de aprobacion, los mismos brazos que faltan.
+
+# EN: The line battalions of libertos. In February 1843, at the height of the mobilisation, the
+#     commanders of the Montevideo garrison counted these -- some 1,800 men -- and a few cavalry
+#     squadrons as the only real soldiers on the walls; more than seven in ten of the rest were
+#     volunteers, national guards or urban militia (Etchechury 2017).
+# ES: Los batallones de linea de libertos. En febrero de 1843, en el pico de la movilizacion, los
+#     jefes de la guarnicion de Montevideo contaban a estos -- unos 1.800 hombres -- y algunos
+#     escuadrones de caballeria como los unicos soldados de verdad de la muralla; mas de siete de
+#     cada diez del resto eran voluntarios, guardias nacionales o milicia urbana.
+guerra_grande_abolition_liberto_battalions = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.05
+	interest_group_ig_armed_forces_approval_add = 3
+	country_legitimacy_base_add = 5
+}
+
+# EN: Applied to the landowners themselves, not to the country: the estancieros and saladeristas
+#     were the slaveholders, and the decree took their property and put it in uniform. They were
+#     promised compensation "en tiempo oportuno"; most of them never collected (Grinberg 2019).
+# ES: Se aplica a los terratenientes, no al pais: los estancieros y saladeristas eran los duenios
+#     de esclavos, y el decreto les tomo la propiedad y la puso de uniforme. Les prometieron
+#     indemnizacion "en tiempo oportuno"; la mayoria no cobro nunca.
+guerra_grande_abolition_slaveholders_alienated = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds"
+	interest_group_approval_add = -4
+}
+
+# EN: The other half of the bill. The men who walked into the battalions were the hands that
+#     worked the saladeros and the estancias -- Brazilian charqueadores had brought slave labour
+#     into the Montevideo salting industry from 1835 on, and the enrolment parties had been
+#     emptying the establishments since 1837. Freedom in the city meant no arms in the corrals.
+# ES: La otra mitad de la cuenta. Los hombres que entraron a los batallones eran los brazos de
+#     los saladeros y las estancias: los charqueadores brasilenios habian metido mano de obra
+#     esclava en la industria saladeril montevideana desde 1835, y las partidas de enrolamiento
+#     vaciaban los establecimientos desde 1837. Libertad en la ciudad, y nadie en los corrales.
+guerra_grande_abolition_saladeros_short_handed = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	building_group_bg_ranching_throughput_add = -0.10
+	building_group_bg_agriculture_throughput_add = -0.05
+	interest_group_ig_landowners_pol_str_mult = -0.10
+}
+
+# EN: The lottery of mid-1842: slaves drawn for the army, 300 pesos to the owner for each man,
+#     and the man freed at once with four years to serve. Property was respected and paid for,
+#     so the owners stayed; it simply did not raise enough men (Grinberg 2019).
+# ES: El sorteo de mediados de 1842: esclavos sorteados para el ejercito, 300 pesos al duenio por
+#     cada hombre, y el hombre libre en el acto con cuatro anios de servicio. La propiedad se
+#     respeto y se pago, asi que los duenios se quedaron; lo que no hizo fue juntar hombres.
+guerra_grande_abolition_bought_recruits = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = -100
+	interest_group_ig_landowners_approval_add = 1
+}
+
+# EN: The owners keep their people, and keep faith with the government.
+# ES: Los duenios se quedan con su gente, y con el gobierno.
+guerra_grande_abolition_slaveholders_reassured = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	interest_group_approval_add = 3
+}
+
+# EN: And the battalions that were never raised. This is the real price of leaving the decree
+#     unsigned: in a war fought with whoever could be found, the men who were not found are the
+#     ones missing from the line.
+# ES: Y los batallones que no se levantaron. Ese es el precio real de no firmar el decreto: en
+#     una guerra peleada con quien apareciera, los hombres que no aparecieron son los que faltan
+#     en la linea.
+guerra_grande_abolition_ranks_unfilled = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = -0.10
+	unit_defense_mult = -0.05
+	interest_group_ig_armed_forces_approval_add = -3
+	country_war_exhaustion_casualties_mult = 0.10
+}
+
+# EN: Free soil. Refusing to return the fugitives made the Republic a destination: slaves crossed
+#     from Rio Grande do Sul knowing what the ground meant, and around 900 are recorded as having
+#     fled into Uruguay in 1850 alone. It also made an enemy of the Empire (Grinberg 2019).
+# ES: Suelo libre. Negarse a devolver a los fugitivos convirtio a la Republica en destino: los
+#     esclavos cruzaban desde Rio Grande do Sul sabiendo lo que significaba el suelo, y solo en
+#     1850 se registran unos 900 que huyeron al Uruguay. Y le hizo un enemigo del Imperio.
+guerra_grande_abolition_free_soil = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	country_prestige_mult = 0.10
+	state_migration_pull_mult = 0.25
+	country_loyalists_from_legitimacy_mult = 0.10
+}
+
+# EN: The other answer, and it was also given: in December 1842, days after the law, more than
+#     two hundred slaves were carried out of Montevideo aboard the corvette Siete de Abril to
+#     Santa Catarina, to save the property of the Empire's subjects (Grinberg 2019).
+# ES: La otra respuesta, que tambien se dio: en diciembre de 1842, dias despues de la ley, mas de
+#     doscientos esclavos salieron de Montevideo en la corbeta Siete de Abril rumbo a Santa
+#     Catarina, para salvar la propiedad de los subditos del Imperio.
+guerra_grande_abolition_slaves_returned = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+	country_prestige_mult = -0.10
+	country_radicals_from_legitimacy_mult = 0.15
+	interest_group_ig_landowners_approval_add = 2
+}

@@ -1,0 +1,24 @@
+﻿# Media aliases for the Fructuoso Rivera event pictures (Arroyo Grande, exile, return, death).
+# Kept in a separate file from guerra_grande_aliases.txt; the game reads every .txt in this folder.
+# Alias de medios para los eventos de Fructuoso Rivera (Arroyo Grande, exilio, regreso, muerte).
+# Van en un archivo aparte de guerra_grande_aliases.txt; el juego lee todos los .txt de esta carpeta.
+
+gg_rivera_arroyo_grande = {
+	video = "gfx/media_aliases/gg_rivera_arroyo_grande.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_rivera_exile = {
+	video = "gfx/media_aliases/gg_rivera_exile.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_rivera_return = {
+	video = "gfx/media_aliases/gg_rivera_return.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+gg_rivera_death = {
+	video = "gfx/media_aliases/gg_rivera_death.bk2"
+	audio = "event:/SFX/Events/southamerica/christianity"
+}

@@ -1,0 +1,51 @@
+﻿# EN: Same shape as vanilla's je_the_first_carlist_war_score_bar, and the same sign convention,
+#     which is worth writing down because it is the opposite of what you would guess.
+#     Paradox's own scripted_progress_bars.md says desc prints on the LEFT and second_desc on the
+#     RIGHT. In the carlist bar, the Carlists (SPC) score and move the bar -1 and their text is
+#     second_desc; the Cristinos (SPA) move it +1 and theirs is desc. So: desc = left = POSITIVE.
+#     Ours follows that exactly -- blancos are desc, on the left, and every blanco choice adds a
+#     positive value. (The comment that used to sit here claimed the reverse. It was wrong, and a
+#     wrong comment about a sign convention is worse than none, because the next fix trusts it.)
+#
+#     Colour: the style is not a free colour, it is one of four names compiled into the binary --
+#     double_sided_gold, double_sided_bad, double_sided_two_spains, double_sided_ryukyu. There is
+#     no gui or texture indirection to repoint. Decoding the textures in gfx/interface/progressbar
+#     gives progressbar_default #294f5b (dark celeste), progressbar_gold #926230 (orange) and
+#     progressbar_bad #74312f (red). MEASURED FROM A SCREENSHOT, not assumed: the named style
+#     paints only the LEFT half and the right half is always gold. So double_sided_bad produced a
+#     red left (the blancos) and a gold right, which is backwards -- red belongs to the colorados.
+#     Since no style gives celeste on the left and red on the right, and the colorados sit on the
+#     right, a red colorado half is simply not reachable with the four names the binary carries.
+#     Juan chose to keep celeste for the blancos over moving red to the correct side.
+# ES: Misma forma que la barra carlista de vanilla, y la misma convencion de signo, que conviene
+#     dejar escrita porque es al reves de lo que uno supondria.
+#     El scripted_progress_bars.md de Paradox dice que desc se imprime a la IZQUIERDA y second_desc
+#     a la DERECHA. En la barra carlista, los carlistas (SPC) puntuan y mueven la barra -1 y su
+#     texto es second_desc; los cristinos (SPA) la mueven +1 y el suyo es desc. O sea:
+#     desc = izquierda = POSITIVO. La nuestra lo sigue igual: los blancos son desc, van a la
+#     izquierda, y toda eleccion blanca suma en positivo. (El comentario que estaba aca decia lo
+#     contrario. Estaba mal, y un comentario equivocado sobre una convencion de signo es peor que
+#     ninguno, porque el proximo arreglo le cree.)
+#
+#     Color: el estilo no es un color libre, es uno de cuatro nombres compilados en el binario --
+#     double_sided_gold, double_sided_bad, double_sided_two_spains, double_sided_ryukyu. No hay
+#     indireccion de gui ni de textura para repuntar. Decodificando las texturas de
+#     gfx/interface/progressbar da progressbar_default #294f5b (celeste oscuro), progressbar_gold
+#     #926230 (naranja) y progressbar_bad #74312f (rojo). MEDIDO SOBRE UNA CAPTURA, no supuesto: el
+#     estilo nombrado pinta solo la mitad IZQUIERDA y la derecha es siempre dorada. Por eso
+#     double_sided_bad daba izquierda roja (los blancos) y derecha dorada, que esta al reves: el
+#     rojo es de los colorados. Como ningun estilo da celeste a la izquierda y rojo a la derecha, y
+#     los colorados van a la derecha, una mitad colorada roja es inalcanzable con los cuatro
+#     nombres que trae el binario. Juan eligio conservar el celeste de los blancos antes que mover
+#     el rojo al lado correcto.
+guerra_grande_war_score_bar = {
+	name = "guerra_grande_war_score_bar"
+	desc = "guerra_grande_bar_blancos_desc"
+	second_desc = "guerra_grande_bar_colorados_desc"
+
+	double_sided_gold = yes
+
+	start_value = 0
+	min_value = -10
+	max_value = 10
+}

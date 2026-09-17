@@ -1,0 +1,45 @@
+﻿# Media aliases for the foreign legions and the troops (gg_contingent.*, gg_legion.1).
+# Kept in a separate file from guerra_grande_aliases.txt; the game reads every .txt in this folder.
+# Alias de medios para las legiones extranjeras y las tropas (gg_contingent.*, gg_legion.1).
+# Van en un archivo aparte de guerra_grande_aliases.txt; el juego lee todos los .txt de esta carpeta.
+
+gg_leg_argentine = {
+	video = "gfx/media_aliases/gg_leg_argentine.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_leg_basque_desertion = {
+	video = "gfx/media_aliases/gg_leg_basque_desertion.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_leg_french = {
+	video = "gfx/media_aliases/gg_leg_french.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_leg_italian = {
+	video = "gfx/media_aliases/gg_leg_italian.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+gg_leg_basque_chasseurs = {
+	video = "gfx/media_aliases/gg_leg_basque_chasseurs.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+gg_leg_rosista = {
+	video = "gfx/media_aliases/gg_leg_rosista.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+gg_leg_caxias = {
+	video = "gfx/media_aliases/gg_leg_caxias.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+gg_leg_colours = {
+	video = "gfx/media_aliases/gg_leg_colours.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+

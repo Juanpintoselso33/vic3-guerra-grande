@@ -1,0 +1,17 @@
+﻿# EN: Uruguay is no longer three states but five. Every list that says "this is Uruguay"
+#     has to say so too, or releasing or forming the country would leave the Canelones
+#     countryside and Maldonado behind.
+# ES: Uruguay ya no son tres estados sino cinco. Toda lista que diga "esto es Uruguay"
+#     tiene que decirlo tambien, o liberar o formar el pais dejaria afuera la campania
+#     de Canelones y Maldonado.
+
+REPLACE:URU = {
+	states = {
+		STATE_MONTEVIDEO
+		STATE_SAN_JOSE
+		STATE_MALDONADO
+		STATE_BANDA_ORIENTAL
+		STATE_PAYSANDU
+	}
+	ai_will_do = { always = no }
+}

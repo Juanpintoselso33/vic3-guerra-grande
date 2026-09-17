@@ -1,0 +1,46 @@
+﻿# EN: PROVISIONAL. Blunt instrument, flagged as such: country_block_government_reform_bool
+#     blocks ANY law reform, not just Distribution of Power, because that is what vanilla itself
+#     uses for the same class of problem -- modifier_government_recently_couped, the post-coup
+#     cooldown, applies it the same way. Verified against
+#     common/static_modifiers/00_ip4_04_modifiers.txt.
+#     WHY IT EXISTS: two things converged. First, Juan's own design requirement, stated directly:
+#     "rosas tiene que estar hasta por lo menos que caiga en caseros" -- the Cerrito's alliance
+#     with Rosas is load-bearing for the whole guerra_grande.4/gg_loan.4 storyline, and it makes
+#     no sense if Rosas is gone by 1840. Second, a real bug found the same day: DNFC classifies
+#     Argentina as "dyn_c_argentina_dictatorship", and that classification does not permit
+#     law_cultural_exclusion, which la Argentina's own history file activates for Rosas at game
+#     start (common/history/countries -- activate_law = law_type:law_cultural_exclusion). The
+#     engine was logging "is not permitted to retain law Cultural Exclusion" and force-dropping
+#     it, which is very likely what was destabilising Argentina's government into the "de repente
+#     se vuelven republica" reports across two separate playthroughs.
+#     WHY IT IS PROVISIONAL, NOT A FIX: this masks the DNFC/la-Argentina conflict by freezing
+#     Argentina's politics outright, rather than resolving WHY DNFC's dictatorship classification
+#     rejects Cultural Exclusion. The real fix belongs in the DNFC compatch
+#     (~/dev/juegos/la-argentina-compatches/la-argentina-x-dnfc), which is someone else's repo,
+#     not this mod's. If that gets fixed upstream, this lock becomes redundant and should be
+#     removed rather than left stacked on top of a corrected root cause.
+# ES: PROVISORIO. Instrumento contundente, marcado como tal: country_block_government_reform_bool
+#     bloquea CUALQUIER reforma de ley, no solo distribucion del poder, porque es lo que usa la
+#     propia vanilla para el mismo tipo de problema -- modifier_government_recently_couped, el
+#     enfriamiento post-golpe, lo aplica igual. Verificado contra
+#     common/static_modifiers/00_ip4_04_modifiers.txt.
+#     POR QUE EXISTE: confluyeron dos cosas. Primero, un requisito de diseno de Juan, dicho
+#     directamente: "rosas tiene que estar hasta por lo menos que caiga en caseros" -- la alianza
+#     del Cerrito con Rosas sostiene toda la trama de guerra_grande.4/gg_loan.4, y no tiene
+#     sentido si Rosas ya no esta en 1840. Segundo, un bug real encontrado el mismo dia: DNFC
+#     clasifica a Argentina como "dyn_c_argentina_dictatorship", y esa clasificacion no permite
+#     law_cultural_exclusion, que el propio archivo de historia de la Argentina activa para Rosas
+#     al arrancar (common/history/countries -- activate_law = law_type:law_cultural_exclusion). El
+#     motor logueaba "is not permitted to retain law Cultural Exclusion" y se la sacaba a la
+#     fuerza, que muy probablemente era lo que desestabilizaba al gobierno argentino en los
+#     reportes de "de repente se vuelven republica" de dos partidas distintas.
+#     POR QUE ES PROVISORIO Y NO UN ARREGLO: esto tapa el conflicto entre DNFC y la Argentina
+#     congelando la politica argentina entera, en vez de resolver POR QUE la clasificacion de
+#     dictadura de DNFC rechaza Cultural Exclusion. El arreglo de verdad va en el compatch de DNFC
+#     (~/dev/juegos/la-argentina-compatches/la-argentina-x-dnfc), que es el repo de otra sesion,
+#     no de este mod. Si eso se arregla en origen, este candado queda redundante y hay que
+#     sacarlo en vez de dejarlo apilado sobre una causa ya corregida.
+gg_rosas_provisional_lock = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	country_block_government_reform_bool = yes
+}

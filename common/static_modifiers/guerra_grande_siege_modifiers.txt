@@ -1,0 +1,330 @@
+﻿# EN: The economic asymmetry of the Sitio Grande (1843-1851). The siege lasted nine years because
+#     neither government could finish the other, and the reason is economic, not military:
+#     Montevideo held the one customs house the world recognised, at the end of the one deepwater
+#     bay, and no countryside -- so no cattle and no food. The Cerrito held the whole country
+#     except the walled city -- cattle, hides, saladeros and men -- and its ports were open
+#     roadsteads whose customs house nobody outside the Republic would acknowledge, so what it
+#     produced could only leave as contraband. Each side had exactly what the other lacked.
+# ES: La asimetria economica del Sitio Grande (1843-1851). El sitio duro nueve anios porque ninguno
+#     de los dos gobiernos podia terminar con el otro, y la razon es economica, no militar:
+#     Montevideo tenia la unica aduana que el mundo reconocia, al final de la unica bahia honda, y
+#     no tenia campania: ni ganado ni comida. El Cerrito tenia el pais entero menos la plaza
+#     amurallada -- ganado, cueros, saladeros y hombres -- y sus puertos eran radas abiertas cuya
+#     aduana nadie de afuera de la Republica reconocia, asi que lo que producia solo podia salir
+#     como contrabando. Cada lado tenia justo lo que al otro le faltaba.
+#
+# Every key below was checked against the 1.13.11 definitions in
+# common/modifier_type_definitions/. Sources for every figure quoted: SOURCES_siege.md.
+#
+# DESIGN NOTE / NOTA DE DISENIO -- REVISED 2026-09-16
+# EN: these two state modifiers used to be exact mirror images, six keys with opposite signs,
+#     built on the premise that the Cerrito had no port. That premise is false twice over.
+#     On the map, three of the four Cerrito states carry a port: SAN_JOSE (x4E1442), MALDONADO
+#     (xA46ED2) and BANDA_ORIENTAL (x139DC8). And in the sources, Oribe habilitated the Buceo as
+#     a port by decree of 10 July 1843 and ran a customs house there -- the "aduana de Oribe",
+#     seventy officials under the Primer Receptor Ignacio Soria -- which was the Cerrito's
+#     principal source of revenue; the port held more than forty overseas merchant ships at its
+#     height, and in February 1845 Oribe expressly kept the Buceo and Nueva Palmira open to the
+#     English packets. The Cerrito's disadvantage was never the ABSENCE of ports. It was their
+#     QUALITY (open beaches with no harbour works), their LEGITIMACY (Montevideo declared every
+#     ship that called at the Buceo a pirate and every cargo contraband) and their EXPOSURE (a
+#     single squadron could close them, and when the Anglo-French one did, Oribe had to move the
+#     Administracion Central de la Aduana inland to Melo).
+#     So the mirror is gone on purpose. These are no longer the same keys with opposite signs,
+#     because history was not symmetrical: one side had one good legal port, the other had three
+#     bad illegal ones and the entire country behind them.
+# ES: estos dos modificadores de estado eran espejos exactos, seis claves con el signo cambiado,
+#     apoyados en la premisa de que el Cerrito no tenia puerto. La premisa es falsa dos veces.
+#     En el mapa, tres de los cuatro estados del Cerrito tienen puerto: SAN_JOSE (x4E1442),
+#     MALDONADO (xA46ED2) y BANDA_ORIENTAL (x139DC8). Y en las fuentes, Oribe habilito el Buceo
+#     como puerto por decreto del 10 de julio de 1843 y levanto ahi una aduana -- la "aduana de
+#     Oribe", setenta funcionarios a las ordenes del Primer Receptor Ignacio Soria -- que fue su
+#     principal fuente de recursos; el puerto llego a tener mas de cuarenta buques de ultramar, y
+#     en febrero de 1845 Oribe dejo expresamente abiertos el Buceo y Nueva Palmira a los paquetes
+#     ingleses. La desventaja del Cerrito nunca fue la AUSENCIA de puertos. Fue su CALIDAD (playas
+#     abiertas sin obras de puerto), su LEGITIMIDAD (Montevideo declaraba pirata a todo buque que
+#     recalara en el Buceo y contrabando a toda su carga) y su EXPOSICION (una sola escuadra podia
+#     cerrarlos, y cuando la anglo-francesa lo hizo, Oribe tuvo que mudar la Administracion
+#     Central de la Aduana tierra adentro, a Melo).
+#     Asi que el espejo se rompio a proposito. Ya no son las mismas claves con el signo cambiado,
+#     porque la historia no fue simetrica: un lado tenia un puerto bueno y legal, el otro tenia
+#     tres malos e ilegales y el pais entero detras.
+
+# ---------------------------------------------------------------------------------------------
+# STATE MODIFIERS -- what the ground itself gives, applied to the states, not to the governments.
+# MODIFICADORES DE ESTADO -- lo que da el suelo, aplicado a los estados, no a los gobiernos.
+# ---------------------------------------------------------------------------------------------
+
+# EN: Montevideo. The customs of the port multiplied by more than thirty during the siege -- from
+#     86,000 pesos in 1844 to over 2,900,000 in 1847 -- because the Anglo-French blockade of Buenos
+#     Aires pushed the whole trade of the basin through this bay. The city filled with foreigners:
+#     of 31,000 inhabitants in 1843 only some 11,000 were orientals. And it had no countryside at
+#     all: the quintas and chacras outside the wall were inside Oribe's lines.
+#     The key that carries the real advantage is state_trade_advantage_mult. Montevideo's edge was
+#     not that it had a port and the Cerrito had none -- it was that its customs house was the one
+#     a foreign shipmaster could clear through without his cargo being seized as contraband
+#     somewhere else. +0.25 is the value vanilla itself gives to a free-trade posture in
+#     common/laws/01_trade_policy.txt, i.e. the top of the scale the game actually uses.
+#     NOTE: the physical harbour is NOT modelled here. It belongs to the state trait on the map
+#     (see the report: STATE_MONTEVIDEO carries "state_trait_montevideo_harbor", which is defined
+#     nowhere in the game or the mod and therefore does nothing). If that trait is repaired,
+#     building_port_throughput_add and state_trade_capacity_mult come from there, not from here.
+# ES: Montevideo. La aduana del puerto se multiplico por mas de treinta durante el sitio -- de
+#     86.000 pesos en 1844 a mas de 2.900.000 en 1847 -- porque el bloqueo anglo-frances a Buenos
+#     Aires empujo todo el comercio de la cuenca por esta bahia. La ciudad se lleno de extranjeros:
+#     de 31.000 habitantes en 1843, apenas unos 11.000 eran orientales. Y no tenia nada de campania:
+#     las quintas y chacras de extramuros quedaron adentro de la linea de Oribe.
+#     La clave que lleva la ventaja de verdad es state_trade_advantage_mult. Lo de Montevideo no
+#     era tener puerto contra un Cerrito sin puerto: era que su aduana era la unica por la que un
+#     capitan extranjero podia despachar sin que le decomisaran la carga como contrabando en otro
+#     lado. +0.25 es el valor que la propia vanilla le da al libre comercio en
+#     common/laws/01_trade_policy.txt, o sea el tope de la escala que usa el juego.
+gg_siege_port_without_a_countryside = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	state_tax_capacity_mult = 0.60
+	state_trade_capacity_add = 30
+	state_trade_advantage_mult = 0.25
+	state_migration_pull_mult = 0.50
+	building_group_bg_ranching_throughput_add = -0.60
+	building_group_bg_agriculture_throughput_add = -0.60
+	state_conscription_rate_mult = -0.40
+}
+
+# EN: San Jose, Maldonado, Banda Oriental and Paysandu -- the four states the events actually
+#     address; the old comment here named Cerro Largo, which is not a state in this mod.
+#     The Cerrito governed the whole Republic bar the walled city, and that is where the cattle,
+#     the hides and the horsemen were -- the saladeros of the Buceo, of the Guardia de Arredondo
+#     on the Yaguaron and of the Uruguay river littoral worked all through the war, while
+#     Montevideo's own saladeros were ruined.
+#     What it lacked was not ports. It had them, three of them on this map, and the Buceo was a
+#     working customs house with seventy officials in it. What it lacked was every quality that
+#     makes a port worth having, and each of the three new keys is one of them:
+#       state_trade_advantage_mult = -0.25   the cargo is contraband. Montevideo declared every
+#           ship that called at the Buceo a pirate, so it sold at a smuggler's discount and bought
+#           at a smuggler's premium. -0.25 is vanilla's own floor for this key (brazil_1_modifiers).
+#       building_port_throughput_add = -0.20 the Buceo was an open beach, not a harbour. -0.20 is
+#           exactly what vanilla gives state_trait_hudson_bay, its one "bad place to run a port".
+#       state_blockade_resistance_add = -60  every state starts at 100 from the code static
+#           modifier, so this leaves 40 against Montevideo's 300 (100 base + 100 walls + 100
+#           resupplied). Any squadron at all can close these ports, which is what happened: when
+#           the Anglo-French one did, Oribe moved the Administracion Central de la Aduana to Melo.
+#     And the two keys that shrank, because the old values said "no port" rather than "bad port":
+#       state_tax_capacity_mult  -0.60 -> -0.30. Oribe collected. He enacted the General Customs
+#           Law of 13 June 1837 and ratified it by decree of 23 January 1845 for the whole
+#           territory of the Cerrito government. Badly, off a countryside he had himself forbidden
+#           to brand or work -- but he collected.
+#       state_trade_capacity_mult -0.50 -> -0.20. Three small roadsteads against one deepwater
+#           bay is a handicap, not an absence. The rest of the old -0.50 now lives in
+#           guerra_grande_river_plate_blockade, where it is conditional on someone actually
+#           blockading -- which is where it belongs, and stops the two double-counting.
+# ES: San Jose, Maldonado, Banda Oriental y Paysandu -- los cuatro estados que los eventos tocan
+#     de verdad; el comentario viejo nombraba Cerro Largo, que no es un estado en este mod.
+#     El Cerrito goberno la Republica entera menos la plaza amurallada, y ahi estaban el ganado,
+#     los cueros y los jinetes: los saladeros del Buceo, de la Guardia de Arredondo sobre el
+#     Yaguaron y del litoral del rio Uruguay trabajaron toda la guerra, mientras los de Montevideo
+#     se arruinaban.
+#     Lo que le faltaba no eran puertos. Los tenia, tres en este mapa, y el Buceo era una aduana
+#     en funciones con setenta empleados adentro. Lo que le faltaba era todo lo que hace que un
+#     puerto sirva, y cada una de las tres claves nuevas es una de esas cosas:
+#       state_trade_advantage_mult = -0.25   la carga es contrabando. Montevideo declaraba pirata
+#           a todo buque que recalara en el Buceo, asi que vendia con descuento de contrabandista
+#           y compraba con recargo. -0.25 es el piso que usa la propia vanilla (brazil_1_modifiers).
+#       building_port_throughput_add = -0.20 el Buceo era una playa abierta, no un puerto. -0.20
+#           es exactamente lo que vanilla le da a state_trait_hudson_bay, su unico "mal lugar
+#           para tener puerto".
+#       state_blockade_resistance_add = -60  todo estado arranca en 100 por el static modifier de
+#           codigo, asi que esto lo deja en 40 contra los 300 de Montevideo (100 de base + 100 de
+#           murallas + 100 de reabastecida). Cualquier escuadra puede cerrar estos puertos, que es
+#           lo que paso: cuando lo hizo la anglo-francesa, Oribe mudo la Administracion Central de
+#           la Aduana a Melo.
+#     Y las dos claves que se achicaron, porque los valores viejos decian "sin puerto" y no "con
+#     puerto malo":
+#       state_tax_capacity_mult  -0.60 -> -0.30. Oribe recaudaba. Dicto la Ley General de Aduanas
+#           del 13 de junio de 1837 y la ratifico por decreto del 23 de enero de 1845 para todo el
+#           territorio del gobierno del Cerrito. Mal, sobre una campania a la que el mismo le
+#           habia prohibido marcar y trabajar, pero recaudaba.
+#       state_trade_capacity_mult -0.50 -> -0.20. Tres radas chicas contra una bahia honda es una
+#           desventaja, no una ausencia. El resto del -0.50 viejo ahora vive en
+#           guerra_grande_river_plate_blockade, condicionado a que alguien bloquee de verdad, que
+#           es donde corresponde, y asi los dos dejan de contar lo mismo dos veces.
+gg_siege_countryside_without_a_port = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	state_tax_capacity_mult = -0.30
+	state_trade_capacity_mult = -0.20
+	state_trade_advantage_mult = -0.25
+	building_port_throughput_add = -0.20
+	state_blockade_resistance_add = -60
+	state_migration_pull_mult = -0.50
+	building_group_bg_ranching_throughput_add = 0.30
+	building_group_bg_agriculture_throughput_add = 0.30
+	state_conscription_rate_mult = 0.50
+}
+
+# EN: THE CERRITO'S ANSWER TO A BLOCKADE, AND WHY A BLOCKADE NEVER FINISHED IT EITHER.
+#     This is the other half of the same correction. If the Cerrito's ports are cheap to close --
+#     and above they now are -- then a blockade would end the war, and historically it did not.
+#     It did not because the Cerrito's trade simply walked north. When the Anglo-French squadron
+#     blockaded, Oribe habilitated ports on the Yaguaron, the Laguna Merin and the Chuy and put
+#     the Administracion Central de la Aduana at Melo; the saladeros resumed from about 1845
+#     "mainly in the north, since that frontier was open to the cattle trade in contrast to the
+#     closed ports of the Rio de la Plata", Cerro Largo leading and the activity running down the
+#     littoral to Salto, Paysandu, Soriano and Colonia; and the cattle left overland into Rio
+#     Grande do Sul in the great drives called californias. A squadron in the Plata cannot reach
+#     any of that.
+#     This is the exact counterpart of gg_siege_the_sea_lane_stays_open on the Defensa's side:
+#     each government had one line of supply the other could never cut, and that -- not the walls
+#     and not the guns -- is the whole reason the war ran nine years.
+#     Applied to the two land-and-river-frontier states, BANDA_ORIENTAL (the Brazilian frontier,
+#     Melo and the Merin) and PAYSANDU (the Uruguay river littoral), when the blockade lands.
+#     INERT UNTIL HOOKED UP: nothing applies this yet. The event patch is in the report.
+# ES: LA RESPUESTA DEL CERRITO AL BLOQUEO, Y POR QUE UN BLOQUEO TAMPOCO LO TERMINO.
+#     Es la otra mitad de la misma correccion. Si los puertos del Cerrito son baratos de cerrar
+#     -- y arriba ahora lo son -- entonces un bloqueo terminaria la guerra, y en los hechos no la
+#     termino. No la termino porque el comercio del Cerrito se fue al norte caminando. Cuando la
+#     escuadra anglo-francesa bloqueo, Oribe habilito puertos sobre el Yaguaron, la Laguna Merin y
+#     el Chuy y puso la Administracion Central de la Aduana en Melo; los saladeros retomaron desde
+#     alrededor de 1845 "principalmente en el norte, ya que esa frontera estaba abierta al
+#     comercio de ganado a diferencia de los puertos cerrados del Rio de la Plata", con Cerro
+#     Largo a la cabeza y la actividad bajando por el litoral hasta Salto, Paysandu, Soriano y
+#     Colonia; y el ganado salia por tierra a Rio Grande do Sul en las californias. Una escuadra
+#     en el Plata no llega a nada de eso.
+#     Es la contraparte exacta de gg_siege_the_sea_lane_stays_open del lado de la Defensa: cada
+#     gobierno tenia una linea de abastecimiento que el otro no podia cortar, y eso -- no las
+#     murallas ni los canionies -- es toda la razon por la que la guerra duro nueve anios.
+#     Se aplica a los dos estados de frontera terrestre y fluvial, BANDA_ORIENTAL (la frontera con
+#     el Brasil, Melo y la Merin) y PAYSANDU (el litoral del rio Uruguay), cuando cae el bloqueo.
+#     INERTE HASTA ENGANCHARLO: todavia nada lo aplica. El parche del evento esta en el reporte.
+gg_siege_the_land_frontier_stays_open = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	state_trade_capacity_mult = 0.25
+	state_trade_advantage_mult = 0.20
+	building_group_bg_ranching_throughput_add = 0.20
+}
+
+# ---------------------------------------------------------------------------------------------
+# COUNTRY MODIFIERS -- how each government paid for the war. Same three keys, opposite signs.
+# MODIFICADORES DE PAIS -- como pago cada gobierno la guerra. Las mismas tres claves, al reves.
+# ---------------------------------------------------------------------------------------------
+
+# EN: the Defensa did have money, and none of it was its own. The customs revenue was sold forward
+#     year by year to a joint-stock company, the Sociedad Compradora de los Derechos de Aduana,
+#     which collected it in exchange for half of what came in; the 1847 contract bought the 1850
+#     revenue outright for 555,000 pesos against a monthly subsidy of 150,000 to the government.
+#     The Plaza Matriz and the Cabildo were mortgaged to a French merchant. From June 1848 France
+#     paid 40,000 pesos a month by convention, and from July 1850 Brazil paid 18,000 pesos fuertes
+#     a month in secret. Cash today, and a debt that outlived the war.
+# ES: la Defensa si tenia plata, y nada de eso era suyo. La renta de aduana se vendia por adelantado
+#     anio por anio a una sociedad anonima, la Sociedad Compradora de los Derechos de Aduana, que la
+#     cobraba a cambio de la mitad de lo que entrara; el contrato de 1847 compro la renta de 1850
+#     entera por 555.000 pesos contra un subsidio mensual de 150.000 al gobierno. La Plaza Matriz y
+#     el Cabildo quedaron hipotecados a un comerciante frances. Desde junio de 1848 Francia pagaba
+#     40.000 pesos por mes por convencion, y desde julio de 1850 Brasil pagaba 18.000 pesos fuertes
+#     por mes en secreto. Plata hoy, y una deuda que sobrevivio a la guerra.
+gg_siege_mortgaged_customs = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = 300
+	country_loan_interest_rate_mult = 0.50
+	country_authority_add = -40
+}
+
+# EN: the mirror. Oribe habilitated the Buceo as a port on 10 July 1843, by decree with his minister
+#     Villademoros, expressly "para que mas facilmente se llenen las necesidades de la poblacion y
+#     se haga mas facil el percibo de los derechos para el estado", and built a customs house there
+#     -- the "aduana de Oribe" -- with seventy officials under the Primer Receptor Ignacio Soria.
+#     It was the Cerrito's main source of revenue, and it was small. Against that: the Cerrito owed
+#     nobody. Oribe had turned down a British loan of three million pesos rather than sign the
+#     perpetual alliance attached to it, and he governed and collected the whole country himself.
+# ES: el espejo. Oribe habilito el Buceo como puerto el 10 de julio de 1843, por decreto con su
+#     ministro Villademoros, expresamente "para que mas facilmente se llenen las necesidades de la
+#     poblacion y se haga mas facil el percibo de los derechos para el estado", y levanto ahi una
+#     aduana -- la "aduana de Oribe" -- con setenta funcionarios a las ordenes del Primer Receptor
+#     Ignacio Soria. Fue la principal fuente de recursos del Cerrito, y era chica. A cambio: el
+#     Cerrito no le debia a nadie. Oribe habia rechazado un emprestito britanico de tres millones de
+#     pesos antes que firmar el tratado perpetuo de alianza que venia con el, y goberno y recaudo el
+#     pais entero el mismo.
+gg_siege_customs_house_at_the_buceo = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_minting_add = 100
+	country_loan_interest_rate_mult = -0.25
+	country_authority_add = 40
+}
+
+# EN: and this is why neither could finish the other. Both governments banned all communication with
+#     the enemy -- Montevideo on 26 June 1843, Oribe more tightly in February 1845 -- and both
+#     licensed it anyway, because each needed exactly what the other had. Cattle walked into the
+#     besieged plaza by boat and by the coast, sold under permits signed at Oribe's own
+#     headquarters; overseas cargo reached Buenos Aires by paying duty at Montevideo first, so that
+#     the trade of the besiegers' ally paid the government they were besieging. A war that funds
+#     itself off its enemy does not end.
+# ES: y por esto ninguno pudo terminar con el otro. Los dos gobiernos prohibieron toda comunicacion
+#     con el enemigo -- Montevideo el 26 de junio de 1843, Oribe mas apretado en febrero de 1845 --
+#     y los dos la habilitaron igual, porque cada uno necesitaba justo lo que tenia el otro. El
+#     ganado entraba a la plaza sitiada por agua y por la costa, vendido con permisos firmados en el
+#     propio Cuartel General de Oribe; la carga de ultramar llegaba a Buenos Aires pagando derechos
+#     antes en Montevideo, asi que el comercio del aliado de los sitiadores le pagaba al gobierno
+#     que estaban sitiando. Una guerra que se financia de su enemigo no se termina.
+gg_siege_trading_with_the_enemy = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_minting_add = 50
+	country_prestige_mult = -0.05
+	country_authority_add = -20
+}
+
+# EN: THE REASON THE SIEGE LASTED NINE YEARS. Not the walls -- the guns that were not there.
+#     Antonio Diaz, son of Oribe's own War Minister, writing from his father's papers: Oribe's
+#     "gran tren de artilleria no bajaba de treinta y cinco piezas... aunque ninguna de brecha",
+#     and he sat down before the city "esperando que esta se rendiria a los pocos dias por hambre".
+#     Thirty-five guns and not one of them able to open a wall. Meanwhile the besieged went from
+#     23 guns on 10 February 1843 to 100 guns and 800 artillerymen by June: the side inside the
+#     ring out-gunned the side around it, roughly threefold.
+#     So the Cerrito is not weak -- it beats the Defensa in the open field and holds the whole
+#     countryside. It simply cannot reduce a fortified city, which is exactly what happened.
+#     Sourced in SOURCES_order_of_battle.md. Vanilla's own range for unit_occupation_mult runs
+#     -0.2 to +1.0, so -0.5 is a hard penalty without leaving the scale the game uses.
+# ES: LA RAZON POR LA QUE EL SITIO DURO NUEVE ANIOS. No las murallas: los canionies que no estaban.
+#     Antonio Diaz, hijo del ministro de guerra de Oribe, escribiendo con los papeles de su padre:
+#     el "gran tren de artilleria no bajaba de treinta y cinco piezas... aunque ninguna de brecha",
+#     y se sento frente a la ciudad "esperando que esta se rendiria a los pocos dias por hambre".
+#     Treinta y cinco canionies y ninguno capaz de abrir un muro. Mientras tanto los sitiados
+#     pasaron de 23 piezas el 10 de febrero de 1843 a 100 piezas y 800 artilleros en junio: el que
+#     estaba adentro del cerco triplicaba en artilleria al que lo rodeaba.
+#     Asi que el Cerrito no es debil: le gana a la Defensa en campo abierto y tiene la campania
+#     entera. Simplemente no puede reducir una plaza fuerte, que es exactamente lo que paso.
+gg_siege_no_breaching_guns = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds"
+	unit_occupation_mult = -0.5
+	unit_provinces_captured_mult = -0.5
+}
+
+# EN: and the other half of the same fact: the guns of the plaza. The Defensa's artillery park
+#     quadrupled in four months and its gunners were the second largest arm it had, after the
+#     infantry and well ahead of its almost non-existent cavalry.
+# ES: y la otra mitad del mismo hecho: los canionies de la plaza. El parque de artilleria de la
+#     Defensa se cuadruplico en cuatro meses y sus artilleros eran su segunda arma, detras de la
+#     infanteria y muy por delante de su caballeria casi inexistente.
+gg_siege_guns_of_the_plaza = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	state_fortification_bombardment_resistance_add = 250
+}
+
+# EN: WHY THE GARRISON DID NOT SIMPLY MELT AWAY. Montevideo cannot conscript -- two of every three
+#     people in it were foreigners who would not fill a national levy, which is why the state
+#     modifier cuts its conscription by 40%. What kept it alive instead was the sea: the port never
+#     closed, the foreign squadrons kept it open, and men, money and food came in by ship for nine
+#     years. Without this the Defensa bleeds out slowly and the siege the whole mod is about never
+#     happens -- observed in a test game, the AI Defensa simply drained away.
+#     The Cerrito has the opposite problem and keeps it: its men went home between campaigns.
+# ES: POR QUE LA GUARNICION NO SE DESHIZO SOLA. Montevideo no puede conscribir: dos de cada tres
+#     habitantes eran extranjeros que no llenaban una leva nacional, y por eso el modificador de
+#     estado le corta 40% la conscripcion. Lo que la mantuvo viva fue el mar: el puerto no cerro
+#     nunca, las escuadras extranjeras lo mantuvieron abierto, y por barco entraron hombres, plata
+#     y comida durante nueve anios. Sin esto la Defensa se desangra despacio y el sitio del que
+#     trata todo el mod no ocurre: observado en una partida de prueba, la Defensa de la IA
+#     simplemente se vaciaba de tropas.
+#     El Cerrito tiene el problema inverso y lo conserva: sus hombres se volvian a casa entre
+#     campanias.
+gg_siege_the_sea_lane_stays_open = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_recovery_rate_add = 0.25
+	unit_morale_recovery_mult = 0.15
+}

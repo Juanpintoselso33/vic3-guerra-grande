@@ -1,0 +1,1277 @@
+﻿namespace = gg_rivera
+
+# EN: FRUCTUOSO RIVERA, 1842-1854. The man who founded the Partido Colorado, who threw Oribe out
+#     in 1838 and whose government created the Defensa, spends the whole of the Guerra Grande
+#     losing: Arroyo Grande (6 December 1842), India Muerta (27 March 1845), Cerro de las Animas
+#     (January 1847). Between those defeats his own government strips him of his commands, bars
+#     his return, watches the Empire jail him in Rio de Janeiro, tries to forbid him to land when
+#     Brazil ships him home, and finally -- on 4 December 1847 -- has two of its own colonels
+#     arrest him at Maldonado and deport him on a French vessel, "por todo el tiempo que dure la
+#     presente guerra". He does not come back for the peace: Giro forbids it. He comes back in
+#     November 1853, named to a triumvirate by the coup of a younger colorado, and dies on the
+#     road to take office, on 13 January 1854, by the arroyo Conventos outside Melo.
+#     The cleavage underneath is not blanco against colorado. It is caudillos against doctores,
+#     and it runs horizontally through both parties (Pivel Devoto's reading, followed here). The
+#     Defensa's own account of itself -- liberty, Europe, civilisation against caudillo barbarism
+#     -- required the destruction of the caudillo who founded it.
+# ES: FRUCTUOSO RIVERA, 1842-1854. El hombre que fundo el Partido Colorado, que volteo a Oribe en
+#     1838 y cuyo gobierno creo la Defensa, se pasa la Guerra Grande entera perdiendo: Arroyo
+#     Grande (6 de diciembre de 1842), India Muerta (27 de marzo de 1845), Cerro de las Animas
+#     (enero de 1847). Entre esas derrotas su propio gobierno lo destituye de sus mandos, le
+#     prohibe volver, mira como el Imperio lo encarcela en Rio de Janeiro, intenta prohibirle
+#     desembarcar cuando el Brasil lo manda de vuelta y, finalmente -- el 4 de diciembre de 1847
+#     --, hace que dos de sus propios coroneles lo detengan en Maldonado y lo deporten en un
+#     buque frances, "por todo el tiempo que dure la presente guerra". No vuelve para la paz:
+#     Giro se lo prohibe. Vuelve en noviembre de 1853, nombrado triunviro por el golpe de un
+#     colorado mas joven, y muere yendo a asumir, el 13 de enero de 1854, junto al arroyo
+#     Conventos, cerca de Melo.
+#     El corte de abajo no es blancos contra colorados. Es caudillos contra doctores, y atraviesa
+#     horizontalmente a los dos partidos (la lectura de Pivel Devoto, que es la que se sigue aca).
+#     El relato que la Defensa hacia de si misma -- la libertad, Europa, la civilizacion contra la
+#     barbarie caudillesca -- exigia destruir al caudillo que la habia fundado.
+#
+# Sources, with URLs and bilingual notes, in SOURCES_rivera.md.
+#
+# SCHEDULING. These events are scheduled from the end of each option of guerra_grande.3, inside
+# the existing `c:URU ?= { ... }` block, with day offsets from a base of 10 February 1839 -- the
+# same base the contingents and the loans use. Only gg_rivera.1 is scheduled from there; every
+# other event in this file is triggered by the option the player picks in the one before it.
+#
+#   trigger_event = { id = gg_rivera.1 days = 1395 popup = yes }   # 1842.12.6  Arroyo Grande
+#
+# ROUTING. Every event here is addressed to the country holding guerra_grande_defensa_government,
+# not to ROOT: a player who took the blanco road becomes CER via change_tag in guerra_grande.3,
+# and in that game the Defensa is the AI. Scheduling by tag inside c:URU, and testing the
+# variable in the trigger, means the Defensa gets this arc whether it is the player or the AI --
+# the same fix gg_abolition.1 and the contingents already carry.
+
+
+# ============================================================================================
+# 1842.12.6 - ARROYO GRANDE
+# ============================================================================================
+# EN: Roughly 8,000 a side on the Arroyo Grande, in Entre Rios near San Salvador. Oribe's right
+#     under Urquiza and his brother Ignacio's cavalry break Rivera's centre; the beaten army
+#     leaves 2,000 dead and 1,400 prisoners, the whole of its artillery and infantry, its
+#     ammunition and 24,000 horses. The officers and, it is said, even the corporals and
+#     sergeants are put to the knife; the rank and file are folded into Oribe's army. Federal
+#     losses: 300. Rivera runs from the field leaving his sword and his pistols behind.
+#     Oribe wastes weeks on minor business, which is the only reason the colorado government has
+#     time to scrape 5,000 men together; Rosas's fleet ferries his infantry and guns across the
+#     river, and on 16 February 1843 his vanguard camps on the Cerrito. He does not storm the
+#     city. He sits down in front of it for eight and a half years.
+# ES: Unos 8.000 por lado en el Arroyo Grande, en Entre Rios, cerca de San Salvador. La derecha
+#     de Oribe con Urquiza y la caballeria de su hermano Ignacio rompen el centro de Rivera; el
+#     ejercito batido deja 2.000 muertos y 1.400 prisioneros, toda su artilleria y su infanteria,
+#     la municion y 24.000 caballos. A los oficiales y, se dice, hasta a los cabos y sargentos
+#     los degüellan; la tropa se incorpora al ejercito de Oribe. Bajas federales: 300. Rivera
+#     huye del campo dejando la espada y las pistolas.
+#     Oribe pierde semanas en asuntos menores, que es la unica razon por la que el gobierno
+#     colorado alcanza a juntar 5.000 hombres; la flota de Rosas le cruza la infanteria y los
+#     canionies, y el 16 de febrero de 1843 su vanguardia acampa en el Cerrito. No toma la ciudad
+#     por asalto. Se sienta enfrente por ocho anios y medio.
+gg_rivera.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.1.t
+	desc = gg_rivera.1.d
+	flavor = gg_rivera.1.f
+
+	# Animated from a public-domain painting. Produced separately; alias declared in
+	# gfx/media_aliases/. Not created by this file.
+	event_image = {
+		video = "gg_rivera_arroyo_grande"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		exists = c:CER
+		NOT = { has_global_variable = gg_rivera_arroyo_grande_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_arroyo_grande_settled
+		}
+	}
+
+	# EN: The infantry goes to the campania. This is what Rivera asks for and never gets: at
+	#     India Muerta in 1845 he gives battle still waiting for the foot soldiers Montevideo
+	#     promised, and his own chief of staff, Jose Antonio Costa, writes to him that he doubts
+	#     they will arrive in time. They do not. Sending them is the counterfactual, and it costs
+	#     exactly what it should: the walls.
+	# ES: La infanteria sale a la campania. Es lo que Rivera pide y nunca recibe: en India Muerta,
+	#     en 1845, da batalla todavia esperando los infantes que Montevideo le prometio, y su
+	#     propio jefe de estado mayor, Jose Antonio Costa, le escribe que duda que lleguen a
+	#     tiempo. No llegan. Mandarlos es la contrafactica, y cuesta justo lo que tiene que
+	#     costar: la muralla.
+	option = {
+		name = gg_rivera.1.a
+		set_global_variable = gg_rivera_reinforced
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+			#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+			#     ever adds rank after confirming the result stays at or below 3 -- the full set
+			#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+			#     several of these across a decade with nothing resetting rank between them, so
+			#     an unguarded add stacked past that ceiling.
+			# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+			#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+			#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+			#     3 o menos -- todo el set que los character_templates llegan a nombrar
+			#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+			#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+			#     pasaba de ese techo.
+			if = {
+				limit = { commander_rank <= 2 }
+				add_commander_rank = 1
+			}
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Ejercito_de_Operaciones
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+		}
+		add_modifier = {
+			name = gg_rivera_walls_stripped
+			years = 6
+			is_decaying = yes
+		}
+		hidden_effect = {
+			# 1845.3.27 - India Muerta, 842 days from here.
+			trigger_event = { id = gg_rivera.2 days = 842 popup = yes }
+		}
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	# EN: What actually happened. The government of Joaquin Suarez calls out the Guardia Nacional,
+	#     raises the first line corps, and remounts the colonial cannon that had been serving as
+	#     posts in the pavements. Juan Agustin Wright's phrase for the Republic that winter:
+	#     "batida en el exterior, sin ejercitos ni soldados, sin material de guerra, sin dinero,
+	#     sin rentas y sin credito". Everything goes to the wall, and Rivera is left to find his
+	#     own men in the campania.
+	# ES: Lo que de verdad paso. El gobierno de Joaquin Suarez llama a la Guardia Nacional, crea
+	#     los primeros cuerpos de linea y vuelve a montar los canionies coloniales que servian de
+	#     postes en las veredas. La frase de Juan Agustin Wright para la Republica de ese verano:
+	#     "batida en el exterior, sin ejercitos ni soldados, sin material de guerra, sin dinero,
+	#     sin rentas y sin credito". Todo va a la muralla, y Rivera se arregla solo en la campania.
+	option = {
+		name = gg_rivera.1.b
+		default_option = yes
+		set_global_variable = gg_rivera_left_alone
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Guardia_Nacional_de_Montevideo
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		add_modifier = {
+			name = gg_rivera_the_city_takes_the_war
+			years = 6
+			is_decaying = yes
+		}
+		add_loyalists = {
+			value = small_radicals
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.2 days = 842 popup = yes }
+		}
+		ai_chance = {
+			base = 65
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1845.3.27 - INDIA MUERTA
+# ============================================================================================
+# EN: Rosas sends Oribe an expeditionary corps of 4,000 entrerrianos under Urquiza with orders to
+#     finish Rivera. Rivera has a little over 4,000, mostly militia lately embodied; Urquiza has
+#     3,000 veterans, and the last report before the battle puts him at 6,000 once the rearguard
+#     under Francia and Basabilbaso comes up. Rivera calls a council of war at nine on the night
+#     of the 26th and it votes to fight. Before dawn on the 27th a rider from Anacleto Medina
+#     arrives with Medina's opinion: do not engage until the reinforcements come. Rivera engages.
+#     Two hours. Between 400 and 1,000 dead on the field, 500 prisoners, the park, the horses,
+#     his correspondence and his sword. Urquiza has the 500 prisoners' throats cut and, it is
+#     said, hangs a paper from a mangrullo: "El que entierre uno de estos sera degollado."
+#     Rivera crosses the Yaguaron at the Paso de las Piedras and asks Brazil for asylum.
+#     The Defensa's answer is immediate and is the hinge of this whole arc: it strips him of his
+#     military commands, gives the army to Anacleto Medina, and passes a rule forbidding his
+#     return to Uruguay without the express authorisation of its own War Minister.
+# ES: Rosas le manda a Oribe un cuerpo expedicionario de 4.000 entrerrianos al mando de Urquiza
+#     con la orden de terminar con Rivera. Rivera tiene poco mas de 4.000, en buena parte milicia
+#     recien incorporada; Urquiza tiene 3.000 veteranos, y el ultimo parte antes de la batalla lo
+#     da en 6.000 cuando se le suma la retaguardia de Francia y Basabilbaso. Rivera reune consejo
+#     de guerra a las nueve de la noche del 26 y el consejo vota dar batalla. Antes del amanecer
+#     del 27 llega un ayudante de Anacleto Medina con la opinion de Medina: no comprometer un
+#     encuentro hasta que lleguen los refuerzos. Rivera lo compromete.
+#     Dos horas. Entre 400 y 1.000 muertos en el campo, 500 prisioneros, el parque, las caballadas,
+#     su correspondencia y su espada. Urquiza manda degollar a los 500 prisioneros y, se dice,
+#     cuelga un papel de un mangrullo: "El que entierre uno de estos sera degollado."
+#     Rivera cruza el Yaguaron por el Paso de las Piedras y pide asilo al Brasil.
+#     La respuesta de la Defensa es inmediata y es la bisagra de todo este arco: lo destituye de
+#     sus cargos militares, le da el ejercito a Anacleto Medina y aprueba una disposicion que
+#     prohibe su retorno al Uruguay salvo autorizacion expresa de su propio Ministro de Guerra.
+gg_rivera.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_rivera.2.d_reinforced
+				trigger = {
+					has_global_variable = gg_rivera_reinforced
+				}
+			}
+			triggered_desc = {
+				desc = gg_rivera.2.d_alone
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	flavor = gg_rivera.2.f
+
+	event_image = {
+		video = "gg_riv_india_muerta"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		# EN: guard, not decoration. Every event in this chain tests the state the one before it
+		#     left behind, so an event that somehow arrives out of order simply does not fire
+		#     instead of applying its effects on top of a state that never happened.
+		# ES: candado, no adorno. Cada evento de esta cadena chequea el estado que dejo el
+		#     anterior, asi que un evento que llegue fuera de orden no dispara, en vez de aplicar
+		#     sus efectos sobre un estado que nunca existio.
+		OR = {
+			has_global_variable = gg_rivera_reinforced
+			has_global_variable = gg_rivera_left_alone
+		}
+		NOT = { has_global_variable = gg_rivera_india_muerta_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_india_muerta_settled
+		}
+	}
+
+	# EN: The historical answer. Destitution from every military command, the army to Anacleto
+	#     Medina, and the bar on his return. Medina is the right man on the record: he held the
+	#     right at India Muerta, he was the one who advised against fighting, and after Arroyo
+	#     Grande it was he and Olazabal who reorganised what was left of the cavalry.
+	# ES: La respuesta historica. Destitucion de todo mando militar, el ejercito para Anacleto
+	#     Medina y la prohibicion de volver. Medina es el hombre que corresponde segun el
+	#     registro: tuvo la derecha en India Muerta, fue el que aconsejo no dar batalla y despues
+	#     de Arroyo Grande fue el, con Olazabal, quien reorganizo lo que quedaba de la caballeria.
+	option = {
+		name = gg_rivera.2.a
+		default_option = yes
+		set_global_variable = gg_rivera_stripped
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			if = {
+				limit = { exists = this.commander_military_formation }
+				unassign_from_formation = yes
+			}
+			if = {
+				limit = { has_role_of_type = general }
+				remove_character_role = general
+			}
+		}
+		if = {
+			limit = { any_scope_character = { has_template = URU_anacleto_medina } }
+			random_scope_character = {
+				limit = { has_template = URU_anacleto_medina }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+				#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+				#     ever adds rank after confirming the result stays at or below 3 -- the full set
+				#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+				#     several of these across a decade with nothing resetting rank between them, so
+				#     an unguarded add stacked past that ceiling.
+				# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+				#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+				#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+				#     3 o menos -- todo el set que los character_templates llegan a nombrar
+				#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+				#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+				#     pasaba de ese techo.
+				if = {
+					limit = { commander_rank <= 1 }
+					add_commander_rank = 2
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_anacleto_medina
+				commander_rank = commander_rank_3
+			}
+		}
+		add_modifier = {
+			name = gg_rivera_medina_takes_the_army
+			years = 8
+		}
+		hidden_effect = {
+			# 1846.3.18 - the Perla puts him back on the mole at Montevideo, 356 days from here.
+			trigger_event = { id = gg_rivera.3 days = 356 popup = yes }
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	# EN: The other thing that really happened, and the reason the charge of "dealings with
+	#     Brazil" was never quite empty. In the winter of 1844 Rivera dealt directly with the
+	#     Marquis of Caxias, commander-in-chief of the Empire's forces in Rio Grande, through his
+	#     secretary Jose Luis Bustamante, and reorganised his divisions with arms, clothing and
+	#     horses received there. Paying for that openly is a government decision, and the Empire
+	#     files it away: the receipt is read back to him in 1847.
+	# ES: La otra cosa que de verdad paso, y la razon por la que la acusacion de "tratos con el
+	#     Brasil" nunca estuvo del todo vacia. En el invierno de 1844 Rivera trato directamente
+	#     con el marques de Caxias, comandante en jefe de las fuerzas del Imperio en Rio Grande,
+	#     por intermedio de su secretario Jose Luis Bustamante, y rehizo sus divisiones con armas,
+	#     vestuario y caballos recibidos alli. Pagarlo de frente es una decision de gobierno, y el
+	#     Imperio la archiva: el recibo se le lee de vuelta en 1847.
+	option = {
+		name = gg_rivera.2.b
+		set_global_variable = gg_rivera_brazilian_arms
+		add_treasury = -25000
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+			#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+			#     ever adds rank after confirming the result stays at or below 3 -- the full set
+			#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+			#     several of these across a decade with nothing resetting rank between them, so
+			#     an unguarded add stacked past that ceiling.
+			# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+			#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+			#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+			#     3 o menos -- todo el set que los character_templates llegan a nombrar
+			#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+			#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+			#     pasaba de ese techo.
+			if = {
+				limit = { commander_rank <= 2 }
+				add_commander_rank = 1
+			}
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Division_del_Yaguaron
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+		}
+		c:BRZ ?= {
+			change_relations = { country = ROOT value = 25 }
+		}
+		add_modifier = {
+			name = gg_rivera_arms_from_the_empire
+			years = 8
+		}
+		hidden_effect = {
+			# He never leaves, so there is no landing to forbid: straight to 1847.12.4,
+			# 982 days from here.
+			trigger_event = { id = gg_rivera.4 days = 982 popup = yes }
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	# EN: What the Empire did on its own account, offered here as a decision. Brazil jailed Rivera
+	#     in Rio de Janeiro on the charge of conspiring with the riograndense republican
+	#     separatists -- and the charge had a history: in February 1842 Bentos Goncalves of the
+	#     Riograndense Republic had secretly agreed with Rivera to join the "Uruguay mayor", the
+	#     new state Rivera meant to build out of the Banda Oriental, Entre Rios, Corrientes and
+	#     Rio Grande do Sul. Asking Rio de Janeiro to keep him is the doctores' free hand.
+	# ES: Lo que el Imperio hizo por su cuenta, ofrecido aca como decision. El Brasil encarcelo a
+	#     Rivera en Rio de Janeiro acusandolo de conspirar con los caudillos riograndenses
+	#     republicanos y separatistas, y la acusacion tenia historia: en febrero de 1842 Bentos
+	#     Goncalves, de la Republica Riograndense, habia acordado en secreto con Rivera sumarse al
+	#     "Uruguay mayor", el Estado nuevo que Rivera queria armar con la Banda Oriental, Entre
+	#     Rios, Corrientes y Rio Grande do Sul. Pedirle a Rio de Janeiro que lo retenga es la mano
+	#     libre de los doctores.
+	option = {
+		name = gg_rivera.2.c
+		set_global_variable = gg_rivera_stripped
+		set_global_variable = gg_rivera_handed_to_brazil
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			exile_character_with_role_cleanup = yes
+		}
+		c:BRZ ?= {
+			change_relations = { country = ROOT value = 40 }
+		}
+		add_modifier = {
+			name = gg_rivera_the_doctors_free_hand
+			years = 8
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.3 days = 356 popup = yes }
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1846.3.18 - "SE VIENE EL PATRON"
+# ============================================================================================
+# EN: The government of Montevideo names the man it has just stripped of everything its minister
+#     to Paraguay -- partly to do something about his imprisonment, mostly to keep him out of the
+#     country. Brazil refuses him the passport for Asuncion, releases him anyway and puts him
+#     aboard the schooner Perla for Montevideo. He lands on 18 March 1846 into a city already
+#     repeating the watchword: "Se viene el Patron."
+#     The government tries to forbid the landing. It offers him a diplomatic post in Europe,
+#     which he proudly refuses. The Sociedad Nacional -- a society of leading citizens organised
+#     against him, presided over by Santiago Vazquez -- gets a decree of banishment out of the
+#     government. On 1 April the Basque battalion, the libertos of the infantry and other forces
+#     under Cesar Diaz and Venancio Flores mutiny and demand his release. The government folds
+#     within the day: Melchor Pacheco y Obes resigns as commander-general of arms and sails for
+#     Europe, ministers Santiago Vazquez and Francisco J. Munoz resign, the decree is annulled
+#     and the landing authorised. Rivera comes ashore on his wife's arm -- Bernardina Fragoso had
+#     been the centre of the conspiracy -- and the new War Minister, Jose A. Costa, makes him
+#     general-in-chief of the Army of Operations. The government makes him Grand Marshal of the
+#     Republic, and Gabriel Antonio Pereira and Miguel Barreiro take the ministries.
+# ES: El gobierno de Montevideo nombra al hombre que acaba de destituir de todo su representante
+#     en el Paraguay, en parte para hacer algo por su prision, sobre todo para tenerlo fuera del
+#     pais. El Brasil le niega el permiso para viajar a Asuncion, igual lo libera y lo embarca en
+#     la goleta Perla rumbo a Montevideo. Desembarca el 18 de marzo de 1846 en una ciudad que ya
+#     repite la consigna: "Se viene el Patron."
+#     El gobierno intenta prohibir el desembarco. Le ofrece un cargo diplomatico en Europa, que
+#     rechaza orgullosamente. La Sociedad Nacional -- una agrupacion de ciudadanos destacados
+#     organizada contra el, presidida por Santiago Vazquez -- le arranca al gobierno un decreto
+#     de destierro. El 1 de abril se sublevan el batallon de vascos, los negros libertos de la
+#     infanteria y otras fuerzas al mando de Cesar Diaz y Venancio Flores, pidiendo su liberacion.
+#     El gobierno cede en el dia: Melchor Pacheco y Obes dimite de comandante general de armas y
+#     se embarca para Europa, los ministros Santiago Vazquez y Francisco J. Munoz renuncian, se
+#     anula el decreto y se autoriza el desembarco. Rivera baja del brazo de su mujer -- Bernardina
+#     Fragoso habia sido el centro de la conspiracion -- y el nuevo ministro de Guerra, Jose A.
+#     Costa, lo hace general en jefe del Ejercito de Operaciones. El gobierno lo nombra gran
+#     mariscal de la Republica, y Gabriel Antonio Pereira y Miguel Barreiro toman los ministerios.
+gg_rivera.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.3.t
+	desc = gg_rivera.3.d
+	flavor = gg_rivera.3.f
+
+	# Animated from a public-domain painting. Produced separately; alias declared in
+	# gfx/media_aliases/. Not created by this file.
+	event_image = {
+		video = "gg_rivera_return"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = gg_rivera_stripped
+		NOT = { has_global_variable = gg_rivera_landing_settled }
+	}
+
+	# EN: If this government asked the Empire to keep him and the Empire has just put him on a
+	#     schooner home instead, that is a refusal, and it is read in Rio de Janeiro as one.
+	# ES: Si este gobierno le pidio al Imperio que lo retuviera y el Imperio acaba de mandarlo de
+	#     vuelta en una goleta, eso es una negativa, y en Rio de Janeiro se lee como tal.
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_landing_settled
+			if = {
+				limit = { has_global_variable = gg_rivera_handed_to_brazil }
+				c:BRZ ?= {
+					change_relations = { country = ROOT value = -20 }
+				}
+			}
+		}
+	}
+
+	# EN: The historical answer, and it is a capitulation. The decree is annulled, the ministry
+	#     that wrote it falls, and the caudillo walks back into the command of everything. In game
+	#     terms that is exactly what it is: the doctores lose the government and the caudillo's
+	#     men take it -- the armed forces and the port -- and the Army of Operations is raised
+	#     again under a man the government cannot now refuse.
+	# ES: La respuesta historica, y es una capitulacion. Se anula el decreto, cae el ministerio que
+	#     lo escribio y el caudillo vuelve al mando de todo. En terminos de juego eso es
+	#     exactamente lo que es: los doctores pierden el gobierno y lo toman los hombres del
+	#     caudillo -- las armas y el puerto -- y el Ejercito de Operaciones se levanta de nuevo al
+	#     mando de un hombre al que el gobierno ya no puede decirle que no.
+	option = {
+		name = gg_rivera.3.a
+		default_option = yes
+		set_global_variable = gg_rivera_restored
+		if = {
+			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+				#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+				#     ever adds rank after confirming the result stays at or below 3 -- the full set
+				#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+				#     several of these across a decade with nothing resetting rank between them, so
+				#     an unguarded add stacked past that ceiling.
+				# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+				#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+				#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+				#     3 o menos -- todo el set que los character_templates llegan a nombrar
+				#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+				#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+				#     pasaba de ese techo.
+				if = {
+					limit = { commander_rank <= 1 }
+					add_commander_rank = 2
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_Fructuoso_Rivera
+				commander_rank = commander_rank_3
+			}
+		}
+		# The cabinet that decreed his banishment resigns in a day.
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_armed_forces }
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Ejercito_de_Operaciones
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		add_modifier = {
+			name = gg_rivera_gran_mariscal
+			years = 8
+		}
+		hidden_effect = {
+			# 1847.12.4 - Maldonado, 626 days from here.
+			trigger_event = { id = gg_rivera.4 days = 626 popup = yes }
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# EN: The government holds. The price is the mutiny, and the mutiny is the garrison: the
+	#     Basque battalion, the liberto line infantry -- the men the garrison's own commanders
+	#     called the only real soldiers on the walls -- and the two young colonels who led them.
+	#     Cesar Diaz and Venancio Flores are cashiered for it, which costs this government the two
+	#     best field officers it will ever have; Flores is the man who takes the country in 1853.
+	#     What it buys is a government that cannot be blackmailed by its own soldiers.
+	# ES: El gobierno aguanta. El precio es el motin, y el motin es la guarnicion: el batallon de
+	#     vascos, la infanteria de linea de libertos -- los hombres que los propios jefes de la
+	#     guarnicion llamaban los unicos soldados de verdad de la muralla -- y los dos coroneles
+	#     jovenes que los encabezaron. A Cesar Diaz y a Venancio Flores se los da de baja, lo que
+	#     le cuesta a este gobierno los dos mejores oficiales de campo que va a tener; Flores es el
+	#     hombre que se queda con el pais en 1853. Lo que compra es un gobierno al que sus propios
+	#     soldados no pueden extorsionar.
+	option = {
+		name = gg_rivera.3.b
+		set_global_variable = gg_rivera_never_returned
+		if = {
+			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				exile_character_with_role_cleanup = yes
+			}
+		}
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_cesar_diaz
+					has_template = URU_venancio_flores
+				}
+				has_role_of_type = general
+			}
+			if = {
+				limit = { exists = this.commander_military_formation }
+				unassign_from_formation = yes
+			}
+			remove_character_role = general
+		}
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		add_modifier = {
+			name = gg_rivera_the_mutiny_broken
+			years = 8
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+		hidden_effect = {
+			# 1853.9.25 - the coup that names a triumvirate of exiles, 2748 days from here.
+			trigger_event = { id = gg_rivera.5 days = 2748 popup = yes }
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1847.12.4 - EL DESTIERRO
+# ============================================================================================
+# EN: Back in the campania, Rivera takes Mercedes and then Paysandu in December 1846, with grave
+#     excesses by his own men. In January 1847 -- 18 January, by the Banco de Historias Locales --
+#     Ignacio Oribe and Servando Gomez destroy him at the Cerro de las Animas and retake both
+#     towns at once. Manuel Herrera y Obes is back at Gobierno and Relaciones Exteriores, and the
+#     government disavows Rivera's approaches to Oribe.
+#     He keeps going. He sends the president of the Cerrito a peace of eight conditions -- end the
+#     war, return the confiscated property, hold elections, and the rest -- an arrangement "entre
+#     orientales", with the foreign troops of both sides evacuated. For the doctores of the
+#     Defensa, whose whole case rests on France and Britain and on Oribe being Rosas's lieutenant,
+#     this is unassumable. The government decrees his destitution from every post and his
+#     banishment from the Republic "Por todo el tiempo que dure la presente guerra".
+#     On 4 December 1847 colonels Lorenzo Batlle and Francisco Tajes reach Maldonado with a
+#     considerable force and arrest him in the house of the Aguilar family, at what is now the
+#     corner of Sarandi and 25 de Mayo. He is put aboard a French vessel -- France is the
+#     Defensa's ally -- and deported to the Empire, lodged in a house in Rio de Janeiro and
+#     forbidden to leave the city. He writes a bitter letter to Herrera y Obes and goes.
+#     The documents were printed the same year: "Publicacion oficial de los documentos referentes
+#     a la destitucion y destierro del Brigadier General D. Fructuoso Rivera", Montevideo,
+#     Imprenta de la Caridad, 1847.
+# ES: De vuelta en la campania, Rivera toma Mercedes y despues Paysandu en diciembre de 1846, con
+#     graves excesos de su propia gente. En enero de 1847 -- el 18, segun el Banco de Historias
+#     Locales -- Ignacio Oribe y Servando Gomez lo diezman en el Cerro de las Animas y reconquistan
+#     las dos villas enseguida. Manuel Herrera y Obes volvio a Gobierno y Relaciones Exteriores, y
+#     el gobierno desconoce las gestiones de Rivera ante Oribe.
+#     El sigue. Le hace llegar al presidente del Gobierno del Cerrito una paz de ocho condiciones
+#     -- fin de la guerra, devolucion de las propiedades confiscadas, elecciones y lo demas --, un
+#     arreglo "entre orientales", con evacuacion de las tropas extranjeras de los dos bandos. Para
+#     los doctores de la Defensa, cuyo caso entero se apoya en Francia y en Inglaterra y en que
+#     Oribe es el lugarteniente de Rosas, eso es inasumible. El gobierno decreta su destitucion de
+#     todos los cargos y su destierro de la Republica "Por todo el tiempo que dure la presente
+#     guerra".
+#     El 4 de diciembre de 1847 los coroneles Lorenzo Batlle y Francisco Tajes llegan a Maldonado
+#     con una fuerza considerable y lo detienen en la casa de la familia Aguilar, en la que hoy es
+#     la esquina de Sarandi y 25 de Mayo. Lo embarcan en un buque frances -- Francia es aliada de
+#     la Defensa -- y lo deportan al Imperio, alojado en una casa de Rio de Janeiro con prohibicion
+#     de salir de la ciudad. Le escribe una carta amarga a Herrera y Obes y se va.
+#     Los documentos se imprimieron ese mismo anio: "Publicacion oficial de los documentos
+#     referentes a la destitucion y destierro del Brigadier General D. Fructuoso Rivera",
+#     Montevideo, Imprenta de la Caridad, 1847.
+gg_rivera.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_rivera.4.d_brazilian_arms
+				trigger = {
+					has_global_variable = gg_rivera_brazilian_arms
+				}
+			}
+			triggered_desc = {
+				desc = gg_rivera.4.d_restored
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	flavor = gg_rivera.4.f
+
+	# Animated from a public-domain painting. Produced separately; alias declared in
+	# gfx/media_aliases/. Not created by this file.
+	event_image = {
+		video = "gg_rivera_exile"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		# He has to be back in our service for there to be anything to banish him from.
+		OR = {
+			has_global_variable = gg_rivera_restored
+			has_global_variable = gg_rivera_brazilian_arms
+		}
+		NOT = { has_global_variable = gg_rivera_destierro_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_destierro_settled
+		}
+	}
+
+	# EN: Sign it. The government that he founded banishes him, and the two colonels who carry the
+	#     order to Maldonado make their names on it -- Lorenzo Batlle will be President of the
+	#     Republic in 1868. What it buys is real and is the thing the doctores wanted: a
+	#     government of laws and ministers instead of a government that has to ask a caudillo.
+	#     What it costs is the only general this Republic has who has ever commanded an army in
+	#     the field against Oribe.
+	# ES: Firmarlo. El gobierno que el fundo lo destierra, y los dos coroneles que llevan la orden
+	#     a Maldonado se hacen un nombre con eso: Lorenzo Batlle va a ser presidente de la
+	#     Republica en 1868. Lo que compra es real y es lo que los doctores querian: un gobierno de
+	#     leyes y de ministros en vez de un gobierno que tiene que pedirle permiso a un caudillo.
+	#     Lo que cuesta es el unico general que esta Republica tuvo que haya mandado un ejercito en
+	#     campania contra Oribe.
+	option = {
+		name = gg_rivera.4.a
+		default_option = yes
+		set_global_variable = gg_rivera_exiled
+		if = {
+			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				exile_character_with_role_cleanup = yes
+			}
+		}
+		if = {
+			limit = { any_scope_character = { has_template = URU_lorenzo_batlle } }
+			random_scope_character = {
+				limit = { has_template = URU_lorenzo_batlle }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+				#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+				#     ever adds rank after confirming the result stays at or below 3 -- the full set
+				#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+				#     several of these across a decade with nothing resetting rank between them, so
+				#     an unguarded add stacked past that ceiling.
+				# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+				#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+				#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+				#     3 o menos -- todo el set que los character_templates llegan a nombrar
+				#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+				#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+				#     pasaba de ese techo.
+				if = {
+					limit = { commander_rank <= 2 }
+					add_commander_rank = 1
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_lorenzo_batlle
+				commander_rank = commander_rank_2
+			}
+		}
+		# Herrera y Obes back at Gobierno and Relaciones Exteriores; the doctores govern.
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		add_modifier = {
+			name = gg_rivera_the_doctors_republic
+			years = 10
+		}
+		hidden_effect = {
+			# 1853.9.25 - Flores throws Giro out, 2122 days from here.
+			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	# EN: Refuse. He keeps his commands, and a government that will not banish its caudillo ends
+	#     up governed by him: the interim presidency of Joaquin Suarez, eight years old by now,
+	#     gives way to the hombre fuerte. That is not invention -- it is what the government was
+	#     already doing in 1846 when it made him Grand Marshal "buscando aliviar sus
+	#     responsabilidades ante quien era otra vez el hombre fuerte". The general stays. The
+	#     legality the Defensa says it is fighting for does not.
+	# ES: Negarse. Conserva sus mandos, y un gobierno que no destierra a su caudillo termina
+	#     gobernado por el: la presidencia interina de Joaquin Suarez, que ya lleva ocho anios, le
+	#     deja el lugar al hombre fuerte. No es invento: es lo que el gobierno ya estaba haciendo
+	#     en 1846 cuando lo nombro gran mariscal "buscando aliviar sus responsabilidades ante quien
+	#     era otra vez el hombre fuerte". El general se queda. La legalidad por la que la Defensa
+	#     dice pelear, no.
+	option = {
+		name = gg_rivera.4.b
+		set_global_variable = gg_rivera_kept
+		if = {
+			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				# EN: guarded against "Invalid commander rank" (character_templates_utils.cpp),
+				#     logged and crashing a session. Vanilla's own promotion event (generals.1) only
+				#     ever adds rank after confirming the result stays at or below 3 -- the full set
+				#     character_templates ever names (commander_rank_1/_2/_3). Rivera's arc fires
+				#     several of these across a decade with nothing resetting rank between them, so
+				#     an unguarded add stacked past that ceiling.
+				# ES: protegido contra "Invalid commander rank" (character_templates_utils.cpp),
+				#     que quedo en el log y crasheo una partida. El evento de promocion de vanilla
+				#     (generals.1) solo suma rango despues de confirmar que el resultado se queda en
+				#     3 o menos -- todo el set que los character_templates llegan a nombrar
+				#     (commander_rank_1/_2/_3). El arco de Rivera dispara varios de estos a lo largo
+				#     de una decada sin resetear el rango entre medio, y una suma sin guarda se
+				#     pasaba de ese techo.
+				if = {
+					limit = { commander_rank <= 2 }
+					add_commander_rank = 1
+				}
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_Fructuoso_Rivera
+				ruler = yes
+				commander_rank = commander_rank_3
+			}
+		}
+		set_ruling_interest_groups = { ig_armed_forces ig_petty_bourgeoisie }
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Ejercito_de_Operaciones
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+		}
+		add_modifier = {
+			name = gg_rivera_the_caudillos_republic
+			years = 10
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+
+	# EN: Back the eight conditions and send them to the Cerrito over the ministry's head. This is
+	#     the one thing that could actually have ended the war in 1847 -- and the price is the
+	#     coalition that keeps Montevideo alive. An arrangement "entre orientales" means the
+	#     foreign troops of both sides go home, and the Defensa is the side made of foreign
+	#     troops: the French Legion, the Italian Legion, the Basques, the squadrons. It also means
+	#     returning the confiscated property, which is paid in cash. When the government of
+	#     Joaquin Suarez refused to authorise exactly these talks, Gabriel Antonio Pereira, Miguel
+	#     Barreiro and Venancio Flores resigned, and Flores left the country.
+	# ES: Respaldar las ocho condiciones y mandarlas al Cerrito por encima del ministerio. Es lo
+	#     unico que de verdad pudo haber terminado la guerra en 1847, y el precio es la coalicion
+	#     que mantiene viva a Montevideo. Un arreglo "entre orientales" quiere decir que las tropas
+	#     extranjeras de los dos bandos se van a su casa, y la Defensa es el bando hecho de tropas
+	#     extranjeras: la Legion Francesa, la Legion Italiana, los vascos, las escuadras. Quiere
+	#     decir tambien devolver las propiedades confiscadas, que se paga en efectivo. Cuando el
+	#     gobierno de Joaquin Suarez se nego a autorizar justamente estas tratativas, renunciaron
+	#     Gabriel Antonio Pereira, Miguel Barreiro y el propio Venancio Flores, que se fue del pais.
+	option = {
+		name = gg_rivera.4.c
+		set_global_variable = gg_rivera_eight_conditions
+		add_treasury = -25000
+		c:CER ?= {
+			change_relations = { country = ROOT value = 50 }
+		}
+		set_ruling_interest_groups = { ig_armed_forces ig_rural_folk }
+		add_modifier = {
+			name = gg_rivera_entre_orientales
+			years = 10
+		}
+		add_loyalists = {
+			value = medium_radicals
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1853.9.25 - EL TRIUNVIRATO
+# ============================================================================================
+# EN: The peace of 8 October 1851 is signed without him. He is in Rio de Janeiro, forbidden to
+#     leave the city, and he stays there: after the peace, President Juan Francisco Giro refuses
+#     to let him come home. Everyone had expected Eugenio Garzon to be the first president of the
+#     reunited Republic; Garzon died, and Giro was elected instead, on the politica de fusion --
+#     blancos and colorados in one government. It does not hold. Venancio Flores, Jefe Politico of
+#     Montevideo in 1852 and then Minister of War, forces Giro out on 25 September 1853 and names
+#     a triumvirate to finish the constitutional term: himself, Juan Antonio Lavalleja and
+#     Fructuoso Rivera. Two of the three are abroad.
+#     Lavalleja dies in Montevideo on 23 October 1853, three weeks in.
+# ES: La paz del 8 de octubre de 1851 se firma sin el. Esta en Rio de Janeiro con prohibicion de
+#     salir de la ciudad, y ahi se queda: despues de la paz, el presidente Juan Francisco Giro le
+#     prohibe volver. Todos esperaban que el primer presidente de la Republica reunificada fuera
+#     Eugenio Garzon; Garzon murio, y en su lugar se eligio a Giro, sobre la politica de fusion:
+#     blancos y colorados en un mismo gobierno. No aguanta. Venancio Flores, jefe politico de
+#     Montevideo en 1852 y despues ministro de Guerra, fuerza la renuncia de Giro el 25 de
+#     setiembre de 1853 y nombra un triunvirato para terminar el periodo constitucional: el mismo,
+#     Juan Antonio Lavalleja y Fructuoso Rivera. Dos de los tres estan afuera.
+#     Lavalleja muere en Montevideo el 23 de octubre de 1853, a tres semanas de nombrado.
+gg_rivera.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.5.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_rivera.5.d_exiled
+				trigger = {
+					OR = {
+						has_global_variable = gg_rivera_exiled
+						has_global_variable = gg_rivera_never_returned
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gg_rivera.5.d_at_home
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	flavor = gg_rivera.5.f
+
+	event_image = {
+		video = "gg_riv_triumvirate"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		# One of the four ways 1847 could end has to have happened first.
+		OR = {
+			has_global_variable = gg_rivera_exiled
+			has_global_variable = gg_rivera_kept
+			has_global_variable = gg_rivera_eight_conditions
+			has_global_variable = gg_rivera_never_returned
+		}
+		NOT = { has_global_variable = gg_rivera_triumvirate_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_triumvirate_settled
+			# Lavalleja was named to the triumvirate and died three weeks later, on
+			# 23 October 1853. Wherever he is by now, the war is over and he is 69.
+			every_country = {
+				limit = { any_scope_character = { has_template = URU_Juan_Antonio_Lavalleja } }
+				random_scope_character = {
+					limit = { has_template = URU_Juan_Antonio_Lavalleja }
+					kill_character = yes
+				}
+			}
+		}
+	}
+
+	# EN: The historical answer. Both absent triumvirs are called home and the caudillo who was
+	#     banished for the duration of a war that is now over becomes head of state again. It is
+	#     the third time this country has put Fructuoso Rivera at the head of its government.
+	# ES: La respuesta historica. Se llama a los dos triunviros ausentes y el caudillo desterrado
+	#     "por todo el tiempo que dure la presente guerra" -- una guerra que ya termino -- vuelve a
+	#     ser jefe de Estado. Es la tercera vez que este pais pone a Fructuoso Rivera al frente de
+	#     su gobierno.
+	option = {
+		name = gg_rivera.5.a
+		default_option = yes
+		set_global_variable = gg_rivera_recalled
+		if = {
+			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_Fructuoso_Rivera
+				ruler = yes
+				commander_rank = commander_rank_3
+			}
+		}
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_armed_forces }
+		add_modifier = {
+			name = gg_rivera_the_triumvirate
+			years = 5
+		}
+		hidden_effect = {
+			# 1854.1.13 - the arroyo Conventos, 110 days from here.
+			trigger_event = { id = gg_rivera.6 days = 110 popup = yes }
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# EN: Flores governs alone, which is what happened in fact anyway once both his colleagues
+	#     were dead -- only here it is decided rather than inherited, and the old man is left in
+	#     Rio de Janeiro, where he had been living in the greatest poverty. The colorados keep the
+	#     government and lose the man half the campania still rides for.
+	# ES: Flores gobierna solo, que es lo que termino pasando de hecho cuando sus dos colegas
+	#     murieron, solo que aca se decide en vez de heredarse, y el viejo queda en Rio de Janeiro,
+	#     donde vivia en la mayor pobreza. Los colorados se quedan con el gobierno y pierden al
+	#     hombre por el que media campania todavia cabalga.
+	option = {
+		name = gg_rivera.5.b
+		set_global_variable = gg_rivera_left_in_rio
+		if = {
+			limit = { any_scope_character = { has_template = URU_venancio_flores } }
+			random_scope_character = {
+				limit = { has_template = URU_venancio_flores }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_venancio_flores
+				ruler = yes
+				commander_rank = commander_rank_3
+			}
+		}
+		set_ruling_interest_groups = { ig_armed_forces ig_petty_bourgeoisie }
+		add_modifier = {
+			name = gg_rivera_flores_alone
+			years = 5
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.6 days = 110 popup = yes }
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1854.1.13 - ARROYO CONVENTOS
+# ============================================================================================
+# EN: He crossed back into the country on 19 November 1853 and slept at the Posta de Menna. On
+#     the 24th Anacleto Medina -- el indio Medina, who had taken his army from him in 1845 -- rode
+#     out to meet him and paraded his troops past the triumvir; Rivera's eyes filled. At Durazno,
+#     where he had known his glories and his loves, the old friends came out to meet him and he
+#     fell ill: vomiting, pain. He rested a few days in Cerro Largo, wrote his last letters, and
+#     went on. Brigido Silveira, the chief of his escort, tried to make him rest longer. He would
+#     not: Bernardina was waiting, Pacheco y Obes was waiting, Flores was waiting.
+#     At midday on 12 January he understood what was happening and spoke to the men around him:
+#     "Ese baul, si muero, se encargaran ustedes de entregarlo al Gobierno. En el se encierran
+#     todos los ultimos actos de mi vida, y en ellos encontraran mis enemigos documentos que
+#     prueban que jamas he dejado de servir a la patria." He died the next day, 13 January 1854,
+#     in the rancho of his compadre Bartolo Silva by the arroyo Conventos, outside Melo. They put
+#     the body in a tin box of cane spirit and carried it on to Montevideo. He was buried in the
+#     Matriz beside Lavalleja, his compadre, dead three months before him.
+# ES: Volvio a pisar el pais el 19 de noviembre de 1853 y durmio en la Posta de Menna. El 24,
+#     Anacleto Medina -- el indio Medina, el que le habia sacado el ejercito en 1845 -- le salio
+#     al encuentro e hizo desfilar sus tropas ante el triunviro; a Rivera se le humedecieron los
+#     ojos. En Durazno, donde habia conocido sus glorias y sus amores, los viejos amigos salieron
+#     a recibirlo y se enfermo: vomitos, dolores. Descanso unos dias en Cerro Largo, escribio sus
+#     ultimas cartas y siguio. Brigido Silveira, el jefe de su escolta, quiso hacerlo parar mas
+#     tiempo. No quiso: lo esperaba Bernardina, lo esperaba Pacheco y Obes, lo esperaba Flores.
+#     Al mediodia del 12 de enero tomo conciencia de su estado y les hablo a los presentes: "Ese
+#     baul, si muero, se encargaran ustedes de entregarlo al Gobierno. En el se encierran todos
+#     los ultimos actos de mi vida, y en ellos encontraran mis enemigos documentos que prueban que
+#     jamas he dejado de servir a la patria." Murio al dia siguiente, el 13 de enero de 1854, en
+#     el rancho de su compadre Bartolo Silva, junto al arroyo Conventos, cerca de Melo. Metieron
+#     el cuerpo en una caja de lata con cania y lo siguieron llevando a Montevideo. Lo enterraron
+#     en la Matriz al lado de Lavalleja, su compadre, muerto tres meses antes que el.
+gg_rivera.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.6.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_rivera.6.d_on_the_road
+				trigger = {
+					has_global_variable = gg_rivera_recalled
+				}
+			}
+			triggered_desc = {
+				desc = gg_rivera.6.d_in_rio
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	flavor = gg_rivera.6.f
+
+	# Animated from a public-domain painting. Produced separately; alias declared in
+	# gfx/media_aliases/. Not created by this file.
+	event_image = {
+		video = "gg_rivera_death"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		OR = {
+			has_global_variable = gg_rivera_recalled
+			has_global_variable = gg_rivera_left_in_rio
+		}
+		NOT = { has_global_variable = gg_rivera_death_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_rivera_death_settled
+			random_scope_character = {
+				limit = { has_template = URU_Fructuoso_Rivera }
+				kill_character = yes
+			}
+			# The triumvirate is down to one man, and the one man is Flores. Historically that is
+			# how he came to exercise the executive between 1853 and 1854, and then to be elected
+			# to finish Giro's term.
+			if = {
+				limit = { NOT = { exists = ruler } }
+				if = {
+					limit = { any_scope_character = { has_template = URU_venancio_flores } }
+					random_scope_character = {
+						limit = { has_template = URU_venancio_flores }
+						set_character_as_ruler = yes
+					}
+				}
+				else = {
+					create_character = {
+						template = URU_venancio_flores
+						ruler = yes
+					}
+				}
+			}
+		}
+	}
+
+	# EN: The politica de fusion carried on: blancos and colorados in the same government, which is
+	#     the only reading of "ni vencidos ni vencedores" that means anything after the man who
+	#     spent nine years refusing it is in the ground. It costs the armed forces, who won the war
+	#     and are now asked to share the state with the men they besieged.
+	# ES: La politica de fusion sigue: blancos y colorados en el mismo gobierno, que es la unica
+	#     lectura de "ni vencidos ni vencedores" que quiere decir algo una vez que el hombre que se
+	#     paso nueve anios negandose esta bajo tierra. Cuesta las armas, que ganaron la guerra y
+	#     ahora tienen que compartir el Estado con los que sitiaron la ciudad.
+	option = {
+		name = gg_rivera.6.a
+		default_option = yes
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_landowners }
+		add_modifier = {
+			name = gg_rivera_the_politics_of_fusion
+			years = 10
+		}
+		add_loyalists = {
+			value = medium_radicals
+		}
+		ai_chance = {
+			base = 55
+		}
+	}
+
+	# EN: The other road, and the one the country actually took within two years: Flores governs
+	#     with the army and the port and no one else, and by 1855 the Rebelion de los Conservadores
+	#     is under way. The trunk of documents goes to the government that banished him, as he
+	#     asked -- and his enemies read it.
+	# ES: El otro camino, y el que el pais tomo de verdad a los dos anios: Flores gobierna con el
+	#     ejercito y el puerto y con nadie mas, y para 1855 ya esta en marcha la Rebelion de los
+	#     Conservadores. El baul de documentos va al gobierno que lo desterro, como el pidio, y sus
+	#     enemigos lo leen.
+	option = {
+		name = gg_rivera.6.b
+		set_ruling_interest_groups = { ig_armed_forces ig_petty_bourgeoisie }
+		add_modifier = {
+			name = gg_rivera_colorado_exclusivism
+			years = 10
+		}
+		add_radicals = {
+			value = medium_radicals
+		}
+		ai_chance = {
+			base = 45
+		}
+	}
+}

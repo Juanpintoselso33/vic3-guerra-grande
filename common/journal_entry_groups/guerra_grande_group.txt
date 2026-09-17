@@ -1,0 +1,6 @@
+﻿# The Guerra Grande is fought by two countries at once, so its journal entry needs a
+# contextless group - the same kind vanilla uses for the Carlist Wars.
+je_group_guerra_grande = {
+	context = none
+	updates_strategic_region_stances = yes
+}

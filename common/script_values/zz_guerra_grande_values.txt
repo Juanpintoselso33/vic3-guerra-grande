@@ -1,0 +1,14 @@
+﻿# EN: Thresholds for the war bar. The bar used to be decoration: it moved and nothing followed.
+#     These turn a lead of five battles into a real advantage, and ten into a decision.
+# ES: Umbrales de la barra de la guerra. La barra era decorativa: se movia y no pasaba nada.
+#     Con esto, una ventaja de cinco batallas pesa de verdad, y una de diez decide la guerra.
+
+guerra_grande_blanco_lead = {
+	value = global_var:guerra_grande_blanco_score
+	subtract = global_var:guerra_grande_colorado_score
+}
+
+guerra_grande_colorado_lead = {
+	value = global_var:guerra_grande_colorado_score
+	subtract = global_var:guerra_grande_blanco_score
+}

@@ -1,0 +1,109 @@
+﻿namespace = gg_legion
+
+# EN: The popup behind guerra_grande_french_legion_button. The button grants the commander and
+#     the standing modifier; this event delivers the battalions and asks the one political
+#     question the legion actually faced.
+# ES: El popup detras de guerra_grande_french_legion_button. El boton da el comandante y el
+#     modificador permanente; este evento entrega los batallones y hace la unica pregunta
+#     politica que la legion realmente enfrento.
+#
+# EN: No score is touched here on purpose. The war-score globals are held to a strict blanco /
+#     colorado symmetry across events/, and the Italian Legion button does not move them either.
+#     This is a contingent of men, like every other one in this mod -- not a war declaration.
+# ES: A proposito no se toca el marcador. Los globales de la guerra estan sujetos a una simetria
+#     estricta blanco / colorado en events/, y el boton de la Legion Italiana tampoco los mueve.
+#     Esto es un contingente de hombres, como todos los demas de este mod, no una declaracion de
+#     guerra.
+#
+# Sources / Fuentes: Mario Etchechury Barrera, "'Defensores de la humanidad y la civilizacion'.
+# Las legiones extranjeras de Montevideo, entre el mito cosmopolita y la eclosion de las
+# 'nacionalidades' (1838-1851)", Historia (PUC Chile) 50:II, 2017, pp. 491-524. Full citations in
+# ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md.
+
+# EN: April 1843. The corps is formed. The question put to the government was whether the
+#     legionaries served as Frenchmen under their own colours -- which is what Paris objected to,
+#     through consul Theodore Pichon -- or as orientals. In April 1844 the authorities settled it
+#     by "nationalising" them: the volunteers renounced French citizenship and the corps was
+#     renamed the 2a Legion de Guardia Nacional.
+# ES: Abril de 1843. El cuerpo se forma. La pregunta que se le hizo al gobierno era si los
+#     legionarios servian como franceses con bandera propia -- a lo que Paris se oponia, por
+#     medio del consul Theodore Pichon -- o como orientales. En abril de 1844 las autoridades lo
+#     resolvieron "nacionalizandolos": los voluntarios renunciaron a la ciudadania francesa y el
+#     cuerpo paso a llamarse 2a Legion de Guardia Nacional.
+gg_legion.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_legion.1.t
+	desc = gg_legion.1.d
+	flavor = gg_legion.1.f
+
+	# EN: The French Legion, the largest battalion of the garrison.
+	event_image = {
+		video = "gg_leg_colours"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_variable = guerra_grande_french_legion_raised
+	}
+
+	# EN: their own colours. More than three thousand men at the height -- the strongest battalion
+	#     of the garrison -- but the legions quarrelled with each other and with the city, and
+	#     Etchechury's whole argument is that this armed cosmopolitanism came close to setting off
+	#     "una 'guerra civil' dentro de la ciudad-puerto".
+	# ES: con bandera propia. Mas de tres mil hombres en su mejor momento -- el batallon mas
+	#     poderoso de la guarnicion -- pero las legiones se peleaban entre si y con la ciudad, y
+	#     toda la tesis de Etchechury es que ese cosmopolitismo armado estuvo cerca de desatar
+	#     "una 'guerra civil' dentro de la ciudad-puerto".
+	option = {
+		name = gg_legion.1.a
+		default_option = yes
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 4
+			}
+		}
+		add_radicals = {
+			value = small_radicals
+			strata = middle
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	# EN: nationalise them. Fewer men on the wall at once, because the men who wanted to stay
+	#     French went to the consul instead -- but the ones who stayed are the Republic's own, and
+	#     the diplomatic quarrel with Paris goes away.
+	# ES: nacionalizarlos. Menos hombres en la muralla de entrada, porque los que querian seguir
+	#     siendo franceses se fueron al consulado -- pero los que quedaron son de la Republica, y
+	#     el pleito diplomatico con Paris se termina.
+	option = {
+		name = gg_legion.1.b
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = middle
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+}

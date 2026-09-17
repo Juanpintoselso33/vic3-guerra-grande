@@ -1,0 +1,12 @@
+﻿# EN: The two blues of the Guerra Grande, taken from the flags Wikimedia Commons holds for each
+#     government: "Flag of Uruguay (Oribe).svg" uses #0020a6, a deep navy, and "Flag of Uruguay
+#     (Rivera).svg" uses #75aadb, the celeste. Same flag, same geometry -- the blue is what told
+#     the Cerrito from the Defensa.
+# ES: Los dos azules de la Guerra Grande, sacados de las banderas que Wikimedia Commons da para
+#     cada gobierno: "Flag of Uruguay (Oribe).svg" usa #0020a6, azul marino, y "Flag of Uruguay
+#     (Rivera).svg" usa #75aadb, el celeste. Misma bandera, misma geometria: el azul es lo que
+#     distinguia al Cerrito de la Defensa.
+colors = {
+	cerrito_blue  = rgb { 0 32 166 }
+	defensa_celeste = rgb { 117 170 219 }
+}
