@@ -29,6 +29,7 @@ guerra_grande.1 = {
 		if = {
 			limit = { NOT = { has_journal_entry = je_guerra_grande } }
 			add_contextless_journal_entry = je_guerra_grande
+			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 			je:je_guerra_grande ?= {
 				add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
 			}
@@ -459,6 +460,7 @@ guerra_grande.3 = {
 			#     LOS DOS lo tengan (scope:enemy_country ?= { has_journal_entry }), asi que sin
 			#     esto la barra no se movia y ninguna batalla contaba.
 			add_contextless_journal_entry = je_guerra_grande
+			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 			create_diplomatic_play = {
 				name = guerra_grande_play
 				target_country = c:URU
@@ -867,6 +869,7 @@ guerra_grande.3 = {
 		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
+		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 		ai_chance = {
 			base = 80
 		}
@@ -1007,6 +1010,7 @@ guerra_grande.3 = {
 		c:URU ?= {
 			set_capital = STATE_MONTEVIDEO
 			add_contextless_journal_entry = je_guerra_grande
+			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 			add_modifier = {
 				name = guerra_grande_walls_of_montevideo
 				years = 15
@@ -1415,6 +1419,7 @@ guerra_grande.3 = {
 		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
+		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 		ai_chance = {
 			base = 20
 		}

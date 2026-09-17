@@ -17,9 +17,7 @@ je_guerra_grande = {
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	scripted_progress_bar = guerra_grande_war_score_bar
-	scripted_progress_bar = gg_sea_bar
 	scripted_progress_bar = gg_siege_bar
-	scripted_button = guerra_grande_foreign_intervention_button
 	scripted_button = guerra_grande_italian_legion_button
 	scripted_button = guerra_grande_french_legion_button
 	# EN: the Cerrito's own two. The mirror of a foreign legion is not another foreign legion:
@@ -89,8 +87,7 @@ je_guerra_grande = {
 	on_monthly_pulse = {
 		effect = {
 			# EN/ES: playtest -- keep the two bars in step / mantener las dos barras al dia
-			set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value }
-			set_bar_progress = { name = gg_siege_bar value = global_var:gg_siege_months }
+			scope:journal_entry = { set_bar_progress = { name = gg_siege_bar value = global_var:gg_siege_months } }
 			if = { limit = { NOT = { has_global_variable = gg_debug_intervention_presses } } set_global_variable = { name = gg_debug_intervention_presses value = 0 } }
 			if = { limit = { NOT = { has_global_variable = gg_debug_italian_presses } } set_global_variable = { name = gg_debug_italian_presses value = 0 } }
 			if = { limit = { NOT = { has_global_variable = gg_debug_french_presses } } set_global_variable = { name = gg_debug_french_presses value = 0 } }

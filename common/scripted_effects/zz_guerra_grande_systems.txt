@@ -82,7 +82,7 @@ gg_patron_change = {
 			set_global_variable = { name = gg_patron_$PATRON$ value = 0 }
 		}
 		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_PATRON $PATRON$ $DELTA$"
-		je:je_guerra_grande ?= { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+		je:je_gg_patrons ?= { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
 	}
 }
 

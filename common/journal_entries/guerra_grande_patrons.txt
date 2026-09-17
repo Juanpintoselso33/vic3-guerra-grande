@@ -1,0 +1,60 @@
+﻿# EN: playtest 2026-09-17 -- the foreign influence gets its own journal, so the sea bar is visible in
+#     the outliner next to the war score. It opens with the war journal on game start and closes
+#     with the peace (or the failure) of the Guerra Grande.
+# ES: la influencia externa tiene su propio journal, asi la barra del mar se ve en el panel junto al
+#     puntaje. Abre con el de la guerra al empezar la partida y cierra con la paz (o el fracaso).
+je_gg_patrons = {
+	group = je_group_guerra_grande
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	scripted_progress_bar = gg_sea_bar
+	# EN/ES: calling in the squadrons is a request to the powers / llamar a las escuadras es un pedido a las potencias
+	scripted_button = guerra_grande_foreign_intervention_button
+
+	should_be_involved = {
+		OR = {
+			c:URU ?= this
+			c:CER ?= this
+			has_variable = guerra_grande_cerrito_government
+			has_variable = guerra_grande_defensa_government
+		}
+	}
+
+	should_show_when_not_involved = {
+		always = no
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_gg_patrons_status
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_gg_patrons_complete_tt
+			has_global_variable = gg_peace_settled
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = je_gg_patrons_fail_tt
+			has_global_variable = gg_war_failed
+		}
+	}
+
+	weight = 99
+}
