@@ -202,3 +202,10 @@ gg_phase1_cagancha_lost = {
 	country_authority_add = -20
 	country_legitimacy_base_add = -5
 }
+
+# T3b (FE-8). Calling the squadrons before 1845: a port offered as a factory.
+gg_intervention_early_price = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+	interest_group_ig_landowners_approval_add = -2
+}

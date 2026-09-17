@@ -547,6 +547,13 @@ gg_contingent.8 = {
 			#     T2/T3b turn this into a war-support blow and a Brazilian patron rise.
 			gg_patron_change = { PATRON = brasil DELTA = 20 }
 			gg_score_colorado = { AMOUNT = 3 }
+			# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks
+			c:CER ?= {
+				every_scope_war = {
+					limit = { gg_is_the_war = yes }
+					add_war_war_support = { target = c:CER value = -30 }
+				}
+			}
 		}
 		ai_chance = {
 			base = 85

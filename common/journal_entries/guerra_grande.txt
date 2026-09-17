@@ -119,11 +119,11 @@ je_guerra_grande = {
 					}
 				}
 				if = {
-					limit = { has_global_variable = guerra_grande_foreign_intervention }
-					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS foreign_intervention is SET"
+					limit = { gg_sea_open = yes }
+					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS sea OPEN"
 				}
 				else = {
-					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS foreign_intervention NOT set"
+					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS sea SHUT"
 				}
 				c:CER ?= {
 					if = {
@@ -191,9 +191,10 @@ je_guerra_grande = {
 					limit = { NOT = { has_global_variable = gg_siege_tick } }
 					set_global_variable = { name = gg_siege_tick days = 20 }
 					if = {
+						# EN/ES: T3b, C15/C21 -- the sea is the one condition (I16) / el mar es la unica condicion
 						limit = {
 							c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
-							NOT = { has_global_variable = guerra_grande_foreign_intervention }
+							NOT = { gg_sea_open = yes }
 						}
 						change_global_variable = { name = gg_siege_months add = 1 }
 					}
@@ -201,6 +202,41 @@ je_guerra_grande = {
 						limit = { global_var:gg_siege_months > 0 }
 						change_global_variable = { name = gg_siege_months add = -1 }
 					}
+					# EN: T3b, FE-9 -- when the squadrons hold the river, the blockade is lifted.
+					# ES: T3b, FE-9 -- cuando las escuadras sostienen el rio, el bloqueo se levanta.
+					if = {
+						limit = { gg_sea_open = yes }
+						c:URU ?= {
+							if = {
+								limit = { has_modifier = guerra_grande_river_plate_blockade }
+								remove_modifier = guerra_grande_river_plate_blockade
+							}
+						}
+					}
+					# EN: T3b, C19 -- the patrons, once a month. A side whose backing is under 40 bleeds
+					#     war support; France and Brazil pay the Defensa, Rosas pays the Cerrito.
+					# ES: T3b, C19 -- los padrinos, una vez por mes. El bando con menos de 40 de sosten
+					#     pierde apoyo a la guerra; Francia y Brasil le pagan a la Defensa, Rosas al Cerrito.
+					if = {
+						limit = { gg_defensa_backing < 40 }
+						c:URU ?= {
+							every_scope_war = {
+								limit = { gg_is_the_war = yes }
+								add_war_war_support = { target = c:URU value = gg_defensa_drain }
+							}
+						}
+					}
+					if = {
+						limit = { gg_cerrito_backing < 40 }
+						c:CER ?= {
+							every_scope_war = {
+								limit = { gg_is_the_war = yes }
+								add_war_war_support = { target = c:CER value = gg_cerrito_drain }
+							}
+						}
+					}
+					c:URU ?= { add_treasury = gg_defensa_subsidy }
+					c:CER ?= { add_treasury = gg_cerrito_subsidy }
 				}
 			}
 		}

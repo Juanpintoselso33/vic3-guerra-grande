@@ -63,3 +63,34 @@ gg_rivera_1837_strength_bar = {
 	value = gg_rivera_1837_strength
 	multiply = -1
 }
+
+# EN: T3b, C19. Monthly war-support drain for a side whose patrons fall below 40 of backing:
+#     one point for every 5 missing (negative, ready for add_war_war_support). Provisional (T10).
+# ES: T3b, C19. Drenaje mensual de apoyo a la guerra para el bando cuyos padrinos suman menos de
+#     40: un punto por cada 5 que faltan (negativo). Provisorio hasta T10.
+gg_defensa_drain = {
+	value = gg_defensa_backing
+	subtract = 40
+	divide = 5
+}
+
+gg_cerrito_drain = {
+	value = gg_cerrito_backing
+	subtract = 40
+	divide = 5
+}
+
+# EN: T3b, C19. Monthly money from the patrons who pay: France and Brazil to the Defensa, Rosas to
+#     the Cerrito. 30 per point of support is provisional (T10).
+# ES: T3b, C19. Plata mensual de los padrinos que pagan: Francia y Brasil a la Defensa, Rosas al
+#     Cerrito. 30 por punto de apoyo es provisorio (T10).
+gg_defensa_subsidy = {
+	value = global_var:gg_patron_francia
+	add = global_var:gg_patron_brasil
+	multiply = 30
+}
+
+gg_cerrito_subsidy = {
+	value = global_var:gg_patron_rosas
+	multiply = 30
+}

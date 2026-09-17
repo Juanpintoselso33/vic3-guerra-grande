@@ -18,9 +18,10 @@ guerra_grande_foreign_intervention_button = {
 			has_global_variable = guerra_grande_open_war
 		}
 		hidden_trigger = {
-			NOT = { has_global_variable = guerra_grande_foreign_intervention }
+			NOT = { has_global_variable = gg_intervention_called }
 		}
-		year >= 1845.1.1
+		# EN/ES: T3b, FE-8 -- the button brings the powers forward, from 1843 / el boton las adelanta, desde 1843
+		year >= 1843.1.1
 		OR = {
 			custom_tooltip = {
 				text = guerra_grande_requires_great_power_interest
@@ -34,7 +35,7 @@ guerra_grande_foreign_intervention_button = {
 	}
 
 	selected = {
-		has_global_variable = guerra_grande_foreign_intervention
+		has_global_variable = gg_intervention_called
 	}
 
 	effect = {
@@ -60,7 +61,24 @@ guerra_grande_foreign_intervention_button = {
 			name = gg_debug_intervention_presses
 			add = 1
 		}
-		set_global_variable = guerra_grande_foreign_intervention
+		# EN: T3b, C21 -- no more intervention flag: the squadrons are France and Britain rising, and
+		#     they go down again five years later (gg_powers.1). Calling them before 1845 costs
+		#     sovereignty: Varela's offer of a port as a factory.
+		# ES: T3b, C21 -- ya no hay marca de intervencion: las escuadras son Francia y Gran Bretania
+		#     subiendo, y bajan otra vez a los cinco anios. Llamarlas antes de 1845 cuesta
+		#     soberania: la oferta de Varela de un puerto como factoria.
+		set_global_variable = gg_intervention_called
+		gg_patron_change = { PATRON = francia DELTA = 30 }
+		gg_patron_change = { PATRON = britania DELTA = 30 }
+		if = {
+			limit = { year < 1845 }
+			add_modifier = {
+				name = gg_intervention_early_price
+				years = 10
+				is_decaying = yes
+			}
+		}
+		trigger_event = { id = gg_powers.1 days = 1826 }
 		add_modifier = {
 			name = guerra_grande_montevideo_resupplied
 			years = 5

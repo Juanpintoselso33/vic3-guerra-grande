@@ -88,6 +88,9 @@ guerra_grande_montonera_levy_button = {
 			add = 1
 		}
 		set_variable = guerra_grande_montonera_levy_raised
+		# EN/ES: T3b, FE-9 -- the caudillos' levy: the balance tilts, the till pays
+		gg_cerrito_balance_change = { DELTA = -10 }
+		add_treasury = -10000
 		# EN: cavalry first and most of it. This is the one thing the besiegers had that the city
 		#     could never buy: men who came with their own horses.
 		# ES: caballeria primero y casi todo. Es lo unico que tenian los sitiadores que la ciudad
@@ -185,9 +188,14 @@ guerra_grande_river_blockade_button = {
 		#     guerra_grande_foreign_intervention_button, las escuadras anglo-francesas estan en el
 		#     rio, y despues de agosto de 1845 no quedaba escuadra argentina con que bloquear. Es
 		#     el unico boton del par que el otro bando puede sacar del tablero.
+		# EN/ES: T3b, FE-9 -- the sea must be shut and Rosas must be behind it
 		custom_tooltip = {
 			text = guerra_grande_requires_river_unwatched
-			NOT = { has_global_variable = guerra_grande_foreign_intervention }
+			NOT = { gg_sea_open = yes }
+		}
+		custom_tooltip = {
+			text = guerra_grande_requires_rosas_backing
+			global_var:gg_patron_rosas >= 40
 		}
 		year >= 1843
 	}

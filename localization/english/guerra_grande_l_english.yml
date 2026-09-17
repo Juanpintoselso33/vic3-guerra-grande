@@ -146,3 +146,8 @@
  Legion_Francesa:0 "The French Legion"
  gg_rosas_provisional_lock:0 "Rosas Holds the Reins (Provisional)"
  gg_rosas_provisional_lock_desc:0 "A blunt, provisional lock: no law reform of any kind while this holds. Added because the Confederation's government was destabilising into unrelated forms mid-campaign -- likely a conflict between the flags mod's dictatorship classification and Rosas's own starting laws. Should come off once that conflict is fixed at its root, not stay stacked on top of it."
+
+# T3b
+ guerra_grande.9.b:0 "Let them come to mediate, not to fight."
+ gg_intervention_early_price:0 "A Port Offered as a Factory"
+ guerra_grande_requires_rosas_backing:0 "Rosas must back the blockade (Rosas support 40 or more)."

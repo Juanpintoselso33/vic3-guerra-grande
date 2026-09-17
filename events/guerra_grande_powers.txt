@@ -1,0 +1,19 @@
+﻿namespace = gg_powers
+
+# EN: The powers (docs/guerra-grande-flujo/fichas.md F2-1, F3-*). T3b only brings the waning of an
+#     intervention called by the button; the dated events land in T4 and T7.
+# ES: Las potencias. T3b solo trae el retiro de una intervencion llamada por el boton; los eventos
+#     con fecha llegan en T4 y T7.
+
+# EN: five years after the button, the squadrons thin out (C10, "whichever comes first" with the
+#     historical dates of T4).
+# ES: cinco anios despues del boton, las escuadras se ralean.
+gg_powers.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		gg_patron_change = { PATRON = francia DELTA = -20 }
+		gg_patron_change = { PATRON = britania DELTA = -20 }
+	}
+}

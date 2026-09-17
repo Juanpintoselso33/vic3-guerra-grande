@@ -146,3 +146,8 @@
  Legion_Francesa:0 "Legión Francesa"
  gg_rosas_provisional_lock:0 "Rosas sostiene las riendas (provisorio)"
  gg_rosas_provisional_lock_desc:0 "Un candado contundente y provisorio: ninguna reforma de ley mientras dure. Se agregó porque el gobierno de la Confederación se desestabilizaba hacia formas ajenas a mitad de campaña -- probablemente un choque entre la clasificación de dictadura del mod de banderas y las leyes propias de Rosas al arrancar. Debería sacarse una vez que ese choque se corrija de raíz, no quedar apilado encima."
+
+# T3b
+ guerra_grande.9.b:0 "Que vengan a mediar, no a pelear."
+ gg_intervention_early_price:0 "Un puerto ofrecido como factoría"
+ guerra_grande_requires_rosas_backing:0 "Rosas tiene que respaldar el bloqueo (apoyo de Rosas 40 o más)."
