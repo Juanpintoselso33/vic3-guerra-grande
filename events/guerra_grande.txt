@@ -137,7 +137,11 @@ guerra_grande.2 = {
 	immediate = {
 		hidden_effect = {
 			# 1839.2.10 - Rivera declares war on Rosas and the war becomes open.
-			trigger_event = { id = guerra_grande.3 days = 110 popup = yes }
+			# EN: T6 -- the split no longer follows the fall by 110 days: Arroyo Grande (gg_phase1.8)
+			#     schedules it. The fall opens phase 1 (1839-1842).
+			# ES: T6 -- la particion ya no sigue a la caida a los 110 dias: la agenda Arroyo Grande
+			#     (gg_phase1.8). La caida abre la fase 1 (1839-1842).
+			trigger_event = { id = gg_phase1.1 days = 120 popup = yes }   # 1839.02.21 guerra a Rosas
 		}
 	}
 
@@ -189,6 +193,8 @@ guerra_grande.2 = {
 	# The blanco government digs in instead: Oribe stays, and the blancos take the state alone.
 	option = {
 		name = guerra_grande.2.b
+		# EN/ES: T6, F1-0 -- Oribe holds on, but falls anyway in 1839 / Oribe resiste, pero cae igual en 1839
+		trigger_event = { id = gg_phase1.0 days = 100 popup = yes }   # 1839.02.01
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		change_global_variable = {
@@ -271,7 +277,7 @@ guerra_grande.3 = {
 			#     de 1842 como dos batallones gratis, sin eleccion, sin costo y sin contraparte
 			#     blanca. El despachador le da cada decreto al gobierno que lo firmo, y 1400 dias
 			#     caen justo en el 12.12.1842 (1401 caia un dia tarde).
-			trigger_event = { id = gg_abolition.1 days = 1400 }                # 1842.12.12 / 1846.10.26 aboliciones
+			# EN/ES: T6 -- the abolitions are scheduled from on_game_start and gg_partition_calendar
 		}
 	}
 
@@ -833,34 +839,8 @@ guerra_grande.3 = {
 		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
-		c:URU ?= {
-			trigger_event = { id = gg_contingent.1 days = 202 popup = yes }    # 1839.9  Legion Argentina
-			trigger_event = { id = gg_contingent.3 days = 1466 popup = yes }   # 1843.2  desercion vasca
-			trigger_event = { id = gg_contingent.4 days = 1516 popup = yes }   # 1843.4.7 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 1518 popup = yes }   # 1843.4.9 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 2255 popup = yes }   # 1845.4  Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 4588 popup = yes }   # 1851.9.4 Caxias cruza
-			# EN: foreign money for the Defensa, and the watcher that presents the bill at the peace.
-			#     Defined in events/guerra_grande_loans.txt, sourced in SOURCES_loans.md. Same base
-			#     date as the contingents: 10 February 1839.
-			# ES: plata extranjera para la Defensa, y el vigia que pasa la cuenta en la paz. Definidos
-			#     en events/guerra_grande_loans.txt, con fuentes en SOURCES_loans.md. Misma fecha base
-			#     que los contingentes: 10 de febrero de 1839.
-			trigger_event = { id = gg_loan.1 days = 3409 popup = yes }   # 1848.6.12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 4225 popup = yes }   # 1850.9.6 contratos secretos
-			trigger_event = { id = gg_loan.7 days = 200 }                # vigia del ajuste de cuentas
-			# EN: Rivera, 1842-1854 -- events/guerra_grande_rivera.txt, sourced in SOURCES_rivera.md.
-			#     Only the first is scheduled; the other five chain from the option you pick.
-			# ES: Rivera, 1842-1854: events/guerra_grande_rivera.txt, con fuentes en SOURCES_rivera.md.
-			#     Solo se programa el primero; los otros cinco encadenan segun la opcion que elijas.
-			trigger_event = { id = gg_rivera.1 days = 1394 popup = yes }   # 1842.12.6 Arroyo Grande
-		}
-		# EN: and the mirror: Argentine money for the Cerrito, with its own price.
-		# ES: y el espejo: plata argentina para el Cerrito, con su propio precio.
-		c:CER ?= {
-			trigger_event = { id = gg_loan.3 days = 1610 popup = yes }   # 1843.7.10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 2373 popup = yes }   # 1845.8.11 la reunificacion
-		}
+		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
+		gg_partition_calendar = yes
 		# EN: the split is finished here, and only here. Both governments exist, both hold their
 		#     states, and only now is it safe to say so.
 		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the
@@ -1390,34 +1370,8 @@ guerra_grande.3 = {
 		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
-		c:URU ?= {
-			trigger_event = { id = gg_contingent.1 days = 202 popup = yes }    # 1839.9  Legion Argentina
-			trigger_event = { id = gg_contingent.3 days = 1466 popup = yes }   # 1843.2  desercion vasca
-			trigger_event = { id = gg_contingent.4 days = 1516 popup = yes }   # 1843.4.7 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 1518 popup = yes }   # 1843.4.9 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 2255 popup = yes }   # 1845.4  Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 4588 popup = yes }   # 1851.9.4 Caxias cruza
-			# EN: foreign money for the Defensa, and the watcher that presents the bill at the peace.
-			#     Defined in events/guerra_grande_loans.txt, sourced in SOURCES_loans.md. Same base
-			#     date as the contingents: 10 February 1839.
-			# ES: plata extranjera para la Defensa, y el vigia que pasa la cuenta en la paz. Definidos
-			#     en events/guerra_grande_loans.txt, con fuentes en SOURCES_loans.md. Misma fecha base
-			#     que los contingentes: 10 de febrero de 1839.
-			trigger_event = { id = gg_loan.1 days = 3409 popup = yes }   # 1848.6.12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 4225 popup = yes }   # 1850.9.6 contratos secretos
-			trigger_event = { id = gg_loan.7 days = 200 }                # vigia del ajuste de cuentas
-			# EN: Rivera, 1842-1854 -- events/guerra_grande_rivera.txt, sourced in SOURCES_rivera.md.
-			#     Only the first is scheduled; the other five chain from the option you pick.
-			# ES: Rivera, 1842-1854: events/guerra_grande_rivera.txt, con fuentes en SOURCES_rivera.md.
-			#     Solo se programa el primero; los otros cinco encadenan segun la opcion que elijas.
-			trigger_event = { id = gg_rivera.1 days = 1394 popup = yes }   # 1842.12.6 Arroyo Grande
-		}
-		# EN: and the mirror: Argentine money for the Cerrito, with its own price.
-		# ES: y el espejo: plata argentina para el Cerrito, con su propio precio.
-		c:CER ?= {
-			trigger_event = { id = gg_loan.3 days = 1610 popup = yes }   # 1843.7.10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 2373 popup = yes }   # 1845.8.11 la reunificacion
-		}
+		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
+		gg_partition_calendar = yes
 		# EN: the split is finished here, and only here. Both governments exist, both hold their
 		#     states, and only now is it safe to say so.
 		#     The journal is re-added to ROOT because change_tag drops it: the player who takes the

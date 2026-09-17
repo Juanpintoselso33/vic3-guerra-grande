@@ -195,3 +195,10 @@ gg_artigas_letter = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	country_legitimacy_base_add = 5
 }
+
+# T6 (fase 1). Going out early against Echague and losing.
+gg_phase1_cagancha_lost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -20
+	country_legitimacy_base_add = -5
+}

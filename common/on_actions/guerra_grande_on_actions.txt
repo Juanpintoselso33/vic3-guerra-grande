@@ -55,6 +55,8 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_prewar.7 days = 840 popup = yes }   # 1838.04.20 bloqueo frances
 			trigger_event = { id = gg_prewar.8 days = 877 popup = yes }   # 1838.05.27 Universidad
 			trigger_event = { id = gg_prewar.9 days = 896 popup = yes }   # 1838.06.15 Palmar
+			# EN/ES: T6 -- Ley N. 242 of the Defensa / de la Defensa, 1842.12.12
+			trigger_event = { id = gg_abolition.1 days = 2537 }
 			# 19 September 1836: the battle of Carpinteria, where the ribbons are born.
 			trigger_event = { id = guerra_grande.1 days = 262 popup = yes }
 		}

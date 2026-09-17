@@ -1,0 +1,542 @@
+﻿namespace = gg_phase1
+
+# EN: Phase 1 (1838-1842), docs/guerra-grande-flujo/fichas.md F1-0 to F1-8. Rivera governs,
+#     Oribe commands Rosas's armies in Argentina, and the split waits for Arroyo Grande
+#     (historia.md, phase 1; Wikipedia ES, Guerra Grande). Every event requires that the split
+#     has not happened yet: F1-1 c can bring it a year forward.
+# ES: Fase 1 (1838-1842), fichas F1-0 a F1-8. Gobierna Rivera, Oribe manda los ejercitos de Rosas
+#     en la Argentina, y la particion espera a Arroyo Grande. Todo evento exige que la particion no
+#     haya ocurrido: F1-1 c la puede adelantar un anio.
+
+
+# F1-0 - the blanco path converges (1 February 1839)
+gg_phase1.0 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.0.t
+	desc = gg_phase1.0.d
+	flavor = gg_phase1.0.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_variable = guerra_grande_blanco_path
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	immediate = {
+		# EN: what the resistance of 1838 bought: Palmar avoided and a deal with France.
+		# ES: lo que compro la resistencia de 1838: Palmar evitado y un trato con Francia.
+		if = {
+			limit = { has_global_variable = gg_palmar_avoided }
+			gg_score_blanco = { AMOUNT = 2 }
+		}
+		if = {
+			limit = { has_global_variable = gg_french_deal_1838 }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
+	}
+
+	option = {
+		name = gg_phase1.0.a
+		default_option = yes
+		# EN: F1-0 -- the blanco path converges: Oribe falls anyway, and leaves with his army.
+		# ES: F1-0 -- el camino blanco converge: Oribe cae igual, y se va con su ejercito.
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			set_character_as_ruler = yes
+		}
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_phase1.0.b
+		# EN: negotiate the exit: fewer men go, but Rivera grants an amnesty the doctores remember.
+		# ES: negociar la salida: se van menos hombres, pero Rivera da una amnistia que los doctores recuerdan.
+		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			set_character_as_ruler = yes
+		}
+		gg_cerrito_balance_change = { DELTA = 5 }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+
+# F1-1 - Rivera declares war on Rosas (21 February 1839)
+gg_phase1.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.1.t
+	desc = gg_phase1.1.d
+	flavor = gg_phase1.1.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	option = {
+		name = gg_phase1.1.a
+		default_option = yes
+		# EN: historical: total war. France up, Rosas angry, Echague invades.
+		# ES: lo historico: guerra total. Francia sube, Rosas se enoja, Echague invade.
+		gg_patron_change = { PATRON = francia DELTA = 10 }
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		hidden_effect = {
+			trigger_event = { id = gg_phase1.2 days = 158 popup = yes }   # 1839.07.29 Echague cruza
+			if = {
+				# EN/ES: F0-2 b -- with asylum respected, Lavalle comes half a year later / Lavalle llega medio anio despues
+				limit = { has_global_variable = gg_unitarian_asylum }
+				trigger_event = { id = gg_phase1.4 days = 372 popup = yes }   # 1840.02.28
+			}
+			else = {
+				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
+			}
+			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
+			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
+			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_phase1.1.b
+		# EN: only the alliance with Corrientes: less France, a smaller invasion.
+		# ES: solo la alianza con Corrientes: menos Francia, una invasion mas chica.
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		set_global_variable = gg_small_invasion
+		hidden_effect = {
+			trigger_event = { id = gg_phase1.2 days = 158 popup = yes }   # 1839.07.29 Echague cruza
+			if = {
+				# EN/ES: F0-2 b -- with asylum respected, Lavalle comes half a year later / Lavalle llega medio anio despues
+				limit = { has_global_variable = gg_unitarian_asylum }
+				trigger_event = { id = gg_phase1.4 days = 372 popup = yes }   # 1840.02.28
+			}
+			else = {
+				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
+			}
+			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
+			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
+			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
+		}
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = gg_phase1.1.c
+		# EN: neutrality: France cools and nobody invades in 1839, but Rosas prepares anyway and
+		#     Arroyo Grande comes a year early -- and with it the split (gg_partition_calendar).
+		# ES: neutralidad: Francia se enfria y nadie invade en 1839, pero Rosas se prepara igual y
+		#     Arroyo Grande llega un anio antes, y con el la particion.
+		gg_patron_change = { PATRON = francia DELTA = -10 }
+		set_global_variable = gg_partition_early
+		hidden_effect = {
+			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
+			trigger_event = { id = gg_phase1.8 days = 1003 popup = yes }  # 1841.11.20 Arroyo Grande
+		}
+		ai_chance = { base = 15 }
+	}
+
+}
+
+
+# F1-2a - Echague and Lavalleja cross at Salto (29 July 1839)
+gg_phase1.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.2.t
+	desc = gg_phase1.2.d
+	flavor = gg_phase1.2.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_carpinteria"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	immediate = {
+		# EN/ES: F1-1 b -- the invasion is smaller / la invasion es mas chica
+		if = {
+			limit = { has_global_variable = gg_small_invasion }
+			gg_score_colorado = { AMOUNT = 1 }
+		}
+	}
+
+	option = {
+		name = gg_phase1.2.a
+		default_option = yes
+		# EN: historical: a war of resources behind the Santa Lucia, waiting for the infantry.
+		# ES: lo historico: guerra de recursos detras del Santa Lucia, esperando la infanteria.
+		hidden_effect = {
+			trigger_event = { id = gg_phase1.3 days = 153 popup = yes }   # 1839.12.29 Cagancha
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_phase1.2.b
+		# EN: go out and fight now: it can be won early, or lost.
+		# ES: salir a pelear ya: se puede ganar antes, o perder.
+		random_list = {
+			50 = {
+				hidden_effect = {
+					trigger_event = { id = gg_phase1.3 days = 60 popup = yes }
+				}
+			}
+			50 = {
+				gg_score_blanco = { AMOUNT = 2 }
+				add_modifier = { name = gg_phase1_cagancha_lost years = 3 is_decaying = yes }
+			}
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+
+# F1-2b - Cagancha (29 December 1839)
+gg_phase1.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.3.t
+	desc = gg_phase1.3.d
+	flavor = gg_phase1.3.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_carpinteria"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	immediate = {
+		gg_score_colorado = { AMOUNT = 2 }
+	}
+
+	option = {
+		name = gg_phase1.3.a
+		# EN: invade Entre Rios as the unitarians ask: France up, the army exposed (Arroyo Grande hits harder).
+		# ES: invadir Entre Rios como piden los unitarios: Francia sube, el ejercito queda expuesto.
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		set_global_variable = gg_invaded_entre_rios
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_phase1.3.b
+		default_option = yes
+		# EN: historical: stay. Rivera refused to cross.
+		# ES: lo historico: quedarse. Rivera se nego a cruzar.
+		add_modifier = { name = guerra_grande_colorado_order years = 10 }
+		ai_chance = { base = 70 }
+	}
+
+}
+
+
+# F1-6 - Lavalle and the emigres (1 September 1839, half a year later with asylum)
+gg_phase1.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.4.t
+	desc = gg_phase1.4.d
+	flavor = gg_phase1.4.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_leg_argentine"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	option = {
+		name = gg_phase1.4.a
+		default_option = yes
+		# EN: back Lavalle's expedition and its French ships: France and Rosas both rise.
+		# ES: apoyar la expedicion de Lavalle y sus barcos franceses: suben Francia y Rosas.
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 65 }
+	}
+
+	option = {
+		name = gg_phase1.4.b
+		# EN: keep the Republic out of the unitarians' war.
+		# ES: dejar a la Republica afuera de la guerra de los unitarios.
+		gg_patron_change = { PATRON = francia DELTA = -5 }
+		add_modifier = { name = guerra_grande_armed_truce years = 3 is_decaying = yes }
+		ai_chance = { base = 35 }
+	}
+
+}
+
+
+# F1-3 - the Arana-Mackau treaty: France leaves (29 October 1840)
+gg_phase1.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.5.t
+	desc = gg_phase1.5.d
+	flavor = gg_phase1.5.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	immediate = {
+		gg_patron_change = { PATRON = francia DELTA = -15 }
+	}
+
+	option = {
+		name = gg_phase1.5.a
+		default_option = yes
+		# EN: look for Britain: it rises early, for a price.
+		# ES: buscar a Gran Bretania: sube antes de tiempo, a cambio de plata.
+		gg_patron_change = { PATRON = britania DELTA = 10 }
+		add_treasury = -10000
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_phase1.5.b
+		# EN: lean on the unitarians and Corrientes: more war support, a harder Rosas.
+		# ES: apoyarse en los unitarios y en Corrientes: mas apoyo a la guerra, Rosas se endurece.
+		gg_score_colorado = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_phase1.5.c
+		# EN: ask Brazil: it comes early, and the price is the border -- the claim on Rio Grande goes.
+		# ES: pedirle al Brasil: llega antes, y el precio es la frontera: se va el reclamo sobre Rio Grande.
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		s:STATE_RIO_GRANDE_DO_SUL ?= {
+			remove_claim = c:URU
+		}
+		ai_chance = { base = 20 }
+	}
+
+}
+
+
+# F1-8 - news of Famailla and of Lavalle's death (15 October 1841)
+gg_phase1.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.6.t
+	desc = gg_phase1.6.d
+	flavor = gg_phase1.6.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rosas_cerrito"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	option = {
+		name = gg_phase1.6.a
+		default_option = yes
+		# EN: use the name 'degollador' in the Montevideo press: France and Europe listen, the blancos harden.
+		# ES: explotar la fama de 'degollador' en la prensa: Francia y Europa escuchan, los blancos se radicalizan.
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_phase1.6.b
+		# EN: say nothing: Oribe comes back in 1843 with his veterans and no public stain.
+		# ES: callar: Oribe vuelve en 1843 con sus veteranos y sin mancha publica.
+		gg_score_blanco = { AMOUNT = 1 }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+
+# F1-5 - the 'greater Uruguay' (supreme command at Paysandu, 25 October 1842)
+gg_phase1.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.7.t
+	desc = gg_phase1.7.d
+	flavor = gg_phase1.7.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	option = {
+		name = gg_phase1.7.a
+		default_option = yes
+		# EN: historical: head the project. Rivera takes the supreme command and Paz withdraws; Rosas and
+		#     Brazil turn against it, and Arroyo Grande hits harder.
+		# ES: lo historico: encabezar el proyecto. Rivera toma el mando supremo y Paz se retira; Rosas y el
+		#     Brasil se ponen en contra, y Arroyo Grande pega mas fuerte.
+		gg_score_colorado = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		gg_patron_change = { PATRON = brasil DELTA = -10 }
+		set_global_variable = gg_greater_uruguay
+		ai_chance = { base = 55 }
+	}
+
+	option = {
+		name = gg_phase1.7.b
+		# EN: turn it down: fewer allies, a neutral Brazil.
+		# ES: rechazarlo: menos aliados, el Brasil neutral.
+		gg_patron_change = { PATRON = brasil DELTA = 5 }
+		ai_chance = { base = 45 }
+	}
+
+}
+
+
+# F1-4 - Arroyo Grande: the news that Oribe is 'defenceless' (20 November 1842)
+gg_phase1.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_phase1.8.t
+	desc = gg_phase1.8.d
+	flavor = gg_phase1.8.f
+
+	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
+	event_image = {
+		video = "gg_rivera_arroyo_grande"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	option = {
+		name = gg_phase1.8.a
+		default_option = yes
+		# EN: historical: cross the Uruguay and look for him. Defeat; the split follows in 88 days.
+		# ES: lo historico: cruzar el Uruguay y buscarlo. Derrota; la particion llega a los 88 dias.
+		gg_score_blanco = { AMOUNT = 3 }
+		if = {
+			limit = { has_global_variable = gg_invaded_entre_rios }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
+		if = {
+			limit = { has_global_variable = gg_greater_uruguay }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.1 days = 16 popup = yes }       # la derrota, 6 de diciembre
+			trigger_event = { id = guerra_grande.3 days = 88 popup = yes }   # la particion
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_phase1.8.b
+		# EN: wait on the coast: Oribe invades anyway and the split comes six months later, but the
+		#     colorado army is intact.
+		# ES: esperar en la costa: Oribe invade igual y la particion llega seis meses despues, pero el
+		#     ejercito colorado queda entero.
+		gg_score_colorado = { AMOUNT = 1 }
+		set_global_variable = gg_partition_delayed
+		# EN/ES: there is no Arroyo Grande to recover from: Rivera's chain starts with his army whole.
+		set_global_variable = gg_rivera_arroyo_grande_settled
+		set_global_variable = gg_rivera_reinforced
+		hidden_effect = {
+			trigger_event = { id = guerra_grande.3 days = 270 popup = yes }
+		}
+		ai_chance = { base = 40 }
+	}
+
+}

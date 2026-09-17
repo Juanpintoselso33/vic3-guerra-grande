@@ -87,9 +87,10 @@ gg_rivera.1 = {
 
 	duration = 3
 
+	# EN/ES: T6 -- Arroyo Grande is now before the split: Rivera's government is plain URU.
 	trigger = {
-		has_variable = guerra_grande_defensa_government
-		exists = c:CER
+		this = c:URU
+		NOT = { has_global_variable = guerra_grande_split_done }
 		NOT = { has_global_variable = gg_rivera_arroyo_grande_settled }
 	}
 
@@ -152,10 +153,8 @@ gg_rivera.1 = {
 			years = 6
 			is_decaying = yes
 		}
-		hidden_effect = {
-			# 1845.3.27 - India Muerta, 842 days from here.
-			trigger_event = { id = gg_rivera.2 days = 842 popup = yes }
-		}
+		# EN/ES: T6 -- India Muerta (1845.3.27) comes from gg_partition_calendar, addressed to the
+		#     Defensa: scheduled here it would land on ROOT, which becomes the Cerrito in guerra_grande.3.b.
 		ai_chance = {
 			base = 35
 		}
@@ -199,9 +198,8 @@ gg_rivera.1 = {
 		add_loyalists = {
 			value = small_radicals
 		}
-		hidden_effect = {
-			trigger_event = { id = gg_rivera.2 days = 842 popup = yes }
-		}
+		# EN/ES: T6 -- India Muerta (1845.3.27) comes from gg_partition_calendar, addressed to the
+		#     Defensa: scheduled here it would land on ROOT, which becomes the Cerrito in guerra_grande.3.b.
 		ai_chance = {
 			base = 65
 		}

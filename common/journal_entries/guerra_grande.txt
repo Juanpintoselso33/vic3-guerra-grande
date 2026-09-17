@@ -315,7 +315,8 @@ je_guerra_grande = {
 				#     vuelo que lo pueda salvar.
 				AND = {
 					NOT = { has_global_variable = guerra_grande_open_war }
-					year >= 1840
+					# EN/ES: T6 -- the split moved to 1843 (latest 17 August 1843) / la particion paso a 1843
+					year >= 1844
 					OR = {
 						NOT = { exists = c:URU }
 						c:URU ?= { NOT = { exists = s:STATE_BANDA_ORIENTAL.region_state:URU } }

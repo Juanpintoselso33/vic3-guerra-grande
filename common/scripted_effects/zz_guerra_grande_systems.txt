@@ -92,3 +92,101 @@ gg_cerrito_balance_change = {
 	}
 	debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BALANCE $DELTA$"
 }
+
+# EN: T6, C18/FX-4. The whole post-split calendar, in one place, on absolute historical dates.
+#     Called at the end of both guerra_grande.3 options, when both governments exist, and
+#     addressed by tag so the Defensa and the Cerrito get their own events whoever the player is.
+#     The split itself can move (F1-1 c brings Arroyo Grande a year forward, F1-4 b delays it six
+#     months), so each variant carries its own delays. Anything whose date already passed when
+#     the split happens fires the day after (delay 1). Recompute with the table in the T6 commit.
+# ES: T6, C18/FX-4. Todo el calendario posterior a la particion, en un solo lugar y en fechas
+#     historicas absolutas. Lo llaman las dos opciones de guerra_grande.3, cuando ya existen los
+#     dos gobiernos, y va por tag para que cada uno reciba lo suyo sea quien sea el jugador. La
+#     particion se puede mover (F1-1 c adelanta Arroyo Grande un anio, F1-4 b la atrasa seis
+#     meses), asi que cada variante tiene sus demoras. Lo que ya paso al partirse dispara al dia
+#     siguiente (demora 1).
+gg_partition_calendar = {
+	if = {
+		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
+		# split on 1842-08-17
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.3 days = 183 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_contingent.1 days = 196 popup = yes }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_contingent.4 days = 233 popup = yes }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 235 popup = yes }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 972 popup = yes }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 3305 popup = yes }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_loan.1 days = 2126 popup = yes }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 2942 popup = yes }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_rivera.2 days = 953 popup = yes }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
+		}
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 327 popup = yes }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 1090 popup = yes }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_abolition.3 days = 1531 popup = yes }   # 1846-10-26 decreto del Cerrito
+		}
+	}
+	else_if = {
+		limit = { has_global_variable = gg_partition_early }
+		# split on 1842-02-16
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.3 days = 365 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_contingent.1 days = 378 popup = yes }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_contingent.4 days = 415 popup = yes }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 417 popup = yes }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 1154 popup = yes }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 3487 popup = yes }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_loan.1 days = 2308 popup = yes }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 3124 popup = yes }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_rivera.2 days = 1135 popup = yes }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
+		}
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 509 popup = yes }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 1272 popup = yes }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_abolition.3 days = 1713 popup = yes }   # 1846-10-26 decreto del Cerrito
+		}
+	}
+	else_if = {
+		limit = { has_global_variable = gg_partition_delayed }
+		# split on 1843-08-17
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_contingent.1 days = 1 popup = yes }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_contingent.4 days = 1 popup = yes }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 1 popup = yes }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 607 popup = yes }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 2940 popup = yes }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_loan.1 days = 1761 popup = yes }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 2577 popup = yes }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_rivera.2 days = 588 popup = yes }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
+		}
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 1 popup = yes }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 725 popup = yes }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_abolition.3 days = 1166 popup = yes }   # 1846-10-26 decreto del Cerrito
+		}
+	}
+	else = {
+		# split on 1843-02-16 (historical)
+		c:URU ?= {
+			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_contingent.1 days = 13 popup = yes }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_contingent.4 days = 50 popup = yes }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_contingent.5 days = 52 popup = yes }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_contingent.6 days = 789 popup = yes }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_contingent.8 days = 3122 popup = yes }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_loan.1 days = 1943 popup = yes }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_loan.2 days = 2759 popup = yes }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_rivera.2 days = 770 popup = yes }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
+		}
+		c:CER ?= {
+			trigger_event = { id = gg_loan.3 days = 144 popup = yes }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_loan.4 days = 907 popup = yes }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_abolition.3 days = 1348 popup = yes }   # 1846-10-26 decreto del Cerrito
+		}
+	}
+}

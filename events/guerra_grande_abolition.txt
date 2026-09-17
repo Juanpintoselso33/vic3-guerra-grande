@@ -41,9 +41,9 @@ gg_abolition.1 = {
 	type = country_event
 	hidden = yes
 
+	# EN/ES: T6 -- on 12 December 1842 the Cerrito does not exist yet / el Cerrito todavia no existe
 	trigger = {
 		exists = c:URU
-		exists = c:CER
 	}
 
 	immediate = {
@@ -52,10 +52,7 @@ gg_abolition.1 = {
 			c:URU ?= {
 				trigger_event = { id = gg_abolition.2 days = 0 popup = yes }
 			}
-			# 1846.10.26 - the Cerrito's decree, 1414 days later to the day.
-			c:CER ?= {
-				trigger_event = { id = gg_abolition.3 days = 1414 popup = yes }
-			}
+			# EN/ES: T6 -- the Cerrito's decree (1846.10.26) is scheduled by gg_partition_calendar
 		}
 	}
 }
@@ -83,7 +80,6 @@ gg_abolition.2 = {
 
 	trigger = {
 		this = c:URU
-		exists = c:CER
 		NOT = { has_variable = guerra_grande_abolition_settled }
 	}
 
