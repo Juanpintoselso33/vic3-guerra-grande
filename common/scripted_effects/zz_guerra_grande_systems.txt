@@ -12,6 +12,12 @@
 # EN: called once from guerra_grande_on_game_start.
 # ES: se llama una sola vez desde guerra_grande_on_game_start.
 gg_systems_init = {
+	# EN/ES: playtest -- countries kept in globals so journal texts can show their flags
+	#     / paises guardados en globales para mostrar sus banderas en los textos
+	c:ARG ?= { set_global_variable = { name = gg_flag_arg value = this } }
+	c:FRA ?= { set_global_variable = { name = gg_flag_fra value = this } }
+	c:GBR ?= { set_global_variable = { name = gg_flag_gbr value = this } }
+	c:BRZ ?= { set_global_variable = { name = gg_flag_brz value = this } }
 	# EN/ES: patrons, 0-100 / padrinos, 0-100
 	set_global_variable = { name = gg_patron_rosas value = 50 }
 	set_global_variable = { name = gg_patron_francia value = 20 }
