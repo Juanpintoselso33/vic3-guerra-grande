@@ -50,6 +50,7 @@ guerra_grande_on_game_start = {
 			#     primer dia, asi cada decision de 1836-1838 muestra su efecto en padrinos y puntaje.
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).
 			trigger_event = { id = gg_prewar.1 days = 2 popup = yes }     # 1836.01.03 El Moderador
 			trigger_event = { id = gg_prewar.2 days = 74 popup = yes }    # 1836.03.15 Farrapos
@@ -226,5 +227,24 @@ guerra_grande_on_war_end = {
 			}
 		}
 		}
+	}
+}
+
+# EN/ES: playtest 2026-09-17 -- Rivera keeps the presidency through the elections of 1839-1842
+#     / Rivera conserva la presidencia en las elecciones de 1839-1842
+on_election_campaign_end = {
+	on_actions = {
+		guerra_grande_on_election_end
+	}
+}
+
+guerra_grande_on_election_end = {
+	trigger = {
+		c:URU ?= this
+		has_global_variable = gg_rivera_presidency
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+	effect = {
+		trigger_event = { id = gg_phase1.10 days = 1 }
 	}
 }

@@ -494,7 +494,7 @@ gg_powers.17 = {
 	trigger = {
 		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
-		global_var:gg_defensa_line >= 2
+		global_var:gg_defensa_balance > 0
 		NOT = { has_global_variable = gg_rivera_litoral }
 		NOT = { has_global_variable = gg_urquiza_flipped }
 	}
@@ -651,13 +651,7 @@ gg_powers.19 = {
 		# EN: a mission to Paris (Pacheco y Obes): France falls more slowly. Cheaper with his line.
 		# ES: una mision a Paris (Pacheco y Obes): Francia baja mas lento. Mas barata con su linea.
 		set_global_variable = gg_paris_mission
-		if = {
-			limit = { global_var:gg_defensa_line <= 1 }
-			add_treasury = -5000
-		}
-		else = {
-			add_treasury = -15000
-		}
+		add_treasury = -10000
 		ai_chance = { base = 40 }
 	}
 
@@ -668,7 +662,7 @@ gg_powers.19 = {
 		gg_patron_change = { PATRON = brasil DELTA = 15 }
 		set_global_variable = gg_brazil_deal
 		if = {
-			limit = { global_var:gg_defensa_line <= 1 }
+			limit = { global_var:gg_defensa_balance <= 0 }
 			add_treasury = -10000
 		}
 		ai_chance = { base = 40 }
@@ -879,14 +873,14 @@ gg_powers.24 = {
 
 	option = {
 		name = gg_powers.24.b
-		# EN: change the line (Pacheco y Obes <-> Herrera y Obes), at a price in legitimacy.
+		# EN: swing the government (caudillos <-> doctores), at a price in legitimacy.
 		# ES: cambiar la linea, con costo en legitimidad.
 		if = {
-			limit = { global_var:gg_defensa_line <= 1 }
-			gg_defensa_line_set = { LINE = 2 }
+			limit = { global_var:gg_defensa_balance <= 0 }
+			gg_defensa_balance_change = { DELTA = 40 }
 		}
 		else = {
-			gg_defensa_line_set = { LINE = 1 }
+			gg_defensa_balance_change = { DELTA = -40 }
 		}
 		add_modifier = { name = gg_line_change years = 3 is_decaying = yes }
 		ai_chance = { base = 40 }
@@ -1037,7 +1031,7 @@ gg_powers.28 = {
 				NOT = { has_global_variable = gg_peace_cooldown }
 				OR = {
 					global_var:gg_cerrito_balance >= 30
-					global_var:gg_defensa_line >= 2
+					global_var:gg_defensa_balance >= 30
 				}
 			}
 			set_global_variable = gg_peace_offered

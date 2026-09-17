@@ -73,3 +73,24 @@ gg_siege_bar = {
 	min_value = 0
 	max_value = 24
 }
+
+# EN/ES: the two factions' balances (desc = left = positive = doctores) / las dos balanzas
+gg_cerrito_balance_bar = {
+	name = "gg_cerrito_balance_bar"
+	desc = "gg_balance_bar_doctores_desc"
+	second_desc = "gg_balance_bar_caudillos_desc"
+	double_sided_gold = yes
+	start_value = 0
+	min_value = -100
+	max_value = 100
+}
+
+gg_defensa_balance_bar = {
+	name = "gg_defensa_balance_bar"
+	desc = "gg_balance_bar_doctores_desc"
+	second_desc = "gg_balance_bar_caudillos_desc"
+	double_sided_gold = yes
+	start_value = 0
+	min_value = -100
+	max_value = 100
+}

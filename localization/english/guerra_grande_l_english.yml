@@ -15,8 +15,8 @@
  je_guerra_grande:0 "The Guerra Grande"
  je_guerra_grande_desc:0 "Two ribbons, two governments, one country. For eight years the Republic was crossed from north to south by Uruguayan, French, Basque, Italian and Argentine armies, split between Oribe's Cerrito Government and the Defensa Government, where Joaquín Suárez served eight years as interim president.\n\n#b How it ends:#! the Defensa negotiates if its war support runs out, if the siege reaches 24 months or if the blancos lead by 10. The Cerrito negotiates if its war support runs out, if half its countryside is occupied or if the colorados lead by 10. From 1851, half is enough. If nothing closes, the powers may impose their own peace.\n\n#b When the Republic splits,#! the side ahead arms one more battalion for every two points (up to eight). Neither Argentina nor Brazil joins as a belligerent. It fails if a foreign power takes Montevideo."
  je_guerra_grande_reason:0 "Blancos and colorados fight over the Republic."
- je_guerra_grande_status_factions:0 "@intelligentsia! #b Balance of the blanco government:#! #V [GetGlobalVariable('gg_cerrito_balance').GetValue|v0]#! (−100 caudillos, 100 doctores)"
- je_guerra_grande_status_siege:0 "@armed_forces! #b Defensa:#! line #V [GetGlobalVariable('gg_defensa_line').GetValue|v0]#! (1 resist, 2 negotiate)  ·  @intelligentsia! #b Cerrito:#! balance #V [GetGlobalVariable('gg_cerrito_balance').GetValue|v0]#!"
+ je_guerra_grande_status_factions:0 "There is no war yet: every decision of these years adds to one side, and the bar already counts it."
+ je_guerra_grande_status_siege:0 "Two governments: the #R Defensa#! in Montevideo and the #blue_value Cerrito#! in the countryside."
  je_guerra_grande_complete_tt:0 "Only one of the two governments is left standing."
 
 # Progress bar

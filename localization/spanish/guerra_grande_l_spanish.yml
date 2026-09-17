@@ -15,8 +15,8 @@
  je_guerra_grande:0 "La Guerra Grande"
  je_guerra_grande_desc:0 "Dos divisas, dos gobiernos, un solo país. Durante ocho años la República estuvo recorrida de norte a sur por ejércitos orientales, franceses, vascos, italianos y argentinos, partida entre el Gobierno del Cerrito de Oribe y el Gobierno de la Defensa, donde Joaquín Suárez fue presidente interino durante ocho años.\n\n#b Cómo termina:#! la Defensa negocia si pierde el apoyo a la guerra, si el asedio llega a 24 meses o si los blancos le sacan 10 de puntaje. El Cerrito negocia si pierde el apoyo, si le ocupan la mitad de la campaña o si los colorados le sacan 10. Desde 1851 alcanza con la mitad. Si nada cierra, las potencias pueden imponer su paz.\n\n#b Al partirse la República,#! el que vaya adelante arma un batallón más por cada dos puntos (hasta ocho). Ni la Argentina ni el Brasil entran como beligerantes. Fracasa si una potencia extranjera se queda con Montevideo."
  je_guerra_grande_reason:0 "Blancos y colorados se disputan la República."
- je_guerra_grande_status_factions:0 "@intelligentsia! #b Balanza del gobierno blanco:#! #V [GetGlobalVariable('gg_cerrito_balance').GetValue|v0]#! (−100 caudillos, 100 doctores)"
- je_guerra_grande_status_siege:0 "@armed_forces! #b Defensa:#! línea #V [GetGlobalVariable('gg_defensa_line').GetValue|v0]#! (1 resistir, 2 negociar)  ·  @intelligentsia! #b Cerrito:#! balanza #V [GetGlobalVariable('gg_cerrito_balance').GetValue|v0]#!"
+ je_guerra_grande_status_factions:0 "Todavía no hay guerra: cada decisión de estos años suma para un bando, y la barra ya la cuenta."
+ je_guerra_grande_status_siege:0 "Dos gobiernos: la #R Defensa#! en Montevideo y el #blue_value Cerrito#! en la campaña."
  je_guerra_grande_complete_tt:0 "Queda en pie uno solo de los dos gobiernos."
 
 # Barra de progreso

@@ -20,7 +20,7 @@ gg_systems_init = {
 	set_global_variable = { name = gg_patron_urquiza value = 40 }
 	# EN: the Defensa's line: 0 = no Defensa yet, 1 = Pacheco y Obes, 2 = Herrera y Obes.
 	# ES: la linea de la Defensa: 0 = todavia no hay Defensa, 1 = Pacheco y Obes, 2 = Herrera y Obes.
-	set_global_variable = { name = gg_defensa_line value = 0 }
+	set_global_variable = { name = gg_defensa_balance value = 0 }
 	# EN: the Cerrito's balance, -100 (caudillos) to 100 (doctores).
 	# ES: la balanza del Cerrito, -100 (caudillos) a 100 (doctores).
 	set_global_variable = { name = gg_cerrito_balance value = 0 }
@@ -86,24 +86,26 @@ gg_patron_change = {
 	}
 }
 
-# EN: usage: gg_defensa_line_set = { LINE = 2 }  (1 = Pacheco y Obes, 2 = Herrera y Obes)
-# ES: uso: gg_defensa_line_set = { LINE = 2 }  (1 = Pacheco y Obes, 2 = Herrera y Obes)
-gg_defensa_line_set = {
-	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+# EN: usage: gg_defensa_balance_change = { DELTA = 30 }  (positive = towards the doctores:
+#     Herrera y Obes, Pacheco y Obes, Suarez; negative = towards the caudillos: Rivera, Flores, Diaz).
+#     Replaces the old Pacheco/Herrera line (playtest review 2026-09-17, Juan's decision).
+# ES: uso: gg_defensa_balance_change = { DELTA = 30 }  (positivo = hacia los doctores; negativo =
+#     hacia los caudillos). Reemplaza la vieja linea Pacheco/Herrera.
+gg_defensa_balance_change = {
 	custom_tooltip = {
-		text = gg_tt_line_$LINE$
-		set_global_variable = { name = gg_defensa_line value = $LINE$ }
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_LINE $LINE$"
-		# EN/ES: T9, FG-1 -- line 1 is Pacheco y Obes's / la linea 1 es la de Pacheco y Obes
+		text = gg_tt_dbalance_$DELTA$
+		change_global_variable = { name = gg_defensa_balance add = $DELTA$ }
 		if = {
-			limit = { global_var:gg_defensa_line <= 1 }
-			c:URU ?= {
-				random_scope_character = {
-					limit = { has_template = URU_gg_melchor_pacheco_y_obes }
-					set_as_interest_group_leader = yes
-				}
-			}
+			limit = { global_var:gg_defensa_balance > 100 }
+			set_global_variable = { name = gg_defensa_balance value = 100 }
 		}
+		else_if = {
+			limit = { global_var:gg_defensa_balance < -100 }
+			set_global_variable = { name = gg_defensa_balance value = -100 }
+		}
+		set_global_variable = gg_defensa_balance_started
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_DBALANCE $DELTA$"
+		je:je_gg_factions ?= { set_bar_progress = { name = gg_defensa_balance_bar value = global_var:gg_defensa_balance } }
 	}
 }
 
@@ -123,6 +125,7 @@ gg_cerrito_balance_change = {
 			set_global_variable = { name = gg_cerrito_balance value = -100 }
 		}
 		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BALANCE $DELTA$"
+	je:je_gg_factions ?= { set_bar_progress = { name = gg_cerrito_balance_bar value = global_var:gg_cerrito_balance } }
 	}
 }
 

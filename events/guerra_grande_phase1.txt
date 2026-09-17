@@ -36,6 +36,19 @@ gg_phase1.9 = {
 
 	option = {
 		name = gg_phase1.9.a
+		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
+		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
+		custom_tooltip = gg_oribe_exile_tt
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+				}
+			}
+			exile_character = yes
+		}
+		set_global_variable = gg_rivera_presidency
 		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
 		if = {
 			limit = { has_global_variable = gg_palmar_avoided }
@@ -56,6 +69,19 @@ gg_phase1.9 = {
 
 	option = {
 		name = gg_phase1.9.b
+		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
+		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
+		custom_tooltip = gg_oribe_exile_tt
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+				}
+			}
+			exile_character = yes
+		}
+		set_global_variable = gg_rivera_presidency
 		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
 		if = {
 			limit = { has_global_variable = gg_palmar_avoided }
@@ -566,4 +592,31 @@ gg_phase1.8 = {
 		ai_chance = { base = 40 }
 	}
 
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_phase1.10 -- hidden. Rivera's presidency survives the elections until the split: the
+#     Assembly elected him on 1 March 1839 and Suarez succeeded him in 1843. The blancos can still
+#     win seats (the government's groups), but not the presidency. Fired the day after a campaign ends.
+# ES: gg_phase1.10 -- oculto. La presidencia de Rivera sobrevive a las elecciones hasta la particion:
+#     la Asamblea lo eligio el 1 de marzo de 1839 y Suarez lo sucedio en 1843. Los blancos pueden
+#     ganar bancas, no la presidencia.
+# -------------------------------------------------------------------------------------------------
+gg_phase1.10 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:URU ?= this
+		has_global_variable = gg_rivera_presidency
+		NOT = { has_global_variable = guerra_grande_split_done }
+		any_scope_character = { has_template = URU_Fructuoso_Rivera }
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = { has_template = URU_Fructuoso_Rivera }
+			set_character_as_ruler = yes
+		}
+	}
 }

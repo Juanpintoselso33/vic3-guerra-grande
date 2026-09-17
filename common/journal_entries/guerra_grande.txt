@@ -244,6 +244,16 @@ je_guerra_grande = {
 							}
 						}
 					}
+					# EN/ES: review -- the same for the Defensa's caudillos / lo mismo para los caudillos de la Defensa
+					if = {
+						limit = { global_var:gg_defensa_balance <= -30 }
+						c:URU ?= {
+							every_scope_war = {
+								limit = { gg_is_the_war = yes }
+								add_war_war_support = { target = c:URU value = 2 }
+							}
+						}
+					}
 					# EN/ES: T7, FG-2 -- with the caudillos in charge, the siege holds / con los caudillos, el sitio aguanta
 					if = {
 						limit = { global_var:gg_cerrito_balance <= -30 }

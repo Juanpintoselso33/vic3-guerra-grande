@@ -30,6 +30,7 @@ guerra_grande.1 = {
 			limit = { NOT = { has_journal_entry = je_guerra_grande } }
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			je:je_guerra_grande ?= {
 				add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
 			}
@@ -140,6 +141,19 @@ guerra_grande.2 = {
 	# Historical: Oribe resigns and sails to Buenos Aires, and Rivera takes the government.
 	option = {
 		name = guerra_grande.2.a
+		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
+		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
+		custom_tooltip = gg_oribe_exile_tt
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+				}
+			}
+			exile_character = yes
+		}
+		set_global_variable = gg_rivera_presidency
 		# EN/ES: F0-7 b -- France spared Oribe's flotilla / Francia no toco la flotilla de Oribe
 		if = {
 			limit = { has_global_variable = gg_french_deal_1838 }
@@ -461,6 +475,7 @@ guerra_grande.3 = {
 			#     esto la barra no se movia y ninguna batalla contaba.
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 			create_diplomatic_play = {
 				name = guerra_grande_play
@@ -834,13 +849,13 @@ guerra_grande.3 = {
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
 		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
 		if = {
-			limit = { global_var:gg_defensa_line <= 0 }
+			limit = { NOT = { has_global_variable = gg_defensa_balance_started } }
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
-				gg_defensa_line_set = { LINE = 1 }
+				gg_defensa_balance_change = { DELTA = -20 }
 			}
 			else = {
-				gg_defensa_line_set = { LINE = 2 }
+				gg_defensa_balance_change = { DELTA = 20 }
 			}
 		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
@@ -871,6 +886,7 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 		if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 		ai_chance = {
 			base = 80
@@ -1013,6 +1029,7 @@ guerra_grande.3 = {
 			set_capital = STATE_MONTEVIDEO
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 			add_modifier = {
 				name = guerra_grande_walls_of_montevideo
@@ -1386,13 +1403,13 @@ guerra_grande.3 = {
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
 		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
 		if = {
-			limit = { global_var:gg_defensa_line <= 0 }
+			limit = { NOT = { has_global_variable = gg_defensa_balance_started } }
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
-				gg_defensa_line_set = { LINE = 1 }
+				gg_defensa_balance_change = { DELTA = -20 }
 			}
 			else = {
-				gg_defensa_line_set = { LINE = 2 }
+				gg_defensa_balance_change = { DELTA = 20 }
 			}
 		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
@@ -1423,6 +1440,7 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 		if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 		ai_chance = {
 			base = 20
