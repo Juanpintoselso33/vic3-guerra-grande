@@ -44,3 +44,89 @@ guerra_grande_play_is_allowed = {
 gg_sea_open = {
 	gg_sea_power >= 60
 }
+
+# EN: T2. War scope: this is the Guerra Grande -- one government leads each side. Same pattern as
+#     vanilla common/ideologies/01_character_ideologies.txt:2628 (attacker_warleader ?= {...}).
+#     Marks, not tags, so it survives the change_tag of guerra_grande.3.b.
+# ES: T2. Scope de guerra: esta es la Guerra Grande -- un gobierno lidera cada bando. Mismo patron
+#     que vanilla. Por marca y no por tag, asi sobrevive al change_tag de guerra_grande.3.b.
+gg_is_the_war = {
+	OR = {
+		AND = {
+			attacker_warleader ?= { has_variable = guerra_grande_cerrito_government }
+			defender_warleader ?= { has_variable = guerra_grande_defensa_government }
+		}
+		AND = {
+			attacker_warleader ?= { has_variable = guerra_grande_defensa_government }
+			defender_warleader ?= { has_variable = guerra_grande_cerrito_government }
+		}
+	}
+}
+
+# EN: T2, arbiter (to-be.md section 3). The Cerrito is ripe for a peace dictated by the Defensa:
+#     its war support is spent, half its countryside is occupied, or the colorados lead by ten.
+#     From 1851 the war is tired and every bar is halved (FA-2). Values provisional until T10.
+# ES: T2, arbitro. El Cerrito esta maduro para una paz de la Defensa: se le acabo el apoyo a la
+#     guerra, tiene ocupada la mitad de su campania, o los colorados le sacan diez. Desde 1851 la
+#     guerra esta cansada y cada exigencia baja a la mitad. Valores provisorios hasta T10.
+gg_cerrito_ripe = {
+	OR = {
+		guerra_grande_colorado_lead >= 10
+		AND = {
+			year >= 1851
+			guerra_grande_colorado_lead >= 5
+		}
+		c:CER ?= {
+			OR = {
+				enemy_occupation >= 0.5
+				AND = {
+					year >= 1851
+					enemy_occupation >= 0.3
+				}
+				any_scope_war = {
+					gg_is_the_war = yes
+					OR = {
+						has_war_support = { target = c:CER value <= 0 }
+						AND = {
+							year >= 1851
+							has_war_support = { target = c:CER value <= 25 }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# EN: T2, arbiter. The Defensa is ripe for a peace dictated by the Cerrito: its war support is
+#     spent, the sea has been shut for 24 months, or the blancos lead by ten. Never occupation:
+#     Montevideo is a single province and falling is capitulating (to-be.md, engine facts).
+# ES: T2, arbitro. La Defensa esta madura para una paz del Cerrito: se le acabo el apoyo, lleva 24
+#     meses con el mar cerrado, o los blancos le sacan diez. Nunca por ocupacion: Montevideo es una
+#     sola provincia y caer es capitular.
+gg_defensa_ripe = {
+	OR = {
+		guerra_grande_blanco_lead >= 10
+		AND = {
+			year >= 1851
+			guerra_grande_blanco_lead >= 5
+		}
+		global_var:gg_siege_months >= 24
+		AND = {
+			year >= 1851
+			global_var:gg_siege_months >= 12
+		}
+		c:URU ?= {
+			any_scope_war = {
+				gg_is_the_war = yes
+				OR = {
+					has_war_support = { target = c:URU value <= 0 }
+					AND = {
+						year >= 1851
+						has_war_support = { target = c:URU value <= 25 }
+					}
+				}
+			}
+		}
+	}
+}

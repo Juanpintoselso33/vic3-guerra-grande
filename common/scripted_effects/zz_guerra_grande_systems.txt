@@ -29,6 +29,8 @@ gg_systems_init = {
 	# ES: T5 -- los eventos de la fase 0 puntuan antes de que Carpinteria cree el journal, asi que
 	#     el puntaje arranca aca; el immediate del journal solo lo pone si todavia falta.
 	set_global_variable = { name = guerra_grande_blanco_score value = 0 }
+	# EN/ES: T2, C15 -- months of closed sea / meses de mar cerrado
+	set_global_variable = { name = gg_siege_months value = 0 }
 	set_global_variable = { name = guerra_grande_colorado_score value = 0 }
 }
 

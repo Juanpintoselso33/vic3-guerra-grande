@@ -180,11 +180,33 @@ je_guerra_grande = {
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
 				# EN/ES: T1, C1 -- the peace is no longer scheduled here: the weekly arbiter does it.
+				# EN: T2, C15 -- the siege counter. The sea counts as shut while the Defensa carries the
+				#     river blockade and no squadron came; T3b replaces this with gg_sea_open. The
+				#     20-day tick makes it count once a month however many times this pulse runs.
+				# ES: T2, C15 -- el contador del asedio. El mar cuenta como cerrado mientras la Defensa
+				#     tiene el bloqueo fluvial y no vino ninguna escuadra; T3b lo cambia por
+				#     gg_sea_open. La marca de 20 dias hace que cuente una vez por mes, corra este
+				#     pulso las veces que corra.
+				if = {
+					limit = { NOT = { has_global_variable = gg_siege_tick } }
+					set_global_variable = { name = gg_siege_tick days = 20 }
+					if = {
+						limit = {
+							c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
+							NOT = { has_global_variable = guerra_grande_foreign_intervention }
+						}
+						change_global_variable = { name = gg_siege_months add = 1 }
+					}
+					else_if = {
+						limit = { global_var:gg_siege_months > 0 }
+						change_global_variable = { name = gg_siege_months add = -1 }
+					}
+				}
 			}
 		}
 	}
 
-	# EN: T1, C2 -- the weekly arbiter (score only; T2 adds war support, occupation and siege).
+	# EN: T1/T2, C2 -- the weekly arbiter: score, war support, the Cerrito's occupation and the siege.
 	#     The only place that offers a negotiated peace (I2). It sets gg_peace_offered in the
 	#     same effect that schedules the menu (I6), so no other path can offer a second one.
 	#     From 1851 the war is tired and half the lead is enough (FA-2).
@@ -204,16 +226,9 @@ je_guerra_grande = {
 					exists = c:CER
 					exists = c:URU
 				}
+				# EN/ES: T2 -- who is ripe (common/scripted_triggers) / quien esta maduro
 				if = {
-					limit = {
-						OR = {
-							guerra_grande_blanco_lead >= 10
-							AND = {
-								year >= 1851
-								guerra_grande_blanco_lead >= 5
-							}
-						}
-					}
+					limit = { gg_defensa_ripe = yes }
 					set_global_variable = gg_peace_offered
 					random_country = {
 						limit = { has_variable = guerra_grande_cerrito_government }
@@ -221,15 +236,7 @@ je_guerra_grande = {
 					}
 				}
 				else_if = {
-					limit = {
-						OR = {
-							guerra_grande_colorado_lead >= 10
-							AND = {
-								year >= 1851
-								guerra_grande_colorado_lead >= 5
-							}
-						}
-					}
+					limit = { gg_cerrito_ripe = yes }
 					set_global_variable = gg_peace_offered
 					random_country = {
 						limit = { has_variable = guerra_grande_defensa_government }

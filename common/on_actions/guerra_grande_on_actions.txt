@@ -113,6 +113,17 @@ guerra_grande_battle_score = {
 	}
 
 	effect = {
+		# EN: T2, C3 -- the score and the real war move together: every battle won costs the loser
+		#     war support in the Guerra Grande. -5 is provisional until T10.
+		# ES: T2, C3 -- el puntaje y la guerra real se mueven juntos: cada batalla ganada le cuesta
+		#     apoyo a la guerra al perdedor. El -5 es provisorio hasta T10.
+		every_scope_war = {
+			limit = { gg_is_the_war = yes }
+			add_war_war_support = {
+				target = scope:enemy_country
+				value = -5
+			}
+		}
 		if = {
 			limit = {
 				c:CER ?= this
