@@ -161,7 +161,8 @@ guerra_grande.2 = {
 		}
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		gg_score_colorado = { AMOUNT = 3 }
+		# EN/ES: balance 2026-09-17 -- +3 -> +1: Palmar already paid for the defeat / Palmar ya pago la derrota
+		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		set_variable = guerra_grande_colorado_path
 		# EN: a resignation has to actually remove him. set_ruling_interest_groups replaces the
@@ -280,12 +281,43 @@ guerra_grande.3 = {
 			#     blanca. El despachador le da cada decreto al gobierno que lo firmo, y 1400 dias
 			#     caen justo en el 12.12.1842 (1401 caia un dia tarde).
 			# EN/ES: T6 -- the abolitions are scheduled from on_game_start and gg_partition_calendar
+			# EN: balance 2026-09-17 -- the war of 1836-1842 is not the siege. The split keeps half of
+			#     the lead (rounded down), so the first war tilts the second without deciding it. It
+			#     runs here, before the options read the lead for the split's troops.
+			# ES: la guerra de 1836-1842 no es el sitio. La particion deja la mitad de la ventaja
+			#     (redondeando para abajo): la primera guerra inclina la segunda sin decidirla. Va aca,
+			#     antes de que las opciones lean la ventaja para las tropas de la particion.
+			if = {
+				limit = { guerra_grande_blanco_lead >= 2 }
+				set_global_variable = { name = gg_split_trim_amount value = gg_split_trim }
+				set_global_variable = gg_split_trim_blancos
+				change_global_variable = { name = guerra_grande_blanco_score subtract = global_var:gg_split_trim_amount }
+			}
+			else_if = {
+				limit = { guerra_grande_colorado_lead >= 2 }
+				set_global_variable = { name = gg_split_trim_amount value = gg_split_trim }
+				set_global_variable = gg_split_trim_colorados
+				change_global_variable = { name = guerra_grande_colorado_score subtract = global_var:gg_split_trim_amount }
+			}
+			# EN/ES: also resyncs a bar that drifted while clamped at -10/10 / resincroniza la barra si se trabo en el tope
+			je:je_guerra_grande ?= {
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+			}
 		}
 	}
 
 	option = {
 		name = guerra_grande.3.a
 		default_option = yes
+		# EN/ES: balance 2026-09-17 -- the halved lead, shown / la ventaja reducida, a la vista
+		if = {
+			limit = { has_global_variable = gg_split_trim_blancos }
+			custom_tooltip = gg_split_trim_blancos_tt
+		}
+		else_if = {
+			limit = { has_global_variable = gg_split_trim_colorados }
+			custom_tooltip = gg_split_trim_colorados_tt
+		}
 		# EN: you stay in Montevideo. The Cerrito secedes with the countryside and Oribe goes
 		#     with it -- the character is moved, never cloned.
 		# ES: te quedas en Montevideo. El Cerrito se separa con la campania y Oribe se va con
@@ -907,6 +939,15 @@ guerra_grande.3 = {
 	#     separa con ese tag y la plaza amurallada, asi que todo lo que apunta a c:URU sigue bien.
 	option = {
 		name = guerra_grande.3.b
+		# EN/ES: balance 2026-09-17 -- the halved lead, shown / la ventaja reducida, a la vista
+		if = {
+			limit = { has_global_variable = gg_split_trim_blancos }
+			custom_tooltip = gg_split_trim_blancos_tt
+		}
+		else_if = {
+			limit = { has_global_variable = gg_split_trim_colorados }
+			custom_tooltip = gg_split_trim_colorados_tt
+		}
 		trigger = {
 			has_variable = guerra_grande_blanco_path
 		}

@@ -465,7 +465,8 @@ gg_prewar.9 = {
 		default_option = yes
 		# EN: historical: Ignacio Oribe gives battle at Palmar and loses the Republic.
 		# ES: lo historico: Ignacio Oribe da batalla en Palmar y pierde la Republica.
-		gg_score_colorado = { AMOUNT = 3 }
+		# EN/ES: balance 2026-09-17 -- +3 -> +2: the fall of Oribe already counts this defeat / la caida ya la cuenta
+		gg_score_colorado = { AMOUNT = 2 }
 		ai_chance = { base = 50 }
 	}
 

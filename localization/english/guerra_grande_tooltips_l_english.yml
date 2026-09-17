@@ -386,3 +386,5 @@
  gg_intro.4.a:0 "Open «The Great Siege»."
  gg_cerrito_balance_bar_desc:0 "#blue_value Blancos#! #V [GetGlobalVariable('gg_cerrito_balance').GetValue|v0]#!   @armed_forces! caudillos"
  gg_defensa_balance_bar_desc:0 "#R Colorados#! #V [GetGlobalVariable('gg_defensa_balance').GetValue|v0]#!   @armed_forces! caudillos"
+ gg_split_trim_blancos_tt:0 "@battalions! A new war begins: the #blue_value blancos'#! lead is cut in half (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! score)."
+ gg_split_trim_colorados_tt:0 "@battalions! A new war begins: the #R colorados'#! lead is cut in half (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! score)."
