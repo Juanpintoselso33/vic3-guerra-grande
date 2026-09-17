@@ -42,7 +42,7 @@
 #     bar, so the war bar moves to double_sided_two_spains (journal_entry.gui: gold progress on the
 #     LEFT, celeste on the right). The blancos keep their celeste, on the right; the colorados take
 #     the gold left, so the bar now reads the COLORADO lead (gg_war_score_bar_value). The carlist end
-#     icons are replaced in gfx/interface/progressbar by the two parties' interest-group icons.
+#     icons are replaced in gfx/interface/progressbar by the two parties' flags (CREDITS.md).
 # ES: eleccion de Juan -- double_sided_gold pasa a la barra de los blancos en «Doctores y caudillos»,
 #     asi que la de la guerra pasa a double_sided_two_spains (dorado a la IZQUIERDA, celeste a la
 #     derecha). Los blancos conservan el celeste, a la derecha; los colorados quedan en el dorado de
