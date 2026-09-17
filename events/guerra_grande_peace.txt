@@ -50,7 +50,26 @@ gg_peace.1 = {
 	placement = ROOT
 
 	title = gg_peace.1.t
-	desc = gg_peace.1.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_peace.1.desc_withdraws
+				trigger = { has_global_variable = gg_oribe_withdraws }
+			}
+			triggered_desc = {
+				desc = gg_peace.1.desc_imperial
+				trigger = { has_global_variable = gg_imperial_pledged }
+			}
+			triggered_desc = {
+				desc = gg_peace.1.desc_sold
+				trigger = { has_global_variable = gg_reunification_pledged }
+			}
+			triggered_desc = {
+				desc = gg_peace.1.desc
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_peace.1.flav
 
 	# Adolphe d'Hastrel, "The Roads, Montevideo" (1840), public domain.
@@ -89,6 +108,27 @@ gg_peace.1 = {
 				save_scope_as = gg_peace_loser
 			}
 		}
+		# EN/ES: T8, F1b -- Oribe leaves with the Argentine division under the squadrons' guarantee
+		if = {
+			limit = { has_global_variable = gg_oribe_withdraws }
+			scope:gg_peace_loser ?= {
+				every_scope_character = {
+					limit = {
+						OR = {
+							has_template = URU_Manuel_Oribe
+							has_template = URU_Ignacio_Oribe
+						}
+					}
+					exile_character = yes
+				}
+			}
+			add_modifier = { name = gg_peace_oribe_withdrew years = 5 is_decaying = yes }
+		}
+		# EN/ES: T8, FE-12 -- "Oribe sold the country": the Defensa's banner / la bandera de la Defensa
+		if = {
+			limit = { has_global_variable = gg_reunification_pledged }
+			add_modifier = { name = gg_peace_oribe_sold_country years = 10 is_decaying = yes }
+		}
 	}
 
 	# EN: a -- THE FORMULA. 8 October 1851, the camp on the Pantanoso. The clause is the one that
@@ -105,6 +145,8 @@ gg_peace.1 = {
 	#     le pidio garantias a Urquiza, Urquiza las dio, y se quedo en su quinta hasta 1857.
 	option = {
 		name = gg_peace.1.a
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 		default_option = yes
@@ -175,6 +217,8 @@ gg_peace.1 = {
 	#     este lado. Esta opcion es esa diferencia, tomada aca.
 	option = {
 		name = gg_peace.1.b
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -258,7 +302,12 @@ gg_peace.1 = {
 	option = {
 		name = gg_peace.1.c
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
-		trigger = { global_var:gg_patron_brasil > 0 }
+		trigger = {
+			OR = {
+				global_var:gg_patron_brasil > 0
+				has_global_variable = gg_imperial_pledged
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -332,7 +381,10 @@ gg_peace.1 = {
 	option = {
 		name = gg_peace.1.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
-		trigger = { gg_sea_power > 0 }
+		trigger = {
+			gg_sea_power > 0
+			NOT = { has_global_variable = gg_imperial_pledged }
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -383,6 +435,8 @@ gg_peace.1 = {
 	#     hombres. Rosas cayo en Caseros el 3 de febrero de 1852.
 	option = {
 		name = gg_peace.1.e
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -433,6 +487,122 @@ gg_peace.1 = {
 		}
 	}
 
+	# EN: g -- T8, FE-13. VASSAL OF THE EMPIRE. Lamas's mission paid for with the thing the five
+	#     treaties only hinted at: the Empire guarantees the Republic by holding it.
+	# ES: g -- T8, FE-13. VASALLO DEL IMPERIO. La mision de Lamas pagada con lo que los cinco
+	#     tratados solo insinuaban: el Imperio garantiza la Republica teniendola.
+	option = {
+		name = gg_peace.1.g
+		trigger = { has_global_variable = gg_imperial_pledged }
+		set_global_variable = gg_peace_settled
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		c:BRZ ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = vassal
+			}
+			change_relations = {
+				country = root
+				value = 80
+			}
+		}
+		c:ARG ?= {
+			change_relations = {
+				country = root
+				value = -60
+			}
+		}
+		add_modifier = {
+			name = gg_peace_imperial_vassal
+			years = 20
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_no_victors
+		}
+
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	# EN: h -- T8, F15. THE PROVINCIA CISPLATINA. Nobody in the Defensa asked for this; it is the
+	#     outer limit of depending on the Empire. Uruguay stays a vassal (vanilla already names a
+	#     Brazilian subject "Cisplatina"), and the incorporation is left to vanilla's own annex
+	#     action. No reversal of the mod's own.
+	# ES: h -- T8, F15. LA PROVINCIA CISPLATINA. Nadie en la Defensa lo pidio: es el limite de
+	#     depender del Imperio. El Uruguay queda vasallo (vanilla ya llama "Cisplatina" a un
+	#     subdito del Brasil), y la incorporacion queda a la accion de anexion de vanilla. Sin
+	#     reversion propia del mod.
+	option = {
+		name = gg_peace.1.h
+		trigger = {
+			has_global_variable = gg_imperial_pledged
+			global_var:gg_patron_brasil >= 60
+		}
+		set_global_variable = gg_peace_settled
+
+		custom_tooltip = gg_peace_cisplatina_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		c:BRZ ?= {
+			create_diplomatic_pact = {
+				country = root
+				type = vassal
+			}
+			change_relations = {
+				country = root
+				value = 100
+			}
+			c:ARG ?= {
+				change_relations = {
+					country = prev
+					value = -100
+				}
+			}
+			c:GBR ?= {
+				change_relations = {
+					country = prev
+					value = -40
+				}
+			}
+			c:FRA ?= {
+				change_relations = {
+					country = prev
+					value = -40
+				}
+			}
+		}
+		add_modifier = {
+			name = gg_peace_cisplatina
+			years = 30
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+
+		hidden_effect = {
+			set_global_variable = gg_peace_punished
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
 	# EN: f -- NO TERMS. Montevideo did this for real: the armistice negotiated through admiral Le
 	#     Predour held from May 1849 to August 1851, two years and three months in which besiegers
 	#     and besieged looked at each other without firing a shot, waiting on a vote of the French
@@ -444,7 +614,10 @@ gg_peace.1 = {
 	option = {
 		name = gg_peace.1.f
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
-		trigger = { NOT = { has_global_variable = gg_white_peace } }
+		trigger = {
+			NOT = { has_global_variable = gg_white_peace }
+			NOT = { has_global_variable = gg_oribe_withdraws }
+		}
 
 		add_modifier = {
 			name = guerra_grande_divided_country
@@ -497,7 +670,18 @@ gg_peace.2 = {
 	placement = ROOT
 
 	title = gg_peace.2.t
-	desc = gg_peace.2.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_peace.2.desc_pledged
+				trigger = { has_global_variable = gg_reunification_pledged }
+			}
+			triggered_desc = {
+				desc = gg_peace.2.desc
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_peace.2.flav
 
 	# Adolphe d'Hastrel, "The Roads, Montevideo" (1840), public domain.
@@ -560,6 +744,8 @@ gg_peace.2 = {
 	#     acepten el pliego entero.
 	option = {
 		name = gg_peace.2.a
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 		default_option = yes
@@ -623,6 +809,8 @@ gg_peace.2 = {
 	#     extranjeras se van.
 	option = {
 		name = gg_peace.2.b
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -696,6 +884,8 @@ gg_peace.2 = {
 	#     leyenda es propaganda colorada y este archivo lo dice; el parte a Rosas no lo es.
 	option = {
 		name = gg_peace.2.c
+		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
+		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -789,7 +979,12 @@ gg_peace.2 = {
 	option = {
 		name = gg_peace.2.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
-		trigger = { global_var:gg_patron_rosas > 0 }
+		trigger = {
+			OR = {
+				global_var:gg_patron_rosas > 0
+				has_global_variable = gg_reunification_pledged
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -868,7 +1063,12 @@ gg_peace.2 = {
 	option = {
 		name = gg_peace.2.e
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
-		trigger = { global_var:gg_patron_rosas > 0 }
+		trigger = {
+			OR = {
+				global_var:gg_patron_rosas > 0
+				has_global_variable = gg_reunification_pledged
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -919,6 +1119,61 @@ gg_peace.2 = {
 
 		ai_chance = {
 			base = 10
+		}
+	}
+
+	# EN: g -- T8, F14. BACK INTO THE CONFEDERATION, AS ONE MORE PROVINCE. The offer of 1845, taken
+	#     all the way. The Banda Oriental was one of the United Provinces and shares the federal
+	#     cause, so it enters directly, with a Provincia Oriental autonomy on its states. This is
+	#     the end of the Republic. There is no document showing Oribe wanted it.
+	# ES: g -- T8, F14. DE VUELTA A LA CONFEDERACION, COMO UNA PROVINCIA MAS. La oferta de 1845,
+	#     llevada hasta el final. La Banda Oriental fue una de las Provincias Unidas y comparte la
+	#     causa federal, asi que entra directo, con una autonomia de Provincia Oriental en sus
+	#     estados. Es el fin de la Republica. No hay documento que muestre que Oribe lo quisiera.
+	option = {
+		name = gg_peace.2.g
+		trigger = {
+			has_global_variable = gg_reunification_pledged
+			global_var:gg_patron_rosas >= 60
+			exists = c:ARG
+		}
+		set_global_variable = gg_peace_settled
+		set_global_variable = gg_reincorporated
+
+		custom_tooltip = gg_peace_reincorporation_tt
+
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+
+		every_scope_state = {
+			add_modifier = {
+				name = gg_provincia_oriental
+				years = 30
+			}
+		}
+		c:ARG ?= {
+			c:BRZ ?= {
+				change_relations = {
+					country = prev
+					value = -100
+				}
+			}
+			c:GBR ?= {
+				change_relations = {
+					country = prev
+					value = -50
+				}
+			}
+			c:FRA ?= {
+				change_relations = {
+					country = prev
+					value = -50
+				}
+			}
+			annex_with_incorporation = root
+		}
+
+		ai_chance = {
+			base = 5
 		}
 	}
 

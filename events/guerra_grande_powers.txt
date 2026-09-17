@@ -792,7 +792,7 @@ gg_powers.23 = {
 		# ES: pelear con lo que queda (Ignacio Oribe): el ejercito puede deshacerse.
 		random_list = {
 			60 = {
-		c:CER ?= {
+				c:CER ?= {
 					every_scope_war = {
 						limit = { gg_is_the_war = yes }
 						add_war_war_support = { target = c:CER value = -30 }
@@ -800,7 +800,7 @@ gg_powers.23 = {
 				}
 			}
 			40 = {
-		c:CER ?= {
+				c:CER ?= {
 					every_scope_war = {
 						limit = { gg_is_the_war = yes }
 						add_war_war_support = { target = c:CER value = -10 }
@@ -1176,4 +1176,65 @@ gg_powers.31 = {
 		ai_chance = { base = 30 }
 	}
 
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_powers.32 -- T8, FE-13. LAMAS IN RIO (1847-1849). The mirror of gg_loan.4: the Empire hints
+#     at more than an alliance. Accepting brings Brazil early and strong, and ties the Defensa's
+#     peace menu to Brazilian terms.
+# ES: gg_powers.32 -- T8, FE-13. LAMAS EN RIO (1847-1849). El espejo de gg_loan.4: el Imperio
+#     insinua algo mas que una alianza. Aceptar trae al Brasil antes y fuerte, y ata el menu de paz
+#     de la Defensa a condiciones brasileras.
+# -------------------------------------------------------------------------------------------------
+gg_powers.32 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.32.t
+	desc = gg_powers.32.d
+	flavor = gg_powers.32.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_money_maua"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_imperial_pledged }
+	}
+
+	option = {
+		name = gg_powers.32.a
+		custom_tooltip = gg_imperial_pledge_tt
+		set_global_variable = gg_imperial_pledged
+		gg_patron_change = { PATRON = brasil DELTA = 30 }
+		gg_patron_change = { PATRON = britania DELTA = -5 }
+		c:CER ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:CER value = -10 }
+			}
+		}
+		c:ARG ?= {
+			change_relations = { country = ROOT value = -30 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_powers.32.b
+		default_option = yes
+		add_loyalists = {
+			value = small_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		ai_chance = { base = 70 }
+	}
 }

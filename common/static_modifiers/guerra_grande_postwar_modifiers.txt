@@ -1,0 +1,100 @@
+﻿# EN: Modifiers of the new endings and the postwar (T8). Every key is one the game defines.
+# ES: Modificadores de los finales nuevos y la posguerra (T8). Todas las claves las define el juego.
+
+# T8, FE-13 -- vassal of the Empire / vasallo del Imperio
+gg_peace_imperial_vassal = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.15
+	country_authority_add = 50
+	interest_group_ig_intelligentsia_approval_add = -5
+	country_loan_interest_rate_add = -0.01
+}
+
+# T8, F15 -- the Provincia Cisplatina / la Provincia Cisplatina
+gg_peace_cisplatina = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.30
+	country_legitimacy_base_add = -15
+	state_radicals_from_political_movements_mult = 0.25
+	interest_group_ig_intelligentsia_approval_add = -10
+}
+
+# T8, F14 -- state modifier: the Provincia Oriental's autonomy / autonomia de la Provincia Oriental
+gg_provincia_oriental = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	state_loyalists_from_political_movements_mult = 0.20
+	state_radicals_from_political_movements_mult = -0.10
+	state_tax_waste_add = 0.05
+}
+
+# T8, F1b -- Oribe left with the Argentines / Oribe se fue con los argentinos
+gg_peace_oribe_withdrew = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	interest_group_ig_landowners_pol_str_mult = -0.15
+}
+
+# T8, FE-12 -- "Oribe sold the country" / "Oribe entrego el pais"
+gg_peace_oribe_sold_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 8
+	interest_group_ig_intelligentsia_approval_add = 3
+	interest_group_ig_landowners_pol_str_mult = -0.10
+}
+
+# T8, FX-2 -- nobody recognises the beaten government's debts / nadie reconoce las deudas del vencido
+gg_postwar_unrecognised_debts = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_loan_interest_rate_add = 0.02
+	country_prestige_mult = -0.10
+}
+
+# T8, FX-2 -- state modifier: the beaten side's countryside / la campaña del vencido
+gg_postwar_unrest = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	state_radicals_from_political_movements_mult = 0.30
+	state_turmoil_effects_mult = 0.20
+}
+
+# T8, FX-2 -- a late amnesty / una amnistia tardia
+gg_postwar_late_amnesty = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	country_authority_add = -25
+}
+
+# T8, FX-3 -- the State assumes both governments' debts / el Estado asume las deudas de los dos
+gg_postwar_shared_debts = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_loan_interest_rate_add = 0.01
+	country_legitimacy_base_add = 5
+}
+
+# T8, FX-3 -- only our own debts / solo las deudas propias
+gg_postwar_debts_disowned = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_prestige_mult = -0.10
+	country_legitimacy_base_add = -5
+}
+
+# T8, FX-3 -- an election under European eyes (F12) / una eleccion bajo la mirada europea
+gg_postwar_observed_election = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_influence_add = 10
+}
+
+# T8, FX-2/FX-3 -- the caudillos in government / los caudillos en el gobierno
+gg_postwar_caudillos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+	country_legitimacy_base_add = -5
+}
+
+# T8, FX-3 -- the fusion policy / la politica de fusion
+gg_postwar_fusion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	state_radicals_from_political_movements_mult = -0.20
+	state_loyalists_from_political_movements_mult = 0.10
+	country_legitimacy_base_add = 5
+}

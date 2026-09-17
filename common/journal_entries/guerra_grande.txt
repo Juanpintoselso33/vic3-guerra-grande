@@ -424,6 +424,15 @@ je_guerra_grande = {
 				}
 			}
 		}
+		# EN/ES: T8, C16 -- the postwar, once / la posguerra, una vez
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_postwar_started }
+				NOT = { has_global_variable = gg_reincorporated }
+			}
+			set_global_variable = gg_postwar_started
+			gg_postwar_dispatch = yes
+		}
 		hidden_effect = {
 			remove_global_variable = guerra_grande_open_war
 		}

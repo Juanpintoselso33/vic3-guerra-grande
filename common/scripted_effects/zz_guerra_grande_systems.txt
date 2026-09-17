@@ -280,3 +280,21 @@ gg_urquiza_flip = {
 		trigger_event = { id = gg_powers.23 days = 30 popup = yes }
 	}
 }
+
+# EN: T8, C16 -- the postwar goes to the government left standing (the victor's rule of gg_peace.5).
+# ES: T8, C16 -- la posguerra va al gobierno que quedo (la misma regla que gg_peace.5).
+gg_postwar_dispatch = {
+	if = {
+		limit = {
+			exists = c:CER
+			OR = {
+				NOT = { exists = c:URU }
+				guerra_grande_blanco_lead > 0
+			}
+		}
+		c:CER = { trigger_event = { id = gg_postwar.1 days = 60 } }
+	}
+	else = {
+		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 60 } }
+	}
+}
