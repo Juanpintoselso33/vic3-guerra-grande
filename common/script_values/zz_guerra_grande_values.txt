@@ -69,12 +69,6 @@ gg_rivera_1837_strength = {
 	max = 3
 }
 
-# EN/ES: the same, negative, for the journal bar (colorado moves it down) / lo mismo, en negativo, para la barra.
-gg_rivera_1837_strength_bar = {
-	value = gg_rivera_1837_strength
-	multiply = -1
-}
-
 # EN: T3b, C19. Monthly war-support drain for a side whose patrons fall below 40 of backing:
 #     one point for every 5 missing (negative, ready for add_war_war_support). Provisional (T10).
 # ES: T3b, C19. Drenaje mensual de apoyo a la guerra para el bando cuyos padrinos suman menos de
@@ -126,9 +120,10 @@ gg_split_trim = {
 	round = yes
 }
 
-# EN/ES: the war bar's value, clamped to its range / el valor de la barra, dentro de su rango
+# EN/ES: the war bar's value, clamped to its range. The bar reads the COLORADO lead (colorados on
+#     the left since 2026-09-17) / el valor de la barra; lee la ventaja COLORADA
 gg_war_score_bar_value = {
-	value = guerra_grande_blanco_lead
+	value = guerra_grande_colorado_lead
 	min = -10
 	max = 10
 }

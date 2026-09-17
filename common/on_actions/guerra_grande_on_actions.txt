@@ -146,7 +146,7 @@ guerra_grande_battle_score = {
 				add = 1
 			}
 			je:je_guerra_grande ?= {
-				add_progress = { value = 1 name = guerra_grande_war_score_bar }
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 		else_if = {
@@ -158,7 +158,7 @@ guerra_grande_battle_score = {
 				add = 1
 			}
 			je:je_guerra_grande ?= {
-				add_progress = { value = -1 name = guerra_grande_war_score_bar }
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 	}

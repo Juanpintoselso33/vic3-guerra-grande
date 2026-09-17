@@ -268,7 +268,7 @@ gg_prewar.5 = {
 			text = gg_prewar.5.a_tt
 			change_global_variable = { name = guerra_grande_colorado_score add = gg_rivera_1837_strength }
 			je:je_guerra_grande ?= {
-				add_progress = { value = gg_rivera_1837_strength_bar name = guerra_grande_war_score_bar }
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 		ai_chance = { base = 55 }

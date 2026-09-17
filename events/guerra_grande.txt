@@ -32,7 +32,7 @@ guerra_grande.1 = {
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
 			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			je:je_guerra_grande ?= {
-				add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 		hidden_effect = {

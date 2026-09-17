@@ -41,11 +41,11 @@ gg_systems_init = {
 }
 
 # EN: usage: gg_score_blanco = { AMOUNT = 2 }. AMOUNT must be a positive literal: the colorado
-#     side writes -$AMOUNT$ for the bar, so a negative number or a named value would not parse.
+#     side's tooltip key is built from it, so a negative number or a named value would not resolve.
 #     To take score away from one side, give it to the other. Moves the score, and the journal bar if the
 #     journal already exists (before Carpinteria it does not; .1 syncs the bar when it opens).
 # ES: uso: gg_score_blanco = { AMOUNT = 2 }. AMOUNT tiene que ser un numero positivo escrito tal
-#     cual: el lado colorado escribe -$AMOUNT$ para la barra. Para restarle a un bando, se le suma
+#     cual: la clave del tooltip se arma con el. Para restarle a un bando, se le suma
 #     al otro. Mueve el puntaje, y la barra si el journal ya existe
 #     (antes de Carpinteria no existe; .1 sincroniza la barra al abrirlo).
 gg_score_blanco = {
@@ -54,7 +54,7 @@ gg_score_blanco = {
 		text = gg_tt_score_blanco_$AMOUNT$
 		change_global_variable = { name = guerra_grande_blanco_score add = $AMOUNT$ }
 		je:je_guerra_grande ?= {
-			add_progress = { value = $AMOUNT$ name = guerra_grande_war_score_bar }
+			set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 		}
 	}
 }
@@ -65,7 +65,7 @@ gg_score_colorado = {
 		text = gg_tt_score_colorado_$AMOUNT$
 		change_global_variable = { name = guerra_grande_colorado_score add = $AMOUNT$ }
 		je:je_guerra_grande ?= {
-			add_progress = { value = -$AMOUNT$ name = guerra_grande_war_score_bar }
+			set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 		}
 	}
 }

@@ -82,6 +82,11 @@ je_guerra_grande = {
 
 	on_monthly_pulse = {
 		effect = {
+			# EN/ES: playtest 2026-09-17 -- the bar is read from the score every month, on this
+			#     country's own journal, so it never drifts / la barra se lee del puntaje cada mes
+			scope:journal_entry = {
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+			}
 			# EN/ES: playtest -- keep the two bars in step / mantener las dos barras al dia
 			if = { limit = { NOT = { has_global_variable = gg_debug_intervention_presses } } set_global_variable = { name = gg_debug_intervention_presses value = 0 } }
 			if = { limit = { NOT = { has_global_variable = gg_debug_italian_presses } } set_global_variable = { name = gg_debug_italian_presses value = 0 } }

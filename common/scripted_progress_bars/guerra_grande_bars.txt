@@ -38,12 +38,22 @@
 #     los colorados van a la derecha, una mitad colorada roja es inalcanzable con los cuatro
 #     nombres que trae el binario. Juan eligio conservar el celeste de los blancos antes que mover
 #     el rojo al lado correcto.
+# EN: playtest 2026-09-17 -- Juan's choice: double_sided_gold now belongs to the blancos' factions
+#     bar, so the war bar moves to double_sided_two_spains (journal_entry.gui: gold progress on the
+#     LEFT, celeste on the right). The blancos keep their celeste, on the right; the colorados take
+#     the gold left, so the bar now reads the COLORADO lead (gg_war_score_bar_value). The carlist end
+#     icons are replaced in gfx/interface/progressbar by the two parties' interest-group icons.
+# ES: eleccion de Juan -- double_sided_gold pasa a la barra de los blancos en «Doctores y caudillos»,
+#     asi que la de la guerra pasa a double_sided_two_spains (dorado a la IZQUIERDA, celeste a la
+#     derecha). Los blancos conservan el celeste, a la derecha; los colorados quedan en el dorado de
+#     la izquierda, y la barra lee la ventaja COLORADA. Los iconos carlistas de las puntas se
+#     reemplazan por los de los grupos de cada partido.
 guerra_grande_war_score_bar = {
 	name = "guerra_grande_war_score_bar"
-	desc = "guerra_grande_bar_blancos_desc"
-	second_desc = "guerra_grande_bar_colorados_desc"
+	desc = "guerra_grande_bar_colorados_desc"
+	second_desc = "guerra_grande_bar_blancos_desc"
 
-	double_sided_gold = yes
+	double_sided_two_spains = yes
 
 	start_value = 0
 	min_value = -10
@@ -74,15 +84,17 @@ gg_siege_bar = {
 	max_value = 24
 }
 
-# EN/ES: playtest 2026-09-17 -- the two factions' balances as plain single-sided bars, each in its
-#     party's colour (default = dark celeste for the blancos, default_bad = red for the colorados):
-#     full = the doctores rule, empty = the caudillos. Juan did not want the carlist double bar here.
-#     / las dos balanzas como barras simples, cada una con el color de su partido: llena = doctores.
+# EN/ES: playtest 2026-09-17 -- a tug of war per party: the party's colour on the left is the
+#     doctores (celeste: double_sided_gold; red: double_sided_ryukyu), the gold on the right is always
+#     the caudillos. The end icons of both styles are replaced by the intelligentsia and armed forces
+#     icons (gfx/interface/progressbar). A single-sided bar read as progress towards one side only.
+#     / un tira y afloje por partido: el color del partido a la izquierda son los doctores, el dorado
+#     de la derecha siempre los caudillos. La barra simple se leia como avance hacia un solo lado.
 gg_cerrito_balance_bar = {
 	name = "gg_cerrito_balance_bar"
 	desc = "gg_cerrito_balance_bar_desc"
-	second_desc = "gg_balance_bar_doctores_desc"
-	default = yes
+	second_desc = "gg_balance_bar_caudillos_desc"
+	double_sided_gold = yes
 	start_value = 0
 	min_value = -100
 	max_value = 100
@@ -91,8 +103,8 @@ gg_cerrito_balance_bar = {
 gg_defensa_balance_bar = {
 	name = "gg_defensa_balance_bar"
 	desc = "gg_defensa_balance_bar_desc"
-	second_desc = "gg_balance_bar_doctores_desc"
-	default_bad = yes
+	second_desc = "gg_balance_bar_caudillos_desc"
+	double_sided_ryukyu = yes
 	start_value = 0
 	min_value = -100
 	max_value = 100
