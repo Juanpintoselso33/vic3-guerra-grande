@@ -66,7 +66,30 @@ gg_abolition.2 = {
 	placement = ROOT
 
 	title = gg_abolition.2.t
-	desc = gg_abolition.2.d
+	# EN: playtest 2026-09-17 -- the law's date is fixed, but the war around it follows the player:
+	#     Arroyo Grande can come a year early (gg_partition_early) or not at all (gg_partition_delayed).
+	# ES: la fecha de la ley es fija, pero la guerra alrededor sigue al jugador: Arroyo Grande puede
+	#     llegar un anio antes (gg_partition_early) o no pasar (gg_partition_delayed).
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_abolition.2.d_early_delayed
+				trigger = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
+			}
+			triggered_desc = {
+				desc = gg_abolition.2.d_early
+				trigger = { has_global_variable = gg_partition_early }
+			}
+			triggered_desc = {
+				desc = gg_abolition.2.d_delayed
+				trigger = { has_global_variable = gg_partition_delayed }
+			}
+			triggered_desc = {
+				desc = gg_abolition.2.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_abolition.2.f
 
 	# EN: Ley N.o 242, 12 Dec 1842: the Defensa frees the slaves to fill its ranks.

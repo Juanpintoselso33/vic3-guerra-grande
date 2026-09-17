@@ -1661,7 +1661,32 @@ gg_peace.8 = {
 			limit = { NOT = { exists = c:URU } }
 			change_tag = URU
 		}
-		trigger_event = { id = gg_postwar.1 days = 60 }
+		# EN: playtest 2026-09-17 -- an event queued on the country that just changed tag never fired
+		#     (guerra_grande.3.b lost its calendar that way), so another country relays it: Brazil,
+		#     or any other if Brazil is gone. gg_peace.10 finds the new URU a day later.
+		# ES: un evento agendado sobre el pais que acaba de cambiar de tag no salia (asi se perdio el
+		#     calendario de guerra_grande.3.b), asi que lo releva otro pais: el Brasil, o cualquiera.
+		if = {
+			limit = { exists = c:BRZ }
+			c:BRZ = { trigger_event = { id = gg_peace.10 days = 1 } }
+		}
+		else = {
+			random_country = {
+				limit = { NOT = { has_variable = guerra_grande_cerrito_government } }
+				trigger_event = { id = gg_peace.10 days = 1 }
+			}
+		}
+	}
+}
+
+# EN/ES: gg_peace.10 -- relay for gg_peace.8 (hidden, on any other country): the postwar of the
+#     Republic that was the Cerrito / relevo de gg_peace.8: la posguerra de la Republica que fue el Cerrito
+gg_peace.10 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 59 } }
 	}
 }
 
