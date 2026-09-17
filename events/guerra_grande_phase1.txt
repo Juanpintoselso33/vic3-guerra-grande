@@ -20,7 +20,7 @@ gg_phase1.9 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_f2_oribe_carbajal"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -33,21 +33,13 @@ gg_phase1.9 = {
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
-	immediate = {
-		# EN: what the resistance of 1838 bought: Palmar avoided and a deal with France.
-		# ES: lo que compro la resistencia de 1838: Palmar evitado y un trato con Francia.
+	option = {
+		name = gg_phase1.9.a
+		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
 		if = {
 			limit = { has_global_variable = gg_palmar_avoided }
 			gg_score_blanco = { AMOUNT = 2 }
 		}
-		if = {
-			limit = { has_global_variable = gg_french_deal_1838 }
-			gg_score_blanco = { AMOUNT = 1 }
-		}
-	}
-
-	option = {
-		name = gg_phase1.9.a
 		default_option = yes
 		# EN: F1-0 -- the blanco path converges: Oribe falls anyway, and leaves with his army.
 		# ES: F1-0 -- el camino blanco converge: Oribe cae igual, y se va con su ejercito.
@@ -63,6 +55,11 @@ gg_phase1.9 = {
 
 	option = {
 		name = gg_phase1.9.b
+		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
+		if = {
+			limit = { has_global_variable = gg_palmar_avoided }
+			gg_score_blanco = { AMOUNT = 2 }
+		}
 		# EN: negotiate the exit: fewer men go, but Rivera grants an amnesty the doctores remember.
 		# ES: negociar la salida: se van menos hombres, pero Rivera da una amnistia que los doctores recuerdan.
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
@@ -180,7 +177,7 @@ gg_phase1.2 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_carpinteria"
+		video = "gg_f2_palenque"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -337,7 +334,7 @@ gg_phase1.5 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_fl_barry"
+		video = "gg_f2_mackau"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -489,7 +486,7 @@ gg_phase1.8 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rivera_arroyo_grande"
+		video = "gg_f2_rosas_monvoisin"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

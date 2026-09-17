@@ -1,0 +1,146 @@
+﻿# Media aliases, second batch for the flow events (T9 review, 2026-09-17). Sources: SOURCES_flujo_images.md.
+# Alias de medios, segundo lote de los eventos del flujo (revision de T9). Fuentes: SOURCES_flujo_images.md.
+
+# Wikimedia Commons: Manuel Oribe ElIndiscreto n63.jpg
+gg_f2_oribe_indiscreto = {
+	video = "gfx/media_aliases/gg_f2_oribe_indiscreto.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Juan Manuel Blanes - La doma.png
+gg_f2_doma = {
+	video = "gfx/media_aliases/gg_f2_doma.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Le Tour du monde-01-p229.jpg
+gg_f2_montevideo_port = {
+	video = "gfx/media_aliases/gg_f2_montevideo_port.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Gaucho Pialando, según Pallière.tif
+gg_f2_pialando = {
+	video = "gfx/media_aliases/gg_f2_pialando.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Wikimedia Commons: Amiral de mackau (1788-1855).jpg
+gg_f2_mackau = {
+	video = "gfx/media_aliases/gg_f2_mackau.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Eduardo Carbajal - Brigadier General Manuel Oribe.png
+gg_f2_oribe_carbajal = {
+	video = "gfx/media_aliases/gg_f2_oribe_carbajal.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Wikimedia Commons: ManuelOribe12.jpg
+gg_f2_oribe_gallino = {
+	video = "gfx/media_aliases/gg_f2_oribe_gallino.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: ManuelOribe11.jpg
+gg_f2_oribe_1840 = {
+	video = "gfx/media_aliases/gg_f2_oribe_1840.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Jean-Philippe Goulu - Retrato del Almirante Guillermo Brown (1827).jpg
+gg_f2_brown = {
+	video = "gfx/media_aliases/gg_f2_brown.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Henry John Temple, 3rd Viscount Palmerston (cropped).jpg
+gg_f2_palmerston = {
+	video = "gfx/media_aliases/gg_f2_palmerston.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Raymond Monvoisin - Retrato de Juan Manuel de Rosas.jpg
+gg_f2_rosas_monvoisin = {
+	video = "gfx/media_aliases/gg_f2_rosas_monvoisin.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Joaquin Suarez con la banda presidencial.jpg
+gg_f2_suarez = {
+	video = "gfx/media_aliases/gg_f2_suarez.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Comte Walewski Congrès de Paris 1856 BNF Gallica.jpg
+gg_f2_walewski = {
+	video = "gfx/media_aliases/gg_f2_walewski.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Colonel Lord Howden by Thomas Clement Thompson.JPG
+gg_f2_howden = {
+	video = "gfx/media_aliases/gg_f2_howden.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Idilio criollo - Juan León Pallière.jpg
+gg_f2_idilio = {
+	video = "gfx/media_aliases/gg_f2_idilio.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# Wikimedia Commons: Garibaldi 1849 par Hauser.jpg
+gg_f2_garibaldi = {
+	video = "gfx/media_aliases/gg_f2_garibaldi.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Wikimedia Commons: Henri Félix Philippoteaux - Lamartine repoussant le drapeau rouge à l'Hôtel de Ville, le 25 février 1848 - P258 - Musée Carnavalet.jpg
+gg_f2_lamartine = {
+	video = "gfx/media_aliases/gg_f2_lamartine.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: Nadar - Alexander Dumas père (1802-1870) - Google Art Project 2.jpg
+gg_f2_dumas = {
+	video = "gfx/media_aliases/gg_f2_dumas.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Wikimedia Commons: La reina Isabel II de España, de José Gutiérrez de la Vega (Museo del Romanticismo de Madrid).jpg
+gg_f2_isabel = {
+	video = "gfx/media_aliases/gg_f2_isabel.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Wikimedia Commons: Gilberto Bellini - Entrevista del general Artigas con el doctor Dámaso Antonio Larrañaga.png
+gg_f2_bellini = {
+	video = "gfx/media_aliases/gg_f2_bellini.bk2"
+	audio = "event:/SFX/Events/southamerica/christianity"
+}
+
+# Wikimedia Commons: Juan Manuel Blanes - Dos gauchos en el palenque.png
+gg_f2_palenque = {
+	video = "gfx/media_aliases/gg_f2_palenque.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Wikimedia Commons: Retrato de Venancio Flores.jpg
+gg_f2_flores = {
+	video = "gfx/media_aliases/gg_f2_flores.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Wikimedia Commons: Andres Lamas.jpg
+gg_f2_lamas = {
+	video = "gfx/media_aliases/gg_f2_lamas.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# Wikimedia Commons: Anacleto Medina.JPG
+gg_f2_medina = {
+	video = "gfx/media_aliases/gg_f2_medina.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}

@@ -50,7 +50,7 @@ gg_postwar.2 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_money_reckoning"
+		video = "gg_f2_medina"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
@@ -125,7 +125,7 @@ gg_postwar.3 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_money_cerrito_debts"
+		video = "gg_fl_aduana"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -272,7 +272,7 @@ gg_postwar.5 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_rivera_return"
+		video = "gg_f2_flores"
 	}
 
 	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
@@ -331,7 +331,7 @@ gg_postwar.6 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_two_governments"
+		video = "gg_f2_lamas"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

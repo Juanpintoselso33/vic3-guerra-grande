@@ -103,7 +103,7 @@ gg_powers.10 = {
 	flavor = gg_powers.10.f
 
 	event_image = {
-		video = "gg_fl_aduana"
+		video = "gg_f2_brown"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -212,7 +212,7 @@ gg_powers.12 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_f2_oribe_gallino"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -270,7 +270,7 @@ gg_powers.13 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_f2_suarez"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -316,7 +316,7 @@ gg_powers.14 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_f2_walewski"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -359,7 +359,7 @@ gg_powers.15 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_peace"
+		video = "gg_f2_howden"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -536,7 +536,7 @@ gg_powers.18 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_leg_basque_desertion"
+		video = "gg_f2_garibaldi"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -619,7 +619,7 @@ gg_powers.19 = {
 	flavor = gg_powers.19.f
 
 	event_image = {
-		video = "gg_fl_barry"
+		video = "gg_f2_palmerston"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -713,7 +713,7 @@ gg_powers.21 = {
 
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
 	event_image = {
-		video = "gg_money_french_convention"
+		video = "gg_f2_lamartine"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -894,7 +894,7 @@ gg_powers.25 = {
 	flavor = gg_powers.25.f
 
 	event_image = {
-		video = "gg_fl_giro"
+		video = "gg_f2_isabel"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -1001,7 +1001,7 @@ gg_powers.28 = {
 	flavor = gg_powers.28.f
 
 	event_image = {
-		video = "gg_fl_larranaga"
+		video = "gg_f2_bellini"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -1078,7 +1078,7 @@ gg_powers.29 = {
 	flavor = gg_powers.29.f
 
 	event_image = {
-		video = "gg_fl_pacheco"
+		video = "gg_f2_dumas"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

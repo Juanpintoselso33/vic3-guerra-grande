@@ -1496,7 +1496,7 @@ gg_peace.6 = {
 	flavor = gg_peace.6.flav
 
 	event_image = {
-		video = "gg_peace"
+		video = "gg_f2_idilio"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -1565,7 +1565,7 @@ gg_peace.7 = {
 	flavor = gg_peace.7.flav
 
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_f2_oribe_indiscreto"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"

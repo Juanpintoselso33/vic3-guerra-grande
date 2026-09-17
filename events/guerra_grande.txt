@@ -57,13 +57,7 @@ guerra_grande.1 = {
 		name = guerra_grande.1.a
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_blanco_score
-			add = 2
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = 2 name = guerra_grande_war_score_bar }
-		}
+		gg_score_blanco = { AMOUNT = 2 }
 		default_option = yes
 		set_variable = guerra_grande_blanco_path
 		add_modifier = {
@@ -79,13 +73,7 @@ guerra_grande.1 = {
 		name = guerra_grande.1.b
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_colorado_score
-			add = 2
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = -2 name = guerra_grande_war_score_bar }
-		}
+		gg_score_colorado = { AMOUNT = 2 }
 		set_variable = guerra_grande_colorado_path
 		add_modifier = {
 			name = guerra_grande_colorado_order
@@ -148,15 +136,14 @@ guerra_grande.2 = {
 	# Historical: Oribe resigns and sails to Buenos Aires, and Rivera takes the government.
 	option = {
 		name = guerra_grande.2.a
+		# EN/ES: F0-7 b -- France spared Oribe's flotilla / Francia no toco la flotilla de Oribe
+		if = {
+			limit = { has_global_variable = gg_french_deal_1838 }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_colorado_score
-			add = 3
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = -3 name = guerra_grande_war_score_bar }
-		}
+		gg_score_colorado = { AMOUNT = 3 }
 		default_option = yes
 		set_variable = guerra_grande_colorado_path
 		# EN: a resignation has to actually remove him. set_ruling_interest_groups replaces the
@@ -193,17 +180,17 @@ guerra_grande.2 = {
 	# The blanco government digs in instead: Oribe stays, and the blancos take the state alone.
 	option = {
 		name = guerra_grande.2.b
+		custom_tooltip = guerra_grande.2.b_tt
+		# EN/ES: F0-7 b -- France spared Oribe's flotilla / Francia no toco la flotilla de Oribe
+		if = {
+			limit = { has_global_variable = gg_french_deal_1838 }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
 		# EN/ES: T6, F1-0 -- Oribe holds on, but falls anyway in 1839 / Oribe resiste, pero cae igual en 1839
 		trigger_event = { id = gg_phase1.9 days = 100 popup = yes }   # 1839.02.01
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_blanco_score
-			add = 3
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = 3 name = guerra_grande_war_score_bar }
-		}
+		gg_score_blanco = { AMOUNT = 3 }
 		set_variable = guerra_grande_blanco_path
 		# EN: vanilla interest groups, because this mod's baseline is vanilla -- Better
 		#     Politics Mod support belongs in la_argentina_bpm_compatch, not here. Naming
@@ -1668,7 +1655,7 @@ guerra_grande.11 = {
 
 	# Manuel Oribe, lithograph, c. 1840, public domain.
 	event_image = {
-		video = "gg_oribe_fall"
+		video = "gg_f2_oribe_1840"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1685,13 +1672,7 @@ guerra_grande.11 = {
 		gg_cerrito_balance_change = { DELTA = 10 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_blanco_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = 1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_blanco = { AMOUNT = 1 }
 		# EN: matches the 10-year grant from Carpinteria/the fall of Oribe on purpose. It was
 		#     never established here whether a repeated add_modifier on an already-active
 		#     modifier resets its timer, extends it, or stacks a second instance -- there is
@@ -1724,13 +1705,7 @@ guerra_grande.11 = {
 		#     mismo gobierna, asi que decirle que no al culto de la autoridad, o negarle el mando a
 		#     Lavalleja, es una concesion al bando liberal -- y tiene que pagarle a los colorados
 		#     exactamente lo que la otra puerta le paga a los blancos, o la eleccion es decorativa.
-		change_global_variable = {
-			name = guerra_grande_colorado_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = -1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_colorado = { AMOUNT = 1 }
 		add_modifier = {
 			name = guerra_grande_colorado_order
 			years = 10
@@ -1772,13 +1747,7 @@ guerra_grande.12 = {
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_blanco_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = 1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_blanco = { AMOUNT = 1 }
 		default_option = yes
 		add_modifier = {
 			name = guerra_grande_blanco_order
@@ -1799,13 +1768,7 @@ guerra_grande.12 = {
 		#     mismo gobierna, asi que decirle que no al culto de la autoridad, o negarle el mando a
 		#     Lavalleja, es una concesion al bando liberal -- y tiene que pagarle a los colorados
 		#     exactamente lo que la otra puerta le paga a los blancos, o la eleccion es decorativa.
-		change_global_variable = {
-			name = guerra_grande_colorado_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = -1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_colorado = { AMOUNT = 1 }
 		add_modifier = {
 			name = guerra_grande_colorado_order
 			years = 10
@@ -1847,13 +1810,7 @@ guerra_grande.13 = {
 		gg_patron_change = { PATRON = brasil DELTA = -5 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_blanco_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = 1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_blanco = { AMOUNT = 1 }
 		default_option = yes
 		add_modifier = {
 			name = guerra_grande_blanco_order
@@ -1868,13 +1825,7 @@ guerra_grande.13 = {
 		name = guerra_grande.13.b
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
-		change_global_variable = {
-			name = guerra_grande_colorado_score
-			add = 1
-		}
-		je:je_guerra_grande ?= {
-			add_progress = { value = -1 name = guerra_grande_war_score_bar }
-		}
+		gg_score_colorado = { AMOUNT = 1 }
 		add_modifier = {
 			name = guerra_grande_colorado_order
 			years = 10

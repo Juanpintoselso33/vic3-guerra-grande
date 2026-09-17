@@ -48,6 +48,7 @@ gg_prewar.1 = {
 
 	option = {
 		name = gg_prewar.1.b
+		custom_tooltip = gg_prewar.1.b_tt
 		# EN: asylum respected. Rosas lower, France higher, Lavalle stays out for a while (read in T6).
 		# ES: se respeta el asilo. Rosas mas bajo, Francia mas alta, Lavalle queda neutral un tiempo (T6).
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
@@ -95,6 +96,7 @@ gg_prewar.2 = {
 
 	option = {
 		name = gg_prewar.2.b
+		custom_tooltip = gg_prewar.2.b_tt
 		# EN: help the Empire close the border: Brazil up, Rivera weaker in 1837, the farrapos hostile.
 		# ES: ayudar al Imperio a cerrar la frontera: Brasil sube, Rivera mas debil en 1837.
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
@@ -126,7 +128,7 @@ gg_prewar.3 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_rivera"
+		video = "gg_f2_doma"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -196,6 +198,7 @@ gg_prewar.4 = {
 
 	option = {
 		name = gg_prewar.4.a
+		custom_tooltip = gg_prewar.4.a_tt
 		default_option = yes
 		# EN: historical: political chiefs of the government. More control, but the northern caudillos go to Rivera.
 		# ES: lo historico: jefes politicos del gobierno. Mas control, pero los caudillos del norte se pasan a Rivera.
@@ -207,6 +210,7 @@ gg_prewar.4 = {
 
 	option = {
 		name = gg_prewar.4.b
+		custom_tooltip = gg_prewar.4.b_tt
 		# EN: local caudillos in charge: less control, fewer defections in 1837.
 		# ES: caudillos locales al frente: menos control, menos adhesiones a Rivera en 1837.
 		set_global_variable = gg_depts_local_caudillos
@@ -294,7 +298,7 @@ gg_prewar.6 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_fl_lancero"
+		video = "gg_f2_pialando"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -338,7 +342,7 @@ gg_prewar.7 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_f2_montevideo_port"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
@@ -361,6 +365,7 @@ gg_prewar.7 = {
 
 	option = {
 		name = gg_prewar.7.b
+		custom_tooltip = gg_prewar.7.b_tt
 		# EN: deal with France: the flotilla is spared and the fall is delayed (read in T6), but Rosas
 		#     starts low and Rivera loses French help.
 		# ES: negociar con Francia: se salva la flotilla y la caida se atrasa (T6), pero Rosas arranca bajo.
@@ -399,6 +404,7 @@ gg_prewar.8 = {
 
 	option = {
 		name = gg_prewar.8.a
+		custom_tooltip = gg_prewar.8.a_tt
 		default_option = yes
 		# EN: decree the Universidad Mayor (27 May 1838) on Larranaga's law of 1833. The second half is
 		#     the inauguration of 1849 (T7), which reads gg_university_decreed.
@@ -465,6 +471,7 @@ gg_prewar.9 = {
 
 	option = {
 		name = gg_prewar.9.b
+		custom_tooltip = gg_prewar.9.b_tt
 		trigger = {
 			guerra_grande_blanco_lead >= 3
 		}
