@@ -136,5 +136,18 @@ gg_intro.5 = {
 	immediate = {
 		set_global_variable = gg_partition_calendar_done
 		gg_partition_calendar = yes
+		# EN/ES: playtest 2026-09-17 -- the war of option guerra_grande.3.b, opened once CER resolves
+		#     / la guerra de la opcion .3.b, que se abre cuando CER ya se resuelve
+		if = {
+			limit = { has_global_variable = gg_play_pending }
+			remove_global_variable = gg_play_pending
+			c:CER ?= {
+				create_diplomatic_play = {
+					name = guerra_grande_play
+					target_country = c:URU
+					type = dp_guerra_grande
+				}
+			}
+		}
 	}
 }

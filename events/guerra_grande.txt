@@ -1092,11 +1092,13 @@ guerra_grande.3 = {
 				}
 			}
 		}
-		create_diplomatic_play = {
-			name = guerra_grande_play
-			target_country = c:URU
-			type = dp_guerra_grande
-		}
+		# EN: playtest 2026-09-17 -- ROOT just became CER by change_tag, and c:CER does not resolve
+		#     until the next day, so the play's 'exists = c:CER' failed and no war opened. gg_intro.5
+		#     opens it a day later. Inside this option the Cerrito is ROOT, never c:CER.
+		# ES: ROOT recien paso a ser CER por change_tag y c:CER no se resuelve hasta el dia siguiente:
+		#     la jugada fallaba su 'exists = c:CER' y la guerra no abria. gg_intro.5 la abre un dia
+		#     despues. Dentro de esta opcion el Cerrito es ROOT, nunca c:CER.
+		set_global_variable = gg_play_pending
 		# EN: create_country copies the whole character roster from origin, so the new government
 		#     is born holding a duplicate of every man in the country -- including the enemy's.
 		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
@@ -1153,7 +1155,7 @@ guerra_grande.3 = {
 		#     escrito.
 		if = {
 			limit = { guerra_grande_blanco_lead >= 4 }
-			c:CER ?= {
+			root = {
 				create_military_formation = {
 					type = army
 					hq_region = sr:region_brazil
@@ -1183,7 +1185,7 @@ guerra_grande.3 = {
 		}
 		else_if = {
 			limit = { guerra_grande_blanco_lead >= 2 }
-			c:CER ?= {
+			root = {
 				create_military_formation = {
 					type = army
 					hq_region = sr:region_brazil
@@ -1212,7 +1214,7 @@ guerra_grande.3 = {
 			}
 		}
 		else = {
-			c:CER ?= {
+			root = {
 				create_military_formation = {
 					type = army
 					hq_region = sr:region_brazil
@@ -1303,7 +1305,7 @@ guerra_grande.3 = {
 		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
 		# ES: los canionies, o su ausencia -- ver SOURCES_order_of_battle.md y el encabezado de
 		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
-		c:CER ?= {
+		root = {
 			add_modifier = { name = gg_siege_no_breaching_guns years = 15 }
 		}
 		if = {
@@ -1336,7 +1338,7 @@ guerra_grande.3 = {
 		#     Colorado adentro del Cerrito. Ahora cada gobierno conserva solo el suyo y le devuelve
 		#     al otro el nombre de vanilla, que es lo que hace set_interest_group_name con la clave
 		#     base.
-		c:CER ?= {
+		root = {
 			activate_law = law_type:law_oligarchy
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_blanco_party
@@ -1361,7 +1363,7 @@ guerra_grande.3 = {
 		#     Confederacion abria una jugada contra el mismo gobierno que financiaba, y de paso
 		#     rompia la regla de que ninguna potencia extranjera entra como beligerante.
 		c:ARG ?= {
-			change_relations = { country = c:CER value = 100 }
+			change_relations = { country = root value = 100 }
 			# EN: no pact here. create_diplomatic_pact cannot make an alliance -- vanilla only
 			#     ever creates puppet, protectorate, colony, personal_union, vassal, rivalry,
 			#     tributary and join_power_bloc with it, and asking for 'alliance' failed
@@ -1426,7 +1428,7 @@ guerra_grande.3 = {
 			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
 			add_modifier = { name = gg_siege_the_sea_lane_stays_open years = 15 }
 		}
-		c:CER ?= {
+		root = {
 			add_modifier = { name = gg_siege_customs_house_at_the_buceo years = 15 }
 			add_modifier = { name = gg_siege_trading_with_the_enemy years = 15 }
 		}
@@ -1448,7 +1450,8 @@ guerra_grande.3 = {
 		# EN/ES: playtest 2026-09-17 -- a day later (gg_intro.5): tags just changed or created in this
 		#     same effect did not resolve, and the Cerrito's calendar was lost for a blanco player
 		#     / un dia despues: los tags recien cambiados o creados no se resolvian en este mismo efecto
-		trigger_event = { id = gg_intro.5 days = 1 }
+		# EN/ES: through the new URU: an event queued on the country that just changed tag never fired / por el URU nuevo: el evento en el pais que cambio de tag no salia
+		c:URU ?= { trigger_event = { id = gg_intro.5 days = 1 } }
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
 		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
 		if = {
