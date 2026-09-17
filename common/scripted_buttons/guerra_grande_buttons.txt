@@ -210,6 +210,20 @@ guerra_grande_italian_legion_button = {
 				years = 10
 				is_decaying = yes
 			}
+			# EN/ES: FN-3 -- with Costa Brava behind him the legion musters a battalion of its own
+			#     / con Costa Brava atras, la legion forma su propio batallon
+			if = {
+				limit = { has_global_variable = gg_garibaldi_famous }
+				create_military_formation = {
+					type = army
+					hq_region = capital.region
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
+				}
+			}
 			trigger_event = { id = guerra_grande.5 popup = yes }
 		}
 		else = {

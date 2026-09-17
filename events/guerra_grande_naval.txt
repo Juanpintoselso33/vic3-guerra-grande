@@ -1,0 +1,217 @@
+﻿namespace = gg_naval
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE RIVER WAR OF 1841-1842 (FN-3, stage 2). The Guerra Grande before the siege was fought on
+#     the water as much as on horseback, and the mod had nothing there. Two campaigns, both lost:
+#     Coe's squadron, raised by public subscription in Montevideo and worn down by Brown through
+#     1841, and Garibaldi's expedition up the Parana, destroyed at Costa Brava in August 1842.
+#     Juan's decision (2026-09-17): expensive and inglorious. Raising the squadron costs money and
+#     buys one battle; the December event closes the campaign and opens the Parana expedition;
+#     Costa Brava only happens if that expedition sailed, and it is what brings Garibaldi -- and
+#     the stronger Italian Legion of 1843 -- into the city.
+# ES: LA GUERRA DEL RIO DE 1841-1842 (FN-3, etapa 2). La Guerra Grande antes del sitio se peleo
+#     tanto en el agua como a caballo, y el mod no tenia nada. Dos campanias, las dos perdidas: la
+#     escuadra de Coe, levantada por suscripcion en Montevideo y desgastada por Brown durante 1841,
+#     y la expedicion de Garibaldi al Parana, deshecha en Costa Brava en agosto de 1842.
+#     Decision de Juan: cara y sin gloria. Armarla cuesta plata y compra un combate; el evento de
+#     diciembre cierra la campania y abre la expedicion al Parana; Costa Brava solo pasa si esa
+#     expedicion zarpo, y es lo que trae a Garibaldi -- y a la Legion Italiana reforzada de 1843.
+#
+# SOURCE / FUENTE: Wikipedia ES, «Campania naval de 1841 (Guerra Grande)» y «Combate de Costa
+#     Brava», que citan a Arguindeguy y Rodriguez, «Buques de la Armada Argentina 1810-1852»
+#     (Instituto Nacional Browniano, 1999), a Saldias, «Historia de la Confederacion Argentina», a
+#     Setembrino Pereda, «Garibaldi en el Uruguay» (1914) y a las Memorias del general Paz.
+#     Fechas y hechos usados: convenio Mackau-Arana 29.10.1840; decreto de Rosas del 22.1.1841
+#     cerrando el Parana y el Uruguay, autorizando el corso y bloqueando Montevideo; Brown
+#     nombrado comandante en jefe el 2.2.1841; Coe nombrado el 31.12.1840; Rivera cierra los rios y
+#     autoriza el corso el 11.2.1841; combate del 24.5.1841 frente a Punta Brava (muere Shannon,
+#     comandante de la Sarandi); combate de Santa Lucia el 3.8.1841; captura del Cagancha el
+#     10.12.1841; ultima refriega el 21.12.1841 y regreso de Coe el 23; los pasquines contra Coe y
+#     el desarme de la escuadra, salvo el Pereira y la Constitucion, preparados para Corrientes;
+#     Costa Brava, 15 y 16 de agosto de 1842, cerca de Esquina.
+# -------------------------------------------------------------------------------------------------
+
+# 11 February 1841. Rosas has closed the rivers; Rivera answers in kind and has to decide whether
+# the Republic pays for a navy. / 11 de febrero de 1841: Rosas cerro los rios y hay que decidir si
+# la Republica paga una escuadra.
+gg_naval.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_naval.1.t
+	# EN/ES: in the neutral path (gg_phase1.1.c) the Republic never declared war, and Rosas closes
+	#     the river all the same / en el camino neutral la Republica nunca declaro la guerra, y
+	#     Rosas cierra el rio igual
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_naval.1.d_neutral
+				trigger = { has_global_variable = gg_partition_early }
+			}
+			triggered_desc = {
+				desc = gg_naval.1.d
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = gg_naval.1.f
+
+	# EN/ES: "El almirante Brown frente a Montevideo", Diogenes Hequet (1866-1902), public domain.
+	event_image = {
+		video = "gg_nav_brown_montevideo"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_raiding.dds"
+
+	duration = 3
+
+	trigger = {
+		c:URU ?= this
+		NOT = { has_global_variable = guerra_grande_split_done }
+		NOT = { has_global_variable = gg_coe_decided }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_coe_decided
+		}
+	}
+
+	# EN: the historical answer: the Comision Maritima opens a subscription among the wealthy of
+	#     Montevideo and Coe puts to sea. It buys Santa Lucia and very little else.
+	# ES: la respuesta historica: la Comision Maritima abre una suscripcion entre los ricos de
+	#     Montevideo y Coe sale al rio. Compra Santa Lucia y poco mas.
+	option = {
+		name = gg_naval.1.a
+		default_option = yes
+		custom_tooltip = gg_naval.1.a_tt
+		add_treasury = -30000
+		set_global_variable = gg_coe_squadron
+		gg_score_colorado = { AMOUNT = 1 }
+		hidden_effect = {
+			trigger_event = { id = gg_naval.2 days = 315 popup = yes }   # 1841.12.23
+		}
+		ai_chance = { base = 70 }
+	}
+
+	# EN: leave the river to Brown and keep the money. The port pays for it until the intervention
+	#     of 1843 reopens the sea.
+	# ES: dejarle el rio a Brown y guardarse la plata. Lo paga el puerto hasta que la intervencion
+	#     de 1843 vuelva a abrir el mar.
+	option = {
+		name = gg_naval.1.b
+		custom_tooltip = gg_naval.1.b_tt
+		add_modifier = {
+			name = gg_naval_port_under_blockade
+			years = 2
+			is_decaying = yes
+		}
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# 23 December 1841. Coe comes back from the last action of the year and the city is already
+# printing lampoons about him. / 23 de diciembre de 1841: Coe vuelve de la ultima refriega y la
+# ciudad ya imprime pasquines contra el.
+gg_naval.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_naval.2.t
+	desc = gg_naval.2.d
+	flavor = gg_naval.2.f
+
+	event_image = {
+		video = "gg_nav_pasquines"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		c:URU ?= this
+		has_global_variable = gg_coe_squadron
+		NOT = { has_global_variable = guerra_grande_split_done }
+	}
+
+	# EN: the historical answer: the squadron is sold off, except the Pereira and the Constitucion,
+	#     which are fitted out for Corrientes. That expedition is Garibaldi's, and it ends at Costa
+	#     Brava. / ES: lo historico: se desarma la escuadra salvo el Pereira y la Constitucion, que
+	#     se alistan para Corrientes. Esa expedicion es la de Garibaldi, y termina en Costa Brava.
+	option = {
+		name = gg_naval.2.a
+		default_option = yes
+		custom_tooltip = gg_naval.2.a_tt
+		set_global_variable = gg_parana_expedition
+		add_treasury = -10000
+		hidden_effect = {
+			trigger_event = { id = gg_naval.3 days = 236 popup = yes }   # 1842.08.16
+		}
+		ai_chance = { base = 60 }
+	}
+
+	# EN: sell every hull and let the court martial clear or condemn Coe in peace. No expedition,
+	#     no Costa Brava, and the treasury gets something back.
+	# ES: vender todos los cascos y que el consejo de guerra resuelva lo de Coe. Sin expedicion, sin
+	#     Costa Brava, y algo vuelve a la caja.
+	option = {
+		name = gg_naval.2.b
+		custom_tooltip = gg_naval.2.b_tt
+		add_treasury = 15000
+		ai_chance = { base = 40 }
+	}
+}
+
+# 16 August 1842, Costa Brava. / 16 de agosto de 1842, Costa Brava.
+gg_naval.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_naval.3.t
+	desc = gg_naval.3.d
+	flavor = gg_naval.3.f
+
+	event_image = {
+		video = "gg_nav_costa_brava"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_raiding.dds"
+
+	duration = 3
+
+	trigger = {
+		c:URU ?= this
+		has_global_variable = gg_parana_expedition
+	}
+
+	# EN/ES: the defeat is the defeat, whatever is done with the man / la derrota es la derrota
+	immediate = {
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+	}
+
+	# EN: receive him as what the city already believes he is. The fame is what fills the Italian
+	#     Legion of 1843: Garibaldi commands it, and it musters a battalion more.
+	# ES: recibirlo como lo que la ciudad ya cree que es. Esa fama es la que llena la Legion
+	#     Italiana de 1843: Garibaldi la manda, y forma un batallon mas.
+	option = {
+		name = gg_naval.3.a
+		default_option = yes
+		custom_tooltip = gg_naval.3.a_tt
+		set_global_variable = gg_garibaldi_famous
+		add_treasury = -5000
+		ai_chance = { base = 65 }
+	}
+
+	# EN: a defeat is a defeat: no honours, no arrears, no promotion. The legion of 1843 is the
+	#     one the city can pay for. / ES: una derrota es una derrota: sin honores, sin sueldos
+	#     atrasados, sin ascenso. La legion de 1843 es la que la ciudad pueda pagar.
+	option = {
+		name = gg_naval.3.b
+		custom_tooltip = gg_naval.3.b_tt
+		ai_chance = { base = 35 }
+	}
+}

@@ -253,3 +253,18 @@ gg_university_inaugurated = {
 	country_prestige_add = 5
 	interest_group_ig_intelligentsia_approval_add = 3
 }
+
+# EN: 1841-1842 -- the Republic does not dispute the river and Brown's squadron sits off the port.
+#     Not a scripted blockade: the mod's blockade machinery only exists from 1843, so this is the
+#     price of the decision, decaying as the Anglo-French intervention reopens the sea.
+# ES: 1841-1842 -- la Republica no disputa el rio y la escuadra de Brown se queda frente al puerto.
+#     No es un bloqueo del motor: la maquinaria de bloqueo del mod existe recien desde 1843, asi
+#     que esto es el precio de la decision, y se va cayendo cuando la intervencion abre el mar.
+gg_naval_port_under_blockade = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_trade_capacity_mult = -0.25
+	state_trade_advantage_mult = -0.20
+	building_port_throughput_add = -0.15
+	country_minting_add = -200
+	interest_group_ig_petty_bourgeoisie_approval_add = -3
+}

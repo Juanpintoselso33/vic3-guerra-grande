@@ -339,13 +339,45 @@ gg_contingent.5 = {
 		name = gg_contingent.5.a
 		default_option = yes
 		set_variable = guerra_grande_italian_legion_raised
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		# EN/ES: FN-3 -- Costa Brava (gg_naval.3.a) made Garibaldi's name in the city: he commands the
+		#     legion and it musters a battalion more / Costa Brava le hizo el nombre: la manda el y suma un batallon
+		if = {
+			limit = { has_global_variable = gg_garibaldi_famous }
+			custom_tooltip = gg_naval.3.a_tt
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
+			}
+		create_character = {
+			first_name = "Giuseppe"
+			last_name = "Garibaldi"
+			historical = yes
+			is_general = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_radical
+			culture = cu:north_italian
+			religion = rel:catholic
+			traits = {
+				charismatic
+				brave
+				experienced_offensive_planner
+			}
+		}
+		}
+		else = {
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		add_modifier = {

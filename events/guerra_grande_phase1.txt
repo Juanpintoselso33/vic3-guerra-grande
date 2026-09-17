@@ -143,6 +143,7 @@ gg_phase1.1 = {
 				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
 			}
 			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
 			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
 			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
 			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
@@ -169,6 +170,7 @@ gg_phase1.1 = {
 				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
 			}
 			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
 			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
 			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
 			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
@@ -187,6 +189,7 @@ gg_phase1.1 = {
 		set_global_variable = gg_partition_early
 		hidden_effect = {
 			trigger_event = { id = gg_phase1.5 days = 616 popup = yes }   # 1840.10.29 Arana-Mackau
+			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
 			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
 			trigger_event = { id = gg_phase1.8 days = 1003 popup = yes }  # 1841.11.20 Arroyo Grande
 		}
