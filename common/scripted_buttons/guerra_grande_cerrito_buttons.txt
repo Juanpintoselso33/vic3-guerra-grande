@@ -254,6 +254,48 @@ guerra_grande_river_blockade_button = {
 				is_decaying = yes
 			}
 		}
+		# EN: FN-1 -- and the squadron itself. Rosas lent Brown with what the Confederation had on
+		#     the river: brigs and schooners, three of them here as frigates, the smallest fleet the
+		#     engine can float. Based on the coast the Cerrito holds, because Montevideo is the
+		#     enemy's. Whether the AI puts it on a blockade mission is up to it (the engine has no
+		#     effect to order a mission), so the declared blockade keeps counting as well.
+		# ES: FN-1 -- y la escuadra. Rosas prestaba a Brown con lo que la Confederacion tenia en el
+		#     rio: bergantines y goletas, aca tres fragatas, la flota mas chica que el motor sostiene.
+		#     Con base en la costa que tiene el Cerrito, porque Montevideo es del enemigo. Que la IA
+		#     la ponga en mision de bloqueo depende de ella (el motor no tiene efecto para ordenar
+		#     una mision), asi que el bloqueo declarado sigue contando igual.
+		if = {
+			limit = { NOT = { has_variable = gg_brown_squadron_raised } }
+			set_variable = gg_brown_squadron_raised
+			if = {
+				limit = { exists = s:STATE_MALDONADO.region_state:CER }
+				create_military_formation = {
+					type = fleet
+					hq_region = sr:region_la_plata
+					name = gg_brown_squadron_name
+					save_scope_as = gg_brown_fleet
+					ship = {
+						type = ship_type:ship_type_frigate
+						state_region = s:STATE_MALDONADO
+						count = 3
+					}
+				}
+				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+			else = {
+				create_military_formation = {
+					type = fleet
+					hq_region = sr:region_la_plata
+					name = gg_brown_squadron_name
+					save_scope_as = gg_brown_fleet
+					ship = {
+						type = ship_type:ship_type_frigate
+						count = 3
+					}
+				}
+				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+		}
 	}
 
 	ai_chance = {

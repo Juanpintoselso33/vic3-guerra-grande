@@ -328,3 +328,13 @@ gg_siege_the_sea_lane_stays_open = {
 	unit_recovery_rate_add = 0.25
 	unit_morale_recovery_mult = 0.15
 }
+
+# EN: FN-2. The Anglo-French naval station off Montevideo, while France and Britain together hold
+#     the river: this is why eight years of siege never starved the city.
+# ES: FN-2. La estacion naval anglo-francesa frente a Montevideo, mientras Francia y Gran Bretania
+#     sostienen el rio juntas: por eso ocho anios de sitio no rindieron a la ciudad por hambre.
+gg_naval_anglo_french_station = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_blockade_resistance_add = 100
+	building_port_throughput_add = 0.15
+}

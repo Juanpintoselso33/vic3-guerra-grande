@@ -207,8 +207,21 @@ je_guerra_grande = {
 					set_global_variable = { name = gg_siege_tick days = 20 }
 					if = {
 						# EN/ES: T3b, C15/C21 -- the sea is the one condition (I16) / el mar es la unica condicion
+						# EN: FN-1 -- the month counts with the declared blockade (the Cerrito's button) OR with a
+						#     real one: the Confederation's squadron sitting on Montevideo's water. The engine
+						#     cannot be ordered to blockade, so both count.
+						# ES: FN-1 -- el mes cuenta con el bloqueo declarado (el boton del Cerrito) O con uno real:
+						#     la escuadra sobre el agua de Montevideo. Al motor no se le puede ordenar bloquear.
 						limit = {
-							c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
+							OR = {
+								c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
+								c:URU ?= {
+									any_scope_state = {
+										state_region = s:STATE_MONTEVIDEO
+										blockade_level > 0
+									}
+								}
+							}
 							NOT = { gg_sea_open = yes }
 							NOT = { has_global_variable = gg_truce }
 						}
@@ -220,6 +233,57 @@ je_guerra_grande = {
 							NOT = { has_global_variable = gg_truce }
 						}
 						change_global_variable = { name = gg_siege_months add = -1 }
+					}
+					# EN: FN-2 -- the Anglo-French station: while the sea is open the city resists a blockade and
+					#     keeps a lent squadron; when the backing falls the powers take their ships back.
+					# ES: FN-2 -- la estacion anglo-francesa: con el mar abierto la ciudad resiste el bloqueo y
+					#     tiene escuadra prestada; si el apoyo cae, las potencias se llevan sus barcos.
+					if = {
+						limit = { gg_sea_open = yes }
+						c:URU ?= {
+							if = {
+								limit = { NOT = { has_variable = gg_lent_squadron } }
+								set_variable = gg_lent_squadron
+								create_military_formation = {
+									save_scope_as = gg_lent_fleet
+									type = fleet
+									hq_region = sr:region_la_plata
+									name = gg_lent_squadron_name
+									ship = {
+										type = ship_type:ship_type_frigate
+										state_region = s:STATE_MONTEVIDEO
+										count = 4
+									}
+								}
+								# EN/ES: kept so the powers can take their ships back / guardada para que se las lleven
+								set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
+							}
+							every_scope_state = {
+								limit = {
+									state_region = s:STATE_MONTEVIDEO
+									NOT = { has_modifier = gg_naval_anglo_french_station }
+								}
+								add_modifier = { name = gg_naval_anglo_french_station }
+							}
+						}
+					}
+					else = {
+						c:URU ?= {
+							# EN/ES: the station is gone and so are its ships / se fue la estacion y se van sus barcos
+							if = {
+								limit = { has_variable = gg_lent_squadron }
+								remove_variable = gg_lent_squadron
+								if = {
+									limit = { has_variable = gg_lent_squadron_ref }
+									var:gg_lent_squadron_ref ?= { disband_military_formation = yes }
+									remove_variable = gg_lent_squadron_ref
+								}
+							}
+							every_scope_state = {
+								limit = { has_modifier = gg_naval_anglo_french_station }
+								remove_modifier = gg_naval_anglo_french_station
+							}
+						}
 					}
 					# EN: T3b, FE-9 -- when the squadrons hold the river, the blockade is lifted.
 					# ES: T3b, FE-9 -- cuando las escuadras sostienen el rio, el bloqueo se levanta.

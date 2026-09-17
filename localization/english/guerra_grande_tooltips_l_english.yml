@@ -388,3 +388,7 @@
  gg_defensa_balance_bar_desc:0 "#R Colorados#!: doctores"
  gg_split_trim_blancos_tt:0 "@battalions! A new war begins: the #blue_value blancos'#! lead is cut in half (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! score)."
  gg_split_trim_colorados_tt:0 "@battalions! A new war begins: the #R colorados'#! lead is cut in half (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! score)."
+ gg_brown_squadron_name:0 "Brown's Squadron"
+ gg_lent_squadron_name:0 "The Anglo-French Squadron"
+ gg_naval_anglo_french_station:0 "The Anglo-French Station"
+ gg_naval_anglo_french_station_desc:0 "France and Britain hold the river: the port cannot be closed."

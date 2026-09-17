@@ -388,3 +388,7 @@
  gg_defensa_balance_bar_desc:0 "#R Colorados#!: doctores"
  gg_split_trim_blancos_tt:0 "@battalions! Empieza otra guerra: la ventaja de los #blue_value blancos#! se reduce a la mitad (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! de puntaje)."
  gg_split_trim_colorados_tt:0 "@battalions! Empieza otra guerra: la ventaja de los #R colorados#! se reduce a la mitad (#N -[GetGlobalVariable('gg_split_trim_amount').GetValue|v0]#! de puntaje)."
+ gg_brown_squadron_name:0 "Escuadra de Brown"
+ gg_lent_squadron_name:0 "Escuadra anglo-francesa"
+ gg_naval_anglo_french_station:0 "La estación anglo-francesa"
+ gg_naval_anglo_french_station_desc:0 "Francia y Gran Bretaña sostienen el río: el puerto no se puede cerrar."

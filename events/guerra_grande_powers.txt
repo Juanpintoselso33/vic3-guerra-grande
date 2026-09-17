@@ -199,6 +199,16 @@ gg_powers.11 = {
 		# ES: lo historico: resistir. Se pierde la escuadra y el bloqueo muere hasta que se vayan las
 		#     potencias, pero suben Rosas y la opinion americana.
 		set_global_variable = gg_brown_fleet_lost
+		# EN/ES: FN-1 -- Purvis took Brown's ships away, so the squadron leaves the map as well
+		#     / Purvis se llevo los barcos de Brown, asi que la escuadra tambien se va del mapa
+		c:CER ?= {
+			if = {
+				limit = { has_variable = gg_brown_squadron_ref }
+				var:gg_brown_squadron_ref ?= { disband_military_formation = yes }
+				remove_variable = gg_brown_squadron_ref
+				remove_variable = gg_brown_squadron_raised
+			}
+		}
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		add_modifier = { name = gg_powers_american_cause years = 10 is_decaying = yes }
 		ai_chance = { base = 55 }
