@@ -24,11 +24,14 @@ guerra_grande.1 = {
 	}
 
 	immediate = {
-		add_contextless_journal_entry = je_guerra_grande
-		# EN: T5 -- phase 0 already scored before the journal existed; bring the bar up to date.
-		# ES: T5 -- la fase 0 ya puntuo antes de que existiera el journal; se pone la barra al dia.
-		je:je_guerra_grande ?= {
-			add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
+		# EN/ES: the journal now opens on game start; this only covers a save from before that
+		#     (and brings its bar up to date) / el journal ya abre al empezar; esto cubre partidas viejas
+		if = {
+			limit = { NOT = { has_journal_entry = je_guerra_grande } }
+			add_contextless_journal_entry = je_guerra_grande
+			je:je_guerra_grande ?= {
+				add_progress = { value = guerra_grande_blanco_lead name = guerra_grande_war_score_bar }
+			}
 		}
 		hidden_effect = {
 			# EN: the ribbons name the parties. Vanilla groups only: Oribe sits with the
