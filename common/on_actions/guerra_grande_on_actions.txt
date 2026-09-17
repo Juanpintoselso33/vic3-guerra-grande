@@ -51,6 +51,8 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_intro.1 days = 1 popup = yes }     # La Guerra Grande
 			trigger_event = { id = gg_intro.2 days = 2 popup = yes }     # La intervencion extranjera
 			trigger_event = { id = gg_intro.3 days = 3 popup = yes }     # Doctores y caudillos
+			# EN/ES: playtest 2026-09-17 -- the President's portrait, before his first decision / el retrato del Presidente, antes de su primera decision
+			trigger_event = { id = guerra_grande.11 days = 4 popup = yes }  # 1836.01.05 Oribe
 			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).
 			trigger_event = { id = gg_prewar.1 days = 5 popup = yes }     # 1836.01.06 El Moderador, after the three journals
 			trigger_event = { id = gg_prewar.2 days = 74 popup = yes }    # 1836.03.15 Farrapos

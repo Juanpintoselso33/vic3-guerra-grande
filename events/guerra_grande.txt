@@ -51,10 +51,15 @@ guerra_grande.1 = {
 			# 1838.10.24 - Rivera marches on Montevideo.
 			trigger_event = { id = guerra_grande.2 days = 765 popup = yes }
 			# The four men the war is about, one every six months of the wait.
-			trigger_event = { id = guerra_grande.11 days = 100 popup = yes }
-			trigger_event = { id = guerra_grande.12 days = 280 popup = yes }
-			trigger_event = { id = guerra_grande.13 days = 460 popup = yes }
-			trigger_event = { id = guerra_grande.14 days = 640 popup = yes }
+			# EN: playtest 2026-09-17 -- each portrait when its man enters the scene: Rivera as he flees
+			#     after Carpinteria, Lavalleja with the victors, Artigas after Oribe's fall (24/10/1838).
+			#     Oribe's is scheduled from on_game_start (January 1836).
+			# ES: cada retrato cuando su hombre entra en escena: Rivera al huir despues de Carpinteria,
+			#     Lavalleja con los vencedores, Artigas despues de la caida de Oribe. El de Oribe sale
+			#     desde on_game_start (enero de 1836).
+			trigger_event = { id = guerra_grande.13 days = 25 popup = yes }    # 1836.10.14 Rivera
+			trigger_event = { id = guerra_grande.12 days = 55 popup = yes }    # 1836.11.13 Lavalleja
+			trigger_event = { id = guerra_grande.14 days = 780 popup = yes }   # 1838.11.08 Artigas
 		}
 	}
 
