@@ -310,3 +310,8 @@
  je_gg_patrons_status:0 "#blue_value Rosas#! #V [GetGlobalVariable('gg_patron_rosas').GetValue|v0]#!  ·  #R France#! #V [GetGlobalVariable('gg_patron_francia').GetValue|v0]#!  ·  #R Britain#! #V [GetGlobalVariable('gg_patron_britania').GetValue|v0]#!  ·  #R Brazil#! #V [GetGlobalVariable('gg_patron_brasil').GetValue|v0]#!  ·  Urquiza #V [GetGlobalVariable('gg_patron_urquiza').GetValue|v0]#!"
  je_gg_patrons_complete_tt:0 "The peace is signed."
  je_gg_patrons_fail_tt:0 "The Republic fell into foreign hands."
+ je_gg_siege:0 "The Great Siege"
+ je_gg_siege_reason:0 "Oribe's army stands before the walls of Montevideo."
+ je_gg_siege_desc:0 "On 16 February 1843 Oribe's army arrived before Montevideo, and the siege would last eight and a half years. The Cerrito had three camps: the Cerrito de la Victoria, where the troops were organised; the Villa de la Restauración, seat of the government; and the port of the Buceo, through which the hides went out. Inside the walls, the Defensa raised an army under José María Paz and Melchor Pacheco y Obes, and the French, Spanish and Italian communities formed legions that together outnumbered the oriental soldiers.\n\n#b How it works:#! every month with the sea shut adds one to the siege, and every month with the sea open takes one away. At 24 the Defensa must negotiate (12 from 1851). A truce freezes it. France and Britain open the sea: follow it in «The Foreign Intervention»."
+ je_gg_siege_status:0 "@ships! #b Months with the sea shut:#! #V [GetGlobalVariable('gg_siege_months').GetValue|v0]#! of #V 24#! (#V 12#! from 1851)"
+ je_gg_siege_complete_tt:0 "The siege ended with the peace."

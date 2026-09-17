@@ -461,6 +461,7 @@ guerra_grande.3 = {
 			#     esto la barra no se movia y ninguna batalla contaba.
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 			create_diplomatic_play = {
 				name = guerra_grande_play
 				target_country = c:URU
@@ -870,6 +871,7 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 		ai_chance = {
 			base = 80
 		}
@@ -1011,6 +1013,7 @@ guerra_grande.3 = {
 			set_capital = STATE_MONTEVIDEO
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 			add_modifier = {
 				name = guerra_grande_walls_of_montevideo
 				years = 15
@@ -1420,6 +1423,7 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		if = { limit = { NOT = { has_journal_entry = je_gg_siege } } add_contextless_journal_entry = je_gg_siege }
 		ai_chance = {
 			base = 20
 		}

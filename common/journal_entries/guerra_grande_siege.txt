@@ -1,0 +1,62 @@
+﻿# EN: playtest 2026-09-17 -- "El Sitio Grande" (16 February 1843 - 8 October 1851) gets its own
+#     journal from the split: the siege bar, the Cerrito's river blockade and the Defensa's legions.
+#     Display and buttons only: the siege counter itself still runs in je_guerra_grande.
+# ES: "El Sitio Grande" tiene su propio journal desde la particion: la barra del asedio, el bloqueo
+#     del Cerrito y las legiones de la Defensa. Solo muestra y botones: el contador sigue en
+#     je_guerra_grande.
+je_gg_siege = {
+	group = je_group_guerra_grande
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	scripted_progress_bar = gg_siege_bar
+	scripted_button = guerra_grande_italian_legion_button
+	scripted_button = guerra_grande_french_legion_button
+	scripted_button = guerra_grande_river_blockade_button
+
+	should_be_involved = {
+		OR = {
+			c:URU ?= this
+			c:CER ?= this
+			has_variable = guerra_grande_cerrito_government
+			has_variable = guerra_grande_defensa_government
+		}
+	}
+
+	should_show_when_not_involved = {
+		always = no
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_gg_siege_status
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			scope:journal_entry = { set_bar_progress = { name = gg_siege_bar value = global_var:gg_siege_months } }
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_gg_siege_complete_tt
+			has_global_variable = gg_peace_settled
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = je_gg_patrons_fail_tt
+			has_global_variable = gg_war_failed
+		}
+	}
+
+	weight = 98
+}

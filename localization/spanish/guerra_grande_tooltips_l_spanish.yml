@@ -310,3 +310,8 @@
  je_gg_patrons_status:0 "#blue_value Rosas#! #V [GetGlobalVariable('gg_patron_rosas').GetValue|v0]#!  ·  #R Francia#! #V [GetGlobalVariable('gg_patron_francia').GetValue|v0]#!  ·  #R G. Bretaña#! #V [GetGlobalVariable('gg_patron_britania').GetValue|v0]#!  ·  #R Brasil#! #V [GetGlobalVariable('gg_patron_brasil').GetValue|v0]#!  ·  Urquiza #V [GetGlobalVariable('gg_patron_urquiza').GetValue|v0]#!"
  je_gg_patrons_complete_tt:0 "La paz está firmada."
  je_gg_patrons_fail_tt:0 "La República quedó en manos extranjeras."
+ je_gg_siege:0 "El Sitio Grande"
+ je_gg_siege_reason:0 "El ejército de Oribe está frente a los muros de Montevideo."
+ je_gg_siege_desc:0 "El 16 de febrero de 1843 el ejército de Oribe llegó frente a Montevideo, y el sitio iba a durar ocho años y medio. El Cerrito tenía tres campamentos: el Cerrito de la Victoria, donde se organizaba la tropa; la Villa de la Restauración, donde estaba el gobierno; y el puerto del Buceo, por donde salían los cueros. Adentro de los muros, la Defensa armó un ejército que mandaban José María Paz y Melchor Pacheco y Obes, y las colectividades francesa, española e italiana formaron legiones que, juntas, eran más que los soldados orientales.\n\n#b Cómo funciona:#! cada mes con el mar cerrado suma uno al asedio, y cada mes con el mar abierto le resta uno. Con 24, la Defensa tiene que negociar (desde 1851, con 12). La tregua lo congela. El mar lo abren Francia y Gran Bretaña: se sigue en «La intervención extranjera»."
+ je_gg_siege_status:0 "@ships! #b Meses con el mar cerrado:#! #V [GetGlobalVariable('gg_siege_months').GetValue|v0]#! de #V 24#! (#V 12#! desde 1851)"
+ je_gg_siege_complete_tt:0 "El sitio terminó con la paz."
