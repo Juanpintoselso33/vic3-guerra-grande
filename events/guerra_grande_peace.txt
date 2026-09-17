@@ -1601,7 +1601,9 @@ gg_peace.7 = {
 			create_diplomatic_pact = { country = ROOT type = rivalry }
 		}
 		every_scope_state = {
-			add_claim = c:ARG
+			state_region = {
+				add_claim = c:ARG
+			}
 		}
 		add_modifier = { name = gg_peace_european_guarantee years = 10 is_decaying = yes }
 		ai_chance = { base = 70 }
@@ -1619,7 +1621,9 @@ gg_peace.7 = {
 			create_diplomatic_pact = { country = ROOT type = rivalry }
 		}
 		every_scope_state = {
-			add_claim = c:ARG
+			state_region = {
+				add_claim = c:ARG
+			}
 		}
 		add_modifier = { name = guerra_grande_no_victors_no_vanquished years = 10 is_decaying = yes }
 		ai_chance = { base = 30 }

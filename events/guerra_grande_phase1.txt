@@ -10,13 +10,13 @@
 
 
 # F1-0 - the blanco path converges (1 February 1839)
-gg_phase1.0 = {
+gg_phase1.9 = {
 	type = country_event
 	placement = ROOT
 
-	title = gg_phase1.0.t
-	desc = gg_phase1.0.d
-	flavor = gg_phase1.0.f
+	title = gg_phase1.9.t
+	desc = gg_phase1.9.d
+	flavor = gg_phase1.9.f
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
@@ -47,7 +47,7 @@ gg_phase1.0 = {
 	}
 
 	option = {
-		name = gg_phase1.0.a
+		name = gg_phase1.9.a
 		default_option = yes
 		# EN: F1-0 -- the blanco path converges: Oribe falls anyway, and leaves with his army.
 		# ES: F1-0 -- el camino blanco converge: Oribe cae igual, y se va con su ejercito.
@@ -62,7 +62,7 @@ gg_phase1.0 = {
 	}
 
 	option = {
-		name = gg_phase1.0.b
+		name = gg_phase1.9.b
 		# EN: negotiate the exit: fewer men go, but Rivera grants an amnesty the doctores remember.
 		# ES: negociar la salida: se van menos hombres, pero Rivera da una amnistia que los doctores recuerdan.
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }

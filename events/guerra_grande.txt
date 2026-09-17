@@ -194,7 +194,7 @@ guerra_grande.2 = {
 	option = {
 		name = guerra_grande.2.b
 		# EN/ES: T6, F1-0 -- Oribe holds on, but falls anyway in 1839 / Oribe resiste, pero cae igual en 1839
-		trigger_event = { id = gg_phase1.0 days = 100 popup = yes }   # 1839.02.01
+		trigger_event = { id = gg_phase1.9 days = 100 popup = yes }   # 1839.02.01
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		change_global_variable = {

@@ -43,16 +43,24 @@ gg_systems_init = {
 #     al otro. Mueve el puntaje, y la barra si el journal ya existe
 #     (antes de Carpinteria no existe; .1 sincroniza la barra al abrirlo).
 gg_score_blanco = {
-	change_global_variable = { name = guerra_grande_blanco_score add = $AMOUNT$ }
-	je:je_guerra_grande ?= {
-		add_progress = { value = $AMOUNT$ name = guerra_grande_war_score_bar }
+	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+	custom_tooltip = {
+		text = gg_tt_score_blanco_$AMOUNT$
+		change_global_variable = { name = guerra_grande_blanco_score add = $AMOUNT$ }
+		je:je_guerra_grande ?= {
+			add_progress = { value = $AMOUNT$ name = guerra_grande_war_score_bar }
+		}
 	}
 }
 
 gg_score_colorado = {
-	change_global_variable = { name = guerra_grande_colorado_score add = $AMOUNT$ }
-	je:je_guerra_grande ?= {
-		add_progress = { value = -$AMOUNT$ name = guerra_grande_war_score_bar }
+	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+	custom_tooltip = {
+		text = gg_tt_score_colorado_$AMOUNT$
+		change_global_variable = { name = guerra_grande_colorado_score add = $AMOUNT$ }
+		je:je_guerra_grande ?= {
+			add_progress = { value = -$AMOUNT$ name = guerra_grande_war_score_bar }
+		}
 	}
 }
 
@@ -61,30 +69,38 @@ gg_score_colorado = {
 # ES: uso: gg_patron_change = { PATRON = francia DELTA = -15 }
 #     PATRON es rosas, francia, britania, brasil o urquiza. El resultado queda entre 0 y 100.
 gg_patron_change = {
-	change_global_variable = { name = gg_patron_$PATRON$ add = $DELTA$ }
-	if = {
-		limit = { global_var:gg_patron_$PATRON$ > 100 }
-		set_global_variable = { name = gg_patron_$PATRON$ value = 100 }
+	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+	custom_tooltip = {
+		text = gg_tt_patron_$PATRON$_$DELTA$
+		change_global_variable = { name = gg_patron_$PATRON$ add = $DELTA$ }
+		if = {
+			limit = { global_var:gg_patron_$PATRON$ > 100 }
+			set_global_variable = { name = gg_patron_$PATRON$ value = 100 }
+		}
+		else_if = {
+			limit = { global_var:gg_patron_$PATRON$ < 0 }
+			set_global_variable = { name = gg_patron_$PATRON$ value = 0 }
+		}
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_PATRON $PATRON$ $DELTA$"
 	}
-	else_if = {
-		limit = { global_var:gg_patron_$PATRON$ < 0 }
-		set_global_variable = { name = gg_patron_$PATRON$ value = 0 }
-	}
-	debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_PATRON $PATRON$ $DELTA$"
 }
 
 # EN: usage: gg_defensa_line_set = { LINE = 2 }  (1 = Pacheco y Obes, 2 = Herrera y Obes)
 # ES: uso: gg_defensa_line_set = { LINE = 2 }  (1 = Pacheco y Obes, 2 = Herrera y Obes)
 gg_defensa_line_set = {
-	set_global_variable = { name = gg_defensa_line value = $LINE$ }
-	debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_LINE $LINE$"
-	# EN/ES: T9, FG-1 -- line 1 is Pacheco y Obes's / la linea 1 es la de Pacheco y Obes
-	if = {
-		limit = { global_var:gg_defensa_line <= 1 }
-		c:URU ?= {
-			random_scope_character = {
-				limit = { has_template = URU_gg_melchor_pacheco_y_obes }
-				set_as_interest_group_leader = yes
+	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+	custom_tooltip = {
+		text = gg_tt_line_$LINE$
+		set_global_variable = { name = gg_defensa_line value = $LINE$ }
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_LINE $LINE$"
+		# EN/ES: T9, FG-1 -- line 1 is Pacheco y Obes's / la linea 1 es la de Pacheco y Obes
+		if = {
+			limit = { global_var:gg_defensa_line <= 1 }
+			c:URU ?= {
+				random_scope_character = {
+					limit = { has_template = URU_gg_melchor_pacheco_y_obes }
+					set_as_interest_group_leader = yes
+				}
 			}
 		}
 	}
@@ -93,16 +109,20 @@ gg_defensa_line_set = {
 # EN: usage: gg_cerrito_balance_change = { DELTA = 10 }  (positive = towards the doctores)
 # ES: uso: gg_cerrito_balance_change = { DELTA = 10 }  (positivo = hacia los doctores)
 gg_cerrito_balance_change = {
-	change_global_variable = { name = gg_cerrito_balance add = $DELTA$ }
-	if = {
-		limit = { global_var:gg_cerrito_balance > 100 }
-		set_global_variable = { name = gg_cerrito_balance value = 100 }
+	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
+	custom_tooltip = {
+		text = gg_tt_balance_$DELTA$
+		change_global_variable = { name = gg_cerrito_balance add = $DELTA$ }
+		if = {
+			limit = { global_var:gg_cerrito_balance > 100 }
+			set_global_variable = { name = gg_cerrito_balance value = 100 }
+		}
+		else_if = {
+			limit = { global_var:gg_cerrito_balance < -100 }
+			set_global_variable = { name = gg_cerrito_balance value = -100 }
+		}
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BALANCE $DELTA$"
 	}
-	else_if = {
-		limit = { global_var:gg_cerrito_balance < -100 }
-		set_global_variable = { name = gg_cerrito_balance value = -100 }
-	}
-	debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BALANCE $DELTA$"
 }
 
 # EN: T6, C18/FX-4. The whole post-split calendar, in one place, on absolute historical dates.
