@@ -122,3 +122,19 @@ gg_intro.4 = {
 		ai_chance = { base = 100 }
 	}
 }
+
+# EN/ES: hidden -- the partition calendar, the day after the split / el calendario de la particion
+gg_intro.5 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_global_variable = guerra_grande_split_done
+		NOT = { has_global_variable = gg_partition_calendar_done }
+	}
+
+	immediate = {
+		set_global_variable = gg_partition_calendar_done
+		gg_partition_calendar = yes
+	}
+}

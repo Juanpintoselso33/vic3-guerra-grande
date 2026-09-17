@@ -94,7 +94,7 @@ guerra_grande_french_legion_button = {
 	}
 
 	effect = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON french_legion pressed by [THIS.GetNameNoFormatting]"
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON french_legion pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.

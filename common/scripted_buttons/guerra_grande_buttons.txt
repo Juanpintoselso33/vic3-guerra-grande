@@ -43,7 +43,7 @@ guerra_grande_foreign_intervention_button = {
 	effect = {
 		# EN/ES: instrumented 2026-09-16 to answer "is the AI ever pressing this button" --
 		#        writes to game.log so the next playthrough gives real data instead of a guess.
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON foreign_intervention pressed by [THIS.GetNameNoFormatting]"
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON foreign_intervention pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -167,7 +167,7 @@ guerra_grande_italian_legion_button = {
 	}
 
 	effect = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON italian_legion pressed by [THIS.GetNameNoFormatting]"
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON italian_legion pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.

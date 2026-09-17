@@ -844,7 +844,10 @@ guerra_grande.3 = {
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
-		gg_partition_calendar = yes
+		# EN/ES: playtest 2026-09-17 -- a day later (gg_intro.5): tags just changed or created in this
+		#     same effect did not resolve, and the Cerrito's calendar was lost for a blanco player
+		#     / un dia despues: los tags recien cambiados o creados no se resolvian en este mismo efecto
+		trigger_event = { id = gg_intro.5 days = 1 }
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
 		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
 		if = {
@@ -1396,7 +1399,10 @@ guerra_grande.3 = {
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
 		# EN/ES: T6 -- the whole post-split calendar / todo el calendario posterior a la particion
-		gg_partition_calendar = yes
+		# EN/ES: playtest 2026-09-17 -- a day later (gg_intro.5): tags just changed or created in this
+		#     same effect did not resolve, and the Cerrito's calendar was lost for a blanco player
+		#     / un dia despues: los tags recien cambiados o creados no se resolvian en este mismo efecto
+		trigger_event = { id = gg_intro.5 days = 1 }
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
 		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
 		if = {

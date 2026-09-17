@@ -67,7 +67,7 @@ guerra_grande_montonera_levy_button = {
 	}
 
 	effect = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON montonera pressed by [THIS.GetNameNoFormatting]"
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON montonera pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -213,7 +213,7 @@ guerra_grande_river_blockade_button = {
 	}
 
 	effect = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON blockade pressed by [THIS.GetNameNoFormatting]"
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON blockade pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.

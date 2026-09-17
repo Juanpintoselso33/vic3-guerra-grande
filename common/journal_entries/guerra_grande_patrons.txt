@@ -38,7 +38,19 @@ je_gg_patrons = {
 
 	on_monthly_pulse = {
 		effect = {
-			scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+			# EN/ES: keeps the flag countries referenced in script (the engine ignores loc reads)
+			if = {
+				limit = {
+					has_global_variable = gg_flag_arg
+					has_global_variable = gg_flag_fra
+					has_global_variable = gg_flag_gbr
+					has_global_variable = gg_flag_brz
+				}
+				scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+			}
+			else = {
+				scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+			}
 		}
 	}
 

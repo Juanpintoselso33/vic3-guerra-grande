@@ -135,19 +135,22 @@ gg_rivera.1 = {
 				add_commander_rank = 1
 			}
 		}
-		create_military_formation = {
-			type = army
-			hq_region = sr:region_brazil
-			name = Ejercito_de_Operaciones
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Ejercito_de_Operaciones
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
 			}
 		}
 		add_modifier = {
@@ -179,19 +182,22 @@ gg_rivera.1 = {
 		gg_defensa_balance_change = { DELTA = 30 }
 		default_option = yes
 		set_global_variable = gg_rivera_left_alone
-		create_military_formation = {
-			type = army
-			hq_region = sr:region_brazil
-			name = Guardia_Nacional_de_Montevideo
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Guardia_Nacional_de_Montevideo
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		add_modifier = {
@@ -400,14 +406,17 @@ gg_rivera.2 = {
 				add_commander_rank = 1
 			}
 		}
-		create_military_formation = {
-			type = army
-			hq_region = sr:region_brazil
-			name = Division_del_Yaguaron
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
-				count = 3
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Division_del_Yaguaron
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_MONTEVIDEO
+					count = 3
+				}
 			}
 		}
 		c:BRZ ?= {
@@ -596,19 +605,22 @@ gg_rivera.3 = {
 		}
 		# The cabinet that decreed his banishment resigns in a day.
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_armed_forces }
-		create_military_formation = {
-			type = army
-			hq_region = sr:region_brazil
-			name = Ejercito_de_Operaciones
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Ejercito_de_Operaciones
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_MONTEVIDEO
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		add_modifier = {
@@ -895,19 +907,22 @@ gg_rivera.4 = {
 			}
 		}
 		set_ruling_interest_groups = { ig_armed_forces ig_petty_bourgeoisie }
-		create_military_formation = {
-			type = army
-			hq_region = sr:region_brazil
-			name = Ejercito_de_Operaciones
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Ejercito_de_Operaciones
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
 			}
 		}
 		add_modifier = {
