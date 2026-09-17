@@ -74,12 +74,15 @@ gg_siege_bar = {
 	max_value = 24
 }
 
-# EN/ES: the two factions' balances (desc = left = positive = doctores) / las dos balanzas
+# EN/ES: playtest 2026-09-17 -- the two factions' balances as plain single-sided bars, each in its
+#     party's colour (default = dark celeste for the blancos, default_bad = red for the colorados):
+#     full = the doctores rule, empty = the caudillos. Juan did not want the carlist double bar here.
+#     / las dos balanzas como barras simples, cada una con el color de su partido: llena = doctores.
 gg_cerrito_balance_bar = {
 	name = "gg_cerrito_balance_bar"
-	desc = "gg_balance_bar_doctores_desc"
-	second_desc = "gg_balance_bar_caudillos_desc"
-	double_sided_gold = yes
+	desc = "gg_cerrito_balance_bar_desc"
+	second_desc = "gg_balance_bar_doctores_desc"
+	default = yes
 	start_value = 0
 	min_value = -100
 	max_value = 100
@@ -87,9 +90,9 @@ gg_cerrito_balance_bar = {
 
 gg_defensa_balance_bar = {
 	name = "gg_defensa_balance_bar"
-	desc = "gg_balance_bar_doctores_desc"
-	second_desc = "gg_balance_bar_caudillos_desc"
-	double_sided_gold = yes
+	desc = "gg_defensa_balance_bar_desc"
+	second_desc = "gg_balance_bar_doctores_desc"
+	default_bad = yes
 	start_value = 0
 	min_value = -100
 	max_value = 100
