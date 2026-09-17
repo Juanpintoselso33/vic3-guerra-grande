@@ -128,8 +128,16 @@ gg_intro.5 = {
 	type = country_event
 	hidden = yes
 
+	# EN: playtest 2026-09-17, SECOND round. The event never fired, in either branch of the split:
+	#     the engine checks a scheduled event's trigger WHEN IT IS SCHEDULED, and at that moment
+	#     guerra_grande_split_done is not set yet (the option sets it at its end). So the trigger
+	#     asked for a mark that could not exist, and the event was dropped -- silently, which is why
+	#     the Cerrito's calendar and its war went missing. The guard lives in the immediate now.
+	# ES: playtest, SEGUNDA vuelta. El evento no salia en ninguna de las dos ramas del corte: el
+	#     motor chequea el trigger de un evento agendado CUANDO SE AGENDA, y ahi todavia no esta
+	#     guerra_grande_split_done (la opcion la prende al final). El trigger pedia una marca que no
+	#     podia existir y el evento se descartaba, en silencio. La guarda ahora va en el immediate.
 	trigger = {
-		has_global_variable = guerra_grande_split_done
 		NOT = { has_global_variable = gg_partition_calendar_done }
 	}
 

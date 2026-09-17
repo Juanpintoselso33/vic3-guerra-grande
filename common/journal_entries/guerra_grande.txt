@@ -82,6 +82,19 @@ je_guerra_grande = {
 
 	on_monthly_pulse = {
 		effect = {
+			# EN: playtest 2026-09-17 -- self-healing: if the split happened and the post-partition
+			#     calendar never ran (a scheduled event whose trigger was checked too early was
+			#     dropped), run it now. This also repairs saves made before the fix.
+			# ES: auto-reparacion: si la particion ocurrio y el calendario posterior nunca corrio
+			#     (un evento agendado cuyo trigger se chequeo demasiado temprano se descartaba), se
+			#     corre ahora. Tambien repara partidas guardadas antes del arreglo.
+			if = {
+				limit = {
+					has_global_variable = guerra_grande_split_done
+					NOT = { has_global_variable = gg_partition_calendar_done }
+				}
+				trigger_event = { id = gg_intro.5 days = 0 }
+			}
 			# EN/ES: playtest 2026-09-17 -- the bar is read from the score every month, on this
 			#     country's own journal, so it never drifts / la barra se lee del puntaje cada mes
 			scope:journal_entry = {
