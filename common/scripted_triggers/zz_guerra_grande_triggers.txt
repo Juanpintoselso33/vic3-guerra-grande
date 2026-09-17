@@ -85,16 +85,13 @@ gg_cerrito_ripe = {
 					year >= 1851
 					enemy_occupation >= 0.3
 				}
-				any_scope_war = {
-					gg_is_the_war = yes
-					OR = {
-						has_war_support = { target = c:CER value <= 0 }
-						AND = {
-							year >= 1851
-							has_war_support = { target = c:CER value <= 25 }
-						}
-					}
-				}
+				# EN: playtest 2026-09-17 -- war support at zero used to be enough, and the player was
+				#     annexed by the enemy's peace menu the week it touched zero. Exhaustion now has
+				#     to be deep AND sustained: three months counted by the journal's pulse.
+				# ES: el apoyo en cero alcanzaba, y al jugador lo anexaba el menu de paz del enemigo
+				#     la semana que lo tocaba. Ahora el agotamiento tiene que ser hondo Y sostenido:
+				#     tres meses contados por el pulso del journal.
+				global_var:gg_cerrito_exhausted >= 3
 			}
 		}
 	}
@@ -118,18 +115,8 @@ gg_defensa_ripe = {
 			year >= 1851
 			global_var:gg_siege_months >= 12
 		}
-		c:URU ?= {
-			any_scope_war = {
-				gg_is_the_war = yes
-				OR = {
-					has_war_support = { target = c:URU value <= 0 }
-					AND = {
-						year >= 1851
-						has_war_support = { target = c:URU value <= 25 }
-					}
-				}
-			}
-		}
+		# EN/ES: the same rule on this side / la misma regla de este lado
+		global_var:gg_defensa_exhausted >= 3
 	}
 }
 

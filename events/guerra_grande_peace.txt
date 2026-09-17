@@ -1745,3 +1745,106 @@ gg_peace.9 = {
 		ai_chance = { base = 100 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.11 and gg_peace.12 -- THE BEATEN GOVERNMENT SPEAKS FIRST (playtest 2026-09-17).
+#     The arbiter used to hand the peace menu straight to the winner, and every option of that menu
+#     annexes the loser: a player whose war support touched zero was annexed without seeing a single
+#     event. Now the government that is losing is asked first. Asking for terms hands the menu to the
+#     other side, as before. Fighting on costs war support and shuts the arbiter for a year, and the
+#     exhaustion counter starts again -- the war can still be lost, but never without the player.
+# ES: gg_peace.11 y gg_peace.12 -- EL QUE VA PERDIENDO HABLA PRIMERO. El arbitro le pasaba el menu de
+#     paz directo al ganador, y todas las opciones de ese menu anexan al perdedor: al jugador cuyo
+#     apoyo tocaba cero lo anexaban sin ver un solo evento. Ahora se le pregunta primero al que
+#     pierde. Pedir condiciones le pasa el menu al otro. Seguir peleando cuesta apoyo a la guerra y
+#     cierra el arbitro por un anio, y el contador de agotamiento vuelve a empezar.
+# -------------------------------------------------------------------------------------------------
+gg_peace.11 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.11.t
+	desc = gg_peace.11.d
+	flavor = gg_peace.11.f
+
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 1825
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	option = {
+		name = gg_peace.11.a
+		default_option = yes
+		custom_tooltip = gg_peace_ask_terms_tt
+		# EN/ES: the mark travels with the request, so the arbiter does not offer twice / la marca va
+		#     con el pedido, para que el arbitro no ofrezca dos veces
+		set_global_variable = gg_peace_offered
+		hidden_effect = {
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.2 days = 3 popup = yes }
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_peace.11.b
+		custom_tooltip = gg_peace_fight_on_tt
+		gg_peace_fight_on = yes
+		ai_chance = { base = 40 }
+	}
+}
+
+gg_peace.12 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.12.t
+	desc = gg_peace.12.d
+	flavor = gg_peace.12.f
+
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 1825
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	option = {
+		name = gg_peace.12.a
+		default_option = yes
+		custom_tooltip = gg_peace_ask_terms_tt
+		# EN/ES: the mark travels with the request, so the arbiter does not offer twice / la marca va
+		#     con el pedido, para que el arbitro no ofrezca dos veces
+		set_global_variable = gg_peace_offered
+		hidden_effect = {
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_peace.12.b
+		custom_tooltip = gg_peace_fight_on_tt
+		gg_peace_fight_on = yes
+		ai_chance = { base = 40 }
+	}
+}

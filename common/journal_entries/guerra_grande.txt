@@ -308,6 +308,45 @@ je_guerra_grande = {
 					#     war support; France and Brazil pay the Defensa, Rosas pays the Cerrito.
 					# ES: T3b, C19 -- los padrinos, una vez por mes. El bando con menos de 40 de sosten
 					#     pierde apoyo a la guerra; Francia y Brasil le pagan a la Defensa, Rosas al Cerrito.
+					# EN: playtest 2026-09-17 -- exhaustion is counted, not snapshotted, and it has a floor.
+					#     A government is exhausted when its war support is at -25 or worse; three months in a
+					#     row of that is what opens the enemy's peace menu. And nobody is allowed to slide to
+					#     -100, which is where the engine capitulates on its own and the winner takes everything.
+					# ES: el agotamiento se cuenta, no se mira de golpe, y tiene piso. Un gobierno esta agotado
+					#     con el apoyo en -25 o peor; tres meses seguidos abren el menu de paz del enemigo. Y a
+					#     nadie se lo deja caer a -100, que es donde el motor capitula solo.
+					c:CER ?= {
+						every_scope_war = {
+							limit = { gg_is_the_war = yes }
+							if = {
+								limit = { has_war_support = { target = c:CER value <= -25 } }
+								change_global_variable = { name = gg_cerrito_exhausted add = 1 }
+							}
+							else = {
+								set_global_variable = { name = gg_cerrito_exhausted value = 0 }
+							}
+							if = {
+								limit = { has_war_support = { target = c:CER value <= -60 } }
+								add_war_war_support = { target = c:CER value = 15 }
+							}
+						}
+					}
+					c:URU ?= {
+						every_scope_war = {
+							limit = { gg_is_the_war = yes }
+							if = {
+								limit = { has_war_support = { target = c:URU value <= -25 } }
+								change_global_variable = { name = gg_defensa_exhausted add = 1 }
+							}
+							else = {
+								set_global_variable = { name = gg_defensa_exhausted value = 0 }
+							}
+							if = {
+								limit = { has_war_support = { target = c:URU value <= -60 } }
+								add_war_war_support = { target = c:URU value = 15 }
+							}
+						}
+					}
 					if = {
 						limit = { gg_defensa_backing < 40 }
 						c:URU ?= {
@@ -389,17 +428,21 @@ je_guerra_grande = {
 				else_if = {
 					limit = { gg_defensa_ripe = yes }
 					set_global_variable = gg_peace_offered
+					# EN: playtest 2026-09-17 -- the side that is beaten is asked first. It used to be annexed by
+					#     the winner's menu without seeing anything; now it can ask for terms or fight on.
+					# ES: al que va perdiendo se le pregunta primero. Antes lo anexaba el menu del ganador sin que
+					#     viera nada; ahora puede pedir condiciones o seguir peleando.
 					random_country = {
-						limit = { has_variable = guerra_grande_cerrito_government }
-						trigger_event = { id = gg_peace.2 days = 3 popup = yes }
+						limit = { has_variable = guerra_grande_defensa_government }
+						trigger_event = { id = gg_peace.11 days = 1 popup = yes }
 					}
 				}
 				else_if = {
 					limit = { gg_cerrito_ripe = yes }
 					set_global_variable = gg_peace_offered
 					random_country = {
-						limit = { has_variable = guerra_grande_defensa_government }
-						trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+						limit = { has_variable = guerra_grande_cerrito_government }
+						trigger_event = { id = gg_peace.12 days = 1 popup = yes }
 					}
 				}
 				# EN/ES: T7, F3-2 -- a long stalemate brings back the powers' proposal, once

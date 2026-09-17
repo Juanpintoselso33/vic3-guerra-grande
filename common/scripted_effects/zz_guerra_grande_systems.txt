@@ -37,6 +37,10 @@ gg_systems_init = {
 	set_global_variable = { name = guerra_grande_blanco_score value = 0 }
 	# EN/ES: T2, C15 -- months of closed sea / meses de mar cerrado
 	set_global_variable = { name = gg_siege_months value = 0 }
+	# EN/ES: months in a row with the war support of each government at -25 or worse / meses seguidos
+	#     con el apoyo de cada gobierno en -25 o peor
+	set_global_variable = { name = gg_cerrito_exhausted value = 0 }
+	set_global_variable = { name = gg_defensa_exhausted value = 0 }
 	set_global_variable = { name = guerra_grande_colorado_score value = 0 }
 }
 
@@ -456,4 +460,26 @@ gg_president_historical = {
 		limit = { has_global_variable = gg_rivera_presidency }
 		gg_ruler_set = { TEMPLATE = URU_gg_gabriel_antonio_pereira }
 	}
+}
+
+# EN: fighting on after the arbiter declared this government beaten (playtest 2026-09-17): the
+#     exhaustion counter restarts, the arbiter is shut for a year, and the decision costs what such
+#     a decision costs.
+# ES: seguir peleando despues de que el arbitro declaro agotado a este gobierno: el contador vuelve
+#     a cero, el arbitro se cierra por un anio y la decision cuesta lo que cuesta.
+gg_peace_fight_on = {
+	remove_global_variable = gg_peace_offered
+	set_global_variable = { name = gg_peace_cooldown days = 365 }
+	if = {
+		limit = { has_variable = guerra_grande_cerrito_government }
+		set_global_variable = { name = gg_cerrito_exhausted value = 0 }
+	}
+	else = {
+		set_global_variable = { name = gg_defensa_exhausted value = 0 }
+	}
+	every_scope_war = {
+		limit = { gg_is_the_war = yes }
+		add_war_war_support = { target = root value = -10 }
+	}
+	add_radicals = { value = small_radicals }
 }
