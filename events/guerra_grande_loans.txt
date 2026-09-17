@@ -65,7 +65,7 @@ gg_loan.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		NOT = { has_variable = gg_loan_settled }
 	}
@@ -153,7 +153,7 @@ gg_loan.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		NOT = { has_variable = gg_loan_settled }
 	}
@@ -275,7 +275,7 @@ gg_loan.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		NOT = { has_variable = gg_loan_settled }
 		# EN/ES: T1, C14 -- only while the war is open / solo con la guerra abierta
 		has_global_variable = guerra_grande_open_war
@@ -396,7 +396,7 @@ gg_loan.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		NOT = { has_variable = gg_loan_settled }
 		# EN/ES: T1, C14 -- only while the war is open / solo con la guerra abierta
 		has_global_variable = guerra_grande_open_war

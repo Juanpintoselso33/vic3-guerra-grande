@@ -28,7 +28,7 @@ gg_phase1.9 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_variable = guerra_grande_blanco_path
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
@@ -96,7 +96,7 @@ gg_phase1.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -188,7 +188,7 @@ gg_phase1.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -251,7 +251,7 @@ gg_phase1.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -299,7 +299,7 @@ gg_phase1.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -345,7 +345,7 @@ gg_phase1.5 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -405,7 +405,7 @@ gg_phase1.6 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -449,7 +449,7 @@ gg_phase1.7 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
@@ -497,7 +497,7 @@ gg_phase1.8 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 

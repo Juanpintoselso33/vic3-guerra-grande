@@ -25,7 +25,10 @@ gg_powers.2 = {
 	hidden = yes
 	trigger = { has_global_variable = guerra_grande_split_done }
 	immediate = {
-		gg_patron_change = { PATRON = francia DELTA = 15 }
+		# EN/ES: balance, first playtest 2026-09-17: the sea was historically open from the start of
+		#     the siege (the French station, Purvis). 20 here plus Purvis's 15 opens it in 1843.
+		#     / balance: el mar estuvo abierto desde el comienzo del sitio; 20 aca mas 15 de Purvis.
+		gg_patron_change = { PATRON = francia DELTA = 20 }
 	}
 }
 
@@ -108,8 +111,14 @@ gg_powers.10 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
+	}
+
+	immediate = {
+		# EN/ES: Purvis refuses to recognise the blockade whatever the Cerrito answers (historical).
+		#     / Purvis no reconoce el bloqueo conteste lo que conteste el Cerrito.
+		gg_patron_change = { PATRON = britania DELTA = 15 }
 	}
 
 	option = {
@@ -159,7 +168,7 @@ gg_powers.11 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 		gg_sea_open = yes
 	}
@@ -211,7 +220,7 @@ gg_powers.12 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
@@ -269,7 +278,7 @@ gg_powers.13 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
@@ -315,7 +324,7 @@ gg_powers.14 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 	}
@@ -358,7 +367,7 @@ gg_powers.15 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -403,7 +412,7 @@ gg_powers.16 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
@@ -475,7 +484,7 @@ gg_powers.17 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 		global_var:gg_defensa_line >= 2
 		NOT = { has_global_variable = gg_rivera_litoral }
@@ -535,7 +544,7 @@ gg_powers.18 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 		gg_france_pays_legions = no
 	}
@@ -618,7 +627,7 @@ gg_powers.19 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -712,7 +721,7 @@ gg_powers.21 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -776,7 +785,7 @@ gg_powers.23 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -845,7 +854,7 @@ gg_powers.24 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -893,7 +902,7 @@ gg_powers.25 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -937,7 +946,7 @@ gg_powers.26 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -1077,7 +1086,7 @@ gg_powers.29 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 	}
 
@@ -1191,7 +1200,7 @@ gg_powers.32 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_imperial_pledged }

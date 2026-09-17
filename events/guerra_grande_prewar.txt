@@ -32,7 +32,7 @@ gg_prewar.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -79,7 +79,7 @@ gg_prewar.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -134,7 +134,7 @@ gg_prewar.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -191,7 +191,7 @@ gg_prewar.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -252,7 +252,7 @@ gg_prewar.5 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -302,7 +302,7 @@ gg_prewar.6 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -346,7 +346,7 @@ gg_prewar.7 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -394,7 +394,7 @@ gg_prewar.8 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -451,7 +451,7 @@ gg_prewar.9 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {

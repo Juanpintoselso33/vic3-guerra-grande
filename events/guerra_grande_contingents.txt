@@ -35,7 +35,7 @@ gg_contingent.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		# EN/ES: T1, I18 -- the legion is raised once / la legion se levanta una vez
 		NOT = { has_variable = guerra_grande_argentine_legion_raised }
@@ -131,7 +131,7 @@ gg_contingent.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 	}
 
@@ -237,7 +237,7 @@ gg_contingent.4 = {
 		#     abril de 1843 se llevaba a Thiebaut y sus batallones, y despues los del evento
 		#     encima. Su hermano gg_contingent.5 ya se guardaba asi; este no.
 		NOT = { has_variable = guerra_grande_french_legion_raised }
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 	}
 
@@ -330,7 +330,7 @@ gg_contingent.5 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		NOT = { has_variable = guerra_grande_italian_legion_raised }
 	}
@@ -380,7 +380,7 @@ gg_contingent.6 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		# The Basque companies were companies of the French Legion. No legion, no split.
 		NOT = { has_variable = guerra_grande_french_legion_refused }
@@ -426,7 +426,7 @@ gg_contingent.7 = {
 	duration = 3
 
 	trigger = {
-		this = c:CER
+		c:CER ?= this
 	}
 
 	option = {
@@ -482,7 +482,7 @@ gg_contingent.8 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		exists = c:CER
 		year >= 1851
 		NOT = { has_global_variable = guerra_grande_treaties_signed }

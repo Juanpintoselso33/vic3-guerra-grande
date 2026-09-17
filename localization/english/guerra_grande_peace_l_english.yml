@@ -13,11 +13,11 @@
  gg_peace.1.desc:0 "The war is decided, and for the first time in nine years this government is the one writing the terms rather than waiting on somebody else's squadron to arrive.\n\nWhat comes next is not obvious. The formula being circulated from Rio de Janeiro would end the war by refusing to name a winner — and it would cost this government the confiscations, the proscriptions and the war debt of the men on the hill. The decrees of February 1843 are still on the books and were never repealed. The Empire is offering treaties. Two ministers in ten years have asked London and Paris to take the Republic under protection. And there is the other bank of the river, where the man who paid for this war is still standing."
  gg_peace.1.flav:0 "Nine years inside a wall, and now a blank page."
 
- gg_peace.1.a:0 "Neither vanquished nor victors. Sign, and pay their debts."
- gg_peace.1.b:0 "The decrees of February 1843 were never repealed. Enforce them."
- gg_peace.1.c:0 "Sign the five treaties with the Empire."
- gg_peace.1.d:0 "Ask London and Paris to take the Republic under protection."
- gg_peace.1.e:0 "Pacify the Republic — and then cross the river after Rosas."
+ gg_peace.1.a:0 "Amnesty: no victors and no vanquished, and the State pays both sides' debts."
+ gg_peace.1.b:0 "Punishment: carry out the decrees of February 1843."
+ gg_peace.1.c:0 "Brazilian protectorate: sign the five treaties with the Empire."
+ gg_peace.1.d:0 "European protectorate: ask London and Paris for it."
+ gg_peace.1.e:0 "War on Rosas: pacify the Republic and cross the river."
  gg_peace.1.f:0 "No terms. Not yet."
 
  gg_peace_formula_tt:0 "The pact of 8 October 1851, in its signed wording: it is recognised that the resistance the soldiers and citizens made to the Anglo-French intervention was in the belief that they were defending the independence of the Republic; equal rights, equal merit and equal claim to public office for every oriental of whatever opinion; the Republic assumes as national the debt contracted by general Oribe; senators and representatives to be elected in every department, and they will name the President. And the sentence: among the different opinions that have divided the orientals, there shall be neither vanquished nor victors.\n\nOribe is not proscribed. A delegation of citizens asked Urquiza for guarantees for him and Urquiza gave them; he stayed in his quinta, unmolested, until he died in 1857."
@@ -34,11 +34,11 @@
  gg_peace.2.desc:0 "The gates are open. Nine years of sitting in front of a wall this army had no gun able to breach, and hunger did it in the end because no squadron came.\n\nThis government has claimed one thing since 1838 and never anything else: that it is the lawful government of the Republic, that its president's term was cut short by an armed rising, and that everything it has done out here — the Chambers, the courts, the customs house, the schools, the abolition of slavery — was done under the Constitution of 1830. It can now say so from the city. Or it can say something else. There is a letter from Buenos Aires, six years old, that has never been answered."
  gg_peace.2.flav:0 "Thirty-five guns and not one of them able to open a wall. Hunger opened it."
 
- gg_peace.2.a:0 "Neither vanquished nor victors. The clause was ours to begin with."
- gg_peace.2.b:0 "The interrupted term resumes. Every decree of theirs is void."
- gg_peace.2.c:0 "Mueran los salvages unitarios. Let the paper mean what it says."
- gg_peace.2.d:0 "Answer Rosas: the Republic goes back into the Confederation."
- gg_peace.2.e:0 "The Restaurador paid for this war. Let him keep paying."
+ gg_peace.2.a:0 "Amnesty: no victors and no vanquished, the clause of Oribe's own terms."
+ gg_peace.2.b:0 "Presidency restored: every decree of the Defensa is void."
+ gg_peace.2.c:0 "Punishment: death to the savage unitarians."
+ gg_peace.2.d:0 "Vassalage: the Republic comes under Rosas's Confederation."
+ gg_peace.2.e:0 "Rosas's client: the Restorer pays, and the Restorer rules."
  gg_peace.2.f:0 "No terms. Not yet."
 
  gg_peace_oribe_pliego_tt:0 "The clause did not come from the other side. Andrés Lamas coined the phrase in Rio de Janeiro, but it was Oribe who wrote it into the bases he sent in on 7 October 1851, and it went in with the rest of his pliego: that the resistance to the Anglo-French intervention be recognised as a defence of the independence of the Republic; that every governmental and judicial act performed in the territory his arms occupied be declared lawful, the confiscations not excepted; that the Nation recognise what his government owes; that his oriental battalions stay under his command until a President is constitutionally elected; and that among the different opinions that have divided the orientals there be neither vanquished nor victors.\n\nHe was given part of it. Winning means the whole pliego."

@@ -340,7 +340,8 @@ gg_postwar_dispatch = {
 				guerra_grande_blanco_lead > 0
 			}
 		}
-		c:CER = { trigger_event = { id = gg_postwar.1 days = 60 } }
+		# EN/ES: the Cerrito takes the Republic's tag first (gg_peace.8) / el Cerrito recupera el tag
+		c:CER = { trigger_event = { id = gg_peace.8 days = 1 } }
 	}
 	else = {
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 60 } }

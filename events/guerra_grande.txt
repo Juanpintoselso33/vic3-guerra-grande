@@ -20,7 +20,7 @@ guerra_grande.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	immediate = {
@@ -131,7 +131,7 @@ guerra_grande.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	immediate = {
@@ -252,7 +252,7 @@ guerra_grande.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 		NOT = { exists = c:CER }
 		exists = s:STATE_BANDA_ORIENTAL.region_state:URU
 		any_scope_state = {
@@ -825,14 +825,14 @@ guerra_grande.3 = {
 		# EN: ROUTING. These six are foreign support for the DEFENSA, and they used to be scheduled
 		#     in this event's immediate, on ROOT, before the player had chosen a side. In option .b
 		#     ROOT then becomes CER via change_tag, so all six fired on the Cerrito and failed their
-		#     own 'this = c:URU' trigger: whoever played the Cerrito faced a Defensa that never
+		#     own 'c:URU ?= this' trigger: whoever played the Cerrito faced a Defensa that never
 		#     received a single legion, silently, for the whole war. They are scheduled here instead,
 		#     at the end of the option, where both governments already exist, and addressed by tag --
 		#     so the Defensa gets them whether it is the player or the AI.
 		# ES: RUTEO. Estos seis son apoyo extranjero para la DEFENSA, y se programaban en el
 		#     immediate de este evento, sobre ROOT, antes de que el jugador eligiera bando. En la
 		#     opcion .b ROOT pasa a ser CER por change_tag, asi que los seis disparaban sobre el
-		#     Cerrito y fallaban su propio trigger 'this = c:URU': el que jugaba al Cerrito enfrentaba
+		#     Cerrito y fallaban su propio trigger 'c:URU ?= this': el que jugaba al Cerrito enfrentaba
 		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
@@ -1373,14 +1373,14 @@ guerra_grande.3 = {
 		# EN: ROUTING. These six are foreign support for the DEFENSA, and they used to be scheduled
 		#     in this event's immediate, on ROOT, before the player had chosen a side. In option .b
 		#     ROOT then becomes CER via change_tag, so all six fired on the Cerrito and failed their
-		#     own 'this = c:URU' trigger: whoever played the Cerrito faced a Defensa that never
+		#     own 'c:URU ?= this' trigger: whoever played the Cerrito faced a Defensa that never
 		#     received a single legion, silently, for the whole war. They are scheduled here instead,
 		#     at the end of the option, where both governments already exist, and addressed by tag --
 		#     so the Defensa gets them whether it is the player or the AI.
 		# ES: RUTEO. Estos seis son apoyo extranjero para la DEFENSA, y se programaban en el
 		#     immediate de este evento, sobre ROOT, antes de que el jugador eligiera bando. En la
 		#     opcion .b ROOT pasa a ser CER por change_tag, asi que los seis disparaban sobre el
-		#     Cerrito y fallaban su propio trigger 'this = c:URU': el que jugaba al Cerrito enfrentaba
+		#     Cerrito y fallaban su propio trigger 'c:URU ?= this': el que jugaba al Cerrito enfrentaba
 		#     a una Defensa que no recibia una sola legion, en silencio, toda la guerra. Ahora se
 		#     programan aca, al final de la opcion, donde ya existen los dos gobiernos, y apuntados
 		#     por tag: la Defensa los recibe sea jugador o IA.
@@ -1450,7 +1450,7 @@ guerra_grande.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:ARG
+		c:ARG ?= this
 		exists = c:CER
 	}
 
@@ -1676,7 +1676,7 @@ guerra_grande.11 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -1763,7 +1763,7 @@ guerra_grande.12 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -1838,7 +1838,7 @@ guerra_grande.13 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {
@@ -1904,7 +1904,7 @@ guerra_grande.14 = {
 	duration = 3
 
 	trigger = {
-		this = c:URU
+		c:URU ?= this
 	}
 
 	option = {

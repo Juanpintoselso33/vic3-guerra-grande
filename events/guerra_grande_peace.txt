@@ -1629,3 +1629,31 @@ gg_peace.7 = {
 		ai_chance = { base = 30 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.8 -- THE CERRITO IS THE REPUBLIC (hidden). Oribe's government always held it was the
+#     lawful government of the Republic; when it wins, it takes the Republic's name and tag back.
+#     change_tag only takes a tag that does not exist, so it runs once the Defensa is gone, the day
+#     after the journal closes. The postwar is dispatched from here because change_tag drops the
+#     journal entry.
+# ES: gg_peace.8 -- EL CERRITO ES LA REPUBLICA (oculto). El gobierno de Oribe siempre sostuvo que era
+#     el gobierno legal de la Republica; cuando gana, recupera el nombre y el tag. change_tag solo
+#     acepta un tag que no exista, asi que corre cuando la Defensa ya no esta, al dia siguiente de
+#     cerrarse el diario. La posguerra sale de aca porque change_tag se lleva la entrada de diario.
+# -------------------------------------------------------------------------------------------------
+gg_peace.8 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+	}
+
+	immediate = {
+		if = {
+			limit = { NOT = { exists = c:URU } }
+			change_tag = URU
+		}
+		trigger_event = { id = gg_postwar.1 days = 60 }
+	}
+}

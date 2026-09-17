@@ -13,11 +13,11 @@
  gg_peace.1.desc:0 "La guerra está decidida y, por primera vez en nueve años, este gobierno es el que escribe las condiciones en vez de esperar que llegue la escuadra de otro.\n\nLo que sigue no es obvio. La fórmula que circula desde Río de Janeiro termina la guerra negándose a nombrar un ganador, y le cuesta a este gobierno las confiscaciones, las proscripciones y la deuda de guerra de los del cerro. Los decretos de febrero de 1843 siguen vigentes: nunca se derogaron. El Imperio ofrece tratados. Dos ministros en diez años le pidieron a Londres y a París que tomaran la República bajo protección. Y está la otra orilla del río, donde el hombre que pagó esta guerra sigue en pie."
  gg_peace.1.flav:0 "Nueve años adentro de una muralla, y ahora una hoja en blanco."
 
- gg_peace.1.a:0 "Ni vencidos ni vencedores. Firmar, y pagarles las deudas."
- gg_peace.1.b:0 "Los decretos de febrero de 1843 nunca se derogaron. Cumplirlos."
- gg_peace.1.c:0 "Firmar los cinco tratados con el Imperio."
- gg_peace.1.d:0 "Pedirle a Londres y a París que tomen la República bajo protección."
- gg_peace.1.e:0 "Pacificar la República, y después cruzar el río a buscar a Rosas."
+ gg_peace.1.a:0 "Amnistía: ni vencidos ni vencedores, y el Estado paga las deudas de los dos."
+ gg_peace.1.b:0 "Castigo: cumplir los decretos de febrero de 1843."
+ gg_peace.1.c:0 "Protectorado del Brasil: firmar los cinco tratados con el Imperio."
+ gg_peace.1.d:0 "Protectorado europeo: pedírselo a Londres y a París."
+ gg_peace.1.e:0 "Guerra a Rosas: pacificar la República y cruzar el río."
  gg_peace.1.f:0 "Sin condiciones. Todavía no."
 
  gg_peace_formula_tt:0 "El pacto del 8 de octubre de 1851, en su redacción firmada: se reconoce que la resistencia que hicieron los militares y ciudadanos a la intervención anglo-francesa fue en la creencia de que con ella defendían la independencia de la República; iguales derechos, iguales servicios y méritos y opción a los empleos públicos para todos los orientales, de la opinión que fueran; la República reconocerá como deuda nacional la que haya contraído el general Oribe; se elegirán senadores y representantes en todos los departamentos y ellos nombrarán al Presidente. Y la frase: entre las diferentes opiniones en que han estado divididos los orientales, no habrá vencidos ni vencedores.\n\nA Oribe no se lo proscribe. Una comisión de ciudadanos le pidió garantías a Urquiza y Urquiza las dio; se quedó en su quinta, sin que nadie lo molestara, hasta que murió en 1857."
@@ -34,11 +34,11 @@
  gg_peace.2.desc:0 "Las puertas están abiertas. Nueve años sentados frente a un muro que este ejército no tenía un solo cañón capaz de abrir, y al final lo abrió el hambre, porque no vino ninguna escuadra.\n\nEste gobierno sostiene una sola cosa desde 1838 y nunca ninguna otra: que es el gobierno legal de la República, que a su presidente un alzamiento armado le cortó el mandato, y que todo lo que hizo acá afuera —las Cámaras, los tribunales, la aduana, las escuelas, la abolición de la esclavitud— lo hizo bajo la Constitución de 1830. Ahora puede decirlo desde la ciudad. O puede decir otra cosa. Hay una carta de Buenos Aires, de hace seis años, que nunca se contestó."
  gg_peace.2.flav:0 "Treinta y cinco cañones y ninguno capaz de abrir un muro. Lo abrió el hambre."
 
- gg_peace.2.a:0 "Ni vencidos ni vencedores. La cláusula era nuestra desde el principio."
- gg_peace.2.b:0 "Sigue el mandato interrumpido. Todo decreto de ellos es nulo."
- gg_peace.2.c:0 "Mueran los salvages unitarios. Que el diario diga lo que dice."
- gg_peace.2.d:0 "Contestarle a Rosas: la República vuelve a la Confederación."
- gg_peace.2.e:0 "El Restaurador pagó esta guerra. Que siga pagando."
+ gg_peace.2.a:0 "Amnistía: ni vencidos ni vencedores, la cláusula del pliego de Oribe."
+ gg_peace.2.b:0 "Presidencia restituida: todo decreto de la Defensa es nulo."
+ gg_peace.2.c:0 "Castigo: mueran los salvajes unitarios."
+ gg_peace.2.d:0 "Vasallaje: la República queda bajo la Confederación de Rosas."
+ gg_peace.2.e:0 "Cliente de Rosas: el Restaurador paga, y el Restaurador manda."
  gg_peace.2.f:0 "Sin condiciones. Todavía no."
 
  gg_peace_oribe_pliego_tt:0 "La cláusula no vino del otro bando. Andrés Lamas acuñó la frase en Río de Janeiro, pero fue Oribe quien la escribió en las bases que mandó el 7 de octubre de 1851, y entró con el resto de su pliego: que se reconozca que la resistencia a la intervención anglo-francesa fue en defensa de la independencia de la República; que se declaren legales todos los actos gubernativos y judiciales ejercidos en el territorio que ocuparon sus armas, sin excluir las confiscaciones; que la Nación reconozca lo que su gobierno quedó adeudando; que sus batallones orientales queden bajo su mando hasta la elección constitucional de Presidente; y que entre las diferentes opiniones en que han estado divididos los orientales no haya vencidos ni vencedores.\n\nLe dieron una parte. Ganar es que le acepten el pliego entero."
