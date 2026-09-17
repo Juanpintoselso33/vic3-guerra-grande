@@ -12,3 +12,23 @@ guerra_grande_colorado_lead = {
 	value = global_var:guerra_grande_colorado_score
 	subtract = global_var:guerra_grande_blanco_score
 }
+
+# EN: T3a. Naval weight of the Defensa's patrons; read only through gg_sea_open (invariant I16).
+# ES: T3a. Peso naval de los padrinos de la Defensa; solo se lee a traves de gg_sea_open (I16).
+gg_sea_power = {
+	value = global_var:gg_patron_francia
+	add = global_var:gg_patron_britania
+}
+
+# EN: T3a. Total backing of each side (to-be.md section 2); T3b makes it drain war support.
+# ES: T3a. Sosten total de cada bando (to-be.md seccion 2); en T3b drena el apoyo a la guerra.
+gg_defensa_backing = {
+	value = global_var:gg_patron_francia
+	add = global_var:gg_patron_britania
+	add = global_var:gg_patron_brasil
+}
+
+gg_cerrito_backing = {
+	value = global_var:gg_patron_rosas
+	add = global_var:gg_patron_urquiza
+}

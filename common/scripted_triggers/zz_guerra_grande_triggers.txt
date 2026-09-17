@@ -36,3 +36,11 @@ guerra_grande_play_is_allowed = {
 		year >= 1851
 	}
 }
+
+# EN: T3a. The sea is open while France and Britain together keep the river (to-be.md C21).
+#     The single place that decides it (invariant I16). 60 is provisional until T10.
+# ES: T3a. El mar esta abierto mientras Francia y Gran Bretana juntas sostienen el rio (C21).
+#     El unico lugar que lo decide (invariante I16). El 60 es provisorio hasta T10.
+gg_sea_open = {
+	gg_sea_power >= 60
+}

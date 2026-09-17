@@ -11,6 +11,8 @@ on_game_started = {
 
 guerra_grande_on_game_start = {
 	effect = {
+		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
+		gg_systems_init = yes
 		# EN: initialise the debug button-press counters. Vanilla itself always sets a global
 		#     variable to 0 before the first change_global_variable on it (e.g.
 		#     common/on_actions/00_code_on_actions.txt: grunderzeit_german_countries) --
