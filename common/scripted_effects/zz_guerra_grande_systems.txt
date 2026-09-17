@@ -150,6 +150,9 @@ gg_cerrito_balance_change = {
 gg_partition_calendar = {
 	# EN/ES: T9 -- the new characters, once both governments exist / los personajes nuevos
 	gg_spawn_war_characters = yes
+	# EN/ES: the siege journal, opened by its event for both governments / el journal del sitio
+	c:URU ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
+	c:CER ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
 	if = {
 		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
 		# split on 1842-08-17

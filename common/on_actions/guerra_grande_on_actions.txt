@@ -48,11 +48,11 @@ guerra_grande_on_game_start = {
 			# EN/ES: playtest 2026-09-17 -- the journal is open from the first day, so every choice of
 			#     1836-1838 shows its effect on the patrons and the score / el journal abre desde el
 			#     primer dia, asi cada decision de 1836-1838 muestra su efecto en padrinos y puntaje.
-			add_contextless_journal_entry = je_guerra_grande
-			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
+			trigger_event = { id = gg_intro.1 days = 1 popup = yes }     # La Guerra Grande
+			trigger_event = { id = gg_intro.2 days = 2 popup = yes }     # La intervencion extranjera
+			trigger_event = { id = gg_intro.3 days = 3 popup = yes }     # Doctores y caudillos
 			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).
-			trigger_event = { id = gg_prewar.1 days = 2 popup = yes }     # 1836.01.03 El Moderador
+			trigger_event = { id = gg_prewar.1 days = 5 popup = yes }     # 1836.01.06 El Moderador, after the three journals
 			trigger_event = { id = gg_prewar.2 days = 74 popup = yes }    # 1836.03.15 Farrapos
 			trigger_event = { id = gg_prewar.3 days = 160 popup = yes }   # 1836.06.09 cuentas de Rivera
 			trigger_event = { id = gg_prewar.4 days = 532 popup = yes }   # 1837.06.16 departamentos
