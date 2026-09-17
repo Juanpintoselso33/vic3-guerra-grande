@@ -195,6 +195,7 @@ je_guerra_grande = {
 						limit = {
 							c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
 							NOT = { gg_sea_open = yes }
+							NOT = { has_global_variable = gg_truce }
 						}
 						change_global_variable = { name = gg_siege_months add = 1 }
 					}
@@ -235,6 +236,16 @@ je_guerra_grande = {
 							}
 						}
 					}
+					# EN/ES: T7, FG-2 -- with the caudillos in charge, the siege holds / con los caudillos, el sitio aguanta
+					if = {
+						limit = { global_var:gg_cerrito_balance <= -30 }
+						c:CER ?= {
+							every_scope_war = {
+								limit = { gg_is_the_war = yes }
+								add_war_war_support = { target = c:CER value = 2 }
+							}
+						}
+					}
 					c:URU ?= { add_treasury = gg_defensa_subsidy }
 					c:CER ?= { add_treasury = gg_cerrito_subsidy }
 				}
@@ -259,6 +270,8 @@ je_guerra_grande = {
 					NOT = { has_global_variable = gg_peace_offered }
 					NOT = { has_global_variable = gg_peace_settled }
 					NOT = { has_global_variable = gg_peace_cooldown }
+					# EN/ES: T7, I15 -- Howden's truce / la tregua de Howden
+					NOT = { has_global_variable = gg_truce }
 					exists = c:CER
 					exists = c:URU
 				}
@@ -277,6 +290,15 @@ je_guerra_grande = {
 					random_country = {
 						limit = { has_variable = guerra_grande_defensa_government }
 						trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+					}
+				}
+				# EN/ES: T7, F3-2 -- a long stalemate brings back the powers' proposal, once
+				else_if = {
+					limit = { gg_powers_stalemate = yes }
+					set_global_variable = gg_hood_retried
+					random_country = {
+						limit = { has_variable = guerra_grande_cerrito_government }
+						trigger_event = { id = gg_powers.12 days = 3 popup = yes }
 					}
 				}
 			}

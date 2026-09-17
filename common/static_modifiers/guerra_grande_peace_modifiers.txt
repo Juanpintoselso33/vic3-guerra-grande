@@ -272,3 +272,17 @@ gg_victory_chief_handed_over = {
 	country_legitimacy_base_add = -10
 	country_influence_add = 25
 }
+
+# T7 (F12). The powers' peace: elections under their eye.
+gg_peace_powers_tutelage = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	country_influence_add = -25
+}
+
+# T7 (F13). Oribe's presidency under a European guarantee.
+gg_peace_european_guarantee = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	country_prestige_add = 5
+}

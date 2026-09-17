@@ -26,11 +26,19 @@ gg_defensa_backing = {
 	value = global_var:gg_patron_francia
 	add = global_var:gg_patron_britania
 	add = global_var:gg_patron_brasil
+	# EN/ES: T7 -- Urquiza counts for the side he is on / Urquiza cuenta para el lado donde esta
+	if = {
+		limit = { has_global_variable = gg_urquiza_flipped }
+		add = global_var:gg_patron_urquiza
+	}
 }
 
 gg_cerrito_backing = {
 	value = global_var:gg_patron_rosas
-	add = global_var:gg_patron_urquiza
+	if = {
+		limit = { NOT = { has_global_variable = gg_urquiza_flipped } }
+		add = global_var:gg_patron_urquiza
+	}
 }
 
 # EN: T5, F0-5. How hard Rivera hits at Yucutuja: 2, +1 if the border stayed open to the

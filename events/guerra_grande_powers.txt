@@ -88,3 +88,1092 @@ gg_powers.5 = {
 		}
 	}
 }
+
+
+# F2-1 - Purvis does not recognise the blockade (April 1843)
+gg_powers.10 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.10.t
+	desc = gg_powers.10.d
+	flavor = gg_powers.10.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.10.a
+		default_option = yes
+		# EN: keep the blockade: Britain takes offence, and the ships are at risk.
+		# ES: sostener el bloqueo: Gran Bretania se ofende, y los barcos corren riesgo.
+		gg_patron_change = { PATRON = britania DELTA = 10 }
+		random_list = {
+			60 = {}
+			40 = { add_modifier = { name = gg_powers_ships_lost years = 5 is_decaying = yes } }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_powers.10.b
+		# EN: historical: open trade with the city to drain its specie; the sea stays open.
+		# ES: lo historico: comercio abierto con la ciudad para sacarle el metalico; el mar queda abierto.
+		c:URU ?= {
+			add_modifier = { name = gg_powers_specie_drain years = 3 is_decaying = yes }
+			if = {
+				limit = { has_modifier = guerra_grande_river_plate_blockade }
+				remove_modifier = guerra_grande_river_plate_blockade
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+
+}
+
+# F3-1 - the allies seize Brown's squadron (July-August 1845)
+gg_powers.11 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.11.t
+	desc = gg_powers.11.d
+	flavor = gg_powers.11.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+		gg_sea_open = yes
+	}
+
+	option = {
+		name = gg_powers.11.a
+		# EN: lift the blockade and save the squadron: the blockade goes, the ships stay for later.
+		# ES: levantar el bloqueo y salvar la escuadra: se pierde el bloqueo, quedan los barcos.
+		c:URU ?= {
+			if = {
+				limit = { has_modifier = guerra_grande_river_plate_blockade }
+				remove_modifier = guerra_grande_river_plate_blockade
+			}
+		}
+		ai_chance = { base = 45 }
+	}
+
+	option = {
+		name = gg_powers.11.b
+		default_option = yes
+		# EN: historical: stand firm. The squadron is taken and the blockade dies until the powers leave,
+		#     but Rosas and American opinion rise.
+		# ES: lo historico: resistir. Se pierde la escuadra y el bloqueo muere hasta que se vayan las
+		#     potencias, pero suben Rosas y la opinion americana.
+		set_global_variable = gg_brown_fleet_lost
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		add_modifier = { name = gg_powers_american_cause years = 10 is_decaying = yes }
+		ai_chance = { base = 55 }
+	}
+
+}
+
+# F3-2a - the Hood bases reach the Cerrito (July 1846)
+gg_powers.12 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.12.t
+	desc = gg_powers.12.d
+	flavor = gg_powers.12.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_peace_offered }
+		OR = {
+			gg_sea_open = yes
+			has_global_variable = gg_powers_mediators
+		}
+	}
+
+	immediate = {
+		# EN/ES: FG-2 -- the doctores make accepting easier / los doctores facilitan aceptar
+		if = {
+			limit = { global_var:gg_cerrito_balance >= 30 }
+			gg_cerrito_balance_change = { DELTA = 5 }
+		}
+	}
+
+	option = {
+		name = gg_powers.12.a
+		default_option = yes
+		# EN: historical: accept with amendments (11 August 1846). The Defensa decides next.
+		# ES: lo historico: aceptar con retoques (11 de agosto de 1846). Despues decide la Defensa.
+		set_global_variable = gg_hood_done
+		c:URU ?= { trigger_event = { id = gg_powers.13 days = 29 popup = yes } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_powers.12.b
+		# EN: refuse: it ends here, and the powers harden against the Cerrito.
+		# ES: rechazar: se corta aca, y las potencias se endurecen con el Cerrito.
+		set_global_variable = gg_hood_done
+		add_modifier = { name = gg_powers_hardened years = 5 is_decaying = yes }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+# F3-2b - the Hood bases reach the Defensa
+gg_powers.13 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.13.t
+	desc = gg_powers.13.d
+	flavor = gg_powers.13.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_peace_offered }
+	}
+
+	option = {
+		name = gg_powers.13.a
+		# EN: accept the powers' peace: elections, amnesty, the foreigners disarmed (final F12).
+		# ES: aceptar la paz de las potencias: elecciones, amnistia, desarme de los extranjeros (F12).
+		set_global_variable = gg_peace_offered
+		trigger_event = { id = gg_peace.6 days = 3 popup = yes }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_powers.13.b
+		default_option = yes
+		# EN: historical: refuse. The powers threaten to leave, and they begin to.
+		# ES: lo historico: rechazar. Las potencias amenazan con irse, y empiezan a hacerlo.
+		gg_patron_change = { PATRON = francia DELTA = -15 }
+		gg_patron_change = { PATRON = britania DELTA = -15 }
+		ai_chance = { base = 70 }
+	}
+
+}
+
+# F3-3a - Howden and Walewski at the Cerrito (9 July 1847)
+gg_powers.14 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.14.t
+	desc = gg_powers.14.d
+	flavor = gg_powers.14.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	option = {
+		name = gg_powers.14.a
+		default_option = yes
+		# EN: historical: no peace without Rosas, but six months of truce and cattle for the city.
+		# ES: lo historico: sin paz sin Rosas, pero seis meses de tregua y ganado para la ciudad.
+		c:URU ?= { trigger_event = { id = gg_powers.15 days = 5 popup = yes } }
+		ai_chance = { base = 65 }
+	}
+
+	option = {
+		name = gg_powers.14.b
+		# EN: offer nothing: Rosas is pleased.
+		# ES: no ofrecer nada: Rosas lo agradece.
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 35 }
+	}
+
+}
+
+# F3-3b - the truce offer reaches the Defensa
+gg_powers.15 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.15.t
+	desc = gg_powers.15.d
+	flavor = gg_powers.15.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.15.a
+		default_option = yes
+		# EN: accept the truce: six months without peace offers or siege, food for the city; Britain
+		#     lifts its blockade and steps back (I15).
+		# ES: aceptar la tregua: seis meses sin ofertas de paz ni asedio, comida para la ciudad; Gran
+		#     Bretania levanta su bloqueo y se aleja.
+		set_global_variable = { name = gg_truce days = 180 }
+		add_modifier = { name = gg_truce_cattle months = 6 }
+		gg_patron_change = { PATRON = britania DELTA = -10 }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.15.b
+		# EN: refuse: nothing stops, and Howden sails for Rio anyway.
+		# ES: rechazar: no se frena nada, y Howden se va a Rio igual.
+		gg_patron_change = { PATRON = britania DELTA = -10 }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# F3-4 - the Gore-Gros mission: the presidency for Oribe (March-May 1848)
+gg_powers.16 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.16.t
+	desc = gg_powers.16.d
+	flavor = gg_powers.16.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_peace_offered }
+		NOT = { has_global_variable = gg_reunification_pledged }
+	}
+
+	immediate = {
+		# EN/ES: FS-2 -- if the Defensa blamed Rosas for Varela, the Cerrito listens less / si la Defensa culpo a Rosas por Varela, el Cerrito escucha menos
+		if = {
+			limit = { has_global_variable = gg_varela_blamed }
+			gg_cerrito_balance_change = { DELTA = -5 }
+		}
+	}
+
+	option = {
+		name = gg_powers.16.a
+		# EN: accept the presidency under a European guarantee and leave Rosas (final F13). With the
+		#     caudillos in charge, the camp resents it.
+		# ES: aceptar la presidencia con garantia europea y dejar a Rosas (F13). Con los caudillos al
+		#     frente, el campamento lo resiente.
+		if = {
+			limit = { global_var:gg_cerrito_balance < 0 }
+			add_radicals = { value = medium_radicals }
+		}
+		set_global_variable = gg_peace_offered
+		trigger_event = { id = gg_peace.7 days = 3 popup = yes }
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = gg_powers.16.b
+		default_option = yes
+		# EN: historical (18 May 1848): refuse after Rosas's warning. Rosas rises, the powers leave sooner.
+		# ES: lo historico: rechazar tras la advertencia de Rosas. Rosas sube, las potencias se van antes.
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		gg_patron_change = { PATRON = francia DELTA = -10 }
+		gg_patron_change = { PATRON = britania DELTA = -10 }
+		ai_chance = { base = 65 }
+	}
+
+	option = {
+		name = gg_powers.16.c
+		trigger = { NOT = { has_global_variable = gg_gore_gros_stalled } }
+		# EN: stall. The powers stay a little longer, Rosas grows suspicious, and the offer returns once.
+		# ES: dar largas. Las potencias se quedan un poco mas, Rosas desconfia, y la oferta vuelve una vez.
+		set_global_variable = gg_gore_gros_stalled
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		trigger_event = { id = gg_powers.16 days = 90 popup = yes }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+# F3-5 - Urquiza, the early window (1847)
+gg_powers.17 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.17.t
+	desc = gg_powers.17.d
+	flavor = gg_powers.17.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_rivera"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+		global_var:gg_defensa_line >= 2
+		NOT = { has_global_variable = gg_rivera_litoral }
+		NOT = { has_global_variable = gg_urquiza_flipped }
+	}
+
+	option = {
+		name = gg_powers.17.a
+		default_option = yes
+		# EN: offer Urquiza the alliance after Alcaraz. Whether Rosas lets him go depends on how strong
+		#     Rosas is.
+		# ES: ofrecerle la alianza a Urquiza despues de Alcaraz. Que Rosas lo deje ir depende de cuan
+		#     fuerte este Rosas.
+		add_treasury = -20000
+		if = {
+			limit = { global_var:gg_patron_rosas >= 60 }
+			random_list = {
+				80 = {}
+				20 = { gg_urquiza_flip = yes }
+			}
+		}
+		else = {
+			random_list = {
+				50 = {}
+				50 = { gg_urquiza_flip = yes }
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.17.b
+		# EN: do not risk it: the line stays cautious, the doctores lose a card.
+		# ES: no arriesgar: la linea se queda prudente, los doctores pierden una carta.
+		add_modifier = { name = guerra_grande_armed_truce years = 2 is_decaying = yes }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# F3-6 - the Basques go to Buenos Aires and Garibaldi to Italy (1848)
+gg_powers.18 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.18.t
+	desc = gg_powers.18.d
+	flavor = gg_powers.18.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_leg_basque_desertion"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+		gg_france_pays_legions = no
+	}
+
+	option = {
+		name = gg_powers.18.a
+		# EN: keep Garibaldi's men, let the Basques go.
+		# ES: retener a los de Garibaldi, dejar ir a los vascos.
+		add_treasury = -30000
+		if = {
+			limit = { has_modifier = guerra_grande_foreign_legions }
+			remove_modifier = guerra_grande_foreign_legions
+		}
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -5 }
+			}
+		}
+		ai_chance = { base = 35 }
+	}
+
+	option = {
+		name = gg_powers.18.b
+		# EN: keep the Basques, let Garibaldi go.
+		# ES: retener a los vascos, dejar ir a Garibaldi.
+		add_treasury = -30000
+		if = {
+			limit = { has_modifier = guerra_grande_italian_legion }
+			remove_modifier = guerra_grande_italian_legion
+		}
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -5 }
+			}
+		}
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = gg_powers.18.c
+		default_option = yes
+		# EN: historical: let both go. The money stays, the walls are thinner.
+		# ES: lo historico: dejarlos ir a los dos. La plata queda, la muralla se afina.
+		if = {
+			limit = { has_modifier = guerra_grande_foreign_legions }
+			remove_modifier = guerra_grande_foreign_legions
+		}
+		if = {
+			limit = { has_modifier = guerra_grande_italian_legion }
+			remove_modifier = guerra_grande_italian_legion
+		}
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -15 }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# F3-7 - the Southern-Arana treaty: Britain leaves (24 November 1849)
+gg_powers.19 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.19.t
+	desc = gg_powers.19.d
+	flavor = gg_powers.19.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_squadrons"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	immediate = {
+		gg_patron_change = { PATRON = britania DELTA = -100 }
+		# EN/ES: FG-1 -- a crisis lets the Defensa change its line / una crisis permite cambiar de linea
+		trigger_event = { id = gg_powers.24 days = 10 popup = yes }
+	}
+
+	option = {
+		name = gg_powers.19.a
+		default_option = yes
+		# EN: a mission to Paris (Pacheco y Obes): France falls more slowly. Cheaper with his line.
+		# ES: una mision a Paris (Pacheco y Obes): Francia baja mas lento. Mas barata con su linea.
+		set_global_variable = gg_paris_mission
+		if = {
+			limit = { global_var:gg_defensa_line <= 1 }
+			add_treasury = -5000
+		}
+		else = {
+			add_treasury = -15000
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_powers.19.b
+		# EN: look for Brazil (Lamas): Brazil rises early, the treaties will be the price. Cheaper with Herrera.
+		# ES: buscar al Brasil (Lamas): el Brasil sube antes, el precio seran los tratados. Mas barato con Herrera.
+		gg_patron_change = { PATRON = brasil DELTA = 15 }
+		set_global_variable = gg_brazil_deal
+		if = {
+			limit = { global_var:gg_defensa_line <= 1 }
+			add_treasury = -10000
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_powers.19.c
+		# EN: hold on alone: pride, and no patron.
+		# ES: aguantar solos: orgullo, y ningun padrino.
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = 10 }
+			}
+		}
+		ai_chance = { base = 20 }
+	}
+
+}
+
+# F4-1a - the Arana-Lepredour convention (31 August 1850)
+gg_powers.20 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_global_variable = guerra_grande_split_done
+	}
+
+	immediate = {
+		# EN/ES: the French squadron stops being sea; the Paris mission softens the fall
+		if = {
+			limit = { has_global_variable = gg_paris_mission }
+			gg_patron_change = { PATRON = francia DELTA = -10 }
+		}
+		else = {
+			gg_patron_change = { PATRON = francia DELTA = -20 }
+		}
+	}
+}
+
+# F4-1b - the French subsidy runs out (1851)
+gg_powers.21 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.21.t
+	desc = gg_powers.21.d
+	flavor = gg_powers.21.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_money_french_convention"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.21.a
+		default_option = yes
+		# EN: mortgage the customs: more debt, but the city holds (read by the postwar in T8).
+		# ES: hipotecar la aduana: mas deuda, pero la ciudad aguanta (lo lee la posguerra en T8).
+		add_treasury = 40000
+		set_global_variable = gg_customs_mortgaged
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.21.b
+		# EN: cut back: the city is condemned, or looks it.
+		# ES: recortar: la ciudad queda condenada, o lo parece.
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -15 }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# F4-3a - Urquiza's pronouncement, if Brazil is behind the Defensa (1 May 1851)
+gg_powers.22 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_urquiza_flipped }
+		global_var:gg_patron_brasil >= 30
+	}
+
+	immediate = {
+		# EN/ES: C25 -- Urquiza's pronouncement (1 May 1851), if Brazil is strong enough behind the Defensa
+		gg_urquiza_flip = yes
+	}
+}
+
+# F4-3b - the oribista chiefs go over: the Cerrito answers (1851)
+gg_powers.23 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.23.t
+	desc = gg_powers.23.d
+	flavor = gg_powers.23.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_leg_caxias"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.23.a
+		# EN: fight with what is left (Ignacio Oribe): the army may melt.
+		# ES: pelear con lo que queda (Ignacio Oribe): el ejercito puede deshacerse.
+		random_list = {
+			60 = {
+		c:CER ?= {
+					every_scope_war = {
+						limit = { gg_is_the_war = yes }
+						add_war_war_support = { target = c:CER value = -30 }
+					}
+				}
+			}
+			40 = {
+		c:CER ?= {
+					every_scope_war = {
+						limit = { gg_is_the_war = yes }
+						add_war_war_support = { target = c:CER value = -10 }
+					}
+				}
+			}
+		}
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_powers.23.b
+		default_option = yes
+		# EN: historical: send Lucas Moreno to Urquiza and ask for terms (the arbiter ripens the Cerrito).
+		# ES: lo historico: mandar a Lucas Moreno ante Urquiza y pedir condiciones.
+		set_global_variable = gg_cerrito_negotiates
+		ai_chance = { base = 55 }
+	}
+
+	option = {
+		name = gg_powers.23.c
+		# EN: ask for a naval guarantee to leave with the Argentine troops (exit S12): the Cerrito
+		#     dissolves in peace and Urquiza does not keep the park.
+		# ES: pedir la garantia naval para irse con las tropas argentinas (salida S12): el Cerrito se
+		#     disuelve en paz y Urquiza no se queda con el parque.
+		set_global_variable = gg_cerrito_negotiates
+		set_global_variable = gg_oribe_withdraws
+		ai_chance = { base = 15 }
+	}
+
+}
+
+# FG-1 - a crisis: the Defensa may change its line
+gg_powers.24 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.24.t
+	desc = gg_powers.24.d
+	flavor = gg_powers.24.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_new_troy"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.24.a
+		default_option = yes
+		# EN: keep the line.
+		# ES: mantener la linea.
+		add_modifier = { name = guerra_grande_armed_truce years = 1 is_decaying = yes }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.24.b
+		# EN: change the line (Pacheco y Obes <-> Herrera y Obes), at a price in legitimacy.
+		# ES: cambiar la linea, con costo en legitimidad.
+		if = {
+			limit = { global_var:gg_defensa_line <= 1 }
+			gg_defensa_line_set = { LINE = 2 }
+		}
+		else = {
+			gg_defensa_line_set = { LINE = 1 }
+		}
+		add_modifier = { name = gg_line_change years = 3 is_decaying = yes }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# FS-1 - Spain recognises the independence, through Giro (1845)
+gg_powers.25 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.25.t
+	desc = gg_powers.25.d
+	flavor = gg_powers.25.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_money_reunification"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:CER
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.25.a
+		default_option = yes
+		# EN: show it to the powers: they soften towards the Cerrito.
+		# ES: mostrarlo ante las potencias: se ablandan con el Cerrito.
+		gg_cerrito_balance_change = { DELTA = 10 }
+		gg_patron_change = { PATRON = francia DELTA = -5 }
+		gg_patron_change = { PATRON = britania DELTA = -5 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_powers.25.b
+		# EN: show it to Rosas as proof of American loyalty.
+		# ES: mostrarlo ante Rosas como prueba de lealtad americana.
+		gg_cerrito_balance_change = { DELTA = 10 }
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		ai_chance = { base = 50 }
+	}
+
+}
+
+# FS-2 - Florencio Varela is murdered (20 March 1848)
+gg_powers.26 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.26.t
+	desc = gg_powers.26.d
+	flavor = gg_powers.26.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_new_troy"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.26.a
+		default_option = yes
+		# EN: blame Rosas and Oribe: European opinion rises, Gore-Gros gets harder.
+		# ES: culpar a Rosas y a Oribe: sube la opinion europea, Gore-Gros se endurece.
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		set_global_variable = gg_varela_blamed
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.26.b
+		# EN: investigate without accusing: the Defensa's own house grows tense.
+		# ES: investigar sin acusar: la interna de la Defensa se tensa.
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# FS-3a - Larranaga's funeral: who receives it (16 February 1848)
+gg_powers.27 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+	}
+
+	immediate = {
+		# EN/ES: the side that is behind receives it / lo recibe el que va abajo
+		if = {
+			limit = { guerra_grande_blanco_lead >= 0 }
+			c:URU ?= { trigger_event = { id = gg_powers.28 popup = yes } }
+		}
+		else = {
+			c:CER ?= { trigger_event = { id = gg_powers.28 popup = yes } }
+		}
+	}
+}
+
+# FS-3b - Larranaga's funeral, a ceasefire (1848)
+gg_powers.28 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.28.t
+	desc = gg_powers.28.d
+	flavor = gg_powers.28.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	option = {
+		name = gg_powers.28.a
+		default_option = yes
+		# EN: sound out a peace 'between orientales'. It only goes anywhere with the doctores strong in
+		#     the Cerrito or Herrera leading the Defensa; then the side ahead gets the menu.
+		# ES: tantear una paz 'entre orientales'. Solo prospera con los doctores fuertes en el Cerrito o
+		#     con Herrera al frente de la Defensa; entonces el que va arriba recibe el menu.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_peace_offered }
+				NOT = { has_global_variable = gg_peace_cooldown }
+				OR = {
+					global_var:gg_cerrito_balance >= 30
+					global_var:gg_defensa_line >= 2
+				}
+			}
+			set_global_variable = gg_peace_offered
+			if = {
+				limit = { guerra_grande_blanco_lead >= 0 }
+				random_country = {
+					limit = { has_variable = guerra_grande_cerrito_government }
+					trigger_event = { id = gg_peace.2 days = 3 popup = yes }
+				}
+			}
+			else = {
+				random_country = {
+					limit = { has_variable = guerra_grande_defensa_government }
+					trigger_event = { id = gg_peace.1 days = 3 popup = yes }
+				}
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = gg_powers.28.b
+		# EN: respect the ceasefire: both sides tire.
+		# ES: respetar el cese del fuego: los dos se cansan.
+		c:URU ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:URU value = -5 }
+			}
+		}
+		c:CER ?= {
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:CER value = -5 }
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+
+}
+
+# FS-4 - Montevideo, ou une nouvelle Troie (1850), fused with guerra_grande.6
+gg_powers.29 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.29.t
+	desc = gg_powers.29.d
+	flavor = gg_powers.29.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_new_troy"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		this = c:URU
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_powers.29.a
+		default_option = yes
+		# EN: spread Dumas's book: European opinion, at a price; France falls more slowly.
+		# ES: difundir el libro de Dumas: opinion europea, con costo; Francia baja mas lento.
+		add_treasury = -10000
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_powers.29.b
+		# EN: keep it: the money stays in the city.
+		# ES: guardarlo: la plata queda en la ciudad.
+		add_treasury = 5000
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# F0-8b - the University opens: whoever holds Montevideo (18 July 1849)
+gg_powers.30 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		has_global_variable = gg_university_decreed
+	}
+
+	immediate = {
+		if = {
+			limit = { c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
+			c:URU ?= { trigger_event = { id = gg_powers.31 popup = yes } }
+		}
+		else = {
+			c:CER ?= { trigger_event = { id = gg_powers.31 popup = yes } }
+		}
+	}
+}
+
+# F0-8b - the Universidad Mayor opens (18 July 1849)
+gg_powers.31 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.31.t
+	desc = gg_powers.31.d
+	flavor = gg_powers.31.f
+
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md) / reusado hasta T9
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gg_university_decreed
+		any_scope_state = { state_region = s:STATE_MONTEVIDEO }
+	}
+
+	option = {
+		name = gg_powers.31.a
+		default_option = yes
+		# EN: inaugurate it with ceremony: prestige for whoever holds the city; the doctores for the Cerrito.
+		# ES: inaugurarla con ceremonia: prestigio para quien tenga la ciudad; los doctores si es el Cerrito.
+		add_modifier = { name = gg_university_inaugurated years = 10 is_decaying = yes }
+		if = {
+			limit = { has_variable = guerra_grande_cerrito_government }
+			gg_cerrito_balance_change = { DELTA = 10 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_powers.31.b
+		# EN: open it quietly: less prestige, the money goes to the walls.
+		# ES: abrirla sin ceremonia: menos prestigio, la plata va a la muralla.
+		add_treasury = 5000
+		ai_chance = { base = 30 }
+	}
+
+}

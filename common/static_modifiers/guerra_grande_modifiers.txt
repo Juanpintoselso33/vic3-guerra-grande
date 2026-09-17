@@ -209,3 +209,47 @@ gg_intervention_early_price = {
 	country_legitimacy_base_add = -10
 	interest_group_ig_landowners_approval_add = -2
 }
+
+# T7. Brown's ships lost insisting on the blockade.
+gg_powers_ships_lost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -15
+}
+
+# T7. The city's specie drained by open trade.
+gg_powers_specie_drain = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tax_waste_add = 0.1
+}
+
+# T7. The American cause after the seizure of the squadron.
+gg_powers_american_cause = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+}
+
+# T7. The powers harden against the Cerrito.
+gg_powers_hardened = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_influence_add = -25
+}
+
+# T7. Howden's truce: cattle for the city.
+gg_truce_cattle = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	interest_group_ig_petty_bourgeoisie_approval_add = 3
+}
+
+# T7. The Defensa changed its line in a crisis.
+gg_line_change = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+}
+
+# T7. The Universidad Mayor opened.
+gg_university_inaugurated = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_add = 5
+	interest_group_ig_intelligentsia_approval_add = 3
+}

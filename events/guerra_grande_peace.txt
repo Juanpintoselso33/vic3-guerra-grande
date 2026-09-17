@@ -1222,3 +1222,151 @@ gg_peace.5 = {
 		ai_chance = { base = 15 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.6 -- THE POWERS' PEACE (T7, F12; T8 completes it). Both governments accepted the Hood
+#     bases: cease-fire, the foreigners of Montevideo disarmed, the Argentines gone, elections and
+#     amnesty. The recognised government (URU) absorbs the Cerrito; the election decides who governs:
+#     the side that held more of the country wins it (historia.md S3, decision of 2026-09-17).
+# ES: gg_peace.6 -- LA PAZ DE LAS POTENCIAS. Los dos gobiernos aceptaron las bases Hood. El gobierno
+#     reconocido absorbe al Cerrito; la eleccion decide quien gobierna: gana el bando que tenia mas
+#     del pais.
+# -------------------------------------------------------------------------------------------------
+gg_peace.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.6.t
+	desc = gg_peace.6.desc
+	flavor = gg_peace.6.flav
+
+	event_image = {
+		video = "gg_peace"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gg_peace_offered
+		NOT = { has_global_variable = gg_peace_settled }
+		has_variable = guerra_grande_defensa_government
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				save_scope_as = gg_peace_loser
+			}
+		}
+	}
+
+	option = {
+		name = gg_peace.6.a
+		default_option = yes
+		set_global_variable = gg_peace_settled
+		set_global_variable = gg_peace_no_victors
+		set_global_variable = gg_powers_peace
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		# EN/ES: the election: the side that held more of the country governs
+		if = {
+			limit = { guerra_grande_blanco_lead >= 0 }
+			set_ruling_interest_groups = { ig_landowners ig_rural_folk }
+			random_scope_character = {
+				limit = { has_template = URU_Manuel_Oribe }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		}
+		if = {
+			limit = { has_modifier = guerra_grande_foreign_legions }
+			remove_modifier = guerra_grande_foreign_legions
+		}
+		if = {
+			limit = { has_modifier = guerra_grande_italian_legion }
+			remove_modifier = guerra_grande_italian_legion
+		}
+		add_modifier = { name = gg_peace_powers_tutelage years = 10 is_decaying = yes }
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.7 -- ORIBE PRESIDENT UNDER A EUROPEAN GUARANTEE (T7, F13; T8 completes it). The
+#     Cerrito accepted Gore and Gros: it absorbs the Defensa in peace, and Rosas is left hostile.
+# ES: gg_peace.7 -- ORIBE PRESIDENTE CON GARANTIA EUROPEA. El Cerrito acepto a Gore y Gros: absorbe
+#     a la Defensa en paz, y Rosas queda hostil.
+# -------------------------------------------------------------------------------------------------
+gg_peace.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_peace.7.t
+	desc = gg_peace.7.desc
+	flavor = gg_peace.7.flav
+
+	event_image = {
+		video = "gg_oribe_fall"
+	}
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gg_peace_offered
+		NOT = { has_global_variable = gg_peace_settled }
+		has_variable = guerra_grande_cerrito_government
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				save_scope_as = gg_peace_loser
+			}
+		}
+	}
+
+	option = {
+		name = gg_peace.7.a
+		default_option = yes
+		set_global_variable = gg_peace_settled
+		set_global_variable = gg_peace_no_victors
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		gg_patron_change = { PATRON = rosas DELTA = -100 }
+		gg_patron_change = { PATRON = francia DELTA = 10 }
+		gg_patron_change = { PATRON = britania DELTA = 10 }
+		c:ARG ?= {
+			change_relations = { country = ROOT value = -100 }
+			create_diplomatic_pact = { country = ROOT type = rivalry }
+		}
+		every_scope_state = {
+			add_claim = c:ARG
+		}
+		add_modifier = { name = gg_peace_european_guarantee years = 10 is_decaying = yes }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_peace.7.b
+		set_global_variable = gg_peace_settled
+		set_global_variable = gg_peace_no_victors
+		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		gg_patron_change = { PATRON = rosas DELTA = -100 }
+		gg_cerrito_balance_change = { DELTA = 10 }
+		c:ARG ?= {
+			change_relations = { country = ROOT value = -100 }
+			create_diplomatic_pact = { country = ROOT type = rivalry }
+		}
+		every_scope_state = {
+			add_claim = c:ARG
+		}
+		add_modifier = { name = guerra_grande_no_victors_no_vanquished years = 10 is_decaying = yes }
+		ai_chance = { base = 30 }
+	}
+}

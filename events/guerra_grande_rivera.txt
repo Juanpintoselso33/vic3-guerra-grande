@@ -555,6 +555,8 @@ gg_rivera.3 = {
 	#     mando de un hombre al que el gobierno ya no puede decirle que no.
 	option = {
 		name = gg_rivera.3.a
+		# EN/ES: T7, FR-1 -- back in the countryside, December 1846 / de vuelta en la campania, diciembre de 1846
+		trigger_event = { id = gg_rivera.7 days = 270 popup = yes }
 		# EN/ES: T4 -- FE-7: the Patron is back: the military line / vuelve el Patron: linea militar
 		gg_defensa_line_set = { LINE = 1 }
 		default_option = yes
@@ -1283,5 +1285,66 @@ gg_rivera.6 = {
 		ai_chance = {
 			base = 45
 		}
+	}
+}
+
+# EN: T7, FR-1 -- Rivera's campaign of December 1846 (SOURCES_rivera.md). The litoral campaign closes
+#     Urquiza's early window (F3-5); staying keeps it open; going to Oribe brings forward the peace
+#     of eight conditions and the clash with the doctores.
+# ES: T7, FR-1 -- la campania de Rivera de diciembre de 1846. La campania del litoral cierra la
+#     ventana temprana de Urquiza; quedarse la deja abierta; ir a Oribe adelanta la paz de ocho
+#     condiciones y el choque con los doctores.
+gg_rivera.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.7.t
+	desc = gg_rivera.7.d
+	flavor = gg_rivera.7.f
+
+	event_image = {
+		video = "gg_rivera_return"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_rivera.7.a
+		default_option = yes
+		# EN: historical: Mercedes and Paysandu, with excesses; the Cerro de las Animas is likely.
+		# ES: lo historico: Mercedes y Paysandu, con excesos; el Cerro de las Animas es probable.
+		set_global_variable = gg_rivera_litoral
+		gg_score_colorado = { AMOUNT = 1 }
+		random_list = {
+			70 = { gg_score_blanco = { AMOUNT = 2 } }
+			30 = { gg_score_colorado = { AMOUNT = 1 } }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_rivera.7.b
+		# EN: cover Maldonado and let Herrera y Obes negotiate: Rivera loses weight.
+		# ES: cubrir Maldonado y dejar negociar a Herrera y Obes: Rivera pierde peso.
+		gg_defensa_line_set = { LINE = 2 }
+		add_modifier = { name = guerra_grande_armed_truce years = 2 is_decaying = yes }
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = gg_rivera.7.c
+		# EN: go straight to Oribe with a peace 'between orientales': the eight conditions come early.
+		# ES: ir derecho a Oribe con una paz 'entre orientales': las ocho condiciones llegan antes.
+		set_global_variable = gg_rivera_eight_conditions
+		gg_cerrito_balance_change = { DELTA = 5 }
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 15 }
 	}
 }

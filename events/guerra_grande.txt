@@ -1649,6 +1649,7 @@ guerra_grande.9 = {
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		gg_patron_change = { PATRON = britania DELTA = -10 }
 		set_global_variable = gg_powers_mediators
+		c:CER ?= { trigger_event = { id = gg_powers.12 days = 120 popup = yes } }
 		ai_chance = {
 			base = 30
 		}

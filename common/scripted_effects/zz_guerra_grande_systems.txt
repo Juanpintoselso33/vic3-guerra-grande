@@ -112,6 +112,17 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
 		# split on 1842-08-17
 		c:URU ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.17 days = 1657 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_powers.27 days = 2009 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_powers.26 days = 2042 popup = yes }   # 1848-03-20 Varela
+			trigger_event = { id = gg_powers.18 days = 2134 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_powers.30 days = 2527 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_powers.19 days = 2656 popup = yes }   # 1849-11-24 Southern
+			trigger_event = { id = gg_powers.29 days = 2753 popup = yes }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_powers.20 days = 2936 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_powers.21 days = 3118 popup = yes }   # 1851-03-01 fin del subsidio
+			trigger_event = { id = gg_powers.22 days = 3179 }   # 1851-05-01 Urquiza, 1851
 			trigger_event = { id = gg_contingent.3 days = 183 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 196 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 233 popup = yes }   # 1843-04-07 Legion Francesa
@@ -124,6 +135,13 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
 		}
 		c:CER ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.10 days = 227 popup = yes }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_powers.25 days = 1019 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.11 days = 1069 popup = yes }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_powers.12 days = 1426 popup = yes }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_powers.14 days = 1787 popup = yes }   # 1847-07-09 Howden
+			trigger_event = { id = gg_powers.16 days = 2047 popup = yes }   # 1848-03-25 Gore-Gros
 			trigger_event = { id = gg_loan.3 days = 327 popup = yes }   # 1843-07-10 el Buceo y la caja
 			trigger_event = { id = gg_loan.4 days = 1090 popup = yes }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_abolition.3 days = 1531 popup = yes }   # 1846-10-26 decreto del Cerrito
@@ -133,6 +151,17 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_early }
 		# split on 1842-02-16
 		c:URU ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.17 days = 1839 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_powers.27 days = 2191 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_powers.26 days = 2224 popup = yes }   # 1848-03-20 Varela
+			trigger_event = { id = gg_powers.18 days = 2316 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_powers.30 days = 2709 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_powers.19 days = 2838 popup = yes }   # 1849-11-24 Southern
+			trigger_event = { id = gg_powers.29 days = 2935 popup = yes }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_powers.20 days = 3118 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_powers.21 days = 3300 popup = yes }   # 1851-03-01 fin del subsidio
+			trigger_event = { id = gg_powers.22 days = 3361 }   # 1851-05-01 Urquiza, 1851
 			trigger_event = { id = gg_contingent.3 days = 365 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 378 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 415 popup = yes }   # 1843-04-07 Legion Francesa
@@ -145,6 +174,13 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
 		}
 		c:CER ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.10 days = 409 popup = yes }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_powers.25 days = 1201 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.11 days = 1251 popup = yes }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_powers.12 days = 1608 popup = yes }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_powers.14 days = 1969 popup = yes }   # 1847-07-09 Howden
+			trigger_event = { id = gg_powers.16 days = 2229 popup = yes }   # 1848-03-25 Gore-Gros
 			trigger_event = { id = gg_loan.3 days = 509 popup = yes }   # 1843-07-10 el Buceo y la caja
 			trigger_event = { id = gg_loan.4 days = 1272 popup = yes }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_abolition.3 days = 1713 popup = yes }   # 1846-10-26 decreto del Cerrito
@@ -154,6 +190,17 @@ gg_partition_calendar = {
 		limit = { has_global_variable = gg_partition_delayed }
 		# split on 1843-08-17
 		c:URU ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.17 days = 1292 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_powers.27 days = 1644 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_powers.26 days = 1677 popup = yes }   # 1848-03-20 Varela
+			trigger_event = { id = gg_powers.18 days = 1769 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_powers.30 days = 2162 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_powers.19 days = 2291 popup = yes }   # 1849-11-24 Southern
+			trigger_event = { id = gg_powers.29 days = 2388 popup = yes }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_powers.20 days = 2571 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_powers.21 days = 2753 popup = yes }   # 1851-03-01 fin del subsidio
+			trigger_event = { id = gg_powers.22 days = 2814 }   # 1851-05-01 Urquiza, 1851
 			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 1 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 1 popup = yes }   # 1843-04-07 Legion Francesa
@@ -166,6 +213,13 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
 		}
 		c:CER ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.10 days = 1 popup = yes }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_powers.25 days = 654 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.11 days = 704 popup = yes }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_powers.12 days = 1061 popup = yes }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_powers.14 days = 1422 popup = yes }   # 1847-07-09 Howden
+			trigger_event = { id = gg_powers.16 days = 1682 popup = yes }   # 1848-03-25 Gore-Gros
 			trigger_event = { id = gg_loan.3 days = 1 popup = yes }   # 1843-07-10 el Buceo y la caja
 			trigger_event = { id = gg_loan.4 days = 725 popup = yes }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_abolition.3 days = 1166 popup = yes }   # 1846-10-26 decreto del Cerrito
@@ -174,6 +228,17 @@ gg_partition_calendar = {
 	else = {
 		# split on 1843-02-16 (historical)
 		c:URU ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.17 days = 1474 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_powers.27 days = 1826 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_powers.26 days = 1859 popup = yes }   # 1848-03-20 Varela
+			trigger_event = { id = gg_powers.18 days = 1951 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_powers.30 days = 2344 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_powers.19 days = 2473 popup = yes }   # 1849-11-24 Southern
+			trigger_event = { id = gg_powers.29 days = 2570 popup = yes }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_powers.20 days = 2753 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_powers.21 days = 2935 popup = yes }   # 1851-03-01 fin del subsidio
+			trigger_event = { id = gg_powers.22 days = 2996 }   # 1851-05-01 Urquiza, 1851
 			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_contingent.1 days = 13 popup = yes }   # 1843-03-01 Legion Argentina del sitio
 			trigger_event = { id = gg_contingent.4 days = 50 popup = yes }   # 1843-04-07 Legion Francesa
@@ -186,9 +251,32 @@ gg_partition_calendar = {
 			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
 		}
 		c:CER ?= {
+			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
+			trigger_event = { id = gg_powers.10 days = 44 popup = yes }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_powers.25 days = 836 popup = yes }   # 1845-06-01 Espana reconoce
+			trigger_event = { id = gg_powers.11 days = 886 popup = yes }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_powers.12 days = 1243 popup = yes }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_powers.14 days = 1604 popup = yes }   # 1847-07-09 Howden
+			trigger_event = { id = gg_powers.16 days = 1864 popup = yes }   # 1848-03-25 Gore-Gros
 			trigger_event = { id = gg_loan.3 days = 144 popup = yes }   # 1843-07-10 el Buceo y la caja
 			trigger_event = { id = gg_loan.4 days = 907 popup = yes }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_abolition.3 days = 1348 popup = yes }   # 1846-10-26 decreto del Cerrito
 		}
+	}
+}
+
+# EN: T7, C25/C26. Urquiza turns against Rosas: his weight moves to the Defensa, Rosas loses him,
+#     the oribista chiefs go over, and the Cerrito answers (gg_powers.23).
+# ES: T7, C25/C26. Urquiza se da vuelta: su peso pasa a la Defensa, Rosas lo pierde, los jefes
+#     oribistas se pasan, y el Cerrito responde (gg_powers.23).
+gg_urquiza_flip = {
+	set_global_variable = gg_urquiza_flipped
+	gg_patron_change = { PATRON = rosas DELTA = -20 }
+	c:CER ?= {
+		every_scope_war = {
+			limit = { gg_is_the_war = yes }
+			add_war_war_support = { target = c:CER value = -20 }
+		}
+		trigger_event = { id = gg_powers.23 days = 30 popup = yes }
 	}
 }

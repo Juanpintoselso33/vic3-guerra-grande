@@ -197,6 +197,14 @@ guerra_grande_river_blockade_button = {
 			text = guerra_grande_requires_rosas_backing
 			global_var:gg_patron_rosas >= 40
 		}
+		# EN/ES: T7, F3-1 -- without Brown's squadron there is no blockade until 1850
+		custom_tooltip = {
+			text = guerra_grande_requires_brown_fleet
+			OR = {
+				NOT = { has_global_variable = gg_brown_fleet_lost }
+				year >= 1850
+			}
+		}
 		year >= 1843
 	}
 
