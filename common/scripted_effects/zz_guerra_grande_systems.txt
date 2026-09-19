@@ -121,6 +121,28 @@ gg_abolition_dispatch = {
 	}
 }
 
+# EN: T7, the diplomatic table is reserved while a chain of the powers is running (Codex review
+#     2026-09-19). The Hood bases schedule Montevideo's answer 29 days later, and the long popups of
+#     Gore-Gros and the Larraniaga funeral can sit open for years: in all that time nothing stopped
+#     the weekly arbiter from opening a different peace, so the player could end up with two peace
+#     menus on the table at once. gg_peace_offered cannot do this job, because the chain has not
+#     offered anything yet: it is still negotiating.
+# ES: T7, la mesa diplomatica queda reservada mientras corre una cadena de las potencias. Las bases
+#     Hood agendan la respuesta de Montevideo 29 dias despues, y los popups largos de Gore-Gros y las
+#     exequias pueden quedar abiertos anios: en todo ese tiempo nada impedia que el arbitro semanal
+#     abriera otra paz, y el jugador podia terminar con dos menus de paz a la vez. gg_peace_offered no
+#     sirve para esto, porque la cadena todavia no ofrecio nada: esta negociando.
+gg_peace_chain_hold = {
+	set_global_variable = gg_peace_chain_pending
+}
+
+gg_peace_chain_clear = {
+	if = {
+		limit = { has_global_variable = gg_peace_chain_pending }
+		remove_global_variable = gg_peace_chain_pending
+	}
+}
+
 # EN: T8, the postwar, started from one place and only once (Codex review 2026-09-19). It used to
 #     hang off the closing, inside the guard "no peace has been signed yet" -- so every negotiated
 #     peace, which signs itself, skipped it: no postwar at all, and a Cerrito that won at the table
@@ -196,6 +218,10 @@ gg_war_closing_dispatch = {
 				}
 			}
 			set_global_variable = gg_victory_third_party
+			# EN/ES: nobody oriental won this one, so the occupation marks must not say otherwise
+			#     / no gano ningun oriental, asi que las marcas de ocupacion no pueden decir otra cosa
+			set_global_variable = { name = gg_cerrito_overrun value = 0 }
+			set_global_variable = { name = gg_defensa_overrun value = 0 }
 		}
 		else_if = {
 			limit = {
@@ -207,7 +233,33 @@ gg_war_closing_dispatch = {
 			set_global_variable = gg_victory_timeout
 		}
 		# EN/ES: who writes the terms / quien escribe el pliego
+		# EN: Codex review 2026-09-19, third pass -- a war that a third country ended does not have an
+		#     oriental winner, and asking the military triggers for one produced answers like "the
+		#     Cerrito won" while a foreign flag flew over Montevideo. There the paper goes to whoever
+		#     is left standing, the Defensa first because the Republic's tag is hers, and gg_peace.5
+		#     already has its own text for this ending.
+		# ES: una guerra que termino un tercero no tiene ganador oriental, y preguntarle a los triggers
+		#     militares daba respuestas como "gano el Cerrito" con una bandera extranjera sobre
+		#     Montevideo. Ahi el papel es del que haya quedado en pie, la Defensa primero porque el tag
+		#     de la Republica es suyo, y gg_peace.5 ya tiene su texto para este final.
 		if = {
+			limit = {
+				has_global_variable = gg_victory_third_party
+				exists = c:URU
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { has_global_variable = gg_victory_third_party }
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
 			limit = { gg_cerrito_won_militarily = yes }
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
@@ -221,6 +273,10 @@ gg_war_closing_dispatch = {
 				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
 			}
 		}
+		# EN/ES: no winner (the 1860 cut, or a stalemate): the paper is read by whoever is ahead on the
+		#     same number the bar shows, and if nobody is ahead, by the Defensa / sin ganador (el corte
+		#     de 1860 o un empate): lee el papel el que va arriba en el mismo numero que muestra la
+		#     barra, y si no hay nadie arriba, la Defensa
 		else_if = {
 			limit = {
 				exists = c:CER

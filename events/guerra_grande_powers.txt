@@ -272,6 +272,8 @@ gg_powers.12 = {
 		# EN: historical: accept with amendments (11 August 1846). The Defensa decides next.
 		# ES: lo historico: aceptar con retoques (11 de agosto de 1846). Despues decide la Defensa.
 		set_global_variable = gg_hood_done
+		# EN/ES: the table is ours for those 29 days / la mesa es nuestra esos 29 dias
+		gg_peace_chain_hold = yes
 		c:URU ?= { trigger_event = { id = gg_powers.13 days = 29 popup = yes } }
 		ai_chance = { base = 70 }
 	}
@@ -315,6 +317,7 @@ gg_powers.13 = {
 
 	option = {
 		name = gg_powers.13.a
+		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.13.a_tt
 		# EN: accept the powers' peace: elections, amnesty, the foreigners disarmed (final F12).
 		# ES: aceptar la paz de las potencias: elecciones, amnistia, desarme de los extranjeros (F12).
@@ -325,6 +328,7 @@ gg_powers.13 = {
 
 	option = {
 		name = gg_powers.13.b
+		gg_peace_chain_clear = yes
 		default_option = yes
 		# EN: historical: refuse. The powers threaten to leave, and they begin to.
 		# ES: lo historico: rechazar. Las potencias amenazan con irse, y empiezan a hacerlo.
@@ -461,6 +465,7 @@ gg_powers.16 = {
 	#     por el asesinato de Varela es lo que hizo la Defensa; el campamento responde cerrando filas
 	#     con el, y eso se ve en el journal de la intervencion.
 	immediate = {
+		gg_peace_chain_hold = yes
 		if = {
 			limit = { has_global_variable = gg_varela_blamed }
 			gg_patron_change = { PATRON = rosas DELTA = 5 }
@@ -469,6 +474,7 @@ gg_powers.16 = {
 
 	option = {
 		name = gg_powers.16.a
+		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.16.a_tt
 		# EN: accept the presidency under a European guarantee and leave Rosas (final F13). With the
 		#     caudillos in charge, the camp resents it.
@@ -489,6 +495,7 @@ gg_powers.16 = {
 
 	option = {
 		name = gg_powers.16.b
+		gg_peace_chain_clear = yes
 		default_option = yes
 		# EN: historical (18 May 1848): refuse after Rosas's warning. Rosas rises, the powers leave sooner.
 		# ES: lo historico: rechazar tras la advertencia de Rosas. Rosas sube, las potencias se van antes.
@@ -500,6 +507,7 @@ gg_powers.16 = {
 
 	option = {
 		name = gg_powers.16.c
+		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.16.c_tt2
 		trigger = { NOT = { has_global_variable = gg_gore_gros_stalled } }
 		# EN: stall. The powers stay a little longer, Rosas grows suspicious, and the offer returns once.
@@ -1055,8 +1063,15 @@ gg_powers.28 = {
 		NOT = { has_global_variable = gg_peace_settled }
 	}
 
+	immediate = {
+		# EN/ES: this popup can sit open for years; the arbiter waits / este popup puede quedar
+		#     abierto anios; el arbitro espera
+		gg_peace_chain_hold = yes
+	}
+
 	option = {
 		name = gg_powers.28.a
+		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.28.a_tt
 		default_option = yes
 		# EN: sound out a peace 'between orientales'. It only goes anywhere with the doctores strong in
@@ -1099,6 +1114,7 @@ gg_powers.28 = {
 
 	option = {
 		name = gg_powers.28.b
+		gg_peace_chain_clear = yes
 		# EN: respect the ceasefire: both sides tire.
 		# ES: respetar el cese del fuego: los dos se cansan.
 		c:URU ?= {

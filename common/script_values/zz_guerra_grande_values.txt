@@ -63,9 +63,39 @@ gg_war_balance_colorado = {
 
 # EN: T3a. Naval weight of the Defensa's patrons; read only through gg_sea_open (invariant I16).
 # ES: T3a. Peso naval de los padrinos de la Defensa; solo se lee a traves de gg_sea_open (I16).
+# EN: T10 balance 2026-09-19 (Codex). The sea used to open by itself and stay open: France's subsidy
+#     adds 20 in March 1843 and Purvis another 20 in April, which clears the threshold of 60 without
+#     the player deciding anything, and from then until Britain leaves in 1849 the siege counter is
+#     simply off -- six years with the Cerrito's central mechanic inert. What was missing is the
+#     other half of the historical picture: Brown's squadron sitting on the water. A declared
+#     blockade backed by real ships now takes 15 off the powers' grip, which is enough to shut the
+#     sea while the two European stations are not both in the river, and not enough afterwards. So
+#     the Cerrito has to raise the squadron AND keep the powers weak, and the powers taking Brown's
+#     ships away (gg_powers.11) ends the pressure with them.
+# ES: T10, balance. El mar se abria solo y se quedaba abierto: el subsidio frances suma 20 en marzo
+#     de 1843 y Purvis otros 20 en abril, lo que pasa el umbral de 60 sin que el jugador decida nada,
+#     y de ahi hasta que Inglaterra se va en 1849 el contador del sitio esta apagado: seis anios con
+#     la mecanica central del Cerrito inerte. Faltaba la otra mitad del cuadro historico: la escuadra
+#     de Brown sobre el agua. Un bloqueo declarado con barcos de verdad le saca ahora 15 al agarre de
+#     las potencias, que alcanza para cerrar el mar mientras las dos estaciones europeas no esten
+#     juntas en el rio, y no alcanza despues. El Cerrito tiene que levantar la escuadra Y mantener
+#     flojas a las potencias, y si las potencias se llevan los barcos de Brown la presion se va con
+#     ellos.
+gg_blockade_pressure = {
+	value = 0
+	if = {
+		limit = {
+			c:CER ?= { has_variable = gg_brown_squadron_raised }
+			c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
+		}
+		add = 15
+	}
+}
+
 gg_sea_power = {
 	value = global_var:gg_patron_francia
 	add = global_var:gg_patron_britania
+	subtract = gg_blockade_pressure
 }
 
 # EN: T3a. Total backing of each side (to-be.md section 2); T3b makes it drain war support.

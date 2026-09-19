@@ -484,6 +484,9 @@ je_guerra_grande = {
 					NOT = { has_global_variable = gg_peace_offered }
 					NOT = { has_global_variable = gg_peace_settled }
 					NOT = { has_global_variable = gg_peace_cooldown }
+					# EN/ES: Codex review 2026-09-19 -- a chain of the powers is already at the table
+					#     / hay una cadena de las potencias sentada a la mesa
+					NOT = { has_global_variable = gg_peace_chain_pending }
 					# EN/ES: T7, I15 -- Howden's truce / la tregua de Howden
 					NOT = { has_global_variable = gg_truce }
 					exists = c:CER

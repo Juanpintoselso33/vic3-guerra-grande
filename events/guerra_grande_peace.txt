@@ -1812,6 +1812,15 @@ gg_peace.11 = {
 
 	option = {
 		name = gg_peace.11.b
+		# EN: Codex review 2026-09-19 -- the engine can end the war (a white peace, a conceded play)
+		#     while this popup is still open. Offering "fight on" then leaves both governments alive,
+		#     no war and an open journal waiting for an offer that will not come.
+		# ES: el motor puede terminar la guerra (paz blanca, jugada cedida) con este popup abierto.
+		#     Ofrecer "seguir peleando" ahi deja los dos gobiernos vivos, sin guerra y con el journal
+		#     esperando una oferta que no va a llegar.
+		trigger = {
+			has_global_variable = guerra_grande_open_war
+		}
 		custom_tooltip = gg_peace_fight_on_tt
 		gg_peace_fight_on = yes
 		ai_chance = { base = 40 }
@@ -1858,6 +1867,15 @@ gg_peace.12 = {
 
 	option = {
 		name = gg_peace.12.b
+		# EN: Codex review 2026-09-19 -- the engine can end the war (a white peace, a conceded play)
+		#     while this popup is still open. Offering "fight on" then leaves both governments alive,
+		#     no war and an open journal waiting for an offer that will not come.
+		# ES: el motor puede terminar la guerra (paz blanca, jugada cedida) con este popup abierto.
+		#     Ofrecer "seguir peleando" ahi deja los dos gobiernos vivos, sin guerra y con el journal
+		#     esperando una oferta que no va a llegar.
+		trigger = {
+			has_global_variable = guerra_grande_open_war
+		}
 		custom_tooltip = gg_peace_fight_on_tt
 		gg_peace_fight_on = yes
 		ai_chance = { base = 40 }
