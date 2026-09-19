@@ -1,0 +1,23 @@
+{
+  "name": "Guerra Grande",
+  "id": "",
+  "version": "0.3.0",
+  "supported_game_version": "1.13.*",
+  "short_description": "Uruguay 1836-1852: la Guerra Grande / Uruguay 1836-1852: the Great War",
+  "tags": [
+    "Historical",
+    "Events",
+    "Journal Entries",
+    "Map"
+  ],
+  "relationships": [],
+  "replace_paths": [
+    "map_data/state_regions"
+  ],
+  "game_custom_data": {
+    "multiplayer_synchronized": true,
+    "replace_paths": [
+      "map_data/state_regions"
+    ]
+  }
+}
