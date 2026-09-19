@@ -89,7 +89,6 @@ guerra_grande_montonera_levy_button = {
 		}
 		set_variable = guerra_grande_montonera_levy_raised
 		# EN/ES: T3b, FE-9 -- the caudillos' levy: the balance tilts, the till pays
-		gg_cerrito_balance_change = { DELTA = -10 }
 		add_treasury = -10000
 		# EN: cavalry first and most of it. This is the one thing the besiegers had that the city
 		#     could never buy: men who came with their own horses.

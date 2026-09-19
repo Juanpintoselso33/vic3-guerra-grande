@@ -94,7 +94,6 @@ gg_phase1.9 = {
 			limit = { has_template = URU_Fructuoso_Rivera }
 			set_character_as_ruler = yes
 		}
-		gg_cerrito_balance_change = { DELTA = 5 }
 		ai_chance = { base = 40 }
 	}
 

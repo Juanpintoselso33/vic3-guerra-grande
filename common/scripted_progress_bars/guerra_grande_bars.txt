@@ -83,29 +83,3 @@ gg_siege_bar = {
 	min_value = 0
 	max_value = 24
 }
-
-# EN/ES: playtest 2026-09-17 -- a tug of war per party: the party's colour on the left is the
-#     doctores (celeste: double_sided_gold; red: double_sided_ryukyu), the gold on the right is always
-#     the caudillos. The end icons of both styles are replaced by the intelligentsia and armed forces
-#     icons (gfx/interface/progressbar). A single-sided bar read as progress towards one side only.
-#     / un tira y afloje por partido: el color del partido a la izquierda son los doctores, el dorado
-#     de la derecha siempre los caudillos. La barra simple se leia como avance hacia un solo lado.
-gg_cerrito_balance_bar = {
-	name = "gg_cerrito_balance_bar"
-	desc = "gg_cerrito_balance_bar_desc"
-	second_desc = "gg_balance_bar_caudillos_desc"
-	double_sided_gold = yes
-	start_value = 0
-	min_value = -100
-	max_value = 100
-}
-
-gg_defensa_balance_bar = {
-	name = "gg_defensa_balance_bar"
-	desc = "gg_defensa_balance_bar_desc"
-	second_desc = "gg_balance_bar_caudillos_desc"
-	double_sided_ryukyu = yes
-	start_value = 0
-	min_value = -100
-	max_value = 100
-}

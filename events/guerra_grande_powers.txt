@@ -180,6 +180,9 @@ gg_powers.11 = {
 
 	option = {
 		name = gg_powers.11.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the squadron stays off the port /
+		#     la barra tiene que moverse durante la guerra: la escuadra queda frente al puerto
+		gg_score_blanco = { AMOUNT = 1 }
 		# EN: lift the blockade and save the squadron: the blockade goes, the ships stay for later.
 		# ES: levantar el bloqueo y salvar la escuadra: se pierde el bloqueo, quedan los barcos.
 		c:URU ?= {
@@ -193,6 +196,9 @@ gg_powers.11 = {
 
 	option = {
 		name = gg_powers.11.b
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: with no squadron, the river is the city's again /
+		#     la barra tiene que moverse durante la guerra: sin escuadra, el rio vuelve a ser de la ciudad
+		gg_score_colorado = { AMOUNT = 1 }
 		custom_tooltip = gg_powers.11.b_tt2
 		default_option = yes
 		# EN: historical: stand firm. The squadron is taken and the blockade dies until the powers leave,
@@ -244,14 +250,6 @@ gg_powers.12 = {
 		OR = {
 			gg_sea_open = yes
 			has_global_variable = gg_powers_mediators
-		}
-	}
-
-	immediate = {
-		# EN/ES: FG-2 -- the doctores make accepting easier / los doctores facilitan aceptar
-		if = {
-			limit = { global_var:gg_cerrito_balance >= 30 }
-			gg_cerrito_balance_change = { DELTA = 5 }
 		}
 	}
 
@@ -394,6 +392,9 @@ gg_powers.15 = {
 
 	option = {
 		name = gg_powers.15.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the truce freezes the siege with the countryside in the Cerrito's hands /
+		#     la barra tiene que moverse durante la guerra: la tregua congela el sitio con la campania en manos del Cerrito
+		gg_score_blanco = { AMOUNT = 1 }
 		custom_tooltip = gg_powers.15.a_tt
 		default_option = yes
 		# EN: accept the truce: six months without peace offers or siege, food for the city; Britain
@@ -441,11 +442,16 @@ gg_powers.16 = {
 		NOT = { has_global_variable = gg_reunification_pledged }
 	}
 
+	# EN: playtest 2026-09-19 -- when the mechanic of doctores and caudillos was removed this mark
+	#     lost its only reader. Blaming Rosas for Varela's murder is what the Defensa did; the camp
+	#     answers by closing ranks with him, which is visible on the patrons' journal.
+	# ES: al sacar la mecanica de doctores y caudillos esta marca se quedo sin lector. Culpar a Rosas
+	#     por el asesinato de Varela es lo que hizo la Defensa; el campamento responde cerrando filas
+	#     con el, y eso se ve en el journal de la intervencion.
 	immediate = {
-		# EN/ES: FS-2 -- if the Defensa blamed Rosas for Varela, the Cerrito listens less / si la Defensa culpo a Rosas por Varela, el Cerrito escucha menos
 		if = {
 			limit = { has_global_variable = gg_varela_blamed }
-			gg_cerrito_balance_change = { DELTA = -5 }
+			gg_patron_change = { PATRON = rosas DELTA = 5 }
 		}
 	}
 
@@ -456,8 +462,12 @@ gg_powers.16 = {
 		#     caudillos in charge, the camp resents it.
 		# ES: aceptar la presidencia con garantia europea y dejar a Rosas (F13). Con los caudillos al
 		#     frente, el campamento lo resiente.
+		# EN/ES: playtest 2026-09-19 -- this used to read the doctores/caudillos balance. Now it reads
+		#     what the player can see: leaving Rosas hurts where Rosas is still the patron of the camp.
+		#     / antes leia la balanza de doctores y caudillos; ahora lee lo que el jugador ve: dejar a
+		#     Rosas duele donde Rosas sigue siendo el padrino del campamento.
 		if = {
-			limit = { global_var:gg_cerrito_balance < 0 }
+			limit = { global_var:gg_patron_rosas >= 50 }
 			add_radicals = { value = medium_radicals }
 		}
 		set_global_variable = gg_peace_offered
@@ -510,7 +520,16 @@ gg_powers.17 = {
 	trigger = {
 		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
-		global_var:gg_defensa_balance > 0
+		# EN: playtest 2026-09-19 -- this window used to need the doctores ahead on a bar nobody read.
+		#     What opens it now is the decision the player remembers: a Defensa that did not hand the
+		#     war to Rivera can treat with Urquiza. Rivera was the standing obstacle to any deal.
+		# ES: esta ventana pedia a los doctores arriba en una barra que nadie leia. Ahora la abre la
+		#     decision que el jugador se acuerda: una Defensa que no le entrego la guerra a Rivera
+		#     puede tratar con Urquiza. Rivera fue el obstaculo permanente a cualquier arreglo.
+		OR = {
+			has_global_variable = gg_rivera_left_alone
+			has_global_variable = gg_rivera_never_returned
+		}
 		NOT = { has_global_variable = gg_rivera_litoral }
 		NOT = { has_global_variable = gg_urquiza_flipped }
 	}
@@ -657,8 +676,6 @@ gg_powers.19 = {
 
 	immediate = {
 		gg_patron_change = { PATRON = britania DELTA = -100 }
-		# EN/ES: FG-1 -- a crisis lets the Defensa change its line / una crisis permite cambiar de linea
-		trigger_event = { id = gg_powers.24 days = 10 popup = yes }
 	}
 
 	option = {
@@ -679,8 +696,10 @@ gg_powers.19 = {
 		# ES: buscar al Brasil (Lamas): el Brasil sube antes, el precio seran los tratados. Mas barato con Herrera.
 		gg_patron_change = { PATRON = brasil DELTA = 15 }
 		set_global_variable = gg_brazil_deal
+		# EN/ES: playtest 2026-09-19 -- cheaper if Lamas is already in Rio: the mission is open, not new
+		#     / mas barato si Lamas ya esta en Rio: la mision esta abierta, no hay que empezarla
 		if = {
-			limit = { global_var:gg_defensa_balance <= 0 }
+			limit = { NOT = { has_global_variable = gg_imperial_pledged } }
 			add_treasury = -10000
 		}
 		ai_chance = { base = 40 }
@@ -864,55 +883,6 @@ gg_powers.23 = {
 	}
 
 }
-
-# FG-1 - a crisis: the Defensa may change its line
-gg_powers.24 = {
-	type = country_event
-	placement = ROOT
-
-	title = gg_powers.24.t
-	desc = gg_powers.24.d
-	flavor = gg_powers.24.f
-
-	event_image = {
-		video = "gg_fl_pacheco"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-
-	duration = 1825
-
-	trigger = {
-		c:URU ?= this
-		has_global_variable = guerra_grande_open_war
-	}
-
-	option = {
-		name = gg_powers.24.a
-		default_option = yes
-		# EN: keep the line.
-		# ES: mantener la linea.
-		add_modifier = { name = guerra_grande_armed_truce years = 1 is_decaying = yes }
-		ai_chance = { base = 60 }
-	}
-
-	option = {
-		name = gg_powers.24.b
-		# EN: swing the government (caudillos <-> doctores), at a price in legitimacy.
-		# ES: cambiar la linea, con costo en legitimidad.
-		if = {
-			limit = { global_var:gg_defensa_balance <= 0 }
-			gg_defensa_balance_change = { DELTA = 40 }
-		}
-		else = {
-			gg_defensa_balance_change = { DELTA = -40 }
-		}
-		add_modifier = { name = gg_line_change years = 3 is_decaying = yes }
-		ai_chance = { base = 40 }
-	}
-
-}
-
 # FS-1 - Spain recognises the independence, through Giro (1845)
 gg_powers.25 = {
 	type = country_event
@@ -940,7 +910,6 @@ gg_powers.25 = {
 		default_option = yes
 		# EN: show it to the powers: they soften towards the Cerrito.
 		# ES: mostrarlo ante las potencias: se ablandan con el Cerrito.
-		gg_cerrito_balance_change = { DELTA = 10 }
 		gg_patron_change = { PATRON = francia DELTA = -5 }
 		gg_patron_change = { PATRON = britania DELTA = -5 }
 		ai_chance = { base = 50 }
@@ -950,7 +919,6 @@ gg_powers.25 = {
 		name = gg_powers.25.b
 		# EN: show it to Rosas as proof of American loyalty.
 		# ES: mostrarlo ante Rosas como prueba de lealtad americana.
-		gg_cerrito_balance_change = { DELTA = 10 }
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		ai_chance = { base = 50 }
 	}
@@ -1055,9 +1023,16 @@ gg_powers.28 = {
 			limit = {
 				NOT = { has_global_variable = gg_peace_offered }
 				NOT = { has_global_variable = gg_peace_cooldown }
+				# EN: playtest 2026-09-19 -- it used to need a faction bar at 30. Now what opens it is
+				#     that somebody already sat at a table: the Hood bases, Rivera's eight conditions or
+				#     a Cerrito that asked for terms. All three are things the player did.
+				# ES: pedia una barra de facciones en 30. Ahora lo abre que alguien ya se haya sentado a
+				#     una mesa: las bases Hood, las ocho condiciones de Rivera o un Cerrito que pidio
+				#     condiciones. Las tres son cosas que hizo el jugador.
 				OR = {
-					global_var:gg_cerrito_balance >= 30
-					global_var:gg_defensa_balance >= 30
+					has_global_variable = gg_hood_done
+					has_global_variable = gg_rivera_eight_conditions
+					has_global_variable = gg_cerrito_negotiates
 				}
 			}
 			set_global_variable = gg_peace_offered
@@ -1123,6 +1098,9 @@ gg_powers.29 = {
 
 	option = {
 		name = gg_powers.29.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: a city that does not fall is the Defensa's best propaganda /
+		#     la barra tiene que moverse durante la guerra: la ciudad que no cae es la mejor propaganda de la Defensa
+		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		# EN: spread Dumas's book: European opinion, at a price; France falls more slowly.
 		# ES: difundir el libro de Dumas: opinion europea, con costo; Francia baja mas lento.
@@ -1146,8 +1124,11 @@ gg_powers.30 = {
 	type = country_event
 	hidden = yes
 
+	# EN/ES: playtest 2026-09-19 -- it used to need the 1838 decree event, which was cut for being a
+	#     second University event. Oribe decreed it in 1838 either way, and this text says so.
+	#     / pedia el evento del decreto de 1838, que se saco por ser un segundo evento de la
+	#     Universidad. Oribe lo decreto igual en 1838, y este texto lo dice.
 	trigger = {
-		has_global_variable = gg_university_decreed
 	}
 
 	immediate = {
@@ -1178,8 +1159,11 @@ gg_powers.31 = {
 
 	duration = 1825
 
+	# EN/ES: playtest 2026-09-19 -- it used to need the 1838 decree event, which was cut for being a
+	#     second University event. Oribe decreed it in 1838 either way, and this text says so.
+	#     / pedia el evento del decreto de 1838, que se saco por ser un segundo evento de la
+	#     Universidad. Oribe lo decreto igual en 1838, y este texto lo dice.
 	trigger = {
-		has_global_variable = gg_university_decreed
 		any_scope_state = { state_region = s:STATE_MONTEVIDEO }
 	}
 
@@ -1189,10 +1173,6 @@ gg_powers.31 = {
 		# EN: inaugurate it with ceremony: prestige for whoever holds the city; the doctores for the Cerrito.
 		# ES: inaugurarla con ceremonia: prestigio para quien tenga la ciudad; los doctores si es el Cerrito.
 		add_modifier = { name = gg_university_inaugurated years = 10 is_decaying = yes }
-		if = {
-			limit = { has_variable = guerra_grande_cerrito_government }
-			gg_cerrito_balance_change = { DELTA = 10 }
-		}
 		ai_chance = { base = 70 }
 	}
 

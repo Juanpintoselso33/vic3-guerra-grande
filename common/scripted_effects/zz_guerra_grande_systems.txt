@@ -24,12 +24,6 @@ gg_systems_init = {
 	set_global_variable = { name = gg_patron_britania value = 10 }
 	set_global_variable = { name = gg_patron_brasil value = 20 }
 	set_global_variable = { name = gg_patron_urquiza value = 40 }
-	# EN: the Defensa's line: 0 = no Defensa yet, 1 = Pacheco y Obes, 2 = Herrera y Obes.
-	# ES: la linea de la Defensa: 0 = todavia no hay Defensa, 1 = Pacheco y Obes, 2 = Herrera y Obes.
-	set_global_variable = { name = gg_defensa_balance value = 0 }
-	# EN: the Cerrito's balance, -100 (caudillos) to 100 (doctores).
-	# ES: la balanza del Cerrito, -100 (caudillos) a 100 (doctores).
-	set_global_variable = { name = gg_cerrito_balance value = 0 }
 	# EN: T5 -- phase 0 events score before Carpinteria creates the journal, so the score starts
 	#     here; the journal's own immediate only sets it if it is still missing.
 	# ES: T5 -- los eventos de la fase 0 puntuan antes de que Carpinteria cree el journal, asi que
@@ -37,6 +31,12 @@ gg_systems_init = {
 	set_global_variable = { name = guerra_grande_blanco_score value = 0 }
 	# EN/ES: T2, C15 -- months of closed sea / meses de mar cerrado
 	set_global_variable = { name = gg_siege_months value = 0 }
+	# EN/ES: playtest 2026-09-19 -- months of open sea, the mirror of the siege / meses de mar abierto
+	set_global_variable = { name = gg_relief_months value = 0 }
+	# EN/ES: Codex review 2026-09-19 -- half of a government's ground in the other's hands, written
+	#     down monthly while the war lasts / medio pais en manos del otro, anotado mes a mes
+	set_global_variable = { name = gg_cerrito_overrun value = 0 }
+	set_global_variable = { name = gg_defensa_overrun value = 0 }
 	# EN/ES: months in a row with the war support of each government at -25 or worse / meses seguidos
 	#     con el apoyo de cada gobierno en -25 o peor
 	set_global_variable = { name = gg_cerrito_exhausted value = 0 }
@@ -96,46 +96,114 @@ gg_patron_change = {
 	}
 }
 
-# EN: usage: gg_defensa_balance_change = { DELTA = 30 }  (positive = towards the doctores:
-#     Herrera y Obes, Pacheco y Obes, Suarez; negative = towards the caudillos: Rivera, Flores, Diaz).
-#     Replaces the old Pacheco/Herrera line (playtest review 2026-09-17, Juan's decision).
-# ES: uso: gg_defensa_balance_change = { DELTA = 30 }  (positivo = hacia los doctores; negativo =
-#     hacia los caudillos). Reemplaza la vieja linea Pacheco/Herrera.
-gg_defensa_balance_change = {
-	custom_tooltip = {
-		text = gg_tt_dbalance_$DELTA$
-		change_global_variable = { name = gg_defensa_balance add = $DELTA$ }
-		if = {
-			limit = { global_var:gg_defensa_balance > 100 }
-			set_global_variable = { name = gg_defensa_balance value = 100 }
+# EN: T6, the Defensa's law of 1842, dispatched once (Codex review 2026-09-19). Three places could
+#     schedule it -- the dated dispatcher of 12 December, Arroyo Grande six days later, and the
+#     partition's backstop -- and all three asked the same question: "is it settled yet?". A popup
+#     waits 1825 days for an answer, so an unanswered law was not settled and a second copy could be
+#     scheduled on top of the first. Dispatched and settled are two different things now.
+# ES: T6, la ley de la Defensa de 1842, despachada una sola vez. Tres lugares podian agendarla -- el
+#     despachador del 12 de diciembre, Arroyo Grande seis dias despues y el respaldo de la particion
+#     -- y los tres preguntaban lo mismo: "ya esta resuelta?". Un popup espera 1825 dias una
+#     respuesta, asi que una ley sin contestar no estaba resuelta y se podia agendar una segunda
+#     copia encima de la primera. Despachada y resuelta ya no son lo mismo.
+gg_abolition_dispatch = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = gg_abolition_dispatched }
+			# EN/ES: the law lives on the Defensa, not on whoever calls this / la ley vive en la
+			#     Defensa, no en quien llame a este efecto
+			c:URU ?= { NOT = { has_variable = guerra_grande_abolition_settled } }
 		}
-		else_if = {
-			limit = { global_var:gg_defensa_balance < -100 }
-			set_global_variable = { name = gg_defensa_balance value = -100 }
+		set_global_variable = gg_abolition_dispatched
+		c:URU ?= {
+			trigger_event = { id = gg_abolition.2 days = $DAYS$ popup = yes }
 		}
-		set_global_variable = gg_defensa_balance_started
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_DBALANCE $DELTA$"
-		je:je_gg_factions ?= { set_bar_progress = { name = gg_defensa_balance_bar value = global_var:gg_defensa_balance } }
 	}
 }
 
-# EN: usage: gg_cerrito_balance_change = { DELTA = 10 }  (positive = towards the doctores)
-# ES: uso: gg_cerrito_balance_change = { DELTA = 10 }  (positivo = hacia los doctores)
-gg_cerrito_balance_change = {
-	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
-	custom_tooltip = {
-		text = gg_tt_balance_$DELTA$
-		change_global_variable = { name = gg_cerrito_balance add = $DELTA$ }
+# EN: T1/T9, the closing of the war, in one idempotent place (Codex review 2026-09-19). It used to
+#     live inside on_complete_all_involved only, and the journal has two ways out: complete and fail.
+#     A foreign power holding Montevideo is a fail, so that game closed the war without handing the
+#     final event to anybody -- while the mirror case (a third country eating the Cerrito) did get
+#     one. Both hooks call this now, the mark makes it run once, and it always names a recipient.
+# ES: T1/T9, el cierre de la guerra, en un solo lugar y una sola vez. Vivia dentro de
+#     on_complete_all_involved nada mas, y el journal tiene dos salidas: complete y fail. Que una
+#     potencia extranjera se quede con Montevideo es un fail, asi que esa partida cerraba la guerra
+#     sin entregarle el evento final a nadie, mientras que el caso espejo (un tercero se come al
+#     Cerrito) si lo recibia. Ahora lo llaman las dos salidas, la marca hace que corra una vez, y
+#     siempre hay destinatario.
+gg_war_closing_dispatch = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_peace_settled } }
+		set_global_variable = gg_peace_settled
+		set_global_variable = gg_victory_pending
+		# EN/ES: a third country kept the capital / un tercero se quedo con la capital
 		if = {
-			limit = { global_var:gg_cerrito_balance > 100 }
-			set_global_variable = { name = gg_cerrito_balance value = 100 }
+			limit = {
+				NOR = {
+					c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+					c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+				}
+			}
+			set_global_variable = gg_victory_third_party
 		}
 		else_if = {
-			limit = { global_var:gg_cerrito_balance < -100 }
-			set_global_variable = { name = gg_cerrito_balance value = -100 }
+			limit = {
+				NOR = {
+					gg_cerrito_won_militarily = yes
+					gg_defensa_won_militarily = yes
+				}
+			}
+			set_global_variable = gg_victory_timeout
 		}
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BALANCE $DELTA$"
-	je:je_gg_factions ?= { set_bar_progress = { name = gg_cerrito_balance_bar value = global_var:gg_cerrito_balance } }
+		# EN/ES: who writes the terms / quien escribe el pliego
+		if = {
+			limit = { gg_cerrito_won_militarily = yes }
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { gg_defensa_won_militarily = yes }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:CER
+				gg_war_balance_blanco > 0
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { exists = c:URU }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { exists = c:CER }
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		# EN/ES: T8, C16 -- the postwar, once / la posguerra, una vez
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_postwar_started }
+				NOT = { has_global_variable = gg_reincorporated }
+			}
+			set_global_variable = gg_postwar_started
+			gg_postwar_dispatch = yes
+		}
 	}
 }
 
@@ -215,12 +283,7 @@ gg_partition_calendar = {
 	gg_spawn_war_characters = yes
 	# EN/ES: playtest 2026-09-17 -- backstop: the Defensa's law of 1842 must not be lost if neither
 	#     Arroyo Grande nor the dated dispatcher reached it / red de seguridad para la ley de 1842
-	c:URU ?= {
-		if = {
-			limit = { NOT = { has_variable = guerra_grande_abolition_settled } }
-			trigger_event = { id = gg_abolition.2 days = 2 popup = yes }
-		}
-	}
+	gg_abolition_dispatch = { DAYS = 2 }
 	# EN/ES: the siege journal, opened by its event for both governments / el journal del sitio
 	c:URU ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
 	c:CER ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }

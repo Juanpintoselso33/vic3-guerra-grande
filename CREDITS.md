@@ -14,8 +14,3 @@ Used as the end icons of the war bar (`gfx/interface/progressbar/twospains_*_mar
   - Source / Fuente: [Flag of the National Party (Uruguay).svg](https://commons.wikimedia.org/wiki/File:Flag_of_the_National_Party_(Uruguay).svg), Wikimedia Commons.
   - License / Licencia: public domain / dominio público.
   - Changes / Cambios: rasterised, resized, framed and converted to DDS. / Rasterizada, reducida, enmarcada y convertida a DDS.
-
-## Interest group icons / Íconos de grupos de interés
-
-`greatgame_*_marker.dds`, `tokugawa_marker.dds` and / y `qing_dynasty_marker.dds` are the base game's
-intelligentsia and armed forces icons, resized. / son los íconos del juego base, reducidos.

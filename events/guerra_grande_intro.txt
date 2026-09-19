@@ -1,13 +1,14 @@
 ﻿namespace = gg_intro
 
-# EN: playtest 2026-09-17 (Juan's request) -- each journal is opened by an event that explains it.
-#     The first three fire one after another on game start, before any other event; the siege one
-#     fires for both governments the day after the split.
-# ES: cada journal lo abre un evento que lo explica. Los tres primeros salen seguidos al empezar,
-#     antes que cualquier otro evento; el del sitio sale para los dos gobiernos al dia siguiente de
-#     la particion.
+# EN: playtest 2026-09-19 (Juan's request) -- the opening used to be three popups in three days,
+#     each one an OK button that opened a journal, and the first real decision only came on the
+#     fifth day. One event opens both journals now. The siege one still fires for both governments
+#     the day after the split.
+# ES: la apertura eran tres popups en tres dias, cada uno un boton de OK que abria un journal, y la
+#     primera decision de verdad recien llegaba el quinto dia. Ahora un solo evento abre los dos
+#     journals. El del sitio sigue saliendo para los dos gobiernos al dia siguiente de la particion.
 
-# EN/ES: day 1 -- La Guerra Grande
+# EN/ES: day 1 -- the opening: it opens both journals / la apertura: abre los dos journals
 gg_intro.1 = {
 	type = country_event
 	placement = ROOT
@@ -35,68 +36,10 @@ gg_intro.1 = {
 		name = gg_intro.1.a
 		default_option = yes
 		add_contextless_journal_entry = je_guerra_grande
-		ai_chance = { base = 100 }
-	}
-}
-
-# EN/ES: day 2 -- La intervencion extranjera
-gg_intro.2 = {
-	type = country_event
-	placement = ROOT
-
-	title = gg_intro.2.t
-	desc = gg_intro.2.d
-	flavor = gg_intro.2.f
-
-	event_image = {
-		video = "gg_in_obligado"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-
-	duration = 1825
-
-	trigger = {
-		NOT = { has_journal_entry = je_gg_patrons }
-	}
-
-	option = {
-		name = gg_intro.2.a
-		default_option = yes
 		add_contextless_journal_entry = je_gg_patrons
 		ai_chance = { base = 100 }
 	}
 }
-
-# EN/ES: day 3 -- Doctores y caudillos
-gg_intro.3 = {
-	type = country_event
-	placement = ROOT
-
-	title = gg_intro.3.t
-	desc = gg_intro.3.d
-	flavor = gg_intro.3.f
-
-	event_image = {
-		video = "gg_in_constitution"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-
-	duration = 1825
-
-	trigger = {
-		NOT = { has_journal_entry = je_gg_factions }
-	}
-
-	option = {
-		name = gg_intro.3.a
-		default_option = yes
-		add_contextless_journal_entry = je_gg_factions
-		ai_chance = { base = 100 }
-	}
-}
-
 # EN/ES: the day after the split, for both governments -- El Sitio Grande
 gg_intro.4 = {
 	type = country_event

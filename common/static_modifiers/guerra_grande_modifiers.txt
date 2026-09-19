@@ -241,12 +241,6 @@ gg_truce_cattle = {
 	interest_group_ig_petty_bourgeoisie_approval_add = 3
 }
 
-# T7. The Defensa changed its line in a crisis.
-gg_line_change = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_legitimacy_base_add = -10
-}
-
 # T7. The Universidad Mayor opened.
 gg_university_inaugurated = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"

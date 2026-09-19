@@ -33,7 +33,6 @@ guerra_grande.1 = {
 			limit = { NOT = { has_journal_entry = je_guerra_grande } }
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			je:je_guerra_grande ?= {
 				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
@@ -526,7 +525,6 @@ guerra_grande.3 = {
 			#     esto la barra no se movia y ninguna batalla contaba.
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			create_diplomatic_play = {
 				name = guerra_grande_play
 				target_country = c:URU
@@ -900,17 +898,6 @@ guerra_grande.3 = {
 		#     / un dia despues: los tags recien cambiados o creados no se resolvian en este mismo efecto
 		trigger_event = { id = gg_intro.5 days = 1 }
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
-		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
-		if = {
-			limit = { NOT = { has_global_variable = gg_defensa_balance_started } }
-			if = {
-				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
-				gg_defensa_balance_change = { DELTA = -20 }
-			}
-			else = {
-				gg_defensa_balance_change = { DELTA = 20 }
-			}
-		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
 		set_global_variable = guerra_grande_open_war
 		c:ARG ?= {
@@ -939,7 +926,6 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-		if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 		ai_chance = {
 			base = 80
 		}
@@ -1090,7 +1076,6 @@ guerra_grande.3 = {
 			set_capital = STATE_MONTEVIDEO
 			add_contextless_journal_entry = je_guerra_grande
 			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-			if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 			add_modifier = {
 				name = guerra_grande_walls_of_montevideo
 				years = 15
@@ -1467,17 +1452,6 @@ guerra_grande.3 = {
 		# EN/ES: through the new URU: an event queued on the country that just changed tag never fired / por el URU nuevo: el evento en el pais que cambio de tag no salia
 		c:URU ?= { trigger_event = { id = gg_intro.5 days = 1 } }
 		# EN/ES: T4, FG-1 -- the Defensa's line starts from the 1838 path unless Rivera's events set it
-		#     / la linea de la Defensa arranca por el camino de 1838 si los eventos de Rivera no la fijaron
-		if = {
-			limit = { NOT = { has_global_variable = gg_defensa_balance_started } }
-			if = {
-				limit = { any_country = { has_variable = guerra_grande_colorado_path } }
-				gg_defensa_balance_change = { DELTA = -20 }
-			}
-			else = {
-				gg_defensa_balance_change = { DELTA = 20 }
-			}
-		}
 		# EN/ES: T1, C13 -- the war opens only now that both governments exist / la guerra abre recien ahora
 		set_global_variable = guerra_grande_open_war
 		c:ARG ?= {
@@ -1506,7 +1480,6 @@ guerra_grande.3 = {
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
 		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
-		if = { limit = { NOT = { has_journal_entry = je_gg_factions } } add_contextless_journal_entry = je_gg_factions }
 		ai_chance = {
 			base = 20
 		}
@@ -1623,77 +1596,6 @@ guerra_grande.5 = {
 		}
 	}
 }
-
-# Flavour: the siege of Montevideo drags on.
-guerra_grande.6 = {
-	type = country_event
-	placement = ROOT
-
-	title = guerra_grande.6.t
-	desc = guerra_grande.6.d
-	flavor = guerra_grande.6.f
-
-	# Adolphe d'Hastrel, "Azoteas de Montevideo" (1840), public domain.
-	event_image = {
-		video = "gg_new_troy"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
-
-	duration = 1825
-
-	trigger = {
-		has_global_variable = guerra_grande_open_war
-	}
-
-	option = {
-		name = guerra_grande.6.a
-		default_option = yes
-		add_loyalists = {
-			value = small_radicals
-		}
-		ai_chance = {
-			base = 100
-		}
-	}
-}
-
-# Flavour: the countryside eats the herds.
-guerra_grande.7 = {
-	type = country_event
-	placement = ROOT
-
-	title = guerra_grande.7.t
-	desc = guerra_grande.7.d
-	flavor = guerra_grande.7.f
-
-	# Prilidiano Pueyrredon, "Los capataces", public domain.
-	event_image = {
-		video = "gg_herds"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
-
-	duration = 1825
-
-	trigger = {
-		has_global_variable = guerra_grande_open_war
-	}
-
-	option = {
-		name = guerra_grande.7.a
-		default_option = yes
-		add_radicals = {
-			value = small_radicals
-		}
-		ai_chance = {
-			base = 100
-		}
-	}
-}
-
-
-
 # EN: the squadrons arrive -- fired by guerra_grande_foreign_intervention_button.
 # ES: llegan las escuadras: lo dispara guerra_grande_foreign_intervention_button.
 guerra_grande.9 = {
@@ -1765,7 +1667,6 @@ guerra_grande.11 = {
 	option = {
 		name = guerra_grande.11.a
 		# EN/ES: T5, FE-3 -- the law above the man: the doctores / la ley sobre el hombre: los doctores
-		gg_cerrito_balance_change = { DELTA = 10 }
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
 		gg_score_blanco = { AMOUNT = 1 }
@@ -1792,7 +1693,6 @@ guerra_grande.11 = {
 	option = {
 		name = guerra_grande.11.b
 		# EN/ES: T5, FE-3 -- as chosen in fichas.md: towards the caudillos / segun la ficha: hacia los caudillos
-		gg_cerrito_balance_change = { DELTA = -10 }
 		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
 		#     it, so saying no to the cult of authority, or denying Lavalleja his command, is a
 		#     concession to the liberal side -- and it has to pay the colorados exactly what the

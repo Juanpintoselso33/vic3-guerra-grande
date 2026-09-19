@@ -282,6 +282,16 @@ gg_postwar.4 = {
 	option = {
 		name = gg_postwar.4.b
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
+		# EN: playtest 2026-09-19 -- a Republic that came through the colorado path (Rivera's 1836-38)
+		#     hands the colorados a party that never stopped governing. It is the last thing that mark
+		#     decides, and it used to decide only the starting point of the faction bar that was cut.
+		# ES: una Republica que vino por el camino colorado (el de Rivera, 1836-38) le entrega a los
+		#     colorados un partido que nunca dejo de gobernar. Es lo ultimo que decide esa marca, que
+		#     antes solo decidia el punto de partida de la barra de facciones que se saco.
+		if = {
+			limit = { has_variable = guerra_grande_colorado_path }
+			add_loyalists = { value = small_radicals interest_group = ig:ig_petty_bourgeoisie }
+		}
 		add_radicals = { value = medium_radicals interest_group = ig:ig_landowners }
 		ai_chance = { base = 25 }
 	}

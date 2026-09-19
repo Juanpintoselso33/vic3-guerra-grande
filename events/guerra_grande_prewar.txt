@@ -148,7 +148,6 @@ gg_prewar.3 = {
 		# EN: historical (June 1836): publish the commission and give the Comandancia to Ignacio Oribe.
 		#     The state is ordered and the doctores gain weight, but Rivera rises with all his force.
 		# ES: lo historico (junio de 1836): publicar la comision y darle la Comandancia a Ignacio Oribe.
-		gg_cerrito_balance_change = { DELTA = 10 }
 		gg_score_blanco = { AMOUNT = 1 }
 		gg_score_colorado = { AMOUNT = 2 }
 		ai_chance = { base = 55 }
@@ -158,7 +157,6 @@ gg_prewar.3 = {
 		name = gg_prewar.3.b
 		# EN: publish without restoring the Comandancia: Rivera rises anyway, with less support.
 		# ES: publicarlas sin restituir la Comandancia: Rivera se alza igual, con menos apoyo.
-		gg_cerrito_balance_change = { DELTA = 5 }
 		gg_score_blanco = { AMOUNT = 1 }
 		gg_score_colorado = { AMOUNT = 1 }
 		ai_chance = { base = 30 }
@@ -168,7 +166,6 @@ gg_prewar.3 = {
 		name = gg_prewar.3.c
 		# EN: shelve the accounts and give him a post: Oribe looks weak.
 		# ES: archivar las cuentas y darle un cargo: Oribe queda como debil.
-		gg_cerrito_balance_change = { DELTA = -5 }
 		gg_score_colorado = { AMOUNT = 1 }
 		ai_chance = { base = 15 }
 	}
@@ -380,55 +377,6 @@ gg_prewar.7 = {
 	}
 
 }
-
-
-# F0-8 - the Universidad Mayor de la Republica, 27 May 1838
-# SOURCE / FUENTE: Wikipedia ES, Universidad de la Republica: law of 11.6.1833 (Larranaga, nine chairs, decree when most are running); the five subjects taught in 1836; Oribe's decree of 27.5.1838.
-gg_prewar.8 = {
-	type = country_event
-	placement = ROOT
-
-	title = gg_prewar.8.t
-	desc = gg_prewar.8.d
-	flavor = gg_prewar.8.f
-
-	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
-	event_image = {
-		video = "gg_fl_larranaga"
-	}
-
-	icon = "gfx/interface/icons/event_icons/event_default.dds"
-
-	duration = 1825
-
-	trigger = {
-		c:URU ?= this
-	}
-
-	option = {
-		name = gg_prewar.8.a
-		custom_tooltip = gg_prewar.8.a_tt
-		default_option = yes
-		# EN: decree the Universidad Mayor (27 May 1838) on Larranaga's law of 1833. The second half is
-		#     the inauguration of 1849 (T7), which reads gg_university_decreed.
-		# ES: decretar la Universidad Mayor (27 de mayo de 1838) sobre la ley de Larraniaga de 1833.
-		gg_cerrito_balance_change = { DELTA = 10 }
-		add_treasury = -15000
-		set_global_variable = gg_university_decreed
-		ai_chance = { base = 60 }
-	}
-
-	option = {
-		name = gg_prewar.8.b
-		# EN: postpone it: the money stays for the war, and the caudillos win the argument.
-		# ES: postergarla: la plata queda para la guerra, y los caudillos ganan la discusion.
-		gg_cerrito_balance_change = { DELTA = -5 }
-		ai_chance = { base = 40 }
-	}
-
-}
-
-
 # F0-6 - Palmar, 15 June 1838
 # SOURCE / FUENTE: Wikipedia ES, Batalla de Palmar: 15.6.1838, Paysandu; Ignacio Oribe and Lavalleja; Lavalle takes command; Piran's artillery; the named officers.
 gg_prewar.9 = {

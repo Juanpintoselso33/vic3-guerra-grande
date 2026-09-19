@@ -1626,7 +1626,6 @@ gg_peace.7 = {
 		set_global_variable = gg_peace_no_victors
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 		gg_patron_change = { PATRON = rosas DELTA = -100 }
-		gg_cerrito_balance_change = { DELTA = 10 }
 		c:ARG ?= {
 			change_relations = { country = ROOT value = -100 }
 			create_diplomatic_pact = { country = ROOT type = rivalry }

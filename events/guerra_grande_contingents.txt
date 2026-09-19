@@ -61,6 +61,9 @@ gg_contingent.1 = {
 	#     en gg_contingent.3, en la fecha en que de verdad tomo la linea.
 	option = {
 		name = gg_contingent.1.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Argentine Legion covers a stretch of the wall /
+		#     la barra tiene que moverse durante la guerra: la Legion Argentina cubre una linea de la muralla
+		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		set_variable = guerra_grande_argentine_legion_raised
 		create_military_formation = {
@@ -144,8 +147,10 @@ gg_contingent.3 = {
 	#     asi que el jugador solo veia un modificador. Es el evento entero: va en la opcion.
 	option = {
 		name = gg_contingent.3.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Basques cross with their arms to the camp /
+		#     la barra tiene que moverse durante la guerra: los vascos se pasan con sus armas al campamento
+		gg_score_blanco = { AMOUNT = 1 }
 		# EN/ES: T4 -- FE-4: the Basques go over: the caudillos' camp grows / los vascos se pasan: crece lo caudillesco
-		gg_cerrito_balance_change = { DELTA = -5 }
 		default_option = yes
 		# EN: "Los Aguerridos" walk out of the lines under arms and are merged into Oribe's
 		#     Batallon de Voluntarios (Etchechury 2017). The Cerrito gains the battalion.
@@ -246,6 +251,9 @@ gg_contingent.4 = {
 
 	option = {
 		name = gg_contingent.4.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the French Legion is the largest corps of the siege /
+		#     la barra tiene que moverse durante la guerra: la Legion Francesa es el cuerpo mas numeroso del sitio
+		gg_score_colorado = { AMOUNT = 1 }
 		# EN/ES: T4 -- FE-4/FE-10: the legion hangs on France, and is raised once / la legion cuelga de Francia, y se levanta una vez
 		gg_patron_change = { PATRON = francia DELTA = 5 }
 		set_variable = guerra_grande_french_legion_raised
@@ -340,6 +348,9 @@ gg_contingent.5 = {
 
 	option = {
 		name = gg_contingent.5.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Italian Legion takes the Cerro flank /
+		#     la barra tiene que moverse durante la guerra: la Legion Italiana toma el flanco del Cerro
+		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		set_variable = guerra_grande_italian_legion_raised
 		# EN/ES: FN-3 -- Costa Brava (gg_naval.3.a) made Garibaldi's name in the city: he commands the
@@ -423,6 +434,9 @@ gg_contingent.6 = {
 
 	option = {
 		name = gg_contingent.6.a
+		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Basque Chasseurs fill the ranks again /
+		#     la barra tiene que moverse durante la guerra: los Cazadores Vascos vuelven a llenar los cuadros
+		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		create_military_formation = {
 			type = army

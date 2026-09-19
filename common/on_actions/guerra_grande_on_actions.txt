@@ -48,9 +48,7 @@ guerra_grande_on_game_start = {
 			# EN/ES: playtest 2026-09-17 -- the journal is open from the first day, so every choice of
 			#     1836-1838 shows its effect on the patrons and the score / el journal abre desde el
 			#     primer dia, asi cada decision de 1836-1838 muestra su efecto en padrinos y puntaje.
-			trigger_event = { id = gg_intro.1 days = 1 popup = yes }     # La Guerra Grande
-			trigger_event = { id = gg_intro.2 days = 2 popup = yes }     # La intervencion extranjera
-			trigger_event = { id = gg_intro.3 days = 3 popup = yes }     # Doctores y caudillos
+			trigger_event = { id = gg_intro.1 days = 1 popup = yes }     # La Guerra Grande + La intervencion extranjera
 			# EN/ES: playtest 2026-09-17 -- the President's portrait, before his first decision / el retrato del Presidente, antes de su primera decision
 			trigger_event = { id = guerra_grande.11 days = 4 popup = yes }  # 1836.01.05 Oribe
 			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).
@@ -61,7 +59,6 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_prewar.5 days = 660 popup = yes }   # 1837.10.22 Yucutuja
 			trigger_event = { id = gg_prewar.6 days = 776 popup = yes }   # 1838.02.15 el Yi
 			trigger_event = { id = gg_prewar.7 days = 840 popup = yes }   # 1838.04.20 bloqueo frances
-			trigger_event = { id = gg_prewar.8 days = 877 popup = yes }   # 1838.05.27 Universidad
 			trigger_event = { id = gg_prewar.9 days = 896 popup = yes }   # 1838.06.15 Palmar
 			# EN/ES: T6 -- Ley N. 242 of the Defensa / de la Defensa, 1842.12.12
 			trigger_event = { id = gg_abolition.1 days = 2537 }

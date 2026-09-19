@@ -13,6 +13,50 @@ guerra_grande_colorado_lead = {
 	subtract = global_var:guerra_grande_blanco_score
 }
 
+# EN: T1/T2, the war balance (playtest 2026-09-19). Counting the events, the bar moved 25 times and
+#     only twice after 1843: it was frozen for the eight years of the siege, and since the partition
+#     halves the lead, the ten points the arbiter asks for were out of reach. The main path of the
+#     design -- a peace negotiated on the score -- could not happen, and every game ended by
+#     exhaustion or conquest, which was meant to be the emergency exit.
+#     The bar reads the war now: the months of closed sea push towards the blancos, the months with
+#     the sea open push towards the colorados, four months to the point and six points at most, so
+#     neither can decide the war on its own. The arbiter reads the same number as the bar.
+# ES: T1/T2, la balanza de la guerra. Contando los eventos, la barra se movia 25 veces y solo dos
+#     despues de 1843: quedaba congelada los ocho anios del sitio, y como la particion parte la
+#     ventaja al medio, los diez puntos que pide el arbitro eran inalcanzables. El camino principal
+#     del diseanio -- la paz negociada por puntaje -- no podia pasar, y todas las partidas terminaban
+#     por agotamiento o conquista, que era la salida de emergencia.
+#     Ahora la barra lee la guerra: los meses de mar cerrado empujan hacia los blancos, los meses de
+#     mar abierto hacia los colorados, cuatro meses por punto y seis puntos como techo, asi ninguno
+#     decide la guerra solo. El arbitro lee el mismo numero que la barra.
+gg_siege_pressure = {
+	value = global_var:gg_siege_months
+	divide = 4
+	round = yes
+	min = 0
+	max = 6
+}
+
+gg_relief_pressure = {
+	value = global_var:gg_relief_months
+	divide = 4
+	round = yes
+	min = 0
+	max = 6
+}
+
+gg_war_balance_blanco = {
+	value = guerra_grande_blanco_lead
+	add = gg_siege_pressure
+	subtract = gg_relief_pressure
+}
+
+gg_war_balance_colorado = {
+	value = guerra_grande_colorado_lead
+	add = gg_relief_pressure
+	subtract = gg_siege_pressure
+}
+
 # EN: T3a. Naval weight of the Defensa's patrons; read only through gg_sea_open (invariant I16).
 # ES: T3a. Peso naval de los padrinos de la Defensa; solo se lee a traves de gg_sea_open (I16).
 gg_sea_power = {
@@ -123,7 +167,7 @@ gg_split_trim = {
 # EN/ES: the war bar's value, clamped to its range. The bar reads the COLORADO lead (colorados on
 #     the left since 2026-09-17) / el valor de la barra; lee la ventaja COLORADA
 gg_war_score_bar_value = {
-	value = guerra_grande_colorado_lead
+	value = gg_war_balance_colorado
 	min = -10
 	max = 10
 }

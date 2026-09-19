@@ -69,9 +69,7 @@ gg_abolition.1 = {
 						has_global_variable = gg_partition_delayed
 					}
 				}
-				c:URU ?= {
-					trigger_event = { id = gg_abolition.2 days = 0 popup = yes }
-				}
+				gg_abolition_dispatch = { DAYS = 0 }
 			}
 			# EN/ES: T6 -- the Cerrito's decree (1846.10.26) is scheduled by gg_partition_calendar
 		}
@@ -279,7 +277,6 @@ gg_abolition.3 = {
 	option = {
 		name = gg_abolition.3.a
 		# EN/ES: T4 -- FE-4: the Cerrito's decree, a doctores' act / el decreto del Cerrito, un acto de los doctores
-		gg_cerrito_balance_change = { DELTA = 10 }
 		default_option = yes
 		set_variable = guerra_grande_abolition_settled
 		set_variable = guerra_grande_abolition_decreed

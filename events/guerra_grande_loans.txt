@@ -292,7 +292,6 @@ gg_loan.3 = {
 		custom_tooltip = gg_loan.3.a_tt2
 		# EN/ES: T4 -- FE-5: Rosas's till / la caja de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
-		gg_cerrito_balance_change = { DELTA = -5 }
 		default_option = yes
 		add_treasury = 10000
 		add_modifier = {
@@ -340,7 +339,6 @@ gg_loan.3 = {
 	option = {
 		name = gg_loan.3.b
 		# EN/ES: T4 -- FE-5: the Buceo customs, the doctores' answer / la aduana del Buceo, la respuesta de los doctores
-		gg_cerrito_balance_change = { DELTA = 10 }
 		add_modifier = {
 			name = guerra_grande_cerrito_self_reliance
 			years = 5
@@ -479,7 +477,6 @@ gg_loan.4 = {
 		name = gg_loan.4.c
 		# EN/ES: T4 -- FE-6: the Republic is a republic / la Republica es una republica
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
-		gg_cerrito_balance_change = { DELTA = 10 }
 		add_modifier = { name = guerra_grande_cerrito_self_reliance years = 10 }
 		add_modifier = { name = guerra_grande_alone_against_the_siege years = 10 }
 		c:ARG ?= { change_relations = { country = ROOT value = -30 } }

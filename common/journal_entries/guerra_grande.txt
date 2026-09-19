@@ -168,15 +168,11 @@ je_guerra_grande = {
 			#     nunca tocaba el marcador, asi que la aguja y los numeros que imprime esta misma
 			#     entrada se contradecian. Una barra que se mueve sola y se contradice a si misma no
 			#     le ensenia nada al jugador, asi que no hay deriva: lo que ves es lo que elegiste.
-			# Flavour only while the war is actually being fought.
-			if = {
-				limit = { has_global_variable = guerra_grande_open_war }
-				c:URU ?= { random_list = {
-					17 = {}
-					1 = { trigger_event = guerra_grande.6 }
-					1 = { trigger_event = guerra_grande.7 }
-				} }
-			}
+			# EN: playtest 2026-09-19 -- this monthly roll threw two one-option events ("Las azoteas",
+			#     "Se acabaron las haciendas") whose only effect was the mood of the pops: an OK button
+			#     in the middle of the siege. Cut, with the events.
+			# ES: esta tirada mensual sacaba dos eventos de una sola opcion cuyo unico efecto era el
+			#     humor de los pops: un boton de OK en medio del sitio. Se fueron, con los eventos.
 			# EN: the bar has to buy something. Five battles of lead give the leading government a
 			#     real advantage and grind the other down; ten decide the war and bring the losing
 			#     side to the table. Both modifiers are refreshed monthly, so they fade on their
@@ -188,12 +184,12 @@ je_guerra_grande = {
 			if = {
 				limit = { has_global_variable = guerra_grande_open_war }
 				if = {
-					limit = { guerra_grande_blanco_lead >= 5 }
+					limit = { gg_war_balance_blanco >= 5 }
 					c:CER ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:URU ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
 				else_if = {
-					limit = { guerra_grande_colorado_lead >= 5 }
+					limit = { gg_war_balance_colorado >= 5 }
 					c:URU ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
@@ -236,6 +232,27 @@ je_guerra_grande = {
 							NOT = { has_global_variable = gg_truce }
 						}
 						change_global_variable = { name = gg_siege_months add = -1 }
+					}
+					# EN: playtest 2026-09-19 -- the mirror of the siege: months with the sea open and no
+					#     blockade are months the city wins, and they push the bar towards the colorados.
+					#     Without this the bar only ever moved one way during the war.
+					# ES: el espejo del sitio: los meses de mar abierto y sin bloqueo son meses que gana la
+					#     ciudad, y empujan la barra hacia los colorados. Sin esto la barra solo se movia
+					#     para un lado durante la guerra.
+					if = {
+						limit = {
+							gg_sea_open = yes
+							NOT = { has_global_variable = gg_truce }
+							global_var:gg_relief_months < 24
+						}
+						change_global_variable = { name = gg_relief_months add = 1 }
+					}
+					else_if = {
+						limit = {
+							NOT = { gg_sea_open = yes }
+							global_var:gg_relief_months > 0
+						}
+						change_global_variable = { name = gg_relief_months add = -1 }
 					}
 					# EN: FN-2 -- the Anglo-French station: while the sea is open the city resists a blockade and
 					#     keeps a lent squadron; when the backing falls the powers take their ships back.
@@ -334,6 +351,34 @@ je_guerra_grande = {
 							}
 						}
 					}
+					# EN: Codex review 2026-09-19 -- the closing used to read enemy_occupation at the moment the
+					#     journal closed, and that number counts ground taken by ANY enemy: a Brazilian war
+					#     somewhere else could be read as the Cerrito's victory. It is written down here
+					#     instead, month by month and only while this war is the one being fought, so the
+					#     closing reads who took whose ground in the Guerra Grande.
+					# ES: el cierre leia enemy_occupation en el momento de cerrar, y ese numero cuenta el
+					#     suelo tomado por CUALQUIER enemigo: una guerra con el Brasil en otro lado podia
+					#     leerse como victoria del Cerrito. Se anota aca, mes a mes y solo mientras la
+					#     guerra que se pelea sea esta, asi el cierre lee quien tomo el suelo de quien.
+					c:CER ?= {
+						every_scope_war = {
+							limit = { gg_is_the_war = yes }
+							if = {
+								limit = { c:URU ?= { enemy_occupation >= 0.5 } }
+								set_global_variable = { name = gg_defensa_overrun value = 1 }
+							}
+							else = {
+								set_global_variable = { name = gg_defensa_overrun value = 0 }
+							}
+							if = {
+								limit = { c:CER ?= { enemy_occupation >= 0.5 } }
+								set_global_variable = { name = gg_cerrito_overrun value = 1 }
+							}
+							else = {
+								set_global_variable = { name = gg_cerrito_overrun value = 0 }
+							}
+						}
+					}
 					c:URU ?= {
 						every_scope_war = {
 							limit = { gg_is_the_war = yes }
@@ -365,26 +410,6 @@ je_guerra_grande = {
 							every_scope_war = {
 								limit = { gg_is_the_war = yes }
 								add_war_war_support = { target = c:CER value = gg_cerrito_drain }
-							}
-						}
-					}
-					# EN/ES: review -- the same for the Defensa's caudillos / lo mismo para los caudillos de la Defensa
-					if = {
-						limit = { global_var:gg_defensa_balance <= -30 }
-						c:URU ?= {
-							every_scope_war = {
-								limit = { gg_is_the_war = yes }
-								add_war_war_support = { target = c:URU value = 2 }
-							}
-						}
-					}
-					# EN/ES: T7, FG-2 -- with the caudillos in charge, the siege holds / con los caudillos, el sitio aguanta
-					if = {
-						limit = { global_var:gg_cerrito_balance <= -30 }
-						c:CER ?= {
-							every_scope_war = {
-								limit = { gg_is_the_war = yes }
-								add_war_war_support = { target = c:CER value = 2 }
 							}
 						}
 					}
@@ -558,6 +583,10 @@ je_guerra_grande = {
 			years = 15
 			is_decaying = yes
 		}
+		# EN/ES: Codex review 2026-09-19 -- a war that ends here still has to be closed: same dispatch
+		#     as complete, and the mark makes sure only one of the two runs it / una guerra que termina
+		#     aca tambien hay que cerrarla: el mismo despacho, y la marca deja que corra uno solo
+		gg_war_closing_dispatch = yes
 		hidden_effect = {
 			# EN/ES: T1, C14 -- the loans' watcher reads this / el vigia de los prestamos lee esto
 			set_global_variable = gg_war_failed
@@ -570,89 +599,7 @@ je_guerra_grande = {
 	# ES: T1, C11 -- una guerra cerrada sin paz firmada termina en gg_peace.5. La marca va primero,
 	#     asi la pasada del segundo pais involucrado no hace nada.
 	on_complete_all_involved = {
-		if = {
-			limit = { NOT = { has_global_variable = gg_peace_settled } }
-			set_global_variable = gg_peace_settled
-			set_global_variable = gg_victory_pending
-			# EN: playtest 2026-09-19 -- Juan won the same battle twice and got two different endings: the
-			#     first time the Cerrito's victory menu, the second "neither victors nor vanquished". The
-			#     reason was that both countries still existed, which was read as a stalemate no matter what
-			#     the armies had done. Order now: a third country that took the capitals first, then the
-			#     military result (gg_cerrito_won_militarily / gg_defensa_won_militarily, occupation
-			#     included), and only if nobody holds the other's ground is it a peace without victors.
-			# ES: Juan gano la misma batalla dos veces y le salieron dos finales distintos: la primera el menu
-			#     de la victoria del Cerrito, la segunda «ni vencedores ni vencidos». El motivo era que los dos
-			#     paises seguian existiendo, y eso se leia como empate sin mirar lo que habian hecho los
-			#     ejercitos. Orden nuevo: primero un tercero que se quedo con las capitales, despues el
-			#     resultado militar (ocupacion incluida), y recien si nadie tiene el suelo del otro es una paz
-			#     sin vencedores.
-			if = {
-				limit = {
-					OR = {
-						AND = {
-							NOT = { exists = c:CER }
-							c:URU ?= { NOT = { any_scope_state = { state_region = s:STATE_SAN_JOSE } } }
-						}
-						AND = {
-							NOT = { exists = c:URU }
-							c:CER ?= { NOT = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
-						}
-					}
-				}
-				set_global_variable = gg_victory_third_party
-			}
-			else_if = {
-				limit = {
-					NOR = {
-						gg_cerrito_won_militarily = yes
-						gg_defensa_won_militarily = yes
-					}
-				}
-				set_global_variable = gg_victory_timeout
-			}
-			# EN/ES: who writes the terms / quien escribe el pliego
-			if = {
-				limit = { gg_cerrito_won_militarily = yes }
-				random_country = {
-					limit = { has_variable = guerra_grande_cerrito_government }
-					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
-				}
-			}
-			else_if = {
-				limit = { gg_defensa_won_militarily = yes }
-				random_country = {
-					limit = { has_variable = guerra_grande_defensa_government }
-					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
-				}
-			}
-			# EN/ES: no military winner: the score only says who reads out the paper / sin ganador militar,
-			#     el puntaje solo dice quien lee el papel
-			else_if = {
-				limit = {
-					exists = c:CER
-					guerra_grande_blanco_lead > 0
-				}
-				random_country = {
-					limit = { has_variable = guerra_grande_cerrito_government }
-					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
-				}
-			}
-			else = {
-				random_country = {
-					limit = { has_variable = guerra_grande_defensa_government }
-					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
-				}
-			}
-		}
-		# EN/ES: T8, C16 -- the postwar, once / la posguerra, una vez
-		if = {
-			limit = {
-				NOT = { has_global_variable = gg_postwar_started }
-				NOT = { has_global_variable = gg_reincorporated }
-			}
-			set_global_variable = gg_postwar_started
-			gg_postwar_dispatch = yes
-		}
+		gg_war_closing_dispatch = yes
 		hidden_effect = {
 			remove_global_variable = guerra_grande_open_war
 		}
