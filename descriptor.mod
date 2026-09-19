@@ -1,8 +1,8 @@
-version="0.2.0"
+version="0.3.0"
 tags={
 	"Historical"
 	"Events"
 	"Journal Entries"
 }
-name="Guerra Grande (la Argentina submod)"
+name="Guerra Grande"
 supported_version="1.13.*"
