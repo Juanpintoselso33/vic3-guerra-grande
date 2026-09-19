@@ -1,0 +1,27 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The Republic's capital (standalone, Codex review 19 September 2026). Vanilla declares
+#     URU with capital = STATE_URUGUAY, and this mod replaces that state with five: the country was
+#     left pointing at a capital that does not exist, which breaks anything reading capital or
+#     capital.region -- including the naval HQ of the squadrons, which is read from the capital's
+#     strategic region.
+#     is_named_from_capital goes to no on purpose: with it on, a Republic whose capital is now
+#     STATE_MONTEVIDEO would take that state's name. The country keeps its own, from the URU key.
+# ES: la capital de la Republica. Vanilla declara URU con capital = STATE_URUGUAY, y este mod
+#     reemplaza ese estado por cinco: el pais quedaba apuntando a una capital que no existe, lo que
+#     rompe todo lo que lea capital o capital.region, incluido el HQ naval de las escuadras, que sale
+#     de la region estrategica de la capital.
+#     is_named_from_capital pasa a no a proposito: con eso prendido, una Republica cuya capital ahora
+#     es STATE_MONTEVIDEO tomaria el nombre de ese estado. El pais conserva el suyo, de la clave URU.
+# -------------------------------------------------------------------------------------------------
+
+REPLACE:URU = {
+	color = { 131  101  85 }
+
+	country_type = recognized
+
+	tier = principality
+
+	cultures = { platinean }
+	capital = STATE_MONTEVIDEO
+	is_named_from_capital = no
+}

@@ -1395,6 +1395,10 @@ gg_peace.5 = {
 	# a -- clemency / clemencia
 	option = {
 		name = gg_peace.5.a
+		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
+		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
+		#     de ser ciertas
+		gg_victory_clear = yes
 		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
 		#     / la posguerra arranca cuando el ganador ya decidio
 		gg_postwar_start = yes
@@ -1412,6 +1416,10 @@ gg_peace.5 = {
 	# b -- proscription: the defeated chiefs go into exile / proscripcion: exilio de los jefes
 	option = {
 		name = gg_peace.5.b
+		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
+		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
+		#     de ser ciertas
+		gg_victory_clear = yes
 		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
 		#     / la posguerra arranca cuando el ganador ya decidio
 		gg_postwar_start = yes
@@ -1450,6 +1458,10 @@ gg_peace.5 = {
 	# c -- terror / deguello
 	option = {
 		name = gg_peace.5.c
+		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
+		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
+		#     de ser ciertas
+		gg_victory_clear = yes
 		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
 		#     / la posguerra arranca cuando el ganador ya decidio
 		gg_postwar_start = yes
@@ -1470,6 +1482,10 @@ gg_peace.5 = {
 	# d -- entregarle el jefe vencido a su padrino, a cambio de la buena voluntad del padrino
 	option = {
 		name = gg_peace.5.d
+		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
+		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
+		#     de ser ciertas
+		gg_victory_clear = yes
 		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
 		#     / la posguerra arranca cuando el ganador ya decidio
 		gg_postwar_start = yes

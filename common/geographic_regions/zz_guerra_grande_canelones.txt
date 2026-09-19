@@ -1,76 +1,46 @@
-﻿# Canelones is part of the colonial La Plata, like the state it was split from.
-# Canelones integra el Rio de la Plata colonial, igual que el estado del que se separo.
+﻿﻿# -------------------------------------------------------------------------------------------------
+# EN: The colonial region of la Plata (standalone, Codex review 19 September 2026). This file used to
+#     carry la Argentina's list, with nineteen states vanilla does not have (Formosa, Neuquen,
+#     Chubut, Tarija...) and without vanilla ones like Patagonia, Araucania or Potosi: pure
+#     contamination from the dependency the mod just dropped, and a database error on load.
+#     Rebuilt from vanilla's list, with STATE_URUGUAY replaced by the five oriental states -- the
+#     only thing this mod has any business changing here.
+# ES: la region colonial del Plata. Este archivo traia la lista de la Argentina, con diecinueve
+#     estados que vanilla no tiene y sin otros que si tiene: contaminacion pura de la dependencia que
+#     el mod acaba de soltar, y un error de base de datos al cargar. Reconstruido desde la lista de
+#     vanilla, con STATE_URUGUAY reemplazado por los cinco estados orientales, que es lo unico que
+#     este mod tiene por que tocar aca.
+# -------------------------------------------------------------------------------------------------
+
 REPLACE:geographic_region_colonial_la_plata = {
 	short_key = "colonial_la_plata"
 
 	state_regions = {
 		# La Plata Region
 		STATE_BUENOS_AIRES
-		STATE_CHACO
-		STATE_FORMOSA_ARG
-		STATE_CHUBUT
-		STATE_SANTA_CRUZ_ARG
-		STATE_TIERRA_DEL_FUEGO
 		STATE_SANTA_FE
-		STATE_BAJO_PARAGUAY
+		STATE_CORRIENTES
+		STATE_CHACO
 		STATE_ALTO_PARAGUAY
-		STATE_RIO_NEGRO
-		STATE_CORDOBA
-		STATE_NEUQUEN
-		STATE_LA_RIOJA
-		STATE_MENDOZA
-		STATE_NEUQUEN
-		STATE_SANTIAGO_DEL_ESTERO
-		STATE_CATAMARCA
-		STATE_ENTRE_RIOS
-		STATE_MISIONES
-		STATE_SAN_JUAN
-		STATE_SALTA
-		STATE_SAN_LUIS
-		STATE_CHUBUT
+		STATE_BAJO_PARAGUAY
 		STATE_LA_PAMPA
 		STATE_TUCUMAN
+		STATE_RIO_NEGRO
+		STATE_PATAGONIA
+		STATE_ARAUCANIA
+		STATE_SOUTH_ATLANTIC_ISLANDS
+		# Andes Region
+		STATE_SANTA_CRUZ
 		STATE_JUJUY
-		STATE_CORRIENTES
-		STATE_TARIJA
-		# South Andes Region
-		STATE_TARAPACA
 		STATE_ANTOFAGASTA
-		STATE_LOS_RIOS
-		STATE_LOS_LAGOS
-		STATE_AYSEN 
-		STATE_MAGALLANES 
-		STATE_SANTIAGO
+		STATE_POTOSI
+		STATE_LA_PAZ
 		# Brazil Region
 		STATE_MONTEVIDEO
 		STATE_SAN_JOSE
 		STATE_MALDONADO
-		STATE_BANDA_ORIENTAL
 		STATE_PAYSANDU
+		STATE_BANDA_ORIENTAL
 		STATE_RIO_GRANDE_DO_SUL
-	}
-}
-
-# EN: same for the southern cone list the state fix restores.
-# ES: lo mismo para la lista del cono sur que restaura el fix de estados.
-REPLACE:geographic_region_southern_cone = {
-	short_key = "southern_cone"
-
-	state_regions = {
-		STATE_MONTEVIDEO
-		STATE_SAN_JOSE
-		STATE_MALDONADO
-		STATE_BANDA_ORIENTAL
-		STATE_PAYSANDU
-		STATE_ALTO_PARAGUAY
-		STATE_BAJO_PARAGUAY
-		STATE_BUENOS_AIRES
-		STATE_RIO_NEGRO
-		STATE_LA_PAMPA
-		STATE_SANTA_FE
-		STATE_CORRIENTES
-		STATE_TUCUMAN
-		STATE_CHACO
-		STATE_JUJUY
 	}
 }

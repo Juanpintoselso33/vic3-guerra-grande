@@ -294,7 +294,7 @@ REPLACE:je_paraguayan_war = {
                     any_scope_state = {
                         OR = {
                             state_region = s:STATE_CORRIENTES
-                            state_region = s:STATE_MONTEVIDEO
+                            OR = { state_region = s:STATE_MONTEVIDEO state_region = s:STATE_SAN_JOSE state_region = s:STATE_MALDONADO state_region = s:STATE_PAYSANDU state_region = s:STATE_BANDA_ORIENTAL }
                             state_region = s:STATE_SANTA_FE
                             state_region = s:STATE_PARANA
                             state_region = s:STATE_RIO_GRANDE_DO_SUL

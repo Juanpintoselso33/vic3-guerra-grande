@@ -36,7 +36,7 @@ gg_siege_pressure = {
 	#     months, not four / piso, no redondeo: con redondeo el punto llegaba a los dos meses
 	floor = yes
 	min = 0
-	max = 6
+	max = 4
 }
 
 gg_relief_pressure = {
@@ -46,7 +46,15 @@ gg_relief_pressure = {
 	#     months, not four / piso, no redondeo: con redondeo el punto llegaba a los dos meses
 	floor = yes
 	min = 0
-	max = 6
+	# EN: Codex review, third pass -- the ceiling was 6, and from 1851 the arbiter asks for 5: two
+	#     years of open sea opened the peace table by themselves, with the score dead even. The
+	#     comment promised the pressure would not decide the war on its own; now it cannot. Four is
+	#     below every threshold the arbiter reads, so it always needs something the player did.
+	# ES: el techo era 6, y desde 1851 el arbitro pide 5: dos anios de mar abierto abrian la mesa de
+	#     paz solos, con el puntaje empatado. El comentario prometia que la presion no decidia la
+	#     guerra sola; ahora no puede. Cuatro esta debajo de todos los umbrales del arbitro, asi que
+	#     siempre hace falta algo que haya hecho el jugador.
+	max = 4
 }
 
 gg_war_balance_blanco = {

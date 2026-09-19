@@ -827,3 +827,85 @@ REPLACE:URU_paulina_luisi = { #Paulina Luisi
         #guaranteed to spawn if possible
     }
 }
+
+# EN/ES: Codex review 2026-09-19 -- estas dos faltaban: solo nombraban el estado en su
+#     condicion de uso para PLT, no en home_region / these two only named the state in their PLT
+#     usage condition, not in home_region
+REPLACE:URU_emilio_reus = { # Emilio Reus Bahamonde
+	first_name = Emilio
+	last_name = Reus
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	birth_date = 1858.5.1 # Guesswork
+	home_region = STATE_GALICIA
+	traits = {
+		sickly
+		reckless
+		ambitious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			OR = {
+				c:URU ?= THIS
+				AND = {
+					c:PLT ?= THIS
+					any_scope_state = {
+						state_region = s:STATE_MONTEVIDEO
+					}
+				}
+			}
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+        }
+        earliest_usage_date = 1888.1.1
+        latest_usage_date = 1900.1.1
+        #guaranteed to spawn if possible
+    }
+	trait_generation = { }
+}
+# EN/ES: Codex review 2026-09-19 -- estas dos faltaban: solo nombraban el estado en su
+#     condicion de uso para PLT, no en home_region / these two only named the state in their PLT
+#     usage condition, not in home_region
+REPLACE:URU_anacleto_medina = { # Anacleto Medina y Biera
+	first_name = Anacleto
+	last_name = Medina
+	historical = yes
+	birth_date = 1788.7.26
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	culture = primary_culture
+	religion = rel:catholic
+	home_region = STATE_CORRIENTES
+	traits = {
+		cruel
+		forest_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			OR = {
+				c:URU ?= THIS
+				AND = {
+					c:PLT ?= THIS
+					any_scope_state = {
+						state_region = s:STATE_MONTEVIDEO
+					}
+				}
+			}
+			has_dlc_feature = rp1_content
+        }
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1880.1.1
+		#guaranteed to spawn if possible
+	}
+	trait_generation = { }
+}

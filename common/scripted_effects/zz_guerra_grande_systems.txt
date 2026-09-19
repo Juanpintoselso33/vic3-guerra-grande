@@ -143,6 +143,17 @@ gg_peace_chain_clear = {
 	}
 }
 
+# EN/ES: Codex review 2026-09-19 -- gg_victory_pending was set when the victory menu was scheduled and
+#     nobody ever took it off, so the menu's own trigger stayed true for the rest of the game. These
+#     three are answers to a question that has been answered. / gg_victory_pending se prendia al
+#     agendar el menu de la victoria y nadie la apagaba nunca, asi que el trigger del menu quedaba
+#     verdadero el resto de la partida. Las tres son respuestas a una pregunta ya contestada.
+gg_victory_clear = {
+	if = { limit = { has_global_variable = gg_victory_pending } remove_global_variable = gg_victory_pending }
+	if = { limit = { has_global_variable = gg_victory_third_party } remove_global_variable = gg_victory_third_party }
+	if = { limit = { has_global_variable = gg_victory_timeout } remove_global_variable = gg_victory_timeout }
+}
+
 # EN: T8, the postwar, started from one place and only once (Codex review 2026-09-19). It used to
 #     hang off the closing, inside the guard "no peace has been signed yet" -- so every negotiated
 #     peace, which signs itself, skipped it: no postwar at all, and a Cerrito that won at the table

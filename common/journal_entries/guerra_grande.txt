@@ -417,6 +417,18 @@ je_guerra_grande = {
 							set_global_variable = { name = gg_cerrito_overrun value = 0 }
 						}
 					}
+					# EN: Codex review 2026-09-19, third pass -- when another war opens, the block above stops
+					#     writing, and "leaving the marks as they are" meant a 1 from last month could decide
+					#     the closing months later. A reading that cannot be trusted is not kept: both go to
+					#     zero, and the war has to earn them again once it is the only one being fought.
+					# ES: cuando se abre otra guerra el bloque de arriba deja de escribir, y "dejar las marcas
+					#     como estan" queria decir que un 1 del mes pasado podia decidir el cierre meses
+					#     despues. Una lectura que no se puede creer no se guarda: las dos van a cero, y la
+					#     guerra tiene que volver a ganarselas cuando sea la unica que se pelea.
+					else = {
+						set_global_variable = { name = gg_cerrito_overrun value = 0 }
+						set_global_variable = { name = gg_defensa_overrun value = 0 }
+					}
 					c:URU ?= {
 						every_scope_war = {
 							limit = { gg_is_the_war = yes }

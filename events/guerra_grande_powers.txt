@@ -586,17 +586,18 @@ gg_powers.17 = {
 			}
 			gg_urquiza_flip = yes
 		}
-		else_if = {
-			limit = { global_var:gg_patron_urquiza >= 50 }
+		# EN: Codex review 2026-09-19 -- the offer adds 20 before the check, and before March 1847 the
+		#     most Urquiza can have lost is 10, so he is always at 50 or more here: the branch below
+		#     that asked for less than 50 could never run. What decides now is Rosas, which is the
+		#     historical question anyway -- letting Urquiza go was Rosas's to allow.
+		# ES: la oferta suma 20 antes del chequeo, y antes de marzo de 1847 Urquiza pudo perder 10 como
+		#     mucho, asi que aca siempre esta en 50 o mas: la rama que pedia menos de 50 no podia
+		#     correr nunca. Lo que decide ahora es Rosas, que es ademas la pregunta historica: dejarlo
+		#     ir era cosa de Rosas.
+		else = {
 			random_list = {
 				60 = {}
 				40 = { gg_urquiza_flip = yes }
-			}
-		}
-		else = {
-			random_list = {
-				85 = {}
-				15 = { gg_urquiza_flip = yes }
 			}
 		}
 		ai_chance = { base = 60 }
