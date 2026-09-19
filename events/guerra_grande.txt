@@ -1608,7 +1608,8 @@ guerra_grande.9 = {
 
 	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
 	event_image = {
-		video = "gg_squadrons"
+		# EN/ES: playtest 2026-09-19 -- la Vuelta de Obligado es justo las escuadras forzando el rio, 20.11.1845
+		video = "gg_in_obligado"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"

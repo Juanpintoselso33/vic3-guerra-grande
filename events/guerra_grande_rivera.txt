@@ -1368,6 +1368,10 @@ gg_rivera.7 = {
 		# EN: historical: Mercedes and Paysandu, with excesses; the Cerro de las Animas is likely.
 		# ES: lo historico: Mercedes y Paysandu, con excesos; el Cerro de las Animas es probable.
 		set_global_variable = gg_rivera_litoral
+		# EN/ES: playtest 2026-09-19 -- Urquiza is the governor of the province being raided: his
+		#     support was a number nobody could move / Urquiza es el gobernador de la provincia en la
+		#     que se entra: su apoyo era un numero que nadie podia mover
+		gg_patron_change = { PATRON = urquiza DELTA = -15 }
 		gg_score_colorado = { AMOUNT = 1 }
 		random_list = {
 			70 = { gg_score_blanco = { AMOUNT = 2 } }

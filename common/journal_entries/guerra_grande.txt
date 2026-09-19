@@ -179,12 +179,19 @@ je_guerra_grande = {
 			if = {
 				limit = { has_global_variable = guerra_grande_open_war }
 				if = {
-					limit = { gg_war_balance_blanco >= 5 }
+					# EN: T10 balance 2026-09-19 -- these read the lead the DECISIONS built, not the war
+					#     balance that now includes the siege and the sea. With the composite they would sit
+					#     on one side for the six years the sea stays open, and +10% offense for six years is
+					#     not an edge, it is a different war. The bar and the arbiter do read the composite.
+					# ES: estos leen la ventaja que construyeron las DECISIONES, no la balanza que ahora
+					#     incluye el sitio y el mar: con la balanza quedarian prendidos de un lado los seis
+					#     anios que el mar esta abierto. La barra y el arbitro si leen la balanza.
+					limit = { guerra_grande_blanco_lead >= 5 }
 					c:CER ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:URU ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
 				else_if = {
-					limit = { gg_war_balance_colorado >= 5 }
+					limit = { guerra_grande_colorado_lead >= 5 }
 					c:URU ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}

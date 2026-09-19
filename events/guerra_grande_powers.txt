@@ -550,17 +550,33 @@ gg_powers.17 = {
 		# ES: ofrecerle la alianza a Urquiza despues de Alcaraz. Que Rosas lo deje ir depende de cuan
 		#     fuerte este Rosas.
 		add_treasury = -20000
+		# EN: playtest 2026-09-19 -- Urquiza's own support was fixed at 40 for the whole game and no
+		#     decision moved it: the journal showed a bar the player could not touch. The offer moves
+		#     him, and whether he goes over is read off that number instead of being a coin toss --
+		#     Rosas still weighs, because letting him go was Rosas's to allow.
+		# ES: el apoyo de Urquiza estaba clavado en 40 toda la partida y ninguna decision lo movia: el
+		#     journal mostraba una barra que el jugador no podia tocar. La oferta lo mueve, y que se
+		#     pase se lee de ese numero en vez de ser cara o cruz; Rosas sigue pesando, porque dejarlo
+		#     ir era cosa de Rosas.
+		gg_patron_change = { PATRON = urquiza DELTA = 20 }
 		if = {
-			limit = { global_var:gg_patron_rosas >= 60 }
+			limit = {
+				global_var:gg_patron_urquiza >= 50
+				global_var:gg_patron_rosas < 60
+			}
+			gg_urquiza_flip = yes
+		}
+		else_if = {
+			limit = { global_var:gg_patron_urquiza >= 50 }
 			random_list = {
-				80 = {}
-				20 = { gg_urquiza_flip = yes }
+				60 = {}
+				40 = { gg_urquiza_flip = yes }
 			}
 		}
 		else = {
 			random_list = {
-				50 = {}
-				50 = { gg_urquiza_flip = yes }
+				85 = {}
+				15 = { gg_urquiza_flip = yes }
 			}
 		}
 		ai_chance = { base = 60 }
@@ -568,9 +584,10 @@ gg_powers.17 = {
 
 	option = {
 		name = gg_powers.17.b
-		# EN: do not risk it: the line stays cautious, the doctores lose a card.
-		# ES: no arriesgar: la linea se queda prudente, los doctores pierden una carta.
+		# EN: do not risk it. Alcaraz was Urquiza's own peace and nobody answered it: he notices.
+		# ES: no arriesgar. Alcaraz fue la paz del propio Urquiza y nadie la contesto: se nota.
 		add_modifier = { name = guerra_grande_armed_truce years = 2 is_decaying = yes }
+		gg_patron_change = { PATRON = urquiza DELTA = -10 }
 		ai_chance = { base = 40 }
 	}
 
@@ -809,10 +826,16 @@ gg_powers.22 = {
 	type = country_event
 	hidden = yes
 
+	# EN/ES: playtest 2026-09-19 -- the Empire behind the Defensa brings him over, and so does having
+	#     worked on him for years / el Imperio detras de la Defensa lo trae, y haberlo trabajado
+	#     durante anios tambien
 	trigger = {
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_urquiza_flipped }
-		global_var:gg_patron_brasil >= 30
+		OR = {
+			global_var:gg_patron_brasil >= 30
+			global_var:gg_patron_urquiza >= 60
+		}
 	}
 
 	immediate = {
@@ -1007,7 +1030,8 @@ gg_powers.28 = {
 	flavor = gg_powers.28.f
 
 	event_image = {
-		video = "gg_f2_bellini"
+		# EN/ES: playtest 2026-09-19 -- el retrato del muerto para sus propias exequias
+		video = "gg_fl_larranaga"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -1231,6 +1255,9 @@ gg_powers.32 = {
 	#     una sola de las dos
 	immediate = {
 		set_global_variable = gg_lamas_in_rio
+		# EN/ES: playtest 2026-09-19 -- the Rio mission worked on Urquiza as much as on the Empire
+		#     / la mision de Rio trabajo tanto al Imperio como a Urquiza
+		gg_patron_change = { PATRON = urquiza DELTA = 5 }
 	}
 
 	option = {

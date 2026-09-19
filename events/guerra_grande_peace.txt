@@ -690,7 +690,8 @@ gg_peace.2 = {
 
 	# Adolphe d'Hastrel, "The Roads, Montevideo" (1840), public domain.
 	event_image = {
-		video = "gg_peace"
+		# EN/ES: playtest 2026-09-19 -- el Cerrito le dicta las condiciones a la ciudad sitiada
+		video = "gg_new_troy"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -1708,7 +1709,8 @@ gg_peace.9 = {
 	flavor = gg_peace.9.flav
 
 	event_image = {
-		video = "gg_f2_idilio"
+		# EN/ES: playtest 2026-09-19 -- la jura de la Constitucion para una eleccion ganada
+		video = "gg_in_constitution"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -1767,7 +1769,8 @@ gg_peace.11 = {
 	flavor = gg_peace.11.f
 
 	event_image = {
-		video = "gg_peace"
+		# EN/ES: playtest 2026-09-19 -- Pacheco y Obes es el ministro de guerra de la Defensa, que es la que pide condiciones
+		video = "gg_fl_pacheco"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -1812,7 +1815,8 @@ gg_peace.12 = {
 	flavor = gg_peace.12.f
 
 	event_image = {
-		video = "gg_peace"
+		# EN/ES: playtest 2026-09-19 -- el campamento del Cerrito vivia de las haciendas, y se esta vaciando
+		video = "gg_herds"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"

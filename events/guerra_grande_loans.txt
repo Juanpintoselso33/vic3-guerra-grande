@@ -417,6 +417,10 @@ gg_loan.4 = {
 	#     Buenos Aires, y pone el peso entero de Rosas detras suyo.
 	option = {
 		name = gg_loan.4.a
+		# EN/ES: playtest 2026-09-19 -- a Republic folded back into the Confederation is exactly what
+		#     the federal governors of the Litoral fear / una Republica reincorporada a la
+		#     Confederacion es justo lo que temen los gobernadores federales del Litoral
+		gg_patron_change = { PATRON = urquiza DELTA = -10 }
 		custom_tooltip = gg_loan.4.a_tt
 		add_treasury = 25000
 		add_modifier = { name = guerra_grande_reunification_accepted years = 20 }
