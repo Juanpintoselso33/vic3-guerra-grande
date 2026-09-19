@@ -87,7 +87,24 @@ gg_siege_port_without_a_countryside = {
 	state_migration_pull_mult = 0.50
 	building_group_bg_ranching_throughput_add = -0.60
 	building_group_bg_agriculture_throughput_add = -0.60
-	state_conscription_rate_mult = -0.40
+	# EN/ES: -0.40 -> -0.15 (balance 19/9/2026). El castigo de reclutamiento de la plaza se sumaba al
+	#     +0.50 de la campania y a una poblacion cuatro veces menor: la ventaja de conscripcion del
+	#     Cerrito daba casi 11 a 1. / the plaza's recruiting penalty stacked on top of the
+	#     countryside's bonus and a population four times smaller: nearly 11 to 1.
+	state_conscription_rate_mult = -0.15
+	# EN: THE CITY HAS NO ONE LEFT TO EMPLOY. Montevideo has 36.000 people, 32.500 of them free, so
+	#     at vanilla's working-adult ratio about 8.125 employable adults -- against roughly
+	#     9.100-10.100 jobs its starting buildings already demand. The foreign legions arrive as
+	#     battalions, not as people, so the Defensa was left holding formations it could not man:
+	#     that is why it showed 0-4 while the script had created up to 24. A besieged city that
+	#     arms its whole population is the historical fact and the fix at once.
+	# ES: LA CIUDAD NO TIENE A QUIEN EMPLEAR. Montevideo tiene 36.000 habitantes, 32.500 libres, o
+	#     sea unos 8.125 adultos empleables con la tasa de vanilla, contra 9.100-10.100 puestos que
+	#     sus edificios iniciales ya piden. Las legiones extranjeras llegan como batallones, no como
+	#     gente, asi que la Defensa se quedaba con formaciones que no podia tripular: por eso
+	#     mostraba 0-4 con hasta 24 creados por script. Una ciudad sitiada que arma a toda su
+	#     poblacion es el hecho historico y el arreglo a la vez.
+	state_working_adult_ratio_add = 0.15
 }
 
 # EN: San Jose, Maldonado, Banda Oriental and Paysandu -- the four states the events actually
@@ -157,7 +174,8 @@ gg_siege_countryside_without_a_port = {
 	state_migration_pull_mult = -0.50
 	building_group_bg_ranching_throughput_add = 0.30
 	building_group_bg_agriculture_throughput_add = 0.30
-	state_conscription_rate_mult = 0.50
+	# EN/ES: 0.50 -> 0.25, la otra mitad de la brecha de conscripcion / the other half of the gap
+	state_conscription_rate_mult = 0.25
 }
 
 # EN: THE CERRITO'S ANSWER TO A BLOCKADE, AND WHY A BLOCKADE NEVER FINISHED IT EITHER.
@@ -294,6 +312,16 @@ gg_siege_no_breaching_guns = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds"
 	unit_occupation_mult = -0.5
 	unit_provinces_captured_mult = -0.5
+	# EN: and the assault itself. The two lines above only slow down what happens AFTER the battle is
+	#     won, and Montevideo is a single province: the engine's minimum capture beats any occupation
+	#     penalty, so one won battle took the city. An army with no breaching guns should lose the
+	#     battle at the wall, not merely take longer to walk in.
+	# ES: y el asalto mismo. Las dos lineas de arriba solo frenan lo que pasa DESPUES de ganada la
+	#     batalla, y Montevideo es una sola provincia: el minimo de captura del motor le gana a
+	#     cualquier penalidad de ocupacion, asi que una sola batalla ganada tomaba la ciudad. Un
+	#     ejercito sin canones de brecha tiene que perder la batalla al pie de la muralla, no
+	#     simplemente tardar mas en entrar.
+	unit_offense_mult = -0.5
 }
 
 # EN: and the other half of the same fact: the guns of the plaza. The Defensa's artillery park

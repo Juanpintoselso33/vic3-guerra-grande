@@ -598,7 +598,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 4
+						count = 3
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
@@ -608,7 +608,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 6
+						count = 3
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -638,7 +638,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 5
+						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -667,7 +667,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 4
+						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -687,12 +687,12 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 4
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
 						state_region = s:STATE_MONTEVIDEO
-						count = 2
+						count = 1
 					}
 				}
 			}
@@ -707,7 +707,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 3
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -726,7 +726,7 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 3
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -1190,17 +1190,17 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 4
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 2
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 6
+						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -1220,17 +1220,17 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 3
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 2
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 5
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -1249,17 +1249,17 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 3
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
 						state_region = s:STATE_SAN_JOSE
-						count = 2
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
 						state_region = s:STATE_SAN_JOSE
-						count = 4
+						count = 1
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
@@ -1299,12 +1299,12 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 3
+						count = 4
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
 						state_region = s:STATE_MONTEVIDEO
-						count = 1
+						count = 2
 					}
 				}
 			}
@@ -1318,12 +1318,12 @@ guerra_grande.3 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 3
+						count = 4
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
 						state_region = s:STATE_MONTEVIDEO
-						count = 1
+						count = 2
 					}
 				}
 			}

@@ -88,7 +88,11 @@ guerra_grande_dismembered_republic = {
 # La plaza fuerte y el mar: lo que sostuvo a la Defensa durante nueve anios de sitio.
 guerra_grande_walls_of_montevideo = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
-	unit_defense_mult = 0.50
+	# EN/ES: 0.50 -> 0.75 (balance 19/9/2026). Con el Cerrito saliendo de la particion con mas
+	#     batallones y mucha mas campania detras, medio punto de defensa no alcanzaba para que la
+	#     plaza fuera inexpugnable: el asalto directo era el camino barato. / half a point of
+	#     defence did not make the place unassailable, and the direct assault was the cheap road.
+	unit_defense_mult = 0.75
 	state_blockade_resistance_add = 100
 	military_formation_attrition_risk_mult = -0.25
 	country_war_exhaustion_casualties_mult = -0.25
