@@ -106,7 +106,13 @@ gg_rivera.1 = {
 			# ES: la Ley N. 242 cuelga de ESTA derrota, no de una fecha. La cola de eventos puede
 			#     correr Arroyo Grande meses despues del 12 de diciembre de 1842, y entonces el texto
 			#     de la ley hablaba de una batalla que no habia pasado. Seis dias, como en 1842.
-			c:URU ?= { trigger_event = { id = gg_abolition.2 days = 6 popup = yes } }
+			# EN/ES: playtest 2026-09-19 -- only once the Defensa exists; before the split the calendar
+			#     carries the law (gg_partition_calendar) / solo con la Defensa ya existiendo; antes de
+			#     la particion la ley la lleva el calendario
+			if = {
+				limit = { has_global_variable = guerra_grande_split_done }
+				c:URU ?= { trigger_event = { id = gg_abolition.2 days = 6 popup = yes } }
+			}
 		}
 	}
 

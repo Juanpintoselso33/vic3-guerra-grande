@@ -53,8 +53,17 @@ gg_abolition.1 = {
 			#     itself schedules it six days later.
 			# ES: 12.12.1842 -- solo si la derrota que produjo la ley ya paso, o si en esta partida no
 			#     hay Arroyo Grande. Si no, la programa el propio Arroyo Grande seis dias despues.
+			# EN: playtest 2026-09-19 -- Ley 242 is the Defensa's law, and it was being passed by the
+			#     government that existed on 12 December 1842, which in the blanco path is Oribe's.
+			#     It now waits for the partition; if the country has not split yet, the law is not
+			#     lost -- gg_partition_calendar passes it two days after the Defensa exists.
+			# ES: la Ley 242 es la ley de la Defensa, y la votaba el gobierno que existiera el 12 de
+			#     diciembre de 1842, que en el camino blanco es el de Oribe. Ahora espera a la
+			#     particion; si el pais todavia no se partio la ley no se pierde: la pasa
+			#     gg_partition_calendar dos dias despues de que exista la Defensa.
 			if = {
 				limit = {
+					has_global_variable = guerra_grande_split_done
 					OR = {
 						has_global_variable = gg_rivera_arroyo_grande_settled
 						has_global_variable = gg_partition_delayed
@@ -119,8 +128,11 @@ gg_abolition.2 = {
 	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
 	duration = 1825
 
+	# EN/ES: playtest 2026-09-19 -- the Defensa's law needs the Defensa / la ley de la Defensa
+	#     necesita a la Defensa
 	trigger = {
 		c:URU ?= this
+		has_variable = guerra_grande_defensa_government
 		NOT = { has_variable = guerra_grande_abolition_settled }
 	}
 

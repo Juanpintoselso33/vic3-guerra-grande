@@ -120,6 +120,43 @@ gg_defensa_ripe = {
 	}
 }
 
+# EN: T1/T9, who won the war (playtest 2026-09-19). The closing used to read the winner off the
+#     political score (guerra_grande_blanco_lead), so a Cerrito that had taken Montevideo could be
+#     told there were neither victors nor vanquished, and the same position could hand the winner's
+#     menu to the government that had just lost its capital. The military result is what decides
+#     now, and it is read with occupation included: enemy_occupation is the engine's own weighted
+#     share of a country under enemy control, so a capital held but not yet annexed still counts.
+#     Winning also requires not being just as beaten: half of your own ground in enemy hands is a
+#     stalemate, not a victory.
+# ES: T1/T9, quien gano la guerra. El cierre leia al ganador del puntaje politico, asi que un
+#     Cerrito con Montevideo tomada podia recibir «ni vencedores ni vencidos», y en la misma
+#     posicion el menu del ganador podia caerle al gobierno que acababa de perder su capital.
+#     Ahora decide el resultado militar, contando la ocupacion: enemy_occupation es la porcion del
+#     pais en manos enemigas segun el motor, asi que una capital tomada y todavia no anexada
+#     cuenta igual. Ganar exige ademas no estar igual de golpeado: la mitad del suelo propio
+#     ocupado es un empate, no una victoria.
+gg_cerrito_won_militarily = {
+	exists = c:CER
+	OR = {
+		NOT = { exists = c:URU }
+		AND = {
+			c:URU ?= { enemy_occupation >= 0.5 }
+			c:CER ?= { enemy_occupation < 0.5 }
+		}
+	}
+}
+
+gg_defensa_won_militarily = {
+	exists = c:URU
+	OR = {
+		NOT = { exists = c:CER }
+		AND = {
+			c:CER ?= { enemy_occupation >= 0.5 }
+			c:URU ?= { enemy_occupation < 0.5 }
+		}
+	}
+}
+
 # EN: T7, F3-2. A long stalemate under the squadrons: the arbiter may bring back the powers' peace.
 # ES: T7, F3-2. Un empate largo bajo las escuadras: el arbitro puede volver a traer la paz de las potencias.
 gg_powers_stalemate = {

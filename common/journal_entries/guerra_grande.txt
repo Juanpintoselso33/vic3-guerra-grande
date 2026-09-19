@@ -71,6 +71,9 @@ je_guerra_grande = {
 					NOT = { has_global_variable = guerra_grande_open_war }
 				}
 			}
+			# EN: playtest 2026-09-17 -- the race between the two governments' exhaustion decided who got
+			#     to dictate the peace, and the player could not see it. Now the journal prints it.
+			# ES: la carrera entre los agotamientos decidia quien dictaba la paz, y el jugador no la veia.
 			triggered_desc = {
 				desc = je_guerra_grande_status_siege
 				trigger = {
@@ -425,6 +428,42 @@ je_guerra_grande = {
 						trigger_event = { id = gg_peace.1 days = 3 popup = yes }
 					}
 				}
+				# EN: playtest 2026-09-19 -- both governments can ripen in the same month, and the order of
+				#     the branches was deciding who got to dictate. Fixed tie-break, in this order: the more
+				#     exhausted one asks first; on a tie, whoever is behind on the score; on a tie there too,
+				#     the Defensa. Nothing here is random, so a reload gives the same answer.
+				# ES: los dos gobiernos pueden madurar el mismo mes, y el orden de las ramas decidia quien
+				#     dictaba. Desempate fijo, en este orden: pide primero el mas agotado; si empatan, el que va
+				#     atras en el puntaje; si tambien empatan, la Defensa. Nada de esto es al azar: recargar da
+				#     lo mismo.
+				else_if = {
+					limit = {
+						gg_defensa_ripe = yes
+						gg_cerrito_ripe = yes
+					}
+					set_global_variable = gg_peace_offered
+					if = {
+						limit = {
+							OR = {
+								gg_exhaustion_gap > 0
+								AND = {
+									gg_exhaustion_gap = 0
+									guerra_grande_colorado_lead <= 0
+								}
+							}
+						}
+						random_country = {
+							limit = { has_variable = guerra_grande_defensa_government }
+							trigger_event = { id = gg_peace.11 days = 1 popup = yes }
+						}
+					}
+					else = {
+						random_country = {
+							limit = { has_variable = guerra_grande_cerrito_government }
+							trigger_event = { id = gg_peace.12 days = 1 popup = yes }
+						}
+					}
+				}
 				else_if = {
 					limit = { gg_defensa_ripe = yes }
 					set_global_variable = gg_peace_offered
@@ -535,14 +574,19 @@ je_guerra_grande = {
 			limit = { NOT = { has_global_variable = gg_peace_settled } }
 			set_global_variable = gg_peace_settled
 			set_global_variable = gg_victory_pending
+			# EN: playtest 2026-09-19 -- Juan won the same battle twice and got two different endings: the
+			#     first time the Cerrito's victory menu, the second "neither victors nor vanquished". The
+			#     reason was that both countries still existed, which was read as a stalemate no matter what
+			#     the armies had done. Order now: a third country that took the capitals first, then the
+			#     military result (gg_cerrito_won_militarily / gg_defensa_won_militarily, occupation
+			#     included), and only if nobody holds the other's ground is it a peace without victors.
+			# ES: Juan gano la misma batalla dos veces y le salieron dos finales distintos: la primera el menu
+			#     de la victoria del Cerrito, la segunda «ni vencedores ni vencidos». El motivo era que los dos
+			#     paises seguian existiendo, y eso se leia como empate sin mirar lo que habian hecho los
+			#     ejercitos. Orden nuevo: primero un tercero que se quedo con las capitales, despues el
+			#     resultado militar (ocupacion incluida), y recien si nadie tiene el suelo del otro es una paz
+			#     sin vencedores.
 			if = {
-				limit = {
-					exists = c:CER
-					exists = c:URU
-				}
-				set_global_variable = gg_victory_timeout
-			}
-			else_if = {
 				limit = {
 					OR = {
 						AND = {
@@ -557,13 +601,36 @@ je_guerra_grande = {
 				}
 				set_global_variable = gg_victory_third_party
 			}
+			else_if = {
+				limit = {
+					NOR = {
+						gg_cerrito_won_militarily = yes
+						gg_defensa_won_militarily = yes
+					}
+				}
+				set_global_variable = gg_victory_timeout
+			}
+			# EN/ES: who writes the terms / quien escribe el pliego
 			if = {
+				limit = { gg_cerrito_won_militarily = yes }
+				random_country = {
+					limit = { has_variable = guerra_grande_cerrito_government }
+					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+				}
+			}
+			else_if = {
+				limit = { gg_defensa_won_militarily = yes }
+				random_country = {
+					limit = { has_variable = guerra_grande_defensa_government }
+					trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+				}
+			}
+			# EN/ES: no military winner: the score only says who reads out the paper / sin ganador militar,
+			#     el puntaje solo dice quien lee el papel
+			else_if = {
 				limit = {
 					exists = c:CER
-					OR = {
-						NOT = { exists = c:URU }
-						guerra_grande_blanco_lead > 0
-					}
+					guerra_grande_blanco_lead > 0
 				}
 				random_country = {
 					limit = { has_variable = guerra_grande_cerrito_government }

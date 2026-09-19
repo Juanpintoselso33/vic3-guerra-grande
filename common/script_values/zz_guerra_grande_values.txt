@@ -127,3 +127,11 @@ gg_war_score_bar_value = {
 	min = -10
 	max = 10
 }
+
+# EN: T2, the arbiter's tie-break (playtest 2026-09-19). Positive means the Defensa is the more
+#     exhausted of the two; negative, the Cerrito. / ES: positivo, la Defensa esta mas agotada que
+#     el Cerrito; negativo, al reves.
+gg_exhaustion_gap = {
+	value = global_var:gg_defensa_exhausted
+	subtract = global_var:gg_cerrito_exhausted
+}
