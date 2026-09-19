@@ -1,0 +1,46 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE DEFENSA'S FLAG IS A WARTIME FLAG, NOT URUGUAY'S FLAG.
+#     Playtest 2026-09-19: "when the war ends Uruguay is left with the Defensa's flag, it has to go
+#     back to normal". It did not go back because the Defensa's coat of arms was keyed URU in
+#     common/coat_of_arms/, which overrides Uruguay's arms for the entire game -- there is no end
+#     date on a coat of arms. Worse in the other branch: a Cerrito that won the war and took the URU
+#     tag ended up flying the flag of the government it had just beaten.
+#     A flag_definition is the right tool: it carries a trigger, so the flag is conditional and the
+#     vanilla arms stay untouched underneath. Two conditions, both needed:
+#       - the country is actually the Defensa government (the Cerrito never gets this flag), and
+#       - the war is still open (gg_peace_settled is the marker every ending sets, including the
+#         one the closing dispatch writes when a third country takes the war away from both).
+#     When either stops being true the definition stops applying and vanilla's URU flag returns, in
+#     the same frame, with no effect to call and nothing to remember to undo.
+# ES: LA BANDERA DE LA DEFENSA ES UNA BANDERA DE GUERRA, NO LA DEL URUGUAY.
+#     Prueba en partida 19/9/2026: "cuando termina la guerra Uruguay queda con la bandera de la
+#     Defensa, tiene que volver a lo normal". No volvia porque el escudo de la Defensa estaba con la
+#     clave URU en common/coat_of_arms/, que le pisa el escudo al Uruguay toda la partida: un escudo
+#     no tiene fecha de vencimiento. Peor en la otra rama: un Cerrito que ganaba la guerra y tomaba
+#     el tag URU terminaba con la bandera del gobierno que acababa de derrotar.
+#     Un flag_definition es la herramienta correcta: lleva trigger, asi que la bandera es
+#     condicional y el escudo de vanilla queda intacto abajo. Dos condiciones, las dos necesarias:
+#       - que el pais sea de verdad el gobierno de la Defensa (el Cerrito nunca lleva esta bandera), y
+#       - que la guerra siga abierta (gg_peace_settled es la marca que prende todo final, incluido
+#         el que escribe el despacho de cierre cuando un tercero les saca la guerra a los dos).
+#     Cuando cualquiera de las dos deja de ser cierta, la definicion deja de aplicar y vuelve la
+#     bandera de vanilla, en el mismo cuadro, sin ningun efecto que llamar ni nada que acordarse de
+#     deshacer.
+#
+#     SOURCE / FUENTE: "Flag of Uruguay (Rivera).svg", el archivo que ilustra el articulo "Gobierno
+#     de la Defensa" de Wikipedia con el epigrafe "Bandera de Uruguay usada por el Gobierno de la
+#     Defensa". La imagen bajada y convertida, no redibujada.
+# -------------------------------------------------------------------------------------------------
+
+URU = {
+	flag_definition = {
+		coa = gg_defensa_government
+		priority = 100
+		trigger = {
+			scope:actor ?= {
+				has_variable = guerra_grande_defensa_government
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+		}
+	}
+}

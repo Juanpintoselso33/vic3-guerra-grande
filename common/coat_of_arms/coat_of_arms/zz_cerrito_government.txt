@@ -42,7 +42,18 @@ CER = {
 #     Uruguay usada por el Gobierno de la Defensa". La misma imagen, bajada y convertida, no
 #     redibujada. Es la variante celeste de la bandera nacional -- la bandera de la epoca de
 #     todos modos, asi que Uruguay la lleva toda la partida.
-URU = {
+# EN: playtest 2026-09-19 -- this used to be keyed URU, which overrode Uruguay's coat of arms for
+#     the whole game: the Republic kept flying the Defensa's flag long after the war was over, and
+#     a Cerrito that won and took the URU tag flew its enemy's flag. It is now its own key, and
+#     common/flag_definitions/zz_guerra_grande_flags.txt hands it to Uruguay only while the Defensa
+#     government exists and the war is still open. After the peace, vanilla's URU flag comes back.
+# ES: prueba en partida 19/9/2026 -- esto estaba con la clave URU, asi que le pisaba el escudo al
+#     Uruguay toda la partida: la Republica seguia con la bandera de la Defensa mucho despues de
+#     terminada la guerra, y un Cerrito que ganaba y tomaba el tag URU terminaba con la bandera de
+#     su enemigo. Ahora tiene clave propia, y common/flag_definitions/zz_guerra_grande_flags.txt se
+#     la da al Uruguay solo mientras exista el gobierno de la Defensa y la guerra siga abierta.
+#     Despues de la paz vuelve la bandera de vanilla.
+gg_defensa_government = {
 	pattern = "pattern_solid.tga"
 	color1 = "white"
 

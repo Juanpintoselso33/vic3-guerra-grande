@@ -187,9 +187,11 @@ gg_cerrito_subsidy = {
 }
 
 # EN/ES: the sea bar, capped at the opening threshold / la barra del mar, topeada en el umbral
+# EN/ES: 120 so the 60 threshold sits at the middle of the bar / 120 para que el umbral de 60 quede
+#     en el medio de la barra
 gg_sea_bar_value = {
 	value = gg_sea_power
-	max = 60
+	max = 120
 	min = 0
 }
 

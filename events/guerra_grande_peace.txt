@@ -1749,12 +1749,40 @@ gg_peace.10 = {
 
 	immediate = {
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 59 } }
+		# EN: playtest 2026-09-19 -- "if the Cerrito wins and I go back to being Uruguay, the capital
+		#     stays in Florida, not Montevideo". Of course it did: the split gave the Cerrito its
+		#     capital in the countryside (San Jose, or the Banda Oriental, whose city is Florida)
+		#     because Montevideo was the enemy's, and change_tag changes the tag, not the capital.
+		#     Winning the war means taking the city, and the Republic governs from Montevideo.
+		#     Guarded on actually owning it: a Cerrito that won at the table without entering the
+		#     city keeps governing from where it is.
+		# ES: prueba en partida 19/9/2026 -- "si gana el Cerrito y vuelvo a ser Uruguay, la capital
+		#     queda en Florida, no en Montevideo". Y claro: el corte le dio al Cerrito su capital en
+		#     la campania (San Jose, o la Banda Oriental, cuya ciudad es Florida) porque Montevideo
+		#     era del enemigo, y change_tag cambia el tag, no la capital. Ganar la guerra es tomar la
+		#     ciudad, y la Republica gobierna desde Montevideo. Con la guarda de poseerla de verdad:
+		#     un Cerrito que gano en la mesa sin entrar a la ciudad sigue gobernando desde donde esta.
+		if = {
+			limit = {
+				exists = c:URU
+				exists = s:STATE_MONTEVIDEO.region_state:URU
+			}
+			c:URU = { set_capital = STATE_MONTEVIDEO }
+		}
 		# EN/ES: and the subject pact that change_tag dropped, rebuilt here where c:URU resolves.
 		#     The overlord makes the pact, which is the same direction the peace options use.
 		#     / y el pacto de sujecion que se llevo el change_tag, rehecho aca donde c:URU resuelve.
 		#     Lo hace el señor, que es la misma direccion que usan las opciones de paz.
 		if = {
 			limit = {
+				# EN/ES: I17 -- no subject pact without a signed peace, checked here because this
+				#     relay has no trigger of its own (a scheduled event's trigger is read when it is
+				#     scheduled, and this one is queued a day ahead: a trigger here would be a place
+				#     to lose it). / I17 -- ningun pacto de sujecion sin paz firmada, chequeado aca
+				#     porque este relevo no tiene trigger propio (el trigger de un evento agendado se
+				#     lee cuando se agenda, y este se encola un dia antes: un trigger aca seria un
+				#     lugar donde perderlo).
+				has_global_variable = gg_peace_settled
 				has_global_variable = gg_cerrito_overlord
 				has_global_variable = gg_cerrito_subject_kind
 				exists = c:URU
