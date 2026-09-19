@@ -106,13 +106,16 @@ gg_rivera.1 = {
 			# ES: la Ley N. 242 cuelga de ESTA derrota, no de una fecha. La cola de eventos puede
 			#     correr Arroyo Grande meses despues del 12 de diciembre de 1842, y entonces el texto
 			#     de la ley hablaba de una batalla que no habia pasado. Seis dias, como en 1842.
-			# EN/ES: playtest 2026-09-19 -- only once the Defensa exists; before the split the calendar
-			#     carries the law (gg_partition_calendar) / solo con la Defensa ya existiendo; antes de
-			#     la particion la ley la lleva el calendario
-			if = {
-				limit = { has_global_variable = guerra_grande_split_done }
-				gg_abolition_dispatch = { DAYS = 6 }
-			}
+			# EN: Codex review 2026-09-19 -- this used to schedule the Defensa's law six days after
+			#     Arroyo Grande, but Arroyo Grande only fires BEFORE the partition (its own trigger
+			#     asks for that), and the law needs a Defensa that does not exist yet. The guard made
+			#     the call dead code. The law travels by the partition calendar, which passes it two
+			#     days after both governments exist.
+			# ES: aca se agendaba la ley de la Defensa seis dias despues de Arroyo Grande, pero Arroyo
+			#     Grande solo sale ANTES de la particion (lo pide su propio trigger), y la ley necesita
+			#     una Defensa que todavia no existe. La guarda dejaba el llamado en codigo muerto. La
+			#     ley viaja por el calendario de la particion, que la pasa dos dias despues de que
+			#     existan los dos gobiernos.
 		}
 	}
 

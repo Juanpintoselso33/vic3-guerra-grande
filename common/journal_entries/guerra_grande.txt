@@ -98,11 +98,6 @@ je_guerra_grande = {
 				}
 				trigger_event = { id = gg_intro.5 days = 0 }
 			}
-			# EN/ES: playtest 2026-09-17 -- the bar is read from the score every month, on this
-			#     country's own journal, so it never drifts / la barra se lee del puntaje cada mes
-			scope:journal_entry = {
-				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
-			}
 			# EN/ES: playtest -- keep the two bars in step / mantener las dos barras al dia
 			if = { limit = { NOT = { has_global_variable = gg_debug_intervention_presses } } set_global_variable = { name = gg_debug_intervention_presses value = 0 } }
 			if = { limit = { NOT = { has_global_variable = gg_debug_italian_presses } } set_global_variable = { name = gg_debug_italian_presses value = 0 } }
@@ -250,6 +245,9 @@ je_guerra_grande = {
 					else_if = {
 						limit = {
 							NOT = { gg_sea_open = yes }
+							# EN/ES: Codex review -- a truce freezes the siege counter, so it has to freeze this
+							#     one too / la tregua congela el contador del sitio, tiene que congelar este
+							NOT = { has_global_variable = gg_truce }
 							global_var:gg_relief_months > 0
 						}
 						change_global_variable = { name = gg_relief_months add = -1 }
@@ -360,23 +358,40 @@ je_guerra_grande = {
 					#     suelo tomado por CUALQUIER enemigo: una guerra con el Brasil en otro lado podia
 					#     leerse como victoria del Cerrito. Se anota aca, mes a mes y solo mientras la
 					#     guerra que se pelea sea esta, asi el cierre lee quien tomo el suelo de quien.
-					c:CER ?= {
-						every_scope_war = {
-							limit = { gg_is_the_war = yes }
-							if = {
-								limit = { c:URU ?= { enemy_occupation >= 0.5 } }
-								set_global_variable = { name = gg_defensa_overrun value = 1 }
+					# EN: Codex review 2026-09-19, second pass -- wrapping this in the war's scope was not
+					#     enough: enemy_occupation belongs to the country and adds up the ground taken by
+					#     ANY enemy, whatever war it came from. The engine has no per-attacker occupation
+					#     in script (attacker_occupation_progress is a war-goal contestion type, not a
+					#     trigger), so the number is only trusted while the Guerra Grande is the ONLY war
+					#     either government is fighting. With another war open the marks are left alone.
+					# ES: envolverlo en el scope de la guerra no alcanzaba: enemy_occupation es del pais y
+					#     suma el suelo tomado por CUALQUIER enemigo, venga de la guerra que venga. El motor
+					#     no expone ocupacion por bando en script, asi que el numero solo se cree mientras
+					#     la Guerra Grande sea la UNICA guerra de los dos gobiernos. Con otra guerra abierta
+					#     las marcas se dejan como estan.
+					if = {
+						limit = {
+							c:CER ?= {
+								any_scope_war = { gg_is_the_war = yes }
+								NOT = { any_scope_war = { NOT = { gg_is_the_war = yes } } }
 							}
-							else = {
-								set_global_variable = { name = gg_defensa_overrun value = 0 }
+							c:URU ?= {
+								NOT = { any_scope_war = { NOT = { gg_is_the_war = yes } } }
 							}
-							if = {
-								limit = { c:CER ?= { enemy_occupation >= 0.5 } }
-								set_global_variable = { name = gg_cerrito_overrun value = 1 }
-							}
-							else = {
-								set_global_variable = { name = gg_cerrito_overrun value = 0 }
-							}
+						}
+						if = {
+							limit = { c:URU ?= { enemy_occupation >= 0.5 } }
+							set_global_variable = { name = gg_defensa_overrun value = 1 }
+						}
+						else = {
+							set_global_variable = { name = gg_defensa_overrun value = 0 }
+						}
+						if = {
+							limit = { c:CER ?= { enemy_occupation >= 0.5 } }
+							set_global_variable = { name = gg_cerrito_overrun value = 1 }
+						}
+						else = {
+							set_global_variable = { name = gg_cerrito_overrun value = 0 }
 						}
 					}
 					c:URU ?= {
@@ -416,6 +431,15 @@ je_guerra_grande = {
 					c:URU ?= { add_treasury = gg_defensa_subsidy }
 					c:CER ?= { add_treasury = gg_cerrito_subsidy }
 				}
+			}
+			# EN: Codex review 2026-09-19 -- the bar is drawn at the END of the pulse. It used to be drawn
+			#     first, before the siege and relief counters moved, so the player saw a number a month
+			#     behind the one the weekly arbiter was already reading.
+			# ES: la barra se dibuja al FINAL del pulso. Antes se dibujaba primero, antes de mover los
+			#     contadores del sitio y del alivio, asi que el jugador veia un numero un mes atrasado
+			#     respecto del que ya leia el arbitro semanal.
+			scope:journal_entry = {
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 	}

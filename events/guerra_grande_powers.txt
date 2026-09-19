@@ -526,9 +526,17 @@ gg_powers.17 = {
 		# ES: esta ventana pedia a los doctores arriba en una barra que nadie leia. Ahora la abre la
 		#     decision que el jugador se acuerda: una Defensa que no le entrego la guerra a Rivera
 		#     puede tratar con Urquiza. Rivera fue el obstaculo permanente a cualquier arreglo.
+		# EN/ES: Codex review 2026-09-19 -- gg_rivera_left_alone is a decision of 1843 that is never
+		#     cleared, and the player can bring Rivera back in 1846: the window has to look at where
+		#     things stand, not at what was decided first / es una decision de 1843 que no se borra
+		#     nunca, y el jugador puede traer a Rivera de vuelta en 1846: la ventana tiene que mirar
+		#     como quedaron las cosas, no lo que se decidio primero
 		OR = {
-			has_global_variable = gg_rivera_left_alone
 			has_global_variable = gg_rivera_never_returned
+			AND = {
+				has_global_variable = gg_rivera_left_alone
+				NOT = { has_global_variable = gg_rivera_restored }
+			}
 		}
 		NOT = { has_global_variable = gg_rivera_litoral }
 		NOT = { has_global_variable = gg_urquiza_flipped }
@@ -699,7 +707,7 @@ gg_powers.19 = {
 		# EN/ES: playtest 2026-09-19 -- cheaper if Lamas is already in Rio: the mission is open, not new
 		#     / mas barato si Lamas ya esta en Rio: la mision esta abierta, no hay que empezarla
 		if = {
-			limit = { NOT = { has_global_variable = gg_imperial_pledged } }
+			limit = { NOT = { has_global_variable = gg_lamas_in_rio } }
 			add_treasury = -10000
 		}
 		ai_chance = { base = 40 }
@@ -1215,6 +1223,14 @@ gg_powers.32 = {
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_imperial_pledged }
+	}
+
+	# EN/ES: Codex review 2026-09-19 -- Lamas went to Rio whichever answer the player gives; the
+	#     discount below reads this, not the pledge, which is only one of the two answers / Lamas fue
+	#     a Rio con cualquiera de las dos respuestas; el descuento lee esto, no el compromiso, que es
+	#     una sola de las dos
+	immediate = {
+		set_global_variable = gg_lamas_in_rio
 	}
 
 	option = {

@@ -134,15 +134,44 @@ gg_abolition_dispatch = {
 #     siempre hay destinatario.
 gg_war_closing_dispatch = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_peace_settled } }
+		limit = {
+			NOT = { has_global_variable = gg_peace_settled }
+			# EN/ES: Codex review 2026-09-19 -- with both governments gone there is nobody to hand the
+			#     terms to, and marking the peace as pending would leave a menu waiting forever. The
+			#     journal still closes: this only decides who signs. / sin los dos gobiernos no hay a
+			#     quien entregarle el pliego, y marcar la paz como pendiente dejaba un menu esperando
+			#     para siempre. El journal cierra igual: esto solo decide quien firma.
+			OR = {
+				exists = c:CER
+				exists = c:URU
+			}
+		}
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_victory_pending
-		# EN/ES: a third country kept the capital / un tercero se quedo con la capital
+		# EN: a third country took the war away from both (Codex review 2026-09-19, second pass: the
+		#     simplified test lost the mirror case -- a foreign power eating the Cerrito while the
+		#     Defensa still held Montevideo was read as the Defensa winning the war on its own).
+		#     Three ways: nobody oriental holds the capital, or one government is gone and the other
+		#     does not hold the ground that government lost.
+		# ES: un tercero les saco la guerra a los dos. La prueba simplificada perdia el caso espejo:
+		#     una potencia extranjera comiendose al Cerrito con la Defensa todavia en Montevideo se
+		#     leia como que la Defensa habia ganado la guerra sola. Tres formas: que ningun oriental
+		#     tenga la capital, o que falte un gobierno y el otro no tenga el suelo que ese perdio.
 		if = {
 			limit = {
-				NOR = {
-					c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
-					c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+				OR = {
+					NOR = {
+						c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+						c:CER ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+					}
+					AND = {
+						NOT = { exists = c:CER }
+						c:URU ?= { NOT = { any_scope_state = { state_region = s:STATE_SAN_JOSE } } }
+					}
+					AND = {
+						NOT = { exists = c:URU }
+						c:CER ?= { NOT = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
+					}
 				}
 			}
 			set_global_variable = gg_victory_third_party

@@ -32,7 +32,9 @@ guerra_grande_colorado_lead = {
 gg_siege_pressure = {
 	value = global_var:gg_siege_months
 	divide = 4
-	round = yes
+	# EN/ES: Codex review 2026-09-19 -- floor, not round: with round the point arrives at two
+	#     months, not four / piso, no redondeo: con redondeo el punto llegaba a los dos meses
+	floor = yes
 	min = 0
 	max = 6
 }
@@ -40,7 +42,9 @@ gg_siege_pressure = {
 gg_relief_pressure = {
 	value = global_var:gg_relief_months
 	divide = 4
-	round = yes
+	# EN/ES: Codex review 2026-09-19 -- floor, not round: with round the point arrives at two
+	#     months, not four / piso, no redondeo: con redondeo el punto llegaba a los dos meses
+	floor = yes
 	min = 0
 	max = 6
 }
