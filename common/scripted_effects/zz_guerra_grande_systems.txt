@@ -498,7 +498,24 @@ gg_cal_fire = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
 		if = {
-			limit = { has_global_variable = guerra_grande_split_done }
+			# EN: Codex review 2026-09-19 -- the mark used to be written on the strength of
+			#     guerra_grande_split_done alone, and the recipient was looked for afterwards. If no
+			#     country carried the side variable (the government was annexed, or the split ran in
+			#     an order nobody foresaw), the relay still declared itself done and the event was
+			#     lost for the whole game, silently. Asking for the recipient HERE makes the mark
+			#     mean "delivered", not "attempted": with no one to deliver to, it falls through to
+			#     the retry below and tries again next month.
+			# ES: revision de Codex 19/9/2026 -- la marca se escribia con solo ver
+			#     guerra_grande_split_done, y recien despues se buscaba destinatario. Si ningun pais
+			#     tenia la variable del bando (el gobierno fue anexado, o el corte corrio en un orden
+			#     que nadie previo), el relevo se daba por cumplido igual y el evento se perdia toda
+			#     la partida, en silencio. Pedir el destinatario ACA hace que la marca signifique
+			#     "entregado" y no "intentado": si no hay a quien entregarle, cae al reintento de
+			#     abajo y lo vuelve a probar el mes que viene.
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				any_country = { has_variable = $SIDE$ }
+			}
 			set_global_variable = gg_cal_done_$N$
 			random_country = {
 				limit = { has_variable = $SIDE$ }
@@ -517,7 +534,11 @@ gg_cal_fire_quiet = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
 		if = {
-			limit = { has_global_variable = guerra_grande_split_done }
+			# EN/ES: same guard as gg_cal_fire above / la misma guarda que gg_cal_fire de arriba
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				any_country = { has_variable = $SIDE$ }
+			}
 			set_global_variable = gg_cal_done_$N$
 			random_country = {
 				limit = { has_variable = $SIDE$ }
