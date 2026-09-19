@@ -1,0 +1,103 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The oriental states' population (standalone, 19 September 2026). This mod replaces vanilla's single
+#     STATE_URUGUAY with five states, and each of them needs its own population. Until today this came in
+#     a copy of the whole South American file, inherited from la Argentina, which meant the submod
+#     also shipped their Argentine and Chilean population and overwrote anyone else's.
+#     A file of its own with the five entries is enough: history files merge, so everything the mod
+#     does not name keeps coming from vanilla or from whatever other mod is loaded. Vanilla's own
+#     entry for STATE_URUGUAY is left behind pointing at a state that no longer exists, which costs
+#     one line in the log and nothing in the game.
+# ES: La poblacion de los estados orientales (standalone). Este mod reemplaza el unico STATE_URUGUAY de
+#     vanilla por cinco estados, y cada uno necesita lo suyo. Hasta hoy esto venia en una copia del
+#     archivo sudamericano entero, heredada de la Argentina, asi que el submod ademas repartia sus
+#     datos argentinos y chilenos y le pisaba el archivo a cualquier otro mod.
+#     Con un archivo propio de cinco entradas alcanza: los archivos de historia se combinan, asi que
+#     todo lo que el mod no nombra sigue viniendo de vanilla o del mod que este cargado. La entrada de
+#     vanilla para STATE_URUGUAY queda apuntando a un estado que ya no existe, lo que cuesta una linea
+#     en el log y nada en la partida.
+# -------------------------------------------------------------------------------------------------
+
+POPS = {
+	s:STATE_MONTEVIDEO = {
+		region_state:URU = {
+			create_pop = { culture = platinean size = 20000 }
+			create_pop = { culture = afro_caribeno size = 1500 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 3500 }
+			create_pop = { culture = french size = 4500 }
+			create_pop = { culture = south_italian size = 2700 }
+			create_pop = { culture = north_italian size = 1800 }
+			create_pop = { culture = south_german size = 1600 }
+			create_pop = { culture = sulista size = 400 }
+		}
+	}
+
+	s:STATE_SAN_JOSE = {
+		region_state:URU = {
+			create_pop = { culture = platinean size = 65192 }
+			create_pop = { culture = afro_caribeno size = 496 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 3178 }
+			create_pop = { culture = sulista size = 3600 }
+			create_pop = { culture = french size = 500 }
+			create_pop = { culture = south_italian size = 300 }
+			create_pop = { culture = north_italian size = 200 }
+			create_pop = { culture = south_german size = 400 }
+		}
+	}
+
+	s:STATE_MALDONADO = {
+		region_state:URU = {
+			create_pop = { culture = platinean size = 7000 }
+			create_pop = { culture = afro_caribeno size = 1800 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 600 }
+			create_pop = { culture = sulista size = 700 }
+			create_pop = { culture = french size = 400 }
+			create_pop = { culture = south_italian size = 400 }
+			create_pop = { culture = south_german size = 200 }
+		}
+	}
+	s:STATE_PAYSANDU = {
+		region_state:URU = {
+			create_pop = {
+				culture = platinean
+				size = 31192
+			}
+			create_pop = {
+				culture = afro_caribeno
+				size = 8996
+			}
+			create_pop = {
+				culture = sulista
+				size = 4000
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = afro_caribeno
+				size = 2678
+			}
+			create_pop = {
+				culture = french
+				size = 1000
+			}
+			create_pop = {
+				culture = south_italian
+				size = 1000
+			}
+			create_pop = {
+				culture = south_german
+				size = 500
+			}
+		}
+	}
+
+	s:STATE_BANDA_ORIENTAL = {
+		region_state:URU = {
+			create_pop = { culture = platinean size = 12192 }
+			create_pop = { culture = afro_caribeno size = 4196 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 1090 }
+			create_pop = { culture = sulista size = 3300 }
+			create_pop = { culture = french size = 600 }
+			create_pop = { culture = south_italian size = 600 }
+			create_pop = { culture = south_german size = 300 }
+		}
+	}
+}

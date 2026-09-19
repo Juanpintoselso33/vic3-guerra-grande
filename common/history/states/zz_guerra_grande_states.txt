@@ -1,0 +1,72 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The oriental states' ownership and homelands (standalone, 19 September 2026). This mod replaces vanilla's single
+#     STATE_URUGUAY with five states, and each of them needs its own ownership and homelands. Until today this came in
+#     a copy of the whole South American file, inherited from la Argentina, which meant the submod
+#     also shipped their Argentine and Chilean ownership and homelands and overwrote anyone else's.
+#     A file of its own with the five entries is enough: history files merge, so everything the mod
+#     does not name keeps coming from vanilla or from whatever other mod is loaded. Vanilla's own
+#     entry for STATE_URUGUAY is left behind pointing at a state that no longer exists, which costs
+#     one line in the log and nothing in the game.
+# ES: La propiedad y las patrias de los estados orientales (standalone). Este mod reemplaza el unico STATE_URUGUAY de
+#     vanilla por cinco estados, y cada uno necesita lo suyo. Hasta hoy esto venia en una copia del
+#     archivo sudamericano entero, heredada de la Argentina, asi que el submod ademas repartia sus
+#     datos argentinos y chilenos y le pisaba el archivo a cualquier otro mod.
+#     Con un archivo propio de cinco entradas alcanza: los archivos de historia se combinan, asi que
+#     todo lo que el mod no nombra sigue viniendo de vanilla o del mod que este cargado. La entrada de
+#     vanilla para STATE_URUGUAY queda apuntando a un estado que ya no existe, lo que cuesta una linea
+#     en el log y nada en la partida.
+# -------------------------------------------------------------------------------------------------
+
+STATES = {
+	s:STATE_MONTEVIDEO = {
+		create_state = {
+			country = c:URU
+			owned_provinces = { x302DDA }
+		}
+		add_homeland = cu:platinean
+		add_homeland = cu:afro_caribeno
+		add_claim = c:ARG
+		add_claim = c:BRZ
+	}
+
+	s:STATE_SAN_JOSE = {
+		create_state = {
+			country = c:URU
+			owned_provinces = { x3588C8 x3D3A57 x3EA75C x3F05CB x490187 x4934E2 x49D0F9 x4E1442 x754BF8 xE25670 xE69F06 xFEBAD0 }
+		}
+		add_homeland = cu:platinean
+		add_homeland = cu:afro_caribeno
+		add_claim = c:ARG
+		add_claim = c:BRZ
+	}
+
+	s:STATE_MALDONADO = {
+		create_state = {
+			country = c:URU
+			owned_provinces = { xA46ED2 x449F06 xD8A185 }
+		}
+		add_homeland = cu:platinean
+		add_claim = c:ARG
+		add_claim = c:BRZ
+	}
+
+	s:STATE_PAYSANDU = {
+			create_state = {
+				country = c:URU
+				owned_provinces = {x104529 x7764E0 x65E74D xC2A28B x3AF263 xE2D434 xC53004 xC707C7 x061EE6 x08CCA6 xA282BC xABC305 x8136C4 xDD1206 x02C6DE xEE9484 x46C43D xE2BE85 x9C6453 }
+			}
+			add_homeland = cu:platinean
+			add_claim = c:ARG
+			add_claim = c:BRZ
+		}
+
+	s:STATE_BANDA_ORIENTAL = {
+		create_state = {
+			country = c:URU
+			owned_provinces = { x7AADBF xD45E0C x139DC8 x44A7CD xCB8D8C xA7EB2E x466506 xD8A44F xD5325F }
+		}
+		add_homeland = cu:platinean
+		add_claim = c:ARG
+		add_claim = c:BRZ
+	}
+}

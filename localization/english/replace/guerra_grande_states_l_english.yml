@@ -42,3 +42,9 @@
  HUB_NAME_STATE_PAYSANDU_farm: "Paysandú"
  HUB_NAME_STATE_PAYSANDU_mine: "San Fructuoso"
  HUB_NAME_STATE_PAYSANDU_wood: "Mercedes"
+
+# EN/ES: standalone (19/9/2026) -- these two states used to take their names from la Argentina,
+#     where they were born; the mod owns the five oriental states now / estos dos estados
+#     tomaban el nombre de la Argentina, donde nacieron; el mod ahora es duenio de los cinco
+ STATE_MONTEVIDEO: "Montevideo"
+ STATE_PAYSANDU: "Paysandú"

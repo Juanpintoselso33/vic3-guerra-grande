@@ -1,0 +1,321 @@
+﻿﻿# -------------------------------------------------------------------------------------------------
+# EN: Paraguay's two journals name STATE_URUGUAY (standalone, 19 September 2026), a state this mod
+#     replaces with five. A trigger that asks for a state that does not exist can never be true, so
+#     without this Paraguay's expansion and its war would quietly stop being winnable the moment the
+#     Banda Oriental is part of the goal. Replaced by object, with the five oriental states in its
+#     place: same demand, spelled in the states that exist.
+# ES: los dos journals del Paraguay nombran STATE_URUGUAY, un estado que este mod reemplaza por
+#     cinco. Un trigger que pide un estado que no existe nunca puede ser verdadero, asi que sin esto
+#     la expansion del Paraguay y su guerra dejarian de poder ganarse en silencio en cuanto la Banda
+#     Oriental sea parte del objetivo. Reemplazados por objeto, con los cinco estados orientales en
+#     su lugar: la misma exigencia, escrita en los estados que existen.
+# -------------------------------------------------------------------------------------------------
+
+REPLACE:je_expanding_paraguay = {
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_historical_content
+
+    is_shown_in_lobby = {
+        has_dlc_feature = rp1_content #Colossus of the South
+        c:PRG ?= THIS
+    }
+
+    immediate = {
+
+    }
+
+    complete = {
+        owns_entire_state_region = STATE_CORRIENTES
+        OR = {
+            AND = { country_or_subject_owns_entire_state_region = STATE_MONTEVIDEO country_or_subject_owns_entire_state_region = STATE_SAN_JOSE country_or_subject_owns_entire_state_region = STATE_MALDONADO country_or_subject_owns_entire_state_region = STATE_PAYSANDU country_or_subject_owns_entire_state_region = STATE_BANDA_ORIENTAL }
+            country_or_subject_owns_entire_state_region = STATE_SANTA_FE
+            country_or_subject_owns_entire_state_region = STATE_PARANA
+            country_or_subject_owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+        }
+    }
+
+    fail = {
+        custom_tooltip = {
+            text = lost_war_tt
+            OR = {
+                has_variable = recently_lost_war
+                AND = {
+                    has_variable = recently_had_war
+                    NOT = {
+                        has_variable = recently_won_war
+                    }
+                }
+            }
+        }
+    }
+
+    on_fail = {
+        trigger_event = { id = paraguay.8 popup = yes }
+        show_as_tooltip = {
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = ybycui_iron_works_modifier
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = ybycui_iron_works_modifier
+                    }
+                    remove_modifier = ybycui_iron_works_modifier
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = ybycui_prisoner_workforce_modifier
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = ybycui_prisoner_workforce_modifier
+                    }
+                    remove_modifier = ybycui_prisoner_workforce_modifier
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = ybycui_steelworks
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = ybycui_steelworks
+                    }
+                    remove_modifier = ybycui_steelworks
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = humanita_fortress_modifier
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = humanita_fortress_modifier
+                    }
+                    remove_modifier = humanita_fortress_modifier
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = vaccinations_prg_modifier
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = vaccinations_prg_modifier
+                    }
+                    remove_modifier = vaccinations_prg_modifier
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        has_modifier = barracks_boost_paraguay_quantity_modifier
+                    }
+                }
+                random_scope_state = {
+                    limit = {
+                        has_modifier = barracks_boost_paraguay_quantity_modifier
+                    }
+                    remove_modifier = barracks_boost_paraguay_quantity_modifier
+                }
+            }
+            if = {
+                limit = {
+                    has_modifier = barracks_boost_paraguay_quality_modifier
+                }
+                remove_modifier = barracks_boost_paraguay_quality_modifier
+            }
+            if = {
+                limit = {
+                    any_scope_character = {
+                        has_trait = special_character_napoleon_of_the_americas
+                    }
+                }
+                random_scope_character = {
+                    limit = {
+                        has_trait = special_character_napoleon_of_the_americas
+                    }
+                    kill_character = yes
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_character = {
+                       has_trait = special_character_el_excelentisimo
+                    }
+                }
+                random_scope_character = {
+                    limit = {
+                       has_trait = special_character_el_excelentisimo
+                    }
+                    kill_character = yes
+                }
+            }
+            if = {
+                limit = {
+                    ruler = {
+                        NOR = {
+                            has_trait = special_character_el_excelentisimo
+                            has_trait = special_character_napoleon_of_the_americas
+                        }
+                    }
+                }
+                ruler = {
+                    kill_character = yes
+                }
+            }
+            if = {
+                limit = {
+                    any_scope_state = {
+                        state_region = s:STATE_BAJO_PARAGUAY
+                    }
+                }
+                s:STATE_BAJO_PARAGUAY.region_state:PRG = {
+                    add_modifier = {
+                        name = thus_unto_tyrants_modifier
+                        days = long_modifier_time
+                    }
+                }
+            }
+            add_modifier = {
+                name = a_broken_land_modifier
+                days = long_modifier_time
+            }
+        }
+    }
+
+    on_complete = {
+        trigger_event = { id = paraguay.9 popup = yes }
+        set_variable = paraguay_war_victory_achievement
+    }
+
+    invalid = {
+        is_subject = yes
+    }
+
+    weight = 1000
+    	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+REPLACE:je_paraguayan_war = {
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_historical_content
+
+    immediate = {
+        c:PRG ?= {
+            save_scope_as = paraguay_scope
+        }
+    }
+
+    complete = {
+        OR = {
+            AND = {
+                custom_tooltip = {
+                    text = je_paraguayan_war_tt_1
+                    OR = {
+                        c:PRG ?= {
+                            has_variable = recently_lost_war
+                        }
+                    }
+                    has_variable = recently_won_war
+                }
+                c:PRG ?= {
+                    NOT = {
+                        has_state_in_state_region = STATE_MATO_GROSSO
+                        has_state_in_state_region = STATE_CORRIENTES
+                        has_state_in_state_region = STATE_CHACO
+                    }
+                }
+            }
+            AND = {
+                custom_tooltip = {
+                    text = je_paraguayan_war_tt_1
+                    has_variable = recently_won_war
+                }
+                NOT = {
+                    c:PRG ?= {
+                        is_country_alive = yes
+                    }
+                }
+            }
+        }
+    }
+
+    fail = {
+        custom_tooltip = {
+            text = je_paraguayan_war_tt_2
+            c:PRG ?= {
+                has_variable = recently_won_war
+            }
+            has_variable = recently_lost_war
+        }
+        c:PRG ?= {
+            has_state_in_state_region = STATE_CORRIENTES
+            OR = {
+                AND = { country_or_subject_owns_entire_state_region = STATE_MONTEVIDEO country_or_subject_owns_entire_state_region = STATE_SAN_JOSE country_or_subject_owns_entire_state_region = STATE_MALDONADO country_or_subject_owns_entire_state_region = STATE_PAYSANDU country_or_subject_owns_entire_state_region = STATE_BANDA_ORIENTAL }
+                country_or_subject_owns_entire_state_region = STATE_SANTA_FE
+                country_or_subject_owns_entire_state_region = STATE_PARANA
+                country_or_subject_owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+            }
+        }
+    }
+
+    on_fail = {
+        trigger_event = { id = paraguay.10 popup = yes }
+    }
+
+    on_complete = {
+        trigger_event = { id = paraguay.7 popup = yes }
+    }
+
+    invalid = {
+        c:PRG ?= {
+            has_journal_entry = je_expanding_paraguay
+            NOT = {
+                has_war_with = root
+            }
+            any_diplomatic_play = {
+                is_war = yes
+                initiator = prev
+                target = {
+                    any_scope_state = {
+                        OR = {
+                            state_region = s:STATE_CORRIENTES
+                            OR = { state_region = s:STATE_MONTEVIDEO state_region = s:STATE_SAN_JOSE state_region = s:STATE_MALDONADO state_region = s:STATE_PAYSANDU state_region = s:STATE_BANDA_ORIENTAL }
+                            state_region = s:STATE_SANTA_FE
+                            state_region = s:STATE_PARANA
+                            state_region = s:STATE_RIO_GRANDE_DO_SUL
+                        }
+                    }
+                    root = {
+                        has_interest_marker_in_region = prev.capital.region
+                    }
+                }
+                OR = {
+                    has_play_goal = conquer_state
+                    has_play_goal = return_state
+                    has_play_goal = make_tributary
+                    has_play_goal = make_dominion
+                    has_play_goal = make_protectorate
+                }
+            }
+        }
+    }
+
+    weight = 1000
+    	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
