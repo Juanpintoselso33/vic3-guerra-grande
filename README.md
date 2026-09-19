@@ -1,10 +1,22 @@
-# Guerra Grande — submod for *la Argentina*
+# Guerra Grande — Uruguay, 1836-1852
 
-A submod for [la Argentina](https://steamcommunity.com/sharedfiles/filedetails/?id=2982907360)
-(Victoria 3, 1.13.11) that plays out Uruguay's Guerra Grande: the birth of the Blanco and
-Colorado parties at Carpintería, the split of the Republic into the Defensa and the Cerrito,
-and the peace of 1851. **Requires la Argentina** (it uses its states and its
-`ideology_autonomist`). Works with Better Politics Mod.
+Victoria 3 (1.13). La Guerra Grande oriental: el nacimiento de las divisas blanca y colorada en
+Carpintería, la partición de la República en el gobierno de la **Defensa** (Montevideo) y el del
+**Cerrito** (la campaña), los nueve años de sitio y la paz de 1851.
+
+**Es un mod que se sostiene solo.** Trae sus cinco estados orientales, su historia y todo lo que
+necesita del juego base; lo que cambia de vanilla lo reemplaza por objeto con `REPLACE:` en vez de
+pisar archivos enteros, así que convive con otros mods.
+
+## Cómo cargarlo
+
+| Qué querés jugar | Cómo |
+|---|---|
+| Sólo la Guerra Grande | Guerra Grande. Nada más |
+| Con **la Argentina** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden. Sin el compatch los dos mods se pisan el mapa y el Uruguay arranca con el doble de población |
+
+⚠️ **Partidas viejas del submod**: si venías jugando con la Argentina, seguí con ella y agregá el
+compatch. Desactivarla saca contenido que ya es parte de tu guardado.
 
 *English below the Spanish text — same content.*
 
@@ -13,8 +25,8 @@ and the peace of 1851. **Requires la Argentina** (it uses its states and its
 ## Qué hace (español)
 
 **Al arrancar la partida.** Manuel Oribe deja de ser un "moderado" y recibe
-`ideology_autonomist`, la ideología que el propio mod de la Argentina define pero que nadie
-recibía: caudillos locales, arrendatarios, impuestos a la tierra.
+`ideology_caudillismo`, que es la del juego base y la que le corresponde: el caudillo de la
+campaña, no un moderado.
 
 **19 de setiembre de 1836 — Carpintería.** Nueve meses después del inicio. Los grupos de
 interés pasan a llamarse **Partido Blanco** y **Partido Colorado**, y el jugador elige divisa
@@ -58,9 +70,19 @@ ahí, y cargarla **después** de la Argentina.
 
 ---
 
+## How to load it (English)
+
+| What you want | How |
+|---|---|
+| The Guerra Grande alone | Guerra Grande. Nothing else |
+| With **la Argentina** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, in that order. Without the compatch the two mods overwrite each other's map and Uruguay starts with twice its population |
+
+⚠️ **Old saves from the submod**: if you were playing with la Argentina, keep it and add the
+compatch. Turning it off removes content that is already part of your save.
+
 ## What it does (English)
 
-**At game start.** Manuel Oribe stops being a "moderate" and gets `ideology_autonomist` — the
+**At game start.** Manuel Oribe stops being a "moderate" and gets `ideology_caudillismo` — the
 ideology la Argentina defines but never gives to anyone: local caudillos, tenant farmers, land
 taxes.
 

@@ -148,8 +148,16 @@ gg_prewar.3 = {
 		# EN: historical (June 1836): publish the commission and give the Comandancia to Ignacio Oribe.
 		#     The state is ordered and the doctores gain weight, but Rivera rises with all his force.
 		# ES: lo historico (junio de 1836): publicar la comision y darle la Comandancia a Ignacio Oribe.
-		gg_score_blanco = { AMOUNT = 1 }
-		gg_score_colorado = { AMOUNT = 2 }
+		# EN: Codex review 2026-09-19 -- this used to be blanco +1 and colorado +2, and option c was
+		#     colorado +1: since the whole mod reads only the DIFFERENCE between the two scores, both
+		#     answers left exactly colorado +1 and the choice was decoration. Publishing the accounts
+		#     and handing the Comandancia to Ignacio Oribe now leans blanco, which is what it was.
+		# ES: esto era blanco +1 y colorado +2, y la opcion c era colorado +1: como todo el mod lee
+		#     solo la DIFERENCIA entre los dos puntajes, las dos respuestas dejaban exactamente
+		#     colorado +1 y la eleccion era decorativa. Publicar las cuentas y darle la Comandancia a
+		#     Ignacio Oribe ahora inclina para el lado blanco, que es lo que era.
+		gg_score_blanco = { AMOUNT = 2 }
+		gg_score_colorado = { AMOUNT = 1 }
 		ai_chance = { base = 55 }
 	}
 

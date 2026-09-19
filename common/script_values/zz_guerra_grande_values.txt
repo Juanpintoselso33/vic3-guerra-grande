@@ -19,7 +19,7 @@ guerra_grande_colorado_lead = {
 #     design -- a peace negotiated on the score -- could not happen, and every game ended by
 #     exhaustion or conquest, which was meant to be the emergency exit.
 #     The bar reads the war now: the months of closed sea push towards the blancos, the months with
-#     the sea open push towards the colorados, four months to the point and six points at most, so
+#     the sea open push towards the colorados, four full months to the point and four points at most, so
 #     neither can decide the war on its own. The arbiter reads the same number as the bar.
 # ES: T1/T2, la balanza de la guerra. Contando los eventos, la barra se movia 25 veces y solo dos
 #     despues de 1843: quedaba congelada los ocho anios del sitio, y como la particion parte la
@@ -27,7 +27,7 @@ guerra_grande_colorado_lead = {
 #     del diseanio -- la paz negociada por puntaje -- no podia pasar, y todas las partidas terminaban
 #     por agotamiento o conquista, que era la salida de emergencia.
 #     Ahora la barra lee la guerra: los meses de mar cerrado empujan hacia los blancos, los meses de
-#     mar abierto hacia los colorados, cuatro meses por punto y seis puntos como techo, asi ninguno
+#     mar abierto hacia los colorados, cuatro meses por punto y cuatro puntos como techo, asi ninguno
 #     decide la guerra solo. El arbitro lee el mismo numero que la barra.
 gg_siege_pressure = {
 	value = global_var:gg_siege_months

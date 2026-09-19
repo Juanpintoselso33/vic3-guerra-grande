@@ -259,6 +259,36 @@ je_guerra_grande = {
 						}
 						change_global_variable = { name = gg_relief_months add = -1 }
 					}
+					# EN: Codex review 2026-09-19 -- the Cerrito's two mechanics used to live inside scripted
+					#     buttons, and the AI never presses a button. With the player on the Defensa, the
+					#     Cerrito never raised the montonera, never called Brown's squadron and never
+					#     declared the blockade: the sea stayed open by itself and the siege did nothing.
+					#     An AI Cerrito does both, in the order a government would: the horsemen as soon
+					#     as the war is on, the blockade once it has a war to blockade for.
+					# ES: las dos mecanicas del Cerrito vivian adentro de botones, y la IA no aprieta
+					#     botones. Con el jugador en la Defensa, el Cerrito no levantaba la montonera, no
+					#     llamaba a la escuadra de Brown y no declaraba el bloqueo: el mar quedaba abierto
+					#     solo y el sitio no hacia nada. Un Cerrito de la IA hace las dos, en el orden en
+					#     que las haria un gobierno: los jinetes apenas hay guerra, el bloqueo despues.
+					c:CER ?= {
+						if = {
+							limit = {
+								is_player = no
+								has_global_variable = guerra_grande_open_war
+								NOT = { has_variable = guerra_grande_montonera_levy_raised }
+							}
+							gg_montonera_levy = yes
+						}
+						if = {
+							limit = {
+								is_player = no
+								has_global_variable = guerra_grande_open_war
+								NOT = { has_variable = guerra_grande_river_blockade_asked }
+								NOT = { has_global_variable = gg_brown_fleet_lost }
+							}
+							gg_river_blockade = yes
+						}
+					}
 					# EN: FN-2 -- the Anglo-French station: while the sea is open the city resists a blockade and
 					#     keeps a lent squadron; when the backing falls the powers take their ships back.
 					# ES: FN-2 -- la estacion anglo-francesa: con el mar abierto la ciudad resiste el bloqueo y

@@ -664,6 +664,18 @@ gg_powers.18 = {
 		if = {
 			limit = { has_modifier = guerra_grande_italian_legion }
 			remove_modifier = guerra_grande_italian_legion
+			# EN: Codex review 2026-09-19 -- the option said the legions marched away and not one man
+			#     moved: the engine has no script effect that removes land units (transfer_combat_units
+			#     is an interface command, like disband_military_formation). What does leave is the man
+			#     who commanded them, which is what the sources record: Garibaldi sailed in 1848.
+			# ES: la opcion decia que las legiones se iban y no se movia un hombre: el motor no tiene
+			#     efecto de script que saque unidades de tierra. El que si se va es el que las mandaba,
+			#     que es lo que dicen las fuentes: Garibaldi se embarco en 1848.
+			if = {
+				limit = { has_variable = gg_garibaldi_ref }
+				var:gg_garibaldi_ref ?= { exile_character = yes }
+				remove_variable = gg_garibaldi_ref
+			}
 		}
 		c:URU ?= {
 			every_scope_war = {
@@ -686,6 +698,18 @@ gg_powers.18 = {
 		if = {
 			limit = { has_modifier = guerra_grande_italian_legion }
 			remove_modifier = guerra_grande_italian_legion
+			# EN: Codex review 2026-09-19 -- the option said the legions marched away and not one man
+			#     moved: the engine has no script effect that removes land units (transfer_combat_units
+			#     is an interface command, like disband_military_formation). What does leave is the man
+			#     who commanded them, which is what the sources record: Garibaldi sailed in 1848.
+			# ES: la opcion decia que las legiones se iban y no se movia un hombre: el motor no tiene
+			#     efecto de script que saque unidades de tierra. El que si se va es el que las mandaba,
+			#     que es lo que dicen las fuentes: Garibaldi se embarco en 1848.
+			if = {
+				limit = { has_variable = gg_garibaldi_ref }
+				var:gg_garibaldi_ref ?= { exile_character = yes }
+				remove_variable = gg_garibaldi_ref
+			}
 		}
 		c:URU ?= {
 			every_scope_war = {

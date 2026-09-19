@@ -327,6 +327,180 @@ gg_war_closing_dispatch = {
 	}
 }
 
+# EN: T3b/FN-1, the Cerrito's two mechanics, taken out of the buttons (Codex review 2026-09-19). The
+#     montonera levy and the river blockade lived inside scripted buttons, and the AI never presses a
+#     button: with the player on the Defensa, the Cerrito never raised its horsemen, never called
+#     Brown's squadron and never declared the blockade, so the sea stayed open by itself and the
+#     siege -- the heart of that side's war -- did nothing at all. The code is the same; now it is an
+#     effect the button calls, and so can a hidden event for the AI.
+# ES: T3b/FN-1, las dos mecanicas del Cerrito, sacadas de los botones. La leva de montoneras y el
+#     bloqueo del rio vivian adentro de botones, y la IA no aprieta botones nunca: con el jugador en
+#     la Defensa, el Cerrito no levantaba sus jinetes, no llamaba a la escuadra de Brown y no
+#     declaraba el bloqueo, asi que el mar quedaba abierto solo y el sitio -- el corazon de la guerra
+#     de ese bando -- no hacia nada. El codigo es el mismo; ahora es un efecto que llama el boton, y
+#     que tambien puede llamar un evento oculto para la IA.
+
+gg_montonera_levy = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON montonera pressed"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_montonera_presses } }
+			set_global_variable = { name = gg_debug_montonera_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_montonera_presses
+			add = 1
+		}
+		set_variable = guerra_grande_montonera_levy_raised
+		# EN/ES: T3b, FE-9 -- the caudillos' levy: the balance tilts, the till pays
+		add_treasury = -10000
+		# EN: cavalry first and most of it. This is the one thing the besiegers had that the city
+		#     could never buy: men who came with their own horses.
+		# ES: caballeria primero y casi todo. Es lo unico que tenian los sitiadores que la ciudad
+		#     no podia comprar: hombres que venian con caballo propio.
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SAN_JOSE
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SAN_JOSE
+				count = 1
+			}
+		}
+		# EN: this modifier is already the mod's name for what the levy renews -- caudillos,
+		#     estancias and the parish militias. If the Cerrito already carries it from the
+		#     faction choice, applying it again refreshes the duration rather than stacking, which
+		#     is the intended reading: the countryside is called on a second time.
+		# ES: este modificador ya es el nombre que el mod le da a lo que renueva la leva:
+		#     caudillos, estancias y milicias de parroquia. Si el Cerrito ya lo trae de la eleccion
+		#     de bando, aplicarlo de nuevo renueva la duracion en vez de acumularse, que es la
+		#     lectura buscada: se llama a la campania por segunda vez.
+		add_modifier = {
+			name = guerra_grande_blanco_order
+			years = 10
+			is_decaying = yes
+		}
+		# EN: and this is the price. Every man on a horse is a man off the estancia; the levy is
+		#     paid for by the rural economy, not by a customs house.
+		# ES: y este es el precio. Cada hombre a caballo es un hombre menos en la estancia; la leva
+		#     la paga la economia rural, no una aduana.
+		add_radicals = {
+			value = medium_radicals
+			strata = lower
+		}
+	}
+
+gg_river_blockade = {
+		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON blockade pressed"
+		# EN: visible counter, since debug_log writes nothing in this release build
+		#     (verified: not even vanilla's own debug_log lines appear in game.log).
+		#     Read from the journal's status text.
+		# ES: contador visible, porque debug_log no escribe nada en este build de release
+		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
+		#     desde el texto de estado del journal.
+		# EN: self-healing guard -- this fix landed after some saves already ran
+		#     on_game_started once, so the global init there never fires for them.
+		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
+		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
+		#     de alla nunca les llega.
+		if = {
+			limit = { NOT = { has_global_variable = gg_debug_blockade_presses } }
+			set_global_variable = { name = gg_debug_blockade_presses value = 0 }
+		}
+		change_global_variable = {
+			name = gg_debug_blockade_presses
+			add = 1
+		}
+		set_variable = guerra_grande_river_blockade_asked
+		# EN: Rosas' backing comes with the squadron: money, cattle and veterans.
+		# ES: el apoyo de Rosas viene con la escuadra: plata, ganado y veteranos.
+		add_modifier = {
+			name = guerra_grande_rosista_support
+			years = 8
+			is_decaying = yes
+		}
+		# EN: and the city gets the same blockade modifier the Defensa's own button puts on the
+		#     Confederation -- the exact mirror of guerra_grande_foreign_intervention_button,
+		#     pointed the other way.
+		# ES: y la ciudad recibe el mismo modificador de bloqueo que el boton de la Defensa le
+		#     pone a la Confederacion: el espejo exacto de
+		#     guerra_grande_foreign_intervention_button, apuntado para el otro lado.
+		c:URU ?= {
+			add_modifier = {
+				name = guerra_grande_river_plate_blockade
+				years = 8
+				is_decaying = yes
+			}
+		}
+		# EN: FN-1 -- and the squadron itself. Rosas lent Brown with what the Confederation had on
+		#     the river: brigs and schooners, three of them here as frigates, the smallest fleet the
+		#     engine can float. Based on the coast the Cerrito holds, because Montevideo is the
+		#     enemy's. Whether the AI puts it on a blockade mission is up to it (the engine has no
+		#     effect to order a mission), so the declared blockade keeps counting as well.
+		# ES: FN-1 -- y la escuadra. Rosas prestaba a Brown con lo que la Confederacion tenia en el
+		#     rio: bergantines y goletas, aca tres fragatas, la flota mas chica que el motor sostiene.
+		#     Con base en la costa que tiene el Cerrito, porque Montevideo es del enemigo. Que la IA
+		#     la ponga en mision de bloqueo depende de ella (el motor no tiene efecto para ordenar
+		#     una mision), asi que el bloqueo declarado sigue contando igual.
+		if = {
+			limit = { NOT = { has_variable = gg_brown_squadron_raised } }
+			set_variable = gg_brown_squadron_raised
+			if = {
+				limit = { exists = s:STATE_MALDONADO.region_state:CER }
+				create_military_formation = {
+					type = fleet
+					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+					#     the squadron was never created. The capital's region is where the country is.
+					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+					#     estado oriental, asi que la escuadra nunca se creaba.
+					hq_region = capital.region
+					name = gg_brown_squadron_name
+					save_scope_as = gg_brown_fleet
+					ship = {
+						type = ship_type:ship_type_frigate
+						state_region = s:STATE_MALDONADO
+						count = 3
+					}
+				}
+				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+			else = {
+				create_military_formation = {
+					type = fleet
+					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+					#     the squadron was never created. The capital's region is where the country is.
+					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+					#     estado oriental, asi que la escuadra nunca se creaba.
+					hq_region = capital.region
+					name = gg_brown_squadron_name
+					save_scope_as = gg_brown_fleet
+					ship = {
+						type = ship_type:ship_type_frigate
+						count = 3
+					}
+				}
+				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+		}
+	}
+
 # EN: T6/T7, the dated calendar's relay (events/guerra_grande_calendar.txt has the whole reasoning).
 #     Hands a dated event to the government that owns it. If the country has not split yet the relay
 #     waits a month and tries again, so a late partition does not swallow what was dated before it.
