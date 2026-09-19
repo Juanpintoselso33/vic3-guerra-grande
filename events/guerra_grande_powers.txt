@@ -1267,42 +1267,16 @@ gg_powers.32 = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: gg_powers.33 -- dispatcher for the three dated events of the powers (hidden). Found in the
-#     playtest of 2026-09-17: the engine checks a scheduled event's trigger WHEN IT IS SCHEDULED,
-#     and these three are scheduled on the first day of 1836 while asking for guerra_grande_split_done,
-#     a mark that cannot exist until 1843. They were dropped, silently, every game. This has no
-#     trigger of its own, so it always arrives; the real events are fired from here with days = 0,
-#     which checks their triggers at the moment that matters.
-# ES: gg_powers.33 -- despachador de los tres eventos fechados de las potencias (oculto). El motor
-#     chequea el trigger de un evento agendado CUANDO SE AGENDA, y estos tres se agendan el primer
-#     dia de 1836 pidiendo guerra_grande_split_done, una marca imposible hasta 1843: se descartaban
-#     en silencio en todas las partidas. Este no tiene trigger, asi que siempre llega, y dispara a
-#     los de verdad con days = 0, que es cuando el chequeo sirve.
+# EN: the three dated events of the powers (gg_powers.3, .4 and .5) are no longer dispatched from
+#     here. They live in the war's dated calendar, events/guerra_grande_calendar.txt, which anchors
+#     every historical date to the calendar instead of counting days from the partition, and which
+#     schedules two copies of each relay so a tag change cannot swallow them. The rule that produced
+#     the old dispatchers still holds: the engine checks a scheduled event's trigger WHEN IT IS
+#     SCHEDULED, so these three are fired with days = 0 from a relay that has no trigger of its own.
+# ES: los tres eventos fechados de las potencias (gg_powers.3, .4 y .5) ya no se despachan desde
+#     aca. Viven en el calendario fechado de la guerra, events/guerra_grande_calendar.txt, que clava
+#     cada fecha historica al calendario en vez de contar dias desde la particion, y que agenda dos
+#     copias de cada relevo para que un cambio de tag no se los lleve. La regla que dio origen a los
+#     despachadores viejos sigue valiendo: el motor chequea el trigger de un evento agendado CUANDO
+#     SE AGENDA, asi que estos tres salen con days = 0 desde un relevo que no tiene trigger propio.
 # -------------------------------------------------------------------------------------------------
-gg_powers.33 = {
-	type = country_event
-	hidden = yes
-
-	immediate = {
-		trigger_event = { id = gg_powers.3 days = 0 }
-	}
-}
-
-# EN/ES: the same for 1848 and for 1851 / lo mismo para 1848 y para 1851
-gg_powers.34 = {
-	type = country_event
-	hidden = yes
-
-	immediate = {
-		trigger_event = { id = gg_powers.4 days = 0 }
-	}
-}
-
-gg_powers.35 = {
-	type = country_event
-	hidden = yes
-
-	immediate = {
-		trigger_event = { id = gg_powers.5 days = 0 }
-	}
-}

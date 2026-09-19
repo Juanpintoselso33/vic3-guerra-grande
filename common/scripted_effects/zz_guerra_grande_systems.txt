@@ -139,6 +139,65 @@ gg_cerrito_balance_change = {
 	}
 }
 
+# EN: T6/T7, the dated calendar's relay (events/guerra_grande_calendar.txt has the whole reasoning).
+#     Hands a dated event to the government that owns it. If the country has not split yet the relay
+#     waits a month and tries again, so a late partition does not swallow what was dated before it.
+#     The mark makes it fire once, because two copies of every relay are scheduled (Rosas and the
+#     Republic) against the chance that a tag change at the partition drops the queued events.
+# ES: T6/T7, el relevo del calendario fechado (el razonamiento entero esta en
+#     events/guerra_grande_calendar.txt). Le entrega un evento fechado al gobierno que le toca. Si el
+#     pais todavia no se partio, el relevo espera un mes y reintenta, asi una particion tardia no se
+#     come lo fechado antes. La marca hace que salga una sola vez, porque de cada relevo hay dos
+#     copias agendadas (Rosas y la Republica) por si el cambio de tag de la particion se lleva puestos
+#     los eventos agendados.
+gg_cal_fire = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		if = {
+			limit = { has_global_variable = guerra_grande_split_done }
+			set_global_variable = gg_cal_done_$N$
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { year < 1856 }
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
+# EN/ES: the same, for the events that are not a popup / lo mismo, para los que no son popup
+gg_cal_fire_quiet = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		if = {
+			limit = { has_global_variable = guerra_grande_split_done }
+			set_global_variable = gg_cal_done_$N$
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 }
+			}
+		}
+		else_if = {
+			limit = { year < 1856 }
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
+# EN/ES: the same relay for what does not need two governments: the effect is global, so it runs on
+#     whichever copy of the relay gets there first / el mismo relevo para lo que no necesita dos
+#     gobiernos: el efecto es global, asi que corre en la copia que llegue primero
+gg_cal_fire_here = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		set_global_variable = gg_cal_done_$N$
+		trigger_event = { id = $EVENT$ days = 0 }
+	}
+}
+
 # EN: T6, C18/FX-4. The whole post-split calendar, in one place, on absolute historical dates.
 #     Called at the end of both guerra_grande.3 options, when both governments exist, and
 #     addressed by tag so the Defensa and the Cerrito get their own events whoever the player is.
@@ -165,164 +224,18 @@ gg_partition_calendar = {
 	# EN/ES: the siege journal, opened by its event for both governments / el journal del sitio
 	c:URU ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
 	c:CER ?= { trigger_event = { id = gg_intro.4 days = 1 popup = yes } }
-	if = {
-		limit = { has_global_variable = gg_partition_early has_global_variable = gg_partition_delayed }
-		# split on 1842-08-17
-		c:URU ?= {
-			trigger_event = { id = gg_powers.32 days = 1871 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.17 days = 1657 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
-			trigger_event = { id = gg_powers.27 days = 2009 }   # 1848-02-16 exequias de Larraniaga
-			trigger_event = { id = gg_powers.26 days = 2042 popup = yes }   # 1848-03-20 Varela
-			trigger_event = { id = gg_powers.18 days = 2134 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
-			trigger_event = { id = gg_powers.30 days = 2527 }   # 1849-07-18 Universidad
-			trigger_event = { id = gg_powers.19 days = 2656 popup = yes }   # 1849-11-24 Southern
-			trigger_event = { id = gg_powers.29 days = 2753 popup = yes }   # 1850-03-01 la Nueva Troya
-			trigger_event = { id = gg_powers.20 days = 2936 }   # 1850-08-31 Lepredour
-			trigger_event = { id = gg_powers.21 days = 3118 popup = yes }   # 1851-05-29 se renuncia al subsidio
-			trigger_event = { id = gg_powers.22 days = 3210 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
-			trigger_event = { id = gg_contingent.3 days = 183 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
-			trigger_event = { id = gg_contingent.1 days = 196 popup = yes }   # 1843-03-01 Legion Argentina del sitio
-			trigger_event = { id = gg_contingent.4 days = 233 popup = yes }   # 1843-04-07 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 235 popup = yes }   # 1843-04-09 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 972 popup = yes }   # 1845-04-15 Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 3305 popup = yes }   # 1851-09-04 Caxias cruza
-			trigger_event = { id = gg_loan.1 days = 2126 popup = yes }   # 1848-06-12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 2942 popup = yes }   # 1850-09-06 contratos de setiembre
-			trigger_event = { id = gg_rivera.2 days = 953 popup = yes }   # 1845-03-27 India Muerta
-			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
-		}
-		c:CER ?= {
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.10 days = 227 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 1019 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
-			trigger_event = { id = gg_powers.11 days = 1069 popup = yes }   # 1845-07-21 la escuadra de Brown
-			trigger_event = { id = gg_powers.12 days = 1426 popup = yes }   # 1846-07-13 bases Hood
-			trigger_event = { id = gg_powers.14 days = 1787 popup = yes }   # 1847-07-09 Howden
-			trigger_event = { id = gg_powers.16 days = 2047 popup = yes }   # 1848-03-25 Gore-Gros
-			trigger_event = { id = gg_loan.3 days = 327 popup = yes }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 1090 popup = yes }   # 1845-08-11 la reunificacion
-			trigger_event = { id = gg_abolition.3 days = 1531 popup = yes }   # 1846-10-26 decreto del Cerrito
-		}
-	}
-	else_if = {
-		limit = { has_global_variable = gg_partition_early }
-		# split on 1842-02-16
-		c:URU ?= {
-			trigger_event = { id = gg_powers.32 days = 2053 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.17 days = 1839 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
-			trigger_event = { id = gg_powers.27 days = 2191 }   # 1848-02-16 exequias de Larraniaga
-			trigger_event = { id = gg_powers.26 days = 2224 popup = yes }   # 1848-03-20 Varela
-			trigger_event = { id = gg_powers.18 days = 2316 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
-			trigger_event = { id = gg_powers.30 days = 2709 }   # 1849-07-18 Universidad
-			trigger_event = { id = gg_powers.19 days = 2838 popup = yes }   # 1849-11-24 Southern
-			trigger_event = { id = gg_powers.29 days = 2935 popup = yes }   # 1850-03-01 la Nueva Troya
-			trigger_event = { id = gg_powers.20 days = 3118 }   # 1850-08-31 Lepredour
-			trigger_event = { id = gg_powers.21 days = 3300 popup = yes }   # 1851-05-29 se renuncia al subsidio
-			trigger_event = { id = gg_powers.22 days = 3392 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
-			trigger_event = { id = gg_contingent.3 days = 365 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
-			trigger_event = { id = gg_contingent.1 days = 378 popup = yes }   # 1843-03-01 Legion Argentina del sitio
-			trigger_event = { id = gg_contingent.4 days = 415 popup = yes }   # 1843-04-07 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 417 popup = yes }   # 1843-04-09 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 1154 popup = yes }   # 1845-04-15 Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 3487 popup = yes }   # 1851-09-04 Caxias cruza
-			trigger_event = { id = gg_loan.1 days = 2308 popup = yes }   # 1848-06-12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 3124 popup = yes }   # 1850-09-06 contratos de setiembre
-			trigger_event = { id = gg_rivera.2 days = 1135 popup = yes }   # 1845-03-27 India Muerta
-			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
-		}
-		c:CER ?= {
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.10 days = 409 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 1201 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
-			trigger_event = { id = gg_powers.11 days = 1251 popup = yes }   # 1845-07-21 la escuadra de Brown
-			trigger_event = { id = gg_powers.12 days = 1608 popup = yes }   # 1846-07-13 bases Hood
-			trigger_event = { id = gg_powers.14 days = 1969 popup = yes }   # 1847-07-09 Howden
-			trigger_event = { id = gg_powers.16 days = 2229 popup = yes }   # 1848-03-25 Gore-Gros
-			trigger_event = { id = gg_loan.3 days = 509 popup = yes }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 1272 popup = yes }   # 1845-08-11 la reunificacion
-			trigger_event = { id = gg_abolition.3 days = 1713 popup = yes }   # 1846-10-26 decreto del Cerrito
-		}
-	}
-	else_if = {
-		limit = { has_global_variable = gg_partition_delayed }
-		# split on 1843-08-17
-		c:URU ?= {
-			trigger_event = { id = gg_powers.32 days = 1506 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.17 days = 1292 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
-			trigger_event = { id = gg_powers.27 days = 1644 }   # 1848-02-16 exequias de Larraniaga
-			trigger_event = { id = gg_powers.26 days = 1677 popup = yes }   # 1848-03-20 Varela
-			trigger_event = { id = gg_powers.18 days = 1769 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
-			trigger_event = { id = gg_powers.30 days = 2162 }   # 1849-07-18 Universidad
-			trigger_event = { id = gg_powers.19 days = 2291 popup = yes }   # 1849-11-24 Southern
-			trigger_event = { id = gg_powers.29 days = 2388 popup = yes }   # 1850-03-01 la Nueva Troya
-			trigger_event = { id = gg_powers.20 days = 2571 }   # 1850-08-31 Lepredour
-			trigger_event = { id = gg_powers.21 days = 2753 popup = yes }   # 1851-05-29 se renuncia al subsidio
-			trigger_event = { id = gg_powers.22 days = 2845 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
-			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
-			trigger_event = { id = gg_contingent.1 days = 1 popup = yes }   # 1843-03-01 Legion Argentina del sitio
-			trigger_event = { id = gg_contingent.4 days = 1 popup = yes }   # 1843-04-07 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 1 popup = yes }   # 1843-04-09 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 607 popup = yes }   # 1845-04-15 Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 2940 popup = yes }   # 1851-09-04 Caxias cruza
-			trigger_event = { id = gg_loan.1 days = 1761 popup = yes }   # 1848-06-12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 2577 popup = yes }   # 1850-09-06 contratos de setiembre
-			trigger_event = { id = gg_rivera.2 days = 588 popup = yes }   # 1845-03-27 India Muerta
-			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
-		}
-		c:CER ?= {
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.10 days = 1 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 654 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
-			trigger_event = { id = gg_powers.11 days = 704 popup = yes }   # 1845-07-21 la escuadra de Brown
-			trigger_event = { id = gg_powers.12 days = 1061 popup = yes }   # 1846-07-13 bases Hood
-			trigger_event = { id = gg_powers.14 days = 1422 popup = yes }   # 1847-07-09 Howden
-			trigger_event = { id = gg_powers.16 days = 1682 popup = yes }   # 1848-03-25 Gore-Gros
-			trigger_event = { id = gg_loan.3 days = 1 popup = yes }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 725 popup = yes }   # 1845-08-11 la reunificacion
-			trigger_event = { id = gg_abolition.3 days = 1166 popup = yes }   # 1846-10-26 decreto del Cerrito
-		}
-	}
-	else = {
-		# split on 1843-02-16 (historical)
-		c:URU ?= {
-			trigger_event = { id = gg_powers.32 days = 1688 popup = yes }   # 1847-10-01 Lamas en Rio (T8, FE-13)
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.17 days = 1474 popup = yes }   # 1847-03-01 Urquiza, ventana temprana
-			trigger_event = { id = gg_powers.27 days = 1826 }   # 1848-02-16 exequias de Larraniaga
-			trigger_event = { id = gg_powers.26 days = 1859 popup = yes }   # 1848-03-20 Varela
-			trigger_event = { id = gg_powers.18 days = 1951 popup = yes }   # 1848-06-20 se van vascos y Garibaldi
-			trigger_event = { id = gg_powers.30 days = 2344 }   # 1849-07-18 Universidad
-			trigger_event = { id = gg_powers.19 days = 2473 popup = yes }   # 1849-11-24 Southern
-			trigger_event = { id = gg_powers.29 days = 2570 popup = yes }   # 1850-03-01 la Nueva Troya
-			trigger_event = { id = gg_powers.20 days = 2753 }   # 1850-08-31 Lepredour
-			trigger_event = { id = gg_powers.21 days = 2935 popup = yes }   # 1851-05-29 se renuncia al subsidio
-			trigger_event = { id = gg_powers.22 days = 3027 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil)
-			trigger_event = { id = gg_contingent.3 days = 1 popup = yes }   # 1843-02-16 Los vascos se pasan al Cerrito
-			trigger_event = { id = gg_contingent.1 days = 13 popup = yes }   # 1843-03-01 Legion Argentina del sitio
-			trigger_event = { id = gg_contingent.4 days = 50 popup = yes }   # 1843-04-07 Legion Francesa
-			trigger_event = { id = gg_contingent.5 days = 52 popup = yes }   # 1843-04-09 Legion Italiana
-			trigger_event = { id = gg_contingent.6 days = 789 popup = yes }   # 1845-04-15 Cazadores Vascos
-			trigger_event = { id = gg_contingent.8 days = 3122 popup = yes }   # 1851-09-04 Caxias cruza
-			trigger_event = { id = gg_loan.1 days = 1943 popup = yes }   # 1848-06-12 convenio frances
-			trigger_event = { id = gg_loan.2 days = 2759 popup = yes }   # 1850-09-06 contratos de setiembre
-			trigger_event = { id = gg_rivera.2 days = 770 popup = yes }   # 1845-03-27 India Muerta
-			trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
-		}
-		c:CER ?= {
-			# EN/ES: T7 -- the powers and the coalition / las potencias y la coalicion
-			trigger_event = { id = gg_powers.10 days = 44 popup = yes }   # 1843-04-01 Purvis
-			trigger_event = { id = gg_powers.25 days = 836 popup = yes }   # 1845-06-01 convenio con Espana (no ratificado)
-			trigger_event = { id = gg_powers.11 days = 886 popup = yes }   # 1845-07-21 la escuadra de Brown
-			trigger_event = { id = gg_powers.12 days = 1243 popup = yes }   # 1846-07-13 bases Hood
-			trigger_event = { id = gg_powers.14 days = 1604 popup = yes }   # 1847-07-09 Howden
-			trigger_event = { id = gg_powers.16 days = 1864 popup = yes }   # 1848-03-25 Gore-Gros
-			trigger_event = { id = gg_loan.3 days = 144 popup = yes }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_loan.4 days = 907 popup = yes }   # 1845-08-11 la reunificacion
-			trigger_event = { id = gg_abolition.3 days = 1348 popup = yes }   # 1846-10-26 decreto del Cerrito
-		}
+	# EN: playtest 2026-09-19 -- everything with a historical date used to live here, in four tables
+	#     of thirty lines (one per partition variant), counted in days from the split. The split is a
+	#     date the player moves, so the whole chain slid with it: Caxias crossed in 1852. The dates
+	#     are anchored to the calendar now, in events/guerra_grande_calendar.txt. What stays here is
+	#     what is genuinely relative to the partition.
+	# ES: todo lo que tiene fecha historica vivia aca, en cuatro tablas de treinta lineas (una por
+	#     variante de particion), contadas en dias desde el corte. El corte es una fecha que el
+	#     jugador mueve, asi que la cadena entera se corria con el: Caxias cruzaba en 1852. Ahora las
+	#     fechas estan clavadas al calendario, en events/guerra_grande_calendar.txt. Aca queda lo que
+	#     de verdad es relativo a la particion.
+	c:URU ?= {
+		trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
 	}
 }
 

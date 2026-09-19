@@ -66,12 +66,90 @@ guerra_grande_on_game_start = {
 			# EN/ES: T6 -- Ley N. 242 of the Defensa / de la Defensa, 1842.12.12
 			trigger_event = { id = gg_abolition.1 days = 2537 }
 			# EN/ES: T4, C20 -- the patrons' dated moves / los movimientos fechados de los padrinos
-			trigger_event = { id = gg_powers.2 days = 2616 }   # 1843.03.01 subsidio frances
-			trigger_event = { id = gg_powers.33 days = 3548 }   # 1845.09.18 bloqueo anglo-frances (gg_powers.3)
-			trigger_event = { id = gg_powers.34 days = 4547 }   # 1848.06.13 la revolucion de febrero pega (gg_powers.4)
-			trigger_event = { id = gg_powers.35 days = 5627 }   # 1851.05.29 alianza con el Brasil (gg_powers.5)
 			# 19 September 1836: the battle of Carpinteria, where the ribbons are born.
 			trigger_event = { id = guerra_grande.1 days = 262 popup = yes }
+		}
+
+		# EN: playtest 2026-09-19 -- the war's dated calendar. Each relay carries one event of
+		#     1843-1851 to the day the sources give it, counted from 1 January 1836, and hands it to
+		#     the government that owns it. The whole reasoning is in events/guerra_grande_calendar.txt.
+		#     Two copies: Rosas' Argentina never changes tag, and the Republic does at the partition,
+		#     which can drop the events queued on it. A mark makes each event fire once.
+		# ES: el calendario fechado de la guerra. Cada relevo lleva un evento de 1843-1851 al dia que
+		#     le dan las fuentes, contado desde el 1 de enero de 1836, y se lo entrega al gobierno que
+		#     le toca. El razonamiento entero esta en events/guerra_grande_calendar.txt. Dos copias: la
+		#     Argentina de Rosas no cambia de tag nunca, y la Republica si lo hace en la particion, lo
+		#     que puede llevarse los eventos agendados sobre ella. Una marca hace que cada evento salga
+		#     una sola vez.
+		c:ARG ?= {
+			trigger_event = { id = gg_cal.1 days = 2601 }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_cal.2 days = 2614 }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_cal.3 days = 2645 }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_cal.4 days = 2651 }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_cal.5 days = 2653 }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_cal.6 days = 2745 }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_cal.7 days = 3370 }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_cal.8 days = 3389 }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_cal.9 days = 3436 }   # 1845-06-01 convenio con Espana (no ratificado)
+			trigger_event = { id = gg_cal.10 days = 3486 }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_cal.11 days = 3507 }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_cal.12 days = 3843 }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_cal.13 days = 3948 }   # 1846-10-26 decreto del Cerrito
+			trigger_event = { id = gg_cal.14 days = 4074 }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_cal.15 days = 4204 }   # 1847-07-09 Howden
+			trigger_event = { id = gg_cal.16 days = 4288 }   # 1847-10-01 Lamas en Rio (T8, FE-13)
+			trigger_event = { id = gg_cal.17 days = 4426 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_cal.18 days = 4458 }   # 1848-03-20 Varela
+			trigger_event = { id = gg_cal.19 days = 4463 }   # 1848-03-25 Gore-Gros
+			trigger_event = { id = gg_cal.20 days = 4542 }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_cal.21 days = 4550 }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_cal.22 days = 4943 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_cal.23 days = 5072 }   # 1849-11-24 Southern
+			trigger_event = { id = gg_cal.24 days = 5169 }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_cal.25 days = 5352 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_cal.26 days = 5358 }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_cal.27 days = 5623 }   # 1851-05-29 se renuncia al subsidio
+			trigger_event = { id = gg_cal.28 days = 5626 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian allia
+			trigger_event = { id = gg_cal.29 days = 5721 }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_cal.30 days = 2614 }   # 1843-03-01 el subsidio frances de la Asamblea
+			trigger_event = { id = gg_cal.31 days = 3545 }   # 1845-09-18 el bloqueo anglo-frances (FE-8)
+			trigger_event = { id = gg_cal.32 days = 4543 }   # 1848-06-13 la revolucion de febrero pega en el Plata
+			trigger_event = { id = gg_cal.33 days = 5623 }   # 1851-05-29 la alianza con el Brasil
+		}
+		c:URU ?= {
+			trigger_event = { id = gg_cal.1 days = 2601 }   # 1843-02-16 Los vascos se pasan al Cerrito
+			trigger_event = { id = gg_cal.2 days = 2614 }   # 1843-03-01 Legion Argentina del sitio
+			trigger_event = { id = gg_cal.3 days = 2645 }   # 1843-04-01 Purvis
+			trigger_event = { id = gg_cal.4 days = 2651 }   # 1843-04-07 Legion Francesa
+			trigger_event = { id = gg_cal.5 days = 2653 }   # 1843-04-09 Legion Italiana
+			trigger_event = { id = gg_cal.6 days = 2745 }   # 1843-07-10 el Buceo y la caja
+			trigger_event = { id = gg_cal.7 days = 3370 }   # 1845-03-27 India Muerta
+			trigger_event = { id = gg_cal.8 days = 3389 }   # 1845-04-15 Cazadores Vascos
+			trigger_event = { id = gg_cal.9 days = 3436 }   # 1845-06-01 convenio con Espana (no ratificado)
+			trigger_event = { id = gg_cal.10 days = 3486 }   # 1845-07-21 la escuadra de Brown
+			trigger_event = { id = gg_cal.11 days = 3507 }   # 1845-08-11 la reunificacion
+			trigger_event = { id = gg_cal.12 days = 3843 }   # 1846-07-13 bases Hood
+			trigger_event = { id = gg_cal.13 days = 3948 }   # 1846-10-26 decreto del Cerrito
+			trigger_event = { id = gg_cal.14 days = 4074 }   # 1847-03-01 Urquiza, ventana temprana
+			trigger_event = { id = gg_cal.15 days = 4204 }   # 1847-07-09 Howden
+			trigger_event = { id = gg_cal.16 days = 4288 }   # 1847-10-01 Lamas en Rio (T8, FE-13)
+			trigger_event = { id = gg_cal.17 days = 4426 }   # 1848-02-16 exequias de Larraniaga
+			trigger_event = { id = gg_cal.18 days = 4458 }   # 1848-03-20 Varela
+			trigger_event = { id = gg_cal.19 days = 4463 }   # 1848-03-25 Gore-Gros
+			trigger_event = { id = gg_cal.20 days = 4542 }   # 1848-06-12 convenio frances
+			trigger_event = { id = gg_cal.21 days = 4550 }   # 1848-06-20 se van vascos y Garibaldi
+			trigger_event = { id = gg_cal.22 days = 4943 }   # 1849-07-18 Universidad
+			trigger_event = { id = gg_cal.23 days = 5072 }   # 1849-11-24 Southern
+			trigger_event = { id = gg_cal.24 days = 5169 }   # 1850-03-01 la Nueva Troya
+			trigger_event = { id = gg_cal.25 days = 5352 }   # 1850-08-31 Lepredour
+			trigger_event = { id = gg_cal.26 days = 5358 }   # 1850-09-06 contratos de setiembre
+			trigger_event = { id = gg_cal.27 days = 5623 }   # 1851-05-29 se renuncia al subsidio
+			trigger_event = { id = gg_cal.28 days = 5626 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian allia
+			trigger_event = { id = gg_cal.29 days = 5721 }   # 1851-09-04 Caxias cruza
+			trigger_event = { id = gg_cal.30 days = 2614 }   # 1843-03-01 el subsidio frances de la Asamblea
+			trigger_event = { id = gg_cal.31 days = 3545 }   # 1845-09-18 el bloqueo anglo-frances (FE-8)
+			trigger_event = { id = gg_cal.32 days = 4543 }   # 1848-06-13 la revolucion de febrero pega en el Plata
+			trigger_event = { id = gg_cal.33 days = 5623 }   # 1851-05-29 la alianza con el Brasil
 		}
 		# EN: In 1836 the Republic has two borders at once, and the men of the time said so in
 		#     those words: Juan Manuel de la Sota's Catecismo geografico distinguishes the

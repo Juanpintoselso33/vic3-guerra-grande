@@ -1,0 +1,605 @@
+﻿namespace = gg_cal
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE DATED CALENDAR OF THE WAR (playtest 2026-09-19). Every event below happened on a day the
+#     sources give, and until today each one was scheduled as "so many days after the partition".
+#     That made the whole chain hang off a date the player moves: Juan's country split in May 1843
+#     instead of February, so everything slid three months and Caxias crossed the border in 1852,
+#     after the war he was supposed to end. The four tables (one per partition variant) also had to
+#     be recomputed by hand every time, and one of them had drifted: the renunciation of the French
+#     subsidy fired on 1 March 1851 instead of 29 May.
+#     Now each date is fixed to the calendar. One hidden relay per event is scheduled on the first
+#     day of the game, at its own offset from 1 January 1836, and on that day it hands the event to
+#     whichever government holds the role -- the Defensa or the Cerrito. If the country has not
+#     split yet (a late partition), the relay waits and tries again every month until 1856, so
+#     nothing dated before the split is lost.
+#     Two copies of every relay are scheduled, one on Rosas' Argentina and one on the Republic, and
+#     a mark makes the event fire once: a country that changes tag at the partition can lose the
+#     events queued on it (that is what cost the Cerrito its war in the first playtest), and Rosas
+#     never changes tag.
+#     Day offsets are counted with 365-day years, which is the calendar the engine runs on: there
+#     are no leap days in it.
+# ES: EL CALENDARIO FECHADO DE LA GUERRA. Todo lo de abajo paso un dia que las fuentes dan, y hasta
+#     hoy cada cosa se agendaba como "tantos dias despues de la particion". Eso colgaba la cadena
+#     entera de una fecha que el jugador mueve: el pais de Juan se partio en mayo de 1843 en vez de
+#     febrero, asi que todo se corrio tres meses y Caxias cruzo la frontera en 1852, despues de la
+#     guerra que venia a terminar. Ademas las cuatro tablas (una por variante de particion) habia
+#     que recalcularlas a mano, y una se habia desviado: la renuncia al subsidio frances salia el 1
+#     de marzo de 1851 en vez del 29 de mayo.
+#     Ahora cada fecha esta clavada al calendario. Un relevo oculto por evento se agenda el primer
+#     dia de la partida, con su propio corrimiento desde el 1 de enero de 1836, y ese dia le entrega
+#     el evento al gobierno que corresponda: la Defensa o el Cerrito. Si el pais todavia no se
+#     partio (particion tardia), el relevo espera y reintenta cada mes hasta 1856, asi no se pierde
+#     nada fechado antes de la particion.
+#     De cada relevo se agendan dos copias, una en la Argentina de Rosas y otra en la Republica, y
+#     una marca hace que el evento salga una sola vez: un pais que cambia de tag en la particion
+#     puede perder los eventos agendados sobre el (eso le costo la guerra al Cerrito en la primera
+#     prueba), y Rosas no cambia de tag nunca.
+#     Los corrimientos se cuentan con anios de 365 dias, que es el calendario del motor: no tiene
+#     dias bisiestos.
+# -------------------------------------------------------------------------------------------------
+
+
+# 1843-02-16 -- Los vascos se pasan al Cerrito (gg_contingent.3, la Defensa)
+gg_cal.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 1
+				EVENT = gg_contingent.3
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.1
+			}
+		}
+	}
+}
+
+# 1843-03-01 -- Legion Argentina del sitio (gg_contingent.1, la Defensa)
+gg_cal.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 2
+				EVENT = gg_contingent.1
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.2
+			}
+		}
+	}
+}
+
+# 1843-04-01 -- Purvis (gg_powers.10, el Cerrito)
+gg_cal.3 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 3
+				EVENT = gg_powers.10
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.3
+			}
+		}
+	}
+}
+
+# 1843-04-07 -- Legion Francesa (gg_contingent.4, la Defensa)
+gg_cal.4 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 4
+				EVENT = gg_contingent.4
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.4
+			}
+		}
+	}
+}
+
+# 1843-04-09 -- Legion Italiana (gg_contingent.5, la Defensa)
+gg_cal.5 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 5
+				EVENT = gg_contingent.5
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.5
+			}
+		}
+	}
+}
+
+# 1843-07-10 -- el Buceo y la caja (gg_loan.3, el Cerrito)
+gg_cal.6 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 6
+				EVENT = gg_loan.3
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.6
+			}
+		}
+	}
+}
+
+# 1845-03-27 -- India Muerta (gg_rivera.2, la Defensa)
+gg_cal.7 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 7
+				EVENT = gg_rivera.2
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.7
+			}
+		}
+	}
+}
+
+# 1845-04-15 -- Cazadores Vascos (gg_contingent.6, la Defensa)
+gg_cal.8 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 8
+				EVENT = gg_contingent.6
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.8
+			}
+		}
+	}
+}
+
+# 1845-06-01 -- convenio con Espana (no ratificado) (gg_powers.25, el Cerrito)
+gg_cal.9 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 9
+				EVENT = gg_powers.25
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.9
+			}
+		}
+	}
+}
+
+# 1845-07-21 -- la escuadra de Brown (gg_powers.11, el Cerrito)
+gg_cal.10 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 10
+				EVENT = gg_powers.11
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.10
+			}
+		}
+	}
+}
+
+# 1845-08-11 -- la reunificacion (gg_loan.4, el Cerrito)
+gg_cal.11 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 11
+				EVENT = gg_loan.4
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.11
+			}
+		}
+	}
+}
+
+# 1846-07-13 -- bases Hood (gg_powers.12, el Cerrito)
+gg_cal.12 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 12
+				EVENT = gg_powers.12
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.12
+			}
+		}
+	}
+}
+
+# 1846-10-26 -- decreto del Cerrito (gg_abolition.3, el Cerrito)
+gg_cal.13 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 13
+				EVENT = gg_abolition.3
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.13
+			}
+		}
+	}
+}
+
+# 1847-03-01 -- Urquiza, ventana temprana (gg_powers.17, la Defensa)
+gg_cal.14 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 14
+				EVENT = gg_powers.17
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.14
+			}
+		}
+	}
+}
+
+# 1847-07-09 -- Howden (gg_powers.14, el Cerrito)
+gg_cal.15 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 15
+				EVENT = gg_powers.14
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.15
+			}
+		}
+	}
+}
+
+# 1847-10-01 -- Lamas en Rio (T8, FE-13) (gg_powers.32, la Defensa)
+gg_cal.16 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 16
+				EVENT = gg_powers.32
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.16
+			}
+		}
+	}
+}
+
+# 1848-02-16 -- exequias de Larraniaga (gg_powers.27, la Defensa)
+gg_cal.17 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 17
+				EVENT = gg_powers.27
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.17
+			}
+		}
+	}
+}
+
+# 1848-03-20 -- Varela (gg_powers.26, la Defensa)
+gg_cal.18 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 18
+				EVENT = gg_powers.26
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.18
+			}
+		}
+	}
+}
+
+# 1848-03-25 -- Gore-Gros (gg_powers.16, el Cerrito)
+gg_cal.19 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 19
+				EVENT = gg_powers.16
+				SIDE = guerra_grande_cerrito_government
+				RETRY = gg_cal.19
+			}
+		}
+	}
+}
+
+# 1848-06-12 -- convenio frances (gg_loan.1, la Defensa)
+gg_cal.20 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 20
+				EVENT = gg_loan.1
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.20
+			}
+		}
+	}
+}
+
+# 1848-06-20 -- se van vascos y Garibaldi (gg_powers.18, la Defensa)
+gg_cal.21 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 21
+				EVENT = gg_powers.18
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.21
+			}
+		}
+	}
+}
+
+# 1849-07-18 -- Universidad (gg_powers.30, la Defensa)
+gg_cal.22 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 22
+				EVENT = gg_powers.30
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.22
+			}
+		}
+	}
+}
+
+# 1849-11-24 -- Southern (gg_powers.19, la Defensa)
+gg_cal.23 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 23
+				EVENT = gg_powers.19
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.23
+			}
+		}
+	}
+}
+
+# 1850-03-01 -- la Nueva Troya (gg_powers.29, la Defensa)
+gg_cal.24 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 24
+				EVENT = gg_powers.29
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.24
+			}
+		}
+	}
+}
+
+# 1850-08-31 -- Lepredour (gg_powers.20, la Defensa)
+gg_cal.25 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 25
+				EVENT = gg_powers.20
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.25
+			}
+		}
+	}
+}
+
+# 1850-09-06 -- contratos de setiembre (gg_loan.2, la Defensa)
+gg_cal.26 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 26
+				EVENT = gg_loan.2
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.26
+			}
+		}
+	}
+}
+
+# 1851-05-29 -- se renuncia al subsidio (gg_powers.21, la Defensa)
+gg_cal.27 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 27
+				EVENT = gg_powers.21
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.27
+			}
+		}
+	}
+}
+
+# 1851-06-01 -- Urquiza, 1851 (after the Brazilian alliance of 29 May / despues de la alianza con el Brasil) (gg_powers.22, la Defensa)
+gg_cal.28 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 28
+				EVENT = gg_powers.22
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.28
+			}
+		}
+	}
+}
+
+# 1851-09-04 -- Caxias cruza (gg_contingent.8, la Defensa)
+gg_cal.29 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 29
+				EVENT = gg_contingent.8
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.29
+			}
+		}
+	}
+}
+
+# EN: these four used to be scheduled on the Republic alone, through the dispatchers gg_powers.33
+#     to .35, and they are in the same danger: in the Cerrito branch the Republic changes tag.
+# ES: estos cuatro se agendaban solo sobre la Republica, por los despachadores gg_powers.33 a .35, y
+#     corren el mismo peligro: en la rama del Cerrito la Republica cambia de tag.
+
+# 1843-03-01 -- el subsidio frances de la Asamblea (gg_powers.2)
+gg_cal.30 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_here = {
+				N = 30
+				EVENT = gg_powers.2
+			}
+		}
+	}
+}
+
+# 1845-09-18 -- el bloqueo anglo-frances (FE-8) (gg_powers.3)
+gg_cal.31 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 31
+				EVENT = gg_powers.3
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.31
+			}
+		}
+	}
+}
+
+# 1848-06-13 -- la revolucion de febrero pega en el Plata (gg_powers.4)
+gg_cal.32 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 32
+				EVENT = gg_powers.4
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.32
+			}
+		}
+	}
+}
+
+# 1851-05-29 -- la alianza con el Brasil (gg_powers.5)
+gg_cal.33 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire_quiet = {
+				N = 33
+				EVENT = gg_powers.5
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.33
+			}
+		}
+	}
+}
