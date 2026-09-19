@@ -24,7 +24,7 @@ STATES = {
 			owned_provinces = { x302DDA }
 		}
 		add_homeland = cu:platinean
-		add_homeland = cu:afro_platense
+		add_homeland = cu:afro_caribeno
 		add_claim = c:ARG
 		add_claim = c:BRZ
 	}
@@ -35,7 +35,7 @@ STATES = {
 			owned_provinces = { x3588C8 x3D3A57 x3EA75C x3F05CB x490187 x4934E2 x49D0F9 x4E1442 x754BF8 xE25670 xE69F06 xFEBAD0 }
 		}
 		add_homeland = cu:platinean
-		add_homeland = cu:afro_platense
+		add_homeland = cu:afro_caribeno
 		add_claim = c:ARG
 		add_claim = c:BRZ
 	}

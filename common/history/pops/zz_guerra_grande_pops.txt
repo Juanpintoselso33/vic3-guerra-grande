@@ -21,8 +21,8 @@ POPS = {
 	s:STATE_MONTEVIDEO = {
 		region_state:URU = {
 			create_pop = { culture = platinean size = 20000 }
-			create_pop = { culture = afro_platense size = 1500 }
-			create_pop = { pop_type = slaves culture = afro_platense size = 3500 }
+			create_pop = { culture = afro_caribeno size = 1500 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 3500 }
 			create_pop = { culture = french size = 4500 }
 			create_pop = { culture = south_italian size = 2700 }
 			create_pop = { culture = north_italian size = 1800 }
@@ -34,8 +34,8 @@ POPS = {
 	s:STATE_SAN_JOSE = {
 		region_state:URU = {
 			create_pop = { culture = platinean size = 65192 }
-			create_pop = { culture = afro_platense size = 496 }
-			create_pop = { pop_type = slaves culture = afro_platense size = 3178 }
+			create_pop = { culture = afro_caribeno size = 496 }
+			create_pop = { pop_type = slaves culture = afro_caribeno size = 3178 }
 			create_pop = { culture = sulista size = 3600 }
 			create_pop = { culture = french size = 500 }
 			create_pop = { culture = south_italian size = 300 }

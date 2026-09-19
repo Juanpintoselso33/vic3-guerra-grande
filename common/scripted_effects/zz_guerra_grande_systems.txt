@@ -386,13 +386,20 @@ gg_cal_fire_here = {
 #     descartado por algo que dura una semana se perdia toda la partida: asi se podian perder las
 #     bases Hood, y con ellas el reintento del empate, que las pide. Este reintenta cada mes hasta
 #     1856 y recien escribe la marca cuando el evento va en camino de verdad.
-gg_cal_fire_when_possible = {
+gg_cal_fire_if_table_free = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
 		if = {
 			limit = {
 				has_global_variable = guerra_grande_split_done
-				$CONDITION$
+				# EN/ES: load test 2026-09-19 -- this used to arrive as a $CONDITION$ parameter, and the
+				#     engine cannot compile a parameter that carries a trigger: "failed for unknown
+				#     arguments: =, has_global_variable". The whole file stopped parsing from there, so
+				#     twenty-one of the thirty-three relays did not exist. Written here, it compiles.
+				#     / esto llegaba como parametro y el motor no puede compilar un parametro que trae
+				#     un trigger adentro: el archivo dejaba de parsearse desde ahi y veintiun relevos de
+				#     los treinta y tres no existian. Escrito aca, compila.
+				NOT = { has_global_variable = gg_peace_offered }
 			}
 			set_global_variable = gg_cal_done_$N$
 			random_country = {
