@@ -1,0 +1,38 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: La Plata, formable (standalone, 19 September 2026). Vanilla asks for STATE_URUGUAY among its
+#     states, and this mod replaces that state with five: asking for a state that does not exist
+#     makes the country impossible to form. The five oriental states take its place in the list, so
+#     forming La Plata still means holding the whole Banda Oriental.
+# ES: La Plata, formable. Vanilla pide STATE_URUGUAY entre sus estados, y este mod reemplaza ese
+#     estado por cinco: pedir un estado que no existe vuelve imposible formar el pais. Los cinco
+#     estados orientales ocupan su lugar en la lista, asi que formar La Plata sigue queriendo decir
+#     tener toda la Banda Oriental.
+# -------------------------------------------------------------------------------------------------
+
+REPLACE:PLT = {
+	states = {
+		STATE_BUENOS_AIRES
+		STATE_CHACO
+		STATE_SANTA_FE
+		STATE_MONTEVIDEO
+		STATE_SAN_JOSE
+		STATE_MALDONADO
+		STATE_PAYSANDU
+		STATE_BANDA_ORIENTAL
+		STATE_BAJO_PARAGUAY
+		STATE_ALTO_PARAGUAY
+		STATE_RIO_NEGRO
+		STATE_LA_PAMPA
+		STATE_TUCUMAN
+		STATE_JUJUY
+		STATE_CORRIENTES
+	}
+
+	required_states_fraction = 0.85
+
+	ai_will_do = { always = yes }
+
+	possible = {
+		always = yes
+	}
+}

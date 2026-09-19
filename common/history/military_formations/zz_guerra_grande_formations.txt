@@ -1,0 +1,36 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The Republic's army of 1836 (standalone, 19 September 2026). Vanilla raises it in
+#     STATE_URUGUAY, the state this mod replaces with five, so with the mod alone that formation
+#     found no state to stand in and the Republic started the campaign with nothing in the field.
+#     Same units, same name, raised in Montevideo. History files merge, so this is an addition, not
+#     an override: vanilla's own entry still runs and fails on a state that is no longer there,
+#     which costs a line in the log.
+# ES: el ejercito de la Republica de 1836. Vanilla lo levanta en STATE_URUGUAY, el estado que este
+#     mod reemplaza por cinco, asi que con el mod solo esa formacion no encontraba estado donde
+#     pararse y la Republica arrancaba la partida sin nada en el campo. Las mismas unidades, el
+#     mismo nombre, levantadas en Montevideo. Los archivos de historia se combinan, asi que esto es
+#     un agregado y no un reemplazo: la entrada de vanilla sigue corriendo y fallando sobre un
+#     estado que ya no esta, lo que cuesta una linea en el log.
+# -------------------------------------------------------------------------------------------------
+
+MILITARY_FORMATIONS = {
+	c:URU ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_brazil
+			name = Ejrcito_Nacional
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cuirassiers
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+	}
+}

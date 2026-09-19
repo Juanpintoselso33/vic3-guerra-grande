@@ -1,0 +1,204 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The oriental states' buildings (standalone, 19 September 2026). This mod replaces vanilla's single
+#     STATE_URUGUAY with five states, and each of them needs its own buildings. Until today this came in
+#     a copy of the whole South American file, inherited from la Argentina, which meant the submod
+#     also shipped their Argentine and Chilean buildings and overwrote anyone else's.
+#     A file of its own with the five entries is enough: history files merge, so everything the mod
+#     does not name keeps coming from vanilla or from whatever other mod is loaded. Vanilla's own
+#     entry for STATE_URUGUAY is left behind pointing at a state that no longer exists, which costs
+#     one line in the log and nothing in the game.
+# ES: Los edificios de los estados orientales (standalone). Este mod reemplaza el unico STATE_URUGUAY de
+#     vanilla por cinco estados, y cada uno necesita lo suyo. Hasta hoy esto venia en una copia del
+#     archivo sudamericano entero, heredada de la Argentina, asi que el submod ademas repartia sus
+#     datos argentinos y chilenos y le pisaba el archivo a cualquier otro mod.
+#     Con un archivo propio de cinco entradas alcanza: los archivos de historia se combinan, asi que
+#     todo lo que el mod no nombra sigue viniendo de vanilla o del mod que este cargado. La entrada de
+#     vanilla para STATE_URUGUAY queda apuntando a un estado que ya no existe, lo que cuesta una linea
+#     en el log y nada en la partida.
+# -------------------------------------------------------------------------------------------------
+
+BUILDINGS = {
+s:STATE_MONTEVIDEO={
+		region_state:URU={
+			create_building={
+					building="building_government_administration"
+					add_ownership={
+						country={
+							country="c:URU"
+							levels=1
+						}
+					}
+					reserves=1
+					activate_production_methods={ "pm_simple_organization" "pm_religious_bureaucrats" "pm_professional_bureaucrats" }
+				}
+			create_building={
+					building="building_barrack"
+					add_ownership={
+						country={
+							country="c:URU"
+							levels= 2
+						}
+					}
+					reserves=1
+					activate_production_methods={ "pm_general_training" }
+				}
+			create_building={
+					building="building_port"
+					add_ownership={
+						country={
+							country="c:URU"
+							levels=1
+						}
+					}
+					reserves=1
+					activate_production_methods={ "pm_anchorage" }
+				}
+			create_building={
+					building="building_government_administration"
+					level=2
+					reserves=1
+					activate_production_methods={ "pm_simple_organization" }
+				}
+			create_building={
+					building="building_tooling_workshop"
+					add_ownership={
+						building={
+							type="building_financial_district"
+							country="c:URU"
+							levels=1
+							region="STATE_MONTEVIDEO"
+						}
+					}
+					subsidized=yes
+					reserves=1
+					activate_production_methods={ "pm_crude_tools" "pm_automation_disabled"  }
+				}
+		}
+	}
+
+s:STATE_SAN_JOSE={
+		region_state:URU={
+			create_building={
+					building="building_livestock_ranch"
+					add_ownership={
+						building={
+							type="building_manor_house"
+							country="c:URU"
+							levels=2
+							region="STATE_SAN_JOSE"
+						}
+					}
+					reserves=1
+					activate_production_methods={ "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated"  }
+				}
+			create_building={
+					building="building_logging_camp"
+					add_ownership={
+						building={
+							type="building_financial_district"
+							country="c:URU"
+							levels=1
+							region="STATE_SAN_JOSE"
+						}
+					}
+					reserves=1
+					activate_production_methods={ "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts"  }
+				}
+		}
+	}
+
+s:STATE_MALDONADO={
+		region_state:URU={
+			create_building={
+				building="building_livestock_ranch"
+				level=1
+				reserves=1
+				activate_production_methods={ "pm_simple_ranch" "pm_open_air_stockyards" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+		}
+	}
+	s:STATE_PAYSANDU={
+		region_state:URU={
+			create_building={
+				building="building_livestock_ranch"
+				level=1
+				reserves=1
+				activate_production_methods={ "pm_simple_ranch" "pm_open_air_stockyards" "pm_standard_fences" "pm_unrefrigerated"  }
+			}
+			create_building={
+				building="building_barrack"
+				add_ownership={
+					country={
+						country="c:URU"
+						levels=1
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_general_training" }
+			}
+            create_building={
+				building="building_logging_camp"
+				add_ownership={
+					building={
+						type="building_financial_district"
+						country="c:URU"
+						levels=1
+						region="STATE_PAYSANDU"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts"  }
+			}
+			create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:URU"
+						levels=1
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_organization" "pm_religious_bureaucrats" "pm_professional_bureaucrats" }
+			}			
+		}
+	}
+
+
+s:STATE_BANDA_ORIENTAL={
+		region_state:URU={
+			create_building={
+				building="building_livestock_ranch"
+				level=1
+				reserves=1
+				activate_production_methods={ "pm_simple_ranch" "pm_open_air_stockyards" "pm_standard_fences" "pm_unrefrigerated"  }
+			}
+            create_building={
+				building="building_logging_camp"
+				add_ownership={
+					building={
+						type="building_financial_district"
+						country="c:URU"
+						levels=1
+						region="STATE_PAYSANDU"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts"  }
+			}
+			create_building={
+				building="building_wheat_farm"
+				add_ownership={
+					building={
+						type="building_manor_house"
+						country="c:URU"
+						levels=2
+						region="STATE_PAYSANDU"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_soil_enriching_farming"  "pm_tools" }
+			}
+        			
+		}
+	}
+}
