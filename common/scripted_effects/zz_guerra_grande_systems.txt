@@ -199,7 +199,62 @@ gg_postwar_start = {
 			NOT = { has_global_variable = gg_reincorporated }
 		}
 		set_global_variable = gg_postwar_started
+		gg_wartime_modifiers_clear = yes
 		gg_postwar_dispatch = yes
+	}
+}
+
+# EN: THE SIEGE MODIFIERS OUTLIVED THE SIEGE (balance audit, Codex, 19 September 2026). All four are
+#     applied with years = 15 from 1843, and nothing ever took them off: a peace in 1851 left the
+#     plaza still walled, the countryside still without a port and the Cerrito still without
+#     breaching guns until 1858. Seven years of a war that ended. It matters more now that these
+#     carry the rebalanced numbers -- Montevideo's extra working adults are a besieged city arming
+#     its whole population, which is exactly the thing that has to stop when the siege lifts.
+#     Written as its own effect, called once from gg_postwar_start, which is the single idempotent
+#     door every ending goes through (the peace menu's four options and the closing dispatch).
+#     Guarded one by one with has_modifier so nothing is removed from a country that never had it.
+# ES: LOS MODIFICADORES DEL SITIO DURABAN MAS QUE EL SITIO. Los cuatro se aplican con years = 15
+#     desde 1843 y nadie se los sacaba nunca: una paz en 1851 dejaba la plaza todavia amurallada, la
+#     campania todavia sin puerto y al Cerrito todavia sin canones de brecha hasta 1858. Siete anios
+#     de una guerra terminada. Importa mas ahora que llevan los numeros rebalanceados: los adultos
+#     empleables de mas en Montevideo son una ciudad sitiada armando a toda su poblacion, que es
+#     justo lo que tiene que terminar cuando se levanta el sitio.
+#     Va como efecto propio, llamado una sola vez desde gg_postwar_start, que es la unica puerta
+#     idempotente por la que pasan todos los finales (las cuatro opciones del menu de paz y el
+#     despacho de cierre). Cada uno con su guarda de has_modifier, asi no se le saca nada a un pais
+#     que nunca lo tuvo.
+gg_wartime_modifiers_clear = {
+	every_country = {
+		limit = {
+			OR = {
+				has_modifier = gg_siege_no_breaching_guns
+				has_modifier = guerra_grande_walls_of_montevideo
+			}
+		}
+		if = {
+			limit = { has_modifier = gg_siege_no_breaching_guns }
+			remove_modifier = gg_siege_no_breaching_guns
+		}
+		if = {
+			limit = { has_modifier = guerra_grande_walls_of_montevideo }
+			remove_modifier = guerra_grande_walls_of_montevideo
+		}
+	}
+	every_state = {
+		limit = {
+			OR = {
+				has_modifier = gg_siege_port_without_a_countryside
+				has_modifier = gg_siege_countryside_without_a_port
+			}
+		}
+		if = {
+			limit = { has_modifier = gg_siege_port_without_a_countryside }
+			remove_modifier = gg_siege_port_without_a_countryside
+		}
+		if = {
+			limit = { has_modifier = gg_siege_countryside_without_a_port }
+			remove_modifier = gg_siege_countryside_without_a_port
+		}
 	}
 }
 
