@@ -92,11 +92,15 @@ gg_cerrito_ripe = {
 		}
 		c:CER ?= {
 			OR = {
-				enemy_occupation >= 0.5
-				AND = {
-					year >= 1851
-					enemy_occupation >= 0.3
-				}
+				# EN: Codex review 2026-09-19 -- this read enemy_occupation raw, which counts ground taken
+				#     by ANY enemy: a Brazilian war somewhere else could sit the Cerrito at a peace table
+				#     dictated by the Defensa. The monthly mark is the same measurement, written only
+				#     while the Guerra Grande is the only war the two governments are fighting.
+				# ES: esto leia enemy_occupation crudo, que cuenta el suelo tomado por CUALQUIER enemigo:
+				#     una guerra con el Brasil en otro lado podia sentar al Cerrito a una mesa de paz
+				#     dictada por la Defensa. La marca mensual es la misma medicion, escrita solo mientras
+				#     la Guerra Grande sea la unica guerra de los dos gobiernos.
+				global_var:gg_cerrito_overrun = 1
 				# EN: playtest 2026-09-17 -- war support at zero used to be enough, and the player was
 				#     annexed by the enemy's peace menu the week it touched zero. Exhaustion now has
 				#     to be deep AND sustained: three months counted by the journal's pulse.
