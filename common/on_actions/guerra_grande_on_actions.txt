@@ -21,11 +21,6 @@ guerra_grande_on_game_start = {
 		#     pone una variable global en 0 antes del primer change_global_variable sobre ella
 		#     (ej. common/on_actions/00_code_on_actions.txt: grunderzeit_german_countries) --
 		#     change_global_variable sobre una variable nunca puesta no arranca garantizado en 0.
-		set_global_variable = { name = gg_debug_intervention_presses value = 0 }
-		set_global_variable = { name = gg_debug_italian_presses value = 0 }
-		set_global_variable = { name = gg_debug_french_presses value = 0 }
-		set_global_variable = { name = gg_debug_montonera_presses value = 0 }
-		set_global_variable = { name = gg_debug_blockade_presses value = 0 }
 		# EN: PROVISIONAL, see the modifier's own header in
 		#     common/static_modifiers/gg_rosas_provisional_lock.txt for the full reasoning. 20
 		#     years comfortably covers 1836 to Caseros (3 February 1852) with slack either side.

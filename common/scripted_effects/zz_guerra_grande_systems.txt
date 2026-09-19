@@ -341,7 +341,6 @@ gg_war_closing_dispatch = {
 #     que tambien puede llamar un evento oculto para la IA.
 
 gg_montonera_levy = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON montonera pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -353,14 +352,6 @@ gg_montonera_levy = {
 		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
 		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
 		#     de alla nunca les llega.
-		if = {
-			limit = { NOT = { has_global_variable = gg_debug_montonera_presses } }
-			set_global_variable = { name = gg_debug_montonera_presses value = 0 }
-		}
-		change_global_variable = {
-			name = gg_debug_montonera_presses
-			add = 1
-		}
 		set_variable = guerra_grande_montonera_levy_raised
 		# EN/ES: T3b, FE-9 -- the caudillos' levy: the balance tilts, the till pays
 		add_treasury = -10000
@@ -406,7 +397,6 @@ gg_montonera_levy = {
 	}
 
 gg_river_blockade = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON blockade pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -418,14 +408,6 @@ gg_river_blockade = {
 		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
 		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
 		#     de alla nunca les llega.
-		if = {
-			limit = { NOT = { has_global_variable = gg_debug_blockade_presses } }
-			set_global_variable = { name = gg_debug_blockade_presses value = 0 }
-		}
-		change_global_variable = {
-			name = gg_debug_blockade_presses
-			add = 1
-		}
 		set_variable = guerra_grande_river_blockade_asked
 		# EN: Rosas' backing comes with the squadron: money, cattle and veterans.
 		# ES: el apoyo de Rosas viene con la escuadra: plata, ganado y veteranos.

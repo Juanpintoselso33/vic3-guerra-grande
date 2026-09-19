@@ -260,6 +260,10 @@ gg_contingent.4 = {
 		default_option = yes
 		create_military_formation = {
 			type = army
+			# EN/ES: Codex review 2026-09-19 -- the loc key existed and the formation had no name, so the
+			#     largest corps of the siege showed up as a generic army / la clave existia y la formacion
+			#     no tenia nombre, asi que el cuerpo mas numeroso del sitio salia como un ejercito generico
+			name = Legion_Francesa
 			hq_region = capital.region
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry

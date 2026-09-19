@@ -38,19 +38,16 @@ je_gg_patrons = {
 
 	on_monthly_pulse = {
 		effect = {
-			# EN/ES: keeps the flag countries referenced in script (the engine ignores loc reads)
-			if = {
-				limit = {
-					has_global_variable = gg_flag_arg
-					has_global_variable = gg_flag_fra
-					has_global_variable = gg_flag_gbr
-					has_global_variable = gg_flag_brz
-				}
-				scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
-			}
-			else = {
-				scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
-			}
+			# EN: Codex review 2026-09-19 -- this asked whether the four flag variables existed and then
+			#     redrew the same bar either way: the two branches were identical, so the question cost
+			#     four reads a month and decided nothing. gg_patron_change already redraws the bar when
+			#     a value moves; this monthly pass is the repair for saves made before that.
+			# ES: esto preguntaba si existian las cuatro variables de bandera y despues redibujaba la
+			#     misma barra en los dos casos: las dos ramas eran identicas, asi que la pregunta
+			#     costaba cuatro lecturas por mes y no decidia nada. gg_patron_change ya redibuja la
+			#     barra cuando un valor se mueve; esta pasada mensual es la reparacion de las partidas
+			#     guardadas de antes de eso.
+			scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
 		}
 	}
 

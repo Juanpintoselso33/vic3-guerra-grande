@@ -99,56 +99,16 @@ je_guerra_grande = {
 				trigger_event = { id = gg_intro.5 days = 0 }
 			}
 			# EN/ES: playtest -- keep the two bars in step / mantener las dos barras al dia
-			if = { limit = { NOT = { has_global_variable = gg_debug_intervention_presses } } set_global_variable = { name = gg_debug_intervention_presses value = 0 } }
-			if = { limit = { NOT = { has_global_variable = gg_debug_italian_presses } } set_global_variable = { name = gg_debug_italian_presses value = 0 } }
-			if = { limit = { NOT = { has_global_variable = gg_debug_french_presses } } set_global_variable = { name = gg_debug_french_presses value = 0 } }
-			if = { limit = { NOT = { has_global_variable = gg_debug_montonera_presses } } set_global_variable = { name = gg_debug_montonera_presses value = 0 } }
-			if = { limit = { NOT = { has_global_variable = gg_debug_blockade_presses } } set_global_variable = { name = gg_debug_blockade_presses value = 0 } }
-			# EN/ES: instrumented 2026-09-16 -- Juan reported the Defensa's forces "evaporating"
-			#     across two playthroughs and asked for a way to log what is happening. First
-			#     attempt used .HasModifier('x')/.IsSet as text-interpolation functions; NEITHER
-			#     EXISTS in 1.13.11 (verified: .GetModifier returns an object, not a bool; no
-			#     .IsSet usage anywhere in the game's own localization). Rewritten to branch in
-			#     script with has_modifier as a TRIGGER (verified today against
-			#     common/scripted_buttons/caudillo_buttons.txt) and log a plain string per branch,
-			#     instead of trusting an unverified loc function -- the same mistake this session
-			#     spent all day catching in other people's code.
-			if = {
-				limit = { has_global_variable = guerra_grande_open_war }
-				c:URU ?= {
-					if = {
-						limit = { has_modifier = guerra_grande_walls_of_montevideo }
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa has walls_of_montevideo"
-					}
-					else = {
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa MISSING walls_of_montevideo"
-					}
-					if = {
-						limit = { has_modifier = gg_siege_the_sea_lane_stays_open }
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa has sea_lane_stays_open"
-					}
-					else = {
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Defensa MISSING sea_lane_stays_open"
-					}
-				}
-				if = {
-					limit = { gg_sea_open = yes }
-					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS sea OPEN"
-				}
-				else = {
-					debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS sea SHUT"
-				}
-				c:CER ?= {
-					if = {
-						limit = { has_modifier = gg_siege_no_breaching_guns }
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Cerrito has no_breaching_guns"
-					}
-					if = {
-						limit = { has_modifier = gg_siege_the_land_frontier_stays_open }
-						debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_CENSUS Cerrito has land_frontier_stays_open"
-					}
-				}
-			}
+			# EN: Codex review 2026-09-19 -- a 45-line monthly census of modifiers lived here, written on
+			#     2026-09-16 to chase the Defensa's "evaporating" forces. It printed to debug_log, which
+			#     does not write in a release build, so it was ~200 pulses of work per game for nothing.
+			#     The bug it was chasing was found and fixed (the naval HQ and the buttons the AI never
+			#     pressed), so the instrument goes. If it is ever needed again it is in the history.
+			# ES: aca vivia un censo mensual de modificadores de 45 lineas, escrito el 16/9 para
+			#     perseguir las fuerzas de la Defensa que "se evaporaban". Escribia en debug_log, que en
+			#     una build de release no escribe, asi que eran unos 200 pulsos de trabajo por partida
+			#     para nada. El error que perseguia ya se encontro (el HQ naval y los botones que la IA
+			#     no apretaba nunca), asi que el instrumento se va. Si hace falta, esta en el historial.
 			# EN: the pre-war needle moves ONLY when the player chooses. It used to drift on a
 			#     monthly roll -- and it drifted the wrong way, pushing the bar towards the
 			#     colorados whenever the country was on the blanco path, because that roll did not

@@ -43,7 +43,6 @@ guerra_grande_foreign_intervention_button = {
 	effect = {
 		# EN/ES: instrumented 2026-09-16 to answer "is the AI ever pressing this button" --
 		#        writes to game.log so the next playthrough gives real data instead of a guess.
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON foreign_intervention pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -55,14 +54,6 @@ guerra_grande_foreign_intervention_button = {
 		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
 		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
 		#     de alla nunca les llega.
-		if = {
-			limit = { NOT = { has_global_variable = gg_debug_intervention_presses } }
-			set_global_variable = { name = gg_debug_intervention_presses value = 0 }
-		}
-		change_global_variable = {
-			name = gg_debug_intervention_presses
-			add = 1
-		}
 		# EN: T3b, C21 -- no more intervention flag: the squadrons are France and Britain rising, and
 		#     they go down again five years later (gg_powers.1). Calling them before 1845 costs
 		#     sovereignty: Varela's offer of a port as a factory.
@@ -167,7 +158,6 @@ guerra_grande_italian_legion_button = {
 	}
 
 	effect = {
-		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_BUTTON italian_legion pressed"
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -179,14 +169,6 @@ guerra_grande_italian_legion_button = {
 		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
 		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
 		#     de alla nunca les llega.
-		if = {
-			limit = { NOT = { has_global_variable = gg_debug_italian_presses } }
-			set_global_variable = { name = gg_debug_italian_presses value = 0 }
-		}
-		change_global_variable = {
-			name = gg_debug_italian_presses
-			add = 1
-		}
 		if = {
 			limit = { NOT = { has_variable = guerra_grande_italian_legion_raised } }
 			set_variable = guerra_grande_italian_legion_raised
