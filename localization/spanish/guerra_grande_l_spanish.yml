@@ -143,3 +143,10 @@
  guerra_grande.9.b:0 "Que vengan a mediar, no a pelear."
  gg_intervention_early_price:0 "Un puerto ofrecido como factoría"
  guerra_grande_requires_rosas_backing:0 "Rosas tiene que respaldar el bloqueo (apoyo de Rosas 40 o más)."
+
+ # EN/ES: Codex review 2026-09-19 -- the engine log said "Missing localization key for
+ # character first name" and gave these three random names instead / el log decia que
+ # faltaban las claves y el juego les ponia nombres al azar
+ Jose_Maria:0 "José María"
+ Jean-Chrysostome:0 "Jean-Chrysostome"
+ Thiebaut:0 "Thiébaut"

@@ -189,7 +189,7 @@ gg_contingent.3 = {
 		if = {
 			limit = { has_variable = guerra_grande_argentine_legion_raised }
 			create_character = {
-				first_name = "Jose Maria"
+				first_name = "Jose_Maria"
 				last_name = "Paz"
 				historical = yes
 				is_general = yes

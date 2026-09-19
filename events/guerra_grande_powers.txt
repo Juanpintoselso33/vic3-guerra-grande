@@ -209,9 +209,21 @@ gg_powers.11 = {
 		# EN/ES: FN-1 -- Purvis took Brown's ships away, so the squadron leaves the map as well
 		#     / Purvis se llevo los barcos de Brown, asi que la escuadra tambien se va del mapa
 		c:CER ?= {
+			# EN: Codex review 2026-09-19 -- disband_military_formation is not a script effect (the log
+			#     says "Unknown effect"), so the ships stayed on the map. They are handed over instead,
+			#     which is what happened: Purvis and the French took Brown's squadron.
+			# ES: disband_military_formation no es un efecto de script (el log dice "Unknown effect"),
+			#     asi que los barcos se quedaban en el mapa. Ahora se entregan, que es lo que paso:
+			#     Purvis y los franceses se llevaron la escuadra de Brown.
 			if = {
 				limit = { has_variable = gg_brown_squadron_ref }
-				var:gg_brown_squadron_ref ?= { disband_military_formation = yes }
+				if = {
+					limit = { exists = c:GBR }
+					var:gg_brown_squadron_ref ?= {
+						every_scope_ship = { set_ship_owner_multiple = c:GBR }
+					}
+					clear_ownership_transfer_fleet = yes
+				}
 				remove_variable = gg_brown_squadron_ref
 				remove_variable = gg_brown_squadron_raised
 			}

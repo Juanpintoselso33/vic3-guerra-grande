@@ -1395,6 +1395,9 @@ gg_peace.5 = {
 	# a -- clemency / clemencia
 	option = {
 		name = gg_peace.5.a
+		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
+		#     / la posguerra arranca cuando el ganador ya decidio
+		gg_postwar_start = yes
 		default_option = yes
 		set_global_variable = gg_peace_no_victors
 		add_modifier = {
@@ -1409,6 +1412,9 @@ gg_peace.5 = {
 	# b -- proscription: the defeated chiefs go into exile / proscripcion: exilio de los jefes
 	option = {
 		name = gg_peace.5.b
+		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
+		#     / la posguerra arranca cuando el ganador ya decidio
+		gg_postwar_start = yes
 		set_global_variable = gg_peace_punished
 		if = {
 			limit = { has_variable = guerra_grande_defensa_government }
@@ -1444,6 +1450,9 @@ gg_peace.5 = {
 	# c -- terror / deguello
 	option = {
 		name = gg_peace.5.c
+		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
+		#     / la posguerra arranca cuando el ganador ya decidio
+		gg_postwar_start = yes
 		set_global_variable = gg_peace_punished
 		every_scope_state = {
 			kill_population_percent_in_state = { percent = 0.04 }
@@ -1461,6 +1470,9 @@ gg_peace.5 = {
 	# d -- entregarle el jefe vencido a su padrino, a cambio de la buena voluntad del padrino
 	option = {
 		name = gg_peace.5.d
+		# EN/ES: Codex review 2026-09-19 -- the postwar starts once the winner has decided
+		#     / la posguerra arranca cuando el ganador ya decidio
+		gg_postwar_start = yes
 		set_global_variable = gg_peace_punished
 		if = {
 			limit = { has_variable = guerra_grande_defensa_government }

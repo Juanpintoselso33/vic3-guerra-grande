@@ -266,13 +266,16 @@ je_guerra_grande = {
 					if = {
 						limit = { gg_sea_open = yes }
 						c:URU ?= {
+							# EN: Codex review 2026-09-19 -- the region has no oriental state, so the fleet was
+							#     never created, and the mark was written first, so it never retried either.
+							# ES: la region no tiene ningun estado oriental, asi que la flota no se creaba
+							#     nunca, y la marca se escribia antes, asi que tampoco se reintentaba.
 							if = {
 								limit = { NOT = { has_variable = gg_lent_squadron } }
-								set_variable = gg_lent_squadron
 								create_military_formation = {
 									save_scope_as = gg_lent_fleet
 									type = fleet
-									hq_region = sr:region_la_plata
+									hq_region = capital.region
 									name = gg_lent_squadron_name
 									ship = {
 										type = ship_type:ship_type_frigate
@@ -280,8 +283,13 @@ je_guerra_grande = {
 										count = 4
 									}
 								}
-								# EN/ES: kept so the powers can take their ships back / guardada para que se las lleven
-								set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
+								# EN/ES: the marks go after the creation, so a failed one is tried again next month
+								#     / las marcas van despues de crearla, asi un fallo se reintenta el mes que viene
+								if = {
+									limit = { exists = scope:gg_lent_fleet }
+									set_variable = gg_lent_squadron
+									set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
+								}
 							}
 							every_scope_state = {
 								limit = {
@@ -300,7 +308,15 @@ je_guerra_grande = {
 								remove_variable = gg_lent_squadron
 								if = {
 									limit = { has_variable = gg_lent_squadron_ref }
-									var:gg_lent_squadron_ref ?= { disband_military_formation = yes }
+									# EN/ES: they were lent, so they go home to France instead of vanishing (there is
+									#     no disband effect in script) / eran prestados, asi que vuelven a Francia
+									if = {
+										limit = { exists = c:FRA }
+										var:gg_lent_squadron_ref ?= {
+											every_scope_ship = { set_ship_owner_multiple = c:FRA }
+										}
+										clear_ownership_transfer_fleet = yes
+									}
 									remove_variable = gg_lent_squadron_ref
 								}
 							}

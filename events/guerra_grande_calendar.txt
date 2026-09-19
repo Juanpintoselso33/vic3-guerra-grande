@@ -234,11 +234,13 @@ gg_cal.12 = {
 
 	immediate = {
 		hidden_effect = {
-			gg_cal_fire = {
+			# EN/ES: Codex review 2026-09-19 -- las bases Hood se caian para siempre si justo habia un menu de paz abierto, y con ellas el reintento del empate, que las pide
+			gg_cal_fire_when_possible = {
 				N = 12
 				EVENT = gg_powers.12
 				SIDE = guerra_grande_cerrito_government
 				RETRY = gg_cal.12
+				CONDITION = NOT = { has_global_variable = gg_peace_offered }
 			}
 		}
 	}
@@ -353,11 +355,13 @@ gg_cal.19 = {
 
 	immediate = {
 		hidden_effect = {
-			gg_cal_fire = {
+			# EN/ES: Codex review 2026-09-19 -- lo mismo con Gore-Gros
+			gg_cal_fire_when_possible = {
 				N = 19
 				EVENT = gg_powers.16
 				SIDE = guerra_grande_cerrito_government
 				RETRY = gg_cal.19
+				CONDITION = NOT = { has_global_variable = gg_peace_offered }
 			}
 		}
 	}

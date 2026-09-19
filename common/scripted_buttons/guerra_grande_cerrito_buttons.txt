@@ -270,7 +270,12 @@ guerra_grande_river_blockade_button = {
 				limit = { exists = s:STATE_MALDONADO.region_state:CER }
 				create_military_formation = {
 					type = fleet
-					hq_region = sr:region_la_plata
+					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+					#     the squadron was never created. The capital's region is where the country is.
+					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+					#     estado oriental, asi que la escuadra nunca se creaba.
+					hq_region = capital.region
 					name = gg_brown_squadron_name
 					save_scope_as = gg_brown_fleet
 					ship = {
@@ -284,7 +289,12 @@ guerra_grande_river_blockade_button = {
 			else = {
 				create_military_formation = {
 					type = fleet
-					hq_region = sr:region_la_plata
+					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+					#     the squadron was never created. The capital's region is where the country is.
+					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+					#     estado oriental, asi que la escuadra nunca se creaba.
+					hq_region = capital.region
 					name = gg_brown_squadron_name
 					save_scope_as = gg_brown_fleet
 					ship = {

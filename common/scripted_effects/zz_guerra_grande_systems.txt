@@ -121,6 +121,27 @@ gg_abolition_dispatch = {
 	}
 }
 
+# EN: T8, the postwar, started from one place and only once (Codex review 2026-09-19). It used to
+#     hang off the closing, inside the guard "no peace has been signed yet" -- so every negotiated
+#     peace, which signs itself, skipped it: no postwar at all, and a Cerrito that won at the table
+#     never got the Republic's tag back. It is called now by the peace menus and by the victory menu,
+#     after the player has answered, so the postwar knows what was decided.
+# ES: T8, la posguerra, arrancada desde un solo lugar y una sola vez. Colgaba del cierre, adentro de
+#     la guarda "todavia nadie firmo la paz", asi que toda paz negociada -- que se firma a si misma --
+#     se la saltaba: no habia posguerra, y un Cerrito que ganaba en la mesa no recuperaba el tag de la
+#     Republica. Ahora la llaman los menus de paz y el de la victoria, despues de que el jugador
+#     contesto, asi la posguerra sabe que se decidio.
+gg_postwar_start = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = gg_postwar_started }
+			NOT = { has_global_variable = gg_reincorporated }
+		}
+		set_global_variable = gg_postwar_started
+		gg_postwar_dispatch = yes
+	}
+}
+
 # EN: T1/T9, the closing of the war, in one idempotent place (Codex review 2026-09-19). It used to
 #     live inside on_complete_all_involved only, and the journal has two ways out: complete and fail.
 #     A foreign power holding Montevideo is a fail, so that game closed the war without handing the
@@ -224,15 +245,18 @@ gg_war_closing_dispatch = {
 				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
 			}
 		}
-		# EN/ES: T8, C16 -- the postwar, once / la posguerra, una vez
-		if = {
-			limit = {
-				NOT = { has_global_variable = gg_postwar_started }
-				NOT = { has_global_variable = gg_reincorporated }
-			}
-			set_global_variable = gg_postwar_started
-			gg_postwar_dispatch = yes
-		}
+	}
+	# EN: Codex review 2026-09-19 -- the postwar lives OUTSIDE the "no peace signed" guard, and it is
+	#     not started here when there is a victory menu on the table: gg_peace.5 starts it from its
+	#     own options. Otherwise the postwar chose its branch (and changed the Cerrito's tag, which
+	#     can eat the pending event) before the player had answered the menu.
+	# ES: la posguerra va AFUERA de la guarda de "nadie firmo la paz", y no arranca aca cuando hay un
+	#     menu de victoria sobre la mesa: lo arranca gg_peace.5 desde sus propias opciones. Si no, la
+	#     posguerra elegia rama -- y le cambiaba el tag al Cerrito, lo que puede comerse el evento
+	#     pendiente -- antes de que el jugador contestara.
+	if = {
+		limit = { NOT = { has_global_variable = gg_victory_pending } }
+		gg_postwar_start = yes
 	}
 }
 
@@ -295,6 +319,38 @@ gg_cal_fire_here = {
 	}
 }
 
+# EN: Codex review 2026-09-19 -- same relay, but for an event whose own trigger can be false for a
+#     passing reason (a peace menu already on the table, a cooldown). The plain relay writes the mark
+#     first, so an event dropped for a reason that lasts a week was lost for the whole game: that is
+#     how the Hood bases could never happen, and with them the stalemate retry that asks for them.
+#     This one keeps trying every month until 1856, and only writes the mark once the event is really
+#     on its way.
+# ES: el mismo relevo, para un evento cuyo trigger puede ser falso por algo pasajero (un menu de paz
+#     ya abierto, un enfriamiento). El relevo comun escribe la marca primero, asi que un evento
+#     descartado por algo que dura una semana se perdia toda la partida: asi se podian perder las
+#     bases Hood, y con ellas el reintento del empate, que las pide. Este reintenta cada mes hasta
+#     1856 y recien escribe la marca cuando el evento va en camino de verdad.
+gg_cal_fire_when_possible = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				$CONDITION$
+			}
+			set_global_variable = gg_cal_done_$N$
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { year < 1856 }
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
 # EN: T6, C18/FX-4. The whole post-split calendar, in one place, on absolute historical dates.
 #     Called at the end of both guerra_grande.3 options, when both governments exist, and
 #     addressed by tag so the Defensa and the Cerrito get their own events whoever the player is.
@@ -326,8 +382,20 @@ gg_partition_calendar = {
 	#     jugador mueve, asi que la cadena entera se corria con el: Caxias cruzaba en 1852. Ahora las
 	#     fechas estan clavadas al calendario, en events/guerra_grande_calendar.txt. Aca queda lo que
 	#     de verdad es relativo a la particion.
+	# EN: Codex review 2026-09-19 -- the loans' watcher was scheduled on the Defensa alone, 200 days
+	#     out, and only duplicated itself to both governments once it fired. A Cerrito that finished
+	#     the Defensa inside those 200 days killed the pending event with the country, and the two
+	#     reckoning events (gg_loan.5 and .6) became unreachable for that whole game. One copy on each
+	#     government now, and the event's own guard keeps it from doubling.
+	# ES: el vigia de los prestamos se agendaba solo sobre la Defensa, a 200 dias, y recien al salir
+	#     se duplicaba a los dos gobiernos. Un Cerrito que terminara con la Defensa dentro de esos 200
+	#     dias se llevaba puesto el evento pendiente, y los dos eventos del ajuste de cuentas quedaban
+	#     inalcanzables en esa partida. Ahora va una copia en cada gobierno.
 	c:URU ?= {
 		trigger_event = { id = gg_loan.7 days = 200 }   # vigia del ajuste de cuentas (relativo)
+	}
+	c:CER ?= {
+		trigger_event = { id = gg_loan.7 days = 200 }
 	}
 }
 
@@ -366,16 +434,32 @@ gg_urquiza_flip = {
 # EN: T8, C16 -- the postwar goes to the government left standing (the victor's rule of gg_peace.5).
 # ES: T8, C16 -- la posguerra va al gobierno que quedo (la misma regla que gg_peace.5).
 gg_postwar_dispatch = {
+	# EN: Codex review 2026-09-19 -- this used to send the Cerrito to gg_peace.8 whenever the blancos
+	#     were ahead on the score, even with the Defensa still alive. gg_peace.8 only changes the tag
+	#     when URU is gone, so in those games nobody changed tag AND the postwar went to the Defensa:
+	#     the menu on one side and the postwar on the other. The Cerrito takes the Republic's name
+	#     only when it really absorbed it; otherwise the postwar goes to whoever is left, and if both
+	#     are left, to the side that won.
+	# ES: mandaba al Cerrito a gg_peace.8 con que los blancos fueran arriba en el puntaje, aun con la
+	#     Defensa viva. gg_peace.8 solo cambia el tag si URU ya no existe, asi que en esas partidas no
+	#     cambiaba de tag nadie Y la posguerra se iba a la Defensa: el menu de un lado y la posguerra
+	#     del otro. El Cerrito recupera el nombre de la Republica solo si de verdad la absorbio; si
+	#     no, la posguerra es de quien haya quedado, y si quedaron los dos, del que gano.
 	if = {
 		limit = {
 			exists = c:CER
-			OR = {
-				NOT = { exists = c:URU }
-				guerra_grande_blanco_lead > 0
-			}
+			NOT = { exists = c:URU }
 		}
 		# EN/ES: the Cerrito takes the Republic's tag first (gg_peace.8) / el Cerrito recupera el tag
 		c:CER = { trigger_event = { id = gg_peace.8 days = 1 } }
+	}
+	else_if = {
+		limit = { NOT = { exists = c:CER } }
+		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 60 } }
+	}
+	else_if = {
+		limit = { gg_cerrito_won_militarily = yes }
+		c:CER ?= { trigger_event = { id = gg_postwar.1 days = 60 } }
 	}
 	else = {
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 60 } }

@@ -32,8 +32,20 @@ guerra_grande_play_is_allowed = {
 		# or it is the other government: the civil war itself, which must stay possible
 		has_variable = guerra_grande_cerrito_government
 		has_variable = guerra_grande_defensa_government
-		# or the hour of the historical intervention has come
-		year >= 1851
+		# EN: Codex review 2026-09-19 -- this said only "year >= 1851", which from 1 January 1851 let
+		#     ANY country in the world open a play against either oriental government, not just the
+		#     historical intervention. That is also the main way a foreign power ends up holding
+		#     Montevideo, which is the war's failure state. The hour is Brazil's: Caxias crossing the
+		#     border in September, which is already written as gg_contingent.8.
+		# ES: decia solo "year >= 1851", y desde el 1 de enero de 1851 cualquier pais del mundo podia
+		#     abrirle una jugada a cualquiera de los dos gobiernos orientales, no solo la intervencion
+		#     historica. Es ademas el camino principal por el que una potencia extranjera termina con
+		#     Montevideo, que es el fracaso de la guerra. La hora es la del Brasil: Caxias cruzando la
+		#     frontera en setiembre, que ya esta escrito como gg_contingent.8.
+		AND = {
+			year >= 1851
+			c:BRZ ?= this
+		}
 	}
 }
 
