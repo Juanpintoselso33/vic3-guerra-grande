@@ -1005,10 +1005,38 @@ guerra_grande.3 = {
 			limit = { has_template = URU_lorenzo_batlle }
 			save_scope_as = gg_batlle
 		}
-		# Oribe stays where he already is: at the head of the Cerrito, which is now us.
-		random_scope_character = {
-			limit = { has_template = URU_Manuel_Oribe }
-			set_character_as_ruler = yes
+		# EN: Oribe takes the head of the Cerrito, which is now us.
+		#     Playtest 2026-09-19 -- he was NOT still here. guerra_grande.2.a exiles Oribe and his
+		#     brother to Buenos Aires on 29 October 1838, so by 1843 no character in this country
+		#     carries his template: the search found nobody, nothing was set, and the Cerrito went
+		#     to war under the ruler the Republic happened to have -- Rivera, the Colorado caudillo
+		#     it was fighting. The sister option guerra_grande.3.a already fell back to creating
+		#     him; this one did not. Same three steps here: the one we grabbed, the one still in
+		#     the roster, or bring him back from Buenos Aires, which is what actually happened.
+		# ES: Oribe toma la cabeza del Cerrito, que ahora somos nosotros.
+		#     Prueba en partida 19/9/2026 -- NO seguia aca. guerra_grande.2.a exilia a Oribe y a su
+		#     hermano a Buenos Aires el 29 de octubre de 1838, asi que en 1843 ningun personaje de
+		#     este pais tiene su template: la busqueda no encontraba a nadie, no se fijaba nada, y
+		#     el Cerrito salia a la guerra con el gobernante que tuviera la Republica -- Rivera, el
+		#     caudillo colorado contra el que peleaba. La opcion hermana guerra_grande.3.a ya tenia
+		#     el respaldo de crearlo; esta no. Los mismos tres pasos aca: el que agarramos, el que
+		#     quedo en el plantel, o traerlo de vuelta de Buenos Aires, que es lo que paso de verdad.
+		if = {
+			limit = { exists = scope:gg_oribe }
+			scope:gg_oribe = { set_character_as_ruler = yes }
+		}
+		else_if = {
+			limit = { any_scope_character = { has_template = URU_Manuel_Oribe } }
+			random_scope_character = {
+				limit = { has_template = URU_Manuel_Oribe }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = URU_Manuel_Oribe
+				ruler = yes
+			}
 		}
 		# The Defensa secedes with Montevideo, under the tag the Republic just left behind.
 		create_country = {

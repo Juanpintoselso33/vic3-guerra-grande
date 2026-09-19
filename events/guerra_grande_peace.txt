@@ -1689,6 +1689,36 @@ gg_peace.8 = {
 	}
 
 	immediate = {
+		# EN: playtest 2026-09-19 -- "I chose vassalage to Rosas, it vassalised me, and the moment
+		#     the tag changed Uruguay came out free". change_tag drops the subject pact exactly the
+		#     way it drops the journal entry, and the pact cannot be rebuilt here: after change_tag
+		#     c:URU does not resolve in this same effect (the rule that cost us guerra_grande.3.b).
+		#     So the relation is written down BEFORE the tag change and rebuilt by gg_peace.10, the
+		#     relay that already runs a day later on another country, where c:URU does resolve.
+		#     The subject type cannot travel in a variable, so it travels as a number.
+		# ES: prueba en partida 19/9/2026 -- "elegi vasallaje a Rosas, me vasallizo, y apenas cambio
+		#     el tag el Uruguay quedo libre". change_tag se lleva puesto el pacto de sujecion igual
+		#     que se lleva la entrada de diario, y el pacto no se puede rehacer aca: despues del
+		#     change_tag, c:URU no resuelve en este mismo efecto (la regla que nos costo
+		#     guerra_grande.3.b). Asi que la relacion se anota ANTES del cambio de tag y la rehace
+		#     gg_peace.10, el relevo que ya sale al dia siguiente sobre otro pais, donde c:URU si
+		#     resuelve. El tipo de sujecion no puede viajar en una variable, asi que viaja de numero.
+		if = {
+			limit = { is_subject = yes }
+			set_global_variable = { name = gg_cerrito_overlord value = overlord }
+			if = {
+				limit = { is_subject_type = subject_type_vassal }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 1 }
+			}
+			else_if = {
+				limit = { is_subject_type = subject_type_puppet }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 2 }
+			}
+			else_if = {
+				limit = { is_subject_type = subject_type_protectorate }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 3 }
+			}
+		}
 		if = {
 			limit = { NOT = { exists = c:URU } }
 			change_tag = URU
@@ -1719,6 +1749,40 @@ gg_peace.10 = {
 
 	immediate = {
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 59 } }
+		# EN/ES: and the subject pact that change_tag dropped, rebuilt here where c:URU resolves.
+		#     The overlord makes the pact, which is the same direction the peace options use.
+		#     / y el pacto de sujecion que se llevo el change_tag, rehecho aca donde c:URU resuelve.
+		#     Lo hace el señor, que es la misma direccion que usan las opciones de paz.
+		if = {
+			limit = {
+				has_global_variable = gg_cerrito_overlord
+				has_global_variable = gg_cerrito_subject_kind
+				exists = c:URU
+				c:URU = { is_subject = no }
+			}
+			global_var:gg_cerrito_overlord ?= {
+				if = {
+					limit = { global_var:gg_cerrito_subject_kind = 1 }
+					create_diplomatic_pact = { country = c:URU type = vassal }
+				}
+				else_if = {
+					limit = { global_var:gg_cerrito_subject_kind = 2 }
+					create_diplomatic_pact = { country = c:URU type = puppet }
+				}
+				else_if = {
+					limit = { global_var:gg_cerrito_subject_kind = 3 }
+					create_diplomatic_pact = { country = c:URU type = protectorate }
+				}
+			}
+		}
+		if = {
+			limit = { has_global_variable = gg_cerrito_overlord }
+			remove_global_variable = gg_cerrito_overlord
+		}
+		if = {
+			limit = { has_global_variable = gg_cerrito_subject_kind }
+			remove_global_variable = gg_cerrito_subject_kind
+		}
 	}
 }
 

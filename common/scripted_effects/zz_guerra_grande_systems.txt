@@ -12,6 +12,34 @@
 # EN: called once from guerra_grande_on_game_start.
 # ES: se llama una sola vez desde guerra_grande_on_game_start.
 gg_systems_init = {
+	# EN: NO ELECTIONS BEFORE THE SPLIT EITHER. Vanilla starts Uruguay on law_wealth_voting, so the
+	#     engine ran election campaigns from 1836, and vanilla's generic election events
+	#     (events/election_events/, fired from on_monthly_pulse_country_elections, all gated on
+	#     in_election_campaign) kept swapping the president for whichever interest-group leader they
+	#     picked. The historical cast was being overwritten by a poll the country never held: under
+	#     the 1830 constitution the President was chosen by the General Assembly, and between 1836
+	#     and 1843 the presidency changed by civil war -- Oribe resigns in 1838, Rivera takes it by
+	#     force -- not at the ballot box. law_oligarchy is the same shape the split already gives
+	#     both governments from 1843, and it is what stops the campaigns: with no campaign, not one
+	#     of those events passes its trigger.
+	# ES: TAMPOCO HAY ELECCIONES ANTES DEL CORTE. Vanilla arranca al Uruguay con law_wealth_voting,
+	#     asi que el motor corria campanias electorales desde 1836, y los eventos genericos de
+	#     eleccion de vanilla (events/election_events/, que salen de
+	#     on_monthly_pulse_country_elections y piden todos in_election_campaign) le cambiaban el
+	#     presidente por el lider de turno de algun grupo de interes. El elenco historico lo
+	#     pisaba una eleccion que el pais nunca tuvo: por la constitucion de 1830 al Presidente lo
+	#     elegia la Asamblea General, y entre 1836 y 1843 la presidencia cambio por guerra civil
+	#     -- Oribe renuncia en 1838, Rivera la toma por la fuerza --, no en las urnas. law_oligarchy
+	#     es la misma forma que el corte ya les da a los dos gobiernos desde 1843, y es lo que corta
+	#     las campanias: sin campania, ninguno de esos eventos pasa su trigger.
+	c:URU ?= {
+		if = {
+			limit = {
+				NOT = { has_law = law_type:law_oligarchy }
+			}
+			activate_law = law_type:law_oligarchy
+		}
+	}
 	# EN/ES: playtest -- countries kept in globals so journal texts can show their flags
 	#     / paises guardados en globales para mostrar sus banderas en los textos
 	c:ARG ?= { set_global_variable = { name = gg_flag_arg value = this } }
@@ -479,6 +507,52 @@ gg_river_blockade = {
 					}
 				}
 				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+			# EN: playtest 2026-09-19 -- the squadron arrived with no admiral and no crews: the
+			#     Cerrito was handed three frigates it could not man. Vanilla never gives Uruguay a
+			#     naval administration (only Argentina, Brazil and Chile have one in 1836), and
+			#     building_naval_administration is what recruits_sailors, so the ships sat there.
+			#     A lent squadron comes with its own base and its own men -- Brown's crews were
+			#     Argentine, not oriental -- so Rosas lends both.
+			# ES: prueba en partida 19/9/2026 -- la escuadra llegaba sin almirante y sin dotacion: al
+			#     Cerrito le daban tres fragatas que no podia tripular. Vanilla nunca le da a Uruguay
+			#     una administracion naval (en 1836 solo la tienen la Argentina, el Brasil y Chile), y
+			#     building_naval_administration es la que recluta marineros, asi que los barcos
+			#     quedaban parados. Una escuadra prestada viene con su base y con su gente -- las
+			#     dotaciones de Brown eran argentinas, no orientales -- asi que Rosas presta las dos.
+			if = {
+				limit = { exists = s:STATE_MALDONADO.region_state:CER }
+				s:STATE_MALDONADO.region_state:CER = {
+					create_building = {
+						building = building_naval_administration
+						level = 1
+					}
+				}
+			}
+			else_if = {
+				limit = { any_scope_state = { is_coastal = yes } }
+				random_scope_state = {
+					limit = { is_coastal = yes }
+					create_building = {
+						building = building_naval_administration
+						level = 1
+					}
+				}
+			}
+			# EN: and the man himself. Guillermo Brown commanded the squadron that blockaded
+			#     Montevideo; without naming him the fleet shows up under nobody.
+			# ES: y el hombre. Guillermo Brown mandaba la escuadra que bloqueo Montevideo; si no se
+			#     lo nombra, la flota aparece sin nadie al mando.
+			if = {
+				limit = { exists = scope:gg_brown_fleet }
+				create_character = {
+					template = ARG_William_Brown
+					commander_rank = commander_rank_3
+					save_scope_as = gg_brown_admiral
+				}
+				scope:gg_brown_admiral = {
+					transfer_to_formation = scope:gg_brown_fleet
+				}
 			}
 		}
 	}
