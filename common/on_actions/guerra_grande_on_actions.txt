@@ -136,12 +136,15 @@ guerra_grande_on_game_start = {
 			if = {
 				limit = { exists = s:STATE_ENTRE_RIOS }
 				set_global_variable = { name = gg_corrientes_agravio value = 0 }
+				set_global_variable = { name = gg_norte_agravio value = 0 }
+				set_global_variable = { name = gg_entre_rios_agravio value = 0 }
 				trigger_event = { id = gg_argentina_cal.14 days = 90 }   # 1836-04-01 primer pliego de Corrientes
 				trigger_event = { id = gg_argentina_cal.15 days = 455 }  # 1837-04-01 la renta de la aduana
 				trigger_event = { id = gg_argentina_cal.16 days = 816 }  # 1838-03-28 empieza el bloqueo frances
 				trigger_event = { id = gg_argentina_cal.17 days = 1064 } # 1838-12-01 llega la noticia de Heredia
-				trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 Lamadrid a Tucuman
+				trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 armas y Lamadrid a Tucuman
 				trigger_event = { id = gg_argentina_cal.19 days = 5444 } # 1850-12-01 las dos ordenes a Urquiza
+				trigger_event = { id = gg_argentina_cal.20 days = 3862 } # 1846-08-01 ancla mensual del Tratado de Alcaraz
 			}
 			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia

@@ -512,7 +512,9 @@ gg_argentina.64 = {
 
 # EN: 1838 -- Heredia's murder changes the north, where power passes to liberal groups.
 # ES: 1838 -- el asesinato de Heredia cambia el norte, donde el poder pasa a grupos liberales.
-# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «La Coalicion del Norte» [D].
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «La Coalicion del Norte» [D],
+# and the documented Protector title supplied in the user's brief / y el titulo documentado de
+# Protector aportado en la consigna del usuario.
 gg_argentina.65 = {
 	type = country_event
 	placement = ROOT
@@ -534,20 +536,101 @@ gg_argentina.65 = {
 				limit = { has_template = ARG_Alejandro_Heredia }
 				kill_character = yes
 			}
+			# EN/ES: an unanswered recognition question remains an agravio / la pregunta de
+			#     reconocimiento sin contestar queda como agravio
+			change_global_variable = { name = gg_norte_agravio add = 1 }
 		}
 	}
 
 	option = {
 		name = gg_argentina.65.a
-		# EN/ES: el norte entero pasa a otras manos: cinco provincias que siguen delegando y ya no
-		#     responden como antes / the whole north changes hands: five provinces with a claim
+		# EN/ES: Buenos Aires niega reconocimiento a las nuevas autoridades y las cinco provincias
+		#     conservan el reclamo / Buenos Aires withholds recognition and all five retain the claim
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
 		gg_reclamo_abre = { KEY = coalicion_salta }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
 		default_option = yes
-		ai_chance = { base = 100 }
+		custom_tooltip = gg_norte_refusal_tt
+		change_global_variable = { name = gg_norte_agravio add = 1 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = gg_argentina.65.b
+		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
+		custom_tooltip = gg_norte_concession_tt
+		change_global_variable = { name = gg_norte_agravio add = -1 }
+		add_modifier = { name = gg_arg_northern_recognition years = 5 }
+		ai_chance = { base = 25 }
+	}
+}
+
+# EN: March 1840 -- the arms of the army that fought against the Peru-Bolivian Confederation are
+#     still in the north. Rosas's historical demand supplied the stated reason for Lamadrid's mission.
+# ES: marzo de 1840 -- las armas del ejercito que peleo contra la Confederacion Peru-Boliviana siguen
+#     en el norte. El reclamo historico de Rosas dio el motivo declarado de la mision de Lamadrid.
+# SOURCE / FUENTE: historical implementation brief supplied by the user / consigna historica del
+# usuario; docs/guerra-grande-argentina/historia-argentina.md, «La Coalicion del Norte» [D].
+gg_argentina.68 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.68.t
+	desc = gg_argentina.68.d
+	flavor = gg_argentina.68.f
+	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_norte_agravio add = 1 }
+		}
+	}
+
+	option = {
+		name = gg_argentina.68.a
+		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		gg_reclamo_abre = { KEY = coalicion_salta }
+		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		default_option = yes
+		custom_tooltip = gg_norte_refusal_tt
+		change_global_variable = { name = gg_norte_agravio add = 1 }
+		if = {
+			# EN/ES: no late Lamadrid mission after the Coalition has already formed / no hay mision
+			#     tardia de Lamadrid despues de que la Coalicion ya se formo
+			limit = { NOT = { exists = c:CLN } }
+			trigger_event = { id = gg_argentina.66 days = 0 popup = yes }
+		}
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = gg_argentina.68.b
+		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
+		custom_tooltip = gg_norte_concession_tt
+		change_global_variable = { name = gg_norte_agravio add = -1 }
+		add_modifier = { name = gg_arg_northern_arms_left years = 5 }
+		if = {
+			limit = { NOT = { exists = c:CLN } }
+			trigger_event = { id = gg_argentina.66 days = 0 popup = yes }
+		}
+		ai_chance = { base = 20 }
 	}
 }
 
@@ -572,6 +655,12 @@ gg_argentina.66 = {
 		exists = s:STATE_ENTRE_RIOS
 	}
 
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_norte_agravio add = 1 }
+		}
+	}
+
 	option = {
 		name = gg_argentina.66.a
 		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
@@ -582,12 +671,15 @@ gg_argentina.66 = {
 		#     / the mark decides later whether Lamadrid goes over, so it is said
 		custom_tooltip = gg_lamadrid_sent_tt
 		set_global_variable = gg_lamadrid_sent
+		change_global_variable = { name = gg_norte_agravio add = 1 }
 		ai_chance = { base = 80 }
 	}
 	option = {
 		name = gg_argentina.66.b
 		# EN/ES: no se les reclama nada, y el norte queda como estaba / nothing is demanded
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		custom_tooltip = gg_norte_concession_tt
+		change_global_variable = { name = gg_norte_agravio add = -1 }
 		add_modifier = { name = gg_arg_lamadrid_retained years = 2 }
 		ai_chance = { base = 20 }
 	}
@@ -616,6 +708,12 @@ gg_argentina.67 = {
 		exists = s:STATE_ENTRE_RIOS
 	}
 
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+		}
+	}
+
 	option = {
 		name = gg_argentina.67.a
 		# EN/ES: dos ordenes que no caben juntas dejan a Entre Rios con un reclamo abierto
@@ -624,6 +722,7 @@ gg_argentina.67 = {
 		default_option = yes
 		custom_tooltip = gg_urquiza_double_order_tt
 		set_global_variable = gg_urquiza_double_order
+		change_global_variable = { name = gg_entre_rios_agravio add = 1 }
 		add_modifier = { name = gg_arg_brazil_command months = 18 }
 		add_modifier = { name = gg_arg_traffic_cut months = 18 }
 		ai_chance = { base = 85 }
@@ -631,8 +730,122 @@ gg_argentina.67 = {
 	option = {
 		name = gg_argentina.67.b
 		gg_reclamo_cierra = { KEY = entre_rios }
+		custom_tooltip = gg_entre_rios_concession_tt
+		change_global_variable = { name = gg_entre_rios_agravio add = -1 }
 		add_treasury = -25000
 		ai_chance = { base = 15 }
+	}
+}
+
+# EN: August 1846 -- Urquiza and Madariaga sign the Treaty of Alcaraz: Corrientes returns to the
+#     Confederation, is excused from fighting in Uruguay, and a constituent congress is envisaged.
+#     Rosas demanded amendments and Madariaga rejected them.
+# ES: agosto de 1846 -- Urquiza y Madariaga firman el Tratado de Alcaraz: Corrientes vuelve a la
+#     Confederacion, queda exenta de pelear en el Uruguay y se preve un congreso constituyente.
+#     Rosas exigio modificaciones y Madariaga las rechazo.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1843-1847 — Corrientes sola,
+# y el Paraguay» y «Los momentos de decision», punto 6 [D].
+gg_argentina.69 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.69.t
+	desc = gg_argentina.69.d
+	flavor = gg_argentina.69.f
+	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+		}
+	}
+
+	option = {
+		name = gg_argentina.69.a
+		gg_reclamo_abre = { KEY = entre_rios }
+		default_option = yes
+		custom_tooltip = gg_entre_rios_refusal_tt
+		change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = gg_argentina.69.b
+		gg_reclamo_cierra = { KEY = entre_rios }
+		custom_tooltip = gg_entre_rios_concession_tt
+		change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+		add_modifier = { name = gg_arg_alcaraz_accepted years = 10 }
+		ai_chance = { base = 20 }
+	}
+}
+
+# EN: 7 April 1840 -- counterfactual outcome reached only by conceding all three northern disputes.
+# ES: 7 de abril de 1840 -- desenlace contrafactual al que solo se llega cediendo los tres pleitos.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, 7/4/1840 [D]; counterfactual
+# consequence chosen by the user / consecuencia contrafactual elegida por el usuario.
+gg_argentina.70 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.70.t
+	desc = gg_argentina.70.d
+	flavor = gg_argentina.70.f
+	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		NOT = { exists = c:CLN }
+	}
+
+	option = {
+		name = gg_argentina.70.a
+		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN: 1 May 1851 -- counterfactual outcome reached only if Alcaraz and the 1850 orders were conceded.
+# ES: 1 de mayo de 1851 -- desenlace contrafactual al que solo se llega cediendo Alcaraz y las
+#     ordenes de 1850.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, 1/5/1851 [D]; counterfactual
+# consequence chosen by the user / consecuencia contrafactual elegida por el usuario.
+gg_argentina.71 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.71.t
+	desc = gg_argentina.71.d
+	flavor = gg_argentina.71.f
+	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		NOT = { exists = c:ENR }
+	}
+
+	option = {
+		name = gg_argentina.71.a
+		gg_reclamo_cierra = { KEY = entre_rios }
+		default_option = yes
+		ai_chance = { base = 100 }
 	}
 }
 
@@ -1482,5 +1695,60 @@ gg_argentina.60 = {
 	option = {
 		name = gg_argentina.60.b
 		ai_chance = { base = 10 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.80 and .81 -- WHAT THE ORIENTAL WAR DID TO THE ARGENTINE MAP. Two endings for the
+#     provinces Rosas beat and kept as protectorates, decided not by anything he does in the interior
+#     but by how the war on the other bank finishes. It is the half of the tandem that did not exist:
+#     until 20/9/2026 the interior spoke to Montevideo through the size of the contingent, and
+#     Montevideo never answered.
+# ES: gg_argentina.80 y .81 -- LO QUE LA GUERRA ORIENTAL LE HIZO AL MAPA ARGENTINO. Dos desenlaces
+#     para las provincias que Rosas batio y conservo como protectorados, decididos no por nada que
+#     haga en el interior sino por como termina la guerra de la otra orilla. Es la mitad del tandem
+#     que no existia: hasta el 20/9/2026 el interior le hablaba a Montevideo por el tamanio del
+#     contingente, y Montevideo no contestaba nunca.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md, seccion 11.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.80 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.80.t
+	desc = gg_argentina.80.d
+	flavor = gg_argentina.80.f
+	event_image = { video = "gg_arg_cordoba" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+	}
+
+	option = {
+		name = gg_argentina.80.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+gg_argentina.81 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.81.t
+	desc = gg_argentina.81.d
+	flavor = gg_argentina.81.f
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+	}
+
+	option = {
+		name = gg_argentina.81.a
+		default_option = yes
+		ai_chance = { base = 100 }
 	}
 }

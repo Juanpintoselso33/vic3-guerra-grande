@@ -1,7 +1,7 @@
 ﻿namespace = gg_argentina_cal
 
 # -------------------------------------------------------------------------------------------------
-# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Nineteen relays carry the three preludes, the births
+# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Twenty relays carry the preludes, the births
 #     and the interior campaign to their delivery dates, counted in days from 1 January 1836.
 #
 #     WHY RELAYS AND NOT THE EVENTS THEMSELVES. A scheduled event's trigger is read WHEN IT IS
@@ -24,7 +24,7 @@
 #
 #     THE YEARS ARE 365 DAYS LONG, with no leap days -- the engine's years, not the calendar's. The
 #     offsets were computed by hand and checked one by one.
-# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Diecinueve relevos llevan las tres previas, los
+# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Veinte relevos llevan las previas, los
 #     nacimientos y la campania del interior a sus fechas de entrega, contadas desde el 1 de enero
 #     de 1836.
 #
@@ -129,7 +129,18 @@ gg_argentina_cal.2 = {
 					exists = s:STATE_TUCUMAN.region_state:ARG
 				}
 				set_global_variable = gg_arg_cal_done_2
-				c:ARG = { trigger_event = { id = gg_argentina.2 days = 0 popup = yes } }
+				if = {
+					# EN: Only three concessions erase the three pending northern claims.
+					# ES: Solo tres concesiones borran los tres reclamos pendientes del norte.
+					limit = {
+						has_global_variable = gg_norte_agravio
+						global_var:gg_norte_agravio = 0
+					}
+					c:ARG = { trigger_event = { id = gg_argentina.70 days = 0 popup = yes } }
+				}
+				else = {
+					c:ARG = { trigger_event = { id = gg_argentina.2 days = 0 popup = yes } }
+				}
 			}
 		}
 	}
@@ -179,7 +190,18 @@ gg_argentina_cal.4 = {
 					exists = s:STATE_ENTRE_RIOS.region_state:ARG
 				}
 				set_global_variable = gg_arg_cal_done_4
-				c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
+				if = {
+					# EN: Alcaraz and the 1850 orders must both have been conceded.
+					# ES: Tanto Alcaraz como las ordenes de 1850 tienen que haberse concedido.
+					limit = {
+						has_global_variable = gg_entre_rios_agravio
+						global_var:gg_entre_rios_agravio = 0
+					}
+					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
+				}
+				else = {
+					c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
+				}
 			}
 		}
 	}
@@ -477,8 +499,10 @@ gg_argentina_cal.17 = {
 	} }
 }
 
-# EN: 1/3/1840 (day 1519) -- scheduling date within the documented month. ES: fecha de agenda
-#     dentro del mes documentado.
+# EN: 1/3/1840 (day 1519) -- scheduling date within the documented month. The arms petition opens
+#     first and delivers the existing Lamadrid decision when answered.
+# ES: fecha de agenda dentro del mes documentado. Primero se abre el pliego de las armas y, al
+#     contestarlo, entrega la decision existente sobre Lamadrid.
 gg_argentina_cal.18 = {
 	type = country_event
 	hidden = yes
@@ -491,7 +515,7 @@ gg_argentina_cal.18 = {
 				exists = s:STATE_TUCUMAN.region_state:ARG
 			}
 			set_global_variable = gg_arg_cal_done_18
-			c:ARG = { trigger_event = { id = gg_argentina.66 days = 0 popup = yes } }
+			c:ARG = { trigger_event = { id = gg_argentina.68 days = 0 popup = yes } }
 		}
 	} }
 }
@@ -511,6 +535,29 @@ gg_argentina_cal.19 = {
 			}
 			set_global_variable = gg_arg_cal_done_19
 			c:ARG = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN: August 1846 -- the source gives the month, not the day. Day 3862 is a technical first-of-month
+#     delivery anchor and the event text claims no greater precision.
+# ES: agosto de 1846 -- la fuente da el mes, no el dia. El dia 3862 es un ancla tecnica de entrega
+#     al comienzo del mes y el texto del evento no pretende mayor precision.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1843-1847 — Corrientes sola,
+# y el Paraguay» [D].
+gg_argentina_cal.20 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_20 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_20
+			c:ARG = { trigger_event = { id = gg_argentina.69 days = 0 popup = yes } }
 		}
 	} }
 }

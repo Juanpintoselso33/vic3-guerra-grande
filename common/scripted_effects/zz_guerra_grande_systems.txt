@@ -345,6 +345,7 @@ gg_postwar_start = {
 		}
 		set_global_variable = gg_postwar_started
 		gg_wartime_modifiers_clear = yes
+		gg_argentina_vassals_settle = yes
 		gg_postwar_dispatch = yes
 	}
 }
@@ -958,6 +959,95 @@ gg_urquiza_flip = {
 
 # EN: T8, C16 -- the postwar goes to the government left standing (the victor's rule of gg_peace.5).
 # ES: T8, C16 -- la posguerra va al gobierno que quedo (la misma regla que gg_peace.5).
+# -------------------------------------------------------------------------------------------------
+# EN: WHAT BECOMES OF THE BEATEN PROVINCES WHEN THE GUERRA GRANDE ENDS. Rule asked for by Juan on
+#     20/9/2026: «cuando una provincia se levanta y apago el levantamiento, la provincia queda como
+#     vasalla para reflejar que no esta completamente controlada, y asi hasta la resolucion de la
+#     Guerra Grande; si Rosas gana, por ejemplo, anexo las vasallas».
+#     The first half of that was already true and by a different road: the war against a province is
+#     fought with dp_gg_pacto_federal, whose war goal is make_protectorate, because Rosas never
+#     annexed Corrientes or Tucuman -- he beat them and put a federal governor in. A protectorate is
+#     a country whose foreign relations another conducts, which is the delegation itself, so a beaten
+#     province counts as delegating again while it stays one. What was missing is the ending.
+#     AND THE OTHER HALF, which Juan did not ask for and is what gives the rule its edge: if the
+#     DEFENSA wins, the vassals go free. Until now losing at Montevideo cost Rosas nothing on his own
+#     map -- the interior spoke to Montevideo through the size of the contingent and Montevideo never
+#     answered. Now it answers: the provinces he beat become independent again, the charge is
+#     withdrawn a second time, and the Federal Pact falls with them.
+#     WHY BY TAG AND NOT BY ITERATING SUBJECTS: annexing inside an every_subject_or_below changes the
+#     list being walked. Three tags are three ifs.
+# ES: QUE PASA CON LAS PROVINCIAS BATIDAS CUANDO TERMINA LA GUERRA GRANDE. Regla pedida por Juan el
+#     20/9/2026: «cuando una provincia se levanta y apago el levantamiento, la provincia queda como
+#     vasalla para reflejar que no esta completamente controlada, y asi hasta la resolucion de la
+#     Guerra Grande; si Rosas gana, por ejemplo, anexo las vasallas».
+#     La primera mitad ya era cierta y por otro camino: la guerra contra una provincia se pelea con
+#     dp_gg_pacto_federal, cuyo war goal es make_protectorate, porque Rosas no anexo nunca a
+#     Corrientes ni a Tucuman: las batio y les puso un gobernador federal. Un protectorado es un pais
+#     cuyas relaciones exteriores lleva otro, que es la delegacion misma, asi que una provincia batida
+#     cuenta como que vuelve a delegar mientras lo sea. Lo que faltaba era el desenlace.
+#     Y LA OTRA MITAD, que Juan no pidio y es la que le da filo a la regla: si gana la DEFENSA, las
+#     vasallas se sueltan. Hasta ahora perder en Montevideo no le costaba nada a Rosas en su propio
+#     mapa -- el interior le hablaba a Montevideo por el tamanio del contingente y Montevideo no le
+#     contestaba nunca. Ahora contesta: las provincias que batio vuelven a ser independientes, el
+#     encargo se retira por segunda vez, y el Pacto Federal baja con ellas.
+#     POR QUE POR TAG Y NO ITERANDO SUJETOS: anexar adentro de un every_subject_or_below cambia la
+#     lista que se esta recorriendo. Tres tags son tres ifs.
+# -------------------------------------------------------------------------------------------------
+gg_argentina_vassals_settle = {
+	if = {
+		limit = {
+			exists = c:ARG
+			# EN/ES: el mismo idioma que usa gg_postwar_dispatch para leer quien gano / the same idiom
+			gg_cerrito_won_militarily = yes
+		}
+		c:ARG = {
+			if = {
+				limit = { exists = c:CRR  c:CRR = { is_subject_of = c:ARG } }
+				annex = c:CRR
+			}
+			if = {
+				limit = { exists = c:CLN  c:CLN = { is_subject_of = c:ARG } }
+				annex = c:CLN
+			}
+			if = {
+				limit = { exists = c:ENR  c:ENR = { is_subject_of = c:ARG } }
+				annex = c:ENR
+			}
+			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
+		}
+	}
+	else_if = {
+		limit = {
+			exists = c:ARG
+			gg_defensa_won_militarily = yes
+		}
+		# EN/ES: se sueltan, y el encargo se retira otra vez: una provincia independiente no delega
+		#     / they go free, and the charge is withdrawn again
+		c:CRR ?= {
+			if = {
+				limit = { is_subject_of = c:ARG }
+				make_independent = yes
+				gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
+			}
+		}
+		c:CLN ?= {
+			if = {
+				limit = { is_subject_of = c:ARG }
+				make_independent = yes
+				gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 POINTS = -12 }
+			}
+		}
+		c:ENR ?= {
+			if = {
+				limit = { is_subject_of = c:ARG }
+				make_independent = yes
+				gg_delegation_revoked = { KEY = entre_rios COUNT = -1 POINTS = -12 }
+			}
+		}
+		c:ARG ?= { trigger_event = { id = gg_argentina.81 days = 2 popup = yes } }
+	}
+}
+
 gg_postwar_dispatch = {
 	# EN: Codex review 2026-09-19 -- this used to send the Cerrito to gg_peace.8 whenever the blancos
 	#     were ahead on the score, even with the Defensa still alive. gg_peace.8 only changes the tag
@@ -1199,7 +1289,13 @@ gg_delegation_change = {
 # -------------------------------------------------------------------------------------------------
 gg_reclamo_abre = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_reclamo_$KEY$ } }
+		limit = {
+			NOT = { has_global_variable = gg_reclamo_$KEY$ }
+			# EN: A late answer to a five-year popup cannot reopen a claim for a province that has
+			#     already withdrawn its delegation. ES: Una respuesta tardia a un popup de cinco
+			#     anios no puede reabrir el reclamo de una provincia que ya retiro su delegacion.
+			NOT = { has_global_variable = gg_delegation_gone_$KEY$ }
+		}
 		set_global_variable = gg_reclamo_$KEY$
 		# EN/ES: y la cuenta que muestra el panel: un reclamo que no se ve no existe para el jugador
 		#     / and the count the panel shows: a claim nobody can see does not exist

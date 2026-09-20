@@ -376,6 +376,33 @@ gg_arg_lamadrid_retained = {
 	unit_defense_mult = 0.05
 }
 
+# EN: The northern accommodation has two distinct prices. Recognising the post-Heredia governments
+#     weakens Rosas's claim to order; leaving the Bolivian-war arms in provincial hands weakens the
+#     army available to Buenos Aires. Both modifier types are used by vanilla 1.13.
+# ES: El arreglo del norte tiene dos costos distintos. Reconocer a los gobiernos posteriores a
+#     Heredia debilita la pretension de orden de Rosas; dejar las armas de la guerra de Bolivia en
+#     manos provinciales debilita el ejercito disponible para Buenos Aires. Ambos tipos de
+#     modificador existen en vanilla 1.13.
+gg_arg_northern_recognition = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+}
+
+gg_arg_northern_arms_left = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = -0.05
+}
+
+# EN: Accepting Alcaraz acknowledges that a provincial commander may settle peace and constitutional
+#     terms which Buenos Aires historically tried to amend. The legitimacy key is vanilla 1.13.
+# ES: Aceptar Alcaraz reconoce que un jefe provincial puede acordar la paz y condiciones
+#     constitucionales que Buenos Aires historicamente intento modificar. La clave de legitimidad
+#     existe en vanilla 1.13.
+gg_arg_alcaraz_accepted = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+}
+
 # EN: The command against Brazil improves readiness but costs military stores; closing Entre Rios's
 #     trade costs revenue. ES: El mando contra Brasil mejora el alistamiento pero consume pertrechos;
 #     cerrar el trafico entrerriano cuesta renta.
