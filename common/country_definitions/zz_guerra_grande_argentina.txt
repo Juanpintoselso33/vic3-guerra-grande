@@ -1,0 +1,91 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE THREE COUNTRIES OF THE ARGENTINE SIDE. None of them exists at game start: events create
+#     them out of Argentine territory on their historical dates, the same way the mod creates the
+#     Cerrito out of Uruguay. Entre Rios on 1 May 1851 (the Pronunciamiento), Corrientes on 6 March
+#     1839 (it secedes and declares war), the Coalition of the North on 7 April 1840 (Tucuman
+#     pronounces). Tags verified free against vanilla, this mod and «la Argentina»: 831 three-letter
+#     tags exist between the three and none of them is ENR, CRR or CLN. COR is NOT free -- it is
+#     Corsica.
+# ES: LOS TRES PAISES DEL LADO ARGENTINO. Ninguno existe al empezar la partida: los crean eventos
+#     sobre territorio argentino en sus fechas historicas, igual que el mod crea al Cerrito sobre el
+#     Uruguay. Entre Rios el 1/5/1851 (el Pronunciamiento), Corrientes el 6/3/1839 (se separa y
+#     declara la guerra), la Coalicion del Norte el 7/4/1840 (se pronuncia Tucuman). Los tags estan
+#     verificados libres contra vanilla, este mod y «la Argentina»: hay 831 tags de tres letras entre
+#     los tres y ninguno es ENR, CRR ni CLN. COR NO esta libre: es Corcega.
+#
+#     is_named_from_capital se deja SIN escribir a proposito, porque su efecto por defecto es «no» y
+#     es lo que queremos: los tres tienen nombre propio localizado, no el de su estado capital. Poner
+#     yes haria que Entre Rios se llamara «Parana», que es justo el error que el mod ya tuvo que
+#     corregirle a URU.
+# -------------------------------------------------------------------------------------------------
+
+# EN: ENTRE RIOS -- Urquiza's province. Capital Parana.
+# ES: ENTRE RIOS -- la provincia de Urquiza. Capital, Parana.
+ENR = {
+	# EN: the blue of the Echague tricolour of 28 December 1833, the flag Urquiza carried to Caseros.
+	#     Deliberately dark: the law banned celeste as the unitarian colour, so a dark blue is the
+	#     political statement of that government and it also tells Entre Rios from the Coalition's
+	#     light blue on the map.
+	# ES: el azul de la tricolor de Echague del 28/12/1833, la bandera que Urquiza llevo a Caseros.
+	#     Oscuro a proposito: la ley prohibia el celeste por unitario, asi que el azul intenso es la
+	#     declaracion politica de ese gobierno, y de paso distingue a Entre Rios del celeste de la
+	#     Coalicion en el mapa.
+	color = { 26 42 120 }
+
+	country_type = recognized
+
+	tier = principality
+
+	religion = catholic
+
+	cultures = { platinean }
+
+	capital = STATE_ENTRE_RIOS
+}
+
+# EN: CORRIENTES -- the province that seceded alone in 1839. It takes Misiones with it: Corrientes
+#     had occupied it since 1830 and claimed the whole territory on 1 September 1832.
+# ES: CORRIENTES -- la provincia que se separo sola en 1839. Se lleva Misiones: Corrientes la ocupaba
+#     desde 1830 y reivindico el territorio entero el 1/9/1832.
+CRR = {
+	# EN: the celeste of the bandera del Pico, the provincial flag of the 1821 law -- the one the
+	#     Republican Guard flew at Caa Guazu in 1841, still preserved.
+	# ES: el celeste de la bandera del Pico, la provincial de la ley de 1821, la que la Guardia
+	#     Republicana enarbolo en Caa Guazu en 1841 y todavia se conserva.
+	color = { 108 160 217 }
+
+	country_type = recognized
+
+	tier = principality
+
+	religion = catholic
+
+	cultures = { platinean }
+
+	capital = STATE_CORRIENTES
+}
+
+# EN: THE COALITION OF THE NORTH -- not a province: a league of six of them, with a director who held
+#     war, peace and loans. That is what makes it a country here and not a front.
+# ES: LA COALICION DEL NORTE -- no es una provincia: es una liga de seis, con un director que tenia
+#     la guerra, la paz y los emprestitos. Eso es lo que la hace un pais aca y no un frente.
+CLN = {
+	# EN: the light blue the unitarians flew, against the dark blue Rosas had imposed on the national
+	#     flag. They kept no symbol of their own: raising the celeste WAS the pronouncement.
+	# ES: el celeste que izaban los unitarios, contra el azul oscuro que Rosas le habia puesto a la
+	#     bandera nacional. No tenian simbolo propio: izar el celeste ERA el pronunciamiento.
+	color = { 117 170 224 }
+
+	country_type = recognized
+
+	tier = principality
+
+	religion = catholic
+
+	cultures = { platinean }
+
+	# EN/ES: Tucuman pronounced first and hosted the congress that named Brizuela; and its
+	#     capital.region is region_la_plata, where the rest of the bloc is. Salta and Jujuy are in
+	#     region_andes, so anything done by strategic region would skip them.
+	capital = STATE_TUCUMAN
+}
