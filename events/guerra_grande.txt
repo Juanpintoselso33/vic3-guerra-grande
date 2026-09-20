@@ -275,9 +275,31 @@ guerra_grande.3 = {
 
 	duration = 1825
 
+	# EN: AND THE ARMY HAS TO HAVE CROSSED. Codex's playthrough review, 20 September 2026, caught the
+	#     hole at the centre of the tandem: the mod had an ending for "the war that never became one"
+	#     and no way to reach it, because the partition was scheduled at Arroyo Grande and never
+	#     asked what had become of Oribe's army. So a Rosas who lost the whole interior still saw
+	#     Uruguay split in two and a Cerrito government appear out of an army that was not there.
+	#     There is no Cerrito without the Ejercito Unido de Vanguardia. Oribe did not raise the
+	#     countryside on his own: he arrived at the head of Rosas' army in February 1843, and the
+	#     government of the Cerrito is that army encamped. A 3 means it never came.
+	#     Zero, the value in every game without the Argentine side, passes: nothing changes for
+	#     anyone not running «la Argentina».
+	# ES: Y EL EJERCITO TIENE QUE HABER CRUZADO. La revision de Codex del 20/9/2026 agarro el agujero
+	#     del centro del tandem: el mod tenia un final para "la guerra que no llego a serlo" y ninguna
+	#     forma de llegar a el, porque la particion se agendaba en Arroyo Grande y no preguntaba nunca
+	#     que habia sido del ejercito de Oribe. Asi que un Rosas que perdia el interior entero veia
+	#     igual partirse al Uruguay y aparecer un gobierno del Cerrito salido de un ejercito que no
+	#     estaba.
+	#     No hay Cerrito sin el Ejercito Unido de Vanguardia. Oribe no levanto la campania solo: llego
+	#     al frente del ejercito de Rosas en febrero de 1843, y el gobierno del Cerrito es ese
+	#     ejercito acampado. Un 3 quiere decir que no llego nunca.
+	#     El cero, que es el valor en toda partida sin el lado argentino, pasa: no cambia nada para
+	#     quien no juega con «la Argentina».
 	trigger = {
 		c:URU ?= this
 		NOT = { exists = c:CER }
+		NOT = { global_var:gg_vanguardia_status = 3 }
 		exists = s:STATE_BANDA_ORIENTAL.region_state:URU
 		any_scope_state = {
 			state_region = s:STATE_MONTEVIDEO

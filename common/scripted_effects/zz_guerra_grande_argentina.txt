@@ -256,6 +256,21 @@ gg_argentina_create_entre_rios = {
 		scope:gg_urquiza = {
 			transfer_character = c:ENR
 			set_character_as_ruler = yes
+			# EN: and the command, which he does not have. Vanilla's Urquiza is an interest-group
+			#     leader and a magnate, not a general (common/character_templates/country_arg.txt).
+			#     An Entre Rios whose ruler cannot take the field cannot fight the war it just
+			#     declared, and in a year this man has to win Caseros.
+			#     This line was written once and silently lost: the edit that added it matched no
+			#     text, because the army block had already changed what was around it. It is here
+			#     now, and the review that caught it is in docs/guerra-grande-argentina/.
+			# ES: y el mando, que no tiene. El Urquiza de vanilla es lider de grupo de interes y
+			#     magnate, no general. Un Entre Rios cuyo gobernante no puede salir a campania no
+			#     puede pelear la guerra que acaba de declarar, y en un anio este hombre tiene que
+			#     ganar Caseros.
+			#     Esta linea se escribio una vez y se perdio en silencio: la edicion que la agregaba
+			#     no encontro el texto, porque el bloque del ejercito ya habia cambiado lo de
+			#     alrededor. Aca esta ahora.
+			add_commander_rank = 2
 		}
 	}
 	else = {
