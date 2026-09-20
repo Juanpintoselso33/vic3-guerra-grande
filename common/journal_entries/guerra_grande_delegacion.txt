@@ -58,16 +58,166 @@ je_gg_delegation = {
 
 	# EN/ES: el mismo numero, dicho desde donde esta parado el que mira / the same number, told from
 	#     where the reader is standing
+	# EN: THE LIST, WRITTEN OUT, because the clever way did not work. The first version asked each
+	#     province with SelectLocalization + GetGlobalVariable().IsValid -- a function vanilla uses 841
+	#     times -- and in Juan's game on 20/9/2026 the whole list rendered as nothing: the panel showed
+	#     one province name and the tail. So the list is now sixteen plain descriptions, one per
+	#     combination of the four things that can move (Corrientes, Cordoba, the five of the north, and
+	#     Entre Rios), each with the marks already written into the text. Nothing is computed at draw
+	#     time and nothing can fail at draw time. The five that never secede are always ticked.
+	# ES: LA LISTA, ESCRITA A MANO, porque la forma inteligente no anduvo. La primera version le
+	#     preguntaba a cada provincia con SelectLocalization + GetGlobalVariable().IsValid --una funcion
+	#     que vanilla usa 841 veces-- y en la partida de Juan del 20/9/2026 la lista entera no renderizo
+	#     nada: el panel mostraba un nombre de provincia y la cola. Asi que la lista son ahora dieciseis
+	#     descripciones planas, una por combinacion de las cuatro cosas que se pueden mover (Corrientes,
+	#     Cordoba, las cinco del norte y Entre Rios), cada una con las marcas ya escritas en el texto.
+	#     No se calcula nada al dibujar y no puede fallar nada al dibujar. Las cinco que no se separan
+	#     nunca van siempre tildadas.
 	status_desc = {
 		first_valid = {
 			triggered_desc = {
-				desc = je_gg_delegation_status_rosas
-				# EN/ES: la marca de rol, no el tag: this no es comparable aca / the role mark
-				trigger = { has_variable = gg_arg_rosas_seat }
+				desc = je_gg_del_l_corrientes_cordoba_norte_entre_rios
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					has_global_variable = gg_delegation_gone_cordoba
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
 			}
 			triggered_desc = {
-				desc = je_gg_delegation_status_provincia
-				trigger = { always = yes }
+				desc = je_gg_del_l_corrientes_cordoba_norte
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					has_global_variable = gg_delegation_gone_cordoba
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes_cordoba_entre_rios
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					has_global_variable = gg_delegation_gone_cordoba
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes_norte_entre_rios
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_cordoba_norte_entre_rios
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					has_global_variable = gg_delegation_gone_cordoba
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes_cordoba
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					has_global_variable = gg_delegation_gone_cordoba
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes_norte
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes_entre_rios
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_cordoba_norte
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					has_global_variable = gg_delegation_gone_cordoba
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_cordoba_entre_rios
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					has_global_variable = gg_delegation_gone_cordoba
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_norte_entre_rios
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_corrientes
+				trigger = {
+					has_global_variable = gg_delegation_gone_corrientes
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_cordoba
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					has_global_variable = gg_delegation_gone_cordoba
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_norte
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_entre_rios
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					has_global_variable = gg_delegation_gone_entre_rios
+				}
+			}
+			triggered_desc = {
+				desc = je_gg_del_l_todas
+				trigger = {
+					NOT = { has_global_variable = gg_delegation_gone_corrientes }
+					NOT = { has_global_variable = gg_delegation_gone_cordoba }
+					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
+					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				}
 			}
 		}
 	}
@@ -100,7 +250,7 @@ je_gg_delegation = {
 					#     que es -- cuanto hace que Oribe esta parado frente a Montevideo -- y el journal lo
 					#     imprime en una linea propia.
 					change_global_variable = {
-						name = gg_siege_months
+						name = gg_oribe_siege_months
 						add = 1
 					}
 			}

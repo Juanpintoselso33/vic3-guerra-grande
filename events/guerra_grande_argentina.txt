@@ -381,6 +381,9 @@ gg_argentina.61 = {
 
 	option = {
 		name = gg_argentina.61.a
+		# EN/ES: el pliego queda sin contestar y el reclamo queda abierto en la cuenta del pacto
+		#     / the petition goes unanswered and the claim stays open on the pact
+		gg_reclamo_abre = { KEY = corrientes }
 		default_option = yes
 		change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
@@ -388,6 +391,7 @@ gg_argentina.61 = {
 	}
 	option = {
 		name = gg_argentina.61.b
+		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
 		add_treasury = -25000
 		add_modifier = { name = gg_arg_open_rivers_cost years = 20 }
@@ -424,6 +428,7 @@ gg_argentina.62 = {
 
 	option = {
 		name = gg_argentina.62.a
+		gg_reclamo_abre = { KEY = corrientes }
 		default_option = yes
 		change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
@@ -431,6 +436,7 @@ gg_argentina.62 = {
 	}
 	option = {
 		name = gg_argentina.62.b
+		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
 		add_treasury = -25000
 		add_modifier = { name = gg_arg_customs_shared years = 20 }
@@ -460,6 +466,9 @@ gg_argentina.63 = {
 
 	option = {
 		name = gg_argentina.63.a
+		# EN/ES: el rio cerrado es la razon que Corrientes va a invocar al separarse: el reclamo se abre
+		#     / the closed river is the reason Corrientes will invoke: the claim opens
+		gg_reclamo_abre = { KEY = corrientes }
 		default_option = yes
 		s:STATE_CORRIENTES.region_state:ARG ?= {
 			add_modifier = { name = gg_arg_corrientes_blockaded months = 18 }
@@ -468,6 +477,7 @@ gg_argentina.63 = {
 	}
 	option = {
 		name = gg_argentina.63.b
+		gg_reclamo_cierra = { KEY = corrientes }
 		add_treasury = -20000
 		ai_chance = { base = 30 }
 	}
@@ -494,6 +504,7 @@ gg_argentina.64 = {
 
 	option = {
 		name = gg_argentina.64.a
+		gg_reclamo_cierra = { KEY = corrientes }
 		default_option = yes
 		ai_chance = { base = 100 }
 	}
@@ -528,6 +539,13 @@ gg_argentina.65 = {
 
 	option = {
 		name = gg_argentina.65.a
+		# EN/ES: el norte entero pasa a otras manos: cinco provincias que siguen delegando y ya no
+		#     responden como antes / the whole north changes hands: five provinces with a claim
+		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		gg_reclamo_abre = { KEY = coalicion_salta }
+		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		gg_reclamo_abre = { KEY = coalicion_la_rioja }
 		default_option = yes
 		ai_chance = { base = 100 }
 	}
@@ -556,12 +574,20 @@ gg_argentina.66 = {
 
 	option = {
 		name = gg_argentina.66.a
+		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
+		#     / the claim over the weapons lands in Tucuman, which is where they are
+		gg_reclamo_abre = { KEY = coalicion_tucuman }
 		default_option = yes
+		# EN/ES: la marca decide despues si Lamadrid se pasa a los sublevados, asi que se dice
+		#     / the mark decides later whether Lamadrid goes over, so it is said
+		custom_tooltip = gg_lamadrid_sent_tt
 		set_global_variable = gg_lamadrid_sent
 		ai_chance = { base = 80 }
 	}
 	option = {
 		name = gg_argentina.66.b
+		# EN/ES: no se les reclama nada, y el norte queda como estaba / nothing is demanded
+		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		add_modifier = { name = gg_arg_lamadrid_retained years = 2 }
 		ai_chance = { base = 20 }
 	}
@@ -592,6 +618,9 @@ gg_argentina.67 = {
 
 	option = {
 		name = gg_argentina.67.a
+		# EN/ES: dos ordenes que no caben juntas dejan a Entre Rios con un reclamo abierto
+		#     / two orders that do not fit together leave Entre Rios with a claim open
+		gg_reclamo_abre = { KEY = entre_rios }
 		default_option = yes
 		custom_tooltip = gg_urquiza_double_order_tt
 		set_global_variable = gg_urquiza_double_order
@@ -601,6 +630,7 @@ gg_argentina.67 = {
 	}
 	option = {
 		name = gg_argentina.67.b
+		gg_reclamo_cierra = { KEY = entre_rios }
 		add_treasury = -25000
 		ai_chance = { base = 15 }
 	}

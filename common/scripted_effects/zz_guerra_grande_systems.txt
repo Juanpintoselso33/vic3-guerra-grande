@@ -109,45 +109,29 @@ gg_systems_init = {
 	# EN/ES: cuantas provincias se alzaron alguna vez. No baja nunca: es la memoria de la campania,
 	#     no su foto / how many provinces ever rose. It never goes down: it is the campaign's memory
 	set_global_variable = { name = gg_provincias_alzadas value = 0 }
-	# EN/ES: los meses que el ejercito lleva frente a Montevideo / months before Montevideo
-	set_global_variable = { name = gg_siege_months value = 0 }
-	# EN: AND ONE MARK PER PROVINCE, because a bar was not readable. Juan, 20/9/2026: «revisa bien todo
-	#     el journal de delegation pq no se entiende un carajo, podriamos en vez de tener una barra de
-	#     progreso, listar las provincias y ponerles un booleano a cada una».
-	#     He is right about why it was unreadable: the bar mixed two different things in one number --
-	#     how many provinces had withdrawn the charge (in jumps of twelve) and the monthly wear of the
-	#     siege (one a month) -- so it fell while nothing had happened on the map, and nothing on the
-	#     map told you what it meant.
-	#     Thirteen marks, one per province that delegates. The mark EXISTS while the province still
-	#     speaks through Buenos Aires and is removed when it stops. Marks and not numbers on purpose:
-	#     the journal's text asks each one with .IsValid, which is the one form vanilla's own
-	#     localisation demonstrably uses, and setting them all here means every one of the thirteen is
-	#     a variable that has existed since the first day.
-	# ES: Y UNA MARCA POR PROVINCIA, porque una barra no se leia. Juan, 20/9/2026: «revisa bien todo el
-	#     journal de delegation pq no se entiende un carajo, podriamos en vez de tener una barra de
-	#     progreso, listar las provincias y ponerles un booleano a cada una».
-	#     Tiene razon en por que no se leia: la barra mezclaba dos cosas distintas en un solo numero --
-	#     cuantas provincias habian retirado el encargo (a saltos de doce) y el desgaste mensual del
-	#     sitio (uno por mes) -- asi que bajaba sin que hubiera pasado nada en el mapa, y nada en el
-	#     mapa te decia que significaba.
-	#     Trece marcas, una por provincia que delega. La marca EXISTE mientras la provincia siga
-	#     hablando por Buenos Aires y se borra cuando deja de hacerlo. Marcas y no numeros a proposito:
-	#     el texto del journal le pregunta a cada una con .IsValid, que es la unica forma que la
-	#     localizacion de la propia vanilla usa de manera comprobable, y ponerlas todas aca significa
-	#     que las trece son variables que existen desde el primer dia.
-	set_global_variable = gg_del_corrientes
-	set_global_variable = gg_del_entre_rios
-	set_global_variable = gg_del_cordoba
-	set_global_variable = gg_del_coalicion_tucuman
-	set_global_variable = gg_del_coalicion_salta
-	set_global_variable = gg_del_coalicion_jujuy
-	set_global_variable = gg_del_coalicion_catamarca
-	set_global_variable = gg_del_coalicion_la_rioja
-	set_global_variable = gg_del_santa_fe
-	set_global_variable = gg_del_santiago_del_estero
-	set_global_variable = gg_del_san_juan
-	set_global_variable = gg_del_san_luis
-	set_global_variable = gg_del_mendoza
+	# EN: THE MONTHS THE ARMY HAS SPENT IN FRONT OF MONTEVIDEO, and it is NOT gg_siege_months. That
+	#     name was already taken by the oriental side -- it counts months of closed sea for the war
+	#     bar -- and for a few minutes on 20/9/2026 this journal was adding to it every month, which
+	#     would have moved the Uruguayan war's arbiter with an Argentine number. Caught by a duplicate
+	#     initialisation two hundred lines apart.
+	# ES: LOS MESES QUE EL EJERCITO LLEVA FRENTE A MONTEVIDEO, y NO es gg_siege_months. Ese nombre ya
+	#     estaba tomado por el lado oriental --cuenta meses de mar cerrado para la barra de la guerra--
+	#     y durante unos minutos del 20/9/2026 este journal le estuvo sumando todos los meses, lo que
+	#     habria movido el arbitro de la guerra oriental con un numero argentino. Lo delato una
+	#     inicializacion duplicada a doscientas lineas de distancia.
+	set_global_variable = { name = gg_oribe_siege_months value = 0 }
+	# EN/ES: cuantas provincias delegan con un pliego sin contestar / provinces with a claim open
+	set_global_variable = { name = gg_reclamos_abiertos value = 0 }
+	# EN: THERE ARE NO PER-PROVINCE MARKS ANY MORE, and the reason is worth keeping. They were added
+	#     this same day so the panel could ask each province with SelectLocalization; that did not
+	#     render in Juan's game, so the list became sixteen plain descriptions chosen by script, and
+	#     those read gg_delegation_gone_* -- which already existed. Thirteen marks nobody read were
+	#     left over, and the inventory said so.
+	# ES: YA NO HAY MARCAS POR PROVINCIA, y vale la pena dejar dicho por que. Se agregaron ese mismo
+	#     dia para que el panel le preguntara a cada provincia con SelectLocalization; eso no renderizo
+	#     en la partida de Juan, asi que la lista paso a ser dieciseis descripciones planas elegidas
+	#     por script, y esas leen gg_delegation_gone_*, que ya existia. Quedaron trece marcas que no
+	#     leia nadie, y el inventario lo dijo.
 	# EN: THE THREE FEDERAL GOVERNORS WHO STAY WITH ROSAS, created on day one because that is when
 	#     they were already governing. Vanilla has none of them, and without them the interior is a
 	#     map with no one on it: Ibarra is the man who refuses to join the Coalition and cuts the
@@ -1185,13 +1169,64 @@ gg_delegation_change = {
 }
 
 # EN/ES: a named province (or bloc) stops delegating, once and once only. COUNT y POINTS negativos.
+# -------------------------------------------------------------------------------------------------
+# EN: A CLAIM OPENED, AND A CLAIM ANSWERED. Written 20/9/2026, and the reason is Juan's, playing:
+#     «los eventos de la previa son todos para corrientes! y no estan conectadas a la mecanica del
+#     journal no entiendo que estas haciendo».
+#     He was right twice. Of the seven build-up events, four were Corrientes' -- and not one of the
+#     seven touched the Federal Pact at all. So the player spent three years answering petitions,
+#     refusing demands and sending generals, and the panel that is supposed to be the state of the
+#     Confederation did not move once until a province seceded in 1839. Decisions that leave no trace
+#     on the only thing that shows the state of the thing they are about are not decisions.
+#     A province now has three states, not two: it delegates, it delegates WITH A CLAIM OPEN against
+#     Buenos Aires, or it has withdrawn the charge. Every build-up event opens or answers a claim, so
+#     the panel is alive from 1836 and the player can watch the grievances pile up before anything
+#     breaks. Withdrawing the charge closes the claim, because a province that has left has stopped
+#     asking.
+# ES: UN RECLAMO ABIERTO, Y UN RECLAMO CONTESTADO. Escrito el 20/9/2026, y la razon es de Juan,
+#     jugando: «los eventos de la previa son todos para corrientes! y no estan conectadas a la
+#     mecanica del journal no entiendo que estas haciendo».
+#     Tenia razon dos veces. De los siete eventos de la previa, cuatro eran de Corrientes -- y
+#     ninguno de los siete tocaba el Pacto Federal. Asi que el jugador se pasaba tres anios
+#     contestando pliegos, negando reclamos y mandando generales, y el panel que representa el estado
+#     de la Confederacion no se movia una sola vez hasta que una provincia se separaba en 1839. Las
+#     decisiones que no dejan rastro en lo unico que muestra el estado de aquello de lo que tratan no
+#     son decisiones.
+#     Una provincia tiene ahora tres estados y no dos: delega, delega CON UN RECLAMO ABIERTO contra
+#     Buenos Aires, o retiro el encargo. Cada evento de la previa abre o contesta un reclamo, asi que
+#     el panel esta vivo desde 1836 y el jugador ve acumularse los agravios antes de que se rompa
+#     nada. Retirar el encargo cierra el reclamo, porque una provincia que se fue dejo de pedir.
+# -------------------------------------------------------------------------------------------------
+gg_reclamo_abre = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_reclamo_$KEY$ } }
+		set_global_variable = gg_reclamo_$KEY$
+		# EN/ES: y la cuenta que muestra el panel: un reclamo que no se ve no existe para el jugador
+		#     / and the count the panel shows: a claim nobody can see does not exist
+		change_global_variable = {
+			name = gg_reclamos_abiertos
+			add = 1
+		}
+	}
+}
+
+gg_reclamo_cierra = {
+	if = {
+		limit = { has_global_variable = gg_reclamo_$KEY$ }
+		remove_global_variable = gg_reclamo_$KEY$
+		change_global_variable = {
+			name = gg_reclamos_abiertos
+			add = -1
+		}
+	}
+}
+
 gg_delegation_revoked = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_delegation_gone_$KEY$ } }
 		set_global_variable = gg_delegation_gone_$KEY$
-		# EN/ES: y la marca de la lista se apaga: la provincia deja de hablar por Buenos Aires
-		#     / and the list's mark goes out: the province stops speaking through Buenos Aires
-		remove_global_variable = gg_del_$KEY$
+		# EN/ES: y el reclamo se cierra: la que se fue dejo de pedir / a province that left stopped asking
+		gg_reclamo_cierra = { KEY = $KEY$ }
 		change_global_variable = {
 			name = gg_delegating_provinces
 			add = $COUNT$
@@ -1235,8 +1270,6 @@ gg_delegation_restored = {
 	if = {
 		limit = { has_global_variable = gg_delegation_gone_$KEY$ }
 		remove_global_variable = gg_delegation_gone_$KEY$
-		# EN/ES: y vuelve a la lista / and it returns to the list
-		set_global_variable = gg_del_$KEY$
 		change_global_variable = {
 			name = gg_delegating_provinces
 			add = $COUNT$
