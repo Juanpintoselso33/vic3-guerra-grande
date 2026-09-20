@@ -78,6 +78,46 @@ je_gg_delegation = {
 					gg_delegation_change = { DELTA = -1 }
 				}
 			}
+			# EN: AND THE OTHER DIRECTION, which until now was dead code. gg_delegation_restored
+			#     existed and nobody called it, so a province won back by arms stayed counted as lost
+			#     for ever -- the exact opposite of what a REVOCABLE delegation means. Pago Largo,
+			#     Quebracho Herrado, Famailla and Vences all end with a province back under Buenos
+			#     Aires, and the bar has to say so.
+			#     The test is simply that the country is gone: it was annexed, and its legislature
+			#     delegates again because it no longer has one.
+			# ES: Y LA OTRA DIRECCION, que hasta ahora era codigo muerto. gg_delegation_restored
+			#     existia y nadie lo llamaba, asi que una provincia recuperada por las armas quedaba
+			#     contada como perdida para siempre: lo contrario exacto de lo que significa una
+			#     delegacion REVOCABLE. Pago Largo, Quebracho Herrado, Famailla y Vences terminan con
+			#     una provincia de vuelta bajo Buenos Aires, y la barra tiene que decirlo.
+			#     La prueba es que el pais ya no esta: lo anexaron, y su legislatura vuelve a delegar
+			#     porque ya no tiene legislatura.
+			if = {
+				limit = {
+					c:ARG ?= this
+					NOT = { exists = c:CRR }
+				}
+				gg_delegation_restored = { KEY = corrientes COUNT = 1 POINTS = 12 }
+			}
+			if = {
+				limit = {
+					c:ARG ?= this
+					NOT = { exists = c:CLN }
+				}
+				gg_delegation_restored = { KEY = coalicion_tucuman COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = coalicion_salta COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = coalicion_jujuy COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = coalicion_catamarca COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = coalicion_la_rioja COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = cordoba COUNT = 1 POINTS = 12 }
+			}
+			if = {
+				limit = {
+					c:ARG ?= this
+					NOT = { exists = c:ENR }
+				}
+				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
+			}
 			else = {
 				# EN/ES: sin sitio no hay costo, pero la barra igual se redibuja: es la reparacion de
 				#     las partidas guardadas antes de que existiera / no siege, no cost, but the bar
@@ -117,6 +157,24 @@ je_gg_delegation = {
 		custom_tooltip = {
 			text = je_gg_delegation_complete_tt
 			global_var:gg_delegation_points <= 0
+		}
+	}
+
+	# EN: AND AN ENDING, because until now the entry simply vanished: no Rosas falling, no Caseros, no
+	#     war ending. A journal that completes and says nothing is a journal that taught the player a
+	#     mechanic for fifteen years and then shrugged.
+	# ES: Y UN DESENLACE, porque hasta ahora la entrada sencillamente desaparecia: ni caia Rosas, ni
+	#     se abria Caseros, ni terminaba ninguna guerra. Un journal que cumple y no dice nada es un
+	#     journal que le enseno una mecanica al jugador durante quince anios y despues se encogio de
+	#     hombros.
+	on_complete_all_involved = {
+		if = {
+			limit = {
+				c:ARG ?= this
+				NOT = { has_global_variable = gg_rosas_fell }
+			}
+			set_global_variable = gg_rosas_fell
+			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
 		}
 	}
 

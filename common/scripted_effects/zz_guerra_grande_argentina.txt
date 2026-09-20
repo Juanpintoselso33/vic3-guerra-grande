@@ -57,6 +57,29 @@ gg_argentina_create_corrientes = {
 	}
 	# EN/ES: y la delegacion: una provincia menos / and the delegation: one province fewer
 	gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
+	# EN: the army that came apart at Pago Largo twenty-five days later. Modest on purpose: it was a
+	#     provincial army with no allies, and the sources are blunt about the result.
+	#     hq_region = capital.region, not a named strategic region: the mod already lost Brown's whole
+	#     squadron to a hardcoded region that contained none of the country's states.
+	# ES: el ejercito que se deshizo en Pago Largo veinticinco dias despues. Modesto a proposito: era
+	#     un ejercito provincial sin aliados, y las fuentes son tajantes sobre el resultado.
+	#     hq_region = capital.region, no una region estrategica con nombre: el mod ya perdio la
+	#     escuadra de Brown entera por una region cableada que no tenia ningun estado del pais.
+	c:CRR ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_ejercito_correntino
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				count = 3
+			}
+		}
+	}
 	# EN/ES: Ferre no es el gobernante: es el hombre del programa fluvial, y su programa es la razon
 	#     de la guerra / Ferre is not the ruler: he is the man of the river programme
 	if = {
@@ -142,6 +165,31 @@ gg_argentina_create_coalicion = {
 		limit = { exists = s:STATE_LA_RIOJA.region_state:CLN }
 		gg_delegation_revoked = { KEY = coalicion_la_rioja COUNT = -1 POINTS = -12 }
 	}
+	# EN/ES: Brizuela tenia en La Rioja "el Ejercito mas numeroso y mejor armado de la Coalicion" y la
+	#     oficialidad mas destacada; por eso lo hicieron Director / the largest and best armed army
+	c:CLN ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_ejercito_coalicion
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				count = 3
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 1
+			}
+		}
+	}
 	# EN/ES: Lamadrid existe en vanilla y se paso a sus filas / Lamadrid exists in vanilla
 	if = {
 		limit = { exists = scope:gg_lamadrid }
@@ -168,6 +216,37 @@ gg_argentina_create_entre_rios = {
 	# EN/ES: la que Rosas ofrecia todos los anios y esta vez le aceptaron / the one Rosas offered
 	#     every year and this time they took
 	gg_delegation_revoked = { KEY = entre_rios COUNT = -1 POINTS = -12 }
+	# EN: the best army in the Confederation, and in a year it will be the Ejercito Grande that wins
+	#     Caseros. Urquiza is NOT a general in vanilla -- he is an interest-group leader and a magnate
+	#     -- so he is given a commander rank here: an Entre Rios whose ruler cannot take the field is
+	#     an Entre Rios that cannot fight the war it just declared.
+	# ES: el mejor ejercito de la Confederacion, y en un anio sera el Ejercito Grande que gana
+	#     Caseros. Urquiza en vanilla NO es general -- es lider de grupo de interes y magnate --, asi
+	#     que aca se le da rango de mando: un Entre Rios cuyo gobernante no puede salir a campania es
+	#     un Entre Rios que no puede pelear la guerra que acaba de declarar.
+	c:ENR ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_ejercito_entrerriano
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 4
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				count = 4
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 2
+			}
+		}
+	}
 	# EN: the ORIGINAL Urquiza moves. Leaving the clone would give the game two of him, and every
 	#     event that looks him up by template would find whichever one it found first.
 	# ES: se muda el Urquiza ORIGINAL. Dejar el clon daria dos Urquizas, y cada evento que lo busca

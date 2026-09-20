@@ -480,3 +480,56 @@ gg_argentina.20 = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.30 -- NOBODY DELEGATES ANY MORE. The delegation bar reached zero: no legislature
+#     still lets the governor of Buenos Aires speak for it. That is not a defeat in the field and it
+#     does not need one: Rosas' entire authority over the Confederation WAS the delegation, and a
+#     delegate with nobody to represent is a governor of one province.
+#     It writes the mark the Uruguayan side can read, and it lifts the twenty-year lock the mod used
+#     to put on Argentina so that Rosas would reach Caseros. That lock was provisional, it said so in
+#     its own header, and this is what it was waiting for: whether Rosas gets there is now played.
+# ES: gg_argentina.30 -- YA NADIE DELEGA. La barra de la delegacion llego a cero: ninguna legislatura
+#     deja que el gobernador de Buenos Aires hable por ella. No es una derrota en el campo y no la
+#     necesita: toda la autoridad de Rosas sobre la Confederacion ERA la delegacion, y un delegado
+#     sin a quien representar es un gobernador de una provincia.
+#     Escribe la marca que el lado oriental puede leer, y levanta el candado de veinte anios que el
+#     mod le ponia a la Argentina para que Rosas llegara a Caseros. Ese candado era provisorio, lo
+#     decia su propio encabezado, y esto es lo que estaba esperando: que Rosas llegue o no ahora se
+#     juega.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.30 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.30.t
+	desc = gg_argentina.30.d
+	flavor = gg_argentina.30.f
+
+	event_image = { video = "gg_arg_pronunciamiento" }
+
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN/ES: el candado provisorio se va: era para que Rosas llegara a Caseros, y ya no hay a
+			#     que llegar / the provisional lock goes: it was to get Rosas to Caseros
+			if = {
+				limit = { has_modifier = gg_rosas_provisional_lock }
+				remove_modifier = gg_rosas_provisional_lock
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.30.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
