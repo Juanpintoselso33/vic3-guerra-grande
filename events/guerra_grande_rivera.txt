@@ -320,6 +320,12 @@ gg_rivera.2 = {
 		hidden_effect = {
 			set_global_variable = gg_rivera_india_muerta_settled
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_7 } }
+				set_global_variable = gg_cal_done_7
+			}
+		}
 	}
 
 	# EN: The historical answer. Destitution from every military command, the army to Anacleto
@@ -1075,6 +1081,12 @@ gg_rivera.8 = {
 		hidden_effect = {
 			set_global_variable = gg_mitre_settled
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_34 } }
+				set_global_variable = gg_cal_done_34
+			}
+		}
 	}
 
 	# EN: Historical departure on 12 November 1846. ES: Partida historica del 12 de noviembre de 1846.
@@ -1108,18 +1120,25 @@ gg_rivera.8 = {
 			}
 			add_commander_rank = 1
 		}
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_mitre_baterias_defensa
-			save_scope_as = gg_mitre_defensa_formation
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_mitre_defensa_formation
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_mitre_baterias_defensa
+				save_scope_as = gg_mitre_defensa_formation
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
 			}
+			scope:gg_mitre = { transfer_to_formation = scope:gg_mitre_defensa_formation }
 		}
-		scope:gg_mitre = { transfer_to_formation = scope:gg_mitre_defensa_formation }
 		ai_chance = {
 			base = 20
 		}
@@ -1147,17 +1166,24 @@ gg_rivera.8 = {
 				}
 				add_commander_rank = 1
 			}
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				name = gg_mitre_artilleria_corrientes
-				save_scope_as = gg_mitre_corrientes_formation
-				combat_unit = {
-					type = unit_type:combat_unit_type_cannon_artillery
-					count = 1
+			gg_select_formation_hq_state = yes
+			clear_saved_scope = gg_mitre_corrientes_formation
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_mitre_artilleria_corrientes
+					save_scope_as = gg_mitre_corrientes_formation
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						count = 1
+					}
 				}
+				scope:gg_mitre_corrientes = { transfer_to_formation = scope:gg_mitre_corrientes_formation }
 			}
-			scope:gg_mitre_corrientes = { transfer_to_formation = scope:gg_mitre_corrientes_formation }
 		}
 		ai_chance = {
 			base = 10

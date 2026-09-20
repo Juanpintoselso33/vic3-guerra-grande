@@ -196,13 +196,19 @@ guerra_grande_italian_legion_button = {
 			#     / con Costa Brava atras, la legion forma su propio batallon
 			if = {
 				limit = { has_global_variable = gg_garibaldi_famous }
-				create_military_formation = {
-					type = army
-					hq_region = capital.region
-					combat_unit = {
-						type = unit_type:combat_unit_type_line_infantry
-						state_region = s:STATE_MONTEVIDEO
-						count = 1
+				gg_select_formation_hq_state = yes
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = army
+						hq_region = scope:gg_formation_hq_state.region
+						combat_unit = {
+							type = unit_type:combat_unit_type_line_infantry
+							state_region = s:STATE_MONTEVIDEO
+							count = 1
+						}
 					}
 				}
 			}

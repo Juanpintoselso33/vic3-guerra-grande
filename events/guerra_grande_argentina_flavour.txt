@@ -1,0 +1,421 @@
+﻿namespace = gg_argentina
+
+# EN: Delivery conditions belong to the dated relays; no military effects here.
+# ES: Las condiciones de entrega están en los relevos fechados; aquí no hay efectos militares.
+
+# EN: Historical basis below; alternatives and effect magnitudes are design choices.
+# ES: Base histórica debajo; las alternativas y magnitudes de efectos son decisiones de diseño.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/diagramas-y-flavour-argentino.md,
+# LAS CINCO PRIORITARIAS; historia-argentina.md, Buenos Aires bajo bloqueo (Gelman y Santilli).
+gg_argentina.16 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.16.t
+	desc = gg_argentina.16.d
+	flavor = gg_argentina.16.f
+	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
+	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
+	event_image = { video = "gg_arg_arana" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	immediate = { hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_30 } }
+				set_global_variable = gg_arg_cal_done_30
+			}
+		} }
+	option = {
+		name = gg_argentina.16.a
+		default_option = yes
+		add_treasury = 10000
+		add_modifier = { name = gg_arg_direct_tax years = 3 }
+		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.16.b
+		add_treasury = 50000
+		add_modifier = { name = gg_arg_paper_issue years = 3 }
+		add_radicals = { value = 0.01 }
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = gg_argentina.16.c
+		add_treasury = 40000
+		add_modifier = { name = gg_arg_land_sales years = 8 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = { base = 15 }
+	}
+}
+
+# EN: Historical basis below; alternatives and effect magnitudes are design choices.
+# ES: Base histórica debajo; las alternativas y magnitudes de efectos son decisiones de diseño.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/diagramas-y-flavour-argentino.md,
+# LAS CINCO PRIORITARIAS; historia-argentina.md, El hallazgo distributivo (Fradkin y Gelman).
+gg_argentina.17 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.17.t
+	desc = gg_argentina.17.d
+	flavor = gg_argentina.17.f
+	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
+	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
+	event_image = { video = "gg_arg_arana" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	immediate = { hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_31 } }
+				set_global_variable = gg_arg_cal_done_31
+			}
+		} }
+	option = {
+		name = gg_argentina.17.a
+		default_option = yes
+		add_treasury = 30000
+		add_modifier = { name = gg_arg_land_sales years = 8 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+		add_radicals = { value = 0.03 interest_group = ig:ig_rural_folk }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.17.b
+		add_treasury = -20000
+		add_modifier = { name = gg_arg_small_ranchers years = 3 }
+		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		add_radicals = { value = -0.03 interest_group = ig:ig_rural_folk }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_rural_folk }
+		ai_chance = { base = 15 }
+	}
+}
+
+# EN: Historical basis below; alternatives and effect magnitudes are design choices.
+# ES: Base histórica debajo; las alternativas y magnitudes de efectos son decisiones de diseño.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/diagramas-y-flavour-argentino.md,
+# LAS CINCO PRIORITARIAS; historia-argentina.md, El Pronunciamiento, qué fue exactamente; decisiones-argentina.md, La delegación revocable.
+gg_argentina.18 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.18.t
+	desc = gg_argentina.18.d
+	flavor = gg_argentina.18.f
+	# EN: Borrowed existing video (gg_arg_coalicion); not a depiction of this event. Dedicated video pending.
+	# ES: Video existente prestado (gg_arg_coalicion); no representa este hecho. Video propio pendiente.
+	event_image = { video = "gg_arg_coalicion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	immediate = { hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_32 } }
+				set_global_variable = gg_arg_cal_done_32
+			}
+		} }
+	option = {
+		name = gg_argentina.18.a
+		default_option = yes
+		custom_tooltip = gg_arg_flavour_ritual_tt
+		add_modifier = { name = gg_arg_full_resignation years = 1 }
+		add_loyalists = { value = 0.02 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.18.b
+		custom_tooltip = gg_arg_flavour_ritual_tt
+		add_modifier = { name = gg_arg_soft_resignation years = 1 }
+		add_loyalists = { value = 0.01 }
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = gg_argentina.18.c
+		custom_tooltip = gg_arg_flavour_omit_tt
+		add_modifier = { name = gg_arg_no_resignation years = 1 }
+		add_radicals = { value = 0.01 }
+		if = {
+			limit = { global_var:gg_corrientes_agravio > 0 }
+			gg_reclamo_abre = { KEY = corrientes }
+		}
+		if = {
+			limit = { global_var:gg_entre_rios_agravio > 0 }
+			gg_reclamo_abre = { KEY = entre_rios }
+		}
+		if = {
+			limit = { global_var:gg_norte_agravio > 0 }
+			gg_reclamo_abre = { KEY = coalicion_tucuman }
+			gg_reclamo_abre = { KEY = coalicion_salta }
+			gg_reclamo_abre = { KEY = coalicion_jujuy }
+			gg_reclamo_abre = { KEY = coalicion_catamarca }
+			gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+# EN: Historical basis below; alternatives and effect magnitudes are design choices.
+# ES: Base histórica debajo; las alternativas y magnitudes de efectos son decisiones de diseño.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/diagramas-y-flavour-argentino.md,
+# LAS CINCO PRIORITARIAS; historia-argentina.md, El litoral — el dato duro (Roberto Schmit).
+gg_argentina.19 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.19.t
+	desc = gg_argentina.19.d
+	flavor = gg_argentina.19.f
+	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
+	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
+	event_image = { video = "gg_arg_arana" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	immediate = { hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_33 } }
+				set_global_variable = gg_arg_cal_done_33
+			}
+		} }
+	option = {
+		name = gg_argentina.19.a
+		default_option = yes
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_hard_tt
+			add_treasury = 10000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_enforcement years = 2 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+				gg_reclamo_abre = { KEY = entre_rios }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_open_trade
+				add_modifier = { name = gg_arg_littoral_restricted years = 2 }
+				add_radicals_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.19.b
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_relief_tt
+			add_treasury = -20000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_tolerance years = 2 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				if = {
+					limit = { global_var:gg_entre_rios_agravio > 0 }
+					change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+				}
+				if = {
+					limit = { global_var:gg_entre_rios_agravio = 0 }
+					gg_reclamo_cierra = { KEY = entre_rios }
+				}
+				else = { gg_reclamo_abre = { KEY = entre_rios } }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_restricted
+				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
+				add_loyalists_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = gg_argentina.19.c
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_relief_tt
+			add_treasury = 15000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_licences years = 3 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				if = {
+					limit = { global_var:gg_entre_rios_agravio > 0 }
+					change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+				}
+				if = {
+					limit = { global_var:gg_entre_rios_agravio = 0 }
+					gg_reclamo_cierra = { KEY = entre_rios }
+				}
+				else = { gg_reclamo_abre = { KEY = entre_rios } }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_restricted
+				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
+				add_modifier = { name = gg_arg_customs_shared years = 3 }
+				add_loyalists_in_state = { value = 0.01 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 15 }
+	}
+}
+
+# EN: Historical basis below; alternatives and effect magnitudes are design choices.
+# ES: Base histórica debajo; las alternativas y magnitudes de efectos son decisiones de diseño.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/diagramas-y-flavour-argentino.md,
+# LAS CINCO PRIORITARIAS; historia-argentina.md, El litoral — el dato duro (Roberto Schmit).
+gg_argentina.28 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.28.t
+	desc = gg_argentina.28.d
+	flavor = gg_argentina.28.f
+	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
+	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
+	event_image = { video = "gg_arg_arana" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	immediate = { hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_34 } }
+				set_global_variable = gg_arg_cal_done_34
+			}
+		} }
+	option = {
+		name = gg_argentina.28.a
+		default_option = yes
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_hard_tt
+			add_treasury = 10000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_enforcement years = 2 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+				gg_reclamo_abre = { KEY = entre_rios }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_open_trade
+				add_modifier = { name = gg_arg_littoral_restricted years = 2 }
+				add_radicals_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.28.b
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_relief_tt
+			add_treasury = -20000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_tolerance years = 2 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				if = {
+					limit = { global_var:gg_entre_rios_agravio > 0 }
+					change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+				}
+				if = {
+					limit = { global_var:gg_entre_rios_agravio = 0 }
+					gg_reclamo_cierra = { KEY = entre_rios }
+				}
+				else = { gg_reclamo_abre = { KEY = entre_rios } }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_restricted
+				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
+				add_loyalists_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = gg_argentina.28.c
+		# EN: A late answer cannot collect money from a province that has withdrawn.
+		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_relief_tt
+			add_treasury = 15000
+			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+			remove_modifier = gg_arg_port_enforcement
+			remove_modifier = gg_arg_port_tolerance
+			remove_modifier = gg_arg_port_licences
+			add_modifier = { name = gg_arg_port_licences years = 3 }
+			if = {
+				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
+				if = {
+					limit = { global_var:gg_entre_rios_agravio > 0 }
+					change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+				}
+				if = {
+					limit = { global_var:gg_entre_rios_agravio = 0 }
+					gg_reclamo_cierra = { KEY = entre_rios }
+				}
+				else = { gg_reclamo_abre = { KEY = entre_rios } }
+			}
+			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+				remove_modifier = gg_arg_customs_shared
+				remove_modifier = gg_arg_littoral_restricted
+				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
+				add_modifier = { name = gg_arg_customs_shared years = 3 }
+				add_loyalists_in_state = { value = 0.01 interest_group = owner.ig:ig_landowners }
+			}
+		}
+		else = { custom_tooltip = gg_arg_flavour_trade_expired_tt }
+		ai_chance = { base = 15 }
+	}
+}

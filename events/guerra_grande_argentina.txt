@@ -363,6 +363,15 @@ gg_argentina.4 = {
 		gg_argentina_open_war = { TAG = CLN }
 		ai_chance = { base = 100 }
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_3 } }
+				set_global_variable = gg_arg_cal_done_3
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -402,6 +411,12 @@ gg_argentina.61 = {
 	immediate = {
 		hidden_effect = {
 			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_14 } }
+				set_global_variable = gg_arg_cal_done_14
+			}
 		}
 	}
 
@@ -449,6 +464,12 @@ gg_argentina.62 = {
 	immediate = {
 		hidden_effect = {
 			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_15 } }
+				set_global_variable = gg_arg_cal_done_15
+			}
 		}
 	}
 
@@ -506,6 +527,15 @@ gg_argentina.63 = {
 		gg_reclamo_cierra = { KEY = corrientes }
 		add_treasury = -20000
 		ai_chance = { base = 30 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_16 } }
+				set_global_variable = gg_arg_cal_done_16
+			}
+		}
 	}
 }
 
@@ -565,6 +595,12 @@ gg_argentina.65 = {
 			# EN/ES: an unanswered recognition question remains an agravio / la pregunta de
 			#     reconocimiento sin contestar queda como agravio
 			change_global_variable = { name = gg_norte_agravio add = 1 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_17 } }
+				set_global_variable = gg_arg_cal_done_17
+			}
 		}
 	}
 
@@ -629,6 +665,12 @@ gg_argentina.68 = {
 	immediate = {
 		hidden_effect = {
 			change_global_variable = { name = gg_norte_agravio add = 1 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_18 } }
+				set_global_variable = gg_arg_cal_done_18
+			}
 		}
 	}
 
@@ -824,6 +866,15 @@ gg_argentina.67 = {
 		c:CER ?= { add_treasury = 10000 }
 		ai_chance = { base = 5 }
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_19 } }
+				set_global_variable = gg_arg_cal_done_19
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -881,6 +932,15 @@ gg_argentina.9 = {
 			}
 		}
 		ai_chance = { base = 15 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_27 } }
+				set_global_variable = gg_arg_cal_done_27
+			}
+		}
 	}
 }
 
@@ -943,6 +1003,15 @@ gg_argentina.69 = {
 		custom_tooltip = gg_alcaraz_accept_tt
 		gg_argentina_accept_alcaraz = yes
 		ai_chance = { base = 20 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_20 } }
+				set_global_variable = gg_arg_cal_done_20
+			}
+		}
 	}
 }
 
@@ -1036,6 +1105,15 @@ gg_argentina.8 = {
 		#     noviembre de 1847.
 		gg_argentina_accept_alcaraz = yes
 		ai_chance = { base = 20 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_26 } }
+				set_global_variable = gg_arg_cal_done_26
+			}
+		}
 	}
 }
 
@@ -1179,6 +1257,12 @@ gg_argentina.10 = {
 			}
 			add_modifier = { name = gg_arg_field_won months = 6 }
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_5 } }
+				set_global_variable = gg_arg_cal_done_5
+			}
+		}
 	}
 
 	option = {
@@ -1230,6 +1314,12 @@ gg_argentina.11 = {
 			}
 			add_modifier = { name = gg_arg_field_won months = 6 }
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_6 } }
+				set_global_variable = gg_arg_cal_done_6
+			}
+		}
 	}
 
 	option = {
@@ -1271,6 +1361,12 @@ gg_argentina.12 = {
 				add_modifier = { name = gg_arg_army_wrecked months = 12 }
 			}
 			add_modifier = { name = gg_arg_field_won months = 6 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_7 } }
+				set_global_variable = gg_arg_cal_done_7
+			}
 		}
 	}
 
@@ -1351,6 +1447,12 @@ gg_argentina.20 = {
 			limit = { NOT = { global_var:gg_vanguardia_status = 3 } }
 			c:ARG ?= { trigger_event = { id = gg_argentina.21 days = 0 popup = yes } }
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_8 } }
+				set_global_variable = gg_arg_cal_done_8
+			}
+		}
 	}
 }
 
@@ -1392,17 +1494,23 @@ gg_argentina.21 = {
 		name = gg_argentina.21.b
 		custom_tooltip = gg_vanguardia_reserva_litoral_tt
 		set_global_variable = { name = gg_vanguardia_cruce value = 2 }
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_division_litoral
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 1
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_division_litoral
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 1
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 1
+				}
 			}
 		}
 		ai_chance = { base = 20 }
@@ -1455,35 +1563,49 @@ gg_argentina.22 = {
 		#     other is the mobile column that later choices can release and deploy elsewhere.
 		# ES: Dos formaciones reales vuelven visible el costo. Una son las baterias fijas; la otra es
 		#     la columna movil que las decisiones posteriores pueden liberar y mandar a otro frente.
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_baterias_parana
-			save_scope_as = gg_parana_batteries
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 1
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 1
-			}
-		}
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_columna_parana
-			save_scope_as = gg_parana_column
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 1
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 1
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_parana_batteries
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_baterias_parana
+				save_scope_as = gg_parana_batteries
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 1
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
 			}
 		}
-		set_variable = { name = gg_parana_column_ref value = scope:gg_parana_column }
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_parana_column
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_columna_parana
+				save_scope_as = gg_parana_column
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 1
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
+			}
+			set_variable = { name = gg_parana_column_ref value = scope:gg_parana_column }
+		}
 		ai_chance = { base = 70 }
 	}
 
@@ -1519,20 +1641,35 @@ gg_argentina.22 = {
 		# EN/ES: this is the existing powers' mediation gate read by gg_powers.12, not a second clock.
 		#     / esta es la misma llave de mediacion que lee gg_powers.12, no otro reloj
 		set_global_variable = gg_powers_mediators
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_defensa_parana_limitada
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 1
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_defensa_parana_limitada
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 1
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
 			}
 		}
 		ai_chance = { base = 20 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_21 } }
+				set_global_variable = gg_arg_cal_done_21
+			}
+		}
 	}
 }
 
@@ -1581,6 +1718,15 @@ gg_argentina.23 = {
 			var:gg_parana_column_ref ?= { mobilize_army = yes }
 		}
 		ai_chance = { base = 30 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_22 } }
+				set_global_variable = gg_arg_cal_done_22
+			}
+		}
 	}
 }
 
@@ -1659,6 +1805,15 @@ gg_argentina.24 = {
 		}
 		ai_chance = { base = 15 }
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_23 } }
+				set_global_variable = gg_arg_cal_done_23
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -1720,6 +1875,15 @@ gg_argentina.25 = {
 		set_global_variable = gg_hood_argentina_pending
 		c:CER ?= { trigger_event = { id = gg_powers.12 days = 0 popup = yes } }
 		ai_chance = { base = 30 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_24 } }
+				set_global_variable = gg_arg_cal_done_24
+			}
+		}
 	}
 }
 
@@ -1843,6 +2007,15 @@ gg_argentina.26 = {
 			}
 		}
 		ai_chance = { base = 15 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_25 } }
+				set_global_variable = gg_arg_cal_done_25
+			}
+		}
 	}
 }
 
@@ -2026,6 +2199,12 @@ gg_argentina.40 = {
 				replace_character_roles = { remove = { general } }
 			}
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_9 } }
+				set_global_variable = gg_arg_cal_done_9
+			}
+		}
 	}
 
 	option = {
@@ -2082,6 +2261,15 @@ gg_argentina.41 = {
 		name = gg_argentina.41.c
 		add_modifier = { name = gg_caseros_hold_the_city years = 2 }
 		ai_chance = { base = 20 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_10 } }
+				set_global_variable = gg_arg_cal_done_10
+			}
+		}
 	}
 }
 
@@ -2197,25 +2385,25 @@ gg_argentina.5 = {
 				#     Ahora el asiento es un estado que el pais tiene de verdad: su capital si todavia
 				#     la conserva, cualquiera de sus estados si no. Una region estrategica cableada no
 				#     es opcion: el mod ya perdio la escuadra de Brown entera por una.
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_division_rioja
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 				if = {
-					limit = { exists = capital }
-					capital = { save_scope_as = gg_cln_hq_state }
-				}
-				else = {
-					random_scope_state = { save_scope_as = gg_cln_hq_state }
-				}
-				create_military_formation = {
-					type = army
-					hq_region = scope:gg_cln_hq_state.region
-					name = gg_arg_division_rioja
-					save_scope_as = gg_division_rioja
-					combat_unit = {
-						type = unit_type:combat_unit_type_irregular_infantry
-						count = 3
-					}
-					combat_unit = {
-						type = unit_type:combat_unit_type_hussars
-						count = 2
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = army
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_arg_division_rioja
+						save_scope_as = gg_division_rioja
+						combat_unit = {
+							type = unit_type:combat_unit_type_irregular_infantry
+							count = 3
+						}
+						combat_unit = {
+							type = unit_type:combat_unit_type_hussars
+							count = 2
+						}
 					}
 				}
 			}
@@ -2225,6 +2413,12 @@ gg_argentina.5 = {
 					exists = scope:gg_division_rioja
 				}
 				scope:gg_brizuela = { transfer_to_formation = scope:gg_division_rioja }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_11 } }
+				set_global_variable = gg_arg_cal_done_11
 			}
 		}
 	}
@@ -2298,22 +2492,29 @@ gg_argentina.6 = {
 				}
 				# EN/ES: el ejercito de Caa Guazu: tres mil hombres, y la caballeria que decidio el dia
 				#     / the army of Caa Guazu: three thousand men, and the horse that decided the day
-				create_military_formation = {
-					type = army
-					hq_region = capital.region
-					name = gg_arg_ejercito_caa_guazu
-					save_scope_as = gg_ejercito_paz
-					combat_unit = {
-						type = unit_type:combat_unit_type_irregular_infantry
-						count = 3
-					}
-					combat_unit = {
-						type = unit_type:combat_unit_type_hussars
-						count = 3
-					}
-					combat_unit = {
-						type = unit_type:combat_unit_type_cannon_artillery
-						count = 1
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_ejercito_paz
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = army
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_arg_ejercito_caa_guazu
+						save_scope_as = gg_ejercito_paz
+						combat_unit = {
+							type = unit_type:combat_unit_type_irregular_infantry
+							count = 3
+						}
+						combat_unit = {
+							type = unit_type:combat_unit_type_hussars
+							count = 3
+						}
+						combat_unit = {
+							type = unit_type:combat_unit_type_cannon_artillery
+							count = 1
+						}
 					}
 				}
 			}
@@ -2323,6 +2524,12 @@ gg_argentina.6 = {
 					exists = scope:gg_ejercito_paz
 				}
 				scope:gg_paz = { transfer_to_formation = scope:gg_ejercito_paz }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_12 } }
+				set_global_variable = gg_arg_cal_done_12
 			}
 		}
 	}
@@ -2412,18 +2619,25 @@ gg_argentina.7 = {
 					add_commander_rank = 2
 					save_scope_as = gg_juan_madariaga
 				}
-				create_military_formation = {
-					type = army
-					hq_region = capital.region
-					name = gg_arg_ejercito_libertador
-					save_scope_as = gg_ejercito_libres
-					combat_unit = {
-						type = unit_type:combat_unit_type_irregular_infantry
-						count = 2
-					}
-					combat_unit = {
-						type = unit_type:combat_unit_type_hussars
-						count = gg_libres_horse
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_ejercito_libres
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = army
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_arg_ejercito_libertador
+						save_scope_as = gg_ejercito_libres
+						combat_unit = {
+							type = unit_type:combat_unit_type_irregular_infantry
+							count = 2
+						}
+						combat_unit = {
+							type = unit_type:combat_unit_type_hussars
+							count = gg_libres_horse
+						}
 					}
 				}
 			}
@@ -2433,6 +2647,12 @@ gg_argentina.7 = {
 					exists = scope:gg_ejercito_libres
 				}
 				scope:gg_juan_madariaga = { transfer_to_formation = scope:gg_ejercito_libres }
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_13 } }
+				set_global_variable = gg_arg_cal_done_13
 			}
 		}
 	}
@@ -2590,6 +2810,15 @@ gg_argentina.13 = {
 		set_global_variable = gg_montevideo_convention_refused
 		ai_chance = { base = 15 }
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_28 } }
+				set_global_variable = gg_arg_cal_done_28
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -2713,6 +2942,15 @@ gg_argentina.15 = {
 		set_global_variable = gg_ejercito_grande_alone
 		gg_argentina_raise_ejercito_grande = yes
 		ai_chance = { base = 10 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_29 } }
+				set_global_variable = gg_arg_cal_done_29
+			}
+		}
 	}
 }
 

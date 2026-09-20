@@ -30,6 +30,12 @@ gg_powers.2 = {
 		#     the siege (the French station, Purvis). 20 here plus Purvis's 15 opens it in 1843.
 		#     / balance: el mar estuvo abierto desde el comienzo del sitio; 20 aca mas 15 de Purvis.
 		gg_patron_change = { PATRON = francia DELTA = 20 }
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_30 } }
+				set_global_variable = gg_cal_done_30
+			}
+		}
 	}
 }
 
@@ -52,6 +58,12 @@ gg_powers.3 = {
 		c:URU ?= {
 			trigger_event = { id = guerra_grande.9 popup = yes }
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_31 } }
+				set_global_variable = gg_cal_done_31
+			}
+		}
 	}
 }
 
@@ -70,6 +82,12 @@ gg_powers.4 = {
 		}
 		else = {
 			gg_patron_change = { PATRON = francia DELTA = -20 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_32 } }
+				set_global_variable = gg_cal_done_32
+			}
 		}
 	}
 }
@@ -96,6 +114,12 @@ gg_powers.5 = {
 		}
 		else = {
 			gg_patron_change = { PATRON = brasil DELTA = 5 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_33 } }
+				set_global_variable = gg_cal_done_33
+			}
 		}
 	}
 }
@@ -130,6 +154,12 @@ gg_powers.10 = {
 		# EN/ES: Purvis refuses to recognise the blockade whatever the Cerrito answers (historical).
 		#     / Purvis no reconoce el bloqueo conteste lo que conteste el Cerrito.
 		gg_patron_change = { PATRON = britania DELTA = 20 }
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_3 } }
+				set_global_variable = gg_cal_done_3
+			}
+		}
 	}
 
 	option = {
@@ -240,6 +270,15 @@ gg_powers.11 = {
 		ai_chance = { base = 55 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_10 } }
+				set_global_variable = gg_cal_done_10
+			}
+		}
+	}
 }
 
 # F3-2a - the Hood bases reach the Cerrito (July 1846)
@@ -342,6 +381,15 @@ gg_powers.12 = {
 		ai_chance = { base = 30 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_12 } }
+				set_global_variable = gg_cal_done_12
+			}
+		}
+	}
 }
 
 # F3-2b - the Hood bases reach the Defensa
@@ -435,6 +483,15 @@ gg_powers.14 = {
 		ai_chance = { base = 35 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_15 } }
+				set_global_variable = gg_cal_done_15
+			}
+		}
+	}
 }
 
 # F3-3b - the truce offer reaches the Defensa
@@ -523,6 +580,12 @@ gg_powers.16 = {
 		if = {
 			limit = { has_global_variable = gg_varela_blamed }
 			gg_patron_change = { PATRON = rosas DELTA = 5 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_19 } }
+				set_global_variable = gg_cal_done_19
+			}
 		}
 	}
 
@@ -666,6 +729,15 @@ gg_powers.17 = {
 		ai_chance = { base = 40 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_14 } }
+				set_global_variable = gg_cal_done_14
+			}
+		}
+	}
 }
 
 # F3-6 - the Basques go to Buenos Aires and Garibaldi to Italy (1848)
@@ -774,6 +846,15 @@ gg_powers.18 = {
 		ai_chance = { base = 40 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_21 } }
+				set_global_variable = gg_cal_done_21
+			}
+		}
+	}
 }
 
 # F3-7 - the Southern-Arana treaty: Britain leaves (24 November 1849)
@@ -800,6 +881,12 @@ gg_powers.19 = {
 
 	immediate = {
 		gg_patron_change = { PATRON = britania DELTA = -100 }
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_23 } }
+				set_global_variable = gg_cal_done_23
+			}
+		}
 	}
 
 	option = {
@@ -862,6 +949,12 @@ gg_powers.20 = {
 		else = {
 			gg_patron_change = { PATRON = francia DELTA = -20 }
 		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_25 } }
+				set_global_variable = gg_cal_done_25
+			}
+		}
 	}
 }
 
@@ -918,6 +1011,15 @@ gg_powers.21 = {
 		ai_chance = { base = 45 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_27 } }
+				set_global_variable = gg_cal_done_27
+			}
+		}
+	}
 }
 
 # F4-3a - Urquiza's pronouncement, if Brazil is behind the Defensa (1 May 1851)
@@ -942,6 +1044,12 @@ gg_powers.22 = {
 	immediate = {
 		# EN/ES: C25 -- Urquiza's pronouncement (1 May 1851), if Brazil is strong enough behind the Defensa
 		gg_urquiza_flip = yes
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_28 } }
+				set_global_variable = gg_cal_done_28
+			}
+		}
 	}
 }
 
@@ -1055,6 +1163,15 @@ gg_powers.25 = {
 		ai_chance = { base = 50 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_9 } }
+				set_global_variable = gg_cal_done_9
+			}
+		}
+	}
 }
 
 # FS-2 - Florencio Varela is murdered (20 March 1848)
@@ -1098,6 +1215,15 @@ gg_powers.26 = {
 		ai_chance = { base = 40 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_18 } }
+				set_global_variable = gg_cal_done_18
+			}
+		}
+	}
 }
 
 # FS-3a - Larranaga's funeral: who receives it (16 February 1848)
@@ -1117,6 +1243,12 @@ gg_powers.27 = {
 		}
 		else = {
 			c:CER ?= { trigger_event = { id = gg_powers.28 popup = yes } }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_17 } }
+				set_global_variable = gg_cal_done_17
+			}
 		}
 	}
 }
@@ -1258,6 +1390,15 @@ gg_powers.29 = {
 		ai_chance = { base = 40 }
 	}
 
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_24 } }
+				set_global_variable = gg_cal_done_24
+			}
+		}
+	}
 }
 
 # F0-8b - the University opens: whoever holds Montevideo (18 July 1849)
@@ -1279,6 +1420,12 @@ gg_powers.30 = {
 		}
 		else = {
 			c:CER ?= { trigger_event = { id = gg_powers.31 popup = yes } }
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_22 } }
+				set_global_variable = gg_cal_done_22
+			}
 		}
 	}
 }
@@ -1367,6 +1514,12 @@ gg_powers.32 = {
 		# EN/ES: playtest 2026-09-19 -- the Rio mission worked on Urquiza as much as on the Empire
 		#     / la mision de Rio trabajo tanto al Imperio como a Urquiza
 		gg_patron_change = { PATRON = urquiza DELTA = 5 }
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_16 } }
+				set_global_variable = gg_cal_done_16
+			}
+		}
 	}
 
 	option = {

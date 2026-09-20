@@ -262,15 +262,22 @@ je_guerra_grande = {
 							#     nunca, y la marca se escribia antes, asi que tampoco se reintentaba.
 							if = {
 								limit = { NOT = { has_variable = gg_lent_squadron } }
-								create_military_formation = {
-									save_scope_as = gg_lent_fleet
-									type = fleet
-									hq_region = capital.region
-									name = gg_lent_squadron_name
-									ship = {
-										type = ship_type:ship_type_frigate
-										state_region = s:STATE_MONTEVIDEO
-										count = 4
+								gg_select_formation_hq_state = yes
+								clear_saved_scope = gg_lent_fleet
+								# EN: Without an owned state there is no valid HQ; skip this formation.
+								# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+								if = {
+									limit = { exists = scope:gg_formation_hq_state }
+									create_military_formation = {
+										save_scope_as = gg_lent_fleet
+										type = fleet
+										hq_region = scope:gg_formation_hq_state.region
+										name = gg_lent_squadron_name
+										ship = {
+											type = ship_type:ship_type_frigate
+											state_region = s:STATE_MONTEVIDEO
+											count = 4
+										}
 									}
 								}
 								# EN/ES: the marks go after the creation, so a failed one is tried again next month

@@ -141,13 +141,19 @@ gg_abolition.2 = {
 		set_variable = guerra_grande_abolition_settled
 		set_variable = guerra_grande_abolition_decreed
 		activate_law = law_type:law_slavery_banned
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
 			}
 		}
 		add_modifier = {
@@ -196,13 +202,19 @@ gg_abolition.2 = {
 	option = {
 		name = gg_abolition.2.b
 		set_variable = guerra_grande_abolition_settled
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		add_treasury = -20000
@@ -281,13 +293,19 @@ gg_abolition.3 = {
 		set_variable = guerra_grande_abolition_settled
 		set_variable = guerra_grande_abolition_decreed
 		activate_law = law_type:law_slavery_banned
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_SAN_JOSE
-				count = 2
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = 2
+				}
 			}
 		}
 		add_modifier = {
@@ -323,13 +341,19 @@ gg_abolition.3 = {
 	option = {
 		name = gg_abolition.3.b
 		set_variable = guerra_grande_abolition_settled
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_SAN_JOSE
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = 1
+				}
 			}
 		}
 		add_treasury = -20000
@@ -364,6 +388,15 @@ gg_abolition.3 = {
 		}
 		ai_chance = {
 			base = 10
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_13 } }
+				set_global_variable = gg_cal_done_13
+			}
 		}
 	}
 }

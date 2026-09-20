@@ -17,10 +17,9 @@
 #     scheduled on ARGENTINA, which never changes tag in this mod, so one copy is right and a second
 #     would only be a second thing to keep in step.
 #
-#     THE MARK MEANS DELIVERED, NOT ATTEMPTED. Each gg_arg_cal_done_N is written INSIDE the same
-#     limit that proves the recipient and its states exist. That is the correction of 19 September
-#     2026: writing the mark first and looking for a recipient afterwards lost the event for the
-#     whole game, in silence.
+#     DELIVERY MARKS. Single-recipient events write gg_arg_cal_done_N in their own immediate.
+#     Relays 1, 2 and 4 still mark the attempt: each has two alternative recipients, so moving
+#     their mark requires resolving the single-writer constraint. These relays have no retry.
 #
 #     THE YEARS ARE 365 DAYS LONG, with no leap days -- the engine's years, not the calendar's. The
 #     offsets were computed by hand and checked one by one.
@@ -41,10 +40,9 @@
 #     agendan sobre la ARGENTINA, que en este mod no cambia de tag nunca, asi que una copia es lo
 #     correcto y una segunda seria solo otra cosa que mantener sincronizada.
 #
-#     LA MARCA SIGNIFICA ENTREGADO, NO INTENTADO. Cada gg_arg_cal_done_N se escribe ADENTRO del mismo
-#     limit que prueba que el destinatario y sus estados existen. Es la correccion del 19/9/2026:
-#     escribir la marca primero y buscar destinatario despues perdia el evento toda la partida, en
-#     silencio.
+#     MARCAS DE ENTREGA. Los eventos de destinatario unico escriben gg_arg_cal_done_N en su immediate.
+#     Los relevos 1, 2 y 4 aun marcan el intento: tienen dos destinatarios alternativos y mover
+#     su marca exige resolver la restriccion de escritor unico. Estos relevos no tienen reintento.
 #
 #     LOS ANIOS DEL MOTOR SON DE 365 DIAS, sin bisiestos. Los corrimientos se calcularon a
 #     mano y se verificaron uno por uno.
@@ -166,7 +164,6 @@ gg_argentina_cal.3 = {
 					exists = c:CLN
 					exists = s:STATE_CORDOBA.region_state:ARG
 				}
-				set_global_variable = gg_arg_cal_done_3
 				c:ARG = { trigger_event = { id = gg_argentina.4 days = 0 popup = yes } }
 			}
 		}
@@ -223,7 +220,6 @@ gg_argentina_cal.5 = {
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
-				set_global_variable = gg_arg_cal_done_5
 				c:ARG = { trigger_event = { id = gg_argentina.10 days = 0 popup = yes } }
 			}
 		}
@@ -243,7 +239,6 @@ gg_argentina_cal.6 = {
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
-				set_global_variable = gg_arg_cal_done_6
 				c:ARG = { trigger_event = { id = gg_argentina.11 days = 0 popup = yes } }
 			}
 		}
@@ -263,7 +258,6 @@ gg_argentina_cal.7 = {
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
-				set_global_variable = gg_arg_cal_done_7
 				c:ARG = { trigger_event = { id = gg_argentina.12 days = 0 popup = yes } }
 			}
 		}
@@ -283,7 +277,6 @@ gg_argentina_cal.8 = {
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
-				set_global_variable = gg_arg_cal_done_8
 				c:ARG = { trigger_event = { id = gg_argentina.20 days = 0  } }
 			}
 		}
@@ -318,7 +311,6 @@ gg_argentina_cal.9 = {
 					c:ARG = { has_war_with = c:ENR }
 					has_global_variable = gg_ejercito_grande_created
 				}
-				set_global_variable = gg_arg_cal_done_9
 				c:ARG = { trigger_event = { id = gg_argentina.40 days = 0 popup = yes } }
 			}
 		}
@@ -342,7 +334,6 @@ gg_argentina_cal.10 = {
 					c:ARG = { has_war_with = c:ENR }
 					has_global_variable = gg_ejercito_grande_created
 				}
-				set_global_variable = gg_arg_cal_done_10
 				c:ARG = { trigger_event = { id = gg_argentina.41 days = 0 popup = yes } }
 			}
 		}
@@ -364,7 +355,6 @@ gg_argentina_cal.11 = {
 					# EN/ES: sin Liga no hay Director / no League, no Director
 					exists = c:CLN
 				}
-				set_global_variable = gg_arg_cal_done_11
 				c:ARG = { trigger_event = { id = gg_argentina.5 days = 0 popup = yes } }
 			}
 		}
@@ -391,7 +381,6 @@ gg_argentina_cal.12 = {
 						exists = s:STATE_CORRIENTES.region_state:ARG
 					}
 				}
-				set_global_variable = gg_arg_cal_done_12
 				c:ARG = { trigger_event = { id = gg_argentina.6 days = 0 popup = yes } }
 			}
 		}
@@ -415,7 +404,6 @@ gg_argentina_cal.13 = {
 						exists = s:STATE_CORRIENTES.region_state:ARG
 					}
 				}
-				set_global_variable = gg_arg_cal_done_13
 				c:ARG = { trigger_event = { id = gg_argentina.7 days = 0 popup = yes } }
 			}
 		}
@@ -444,7 +432,6 @@ gg_argentina_cal.14 = {
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_14
 			c:ARG = { trigger_event = { id = gg_argentina.61 days = 0 popup = yes } }
 		}
 	} }
@@ -462,7 +449,6 @@ gg_argentina_cal.15 = {
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_15
 			c:ARG = { trigger_event = { id = gg_argentina.62 days = 0 popup = yes } }
 		}
 	} }
@@ -480,7 +466,6 @@ gg_argentina_cal.16 = {
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_16
 			c:ARG = { trigger_event = { id = gg_argentina.63 days = 0 popup = yes } }
 		}
 	} }
@@ -498,7 +483,6 @@ gg_argentina_cal.17 = {
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 			}
-			set_global_variable = gg_arg_cal_done_17
 			c:ARG = { trigger_event = { id = gg_argentina.65 days = 0 popup = yes } }
 		}
 	} }
@@ -519,7 +503,6 @@ gg_argentina_cal.18 = {
 				exists = c:ARG
 				exists = s:STATE_TUCUMAN.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_18
 			c:ARG = { trigger_event = { id = gg_argentina.68 days = 0 popup = yes } }
 		}
 	} }
@@ -538,7 +521,6 @@ gg_argentina_cal.19 = {
 				exists = c:ARG
 				exists = s:STATE_ENTRE_RIOS.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_19
 			c:ARG = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
 		}
 	} }
@@ -563,7 +545,6 @@ gg_argentina_cal.20 = {
 				c:ARG = { has_war_with = c:CRR }
 				exists = s:STATE_ENTRE_RIOS.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_20
 			c:ARG = { trigger_event = { id = gg_argentina.69 days = 0 popup = yes } }
 		}
 	} }
@@ -591,7 +572,6 @@ gg_argentina_cal.21 = {
 				exists = c:ARG
 				has_global_variable = guerra_grande_open_war
 			}
-			set_global_variable = gg_arg_cal_done_21
 			c:ARG = { trigger_event = { id = gg_argentina.22 days = 0 popup = yes } }
 		}
 	} }
@@ -609,7 +589,6 @@ gg_argentina_cal.22 = {
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance
 			}
-			set_global_variable = gg_arg_cal_done_22
 			c:ARG = { trigger_event = { id = gg_argentina.23 days = 0 popup = yes } }
 		}
 	} }
@@ -627,7 +606,6 @@ gg_argentina_cal.23 = {
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance_continues
 			}
-			set_global_variable = gg_arg_cal_done_23
 			c:ARG = { trigger_event = { id = gg_argentina.24 days = 0 popup = yes } }
 		}
 	} }
@@ -653,7 +631,6 @@ gg_argentina_cal.24 = {
 					has_global_variable = gg_powers_mediators
 				}
 			}
-			set_global_variable = gg_arg_cal_done_24
 			c:ARG = { trigger_event = { id = gg_argentina.25 days = 0 popup = yes } }
 		}
 	} }
@@ -681,7 +658,6 @@ gg_argentina_cal.25 = {
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 			}
-			set_global_variable = gg_arg_cal_done_25
 			c:ARG = { trigger_event = { id = gg_argentina.26 days = 0 popup = yes } }
 		}
 	} }
@@ -711,7 +687,6 @@ gg_argentina_cal.26 = {
 				has_global_variable = gg_alcaraz_rejected
 				c:ARG = { has_war_with = c:CRR }
 			}
-			set_global_variable = gg_arg_cal_done_26
 			c:ARG = { trigger_event = { id = gg_argentina.8 days = 0 popup = yes } }
 		}
 	} }
@@ -738,7 +713,6 @@ gg_argentina_cal.27 = {
 				NOT = { exists = c:ENR }
 				exists = s:STATE_ENTRE_RIOS.region_state:ARG
 			}
-			set_global_variable = gg_arg_cal_done_27
 			c:ARG = { trigger_event = { id = gg_argentina.9 days = 0 popup = yes } }
 		}
 	} }
@@ -767,7 +741,6 @@ gg_argentina_cal.28 = {
 				has_global_variable = gg_montevideo_convention_enabled
 				NOT = { has_global_variable = gg_confederacion_negociada }
 			}
-			set_global_variable = gg_arg_cal_done_28
 			c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
 		}
 	} }
@@ -797,8 +770,106 @@ gg_argentina_cal.29 = {
 				NOT = { has_global_variable = gg_rosas_abandoned_oribe }
 				c:ARG = { has_war_with = c:ENR }
 			}
-			set_global_variable = gg_arg_cal_done_29
 			c:ENR = { trigger_event = { id = gg_argentina.15 days = 0 popup = yes } }
 		}
 	} }
+}
+
+# EN: Design date 1839-09-01; conditions are evaluated on delivery, not at startup.
+# ES: Fecha de diseño 1/9/1839; las condiciones se evalúan al entregar, no al iniciar.
+# SOURCE / FUENTE: diagramas-y-flavour-argentino.md, LAS CINCO PRIORITARIAS.
+gg_argentina_cal.30 = {
+ type = country_event
+ hidden = yes
+ immediate = { hidden_effect = {
+  if = {
+   limit = {
+    NOT = { has_global_variable = gg_arg_cal_done_30 }
+    exists = s:STATE_ENTRE_RIOS
+    exists = c:ARG
+    c:ARG = { has_variable = gg_arg_rosas_seat }
+   }
+   c:ARG = { trigger_event = { id = gg_argentina.16 days = 0 popup = yes } }
+  }
+ } }
+}
+
+# EN: Design date 1842-06-01; conditions are evaluated on delivery, not at startup.
+# ES: Fecha de diseño 1/6/1842; las condiciones se evalúan al entregar, no al iniciar.
+# SOURCE / FUENTE: diagramas-y-flavour-argentino.md, LAS CINCO PRIORITARIAS.
+gg_argentina_cal.31 = {
+ type = country_event
+ hidden = yes
+ immediate = { hidden_effect = {
+  if = {
+   limit = {
+    NOT = { has_global_variable = gg_arg_cal_done_31 }
+    exists = s:STATE_ENTRE_RIOS
+    exists = c:ARG
+    c:ARG = { has_variable = gg_arg_rosas_seat }
+   }
+   c:ARG = { trigger_event = { id = gg_argentina.17 days = 0 popup = yes } }
+  }
+ } }
+}
+
+# EN: Design date 1844-07-01; conditions are evaluated on delivery, not at startup.
+# ES: Fecha de diseño 1/7/1844; las condiciones se evalúan al entregar, no al iniciar.
+# SOURCE / FUENTE: diagramas-y-flavour-argentino.md, LAS CINCO PRIORITARIAS.
+gg_argentina_cal.32 = {
+ type = country_event
+ hidden = yes
+ immediate = { hidden_effect = {
+  if = {
+   limit = {
+    NOT = { has_global_variable = gg_arg_cal_done_32 }
+    exists = s:STATE_ENTRE_RIOS
+    exists = c:ARG
+    c:ARG = { has_variable = gg_arg_rosas_seat }
+   }
+   c:ARG = { trigger_event = { id = gg_argentina.18 days = 0 popup = yes } }
+  }
+ } }
+}
+
+# EN: Design date 1845-03-01; conditions are evaluated on delivery, not at startup.
+# ES: Fecha de diseño 1/3/1845; las condiciones se evalúan al entregar, no al iniciar.
+# SOURCE / FUENTE: diagramas-y-flavour-argentino.md, LAS CINCO PRIORITARIAS.
+gg_argentina_cal.33 = {
+ type = country_event
+ hidden = yes
+ immediate = { hidden_effect = {
+  if = {
+   limit = {
+    NOT = { has_global_variable = gg_arg_cal_done_33 }
+    exists = s:STATE_ENTRE_RIOS
+    exists = c:ARG
+    c:ARG = { has_variable = gg_arg_rosas_seat }
+     NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+     exists = s:STATE_ENTRE_RIOS.region_state:ARG
+   }
+   c:ARG = { trigger_event = { id = gg_argentina.19 days = 0 popup = yes } }
+  }
+ } }
+}
+
+# EN: Design date 1847-05-01; conditions are evaluated on delivery, not at startup.
+# ES: Fecha de diseño 1/5/1847; las condiciones se evalúan al entregar, no al iniciar.
+# SOURCE / FUENTE: diagramas-y-flavour-argentino.md, LAS CINCO PRIORITARIAS.
+gg_argentina_cal.34 = {
+ type = country_event
+ hidden = yes
+ immediate = { hidden_effect = {
+  if = {
+   limit = {
+    NOT = { has_global_variable = gg_arg_cal_done_34 }
+    exists = s:STATE_ENTRE_RIOS
+    exists = c:ARG
+    c:ARG = { has_variable = gg_arg_rosas_seat }
+     NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+     exists = s:STATE_ENTRE_RIOS.region_state:ARG
+   }
+   c:ARG = { trigger_event = { id = gg_argentina.28 days = 0 popup = yes } }
+  }
+ } }
 }

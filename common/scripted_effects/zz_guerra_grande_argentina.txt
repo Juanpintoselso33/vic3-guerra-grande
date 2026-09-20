@@ -87,41 +87,47 @@ gg_argentina_create_corrientes = {
 	gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
 	# EN: the army that came apart at Pago Largo twenty-five days later. Modest on purpose: it was a
 	#     provincial army with no allies, and the sources are blunt about the result.
-	#     hq_region = capital.region, not a named strategic region: the mod already lost Brown's whole
+	#     The HQ uses an owned state: the mod already lost Brown's whole
 	#     squadron to a hardcoded region that contained none of the country's states.
 	# ES: el ejercito que se deshizo en Pago Largo veinticinco dias despues. Modesto a proposito: era
 	#     un ejercito provincial sin aliados, y las fuentes son tajantes sobre el resultado.
-	#     hq_region = capital.region, no una region estrategica con nombre: el mod ya perdio la
+	#     El cuartel usa un estado propio: el mod ya perdio la
 	#     escuadra de Brown entera por una region cableada que no tenia ningun estado del pais.
 	c:CRR ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_ejercito_correntino
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				count = 4
-			}
-			# EN: THE CORRENTINE HORSE, and it is bigger than it was until 20/9/2026. The army that
-			#     came apart at Pago Largo was modest, and it was written modest on purpose -- but a
-			#     province that can be put down in three months is not a war, it is an errand, and
-			#     that is what Juan found playing Rosas. Corrientes fought this war for eight years,
-			#     beat Echague at Caa Guazu and was still fighting at Vences in 1847. Its strength was
-			#     always the horse: the litoral raised cavalry, not battalions.
-			# ES: LA CABALLERIA CORRENTINA, y es mas grande de lo que era hasta el 20/9/2026. El
-			#     ejercito que se deshizo en Pago Largo era modesto, y estaba escrito modesto a
-			#     proposito -- pero una provincia que se liquida en tres meses no es una guerra, es un
-			#     mandado, y eso fue lo que Juan se encontro jugando de Rosas. Corrientes peleo esta
-			#     guerra ocho anios, le gano a Echague en Caa Guazu y seguia peleando en Vences en
-			#     1847. Su fuerza fue siempre la caballeria: el litoral levantaba jinetes, no
-			#     batallones.
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				count = 6
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_ejercito_correntino
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					count = 4
+				}
+				# EN: THE CORRENTINE HORSE, and it is bigger than it was until 20/9/2026. The army that
+				#     came apart at Pago Largo was modest, and it was written modest on purpose -- but a
+				#     province that can be put down in three months is not a war, it is an errand, and
+				#     that is what Juan found playing Rosas. Corrientes fought this war for eight years,
+				#     beat Echague at Caa Guazu and was still fighting at Vences in 1847. Its strength was
+				#     always the horse: the litoral raised cavalry, not battalions.
+				# ES: LA CABALLERIA CORRENTINA, y es mas grande de lo que era hasta el 20/9/2026. El
+				#     ejercito que se deshizo en Pago Largo era modesto, y estaba escrito modesto a
+				#     proposito -- pero una provincia que se liquida en tres meses no es una guerra, es un
+				#     mandado, y eso fue lo que Juan se encontro jugando de Rosas. Corrientes peleo esta
+				#     guerra ocho anios, le gano a Echague en Caa Guazu y seguia peleando en Vences en
+				#     1847. Su fuerza fue siempre la caballeria: el litoral levantaba jinetes, no
+				#     batallones.
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 6
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
 			}
 		}
 	}
@@ -213,25 +219,31 @@ gg_argentina_create_coalicion = {
 	# EN/ES: Brizuela tenia en La Rioja "el Ejercito mas numeroso y mejor armado de la Coalicion" y la
 	#     oficialidad mas destacada; por eso lo hicieron Director / the largest and best armed army
 	c:CLN ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_ejercito_coalicion
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				count = 2
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_ejercito_coalicion
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
 			}
 		}
 	}
@@ -410,72 +422,90 @@ gg_argentina_create_entre_rios = {
 			#     game-scale units, not a claim that the source provides this order of battle.
 			# ES: La fuerza conservada tras el mando de Vences es materialmente mas fuerte en 1851. Son
 			#     unidades a escala de juego, no la afirmacion de que la fuente da este orden de batalla.
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				name = gg_arg_ejercito_entrerriano
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					count = 6
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					count = 2
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					count = 6
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_cannon_artillery
-					count = 2
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_ejercito_entrerriano
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						count = 6
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 6
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						count = 2
+					}
 				}
 			}
 		}
 		else_if = {
 			limit = { has_global_variable = gg_brazil_command_withheld }
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				name = gg_arg_ejercito_entrerriano
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					count = 3
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					count = 2
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					count = 3
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_cannon_artillery
-					count = 2
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_ejercito_entrerriano
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						count = 2
+					}
 				}
 			}
 		}
 		else = {
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				name = gg_arg_ejercito_entrerriano
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					count = 4
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					count = 2
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					count = 4
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_cannon_artillery
-					count = 2
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_ejercito_entrerriano
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 4
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						count = 2
+					}
 				}
 			}
 		}
@@ -689,19 +719,29 @@ gg_argentina_sign_montevideo_convention = {
 		gg_urquiza_flip = yes
 	}
 	c:URU ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_oriental_advance_contingent
-			save_scope_as = gg_oriental_advance_army
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_oriental_advance_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_oriental_advance_contingent
+				save_scope_as = gg_oriental_advance_army
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		random_scope_character = {
-			limit = { has_template = URU_gg_eugenio_garzon }
+			limit = {
+				has_template = URU_gg_eugenio_garzon
+				exists = scope:gg_oriental_advance_army
+			}
 			transfer_to_formation = scope:gg_oriental_advance_army
 		}
 		every_scope_war = {
@@ -719,15 +759,22 @@ gg_argentina_sign_montevideo_convention = {
 		}
 	}
 	c:BRZ ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_brazilian_advance_contingent
-			save_scope_as = gg_brazilian_advance_army
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_RIO_GRANDE_DO_SUL
-				count = 1
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_brazilian_advance_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_brazilian_advance_contingent
+				save_scope_as = gg_brazilian_advance_army
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_RIO_GRANDE_DO_SUL
+					count = 1
+				}
 			}
 		}
 	}
@@ -765,25 +812,35 @@ gg_argentina_raise_ejercito_grande = {
 			random_scope_front = { save_scope_as = gg_buenos_aires_front }
 		}
 	}
-	create_military_formation = {
-		type = army
-		hq_region = capital.region
-		name = gg_arg_ejercito_grande
-		save_scope_as = gg_ejercito_grande_army
-		combat_unit = { type = unit_type:combat_unit_type_line_infantry count = 8 }
-		combat_unit = { type = unit_type:combat_unit_type_irregular_infantry count = 2 }
-		combat_unit = { type = unit_type:combat_unit_type_hussars count = 6 }
-		combat_unit = { type = unit_type:combat_unit_type_cannon_artillery count = 2 }
+	gg_select_formation_hq_state = yes
+	clear_saved_scope = gg_ejercito_grande_army
+	# EN: Without an owned state there is no valid HQ; skip this formation.
+	# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+	if = {
+		limit = { exists = scope:gg_formation_hq_state }
+		create_military_formation = {
+			type = army
+			hq_region = scope:gg_formation_hq_state.region
+			name = gg_arg_ejercito_grande
+			save_scope_as = gg_ejercito_grande_army
+			combat_unit = { type = unit_type:combat_unit_type_line_infantry count = 8 }
+			combat_unit = { type = unit_type:combat_unit_type_irregular_infantry count = 2 }
+			combat_unit = { type = unit_type:combat_unit_type_hussars count = 6 }
+			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery count = 2 }
+		}
 	}
 	random_scope_character = {
-		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+		limit = {
+			has_template = ARG_Justo_Jose_de_Urquiza
+			exists = scope:gg_ejercito_grande_army
+		}
 		if = { limit = { NOT = { is_general = yes } } add_character_role = general }
 		set_commander_rank = 3
 		transfer_to_formation = scope:gg_ejercito_grande_army
 	}
 	if = {
 		limit = { exists = scope:gg_buenos_aires_front }
-		scope:gg_ejercito_grande_army = {
+		scope:gg_ejercito_grande_army ?= {
 			fully_mobilize_army = yes
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
@@ -799,31 +856,51 @@ gg_argentina_raise_ejercito_grande = {
 # https://www.dipublico.org/122100/
 gg_argentina_complete_foreign_contingents = {
 	c:BRZ ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_brazilian_grand_army_contingent
-			save_scope_as = gg_brazilian_grand_army
-			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
-			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_brazilian_grand_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_brazilian_grand_army_contingent
+				save_scope_as = gg_brazilian_grand_army
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+			}
 		}
-		create_military_formation = {
-			type = fleet
-			hq_region = capital.region
-			name = gg_arg_brazilian_allied_fleet
-			# EN: one frigate is the engine's minimum material fleet, not a sourced ship count.
-			# ES: una fragata es la flota material minima del motor, no una cifra historica de buques.
-			ship = { type = ship_type:ship_type_frigate count = 1 }
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = fleet
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_brazilian_allied_fleet
+				# EN: one frigate is the engine's minimum material fleet, not a sourced ship count.
+				# ES: una fragata es la flota material minima del motor, no una cifra historica de buques.
+				ship = { type = ship_type:ship_type_frigate count = 1 }
+			}
 		}
 	}
 	c:URU ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_oriental_grand_army_contingent
-			save_scope_as = gg_oriental_grand_army
-			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
-			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_MONTEVIDEO count = 1 }
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_oriental_grand_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_oriental_grand_army_contingent
+				save_scope_as = gg_oriental_grand_army
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_MONTEVIDEO count = 1 }
+			}
 		}
 	}
 	if = {
@@ -845,21 +922,35 @@ gg_argentina_complete_foreign_contingents = {
 #     de balance, no una cifra historica, y queda visiblemente por debajo de los terminos completos.
 gg_argentina_limited_foreign_contingents = {
 	c:BRZ ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_brazilian_limited_contingent
-			save_scope_as = gg_brazilian_limited_army
-			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_brazilian_limited_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_brazilian_limited_contingent
+				save_scope_as = gg_brazilian_limited_army
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+			}
 		}
 	}
 	c:URU ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_oriental_limited_contingent
-			save_scope_as = gg_oriental_limited_army
-			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+		gg_select_formation_hq_state = yes
+		clear_saved_scope = gg_oriental_limited_army
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_arg_oriental_limited_contingent
+				save_scope_as = gg_oriental_limited_army
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+			}
 		}
 	}
 	if = {

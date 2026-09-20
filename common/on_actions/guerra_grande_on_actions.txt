@@ -140,6 +140,18 @@ guerra_grande_on_game_start = {
 				set_global_variable = { name = gg_corrientes_agravio value = 0 }
 				set_global_variable = { name = gg_norte_agravio value = 0 }
 				set_global_variable = { name = gg_entre_rios_agravio value = 0 }
+				# EN: 365-day cross-checks: 1837-04-01 = (1837-1836)*365+(91-1) = 455 (.15); 1850-12-01 = (1850-1836)*365+(335-1) = 5444 (.19).
+				# ES: Controles con las entradas .15 y .19: 455 y 5444 días; sin bisiestos.
+				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+				trigger_event = { id = gg_argentina_cal.30 days = 1338 } # 1839-09-01: (1839-1836)*365+(244-1) = 1338
+				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+				trigger_event = { id = gg_argentina_cal.31 days = 2341 } # 1842-06-01: (1842-1836)*365+(152-1) = 2341
+				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+				trigger_event = { id = gg_argentina_cal.32 days = 3101 } # 1844-07-01: (1844-1836)*365+(182-1) = 3101
+				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+				trigger_event = { id = gg_argentina_cal.33 days = 3344 } # 1845-03-01: (1845-1836)*365+(60-1) = 3344
+				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+				trigger_event = { id = gg_argentina_cal.34 days = 4135 } # 1847-05-01: (1847-1836)*365+(121-1) = 4135
 				trigger_event = { id = gg_argentina_cal.14 days = 90 }   # 1836-04-01 primer pliego de Corrientes
 				trigger_event = { id = gg_argentina_cal.15 days = 455 }  # 1837-04-01 la renta de la aduana
 				trigger_event = { id = gg_argentina_cal.16 days = 816 }  # 1838-03-28 empieza el bloqueo frances

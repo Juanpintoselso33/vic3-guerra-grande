@@ -184,6 +184,11 @@ gg_defensa_subsidy = {
 gg_cerrito_subsidy = {
 	value = global_var:gg_patron_rosas
 	multiply = 30
+	# EN/ES: explicit withdrawal stops the monthly cash / el retiro expreso corta la caja mensual
+	if = {
+		limit = { has_global_variable = gg_int_arg_withdrawn }
+		multiply = 0
+	}
 }
 
 # EN/ES: the sea bar, capped at the opening threshold / la barra del mar, topeada en el umbral

@@ -9,6 +9,27 @@
 #     efectos, asi el chequeo de invariantes (I14) puede probar que nadie las escribe en otro
 #     lado. Los valores iniciales son provisorios hasta la pasada de balance (T10).
 
+# EN: Country scope. Clear the previous result so a landless country cannot reuse another HQ.
+#     Keep the capital only while owned; otherwise use one of this country's states.
+# ES: Scope de pais. Limpia el resultado anterior para no prestarle otro cuartel a un pais sin tierra.
+#     Conserva la capital solo si es propia; si no, usa cualquiera de los estados del pais.
+gg_select_formation_hq_state = {
+	clear_saved_scope = gg_formation_hq_state
+	if = {
+		limit = {
+			exists = capital
+			capital = { owner = prev }
+		}
+		capital = { save_scope_as = gg_formation_hq_state }
+	}
+	else = {
+		random_scope_state = {
+			limit = { owner = prev }
+			save_scope_as = gg_formation_hq_state
+		}
+	}
+}
+
 # EN: called once from guerra_grande_on_game_start.
 # ES: se llama una sola vez desde guerra_grande_on_game_start.
 gg_systems_init = {
@@ -588,18 +609,24 @@ gg_montonera_levy = {
 		#     could never buy: men who came with their own horses.
 		# ES: caballeria primero y casi todo. Es lo unico que tenian los sitiadores que la ciudad
 		#     no podia comprar: hombres que venian con caballo propio.
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_SAN_JOSE
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_SAN_JOSE
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_SAN_JOSE
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = 1
+				}
 			}
 		}
 		# EN: this modifier is already the mod's name for what the levy renews -- caudillos,
@@ -673,41 +700,55 @@ gg_river_blockade = {
 			set_variable = gg_brown_squadron_raised
 			if = {
 				limit = { exists = s:STATE_MALDONADO.region_state:CER }
-				create_military_formation = {
-					type = fleet
-					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
-					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
-					#     the squadron was never created. The capital's region is where the country is.
-					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
-					#     estado oriental, asi que la escuadra nunca se creaba.
-					hq_region = capital.region
-					name = gg_brown_squadron_name
-					save_scope_as = gg_brown_fleet
-					ship = {
-						type = ship_type:ship_type_frigate
-						state_region = s:STATE_MALDONADO
-						count = 3
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_brown_fleet
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = fleet
+						# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+						#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+						#     the squadron was never created. The capital's region is where the country is.
+						#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+						#     estado oriental, asi que la escuadra nunca se creaba.
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_brown_squadron_name
+						save_scope_as = gg_brown_fleet
+						ship = {
+							type = ship_type:ship_type_frigate
+							state_region = s:STATE_MALDONADO
+							count = 3
+						}
 					}
+					set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
 				}
-				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
 			}
 			else = {
-				create_military_formation = {
-					type = fleet
-					# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
-					#     for Cerrito Government in region_la_plata". That region has no oriental state, so
-					#     the squadron was never created. The capital's region is where the country is.
-					#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
-					#     estado oriental, asi que la escuadra nunca se creaba.
-					hq_region = capital.region
-					name = gg_brown_squadron_name
-					save_scope_as = gg_brown_fleet
-					ship = {
-						type = ship_type:ship_type_frigate
-						count = 3
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_brown_fleet
+				# EN: Without an owned state there is no valid HQ; skip this formation.
+				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = fleet
+						# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
+						#     for Cerrito Government in region_la_plata". That region has no oriental state, so
+						#     the squadron was never created. The capital's region is where the country is.
+						#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
+						#     estado oriental, asi que la escuadra nunca se creaba.
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_brown_squadron_name
+						save_scope_as = gg_brown_fleet
+						ship = {
+							type = ship_type:ship_type_frigate
+							count = 3
+						}
 					}
+					set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
 				}
-				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
 			}
 			# EN: playtest 2026-09-19 -- the squadron arrived with no admiral and no crews: the
 			#     Cerrito was handed three frigates it could not man. Vanilla never gives Uruguay a
@@ -771,34 +812,26 @@ gg_river_blockade = {
 #     los eventos agendados.
 gg_cal_fire = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
-			# EN: Codex review 2026-09-19 -- the mark used to be written on the strength of
-			#     guerra_grande_split_done alone, and the recipient was looked for afterwards. If no
-			#     country carried the side variable (the government was annexed, or the split ran in
-			#     an order nobody foresaw), the relay still declared itself done and the event was
-			#     lost for the whole game, silently. Asking for the recipient HERE makes the mark
-			#     mean "delivered", not "attempted": with no one to deliver to, it falls through to
-			#     the retry below and tries again next month.
-			# ES: revision de Codex 19/9/2026 -- la marca se escribia con solo ver
-			#     guerra_grande_split_done, y recien despues se buscaba destinatario. Si ningun pais
-			#     tenia la variable del bando (el gobierno fue anexado, o el corte corrio en un orden
-			#     que nadie previo), el relevo se daba por cumplido igual y el evento se perdia toda
-			#     la partida, en silencio. Pedir el destinatario ACA hace que la marca signifique
-			#     "entregado" y no "intentado": si no hay a quien entregarle, cae al reintento de
-			#     abajo y lo vuelve a probar el mes que viene.
+			# EN: Only the recipient's immediate acknowledges delivery. Its trigger can reject
+			#     this attempt even when the country exists; retry independently below.
+			# ES: Solo el immediate del destinatario confirma la entrega. Su trigger puede
+			#     rechazar el intento aunque exista el pais; el reintento de abajo es independiente.
 			limit = {
 				has_global_variable = guerra_grande_split_done
 				any_country = { has_variable = $SIDE$ }
 			}
-			set_global_variable = gg_cal_done_$N$
 			random_country = {
 				limit = { has_variable = $SIDE$ }
 				trigger_event = { id = $EVENT$ days = 0 popup = yes }
 			}
 		}
-		else_if = {
-			limit = { year < 1856 }
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
 			trigger_event = { id = $RETRY$ days = 30 }
 		}
 	}
@@ -807,21 +840,23 @@ gg_cal_fire = {
 # EN/ES: the same, for the events that are not a popup / lo mismo, para los que no son popup
 gg_cal_fire_quiet = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
 			# EN/ES: same guard as gg_cal_fire above / la misma guarda que gg_cal_fire de arriba
 			limit = {
 				has_global_variable = guerra_grande_split_done
 				any_country = { has_variable = $SIDE$ }
 			}
-			set_global_variable = gg_cal_done_$N$
 			random_country = {
 				limit = { has_variable = $SIDE$ }
 				trigger_event = { id = $EVENT$ days = 0 }
 			}
 		}
-		else_if = {
-			limit = { year < 1856 }
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
 			trigger_event = { id = $RETRY$ days = 30 }
 		}
 	}
@@ -832,29 +867,22 @@ gg_cal_fire_quiet = {
 #     gobiernos: el efecto es global, asi que corre en la copia que llegue primero
 gg_cal_fire_here = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
-		set_global_variable = gg_cal_done_$N$
+		limit = { NOT = { has_global_variable = $DONE$ } }
 		trigger_event = { id = $EVENT$ days = 0 }
 	}
 }
 
-# EN: Codex review 2026-09-19 -- same relay, but for an event whose own trigger can be false for a
-#     passing reason (a peace menu already on the table, a cooldown). The plain relay writes the mark
-#     first, so an event dropped for a reason that lasts a week was lost for the whole game: that is
-#     how the Hood bases could never happen, and with them the stalemate retry that asks for them.
-#     This one keeps trying every month until 1856, and only writes the mark once the event is really
-#     on its way.
-# ES: el mismo relevo, para un evento cuyo trigger puede ser falso por algo pasajero (un menu de paz
-#     ya abierto, un enfriamiento). El relevo comun escribe la marca primero, asi que un evento
-#     descartado por algo que dura una semana se perdia toda la partida: asi se podian perder las
-#     bases Hood, y con ellas el reintento del empate, que las pide. Este reintenta cada mes hasta
-#     1856 y recien escribe la marca cuando el evento va en camino de verdad.
+# EN: Keep the existing peace-table guard and require a recipient before attempting delivery.
+#     As above, only the recipient writes done; a rejected attempt keeps the monthly retry alive.
+# ES: Conserva la guarda de la mesa de paz y exige destinatario antes de intentar la entrega.
+#     Como arriba, solo el destinatario escribe done; un rechazo conserva el reintento mensual.
 gg_cal_fire_if_table_free = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_cal_done_$N$ } }
+		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
 			limit = {
 				has_global_variable = guerra_grande_split_done
+				any_country = { has_variable = $SIDE$ }
 				# EN/ES: load test 2026-09-19 -- this used to arrive as a $CONDITION$ parameter, and the
 				#     engine cannot compile a parameter that carries a trigger: "failed for unknown
 				#     arguments: =, has_global_variable". The whole file stopped parsing from there, so
@@ -864,14 +892,16 @@ gg_cal_fire_if_table_free = {
 				#     los treinta y tres no existian. Escrito aca, compila.
 				NOT = { has_global_variable = gg_peace_offered }
 			}
-			set_global_variable = gg_cal_done_$N$
 			random_country = {
 				limit = { has_variable = $SIDE$ }
 				trigger_event = { id = $EVENT$ days = 0 popup = yes }
 			}
 		}
-		else_if = {
-			limit = { year < 1856 }
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
 			trigger_event = { id = $RETRY$ days = 30 }
 		}
 	}

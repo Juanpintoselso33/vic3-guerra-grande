@@ -66,13 +66,19 @@ gg_contingent.1 = {
 		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		set_variable = guerra_grande_argentine_legion_raised
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		add_treasury = -10000
@@ -111,6 +117,15 @@ gg_contingent.1 = {
 		}
 		ai_chance = {
 			base = 20
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_2 } }
+				set_global_variable = gg_cal_done_2
+			}
 		}
 	}
 }
@@ -157,13 +172,19 @@ gg_contingent.3 = {
 		# ES: "Los Aguerridos" se van de la linea con sus armas y se funden en el Batallon de
 		#     Voluntarios de Oribe (Etchechury 2017). El Cerrito gana el batallon.
 		c:CER ?= {
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					state_region = s:STATE_SAN_JOSE
-					count = 1
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = 1
+					}
 				}
 			}
 		}
@@ -212,6 +233,15 @@ gg_contingent.3 = {
 			base = 100
 		}
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_1 } }
+				set_global_variable = gg_cal_done_1
+			}
+		}
+	}
 }
 
 # 1843.4.7 - Thiebaut gathers the French residents at the Teatro Nacional. The corps reaches more
@@ -258,22 +288,28 @@ gg_contingent.4 = {
 		gg_patron_change = { PATRON = francia DELTA = 5 }
 		set_variable = guerra_grande_french_legion_raised
 		default_option = yes
-		create_military_formation = {
-			type = army
-			# EN/ES: Codex review 2026-09-19 -- the loc key existed and the formation had no name, so the
-			#     largest corps of the siege showed up as a generic army / la clave existia y la formacion
-			#     no tenia nombre, asi que el cuerpo mas numeroso del sitio salia como un ejercito generico
-			name = Legion_Francesa
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				# EN/ES: Codex review 2026-09-19 -- the loc key existed and the formation had no name, so the
+				#     largest corps of the siege showed up as a generic army / la clave existia y la formacion
+				#     no tenia nombre, asi que el cuerpo mas numeroso del sitio salia como un ejercito generico
+				name = Legion_Francesa
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		# EN: Paris demanded the corps disarm and the consul was paying legionaries to go home.
@@ -321,6 +357,15 @@ gg_contingent.4 = {
 			base = 10
 		}
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_4 } }
+				set_global_variable = gg_cal_done_4
+			}
+		}
+	}
 }
 
 # 1843.4.9 - Garibaldi's note to the Ministry of War. The Italian Legion runs between 500 and 700
@@ -362,13 +407,19 @@ gg_contingent.5 = {
 		if = {
 			limit = { has_global_variable = gg_garibaldi_famous }
 			custom_tooltip = gg_naval.3.a_tt
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					state_region = s:STATE_MONTEVIDEO
-					count = 2
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 2
+					}
 				}
 			}
 		# EN/ES: Codex review 2026-09-19 -- kept in a variable so 1848 can put him on the boat
@@ -392,13 +443,19 @@ gg_contingent.5 = {
 		set_variable = { name = gg_garibaldi_ref value = scope:gg_garibaldi }
 		}
 		else = {
-			create_military_formation = {
-				type = army
-				hq_region = capital.region
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					state_region = s:STATE_MONTEVIDEO
-					count = 1
+			gg_select_formation_hq_state = yes
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = 1
+					}
 				}
 			}
 		}
@@ -409,6 +466,15 @@ gg_contingent.5 = {
 		}
 		ai_chance = {
 			base = 90
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_5 } }
+				set_global_variable = gg_cal_done_5
+			}
 		}
 	}
 }
@@ -446,17 +512,32 @@ gg_contingent.6 = {
 		#     la barra tiene que moverse durante la guerra: los Cazadores Vascos vuelven a llenar los cuadros
 		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 1
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
+				}
 			}
 		}
 		ai_chance = {
 			base = 100
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_8 } }
+				set_global_variable = gg_cal_done_8
+			}
 		}
 	}
 }
@@ -491,35 +572,41 @@ gg_contingent.7 = {
 		# EN/ES: T4 -- FE-4: the Vanguard is Rosas's army / la Vanguardia es el ejercito de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		default_option = yes
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			# EN: AND HERE IS WHERE THE INTERIOR IS PAID FOR. gg_interior_outcome is written by the
-			#     reckoning of 16 February 1843 and until now nobody read it: winning the interior
-			#     cleanly and scraping through it did exactly the same thing. They should not. The
-			#     Vanguardia that crosses is what is LEFT of the army that fought Lavalle twice --
-			#     an army that spent 1840 and 1841 marching from Cordoba to Tucuman and back arrives
-			#     smaller than one that had the interior quiet.
-			#     1 is a clean interior: the five battalions the sources give. 2 is an interior that
-			#     cost him: three. 0, the value without the Argentine side, behaves as history did.
-			# ES: Y ACA ES DONDE SE PAGA EL INTERIOR. gg_interior_outcome lo escribe el balance del
-			#     16 de febrero de 1843 y hasta ahora no lo leia nadie: ganar el interior limpio y
-			#     ganarlo raspando hacian exactamente lo mismo. No tienen que hacerlo. La Vanguardia
-			#     que cruza es lo que QUEDA del ejercito que le gano dos veces a Lavalle: un ejercito
-			#     que se paso 1840 y 1841 marchando de Cordoba a Tucuman y de vuelta llega mas chico
-			#     que uno que tuvo el interior quieto.
-			#     El 1 es interior limpio: los cinco batallones que dan las fuentes. El 2 es un
-			#     interior que le costo: tres. El 0, que es el valor sin el lado argentino, se
-			#     comporta como la historia.
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_SAN_JOSE
-				count = gg_vanguardia_line
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_SAN_JOSE
-				count = gg_vanguardia_horse
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				# EN: AND HERE IS WHERE THE INTERIOR IS PAID FOR. gg_interior_outcome is written by the
+				#     reckoning of 16 February 1843 and until now nobody read it: winning the interior
+				#     cleanly and scraping through it did exactly the same thing. They should not. The
+				#     Vanguardia that crosses is what is LEFT of the army that fought Lavalle twice --
+				#     an army that spent 1840 and 1841 marching from Cordoba to Tucuman and back arrives
+				#     smaller than one that had the interior quiet.
+				#     1 is a clean interior: the five battalions the sources give. 2 is an interior that
+				#     cost him: three. 0, the value without the Argentine side, behaves as history did.
+				# ES: Y ACA ES DONDE SE PAGA EL INTERIOR. gg_interior_outcome lo escribe el balance del
+				#     16 de febrero de 1843 y hasta ahora no lo leia nadie: ganar el interior limpio y
+				#     ganarlo raspando hacian exactamente lo mismo. No tienen que hacerlo. La Vanguardia
+				#     que cruza es lo que QUEDA del ejercito que le gano dos veces a Lavalle: un ejercito
+				#     que se paso 1840 y 1841 marchando de Cordoba a Tucuman y de vuelta llega mas chico
+				#     que uno que tuvo el interior quieto.
+				#     El 1 es interior limpio: los cinco batallones que dan las fuentes. El 2 es un
+				#     interior que le costo: tres. El 0, que es el valor sin el lado argentino, se
+				#     comporta como la historia.
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = gg_vanguardia_line
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_SAN_JOSE
+					count = gg_vanguardia_horse
+				}
 			}
 		}
 		add_modifier = {
@@ -590,19 +677,25 @@ gg_contingent.8 = {
 		#     los aliados se obligan "a hacer salir del territorio de esta al General D. Manuel
 		#     Oribe y las fuerzas argentinas que manda". Escalado como los ~7.000 de Oribe en
 		#     gg_contingent.7.
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = Ejercito_Aliado
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 3
-			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
-				count = 2
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = Ejercito_Aliado
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_MONTEVIDEO
+					count = 2
+				}
 			}
 		}
 		c:BRZ ?= {
@@ -677,6 +770,15 @@ gg_contingent.8 = {
 		}
 		ai_chance = {
 			base = 15
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_29 } }
+				set_global_variable = gg_cal_done_29
+			}
 		}
 	}
 }

@@ -1,0 +1,70 @@
+﻿# EN: Balance values are design abstractions, not historical fiscal estimates.
+# ES: Los valores son balance de diseño, no estimaciones fiscales históricas.
+# EN: Inflation is represented by tax waste and lost legitimacy; land sales mortgage future revenue.
+# ES: La inflación se representa con desperdicio fiscal y pérdida de legitimidad; las ventas hipotecan renta futura.
+
+gg_arg_direct_tax = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = 150
+	country_authority_add = 25
+	interest_group_ig_landowners_approval_add = -2
+}
+
+gg_arg_paper_issue = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_waste_add = 0.05
+	country_legitimacy_base_add = -5
+}
+
+gg_arg_land_sales = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = -100
+	interest_group_ig_landowners_approval_add = 2
+	interest_group_ig_landowners_pol_str_mult = 0.1
+}
+
+gg_arg_small_ranchers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_add = -100
+	interest_group_ig_landowners_approval_add = -2
+	interest_group_ig_rural_folk_approval_add = 2
+}
+
+gg_arg_full_resignation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_legitimacy_base_add = 10
+}
+
+gg_arg_soft_resignation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_legitimacy_base_add = 5
+}
+
+gg_arg_no_resignation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_authority_add = 25
+	country_legitimacy_base_add = -10
+}
+
+gg_arg_port_enforcement = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_authority_add = 25
+	country_minting_mult = 0.05
+}
+
+gg_arg_port_tolerance = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_authority_add = -25
+	country_minting_mult = -0.05
+}
+
+gg_arg_port_licences = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_mult = -0.05
+}
+
+gg_arg_littoral_restricted = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_trade_capacity_add = -10
+	state_weekly_trades_add = -1
+}

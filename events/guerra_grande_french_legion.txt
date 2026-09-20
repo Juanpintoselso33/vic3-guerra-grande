@@ -66,13 +66,19 @@ gg_legion.1 = {
 	option = {
 		name = gg_legion.1.a
 		default_option = yes
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 4
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 4
+				}
 			}
 		}
 		add_radicals = {
@@ -92,13 +98,19 @@ gg_legion.1 = {
 	#     el pleito diplomatico con Paris se termina.
 	option = {
 		name = gg_legion.1.b
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				state_region = s:STATE_MONTEVIDEO
-				count = 3
+		gg_select_formation_hq_state = yes
+		# EN: Without an owned state there is no valid HQ; skip this formation.
+		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_MONTEVIDEO
+					count = 3
+				}
 			}
 		}
 		add_loyalists = {

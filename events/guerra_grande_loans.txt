@@ -119,6 +119,15 @@ gg_loan.1 = {
 			base = 15
 		}
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_20 } }
+				set_global_variable = gg_cal_done_20
+			}
+		}
+	}
 }
 
 # =======================================================================================
@@ -240,6 +249,15 @@ gg_loan.2 = {
 			base = 15
 		}
 	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_26 } }
+				set_global_variable = gg_cal_done_26
+			}
+		}
+	}
 }
 
 # =======================================================================================
@@ -346,6 +364,15 @@ gg_loan.3 = {
 		}
 		ai_chance = {
 			base = 15
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_6 } }
+				set_global_variable = gg_cal_done_6
+			}
 		}
 	}
 }
@@ -485,6 +512,15 @@ gg_loan.4 = {
 		add_modifier = { name = guerra_grande_alone_against_the_siege years = 10 }
 		c:ARG ?= { change_relations = { country = ROOT value = -30 } }
 		ai_chance = { base = 10 }
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_11 } }
+				set_global_variable = gg_cal_done_11
+			}
+		}
 	}
 }
 
