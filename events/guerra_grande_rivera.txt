@@ -1055,7 +1055,7 @@ gg_rivera.8 = {
 	#     Montevideo. ES: Reutiliza el video existente de la Legion Argentina, la escena militar
 	#     disponible mas cercana ambientada en Montevideo.
 	event_image = {
-		video = "gg_leg_argentine"
+		video = "gg_arg_mitre_joven"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

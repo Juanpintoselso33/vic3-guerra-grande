@@ -160,6 +160,40 @@ guerra_grande_customs_pledged = {
 	country_loan_interest_rate_add = 0.01
 }
 
+# EN: Convention of 21 November 1851, arts. VI-VII: four monthly instalments of 100,000 patacones,
+#     6% annual interest, secured on the revenues and public lands of Entre Rios and Corrientes.
+# ES: Convencion del 21 de noviembre de 1851, arts. VI-VII: cuatro mensualidades de 100.000
+#     patacones, interes anual del 6%, con rentas y tierras publicas de Entre Rios y Corrientes.
+# SOURCE / FUENTE: https://www.dipublico.org/122100/
+gg_ejercito_grande_full_mortgage = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.25
+	country_gold_reserve_limit_mult = -0.20
+	country_loan_interest_rate_add = 0.06
+}
+
+# EN: DESIGN COUNTERFACTUAL. The limited branch takes one 100,000-patacon instalment under the same
+#     6% rate; the smaller fiscal penalty is a game-balance representation, not a historical clause.
+# ES: CONTRAFACTUAL DE DISENO. La rama limitada toma una mensualidad de 100.000 patacones al mismo
+#     6%; la penalidad fiscal menor es balance de juego, no una clausula historica.
+gg_ejercito_grande_limited_mortgage = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.10
+	country_gold_reserve_limit_mult = -0.10
+	country_loan_interest_rate_add = 0.06
+}
+
+# EN: Rosas withdraws support: the Cerrito army loses the material basis of its resistance while
+#     the real war resolves against it. ES: Rosas retira el apoyo: el ejercito pierde su base material.
+# SOURCE / FUENTE: design consequence in / consecuencia de diseno en
+# docs/guerra-grande-argentina/plan-contenido-argentino.md, 29/5/1851.
+gg_oribe_abandoned_army = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = -0.35
+	unit_defense_mult = -0.35
+	unit_morale_recovery_mult = -0.50
+}
+
 # ---------------------------------------------------------------------------------------
 # THE RECKONING
 # ---------------------------------------------------------------------------------------

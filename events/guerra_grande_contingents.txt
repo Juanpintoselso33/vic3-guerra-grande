@@ -559,7 +559,11 @@ gg_contingent.8 = {
 		c:URU ?= this
 		exists = c:CER
 		year >= 1851
+		# EN/ES: with la Argentina loaded, gg_argentina.13 owns this choice on 29 May / con la
+		#     Argentina cargada, gg_argentina.13 es el dueno de esta decision el 29 de mayo.
+		NOT = { exists = s:STATE_ENTRE_RIOS }
 		NOT = { has_global_variable = guerra_grande_treaties_signed }
+		NOT = { has_global_variable = gg_montevideo_convention_refused }
 	}
 
 	# EN: THE INTERVENTION THAT ENDED THE WAR. This is not a flavour choice and it must not read

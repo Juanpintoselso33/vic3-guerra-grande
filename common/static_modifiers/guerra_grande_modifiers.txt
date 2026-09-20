@@ -401,16 +401,6 @@ gg_arg_northern_arms_left = {
 	unit_offense_mult = -0.05
 }
 
-# EN: Accepting Alcaraz acknowledges that a provincial commander may settle peace and constitutional
-#     terms which Buenos Aires historically tried to amend. The legitimacy key is vanilla 1.13.
-# ES: Aceptar Alcaraz reconoce que un jefe provincial puede acordar la paz y condiciones
-#     constitucionales que Buenos Aires historicamente intento modificar. La clave de legitimidad
-#     existe en vanilla 1.13.
-gg_arg_alcaraz_accepted = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_legitimacy_base_add = -5
-}
-
 # EN: The command against Brazil improves readiness but costs military stores; closing Entre Rios's
 #     trade costs revenue. ES: El mando contra Brasil mejora el alistamiento pero consume pertrechos;
 #     cerrar el trafico entrerriano cuesta renta.

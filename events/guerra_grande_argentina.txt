@@ -250,45 +250,53 @@ gg_argentina.3 = {
 
 	duration = 1825
 
-	trigger = {
-		c:ARG ?= this
-		NOT = { exists = c:ENR }
-	}
-
 	immediate = {
 		hidden_effect = {
-			# EN/ES: the ORIGINAL Urquiza, saved before the clone exists / el Urquiza ORIGINAL
+			# EN/ES: the ORIGINAL Urquiza, saved before either peaceful or armed separation creates a
+			#     clone / el Urquiza ORIGINAL, guardado antes de que la separacion pacifica o armada cree
+			#     un clon
 			random_scope_character = {
 				limit = { has_template = ARG_Justo_Jose_de_Urquiza }
 				save_scope_as = gg_urquiza
-			}
-			gg_argentina_create_entre_rios = yes
-			# EN: The incompatible orders of 1850 gave Urquiza both a grievance and military
-			#     preparation. If Rosas backed down, Entre Rios still may accept the annual
-			#     resignation, but it does not begin the war with that advantage.
-			# ES: Las ordenes incompatibles de 1850 le dieron a Urquiza agravio y preparacion militar.
-			#     Si Rosas retrocedio, Entre Rios igual puede aceptar la renuncia anual, pero no empieza
-			#     la guerra con esa ventaja.
-			if = {
-				limit = { has_global_variable = gg_urquiza_double_order }
-				c:ENR ?= { add_modifier = { name = gg_arg_urquiza_prepared years = 2 } }
 			}
 		}
 	}
 
 	option = {
 		name = gg_argentina.3.a
+		custom_tooltip = gg_pronunciamiento_accept_tt
+		# EN: DESIGN COUNTERFACTUAL: Rosas accepts the lawful reassumption, calls the congress and
+		#     reviews what Buenos Aires
+		#     can still spend on Oribe. Entre Rios becomes a country, but not a rebellion: no diplomatic
+		#     play is opened and this option never speaks on its behalf.
+		# ES: CONTRAFACTUAL DE DISENO: Rosas acepta la reasuncion legal, convoca el congreso y revisa lo
+		#     que Buenos Aires todavia
+		#     puede gastar en Oribe. Entre Rios se vuelve pais, pero no rebelion: no se abre jugada
+		#     diplomatica y esta opcion nunca habla en su nombre.
+		gg_argentina_create_entre_rios = yes
+		gg_argentina_open_negotiated_confederation = yes
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
 		default_option = yes
-		gg_argentina_open_war = { TAG = ENR }
-		ai_chance = { base = 100 }
+		ai_chance = { base = 20 }
 	}
 
 	option = {
 		name = gg_argentina.3.b
+		custom_tooltip = gg_pronunciamiento_rebelion_tt
+		gg_argentina_create_entre_rios = yes
+		set_global_variable = gg_montevideo_convention_enabled
+		gg_argentina_open_war = { TAG = ENR }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = gg_argentina.3.c
 		trigger = {
 			is_player = yes
-			c:ENR ?= { is_player = no }
 		}
+		custom_tooltip = gg_pronunciamiento_rebelion_tt
+		gg_argentina_create_entre_rios = yes
+		set_global_variable = gg_montevideo_convention_enabled
 		gg_argentina_open_war = { TAG = ENR }
 		ai_chance = { base = 0 }
 		hidden_effect = {
@@ -728,11 +736,14 @@ gg_argentina.66 = {
 }
 
 # EN: 1850 -- Rosas combines command against Brazil with the order to close Entre Rios's traffic
-#     with Montevideo. The annual resignation travels with the orders so the player sees the ritual
-#     that Entre Rios will break in 1851.
+#     with Montevideo. The player can separate those policies, but every answer changes the Federal
+#     Pact, a real army and the material support reaching the Defensa.
 # ES: 1850 -- Rosas combina el mando contra Brasil con la orden de cerrar el trafico entrerriano con
-#     Montevideo. La renuncia anual viaja con las ordenes para que el jugador vea la ceremonia que
-#     Entre Rios rompera en 1851.
+#     Montevideo. El jugador puede separar esas politicas, pero toda respuesta cambia el Pacto
+#     Federal, un ejercito real y el sosten material que llega a la Defensa.
+# EN: Unit counts and treasury transfers below are game-balance values, not sourced historical
+#     quantities. ES: Las cantidades de unidades y transferencias de caja son valores de balance,
+#     no cantidades historicas documentadas.
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Urquiza y Entre Rios» y
 # «El Pronunciamiento, que fue exactamente» [D].
 gg_argentina.67 = {
@@ -750,31 +761,124 @@ gg_argentina.67 = {
 		exists = s:STATE_ENTRE_RIOS
 	}
 
-	immediate = {
-		hidden_effect = {
-			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
-		}
-	}
-
 	option = {
 		name = gg_argentina.67.a
-		# EN/ES: dos ordenes que no caben juntas dejan a Entre Rios con un reclamo abierto
-		#     / two orders that do not fit together leave Entre Rios with a claim open
+		# EN/ES: historical combination / combinacion historica
 		gg_reclamo_abre = { KEY = entre_rios }
 		default_option = yes
-		custom_tooltip = gg_urquiza_double_order_tt
+		custom_tooltip = gg_urquiza_orders_both_tt
 		set_global_variable = gg_urquiza_double_order
-		change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+		set_global_variable = gg_urquiza_brazil_command
+		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
+		gg_argentina_arm_urquiza_against_brazil = yes
 		add_modifier = { name = gg_arg_brazil_command months = 18 }
 		add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				add_treasury = -20000
+			}
+		}
+		c:CER ?= { add_treasury = 10000 }
 		ai_chance = { base = 85 }
 	}
 	option = {
 		name = gg_argentina.67.b
+		# EN/ES: design counterfactual: keep Urquiza's command but withdraw the commercial order /
+		#     contrafactual de diseno: mantener el mando de Urquiza pero retirar la orden comercial
 		gg_reclamo_cierra = { KEY = entre_rios }
-		custom_tooltip = gg_entre_rios_concession_tt
-		change_global_variable = { name = gg_entre_rios_agravio add = -1 }
-		add_treasury = -25000
+		custom_tooltip = gg_urquiza_command_trade_tt
+		set_global_variable = gg_urquiza_brazil_command
+		set_global_variable = { name = gg_entre_rios_agravio value = 0 }
+		gg_argentina_arm_urquiza_against_brazil = yes
+		add_modifier = { name = gg_arg_brazil_command months = 18 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				add_treasury = 20000
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+	option = {
+		name = gg_argentina.67.c
+		# EN: DESIGN COUNTERFACTUAL. The source names no alternative commander, so the engine selects
+		#     another serving Argentine general and the text invents no name.
+		# ES: CONTRAFACTUAL DE DISENO. La fuente no nombra un mando alternativo, asi que el motor elige
+		#     otro general argentino en servicio y el texto no inventa un nombre.
+		gg_reclamo_abre = { KEY = entre_rios }
+		custom_tooltip = gg_other_general_close_trade_tt
+		set_global_variable = gg_brazil_command_withheld
+		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
+		gg_argentina_arm_other_against_brazil = yes
+		add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				add_treasury = -20000
+			}
+		}
+		c:CER ?= { add_treasury = 10000 }
+		ai_chance = { base = 5 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 5 January 1851 -- LA REGENERACION publishes Terrada's article and Urquiza answers Rosas that
+#     freedom of the press is respected in Entre Rios. The demand to subdue the newspaper below is
+#     an explicit design counterfactual: the research documents the article and Urquiza's answer,
+#     not such an order from Rosas.
+# ES: 5 de enero de 1851 -- LA REGENERACION publica el articulo de Terrada y Urquiza le responde a
+#     Rosas que en Entre Rios se respeta la libertad de prensa. La exigencia de someter al periodico
+#     es un contrafactual explicito de diseno: la investigacion documenta el articulo y la respuesta
+#     de Urquiza, no semejante orden de Rosas.
+# EN/ES: The reserve and treasury amounts are game-balance values, not documented quantities. / La
+#     reserva y la transferencia de caja son valores de balance, no cantidades documentadas.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1850-1852 [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina.9 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.9.t
+	desc = gg_argentina.9.d
+	flavor = gg_argentina.9.f
+	event_image = { video = "gg_nav_pasquines" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 1825
+
+	option = {
+		name = gg_argentina.9.a
+		custom_tooltip = gg_regeneracion_pass_tt
+		default_option = yes
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = gg_argentina.9.b
+		custom_tooltip = gg_regeneracion_submit_tt
+		# EN: DESIGN COUNTERFACTUAL. This concrete demand is not documented as an order Rosas sent.
+		# ES: CONTRAFACTUAL DE DISENO. Esta exigencia concreta no esta documentada como orden de Rosas.
+		gg_reclamo_abre = { KEY = entre_rios }
+		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
+		set_global_variable = gg_urquiza_press_preparation
+		gg_argentina_arm_urquiza_reserve = yes
+		ai_chance = { base = 25 }
+	}
+	option = {
+		name = gg_argentina.9.c
+		custom_tooltip = gg_regeneracion_withdraw_tt
+		gg_reclamo_cierra = { KEY = entre_rios }
+		set_global_variable = { name = gg_entre_rios_agravio value = 0 }
+		remove_modifier = gg_arg_traffic_cut
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				add_treasury = 20000
+			}
+		}
 		ai_chance = { base = 15 }
 	}
 }
@@ -794,36 +898,141 @@ gg_argentina.69 = {
 	desc = gg_argentina.69.d
 	flavor = gg_argentina.69.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_arg_alcaraz" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 1825
 
 	trigger = {
 		c:ARG ?= this
+		exists = c:CRR
+		has_war_with = c:CRR
 		exists = s:STATE_ENTRE_RIOS
-	}
-
-	immediate = {
-		hidden_effect = {
-			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
-		}
 	}
 
 	option = {
 		name = gg_argentina.69.a
+		# EN: Rosas's historical answer: the amendments leave the Entre Rios petition pending and
+		#     the real protectorate war open. If another branch ended it, the same Federal Pact play
+		#     reopens it; this button never declares a result.
+		# ES: La respuesta historica de Rosas: las enmiendas dejan pendiente el pliego entrerriano y
+		#     abierta la guerra real por el protectorado. Si otra rama la termino, la reabre la misma
+		#     jugada del Pacto Federal; este boton nunca declara un resultado.
 		gg_reclamo_abre = { KEY = entre_rios }
 		default_option = yes
-		custom_tooltip = gg_entre_rios_refusal_tt
-		change_global_variable = { name = gg_entre_rios_agravio add = 1 }
-		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
+		custom_tooltip = gg_alcaraz_amendments_tt
+		set_global_variable = gg_alcaraz_rejected
+		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
+		if = {
+			limit = {
+				exists = c:CRR
+				NOT = { has_war_with = c:CRR }
+			}
+			gg_argentina_open_war = { TAG = CRR }
+		}
 		ai_chance = { base = 80 }
 	}
 	option = {
 		name = gg_argentina.69.b
-		gg_reclamo_cierra = { KEY = entre_rios }
-		custom_tooltip = gg_entre_rios_concession_tt
-		change_global_variable = { name = gg_entre_rios_agravio add = -1 }
-		add_modifier = { name = gg_arg_alcaraz_accepted years = 10 }
+		# EN: The treaty itself supplies every term below: peace, reincorporation under the delegated
+		#     foreign relations of the Pact, exemption from the Oriental service and a constituent
+		#     congress. The shared effect makes Vences's counterfactual reopening use the same terms.
+		# ES: El propio tratado aporta todos los terminos: paz, reincorporacion bajo las relaciones
+		#     exteriores delegadas del Pacto, exencion del servicio oriental y congreso constituyente.
+		#     El efecto compartido hace que la reapertura contrafactual de Vences use lo mismo.
+		custom_tooltip = gg_alcaraz_accept_tt
+		gg_argentina_accept_alcaraz = yes
+		ai_chance = { base = 20 }
+	}
+}
+
+# EN: 27 November 1847 -- Urquiza destroyed the Madariaga army at Vences: 700 killed and 2,200
+#     prisoners. This event does NOT reproduce that result. It occurs only while the Federal Pact
+#     war is still being fought and decides who receives the force and the front; the engine decides
+#     whether a battle is fought and who wins it. Reopening Alcaraz is an explicit counterfactual
+#     reuse of the documented 1846 proposal, not a treaty proposed in November 1847.
+# ES: 27 de noviembre de 1847 -- Urquiza destruyo al ejercito de los Madariaga en Vences: 700 muertos
+#     y 2.200 prisioneros. Este evento NO reproduce ese resultado. Solo aparece mientras se sigue
+#     peleando la guerra del Pacto Federal y decide quien recibe la fuerza y el frente; el motor
+#     decide si hay batalla y quien la gana. Reabrir Alcaraz es una reutilizacion contrafactual
+#     explicita de la propuesta documentada de 1846, no un tratado propuesto en noviembre de 1847.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1843-1847 [D];
+# docs/guerra-grande-argentina/plan-contenido-argentino.md, 1847, «Vences».
+gg_argentina.8 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.8.t
+	desc = gg_argentina.8.d
+	flavor = gg_argentina.8.f
+	event_image = { video = "gg_fl_urquiza" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	# EN: No trigger here. gg_argentina_cal.26 is the dated relay and reads every condition on
+	#     27 November 1847, not when the calendar is queued in 1836.
+	# ES: Sin trigger aca. gg_argentina_cal.26 es el relevo fechado y lee todas las condiciones el
+	#     27 de noviembre de 1847, no cuando el calendario se agenda en 1836.
+
+	option = {
+		name = gg_argentina.8.a
+		default_option = yes
+		custom_tooltip = gg_vences_delegate_tt
+		set_global_variable = gg_urquiza_vences_command
+		# EN: Save the front of the actual ARG-CRR war before creating the formation. The allocation
+		#     is deliberately a game-scale force, not a claim about an undocumented order of battle.
+		# ES: Guarda el frente de la guerra real ARG-CRR antes de crear la formacion. La asignacion es
+		#     deliberadamente una fuerza a escala de juego, no una afirmacion sobre un orden de batalla
+		#     no documentado.
+		s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+			save_scope_as = gg_entre_rios_state
+		}
+		random_scope_war = {
+			limit = { c:CRR = { is_war_participant = c:ARG } }
+			random_scope_front = { save_scope_as = gg_corrientes_front }
+		}
+		create_military_formation = {
+			type = army
+			hq_region = scope:gg_entre_rios_state.region
+			name = gg_arg_ejercito_entrerriano
+			save_scope_as = gg_vences_army
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ENTRE_RIOS
+				count = 4
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_ENTRE_RIOS
+				count = 4
+			}
+		}
+		random_scope_character = {
+			limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+			if = {
+				limit = { NOT = { is_general = yes } }
+				add_character_role = general
+			}
+			transfer_to_formation = scope:gg_vences_army
+		}
+		if = {
+			limit = {
+				exists = scope:gg_vences_army
+				exists = scope:gg_corrientes_front
+			}
+			scope:gg_vences_army = {
+				fully_mobilize_army = yes
+				deploy_to_front = scope:gg_corrientes_front
+			}
+		}
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = gg_argentina.8.b
+		custom_tooltip = gg_vences_reopen_alcaraz_tt
+		# EN: Counterfactual reuse of the real 1846 terms; not a historical November 1847 treaty.
+		# ES: Reutilizacion contrafactual de los terminos reales de 1846; no un tratado historico de
+		#     noviembre de 1847.
+		gg_argentina_accept_alcaraz = yes
 		ai_chance = { base = 20 }
 	}
 }
@@ -890,6 +1099,10 @@ gg_argentina.71 = {
 	option = {
 		name = gg_argentina.71.a
 		gg_reclamo_cierra = { KEY = entre_rios }
+		# EN/ES: one writer for the constitutional closure opened at Alcaraz / un solo escritor para
+		#     el cierre constitucional abierto en Alcaraz
+		custom_tooltip = gg_confederacion_negociada_tt
+		gg_argentina_open_negotiated_confederation = yes
 		default_option = yes
 		ai_chance = { base = 100 }
 	}
@@ -1159,7 +1372,7 @@ gg_argentina.21 = {
 	desc = gg_argentina.21.d
 	flavor = gg_argentina.21.f
 
-	event_image = { video = "gg_rosas_cerrito" }
+	event_image = { video = "gg_arg_vanguardia" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
 
@@ -1221,7 +1434,7 @@ gg_argentina.22 = {
 	title = gg_argentina.22.t
 	desc = gg_argentina.22.d
 	flavor = gg_argentina.22.f
-	event_image = { video = "gg_squadrons" }
+	event_image = { video = "gg_arg_bloqueo" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 1825
 
@@ -1386,7 +1599,7 @@ gg_argentina.24 = {
 	title = gg_argentina.24.t
 	desc = gg_argentina.24.d
 	flavor = gg_argentina.24.f
-	event_image = { video = "gg_nav_costa_brava" }
+	event_image = { video = "gg_arg_quebracho" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
 
@@ -1464,7 +1677,7 @@ gg_argentina.25 = {
 	title = gg_argentina.25.t
 	desc = gg_argentina.25.d
 	flavor = gg_argentina.25.f
-	event_image = { video = "gg_f2_oribe_gallino" }
+	event_image = { video = "gg_arg_hood_bases" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 1825
 
@@ -1553,7 +1766,7 @@ gg_argentina.26 = {
 	title = gg_argentina.26.t
 	desc = gg_argentina.26.d
 	flavor = gg_argentina.26.f
-	event_image = { video = "gg_f2_rosas_monvoisin" }
+	event_image = { video = "gg_arg_sable" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	duration = 1825
 
@@ -1652,7 +1865,7 @@ gg_argentina.27 = {
 		}
 	}
 	flavor = gg_argentina.27.f
-	event_image = { video = "gg_f2_suarez" }
+	event_image = { video = "gg_arg_clausula" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	duration = 1825
 
@@ -1825,7 +2038,22 @@ gg_argentina.41 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.41.t
-	desc = gg_argentina.41.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.41.d_full
+				trigger = { has_global_variable = gg_ejercito_grande_full_terms }
+			}
+			triggered_desc = {
+				desc = gg_argentina.41.d_limited
+				trigger = { has_global_variable = gg_ejercito_grande_limited_terms }
+			}
+			triggered_desc = {
+				desc = gg_argentina.41.d_alone
+				trigger = { has_global_variable = gg_ejercito_grande_alone }
+			}
+		}
+	}
 	flavor = gg_argentina.41.f
 	event_image = { video = "gg_arg_pronunciamiento" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -2295,6 +2523,164 @@ gg_argentina.60 = {
 		#     opcion tiene que mostrarlo / withholding recognition reduces the Vanguard Rosas can
 		#     later lend, so the option has to say so
 		custom_tooltip = gg_oribe_unrecognised_tt
+		ai_chance = { base = 10 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.13 -- THE CONVENTION OF MONTEVIDEO, 29 May 1851. Entre Rios either signs the
+#     documented Brazilian price or keeps fighting without the alliance. Signing creates actual
+#     allied formations and belligerents; refusal cannot be silently offered again in September.
+# ES: gg_argentina.13 -- LA CONVENCION DE MONTEVIDEO, 29 de mayo de 1851. Entre Rios firma el precio
+#     brasileno documentado o sigue peleando sin la alianza. Firmar crea formaciones y beligerantes
+#     reales; la negativa no puede volver a ofrecerse en silencio en setiembre.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Convencion del 29/5/1851»;
+# primary text / texto primario: https://www.dipublico.org/122098/
+# -------------------------------------------------------------------------------------------------
+gg_argentina.13 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.13.t
+	desc = gg_argentina.13.d
+	flavor = gg_argentina.13.f
+	event_image = { video = "gg_arg_coalicion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	option = {
+		name = gg_argentina.13.a
+		default_option = yes
+		custom_tooltip = gg_montevideo_convention_sign_tt
+		gg_argentina_sign_montevideo_convention = yes
+		c:ARG ?= { trigger_event = { id = gg_argentina.14 days = 0 popup = yes } }
+		ai_chance = { base = 85 }
+	}
+	option = {
+		name = gg_argentina.13.b
+		custom_tooltip = gg_montevideo_convention_refuse_tt
+		set_global_variable = gg_montevideo_convention_refused
+		ai_chance = { base = 15 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.14 -- Rosas answers the signed convention. Abandoning Oribe dissolves the
+#     Cerrito's resistance and exhausts Buenos Aires's support in the Entre Rios war without ever
+#     creating the Ejercito Grande. Declaring war activates article XV and brings both allies into
+#     the existing war against Buenos Aires; the November decision still determines what marches.
+# ES: gg_argentina.14 -- Rosas contesta la convencion firmada. Abandonar a Oribe disuelve la
+#     resistencia del Cerrito y agota el apoyo porteno en la guerra entrerriana sin crear nunca el
+#     Ejercito Grande. Declarar la guerra activa el articulo XV; noviembre decide que marcha.
+# SOURCE / FUENTE: Convention / Convencion of 29 May 1851, arts. I and XV:
+# https://www.dipublico.org/122098/
+# -------------------------------------------------------------------------------------------------
+gg_argentina.14 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.14.t
+	desc = gg_argentina.14.d
+	flavor = gg_argentina.14.f
+	event_image = { video = "gg_oribe_fall" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	option = {
+		name = gg_argentina.14.a
+		custom_tooltip = gg_rosas_abandon_oribe_tt
+		set_global_variable = gg_rosas_abandoned_oribe
+		c:CER ?= {
+			add_modifier = { name = gg_oribe_abandoned_army years = 2 is_decaying = yes }
+			every_scope_war = {
+				limit = { gg_is_the_war = yes }
+				add_war_war_support = { target = c:CER value = -1000 }
+			}
+		}
+		every_scope_war = {
+			limit = { is_war_participant = c:ENR }
+			add_war_war_support = { target = c:ARG value = -1000 }
+		}
+		default_option = yes
+		ai_chance = { base = 20 }
+	}
+	option = {
+		name = gg_argentina.14.b
+		custom_tooltip = gg_rosas_declare_alliance_tt
+		set_global_variable = gg_war_against_buenos_aires
+		every_scope_war = {
+			limit = { is_war_participant = c:ENR }
+			if = {
+				limit = { NOT = { is_war_participant = c:URU } }
+				join_war = { target = c:URU side = c:ENR }
+			}
+			if = {
+				limit = { NOT = { is_war_participant = c:BRZ } }
+				join_war = { target = c:BRZ side = c:ENR }
+			}
+		}
+		ai_chance = { base = 80 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.15 -- THE PRICE OF THE EJERCITO GRANDE, 21 November 1851. The full terms preserve
+#     every documented number in the event and debt ledger: 18,000 under Urquiza, 3,000 Brazilians,
+#     2,500 Orientals, 100,000 patacones monthly for four months at 6%, secured on the revenues and
+#     public lands of Entre Rios and Corrientes. The two alternatives are explicit design branches.
+# ES: gg_argentina.15 -- EL PRECIO DEL EJERCITO GRANDE, 21 de noviembre de 1851. Los terminos
+#     completos conservan todas las cifras documentadas. Las otras dos son ramas explicitas de diseno.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Convencion del 21/11/1851»;
+# primary text / texto primario, arts. III-VIII: https://www.dipublico.org/122100/
+# -------------------------------------------------------------------------------------------------
+gg_argentina.15 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.15.t
+	desc = gg_argentina.15.d
+	flavor = gg_argentina.15.f
+	event_image = { video = "gg_money_brazilian_claims" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	option = {
+		name = gg_argentina.15.a
+		default_option = yes
+		custom_tooltip = gg_ejercito_grande_full_tt
+		set_global_variable = gg_ejercito_grande_full_terms
+		set_global_variable = { name = gg_ejercito_grande_debt value = 400000 }
+		set_global_variable = { name = gg_ejercito_grande_monthly_loan value = 100000 }
+		set_global_variable = { name = gg_ejercito_grande_loan_months value = 4 }
+		set_global_variable = { name = gg_ejercito_grande_interest_percent value = 6 }
+		set_global_variable = gg_ejercito_grande_mortgage
+		add_treasury = 400000
+		add_modifier = { name = gg_ejercito_grande_full_mortgage }
+		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_full_mortgage } }
+		gg_argentina_raise_ejercito_grande = yes
+		gg_argentina_complete_foreign_contingents = yes
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.15.b
+		custom_tooltip = gg_ejercito_grande_limited_tt
+		# EN: DESIGN COUNTERFACTUAL: one documented monthly instalment, not a claimed historical offer.
+		# ES: CONTRAFACTUAL DE DISENO: una mensualidad documentada, no una oferta historica atribuida.
+		set_global_variable = gg_ejercito_grande_limited_terms
+		set_global_variable = { name = gg_ejercito_grande_debt value = 100000 }
+		set_global_variable = { name = gg_ejercito_grande_monthly_loan value = 100000 }
+		set_global_variable = { name = gg_ejercito_grande_loan_months value = 1 }
+		set_global_variable = { name = gg_ejercito_grande_interest_percent value = 6 }
+		set_global_variable = gg_ejercito_grande_mortgage
+		add_treasury = 100000
+		add_modifier = { name = gg_ejercito_grande_limited_mortgage }
+		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_limited_mortgage } }
+		gg_argentina_raise_ejercito_grande = yes
+		gg_argentina_limited_foreign_contingents = yes
+		ai_chance = { base = 20 }
+	}
+	option = {
+		name = gg_argentina.15.c
+		custom_tooltip = gg_ejercito_grande_alone_tt
+		set_global_variable = gg_ejercito_grande_alone
+		gg_argentina_raise_ejercito_grande = yes
 		ai_chance = { base = 10 }
 	}
 }

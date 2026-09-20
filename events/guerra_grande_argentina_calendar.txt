@@ -194,6 +194,9 @@ gg_argentina_cal.4 = {
 					# EN: Alcaraz and the 1850 orders must both have been conceded.
 					# ES: Tanto Alcaraz como las ordenes de 1850 tienen que haberse concedido.
 					limit = {
+						has_global_variable = gg_constituent_congress_route
+						has_global_variable = gg_alcaraz_accepted
+						has_global_variable = gg_corrientes_cerrito_exempt
 						has_global_variable = gg_entre_rios_agravio
 						global_var:gg_entre_rios_agravio = 0
 					}
@@ -313,6 +316,7 @@ gg_argentina_cal.9 = {
 					#     ningun lado. Corregido el 20/9/2026 (Codex).
 					exists = c:ENR
 					c:ARG = { has_war_with = c:ENR }
+					has_global_variable = gg_ejercito_grande_created
 				}
 				set_global_variable = gg_arg_cal_done_9
 				c:ARG = { trigger_event = { id = gg_argentina.40 days = 0 popup = yes } }
@@ -336,6 +340,7 @@ gg_argentina_cal.10 = {
 					# EN/ES: la misma guarda que el relevo de Pacheco / the same guard as Pacheco's relay
 					exists = c:ENR
 					c:ARG = { has_war_with = c:ENR }
+					has_global_variable = gg_ejercito_grande_created
 				}
 				set_global_variable = gg_arg_cal_done_10
 				c:ARG = { trigger_event = { id = gg_argentina.41 days = 0 popup = yes } }
@@ -554,6 +559,8 @@ gg_argentina_cal.20 = {
 				NOT = { has_global_variable = gg_arg_cal_done_20 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
+				exists = c:CRR
+				c:ARG = { has_war_with = c:CRR }
 				exists = s:STATE_ENTRE_RIOS.region_state:ARG
 			}
 			set_global_variable = gg_arg_cal_done_20
@@ -676,6 +683,122 @@ gg_argentina_cal.25 = {
 			}
 			set_global_variable = gg_arg_cal_done_25
 			c:ARG = { trigger_event = { id = gg_argentina.26 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 27 November 1847 (day 4345) -- Vences is delivered only if Rosas rejected Alcaraz and the
+#     actual ARG-CRR war still exists. All conditions live in this relay because a scheduled event's
+#     trigger is read when it is queued, not on its delivery day. The visible event therefore has no
+#     trigger of its own.
+# ES: 27 de noviembre de 1847 (dia 4345) -- Vences se entrega solo si Rosas rechazo Alcaraz y la
+#     guerra real ARG-CRR todavia existe. Todas las condiciones viven en este relevo porque el
+#     trigger de un evento agendado se lee cuando se lo encola, no el dia de entrega. Por eso el
+#     evento visible no tiene trigger propio.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1843-1847 [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.26 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_26 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = c:CRR
+				has_global_variable = gg_alcaraz_rejected
+				c:ARG = { has_war_with = c:CRR }
+			}
+			set_global_variable = gg_arg_cal_done_26
+			c:ARG = { trigger_event = { id = gg_argentina.8 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 5 January 1851 (day 5479) -- La Regeneracion. Every delivery condition lives in this relay:
+#     a scheduled event reads its trigger when it is queued, not on the day it arrives. The visible
+#     event therefore has no trigger of its own.
+# ES: 5 de enero de 1851 (dia 5479) -- La Regeneracion. Toda condicion de entrega vive en este
+#     relevo: un evento agendado lee su trigger cuando se lo encola, no el dia en que sale. Por eso
+#     el evento visible no tiene trigger propio.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1850-1852 [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.27 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_27 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				NOT = { exists = c:ENR }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_27
+			c:ARG = { trigger_event = { id = gg_argentina.9 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 29 May 1851 (day 5623) -- the Convention of Montevideo belongs to Entre Rios, after the
+#     Pronunciamiento has created it and while the route against Rosas is still open. Every delivery
+#     condition lives here because scheduled events read their trigger when they are queued.
+# ES: 29 de mayo de 1851 (dia 5623) -- la Convencion de Montevideo le pertenece a Entre Rios,
+#     despues de que el Pronunciamiento lo creo y mientras siga abierta la via contra Rosas. Toda
+#     condicion de entrega vive aca porque los eventos agendados leen el trigger al encolarse.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Convencion del 29/5/1851»;
+# primary text / texto primario: https://www.dipublico.org/122098/
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.28 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_28 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = c:ENR
+				has_global_variable = gg_montevideo_convention_enabled
+				NOT = { has_global_variable = gg_confederacion_negociada }
+			}
+			set_global_variable = gg_arg_cal_done_28
+			c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 21 November 1851 (day 5799) -- the second convention is offered only after Entre Rios signed
+#     in May and Rosas activated the alliance against Buenos Aires. The visible event has no trigger.
+# ES: 21 de noviembre de 1851 (dia 5799) -- la segunda convencion se ofrece solo si Entre Rios firmo
+#     en mayo y Rosas activo la alianza contra Buenos Aires. El evento visible no tiene trigger.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Convencion del 21/11/1851»;
+# primary text / texto primario: https://www.dipublico.org/122100/
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.29 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_29 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = c:ENR
+				has_global_variable = guerra_grande_treaties_signed
+				has_global_variable = gg_montevideo_free_navigation
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_rosas_abandoned_oribe }
+				c:ARG = { has_war_with = c:ENR }
+			}
+			set_global_variable = gg_arg_cal_done_29
+			c:ENR = { trigger_event = { id = gg_argentina.15 days = 0 popup = yes } }
 		}
 	} }
 }

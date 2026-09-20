@@ -1,0 +1,63 @@
+# Media aliases for the dated Argentine events. Sources: SOURCES_flujo_images.md.
+# Alias de medios de los eventos argentinos fechados. Fuentes: SOURCES_flujo_images.md.
+
+# Jean-Baptiste Henri Durand-Brager, "Soldado federal - Buenos Aires" (c. 1841), public domain.
+# WARNING: this is not the Vanguardia crossing on 16 February 1843; it is a period depiction of
+# mounted Argentine federal troops, used for the army that crossed into Uruguay.
+gg_arg_vanguardia = {
+	video = "gfx/media_aliases/gg_arg_vanguardia.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# William Gore Ouseley, self-portrait (c. 1830), public domain. Ouseley was the British
+# plenipotentiary who, with Deffaudis, announced the Anglo-French blockade in 1845.
+gg_arg_bloqueo = {
+	video = "gfx/media_aliases/gg_arg_bloqueo.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# J. M. Gilbert, "The Alecto, with Schooners in Tow, passing the Batteries of San Lorenzo"
+# (published 1848), no known restrictions. WARNING: this is not the battle of Quebracho on
+# 4 June 1846; it shows the same allied steamer and river batteries on an earlier passage,
+# before those batteries were complete.
+gg_arg_quebracho = {
+	video = "gfx/media_aliases/gg_arg_quebracho.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Adolphe d'Hastrel, "Isla de Martin Garcia" (1839), CC BY-SA 4.0.
+# WARNING: this is a contemporary view of the island named in the Hood bases, not the
+# diplomatic presentation in Buenos Aires on 13 July 1846.
+gg_arg_hood_bases = {
+	video = "gfx/media_aliases/gg_arg_hood_bases.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Romina Santarelli / Ministerio de Cultura de la Nacion Argentina, San Martin's curved sabre
+# in the Museo Historico Nacional (2015), CC BY-SA 2.0.
+gg_arg_sable = {
+	video = "gfx/media_aliases/gg_arg_sable.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Unidentified photographer, the only daguerreotype of Jose de San Martin (Paris, 1848),
+# public domain. WARNING: this is San Martin near the date of his death, not the testament
+# or its reading in the Defensa in 1850.
+gg_arg_clausula = {
+	video = "gfx/media_aliases/gg_arg_clausula.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Young Bartolome Mitre, author/date unknown, scan by Pedro Cayetano J. Vera, CC BY-SA 4.0.
+# The young likeness avoids the anachronistic elderly statesman portraits commonly used for Mitre.
+gg_arg_mitre_joven = {
+	video = "gfx/media_aliases/gg_arg_mitre_joven.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# General Joaquin Madariaga, author/date unknown, public domain.
+# WARNING: this is a participant in the Treaty of Alcaraz, not a scene of the signing.
+gg_arg_alcaraz = {
+	video = "gfx/media_aliases/gg_arg_alcaraz.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}

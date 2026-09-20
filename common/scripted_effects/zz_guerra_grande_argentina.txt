@@ -244,6 +244,131 @@ gg_argentina_create_coalicion = {
 	}
 }
 
+# -------------------------------------------------------------------------------------------------
+# EN: THE TWO ORDERS LEAVE AN ARMY ON THE MAP. Giving Urquiza the Brazilian command forms the
+#     force in Entre Rios and puts him at its head; withholding it forms the same national force in
+#     Buenos Aires under another serving general. The unit counts are game-scale consequences, not
+#     a sourced order of battle, and no alternative commander is named because the research does
+#     not provide one.
+# ES: LAS DOS ORDENES DEJAN UN EJERCITO EN EL MAPA. Darle a Urquiza el mando contra el Brasil forma
+#     la fuerza en Entre Rios y lo pone a su frente; negarselo forma la misma fuerza nacional en
+#     Buenos Aires bajo otro general en servicio. Las cantidades son consecuencias a escala de
+#     juego, no un orden de batalla documentado, y no se nombra al mando alternativo porque la
+#     investigacion no aporta uno.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Urquiza y Entre Rios» y
+# «Los momentos de decision», punto 7 [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina_arm_urquiza_against_brazil = {
+	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
+	create_military_formation = {
+		type = army
+		hq_region = scope:gg_entre_rios_state.region
+		name = gg_arg_ejercito_brasil_urquiza
+		save_scope_as = gg_brazil_army
+		combat_unit = {
+			type = unit_type:combat_unit_type_line_infantry
+			state_region = s:STATE_ENTRE_RIOS
+			count = 4
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_irregular_infantry
+			state_region = s:STATE_ENTRE_RIOS
+			count = 2
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_hussars
+			state_region = s:STATE_ENTRE_RIOS
+			count = 4
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_cannon_artillery
+			state_region = s:STATE_ENTRE_RIOS
+			count = 2
+		}
+	}
+	random_scope_character = {
+		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+		if = {
+			limit = { NOT = { is_general = yes } }
+			add_character_role = general
+			set_commander_rank = 2
+		}
+		transfer_to_formation = scope:gg_brazil_army
+	}
+}
+
+gg_argentina_arm_other_against_brazil = {
+	s:STATE_BUENOS_AIRES.region_state:ARG ?= { save_scope_as = gg_buenos_aires_state }
+	create_military_formation = {
+		type = army
+		hq_region = scope:gg_buenos_aires_state.region
+		name = gg_arg_ejercito_brasil_nacional
+		save_scope_as = gg_brazil_army
+		combat_unit = {
+			type = unit_type:combat_unit_type_line_infantry
+			state_region = s:STATE_BUENOS_AIRES
+			count = 4
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_irregular_infantry
+			state_region = s:STATE_BUENOS_AIRES
+			count = 2
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_hussars
+			state_region = s:STATE_BUENOS_AIRES
+			count = 4
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_cannon_artillery
+			state_region = s:STATE_BUENOS_AIRES
+			count = 2
+		}
+	}
+	random_scope_character = {
+		limit = {
+			is_general = yes
+			NOT = { has_template = ARG_Justo_Jose_de_Urquiza }
+		}
+		transfer_to_formation = scope:gg_brazil_army
+	}
+}
+
+# EN: The counterfactual demand to suppress La Regeneracion accelerates provincial preparation by
+#     raising a separate Entre Rios reserve. It does not claim a documented unit count.
+# ES: La exigencia contrafactual de someter a La Regeneracion acelera la preparacion provincial al
+#     levantar una reserva entrerriana separada. No afirma una cantidad documentada de unidades.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1850-1852 [D] for
+# the article and Urquiza's answer; the demand and this military consequence are design counterfactuals.
+gg_argentina_arm_urquiza_reserve = {
+	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
+	create_military_formation = {
+		type = army
+		hq_region = scope:gg_entre_rios_state.region
+		name = gg_arg_reserva_entrerriana
+		save_scope_as = gg_entre_rios_reserve
+		combat_unit = {
+			type = unit_type:combat_unit_type_irregular_infantry
+			state_region = s:STATE_ENTRE_RIOS
+			count = 2
+		}
+		combat_unit = {
+			type = unit_type:combat_unit_type_hussars
+			state_region = s:STATE_ENTRE_RIOS
+			count = 2
+		}
+	}
+	random_scope_character = {
+		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+		if = {
+			limit = { NOT = { is_general = yes } }
+			add_character_role = general
+			set_commander_rank = 2
+		}
+		transfer_to_formation = scope:gg_entre_rios_reserve
+	}
+}
+
 # EN/ES: 1/5/1851 -- el Pronunciamiento de Urquiza.
 gg_argentina_create_entre_rios = {
 	create_country = {
@@ -272,25 +397,86 @@ gg_argentina_create_entre_rios = {
 	#     que aca se le da rango de mando: un Entre Rios cuyo gobernante no puede salir a campania es
 	#     un Entre Rios que no puede pelear la guerra que acaba de declarar.
 	c:ENR ?= {
-		create_military_formation = {
-			type = army
-			hq_region = capital.region
-			name = gg_arg_ejercito_entrerriano
-			combat_unit = {
-				type = unit_type:combat_unit_type_line_infantry
-				count = 4
+		if = {
+			limit = {
+				OR = {
+					has_global_variable = gg_urquiza_vences_command
+					has_global_variable = gg_urquiza_double_order
+					has_global_variable = gg_urquiza_brazil_command
+					has_global_variable = gg_urquiza_press_preparation
+				}
 			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_irregular_infantry
-				count = 2
+			# EN: The force retained after the Vences command is materially stronger in 1851. These are
+			#     game-scale units, not a claim that the source provides this order of battle.
+			# ES: La fuerza conservada tras el mando de Vences es materialmente mas fuerte en 1851. Son
+			#     unidades a escala de juego, no la afirmacion de que la fuente da este orden de batalla.
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				name = gg_arg_ejercito_entrerriano
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 6
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 6
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 2
+				}
 			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_hussars
-				count = 4
+		}
+		else_if = {
+			limit = { has_global_variable = gg_brazil_command_withheld }
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				name = gg_arg_ejercito_entrerriano
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 3
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 2
+				}
 			}
-			combat_unit = {
-				type = unit_type:combat_unit_type_cannon_artillery
-				count = 2
+		}
+		else = {
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				name = gg_arg_ejercito_entrerriano
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					count = 4
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					count = 4
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 2
+				}
 			}
 		}
 	}
@@ -317,17 +503,21 @@ gg_argentina_create_entre_rios = {
 			#     Esta linea se escribio una vez y se perdio en silencio: la edicion que la agregaba
 			#     no encontro el texto, porque el bloque del ejercito ya habia cambiado lo de
 			#     alrededor. Aca esta ahora.
-			#     Y EL ROL VA PRIMERO, que es la correccion del 20/9/2026 (Codex). add_commander_rank
-			#     le sube el rango a un general; a un hombre que no es general no lo hace general. El
+			#     Y EL ROL VA PRIMERO, que es la correccion del 20/9/2026 (Codex). Un efecto de rango
+			#     actua sobre un general; a un hombre que no es general no lo hace general. El
 			#     Urquiza de vanilla no tiene is_general en su template
 			#     (common/character_templates/country_arg.txt), asi que la linea de arriba sola le
 			#     daba rango a nadie y el gobernante de Entre Rios seguia sin poder salir al campo.
 			#     Vanilla hace las dos en este orden
 			#     (events/agitators_events/historic_agitator_events.txt:1472-1475).
-			#     / AND THE ROLE COMES FIRST: add_commander_rank promotes a general, it does not make
-			#     one, and vanilla's Urquiza is not a general.
-			add_character_role = general
-			add_commander_rank = 2
+			#     / AND THE ROLE COMES FIRST: a rank effect acts on a general, it does not make one, and
+			#     vanilla's Urquiza is not a general. Rank is set only on creation so later events do not
+			#     promote him repeatedly.
+			if = {
+				limit = { NOT = { is_general = yes } }
+				add_character_role = general
+				set_commander_rank = 2
+			}
 		}
 	}
 	else = {
@@ -343,10 +533,10 @@ gg_argentina_create_entre_rios = {
 		}
 		if = {
 			limit = { exists = scope:gg_urquiza_nuevo }
-			scope:gg_urquiza_nuevo = {
-				add_character_role = general
-				add_commander_rank = 2
-			}
+				scope:gg_urquiza_nuevo = {
+					add_character_role = general
+					set_commander_rank = 2
+				}
 		}
 	}
 }
@@ -474,6 +664,273 @@ gg_argentina_open_war = {
 				}
 			}
 		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE CONVENTION OF 29 MAY EXISTS ON THE MAP. One Brazilian and one Oriental battalion enter
+#     the Oriental war at once as the advance bodies of the contingents being prepared; Entre Rios
+#     and Brazil join the Defensa's real war, the Parana is opened, and Garzon takes the Oriental
+#     command. The balance of the documented contingents is raised only by the November decision.
+# ES: LA CONVENCION DEL 29 DE MAYO EXISTE EN EL MAPA. Un batallon brasileno y uno oriental entran
+#     enseguida en la guerra oriental como cuerpos adelantados de los contingentes en preparacion;
+#     Entre Rios y Brasil se suman a la guerra real de la Defensa, se abre el Parana y Garzon toma
+#     el mando oriental. El resto de los contingentes documentados nace recien con la decision de noviembre.
+# SOURCE / FUENTE: Convention / Convencion of 29 May 1851, arts. I, V, XV, XVIII and XIX:
+# https://www.dipublico.org/122098/
+# -------------------------------------------------------------------------------------------------
+gg_argentina_sign_montevideo_convention = {
+	set_global_variable = guerra_grande_treaties_signed
+	set_global_variable = gg_montevideo_free_navigation
+	c:ARG ?= { add_modifier = { name = gg_arg_open_rivers_cost years = 20 } }
+	if = {
+		limit = { NOT = { has_global_variable = gg_urquiza_flipped } }
+		# EN/ES: reuse the existing passage of Garzon and the oribista chiefs / reutiliza el pase existente.
+		gg_urquiza_flip = yes
+	}
+	c:URU ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_oriental_advance_contingent
+			save_scope_as = gg_oriental_advance_army
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MONTEVIDEO
+				count = 1
+			}
+		}
+		random_scope_character = {
+			limit = { has_template = URU_gg_eugenio_garzon }
+			transfer_to_formation = scope:gg_oriental_advance_army
+		}
+		every_scope_war = {
+			limit = { gg_is_the_war = yes }
+			random_scope_front = { save_scope_as = gg_oriental_front }
+			if = {
+				limit = { NOT = { is_war_participant = c:ENR } }
+				join_war = { target = c:ENR side = c:URU }
+			}
+			if = {
+				limit = { NOT = { is_war_participant = c:BRZ } }
+				join_war = { target = c:BRZ side = c:URU }
+			}
+			add_war_war_support = { target = c:CER value = -20 }
+		}
+	}
+	c:BRZ ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_brazilian_advance_contingent
+			save_scope_as = gg_brazilian_advance_army
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_RIO_GRANDE_DO_SUL
+				count = 1
+			}
+		}
+	}
+	if = {
+		limit = { exists = scope:gg_oriental_front }
+		scope:gg_oriental_advance_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_oriental_front
+		}
+		scope:gg_brazilian_advance_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_oriental_front
+		}
+	}
+	gg_patron_change = { PATRON = brasil DELTA = 20 }
+	gg_score_colorado = { AMOUNT = 2 }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE ARMY OF 21 NOVEMBER. Eighteen game battalions make Urquiza's documented 18,000 men and
+#     are created only after the player chooses how to finance the crossing. Corrientes keeps its
+#     existing army: the convention names the 18,000 as Urquiza's contribution, not as a new total
+#     that erases the Correntine force already on the board.
+# ES: EL EJERCITO DEL 21 DE NOVIEMBRE. Dieciocho batallones de juego hacen los 18.000 hombres
+#     documentados de Urquiza y nacen solo cuando el jugador decide como financiar el cruce.
+#     Corrientes conserva su ejercito: la convencion nombra los 18.000 como aporte de Urquiza.
+# SOURCE / FUENTE: Convention / Convencion of 21 November 1851, arts. III-IV:
+# https://www.dipublico.org/122100/
+# -------------------------------------------------------------------------------------------------
+gg_argentina_raise_ejercito_grande = {
+	set_global_variable = gg_ejercito_grande_created
+	c:ARG ?= {
+		every_scope_war = {
+			limit = { is_war_participant = c:ENR }
+			random_scope_front = { save_scope_as = gg_buenos_aires_front }
+		}
+	}
+	create_military_formation = {
+		type = army
+		hq_region = capital.region
+		name = gg_arg_ejercito_grande
+		save_scope_as = gg_ejercito_grande_army
+		combat_unit = { type = unit_type:combat_unit_type_line_infantry count = 8 }
+		combat_unit = { type = unit_type:combat_unit_type_irregular_infantry count = 2 }
+		combat_unit = { type = unit_type:combat_unit_type_hussars count = 6 }
+		combat_unit = { type = unit_type:combat_unit_type_cannon_artillery count = 2 }
+	}
+	random_scope_character = {
+		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+		if = { limit = { NOT = { is_general = yes } } add_character_role = general }
+		set_commander_rank = 3
+		transfer_to_formation = scope:gg_ejercito_grande_army
+	}
+	if = {
+		limit = { exists = scope:gg_buenos_aires_front }
+		scope:gg_ejercito_grande_army = {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_buenos_aires_front
+		}
+	}
+}
+
+# EN: Complete the documented foreign contingents and put the Brazilian fleet on the board. The
+#     engine has no half-battalion, so the documented 2,500 Orientals are represented by three
+#     battalions while the text and debt ledger retain the exact figure.
+# ES: Completa los contingentes documentados y pone la flota brasilena en el tablero. El motor no
+#     tiene medio batallon: los 2.500 orientales quedan representados por tres, con la cifra exacta en texto.
+# SOURCE / FUENTE: Convention / Convencion of 21 November 1851, arts. IV-VIII:
+# https://www.dipublico.org/122100/
+gg_argentina_complete_foreign_contingents = {
+	c:BRZ ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_brazilian_grand_army_contingent
+			save_scope_as = gg_brazilian_grand_army
+			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+		}
+		create_military_formation = {
+			type = fleet
+			hq_region = capital.region
+			name = gg_arg_brazilian_allied_fleet
+			# EN: one frigate is the engine's minimum material fleet, not a sourced ship count.
+			# ES: una fragata es la flota material minima del motor, no una cifra historica de buques.
+			ship = { type = ship_type:ship_type_frigate count = 1 }
+		}
+	}
+	c:URU ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_oriental_grand_army_contingent
+			save_scope_as = gg_oriental_grand_army
+			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_MONTEVIDEO count = 1 }
+		}
+	}
+	if = {
+		limit = { exists = scope:gg_buenos_aires_front }
+		scope:gg_brazilian_grand_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_buenos_aires_front
+		}
+		scope:gg_oriental_grand_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_buenos_aires_front
+		}
+	}
+}
+
+# EN: The counterfactual limited agreement sends one additional battalion from each ally. This is a
+#     game-balance quantity, not a historical figure; it remains visibly smaller than the full terms.
+# ES: El acuerdo limitado contrafactual manda un batallon adicional de cada aliado. Es una cantidad
+#     de balance, no una cifra historica, y queda visiblemente por debajo de los terminos completos.
+gg_argentina_limited_foreign_contingents = {
+	c:BRZ ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_brazilian_limited_contingent
+			save_scope_as = gg_brazilian_limited_army
+			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+		}
+	}
+	c:URU ?= {
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_oriental_limited_contingent
+			save_scope_as = gg_oriental_limited_army
+			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+		}
+	}
+	if = {
+		limit = { exists = scope:gg_buenos_aires_front }
+		scope:gg_brazilian_limited_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_buenos_aires_front
+		}
+		scope:gg_oriental_limited_army ?= {
+			fully_mobilize_army = yes
+			deploy_to_front = scope:gg_buenos_aires_front
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: ACCEPT THE TERMS SIGNED AT ALCARAZ, from either the August 1846 decision or the explicit
+#     counterfactual reopening at Vences. This is the peaceful counterpart to gg_argentina_open_war:
+#     it settles that same ARG-CRR war by exhausting Corrientes's support, so the existing
+#     make_protectorate war goal creates the protectorate and the Federal Pact's weekly observer
+#     restores the delegation. No second subject-making path is introduced.
+#     The two marks are not decorative modifiers. One prevents Corrientes from being counted in any
+#     later Cerrito levy; the other is the open constitutional route read by the 1851 closure.
+# ES: ACEPTAR LOS TERMINOS FIRMADOS EN ALCARAZ, desde la decision de agosto de 1846 o desde la
+#     reapertura contrafactual explicita en Vences. Es la contraparte pacifica de
+#     gg_argentina_open_war: resuelve esa misma guerra ARG-CRR agotando el apoyo correntino, para que
+#     el objetivo make_protectorate existente cree el protectorado y el observador semanal del Pacto
+#     Federal restaure la delegacion. No se introduce una segunda via de sujecion. Las dos marcas no
+#     son modificadores decorativos: una excluye a Corrientes de
+#     cualquier leva posterior para el Cerrito; la otra abre la ruta constitucional que lee el
+#     cierre de 1851.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1843-1847 — Corrientes sola,
+# y el Paraguay» y «Los momentos de decision», punto 6 [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina_accept_alcaraz = {
+	if = {
+		limit = {
+			exists = c:CRR
+			c:ARG ?= this
+		}
+		# EN: Settle the actual Federal Pact war through its own war goal. The engine enforces
+		#     make_protectorate; the weekly delegation observer then sees the subject relationship.
+		# ES: Resuelve la guerra real del Pacto Federal por su propio objetivo. El motor ejecuta
+		#     make_protectorate; despues el observador semanal ve la relacion de sujecion.
+		every_scope_war = {
+			limit = { is_war_participant = c:CRR }
+			add_war_war_support = {
+				target = c:CRR
+				value = -1000
+			}
+		}
+		gg_reclamo_cierra = { KEY = corrientes }
+		gg_reclamo_cierra = { KEY = entre_rios }
+		set_global_variable = { name = gg_entre_rios_agravio value = 0 }
+		set_global_variable = gg_alcaraz_accepted
+		set_global_variable = gg_corrientes_cerrito_exempt
+		set_global_variable = gg_constituent_congress_route
+	}
+}
+
+# EN: ONE WRITER for the negotiated-confederation closure, reached either by the complete chain of
+#     concessions before 1 May or by Rosas accepting Entre Rios's lawful reassumption that day.
+# ES: UN SOLO ESCRITOR para el cierre de confederacion negociada, alcanzado por la cadena completa
+#     de concesiones antes del 1 de mayo o porque Rosas acepta ese dia la reasuncion legal de Entre
+#     Rios.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md, section 3; the closure is a
+# design outcome built from the documented delegation and congress terms.
+gg_argentina_open_negotiated_confederation = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_confederacion_negociada } }
+		set_global_variable = gg_confederacion_negociada
 	}
 }
 

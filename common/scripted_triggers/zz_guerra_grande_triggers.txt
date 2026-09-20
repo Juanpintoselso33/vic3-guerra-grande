@@ -208,3 +208,20 @@ gg_mitre_break_with_rivera = {
 		}
 	}
 }
+# EN: Stable reader for an Argentine postwar. The convention's ledger is global because Entre Rios
+#     or Corrientes may cease to exist while the successor Confederation still inherits the debt.
+# ES: Lector estable para una posguerra argentina. El libro es global porque Entre Rios o Corrientes
+#     pueden dejar de existir mientras la Confederacion sucesora hereda la deuda.
+# SOURCE / FUENTE: Convention / Convencion of 21 November 1851, arts. VI-VII:
+# https://www.dipublico.org/122100/
+gg_argentina_has_ejercito_grande_debt = {
+	has_global_variable = gg_ejercito_grande_mortgage
+	has_global_variable = gg_ejercito_grande_debt
+	has_global_variable = gg_ejercito_grande_monthly_loan
+	has_global_variable = gg_ejercito_grande_loan_months
+	has_global_variable = gg_ejercito_grande_interest_percent
+	global_var:gg_ejercito_grande_debt > 0
+	global_var:gg_ejercito_grande_monthly_loan = 100000
+	global_var:gg_ejercito_grande_loan_months > 0
+	global_var:gg_ejercito_grande_interest_percent = 6
+}

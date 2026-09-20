@@ -81,7 +81,14 @@ gg_powers.4 = {
 gg_powers.5 = {
 	type = country_event
 	hidden = yes
-	trigger = { has_global_variable = guerra_grande_split_done }
+	trigger = {
+	has_global_variable = guerra_grande_split_done
+	has_global_variable = gg_montevideo_convention_enabled
+	NOT = { has_global_variable = gg_confederacion_negociada }
+	# EN/ES: la Argentina's visible convention writes the patron change itself / la convencion
+	#     visible de la Argentina escribe ella misma el cambio de padrino.
+	NOT = { exists = s:STATE_ENTRE_RIOS }
+	}
 	immediate = {
 		if = {
 			limit = { has_global_variable = gg_brazil_deal }
@@ -923,6 +930,8 @@ gg_powers.22 = {
 	#     durante anios tambien
 	trigger = {
 		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_montevideo_convention_enabled
+		NOT = { has_global_variable = gg_confederacion_negociada }
 		NOT = { has_global_variable = gg_urquiza_flipped }
 		OR = {
 			global_var:gg_patron_brasil >= 30
