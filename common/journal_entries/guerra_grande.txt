@@ -580,39 +580,26 @@ je_guerra_grande = {
 	# ES: T1, C11 -- se cierra con la paz firmada, o cuando queda un solo gobierno y Montevideo sigue
 	#     siendo oriental (conquista, jugada cedida o tercer pais), o en el tope de 1860. Nunca pide
 	#     guerra_grande_open_war, que su propio cierre borra.
-	# EN: AND THE WAR THAT NEVER BECAME ONE (design 19/9/2026, from Codex's map of the tandem).
-	#     This entry had no way out if the Republic was never split: its completion demands
-	#     guerra_grande_split_done and its failure demands lost ground, so a whole Uruguay with no
-	#     partition left the player with a journal open for ever, neither completed nor failed. That
-	#     never happened while the split was certain. It stops being certain the moment the Argentine
-	#     side can keep Oribe from crossing: the army that besieges Montevideo is the one that won
-	#     the interior, and if it loses there, it never comes. gg_vanguardia_status = 3 is that
-	#     history, and it is a legitimate ending, not a defeat -- the Republic stayed whole because
-	#     the enemy army never arrived. Nothing writes that value today, so this branch is unreachable
-	#     until the Argentine side exists and no current game changes behaviour.
-	# ES: Y LA GUERRA QUE NO LLEGO A SERLO. Esta entrada no tenia salida si la Republica no se partia:
-	#     su cierre exige guerra_grande_split_done y su fracaso exige suelo perdido, asi que un
-	#     Uruguay entero sin particion dejaba al jugador con un journal abierto para siempre, ni
-	#     cumplido ni fracasado. Eso nunca pasaba mientras la particion fuera segura. Deja de serlo en
-	#     cuanto el lado argentino pueda impedir que Oribe cruce: el ejercito que sitia Montevideo es
-	#     el que gano el interior, y si pierde alla, no llega nunca. gg_vanguardia_status = 3 es esa
-	#     historia, y es un final legitimo y no una derrota -- la Republica quedo entera porque el
-	#     ejercito enemigo no llego. Hoy nadie escribe ese valor, asi que esta rama es inalcanzable
-	#     hasta que exista el lado argentino y ninguna partida actual cambia de comportamiento.
+	# EN: THE WAR THAT NEVER BECAME ONE WAS REMOVED, 20/9/2026, and the removal is safe for the very
+	#     reason the branch existed. It was written because this entry had no way out if the Republic
+	#     was never split: completion demands guerra_grande_split_done and failure demands lost
+	#     ground, so a whole Uruguay with no partition left the journal open for ever, neither
+	#     completed nor failed. That dead end can no longer happen: the partition is certain again --
+	#     it fires on its date whatever the Argentine interior does -- so the state this branch
+	#     existed to catch is unreachable, and an unreachable ending is dead content.
+	#     Where the interior is paid instead: guerra_grande.4, which withholds the Argentine
+	#     auxiliaries. Oribe still crosses; he just crosses alone.
+	# ES: LA GUERRA QUE NO LLEGO A SERLO SE SACO, 20/9/2026, y sacarla es seguro justamente por la
+	#     razon por la que existia. Se escribio porque esta entrada no tenia salida si la Republica
+	#     no se partia: el cierre exige guerra_grande_split_done y el fracaso exige suelo perdido,
+	#     asi que un Uruguay entero sin particion dejaba el journal abierto para siempre, ni cumplido
+	#     ni fracasado. Ese callejon ya no puede pasar: la particion volvio a ser segura --sale en su
+	#     fecha haga lo que haga el interior argentino--, asi que el estado que esta rama venia a
+	#     atrapar es inalcanzable, y un final inalcanzable es contenido muerto.
+	#     Donde se paga el interior ahora: en guerra_grande.4, que le niega los auxiliares
+	#     argentinos. Oribe cruza igual; cruza solo.
 	complete = {
 		OR = {
-		custom_tooltip = {
-			text = je_guerra_grande_complete_nowar_tt
-			AND = {
-				NOT = { has_global_variable = guerra_grande_split_done }
-				global_var:gg_vanguardia_status = 3
-				# EN/ES: 1844, the year after the crossing that did not happen: the calendar has had
-				#     its chance / 1844, el anio siguiente al cruce que no fue: el calendario ya tuvo
-				#     su oportunidad
-				year >= 1844
-				c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
-			}
-		}
 		custom_tooltip = {
 			text = je_guerra_grande_complete_tt
 			AND = {

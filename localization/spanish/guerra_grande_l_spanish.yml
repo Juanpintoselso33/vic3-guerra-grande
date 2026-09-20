@@ -18,7 +18,6 @@
  je_guerra_grande_status_factions:0 "Todavía no hay guerra: cada decisión de estos años suma para un bando, y la barra ya la cuenta."
  je_guerra_grande_status_siege:0 "Dos gobiernos: la #R Defensa#! en Montevideo y el #blue_value Cerrito#! en la campaña.\n@battalions! Agotamiento (tres meses seguidos abren la mesa de paz del otro): #blue_value Cerrito#! #V [GetGlobalVariable('gg_cerrito_exhausted').GetValue|v0]#! de 3 · #R Defensa#! #V [GetGlobalVariable('gg_defensa_exhausted').GetValue|v0]#! de 3."
  je_guerra_grande_complete_tt:0 "La guerra termina cuando se firma la paz o queda en pie un solo gobierno; si no ocurre ninguna, la larga emergencia no puede durar para siempre."
- je_guerra_grande_complete_nowar_tt:0 "El ejército que tenía que cruzar el río se quedó del otro lado, y la República no llegó a partirse."
 
 # Barra de progreso
  guerra_grande_war_score_bar:0 "Qué divisa se impone"
