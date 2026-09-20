@@ -5,7 +5,7 @@
 #     common/scripted_buttons/guerra_grande_french_legion_button.txt.
 
  guerra_grande_french_legion_button:0 "Raise the French Legion"
- guerra_grande_french_legion_button_desc:0 "There are more French in Montevideo than there are orientals under arms. Le Patriote Français has been calling them to a general taking up of arms 'without ridiculous distinctions of class or position', and on the first days of April 1843 they answer: Jean-Chrysostome Thiébaut, a Marseillais who marched with the Grande Armée and has been washed up in the Plata for fifteen years, takes the command. This will be the strongest battalion of the garrison — more than three thousand men at its height, against some seven hundred Italians. It is not France. Paris wants them disarmed and their consul is handing out money to keep them home."
+ guerra_grande_french_legion_button_desc:0 "There are more Frenchmen in Montevideo than Uruguayans under arms. Le Patriote Français has called upon them to take up arms en masse, 'without ridiculous distinctions of class or position', and in the first days of April 1843 they answer. Command falls to Jean-Chrysostome Thiébaut, a Marseillais who marched with the Grande Armée and has spent fifteen years stranded in the Plata. This will be the strongest battalion in the garrison — more than three thousand men at its height, beside some seven hundred Italians. It is not the army of France. Paris wants the men disarmed, and its consul is distributing money to keep them at home."
  guerra_grande_requires_no_foreign_legion_yet:0 "The foreign legions must not already be under arms"
 
  gg_legion.1.t:0 "Under Whose Colours"

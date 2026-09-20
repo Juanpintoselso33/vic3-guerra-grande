@@ -20,7 +20,7 @@
  gg_peace.1.e:0 "War on Rosas: pacify the Republic and cross the river."
  gg_peace.1.f:0 "No terms. Not yet."
 
- gg_peace_formula_tt:0 "@information! Amnesty gives every oriental equal rights and access to public office, assumes the #blue_value Cerrito#!'s war debt and leaves Oribe unproscribed. The divisas are forbidden in favour of the national cockade."
+ gg_peace_formula_tt:0 "@information! Amnesty gives every Uruguayan equal rights and access to public office, assumes the #blue_value Cerrito#!'s war debt and leaves Oribe unproscribed. The divisas are forbidden in favour of the national cockade."
  gg_peace_proscription_defensa_tt:0 "@warning! The #R Defensa#!'s February decrees reach the countryside: the #blue_value blanco chiefs#! are exiled, confiscations stand, and executions and expulsions spread radicalism through the rural districts."
  gg_peace_treaties_tt:0 "@warning! The Empire guarantees the Constitution and subsidises the Republic against its customs revenue; the San Ildefonso claim and navigation of the Laguna Merín and Yaguarón are surrendered. Brazilian trade gains ten years of exemptions, and fugitive slaves must be returned despite the Republic's abolition law."
  gg_peace_protectorate_asked_tt:0 "@information! London and Paris receive a request to place the Republic under their joint protection. Earlier petitions met refusal, so the answer is uncertain."
@@ -69,7 +69,7 @@
  gg_peace_legal_presidency_desc:0 "The term interrupted in 1838 resumes under the Constitution of 1830. The Chambers that were dissolved sit again, the Tribunal de Apelaciones installed on 12 May 1845 stands, and the administration that governed the countryside for nine years does not have to be invented — it simply moves into the city."
 
  gg_peace_colorados_proscribed:0 "Mueran los Salvages Unitarios"
- gg_peace_colorados_proscribed_desc:0 "The masthead of El Defensor de la Independencia Americana carried out. Of 31,000 people inside the walls only some 11,000 were orientals; the Legions were foreign, the merchant houses were foreign, and the presses belonged to the anti-rosista emigration. The port empties, and what made it worth taking leaves with the people who made it."
+ gg_peace_colorados_proscribed_desc:0 "The masthead of El Defensor de la Independencia Americana, put into effect. Of 31,000 people inside the walls, only some 11,000 were Uruguayans; the Legions were foreign, the merchant houses were foreign, and the presses belonged to the anti-Rosista émigrés. The port empties, and what made it worth taking departs with the people who made it."
 
  gg_peace_confederation_province:0 "Back into the Confederation"
  gg_peace_confederation_province_desc:0 "Rosas's proposal of 11 August 1845 accepted instead of buried in a parliamentary commission: the Republic returns to the Provinces of the Río de la Plata and the Preliminary Peace Convention of 1828 is annulled. The countryside that fought the war approves. The city, the emigration and every chancellery in the basin do not."
@@ -78,10 +78,10 @@
  gg_peace_rosista_client_desc:0 "Buenos Aires goes on financing and arming the Republic as it financed and armed the siege — in the last weeks before the capitulation Rosas was still sending eight hundred gold ounces. The money is real and so is the price of it: the Republic is now what its enemies always said it was."
 
  gg_peace_blancos_proscribed:0 "The Decrees of February 1843"
- gg_peace_blancos_proscribed_desc:0 "Shot on the spot and in the back for arms in hand or the enemy's divisa; military commissions for anyone in contact with the besiegers; families expelled, some to the isla Libertad; the confiscations upheld. Applied at last to the countryside, which spent nine years on the other side of the line and will remember it."
+ gg_peace_blancos_proscribed_desc:0 "Anyone found bearing arms or the enemy divisa is shot on the spot, from behind; those who dealt with the besiegers face military commissions; families are expelled, some to the isla Libertad; the confiscations stand. The decrees at last reach the countryside, which spent nine years beyond the lines and will remember them."
 
  gg_peace_treaties_of_1851:0 "The Five Treaties of 1851"
- gg_peace_treaties_of_1851_desc:0 "Alliance, aid, limits, commerce and extradition, signed in Río de Janeiro on 12 October 1851. The Empire guarantees the Constitution and may intervene to restore order; the subsidy arrives monthly against the customs revenue; the northern border sits on the Cuareim and the coast of the Laguna Merín is dry for fifty-eight years; the tasajo comes in free for ten years and the cattle go north free for ten years; and fugitive slaves go back, against the Republic's own abolition law."
+ gg_peace_treaties_of_1851_desc:0 "Alliance, aid, boundaries, commerce and extradition, signed in Río de Janeiro on 12 October 1851. The Empire guarantees the Constitution and may intervene to restore order; the subsidy is advanced monthly against customs revenue; the northern border is fixed at the Cuareim and the Republic is denied navigation from its shore of the Laguna Merín for fifty-eight years; tasajo enters free of duty for ten years and cattle pass northward free of duty for ten years; fugitive slaves are returned despite the Republic's own abolition law."
 
  gg_peace_anglo_french_protectorate:0 "Under European Protection"
  gg_peace_anglo_french_protectorate_desc:0 "Manuel Herrera y Obes's project of 1848, granted: the Republic under the protection of France, with Britain's acquiescence. The port cannot be closed, the immigrants keep landing and the subsidy is now owed rather than begged for. The army, which has spent nine years being told it was defending the independence of the Republic, has been told what that independence was worth."
@@ -93,7 +93,7 @@
  gg_peace_march_on_buenos_aires_desc:0 "Once the national territory is pacified, military action against Rosas begins — Herrera y Obes wrote exactly that to the British and French chargés in September 1851. The Republic puts a division into the alliance that will meet Rosas at Caseros. The army has never stood higher and the treasury has never been emptier."
 
  gg_peace_national_cockade:0 "The National Cockade"
- gg_peace_national_cockade_desc:0 "The divisas colorada and blanca are forbidden and the national cockade declared the only badge a citizen may wear, to make the opinions and the signs that divided the sons of the oriental people disappear. The Villa de la Restauración becomes the Villa de la Unión. Both parties lose something they were attached to, and the State gains an authority it never had."
+ gg_peace_national_cockade_desc:0 "The divisas colorada and blanca are forbidden and the national cockade declared the only badge a citizen may wear, so that the opinions and emblems dividing the sons of Uruguay may disappear. The Villa de la Restauración becomes the Villa de la Unión. Both parties lose something to which they were attached, and the State gains an authority it never possessed."
 
  gg_peace_assumed_war_debt:0 "Their Debt Is Now the Nation's"
  gg_peace_assumed_war_debt_desc:0 "The Republic shall recognise as a national debt that which general Oribe contracted, in accordance with what public law establishes for such cases. It is the third article of the pact, and it is what the formula actually cost: the government that won pays for the war the other one fought."
