@@ -302,3 +302,60 @@ gg_caseros_hold_the_city = {
 	unit_occupation_mult = -0.50
 	country_authority_add = -50
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE PRICE OF A BATTLE LOST, and why it is a modifier and not an annexation. On 20 September 2026
+#     these three battles were given the power to end their wars: Pago Largo annexed Corrientes,
+#     Famailla ended the Coalition. Juan played it and the result was that Corrientes was born on 6
+#     March 1839 and was gone on the 31st, twenty-five days later, by two popups he could not touch,
+#     with the war he had just been given still open and now pointing at a country that no longer
+#     existed. «Asi imposible.»
+#     So the battles do what a battle does and no more: the commander dies, the beaten army is
+#     wrecked for a year, and the war is still there to be won by whoever is playing it. The numbers
+#     are hard on purpose -- an army that lost eight hundred dead and a thousand prisoners out of
+#     three thousand is not an army for a long while -- but they are a handicap, not a verdict.
+# ES: EL PRECIO DE UNA BATALLA PERDIDA, y por que es un modificador y no una anexion. El 20/9/2026 a
+#     estas tres batallas se les dio el poder de terminar sus guerras: Pago Largo anexaba Corrientes,
+#     Famailla terminaba la Coalicion. Juan lo jugo y el resultado fue que Corrientes nacia el 6 de
+#     marzo de 1839 y el 31 ya no estaba, veinticinco dias despues, por dos popups que no podia
+#     tocar, con la guerra que le acababan de dar todavia abierta y apuntando a un pais que ya no
+#     existia. «Asi imposible.»
+#     Asi que las batallas hacen lo que hace una batalla y nada mas: muere el jefe, el ejercito batido
+#     queda deshecho por un anio, y la guerra sigue ahi para que la gane el que la este jugando. Los
+#     numeros son duros a proposito -- un ejercito que perdio ochocientos muertos y mil prisioneros de
+#     tres mil no es un ejercito por un buen rato -- pero son un lastre, no un veredicto.
+# -------------------------------------------------------------------------------------------------
+gg_arg_army_wrecked = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = -0.40
+	unit_defense_mult = -0.30
+	military_formation_organization_gain_mult = -0.40
+	country_war_exhaustion_casualties_mult = 0.50
+}
+
+# EN/ES: y el campo queda del otro lado: el que gano persigue, cuenta prisioneros y ocupa
+#     / and the field stays with the winner: he pursues, counts prisoners and occupies
+gg_arg_field_won = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.20
+	unit_occupation_mult = 0.30
+}
+
+# EN: THE PRETENSION. Rosas did not merely shelter Oribe: he went on receiving him as the lawful
+#     president of the Oriental Republic, which is a standing claim against a state that had a
+#     government of its own and was recognised by France and Britain. It cost him abroad for the rest
+#     of his life, and it is the legal ground on which Oribe's whole campaign rests.
+# ES: LA PRETENSION. Rosas no solo le dio refugio a Oribe: lo siguio recibiendo como presidente legal
+#     de la Republica Oriental, que es una pretension permanente contra un Estado que tenia gobierno
+#     propio y estaba reconocido por Francia y Gran Bretana. Le costo afuera el resto de su vida, y es
+#     el fundamento juridico sobre el que se apoya toda la campania de Oribe.
+gg_oribe_pretension = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	# EN/ES: las dos claves que estaban aca (country_infamy_add, diplomatic_pact_cost_mult) NO EXISTEN
+	#     en 1.13; las agarro validate_mod.py antes de que llegaran a una partida. Lo que si existe es
+	#     la generacion de mala fama y la reputacion diplomatica, que es justo lo que cuesta sostener
+	#     una pretension sobre un Estado ajeno / the two keys that were here do not exist in 1.13
+	country_infamy_generation_mult = 0.25
+	country_diplomatic_reputation_add = -10
+	country_prestige_add = 15
+}

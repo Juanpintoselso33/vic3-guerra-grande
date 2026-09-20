@@ -47,3 +47,68 @@ dp_guerra_grande = {
 
 	on_war_end = {}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: dp_gg_pacto_federal -- THE WAR OF THE FEDERAL PACT: Buenos Aires against a province that has
+#     withdrawn the charge. Written 20 September 2026, playing.
+#     WHY IT IS A PROTECTORATE AND NOT AN ANNEXATION. Rosas never annexed Corrientes or Tucuman. He
+#     beat them and put a federal governor in, and the province went on existing -- Celedonio
+#     Gutierrez governed Tucuman for eleven years after Famailla. What was recovered was the charge,
+#     the conduct of foreign relations, which is what a protectorate is and what the Federal Pact of
+#     1831 delegated.
+#     WHY NOBODY ELSE MAY JOIN, which is the same answer dp_guerra_grande gives and for a stronger
+#     reason. Juan, playing Rosas on 20/9/2026: «en el segundo levantamiento de corrientes la
+#     confederacion bolivia peru se sumo del lado de corrientes y me cago la corrida». The
+#     Peru-Bolivian Confederation was destroyed at Yungay on 20 January 1839, six weeks before
+#     Corrientes seceded, and it never had anything to do with the river. This is an internal war of
+#     the Argentine Confederation: the powers intervened in the Plata by blockading the river and
+#     paying battalions, never by joining an interior campaign as belligerents.
+# ES: dp_gg_pacto_federal -- LA GUERRA DEL PACTO FEDERAL: Buenos Aires contra una provincia que
+#     retiro el encargo. Escrito el 20/9/2026, jugando.
+#     POR QUE ES UN PROTECTORADO Y NO UNA ANEXION. Rosas no anexo nunca a Corrientes ni a Tucuman.
+#     Las batio y les puso un gobernador federal, y la provincia siguio existiendo -- Celedonio
+#     Gutierrez goberno Tucuman once anios despues de Famailla. Lo que se recuperaba era el encargo,
+#     el manejo de las relaciones exteriores, que es lo que es un protectorado y lo que delego el
+#     Pacto Federal de 1831.
+#     POR QUE NO SE SUMA NADIE MAS, que es la misma respuesta que da dp_guerra_grande y por una razon
+#     mas fuerte. Juan, jugando de Rosas el 20/9/2026: «en el segundo levantamiento de corrientes la
+#     confederacion bolivia peru se sumo del lado de corrientes y me cago la corrida». La
+#     Confederacion Peru-Boliviana fue destruida en Yungay el 20 de enero de 1839, seis semanas antes
+#     de que Corrientes se separara, y no tuvo nunca nada que ver con el rio. Esta es una guerra
+#     interna de la Confederacion Argentina: las potencias intervinieron en el Plata bloqueando el
+#     rio y pagando batallones, nunca sumandose de beligerantes a una campania del interior.
+# -------------------------------------------------------------------------------------------------
+dp_gg_pacto_federal = {
+	war_goal = make_protectorate
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/make_protectorate.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		exists = c:ARG
+		scope:target_country = {
+			OR = {
+				c:CRR ?= THIS
+				c:CLN ?= THIS
+				c:ENR ?= THIS
+			}
+		}
+	}
+
+	# EN/ES: guerra interna de la Confederacion: no se suma nadie / an internal war: nobody joins
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

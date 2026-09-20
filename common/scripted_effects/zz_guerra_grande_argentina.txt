@@ -44,11 +44,33 @@ gg_argentina_create_corrientes = {
 			set_variable = gg_arg_corrientes_seat
 		}
 	}
-	# EN/ES: Misiones se va con ella: ocupada desde 1830, repartida en enfiteusis, reivindicada
-	#     entera el 1/9/1832 / Misiones goes with it
+	# EN: MISIONES AND THE EASTERN MISSIONS GO WITH IT. Corrientes had occupied the land south of the
+	#     Aguapey since 1830, handed it out in enfiteusis and claimed the whole territory on 1
+	#     September 1832 -- and that claim did not stop at the Uruguay. «La Argentina» models it: it
+	#     gives Rosas three provinces inside STATE_PARANA and two inside STATE_SANTA_CATARINA, which
+	#     are the Misiones Orientales, the ground Argentina claimed from Brazil. They are the same
+	#     claim as Misiones and they belong to whoever holds the Misiones claim.
+	#     Juan caught this on 20/9/2026 playing Argentina: «le faltan states que el mod de la
+	#     argentina le da, argentinian santa catarina y argentinian parana».
+	# ES: MISIONES Y LAS MISIONES ORIENTALES SE VAN CON ELLA. Corrientes ocupaba el territorio al sur
+	#     del Aguapey desde 1830, lo repartio en enfiteusis y reivindico el territorio entero el
+	#     1/9/1832 -- y esa reivindicacion no se detenia en el Uruguay. «La Argentina» lo modela: le da
+	#     a Rosas tres provincias adentro de STATE_PARANA y dos adentro de STATE_SANTA_CATARINA, que
+	#     son las Misiones Orientales, la tierra que la Argentina le reclamaba al Brasil. Son la misma
+	#     reivindicacion que Misiones y le corresponden a quien tenga esa reivindicacion.
+	#     Lo agarro Juan el 20/9/2026 jugando de Argentina: «le faltan states que el mod de la
+	#     argentina le da, argentinian santa catarina y argentinian parana».
 	if = {
 		limit = { exists = s:STATE_MISIONES.region_state:ARG }
 		s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	if = {
+		limit = { exists = s:STATE_PARANA.region_state:ARG }
+		s:STATE_PARANA.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	if = {
+		limit = { exists = s:STATE_SANTA_CATARINA.region_state:ARG }
+		s:STATE_SANTA_CATARINA.region_state:ARG = { set_state_owner = c:CRR }
 	}
 	gg_argentina_new_country_people = {
 		TAG = CRR
@@ -78,11 +100,28 @@ gg_argentina_create_corrientes = {
 			name = gg_arg_ejercito_correntino
 			combat_unit = {
 				type = unit_type:combat_unit_type_irregular_infantry
-				count = 3
+				count = 4
 			}
+			# EN: THE CORRENTINE HORSE, and it is bigger than it was until 20/9/2026. The army that
+			#     came apart at Pago Largo was modest, and it was written modest on purpose -- but a
+			#     province that can be put down in three months is not a war, it is an errand, and
+			#     that is what Juan found playing Rosas. Corrientes fought this war for eight years,
+			#     beat Echague at Caa Guazu and was still fighting at Vences in 1847. Its strength was
+			#     always the horse: the litoral raised cavalry, not battalions.
+			# ES: LA CABALLERIA CORRENTINA, y es mas grande de lo que era hasta el 20/9/2026. El
+			#     ejercito que se deshizo en Pago Largo era modesto, y estaba escrito modesto a
+			#     proposito -- pero una provincia que se liquida en tres meses no es una guerra, es un
+			#     mandado, y eso fue lo que Juan se encontro jugando de Rosas. Corrientes peleo esta
+			#     guerra ocho anios, le gano a Echague en Caa Guazu y seguia peleando en Vences en
+			#     1847. Su fuerza fue siempre la caballeria: el litoral levantaba jinetes, no
+			#     batallones.
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
-				count = 3
+				count = 6
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 1
 			}
 		}
 	}
@@ -380,14 +419,38 @@ gg_argentina_open_war = {
 			exists = c:$TAG$
 			c:ARG ?= this
 		}
+		# EN: NOT AN ANNEXATION. Rosas never annexed Corrientes and never annexed Tucuman. After Pago
+		#     Largo he put a federal governor in the city and the province went on existing; after
+		#     Famailla, Celedonio Gutierrez governed Tucuman for eleven years. What was taken back was
+		#     never the ground -- it was the CHARGE, the conduct of foreign relations, which is the
+		#     one thing the Federal Pact ever delegated.
+		#     So the play is a protectorate, and that is not a euphemism: a protectorate is a country
+		#     whose foreign relations are conducted by another, which is the exact definition of the
+		#     delegation this whole side is built on. Winning puts the province back under the pact.
+		#     It also fixes what Juan hit on 20/9/2026 playing Argentina -- «no me convence este
+		#     sistema de que Corrientes aparezca y la desaparezca yo a los 3 meses». A province that
+		#     is beaten and not erased is a province that can rise again, and Corrientes rose three
+		#     times: in 1839, at Caa Guazu in 1841 and at the Paso de los Libres in 1843.
+		# ES: NO ES UNA ANEXION. Rosas no anexo nunca a Corrientes ni a Tucuman. Despues de Pago Largo
+		#     puso un gobernador federal en la ciudad y la provincia siguio existiendo; despues de
+		#     Famailla, Celedonio Gutierrez goberno Tucuman once anios. Lo que se recuperaba no era
+		#     nunca la tierra: era el ENCARGO, el manejo de las relaciones exteriores, que es lo unico
+		#     que el Pacto Federal delego jamas.
+		#     Asi que la jugada es un protectorado, y no es un eufemismo: un protectorado es un pais
+		#     cuyas relaciones exteriores lleva otro, que es la definicion exacta de la delegacion
+		#     sobre la que esta construido todo este lado. Ganar devuelve la provincia al pacto.
+		#     Ademas arregla lo que Juan se encontro el 20/9/2026 jugando de Argentina -- «no me
+		#     convence este sistema de que Corrientes aparezca y la desaparezca yo a los 3 meses». Una
+		#     provincia batida y no borrada es una provincia que se puede volver a alzar, y Corrientes
+		#     se alzo tres veces: en 1839, en Caa Guazu en 1841 y en el Paso de los Libres en 1843.
 		create_diplomatic_play = {
 			name = gg_argentina_play_$TAG$
 			target_country = c:$TAG$
-			type = dp_annex_war
+			type = dp_gg_pacto_federal
 			add_war_goal = {
 				holder = c:ARG
 				target_country = c:$TAG$
-				type = annex_country
+				type = make_protectorate
 			}
 		}
 	}
@@ -428,9 +491,18 @@ gg_argentina_revive_corrientes = {
 			set_variable = gg_arg_corrientes_seat
 		}
 	}
+	# EN/ES: las mismas tres, por la misma razon / the same three, for the same reason
 	if = {
 		limit = { exists = s:STATE_MISIONES.region_state:ARG }
 		s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	if = {
+		limit = { exists = s:STATE_PARANA.region_state:ARG }
+		s:STATE_PARANA.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	if = {
+		limit = { exists = s:STATE_SANTA_CATARINA.region_state:ARG }
+		s:STATE_SANTA_CATARINA.region_state:ARG = { set_state_owner = c:CRR }
 	}
 	gg_argentina_new_country_people = {
 		TAG = CRR

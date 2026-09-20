@@ -371,37 +371,27 @@ gg_argentina.10 = {
 					kill_character = yes
 				}
 			}
-			# EN: AND LA BATALLA PASA. Correction of 20 September 2026, from Codex's integral review:
-			#     this popup told the player that the legislature of Corrientes submitted and the
-			#     customs house was one account again, and then killed one man and changed nothing.
-			#     The province stayed independent, the war went on, and the text was a lie a player
-			#     could check by looking at the map.
-			#     Pago Largo is not a setback: it is the end of the first Corrientes. Twenty-five days
-			#     after seceding the province was beaten and reincorporated, and that is what this
-			#     does now.
-			#     THE PLAYER IS NEVER ANNEXED BY A TEXT. If somebody took the Correntine seat, the
-			#     defeat is theirs to play: their commander is dead and their army is where they left
-			#     it, and Rosas has to come and take the province with the war he already has open.
-			#     Vanilla guards its own scripted annexations the same way (events/hawaii_events.txt:342).
-			# ES: Y LA BATALLA PASA. Correccion del 20/9/2026, de la revision integral de Codex: este
-			#     popup le decia al jugador que la legislatura de Corrientes se sometia y que la aduana
-			#     volvia a ser una sola cuenta, y despues mataba a un hombre y no cambiaba nada. La
-			#     provincia seguia independiente, la guerra seguia, y el texto era una mentira que el
-			#     jugador podia comprobar mirando el mapa.
-			#     Pago Largo no es un traspie: es el final de la primera Corrientes. Veinticinco dias
-			#     despues de separarse la provincia fue batida y reincorporada, y eso es lo que hace
-			#     esto ahora.
-			#     AL JUGADOR NO LO ANEXA UN TEXTO. Si alguien tomo el asiento correntino, la derrota es
-			#     suya para jugarla: su jefe esta muerto y su ejercito donde lo dejo, y Rosas tiene que
-			#     ir a tomar la provincia con la guerra que ya tiene abierta. Vanilla guarda igual sus
-			#     propias anexiones por guion (events/hawaii_events.txt:342).
-			if = {
-				limit = {
-					exists = c:CRR
-					c:CRR = { is_player = no }
-				}
-				annex = c:CRR
+			# EN: AND THE BATTLE HAPPENS, BUT IT DOES NOT END THE WAR. Two corrections in one day,
+			#     both from playing. First this event did nothing at all and its text said the
+			#     legislature had submitted; then it was given the annexation, and Juan played it: the
+			#     province was born on 6 March and gone on the 31st, by two popups he never touched,
+			#     while the war he had just been handed pointed at a country that no longer existed.
+			#     What a battle does is break an army. Beron de Astrada dies commanding, which is what
+			#     happened, and what is left of the Correntine army is worth little for a year -- and
+			#     then it is the player's war to finish, which is the only way any of this is a game.
+			# ES: Y LA BATALLA PASA, PERO NO TERMINA LA GUERRA. Dos correcciones en un mismo dia, las
+			#     dos de jugar. Primero este evento no hacia nada y su texto decia que la legislatura
+			#     se habia sometido; despues se le dio la anexion, y Juan lo jugo: la provincia nacia
+			#     el 6 de marzo y el 31 ya no estaba, por dos popups que nunca toco, mientras la
+			#     guerra que le acababan de dar apuntaba a un pais que ya no existia.
+			#     Lo que hace una batalla es romper un ejercito. Beron de Astrada muere mandando, que
+			#     es lo que paso, y lo que queda del ejercito correntino no vale gran cosa por un
+			#     anio -- y despues la guerra es del jugador para terminarla, que es la unica forma de
+			#     que esto sea un juego.
+			c:CRR ?= {
+				add_modifier = { name = gg_arg_army_wrecked months = 12 }
 			}
+			add_modifier = { name = gg_arg_field_won months = 6 }
 		}
 	}
 
@@ -431,32 +421,28 @@ gg_argentina.11 = {
 
 	immediate = {
 		hidden_effect = {
-			# EN: AND CORDOBA GOES BACK. Quebracho Herrado did not end the Coalition -- Famailla did,
-			#     eight months later -- so this event has no country to annex. What it has is the
-			#     province the battle was fought in: the federal army marched on from the field and
-			#     entered the city of Cordoba on 19 December 1840, and the two unitarian generals,
-			#     after blaming each other for the missed rendezvous, «could not hold Cordoba» and
-			#     withdrew north. The province that had joined the league ten weeks earlier is the
-			#     first thing the league loses.
-			#     Until now this event did nothing at all, while its text said the Coalition had lost
-			#     its best army.
-			# ES: Y CORDOBA VUELVE. Quebracho Herrado no termino con la Coalicion -- eso fue Famailla,
-			#     ocho meses despues -- asi que este evento no tiene pais que anexar. Lo que tiene es
-			#     la provincia donde se peleo: el ejercito federal siguio desde el campo y entro en la
-			#     ciudad de Cordoba el 19 de diciembre de 1840, y los dos generales unitarios, despues
-			#     de reprocharse el desencuentro, «no pudieron mantenerse en Cordoba» y se retiraron al
-			#     norte. La provincia que se habia sumado diez semanas antes es lo primero que la liga
-			#     pierde.
-			#     Hasta ahora este evento no hacia absolutamente nada, mientras su texto decia que la
-			#     Coalicion habia perdido su mejor ejercito.
+			# EN: THE LARGEST BATTLE OF THE CIVIL WAR, and the same rule as the other two. For a few
+			#     hours this event moved Cordoba back to Buenos Aires by script; that is a province
+			#     changing hands without anybody fighting for it, which is the thing this mod stopped
+			#     doing on 20 September 2026. The federal army did march on from the field and enter
+			#     the city on 19 December, and the two unitarian generals «could not hold Cordoba» --
+			#     but in a game that has to be done with troops.
+			#     More than fifteen hundred unitarian dead against thirty-six federal. Lavalle's army
+			#     is not an army after this.
+			# ES: LA BATALLA MAS GRANDE DE LA GUERRA CIVIL, y la misma regla que las otras dos. Por unas
+			#     horas este evento le devolvio Cordoba a Buenos Aires por guion; eso es una provincia
+			#     cambiando de manos sin que nadie pelee por ella, que es justo lo que este mod dejo de
+			#     hacer el 20/9/2026. El ejercito federal si siguio desde el campo y entro en la ciudad
+			#     el 19 de diciembre, y los dos generales unitarios «no pudieron mantenerse en Cordoba»
+			#     -- pero en un juego eso se hace con tropas.
+			#     Mas de mil quinientos muertos unitarios contra treinta y seis federales. Despues de
+			#     esto el ejercito de Lavalle no es un ejercito.
 			# SOURCE / FUENTE: Caillet-Bois, Ricardo R., «Quebracho Herrado y la muerte de Marco
-			#     Avellaneda: narrados por un testigo presencial» (memoria.fahce.unlp.edu.ar,
-			#     pr.951.pdf): el 19 de diciembre las tropas federales entran en la ciudad de Cordoba.
-			if = {
-				limit = { exists = s:STATE_CORDOBA.region_state:CLN }
-				s:STATE_CORDOBA.region_state:CLN = { set_state_owner = c:ARG }
-				gg_delegation_restored = { KEY = cordoba COUNT = 1 POINTS = 12 }
+			#     Avellaneda: narrados por un testigo presencial» (memoria.fahce.unlp.edu.ar).
+			c:CLN ?= {
+				add_modifier = { name = gg_arg_army_wrecked months = 12 }
 			}
+			add_modifier = { name = gg_arg_field_won months = 6 }
 		}
 	}
 
@@ -492,16 +478,13 @@ gg_argentina.12 = {
 					kill_character = yes
 				}
 			}
-			# EN/ES: y la liga termina, que es lo que el texto dice desde el principio: dieciocho meses
-			#     y se acabo. Con la misma guarda: al que tomo el asiento no lo anexa un texto
-			#     / and the league ends, which is what the text has said all along, with the same guard
-			if = {
-				limit = {
-					exists = c:CLN
-					c:CLN = { is_player = no }
-				}
-				annex = c:CLN
+			# EN/ES: y la misma regla que en Pago Largo: la milicia tucumana se retiro sin pelear y el
+			#     ejercito de la Coalicion queda deshecho, pero quien termina la guerra es el que la
+			#     esta peleando / and the same rule as at Pago Largo: the war is the player's to finish
+			c:CLN ?= {
+				add_modifier = { name = gg_arg_army_wrecked months = 12 }
 			}
+			add_modifier = { name = gg_arg_field_won months = 6 }
 		}
 	}
 
@@ -1087,5 +1070,102 @@ gg_argentina.7 = {
 			gg_argentina_open_war = { TAG = CRR }
 		}
 		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.60 -- ORIBE ARRIVES IN BUENOS AIRES, five days after he leaves Montevideo. Written
+#     20/9/2026 because Juan played Argentina and said it plainly: «no veo el evento que me dé a
+#     Oribe». He was right, and it was worse than missing -- the script exiled him into the
+#     international pool while the tooltip said he was going to Buenos Aires, so the man the entire
+#     mod turns on simply left the board.
+#     WHAT ACTUALLY HAPPENED. Oribe «resigned» on 24 October 1838 without resigning: he never
+#     accepted that the act was valid and went on calling himself the lawful president of the
+#     Republic from Buenos Aires. Rosas agreed with him, kept receiving him as president, and four
+#     years later gave him the Ejercito Unido de Vanguardia. That army wins Quebracho Herrado,
+#     Famailla and Arroyo Grande, and then crosses the river and sits down in front of Montevideo
+#     for eight years. Every thread of this mod passes through this arrival.
+#     WHAT THE PLAYER DECIDES. Not whether to receive him -- that is the historical fact and Rosas
+#     never hesitated -- but what the reception is worth. Recognising him as president is a claim
+#     against another state and it is expensive; taking him in as a soldier is cheap and leaves the
+#     claim unmade. The two roads lead to the same army and to very different diplomacy.
+# ES: gg_argentina.60 -- ORIBE LLEGA A BUENOS AIRES, cinco dias despues de salir de Montevideo.
+#     Escrito el 20/9/2026 porque Juan jugo de Argentina y lo dijo sin vueltas: «no veo el evento que
+#     me dé a Oribe». Tenia razon, y era peor que faltar: el script lo exiliaba a la bolsa
+#     internacional mientras el tooltip decia que se iba a Buenos Aires, asi que el hombre sobre el
+#     que gira el mod entero se iba del tablero.
+#     LO QUE PASO DE VERDAD. Oribe «resignó» el 24 de octubre de 1838 sin renunciar: nunca acepto que
+#     el acto fuera valido y siguio llamandose presidente legal de la Republica desde Buenos Aires.
+#     Rosas le dio la razon, lo siguio recibiendo como presidente y cuatro anios despues le dio el
+#     Ejercito Unido de Vanguardia. Ese ejercito gana Quebracho Herrado, Famailla y Arroyo Grande, y
+#     despues cruza el rio y se sienta frente a Montevideo ocho anios. Todos los hilos de este mod
+#     pasan por esta llegada.
+#     QUE DECIDE EL JUGADOR. No si lo recibe -- eso es el hecho historico y Rosas no dudo nunca --
+#     sino cuanto vale la recepcion. Reconocerlo presidente es una pretension contra otro Estado y
+#     sale cara; recibirlo de militar es barato y deja la pretension sin formular. Los dos caminos
+#     llevan al mismo ejercito y a diplomacias muy distintas.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md (24/10/1838: «Oribe renuncia en
+#     Montevideo y sigue reclamando la presidencia desde Buenos Aires») y
+#     docs/guerra-grande-flujo/historia.md (Oribe «resigna» sin renunciar: se sigue considerando
+#     presidente legal).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.60 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.60.t
+	desc = gg_argentina.60.d
+	flavor = gg_argentina.60.f
+
+	event_image = { video = "gg_oribe_fall" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 1825
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		any_scope_character = { has_template = URU_Manuel_Oribe }
+		NOT = { has_global_variable = gg_oribe_in_buenos_aires }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_oribe_in_buenos_aires
+			# EN/ES: y el mando, que no tiene: el Oribe de vanilla es presidente, no general, y el
+			#     hombre que va a mandar el Ejercito Unido de Vanguardia tiene que poder mandarlo
+			#     / and the command, which he does not have: vanilla's Oribe is a president
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
+					NOT = { has_role = general }
+				}
+				add_character_role = general
+			}
+			random_scope_character = {
+				limit = { has_template = URU_Manuel_Oribe }
+				add_commander_rank = 2
+			}
+		}
+	}
+
+	# EN/ES: reconocerlo presidente legal, que es lo historico / recognise him as lawful president
+	option = {
+		name = gg_argentina.60.a
+		default_option = yes
+		set_global_variable = gg_oribe_recognised
+		add_modifier = {
+			name = gg_oribe_pretension
+			years = 20
+		}
+		ai_chance = { base = 90 }
+	}
+
+	# EN/ES: recibirlo de militar y no decir nada de la presidencia / take him in as a soldier
+	option = {
+		name = gg_argentina.60.b
+		ai_chance = { base = 10 }
 	}
 }

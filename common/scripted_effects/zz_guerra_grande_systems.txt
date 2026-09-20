@@ -1008,6 +1008,41 @@ gg_ruler_set = {
 			set_character_as_ruler = yes
 		}
 	}
+	# EN: AND IF HE IS ALIVE SOMEWHERE ELSE, HE IS FETCHED, NOT COPIED. Added 20/9/2026. This used to
+	#     go straight from «not here» to create_character, and the case that breaks is the one the
+	#     whole mod turns on: Oribe leaves Montevideo in October 1838 for Buenos Aires, and four years
+	#     later the Cerrito is founded on his army. The Cerrito did not have him -- he was in
+	#     Argentina -- so it made a second Manuel Oribe, and the game had two of the same man, one
+	#     besieging Montevideo and one in Rosas' government.
+	#     A ruler who exists is moved. Only a ruler who exists nowhere is created.
+	# ES: Y SI ESTA VIVO EN OTRA PARTE, SE LO VA A BUSCAR, NO SE LO COPIA. Agregado el 20/9/2026. Esto
+	#     saltaba de «no esta aca» directo a create_character, y el caso que lo rompe es aquel sobre el
+	#     que gira el mod entero: Oribe se va de Montevideo en octubre de 1838 a Buenos Aires, y cuatro
+	#     anios despues el Cerrito se funda sobre su ejercito. El Cerrito no lo tenia -- estaba en la
+	#     Argentina -- asi que fabricaba un segundo Manuel Oribe, y el juego tenia dos del mismo
+	#     hombre, uno sitiando Montevideo y otro en el gobierno de Rosas.
+	#     Un gobernante que existe se muda. Solo se crea el que no existe en ninguna parte.
+	else_if = {
+		limit = {
+			any_country = {
+				any_scope_character = { has_template = $TEMPLATE$ }
+			}
+		}
+		save_scope_as = gg_ruler_claimant
+		random_country = {
+			limit = {
+				any_scope_character = { has_template = $TEMPLATE$ }
+			}
+			random_scope_character = {
+				limit = { has_template = $TEMPLATE$ }
+				transfer_character = scope:gg_ruler_claimant
+			}
+		}
+		random_scope_character = {
+			limit = { has_template = $TEMPLATE$ }
+			set_character_as_ruler = yes
+		}
+	}
 	else = {
 		create_character = {
 			template = $TEMPLATE$

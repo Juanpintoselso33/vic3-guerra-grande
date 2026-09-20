@@ -42,14 +42,43 @@ gg_phase1.9 = {
 		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
 		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
 		custom_tooltip = gg_oribe_exile_tt
-		every_scope_character = {
-			limit = {
-				OR = {
-					has_template = URU_Manuel_Oribe
-					has_template = URU_Ignacio_Oribe
+		# EN: THE ORIBES GO TO BUENOS AIRES, which is what the tooltip has always said and what the
+		#     script never did. Until 20/9/2026 this exiled them -- vanilla's exile drops a man in the
+		#     international pool -- so for an Argentine player Oribe simply never arrived, and at the
+		#     partition four years later the Cerrito did not find him either and CREATED A SECOND ONE.
+		#     Juan, playing Argentina: «no veo el evento que me dé a Oribe.»
+		#     He is transferred to Argentina, where he spent those four years asking Rosas for an army
+		#     and getting it, and where the man who besieges Montevideo has to come from.
+		# ES: LOS ORIBE SE VAN A BUENOS AIRES, que es lo que el tooltip dijo siempre y lo que el script
+		#     no hacia nunca. Hasta el 20/9/2026 esto los exiliaba -- el exilio de vanilla deja al
+		#     hombre en la bolsa internacional -- asi que para un jugador argentino Oribe no llegaba
+		#     jamas, y cuatro anios despues, en la particion, el Cerrito tampoco lo encontraba y SE
+		#     CREABA UN SEGUNDO. Juan, jugando de Argentina: «no veo el evento que me dé a Oribe».
+		#     Se lo transfiere a la Argentina, donde paso esos cuatro anios pidiendole un ejercito a
+		#     Rosas y consiguiendolo, y de donde tiene que salir el hombre que sitia Montevideo.
+		if = {
+			limit = { exists = c:ARG }
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
 				}
+				transfer_character = c:ARG
 			}
-			exile_character = yes
+			c:ARG = { trigger_event = { id = gg_argentina.60 days = 5 popup = yes } }
+		}
+		else = {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
+				}
+				exile_character = yes
+			}
 		}
 		set_global_variable = gg_rivera_presidency
 		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
@@ -72,14 +101,43 @@ gg_phase1.9 = {
 		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
 		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
 		custom_tooltip = gg_oribe_exile_tt
-		every_scope_character = {
-			limit = {
-				OR = {
-					has_template = URU_Manuel_Oribe
-					has_template = URU_Ignacio_Oribe
+		# EN: THE ORIBES GO TO BUENOS AIRES, which is what the tooltip has always said and what the
+		#     script never did. Until 20/9/2026 this exiled them -- vanilla's exile drops a man in the
+		#     international pool -- so for an Argentine player Oribe simply never arrived, and at the
+		#     partition four years later the Cerrito did not find him either and CREATED A SECOND ONE.
+		#     Juan, playing Argentina: «no veo el evento que me dé a Oribe.»
+		#     He is transferred to Argentina, where he spent those four years asking Rosas for an army
+		#     and getting it, and where the man who besieges Montevideo has to come from.
+		# ES: LOS ORIBE SE VAN A BUENOS AIRES, que es lo que el tooltip dijo siempre y lo que el script
+		#     no hacia nunca. Hasta el 20/9/2026 esto los exiliaba -- el exilio de vanilla deja al
+		#     hombre en la bolsa internacional -- asi que para un jugador argentino Oribe no llegaba
+		#     jamas, y cuatro anios despues, en la particion, el Cerrito tampoco lo encontraba y SE
+		#     CREABA UN SEGUNDO. Juan, jugando de Argentina: «no veo el evento que me dé a Oribe».
+		#     Se lo transfiere a la Argentina, donde paso esos cuatro anios pidiendole un ejercito a
+		#     Rosas y consiguiendolo, y de donde tiene que salir el hombre que sitia Montevideo.
+		if = {
+			limit = { exists = c:ARG }
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
 				}
+				transfer_character = c:ARG
 			}
-			exile_character = yes
+			c:ARG = { trigger_event = { id = gg_argentina.60 days = 5 popup = yes } }
+		}
+		else = {
+			every_scope_character = {
+				limit = {
+					OR = {
+						has_template = URU_Manuel_Oribe
+						has_template = URU_Ignacio_Oribe
+					}
+				}
+				exile_character = yes
+			}
 		}
 		set_global_variable = gg_rivera_presidency
 		# EN/ES: what the resistance of 1838 bought / lo que compro la resistencia de 1838
