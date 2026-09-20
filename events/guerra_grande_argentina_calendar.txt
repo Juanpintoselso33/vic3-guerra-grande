@@ -49,6 +49,27 @@
 #     mano y se verificaron uno por uno.
 # -------------------------------------------------------------------------------------------------
 
+# -------------------------------------------------------------------------------------------------
+# EN: «LA ARGENTINA» IS REQUIRED FOR THIS SIDE, and every relay checks it. Decision of 19 September
+#     2026, after Codex's review caught it: of the eight Argentine states this side needs, only
+#     STATE_CORRIENTES and STATE_TUCUMAN exist in vanilla. Entre Rios, Cordoba, Salta, Misiones, La
+#     Rioja and Catamarca are provinces that «la Argentina» adds -- vanilla does not split Argentina
+#     into its historical provinces at all. The whole Argentine side was built reading the COMPATCH's
+#     map, which has them, without checking that the standalone mod does not.
+#     So rather than pretend, each relay asks for a state that only exists with «la Argentina»
+#     loaded. Without it, the four relays do nothing, nothing is created, nothing breaks, and the
+#     Uruguayan side plays exactly as it always did. The requirement is stated in README.md.
+# ES: «LA ARGENTINA» ES REQUISITO DE ESTE LADO, y cada relevo lo chequea. Decision del 19/9/2026,
+#     despues de que la revision de Codex lo agarrara: de los ocho estados argentinos que este lado
+#     necesita, en vanilla existen solo STATE_CORRIENTES y STATE_TUCUMAN. Entre Rios, Cordoba, Salta,
+#     Misiones, La Rioja y Catamarca son provincias que agrega «la Argentina» -- vanilla no parte a la
+#     Argentina en sus provincias historicas. Todo este lado se armo leyendo el mapa del COMPATCH, que
+#     si las tiene, sin chequear que el mod solo no.
+#     Asi que en vez de disimular, cada relevo pide un estado que solo existe con «la Argentina»
+#     cargada. Sin ella, los cuatro relevos no hacen nada, no se crea nada, no se rompe nada, y el
+#     lado oriental se juega exactamente como siempre. El requisito esta dicho en README.md.
+# -------------------------------------------------------------------------------------------------
+
 # EN/ES: 6/3/1839 (dia 1159) -- Corrientes se separa y le declara la guerra a Rosas
 gg_argentina_cal.1 = {
 	type = country_event
@@ -59,6 +80,8 @@ gg_argentina_cal.1 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_1 }
+					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
+					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					NOT = { exists = c:CRR }
 					exists = s:STATE_CORRIENTES.region_state:ARG
@@ -80,6 +103,8 @@ gg_argentina_cal.2 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_2 }
+					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
+					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					NOT = { exists = c:CLN }
 					# EN/ES: Tucuman es la capital de la Coalicion: sin ella no hay pronunciamiento
@@ -103,6 +128,8 @@ gg_argentina_cal.3 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_3 }
+					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
+					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: no crea pais: le suma un estado a uno que ya existe. Si la Coalicion no
 					#     llego a nacer, o ya cayo, no hay a quien adherir.
@@ -128,6 +155,8 @@ gg_argentina_cal.4 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_4 }
+					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
+					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					NOT = { exists = c:ENR }
 					exists = s:STATE_ENTRE_RIOS.region_state:ARG

@@ -10,9 +10,14 @@
 #       the country is created; the new country is then EMPTIED of every clone without exception,
 #       and only then populated. The emptying lives in gg_argentina_new_country_people and its
 #       reasoning is written there.
-#     - After create_country, c:<new tag> does NOT resolve in the same effect. Anything that needs
-#       the new country by tag -- diplomatic plays, journals -- goes in a hidden event a day later,
-#       scheduled on ARGENTINA, which never changes tag.
+#     - c:<new tag> DOES resolve right after create_country, in the same effect: vanilla uses c:ZAN
+#       immediately after creating it (events/zanzibar_events.txt:32). The rule that costs a day is
+#       about change_tag, which is a different effect and a different problem. An earlier version of
+#       this header said the opposite; it was wrong, and a wrong comment is worse than none.
+#     - The country is created in IMMEDIATE, never inside an option. That is how vanilla does it, and
+#       it is not a style choice: an option whose trigger asks about the new country cannot see it if
+#       the option itself is what creates it. That is exactly how the seat-change options were born
+#       unreachable.
 #     - A ruler left unset is a ruler picked at random. Every one of the three is named explicitly.
 #     - The seat change is offered as an option of the historical event itself, with
 #       trigger = { is_player = yes }, the way vanilla does it in events/zanzibar_events.txt:150.
@@ -27,9 +32,13 @@
 #       ANTES de crear el pais; despues el pais nuevo se VACIA de todos los clones sin excepcion, y
 #       recien ahi se puebla. El vaciado vive en gg_argentina_new_country_people y el razonamiento
 #       esta escrito ahi.
-#     - Despues de create_country, c:<tag nuevo> NO resuelve en el mismo efecto. Todo lo que necesite
-#       al pais nuevo por tag -- jugadas diplomaticas, journals -- va en un evento oculto al dia
-#       siguiente, agendado sobre la ARGENTINA, que no cambia de tag nunca.
+#     - c:<tag nuevo> SI resuelve justo despues de create_country, en el mismo efecto: vanilla usa
+#       c:ZAN inmediatamente despues de crearlo. La regla que cuesta un dia es la de change_tag, que
+#       es otro efecto y otro problema. Una version anterior de esta cabecera decia lo contrario:
+#       estaba mal, y un comentario equivocado es peor que ninguno.
+#     - El pais se crea en el IMMEDIATE, nunca adentro de una opcion. Asi lo hace vanilla, y no es
+#       una cuestion de estilo: una opcion cuyo trigger pregunta por el pais nuevo no puede verlo si
+#       es la propia opcion la que lo crea. Asi nacieron inalcanzables las opciones de mudanza.
 #     - Un gobernante sin fijar es un gobernante al azar. Los tres se nombran explicitamente.
 #     - El cambio de asiento se ofrece como opcion del evento historico mismo, con
 #       trigger = { is_player = yes }, como lo hace vanilla en events/zanzibar_events.txt:150.
@@ -94,14 +103,17 @@ gg_argentina.1 = {
 					save_scope_as = gg_ferre
 				}
 			}
+			# EN/ES: Corrientes se separa pase lo que pase: lo que eligen las opciones es la respuesta
+			#     de Rosas, no si ocurre / Corrientes secedes either way
+			gg_argentina_create_corrientes = yes
 		}
 	}
 
 	option = {
 		name = gg_argentina.1.a
 		default_option = yes
-		# EN/ES: FA-1 -- Rosas answers with the army: Echague marches / Rosas contesta con el ejercito
-		gg_argentina_create_corrientes = yes
+		# EN/ES: Rosas contesta con el ejercito: Echague marcha / Rosas answers with the army
+		gg_argentina_open_war = { TAG = CRR }
 		ai_chance = { base = 85 }
 	}
 
@@ -115,7 +127,7 @@ gg_argentina.1 = {
 			is_player = yes
 			c:CRR ?= { is_player = no }
 		}
-		gg_argentina_create_corrientes = yes
+		gg_argentina_open_war = { TAG = CRR }
 		ai_chance = { base = 0 }
 		# EN/ES: last, always / ultimo, siempre
 		hidden_effect = {
@@ -172,13 +184,14 @@ gg_argentina.2 = {
 					save_scope_as = gg_lamadrid
 				}
 			}
+			gg_argentina_create_coalicion = yes
 		}
 	}
 
 	option = {
 		name = gg_argentina.2.a
 		default_option = yes
-		gg_argentina_create_coalicion = yes
+		gg_argentina_open_war = { TAG = CLN }
 		ai_chance = { base = 100 }
 	}
 }
@@ -227,13 +240,14 @@ gg_argentina.3 = {
 				limit = { has_template = ARG_Justo_Jose_de_Urquiza }
 				save_scope_as = gg_urquiza
 			}
+			gg_argentina_create_entre_rios = yes
 		}
 	}
 
 	option = {
 		name = gg_argentina.3.a
 		default_option = yes
-		gg_argentina_create_entre_rios = yes
+		gg_argentina_open_war = { TAG = ENR }
 		ai_chance = { base = 100 }
 	}
 
@@ -243,7 +257,7 @@ gg_argentina.3 = {
 			is_player = yes
 			c:ENR ?= { is_player = no }
 		}
-		gg_argentina_create_entre_rios = yes
+		gg_argentina_open_war = { TAG = ENR }
 		ai_chance = { base = 0 }
 		hidden_effect = {
 			c:ENR ?= { save_scope_as = gg_new_seat }

@@ -117,11 +117,31 @@ gg_argentina_create_coalicion = {
 			template = CLN_gg_tomas_brizuela
 		}
 	}
-	# EN: five at once -- Tucuman pronounces and Salta, Jujuy, Catamarca and La Rioja follow within
-	#     the month. Cordoba is NOT among them: it joins in October and pays its own twelve points.
-	# ES: cinco de una -- se pronuncia Tucuman y dentro del mes la siguen Salta, Jujuy, Catamarca y
-	#     La Rioja. Cordoba NO esta entre ellas: adhiere en octubre y paga sus propios doce puntos.
-	gg_delegation_revoked = { KEY = coalicion COUNT = -5 POINTS = -60 }
+	# EN: one province per state that ACTUALLY left. The four transfers above are conditional -- if
+	#     Argentina had already lost Salta, that state never moves -- so a flat -5 would charge Rosas
+	#     for delegations he had already lost. Tucuman is unconditional: without it there is no
+	#     Coalition, and the relay guarantees Argentina still held it.
+	# ES: una provincia por cada estado que SE FUE DE VERDAD. Las cuatro transferencias de arriba son
+	#     condicionales -- si la Argentina ya habia perdido Salta, ese estado no se mueve nunca --,
+	#     asi que un -5 fijo le cobraria a Rosas delegaciones que ya habia perdido. Tucuman va sin
+	#     condicion: sin ella no hay Coalicion, y el relevo garantiza que la Argentina la tenia.
+	gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 POINTS = -12 }
+	if = {
+		limit = { exists = s:STATE_SALTA.region_state:CLN }
+		gg_delegation_revoked = { KEY = coalicion_salta COUNT = -1 POINTS = -12 }
+	}
+	if = {
+		limit = { exists = s:STATE_JUJUY.region_state:CLN }
+		gg_delegation_revoked = { KEY = coalicion_jujuy COUNT = -1 POINTS = -12 }
+	}
+	if = {
+		limit = { exists = s:STATE_CATAMARCA.region_state:CLN }
+		gg_delegation_revoked = { KEY = coalicion_catamarca COUNT = -1 POINTS = -12 }
+	}
+	if = {
+		limit = { exists = s:STATE_LA_RIOJA.region_state:CLN }
+		gg_delegation_revoked = { KEY = coalicion_la_rioja COUNT = -1 POINTS = -12 }
+	}
 	# EN/ES: Lamadrid existe en vanilla y se paso a sus filas / Lamadrid exists in vanilla
 	if = {
 		limit = { exists = scope:gg_lamadrid }
@@ -180,13 +200,58 @@ gg_argentina_create_entre_rios = {
 gg_argentina_new_country_people = {
 	c:$TAG$ ?= {
 		every_scope_character = {
-			exile_character = yes
+			# EN: vanilla's own comment on exile_character_with_role_cleanup says it "should be used
+			#     instead of exile_character = yes" (common/scripted_effects/00_scripted_effects.txt).
+			#     It also unassigns a commander from his formation and strips every role, which is
+			#     exactly what a cloned roster needs: a bare exile leaves interest-group leaders still
+			#     tied to their group and commanders still tied to formations.
+			# ES: el comentario de la propia vanilla sobre exile_character_with_role_cleanup dice que
+			#     "deberia usarse en lugar de exile_character = yes". Ademas le saca el mando de su
+			#     formacion y le quita todos los roles, que es justo lo que necesita un plantel
+			#     clonado: un exilio pelado deja lideres de grupo todavia atados a su grupo y
+			#     comandantes todavia atados a formaciones.
+			exile_character_with_role_cleanup = yes
 		}
 		# EN/ES: y la delegacion, que desde aca se mira del otro lado / and the delegation, seen from
 		#     the other side from here on
 		if = {
 			limit = { NOT = { has_journal_entry = je_gg_delegation } }
 			add_contextless_journal_entry = je_gg_delegation
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE WAR THE TEXT PROMISES. Every one of these three events tells the player a province has
+#     disavowed Buenos Aires and, in the Corrientes case, declared war outright -- and until now not
+#     one of them opened anything. The three countries seceded in peace and could sit next to
+#     Argentina for sixteen years. This is the play Rosas opens to bring them back: annexation, which
+#     is what he actually did to Corrientes after Pago Largo and to the Coalition after Famailla.
+#     It runs from ARGENTINA's option, so Rosas is the one who opens it -- the province did not
+#     invade anybody, it stopped obeying.
+# ES: LA GUERRA QUE EL TEXTO PROMETE. Cada uno de estos tres eventos le dice al jugador que una
+#     provincia desconocio a Buenos Aires y, en el caso de Corrientes, que le declaro la guerra --
+#     y hasta ahora ninguno abria nada. Los tres paises se separaban en paz y podian convivir con la
+#     Argentina dieciseis anios. Esta es la jugada que abre Rosas para traerlos de vuelta: anexion,
+#     que es lo que hizo de verdad con Corrientes despues de Pago Largo y con la Coalicion despues de
+#     Famailla. Corre desde la opcion de la ARGENTINA, asi que la abre Rosas: la provincia no invadio
+#     a nadie, dejo de obedecer.
+# -------------------------------------------------------------------------------------------------
+gg_argentina_open_war = {
+	if = {
+		limit = {
+			exists = c:$TAG$
+			c:ARG ?= this
+		}
+		create_diplomatic_play = {
+			name = gg_argentina_play_$TAG$
+			target_country = c:$TAG$
+			type = dp_annex_war
+			add_war_goal = {
+				holder = c:ARG
+				target_country = c:$TAG$
+				type = annex_country
+			}
 		}
 	}
 }

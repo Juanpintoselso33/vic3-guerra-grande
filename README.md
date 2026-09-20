@@ -4,7 +4,7 @@ Victoria 3 (1.13). La Guerra Grande oriental: el nacimiento de las divisas blanc
 Carpintería, la partición de la República en el gobierno de la **Defensa** (Montevideo) y el del
 **Cerrito** (la campaña), los nueve años de sitio y la paz de 1851.
 
-**Es un mod que se sostiene solo.** Trae sus cinco estados orientales, su historia y todo lo que
+**La guerra oriental se sostiene sola.** Trae sus cinco estados orientales, su historia y todo lo que
 necesita del juego base; lo que cambia de vanilla lo reemplaza por objeto con `REPLACE:` en vez de
 pisar archivos enteros, así que convive con otros mods.
 
@@ -12,8 +12,23 @@ pisar archivos enteros, así que convive con otros mods.
 
 | Qué querés jugar | Cómo |
 |---|---|
-| Sólo la Guerra Grande | Guerra Grande. Nada más |
-| Con **la Argentina** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden. Sin el compatch los dos mods se pisan el mapa y el Uruguay arranca con el doble de población |
+| Sólo la guerra oriental | Guerra Grande. Nada más |
+| **La guerra entera, las dos orillas** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden |
+
+### El lado argentino necesita «la Argentina», y no es opcional
+
+La orilla oriental —Carpintería, la partición, el sitio, la paz de 1851— **se juega sola**, como
+siempre. El **lado argentino** no: Corrientes, la Coalición del Norte y el Pronunciamiento de Entre
+Ríos necesitan que la Argentina esté partida en sus provincias históricas, y **vanilla no la parte**.
+
+De los ocho estados que ese lado usa, en vanilla existen sólo dos: `STATE_CORRIENTES` y
+`STATE_TUCUMAN`. Entre Ríos, Córdoba, Salta, Misiones, La Rioja y Catamarca **son provincias que
+agrega «la Argentina»**.
+
+Por eso los cuatro eventos fechados del lado argentino piden un estado que sólo existe con ella
+cargada. **Sin «la Argentina», ese lado sencillamente no ocurre**: no se crea ningún país, no se
+rompe nada, y la guerra oriental se juega exactamente igual que antes. Con ella y el compatch, se
+juegan las dos orillas.
 
 ⚠️ **Partidas viejas del submod**: si venías jugando con la Argentina, seguí con ella y agregá el
 compatch. Desactivarla saca contenido que ya es parte de tu guardado.

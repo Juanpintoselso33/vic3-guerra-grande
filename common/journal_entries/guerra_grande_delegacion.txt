@@ -71,7 +71,12 @@ je_gg_delegation = {
 					NOT = { has_global_variable = gg_peace_settled }
 					exists = c:CER
 				}
-				gg_delegation_change = { DELTA = -1 }
+				# EN/ES: y no por debajo de cero: una vez que no queda nada, no queda menos que nada
+				#     / and not below zero: once nothing is left, there is no less than nothing
+				if = {
+					limit = { global_var:gg_delegation_points > 0 }
+					gg_delegation_change = { DELTA = -1 }
+				}
 			}
 			else = {
 				# EN/ES: sin sitio no hay costo, pero la barra igual se redibuja: es la reparacion de
@@ -90,11 +95,28 @@ je_gg_delegation = {
 		}
 	}
 
-	# EN/ES: Rosas se queda sin nada de que ser / Rosas has nothing left to be
+	# EN: ONE AUTHORITY, AND IT IS THE POINTS. This used to complete on gg_delegating_provinces while
+	#     the monthly wear only moved gg_delegation_points, so the two could disagree: the bar could
+	#     read zero, the text still say seven provinces delegate, the journal never close, and the
+	#     points keep falling past -13, -14, -100 with nothing watching. That is not a rounding
+	#     difference, it is two clocks telling different times to the same player.
+	#     The points govern the bar, the text and the ending. The province count stays as what it is
+	#     -- the discrete number of legislatures that have formally withdrawn -- and it is still what
+	#     the status line names, because "eight and a half provinces delegate" is not a sentence
+	#     anybody would say.
+	# ES: UNA SOLA AUTORIDAD, Y SON LOS PUNTOS. Esto cerraba con gg_delegating_provinces mientras el
+	#     desgaste mensual solo movia gg_delegation_points, asi que los dos podian discrepar: la barra
+	#     podia marcar cero, el texto seguir diciendo que delegan siete provincias, el journal no
+	#     cerrar nunca, y los puntos seguir bajando a -13, -14, -100 sin que nadie mirara. No es una
+	#     diferencia de redondeo: son dos relojes dandole la hora distinta al mismo jugador.
+	#     Los puntos gobiernan la barra, el texto y el final. La cuenta de provincias queda como lo
+	#     que es -- el numero discreto de legislaturas que retiraron formalmente la delegacion -- y
+	#     sigue siendo lo que nombra la linea de estado, porque "delegan ocho provincias y media" no
+	#     es una frase que diria nadie.
 	complete = {
 		custom_tooltip = {
 			text = je_gg_delegation_complete_tt
-			global_var:gg_delegating_provinces <= 0
+			global_var:gg_delegation_points <= 0
 		}
 	}
 
