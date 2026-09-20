@@ -1532,9 +1532,27 @@ guerra_grande.4 = {
 
 	duration = 1825
 
+	# EN: THE TANDEM, READ HERE. Rosas can only lend the Vanguardia if the Vanguardia is free to be
+	#     lent. gg_vanguardia_status is written by the reckoning of the interior on 16 February 1843
+	#     (events/guerra_grande_argentina.txt, gg_argentina.20) and says what became of Oribe's army:
+	#     1 crossed whole, 2 crossed depleted, 3 never crossed because the interior was still in arms.
+	#     Zero means undecided, which is what it is in every game without the Argentine side, and it
+	#     behaves exactly as history did -- so nothing changes for a player who is not running «la
+	#     Argentina».
+	#     A 3 is the only value that stops this event, and it should: an army fighting Corrientes or
+	#     the Coalition in 1843 cannot also be sitting in front of Montevideo.
+	# ES: EL TANDEM, LEIDO ACA. Rosas solo puede prestar la Vanguardia si la Vanguardia esta libre
+	#     para prestarse. gg_vanguardia_status la escribe el balance del interior del 16 de febrero de
+	#     1843 y dice que fue del ejercito de Oribe: 1 cruzo entero, 2 cruzo mermado, 3 no cruzo nunca
+	#     porque el interior seguia en armas. Cero es "sin decidir", que es lo que vale en toda
+	#     partida sin el lado argentino, y se comporta como la historia -- asi que no cambia nada para
+	#     quien no juega con «la Argentina».
+	#     El 3 es el unico valor que frena este evento, y tiene que frenarlo: un ejercito peleando
+	#     contra Corrientes o la Coalicion en 1843 no puede estar ademas sentado frente a Montevideo.
 	trigger = {
 		c:ARG ?= this
 		exists = c:CER
+		NOT = { global_var:gg_vanguardia_status = 3 }
 	}
 
 	option = {

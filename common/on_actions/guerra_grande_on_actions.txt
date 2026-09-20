@@ -100,6 +100,11 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento
+			# EN/ES: la campania del interior, y el balance que hace el tandem / the interior campaign
+			trigger_event = { id = gg_argentina_cal.5 days = 1184 }  # 1839-03-31 Pago Largo
+			trigger_event = { id = gg_argentina_cal.6 days = 1791 }  # 1840-11-28 Quebracho Herrado
+			trigger_event = { id = gg_argentina_cal.7 days = 2086 }  # 1841-09-19 Famailla y Metan
+			trigger_event = { id = gg_argentina_cal.8 days = 2601 }  # 1843-02-16 el balance del interior
 		}
 
 		c:ARG ?= {

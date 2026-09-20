@@ -167,3 +167,83 @@ gg_argentina_cal.4 = {
 		}
 	}
 }
+
+# EN/ES: 31/3/1839 (dia 1184) -- Pago Largo: muere Beron de Astrada
+gg_argentina_cal.5 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_5 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+				}
+				set_global_variable = gg_arg_cal_done_5
+				c:ARG = { trigger_event = { id = gg_argentina.10 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 28/11/1840 (dia 1791) -- Quebracho Herrado
+gg_argentina_cal.6 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_6 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+				}
+				set_global_variable = gg_arg_cal_done_6
+				c:ARG = { trigger_event = { id = gg_argentina.11 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 19/9/1841 (dia 2086) -- Famailla, y despues Metan
+gg_argentina_cal.7 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_7 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+				}
+				set_global_variable = gg_arg_cal_done_7
+				c:ARG = { trigger_event = { id = gg_argentina.12 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 16/2/1843 (dia 2601) -- el balance del interior, el dia que Oribe cruza
+gg_argentina_cal.8 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_8 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+				}
+				set_global_variable = gg_arg_cal_done_8
+				c:ARG = { trigger_event = { id = gg_argentina.20 days = 0  } }
+			}
+		}
+	}
+}

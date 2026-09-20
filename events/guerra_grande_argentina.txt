@@ -310,3 +310,173 @@ gg_argentina.4 = {
 		ai_chance = { base = 100 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE CAMPAIGN OF THE INTERIOR. The spine of the tandem: the army that decides the Argentine
+#     civil war is the same one that besieges Montevideo. Oribe leaves Montevideo in October 1838,
+#     Rosas gives him the Ejercito Unido de Vanguardia, he beats Lavalle at Quebracho Herrado and
+#     again at Famailla, destroys Rivera at Arroyo Grande, and on 16 February 1843 he crosses the
+#     river and sits down in front of Montevideo.
+#     THE OUTCOME IS READ, NOT DECREED. These events do not decide who won: they report what the
+#     player did, and the reckoning at the end reads the board -- who still exists, how much of the
+#     delegation is left -- and writes it into the two shared states the Uruguayan side can ask
+#     about. That is the difference between a tandem and two scripts that salute each other.
+# ES: LA CAMPANIA DEL INTERIOR. La columna vertebral del tandem: el ejercito que decide la guerra
+#     civil argentina es el mismo que sitia Montevideo. Oribe sale de Montevideo en octubre de 1838,
+#     Rosas le da el Ejercito Unido de Vanguardia, le gana a Lavalle en Quebracho Herrado y otra vez
+#     en Famailla, destruye a Rivera en Arroyo Grande, y el 16 de febrero de 1843 cruza el rio y se
+#     sienta frente a Montevideo.
+#     EL RESULTADO SE LEE, NO SE DECRETA. Estos eventos no deciden quien gano: cuentan lo que hizo el
+#     jugador, y el balance del final lee el tablero -- quien sigue existiendo, cuanta delegacion
+#     queda -- y lo escribe en los dos estados compartidos que el lado oriental puede preguntar. Esa
+#     es la diferencia entre un tandem y dos guiones que se saludan.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 31/3/1839 -- Pago Largo. Echague destruye al ejercito correntino y muere Beron de Astrada,
+#     veinticinco dias despues de separarse.
+gg_argentina.10 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.10.t
+	desc = gg_argentina.10.d
+	flavor = gg_argentina.10.f
+	event_image = { video = "gg_arg_corrientes" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:CRR
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN/ES: muere mandando, como paso / he dies in command, as he did
+			c:CRR ?= {
+				random_scope_character = {
+					limit = { has_template = CRR_gg_genaro_beron_de_astrada }
+					kill_character = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.10.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN/ES: 28/11/1840 -- Quebracho Herrado. La derrota de Lavalle fue una desinteligencia: llego tarde
+#     a la posta de Romero y Lamadrid se habia retirado sin avisar.
+gg_argentina.11 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.11.t
+	desc = gg_argentina.11.d
+	flavor = gg_argentina.11.f
+	event_image = { video = "gg_arg_corrientes" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:CLN
+	}
+
+	option = {
+		name = gg_argentina.11.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN/ES: 19/9/1841 -- Famailla, y despues Metan. Los milicianos tucumanos se retiraron sin luchar, y
+#     Avellaneda fue degollado en presencia de Oribe.
+gg_argentina.12 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.12.t
+	desc = gg_argentina.12.d
+	flavor = gg_argentina.12.f
+	event_image = { video = "gg_arg_coalicion" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:CLN
+	}
+
+	immediate = {
+		hidden_effect = {
+			c:CLN ?= {
+				random_scope_character = {
+					limit = { has_template = CLN_gg_marco_avellaneda }
+					kill_character = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.12.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.20 -- THE RECKONING OF THE INTERIOR, 16 February 1843. The same day Oribe's army
+#     reaches Montevideo on the other bank. This is where the tandem is actually made: it reads the
+#     board and writes the two shared states, and from here the Uruguayan side can ask what became of
+#     the army that was supposed to cross.
+#     WHAT IT READS, and why those thresholds. The delegation starts at 156 points. Corrientes is 12,
+#     the Coalition is up to 72 with Cordoba. So 144 or more means at most one province was ever out
+#     of hand; below that, Rosas spent the interior putting it back together.
+#     Hidden, because it is a reckoning and not news: the player already lived every one of these
+#     battles.
+# ES: gg_argentina.20 -- EL BALANCE DEL INTERIOR, 16 de febrero de 1843. El mismo dia que el ejercito
+#     de Oribe llega frente a Montevideo en la otra orilla. Aca es donde el tandem se hace de verdad:
+#     lee el tablero y escribe los dos estados compartidos, y desde aca el lado oriental puede
+#     preguntar que fue del ejercito que tenia que cruzar.
+#     QUE LEE, y por que esos umbrales. La delegacion arranca en 156 puntos. Corrientes son 12, la
+#     Coalicion hasta 72 con Cordoba. Asi que 144 o mas quiere decir que como mucho una provincia
+#     estuvo fuera de mano; por debajo, Rosas se paso el interior rearmandolo.
+#     Oculto, porque es un balance y no una noticia: el jugador vivio cada una de esas batallas.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.20 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	immediate = {
+		if = {
+			# EN/ES: el interior sigue en armas: el ejercito no puede irse a otra guerra
+			#     / the interior is still in arms: the army cannot leave for another war
+			limit = {
+				OR = {
+					exists = c:CRR
+					exists = c:CLN
+				}
+			}
+			set_global_variable = { name = gg_interior_outcome value = 3 }
+			set_global_variable = { name = gg_vanguardia_status value = 3 }
+		}
+		else_if = {
+			# EN/ES: gano, y entero / he won, and whole
+			limit = { global_var:gg_delegation_points >= 144 }
+			set_global_variable = { name = gg_interior_outcome value = 1 }
+			set_global_variable = { name = gg_vanguardia_status value = 1 }
+		}
+		else = {
+			# EN/ES: gano, pero le costo el interior entero / he won, but it cost him the interior
+			set_global_variable = { name = gg_interior_outcome value = 2 }
+			set_global_variable = { name = gg_vanguardia_status value = 2 }
+		}
+	}
+}
