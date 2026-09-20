@@ -2178,9 +2178,35 @@ gg_argentina.5 = {
 				}
 				# EN/ES: «el Ejercito mas numeroso y mejor armado de la Coalicion» era el suyo, y era
 				#     riojano: entra en campania con el / his own army, and it was Riojan
+				# EN: THE HQ, AND THE ERROR IT THREW IN JUAN'S GAME OF 20/9/2026. This read
+				#     hq_region = capital.region, and the log answered twice with «Coalition of the
+				#     North does not have state in [ ]» -- an EMPTY region. A capital that the country
+				#     does not hold resolves to nothing, and the formation is never built: Brizuela,
+				#     who brought «the largest and best armed army of the Coalition», arrived with
+				#     nothing and no line in the game said so.
+				#     Now the seat is a state the country actually owns: its capital if it still has
+				#     one, any of its states otherwise. A hardcoded strategic region is not an option
+				#     -- the mod already lost Brown's whole squadron to one that held none of the
+				#     country's states.
+				# ES: EL CUARTEL, Y EL ERROR QUE TIRO EN LA PARTIDA DE JUAN DEL 20/9/2026. Esto decia
+				#     hq_region = capital.region, y el log contesto dos veces «Coalition of the North
+				#     does not have state in [ ]» -- una region VACIA. Una capital que el pais no
+				#     tiene resuelve a nada, y la formacion no se crea nunca: Brizuela, que traia «el
+				#     Ejercito mas numeroso y mejor armado de la Coalicion», llegaba sin nada y
+				#     ninguna linea del juego lo decia.
+				#     Ahora el asiento es un estado que el pais tiene de verdad: su capital si todavia
+				#     la conserva, cualquiera de sus estados si no. Una region estrategica cableada no
+				#     es opcion: el mod ya perdio la escuadra de Brown entera por una.
+				if = {
+					limit = { exists = capital }
+					capital = { save_scope_as = gg_cln_hq_state }
+				}
+				else = {
+					random_scope_state = { save_scope_as = gg_cln_hq_state }
+				}
 				create_military_formation = {
 					type = army
-					hq_region = capital.region
+					hq_region = scope:gg_cln_hq_state.region
 					name = gg_arg_division_rioja
 					save_scope_as = gg_division_rioja
 					combat_unit = {

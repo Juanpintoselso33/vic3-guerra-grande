@@ -45,7 +45,7 @@ je_gg_delegation = {
 	#     withdraw it from him
 	should_be_involved = {
 		OR = {
-			c:ARG ?= this
+			has_variable = gg_arg_rosas_seat
 			c:CRR ?= this
 			c:CLN ?= this
 			c:ENR ?= this
@@ -719,7 +719,7 @@ je_gg_delegation = {
 				#     mark is the guard
 				if = {
 					limit = {
-						c:ARG ?= this
+						has_variable = gg_arg_rosas_seat
 						OR = {
 							# EN: EITHER IT IS GONE, OR IT IS BACK UNDER THE PACT. Until 20/9/2026 a province
 							#     only counted as recovered when its country had been wiped off the map, which
@@ -748,7 +748,7 @@ je_gg_delegation = {
 				#     piece of news, not six
 				if = {
 					limit = {
-						c:ARG ?= this
+						has_variable = gg_arg_rosas_seat
 						OR = {
 							# EN/ES: la misma regla que arriba: o ya no esta y la tiene Buenos Aires, o volvio al
 							#     pacto como protectorado / same rule as above
@@ -770,7 +770,7 @@ je_gg_delegation = {
 				}
 				if = {
 					limit = {
-						c:ARG ?= this
+						has_variable = gg_arg_rosas_seat
 						OR = {
 							# EN/ES: la misma regla que arriba: o ya no esta y la tiene Buenos Aires, o volvio al
 							#     pacto como protectorado / same rule as above
@@ -793,7 +793,7 @@ je_gg_delegation = {
 		effect = {
 			if = {
 				limit = {
-					c:ARG ?= this
+					has_variable = gg_arg_rosas_seat
 					has_global_variable = guerra_grande_split_done
 					NOT = { has_global_variable = gg_peace_settled }
 					exists = c:CER
@@ -888,7 +888,7 @@ je_gg_delegation = {
 	on_complete_all_involved = {
 		if = {
 			limit = {
-				c:ARG ?= this
+				has_variable = gg_arg_rosas_seat
 				NOT = { has_global_variable = gg_rosas_fell }
 			}
 			set_global_variable = gg_rosas_fell
