@@ -1,4 +1,4 @@
-﻿﻿# -------------------------------------------------------------------------------------------------
+﻿# -------------------------------------------------------------------------------------------------
 # EN: Codex review 2026-09-19 -- this was a file of its own that ADDED the Republic's army, on the
 #     assumption that vanilla's entry would just log a line. It does not: history files merge, so
 #     vanilla still ran its own create_military_formation on a state that no longer exists, and the
