@@ -2036,9 +2036,46 @@ guerra_grande.15 = {
 				limit = {
 					c:URU ?= this
 					NOT = { exists = c:CER }
-					# EN/ES: la pregunta, hecha el dia que se contesta / the question, asked on the
-					#     day it can be answered
-					NOT = { global_var:gg_vanguardia_status = 3 }
+					# EN: THE GATE THAT WAS HERE IS GONE, 20/9/2026, and taking it out is the single
+					#     most important correction of the day. It read NOT gg_vanguardia_status = 3
+					#     -- "do not split Uruguay if the Argentine interior is still in arms on 16
+					#     February 1843" -- and it was the ONLY caller of the partition in the whole
+					#     mod. Juan, playing, reached 1844 with no Great Siege, no Cerrito, no Defensa
+					#     and «un monton de eventos no se dispararon». Nothing had failed: with no
+					#     partition there was no country for the oriental war to happen to, and there
+					#     is no second attempt -- this relay runs once, 88 days after Arroyo Grande.
+					#     One instant, no retry, no notice, and half the mod silently gone.
+					#     RETRYING WAS THE WRONG FIX, and Juan saw it before I did: «eso va a afectar
+					#     todo el diagrama de uruguay». 68 oriental events are scheduled by ABSOLUTE
+					#     date from on_game_start and only 2 hang off the partition, so a late split
+					#     spends the whole oriental calendar against a country that does not exist yet.
+					#     WHERE THE INTERIOR IS PAID INSTEAD, and it already was: guerra_grande.4 --
+					#     Rosas lending the Ejercito Unido de Vanguardia -- carries the same guard, and
+					#     gg_vanguardia_line/_horse shrink the contingent when the interior cost him.
+					#     When this gate was written that mechanism did not exist yet; now it does. So
+					#     the Oriental civil war happens on its own schedule, as it must -- it was not
+					#     Corrientes' war -- and what the Argentine interior decides is whether the
+					#     auxiliaries cross at all, and how many. The tandem keeps its teeth and stops
+					#     being able to delete the game.
+					# ES: LA PUERTA QUE ESTABA ACA SE FUE, 20/9/2026, y sacarla es la correccion mas
+					#     importante del dia. Decia NOT gg_vanguardia_status = 3 --«no partas Uruguay
+					#     si el interior argentino sigue en armas el 16 de febrero de 1843»-- y era el
+					#     UNICO que llamaba a la particion en todo el mod. Juan, jugando, llego a 1844
+					#     sin Sitio Grande, sin Cerrito, sin Defensa y con «un monton de eventos no se
+					#     dispararon». No habia fallado nada: sin particion no habia pais al que le
+					#     pasara la guerra oriental, y no hay segundo intento -- este relevo corre una
+					#     sola vez, 88 dias despues de Arroyo Grande.
+					#     REINTENTAR ERA EL ARREGLO EQUIVOCADO, y Juan lo vio antes que yo: «eso va a
+					#     afectar todo el diagrama de uruguay». 68 eventos orientales se agendan por
+					#     fecha ABSOLUTA y solo 2 cuelgan de la particion: una particion tardia gasta
+					#     el calendario oriental entero contra un pais que todavia no existe.
+					#     DONDE SE PAGA EL INTERIOR, y ya se pagaba: guerra_grande.4 --Rosas prestando
+					#     la Vanguardia-- lleva la misma guarda, y gg_vanguardia_line/_horse achican el
+					#     contingente cuando el interior le costo. Cuando se escribio esta puerta ese
+					#     mecanismo no existia; ahora si. Asi que la guerra civil oriental pasa en su
+					#     fecha, como tiene que ser --no era la guerra de Corrientes--, y lo que decide
+					#     el interior argentino es si los auxiliares cruzan y cuantos. El tandem
+					#     conserva los dientes y deja de poder borrar la partida.
 				}
 				trigger_event = { id = guerra_grande.3 days = 0 popup = yes }
 			}
