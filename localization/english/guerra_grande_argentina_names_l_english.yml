@@ -1,0 +1,27 @@
+﻿l_english:
+# -------------------------------------------------------------------------------------------------
+# EN/ES: names of the Argentine-side characters. They go through loc keys and not as literals,
+#     which is how vanilla writes them too (ARG_Justo_Jose_de_Urquiza uses Justo_JosE_): a name
+#     written literally in the template is a name the engine can fail to resolve, and this mod
+#     already shipped three characters with random names that way.
+#     / los nombres de los personajes del lado argentino. Van por clave y no literales, que es como
+#     los escribe vanilla tambien: un nombre literal en el template es un nombre que el motor puede
+#     no resolver, y este mod ya entrego tres personajes con nombre aleatorio asi.
+# -------------------------------------------------------------------------------------------------
+ gg_name_tomas:0 "Tomás"
+ gg_name_brizuela:0 "Brizuela"
+ gg_name_marco:0 "Marco"
+ gg_name_avellaneda:0 "Avellaneda"
+ gg_name_jose_maria:0 "José María"
+ gg_name_paz:0 "Paz"
+ gg_name_genaro:0 "Genaro"
+ gg_name_beron_de_astrada:0 "Berón de Astrada"
+ gg_name_juan:0 "Juan"
+ gg_name_madariaga:0 "Madariaga"
+ gg_name_joaquin:0 "Joaquín"
+ gg_name_juan_felipe:0 "Juan Felipe"
+ gg_name_ibarra:0 "Ibarra"
+ gg_name_nazario:0 "Nazario"
+ gg_name_benavidez:0 "Benavídez"
+ gg_name_jose_felix:0 "José Félix"
+ gg_name_aldao:0 "Aldao"

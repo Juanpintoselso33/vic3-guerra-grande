@@ -1,0 +1,239 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE CHARACTERS OF THE ARGENTINE SIDE that vanilla does not have. Nine of them; the tenth name
+#     of the list, Pedro Ferre, already has a vanilla template (ARG_pedro_ferre) and must NOT be
+#     duplicated -- but he is not created in the 1836 history either, so the event that needs him
+#     has to find him or create him.
+#     Traits were chosen against the sources and, where no trait represents the historical fact, the
+#     fact was left out rather than forced. Two deliberate abstentions, both argued: Aldao gets no
+#     'pious' (vanilla reads that as personal devotion, not as having been a friar) and no 'cruel'
+#     (that image comes through Sarmiento's biography and is not neutral); Joaquin Madariaga gets
+#     'ruthless' for the confiscations and not 'cruel', which would imply personal violence nobody
+#     documents.
+# ES: LOS PERSONAJES DEL LADO ARGENTINO que vanilla no tiene. Son nueve; el decimo nombre de la
+#     lista, Pedro Ferre, ya tiene template de vanilla (ARG_pedro_ferre) y NO hay que duplicarlo --
+#     pero tampoco se crea en la historia de 1836, asi que el evento que lo necesita tiene que
+#     buscarlo o crearlo.
+#     Los traits se eligieron contra las fuentes y, donde ningun trait representa el hecho historico,
+#     el hecho se dejo afuera en vez de forzarlo. Dos abstenciones a proposito, las dos con
+#     argumento: Aldao no lleva 'pious' (vanilla lo lee como devocion personal, no como haber sido
+#     fraile) ni 'cruel' (esa imagen viene por la biografia de Sarmiento y no es neutral); Joaquin
+#     Madariaga lleva 'ruthless' por las confiscaciones y no 'cruel', que implicaria una violencia
+#     personal que nadie documenta.
+#
+#     SOURCE / FUENTE: investigacion de Codex del 19/9/2026 sobre vanilla y las biografias; el
+#     detalle por personaje esta en docs/guerra-grande-argentina/.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Tomas Brizuela: La Rioja, c. 1800 - 1841. Gobernador de La Rioja y Director de la Coalicion
+#     del Norte, con facultad de hacer la guerra, firmar la paz y negociar emprestitos. Tenia el
+#     ejercito mejor armado de la liga y controlaba los pasos a Chile: de ahi mountain_commander.
+CLN_gg_tomas_brizuela = {
+	first_name = gg_name_tomas
+	last_name = gg_name_brizuela
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1800.1.1
+	home_region = STATE_LA_RIOJA
+	traits = {
+		mountain_commander
+		ambitious
+		alcoholic
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Marco Manuel Avellaneda: Catamarca 18/6/1813 - Metan 3/10/1841, degollado tras Famailla.
+#     Doctor en Derecho y periodista, cabeza politica del pronunciamiento de Tucuman del 7/4/1840.
+#     Sin traits militares: no los tuvo.
+CLN_gg_marco_avellaneda = {
+	first_name = gg_name_marco
+	last_name = gg_name_avellaneda
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1813.6.18
+	home_region = STATE_CATAMARCA
+	traits = {
+		erudite
+		inspirational_orator
+		basic_political_operator
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Jose Maria Paz: Cordoba 9/9/1791 - Buenos Aires 22/10/1854. El general de formacion
+#     matematica; vencio a Echague en Caa Guazu el 28/11/1841.
+CRR_gg_jose_maria_paz = {
+	first_name = gg_name_jose_maria
+	last_name = gg_name_paz
+	historical = yes
+	female = no
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_radical
+	birth_date = 1791.9.9
+	home_region = STATE_CORDOBA
+	traits = {
+		meticulous
+		expert_defensive_strategist
+		experienced_artillery_commander
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Juan Genaro Beron de Astrada: Corrientes 19/9/1801 - Pago Largo 31/3/1839. Se separo el
+#     6/3/1839 y murio mandando veinticinco dias despues.
+CRR_gg_genaro_beron_de_astrada = {
+	first_name = gg_name_genaro
+	last_name = gg_name_beron_de_astrada
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_radical
+	birth_date = 1801.9.19
+	home_region = STATE_CORRIENTES
+	traits = {
+		direct
+		reckless
+		brave
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Juan Madariaga: Corrientes, 1809. El brazo militar de la recuperacion de Corrientes por el
+#     Paso de los Libres.
+CRR_gg_juan_madariaga = {
+	first_name = gg_name_juan
+	last_name = gg_name_madariaga
+	historical = yes
+	female = no
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_radical
+	birth_date = 1809.1.1
+	home_region = STATE_CORRIENTES
+	traits = {
+		brave
+		basic_offensive_planner
+		persistent
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Jose Joaquin Gregorio Madariaga: Corrientes 27/11/1799 - Porto Alegre, febrero de 1848.
+#     Goberno, armo partido propio, negocio Alcaraz y confisco los bienes de los federales.
+CRR_gg_joaquin_madariaga = {
+	first_name = gg_name_joaquin
+	last_name = gg_name_madariaga
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_radical
+	birth_date = 1799.11.27
+	home_region = STATE_CORRIENTES
+	traits = {
+		experienced_political_operator
+		basic_diplomat
+		ruthless
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Juan Felipe Ibarra: Matara 1/5/1787 - 15/7/1851. El gobernador de Santiago del Estero que se
+#     NEGO a entrar en la Coalicion, y con esa negativa le partio el bloque en dos. Queda en ARG.
+ARG_gg_juan_felipe_ibarra = {
+	first_name = gg_name_juan_felipe
+	last_name = gg_name_ibarra
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	birth_date = 1787.5.1
+	home_region = STATE_SANTIAGO_DEL_ESTERO
+	traits = {
+		cautious
+		persistent
+		expert_political_operator
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Nazario Benavidez: San Juan 28/7/1805 - San Juan 23/10/1858. El "caudillo manso", federal,
+#     reconocido hasta por sus adversarios como tolerante con los vencidos. Queda en ARG.
+ARG_gg_nazario_benavidez = {
+	first_name = gg_name_nazario
+	last_name = gg_name_benavidez
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_moderate
+	birth_date = 1805.7.28
+	home_region = STATE_SAN_JUAN
+	traits = {
+		tactful
+		honorable
+		experienced_political_operator
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Jose Felix Aldao: Mendoza 11/10/1785 - Mendoza 19/1/1845. De capellan a general; federal.
+#     Queda en ARG.
+ARG_gg_jose_felix_aldao = {
+	first_name = gg_name_jose_felix
+	last_name = gg_name_aldao
+	historical = yes
+	female = no
+	role = character_role_politician
+	is_general = yes
+	commander_rank = default
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	birth_date = 1785.10.11
+	home_region = STATE_MENDOZA
+	traits = {
+		imperious
+		brave
+		experienced_offensive_planner
+	}
+	trait_generation = { }
+}
