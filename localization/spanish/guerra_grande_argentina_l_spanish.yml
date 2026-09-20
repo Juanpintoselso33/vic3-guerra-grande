@@ -17,3 +17,8 @@
  gg_ai_strategy_coalicion_desc:0 "[COUNTRY.GetName] no quiere un palmo de tierra ajena: quiere que la República se dé una constitución. No abre guerras, las contesta. Cada mes que dura es un mes que el ejército federal está en el interior."
  gg_ai_strategy_entre_rios:0 "Marchar sobre Buenos Aires"
  gg_ai_strategy_entre_rios_desc:0 "[COUNTRY.GetName] tiene el mejor ejército de la Confederación, al Imperio del Brasil de aliado y a Montevideo esperándolo. No está defendiendo nada."
+ gg_argentina_play_CRR:0 "Corrientes vuelve al Pacto Federal"
+ gg_argentina_play_CLN:0 "La disolución de la Liga del Norte"
+ gg_argentina_play_ENR:0 "Entre Ríos vuelve al Pacto Federal"
+ dp_gg_pacto_federal:0 "Restablecer el Pacto Federal"
+ dp_gg_liga_disuelta:0 "Disolver la Liga"
