@@ -1,7 +1,7 @@
 ﻿namespace = gg_argentina_cal
 
 # -------------------------------------------------------------------------------------------------
-# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Twenty relays carry the preludes, the births
+# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Twenty-five relays carry the preludes, the births
 #     and the interior campaign to their delivery dates, counted in days from 1 January 1836.
 #
 #     WHY RELAYS AND NOT THE EVENTS THEMSELVES. A scheduled event's trigger is read WHEN IT IS
@@ -24,7 +24,7 @@
 #
 #     THE YEARS ARE 365 DAYS LONG, with no leap days -- the engine's years, not the calendar's. The
 #     offsets were computed by hand and checked one by one.
-# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Veinte relevos llevan las previas, los
+# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Veinticinco relevos llevan las previas, los
 #     nacimientos y la campania del interior a sus fechas de entrega, contadas desde el 1 de enero
 #     de 1836.
 #
@@ -558,6 +558,124 @@ gg_argentina_cal.20 = {
 			}
 			set_global_variable = gg_arg_cal_done_20
 			c:ARG = { trigger_event = { id = gg_argentina.69 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE WAR OF THE PARANA. The blockade is deliberately delivered on the mod's existing date,
+#     18 September 1845. The other three dates are the documented days. As above, all conditions
+#     live in the relays because scheduled-event triggers are read when the event is queued.
+# ES: LA GUERRA DEL PARANA. El bloqueo se entrega a proposito en la fecha que ya usa el mod, 18 de
+#     septiembre de 1845. Las otras tres son las fechas documentadas. Como arriba, todas las
+#     condiciones viven en los relevos porque el trigger se lee cuando el evento se agenda.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronología del bloqueo [D].
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 18/9/1845 (day/dia 3545) -- the blockade from Buenos Aires / el bloqueo desde Buenos Aires
+gg_argentina_cal.21 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_21 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				has_global_variable = guerra_grande_open_war
+			}
+			set_global_variable = gg_arg_cal_done_21
+			c:ARG = { trigger_event = { id = gg_argentina.22 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN/ES: 20/11/1845 (day/dia 3608) -- Obligado, only after fortifying / solo si se fortifico
+gg_argentina_cal.22 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_22 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				has_global_variable = gg_parana_resistance
+			}
+			set_global_variable = gg_arg_cal_done_22
+			c:ARG = { trigger_event = { id = gg_argentina.23 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN/ES: 4/6/1846 (day/dia 3805) -- Quebracho, only if resistance continued / solo si siguio
+gg_argentina_cal.23 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_23 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				has_global_variable = gg_parana_resistance_continues
+			}
+			set_global_variable = gg_arg_cal_done_23
+			c:ARG = { trigger_event = { id = gg_argentina.24 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN/ES: 13/7/1846 (day/dia 3843) -- the same Hood table as gg_powers.12 / la misma mesa
+gg_argentina_cal.24 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_24 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = c:CER
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				NOT = { has_global_variable = gg_peace_offered }
+				NOT = { has_global_variable = gg_hood_done }
+				OR = {
+					gg_sea_open = yes
+					has_global_variable = gg_powers_mediators
+				}
+			}
+			set_global_variable = gg_arg_cal_done_24
+			c:ARG = { trigger_event = { id = gg_argentina.25 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 15 November 1850 (day 5428) -- DESIGN DATE for the news of San Martin's death and the text
+#     preserved in Balcarce's Paris copy to have crossed the Atlantic. No source used by the event
+#     gives an arrival day. All delivery conditions live here, where they are read on the date that matters.
+# ES: 15 de noviembre de 1850 (dia 5428) -- FECHA DE DISENO para que la noticia de la muerte de San
+#     Martin y el texto conservado en la copia parisina de Balcarce hayan cruzado el Atlantico.
+#     Ninguna fuente usada por el evento da un dia de llegada. Toda condicion de entrega vive aca, leida en la fecha que importa.
+# SOURCE / FUENTE: death at Boulogne-sur-Mer, 17/8/1850; Balcarce copy made in Paris, 28/9/1850,
+#     Sala VII, legajo 191. / muerte en Boulogne-sur-Mer, 17/8/1850; copia de Balcarce hecha en
+#     Paris, 28/9/1850, Sala VII, legajo 191.
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.25 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_25 }
+				# EN/ES: the «la Argentina» guard; without that side, nothing changes / sin ese lado, nada cambia
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+			}
+			set_global_variable = gg_arg_cal_done_25
+			c:ARG = { trigger_event = { id = gg_argentina.26 days = 0 popup = yes } }
 		}
 	} }
 }

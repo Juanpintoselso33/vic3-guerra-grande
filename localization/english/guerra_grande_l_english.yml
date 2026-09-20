@@ -155,6 +155,7 @@
  gg_arg_field_won:0 "The field, and the pursuit"
  gg_arg_customs_monopoly:0 "The Customs Monopoly Preserved"
  gg_arg_open_rivers_cost:0 "Licensed Ports and Open Rivers"
+ gg_arg_littoral_open_trade:0 "Open Littoral Trade"
  gg_arg_customs_shared:0 "Customs Revenue Shared"
  gg_arg_corrientes_blockaded:0 "Correntine Commerce under Blockade"
  gg_arg_lamadrid_retained:0 "Lamadrid Kept in Buenos Aires"

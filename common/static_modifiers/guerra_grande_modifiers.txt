@@ -359,6 +359,14 @@ gg_arg_open_rivers_cost = {
 	country_minting_mult = -0.05
 }
 
+# EN/ES: the documented diversion towards the littoral becomes trade in the two river provinces.
+#     / el desvio documentado hacia el litoral se vuelve comercio en las dos provincias riberenas
+gg_arg_littoral_open_trade = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	state_trade_capacity_add = 10
+	state_weekly_trades_add = 1
+}
+
 gg_arg_customs_shared = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	state_tax_capacity_mult = -0.10

@@ -145,6 +145,11 @@ guerra_grande_on_game_start = {
 				trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 armas y Lamadrid a Tucuman
 				trigger_event = { id = gg_argentina_cal.19 days = 5444 } # 1850-12-01 las dos ordenes a Urquiza
 				trigger_event = { id = gg_argentina_cal.20 days = 3862 } # 1846-08-01 ancla mensual del Tratado de Alcaraz
+				trigger_event = { id = gg_argentina_cal.21 days = 3545 } # 1845-09-18 el bloqueo desde Buenos Aires
+				trigger_event = { id = gg_argentina_cal.22 days = 3608 } # 1845-11-20 despues de las cadenas
+				trigger_event = { id = gg_argentina_cal.23 days = 3804 } # 1846-06-04 el convoy vuelve por Quebracho
+				trigger_event = { id = gg_argentina_cal.24 days = 3843 } # 1846-07-13 bases Hood desde Buenos Aires
+				trigger_event = { id = gg_argentina_cal.25 days = 5428 } # 1850-11-15 fecha de diseno: testamento de San Martin
 			}
 			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia

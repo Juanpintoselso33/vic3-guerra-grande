@@ -1628,13 +1628,13 @@ guerra_grande.4 = {
 				years = 10
 				is_decaying = yes
 			}
-		}
-		if = {
-			limit = { global_var:gg_vanguardia_cruce = 3 }
-			trigger_event = { id = guerra_grande.16 days = 183 }
-		}
-		else = {
-			c:CER ?= {
+			if = {
+				limit = { global_var:gg_vanguardia_cruce = 3 }
+				c:ARG ?= {
+					trigger_event = { id = guerra_grande.16 days = 183 }
+				}
+			}
+			else = {
 				trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
 			}
 		}

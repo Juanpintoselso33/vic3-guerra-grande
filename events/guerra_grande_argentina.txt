@@ -1202,6 +1202,491 @@ gg_argentina.21 = {
 }
 
 # -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.22 -- THE RIVER CLOSED, 18 September 1845. This is deliberately tied to the
+#     blockade date already used by gg_powers.3, rather than the 2 August date in the research plan:
+#     one intervention must not create two calendars or two diplomatic states. Brown's captured
+#     squadron is the same one handled by gg_powers.11; this event decides what Buenos Aires does
+#     after the blockade, and does not recreate the seizure.
+# ES: gg_argentina.22 -- EL RIO CERRADO, 18 de septiembre de 1845. Va a proposito en la fecha del
+#     bloqueo que ya usa gg_powers.3, y no en el 2 de agosto del plan: una sola intervencion no puede
+#     tener dos calendarios ni dos estados diplomaticos. La escuadra capturada de Brown es la misma
+#     de gg_powers.11; este evento decide que hace Buenos Aires despues del bloqueo y no repite la
+#     captura.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1845-1850 — el bloqueo
+#     anglo-francés» y la sección económica de Schmit [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina.22 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.22.t
+	desc = gg_argentina.22.d
+	flavor = gg_argentina.22.f
+	event_image = { video = "gg_squadrons" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_argentina.22.a
+		custom_tooltip = gg_argentina.22.a_tt
+		default_option = yes
+		set_global_variable = gg_parana_resistance
+		# EN: Two real formations make the opportunity cost visible. One is the fixed batteries; the
+		#     other is the mobile column that later choices can release and deploy elsewhere.
+		# ES: Dos formaciones reales vuelven visible el costo. Una son las baterias fijas; la otra es
+		#     la columna movil que las decisiones posteriores pueden liberar y mandar a otro frente.
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_baterias_parana
+			save_scope_as = gg_parana_batteries
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 1
+			}
+		}
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_columna_parana
+			save_scope_as = gg_parana_column
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 1
+			}
+		}
+		set_variable = { name = gg_parana_column_ref value = scope:gg_parana_column }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_argentina.22.b
+		custom_tooltip = gg_argentina.22.b_tt
+		# EN/ES: the same Federal-Pact claims are answered; no parallel delegation counter is created.
+		#     / se contestan los mismos reclamos del Pacto; no se crea otro contador de delegacion
+		gg_reclamo_cierra = { KEY = corrientes }
+		gg_reclamo_cierra = { KEY = entre_rios }
+		add_modifier = { name = gg_arg_open_rivers_cost years = 20 }
+		s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+			add_modifier = { name = gg_arg_littoral_open_trade years = 10 }
+		}
+		if = {
+			limit = { exists = s:STATE_CORRIENTES.region_state:ARG }
+			s:STATE_CORRIENTES.region_state:ARG = {
+				add_modifier = { name = gg_arg_littoral_open_trade years = 10 }
+			}
+		}
+		else_if = {
+			limit = { exists = s:STATE_CORRIENTES.region_state:CRR }
+			s:STATE_CORRIENTES.region_state:CRR = {
+				add_modifier = { name = gg_arg_littoral_open_trade years = 10 }
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gg_argentina.22.c
+		custom_tooltip = gg_argentina.22.c_tt
+		# EN/ES: this is the existing powers' mediation gate read by gg_powers.12, not a second clock.
+		#     / esta es la misma llave de mediacion que lee gg_powers.12, no otro reloj
+		set_global_variable = gg_powers_mediators
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_defensa_parana_limitada
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				count = 1
+			}
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.23 -- AFTER THE CHAINS, 20 November 1845. The fleet passed; no option rewrites
+#     that tactical result. No casualty number appears because the sources are irreconcilable, and
+#     no disputed claim of a strategic victory is made. The two formations below are the same real
+#     units allocated in gg_argentina.22: resistance keeps both on the river; negotiation mobilises
+#     the mobile column for another front while the fixed battery remains.
+# ES: gg_argentina.23 -- DESPUES DE LAS CADENAS, 20 de noviembre de 1845. La flota paso; ninguna
+#     opcion reescribe ese resultado tactico. No aparece una cifra de bajas porque las fuentes son
+#     incompatibles, ni se afirma una victoria estrategica discutida. Las dos formaciones son las
+#     mismas unidades asignadas en gg_argentina.22: resistir retiene ambas en el rio; negociar deja
+#     fija la bateria y moviliza la columna para otro frente.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Obligado, los hechos» [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina.23 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.23.t
+	desc = gg_argentina.23.d
+	flavor = gg_argentina.23.f
+	event_image = { video = "gg_in_obligado" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_parana_resistance
+	}
+
+	option = {
+		name = gg_argentina.23.a
+		custom_tooltip = gg_argentina.23.a_tt
+		default_option = yes
+		set_global_variable = gg_parana_resistance_continues
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_argentina.23.b
+		custom_tooltip = gg_argentina.23.b_tt
+		set_global_variable = gg_powers_mediators
+		if = {
+			limit = { has_variable = gg_parana_column_ref }
+			var:gg_parana_column_ref ?= { mobilize_army = yes }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.24 -- THE CONVOY RETURNS BY QUEBRACHO, 4 June 1846. Six merchantmen were lost
+#     and the Argentine defence suffered one death; this was the final blow to an expedition whose
+#     commerce had already failed. The player either keeps both real formations on the river or
+#     sends the mobile column to the selected active war, if that front exists.
+# ES: gg_argentina.24 -- EL CONVOY VUELVE POR QUEBRACHO, 4 de junio de 1846. Se perdieron seis
+#     mercantes y la defensa argentina tuvo un muerto; fue el golpe final contra una expedicion cuyo
+#     comercio ya habia fracasado. El jugador conserva las dos formaciones reales sobre el rio o
+#     manda la columna movil a la guerra elegida, si ese frente existe.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronología del bloqueo [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina.24 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.24.t
+	desc = gg_argentina.24.d
+	flavor = gg_argentina.24.f
+	event_image = { video = "gg_nav_costa_brava" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_parana_resistance_continues
+	}
+
+	option = {
+		name = gg_argentina.24.a
+		custom_tooltip = gg_argentina.24.a_tt
+		default_option = yes
+		set_global_variable = gg_parana_batteries_held
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = gg_argentina.24.b
+		custom_tooltip = gg_argentina.24.b_tt
+		if = {
+			limit = { has_variable = gg_parana_column_ref }
+			var:gg_parana_column_ref ?= { mobilize_army = yes }
+			if = {
+				limit = { exists = c:CRR is_war_participant = c:CRR }
+				random_scope_war = {
+					limit = { c:CRR = { is_war_participant = c:ARG } }
+					random_scope_front = { save_scope_as = gg_parana_target_front }
+				}
+				if = {
+					limit = { exists = scope:gg_parana_target_front }
+					var:gg_parana_column_ref ?= { deploy_to_front = scope:gg_parana_target_front }
+				}
+			}
+		}
+		ai_chance = { base = 25 }
+	}
+
+	option = {
+		name = gg_argentina.24.c
+		custom_tooltip = gg_argentina.24.c_tt
+		if = {
+			limit = { has_variable = gg_parana_column_ref }
+			var:gg_parana_column_ref ?= { mobilize_army = yes }
+			if = {
+				limit = { exists = c:PRG is_war_participant = c:PRG }
+				random_scope_war = {
+					limit = { c:PRG = { is_war_participant = c:ARG } }
+					random_scope_front = { save_scope_as = gg_parana_target_front }
+				}
+				if = {
+					limit = { exists = scope:gg_parana_target_front }
+					var:gg_parana_column_ref ?= { deploy_to_front = scope:gg_parana_target_front }
+				}
+			}
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.25 -- THE HOOD BASES FROM BUENOS AIRES, 13 July 1846. This is not a second
+#     treaty. Buenos Aires writes gg_hood_done and a pending hand-off; gg_powers.12 reads
+#     both, presents only Rosas's answer at the Cerrito, writes the same completion mark, and clears
+#     the hand-off. Acceptance only opens the existing ultimatum to the Defensa; it never settles
+#     the war by itself.
+# ES: gg_argentina.25 -- LAS BASES HOOD DESDE BUENOS AIRES, 13 de julio de 1846. No es otro tratado.
+#     Buenos Aires escribe gg_hood_done y un relevo pendiente; gg_powers.12 lee ambos, muestra
+#     en el Cerrito solamente la respuesta de Rosas, vuelve a escribir la misma marca y limpia el
+#     relevo. Aceptar solo abre el ultimatum existente a la Defensa; nunca cierra la guerra por si.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Bases Hood» [D].
+# -------------------------------------------------------------------------------------------------
+gg_argentina.25 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.25.t
+	desc = gg_argentina.25.d
+	flavor = gg_argentina.25.f
+	event_image = { video = "gg_f2_oribe_gallino" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		exists = c:CER
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+		NOT = { has_global_variable = gg_peace_offered }
+		NOT = { has_global_variable = gg_hood_done }
+		OR = {
+			gg_sea_open = yes
+			has_global_variable = gg_powers_mediators
+		}
+	}
+
+	option = {
+		name = gg_argentina.25.a
+		custom_tooltip = gg_argentina.25.a_tt
+		default_option = yes
+		set_global_variable = { name = gg_hood_argentina_answer value = 1 }
+		set_global_variable = gg_hood_done
+		set_global_variable = gg_hood_argentina_pending
+		if = {
+			limit = { has_global_variable = gg_parana_batteries_held }
+			gg_patron_change = { PATRON = rosas DELTA = 5 }
+		}
+		c:CER ?= { trigger_event = { id = gg_powers.12 days = 0 popup = yes } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_argentina.25.b
+		custom_tooltip = gg_argentina.25.b_tt
+		set_global_variable = { name = gg_hood_argentina_answer value = 2 }
+		set_global_variable = gg_hood_done
+		set_global_variable = gg_hood_argentina_pending
+		c:CER ?= { trigger_event = { id = gg_powers.12 days = 0 popup = yes } }
+		ai_chance = { base = 30 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.26-27 -- SAN MARTIN'S TESTAMENT, design date 15 November 1850. San Martin died
+#     at Boulogne-sur-Mer on 17 August 1850; Mariano Balcarce made the copy deposited in the
+#     Legation archive in Paris on 28 September. The November delivery is therefore a DESIGN DATE:
+#     it gives the news and the text preserved by the copy time to cross the Atlantic, and claims no
+#     known day of arrival. The Buenos Aires choice hands the same news to the Defensa only after it is made,
+#     because a scheduled event's trigger is read when it is scheduled.
+# ES: gg_argentina.26-27 -- EL TESTAMENTO DE SAN MARTIN, fecha de diseno 15 de noviembre de 1850.
+#     San Martin murio en Boulogne-sur-Mer el 17 de agosto de 1850; Mariano Balcarce hizo en Paris,
+#     el 28 de septiembre, la copia depositada en el archivo de la Legacion. La entrega de noviembre
+#     es por eso una FECHA DE DISENO: deja que la noticia y el texto conservado en la copia crucen el
+#     Atlantico y no afirma conocer el dia de llegada. La opcion portenia entrega la misma noticia a la Defensa solo
+#     despues de elegida, porque el trigger de un evento agendado se lee al agendarlo.
+#
+# EN: HISTORIOGRAPHICAL CORRECTION, CODE ONLY. The often-repeated claim that the sword was bequeathed
+#     because of the Vuelta de Obligado is impossible: the holographic testament is dated 23 January
+#     1844 and Obligado 20 November 1845, twenty-two months later. This correction is deliberately
+#     absent from player-facing text: no minister in 1850 is answering later historiography.
+# ES: CORRECCION HISTORIOGRAFICA, SOLO EN CODIGO. Es imposible que el sable fuera legado por la
+#     Vuelta de Obligado: el testamento olografo es del 23 de enero de 1844 y Obligado del 20 de
+#     noviembre de 1845, veintidos meses posterior. La correccion no aparece a proposito en el texto
+#     visible: ningun ministro de 1850 contesta a la historiografia posterior.
+#
+# SOURCE / FUENTE: sanmartiniano.cultura.gob.ar (Ministerio de Cultura); transcripcion completa en
+#     lagazeta.com.ar; Roberto Colimodio, Perfil, 23/1/2022; proyecto 0763-D-2014 de la Camara de
+#     Diputados; copia de Mariano Balcarce, Sala VII, legajo 191. These sources support the 1844
+#     holographic testament and notarial circumstances, the exact third clause, San Martin's titles,
+#     the burial, heart and debt clauses, his death, Balcarce's copy, and the opposition's documented
+#     attacks on authenticity and mental capacity. / Estas fuentes sostienen el testamento olografo
+#     de 1844 y sus circunstancias notariales, la clausula tercera textual, los titulos de San
+#     Martin, las clausulas de entierro, corazon y deudas, su muerte, la copia de Balcarce y los
+#     ataques documentados de la oposicion a la autenticidad y a su capacidad mental.
+# SOURCE / FUENTE: la correspondencia entre San Martin y Rosas sustenta elogios a la firmeza ante la
+#     agresion extranjera, no apoyo a la politica interna de Rosas. / Their correspondence supports
+#     praise for firmness against foreign aggression, not support for Rosas's domestic politics.
+# SOURCE / FUENTE: no source used here dates the sword's delivery. These events are the news and the
+#     clause, never the object's arrival or possession. / Ninguna fuente usada fecha la entrega del
+#     sable. Estos eventos son la noticia y la clausula, nunca la llegada ni la posesion del objeto.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.26 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.26.t
+	desc = gg_argentina.26.d
+	flavor = gg_argentina.26.f
+	event_image = { video = "gg_f2_rosas_monvoisin" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	option = {
+		name = gg_argentina.26.a
+		custom_tooltip = gg_argentina.26.a_tt
+		default_option = yes
+		# EN/ES: the complete publication answers every claim that is still pending; withdrawn
+		#     delegations are not restored. / la publicacion completa contesta todo reclamo todavia
+		#     pendiente; no devuelve delegaciones ya retiradas
+		gg_reclamo_cierra = { KEY = corrientes }
+		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = entre_rios }
+		set_global_variable = { name = gg_san_martin_publication value = 1 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_argentina.27 days = 0 popup = yes }
+			}
+		}
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_argentina.26.b
+		custom_tooltip = gg_argentina.26.b_tt
+		# EN: A sharpened excerpt can answer one petition, but not the whole provincial ledger.
+		#     The current Entre Rios claim comes first, then Corrientes, then the northern bloc.
+		# ES: Un recorte afilado puede contestar un pliego, no toda la cuenta provincial. Va primero
+		#     el reclamo vigente de Entre Rios, despues Corrientes y despues el bloque del norte.
+		if = {
+			limit = { has_global_variable = gg_reclamo_entre_rios }
+			gg_reclamo_cierra = { KEY = entre_rios }
+		}
+		else_if = {
+			limit = { has_global_variable = gg_reclamo_corrientes }
+			gg_reclamo_cierra = { KEY = corrientes }
+		}
+		else_if = {
+			limit = { has_global_variable = gg_reclamo_coalicion_tucuman }
+			gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		}
+		set_global_variable = { name = gg_san_martin_publication value = 2 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_argentina.27 days = 0 popup = yes }
+			}
+		}
+		ai_chance = { base = 35 }
+	}
+
+	option = {
+		name = gg_argentina.26.c
+		custom_tooltip = gg_argentina.26.c_tt
+		# EN/ES: deliberate silence leaves every delegation and petition as it stood, but the choice
+		#     is shared with the other shore and read by the Defensa event. / el silencio deja cada
+		#     delegacion y reclamo como estaba, pero la otra orilla lee la decision
+		set_global_variable = { name = gg_san_martin_publication value = 3 }
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_argentina.27 days = 0 popup = yes }
+			}
+		}
+		ai_chance = { base = 15 }
+	}
+}
+
+gg_argentina.27 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.27.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.27.d_full
+				trigger = { global_var:gg_san_martin_publication = 1 }
+			}
+			triggered_desc = {
+				desc = gg_argentina.27.d_clause
+				trigger = { global_var:gg_san_martin_publication = 2 }
+			}
+			triggered_desc = {
+				desc = gg_argentina.27.d_private
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = gg_argentina.27.f
+	event_image = { video = "gg_f2_suarez" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 1825
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	option = {
+		name = gg_argentina.27.a
+		custom_tooltip = gg_argentina.27.a_tt
+		# EN: the documented opposition line is the sharper political weapon, but disputing the
+		#     Libertador's testament radicalises part of the city.
+		# ES: la linea documentada de la oposicion es el arma mas filosa, pero discutirle el
+		#     testamento al Libertador radicaliza a parte de la ciudad.
+		gg_score_colorado = { AMOUNT = 2 }
+		add_radicals = { value = small_radicals }
+		default_option = yes
+		ai_chance = { base = 65 }
+	}
+
+	option = {
+		name = gg_argentina.27.b
+		custom_tooltip = gg_argentina.27.b_tt
+		# EN/ES: honouring San Martin while denying a domestic endorsement still gives the Defensa
+		#     a political answer, but a narrower one. / honrar a San Martin sin conceder un respaldo
+		#     interno todavia le da una respuesta politica a la Defensa, pero mas estrecha
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 35 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
 # EN: gg_argentina.30 -- NOBODY DELEGATES ANY MORE. The delegation bar reached zero: no legislature
 #     still lets the governor of Buenos Aires speak for it. That is not a defeat in the field and it
 #     does not need one: Rosas' entire authority over the Confederation WAS the delegation, and a

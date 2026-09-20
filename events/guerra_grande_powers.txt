@@ -258,7 +258,34 @@ gg_powers.12 = {
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
-		NOT = { has_global_variable = gg_hood_done }
+		# EN: With the Argentine side loaded, Buenos Aires owns the answer and hands it here. Without
+		#     that side, this is exactly the old gate and the oriental game is unchanged.
+		# ES: Con el lado argentino, Buenos Aires decide y entrega la respuesta aca. Sin ese lado, esta
+		#     es exactamente la guarda anterior y la partida oriental no cambia.
+		OR = {
+			AND = {
+				NOT = { exists = s:STATE_ENTRE_RIOS }
+				NOT = { has_global_variable = gg_hood_done }
+			}
+			AND = {
+				has_global_variable = gg_hood_argentina_pending
+				NOT = { has_global_variable = gg_hood_cerrito_received }
+			}
+			# EN: AND THE NET. With the Argentine side loaded, Buenos Aires owns the answer -- so if
+			#     Buenos Aires is not there to give it, the Hood bases would vanish from the oriental
+			#     game without a line in any log. This branch reopens the old gate when there is no
+			#     Argentina left to answer. It can only ADD a way for the event to fire, never remove
+			#     one.
+			# ES: Y LA RED. Con el lado argentino cargado la respuesta es de Buenos Aires -- asi que
+			#     si Buenos Aires no esta para darla, las bases Hood desaparecerian de la partida
+			#     oriental sin una linea en ningun log. Esta rama reabre la guarda vieja cuando no
+			#     queda Argentina que conteste. Solo puede AGREGAR una via de disparo, nunca sacar
+			#     una.
+			AND = {
+				NOT = { exists = c:ARG }
+				NOT = { has_global_variable = gg_hood_done }
+			}
+		}
 		OR = {
 			gg_sea_open = yes
 			has_global_variable = gg_powers_mediators
@@ -268,10 +295,20 @@ gg_powers.12 = {
 	option = {
 		name = gg_powers.12.a
 		custom_tooltip = gg_powers.12.a_tt
+		trigger = {
+			OR = {
+				NOT = { has_global_variable = gg_hood_argentina_pending }
+				global_var:gg_hood_argentina_answer = 1
+			}
+		}
 		default_option = yes
 		# EN: historical: accept with amendments (11 August 1846). The Defensa decides next.
 		# ES: lo historico: aceptar con retoques (11 de agosto de 1846). Despues decide la Defensa.
 		set_global_variable = gg_hood_done
+		if = {
+			limit = { has_global_variable = gg_hood_argentina_pending }
+			set_global_variable = gg_hood_cerrito_received
+		}
 		# EN/ES: the table is ours for those 29 days / la mesa es nuestra esos 29 dias
 		gg_peace_chain_hold = yes
 		c:URU ?= { trigger_event = { id = gg_powers.13 days = 29 popup = yes } }
@@ -281,9 +318,19 @@ gg_powers.12 = {
 	option = {
 		name = gg_powers.12.b
 		custom_tooltip = gg_powers.12.b_tt2
+		trigger = {
+			OR = {
+				NOT = { has_global_variable = gg_hood_argentina_pending }
+				global_var:gg_hood_argentina_answer = 2
+			}
+		}
 		# EN: refuse: it ends here, and the powers harden against the Cerrito.
 		# ES: rechazar: se corta aca, y las potencias se endurecen con el Cerrito.
 		set_global_variable = gg_hood_done
+		if = {
+			limit = { has_global_variable = gg_hood_argentina_pending }
+			set_global_variable = gg_hood_cerrito_received
+		}
 		add_modifier = { name = gg_powers_hardened years = 5 is_decaying = yes }
 		ai_chance = { base = 30 }
 	}

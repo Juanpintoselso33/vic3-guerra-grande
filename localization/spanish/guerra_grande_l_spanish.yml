@@ -155,6 +155,7 @@
  gg_arg_field_won:0 "El campo, y la persecución"
  gg_arg_customs_monopoly:0 "La aduana conserva el monopolio"
  gg_arg_open_rivers_cost:0 "Puertos habilitados y ríos abiertos"
+ gg_arg_littoral_open_trade:0 "Comercio abierto del litoral"
  gg_arg_customs_shared:0 "Renta aduanera coparticipada"
  gg_arg_corrientes_blockaded:0 "El comercio correntino bajo bloqueo"
  gg_arg_lamadrid_retained:0 "Lamadrid retenido en Buenos Aires"
