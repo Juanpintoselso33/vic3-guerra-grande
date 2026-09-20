@@ -4,23 +4,28 @@
 #     SOURCE / FUENTE: docs/guerra-grande-argentina/banderas-tres-paises.md, with the laws quoted.
 #     Real Wikimedia images, downloaded and converted, never redrawn.
 #
-#     ENTRE RIOS IS MISSING ON PURPOSE, and that is written down rather than quietly solved. The law
-#     of 28 December 1833 orders three horizontal stripes -- blue, white and red, arms in the middle
-#     -- and that is the flag Urquiza carried to Caseros. Every Commons file labelled «1833-1853»
-#     shows a QUARTERED flag instead, which is the 1815-1820 one: the files are mislabelled, and
-#     there is no correct image. Drawing it ourselves would be a design of our own, against the
-#     mod's rule of real flags. Decision of 19 September 2026: leave it, write it down, change it if
-#     a correct image appears. Detail in SOURCES_flujo_images.md.
+#     ENTRE RIOS USES THE FLAG THE MOD ALREADY HAD, and it is the wrong one, knowingly. The law of
+#     28 December 1833 orders three horizontal stripes -- blue, white and red, arms in the middle --
+#     and that is the flag Urquiza carried to Caseros. Every Commons file labelled «1833-1853» shows
+#     a QUARTERED flag instead, which is the 1815-1820 one: the files are mislabelled and no correct
+#     image exists. Drawing it ourselves would be a design of our own, against the mod's rule of real
+#     flags, so the decision of 19 September 2026 was to keep the wrong one and write that down.
+#     te_entre_rios.dds is NOT a new download: it is the very file the mod was already using for the
+#     @gg_entre_rios_flag! texticon, resized to the 768x512 the emblems take. One image, one source,
+#     one entry in SOURCES_flujo_images.md -- where the whole argument is.
 # ES: LAS BANDERAS DE DOS DE LOS TRES PAISES ARGENTINOS. Ninguna es la bandera provincial de hoy, y
 #     en los dos casos la diferencia es politica, no decorativa.
 #     Imagenes reales de Wikimedia, bajadas y convertidas, nunca redibujadas.
 #
-#     ENTRE RIOS FALTA A PROPOSITO, y queda escrito en vez de resuelto en silencio. La ley del
+#     ENTRE RIOS USA LA BANDERA QUE EL MOD YA TENIA, y es la equivocada, a sabiendas. La ley del
 #     28/12/1833 manda tres fajas horizontales -- azul, blanca y colorada, con el escudo al centro --
 #     y es la bandera que Urquiza llevo a Caseros. Todos los archivos de Commons rotulados
-#     «1833-1853» muestran en cambio una bandera CUARTEADA, que es la de 1815-1820: los archivos
-#     estan mal etiquetados y no hay imagen correcta. Dibujarla seria un diseno nuestro, contra la
-#     regla del mod de banderas reales. Detalle en SOURCES_flujo_images.md.
+#     «1833-1853» muestran en cambio una CUARTEADA, que es la de 1815-1820: estan mal etiquetados y
+#     no existe imagen correcta. Dibujarla seria un diseno nuestro, contra la regla de banderas
+#     reales, asi que la decision del 19/9/2026 fue quedarse con la equivocada y dejarlo escrito.
+#     te_entre_rios.dds NO es una descarga nueva: es el mismo archivo que el mod ya usaba para el
+#     texticon @gg_entre_rios_flag!, llevado a los 768x512 que piden los emblemas. Una imagen, una
+#     fuente, una entrada en SOURCES_flujo_images.md, que es donde esta el argumento entero.
 # -------------------------------------------------------------------------------------------------
 
 # EN: Corrientes -- the «bandera del Pico» of the law of 24 December 1821: celeste, white and
@@ -54,5 +59,15 @@ CLN = {
 
 	textured_emblem = {
 		texture = "te_coalicion.dds"
+	}
+}
+
+# EN/ES: Entre Rios -- ver el aviso de la cabecera / see the header's warning
+ENR = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_entre_rios.dds"
 	}
 }
