@@ -1132,6 +1132,72 @@ gg_argentina.20 = {
 			set_global_variable = { name = gg_interior_outcome value = 2 }
 			set_global_variable = { name = gg_vanguardia_status value = 2 }
 		}
+		if = {
+			limit = { NOT = { global_var:gg_vanguardia_status = 3 } }
+			c:ARG ?= { trigger_event = { id = gg_argentina.21 days = 0 popup = yes } }
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.21 -- THE VANGUARD CROSSES, 16 February 1843. Oribe reached the approaches to
+#     Montevideo with the same Ejercito Unido de Vanguardia that had destroyed Rivera at Arroyo
+#     Grande on 6 December 1842. History fixes the army and the crossing; the three options below
+#     are design branches about how the force left after the interior campaign is divided.
+# ES: gg_argentina.21 -- EL CRUCE DE LA VANGUARDIA, 16 de febrero de 1843. Oribe llego frente a
+#     Montevideo con el mismo Ejercito Unido de Vanguardia que habia destruido a Rivera en Arroyo
+#     Grande el 6 de diciembre de 1842. La historia fija el ejercito y el cruce; las tres opciones
+#     de abajo son ramas de diseno sobre como repartir la fuerza que dejo la campania del interior.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md (Arroyo Grande, 6/12/1842;
+#     llegada de Oribe frente a Montevideo, 16/2/1843).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.21 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.21.t
+	desc = gg_argentina.21.d
+	flavor = gg_argentina.21.f
+
+	event_image = { video = "gg_rosas_cerrito" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = { c:ARG ?= this }
+
+	option = {
+		name = gg_argentina.21.a
+		custom_tooltip = gg_vanguardia_cruce_total_tt
+		default_option = yes
+		set_global_variable = { name = gg_vanguardia_cruce value = 1 }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = gg_argentina.21.b
+		custom_tooltip = gg_vanguardia_reserva_litoral_tt
+		set_global_variable = { name = gg_vanguardia_cruce value = 2 }
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_arg_division_litoral
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				count = 1
+			}
+		}
+		ai_chance = { base = 20 }
+	}
+
+	option = {
+		name = gg_argentina.21.c
+		custom_tooltip = gg_vanguardia_cruce_postergado_tt
+		set_global_variable = { name = gg_vanguardia_cruce value = 3 }
+		ai_chance = { base = 10 }
 	}
 }
 
@@ -1616,7 +1682,7 @@ gg_argentina.7 = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						count = 4
+						count = gg_libres_horse
 					}
 				}
 			}

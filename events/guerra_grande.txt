@@ -1628,7 +1628,13 @@ guerra_grande.4 = {
 				years = 10
 				is_decaying = yes
 			}
-			trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
+			if = {
+				limit = { global_var:gg_vanguardia_cruce = 3 }
+				trigger_event = { id = gg_contingent.7 days = 183 popup = yes }
+			}
+			else = {
+				trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
+			}
 		}
 		ai_chance = {
 			base = 70

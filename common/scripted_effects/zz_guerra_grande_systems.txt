@@ -70,8 +70,10 @@ gg_systems_init = {
 	#     gg_interior_outcome   0 sin decidir · 1 Rosas gano el interior · 2 lo gano a duras penas
 	#                           3 Rosas perdio el interior
 	#     gg_vanguardia_status  0 sin decidir · 1 cruzo entera · 2 cruzo mermada · 3 no cruzo nunca
+	# EN/ES: gg_vanguardia_cruce  0 sin decidir · 1 cruzo todo · 2 reserva para el litoral · 3 cruce postergado
 	set_global_variable = { name = gg_interior_outcome value = 0 }
 	set_global_variable = { name = gg_vanguardia_status value = 0 }
+	set_global_variable = { name = gg_vanguardia_cruce value = 0 }
 	# EN: THE REVOCABLE DELEGATION -- the heart of the Argentine side. Rosas' power over the other
 	#     provinces was never sovereignty: it was a DELEGATION of foreign relations that each
 	#     legislature could take back, and taking it back is literally what Tucuman did on 7 April

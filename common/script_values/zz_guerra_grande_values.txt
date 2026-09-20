@@ -269,6 +269,10 @@ gg_vanguardia_line = {
 		limit = { NOT = { has_global_variable = gg_oribe_recognised } }
 		subtract = 1
 	}
+	if = {
+		limit = { global_var:gg_vanguardia_cruce = 2 }
+		subtract = 1
+	}
 	# EN/ES: y un piso de uno: dos recortes sobre dos caballerias dan cero, y un contingente de cero
 	#     unidades no es un contingente / and a floor of one: two cuts on two would give zero
 	min = 1
@@ -298,7 +302,26 @@ gg_vanguardia_horse = {
 		limit = { NOT = { has_global_variable = gg_oribe_recognised } }
 		subtract = 1
 	}
+	if = {
+		limit = { global_var:gg_vanguardia_cruce = 2 }
+		subtract = 1
+	}
 	# EN/ES: y un piso de uno: dos recortes sobre dos caballerias dan cero, y un contingente de cero
 	#     unidades no es un contingente / and a floor of one: two cuts on two would give zero
 	min = 1
+}
+
+# EN: The horse the littoral can raise after the Vanguard's crossing is decided.
+# ES: La caballeria que puede levantar el litoral despues de decidir el cruce de la Vanguardia.
+gg_libres_horse = {
+	value = 4
+	if = {
+		limit = { global_var:gg_vanguardia_cruce = 1 }
+		add = 2
+	}
+	if = {
+		limit = { global_var:gg_vanguardia_cruce = 3 }
+		subtract = 2
+	}
+	min = 2
 }
