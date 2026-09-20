@@ -551,6 +551,10 @@ gg_argentina.65 = {
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		gg_reclamo_abre = { KEY = coalicion_salta }
+		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		gg_reclamo_abre = { KEY = coalicion_la_rioja }
 		default_option = yes
 		custom_tooltip = gg_norte_refusal_tt
 		change_global_variable = { name = gg_norte_agravio add = 1 }
@@ -559,6 +563,10 @@ gg_argentina.65 = {
 	option = {
 		name = gg_argentina.65.b
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
 		gg_reclamo_cierra = { KEY = coalicion_catamarca }
@@ -605,6 +613,10 @@ gg_argentina.68 = {
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		gg_reclamo_abre = { KEY = coalicion_salta }
+		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		gg_reclamo_abre = { KEY = coalicion_la_rioja }
 		default_option = yes
 		custom_tooltip = gg_norte_refusal_tt
 		change_global_variable = { name = gg_norte_agravio add = 1 }
@@ -619,6 +631,10 @@ gg_argentina.68 = {
 	option = {
 		name = gg_argentina.68.b
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
 		gg_reclamo_cierra = { KEY = coalicion_catamarca }
@@ -666,6 +682,10 @@ gg_argentina.66 = {
 		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
 		#     / the claim over the weapons lands in Tucuman, which is where they are
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		gg_reclamo_abre = { KEY = coalicion_salta }
+		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		gg_reclamo_abre = { KEY = coalicion_la_rioja }
 		default_option = yes
 		# EN/ES: la marca decide despues si Lamadrid se pasa a los sublevados, asi que se dice
 		#     / the mark decides later whether Lamadrid goes over, so it is said
@@ -678,6 +698,10 @@ gg_argentina.66 = {
 		name = gg_argentina.66.b
 		# EN/ES: no se les reclama nada, y el norte queda como estaba / nothing is demanded
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
 		custom_tooltip = gg_norte_concession_tt
 		change_global_variable = { name = gg_norte_agravio add = -1 }
 		add_modifier = { name = gg_arg_lamadrid_retained years = 2 }
@@ -810,6 +834,10 @@ gg_argentina.70 = {
 	option = {
 		name = gg_argentina.70.a
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
+		gg_reclamo_cierra = { KEY = coalicion_salta }
+		gg_reclamo_cierra = { KEY = coalicion_jujuy }
+		gg_reclamo_cierra = { KEY = coalicion_catamarca }
+		gg_reclamo_cierra = { KEY = coalicion_la_rioja }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
 		gg_reclamo_cierra = { KEY = coalicion_catamarca }

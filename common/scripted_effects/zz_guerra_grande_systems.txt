@@ -120,8 +120,6 @@ gg_systems_init = {
 	#     habria movido el arbitro de la guerra oriental con un numero argentino. Lo delato una
 	#     inicializacion duplicada a doscientas lineas de distancia.
 	set_global_variable = { name = gg_oribe_siege_months value = 0 }
-	# EN/ES: cuantas provincias delegan con un pliego sin contestar / provinces with a claim open
-	set_global_variable = { name = gg_reclamos_abiertos value = 0 }
 	# EN: THERE ARE NO PER-PROVINCE MARKS ANY MORE, and the reason is worth keeping. They were added
 	#     this same day so the panel could ask each province with SelectLocalization; that did not
 	#     render in Juan's game, so the list became sixteen plain descriptions chosen by script, and
@@ -1297,12 +1295,8 @@ gg_reclamo_abre = {
 			NOT = { has_global_variable = gg_delegation_gone_$KEY$ }
 		}
 		set_global_variable = gg_reclamo_$KEY$
-		# EN/ES: y la cuenta que muestra el panel: un reclamo que no se ve no existe para el jugador
-		#     / and the count the panel shows: a claim nobody can see does not exist
-		change_global_variable = {
-			name = gg_reclamos_abiertos
-			add = 1
-		}
+		# EN/ES: no hay contador aparte: la lista del panel muestra CUALES, que es mejor que cuantos
+		#     / no separate counter: the panel's list shows WHICH, which beats how many
 	}
 }
 
@@ -1310,10 +1304,6 @@ gg_reclamo_cierra = {
 	if = {
 		limit = { has_global_variable = gg_reclamo_$KEY$ }
 		remove_global_variable = gg_reclamo_$KEY$
-		change_global_variable = {
-			name = gg_reclamos_abiertos
-			add = -1
-		}
 	}
 }
 
