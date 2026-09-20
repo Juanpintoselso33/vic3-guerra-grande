@@ -1,0 +1,36 @@
+﻿# Media aliases for the Argentine side's birth events. Sources: SOURCES_flujo_images.md.
+# Alias de medios de los eventos de nacimiento del lado argentino. Fuentes: SOURCES_flujo_images.md.
+
+# Carlos Morel, "Caballeria Gaucha" (c. 1838-1845), public domain. Morel painted in exactly these
+# years: this is the cavalry of the period, and it is the army that marches on Corrientes.
+# NOT the Morel the mod already uses -- "Combate de caballeria en la epoca de Rosas" is
+# gg_fl_palmar's, and "Carga de caballeria" is gg_riv_india_muerta's.
+gg_arg_corrientes = {
+	video = "gfx/media_aliases/gg_arg_corrientes.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Juan Manuel Blanes, "Cabildo abierto", public domain. A civil assembly deliberating: the right
+# register for an event in which a legislature withdraws a delegation, not a caudillo with an army.
+gg_arg_coalicion = {
+	video = "gfx/media_aliases/gg_arg_coalicion.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# "Passage du Parana par l'armee d'Urquiza", period engraving, public domain. The army crossing the
+# Parana: what the Pronunciamiento turns into.
+gg_arg_pronunciamiento = {
+	video = "gfx/media_aliases/gg_arg_pronunciamiento.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# Cordoba, 19th-century photograph, public domain. WARNING: the Commons file is titled "circa 1800"
+# and that is impossible -- it is a photograph, and photography begins in 1839; it is most likely
+# from the 1860s-70s. It is used for what it does show, a low adobe city with its towers, which is
+# how Cordoba looked in 1840. Same caveat as "Batalla de San Cala", and written down in SOURCES.
+# ES: OJO: el archivo de Commons dice "circa 1800" y es imposible: es una fotografia, y la
+# fotografia empieza en 1839. Se usa por lo que si muestra, la ciudad baja de adobe con sus torres.
+gg_arg_cordoba = {
+	video = "gfx/media_aliases/gg_arg_cordoba.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}

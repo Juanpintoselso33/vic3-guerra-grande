@@ -56,18 +56,13 @@ gg_argentina.1 = {
 	desc = gg_argentina.1.d
 	flavor = gg_argentina.1.f
 
-	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
-	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
-	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
-	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
-	#     PENDIENTES.md.
 	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
 	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
 	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
 	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
 	#     en PENDIENTES.md.
 	event_image = {
-		video = "southamerica_war_civilians"
+		video = "gg_arg_corrientes"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_war.dds"
@@ -148,18 +143,13 @@ gg_argentina.2 = {
 	desc = gg_argentina.2.d
 	flavor = gg_argentina.2.f
 
-	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
-	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
-	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
-	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
-	#     PENDIENTES.md.
 	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
 	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
 	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
 	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
 	#     en PENDIENTES.md.
 	event_image = {
-		video = "southamerica_election"
+		video = "gg_arg_coalicion"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_politics.dds"
@@ -212,18 +202,13 @@ gg_argentina.3 = {
 	desc = gg_argentina.3.d
 	flavor = gg_argentina.3.f
 
-	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
-	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
-	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
-	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
-	#     PENDIENTES.md.
 	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
 	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
 	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
 	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
 	#     en PENDIENTES.md.
 	event_image = {
-		video = "southamerica_aristocrats"
+		video = "gg_arg_pronunciamiento"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_politics.dds"
@@ -281,18 +266,13 @@ gg_argentina.4 = {
 	desc = gg_argentina.4.d
 	flavor = gg_argentina.4.f
 
-	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
-	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
-	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
-	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
-	#     PENDIENTES.md.
 	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
 	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
 	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
 	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
 	#     en PENDIENTES.md.
 	event_image = {
-		video = "southamerica_election"
+		video = "gg_arg_cordoba"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_politics.dds"
