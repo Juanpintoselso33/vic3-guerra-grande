@@ -153,7 +153,10 @@ gg_intro.5 = {
 	duration = 1825
 
 	trigger = {
-		has_variable = gg_arg_rosas_seat
+		# EN/ES: se dispara sobre la Argentina y nada mas, asi que se pregunta por el pais y no por una
+		#     variable: una marca que todavia no este puesta descarta el evento en silencio
+		#     / it is fired on Argentina and nowhere else, so ask for the country, not for a mark
+		c:ARG ?= this
 		NOT = { has_journal_entry = je_gg_delegation }
 		# EN/ES: la sonda de «la Argentina»: sin ella este lado no existe / the «la Argentina» probe
 		exists = s:STATE_ENTRE_RIOS
@@ -164,5 +167,38 @@ gg_intro.5 = {
 		default_option = yes
 		add_contextless_journal_entry = je_gg_delegation
 		ai_chance = { base = 100 }
+	}
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_intro.6 -- THE SAFETY NET, hidden, forty days in. Written 20/9/2026 because the entry did
+#     not open in Juan's game and the whole Argentine side hangs off it: without the Pacto Federal
+#     there is no bar of provinces, no reading of the interior and no ending for Rosas.
+#     It is deliberately dumb: if Argentina still has no entry and «la Argentina» is loaded, it opens
+#     it without a word. The explanation is gg_intro.5's job; this one only makes sure the thing
+#     exists. A silent open is worse than an explained one and far better than none.
+# ES: gg_intro.6 -- LA RED, oculta, a los cuarenta dias. Escrita el 20/9/2026 porque la entrada no se
+#     abrio en la partida de Juan y de ella cuelga el lado argentino entero: sin el Pacto Federal no
+#     hay cuenta de provincias, ni lectura del interior, ni final para Rosas.
+#     Es deliberadamente tonta: si la Argentina sigue sin la entrada y «la Argentina» esta cargada, la
+#     abre sin decir nada. Explicar es trabajo de gg_intro.5; esta solo se asegura de que exista. Una
+#     apertura muda es peor que una explicada y muchisimo mejor que ninguna.
+# -------------------------------------------------------------------------------------------------
+gg_intro.6 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					c:ARG ?= this
+					NOT = { has_journal_entry = je_gg_delegation }
+					exists = s:STATE_ENTRE_RIOS
+				}
+				add_contextless_journal_entry = je_gg_delegation
+			}
+		}
 	}
 }

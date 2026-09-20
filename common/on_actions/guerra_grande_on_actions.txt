@@ -100,7 +100,24 @@ guerra_grande_on_game_start = {
 		#     faltaba, asi que el jugador argentino se encontraba el Pacto Federal fijado en pantalla
 		#     sin que nadie le dijera que era. La sonda de «la Argentina» ahora vive en el trigger del
 		#     evento / and an event that explains it opens it, not this line
-		c:ARG ?= { trigger_event = { id = gg_intro.5 days = 0 popup = yes } }
+		# EN: DAY ONE, NOT DAY ZERO, and a safety net behind it. Fired with days = 0 from
+		#     on_game_started the entry simply never opened in Juan's game -- «ahora el journal de
+		#     pacto federal no aparece». The Uruguayan opening next to it has always used days = 1
+		#     and has always worked; an event queued for the same instant the game is still being
+		#     built is not something to rely on.
+		#     And because a journal that fails to open takes the whole Argentine side down with it,
+		#     gg_intro.6 checks a month later and opens it in silence if it is still missing.
+		# ES: DIA UNO, NO DIA CERO, y una red atras. Disparado con days = 0 desde on_game_started la
+		#     entrada sencillamente no se abrio en la partida de Juan -- «ahora el journal de pacto
+		#     federal no aparece». La apertura oriental que esta al lado usa days = 1 desde siempre y
+		#     siempre funciono; un evento encolado para el mismo instante en que el juego todavia se
+		#     esta armando no es algo en lo que apoyarse.
+		#     Y como un journal que no abre se lleva puesto el lado argentino entero, gg_intro.6
+		#     chequea un mes despues y lo abre en silencio si sigue faltando.
+		c:ARG ?= {
+			trigger_event = { id = gg_intro.5 days = 1 popup = yes }
+			trigger_event = { id = gg_intro.6 days = 40 }
+		}
 
 		# EN: and the Argentine side's own dated calendar. One copy each, on Argentina, which never
 		#     changes tag; the reasoning is in events/guerra_grande_argentina_calendar.txt. Offsets in
