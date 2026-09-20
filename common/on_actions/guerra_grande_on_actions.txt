@@ -110,7 +110,23 @@ guerra_grande_on_game_start = {
 		#     events/guerra_grande_argentina_calendar.txt. Corrimientos en anios de 365 dias desde el
 		#     1 de enero de 1836, calculados a mano y verificados uno por uno.
 		c:ARG ?= {
-			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa
+			# EN: The Argentine prehistory is scheduled only when «la Argentina» is present. The
+			#     relays still repeat the probe on their delivery dates, because a dated event reads
+			#     its trigger when it is queued, not when it arrives.
+			# ES: La previa argentina se agenda solo cuando esta presente «la Argentina». Los relevos
+			#     repiten igual la sonda en la fecha de entrega, porque un evento fechado lee su
+			#     trigger cuando se encola, no cuando llega.
+			if = {
+				limit = { exists = s:STATE_ENTRE_RIOS }
+				set_global_variable = { name = gg_corrientes_agravio value = 0 }
+				trigger_event = { id = gg_argentina_cal.14 days = 90 }   # 1836-04-01 primer pliego de Corrientes
+				trigger_event = { id = gg_argentina_cal.15 days = 455 }  # 1837-04-01 la renta de la aduana
+				trigger_event = { id = gg_argentina_cal.16 days = 816 }  # 1838-03-28 empieza el bloqueo frances
+				trigger_event = { id = gg_argentina_cal.17 days = 1064 } # 1838-12-01 llega la noticia de Heredia
+				trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 Lamadrid a Tucuman
+				trigger_event = { id = gg_argentina_cal.19 days = 5444 } # 1850-12-01 las dos ordenes a Urquiza
+			}
+			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento

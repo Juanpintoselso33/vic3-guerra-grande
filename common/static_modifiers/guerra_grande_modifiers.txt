@@ -341,6 +341,61 @@ gg_arg_field_won = {
 	unit_occupation_mult = 0.30
 }
 
+# -------------------------------------------------------------------------------------------------
+# EN: THE PRICE OF ACCOMMODATION. These use only modifier types defined by vanilla 1.13. The open
+#     rivers and shared customs are deliberately long-lived: averting secession does not refund the
+#     revenue Buenos Aires yielded. The short monopoly bonus is the fiscal reason to refuse.
+# ES: EL PRECIO DEL ARREGLO. Estos usan solo tipos de modificador definidos por vanilla 1.13. Los
+#     rios abiertos y la aduana compartida duran a proposito: evitar la secesion no devuelve la renta
+#     que Buenos Aires cedio. El beneficio corto del monopolio es la razon fiscal para negarse.
+# -------------------------------------------------------------------------------------------------
+gg_arg_customs_monopoly = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_mult = 0.05
+}
+
+gg_arg_open_rivers_cost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_mult = -0.05
+}
+
+gg_arg_customs_shared = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.10
+}
+
+gg_arg_corrientes_blockaded = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.25
+}
+
+# EN: Keeping Lamadrid in Buenos Aires preserves a capable commander; sending him is what allows the
+#     later defection. ES: Retener a Lamadrid conserva un jefe capaz; mandarlo habilita su pase.
+gg_arg_lamadrid_retained = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.05
+}
+
+# EN: The command against Brazil improves readiness but costs military stores; closing Entre Rios's
+#     trade costs revenue. ES: El mando contra Brasil mejora el alistamiento pero consume pertrechos;
+#     cerrar el trafico entrerriano cuesta renta.
+gg_arg_brazil_command = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.10
+	country_military_goods_cost_mult = 0.10
+}
+
+gg_arg_traffic_cut = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_minting_mult = -0.05
+}
+
+gg_arg_urquiza_prepared = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+}
+
 # EN: THE PRETENSION. Rosas did not merely shelter Oribe: he went on receiving him as the lawful
 #     president of the Oriental Republic, which is a standing claim against a state that had a
 #     government of its own and was recognised by France and Britain. It cost him abroad for the rest

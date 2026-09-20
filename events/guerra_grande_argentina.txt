@@ -177,10 +177,15 @@ gg_argentina.2 = {
 
 	immediate = {
 		hidden_effect = {
-			# EN/ES: Lamadrid BEFORE the country exists: he exists in vanilla and went over to their
-			#     ranks, so the ORIGINAL has to move. / Lamadrid ANTES de que exista el pais
+			# EN: Lamadrid can defect only if Rosas sent him to Tucuman in March. The prelude makes
+			#     that choice, and the original character must be saved before the new country exists.
+			# ES: Lamadrid solo puede pasarse si Rosas lo mando a Tucuman en marzo. La previa toma esa
+			#     decision, y el personaje original debe guardarse antes de que exista el pais nuevo.
 			if = {
-				limit = { any_scope_character = { has_template = ARG_Gregorio_Araoz_de_Lamadrid } }
+				limit = {
+					has_global_variable = gg_lamadrid_sent
+					any_scope_character = { has_template = ARG_Gregorio_Araoz_de_Lamadrid }
+				}
 				random_scope_character = {
 					limit = { has_template = ARG_Gregorio_Araoz_de_Lamadrid }
 					save_scope_as = gg_lamadrid
@@ -243,6 +248,16 @@ gg_argentina.3 = {
 				save_scope_as = gg_urquiza
 			}
 			gg_argentina_create_entre_rios = yes
+			# EN: The incompatible orders of 1850 gave Urquiza both a grievance and military
+			#     preparation. If Rosas backed down, Entre Rios still may accept the annual
+			#     resignation, but it does not begin the war with that advantage.
+			# ES: Las ordenes incompatibles de 1850 le dieron a Urquiza agravio y preparacion militar.
+			#     Si Rosas retrocedio, Entre Rios igual puede aceptar la renuncia anual, pero no empieza
+			#     la guerra con esa ventaja.
+			if = {
+				limit = { has_global_variable = gg_urquiza_double_order }
+				c:ENR ?= { add_modifier = { name = gg_arg_urquiza_prepared years = 2 } }
+			}
 		}
 	}
 
@@ -321,6 +336,272 @@ gg_argentina.4 = {
 			gg_delegation_revoked = { KEY = cordoba COUNT = -1 POINTS = -12 }
 		}
 		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: PRELUDES TO THE THREE BREAKS. These are petitions, warnings and orders received by Rosas before
+#     the provinces act. They do not replace the births: they make the causes visible and carry the
+#     player's answers into the later events.
+# ES: PREVIAS DE LAS TRES RUPTURAS. Son pliegos, avisos y ordenes que Rosas recibe antes de que las
+#     provincias actuen. No reemplazan los nacimientos: vuelven visibles las causas y llevan las
+#     respuestas del jugador hasta los eventos posteriores.
+# -------------------------------------------------------------------------------------------------
+
+# EN: 1836 -- Ferre's continuing programme after the Customs Law granted protection but withheld
+#     other ports, free navigation and revenue sharing.
+# ES: 1836 -- el programa permanente de Ferre despues de que la Ley de Aduana concedio proteccion
+#     pero no otros puertos, la libre navegacion ni el reparto de la renta.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Corrientes — Ferre» y
+# «La aduana y los rios» [D].
+gg_argentina.61 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.61.t
+	desc = gg_argentina.61.d
+	flavor = gg_argentina.61.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	# EN: An unanswered petition must not count as a concession if the popup is left open until 1839.
+	#     Arrival adds one agravio; refusal adds another, while concession removes the pending one.
+	# ES: Un pliego sin contestar no puede contar como concesion si el popup queda abierto hasta 1839.
+	#     La llegada suma un agravio; la negativa suma otro y la concesion borra el pendiente.
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		}
+	}
+
+	option = {
+		name = gg_argentina.61.a
+		default_option = yes
+		change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.61.b
+		change_global_variable = { name = gg_corrientes_agravio add = -1 }
+		add_treasury = -25000
+		add_modifier = { name = gg_arg_open_rivers_cost years = 20 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# EN: 1837 -- the part of Ferre's programme that directly divides Buenos Aires customs revenue.
+# ES: 1837 -- la parte del programa de Ferre que reparte directamente la renta porteña.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Corrientes — Ferre» y
+# «La aduana y los rios» [D].
+gg_argentina.62 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.62.t
+	desc = gg_argentina.62.d
+	flavor = gg_argentina.62.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	# EN: The same unanswered-petition guard as in 1836. ES: La misma guarda contra un pliego sin
+	#     contestar que en 1836.
+	immediate = {
+		hidden_effect = {
+			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		}
+	}
+
+	option = {
+		name = gg_argentina.62.a
+		default_option = yes
+		change_global_variable = { name = gg_corrientes_agravio add = 1 }
+		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = gg_argentina.62.b
+		change_global_variable = { name = gg_corrientes_agravio add = -1 }
+		add_treasury = -25000
+		add_modifier = { name = gg_arg_customs_shared years = 20 }
+		ai_chance = { base = 25 }
+	}
+}
+
+# EN: 28 March 1838 -- the French blockade closes the outlet on which Corrientes depends. Relief is
+#     a fiscal decision, not a claim that Rosas historically offered it.
+# ES: 28 de marzo de 1838 -- el bloqueo frances cierra la salida de la que depende Corrientes. El
+#     socorro es una decision fiscal, no la afirmacion de que Rosas lo haya ofrecido historicamente.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, 28/3/1838 y 6/3/1839 [D].
+gg_argentina.63 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.63.t
+	desc = gg_argentina.63.d
+	flavor = gg_argentina.63.f
+	event_image = { video = "unspecific_devastation" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	option = {
+		name = gg_argentina.63.a
+		default_option = yes
+		s:STATE_CORRIENTES.region_state:ARG ?= {
+			add_modifier = { name = gg_arg_corrientes_blockaded months = 18 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = gg_argentina.63.b
+		add_treasury = -20000
+		ai_chance = { base = 30 }
+	}
+}
+
+# EN: 6 March 1839 -- alternative to secession, available only if Rosas paid both prices.
+# ES: 6 de marzo de 1839 -- alternativa a la secesion, solo si Rosas pago los dos costos.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Corrientes — Ferre» [D].
+gg_argentina.64 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.64.t
+	desc = gg_argentina.64.d
+	flavor = gg_argentina.64.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		NOT = { exists = c:CRR }
+	}
+
+	option = {
+		name = gg_argentina.64.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN: 1838 -- Heredia's murder changes the north, where power passes to liberal groups.
+# ES: 1838 -- el asesinato de Heredia cambia el norte, donde el poder pasa a grupos liberales.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «La Coalicion del Norte» [D].
+gg_argentina.65 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.65.t
+	desc = gg_argentina.65.d
+	flavor = gg_argentina.65.f
+	event_image = { video = "southamerica_public_figure_assassination" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_scope_character = {
+				limit = { has_template = ARG_Alejandro_Heredia }
+				kill_character = yes
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.65.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN: March 1840 -- Rosas decides whether Lamadrid carries the order to recover the arms of the army
+#     that fought in Bolivia. If he is not sent, he cannot defect in gg_argentina.2.
+# ES: marzo de 1840 -- Rosas decide si Lamadrid lleva la orden de recuperar las armas del ejercito
+#     que peleo en Bolivia. Si no lo manda, no puede pasarse en gg_argentina.2.
+# SOURCE / FUENTE: historical implementation brief supplied by the user / consigna historica del
+# usuario (marzo de 1840, cincuenta granaderos y reclamo de las armas del ejercito de Bolivia).
+gg_argentina.66 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.66.t
+	desc = gg_argentina.66.d
+	flavor = gg_argentina.66.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	option = {
+		name = gg_argentina.66.a
+		default_option = yes
+		set_global_variable = gg_lamadrid_sent
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = gg_argentina.66.b
+		add_modifier = { name = gg_arg_lamadrid_retained years = 2 }
+		ai_chance = { base = 20 }
+	}
+}
+
+# EN: 1850 -- Rosas combines command against Brazil with the order to close Entre Rios's traffic
+#     with Montevideo. The annual resignation travels with the orders so the player sees the ritual
+#     that Entre Rios will break in 1851.
+# ES: 1850 -- Rosas combina el mando contra Brasil con la orden de cerrar el trafico entrerriano con
+#     Montevideo. La renuncia anual viaja con las ordenes para que el jugador vea la ceremonia que
+#     Entre Rios rompera en 1851.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Urquiza y Entre Rios» y
+# «El Pronunciamiento, que fue exactamente» [D].
+gg_argentina.67 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.67.t
+	desc = gg_argentina.67.d
+	flavor = gg_argentina.67.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	option = {
+		name = gg_argentina.67.a
+		default_option = yes
+		set_global_variable = gg_urquiza_double_order
+		add_modifier = { name = gg_arg_brazil_command months = 18 }
+		add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		ai_chance = { base = 85 }
+	}
+	option = {
+		name = gg_argentina.67.b
+		add_treasury = -25000
+		ai_chance = { base = 15 }
 	}
 }
 

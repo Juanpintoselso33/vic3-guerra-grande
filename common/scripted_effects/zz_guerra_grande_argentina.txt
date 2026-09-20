@@ -235,7 +235,9 @@ gg_argentina_create_coalicion = {
 			}
 		}
 	}
-	# EN/ES: Lamadrid existe en vanilla y se paso a sus filas / Lamadrid exists in vanilla
+	# EN: If Rosas sent Lamadrid in March, the saved original defects; if he retained him there is no
+	#     saved scope and no transfer. ES: Si Rosas mando a Lamadrid en marzo, se pasa el original
+	#     guardado; si lo retuvo no hay scope guardado ni transferencia.
 	if = {
 		limit = { exists = scope:gg_lamadrid }
 		scope:gg_lamadrid = { transfer_character = c:CLN }

@@ -1,8 +1,8 @@
 ﻿namespace = gg_argentina_cal
 
 # -------------------------------------------------------------------------------------------------
-# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Four relays, each carrying the birth of a country to
-#     the day the sources give it, counted in days from 1 January 1836.
+# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Nineteen relays carry the three preludes, the births
+#     and the interior campaign to their delivery dates, counted in days from 1 January 1836.
 #
 #     WHY RELAYS AND NOT THE EVENTS THEMSELVES. A scheduled event's trigger is read WHEN IT IS
 #     SCHEDULED, not on its future date. Scheduling the birth of Corrientes directly on day 1159
@@ -23,9 +23,10 @@
 #     whole game, in silence.
 #
 #     THE YEARS ARE 365 DAYS LONG, with no leap days -- the engine's years, not the calendar's. The
-#     four offsets were computed by hand and checked one by one.
-# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Cuatro relevos, cada uno lleva el nacimiento de un
-#     pais al dia que le dan las fuentes, contado en dias desde el 1 de enero de 1836.
+#     offsets were computed by hand and checked one by one.
+# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Diecinueve relevos llevan las tres previas, los
+#     nacimientos y la campania del interior a sus fechas de entrega, contadas desde el 1 de enero
+#     de 1836.
 #
 #     POR QUE RELEVOS Y NO LOS EVENTOS DIRECTAMENTE. El trigger de un evento agendado se lee CUANDO
 #     SE AGENDA, no en su fecha futura. Agendar el nacimiento de Corrientes directo al dia 1159
@@ -45,7 +46,7 @@
 #     escribir la marca primero y buscar destinatario despues perdia el evento toda la partida, en
 #     silencio.
 #
-#     LOS ANIOS DEL MOTOR SON DE 365 DIAS, sin bisiestos. Los cuatro corrimientos se calcularon a
+#     LOS ANIOS DEL MOTOR SON DE 365 DIAS, sin bisiestos. Los corrimientos se calcularon a
 #     mano y se verificaron uno por uno.
 # -------------------------------------------------------------------------------------------------
 
@@ -90,7 +91,20 @@ gg_argentina_cal.1 = {
 					exists = s:STATE_CORRIENTES.region_state:ARG
 				}
 				set_global_variable = gg_arg_cal_done_1
-				c:ARG = { trigger_event = { id = gg_argentina.1 days = 0 popup = yes } }
+				if = {
+					# EN: One refusal is enough to leave the old dispute alive. Only two concessions,
+					#     and therefore an agravio count of zero, avert the secession.
+					# ES: Una negativa alcanza para dejar vivo el pleito. Solo dos concesiones, y por
+					#     eso una cuenta de agravio en cero, evitan la secesion.
+					limit = {
+						has_global_variable = gg_corrientes_agravio
+						global_var:gg_corrientes_agravio = 0
+					}
+					c:ARG = { trigger_event = { id = gg_argentina.64 days = 0 popup = yes } }
+				}
+				else = {
+					c:ARG = { trigger_event = { id = gg_argentina.1 days = 0 popup = yes } }
+				}
 			}
 		}
 	}
@@ -379,4 +393,124 @@ gg_argentina_cal.13 = {
 			}
 		}
 	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: PREHISTORY RELAYS. Their scheduling dates are documented below. The two April dates are design
+#     dates for petitions in continuing disputes, not claimed historical anniversaries; the source
+#     establishes the programme and the years. The 1838 and birth dates are historical dates.
+# ES: RELEVOS DE LA PREVIA. Sus fechas de agenda quedan documentadas abajo. Las dos fechas de abril
+#     son fechas de diseno para pliegos de pleitos permanentes, no aniversarios historicos; la fuente
+#     documenta el programa y los anios. Las fechas de 1838 y de los nacimientos son historicas.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 1/4/1836 (day/dia 90) -- ports and free navigation / puertos y libre navegacion
+gg_argentina_cal.14 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_14 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_14
+			c:ARG = { trigger_event = { id = gg_argentina.61 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN/ES: 1/4/1837 (day/dia 455) -- customs sharing / coparticipacion aduanera
+gg_argentina_cal.15 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_15 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_15
+			c:ARG = { trigger_event = { id = gg_argentina.62 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN/ES: 28/3/1838 (day/dia 816) -- the French blockade begins / empieza el bloqueo frances
+gg_argentina_cal.16 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_16 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_16
+			c:ARG = { trigger_event = { id = gg_argentina.63 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN: 1/12/1838 (day 1064) -- delivery date for the news of Heredia's murder; the source gives 1838,
+#     not a day. ES: fecha de entrega de la noticia del asesinato; la fuente da 1838, no un dia.
+gg_argentina_cal.17 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_17 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+			}
+			set_global_variable = gg_arg_cal_done_17
+			c:ARG = { trigger_event = { id = gg_argentina.65 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN: 1/3/1840 (day 1519) -- scheduling date within the documented month. ES: fecha de agenda
+#     dentro del mes documentado.
+gg_argentina_cal.18 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_18 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_TUCUMAN.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_18
+			c:ARG = { trigger_event = { id = gg_argentina.66 days = 0 popup = yes } }
+		}
+	} }
+}
+
+# EN: 1/12/1850 (day 5444) -- delivery date within the documented year. ES: fecha de entrega dentro
+#     del anio documentado.
+gg_argentina_cal.19 = {
+	type = country_event
+	hidden = yes
+	immediate = { hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_19 }
+				exists = s:STATE_ENTRE_RIOS
+				exists = c:ARG
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			set_global_variable = gg_arg_cal_done_19
+			c:ARG = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
+		}
+	} }
 }
