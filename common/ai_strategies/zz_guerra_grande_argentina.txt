@@ -1,0 +1,132 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: WHAT THE THREE ARGENTINE COUNTRIES ARE TRYING TO DO. Without this they are provinces that were
+#     cut out of Argentina on a date and then behave like any other small country the engine has
+#     never heard of: they build, they trade, and they do not understand that they are at war for
+#     their existence.
+#     A strategy does not order the AI around -- it weights what it wants. Each of these three wanted
+#     something different and documented, and that is what is written here:
+#       CORRIENTES fought for the river. Its whole programme, from Ferre in 1830, was open ports,
+#         free navigation and a share of the customs. It is one province against the Confederation,
+#         so it needs allies more than it needs land, and it cannot afford an adventure.
+#       THE COALITION was a league of six provinces to force a constitution, not a conquest. It has
+#         to SURVIVE: every month it lasts is a month Rosas' army is in the interior and not in front
+#         of Montevideo. It never wanted a foot of anybody's ground.
+#       ENTRE RIOS in 1851 is the opposite of both: the best army in the Confederation, marching on
+#         Buenos Aires with Brazil and the Defensa behind it. It is not defending anything.
+# ES: QUE ESTAN TRATANDO DE HACER LOS TRES PAISES ARGENTINOS. Sin esto son provincias que se
+#     recortaron de la Argentina en una fecha y despues se portan como cualquier pais chico del que
+#     el motor nunca oyo hablar: construyen, comercian, y no entienden que estan en guerra por su
+#     existencia.
+#     Una estrategia no le da ordenes a la IA: pesa lo que quiere. Cada uno de estos tres queria algo
+#     distinto y documentado, y eso es lo que esta escrito aca:
+#       CORRIENTES peleaba por el rio. Su programa entero, desde Ferre en 1830, era puertos
+#         habilitados, libre navegacion y coparticipacion de la aduana. Es una provincia sola contra
+#         la Confederacion: necesita aliados mas que tierra, y no puede permitirse una aventura.
+#       LA COALICION era una liga de seis provincias para forzar una constitucion, no una conquista.
+#         Tiene que SOBREVIVIR: cada mes que aguanta es un mes que el ejercito de Rosas esta en el
+#         interior y no frente a Montevideo. Nunca quiso un palmo de tierra ajena.
+#       ENTRE RIOS en 1851 es lo contrario de los dos: el mejor ejercito de la Confederacion,
+#         marchando sobre Buenos Aires con el Brasil y la Defensa detras. No esta defendiendo nada.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Corrientes -- el rio, y quien la acompanie / the river, and whoever will come with her
+gg_ai_strategy_corrientes = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+
+	type = diplomatic
+
+	# EN/ES: no puede pagar la mala fama de conquistar: esta sola / it cannot afford infamy
+	undesirable_infamy_level = { value = 15 }
+	unacceptable_infamy_level = { value = 35 }
+
+	# EN/ES: busca aliados, no tierra / it looks for allies, not land
+	ideological_opinion_effect_mult = { value = 1.5 }
+	diplomatic_play_neutrality = { value = 20 }
+	diplomatic_play_boldness = { value = 10 }
+	recklessness = { value = -0.25 }
+	aggression = { value = 0.25 }
+
+	building_group_weights = {
+		bg_army = 1.5
+	}
+
+	wargoal_weights = {
+		conquer_state = 0.0
+		make_protectorate = 0.0
+		make_tributary = 0.0
+	}
+
+	possible = {
+		c:CRR ?= this
+	}
+
+	weight = {
+		value = 1000
+	}
+}
+
+# EN/ES: la Coalicion -- aguantar, que es su unica victoria posible / hold on, its only victory
+gg_ai_strategy_coalicion = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+
+	type = diplomatic
+
+	undesirable_infamy_level = { value = 10 }
+	unacceptable_infamy_level = { value = 25 }
+
+	ideological_opinion_effect_mult = { value = 1.5 }
+	# EN/ES: no abre jugadas: contesta. Lo suyo es durar / it does not open plays: it answers
+	diplomatic_play_neutrality = { value = 60 }
+	diplomatic_play_boldness = { value = 0 }
+	recklessness = { value = -0.5 }
+	aggression = { value = 0 }
+
+	building_group_weights = {
+		bg_army = 2.0
+	}
+
+	wargoal_weights = {
+		conquer_state = 0.0
+		make_protectorate = 0.0
+		make_tributary = 0.0
+		reduce_autonomy = 0.0
+	}
+
+	possible = {
+		c:CLN ?= this
+	}
+
+	weight = {
+		value = 1000
+	}
+}
+
+# EN/ES: Entre Rios -- marchar sobre Buenos Aires / march on Buenos Aires
+gg_ai_strategy_entre_rios = {
+	icon = "gfx/interface/icons/ai_strategy_icons/territorial_expansion.dds"
+
+	type = diplomatic
+
+	# EN: it can afford the infamy: it has Brazil and the Defensa with it, and it is going to win.
+	# ES: puede pagar la mala fama: tiene al Brasil y a la Defensa con el, y va a ganar.
+	undesirable_infamy_level = { value = 50 }
+	unacceptable_infamy_level = { value = 100 }
+
+	ideological_opinion_effect_mult = { value = 0.5 }
+	diplomatic_play_neutrality = { value = 0 }
+	diplomatic_play_boldness = { value = 75 }
+	recklessness = { value = 0.5 }
+	aggression = { value = 1.0 }
+
+	building_group_weights = {
+		bg_army = 2.0
+	}
+
+	possible = {
+		c:ENR ?= this
+	}
+
+	weight = {
+		value = 1000
+	}
+}
