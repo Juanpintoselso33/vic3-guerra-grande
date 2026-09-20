@@ -1,0 +1,23 @@
+﻿# EN: One membership rule for activation and later country creation/tag changes.
+# ES: Una regla de participacion para la apertura y los nuevos paises/cambios de tag.
+gg_international_participant = {
+	OR = {
+		c:URU ?= this
+		c:CER ?= this
+		has_variable = guerra_grande_cerrito_government
+		has_variable = guerra_grande_defensa_government
+		has_variable = gg_arg_rosas_seat
+		c:FRA ?= this
+		c:GBR ?= this
+		c:BRZ ?= this
+		has_variable = gg_arg_entre_rios_seat
+	}
+}
+
+gg_international_open = {
+	NOR = {
+		has_global_variable = gg_peace_settled
+		has_global_variable = gg_war_never_crossed
+		has_global_variable = gg_war_failed
+	}
+}

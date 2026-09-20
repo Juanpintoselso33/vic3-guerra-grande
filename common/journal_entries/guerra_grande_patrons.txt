@@ -1,30 +1,28 @@
-﻿# EN: playtest 2026-09-17 -- the foreign influence gets its own journal, so the sea bar is visible in
-#     the outliner next to the war score. It opens with the war journal on game start and closes
-#     with the peace (or the failure) of the Guerra Grande.
-# ES: la influencia externa tiene su propio journal, asi la barra del mar se ve en el panel junto al
-#     puntaje. Abre con el de la guerra al empezar la partida y cierra con la paz (o el fracaso).
+﻿# EN: Shared international situation. Day-one activation is independent of the opening popup;
+#     peace, an averted war or failure closes it for everyone.
+# ES: Situacion internacional compartida. Abre el primer dia sin esperar el popup;
+#     la paz, una guerra evitada o el fracaso la cierran para todos.
 je_gg_patrons = {
-	group = je_group_guerra_grande
+	group = je_group_global_international_situations
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
 	should_be_pinned_by_default_involved = yes
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default_uninvolved_or_context = no
 
 	scripted_progress_bar = gg_sea_bar
 	# EN/ES: calling in the squadrons is a request to the powers / llamar a las escuadras es un pedido a las potencias
 	scripted_button = guerra_grande_foreign_intervention_button
 
 	should_be_involved = {
-		OR = {
-			c:URU ?= this
-			c:CER ?= this
-			has_variable = guerra_grande_cerrito_government
-			has_variable = guerra_grande_defensa_government
-		}
+		gg_international_participant = yes
 	}
 
 	should_show_when_not_involved = {
-		always = no
+		has_interest_marker_in_region = sr:region_la_plata
+	}
+
+	immediate = {
+		scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
 	}
 
 	status_desc = {
@@ -38,16 +36,7 @@ je_gg_patrons = {
 
 	on_monthly_pulse = {
 		effect = {
-			# EN: Codex review 2026-09-19 -- this asked whether the four flag variables existed and then
-			#     redrew the same bar either way: the two branches were identical, so the question cost
-			#     four reads a month and decided nothing. gg_patron_change already redraws the bar when
-			#     a value moves; this monthly pass is the repair for saves made before that.
-			# ES: esto preguntaba si existian las cuatro variables de bandera y despues redibujaba la
-			#     misma barra en los dos casos: las dos ramas eran identicas, asi que la pregunta
-			#     costaba cuatro lecturas por mes y no decidia nada. gg_patron_change ya redibuja la
-			#     barra cuando un valor se mueve; esta pasada mensual es la reparacion de las partidas
-			#     guardadas de antes de eso.
-			scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
+			gg_international_sync = yes
 		}
 	}
 

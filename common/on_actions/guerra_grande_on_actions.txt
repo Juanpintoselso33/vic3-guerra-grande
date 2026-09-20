@@ -49,6 +49,8 @@ guerra_grande_on_game_start = {
 			#     1836-1838 shows its effect on the patrons and the score / el journal abre desde el
 			#     primer dia, asi cada decision de 1836-1838 muestra su efecto en padrinos y puntaje.
 			trigger_event = { id = gg_intro.1 days = 1 popup = yes }     # La Guerra Grande + La intervencion extranjera
+			# EN/ES: shared entry, independent of the popup answer / entrada compartida, sin esperar la respuesta
+			trigger_event = { id = gg_international.1 days = 1 }
 			# EN/ES: playtest 2026-09-17 -- the President's portrait, before his first decision / el retrato del Presidente, antes de su primera decision
 			trigger_event = { id = guerra_grande.11 days = 4 popup = yes }  # 1836.01.05 Oribe
 			# EN/ES: T5 -- phase 0 on their historical dates (days from 1 January 1836).

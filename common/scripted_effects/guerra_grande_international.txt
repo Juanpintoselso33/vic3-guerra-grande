@@ -1,0 +1,34 @@
+﻿# EN: Check the shared entry, not the calling country's membership. Never reopen a closed war.
+# ES: Comprobar la entrada compartida, no la participacion del pais. No reabrir una guerra cerrada.
+gg_international_ensure = {
+	if = {
+		limit = {
+			gg_international_open = yes
+			NOT = { exists = je:je_gg_patrons }
+		}
+		add_contextless_journal_entry = je_gg_patrons
+	}
+	if = {
+		limit = { gg_international_open = yes }
+		gg_international_sync = yes
+	}
+}
+
+# EN: Explicit membership updates are required after activation; should_be_involved only seeds it.
+# ES: Despues de la apertura hay que actualizar participantes; should_be_involved solo los inicia.
+gg_international_sync = {
+	je:je_gg_patrons ?= {
+		every_scope_je_involved = {
+			limit = { NOT = { gg_international_participant = yes } }
+			je:je_gg_patrons = { remove_involved_country = prev }
+		}
+		every_country = {
+			limit = {
+				gg_international_participant = yes
+				NOT = { is_involved_in_journal_entry = je_gg_patrons }
+			}
+			je:je_gg_patrons = { add_involved_country = prev }
+		}
+		set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value }
+	}
+}

@@ -36,7 +36,7 @@ gg_intro.1 = {
 		name = gg_intro.1.a
 		default_option = yes
 		add_contextless_journal_entry = je_guerra_grande
-		add_contextless_journal_entry = je_gg_patrons
+		gg_international_ensure = yes
 		ai_chance = { base = 100 }
 	}
 }

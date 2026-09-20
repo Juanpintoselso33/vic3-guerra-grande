@@ -1,0 +1,9 @@
+﻿namespace = gg_international
+
+# EN: Day-one activation does not wait for Uruguay's player to answer the introduction.
+# ES: La apertura del primer dia no espera la respuesta del jugador oriental a la introduccion.
+gg_international.1 = {
+	type = country_event
+	hidden = yes
+	immediate = { gg_international_ensure = yes }
+}

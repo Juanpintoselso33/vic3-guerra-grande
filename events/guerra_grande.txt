@@ -32,7 +32,7 @@ guerra_grande.1 = {
 		if = {
 			limit = { NOT = { has_journal_entry = je_guerra_grande } }
 			add_contextless_journal_entry = je_guerra_grande
-			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			gg_international_ensure = yes
 			je:je_guerra_grande ?= {
 				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
@@ -332,10 +332,35 @@ guerra_grande.3 = {
 	#     verdad. El razonamiento entero esta en el encabezado del relevo.
 	#     / AND THE GUARD LIVES IN guerra_grande.15, not here. The copy below is deliberate but it is
 	#     not the one that decides.
+	# EN: AND THE COPY THAT ACTUALLY KILLED THE GAME WAS THIS ONE. 20/9/2026. I removed the guard
+	#     from guerra_grande.15, wrote a long commit about it and told Juan it was fixed -- and the
+	#     same condition was still here, in the trigger of the event that does the splitting. The
+	#     relay called and the engine discarded the event on the spot. Juan found it by asking «y
+	#     Oribe?»; the audit pinned it to this line.
+	#     WHAT WE DECIDED, on the audit's numbers: the partition happens on its date and the Cerrito
+	#     is born with its OWN army -- 8 or 9 units, created right here and quite apart from the
+	#     Argentine contingent -- but without the auxiliaries, because Rosas cannot lend an army that
+	#     is fighting in the litoral. That guard stays in guerra_grande.4 and only there.
+	#     A Cerrito without the Vanguardia is not Oribe camped with nothing: it is Oribe with his
+	#     oriental army and no Argentine help. And the documents do not contradict it -- they call
+	#     Oribe's army «Rosas' army» as a design principle but never count how many were Argentine
+	#     and how many were oriental blancos. The only text that separates the two is from 1851.
+	# ES: Y LA COPIA QUE DE VERDAD MATABA LA PARTIDA ERA ESTA. 20/9/2026. Saque la guarda de
+	#     guerra_grande.15, escribi un commit largo y le dije a Juan que estaba arreglado -- y la
+	#     misma condicion seguia aca, en el trigger del evento que parte el pais. El relevo llamaba y
+	#     el motor descartaba el evento en el acto. Juan lo encontro preguntando «y Oribe?»; la
+	#     auditoria lo clavo en esta linea.
+	#     LO QUE DECIDIMOS, sobre los numeros de la auditoria: la particion pasa en su fecha y el
+	#     Cerrito nace con su ejercito PROPIO --8 o 9 unidades, creadas aca mismo y aparte del
+	#     contingente argentino-- pero sin los auxiliares, porque Rosas no puede prestar un ejercito
+	#     que esta peleando en el litoral. Esa guarda queda en guerra_grande.4 y solo ahi.
+	#     Un Cerrito sin Vanguardia no es Oribe acampado con nada: es Oribe con su ejercito oriental
+	#     y sin ayuda argentina. Y los documentos no lo desmienten: llaman «ejercito de Rosas» al de
+	#     Oribe como principio de diseno, pero nunca cuentan cuantos eran argentinos y cuantos
+	#     blancos orientales. El unico texto que los separa es de 1851.
 	trigger = {
 		c:URU ?= this
 		NOT = { exists = c:CER }
-		NOT = { global_var:gg_vanguardia_status = 3 }
 		exists = s:STATE_BANDA_ORIENTAL.region_state:URU
 		any_scope_state = {
 			state_region = s:STATE_MONTEVIDEO
@@ -582,7 +607,7 @@ guerra_grande.3 = {
 			#     LOS DOS lo tengan (scope:enemy_country ?= { has_journal_entry }), asi que sin
 			#     esto la barra no se movia y ninguna batalla contaba.
 			add_contextless_journal_entry = je_guerra_grande
-			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			gg_international_ensure = yes
 			create_diplomatic_play = {
 				name = guerra_grande_play
 				target_country = c:URU
@@ -983,7 +1008,7 @@ guerra_grande.3 = {
 		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
-		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		gg_international_ensure = yes
 		ai_chance = {
 			base = 80
 		}
@@ -1161,7 +1186,7 @@ guerra_grande.3 = {
 		c:URU ?= {
 			set_capital = STATE_MONTEVIDEO
 			add_contextless_journal_entry = je_guerra_grande
-			if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+			gg_international_ensure = yes
 			add_modifier = {
 				name = guerra_grande_walls_of_montevideo
 				years = 15
@@ -1565,7 +1590,7 @@ guerra_grande.3 = {
 		#     importar en que orden corra nada mas, esta guerra no se puede ganar antes de partirse.
 		set_global_variable = guerra_grande_split_done
 		add_contextless_journal_entry = je_guerra_grande
-		if = { limit = { NOT = { has_journal_entry = je_gg_patrons } } add_contextless_journal_entry = je_gg_patrons }
+		gg_international_ensure = yes
 		ai_chance = {
 			base = 20
 		}
