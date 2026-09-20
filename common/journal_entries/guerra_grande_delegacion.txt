@@ -852,6 +852,29 @@ je_gg_delegation = {
 		#     verdad: un encargado al que media Confederacion ya no reconoce no lleva las relaciones
 		#     exteriores de nadie.
 			global_var:gg_delegating_provinces <= 6
+			# EN: AND THE SIEGE HAS TO HAVE LASTED. The headcount alone was wrong and it was my
+			#     arithmetic, not a design choice: thirteen provinces, Corrientes takes one, the
+			#     Coalition five, Cordoba the sixth -- and six delegating is exactly where history
+			#     lands in October 1840. So «fewer than half» fired in every game that followed the
+			#     historical line, the journal closed and «Nobody delegates any more» came out while
+			#     Rosas still had eleven years of government in front of him. Juan found it the first
+			#     time Cordoba joined.
+			#     What actually broke Rosas was not the count: it was holding Oribe in front of
+			#     Montevideo for eight years WHILE the interior was in arms. So the charge breaks when
+			#     both are true at once, and thirty-six months is three years of paying for a siege
+			#     with a Confederation that is already half gone.
+			# ES: Y EL SITIO TIENE QUE HABER DURADO. La cuenta sola estaba mal y era aritmetica mia, no
+			#     una decision de diseno: trece provincias, Corrientes se lleva una, la Coalicion
+			#     cinco, Cordoba la sexta -- y seis delegando es exactamente donde cae la historia en
+			#     octubre de 1840. Asi que «menos de la mitad» se cumplia en toda partida que siguiera
+			#     la linea historica, el journal cerraba y salia «Ya nadie delega» con Rosas todavia
+			#     once anios de gobierno por delante. Juan lo encontro la primera vez que adhirio
+			#     Cordoba.
+			#     Lo que quebro a Rosas de verdad no fue la cuenta: fue sostener a Oribe frente a
+			#     Montevideo ocho anios MIENTRAS el interior estaba en armas. Asi que el encargo se
+			#     quiebra cuando las dos cosas son ciertas a la vez, y treinta y seis meses son tres
+			#     anios de pagar un sitio con media Confederacion ya ida.
+			global_var:gg_oribe_siege_months >= 36
 		}
 	}
 

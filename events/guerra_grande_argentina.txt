@@ -198,7 +198,22 @@ gg_argentina.2 = {
 	option = {
 		name = gg_argentina.2.a
 		default_option = yes
-		gg_argentina_open_war = { TAG = CLN }
+		# EN: THE WAR WAITS FOR CORDOBA. Asked for by Juan, playing, 20/9/2026: «me gustaria que la
+		#     guerra no estalle por lo menos hasta que se levante Cordoba». He is right and it is also
+		#     the better history: on 7 April 1840 what exists is five provinces of the north, cut off
+		#     from the Litoral by Ibarra's refusal. The league only becomes a danger worth marching
+		#     against on 10 October, when Cordoba joins and the line reaches the road that ties Buenos
+		#     Aires to the interior. Marching on the seventh is marching on a bloc that is not yet a
+		#     bloc.
+		#     The war now opens in gg_argentina.4, Cordoba's adhesion, six months later.
+		# ES: LA GUERRA ESPERA A CORDOBA. Pedido por Juan, jugando, el 20/9/2026: «me gustaria que la
+		#     guerra no estalle por lo menos hasta que se levante Cordoba». Tiene razon y ademas es
+		#     mejor historia: el 7 de abril de 1840 lo que hay son cinco provincias del norte,
+		#     separadas del Litoral por la negativa de Ibarra. La liga recien es un peligro por el que
+		#     valga marchar el 10 de octubre, cuando adhiere Cordoba y la linea llega al camino que une
+		#     Buenos Aires con el interior. Marchar el siete es marchar sobre un bloque que todavia no
+		#     es un bloque.
+		#     La guerra se abre ahora en gg_argentina.4, la adhesion de Cordoba, seis meses despues.
 		ai_chance = { base = 100 }
 	}
 }
@@ -335,6 +350,9 @@ gg_argentina.4 = {
 			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
 			gg_delegation_revoked = { KEY = cordoba COUNT = -1 POINTS = -12 }
 		}
+		# EN/ES: y recien ahora marcha el ejercito: seis provincias con el camino del interior adentro
+		#     son otra cosa que cinco arrinconadas contra la cordillera / and only now does the army march
+		gg_argentina_open_war = { TAG = CLN }
 		ai_chance = { base = 100 }
 	}
 }
