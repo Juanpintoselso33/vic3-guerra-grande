@@ -1,0 +1,58 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE FLAGS OF TWO OF THE THREE ARGENTINE COUNTRIES. Neither is the modern provincial flag, and
+#     in both cases the difference is political, not decorative.
+#     SOURCE / FUENTE: docs/guerra-grande-argentina/banderas-tres-paises.md, with the laws quoted.
+#     Real Wikimedia images, downloaded and converted, never redrawn.
+#
+#     ENTRE RIOS IS MISSING ON PURPOSE, and that is written down rather than quietly solved. The law
+#     of 28 December 1833 orders three horizontal stripes -- blue, white and red, arms in the middle
+#     -- and that is the flag Urquiza carried to Caseros. Every Commons file labelled «1833-1853»
+#     shows a QUARTERED flag instead, which is the 1815-1820 one: the files are mislabelled, and
+#     there is no correct image. Drawing it ourselves would be a design of our own, against the
+#     mod's rule of real flags. Decision of 19 September 2026: leave it, write it down, change it if
+#     a correct image appears. Detail in SOURCES_flujo_images.md.
+# ES: LAS BANDERAS DE DOS DE LOS TRES PAISES ARGENTINOS. Ninguna es la bandera provincial de hoy, y
+#     en los dos casos la diferencia es politica, no decorativa.
+#     Imagenes reales de Wikimedia, bajadas y convertidas, nunca redibujadas.
+#
+#     ENTRE RIOS FALTA A PROPOSITO, y queda escrito en vez de resuelto en silencio. La ley del
+#     28/12/1833 manda tres fajas horizontales -- azul, blanca y colorada, con el escudo al centro --
+#     y es la bandera que Urquiza llevo a Caseros. Todos los archivos de Commons rotulados
+#     «1833-1853» muestran en cambio una bandera CUARTEADA, que es la de 1815-1820: los archivos
+#     estan mal etiquetados y no hay imagen correcta. Dibujarla seria un diseno nuestro, contra la
+#     regla del mod de banderas reales. Detalle en SOURCES_flujo_images.md.
+# -------------------------------------------------------------------------------------------------
+
+# EN: Corrientes -- the «bandera del Pico» of the law of 24 December 1821: celeste, white and
+#     celeste, with a celeste triangle coming down from the hoist over the white stripe. The
+#     specimen the Republican Guard flew at Caa Guazu on 28 November 1841 survives in the Provincial
+#     History Museum, and it is this design.
+# ES: Corrientes -- la «bandera del Pico» de la ley del 24/12/1821: celeste, blanca y celeste, con un
+#     triangulo celeste que baja desde el asta sobre la franja blanca. El ejemplar que enarbolo la
+#     Guardia Republicana en Caa Guazu el 28/11/1841 se conserva en el Museo Historico Provincial, y
+#     es este diseno.
+CRR = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_corrientes.dds"
+	}
+}
+
+# EN: the Coalition of the North -- the celeste and white, and that IS the argument. The unitarians
+#     kept no symbol of their own, and where they governed they repealed the provincial flag and
+#     raised the national one. Between 1840 and 1853 two versions of it coexisted: Rosas' dark blue
+#     and the plain celeste. Raising the celeste WAS the pronouncement.
+# ES: la Coalicion del Norte -- la celeste y blanca, y ESO es el argumento. Los unitarios no tenian
+#     simbolo propio, y donde gobernaron derogaron la bandera provincial y alzaron la nacional. Entre
+#     1840 y 1853 convivieron dos versiones de ella: el azul oscuro de Rosas y el celeste sencillo.
+#     Izar el celeste ERA el pronunciamiento.
+CLN = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_coalicion.dds"
+	}
+}
