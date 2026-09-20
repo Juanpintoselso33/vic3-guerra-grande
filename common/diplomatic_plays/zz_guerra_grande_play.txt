@@ -112,3 +112,76 @@ dp_gg_pacto_federal = {
 
 	on_war_end = {}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: dp_gg_liga_disuelta -- THE WAR AGAINST THE LEAGUE, which does not end in a protectorate because
+#     a league cannot be one. Juan asked the question on 20/9/2026 and his instinct was right: «no me
+#     suena bien que quede el protectorado de la Coalicion del Norte, salvo que vos me digas que
+#     efectivamente paso asi». It did not.
+#     WHAT HAPPENED. The Coalition was a pact of war between six provinces, not a state. Famailla
+#     «senalo el final de la Coalicion del Norte», and the war's own summary is blunt: «La Coalicion
+#     del Norte desaparece y sus militares restantes se unen al Ejercito Correntino». Each province
+#     went back on its own, with a federal governor on top: Celedonio Gutierrez governed Tucuman from
+#     14 November 1841 to 14 June 1852, straight after Avellaneda; in Catamarca governor Jose Cubas
+#     was shot in the square on 29 October 1841; in La Rioja Brizuela was dead.
+#     SO THE LEAGUE IS ANNEXED AND THE PROVINCES ARE NOT. Annexing CLN is not Rosas taking ground --
+#     the ground was always his -- it is the league ceasing to exist, and its six provinces going back
+#     to delegating one by one, which is what the Federal Pact counts.
+#     THIS IS A DELIBERATE EXCEPTION to the rule Juan set the same afternoon, that a beaten province
+#     stays a vassal until the Guerra Grande resolves. Corrientes and Entre Rios were PROVINCES:
+#     political bodies that go on existing after a defeat, and can rise again -- Corrientes rose
+#     three times. The Coalition was a wartime pact: when it lost there was nothing left to be a
+#     vassal of.
+# ES: dp_gg_liga_disuelta -- LA GUERRA CONTRA LA LIGA, que no termina en protectorado porque una liga
+#     no puede serlo. Juan hizo la pregunta el 20/9/2026 y su instinto era correcto: «no me suena bien
+#     que quede el protectorado de la Coalicion del Norte, salvo que vos me digas que efectivamente
+#     paso asi». No paso.
+#     LO QUE PASO. La Coalicion era un pacto de guerra entre seis provincias, no un Estado. Famailla
+#     «senalo el final de la Coalicion del Norte», y el resumen de la guerra es tajante: «La Coalicion
+#     del Norte desaparece y sus militares restantes se unen al Ejercito Correntino». Cada provincia
+#     volvio por su cuenta y con un gobernador federal encima: Celedonio Gutierrez goberno Tucuman
+#     del 14 de noviembre de 1841 al 14 de junio de 1852, justo despues de Avellaneda; en Catamarca
+#     al gobernador Jose Cubas lo fusilaron en la plaza el 29 de octubre de 1841; en La Rioja
+#     Brizuela estaba muerto.
+#     ASI QUE SE ANEXA LA LIGA Y NO LAS PROVINCIAS. Anexar CLN no es Rosas quedandose la tierra --la
+#     tierra siempre fue suya--: es la liga dejando de existir, y sus seis provincias volviendo a
+#     delegar una por una, que es lo que cuenta el Pacto Federal.
+#     ES UNA EXCEPCION DELIBERADA a la regla que puso Juan esa misma tarde, la de que una provincia
+#     batida queda de vasalla hasta que se resuelva la Guerra Grande. Corrientes y Entre Rios eran
+#     PROVINCIAS: cuerpos politicos que siguen existiendo despues de una derrota y se pueden volver a
+#     alzar --Corrientes se alzo tres veces--. La Coalicion era un pacto de guerra: cuando perdio no
+#     quedo nada de que ser vasallo.
+# SOURCE / FUENTE: Wikipedia ES, «Coalicion del Norte» (consecuencias: la Coalicion desaparece) y
+#     «Batalla de Famailla» (senalo el final de la Coalicion); «Celedonio Gutierrez» (gobernador de
+#     Tucuman 14/11/1841-14/6/1852); el fusilamiento de Cubas esta en historia-argentina.md [D].
+# -------------------------------------------------------------------------------------------------
+dp_gg_liga_disuelta = {
+	war_goal = annex_country
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		exists = c:ARG
+		scope:target_country = {
+			c:CLN ?= THIS
+		}
+	}
+
+	# EN/ES: guerra interna de la Confederacion: no se suma nadie / an internal war: nobody joins
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

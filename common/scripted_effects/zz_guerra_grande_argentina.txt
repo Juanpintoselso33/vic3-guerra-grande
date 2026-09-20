@@ -445,14 +445,33 @@ gg_argentina_open_war = {
 		#     convence este sistema de que Corrientes aparezca y la desaparezca yo a los 3 meses». Una
 		#     provincia batida y no borrada es una provincia que se puede volver a alzar, y Corrientes
 		#     se alzo tres veces: en 1839, en Caa Guazu en 1841 y en el Paso de los Libres en 1843.
-		create_diplomatic_play = {
-			name = gg_argentina_play_$TAG$
-			target_country = c:$TAG$
-			type = dp_gg_pacto_federal
-			add_war_goal = {
-				holder = c:ARG
+		# EN/ES: la liga se disuelve, la provincia se somete. Una Coalicion batida no queda de vasalla
+		#     porque no hay de que: era un pacto de guerra, no un cuerpo politico. El razonamiento y
+		#     las fuentes estan en common/diplomatic_plays/zz_guerra_grande_play.txt
+		#     / the league dissolves, the province submits
+		if = {
+			limit = { c:CLN ?= c:$TAG$ }
+			create_diplomatic_play = {
+				name = gg_argentina_play_$TAG$
 				target_country = c:$TAG$
-				type = make_protectorate
+				type = dp_gg_liga_disuelta
+				add_war_goal = {
+					holder = c:ARG
+					target_country = c:$TAG$
+					type = annex_country
+				}
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = gg_argentina_play_$TAG$
+				target_country = c:$TAG$
+				type = dp_gg_pacto_federal
+				add_war_goal = {
+					holder = c:ARG
+					target_country = c:$TAG$
+					type = make_protectorate
+				}
 			}
 		}
 	}
