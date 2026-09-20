@@ -147,6 +147,23 @@ gg_systems_init = {
 	}
 	# EN/ES: playtest -- countries kept in globals so journal texts can show their flags
 	#     / paises guardados en globales para mostrar sus banderas en los textos
+	# EN: THE ROLE MARK OF BUENOS AIRES. The journal's status line needs to know whether the reader is
+	#     Rosas or one of the provinces that can take the delegation from him, and it asked that with
+	#     c:ARG ?= this inside a status_desc trigger. The engine rejected it 1752 times in a minute of
+	#     play on 20/9/2026: «Invalid right side during comparison 'this'» -- in a journal's status
+	#     text, this is not a country, so the comparison has no right side. Vanilla's own journals only
+	#     ever read variables there.
+	#     So Buenos Aires gets a mark of its own, which is the same pattern the three new countries
+	#     already use (gg_arg_corrientes_seat and its two brothers): the ROLE, not the tag.
+	# ES: LA MARCA DE ROL DE BUENOS AIRES. La linea de estado del journal necesita saber si el que lee
+	#     es Rosas o una de las provincias que le pueden retirar la delegacion, y lo preguntaba con
+	#     c:ARG ?= this adentro de un trigger de status_desc. El motor lo rechazo 1752 veces en un
+	#     minuto de partida el 20/9/2026: «Invalid right side during comparison 'this'» -- en el texto
+	#     de estado de un journal, this no es un pais, asi que la comparacion no tiene lado derecho.
+	#     Los journals de la propia vanilla ahi adentro solo leen variables.
+	#     Asi que Buenos Aires lleva marca propia, que es el mismo patron que ya usan los tres paises
+	#     nuevos (gg_arg_corrientes_seat y sus dos hermanos): el ROL, no el tag.
+	c:ARG ?= { set_variable = gg_arg_rosas_seat }
 	c:ARG ?= { set_global_variable = { name = gg_flag_arg value = this } }
 	c:FRA ?= { set_global_variable = { name = gg_flag_fra value = this } }
 	c:GBR ?= { set_global_variable = { name = gg_flag_gbr value = this } }

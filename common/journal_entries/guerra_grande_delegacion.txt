@@ -18,7 +18,7 @@
 # -------------------------------------------------------------------------------------------------
 je_gg_delegation = {
 	group = je_group_guerra_grande
-	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
 	should_be_pinned_by_default_involved = yes
 
@@ -45,7 +45,8 @@ je_gg_delegation = {
 		first_valid = {
 			triggered_desc = {
 				desc = je_gg_delegation_status_rosas
-				trigger = { c:ARG ?= this }
+				# EN/ES: la marca de rol, no el tag: this no es comparable aca / the role mark
+				trigger = { has_variable = gg_arg_rosas_seat }
 			}
 			triggered_desc = {
 				desc = je_gg_delegation_status_provincia

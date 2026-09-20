@@ -95,15 +95,12 @@ guerra_grande_on_game_start = {
 		#     una barra que representa provincias que en ese mapa no existen, y la entrada no podia
 		#     cumplirse nunca porque no podia nacer ningun pais que la vaciara. La sonda es la misma
 		#     que usan los relevos.
-		if = {
-			limit = { exists = s:STATE_ENTRE_RIOS }
-			c:ARG ?= {
-				if = {
-					limit = { NOT = { has_journal_entry = je_gg_delegation } }
-					add_contextless_journal_entry = je_gg_delegation
-				}
-			}
-		}
+		# EN/ES: y la abre un evento que la explica, no esta linea. La regla del mod es que a cada
+		#     journal lo abre un evento: el lado oriental lo tiene desde el primer dia y a este le
+		#     faltaba, asi que el jugador argentino se encontraba el Pacto Federal fijado en pantalla
+		#     sin que nadie le dijera que era. La sonda de «la Argentina» ahora vive en el trigger del
+		#     evento / and an event that explains it opens it, not this line
+		c:ARG ?= { trigger_event = { id = gg_intro.5 days = 0 popup = yes } }
 
 		# EN: and the Argentine side's own dated calendar. One copy each, on Argentina, which never
 		#     changes tag; the reasoning is in events/guerra_grande_argentina_calendar.txt. Offsets in

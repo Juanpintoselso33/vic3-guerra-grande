@@ -105,3 +105,64 @@ gg_intro.5 = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_intro.5 -- THE OPENING OF THE ARGENTINE SIDE, day one. Written 20/9/2026 because Juan sat
+#     down to play Argentina and found the Federal Pact already pinned on his screen with nobody
+#     having said what it was, and then three years of silence until Corrientes secedes in March
+#     1839. The mod's own rule, recorded in decisiones.md, is that EVERY journal is opened by an
+#     event that explains it -- the Uruguayan side has had that since the first day and this one
+#     never got its own.
+#     So the entry is no longer handed out by the on_action: it is opened here, by the government
+#     that holds it, which is also the only way the player learns what the count means before it
+#     starts moving.
+#     WHY IT SAYS WHAT COMES NEXT. Three years is a long time to sit in front of a number that does
+#     nothing. The last paragraph names the two things that can move it -- a legislature withdrawing
+#     the charge, and the army in front of Montevideo -- so the wait is a wait for something.
+# ES: gg_intro.5 -- LA APERTURA DEL LADO ARGENTINO, primer dia. Escrito el 20/9/2026 porque Juan se
+#     sento a jugar la Argentina y se encontro el Pacto Federal ya fijado en pantalla sin que nadie
+#     le dijera que era, y despues tres anios de silencio hasta que Corrientes se separa en marzo de
+#     1839. La regla del propio mod, anotada en decisiones.md, es que a CADA journal lo abre un
+#     evento que lo explica -- el lado oriental lo tiene desde el primer dia y a este nunca le toco.
+#     Asi que la entrada ya no la reparte el on_action: la abre aca el gobierno que la tiene, que es
+#     ademas la unica manera de que el jugador entienda que cuenta ese numero antes de que empiece a
+#     moverse.
+#     POR QUE DICE LO QUE VIENE. Tres anios es mucho tiempo para mirar un numero que no hace nada. El
+#     ultimo parrafo nombra las dos cosas que lo pueden mover -- una legislatura que retira el
+#     encargo, y el ejercito frente a Montevideo -- asi que la espera es espera de algo.
+# SOURCE / FUENTE: Pacto Federal del 4 de enero de 1831, tratado entre entidades soberanas; la
+#     delegacion de las relaciones exteriores y el derecho de cada provincia a retirarla. El detalle
+#     esta en docs/guerra-grande-argentina/historia-argentina.md.
+# -------------------------------------------------------------------------------------------------
+gg_intro.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_intro.5.t
+	desc = gg_intro.5.d
+	flavor = gg_intro.5.f
+
+	# EN/ES: IMAGEN PROVISORIA, como las cuatro del lado argentino y por la misma razon: falta la
+	#     tanda de imagenes propias. Anotado en PENDIENTES.md / provisional image, as noted
+	event_image = {
+		video = "gg_arg_pronunciamiento"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 1825
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		NOT = { has_journal_entry = je_gg_delegation }
+		# EN/ES: la sonda de «la Argentina»: sin ella este lado no existe / the «la Argentina» probe
+		exists = s:STATE_ENTRE_RIOS
+	}
+
+	option = {
+		name = gg_intro.5.a
+		default_option = yes
+		add_contextless_journal_entry = je_gg_delegation
+		ai_chance = { base = 100 }
+	}
+}
