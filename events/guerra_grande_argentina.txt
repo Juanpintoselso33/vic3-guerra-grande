@@ -1740,6 +1740,10 @@ gg_argentina.60 = {
 	# EN/ES: recibirlo de militar y no decir nada de la presidencia / take him in as a soldier
 	option = {
 		name = gg_argentina.60.b
+		# EN/ES: callar la presidencia reduce la Vanguardia que Rosas puede prestar despues; la
+		#     opcion tiene que mostrarlo / withholding recognition reduces the Vanguard Rosas can
+		#     later lend, so the option has to say so
+		custom_tooltip = gg_oribe_unrecognised_tt
 		ai_chance = { base = 10 }
 	}
 }
