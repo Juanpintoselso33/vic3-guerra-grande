@@ -251,6 +251,27 @@ gg_vanguardia_line = {
 		limit = { global_var:gg_interior_outcome = 2 }
 		subtract = 1
 	}
+	# EN: AND ONE FEWER IF ROSAS NEVER CALLED HIM PRESIDENT. On the day Oribe landed in Buenos Aires
+	#     the player chose between receiving him as the lawful president of the Oriental Republic --
+	#     which is what Rosas did, and what cost him abroad for the rest of his life -- and taking him
+	#     in as a soldier and saying nothing. Until 20/9/2026 that choice wrote a mark that NOBODY
+	#     READ: the two roads did exactly the same thing. An army lent to a foreign president in exile
+	#     is a different thing from an army lent to a general on the payroll, and the difference shows
+	#     up here, where the Vanguardia is counted out.
+	# ES: Y UNO MENOS SI ROSAS NUNCA LO LLAMO PRESIDENTE. El dia que Oribe desembarco en Buenos Aires
+	#     el jugador eligio entre recibirlo como presidente legal de la Republica Oriental --que es lo
+	#     que hizo Rosas, y lo que le costo afuera el resto de su vida-- y recibirlo de militar sin
+	#     decir nada de la presidencia. Hasta el 20/9/2026 esa eleccion escribia una marca que NO LEIA
+	#     NADIE: los dos caminos hacian exactamente lo mismo. Un ejercito prestado a un presidente
+	#     extranjero en el exilio no es lo mismo que un ejercito prestado a un general a sueldo, y la
+	#     diferencia se ve aca, cuando se cuenta la Vanguardia.
+	if = {
+		limit = { NOT = { has_global_variable = gg_oribe_recognised } }
+		subtract = 1
+	}
+	# EN/ES: y un piso de uno: dos recortes sobre dos caballerias dan cero, y un contingente de cero
+	#     unidades no es un contingente / and a floor of one: two cuts on two would give zero
+	min = 1
 }
 
 gg_vanguardia_horse = {
@@ -259,4 +280,25 @@ gg_vanguardia_horse = {
 		limit = { global_var:gg_interior_outcome = 2 }
 		subtract = 1
 	}
+	# EN: AND ONE FEWER IF ROSAS NEVER CALLED HIM PRESIDENT. On the day Oribe landed in Buenos Aires
+	#     the player chose between receiving him as the lawful president of the Oriental Republic --
+	#     which is what Rosas did, and what cost him abroad for the rest of his life -- and taking him
+	#     in as a soldier and saying nothing. Until 20/9/2026 that choice wrote a mark that NOBODY
+	#     READ: the two roads did exactly the same thing. An army lent to a foreign president in exile
+	#     is a different thing from an army lent to a general on the payroll, and the difference shows
+	#     up here, where the Vanguardia is counted out.
+	# ES: Y UNO MENOS SI ROSAS NUNCA LO LLAMO PRESIDENTE. El dia que Oribe desembarco en Buenos Aires
+	#     el jugador eligio entre recibirlo como presidente legal de la Republica Oriental --que es lo
+	#     que hizo Rosas, y lo que le costo afuera el resto de su vida-- y recibirlo de militar sin
+	#     decir nada de la presidencia. Hasta el 20/9/2026 esa eleccion escribia una marca que NO LEIA
+	#     NADIE: los dos caminos hacian exactamente lo mismo. Un ejercito prestado a un presidente
+	#     extranjero en el exilio no es lo mismo que un ejercito prestado a un general a sueldo, y la
+	#     diferencia se ve aca, cuando se cuenta la Vanguardia.
+	if = {
+		limit = { NOT = { has_global_variable = gg_oribe_recognised } }
+		subtract = 1
+	}
+	# EN/ES: y un piso de uno: dos recortes sobre dos caballerias dan cero, y un contingente de cero
+	#     unidades no es un contingente / and a floor of one: two cuts on two would give zero
+	min = 1
 }

@@ -104,3 +104,5 @@
  gg_argentina.60.a:0 "Es el presidente, y como tal se lo recibe."
  gg_argentina.60.b:0 "Dele un mando y no se hable de la presidencia."
  gg_oribe_pretension:0 "Se sostiene la presidencia oriental"
+ gg_oribe_recognised_tt:0 "@warning! Recibirlo como #b presidente#! es una pretensión contra otro Estado: cuesta afuera, y es lo que hace que el ejército que Rosas preste después sea un ejército prestado a un gobierno y no a un general."
+ gg_urquiza_double_order_tt:0 "@warning! A #b Urquiza#! se le da el mando y la orden de cerrarle el río a Montevideo al mismo tiempo. Se espera que obedezca las dos."

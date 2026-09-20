@@ -109,6 +109,45 @@ gg_systems_init = {
 	# EN/ES: cuantas provincias se alzaron alguna vez. No baja nunca: es la memoria de la campania,
 	#     no su foto / how many provinces ever rose. It never goes down: it is the campaign's memory
 	set_global_variable = { name = gg_provincias_alzadas value = 0 }
+	# EN/ES: los meses que el ejercito lleva frente a Montevideo / months before Montevideo
+	set_global_variable = { name = gg_siege_months value = 0 }
+	# EN: AND ONE MARK PER PROVINCE, because a bar was not readable. Juan, 20/9/2026: «revisa bien todo
+	#     el journal de delegation pq no se entiende un carajo, podriamos en vez de tener una barra de
+	#     progreso, listar las provincias y ponerles un booleano a cada una».
+	#     He is right about why it was unreadable: the bar mixed two different things in one number --
+	#     how many provinces had withdrawn the charge (in jumps of twelve) and the monthly wear of the
+	#     siege (one a month) -- so it fell while nothing had happened on the map, and nothing on the
+	#     map told you what it meant.
+	#     Thirteen marks, one per province that delegates. The mark EXISTS while the province still
+	#     speaks through Buenos Aires and is removed when it stops. Marks and not numbers on purpose:
+	#     the journal's text asks each one with .IsValid, which is the one form vanilla's own
+	#     localisation demonstrably uses, and setting them all here means every one of the thirteen is
+	#     a variable that has existed since the first day.
+	# ES: Y UNA MARCA POR PROVINCIA, porque una barra no se leia. Juan, 20/9/2026: «revisa bien todo el
+	#     journal de delegation pq no se entiende un carajo, podriamos en vez de tener una barra de
+	#     progreso, listar las provincias y ponerles un booleano a cada una».
+	#     Tiene razon en por que no se leia: la barra mezclaba dos cosas distintas en un solo numero --
+	#     cuantas provincias habian retirado el encargo (a saltos de doce) y el desgaste mensual del
+	#     sitio (uno por mes) -- asi que bajaba sin que hubiera pasado nada en el mapa, y nada en el
+	#     mapa te decia que significaba.
+	#     Trece marcas, una por provincia que delega. La marca EXISTE mientras la provincia siga
+	#     hablando por Buenos Aires y se borra cuando deja de hacerlo. Marcas y no numeros a proposito:
+	#     el texto del journal le pregunta a cada una con .IsValid, que es la unica forma que la
+	#     localizacion de la propia vanilla usa de manera comprobable, y ponerlas todas aca significa
+	#     que las trece son variables que existen desde el primer dia.
+	set_global_variable = gg_del_corrientes
+	set_global_variable = gg_del_entre_rios
+	set_global_variable = gg_del_cordoba
+	set_global_variable = gg_del_coalicion_tucuman
+	set_global_variable = gg_del_coalicion_salta
+	set_global_variable = gg_del_coalicion_jujuy
+	set_global_variable = gg_del_coalicion_catamarca
+	set_global_variable = gg_del_coalicion_la_rioja
+	set_global_variable = gg_del_santa_fe
+	set_global_variable = gg_del_santiago_del_estero
+	set_global_variable = gg_del_san_juan
+	set_global_variable = gg_del_san_luis
+	set_global_variable = gg_del_mendoza
 	# EN: THE THREE FEDERAL GOVERNORS WHO STAY WITH ROSAS, created on day one because that is when
 	#     they were already governing. Vanilla has none of them, and without them the interior is a
 	#     map with no one on it: Ibarra is the man who refuses to join the Coalition and cuts the
@@ -1121,21 +1160,27 @@ gg_peace_fight_on = {
 #     DELTA va en puntos internos: 12 es una delegacion provincial entera, 1 es un mes de sitio.
 # -------------------------------------------------------------------------------------------------
 gg_delegation_change = {
+	# EN: THE POINTS ARE GONE AND THIS IS WHAT IS LEFT OF THEM. Until 20/9/2026 the delegation was a
+	#     count of 156 -- thirteen provinces times twelve -- and this effect moved it and redrew a bar.
+	#     The bar mixed the provinces with the monthly wear of the siege, so it fell while nothing had
+	#     happened on the map, and Juan could not read it: «no se entiende un carajo». The provinces
+	#     are now thirteen marks and the journal prints them one by one.
+	#     The effect stays because thirteen call sites pass POINTS to it and because the rule of this
+	#     mod is that no global changes in silence: what it keeps is the number nobody has to
+	#     interpret -- how many provinces delegate -- which the list above it now shows one by one.
+	#     There is no bar left to redraw.
+	# ES: LOS PUNTOS SE FUERON Y ESTO ES LO QUE QUEDO DE ELLOS. Hasta el 20/9/2026 la delegacion era
+	#     una cuenta de 156 -- trece provincias por doce -- y este efecto la movia y redibujaba una
+	#     barra. La barra mezclaba las provincias con el desgaste mensual del sitio, asi que bajaba sin
+	#     que hubiera pasado nada en el mapa, y Juan no podia leerla: «no se entiende un carajo». Las
+	#     provincias ahora son trece marcas y el journal las imprime una por una.
+	#     El efecto se queda porque trece lugares le pasan POINTS y porque la regla de este mod es que
+	#     ninguna global cambia en silencio: lo que conserva es el numero que nadie tiene que
+	#     interpretar --cuantas provincias delegan-- que la lista de arriba ahora muestra una por una.
+	#     Ya no hay barra que redibujar.
 	change_global_variable = {
 		name = gg_delegation_points
 		add = $DELTA$
-	}
-	# EN: the STORED value is deliberately not clamped at thirteen delegations, only the bar is. A
-	#     temporary +12 applied at the ceiling has to be removable later without having quietly
-	#     turned into a net -12 through saturation.
-	# ES: el valor GUARDADO no se recorta a proposito en trece delegaciones; se recorta la barra. Un
-	#     +12 temporal aplicado en el techo tiene que poder sacarse despues sin haberse convertido en
-	#     silencio en un -12 neto por saturacion.
-	je:je_gg_delegation ?= {
-		set_bar_progress = {
-			name = gg_delegation_bar
-			value = gg_delegation_bar_value
-		}
 	}
 }
 
@@ -1144,6 +1189,9 @@ gg_delegation_revoked = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_delegation_gone_$KEY$ } }
 		set_global_variable = gg_delegation_gone_$KEY$
+		# EN/ES: y la marca de la lista se apaga: la provincia deja de hablar por Buenos Aires
+		#     / and the list's mark goes out: the province stops speaking through Buenos Aires
+		remove_global_variable = gg_del_$KEY$
 		change_global_variable = {
 			name = gg_delegating_provinces
 			add = $COUNT$
@@ -1187,6 +1235,8 @@ gg_delegation_restored = {
 	if = {
 		limit = { has_global_variable = gg_delegation_gone_$KEY$ }
 		remove_global_variable = gg_delegation_gone_$KEY$
+		# EN/ES: y vuelve a la lista / and it returns to the list
+		set_global_variable = gg_del_$KEY$
 		change_global_variable = {
 			name = gg_delegating_provinces
 			add = $COUNT$

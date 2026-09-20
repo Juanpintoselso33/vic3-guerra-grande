@@ -22,7 +22,24 @@ je_gg_delegation = {
 
 	should_be_pinned_by_default_involved = yes
 
-	scripted_progress_bar = gg_delegation_bar
+	# EN: NO PROGRESS BAR ANY MORE. It counted 156 points -- thirteen provinces times twelve -- and
+	#     mixed two different things into that one number: a province withdrawing the charge, which is
+	#     a jump of twelve, and the monthly cost of the siege, which is one. So it fell while nothing
+	#     had happened on the map, and nothing on the map explained why. Juan, playing on 20/9/2026:
+	#     «no se entiende un carajo, podriamos en vez de tener una barra de progreso, listar las
+	#     provincias y ponerles un booleano a cada una».
+	#     What replaces it is exactly that: the thirteen provinces, each answering the only question
+	#     this journal ever asked -- does it still speak through Buenos Aires, yes or no. The siege is
+	#     still there and still counted, said as what it is, on a line of its own.
+	# ES: YA NO HAY BARRA DE PROGRESO. Contaba 156 puntos -- trece provincias por doce -- y metia dos
+	#     cosas distintas en ese unico numero: una provincia que retira el encargo, que es un salto de
+	#     doce, y el costo mensual del sitio, que es uno. Asi que bajaba sin que hubiera pasado nada en
+	#     el mapa, y nada en el mapa explicaba por que. Juan, jugando el 20/9/2026: «no se entiende un
+	#     carajo, podriamos en vez de tener una barra de progreso, listar las provincias y ponerles un
+	#     booleano a cada una».
+	#     La reemplaza exactamente eso: las trece provincias, cada una contestando la unica pregunta
+	#     que este journal hizo siempre -- sigue hablando por Buenos Aires, si o no. El sitio sigue
+	#     estando y sigue contandose, dicho por lo que es, en una linea propia.
 
 	# EN/ES: Rosas y los tres que le pueden retirar la delegacion / Rosas and the three who can
 	#     withdraw it from him
@@ -72,12 +89,20 @@ je_gg_delegation = {
 					NOT = { has_global_variable = gg_peace_settled }
 					exists = c:CER
 				}
-				# EN/ES: y no por debajo de cero: una vez que no queda nada, no queda menos que nada
-				#     / and not below zero: once nothing is left, there is no less than nothing
-				if = {
-					limit = { global_var:gg_delegation_points > 0 }
-					gg_delegation_change = { DELTA = -1 }
-				}
+					# EN: THE SIEGE COUNTS ITS OWN MONTHS AND STOPS EATING THE PROVINCES. It used to take a
+					#     point a month off the same number the provinces moved, and that is precisely what
+					#     made the bar unreadable: it fell with nothing happening on the map. Now it counts
+					#     what it is -- how long Oribe has been standing in front of Montevideo -- and the
+					#     journal prints that on a line of its own.
+					# ES: EL SITIO CUENTA SUS PROPIOS MESES Y DEJA DE COMERSE LAS PROVINCIAS. Le sacaba un
+					#     punto por mes al mismo numero que movian las provincias, y eso es exactamente lo
+					#     que hacia ilegible la barra: bajaba sin que pasara nada en el mapa. Ahora cuenta lo
+					#     que es -- cuanto hace que Oribe esta parado frente a Montevideo -- y el journal lo
+					#     imprime en una linea propia.
+					change_global_variable = {
+						name = gg_siege_months
+						add = 1
+					}
 			}
 			# EN: AND THE OTHER DIRECTION, which until now was dead code. gg_delegation_restored
 			#     existed and nobody called it, so a province won back by arms stayed counted as lost
@@ -165,20 +190,8 @@ je_gg_delegation = {
 				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
 				trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
 			}
-			else = {
-				# EN/ES: sin sitio no hay costo, pero la barra igual se redibuja: es la reparacion de
-				#     las partidas guardadas antes de que existiera / no siege, no cost, but the bar
-				#     is still redrawn: that is the repair for saves made before it existed
-				if = {
-					limit = { c:ARG ?= this }
-					scope:journal_entry = {
-						set_bar_progress = {
-							name = gg_delegation_bar
-							value = gg_delegation_bar_value
-						}
-					}
-				}
-			}
+			# EN/ES: ya no hay barra que redibujar ni costo que aplicar: el sitio cuenta sus meses arriba
+			#     / no bar to redraw and no cost to charge: the siege counts its months above
 		}
 	}
 
@@ -203,7 +216,19 @@ je_gg_delegation = {
 	complete = {
 		custom_tooltip = {
 			text = je_gg_delegation_complete_tt
-			global_var:gg_delegation_points <= 0
+		# EN: SIX OF THIRTEEN, the ending Juan chose on 20/9/2026. With whole provinces instead of
+		#     points, asking for all thirteen to leave would be asking for something that never
+		#     happens: at most eight can secede in this mod. Fewer than half still delegating is
+		#     reachable by playing -- Corrientes and the six of the north at once is exactly seven --
+		#     and it is the real threshold anyway: a delegate that half the Confederation no longer
+		#     recognises is not conducting anybody's foreign relations.
+		# ES: SEIS DE TRECE, el final que eligio Juan el 20/9/2026. Con provincias enteras en vez de
+		#     puntos, pedir que se vayan las trece seria pedir algo que no pasa nunca: en este mod como
+		#     mucho se pueden separar ocho. Que deleguen menos de la mitad se alcanza jugando
+		#     --Corrientes y las seis del norte a la vez son justo siete-- y ademas es el umbral de
+		#     verdad: un encargado al que media Confederacion ya no reconoce no lleva las relaciones
+		#     exteriores de nadie.
+			global_var:gg_delegating_provinces <= 6
 		}
 	}
 

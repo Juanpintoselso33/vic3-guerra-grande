@@ -593,6 +593,7 @@ gg_argentina.67 = {
 	option = {
 		name = gg_argentina.67.a
 		default_option = yes
+		custom_tooltip = gg_urquiza_double_order_tt
 		set_global_variable = gg_urquiza_double_order
 		add_modifier = { name = gg_arg_brazil_command months = 18 }
 		add_modifier = { name = gg_arg_traffic_cut months = 18 }
@@ -1436,6 +1437,9 @@ gg_argentina.60 = {
 	option = {
 		name = gg_argentina.60.a
 		default_option = yes
+		# EN/ES: la marca decide despues cuanta Vanguardia le presta Rosas al Cerrito, asi que se dice
+		#     / the mark decides later how much of the Vanguardia Rosas lends, so it is said
+		custom_tooltip = gg_oribe_recognised_tt
 		set_global_variable = gg_oribe_recognised
 		add_modifier = {
 			name = gg_oribe_pretension
