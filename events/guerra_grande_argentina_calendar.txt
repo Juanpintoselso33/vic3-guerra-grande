@@ -247,3 +247,46 @@ gg_argentina_cal.8 = {
 		}
 	}
 }
+
+# EN/ES: 1/2/1852 (dia 5871) -- renuncia Pacheco
+gg_argentina_cal.9 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_9 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+					# EN/ES: solo si hay una guerra que perder: sin Entre Rios en armas no hay Caseros
+					exists = c:ENR
+				}
+				set_global_variable = gg_arg_cal_done_9
+				c:ARG = { trigger_event = { id = gg_argentina.40 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 3/2/1852 (dia 5873) -- la hora de Caseros
+gg_argentina_cal.10 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_10 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+					exists = c:ENR
+				}
+				set_global_variable = gg_arg_cal_done_10
+				c:ARG = { trigger_event = { id = gg_argentina.41 days = 0 popup = yes } }
+			}
+		}
+	}
+}

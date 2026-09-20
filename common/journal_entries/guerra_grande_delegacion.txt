@@ -92,18 +92,27 @@ je_gg_delegation = {
 			#     una provincia de vuelta bajo Buenos Aires, y la barra tiene que decirlo.
 			#     La prueba es que el pais ya no esta: lo anexaron, y su legislatura vuelve a delegar
 			#     porque ya no tiene legislatura.
+			# EN/ES: la marca del bloque hace de guarda: gg_delegation_restored la borra, asi que este
+			#     bloque entero corre una sola vez y la noticia sale una sola vez / the block's own
+			#     mark is the guard
 			if = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:CRR }
+					has_global_variable = gg_delegation_gone_corrientes
 				}
 				gg_delegation_restored = { KEY = corrientes COUNT = 1 POINTS = 12 }
+				trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
 			}
+			# EN/ES: seis provincias que vuelven juntas son UNA noticia, no seis / six at once is one
+			#     piece of news, not six
 			if = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:CLN }
+					has_global_variable = gg_delegation_gone_coalicion_tucuman
 				}
+				trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
 				gg_delegation_restored = { KEY = coalicion_tucuman COUNT = 1 POINTS = 12 }
 				gg_delegation_restored = { KEY = coalicion_salta COUNT = 1 POINTS = 12 }
 				gg_delegation_restored = { KEY = coalicion_jujuy COUNT = 1 POINTS = 12 }
@@ -115,8 +124,10 @@ je_gg_delegation = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:ENR }
+					has_global_variable = gg_delegation_gone_entre_rios
 				}
 				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
+				trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
 			}
 			else = {
 				# EN/ES: sin sitio no hay costo, pero la barra igual se redibuja: es la reparacion de

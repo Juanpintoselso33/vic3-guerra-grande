@@ -533,3 +533,119 @@ gg_argentina.30 = {
 		ai_chance = { base = 100 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: CASEROS. The design decision, taken on 19 September 2026, was that the battle is a REAL WAR
+#     resolved by the engine and not a scripted outcome. What the mod adds is the hour: on 1 February
+#     Pacheco resigns, worn out by contradictory orders, and on 3 February Rosas chooses between the
+#     three ways out that historical criticism lists for him -- and lists as the ones he did not
+#     take. The event gives conditions and modifiers; it does not say who wins.
+#     The price of that choice, accepted openly: the decisive battle may fall on another day or in
+#     another place. The alternative -- Caseros as an event-battle with a computed result -- bought
+#     an exact date by scripting the war, which is precisely what this mod has been taking out.
+# ES: CASEROS. La decision de diseno fue que la batalla es una GUERRA REAL que resuelve el motor, no
+#     un resultado guionado. Lo que agrega el mod es la hora: el 1 de febrero renuncia Pacheco, harto
+#     de las ordenes contradictorias, y el 3 de febrero Rosas elige entre las tres salidas que la
+#     critica historica le enumera -- y le enumera como las que no tomo. El evento da condiciones y
+#     modificadores; no dice quien gana.
+#     El costo de eso, aceptado de frente: la batalla decisiva puede caer otro dia o en otro lugar.
+#     La alternativa -- Caseros como batalla-evento con resultado calculado -- compraba una fecha
+#     exacta guionando la guerra, que es justo lo que este mod viene sacando.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 1/2/1852 -- renuncia Angel Pacheco, el mejor general que le quedaba
+gg_argentina.40 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.40.t
+	desc = gg_argentina.40.d
+	flavor = gg_argentina.40.f
+	event_image = { video = "gg_arg_corrientes" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_scope_character = {
+				limit = { has_template = ARG_Angel_Pacheco }
+				exile_character_with_role_cleanup = yes
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.40.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN/ES: 3/2/1852 -- la hora de Caseros
+gg_argentina.41 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.41.t
+	desc = gg_argentina.41.d
+	flavor = gg_argentina.41.f
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	option = {
+		name = gg_argentina.41.a
+		default_option = yes
+		add_modifier = { name = gg_caseros_pitched_battle years = 2 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = gg_argentina.41.b
+		add_modifier = { name = gg_caseros_manoeuvre years = 2 }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = gg_argentina.41.c
+		add_modifier = { name = gg_caseros_hold_the_city years = 2 }
+		ai_chance = { base = 20 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.50 -- A PROVINCE COMES BACK. Fired when a province that had withdrawn its
+#     delegation is annexed and its legislature delegates again -- because it no longer has one.
+#     This is the mirror of the secession events, and the reason the delegation is called REVOCABLE
+#     and not merely lost: Pago Largo, Quebracho Herrado, Famailla and Vences all end this way.
+# ES: gg_argentina.50 -- UNA PROVINCIA VUELVE. Sale cuando una provincia que habia retirado su
+#     delegacion es anexada y su legislatura vuelve a delegar, porque ya no tiene legislatura. Es el
+#     espejo de los eventos de secesion, y la razon por la que la delegacion se llama REVOCABLE y no
+#     simplemente perdida: Pago Largo, Quebracho Herrado, Famailla y Vences terminan asi.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.50 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.50.t
+	desc = gg_argentina.50.d
+	flavor = gg_argentina.50.f
+	event_image = { video = "gg_arg_cordoba" }
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	option = {
+		name = gg_argentina.50.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}

@@ -105,6 +105,8 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.6 days = 1791 }  # 1840-11-28 Quebracho Herrado
 			trigger_event = { id = gg_argentina_cal.7 days = 2086 }  # 1841-09-19 Famailla y Metan
 			trigger_event = { id = gg_argentina_cal.8 days = 2601 }  # 1843-02-16 el balance del interior
+			trigger_event = { id = gg_argentina_cal.9 days = 5871 }  # 1852-02-01 renuncia Pacheco
+			trigger_event = { id = gg_argentina_cal.10 days = 5873 } # 1852-02-03 la hora de Caseros
 		}
 
 		c:ARG ?= {

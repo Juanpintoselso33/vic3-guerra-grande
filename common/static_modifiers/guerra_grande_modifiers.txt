@@ -266,3 +266,39 @@ gg_naval_port_under_blockade = {
 	country_minting_add = -200
 	interest_group_ig_petty_bourgeoisie_approval_add = -3
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE THREE WAYS OUT OF 3 FEBRUARY 1852. Historical criticism lists exactly these three as the
+#     options Rosas had at Caseros and did not take, so the mod offers them and lets the engine
+#     decide what comes of each. None of them decrees a winner: they are conditions.
+# ES: LAS TRES SALIDAS DEL 3 DE FEBRERO DE 1852. La critica historica le enumera justamente estas
+#     tres a Rosas en Caseros, como las que no tomo, asi que el mod se las ofrece y deja que el motor
+#     decida que sale de cada una. Ninguna decreta un ganador: son condiciones.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: presentar batalla donde el enemigo quiera / give battle where the enemy chooses
+gg_caseros_pitched_battle = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"
+	unit_offense_mult = 0.15
+	unit_defense_mult = -0.15
+	country_war_exhaustion_casualties_mult = 0.25
+}
+
+# EN/ES: maniobrar para elegir el campo: se gana terreno y se pierde tiempo / manoeuvre for the field
+gg_caseros_manoeuvre = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_map_positive.dds"
+	unit_defense_mult = 0.25
+	unit_offense_mult = -0.10
+	# EN/ES: no hay modificador de velocidad de marcha en 1.13 -- lo busque y no existe; lo que si
+	#     existe es la organizacion, que es lo que de verdad le falta a un ejercito que maniobra en
+	#     vez de pelear donde lo encuentran / there is no march-speed modifier in 1.13
+	military_formation_organization_gain_mult = 0.25
+}
+
+# EN/ES: retirarse a la plaza y sostener el sitio / fall back on the city and hold it
+gg_caseros_hold_the_city = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.50
+	unit_occupation_mult = -0.50
+	country_authority_add = -50
+}
