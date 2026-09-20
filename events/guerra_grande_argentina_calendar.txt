@@ -1,0 +1,140 @@
+﻿namespace = gg_argentina_cal
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE DATED CALENDAR OF THE ARGENTINE SIDE. Four relays, each carrying the birth of a country to
+#     the day the sources give it, counted in days from 1 January 1836.
+#
+#     WHY RELAYS AND NOT THE EVENTS THEMSELVES. A scheduled event's trigger is read WHEN IT IS
+#     SCHEDULED, not on its future date. Scheduling the birth of Corrientes directly on day 1159
+#     would test, on 1 January 1836, whether Corrientes does not yet exist and Argentina still holds
+#     its states -- and would then fire on 6 March 1839 no matter what happened in between. So the
+#     relay is unconditional, and every condition lives inside it, read on the day it matters. This
+#     is the rule that cost the mod the partition calendar, Oribe's 1839 exit and three dated
+#     events of the powers.
+#
+#     WHY ONLY ONE COPY. The Uruguayan calendar schedules two copies of every relay because the
+#     Republic changes tag at the partition and can lose what is queued on it. These four are
+#     scheduled on ARGENTINA, which never changes tag in this mod, so one copy is right and a second
+#     would only be a second thing to keep in step.
+#
+#     THE MARK MEANS DELIVERED, NOT ATTEMPTED. Each gg_arg_cal_done_N is written INSIDE the same
+#     limit that proves the recipient and its states exist. That is the correction of 19 September
+#     2026: writing the mark first and looking for a recipient afterwards lost the event for the
+#     whole game, in silence.
+#
+#     THE YEARS ARE 365 DAYS LONG, with no leap days -- the engine's years, not the calendar's. The
+#     four offsets were computed by hand and checked one by one.
+# ES: EL CALENDARIO FECHADO DEL LADO ARGENTINO. Cuatro relevos, cada uno lleva el nacimiento de un
+#     pais al dia que le dan las fuentes, contado en dias desde el 1 de enero de 1836.
+#
+#     POR QUE RELEVOS Y NO LOS EVENTOS DIRECTAMENTE. El trigger de un evento agendado se lee CUANDO
+#     SE AGENDA, no en su fecha futura. Agendar el nacimiento de Corrientes directo al dia 1159
+#     preguntaria, el 1 de enero de 1836, si Corrientes todavia no existe y si la Argentina conserva
+#     sus estados -- y despues saldria el 6 de marzo de 1839 pasara lo que pasara en el medio. Por
+#     eso el relevo va sin condiciones y toda condicion vive adentro, leida el dia que importa. Es la
+#     regla que le costo al mod el calendario de la particion, la salida de Oribe en 1839 y tres
+#     eventos fechados de las potencias.
+#
+#     POR QUE UNA SOLA COPIA. El calendario oriental agenda dos copias de cada relevo porque la
+#     Republica cambia de tag en la particion y puede perder lo que tenga encolado. Estos cuatro se
+#     agendan sobre la ARGENTINA, que en este mod no cambia de tag nunca, asi que una copia es lo
+#     correcto y una segunda seria solo otra cosa que mantener sincronizada.
+#
+#     LA MARCA SIGNIFICA ENTREGADO, NO INTENTADO. Cada gg_arg_cal_done_N se escribe ADENTRO del mismo
+#     limit que prueba que el destinatario y sus estados existen. Es la correccion del 19/9/2026:
+#     escribir la marca primero y buscar destinatario despues perdia el evento toda la partida, en
+#     silencio.
+#
+#     LOS ANIOS DEL MOTOR SON DE 365 DIAS, sin bisiestos. Los cuatro corrimientos se calcularon a
+#     mano y se verificaron uno por uno.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 6/3/1839 (dia 1159) -- Corrientes se separa y le declara la guerra a Rosas
+gg_argentina_cal.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_1 }
+					exists = c:ARG
+					NOT = { exists = c:CRR }
+					exists = s:STATE_CORRIENTES.region_state:ARG
+				}
+				set_global_variable = gg_arg_cal_done_1
+				c:ARG = { trigger_event = { id = gg_argentina.1 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 7/4/1840 (dia 1556) -- Tucuman se pronuncia y nace la Coalicion del Norte
+gg_argentina_cal.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_2 }
+					exists = c:ARG
+					NOT = { exists = c:CLN }
+					# EN/ES: Tucuman es la capital de la Coalicion: sin ella no hay pronunciamiento
+					#     / Tucuman is the Coalition's capital: without it there is no pronouncement
+					exists = s:STATE_TUCUMAN.region_state:ARG
+				}
+				set_global_variable = gg_arg_cal_done_2
+				c:ARG = { trigger_event = { id = gg_argentina.2 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 10/10/1840 (dia 1742) -- Cordoba adhiere a una Coalicion que ya existe
+gg_argentina_cal.3 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_3 }
+					exists = c:ARG
+					# EN/ES: no crea pais: le suma un estado a uno que ya existe. Si la Coalicion no
+					#     llego a nacer, o ya cayo, no hay a quien adherir.
+					#     / it creates no country: it adds a state to one that exists. If the
+					#     Coalition never was born, or has already fallen, there is nobody to join.
+					exists = c:CLN
+					exists = s:STATE_CORDOBA.region_state:ARG
+				}
+				set_global_variable = gg_arg_cal_done_3
+				c:ARG = { trigger_event = { id = gg_argentina.4 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 1/5/1851 (dia 5595) -- el Pronunciamiento de Urquiza
+gg_argentina_cal.4 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_4 }
+					exists = c:ARG
+					NOT = { exists = c:ENR }
+					exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				}
+				set_global_variable = gg_arg_cal_done_4
+				c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
+			}
+		}
+	}
+}

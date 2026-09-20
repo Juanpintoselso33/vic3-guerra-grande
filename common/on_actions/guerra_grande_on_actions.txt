@@ -78,6 +78,20 @@ guerra_grande_on_game_start = {
 		#     Argentina de Rosas no cambia de tag nunca, y la Republica si lo hace en la particion, lo
 		#     que puede llevarse los eventos agendados sobre ella. Una marca hace que cada evento salga
 		#     una sola vez.
+		# EN: and the Argentine side's own dated calendar. One copy each, on Argentina, which never
+		#     changes tag; the reasoning is in events/guerra_grande_argentina_calendar.txt. Offsets in
+		#     365-day years from 1 January 1836, computed by hand and checked one by one.
+		# ES: y el calendario fechado propio del lado argentino. Una copia de cada uno, sobre la
+		#     Argentina, que no cambia de tag; el razonamiento esta en
+		#     events/guerra_grande_argentina_calendar.txt. Corrimientos en anios de 365 dias desde el
+		#     1 de enero de 1836, calculados a mano y verificados uno por uno.
+		c:ARG ?= {
+			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa
+			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
+			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
+			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento
+		}
+
 		c:ARG ?= {
 			trigger_event = { id = gg_cal.1 days = 2601 }   # 1843-02-16 Los vascos se pasan al Cerrito
 			trigger_event = { id = gg_cal.2 days = 2614 }   # 1843-03-01 Legion Argentina del sitio

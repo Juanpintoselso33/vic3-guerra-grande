@@ -1,0 +1,316 @@
+﻿namespace = gg_argentina
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE BIRTH OF THE THREE COUNTRIES OF THE ARGENTINE SIDE. All three are cut out of Argentina on
+#     their historical dates by the relays in events/guerra_grande_argentina_calendar.txt.
+#
+#     THE RULES THIS FILE OBEYS, every one of them learned the hard way on the Uruguayan side:
+#     - create_country CLONES the origin country's whole character roster, and the clone shares its
+#       template with the original. So every character who must MOVE is saved into a scope BEFORE
+#       the country is created; the new country is then EMPTIED of every clone without exception,
+#       and only then populated. The emptying lives in gg_argentina_new_country_people and its
+#       reasoning is written there.
+#     - After create_country, c:<new tag> does NOT resolve in the same effect. Anything that needs
+#       the new country by tag -- diplomatic plays, journals -- goes in a hidden event a day later,
+#       scheduled on ARGENTINA, which never changes tag.
+#     - A ruler left unset is a ruler picked at random. Every one of the three is named explicitly.
+#     - The seat change is offered as an option of the historical event itself, with
+#       trigger = { is_player = yes }, the way vanilla does it in events/zanzibar_events.txt:150.
+#       play_as goes LAST in the option: what happens to a popup open at that instant is not
+#       verified, and nothing should depend on it.
+# ES: EL NACIMIENTO DE LOS TRES PAISES DEL LADO ARGENTINO. Los tres se recortan de la Argentina en
+#     sus fechas historicas, desde los relevos de events/guerra_grande_argentina_calendar.txt.
+#
+#     LAS REGLAS QUE CUMPLE ESTE ARCHIVO, todas aprendidas a los golpes del lado oriental:
+#     - create_country CLONA el plantel entero de personajes del pais de origen, y el clon comparte
+#       template con el original. Asi que todo personaje que tenga que MUDARSE se guarda en un scope
+#       ANTES de crear el pais; despues el pais nuevo se VACIA de todos los clones sin excepcion, y
+#       recien ahi se puebla. El vaciado vive en gg_argentina_new_country_people y el razonamiento
+#       esta escrito ahi.
+#     - Despues de create_country, c:<tag nuevo> NO resuelve en el mismo efecto. Todo lo que necesite
+#       al pais nuevo por tag -- jugadas diplomaticas, journals -- va en un evento oculto al dia
+#       siguiente, agendado sobre la ARGENTINA, que no cambia de tag nunca.
+#     - Un gobernante sin fijar es un gobernante al azar. Los tres se nombran explicitamente.
+#     - El cambio de asiento se ofrece como opcion del evento historico mismo, con
+#       trigger = { is_player = yes }, como lo hace vanilla en events/zanzibar_events.txt:150.
+#       play_as va ULTIMO en la opcion: lo que le pasa a un popup abierto en ese instante no esta
+#       verificado, y nada deberia depender de eso.
+# -------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.1 -- CORRIENTES SECEDES, 6 March 1839. It declares war on Rosas alone: no other
+#     province follows it, and the reason it gives is the blockade on its commerce, not a doctrine.
+#     Misiones goes with it: Corrientes had occupied the land south of the Aguapey since 1830, gave
+#     it out in enfiteusis, and claimed the whole territory on 1 September 1832.
+# ES: gg_argentina.1 -- CORRIENTES SE SEPARA, 6 de marzo de 1839. Le declara la guerra a Rosas sola:
+#     ninguna otra provincia la sigue, y la razon que da es el bloqueo a su comercio, no una
+#     doctrina. Misiones se va con ella: Corrientes ocupaba el territorio al sur del Aguapey desde
+#     1830, lo repartio en enfiteusis y reivindico el territorio entero el 1/9/1832.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md y tabla-estados.md
+# -------------------------------------------------------------------------------------------------
+gg_argentina.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.1.t
+	desc = gg_argentina.1.d
+	flavor = gg_argentina.1.f
+
+	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
+	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
+	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
+	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
+	#     PENDIENTES.md.
+	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
+	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
+	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
+	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
+	#     en PENDIENTES.md.
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_war.dds"
+
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		NOT = { exists = c:CRR }
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN/ES: Ferre BEFORE the country exists. He has a vanilla template but is NOT created in
+			#     the 1836 history -- his appearance depends on interest_group_leader_usage, on the
+			#     rp1_content DLC and on a 1839-1867 window -- so he has to be found or made.
+			#     / Ferre ANTES de que exista el pais. Tiene template de vanilla pero NO se crea en la
+			#     historia de 1836, asi que hay que buscarlo o hacerlo.
+			if = {
+				limit = { any_scope_character = { has_template = ARG_pedro_ferre } }
+				random_scope_character = {
+					limit = { has_template = ARG_pedro_ferre }
+					save_scope_as = gg_ferre
+				}
+			}
+			else = {
+				create_character = {
+					template = ARG_pedro_ferre
+					save_scope_as = gg_ferre
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.1.a
+		default_option = yes
+		# EN/ES: FA-1 -- Rosas answers with the army: Echague marches / Rosas contesta con el ejercito
+		gg_argentina_create_corrientes = yes
+		ai_chance = { base = 85 }
+	}
+
+	option = {
+		name = gg_argentina.1.b
+		# EN: the seat change, offered only to the player. Corrientes secedes either way: what this
+		#     option decides is who you are from here on.
+		# ES: el cambio de asiento, ofrecido solo al jugador. Corrientes se separa igual: lo que
+		#     decide esta opcion es quien sos de aca en adelante.
+		trigger = {
+			is_player = yes
+			c:CRR ?= { is_player = no }
+		}
+		gg_argentina_create_corrientes = yes
+		ai_chance = { base = 0 }
+		# EN/ES: last, always / ultimo, siempre
+		hidden_effect = {
+			c:CRR ?= { save_scope_as = gg_new_seat }
+		}
+		play_as = scope:gg_new_seat
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.2 -- TUCUMAN PRONOUNCES, 7 April 1840. It does not merely rebel: it withdraws from
+#     Rosas the delegation of foreign relations. Salta, Jujuy, Catamarca and La Rioja follow within
+#     the month. Ibarra of Santiago del Estero refuses flatly, and his refusal cuts the bloc in two.
+# ES: gg_argentina.2 -- TUCUMAN SE PRONUNCIA, 7 de abril de 1840. No se rebela nada mas: le RETIRA a
+#     Rosas la delegacion de las relaciones exteriores. Salta, Jujuy, Catamarca y La Rioja la siguen
+#     dentro del mes. Ibarra, de Santiago del Estero, se niega de plano, y su negativa parte el
+#     bloque en dos.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md
+# -------------------------------------------------------------------------------------------------
+gg_argentina.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.2.t
+	desc = gg_argentina.2.d
+	flavor = gg_argentina.2.f
+
+	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
+	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
+	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
+	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
+	#     PENDIENTES.md.
+	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
+	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
+	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
+	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
+	#     en PENDIENTES.md.
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		NOT = { exists = c:CLN }
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN/ES: Lamadrid BEFORE the country exists: he exists in vanilla and went over to their
+			#     ranks, so the ORIGINAL has to move. / Lamadrid ANTES de que exista el pais
+			if = {
+				limit = { any_scope_character = { has_template = ARG_Gregorio_Araoz_de_Lamadrid } }
+				random_scope_character = {
+					limit = { has_template = ARG_Gregorio_Araoz_de_Lamadrid }
+					save_scope_as = gg_lamadrid
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.2.a
+		default_option = yes
+		gg_argentina_create_coalicion = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.3 -- THE PRONUNCIAMIENTO, 1 May 1851. The Entre Rios legislature accepts the
+#     resignation Rosas tendered every year certain it would be refused, and reassumes the faculty
+#     it had delegated. The Convention of 29 May says it in as many words: Entre Rios, "habiendo
+#     reasumido" the faculty granted to the governor of Buenos Aires.
+# ES: gg_argentina.3 -- EL PRONUNCIAMIENTO, 1 de mayo de 1851. La Legislatura entrerriana acepta la
+#     renuncia que Rosas presentaba todos los anios seguro de que se la iban a rechazar, y reasume la
+#     facultad que habia delegado. La Convencion del 29 de mayo lo dice con todas las letras: Entre
+#     Rios, "habiendo reasumido" la facultad concedida al gobernador de Buenos Aires.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md
+# -------------------------------------------------------------------------------------------------
+gg_argentina.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.3.t
+	desc = gg_argentina.3.d
+	flavor = gg_argentina.3.f
+
+	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
+	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
+	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
+	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
+	#     PENDIENTES.md.
+	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
+	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
+	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
+	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
+	#     en PENDIENTES.md.
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		NOT = { exists = c:ENR }
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN/ES: the ORIGINAL Urquiza, saved before the clone exists / el Urquiza ORIGINAL
+			random_scope_character = {
+				limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+				save_scope_as = gg_urquiza
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.3.a
+		default_option = yes
+		gg_argentina_create_entre_rios = yes
+		ai_chance = { base = 100 }
+	}
+
+	option = {
+		name = gg_argentina.3.b
+		trigger = {
+			is_player = yes
+			c:ENR ?= { is_player = no }
+		}
+		gg_argentina_create_entre_rios = yes
+		ai_chance = { base = 0 }
+		hidden_effect = {
+			c:ENR ?= { save_scope_as = gg_new_seat }
+		}
+		play_as = scope:gg_new_seat
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.4 -- CORDOBA JOINS, 10 October 1840. Six provinces at once. This creates no
+#     country: it hands a state to one that already exists, which is set_state_owner in state scope.
+# ES: gg_argentina.4 -- CORDOBA ADHIERE, 10 de octubre de 1840. Seis provincias simultaneas. No crea
+#     pais: le entrega un estado a uno que ya existe, que es set_state_owner en scope de estado.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_argentina.4.t
+	desc = gg_argentina.4.d
+	flavor = gg_argentina.4.f
+
+	# EN: PLACEHOLDER PICTURE, and it is marked as one. The mod's rule is a real Wikimedia image per
+	#     event, never repeated, and turning one into a Bink video is done on the Windows tower. Until
+	#     that pass, these four borrow a VANILLA video -- not another Guerra Grande event's, which
+	#     would break the no-repeats rule inside the mod and look like a finished choice. Listed in
+	#     PENDIENTES.md.
+	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
+	#     por evento, sin repetir, y pasarla a video Bink se hace en la torre. Hasta esa tanda, estos
+	#     cuatro toman prestado un video de VANILLA -- no el de otro evento de la Guerra Grande, que
+	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
+	#     en PENDIENTES.md.
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:CLN
+	}
+
+	option = {
+		name = gg_argentina.4.a
+		default_option = yes
+		if = {
+			limit = { exists = s:STATE_CORDOBA.region_state:ARG }
+			s:STATE_CORDOBA.region_state:ARG = { set_state_owner = c:CLN }
+		}
+		ai_chance = { base = 100 }
+	}
+}

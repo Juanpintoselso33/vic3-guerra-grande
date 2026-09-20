@@ -1,0 +1,176 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE BIRTH OF THE THREE ARGENTINE COUNTRIES, as effects, so the events stay readable.
+#
+#     THE CLONE RULE, and why it is not the one the audit proposed. create_country copies the origin
+#     country's entire character roster, and a clone shares its template with the original, so you
+#     cannot tell them apart by template. The proposed fix was to compare identities -- purge every
+#     character with template X that is NOT the saved scope. That works, but it needs one comparison
+#     per person and it is silently wrong the day somebody adds a character and forgets the list.
+#     What these effects do instead: EXILE EVERY CLONE, WITHOUT EXCEPTION, the moment the country is
+#     created, and only then bring in the people who belong to it -- the originals, transferred, and
+#     the new ones, created. Nothing to compare, no list to keep, and a clone cannot survive because
+#     no clone is ever spared.
+#     The order matters and is the whole trick: create, empty, populate, name the ruler.
+# ES: EL NACIMIENTO DE LOS TRES PAISES ARGENTINOS, como efectos, para que los eventos se lean.
+#
+#     LA REGLA DEL CLON, y por que no es la que proponia la auditoria. create_country copia el
+#     plantel entero de personajes del pais de origen, y un clon comparte template con el original,
+#     asi que no se los puede distinguir por template. El arreglo propuesto era comparar identidades:
+#     purgar todo personaje con template X que NO sea el scope guardado. Funciona, pero necesita una
+#     comparacion por persona y se equivoca en silencio el dia que alguien agrega un personaje y se
+#     olvida de la lista.
+#     Lo que hacen estos efectos: EXILIAR TODOS LOS CLONES, SIN EXCEPCION, apenas se crea el pais, y
+#     recien despues traer a los que le pertenecen -- los originales, transferidos, y los nuevos,
+#     creados. Nada que comparar, ninguna lista que mantener, y un clon no puede sobrevivir porque no
+#     se salva ninguno.
+#     El orden importa y es todo el truco: crear, vaciar, poblar, nombrar gobernante.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 6/3/1839 -- Corrientes se separa. Se lleva Corrientes y Misiones.
+gg_argentina_create_corrientes = {
+	create_country = {
+		tag = CRR
+		origin = this
+		state = s:STATE_CORRIENTES.region_state:ARG
+		on_created = {
+			# EN/ES: la variable de ROL, no de tag: el calendario argentino se dirige por rol, porque
+			#     un asiento puede cambiar de manos / the ROLE variable, not the tag
+			set_variable = gg_arg_corrientes_seat
+		}
+	}
+	# EN/ES: Misiones se va con ella: ocupada desde 1830, repartida en enfiteusis, reivindicada
+	#     entera el 1/9/1832 / Misiones goes with it
+	if = {
+		limit = { exists = s:STATE_MISIONES.region_state:ARG }
+		s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	gg_argentina_new_country_people = {
+		TAG = CRR
+	}
+	c:CRR ?= {
+		set_capital = STATE_CORRIENTES
+		# EN/ES: Beron de Astrada, que se separo y murio mandando veinticinco dias despues
+		create_character = {
+			template = CRR_gg_genaro_beron_de_astrada
+			ruler = yes
+		}
+	}
+	# EN/ES: Ferre no es el gobernante: es el hombre del programa fluvial, y su programa es la razon
+	#     de la guerra / Ferre is not the ruler: he is the man of the river programme
+	if = {
+		limit = { exists = scope:gg_ferre }
+		scope:gg_ferre = { transfer_character = c:CRR }
+	}
+}
+
+# EN/ES: 7/4/1840 -- Tucuman se pronuncia. Salta, Jujuy, Catamarca y La Rioja dentro del mes.
+gg_argentina_create_coalicion = {
+	create_country = {
+		tag = CLN
+		origin = this
+		state = s:STATE_TUCUMAN.region_state:ARG
+		on_created = {
+			set_variable = gg_arg_coalicion_seat
+		}
+	}
+	# EN: the four that followed within the month. Santiago del Estero is NOT here and must never be:
+	#     Ibarra refused flatly, and that refusal is what cuts the bloc in two on the map.
+	# ES: las cuatro que la siguieron dentro del mes. Santiago del Estero NO esta aca y no tiene que
+	#     estar nunca: Ibarra se nego de plano, y esa negativa es lo que parte el bloque en dos en el
+	#     mapa.
+	if = {
+		limit = { exists = s:STATE_SALTA.region_state:ARG }
+		s:STATE_SALTA.region_state:ARG = { set_state_owner = c:CLN }
+	}
+	if = {
+		limit = { exists = s:STATE_JUJUY.region_state:ARG }
+		s:STATE_JUJUY.region_state:ARG = { set_state_owner = c:CLN }
+	}
+	if = {
+		limit = { exists = s:STATE_CATAMARCA.region_state:ARG }
+		s:STATE_CATAMARCA.region_state:ARG = { set_state_owner = c:CLN }
+	}
+	if = {
+		limit = { exists = s:STATE_LA_RIOJA.region_state:ARG }
+		s:STATE_LA_RIOJA.region_state:ARG = { set_state_owner = c:CLN }
+	}
+	gg_argentina_new_country_people = {
+		TAG = CLN
+	}
+	c:CLN ?= {
+		set_capital = STATE_TUCUMAN
+		# EN: Avellaneda rules at the birth, and that is the point: on 7 April 1840 the head of the
+		#     pronouncement is a lawyer and a journalist, not a caudillo. Brizuela was made Director
+		#     of the League later, with the power to make war, sign peace and negotiate loans -- that
+		#     is its own event, on 24 September 1840, still to write.
+		# ES: Avellaneda gobierna en el nacimiento, y eso es justamente el punto: el 7 de abril de
+		#     1840 la cabeza del pronunciamiento es un abogado y periodista, no un caudillo. A
+		#     Brizuela lo nombran Director de la Liga despues, con facultad de hacer la guerra, firmar
+		#     la paz y negociar emprestitos: es su propio evento, del 24/9/1840, y falta escribirlo.
+		create_character = {
+			template = CLN_gg_marco_avellaneda
+			ruler = yes
+		}
+		create_character = {
+			template = CLN_gg_tomas_brizuela
+		}
+	}
+	# EN/ES: Lamadrid existe en vanilla y se paso a sus filas / Lamadrid exists in vanilla
+	if = {
+		limit = { exists = scope:gg_lamadrid }
+		scope:gg_lamadrid = { transfer_character = c:CLN }
+	}
+}
+
+# EN/ES: 1/5/1851 -- el Pronunciamiento de Urquiza.
+gg_argentina_create_entre_rios = {
+	create_country = {
+		tag = ENR
+		origin = this
+		state = s:STATE_ENTRE_RIOS.region_state:ARG
+		on_created = {
+			set_variable = gg_arg_entre_rios_seat
+		}
+	}
+	gg_argentina_new_country_people = {
+		TAG = ENR
+	}
+	c:ENR ?= {
+		set_capital = STATE_ENTRE_RIOS
+	}
+	# EN: the ORIGINAL Urquiza moves. Leaving the clone would give the game two of him, and every
+	#     event that looks him up by template would find whichever one it found first.
+	# ES: se muda el Urquiza ORIGINAL. Dejar el clon daria dos Urquizas, y cada evento que lo busca
+	#     por template encontraria al que encontrara primero.
+	if = {
+		limit = { exists = scope:gg_urquiza }
+		scope:gg_urquiza = {
+			transfer_character = c:ENR
+			set_character_as_ruler = yes
+		}
+	}
+	else = {
+		c:ENR ?= {
+			create_character = {
+				template = ARG_Justo_Jose_de_Urquiza
+				ruler = yes
+			}
+		}
+	}
+}
+
+# EN: THE EMPTYING. Called right after create_country and before anybody is brought in: every
+#     character the clone brought along goes into exile. It is deliberately blunt -- no exceptions,
+#     no list -- because any exception is a place where a clone can hide. A country with no
+#     characters is a normal state for the engine: it generates the interest-group leaders it needs.
+# ES: EL VACIADO. Se llama justo despues de create_country y antes de traer a nadie: todo personaje
+#     que trajo el clonado se va al exilio. Es deliberadamente bruto -- sin excepciones, sin lista --
+#     porque toda excepcion es un lugar donde un clon puede esconderse. Un pais sin personajes es un
+#     estado normal para el motor: genera los lideres de grupo que necesite.
+gg_argentina_new_country_people = {
+	c:$TAG$ ?= {
+		every_scope_character = {
+			exile_character = yes
+		}
+	}
+}
