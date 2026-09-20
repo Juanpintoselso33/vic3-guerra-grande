@@ -40,11 +40,19 @@
  gg_rivera.6.f:0 "Ni vencidos ni vencedores, y ya no queda nadie para discutir cuál de las dos cosas fue él."
  gg_rivera.6.a:0 "Enterrarlo en la Matriz al lado de Lavalleja, y sostener la fusión."
  gg_rivera.6.b:0 "El partido gobierna solo. Que se abra el baúl."
+ gg_rivera.8.t:0 "Los libros del teniente coronel"
+ gg_rivera.8.d:0 "El teniente coronel Bartolomé Mitre ha pedido la baja. Llegó con su familia a Montevideo en 1831; cinco años después entró a la Escuela Militar y se formó en artillería. Antes de que terminara 1839 ya había sido alférez, había escrito en El Iniciador y El Nacional y había peleado en Cagancha bajo las órdenes de Rivera. En 1842 se sumó a las fuerzas del general Paz y salió de Arroyo Grande derrotado y capitán. Después vino el Sitio Grande, y con él Garibaldi.\n\nEste año recibió el grado de teniente coronel. Ahora dice solamente que no seguirá sirviendo bajo Rivera. Sobre el motivo no hay nada asentado que este ministerio pueda agregar.\n\nHoy sale un barco. Mitre tiene preparados los libros que Esteban Echeverría le encargó repartir entre los exiliados durante la escala en Valparaíso. Todavía podemos dejarlo subir, devolverlo a las baterías o darle despacho para el litoral."
+ gg_rivera.8.f:0 "Quince años en Montevideo, y todo lo que queda en el expediente es que un hombre no sirve más bajo otro."
+ gg_rivera.8.a:0 "Que embarque. Y que los libros lleguen a Valparaíso."
+ gg_rivera.8.b:0 "No. Que vuelva a las baterías."
+ gg_rivera.8.c:0 "Darle despacho para el litoral. Que se presente ante Paz."
 
 # Formaciones militares que levanta este arco.
  Ejercito_de_Operaciones:0 "Ejército de Operaciones"
  Guardia_Nacional_de_Montevideo:0 "Guardia Nacional de Montevideo"
  Division_del_Yaguaron:0 "División del Yaguarón"
+ gg_mitre_baterias_defensa:0 "Baterías de la Defensa"
+ gg_mitre_artilleria_corrientes:0 "Artillería de Corrientes"
 
 # Modificadores.
  gg_rivera_walls_stripped:0 "La muralla desguarnecida por la campaña"

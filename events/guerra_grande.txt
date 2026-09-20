@@ -1628,11 +1628,13 @@ guerra_grande.4 = {
 				years = 10
 				is_decaying = yes
 			}
-			if = {
-				limit = { global_var:gg_vanguardia_cruce = 3 }
-				trigger_event = { id = gg_contingent.7 days = 183 popup = yes }
-			}
-			else = {
+		}
+		if = {
+			limit = { global_var:gg_vanguardia_cruce = 3 }
+			trigger_event = { id = guerra_grande.16 days = 183 }
+		}
+		else = {
+			c:CER ?= {
 				trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
 			}
 		}
@@ -2039,6 +2041,51 @@ guerra_grande.15 = {
 					NOT = { global_var:gg_vanguardia_status = 3 }
 				}
 				trigger_event = { id = guerra_grande.3 days = 0 popup = yes }
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: guerra_grande.16 -- THE RELAY OF THE POSTPONED CONTINGENT, and the correction of 20 September
+#     2026 from Codex's integral review.
+#     WHAT WAS BROKEN. When the Vanguardia had not crossed yet, Rosas scheduled gg_contingent.7
+#     straight on the Cerrito with days = 183. But that event asks in its trigger whether the
+#     Cerrito is still this country, and a scheduled event's trigger is read WHEN IT IS SCHEDULED,
+#     not when it appears. If the Cerrito disappeared during those six months, the already accepted
+#     event could still appear against a country that no longer existed and the contingent vanished
+#     without leaving a trace in any log.
+#     WHAT THIS DOES. Rosas now schedules this relay on Argentina. It carries no conditions of its
+#     own and therefore cannot be discarded when it is queued. One hundred and eighty-three days
+#     later the relay asks whether the Cerrito still exists; only if it does, it resolves c:CER on
+#     that day and hands over the contingent immediately. If it does not, the relay dies here.
+# ES: guerra_grande.16 -- EL RELEVO DEL CONTINGENTE POSTERGADO, y la correccion del 20/9/2026 que
+#     trajo la revision integral de Codex.
+#     QUE ESTABA ROTO. Cuando la Vanguardia todavia no habia cruzado, Rosas agendaba gg_contingent.7
+#     directo sobre el Cerrito con days = 183. Pero ese evento pregunta en su trigger si el Cerrito
+#     sigue siendo este pais, y el trigger de un evento agendado se lee CUANDO SE AGENDA, no cuando
+#     aparece. Si el Cerrito desaparecia durante esos seis meses, el evento ya aceptado podia salir
+#     igual contra un pais que ya no existia y el contingente se perdia sin dejar rastro en ningun
+#     log.
+#     QUE HACE ESTO. Rosas agenda ahora este relevo sobre la Argentina. No lleva condiciones propias
+#     y por eso no se puede descartar al encolarse. Ciento ochenta y tres dias despues el relevo
+#     pregunta si el Cerrito todavia existe; solo si existe, resuelve c:CER ese dia y le entrega el
+#     contingente de inmediato. Si no existe, el relevo se muere aca.
+# -------------------------------------------------------------------------------------------------
+guerra_grande.16 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					c:ARG ?= this
+					exists = c:CER
+				}
+				c:CER ?= {
+					trigger_event = { id = gg_contingent.7 days = 0 popup = yes }
+				}
 			}
 		}
 	}

@@ -126,3 +126,23 @@ URU_gg_gabriel_antonio_pereira = {
 	}
 	trait_generation = { }
 }
+
+# Bartolome Mitre: Buenos Aires 26.6.1821 (Felipe Pigna, Clarin, "Bartolome Mitre: como fue el largo y duro camino de su exilio"). Artillery officer and man of letters in Montevideo.
+URU_gg_bartolome_mitre = {
+	first_name = gg_name_bartolome
+	last_name = gg_name_mitre
+	historical = yes
+	female = no
+	role = character_role_general
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1821.6.26
+	home_region = STATE_MONTEVIDEO
+	traits = {
+		basic_artillery_commander
+		erudite
+	}
+	trait_generation = { }
+}

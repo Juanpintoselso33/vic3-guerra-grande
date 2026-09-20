@@ -178,6 +178,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.11 days = 3507 }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_cal.12 days = 3843 }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_cal.13 days = 3948 }   # 1846-10-26 decreto del Cerrito
+			trigger_event = { id = gg_cal.34 days = 3965 }   # 1846-11-12 Mitre deja Montevideo
 			trigger_event = { id = gg_cal.14 days = 4074 }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_cal.15 days = 4204 }   # 1847-07-09 Howden
 			trigger_event = { id = gg_cal.16 days = 4288 }   # 1847-10-01 Lamas en Rio (T8, FE-13)
@@ -213,6 +214,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.11 days = 3507 }   # 1845-08-11 la reunificacion
 			trigger_event = { id = gg_cal.12 days = 3843 }   # 1846-07-13 bases Hood
 			trigger_event = { id = gg_cal.13 days = 3948 }   # 1846-10-26 decreto del Cerrito
+			trigger_event = { id = gg_cal.34 days = 3965 }   # 1846-11-12 Mitre deja Montevideo
 			trigger_event = { id = gg_cal.14 days = 4074 }   # 1847-03-01 Urquiza, ventana temprana
 			trigger_event = { id = gg_cal.15 days = 4204 }   # 1847-07-09 Howden
 			trigger_event = { id = gg_cal.16 days = 4288 }   # 1847-10-01 Lamas en Rio (T8, FE-13)

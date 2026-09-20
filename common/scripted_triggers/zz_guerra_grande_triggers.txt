@@ -190,3 +190,21 @@ gg_powers_stalemate = {
 gg_france_pays_legions = {
 	global_var:gg_patron_francia >= 30
 }
+
+# EN: Mitre's documented 1846 break with Rivera survives either outcome: departure records the
+#     historical rupture; keeping him records both the counterfactual retention and the open
+#     quarrel. The sources do not document the subject of the disagreement.
+# ES: La ruptura documentada de Mitre con Rivera en 1846 sobrevive en cualquiera de los dos
+#     resultados: la partida registra el hecho historico; retenerlo registra tanto la retencion
+#     contrafactual como el pleito abierto. Las fuentes no documentan el tema del desacuerdo.
+# SOURCE / FUENTE: Wikipedia ES and the other sources summarized in the task brief; all agree on
+#     the break and none identifies its subject.
+gg_mitre_break_with_rivera = {
+	OR = {
+		has_global_variable = gg_mitre_gone
+		AND = {
+			has_global_variable = gg_mitre_kept
+			has_global_variable = gg_mitre_contra_rivera
+		}
+	}
+}

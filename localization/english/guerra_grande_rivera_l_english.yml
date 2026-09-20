@@ -40,11 +40,19 @@
  gg_rivera.6.f:0 "Ni vencidos ni vencedores — and now there is nobody left to argue about which he was."
  gg_rivera.6.a:0 "Bury him in the Matriz beside Lavalleja, and keep the fusión."
  gg_rivera.6.b:0 "The party governs alone. Open the trunk."
+ gg_rivera.8.t:0 "The Lieutenant Colonel's Books"
+ gg_rivera.8.d:0 "Lieutenant Colonel Bartolomé Mitre has requested his discharge. He came to Montevideo with his family in 1831; five years later he entered the Military School and trained in artillery. Before 1839 was out he had become an ensign, written for El Iniciador and El Nacional, and fought at Cagancha under Rivera. In 1842 he joined General Paz's forces and came out of Arroyo Grande defeated and a captain. Then came the Great Siege, and with it Garibaldi.\n\nThis year he received the rank of lieutenant colonel. Now he says only that he will no longer serve under Rivera. There is nothing on record about the reason that this ministry can add.\n\nA ship leaves today. Mitre has packed the books Esteban Echeverría asked him to distribute among the exiles during the stop at Valparaíso. We can still let him board, return him to the batteries, or give him orders for the littoral."
+ gg_rivera.8.f:0 "Fifteen years in Montevideo, and all the file says is that one man will no longer serve under another."
+ gg_rivera.8.a:0 "Let him embark. And see that the books reach Valparaíso."
+ gg_rivera.8.b:0 "No. Send him back to the batteries."
+ gg_rivera.8.c:0 "Give him orders for the littoral. Let him report to Paz."
 
 # Military formations raised by this arc.
  Ejercito_de_Operaciones:0 "Army of Operations"
  Guardia_Nacional_de_Montevideo:0 "National Guard of Montevideo"
  Division_del_Yaguaron:0 "Division of the Yaguarón"
+ gg_mitre_baterias_defensa:0 "Batteries of the Defensa"
+ gg_mitre_artilleria_corrientes:0 "Artillery of Corrientes"
 
 # Modifiers.
  gg_rivera_walls_stripped:0 "The Wall Stripped for the Campaña"

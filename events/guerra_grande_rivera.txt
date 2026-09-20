@@ -880,6 +880,14 @@ gg_rivera.4 = {
 		}
 		ai_chance = {
 			base = 50
+			# EN: Mitre's documented break with Rivera gives the government one more reason to sign,
+			#     whether it let him go or kept him in the batteries, without inventing its subject.
+			# ES: La ruptura documentada de Mitre con Rivera le da al gobierno una razon mas para
+			#     firmar, tanto si lo dejo ir como si lo retuvo en las baterias, sin inventar su tema.
+			modifier = {
+				trigger = { gg_mitre_break_with_rivera = yes }
+				add = 25
+			}
 		}
 	}
 
@@ -1005,6 +1013,154 @@ gg_rivera.4 = {
 		}
 		ai_chance = {
 			base = 25
+		}
+	}
+}
+
+
+# ============================================================================================
+# 1846.11.12 - MITRE LEAVES MONTEVIDEO
+# ============================================================================================
+# EN: Bartolome Mitre was born in Buenos Aires in 1821 and moved with his family to Montevideo in
+#     1831. He entered the Escuela Militar de Montevideo in 1836, trained in artillery and became
+#     an ensign in 1839. He wrote for El Iniciador and El Nacional in 1838-1839; fought under Rivera
+#     at Cagancha in December 1839; joined General Paz in 1842 and was defeated at Arroyo Grande on
+#     6 December, already a captain; and served in the Great Siege, where he met and admired
+#     Garibaldi. Promoted lieutenant colonel in 1846, that same year a conflict with Rivera forced
+#     him out of Montevideo. The sources agree on the break, but do not document its subject. On 12
+#     November he embarked carrying books Esteban Echeverria had asked him to distribute among the
+#     exiles during his stop in Valparaiso.
+# ES: Bartolome Mitre nacio en Buenos Aires en 1821 y se mudo con su familia a Montevideo en 1831.
+#     Entro a la Escuela Militar de Montevideo en 1836, estudio artilleria y fue alferez en 1839.
+#     Escribio en El Iniciador y El Nacional en 1838-1839; peleo con Rivera en Cagancha en diciembre
+#     de 1839; se sumo al general Paz en 1842 y cayo derrotado en Arroyo Grande el 6 de diciembre, ya
+#     capitan; y participo del Sitio Grande, donde conocio y admiro a Garibaldi. Ascendido a teniente
+#     coronel en 1846, ese mismo anio un conflicto con Rivera lo obligo a dejar Montevideo. Las
+#     fuentes coinciden en la ruptura, pero no documentan su contenido. El 12 de noviembre embarco
+#     con libros que Esteban Echeverria le habia pedido repartir entre los exiliados durante su
+#     escala en Valparaiso.
+# SOURCE / FUENTE: facts supplied and independently verified in the task brief; Felipe Pigna,
+#     Clarin, "Bartolome Mitre: como fue el largo y duro camino de su exilio" (embarkation date,
+#     Echeverria's books and Valparaiso); Wikipedia ES and the other sources summarized in the task
+#     brief (the conflict with Rivera, whose subject none documents).
+gg_rivera.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_rivera.8.t
+	desc = gg_rivera.8.d
+	flavor = gg_rivera.8.f
+
+	# EN: Reuses the existing Argentine Legion footage, the closest available military scene set in
+	#     Montevideo. ES: Reutiliza el video existente de la Legion Argentina, la escena militar
+	#     disponible mas cercana ambientada en Montevideo.
+	event_image = {
+		video = "gg_leg_argentine"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 1825
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		OR = {
+			has_global_variable = gg_rivera_restored
+			has_global_variable = gg_rivera_brazilian_arms
+		}
+		NOT = { has_global_variable = gg_rivera_exiled }
+		NOT = { has_global_variable = gg_mitre_settled }
+	}
+
+	immediate = {
+		hidden_effect = {
+			set_global_variable = gg_mitre_settled
+		}
+	}
+
+	# EN: Historical departure on 12 November 1846. ES: Partida historica del 12 de noviembre de 1846.
+	option = {
+		name = gg_rivera.8.a
+		custom_tooltip = gg_rivera.8.a_tt2
+		default_option = yes
+		set_global_variable = gg_mitre_gone
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	# EN: The counterfactual keeps the trained artillery officer in the Defensa and makes the
+	#     undocumented break with Rivera matter later without supplying a cause for it.
+	# ES: El contrafactual retiene al artillero formado en la Defensa y hace pesar despues la ruptura
+	#     no documentada con Rivera sin inventarle una causa.
+	option = {
+		name = gg_rivera.8.b
+		custom_tooltip = gg_rivera.8.b_tt2
+		set_global_variable = gg_mitre_kept
+		set_global_variable = gg_mitre_contra_rivera
+		create_character = {
+			template = URU_gg_bartolome_mitre
+			save_scope_as = gg_mitre
+		}
+		scope:gg_mitre = {
+			if = {
+				limit = { NOT = { has_role_of_type = general } }
+				add_character_role = general
+			}
+			add_commander_rank = 1
+		}
+		create_military_formation = {
+			type = army
+			hq_region = capital.region
+			name = gg_mitre_baterias_defensa
+			save_scope_as = gg_mitre_defensa_formation
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_MONTEVIDEO
+				count = 2
+			}
+		}
+		scope:gg_mitre = { transfer_to_formation = scope:gg_mitre_defensa_formation }
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	# EN: One unconfirmed source (todo-argentina.net) says that in 1846 Mitre tried to join Paz,
+	#     who was fighting in Corrientes, and that Paz's defeat sent him to Brazil. No other source
+	#     in the task brief confirms this; it supports only this alternate branch.
+	# ES: Una sola fuente no confirmada (todo-argentina.net) dice que en 1846 Mitre intento sumarse a
+	#     Paz, que peleaba en Corrientes, y que la derrota de Paz lo mando al Brasil. Ninguna otra
+	#     fuente del informe lo confirma; se usa solo como apoyo para esta rama alternativa.
+	option = {
+		name = gg_rivera.8.c
+		custom_tooltip = gg_rivera.8.c_tt2
+		trigger = { exists = c:CRR }
+		c:CRR = {
+			create_character = {
+				template = URU_gg_bartolome_mitre
+				save_scope_as = gg_mitre_corrientes
+			}
+			scope:gg_mitre_corrientes = {
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+				}
+				add_commander_rank = 1
+			}
+			create_military_formation = {
+				type = army
+				hq_region = capital.region
+				name = gg_mitre_artilleria_corrientes
+				save_scope_as = gg_mitre_corrientes_formation
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					count = 1
+				}
+			}
+			scope:gg_mitre_corrientes = { transfer_to_formation = scope:gg_mitre_corrientes_formation }
+		}
+		ai_chance = {
+			base = 10
 		}
 	}
 }

@@ -605,3 +605,20 @@ gg_cal.33 = {
 		}
 	}
 }
+
+# 1846-11-12 -- Mitre deja Montevideo (gg_rivera.8, la Defensa)
+gg_cal.34 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			gg_cal_fire = {
+				N = 34
+				EVENT = gg_rivera.8
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.34
+			}
+		}
+	}
+}
