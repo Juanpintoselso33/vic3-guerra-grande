@@ -18,7 +18,7 @@
 # -------------------------------------------------------------------------------------------------
 je_gg_delegation = {
 	group = je_group_guerra_grande
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
 	should_be_pinned_by_default_involved = yes
 
@@ -90,8 +90,9 @@ je_gg_delegation = {
 			#     contada como perdida para siempre: lo contrario exacto de lo que significa una
 			#     delegacion REVOCABLE. Pago Largo, Quebracho Herrado, Famailla y Vences terminan con
 			#     una provincia de vuelta bajo Buenos Aires, y la barra tiene que decirlo.
-			#     La prueba es que el pais ya no esta: lo anexaron, y su legislatura vuelve a delegar
-			#     porque ya no tiene legislatura.
+			#     La prueba es doble, y hasta el 20/9/2026 era una sola: que el pais ya no este, Y que
+			#     el estado sea de Buenos Aires. Con la primera sola, cualquiera que anexara la
+			#     provincia -- el Brasil, por ejemplo -- le devolvia la delegacion a Rosas.
 			# EN/ES: la marca del bloque hace de guarda: gg_delegation_restored la borra, asi que este
 			#     bloque entero corre una sola vez y la noticia sale una sola vez / the block's own
 			#     mark is the guard
@@ -99,6 +100,18 @@ je_gg_delegation = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:CRR }
+					# EN: AND BUENOS AIRES HAS TO BE THE ONE HOLDING IT. Correction of 20/9/2026 (Codex):
+					#     «the country is gone» was being read as «Rosas took it back», and those are not
+					#     the same sentence. Brazil annexing Corrientes gave Rosas his twelve points back
+					#     and printed a piece of news saying the province had been reincorporated, while
+					#     the map showed it Brazilian. A legislature delegates to Buenos Aires again only
+					#     if it is under Buenos Aires.
+					# ES: Y LA TIENE QUE TENER BUENOS AIRES. Correccion del 20/9/2026 (Codex): «el pais ya
+					#     no esta» se leia como «Rosas la recupero», y no son la misma frase. Que el Brasil
+					#     anexara Corrientes le devolvia a Rosas sus doce puntos y sacaba una noticia
+					#     diciendo que habia sido reincorporada, mientras el mapa la mostraba brasilena.
+					#     Una legislatura vuelve a delegar en Buenos Aires solo si esta bajo Buenos Aires.
+					exists = s:STATE_CORRIENTES.region_state:ARG
 					has_global_variable = gg_delegation_gone_corrientes
 				}
 				gg_delegation_restored = { KEY = corrientes COUNT = 1 POINTS = 12 }
@@ -110,6 +123,8 @@ je_gg_delegation = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:CLN }
+					# EN/ES: misma regla: Tucuman tiene que estar bajo Buenos Aires / same rule
+					exists = s:STATE_TUCUMAN.region_state:ARG
 					has_global_variable = gg_delegation_gone_coalicion_tucuman
 				}
 				trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
@@ -124,6 +139,8 @@ je_gg_delegation = {
 				limit = {
 					c:ARG ?= this
 					NOT = { exists = c:ENR }
+					# EN/ES: misma regla / same rule
+					exists = s:STATE_ENTRE_RIOS.region_state:ARG
 					has_global_variable = gg_delegation_gone_entre_rios
 				}
 				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }

@@ -52,7 +52,8 @@
 # -------------------------------------------------------------------------------------------------
 # EN: «LA ARGENTINA» IS REQUIRED FOR THIS SIDE, and every relay checks it. Decision of 19 September
 #     2026, after Codex's review caught it: of the eight Argentine states this side needs, only
-#     STATE_CORRIENTES and STATE_TUCUMAN exist in vanilla. Entre Rios, Cordoba, Salta, Misiones, La
+#     STATE_CORRIENTES, STATE_TUCUMAN and STATE_JUJUY exist in vanilla (the count said two until
+#     20 September 2026, when a second review checked it against the map files: Jujuy is there). Entre Rios, Cordoba, Salta, Misiones, La
 #     Rioja and Catamarca are provinces that «la Argentina» adds -- vanilla does not split Argentina
 #     into its historical provinces at all. The whole Argentine side was built reading the COMPATCH's
 #     map, which has them, without checking that the standalone mod does not.
@@ -61,7 +62,9 @@
 #     Uruguayan side plays exactly as it always did. The requirement is stated in README.md.
 # ES: «LA ARGENTINA» ES REQUISITO DE ESTE LADO, y cada relevo lo chequea. Decision del 19/9/2026,
 #     despues de que la revision de Codex lo agarrara: de los ocho estados argentinos que este lado
-#     necesita, en vanilla existen solo STATE_CORRIENTES y STATE_TUCUMAN. Entre Rios, Cordoba, Salta,
+#     necesita, en vanilla existen solo STATE_CORRIENTES, STATE_TUCUMAN y STATE_JUJUY (la cuenta
+#     decia dos hasta el 20/9/2026, cuando una segunda revision la chequeo contra los archivos del
+#     mapa: Jujuy esta). Entre Rios, Cordoba, Salta,
 #     Misiones, La Rioja y Catamarca son provincias que agrega «la Argentina» -- vanilla no parte a la
 #     Argentina en sus provincias historicas. Todo este lado se armo leyendo el mapa del COMPATCH, que
 #     si las tiene, sin chequear que el mod solo no.
@@ -260,8 +263,20 @@ gg_argentina_cal.9 = {
 					NOT = { has_global_variable = gg_arg_cal_done_9 }
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
-					# EN/ES: solo si hay una guerra que perder: sin Entre Rios en armas no hay Caseros
+					# EN: only if there is a war to lose. The comment said this and the code did not:
+					#     it asked whether Entre Rios EXISTED, which is a different question. A 1851
+					#     war that ended in a status quo left Entre Rios standing and at peace, and
+					#     on 1 February 1852 Pacheco still resigned and on the third «the hour of
+					#     Caseros» still arrived, announcing an Ejercito Grande a few leagues off
+					#     that was not marching anywhere. Corrected 20/9/2026 (Codex).
+					# ES: solo si hay una guerra que perder. El comentario lo decia y el codigo no: lo
+					#     que preguntaba era si Entre Rios EXISTIA, que es otra pregunta. Una guerra
+					#     de 1851 terminada en statu quo dejaba a Entre Rios en pie y en paz, y el 1
+					#     de febrero de 1852 Pacheco renunciaba igual y el 3 llegaba igual «la hora de
+					#     Caseros», anunciando un Ejercito Grande a unas leguas que no marchaba a
+					#     ningun lado. Corregido el 20/9/2026 (Codex).
 					exists = c:ENR
+					c:ARG = { has_war_with = c:ENR }
 				}
 				set_global_variable = gg_arg_cal_done_9
 				c:ARG = { trigger_event = { id = gg_argentina.40 days = 0 popup = yes } }
@@ -282,7 +297,9 @@ gg_argentina_cal.10 = {
 					NOT = { has_global_variable = gg_arg_cal_done_10 }
 					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
+					# EN/ES: la misma guarda que el relevo de Pacheco / the same guard as Pacheco's relay
 					exists = c:ENR
+					c:ARG = { has_war_with = c:ENR }
 				}
 				set_global_variable = gg_arg_cal_done_10
 				c:ARG = { trigger_event = { id = gg_argentina.41 days = 0 popup = yes } }

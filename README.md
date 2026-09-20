@@ -10,10 +10,20 @@ pisar archivos enteros, así que convive con otros mods.
 
 ## Cómo cargarlo
 
-| Qué querés jugar | Cómo |
-|---|---|
-| Sólo la guerra oriental | Guerra Grande. Nada más |
-| **La guerra entera, las dos orillas** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden |
+| Qué querés jugar | Cómo | Con qué país empezás |
+|---|---|---|
+| Sólo la guerra oriental | Guerra Grande. Nada más | **Uruguay** |
+| **La guerra entera, las dos orillas** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden | **Uruguay** para la orilla oriental, **Argentina** para la otra |
+
+**El lado argentino se juega desde Argentina, y conviene decirlo porque no se deduce.** Todos sus
+eventos —la separación de Corrientes, el pronunciamiento de Tucumán, las batallas del interior, el
+Pronunciamiento de Urquiza, Caseros— le llegan al gobierno de Buenos Aires, que es a quien le pasan.
+Jugando de Uruguay el interior argentino ocurre igual, pero pasa de fondo: lo que se ve de él es el
+tamaño del contingente que Rosas le manda al Cerrito, que depende de cómo le fue en el interior.
+
+Y es desde Argentina de donde se puede **cambiar de asiento**: en el día de su nacimiento, cada uno
+de los tres países ofrece pasarse a él —Corrientes el 6/3/1839, la Coalición el 7/4/1840, Entre Ríos
+el 1/5/1851—. Es una sola oportunidad por país y no se repite.
 
 ### El lado argentino necesita «la Argentina», y no es opcional
 
@@ -21,14 +31,21 @@ La orilla oriental —Carpintería, la partición, el sitio, la paz de 1851— *
 siempre. El **lado argentino** no: Corrientes, la Coalición del Norte y el Pronunciamiento de Entre
 Ríos necesitan que la Argentina esté partida en sus provincias históricas, y **vanilla no la parte**.
 
-De los ocho estados que ese lado usa, en vanilla existen sólo dos: `STATE_CORRIENTES` y
-`STATE_TUCUMAN`. Entre Ríos, Córdoba, Salta, Misiones, La Rioja y Catamarca **son provincias que
-agrega «la Argentina»**.
+De los ocho estados que ese lado usa, en vanilla existen sólo tres: `STATE_CORRIENTES`,
+`STATE_TUCUMAN` y `STATE_JUJUY`. Entre Ríos, Córdoba, Salta, Misiones, La Rioja y Catamarca **son
+provincias que agrega «la Argentina»**. *(Hasta el 20/9/2026 acá decía «sólo dos»: Jujuy sí está en
+vanilla. Lo agarró una revisión que chequeó el dato contra los archivos del mapa.)*
 
-Por eso los cuatro eventos fechados del lado argentino piden un estado que sólo existe con ella
-cargada. **Sin «la Argentina», ese lado sencillamente no ocurre**: no se crea ningún país, no se
+Por eso todo lo que toca ese lado —los trece eventos fechados, los tres gobernadores federales y el
+journal de la delegación— pide un estado que sólo existe con ella cargada. **Sin «la Argentina», ese
+lado sencillamente no ocurre**: no se crea ningún país, no se abre ningún journal argentino, no se
 rompe nada, y la guerra oriental se juega exactamente igual que antes. Con ella y el compatch, se
 juegan las dos orillas.
+
+Una salvedad honesta: el **candado provisorio de Rosas** (`gg_rosas_provisional_lock`) sí se aplica
+siempre, con o sin «la Argentina», y es a propósito. No es una mecánica del lado argentino: es lo que
+mantiene a Rosas gobernando Buenos Aires durante los dieciséis años en que es el padrino del Cerrito,
+que es algo que el lado oriental necesita.
 
 ⚠️ **Partidas viejas del submod**: si venías jugando con la Argentina, seguí con ella y agregá el
 compatch. Desactivarla saca contenido que ya es parte de tu guardado.

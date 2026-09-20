@@ -286,7 +286,7 @@ gg_caseros_pitched_battle = {
 
 # EN/ES: maniobrar para elegir el campo: se gana terreno y se pierde tiempo / manoeuvre for the field
 gg_caseros_manoeuvre = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_map_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	unit_defense_mult = 0.25
 	unit_offense_mult = -0.10
 	# EN/ES: no hay modificador de velocidad de marcha en 1.13 -- lo busque y no existe; lo que si

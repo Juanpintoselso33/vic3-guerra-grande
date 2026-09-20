@@ -76,7 +76,7 @@ gg_argentina.1 = {
 		video = "gg_arg_corrientes"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_war.dds"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
 	duration = 1825
 
@@ -166,7 +166,7 @@ gg_argentina.2 = {
 		video = "gg_arg_coalicion"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
 	duration = 1825
 
@@ -226,7 +226,7 @@ gg_argentina.3 = {
 		video = "gg_arg_pronunciamiento"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
 	duration = 1825
 
@@ -291,7 +291,7 @@ gg_argentina.4 = {
 		video = "gg_arg_cordoba"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
 	duration = 1825
 
@@ -303,12 +303,23 @@ gg_argentina.4 = {
 	option = {
 		name = gg_argentina.4.a
 		default_option = yes
+		# EN: THE DISCOUNT LIVES INSIDE THE TRANSFER, and until 20/9/2026 it lived outside it
+		#     (Codex). This popup lasts five years: a player can leave it open while another war
+		#     takes Cordoba off Argentina. When they finally clicked, set_state_owner did nothing --
+		#     Cordoba was no longer Argentine to give -- and the delegation still charged twelve
+		#     points and one province. The bar counted six provinces gone while the Coalition had
+		#     five.
+		# ES: EL DESCUENTO VIVE ADENTRO DE LA TRANSFERENCIA, y hasta el 20/9/2026 vivia afuera
+		#     (Codex). Este popup dura cinco anios: el jugador lo puede dejar abierto mientras otra
+		#     guerra le saca Cordoba a la Argentina. Cuando por fin apretaba, set_state_owner no hacia
+		#     nada -- Cordoba ya no era argentina para darla -- y la delegacion cobraba igual doce
+		#     puntos y una provincia. La barra contaba seis provincias idas y la Coalicion tenia cinco.
 		if = {
 			limit = { exists = s:STATE_CORDOBA.region_state:ARG }
 			s:STATE_CORDOBA.region_state:ARG = { set_state_owner = c:CLN }
+			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
+			gg_delegation_revoked = { KEY = cordoba COUNT = -1 POINTS = -12 }
 		}
-		# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
-		gg_delegation_revoked = { KEY = cordoba COUNT = -1 POINTS = -12 }
 		ai_chance = { base = 100 }
 	}
 }
@@ -360,6 +371,37 @@ gg_argentina.10 = {
 					kill_character = yes
 				}
 			}
+			# EN: AND LA BATALLA PASA. Correction of 20 September 2026, from Codex's integral review:
+			#     this popup told the player that the legislature of Corrientes submitted and the
+			#     customs house was one account again, and then killed one man and changed nothing.
+			#     The province stayed independent, the war went on, and the text was a lie a player
+			#     could check by looking at the map.
+			#     Pago Largo is not a setback: it is the end of the first Corrientes. Twenty-five days
+			#     after seceding the province was beaten and reincorporated, and that is what this
+			#     does now.
+			#     THE PLAYER IS NEVER ANNEXED BY A TEXT. If somebody took the Correntine seat, the
+			#     defeat is theirs to play: their commander is dead and their army is where they left
+			#     it, and Rosas has to come and take the province with the war he already has open.
+			#     Vanilla guards its own scripted annexations the same way (events/hawaii_events.txt:342).
+			# ES: Y LA BATALLA PASA. Correccion del 20/9/2026, de la revision integral de Codex: este
+			#     popup le decia al jugador que la legislatura de Corrientes se sometia y que la aduana
+			#     volvia a ser una sola cuenta, y despues mataba a un hombre y no cambiaba nada. La
+			#     provincia seguia independiente, la guerra seguia, y el texto era una mentira que el
+			#     jugador podia comprobar mirando el mapa.
+			#     Pago Largo no es un traspie: es el final de la primera Corrientes. Veinticinco dias
+			#     despues de separarse la provincia fue batida y reincorporada, y eso es lo que hace
+			#     esto ahora.
+			#     AL JUGADOR NO LO ANEXA UN TEXTO. Si alguien tomo el asiento correntino, la derrota es
+			#     suya para jugarla: su jefe esta muerto y su ejercito donde lo dejo, y Rosas tiene que
+			#     ir a tomar la provincia con la guerra que ya tiene abierta. Vanilla guarda igual sus
+			#     propias anexiones por guion (events/hawaii_events.txt:342).
+			if = {
+				limit = {
+					exists = c:CRR
+					c:CRR = { is_player = no }
+				}
+				annex = c:CRR
+			}
 		}
 	}
 
@@ -385,6 +427,37 @@ gg_argentina.11 = {
 	trigger = {
 		c:ARG ?= this
 		exists = c:CLN
+	}
+
+	immediate = {
+		hidden_effect = {
+			# EN: AND CORDOBA GOES BACK. Quebracho Herrado did not end the Coalition -- Famailla did,
+			#     eight months later -- so this event has no country to annex. What it has is the
+			#     province the battle was fought in: the federal army marched on from the field and
+			#     entered the city of Cordoba on 19 December 1840, and the two unitarian generals,
+			#     after blaming each other for the missed rendezvous, «could not hold Cordoba» and
+			#     withdrew north. The province that had joined the league ten weeks earlier is the
+			#     first thing the league loses.
+			#     Until now this event did nothing at all, while its text said the Coalition had lost
+			#     its best army.
+			# ES: Y CORDOBA VUELVE. Quebracho Herrado no termino con la Coalicion -- eso fue Famailla,
+			#     ocho meses despues -- asi que este evento no tiene pais que anexar. Lo que tiene es
+			#     la provincia donde se peleo: el ejercito federal siguio desde el campo y entro en la
+			#     ciudad de Cordoba el 19 de diciembre de 1840, y los dos generales unitarios, despues
+			#     de reprocharse el desencuentro, «no pudieron mantenerse en Cordoba» y se retiraron al
+			#     norte. La provincia que se habia sumado diez semanas antes es lo primero que la liga
+			#     pierde.
+			#     Hasta ahora este evento no hacia absolutamente nada, mientras su texto decia que la
+			#     Coalicion habia perdido su mejor ejercito.
+			# SOURCE / FUENTE: Caillet-Bois, Ricardo R., «Quebracho Herrado y la muerte de Marco
+			#     Avellaneda: narrados por un testigo presencial» (memoria.fahce.unlp.edu.ar,
+			#     pr.951.pdf): el 19 de diciembre las tropas federales entran en la ciudad de Cordoba.
+			if = {
+				limit = { exists = s:STATE_CORDOBA.region_state:CLN }
+				s:STATE_CORDOBA.region_state:CLN = { set_state_owner = c:ARG }
+				gg_delegation_restored = { KEY = cordoba COUNT = 1 POINTS = 12 }
+			}
+		}
 	}
 
 	option = {
@@ -419,6 +492,16 @@ gg_argentina.12 = {
 					kill_character = yes
 				}
 			}
+			# EN/ES: y la liga termina, que es lo que el texto dice desde el principio: dieciocho meses
+			#     y se acabo. Con la misma guarda: al que tomo el asiento no lo anexa un texto
+			#     / and the league ends, which is what the text has said all along, with the same guard
+			if = {
+				limit = {
+					exists = c:CLN
+					c:CLN = { is_player = no }
+				}
+				annex = c:CLN
+			}
 		}
 	}
 
@@ -434,18 +517,20 @@ gg_argentina.12 = {
 #     reaches Montevideo on the other bank. This is where the tandem is actually made: it reads the
 #     board and writes the two shared states, and from here the Uruguayan side can ask what became of
 #     the army that was supposed to cross.
-#     WHAT IT READS, and why those thresholds. The delegation starts at 156 points. Corrientes is 12,
-#     the Coalition is up to 72 with Cordoba. So 144 or more means at most one province was ever out
-#     of hand; below that, Rosas spent the interior putting it back together.
+#     WHAT IT READS. Not the bar: the count of provinces that ever rose, which never goes back down.
+#     Corrientes is one, the Coalition up to six with Cordoba. At most one ever out of hand means
+#     Rosas never really had to fight for the interior; more than that, he spent it putting the
+#     country back together. The bar itself is a photograph and gives both the same answer.
 #     Hidden, because it is a reckoning and not news: the player already lived every one of these
 #     battles.
 # ES: gg_argentina.20 -- EL BALANCE DEL INTERIOR, 16 de febrero de 1843. El mismo dia que el ejercito
 #     de Oribe llega frente a Montevideo en la otra orilla. Aca es donde el tandem se hace de verdad:
 #     lee el tablero y escribe los dos estados compartidos, y desde aca el lado oriental puede
 #     preguntar que fue del ejercito que tenia que cruzar.
-#     QUE LEE, y por que esos umbrales. La delegacion arranca en 156 puntos. Corrientes son 12, la
-#     Coalicion hasta 72 con Cordoba. Asi que 144 o mas quiere decir que como mucho una provincia
-#     estuvo fuera de mano; por debajo, Rosas se paso el interior rearmandolo.
+#     QUE LEE. La barra no: la cuenta de provincias que se alzaron alguna vez, que no vuelve a bajar.
+#     Corrientes es una, la Coalicion hasta seis con Cordoba. Como mucho una fuera de mano alguna vez
+#     quiere decir que Rosas nunca tuvo que pelear de verdad por el interior; mas que eso, se lo paso
+#     rearmando el pais. La barra sola es una foto y a los dos les da la misma respuesta.
 #     Oculto, porque es un balance y no una noticia: el jugador vivio cada una de esas batallas.
 # -------------------------------------------------------------------------------------------------
 gg_argentina.20 = {
@@ -470,8 +555,21 @@ gg_argentina.20 = {
 			set_global_variable = { name = gg_vanguardia_status value = 3 }
 		}
 		else_if = {
-			# EN/ES: gano, y entero / he won, and whole
-			limit = { global_var:gg_delegation_points >= 144 }
+			# EN: HE WON, AND WHOLE -- and this now reads the count that never goes back down, not
+			#     the bar. Until 20 September 2026 it asked for 144 points or more, which is a
+			#     photograph of that morning: a Rosas who fought Corrientes and the Coalition for four
+			#     years and annexed them both was back at 156 and got the same «clean» verdict as a
+			#     Rosas nobody ever defied. What the tandem is trying to measure is what the interior
+			#     COST, so it has to remember, and gg_provincias_alzadas is the memory: at most one
+			#     province ever out of hand is a war Rosas never really had to fight.
+			# ES: GANO, Y ENTERO -- y ahora esto lee la cuenta que no vuelve a bajar, no la barra.
+			#     Hasta el 20/9/2026 pedia 144 puntos o mas, que es la foto de esa manana: un Rosas que
+			#     peleo cuatro anios contra Corrientes y la Coalicion y las anexo a las dos estaba de
+			#     vuelta en 156 y sacaba el mismo veredicto «limpio» que un Rosas al que nadie desafio.
+			#     Lo que el tandem quiere medir es lo que COSTO el interior, asi que tiene que
+			#     acordarse, y gg_provincias_alzadas es esa memoria: como mucho una provincia fuera de
+			#     mano alguna vez es una guerra que Rosas nunca tuvo que pelear de verdad.
+			limit = { global_var:gg_provincias_alzadas <= 1 }
 			set_global_variable = { name = gg_interior_outcome value = 1 }
 			set_global_variable = { name = gg_vanguardia_status value = 1 }
 		}
@@ -510,7 +608,7 @@ gg_argentina.30 = {
 
 	event_image = { video = "gg_arg_pronunciamiento" }
 
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
 	duration = 1825
 
@@ -572,9 +670,40 @@ gg_argentina.40 = {
 
 	immediate = {
 		hidden_effect = {
+			# EN: HE RESIGNS, HE DOES NOT EMIGRATE. Correction of 20/9/2026 (Codex): this called
+			#     exile_character_with_role_cleanup, and vanilla's exile does not retire anybody --
+			#     it puts the man in the international exile pool and makes him an AGITATOR
+			#     (00_scripted_effects.txt:720-729). The popup said Pacheco had tendered his
+			#     resignation from the command, and what actually happened was that the ablest
+			#     general Rosas had left the country to go and agitate somewhere else, available for
+			#     any power to invite.
+			#     Angel Pacheco resigned the command two days before Caseros and stayed in the
+			#     country; he died in Buenos Aires in 1869. So what he loses is the command, which is
+			#     exactly what the text says he laid down: he is unassigned from his formation and
+			#     his roles are stripped, and he stays where he was.
+			# ES: RENUNCIA, NO EMIGRA. Correccion del 20/9/2026 (Codex): esto llamaba a
+			#     exile_character_with_role_cleanup, y el exilio de vanilla no retira a nadie: lo mete
+			#     en la bolsa internacional de exiliados y lo hace AGITADOR
+			#     (00_scripted_effects.txt:720-729). El popup decia que Pacheco habia presentado su
+			#     renuncia al mando, y lo que pasaba de verdad era que el mejor general que le
+			#     quedaba a Rosas se iba del pais a agitar a otra parte, disponible para que lo
+			#     invitara cualquier potencia.
+			#     Angel Pacheco renuncio al mando dos dias antes de Caseros y se quedo en el pais;
+			#     murio en Buenos Aires en 1869. Asi que lo que pierde es el mando, que es justo lo
+			#     que el texto dice que deja: se lo saca de su formacion y se le quitan los roles, y
+			#     se queda donde estaba.
 			random_scope_character = {
 				limit = { has_template = ARG_Angel_Pacheco }
-				exile_character_with_role_cleanup = yes
+				if = {
+					limit = { exists = this.commander_military_formation }
+					unassign_from_formation = yes
+				}
+				# EN/ES: se le saca el mando y nada mas. remove_all = yes en vanilla viene siempre
+				#     acompanado de un add -- un personaje sin ningun rol no es un estado que vanilla
+				#     produzca nunca -- asi que se le quita el rol que renuncio y se le dejan los
+				#     demas: sigue siendo un hombre publico argentino, que es lo que fue hasta 1869
+				#     / the command is removed and nothing else
+				replace_character_roles = { remove = { general } }
 			}
 		}
 	}
@@ -638,7 +767,7 @@ gg_argentina.50 = {
 	desc = gg_argentina.50.d
 	flavor = gg_argentina.50.f
 	event_image = { video = "gg_arg_cordoba" }
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 1825
 
 	trigger = {
@@ -688,7 +817,7 @@ gg_argentina.5 = {
 	desc = gg_argentina.5.d
 	flavor = gg_argentina.5.f
 	event_image = { video = "gg_arg_coalicion" }
-	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 1825
 
 	trigger = {
@@ -884,7 +1013,7 @@ gg_argentina.7 = {
 	desc = gg_argentina.7.d
 	flavor = gg_argentina.7.f
 	event_image = { video = "gg_arg_corrientes" }
-	icon = "gfx/interface/icons/event_icons/event_war.dds"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
 
 	trigger = {

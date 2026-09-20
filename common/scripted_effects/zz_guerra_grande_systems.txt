@@ -106,6 +106,9 @@ gg_systems_init = {
 	#     mes de sitio, -1.
 	set_global_variable = { name = gg_delegating_provinces value = 13 }
 	set_global_variable = { name = gg_delegation_points value = 156 }
+	# EN/ES: cuantas provincias se alzaron alguna vez. No baja nunca: es la memoria de la campania,
+	#     no su foto / how many provinces ever rose. It never goes down: it is the campaign's memory
+	set_global_variable = { name = gg_provincias_alzadas value = 0 }
 	# EN: THE THREE FEDERAL GOVERNORS WHO STAY WITH ROSAS, created on day one because that is when
 	#     they were already governing. Vanilla has none of them, and without them the interior is a
 	#     map with no one on it: Ibarra is the man who refuses to join the Coalition and cuts the
@@ -1094,6 +1097,36 @@ gg_delegation_revoked = {
 			add = $COUNT$
 		}
 		gg_delegation_change = { DELTA = $POINTS$ }
+	}
+	# EN: AND THE COUNT THAT NEVER GOES BACK DOWN, added 20 September 2026 after Codex's integral
+	#     review. The delegation bar is a photograph of today: a province that left and was taken
+	#     back gives its twelve points back, and by February 1843 a Rosas who spent four years at war
+	#     in the interior can be sitting on the same 156 points as a Rosas whom nobody ever defied.
+	#     The balance of the interior was reading that photograph and calling both of them a clean
+	#     victory. They are not the same thing, and this counter is what tells them apart: it only
+	#     ever goes up, and the mark that guards it is the same one, so a province is counted once no
+	#     matter how many times it is lost and retaken.
+	#     It is deliberately outside the block above. That block is guarded by the mark and so is
+	#     this, but keeping them apart makes it readable: up there is what the bar shows, down here is
+	#     what the war cost.
+	# ES: Y LA CUENTA QUE NO VUELVE A BAJAR, agregada el 20/9/2026 tras la revision integral de Codex.
+	#     La barra de la delegacion es una foto de hoy: una provincia que se fue y fue recuperada
+	#     devuelve sus doce puntos, y para febrero de 1843 un Rosas que se paso cuatro anios en guerra
+	#     en el interior puede estar sentado sobre los mismos 156 puntos que un Rosas al que nadie
+	#     desafio nunca. El balance del interior leia esa foto y a los dos les decia victoria limpia.
+	#     No son lo mismo, y este contador es lo que los distingue: solo sube, y lo guarda la misma
+	#     marca, asi que una provincia se cuenta una sola vez por mas veces que se pierda y se
+	#     recupere.
+	#     Esta a proposito afuera del bloque de arriba. Aquel lo guarda la marca y a este tambien,
+	#     pero tenerlos separados se lee mejor: arriba esta lo que muestra la barra, aca abajo lo que
+	#     costo la guerra.
+	if = {
+		limit = { NOT = { has_global_variable = gg_alzada_$KEY$ } }
+		set_global_variable = gg_alzada_$KEY$
+		change_global_variable = {
+			name = gg_provincias_alzadas
+			add = 1
+		}
 	}
 }
 

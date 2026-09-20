@@ -571,7 +571,7 @@ gg_phase1.8 = {
 		}
 		hidden_effect = {
 			trigger_event = { id = gg_rivera.1 days = 16 popup = yes }       # la derrota, 6 de diciembre
-			trigger_event = { id = guerra_grande.3 days = 88 popup = yes }   # la particion
+			trigger_event = { id = guerra_grande.15 days = 88 }              # la puerta de la particion
 		}
 		ai_chance = { base = 60 }
 	}
@@ -589,7 +589,7 @@ gg_phase1.8 = {
 		set_global_variable = gg_rivera_arroyo_grande_settled
 		set_global_variable = gg_rivera_reinforced
 		hidden_effect = {
-			trigger_event = { id = guerra_grande.3 days = 270 popup = yes }
+			trigger_event = { id = guerra_grande.15 days = 270 }
 		}
 		ai_chance = { base = 40 }
 	}

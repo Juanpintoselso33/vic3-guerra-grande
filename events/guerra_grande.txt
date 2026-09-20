@@ -296,6 +296,13 @@ guerra_grande.3 = {
 	#     ejercito acampado. Un 3 quiere decir que no llego nunca.
 	#     El cero, que es el valor en toda partida sin el lado argentino, pasa: no cambia nada para
 	#     quien no juega con «la Argentina».
+	#     Y LA GUARDA VIVE EN guerra_grande.15, no aca. Aca abajo quedo repetida a proposito, pero no
+	#     es la que manda: cuando este evento se agendaba directo desde Arroyo Grande, este trigger se
+	#     leia el dia de la batalla, cuando el balance del interior todavia no existia, y pasaba
+	#     siempre. Ahora llega desde el relevo con days = 0, o sea que se lee en el instante y dice la
+	#     verdad. El razonamiento entero esta en el encabezado del relevo.
+	#     / AND THE GUARD LIVES IN guerra_grande.15, not here. The copy below is deliberate but it is
+	#     not the one that decides.
 	trigger = {
 		c:URU ?= this
 		NOT = { exists = c:CER }
@@ -1945,6 +1952,59 @@ guerra_grande.14 = {
 		}
 		ai_chance = {
 			base = 40
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: guerra_grande.15 -- THE GATE OF THE PARTITION, and the correction of 20 September 2026 from
+#     Codex's integral review.
+#     WHAT WAS BROKEN. The partition asks, in its trigger, whether Oribe's army ever crossed
+#     (gg_vanguardia_status = 3 means it never did). But the partition was scheduled straight from
+#     Arroyo Grande with days = 88, and a scheduled event's trigger is read WHEN IT IS SCHEDULED. On
+#     the day Arroyo Grande is fought the balance of the interior has not been struck yet -- it is
+#     struck on 16 February 1843 -- so the guard always read a zero and always passed. A whole
+#     ending, «the war that never became one», had no way of ever being reached. This is the same
+#     rule that once cost the mod the partition calendar, Oribe's 1839 exit and three dated events
+#     of the powers, and it was walked into again by the hand that wrote the guard.
+#     WHAT THIS DOES. Arroyo Grande now schedules this relay, which carries no conditions of its own
+#     and therefore cannot be discarded when it is queued. Eighty-eight days later the relay asks the
+#     question on the day it matters, and only then hands the partition over.
+#     WHY IT IS ALSO CORRECT WHEN THE ARGENTINE SIDE IS NOT PLAYED: without «la Argentina» the
+#     variable stays at the zero it was initialised with, the gate opens, and the Uruguayan game runs
+#     exactly as it always did.
+# ES: guerra_grande.15 -- LA PUERTA DE LA PARTICION, y la correccion del 20/9/2026 que trajo la
+#     revision integral de Codex.
+#     QUE ESTABA ROTO. La particion pregunta, en su trigger, si el ejercito de Oribe llego a cruzar
+#     (gg_vanguardia_status = 3 quiere decir que no llego nunca). Pero la particion se agendaba
+#     directo desde Arroyo Grande con days = 88, y el trigger de un evento agendado se lee CUANDO SE
+#     AGENDA. El dia que se pelea Arroyo Grande el balance del interior todavia no se hizo -- se hace
+#     el 16 de febrero de 1843 -- asi que la guarda leia siempre un cero y pasaba siempre. Un final
+#     entero, «la guerra que no llego a serlo», no tenia forma de alcanzarse. Es la misma regla que
+#     ya le costo al mod el calendario de la particion, la salida de Oribe en 1839 y tres eventos
+#     fechados de las potencias, y volvio a pisarla la misma mano que escribio la guarda.
+#     QUE HACE ESTO. Arroyo Grande agenda ahora este relevo, que no lleva condicion propia y por eso
+#     no se puede descartar al encolarse. Ochenta y ocho dias despues el relevo hace la pregunta el
+#     dia que importa, y recien entonces entrega la particion.
+#     POR QUE TAMBIEN ES CORRECTO SIN EL LADO ARGENTINO: sin «la Argentina» la variable se queda en
+#     el cero con que se inicializo, la puerta se abre, y la partida oriental corre como siempre.
+# -------------------------------------------------------------------------------------------------
+guerra_grande.15 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					c:URU ?= this
+					NOT = { exists = c:CER }
+					# EN/ES: la pregunta, hecha el dia que se contesta / the question, asked on the
+					#     day it can be answered
+					NOT = { global_var:gg_vanguardia_status = 3 }
+				}
+				trigger_event = { id = guerra_grande.3 days = 0 popup = yes }
+			}
 		}
 	}
 }

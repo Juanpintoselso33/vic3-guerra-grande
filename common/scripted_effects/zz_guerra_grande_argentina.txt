@@ -276,14 +276,35 @@ gg_argentina_create_entre_rios = {
 			#     Esta linea se escribio una vez y se perdio en silencio: la edicion que la agregaba
 			#     no encontro el texto, porque el bloque del ejercito ya habia cambiado lo de
 			#     alrededor. Aca esta ahora.
+			#     Y EL ROL VA PRIMERO, que es la correccion del 20/9/2026 (Codex). add_commander_rank
+			#     le sube el rango a un general; a un hombre que no es general no lo hace general. El
+			#     Urquiza de vanilla no tiene is_general en su template
+			#     (common/character_templates/country_arg.txt), asi que la linea de arriba sola le
+			#     daba rango a nadie y el gobernante de Entre Rios seguia sin poder salir al campo.
+			#     Vanilla hace las dos en este orden
+			#     (events/agitators_events/historic_agitator_events.txt:1472-1475).
+			#     / AND THE ROLE COMES FIRST: add_commander_rank promotes a general, it does not make
+			#     one, and vanilla's Urquiza is not a general.
+			add_character_role = general
 			add_commander_rank = 2
 		}
 	}
 	else = {
+		# EN/ES: y el Urquiza de respaldo tambien sale general, que es la misma correccion: nacia sin
+		#     rol y sin rango, o sea un gobernante que no podia mandar la guerra que acababa de
+		#     declarar / the fallback Urquiza is made a general too, for the same reason
 		c:ENR ?= {
 			create_character = {
 				template = ARG_Justo_Jose_de_Urquiza
 				ruler = yes
+				save_scope_as = gg_urquiza_nuevo
+			}
+		}
+		if = {
+			limit = { exists = scope:gg_urquiza_nuevo }
+			scope:gg_urquiza_nuevo = {
+				add_character_role = general
+				add_commander_rank = 2
 			}
 		}
 	}
