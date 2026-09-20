@@ -55,6 +55,8 @@ gg_argentina_create_corrientes = {
 			ruler = yes
 		}
 	}
+	# EN/ES: y la delegacion: una provincia menos / and the delegation: one province fewer
+	gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
 	# EN/ES: Ferre no es el gobernante: es el hombre del programa fluvial, y su programa es la razon
 	#     de la guerra / Ferre is not the ruler: he is the man of the river programme
 	if = {
@@ -115,6 +117,11 @@ gg_argentina_create_coalicion = {
 			template = CLN_gg_tomas_brizuela
 		}
 	}
+	# EN: five at once -- Tucuman pronounces and Salta, Jujuy, Catamarca and La Rioja follow within
+	#     the month. Cordoba is NOT among them: it joins in October and pays its own twelve points.
+	# ES: cinco de una -- se pronuncia Tucuman y dentro del mes la siguen Salta, Jujuy, Catamarca y
+	#     La Rioja. Cordoba NO esta entre ellas: adhiere en octubre y paga sus propios doce puntos.
+	gg_delegation_revoked = { KEY = coalicion COUNT = -5 POINTS = -60 }
 	# EN/ES: Lamadrid existe en vanilla y se paso a sus filas / Lamadrid exists in vanilla
 	if = {
 		limit = { exists = scope:gg_lamadrid }
@@ -138,6 +145,9 @@ gg_argentina_create_entre_rios = {
 	c:ENR ?= {
 		set_capital = STATE_ENTRE_RIOS
 	}
+	# EN/ES: la que Rosas ofrecia todos los anios y esta vez le aceptaron / the one Rosas offered
+	#     every year and this time they took
+	gg_delegation_revoked = { KEY = entre_rios COUNT = -1 POINTS = -12 }
 	# EN: the ORIGINAL Urquiza moves. Leaving the clone would give the game two of him, and every
 	#     event that looks him up by template would find whichever one it found first.
 	# ES: se muda el Urquiza ORIGINAL. Dejar el clon daria dos Urquizas, y cada evento que lo busca
@@ -171,6 +181,12 @@ gg_argentina_new_country_people = {
 	c:$TAG$ ?= {
 		every_scope_character = {
 			exile_character = yes
+		}
+		# EN/ES: y la delegacion, que desde aca se mira del otro lado / and the delegation, seen from
+		#     the other side from here on
+		if = {
+			limit = { NOT = { has_journal_entry = je_gg_delegation } }
+			add_contextless_journal_entry = je_gg_delegation
 		}
 	}
 }

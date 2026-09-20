@@ -93,3 +93,17 @@ gg_siege_bar = {
 	min_value = 0
 	max_value = 24
 }
+
+# EN: the delegation. Thirteen provinces at the start, zero when Rosas has nothing left to be. Not a
+#     two-sided bar: this one is not a tug of war between two sides, it is one thing draining.
+# ES: la delegacion. Trece provincias al empezar, cero cuando a Rosas no le queda de que ser. No es
+#     una barra de dos lados: esto no es un tira y afloja entre dos bandos, es una sola cosa que se
+#     vacia.
+gg_delegation_bar = {
+	name = "gg_delegation_bar"
+	desc = "gg_delegation_bar_desc"
+	default_green = yes
+	start_value = 13
+	min_value = 0
+	max_value = 13
+}

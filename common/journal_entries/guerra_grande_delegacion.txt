@@ -1,0 +1,102 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE REVOCABLE DELEGATION. The Argentine side's journal, and the same object seen from both
+#     sides -- exactly the shape the Defensa and the Cerrito already have. Rosas watches a number he
+#     needs to keep up; Corrientes, the Coalition and Entre Rios watch the same number and need it
+#     down. One bar, one truth, two readings.
+#     WHY IT IS THE HEART. Rosas' power over the other provinces was a delegation of foreign
+#     relations that each legislature could take back. Tucuman took it back on 7 April 1840 and Entre
+#     Rios on 1 May 1851. Without this, Obligado, Alcaraz, the Pronunciamiento and Caseros are four
+#     separate episodes; with it they are one campaign.
+# ES: LA DELEGACION REVOCABLE. El journal del lado argentino, y el mismo objeto visto desde los dos
+#     lados -- exactamente la forma que ya tienen la Defensa y el Cerrito. Rosas mira un numero que
+#     necesita sostener; Corrientes, la Coalicion y Entre Rios miran el mismo numero y lo necesitan
+#     abajo. Una barra, una verdad, dos lecturas.
+#     POR QUE ES EL CORAZON. El poder de Rosas sobre las demas provincias era una delegacion de las
+#     relaciones exteriores que cada legislatura podia retirar. Tucuman la retiro el 7/4/1840 y Entre
+#     Rios el 1/5/1851. Sin esto, Obligado, Alcaraz, el Pronunciamiento y Caseros son cuatro
+#     episodios sueltos; con esto son una campania.
+# -------------------------------------------------------------------------------------------------
+je_gg_delegation = {
+	group = je_group_guerra_grande
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+
+	should_be_pinned_by_default_involved = yes
+
+	scripted_progress_bar = gg_delegation_bar
+
+	# EN/ES: Rosas y los tres que le pueden retirar la delegacion / Rosas and the three who can
+	#     withdraw it from him
+	should_be_involved = {
+		OR = {
+			c:ARG ?= this
+			c:CRR ?= this
+			c:CLN ?= this
+			c:ENR ?= this
+		}
+	}
+
+	should_show_when_not_involved = {
+		always = no
+	}
+
+	# EN/ES: el mismo numero, dicho desde donde esta parado el que mira / the same number, told from
+	#     where the reader is standing
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_gg_delegation_status_rosas
+				trigger = { c:ARG ?= this }
+			}
+			triggered_desc = {
+				desc = je_gg_delegation_status_provincia
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# EN: the siege's monthly cost, and the redraw. Only Argentina runs it: this is a global count,
+	#     and running it on every involved country would charge the month once per seat. The cost is
+	#     one point -- a twelfth of a province -- for every month Oribe is in front of Montevideo,
+	#     which is what nine years of holding him actually did to Rosas.
+	# ES: el costo mensual del sitio, y el redibujo. Lo corre solo la Argentina: esto es una cuenta
+	#     global, y correrla en cada pais involucrado cobraria el mes una vez por asiento. El costo es
+	#     un punto -- un doceavo de provincia -- por cada mes que Oribe este frente a Montevideo, que
+	#     es lo que nueve anios de sostenerlo le hicieron a Rosas de verdad.
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					c:ARG ?= this
+					has_global_variable = guerra_grande_split_done
+					NOT = { has_global_variable = gg_peace_settled }
+					exists = c:CER
+				}
+				gg_delegation_change = { DELTA = -1 }
+			}
+			else = {
+				# EN/ES: sin sitio no hay costo, pero la barra igual se redibuja: es la reparacion de
+				#     las partidas guardadas antes de que existiera / no siege, no cost, but the bar
+				#     is still redrawn: that is the repair for saves made before it existed
+				if = {
+					limit = { c:ARG ?= this }
+					scope:journal_entry = {
+						set_bar_progress = {
+							name = gg_delegation_bar
+							value = gg_delegation_bar_value
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# EN/ES: Rosas se queda sin nada de que ser / Rosas has nothing left to be
+	complete = {
+		custom_tooltip = {
+			text = je_gg_delegation_complete_tt
+			global_var:gg_delegating_provinces <= 0
+		}
+	}
+
+	weight = 100
+}

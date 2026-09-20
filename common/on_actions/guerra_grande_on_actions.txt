@@ -78,6 +78,16 @@ guerra_grande_on_game_start = {
 		#     Argentina de Rosas no cambia de tag nunca, y la Republica si lo hace en la particion, lo
 		#     que puede llevarse los eventos agendados sobre ella. Una marca hace que cada evento salga
 		#     una sola vez.
+		# EN/ES: la delegacion se abre el primer dia y se la queda Rosas: es SU cuenta, y los tres que
+		#     se la pueden retirar la reciben al nacer / the delegation opens on day one and belongs to
+		#     Rosas: it is HIS count, and the three who can take it from him get it when they are born
+		c:ARG ?= {
+			if = {
+				limit = { NOT = { has_journal_entry = je_gg_delegation } }
+				add_contextless_journal_entry = je_gg_delegation
+			}
+		}
+
 		# EN: and the Argentine side's own dated calendar. One copy each, on Argentina, which never
 		#     changes tag; the reasoning is in events/guerra_grande_argentina_calendar.txt. Offsets in
 		#     365-day years from 1 January 1836, computed by hand and checked one by one.
