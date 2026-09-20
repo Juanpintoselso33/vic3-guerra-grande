@@ -40,6 +40,38 @@ gg_systems_init = {
 			activate_law = law_type:law_oligarchy
 		}
 	}
+	# EN: THE TWO SHARED STATES OF THE TANDEM (design 19/9/2026, after Codex mapped the Uruguayan
+	#     chain). Today the Argentine side does not exist and the Uruguayan chain reads no Argentine
+	#     variable at all: Codex's verdict was that "the code survives a diverted history only
+	#     because it ignores it". These two are what will let it stop ignoring it.
+	#     ORIBE'S CAMPAIGN IS THE HINGE. The army that decides the Argentine civil war is the same
+	#     one that besieges Montevideo: out of Montevideo in October 1838, the Ejercito Unido de
+	#     Vanguardia from Rosas, Quebracho Herrado, Famailla, Arroyo Grande, and across the river on
+	#     16 February 1843. So the Uruguayan side needs to be able to ask two questions it cannot ask
+	#     today: how the interior campaign ended, and what became of that army.
+	#     BOTH START AT 0, WHICH MEANS "undecided -- behave exactly as history did". That is
+	#     deliberate: while nothing writes them, every reader takes the historical branch and the
+	#     Uruguayan side behaves precisely as it does now. A missing write cannot silently change a
+	#     game.
+	# ES: LOS DOS ESTADOS COMPARTIDOS DEL TANDEM. Hoy el lado argentino no existe y la cadena oriental
+	#     no lee ni una variable argentina: el veredicto de Codex fue que "el codigo aguanta
+	#     mecanicamente una historia desviada solo porque la ignora". Estas dos son las que le van a
+	#     permitir dejar de ignorarla.
+	#     LA CAMPANIA DE ORIBE ES LA BISAGRA. El ejercito que decide la guerra civil argentina es el
+	#     mismo que sitia Montevideo: sale de Montevideo en octubre de 1838, Rosas le da el Ejercito
+	#     Unido de Vanguardia, Quebracho Herrado, Famailla, Arroyo Grande, y el 16 de febrero de 1843
+	#     cruza el rio. Asi que el lado oriental necesita poder preguntar dos cosas que hoy no puede:
+	#     como termino la campania del interior, y que fue de ese ejercito.
+	#     LAS DOS ARRANCAN EN 0, QUE SIGNIFICA "sin decidir: comportate como la historia". Es a
+	#     proposito: mientras nadie las escriba, todo lector toma la rama historica y el lado oriental
+	#     se comporta exactamente como hoy. Una escritura que falte no puede cambiar una partida en
+	#     silencio.
+	#
+	#     gg_interior_outcome   0 sin decidir · 1 Rosas gano el interior · 2 lo gano a duras penas
+	#                           3 Rosas perdio el interior
+	#     gg_vanguardia_status  0 sin decidir · 1 cruzo entera · 2 cruzo mermada · 3 no cruzo nunca
+	set_global_variable = { name = gg_interior_outcome value = 0 }
+	set_global_variable = { name = gg_vanguardia_status value = 0 }
 	# EN/ES: playtest -- countries kept in globals so journal texts can show their flags
 	#     / paises guardados en globales para mostrar sus banderas en los textos
 	c:ARG ?= { set_global_variable = { name = gg_flag_arg value = this } }

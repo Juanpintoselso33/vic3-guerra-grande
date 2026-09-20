@@ -54,7 +54,14 @@ je_gg_patrons = {
 	complete = {
 		custom_tooltip = {
 			text = je_gg_patrons_complete_tt
-			has_global_variable = gg_peace_settled
+			# EN/ES: or the war that never became one: without a siege there is nothing left for the
+			#     squadrons to decide, and this entry cannot stay open for a war that did not happen.
+			#     / o la guerra que no llego a serlo: sin sitio no queda nada que las escuadras puedan
+			#     decidir, y esta entrada no puede quedar abierta por una guerra que no fue.
+			OR = {
+				has_global_variable = gg_peace_settled
+				has_global_variable = gg_war_never_crossed
+			}
 		}
 	}
 

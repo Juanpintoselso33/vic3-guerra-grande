@@ -18,6 +18,7 @@
  je_guerra_grande_status_factions:0 "There is no war yet: every decision of these years adds to one side, and the bar already counts it."
  je_guerra_grande_status_siege:0 "Two governments: the #R Defensa#! in Montevideo and the #blue_value Cerrito#! in the countryside.\n@battalions! Exhaustion (three months running open the other side's peace table): #blue_value Cerrito#! #V [GetGlobalVariable('gg_cerrito_exhausted').GetValue|v0]#! of 3 · #R Defensa#! #V [GetGlobalVariable('gg_defensa_exhausted').GetValue|v0]#! of 3."
  je_guerra_grande_complete_tt:0 "A peace is signed, only one government is left standing, or the war reaches its 1860 cut-off."
+ je_guerra_grande_complete_nowar_tt:0 "The army that was to cross the river stayed on the far bank, and the Republic was never split."
 
 # Progress bar
  guerra_grande_war_score_bar:0 "Which Divisa Prevails"

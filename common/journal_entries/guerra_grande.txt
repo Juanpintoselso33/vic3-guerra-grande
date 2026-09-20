@@ -580,7 +580,39 @@ je_guerra_grande = {
 	# ES: T1, C11 -- se cierra con la paz firmada, o cuando queda un solo gobierno y Montevideo sigue
 	#     siendo oriental (conquista, jugada cedida o tercer pais), o en el tope de 1860. Nunca pide
 	#     guerra_grande_open_war, que su propio cierre borra.
+	# EN: AND THE WAR THAT NEVER BECAME ONE (design 19/9/2026, from Codex's map of the tandem).
+	#     This entry had no way out if the Republic was never split: its completion demands
+	#     guerra_grande_split_done and its failure demands lost ground, so a whole Uruguay with no
+	#     partition left the player with a journal open for ever, neither completed nor failed. That
+	#     never happened while the split was certain. It stops being certain the moment the Argentine
+	#     side can keep Oribe from crossing: the army that besieges Montevideo is the one that won
+	#     the interior, and if it loses there, it never comes. gg_vanguardia_status = 3 is that
+	#     history, and it is a legitimate ending, not a defeat -- the Republic stayed whole because
+	#     the enemy army never arrived. Nothing writes that value today, so this branch is unreachable
+	#     until the Argentine side exists and no current game changes behaviour.
+	# ES: Y LA GUERRA QUE NO LLEGO A SERLO. Esta entrada no tenia salida si la Republica no se partia:
+	#     su cierre exige guerra_grande_split_done y su fracaso exige suelo perdido, asi que un
+	#     Uruguay entero sin particion dejaba al jugador con un journal abierto para siempre, ni
+	#     cumplido ni fracasado. Eso nunca pasaba mientras la particion fuera segura. Deja de serlo en
+	#     cuanto el lado argentino pueda impedir que Oribe cruce: el ejercito que sitia Montevideo es
+	#     el que gano el interior, y si pierde alla, no llega nunca. gg_vanguardia_status = 3 es esa
+	#     historia, y es un final legitimo y no una derrota -- la Republica quedo entera porque el
+	#     ejercito enemigo no llego. Hoy nadie escribe ese valor, asi que esta rama es inalcanzable
+	#     hasta que exista el lado argentino y ninguna partida actual cambia de comportamiento.
 	complete = {
+		OR = {
+		custom_tooltip = {
+			text = je_guerra_grande_complete_nowar_tt
+			AND = {
+				NOT = { has_global_variable = guerra_grande_split_done }
+				global_var:gg_vanguardia_status = 3
+				# EN/ES: 1844, the year after the crossing that did not happen: the calendar has had
+				#     its chance / 1844, el anio siguiente al cruce que no fue: el calendario ya tuvo
+				#     su oportunidad
+				year >= 1844
+				c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			}
+		}
 		custom_tooltip = {
 			text = je_guerra_grande_complete_tt
 			AND = {
@@ -598,6 +630,7 @@ je_guerra_grande = {
 					year >= 1860
 				}
 			}
+		}
 		}
 	}
 
@@ -651,7 +684,24 @@ je_guerra_grande = {
 	# ES: T1, C11 -- una guerra cerrada sin paz firmada termina en gg_peace.5. La marca va primero,
 	#     asi la pasada del segundo pais involucrado no hace nada.
 	on_complete_all_involved = {
-		gg_war_closing_dispatch = yes
+		# EN: the war that never became one does NOT go through the peace machinery. There is nothing
+		#     to sign: no partition, no two governments, no terms. Running the closing dispatch here
+		#     would mark a peace that nobody made and start a postwar for a war that did not happen.
+		#     It still has to close everything else, so the other two entries do not stay open.
+		# ES: la guerra que no llego a serlo NO pasa por la maquinaria de la paz. No hay nada que
+		#     firmar: ni particion, ni dos gobiernos, ni condiciones. Correr el despacho de cierre aca
+		#     marcaria una paz que nadie hizo y arrancaria una posguerra de una guerra que no fue.
+		#     Igual tiene que cerrar todo lo demas, para que las otras dos entradas no queden abiertas.
+		if = {
+			limit = { NOT = { has_global_variable = guerra_grande_split_done } }
+			hidden_effect = {
+				set_global_variable = gg_war_never_crossed
+				gg_wartime_modifiers_clear = yes
+			}
+		}
+		else = {
+			gg_war_closing_dispatch = yes
+		}
 		hidden_effect = {
 			remove_global_variable = guerra_grande_open_war
 		}
