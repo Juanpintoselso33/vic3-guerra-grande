@@ -1,4 +1,4 @@
-# Media aliases for the dated Argentine events. Sources: SOURCES_flujo_images.md.
+﻿# Media aliases for the dated Argentine events. Sources: SOURCES_flujo_images.md.
 # Alias de medios de los eventos argentinos fechados. Fuentes: SOURCES_flujo_images.md.
 
 # Jean-Baptiste Henri Durand-Brager, "Soldado federal - Buenos Aires" (c. 1841), public domain.
@@ -59,5 +59,53 @@ gg_arg_mitre_joven = {
 # WARNING: this is a participant in the Treaty of Alcaraz, not a scene of the signing.
 gg_arg_alcaraz = {
 	video = "gfx/media_aliases/gg_arg_alcaraz.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# General Juan Madariaga, unidentified photographer, before 1879, public domain.
+# WARNING: this later portrait is not the battle of Vences on 27 November 1847; it depicts the
+# commander of the Corrientes army defeated there, and does not claim the event's historical result.
+gg_arg_vences = {
+	video = "gfx/media_aliases/gg_arg_vences.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# Washington-model printing press manufactured c. 1850 by the Cincinnati Type Foundry; modern
+# photograph by Quadell, CC BY-SA 3.0. WARNING: this is not La Regeneracion's press or its issue of
+# 5 January 1851; it is a surviving contemporary type of press used to represent the act of printing.
+gg_arg_regeneracion = {
+	video = "gfx/media_aliases/gg_arg_regeneracion.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# Miguelzinho Dutra, portrait of Honorio Hermeto Carneiro Leao (inscribed 1845), public domain.
+# WARNING: this is not the signing of the Convention of Montevideo on 29 May 1851; it depicts the
+# Brazilian plenipotentiary who negotiated the terms imposed on Entre Rios.
+gg_arg_convencion = {
+	video = "gfx/media_aliases/gg_arg_convencion.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Felipe Arana, drawing by Carlos Enrique Pellegrini, original in the Archivo General de la Nacion,
+# reproduced in Fermin Chavez, "Iconografia de Rosas y de la Federacion" (1971). Public domain.
+# 1022x1693 -- NOT the 362x435 "Felipe Arana.jpg", which differs from this file only in the case of
+# its extension and is a quarter of the size. Pellegrini drew the Rosista political class from life,
+# and Arana wears the divisa punzo with FEDERACION O MUERTE on his lapel.
+# WARNING: this is not Rosas's answer to the signed convention; it depicts his foreign minister, who
+# conducted the Confederation's diplomacy throughout the period.
+# ES: Felipe Arana, dibujo de Carlos Enrique Pellegrini, original en el AGN, reproducido por Fermin
+# Chavez. NO es el "Felipe Arana.jpg" de 362x435, que se diferencia de este archivo solo por las
+# mayusculas de la extension y tiene la cuarta parte del tamanio. ADVERTENCIA: no es la respuesta de
+# Rosas a la convencion: es su canciller.
+gg_arg_arana = {
+	video = "gfx/media_aliases/gg_arg_arana.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# Brazilian 960-reis silver patacao of 1816, modern photograph by Tank historian boi, CC BY-SA 4.0.
+# WARNING: this is not the convention of 21 November 1851, the loan instrument, or a coin minted in
+# 1851; it represents the Brazilian monetary denomination used for the 100,000-patacon monthly loan.
+gg_arg_patacao = {
+	video = "gfx/media_aliases/gg_arg_patacao.bk2"
 	audio = "event:/SFX/Events/southamerica/aristocrats"
 }

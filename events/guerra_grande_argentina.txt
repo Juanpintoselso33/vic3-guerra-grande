@@ -845,7 +845,8 @@ gg_argentina.9 = {
 	title = gg_argentina.9.t
 	desc = gg_argentina.9.d
 	flavor = gg_argentina.9.f
-	event_image = { video = "gg_nav_pasquines" }
+	# EN/ES: c. 1850 press, not La Regeneracion or its 5 January issue / prensa c. 1850, no ese diario
+	event_image = { video = "gg_arg_regeneracion" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	duration = 1825
 
@@ -963,7 +964,8 @@ gg_argentina.8 = {
 	title = gg_argentina.8.t
 	desc = gg_argentina.8.d
 	flavor = gg_argentina.8.f
-	event_image = { video = "gg_fl_urquiza" }
+	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
+	event_image = { video = "gg_arg_vences" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
 
@@ -2543,7 +2545,8 @@ gg_argentina.13 = {
 	title = gg_argentina.13.t
 	desc = gg_argentina.13.d
 	flavor = gg_argentina.13.f
-	event_image = { video = "gg_arg_coalicion" }
+	# EN/ES: Carneiro Leao, the Brazilian negotiator; not the signing / negociador; no es la firma
+	event_image = { video = "gg_arg_convencion" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 1825
 
@@ -2580,7 +2583,8 @@ gg_argentina.14 = {
 	title = gg_argentina.14.t
 	desc = gg_argentina.14.d
 	flavor = gg_argentina.14.f
-	event_image = { video = "gg_oribe_fall" }
+	# EN/ES: Felipe Arana, Rosas's foreign minister; not the reply / canciller de Rosas; no la respuesta
+	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
 
@@ -2637,7 +2641,8 @@ gg_argentina.15 = {
 	title = gg_argentina.15.t
 	desc = gg_argentina.15.d
 	flavor = gg_argentina.15.f
-	event_image = { video = "gg_money_brazilian_claims" }
+	# EN/ES: 1816 Brazilian patacao, not the 1851 loan instrument / patacao de 1816, no el emprestito
+	event_image = { video = "gg_arg_patacao" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 1825
 
