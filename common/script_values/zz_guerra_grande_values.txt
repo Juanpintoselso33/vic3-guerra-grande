@@ -240,3 +240,23 @@ gg_delegation_bar_value = {
 	min = 0
 	max = 13
 }
+
+# EN: what is left of the Ejercito Unido de Vanguardia when it crosses, read from how the interior
+#     campaign ended. Five battalions if Rosas had the interior quiet, three if it cost him.
+# ES: lo que queda del Ejercito Unido de Vanguardia cuando cruza, leido de como termino la campania
+#     del interior. Cinco batallones si Rosas tuvo el interior quieto, tres si le costo.
+gg_vanguardia_line = {
+	value = 3
+	if = {
+		limit = { global_var:gg_interior_outcome = 2 }
+		subtract = 1
+	}
+}
+
+gg_vanguardia_horse = {
+	value = 2
+	if = {
+		limit = { global_var:gg_interior_outcome = 2 }
+		subtract = 1
+	}
+}

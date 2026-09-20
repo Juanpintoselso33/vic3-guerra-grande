@@ -107,6 +107,11 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.8 days = 2601 }  # 1843-02-16 el balance del interior
 			trigger_event = { id = gg_argentina_cal.9 days = 5871 }  # 1852-02-01 renuncia Pacheco
 			trigger_event = { id = gg_argentina_cal.10 days = 5873 } # 1852-02-03 la hora de Caseros
+			# EN/ES: y los tres que faltaban: el Director de la Liga y las dos vueltas de Corrientes
+			#     / and the three that were missing: the Director of the League and Corrientes' two returns
+			trigger_event = { id = gg_argentina_cal.11 days = 1726 } # 1840-09-24 el pacto de la Liga
+			trigger_event = { id = gg_argentina_cal.12 days = 2156 } # 1841-11-28 Caa Guazu
+			trigger_event = { id = gg_argentina_cal.13 days = 2645 } # 1843-04-01 el Paso de los Libres
 		}
 
 		c:ARG ?= {

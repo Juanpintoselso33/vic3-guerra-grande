@@ -6,10 +6,13 @@
 #     cannot tell them apart by template. The proposed fix was to compare identities -- purge every
 #     character with template X that is NOT the saved scope. That works, but it needs one comparison
 #     per person and it is silently wrong the day somebody adds a character and forgets the list.
-#     What these effects do instead: EXILE EVERY CLONE, WITHOUT EXCEPTION, the moment the country is
+#     What these effects do instead: KILL EVERY CLONE, WITHOUT EXCEPTION, the moment the country is
 #     created, and only then bring in the people who belong to it -- the originals, transferred, and
-#     the new ones, created. Nothing to compare, no list to keep, and a clone cannot survive because
-#     no clone is ever spared.
+#     the new ones, created. Nothing to compare and no list to keep.
+#     It used to EXILE them, and this paragraph used to say that no clone could survive it. That was
+#     wrong: vanilla's exile makes an agitator out of the man and leaves him alive in the exile pool,
+#     where any country can pick him up. Corrected 20 September 2026; the detail is in
+#     gg_argentina_new_country_people.
 #     The order matters and is the whole trick: create, empty, populate, name the ruler.
 # ES: EL NACIMIENTO DE LOS TRES PAISES ARGENTINOS, como efectos, para que los eventos se lean.
 #
@@ -19,10 +22,13 @@
 #     purgar todo personaje con template X que NO sea el scope guardado. Funciona, pero necesita una
 #     comparacion por persona y se equivoca en silencio el dia que alguien agrega un personaje y se
 #     olvida de la lista.
-#     Lo que hacen estos efectos: EXILIAR TODOS LOS CLONES, SIN EXCEPCION, apenas se crea el pais, y
+#     Lo que hacen estos efectos: MATAR A TODOS LOS CLONES, SIN EXCEPCION, apenas se crea el pais, y
 #     recien despues traer a los que le pertenecen -- los originales, transferidos, y los nuevos,
-#     creados. Nada que comparar, ninguna lista que mantener, y un clon no puede sobrevivir porque no
-#     se salva ninguno.
+#     creados. Nada que comparar y ninguna lista que mantener.
+#     Antes los EXILIABA, y este parrafo decia que asi ningun clon podia sobrevivir. Estaba mal: el
+#     exilio de vanilla lo convierte en agitador y lo deja vivo en la bolsa de exiliados, de donde
+#     cualquier pais lo puede levantar. Corregido el 20/9/2026; el detalle esta en
+#     gg_argentina_new_country_people.
 #     El orden importa y es todo el truco: crear, vaciar, poblar, nombrar gobernante.
 # -------------------------------------------------------------------------------------------------
 
@@ -294,17 +300,33 @@ gg_argentina_create_entre_rios = {
 gg_argentina_new_country_people = {
 	c:$TAG$ ?= {
 		every_scope_character = {
-			# EN: vanilla's own comment on exile_character_with_role_cleanup says it "should be used
-			#     instead of exile_character = yes" (common/scripted_effects/00_scripted_effects.txt).
-			#     It also unassigns a commander from his formation and strips every role, which is
-			#     exactly what a cloned roster needs: a bare exile leaves interest-group leaders still
-			#     tied to their group and commanders still tied to formations.
-			# ES: el comentario de la propia vanilla sobre exile_character_with_role_cleanup dice que
-			#     "deberia usarse en lugar de exile_character = yes". Ademas le saca el mando de su
-			#     formacion y le quita todos los roles, que es justo lo que necesita un plantel
-			#     clonado: un exilio pelado deja lideres de grupo todavia atados a su grupo y
-			#     comandantes todavia atados a formaciones.
-			exile_character_with_role_cleanup = yes
+			# EN: THE CLONES ARE KILLED, NOT EXILED, and the correction is dated 20 September 2026,
+			#     from Codex's review. This used to call exile_character_with_role_cleanup, and the
+			#     comment here claimed no clone could survive it. Read vanilla and the claim falls
+			#     apart: common/scripted_effects/00_scripted_effects.txt:720-729 is three lines long
+			#     and it is exile_character = yes, unassign_from_formation, and
+			#     replace_character_roles = { add = { agitator } remove_all = yes }. Nothing dies.
+			#     The clone leaves the country's roster and lands in the EXILE POOL, alive, carrying
+			#     the same name and the same portrait, and from there any country can invite it back
+			#     or it can surface as an agitator. Three births times a full Argentine roster is
+			#     some thirty ghosts, and one of them is named Juan Manuel de Rosas.
+			#     hidden = yes because nobody died: these people were never born. Vanilla uses the
+			#     same form when it needs a silent death (events/brazil/paraguay.txt:292).
+			# ES: LOS CLONES SE MATAN, NO SE EXILIAN, y la correccion es del 20/9/2026, de la revision
+			#     de Codex. Esto llamaba a exile_character_with_role_cleanup y el comentario de aca
+			#     afirmaba que ningun clon podia sobrevivirlo. Se lee vanilla y la afirmacion se cae:
+			#     common/scripted_effects/00_scripted_effects.txt:720-729 tiene tres lineas y son
+			#     exile_character = yes, unassign_from_formation y replace_character_roles con el rol
+			#     de agitador. No muere nadie.
+			#     El clon sale del plantel del pais y cae en la BOLSA DE EXILIADOS, vivo, con el mismo
+			#     nombre y el mismo retrato, y desde ahi cualquier pais lo puede invitar o puede
+			#     aparecer de agitador. Tres nacimientos por un plantel argentino entero son unos
+			#     treinta fantasmas, y uno se llama Juan Manuel de Rosas.
+			#     hidden = yes porque no murio nadie: esta gente nunca nacio. Vanilla usa la misma
+			#     forma cuando necesita una muerte silenciosa (events/brazil/paraguay.txt:292).
+			kill_character = {
+				hidden = yes
+			}
 		}
 		# EN/ES: y la delegacion, que desde aca se mira del otro lado / and the delegation, seen from
 		#     the other side from here on
@@ -347,5 +369,72 @@ gg_argentina_open_war = {
 				type = annex_country
 			}
 		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: CORRIENTES RISES AGAIN. Corrientes fell and came back twice, and a mod that only lets it be
+#     born once is telling half of what happened: Pago Largo (31/3/1839) put a federal governor in
+#     the city, Caa Guazu (28/11/1841) gave the province back to its own men, Arroyo Grande
+#     (6/12/1842) lost it again, and the Madariaga brothers took it back in April 1843.
+#     This is the one thing the interior campaign was missing. Rosas' armies are far stronger than a
+#     single province, so in almost every game Corrientes is annexed within two years of 1839 -- and
+#     with it went Paz and the Madariaga, three men who had a template and no way of ever existing.
+#     WHY IT IS ITS OWN EFFECT and not gg_argentina_create_corrientes: the birth of 1839 puts Beron
+#     de Astrada in the chair and hands Ferre the river programme. Beron died at Pago Largo twenty
+#     five days later. A rebirth that raised him again would be a ghost governing.
+#     The ruler is a parameter because each return had a different man at its head.
+# ES: CORRIENTES VUELVE A LEVANTARSE. Corrientes cayo y volvio dos veces, y un mod que solo la deja
+#     nacer una vez cuenta la mitad de lo que paso: Pago Largo (31/3/1839) puso un gobernador federal
+#     en la ciudad, Caa Guazu (28/11/1841) le devolvio la provincia a los suyos, Arroyo Grande
+#     (6/12/1842) la volvio a perder, y los hermanos Madariaga la recuperaron en abril de 1843.
+#     Es lo unico que le faltaba a la campania del interior. Los ejercitos de Rosas son muchisimo mas
+#     fuertes que una provincia sola, asi que en casi toda partida Corrientes queda anexada antes de
+#     dos anios de 1839 -- y con ella se iban Paz y los Madariaga, tres hombres que tenian template y
+#     ninguna manera de existir jamas.
+#     POR QUE ES SU PROPIO EFECTO y no gg_argentina_create_corrientes: el nacimiento de 1839 sienta a
+#     Beron de Astrada y le da a Ferre el programa fluvial. Beron murio en Pago Largo veinticinco
+#     dias despues. Un renacimiento que lo levantara otra vez seria un fantasma gobernando.
+#     El gobernante es un parametro porque cada vuelta tuvo un hombre distinto a la cabeza.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md
+# -------------------------------------------------------------------------------------------------
+gg_argentina_revive_corrientes = {
+	create_country = {
+		tag = CRR
+		origin = this
+		state = s:STATE_CORRIENTES.region_state:ARG
+		on_created = {
+			set_variable = gg_arg_corrientes_seat
+		}
+	}
+	if = {
+		limit = { exists = s:STATE_MISIONES.region_state:ARG }
+		s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CRR }
+	}
+	gg_argentina_new_country_people = {
+		TAG = CRR
+	}
+	c:CRR ?= {
+		set_capital = STATE_CORRIENTES
+		create_character = {
+			template = $RULER$
+			ruler = yes
+		}
+	}
+	# EN: the delegation is withdrawn again -- but ONLY if the country is actually there. The effect
+	#     is guarded by its own mark, so it cannot charge twice for the same absence; what this extra
+	#     test buys is the case nobody can verify from a text editor: re-creating a tag that already
+	#     lived and died. If the engine refuses it, everything below is a no-op and the event is only
+	#     news -- but an ungated charge would still have taken twelve points off Rosas for a province
+	#     that never came back. A bar must never disagree with the map.
+	# ES: la delegacion se retira otra vez -- pero SOLO si el pais esta de verdad. El efecto esta
+	#     guardado por su propia marca, asi que no cobra dos veces la misma ausencia; lo que compra
+	#     este chequeo de mas es el caso que no se puede verificar desde un editor de texto: volver a
+	#     crear un tag que ya vivio y murio. Si el motor no lo permite, todo lo de abajo no hace nada y
+	#     el evento es solo una noticia -- pero un cobro sin guarda igual le habria sacado doce puntos
+	#     a Rosas por una provincia que nunca volvio. La barra no puede discrepar con el mapa.
+	if = {
+		limit = { exists = c:CRR }
+		gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
 	}
 }

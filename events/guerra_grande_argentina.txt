@@ -7,9 +7,10 @@
 #     THE RULES THIS FILE OBEYS, every one of them learned the hard way on the Uruguayan side:
 #     - create_country CLONES the origin country's whole character roster, and the clone shares its
 #       template with the original. So every character who must MOVE is saved into a scope BEFORE
-#       the country is created; the new country is then EMPTIED of every clone without exception,
-#       and only then populated. The emptying lives in gg_argentina_new_country_people and its
-#       reasoning is written there.
+#       the country is created; the new country is then EMPTIED of every clone without exception --
+#       killed, not exiled, because vanilla's exile leaves the man alive as an agitator -- and only
+#       then populated. The emptying lives in gg_argentina_new_country_people and its reasoning is
+#       written there.
 #     - c:<new tag> DOES resolve right after create_country, in the same effect: vanilla uses c:ZAN
 #       immediately after creating it (events/zanzibar_events.txt:32). The rule that costs a day is
 #       about change_tag, which is a different effect and a different problem. An earlier version of
@@ -29,9 +30,10 @@
 #     LAS REGLAS QUE CUMPLE ESTE ARCHIVO, todas aprendidas a los golpes del lado oriental:
 #     - create_country CLONA el plantel entero de personajes del pais de origen, y el clon comparte
 #       template con el original. Asi que todo personaje que tenga que MUDARSE se guarda en un scope
-#       ANTES de crear el pais; despues el pais nuevo se VACIA de todos los clones sin excepcion, y
-#       recien ahi se puebla. El vaciado vive en gg_argentina_new_country_people y el razonamiento
-#       esta escrito ahi.
+#       ANTES de crear el pais; despues el pais nuevo se VACIA de todos los clones sin excepcion --
+#       matandolos, no exiliandolos, porque el exilio de vanilla lo deja vivo de agitador -- y recien
+#       ahi se puebla. El vaciado vive en gg_argentina_new_country_people y el razonamiento esta
+#       escrito ahi.
 #     - c:<tag nuevo> SI resuelve justo despues de create_country, en el mismo efecto: vanilla usa
 #       c:ZAN inmediatamente despues de crearlo. La regla que cuesta un dia es la de change_tag, que
 #       es otro efecto y otro problema. Una version anterior de esta cabecera decia lo contrario:
@@ -646,6 +648,315 @@ gg_argentina.50 = {
 	option = {
 		name = gg_argentina.50.a
 		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.5 -- THE PACT OF THE LEAGUE OF THE NORTH, 24 September 1840. The Congress of
+#     Agents had been sitting in Tucuman since 22 August; on this day the six provinces signed a
+#     defensive-offensive alliance and elected Tomas Brizuela, governor of La Rioja, Director of the
+#     League, entrusting him with «general affairs» and the power to make war, sign peace, negotiate
+#     loans «within or outside the Republic» and conclude treaties -- these last subject to
+#     ratification by each province.
+#     WHY HIM. He had the most numerous and best armed army of the Coalition and its most
+#     distinguished officers, and he held the mountain passes to Chile, from where reinforcements
+#     were expected. Lamadrid went over to his ranks.
+#     WHAT CHANGES. Avellaneda was the head of the pronouncement; from here the League has a soldier
+#     at its head and the Riojan division in the field. It is the Coalition's strongest month.
+# ES: gg_argentina.5 -- EL PACTO DE LA LIGA DEL NORTE, 24 de septiembre de 1840. El Congreso de
+#     Agentes sesionaba en Tucuman desde el 22 de agosto; ese dia las seis provincias firmaron una
+#     alianza defensiva-ofensiva y eligieron a Tomas Brizuela, gobernador de La Rioja, Director de la
+#     Liga, confiandole los «asuntos generales» y la facultad de hacer la guerra, firmar la paz,
+#     negociar emprestitos «dentro o fuera de la Republica» y celebrar tratados -- estos ultimos
+#     sujetos a la ratificacion de cada provincia.
+#     POR QUE EL. Tenia el ejercito mas numeroso y mejor armado de la Coalicion y la oficialidad mas
+#     destacada, y controlaba los pasos de montania a Chile, de donde se esperaban refuerzos. Lamadrid
+#     se paso a sus filas.
+#     QUE CAMBIA. Avellaneda era la cabeza del pronunciamiento; de aca en adelante la Liga tiene un
+#     militar al frente y la division riojana en campania. Es el mes mas fuerte de la Coalicion.
+# SOURCE / FUENTE: Parrado, Emmanuel, «Indagaciones en torno a la politica de la Liga del Norte
+#     1840-1841» (cdsa.aacademica.org/000-006/24.pdf): el Congreso de Agentes se inaugura el 22 de
+#     agosto de 1840 y «el 24 de septiembre de ese mismo anio se firma el pacto de la Liga del Norte
+#     [...] Se elige a Tomas Brizuela (gobernador de la Rioja) director de la Liga del Norte».
+#     Las facultades y la razon del nombramiento, en docs/guerra-grande-argentina/historia-argentina.md.
+# -------------------------------------------------------------------------------------------------
+gg_argentina.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.5.t
+	desc = gg_argentina.5.d
+	flavor = gg_argentina.5.f
+	event_image = { video = "gg_arg_coalicion" }
+	icon = "gfx/interface/icons/event_icons/event_politics.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:CLN
+	}
+
+	immediate = {
+		hidden_effect = {
+			c:CLN ?= {
+				# EN/ES: si Brizuela no esta -- otra partida, otro camino -- la Liga nombra igual a su
+				#     Director: sin el hombre no hay evento / if Brizuela is gone the League still
+				#     names its Director
+				if = {
+					limit = { NOT = { any_scope_character = { has_template = CLN_gg_tomas_brizuela } } }
+					create_character = { template = CLN_gg_tomas_brizuela }
+				}
+				random_scope_character = {
+					limit = { has_template = CLN_gg_tomas_brizuela }
+					set_character_as_ruler = yes
+					add_commander_rank = 2
+					save_scope_as = gg_brizuela
+				}
+				# EN/ES: «el Ejercito mas numeroso y mejor armado de la Coalicion» era el suyo, y era
+				#     riojano: entra en campania con el / his own army, and it was Riojan
+				create_military_formation = {
+					type = army
+					hq_region = capital.region
+					name = gg_arg_division_rioja
+					save_scope_as = gg_division_rioja
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 2
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = scope:gg_brizuela
+					exists = scope:gg_division_rioja
+				}
+				scope:gg_brizuela = { transfer_to_formation = scope:gg_division_rioja }
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.5.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.6 -- CAA GUAZU, 28 November 1841. Echague crossed into Corrientes with some five
+#     thousand men; Jose Maria Paz met him with three thousand and destroyed him. Fifty-three
+#     Correntine dead against eight hundred dead and a thousand prisoners. It is the one clean
+#     victory the interior gave the enemies of Rosas, and it is also the worst documented battle of
+#     the whole campaign -- said here because it is true and not because it is convenient.
+#     AND IT IS WHERE PAZ EXISTS. If Corrientes is still standing he takes command of its army; if
+#     Rosas had already annexed it -- which is what usually happens, one province against the
+#     Confederation -- then this is the day the province rises again with him at its head. The
+#     mathematician general had no other way into this mod.
+#     WHAT ROSAS DOES NOT KNOW YET: Echague did not have Urquiza with him, and Urquiza replaced him
+#     as governor of Entre Rios shortly afterwards. Caa Guazu is what puts him in the chair.
+# ES: gg_argentina.6 -- CAA GUAZU, 28 de noviembre de 1841. Echague entro en Corrientes con unos cinco
+#     mil hombres; Jose Maria Paz lo espero con tres mil y lo deshizo. Cincuenta y tres muertos
+#     correntinos contra ochocientos muertos y mil prisioneros. Es la unica victoria limpia que el
+#     interior les dio a los enemigos de Rosas, y es tambien la batalla peor documentada de toda la
+#     campania -- dicho aca porque es cierto, no porque convenga.
+#     Y ES DONDE EXISTE PAZ. Si Corrientes sigue en pie, toma el mando de su ejercito; si Rosas ya la
+#     habia anexado -- que es lo que pasa casi siempre, una provincia sola contra la Confederacion --
+#     entonces este es el dia en que la provincia se vuelve a levantar con el a la cabeza. El general
+#     matematico no tenia otra manera de entrar a este mod.
+#     LO QUE ROSAS TODAVIA NO SABE: Echague no llevaba a Urquiza, y Urquiza lo reemplazo como
+#     gobernador de Entre Rios poco despues. Caa Guazu es lo que lo sienta en la silla.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md (28/11/1841; cifras y la
+#     advertencia de que el articulo de referencia casi no tiene citas inline).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.6 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.6.t
+	desc = gg_argentina.6.d
+	flavor = gg_argentina.6.f
+	event_image = { video = "gg_arg_corrientes" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		OR = {
+			exists = c:CRR
+			exists = s:STATE_CORRIENTES.region_state:ARG
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { exists = c:CRR } }
+				gg_argentina_revive_corrientes = { RULER = CRR_gg_jose_maria_paz }
+			}
+			c:CRR ?= {
+				if = {
+					limit = { NOT = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } } }
+					create_character = { template = CRR_gg_jose_maria_paz }
+				}
+				random_scope_character = {
+					limit = { has_template = CRR_gg_jose_maria_paz }
+					add_commander_rank = 2
+					save_scope_as = gg_paz
+				}
+				# EN/ES: el ejercito de Caa Guazu: tres mil hombres, y la caballeria que decidio el dia
+				#     / the army of Caa Guazu: three thousand men, and the horse that decided the day
+				create_military_formation = {
+					type = army
+					hq_region = capital.region
+					name = gg_arg_ejercito_caa_guazu
+					save_scope_as = gg_ejercito_paz
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 3
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						count = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = scope:gg_paz
+					exists = scope:gg_ejercito_paz
+				}
+				scope:gg_paz = { transfer_to_formation = scope:gg_ejercito_paz }
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.6.a
+		default_option = yes
+		# EN/ES: si la provincia volvio a levantarse, la guerra vuelve a abrirse: Rosas no reconocio
+		#     ninguna de las dos vueltas / if the province rose again, the war opens again
+		if = {
+			limit = {
+				exists = c:CRR
+				NOT = { c:ARG ?= { has_war_with = c:CRR } }
+			}
+			gg_argentina_open_war = { TAG = CRR }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.7 -- PASO DE LOS LIBRES, 1 April 1843. After Arroyo Grande the Madariaga brothers
+#     refused to save Ferre and went back to their estancia. Four months later they crossed the
+#     Uruguay from Brazilian soil, at a ford they named the Pass of the Free Men, and in thirteen
+#     days they occupied Corrientes. They did not restore anybody: they built a Unitarian party of
+#     their own and confiscated the property of every federal in the province -- «the same method as
+#     Lavalle and Rosas».
+#     WHY IT MATTERS ON THE OTHER BANK. This is the province that will give Paz his ten thousand men
+#     from Paraguay, sign Alcaraz in 1846 and bleed at Vences in 1847. Without it, from here on the
+#     whole Argentine side is Rosas alone against Entre Rios in 1851.
+#     Joaquin governs, Juan commands. That is how they divided it, and it is why they lasted.
+# ES: gg_argentina.7 -- PASO DE LOS LIBRES, 1 de abril de 1843. Despues de Arroyo Grande los hermanos
+#     Madariaga se negaron a salvar a Ferre y se volvieron a su estancia. Cuatro meses mas tarde
+#     cruzaron el Uruguay desde suelo brasileno, por un paso que bautizaron de los Libres, y en trece
+#     dias ocuparon Corrientes. No restauraron a nadie: armaron un partido unitario propio y
+#     confiscaron los bienes de todos los federales de la provincia -- «el mismo metodo de Lavalle y
+#     Rosas».
+#     POR QUE IMPORTA EN LA OTRA ORILLA. Esta es la provincia que le va a dar a Paz sus diez mil
+#     hombres desde el Paraguay, firmar Alcaraz en 1846 y desangrarse en Vences en 1847. Sin ella, de
+#     aca en adelante todo el lado argentino es Rosas solo contra Entre Rios en 1851.
+#     Joaquin gobierna, Juan manda. Asi se lo repartieron, y por eso duraron.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md (1/4/1843, trece dias hasta la
+#     ciudad; la negativa a salvar a Ferre y las confiscaciones).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.7 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.7.t
+	desc = gg_argentina.7.d
+	flavor = gg_argentina.7.f
+	event_image = { video = "gg_arg_corrientes" }
+	icon = "gfx/interface/icons/event_icons/event_war.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		OR = {
+			exists = c:CRR
+			exists = s:STATE_CORRIENTES.region_state:ARG
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { NOT = { exists = c:CRR } }
+				gg_argentina_revive_corrientes = { RULER = CRR_gg_joaquin_madariaga }
+			}
+			c:CRR ?= {
+				# EN/ES: Joaquin gobierna. Si la provincia ya estaba en pie con otro adentro, el
+				#     gobierno cambia de manos igual: eso fue el Paso de los Libres / Joaquin governs
+				if = {
+					limit = { NOT = { any_scope_character = { has_template = CRR_gg_joaquin_madariaga } } }
+					create_character = { template = CRR_gg_joaquin_madariaga }
+				}
+				random_scope_character = {
+					limit = { has_template = CRR_gg_joaquin_madariaga }
+					set_character_as_ruler = yes
+					add_commander_rank = 1
+				}
+				if = {
+					limit = { NOT = { any_scope_character = { has_template = CRR_gg_juan_madariaga } } }
+					create_character = { template = CRR_gg_juan_madariaga }
+				}
+				random_scope_character = {
+					limit = { has_template = CRR_gg_juan_madariaga }
+					add_commander_rank = 2
+					save_scope_as = gg_juan_madariaga
+				}
+				create_military_formation = {
+					type = army
+					hq_region = capital.region
+					name = gg_arg_ejercito_libertador
+					save_scope_as = gg_ejercito_libres
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						count = 2
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						count = 4
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = scope:gg_juan_madariaga
+					exists = scope:gg_ejercito_libres
+				}
+				scope:gg_juan_madariaga = { transfer_to_formation = scope:gg_ejercito_libres }
+			}
+		}
+	}
+
+	option = {
+		name = gg_argentina.7.a
+		default_option = yes
+		if = {
+			limit = {
+				exists = c:CRR
+				NOT = { c:ARG ?= { has_war_with = c:CRR } }
+			}
+			gg_argentina_open_war = { TAG = CRR }
+		}
 		ai_chance = { base = 100 }
 	}
 }

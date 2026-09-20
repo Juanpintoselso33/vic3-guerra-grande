@@ -494,15 +494,32 @@ gg_contingent.7 = {
 		create_military_formation = {
 			type = army
 			hq_region = capital.region
+			# EN: AND HERE IS WHERE THE INTERIOR IS PAID FOR. gg_interior_outcome is written by the
+			#     reckoning of 16 February 1843 and until now nobody read it: winning the interior
+			#     cleanly and scraping through it did exactly the same thing. They should not. The
+			#     Vanguardia that crosses is what is LEFT of the army that fought Lavalle twice --
+			#     an army that spent 1840 and 1841 marching from Cordoba to Tucuman and back arrives
+			#     smaller than one that had the interior quiet.
+			#     1 is a clean interior: the five battalions the sources give. 2 is an interior that
+			#     cost him: three. 0, the value without the Argentine side, behaves as history did.
+			# ES: Y ACA ES DONDE SE PAGA EL INTERIOR. gg_interior_outcome lo escribe el balance del
+			#     16 de febrero de 1843 y hasta ahora no lo leia nadie: ganar el interior limpio y
+			#     ganarlo raspando hacian exactamente lo mismo. No tienen que hacerlo. La Vanguardia
+			#     que cruza es lo que QUEDA del ejercito que le gano dos veces a Lavalle: un ejercito
+			#     que se paso 1840 y 1841 marchando de Cordoba a Tucuman y de vuelta llega mas chico
+			#     que uno que tuvo el interior quieto.
+			#     El 1 es interior limpio: los cinco batallones que dan las fuentes. El 2 es un
+			#     interior que le costo: tres. El 0, que es el valor sin el lado argentino, se
+			#     comporta como la historia.
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
 				state_region = s:STATE_SAN_JOSE
-				count = 3
+				count = gg_vanguardia_line
 			}
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
 				state_region = s:STATE_SAN_JOSE
-				count = 2
+				count = gg_vanguardia_horse
 			}
 		}
 		add_modifier = {

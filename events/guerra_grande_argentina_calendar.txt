@@ -290,3 +290,76 @@ gg_argentina_cal.10 = {
 		}
 	}
 }
+
+# EN/ES: 24/9/1840 (dia 1726) -- el pacto de la Liga y Brizuela Director
+gg_argentina_cal.11 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_11 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+					# EN/ES: sin Liga no hay Director / no League, no Director
+					exists = c:CLN
+				}
+				set_global_variable = gg_arg_cal_done_11
+				c:ARG = { trigger_event = { id = gg_argentina.5 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 28/11/1841 (dia 2156) -- Caa Guazu: Paz deshace a Echague
+gg_argentina_cal.12 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_12 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+					# EN/ES: o la provincia esta en pie, o Rosas la tiene y se la pueden quitar. Si no
+					#     es ninguna de las dos, Caa Guazu no tiene donde pasar / either the province
+					#     stands, or Rosas holds it and it can be taken from him
+					OR = {
+						exists = c:CRR
+						exists = s:STATE_CORRIENTES.region_state:ARG
+					}
+				}
+				set_global_variable = gg_arg_cal_done_12
+				c:ARG = { trigger_event = { id = gg_argentina.6 days = 0 popup = yes } }
+			}
+		}
+	}
+}
+
+# EN/ES: 1/4/1843 (dia 2645) -- el Paso de los Libres: vuelven los Madariaga
+gg_argentina_cal.13 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_global_variable = gg_arg_cal_done_13 }
+					exists = s:STATE_ENTRE_RIOS
+					exists = c:ARG
+					OR = {
+						exists = c:CRR
+						exists = s:STATE_CORRIENTES.region_state:ARG
+					}
+				}
+				set_global_variable = gg_arg_cal_done_13
+				c:ARG = { trigger_event = { id = gg_argentina.7 days = 0 popup = yes } }
+			}
+		}
+	}
+}

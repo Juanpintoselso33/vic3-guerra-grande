@@ -106,6 +106,42 @@ gg_systems_init = {
 	#     mes de sitio, -1.
 	set_global_variable = { name = gg_delegating_provinces value = 13 }
 	set_global_variable = { name = gg_delegation_points value = 156 }
+	# EN: THE THREE FEDERAL GOVERNORS WHO STAY WITH ROSAS, created on day one because that is when
+	#     they were already governing. Vanilla has none of them, and without them the interior is a
+	#     map with no one on it: Ibarra is the man who refuses to join the Coalition and cuts the
+	#     northern bloc in two, Benavidez and Aldao are Cuyo, where Angaco and Rodeo del Medio are
+	#     fought in 1841. They had templates and no event that created them -- which is another way
+	#     of saying they did not exist.
+	# ES: LOS TRES GOBERNADORES FEDERALES QUE SE QUEDAN CON ROSAS, creados el primer dia porque es
+	#     cuando ya estaban gobernando. Vanilla no tiene a ninguno, y sin ellos el interior es un mapa
+	#     sin nadie adentro: Ibarra es el que se niega a entrar en la Coalicion y parte el bloque del
+	#     norte en dos, Benavidez y Aldao son Cuyo, donde en 1841 se pelean Angaco y Rodeo del Medio.
+	#     Tenian template y ningun evento que los creara, que es otra manera de decir que no existian.
+	#     Y LA GUARDA DE «LA ARGENTINA», que aca no es opcional: los tres tienen home_region en
+	#     Santiago del Estero, San Juan y Mendoza, y en vanilla esos estados NO EXISTEN -- de toda la
+	#     Argentina, vanilla tiene Buenos Aires, Corrientes, Jujuy, Santiago (que es la de Chile) y
+	#     Tucuman. Sin «la Argentina» cargada, crearlos seria pedirle al motor tres hombres de
+	#     ninguna parte, en toda partida oriental, aunque nadie toque el lado argentino. La sonda es
+	#     la misma que usan los diez relevos del calendario argentino: Entre Rios no existe sin ella.
+	#     / AND THE «LA ARGENTINA» GUARD, which here is not optional: their home regions do not exist
+	#     in vanilla at all.
+	if = {
+		limit = { exists = s:STATE_ENTRE_RIOS }
+		c:ARG ?= {
+			if = {
+				limit = { NOT = { any_scope_character = { has_template = ARG_gg_juan_felipe_ibarra } } }
+				create_character = { template = ARG_gg_juan_felipe_ibarra }
+			}
+			if = {
+				limit = { NOT = { any_scope_character = { has_template = ARG_gg_nazario_benavidez } } }
+				create_character = { template = ARG_gg_nazario_benavidez }
+			}
+			if = {
+				limit = { NOT = { any_scope_character = { has_template = ARG_gg_jose_felix_aldao } } }
+				create_character = { template = ARG_gg_jose_felix_aldao }
+			}
+		}
+	}
 	# EN/ES: playtest -- countries kept in globals so journal texts can show their flags
 	#     / paises guardados en globales para mostrar sus banderas en los textos
 	c:ARG ?= { set_global_variable = { name = gg_flag_arg value = this } }
