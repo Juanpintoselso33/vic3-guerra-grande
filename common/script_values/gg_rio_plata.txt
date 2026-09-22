@@ -94,15 +94,13 @@ gg_ui_plata_gbr_relations = {
 	value = 0
 	if = {
 		limit = { exists = c:ARG exists = c:GBR }
-		c:ARG = { save_temporary_scope_as = gg_plata_rosas_ui }
-		c:GBR = { add = relations:scope:gg_plata_rosas_ui }
+		c:ARG = { c:GBR = { add = relations:prev } }
 	}
 }
 gg_ui_plata_fra_relations = {
 	value = 0
 	if = {
 		limit = { exists = c:ARG exists = c:FRA }
-		c:ARG = { save_temporary_scope_as = gg_plata_rosas_ui }
-		c:FRA = { add = relations:scope:gg_plata_rosas_ui }
+		c:ARG = { c:FRA = { add = relations:prev } }
 	}
 }

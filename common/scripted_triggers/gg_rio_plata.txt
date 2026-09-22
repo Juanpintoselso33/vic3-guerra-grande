@@ -18,17 +18,16 @@ gg_plata_ba_fort = {
 gg_plata_mvd_fort = {
 	p:x302DDA.state ?= { has_building = building_naval_fortification }
 }
-# EN: Vic3 has no state-controller trigger (occupation is per province). Codex review 22/9: owner
-#     alone would still show Rosas with Buenos Aires occupied, so it also asks that Argentina holds
-#     control of a strait, which occupation takes away. The closure itself is the engine's answer
-#     (gg_plata_closed), which already folds occupation in.
-# ES: Vic3 no tiene trigger de controlador de estado (la ocupacion es por provincia). Solo el dueno
-#     seguiria mostrando a Rosas con Buenos Aires ocupada, asi que tambien pide que la Argentina
-#     controle un estrecho, cosa que la ocupacion le saca. El cierre en si es la respuesta del motor.
+# EN: Vic3 has no state-controller trigger (occupation is per province), so this reads the owner.
+#     has_any_strait_control was tried and rejected at load (22/9/2026: it takes a country target,
+#     not "yes"). The closure itself is the engine's answer (gg_plata_closed), which already folds
+#     occupation in; only the Overview's label can lag behind an occupation.
+# ES: Vic3 no tiene trigger de controlador de estado, asi que se lee el dueno. has_any_strait_control
+#     se probo y el motor lo rechazo al cargar (lleva un pais como objetivo, no "yes"). El cierre en
+#     si es la respuesta del motor, que ya incluye la ocupacion.
 gg_plata_ba_held_by_rosas = {
 	exists = c:ARG
 	p:x365A5B.state ?= { owner ?= c:ARG }
-	c:ARG = { has_any_strait_control = yes }
 }
 
 # EN: Is the River Plate shut to foreign flags? Rosas holds his bank, it is fortified, and British
@@ -62,16 +61,18 @@ gg_plata_ba_port_blockaded = {
 
 # EN: B. The powers' patience runs out: enough months of a shut river, and London or Paris no longer
 #     cordial with Rosas. Twelve months instead of eighteen once the Defensa has called the
-#     squadrons. Relations are read with a scope target, the only form vanilla uses.
+#     squadrons. Relations are read toward prev, the form vanilla uses.
 # ES: B. Se acaba la paciencia de las potencias: bastantes meses de rio cerrado, y Londres o Paris
 #     ya no cordiales con Rosas. Doce meses en vez de dieciocho si la Defensa llamo a las escuadras.
 gg_plata_patience_spent = {
 	global_var:gg_plata_closed_total >= gg_plata_patience_threshold
-	exists = c:ARG
-	c:ARG = { save_temporary_scope_as = gg_plata_rosas }
-	OR = {
-		c:GBR ?= { relations:scope:gg_plata_rosas < relations_threshold:cordial }
-		c:FRA ?= { relations:scope:gg_plata_rosas < relations_threshold:cordial }
+	# EN/ES: relations toward prev (= Argentina): "relations:scope:x" does not load (22/9/2026, "More
+	#     than one colon in event target link"); vanilla only uses root/prev/this / relaciones hacia prev
+	c:ARG ?= {
+		OR = {
+			c:GBR ?= { relations:prev < relations_threshold:cordial }
+			c:FRA ?= { relations:prev < relations_threshold:cordial }
+		}
 	}
 }
 
