@@ -5,15 +5,30 @@ gg_ui_prewar_leaders_sync = {
   limit = { NOT = { has_global_variable = guerra_grande_split_done } }
   c:URU ?= {
    clear_variable_list = gg_ui_prewar_colorado
+   clear_variable_list = gg_ui_prewar_blanco
+  }
+  # EN: 22/9/2026 (Juan: "after Oribe leaves in '38 Rivera is left alone") -- a fallen caudillo leaves
+  #     Uruguay: Oribe goes to Buenos Aires (or into exile), Rivera to Brazil or exile. Look for both
+  #     wherever they are, so the face to face keeps both sides.
+  # ES: un caudillo caido sale de Uruguay: Oribe a Buenos Aires (o al exilio), Rivera al Brasil o al
+  #     exilio. Se los busca donde esten, para que el cara a cara conserve los dos lados.
+  every_country = {
    every_scope_character = {
     limit = { has_template = URU_Fructuoso_Rivera is_character_alive = yes }
-    owner = { add_to_variable_list = { name = gg_ui_prewar_colorado target = prev } }
+    c:URU ?= { add_to_variable_list = { name = gg_ui_prewar_colorado target = prev } }
    }
-   clear_variable_list = gg_ui_prewar_blanco
    every_scope_character = {
     limit = { has_template = URU_Manuel_Oribe is_character_alive = yes }
-    owner = { add_to_variable_list = { name = gg_ui_prewar_blanco target = prev } }
+    c:URU ?= { add_to_variable_list = { name = gg_ui_prewar_blanco target = prev } }
    }
+  }
+  every_character_in_exile_pool = {
+   limit = { has_template = URU_Fructuoso_Rivera }
+   c:URU ?= { add_to_variable_list = { name = gg_ui_prewar_colorado target = prev } }
+  }
+  every_character_in_exile_pool = {
+   limit = { has_template = URU_Manuel_Oribe }
+   c:URU ?= { add_to_variable_list = { name = gg_ui_prewar_blanco target = prev } }
   }
  }
 }
