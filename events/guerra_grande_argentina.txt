@@ -1120,7 +1120,12 @@ gg_argentina.8 = {
 			save_scope_as = gg_entre_rios_state
 		}
 		random_scope_war = {
-			limit = { c:CRR = { is_war_participant = c:ARG } }
+			# EN/ES: is_war_participant is a war-scope trigger (22/9/2026, "Inconsistent trigger scopes")
+			#     / es un trigger de guerra
+			limit = {
+				is_war_participant = c:CRR
+				is_war_participant = c:ARG
+			}
 			random_scope_front = { save_scope_as = gg_corrientes_front }
 		}
 		create_military_formation = {
@@ -2399,30 +2404,9 @@ gg_argentina.41 = {
 	}
 }
 
-# -------------------------------------------------------------------------------------------------
-# EN: Legacy notification retained for queued saves; new returns use .51-.56.
-# ES: Aviso conservado para guardados pendientes; los nuevos retornos usan .51-.56.
-# -------------------------------------------------------------------------------------------------
-gg_argentina.50 = {
-	type = country_event
-	placement = ROOT
-	title = gg_argentina.50.t
-	desc = gg_argentina.50.d
-	flavor = gg_argentina.50.f
-	event_image = { video = "gg_arg_cordoba" }
-	icon = "gfx/interface/icons/event_icons/event_election.dds"
-	duration = 1825
-
-	trigger = {
-		c:ARG ?= this
-	}
-
-	option = {
-		name = gg_argentina.50.a
-		default_option = yes
-		ai_chance = { base = 100 }
-	}
-}
+# EN/ES: gg_argentina.50 (legacy notice for queued saves) removed 22/9/2026: no save queues it any more,
+#     and it was reported as orphaned at every load. Its localisation keys stay: .51-.56 reuse them.
+#     / quitado: ya no hay guardados que lo tengan en cola; sus claves las reusan .51-.56
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.51 = {
