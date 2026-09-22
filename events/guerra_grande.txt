@@ -46,9 +46,11 @@ guerra_grande.1 = {
 			#     sus propios conservadores y liberales desde el compatch.
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_blanco_party
+				gg_party_blanco_ideologies = yes
 			}
 			ig:ig_petty_bourgeoisie ?= {
 				set_interest_group_name = ig_colorado_party
+				gg_party_colorado_ideologies = yes
 			}
 			# 1838.10.24 - Rivera marches on Montevideo.
 			trigger_event = { id = guerra_grande.2 days = 765 popup = yes }
@@ -865,18 +867,22 @@ guerra_grande.3 = {
 			activate_law = law_type:law_oligarchy
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_blanco_party
+				gg_party_blanco_ideologies = yes
 			}
 			ig:ig_petty_bourgeoisie ?= {
 				set_interest_group_name = ig_petty_bourgeoisie
+				gg_party_colorado_ideologies_undo = yes
 			}
 		}
 		c:URU ?= {
 			activate_law = law_type:law_oligarchy
 			ig:ig_petty_bourgeoisie ?= {
 				set_interest_group_name = ig_colorado_party
+				gg_party_colorado_ideologies = yes
 			}
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_landowners
+				gg_party_blanco_ideologies_undo = yes
 			}
 		}
 		# EN: Rosas backed Oribe -- he is the Cerrito's patron, not its enemy. Without this the AI
@@ -1460,18 +1466,22 @@ guerra_grande.3 = {
 			activate_law = law_type:law_oligarchy
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_blanco_party
+				gg_party_blanco_ideologies = yes
 			}
 			ig:ig_petty_bourgeoisie ?= {
 				set_interest_group_name = ig_petty_bourgeoisie
+				gg_party_colorado_ideologies_undo = yes
 			}
 		}
 		c:URU ?= {
 			activate_law = law_type:law_oligarchy
 			ig:ig_petty_bourgeoisie ?= {
 				set_interest_group_name = ig_colorado_party
+				gg_party_colorado_ideologies = yes
 			}
 			ig:ig_landowners ?= {
 				set_interest_group_name = ig_landowners
+				gg_party_blanco_ideologies_undo = yes
 			}
 		}
 		# EN: Rosas backed Oribe -- he is the Cerrito's patron, not its enemy. Without this the AI

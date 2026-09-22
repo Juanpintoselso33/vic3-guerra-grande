@@ -1,0 +1,49 @@
+﻿# EN: The ideologies each ribbon is born with (22/9/2026, decided with Juan). Called in IG scope where
+#     the mod names the parties: Carpinteria (events/guerra_grande.txt, guerra_grande.1) and the
+#     partition (both branches). Sources: Pivel Devoto, Frega and Caetano on the origin of the parties;
+#     the Colorado as Montevideo, the port and the liberal "doctores"; the Blanco as the "Defensores
+#     de las Leyes", the countryside and the Americanist cause.
+#     Blanco: + sovereignist (sovereignty against the European powers), - pro-slavery.
+#     Colorado: reactionary -> liberal (the doctores' free press and guaranteed liberties).
+#     The group that gives the name back gets vanilla's ideology back too.
+# ES: Las ideologias con que nace cada divisa. Blanco: + soberanista, - esclavista. Colorado:
+#     reaccionario -> liberal. El grupo que devuelve el nombre recupera tambien la ideologia de vanilla.
+gg_party_blanco_ideologies = {
+	if = {
+		limit = { has_ideology = ideology:ideology_pro_slavery }
+		remove_ideology = ideology_pro_slavery
+	}
+	if = {
+		limit = { NOT = { has_ideology = ideology:ideology_sovereignist } }
+		add_ideology = ideology_sovereignist
+	}
+}
+gg_party_colorado_ideologies = {
+	if = {
+		limit = { has_ideology = ideology:ideology_reactionary }
+		remove_ideology = ideology_reactionary
+	}
+	if = {
+		limit = { NOT = { has_ideology = ideology:ideology_liberal } }
+		add_ideology = ideology_liberal
+	}
+}
+# EN/ES: back to vanilla when the name is given back / de vuelta a vanilla al devolver el nombre
+gg_party_colorado_ideologies_undo = {
+	if = {
+		limit = { has_ideology = ideology:ideology_liberal }
+		remove_ideology = ideology_liberal
+	}
+	if = {
+		limit = { NOT = { has_ideology = ideology:ideology_reactionary } }
+		add_ideology = ideology_reactionary
+	}
+}
+gg_party_blanco_ideologies_undo = {
+	# EN/ES: only what we added; slavery is left to vanilla and the abolition events
+	#     / solo lo que agregamos; la esclavitud queda en manos de vanilla y de los eventos de abolicion
+	if = {
+		limit = { has_ideology = ideology:ideology_sovereignist }
+		remove_ideology = ideology_sovereignist
+	}
+}

@@ -22,7 +22,9 @@ REPLACE:URU_Manuel_Oribe = {
 	age = 44
 	dna = dna_gg_manuel_oribe
 	interest_group = ig_landowners
-	ideology = ideology_moderate
+	# EN/ES: 22/9/2026, decided with Juan -- the "Defensor de las Leyes", the lawful president who claims
+	#     his mandate through the whole war / el presidente legal que reclama su mandato toda la guerra
+	ideology = ideology_republican_leader
 	home_region = STATE_MONTEVIDEO
 	traits = {
 		imperious
@@ -39,7 +41,11 @@ REPLACE:URU_Fructuoso_Rivera = {
 	birth_date = 1789.10.27
 	ig_leader = yes
 	is_general = yes
-	interest_group = ig_intelligentsia
+	# EN/ES: 22/9/2026, decided with Juan -- he leads the petty bourgeoisie, which Carpinteria renames
+	#     the Partido Colorado (events/guerra_grande.txt) / lidera el grupo que Carpinteria renombra Partido Colorado
+	interest_group = ig_petty_bourgeoisie
+	# EN/ES: 22/9/2026, decided with Juan -- the liberal, free-trade policy of both his governments (port,
+	#     commerce, sale of public land) / la politica liberal y librecambista de sus dos gobiernos
 	ideology = ideology_market_liberal
 	home_region = STATE_MONTEVIDEO
 	traits = {
