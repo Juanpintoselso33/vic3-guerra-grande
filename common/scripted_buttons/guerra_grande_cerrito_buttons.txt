@@ -114,6 +114,16 @@ guerra_grande_river_blockade_button = {
 		hidden_trigger = {
 			NOT = { has_variable = guerra_grande_river_blockade_asked }
 		}
+		# EN/ES: 22/9/2026 -- the powers' guarantee, and a year after Rosas refused
+		#     / la garantia de las potencias, y un anio despues de una negativa de Rosas
+		custom_tooltip = {
+			text = gg_plata_requires_no_guarantee
+			NOT = { has_global_variable = gg_plata_guarantee }
+		}
+		custom_tooltip = {
+			text = gg_plata_requires_no_refusal
+			NOT = { has_variable = gg_plata_request_refused }
+		}
 		custom_tooltip = {
 			text = guerra_grande_requires_rosas
 			exists = c:ARG

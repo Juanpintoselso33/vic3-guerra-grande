@@ -88,7 +88,15 @@ gg_plata_ultimatum_send = {
 # ES: Rosas devuelve los pasaportes: empieza la intervencion. Sus eventos fechados esperan esto y su
 #     propia distancia desde aca.
 gg_plata_intervention_start = {
-	custom_tooltip = gg_plata_intervention_start_tt
+	# EN/ES: 22/9/2026 -- after Southern without a war London is out: France intervenes alone
+	#     / despues de Southern sin guerra Londres ya no esta: Francia interviene sola
+	if = {
+		limit = { has_global_variable = gg_plata_britain_recognizes }
+		custom_tooltip = gg_plata_intervention_start_france_tt
+	}
+	else = {
+		custom_tooltip = gg_plata_intervention_start_tt
+	}
 	hidden_effect = {
 		if = {
 			limit = { has_global_variable = gg_plata_ultimatum_pending }
@@ -96,7 +104,15 @@ gg_plata_intervention_start = {
 		}
 		set_global_variable = gg_plata_intervention
 		set_global_variable = { name = gg_plata_intervention_months value = 0 }
-		gg_plata_notify = { EVENT = gg_plata.23 }
+		if = {
+			limit = { has_global_variable = gg_plata_britain_recognizes }
+			set_global_variable = gg_plata_france_alone
+		}
+		# EN/ES: a broken guarantee brings its own notice (gg_plata.26) / una garantia rota trae su aviso
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_word_broken } }
+			gg_plata_notify = { EVENT = gg_plata.23 }
+		}
 		# EN: Codex review 22/9 -- the clock lives in its own hidden event on Britain (a tag that never
 		#     changes), not in the war journal: a truce or the end of the war must not stop it.
 		# ES: el reloj vive en su propio evento oculto sobre Gran Bretania (un tag que nunca cambia), no
@@ -109,17 +125,25 @@ gg_plata_intervention_start = {
 		#     agendan tambien desde aca, a su distancia historica del ultimatum. Las copias fechadas
 		#     quedan: sale la que llegue primero (cada relevo tiene su marca DONE).
 		c:GBR ?= {
-			trigger_event = { id = gg_cal.10 days = 1 }      # Brown, 2/8/1845
 			trigger_event = { id = gg_cal.31 days = 60 }     # the blockade of Buenos Aires, 18/9/1845
-			trigger_event = { id = gg_cal.12 days = 365 }    # Hood, July 1846
-			trigger_event = { id = gg_cal.15 days = 700 }    # Howden, July 1847
-			trigger_event = { id = gg_cal.19 days = 940 }    # Gore and Gros, March 1848
-			trigger_event = { id = gg_cal.23 days = 1095 }   # Southern, November 1849
 			trigger_event = { id = gg_cal.25 days = 1370 }   # Lepredour, August 1850
+			# EN/ES: the British and joint links, only when London is in / los eslabones britanicos y
+			#     conjuntos, solo con Londres adentro
+			if = {
+				limit = { NOT = { has_global_variable = gg_plata_france_alone } }
+				trigger_event = { id = gg_cal.10 days = 1 }      # Brown, 2/8/1845
+				trigger_event = { id = gg_cal.12 days = 365 }    # Hood, July 1846
+				trigger_event = { id = gg_cal.15 days = 700 }    # Howden, July 1847
+				trigger_event = { id = gg_cal.19 days = 940 }    # Gore and Gros, March 1848
+				trigger_event = { id = gg_cal.23 days = 1095 }   # Southern, November 1849
+			}
 		}
 		c:ARG ?= {
 			if = {
-				limit = { exists = s:STATE_ENTRE_RIOS }
+				limit = {
+					exists = s:STATE_ENTRE_RIOS
+					NOT = { has_global_variable = gg_plata_france_alone }
+				}
 				trigger_event = { id = gg_argentina_cal.21 days = 60 }    # the blockade from Buenos Aires
 				trigger_event = { id = gg_argentina_cal.22 days = 120 }   # Obligado
 				trigger_event = { id = gg_argentina_cal.23 days = 310 }   # Quebracho
@@ -128,22 +152,62 @@ gg_plata_intervention_start = {
 		}
 		c:ARG ?= {
 			save_scope_as = gg_plata_rosas
-			c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
+			# EN/ES: London is out once it has recognised the right of blockade / Londres ya no esta si reconocio el bloqueo
+			if = {
+				limit = { NOT = { has_global_variable = gg_plata_britain_recognizes } }
+				c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
+			}
 			c:FRA ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
 		}
 	}
 }
 
-# EN: Rosas yields: the river opens and the patience starts again from zero.
-# ES: Rosas cede: el rio se abre y la paciencia vuelve a empezar de cero.
+# EN: Rosas yields (22/9/2026, the powers' guarantee): the river opens, London and Paris stand as
+#     its guarantors, and the Cerrito loses the Argentine backing the blockade had bought. Under the
+#     guarantee the Cerrito cannot ask for the closure, and if Rosas shuts the river anyway the
+#     squadrons come at once (gg_plata.26). It ends with Southern without a war (gg_plata.27).
+# ES: Rosas cede: se abre el rio, Londres y Paris quedan como garantes, y el Cerrito pierde el apoyo
+#     argentino que le habia dado el bloqueo. Bajo la garantia el Cerrito no puede pedir el cierre,
+#     y si Rosas cierra igual, las escuadras vienen enseguida. Termina con Southern sin guerra.
 gg_plata_ultimatum_yield = {
 	gg_plata_rosas_open = yes
+	# EN/ES: no guarantee once the war is over: nothing would be left to end it
+	#     / sin garantia con la guerra terminada: no quedaria nada que la termine
+	if = {
+		limit = { NOT = { has_global_variable = gg_peace_settled } }
+		if = {
+			limit = { has_global_variable = gg_plata_britain_recognizes }
+			custom_tooltip = gg_plata_guarantee_france_tt
+		}
+		else = {
+			custom_tooltip = gg_plata_guarantee_tt
+		}
+	}
+	c:CER ?= {
+		if = {
+			limit = { has_modifier = guerra_grande_rosista_support }
+			custom_tooltip = gg_plata_yield_cerrito_tt
+			remove_modifier = guerra_grande_rosista_support
+			hidden_effect = { set_global_variable = { name = gg_plata_yield_cost_cerrito days = 60 } }
+		}
+	}
 	hidden_effect = {
 		if = {
 			limit = { has_global_variable = gg_plata_ultimatum_pending }
 			remove_global_variable = gg_plata_ultimatum_pending
 		}
 		set_global_variable = { name = gg_plata_closed_total value = 0 }
+		# EN/ES: the opening is announced by gg_plata.25, not again by gg_plata.21
+		#     / la apertura la anuncia gg_plata.25, no otra vez gg_plata.21
+		set_global_variable = { name = gg_plata_notice_closed value = 0 }
+		if = {
+			limit = { NOT = { has_global_variable = gg_peace_settled } }
+			set_global_variable = gg_plata_guarantee
+			# EN/ES: two months for a human Rosas to open his shore in the strait panel before a closure
+			#     counts as a broken word / dos meses para que un Rosas jugador abra su orilla en el panel
+			set_global_variable = { name = gg_plata_guarantee_grace days = 60 }
+			gg_plata_notify = { EVENT = gg_plata.25 }
+		}
 	}
 }
 
@@ -187,10 +251,13 @@ gg_plata_monthly = {
 	# EN: Codex review 22/9 -- once Rosas has opened the river (he yielded, or Brown's option a), the
 	#     Cerrito may ask again, as the old system allowed when the sea opened.
 	# ES: cuando Rosas abrio el rio (cedio, o la opcion a de Brown), el Cerrito puede volver a pedir.
+	# EN/ES: 22/9/2026 -- not under the powers' guarantee: then the request stays spent
+	#     / no bajo la garantia de las potencias: ahi el pedido queda gastado
 	if = {
 		limit = {
 			global_var:gg_plata_rosas_stance = 0
 			gg_plata_open = yes
+			NOT = { has_global_variable = gg_plata_guarantee }
 		}
 		c:CER ?= {
 			if = {
@@ -297,12 +364,16 @@ gg_plata_situation_monthly = {
 		# EN/ES: Britain pays only while its squadron is in the river / Gran Bretana paga solo mientras su
 		#     escuadra esta en el rio
 		if = {
-			limit = { NOT = { has_global_variable = gg_plata_britain_settled } }
+			limit = {
+				NOT = { has_global_variable = gg_plata_britain_settled }
+				NOT = { has_global_variable = gg_plata_france_alone }
+			}
 			c:GBR ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 		}
 		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 	}
 	gg_plata_flags_sync = yes
+	gg_plata_guarantee_monthly = yes
 	gg_plata_notices = yes
 }
 
@@ -380,5 +451,45 @@ gg_plata_notices = {
 		else = {
 			gg_plata_notify = { EVENT = gg_plata.21 }
 		}
+	}
+}
+
+# EN: 22/9/2026 -- the powers' guarantee, once a month (from je_gg_patrons, so a truce does not stop
+#     it). A closure under the guarantee is a broken word: the intervention starts with no second
+#     patience (gg_plata.26). Southern without a war ends it: London recognises the right of
+#     blockade and from then on only Paris's patience counts (gg_plata.27).
+# ES: la garantia de las potencias, una vez por mes. Un cierre bajo la garantia es faltar a la
+#     palabra: la intervencion empieza sin segunda paciencia. Southern sin guerra la termina: Londres
+#     reconoce el derecho de bloqueo y desde ahi solo cuenta la paciencia de Paris.
+gg_plata_guarantee_monthly = {
+	if = {
+		limit = {
+			has_global_variable = gg_plata_guarantee
+			NOT = { has_global_variable = gg_plata_guarantee_grace }
+			gg_plata_closed = yes
+		}
+		remove_global_variable = gg_plata_guarantee
+		set_global_variable = gg_plata_word_broken
+		# EN/ES: the closure is announced by gg_plata.26, not again by gg_plata.20
+		#     / el cierre lo anuncia gg_plata.26, no otra vez gg_plata.20
+		set_global_variable = { name = gg_plata_notice_closed value = 1 }
+		gg_plata_notify = { EVENT = gg_plata.26 }
+		gg_plata_intervention_start = yes
+		remove_global_variable = gg_plata_word_broken
+	}
+	else_if = {
+		limit = { gg_plata_southern_without_war_due = yes }
+		remove_global_variable = gg_plata_guarantee
+		set_global_variable = gg_plata_britain_recognizes
+		gg_plata_notify = { EVENT = gg_plata.27 }
+	}
+	else_if = {
+		limit = { gg_plata_lepredour_without_war_due = yes }
+		if = {
+			limit = { has_global_variable = gg_plata_guarantee }
+			remove_global_variable = gg_plata_guarantee
+		}
+		set_global_variable = gg_plata_france_recognizes
+		gg_plata_notify = { EVENT = gg_plata.28 }
 	}
 }

@@ -67,10 +67,19 @@ gg_plata_patience_spent = {
 	global_var:gg_plata_closed_total >= gg_plata_patience_threshold
 	# EN/ES: relations toward prev (= Argentina): "relations:scope:x" does not load (22/9/2026, "More
 	#     than one colon in event target link"); vanilla only uses root/prev/this / relaciones hacia prev
+	# EN/ES: 22/9/2026 -- once London has recognised the right of blockade (Southern without a war,
+	#     gg_plata_britain_recognizes), only Paris's patience counts / cuando Londres ya reconocio el
+	#     derecho de bloqueo, solo cuenta la paciencia de Paris
 	c:ARG ?= {
 		OR = {
-			c:GBR ?= { relations:prev < relations_threshold:cordial }
-			c:FRA ?= { relations:prev < relations_threshold:cordial }
+			AND = {
+				NOT = { has_global_variable = gg_plata_britain_recognizes }
+				c:GBR ?= { relations:prev < relations_threshold:cordial }
+			}
+			AND = {
+				NOT = { has_global_variable = gg_plata_france_recognizes }
+				c:FRA ?= { relations:prev < relations_threshold:cordial }
+			}
 		}
 	}
 }
@@ -80,6 +89,9 @@ gg_plata_intervention_due = {
 	has_global_variable = guerra_grande_open_war
 	NOT = { has_global_variable = gg_plata_intervention }
 	NOT = { has_global_variable = gg_plata_ultimatum_pending }
+	# EN/ES: under the guarantee a closure is a broken word, not a matter of patience (gg_plata.26)
+	#     / bajo la garantia un cierre es faltar a la palabra, no cuestion de paciencia
+	NOT = { has_global_variable = gg_plata_guarantee }
 	gg_plata_patience_spent = yes
 }
 
@@ -92,4 +104,47 @@ gg_plata_intervention_due = {
 gg_plata_intervention_at = {
 	has_global_variable = gg_plata_intervention
 	global_var:gg_plata_intervention_months >= $MONTHS$
+	# EN/ES: 22/9/2026 -- a French intervention alone (after Southern without a war) runs none of the
+	#     British links / una intervencion solo francesa no corre ningun eslabon britanico
+	NOT = { has_global_variable = gg_plata_france_alone }
+}
+# EN/ES: the links that also belong to a French intervention alone: the blockade of Buenos Aires and
+#     the French settlement / los eslabones que tambien son de una intervencion solo francesa
+gg_plata_intervention_at_any = {
+	has_global_variable = gg_plata_intervention
+	global_var:gg_plata_intervention_months >= $MONTHS$
+}
+
+# EN: 22/9/2026 -- THE POWERS' GUARANTEE (decided with Juan, alternative A of the review of the
+#     close -> ultimatum -> yield -> close cycle). Rosas yielded to the ultimatum: London and Paris
+#     stand as guarantors of the open river. It ends with Southern without a war: London recognises
+#     the right of blockade when it is cordial with Buenos Aires again, or at the date of the
+#     Arana-Southern treaty (24/11/1849, SOURCES_powers.md section 6).
+# ES: LA GARANTIA DE LAS POTENCIAS. Rosas cedio al ultimatum: Londres y Paris quedan como garantes
+#     del rio abierto. Termina con Southern sin guerra: Londres reconoce el derecho de bloqueo cuando
+#     vuelve a estar cordial con Buenos Aires, o en la fecha del tratado Arana-Southern.
+gg_plata_southern_without_war_due = {
+	has_global_variable = gg_plata_guarantee
+	NOT = { has_global_variable = gg_plata_intervention }
+	NOT = { has_global_variable = gg_plata_britain_recognizes }
+	NOT = { has_global_variable = gg_plata_ultimatum_pending }
+	OR = {
+		game_date >= 1849.11.24
+		c:ARG ?= { c:GBR ?= { relations:prev >= relations_threshold:cordial } }
+	}
+}
+
+# EN: Paris settles too, without a war: the Arana-Lepredour convention (31/8/1850, SOURCES_powers.md
+#     section 6), or Paris cordial with Buenos Aires again. From then on no power answers a closure.
+# ES: Paris tambien arregla, sin guerra: la convencion Arana-Lepredour, o Paris otra vez cordial con
+#     Buenos Aires. Desde ahi ninguna potencia responde a un cierre.
+gg_plata_lepredour_without_war_due = {
+	has_global_variable = gg_plata_britain_recognizes
+	NOT = { has_global_variable = gg_plata_france_recognizes }
+	NOT = { has_global_variable = gg_plata_intervention }
+	NOT = { has_global_variable = gg_plata_ultimatum_pending }
+	OR = {
+		game_date >= 1850.8.31
+		c:ARG ?= { c:FRA ?= { relations:prev >= relations_threshold:cordial } }
+	}
 }

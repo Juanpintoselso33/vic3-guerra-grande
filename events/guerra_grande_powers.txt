@@ -55,11 +55,15 @@ gg_powers.3 = {
 	#     cuenta: acorta la paciencia de las potencias.
 	trigger = {
 		has_global_variable = guerra_grande_split_done
-		gg_plata_intervention_at = { MONTHS = 2 }
+		gg_plata_intervention_at_any = { MONTHS = 2 }
 	}
 	immediate = {
 		gg_patron_change = { PATRON = francia DELTA = 30 }
-		gg_patron_change = { PATRON = britania DELTA = 30 }
+		# EN/ES: 22/9/2026 -- not when France intervenes alone / no cuando Francia interviene sola
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_france_alone } }
+			gg_patron_change = { PATRON = britania DELTA = 30 }
+		}
 		# EN: the blockade shuts Rosas's ports, so the Cerrito's trade walks north (SOURCES_siege.md):
 		#     moved here from the Defensa's button, because this is the blockade that caused it.
 		# ES: el bloqueo cierra los puertos de Rosas y el comercio del Cerrito se va al norte: pasado
@@ -76,8 +80,13 @@ gg_powers.3 = {
 				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
 			}
 		}
-		c:URU ?= {
-			trigger_event = { id = guerra_grande.9 popup = yes }
+		# EN/ES: the Anglo-French mediation event, not when France intervenes alone
+		#     / el evento de la mediacion anglo-francesa, no cuando Francia interviene sola
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_france_alone } }
+			c:URU ?= {
+				trigger_event = { id = guerra_grande.9 popup = yes }
+			}
 		}
 		hidden_effect = {
 			if = {
@@ -991,7 +1000,7 @@ gg_powers.20 = {
 
 	trigger = {
 		has_global_variable = guerra_grande_split_done
-		gg_plata_intervention_at = { MONTHS = 45 }
+		gg_plata_intervention_at_any = { MONTHS = 45 }
 	}
 
 	immediate = {

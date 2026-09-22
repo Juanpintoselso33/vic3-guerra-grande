@@ -105,6 +105,39 @@ gg_plata_hunger_pct = {
 	max = 100
 	min = 0
 }
+# EN/ES: 22/9/2026 -- what the powers have promised about the river: 1 London and Paris guarantee it
+#     open, 2 London has recognised the right of blockade and only Paris watches, 3 both settled after
+#     their intervention / lo que las potencias prometieron sobre el rio
+gg_ui_plata_powers_word = {
+	# EN/ES: 1 guaranteed by London and Paris, 2 guaranteed by Paris alone, 4 London has recognised the
+	#     right of blockade and only Paris's patience counts, 3 both have recognised it (after their
+	#     intervention or without it) / 1 garantia de los dos, 2 solo Paris, 4 Londres reconocio, 3 los dos
+	value = 0
+	if = { limit = { has_global_variable = gg_plata_guarantee } value = 1 }
+	if = {
+		limit = {
+			has_global_variable = gg_plata_britain_recognizes
+			NOT = { has_global_variable = gg_plata_intervention }
+		}
+		value = 4
+	}
+	if = {
+		limit = {
+			has_global_variable = gg_plata_britain_recognizes
+			has_global_variable = gg_plata_guarantee
+		}
+		value = 2
+	}
+	if = {
+		limit = {
+			OR = {
+				has_global_variable = gg_plata_intervention_over
+				has_global_variable = gg_plata_france_recognizes
+			}
+		}
+		value = 3
+	}
+}
 # EN/ES: the Buenos Aires shore card: does it keep its battery (only that shore can close the river)
 #     / la tarjeta de Buenos Aires: si conserva su bateria (solo esa orilla puede cerrar el rio)
 gg_ui_plata_ba_fort_sv = {
@@ -124,6 +157,9 @@ gg_ui_plata_patience_shown = {
 			OR = {
 				has_global_variable = gg_plata_ultimatum_pending
 				has_global_variable = gg_plata_intervention
+				# EN/ES: 22/9/2026 -- both powers recognised the right of blockade: no ultimatum left
+				#     / las dos potencias reconocieron el derecho de bloqueo: ya no hay ultimatum
+				has_global_variable = gg_plata_france_recognizes
 			}
 		}
 		value = 0

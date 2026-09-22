@@ -34,6 +34,7 @@ gg_plata.2 = {
 	trigger = {
 		c:ARG ?= this
 		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_plata_guarantee }
 	}
 
 	option = {
@@ -53,6 +54,9 @@ gg_plata.2 = {
 				limit = { has_variable = guerra_grande_river_blockade_asked }
 				remove_variable = guerra_grande_river_blockade_asked
 			}
+			# EN/ES: 22/9/2026 -- a year before it can ask again, so a refusal is not re-asked every month
+			#     / un anio antes de volver a pedir, para que una negativa no se repita cada mes
+			set_variable = { name = gg_plata_request_refused days = 365 }
 		}
 	}
 }
@@ -97,7 +101,17 @@ gg_plata.10 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.10.t
-	desc = gg_plata.10.d
+	desc = {
+		first_valid = {
+			# EN/ES: after Southern without a war London is out; Paris alone / despues de Southern sin
+			#     guerra Londres ya no esta; Paris sola
+			triggered_desc = {
+				desc = gg_plata.10.d_france
+				trigger = { has_global_variable = gg_plata_britain_recognizes }
+			}
+			triggered_desc = { desc = gg_plata.10.d }
+		}
+	}
 	flavor = gg_plata.10.f
 	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
 	event_image = { video = "gg_plata_guizot" }
@@ -120,8 +134,10 @@ gg_plata.10 = {
 
 	option = {
 		name = gg_plata.10.b
-		# EN: yield: the river opens, the Cerrito loses its blockade, and the patience starts again.
-		# ES: ceder: se abre el rio, el Cerrito pierde su bloqueo, y la paciencia vuelve a empezar.
+		# EN: yield (22/9/2026): the river opens under the powers' guarantee, the Cerrito loses the
+		#     Argentine backing, and it cannot ask for the closure while the guarantee lasts.
+		# ES: ceder: se abre el rio bajo la garantia de las potencias, el Cerrito pierde el apoyo
+		#     argentino y no puede pedir el cierre mientras dure la garantia.
 		gg_plata_ultimatum_yield = yes
 		gg_patron_change = { PATRON = rosas DELTA = -15 }
 		add_modifier = { name = gg_plata_rosas_yielded years = 5 is_decaying = yes }
@@ -166,7 +182,19 @@ gg_plata.20 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.20.t
-	desc = gg_plata.20.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.20.d_none
+				trigger = { has_global_variable = gg_plata_france_recognizes }
+			}
+			triggered_desc = {
+				desc = gg_plata.20.d_france
+				trigger = { has_global_variable = gg_plata_britain_recognizes }
+			}
+			triggered_desc = { desc = gg_plata.20.d }
+		}
+	}
 	event_image = { video = "gg_nav_brown_montevideo" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 1825
@@ -210,7 +238,15 @@ gg_plata.22 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.22.t
-	desc = gg_plata.22.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.22.d_france
+				trigger = { has_global_variable = gg_plata_britain_recognizes }
+			}
+			triggered_desc = { desc = gg_plata.22.d }
+		}
+	}
 	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 1825
@@ -223,7 +259,15 @@ gg_plata.23 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.23.t
-	desc = gg_plata.23.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.23.d_france
+				trigger = { has_global_variable = gg_plata_france_alone }
+			}
+			triggered_desc = { desc = gg_plata.23.d }
+		}
+	}
 	event_image = { video = "gg_squadrons" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 1825
@@ -238,6 +282,95 @@ gg_plata.24 = {
 	title = gg_plata.24.t
 	desc = gg_plata.24.d
 	event_image = { video = "gg_f2_palmerston" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.25-27 -- THE POWERS' GUARANTEE (22/9/2026). Notices to the players of the Defensa and
+#     the Cerrito: Rosas yields and the powers stand guarantors (.25); Rosas shuts the river under
+#     the guarantee and the squadrons come at once (.26); London recognises the right of blockade
+#     without a war (.27, SOURCES_powers.md section 6).
+# ES: LA GARANTIA DE LAS POTENCIAS. Avisos a los jugadores de la Defensa y del Cerrito: Rosas cede y
+#     las potencias quedan de garantes; Rosas cierra bajo la garantia y las escuadras vienen
+#     enseguida; Londres reconoce el derecho de bloqueo sin guerra.
+# -------------------------------------------------------------------------------------------------
+gg_plata.25 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.25.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.25.d_france_cost
+				trigger = {
+					has_global_variable = gg_plata_britain_recognizes
+					has_global_variable = gg_plata_yield_cost_cerrito
+				}
+			}
+			triggered_desc = {
+				desc = gg_plata.25.d_france
+				trigger = { has_global_variable = gg_plata_britain_recognizes }
+			}
+			triggered_desc = {
+				desc = gg_plata.25.d_cost
+				trigger = { has_global_variable = gg_plata_yield_cost_cerrito }
+			}
+			triggered_desc = { desc = gg_plata.25.d }
+		}
+	}
+	event_image = { video = "gg_f2_montevideo_port" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.26 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.26.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.26.d_france
+				trigger = { has_global_variable = gg_plata_france_alone }
+			}
+			triggered_desc = { desc = gg_plata.26.d }
+		}
+	}
+	event_image = { video = "gg_squadrons" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.27 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.27.t
+	desc = gg_plata.27.d
+	event_image = { video = "gg_f2_palmerston" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.28 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.28.t
+	desc = gg_plata.28.d
+	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 1825
 	option = {

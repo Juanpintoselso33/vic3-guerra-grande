@@ -222,7 +222,16 @@ je_guerra_grande = {
 								is_player = no
 								has_global_variable = guerra_grande_open_war
 								NOT = { has_variable = guerra_grande_river_blockade_asked }
-								NOT = { has_global_variable = gg_brown_fleet_lost }
+								# EN/ES: 22/9/2026 -- as the button: Brown's squadron, or from 1850 / como el boton
+								OR = {
+									NOT = { has_global_variable = gg_brown_fleet_lost }
+									year >= 1850
+								}
+								# EN/ES: 22/9/2026 -- the same gates as the button: the powers' guarantee, a year
+								#     after a refusal, and Rosas's backing at 40 / las mismas guardas que el boton
+								NOT = { has_global_variable = gg_plata_guarantee }
+								NOT = { has_variable = gg_plata_request_refused }
+								global_var:gg_patron_rosas >= 40
 								# EN/ES: C10 -- the same gates as the Cerrito's button: 1843, and a bank Rosas can
 								#     shut / las mismas guardas que el boton: 1843, y una orilla que Rosas pueda cerrar
 								year >= 1843

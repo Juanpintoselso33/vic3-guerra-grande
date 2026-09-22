@@ -41,12 +41,20 @@ widget = {
    text = "gg_ui_plata_phase_2"
   }
   textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3')]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), Not(GetGlobalVariable('gg_plata_france_alone').IsSet))]"
    tooltip = "gg_ui_plata_phase_3_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
    using = fontsize_large align = center|nobaseline
    text = "gg_ui_plata_phase_3"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), GetGlobalVariable('gg_plata_france_alone').IsSet)]"
+   tooltip = "gg_ui_plata_phase_3_france_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_3_france"
   }
   textbox = {
    visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)4')]"
@@ -110,6 +118,35 @@ flowcontainer = {
    textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_yes" }
    textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_no" }
   }
+ }
+ # EN/ES: 22/9/2026 -- the powers' word on the river, part of the river section / la palabra de las potencias sobre el rio
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)1')]"
+  tooltip = "gg_ui_plata_word_guarantee_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_guarantee" }
+ }
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)2')]"
+  tooltip = "gg_ui_plata_word_paris_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_paris" }
+ }
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)4')]"
+  tooltip = "gg_ui_plata_word_london_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_london" }
+ }
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)3')]"
+  tooltip = "gg_ui_plata_word_settled_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_settled" }
  }
  widget = { size = { 520 8 } }
  textbox = {
@@ -254,7 +291,8 @@ flowcontainer = {
   icon = { size = { 40 40 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
   flowcontainer = {
    direction = vertical spacing = 2
-   textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
+   textbox = { visible = "[Not(GetGlobalVariable('gg_plata_britain_recognizes').IsSet)]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
+   textbox = { visible = "[GetGlobalVariable('gg_plata_britain_recognizes').IsSet]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_france" }
    green_progressbar_horizontal = {
     size = { 472 22 }
     blockoverride "values" {

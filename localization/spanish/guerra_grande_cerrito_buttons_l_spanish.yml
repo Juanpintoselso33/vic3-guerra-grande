@@ -11,3 +11,5 @@
  guerra_grande_river_blockade_button_desc:0 "La línea de sitio no toma Montevideo mientras el mar que tiene atrás siga abierto: por ahí le llegan la harina, la pólvora y la plata de la aduana.\n\nSe le pide a Rosas que cierre el río, y la escuadra del almirante Guillermo Brown se arma en Maldonado al servicio del Cerrito (una sola vez, si Maldonado es nuestro). Si Rosas accede, cada mes de cierre aprieta a la plaza, la acerca a tratar la paz y corre la guerra hacia los #blue_value blancos#!, pero gasta la paciencia de Londres y París. Si se niega, se puede volver a pedir."
  guerra_grande_requires_rosas:0 "La Confederación tiene que seguir en pie"
  guerra_grande_requires_river_unwatched:0 "Rosas tiene que tener su orilla del Plata con batería, y ninguna escuadra extranjera interviniendo en el río"
+ gg_plata_requires_no_guarantee:0 "El río no puede estar bajo la garantía de las potencias (Rosas cedió a su ultimátum)"
+ gg_plata_requires_no_refusal:0 "Rosas no puede haber negado el pedido en el último año"
