@@ -15,8 +15,6 @@ je_gg_patrons = {
 		name = "gg_plata_situation"
 		container = "custom_widget_container_1"
 	}
-	scripted_progress_bar = gg_plata_patience_bar
-	scripted_progress_bar = gg_plata_hunger_bar
 
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = no

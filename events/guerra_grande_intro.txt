@@ -35,7 +35,8 @@ gg_intro.1 = {
 	option = {
 		name = gg_intro.1.a
 		default_option = yes
-		add_contextless_journal_entry = je_guerra_grande
+		# EN/ES: 22/9/2026 (Juan) -- the Guerra Grande opens at Carpinteria (guerra_grande.1), not on day 1;
+		#     the reckoning already runs on globals / la Guerra Grande abre en Carpinteria, no el dia 1
 		gg_international_ensure = yes
 		ai_chance = { base = 100 }
 	}

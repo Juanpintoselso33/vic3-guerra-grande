@@ -280,6 +280,40 @@ flowcontainer = {
   using = fontsize_medium align = left|nobaseline
   text = "gg_ui_plata_port_blockade"
  }
+ # EN/ES: the two clocks, our own bars: not in the pinned preview, and only once they measure something
+ #     / los dos relojes, barras propias: fuera de la vista previa, y solo cuando miden algo
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_shown'), '(CFixedPoint)1')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_plata_patience_bar_desc"
+ }
+ green_progressbar_horizontal = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_shown'), '(CFixedPoint)1')]"
+  size = { 520 30 }
+  blockoverride "values" {
+   value = "[JournalEntry.MakeScope.ScriptValue('gg_plata_patience_pct')]"
+   min = 0 max = 100
+  }
+  tooltip = "gg_plata_patience_bar"
+ }
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_hunger_shown'), '(CFixedPoint)1')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_plata_hunger_bar_desc"
+ }
+ green_progressbar_horizontal = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_hunger_shown'), '(CFixedPoint)1')]"
+  size = { 520 30 }
+  blockoverride "values" {
+   value = "[JournalEntry.MakeScope.ScriptValue('gg_plata_hunger_pct')]"
+   min = 0 max = 100
+  }
+  tooltip = "gg_plata_hunger_bar"
+ }
  button_standard = {
   size = { 520 48 } text = "guerra_grande_foreign_intervention_button" tooltip = "gg_ui_squadrons_action_tt"
   visible = "[GetScriptedGui('gg_ui_call_squadrons').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

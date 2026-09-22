@@ -275,16 +275,12 @@ gg_plata_monthly = {
 	}
 }
 
-# EN: The situation's monthly upkeep (22/9/2026 redesign), from je_gg_patrons: the two bars, the
+# EN: The situation's monthly upkeep (22/9/2026 redesign), from je_gg_patrons: the
 #     phases' own effects (two months, renewed, so they fall by themselves when the phase ends), and
 #     the faction flags the Overview draws.
-# ES: El mantenimiento mensual de la situacion, desde je_gg_patrons: las dos barras, los efectos de
+# ES: El mantenimiento mensual de la situacion, desde je_gg_patrons: los efectos de
 #     cada fase (dos meses, renovados, asi caen solos cuando termina la fase) y las banderas.
 gg_plata_situation_monthly = {
-	scope:journal_entry = {
-		set_bar_progress = { name = gg_plata_patience_bar value = gg_plata_patience_pct }
-		set_bar_progress = { name = gg_plata_hunger_bar value = gg_plata_hunger_pct }
-	}
 	if = {
 		limit = { gg_plata_phase = 1 }
 		p:x302DDA.state ?= { add_modifier = { name = gg_plata_phase_blockade months = 2 } }

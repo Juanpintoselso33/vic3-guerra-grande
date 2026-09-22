@@ -27,8 +27,8 @@ guerra_grande.1 = {
 	}
 
 	immediate = {
-		# EN/ES: the journal now opens on game start; this only covers a save from before that
-		#     (and brings its bar up to date) / el journal ya abre al empezar; esto cubre partidas viejas
+		# EN/ES: 22/9/2026 -- the Guerra Grande opens here, at Carpinteria (Juan), with its bar up to date
+		#     / la Guerra Grande abre aca, en Carpinteria, con la barra al dia
 		if = {
 			limit = { NOT = { has_journal_entry = je_guerra_grande } }
 			add_contextless_journal_entry = je_guerra_grande

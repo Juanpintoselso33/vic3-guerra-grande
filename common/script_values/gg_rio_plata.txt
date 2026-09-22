@@ -116,3 +116,14 @@ gg_ui_plata_forts = {
 	if = { limit = { gg_plata_ba_fort = yes } add = 1 }
 	if = { limit = { gg_plata_mvd_fort = yes } add = 2 }
 }
+# EN/ES: 22/9/2026 (Juan: the bars do not appear until they matter) -- the patience from the first
+#     month of a shut river, the hunger while a run of shut months is on
+#     / las barras no aparecen hasta que corresponden
+gg_ui_plata_patience_shown = {
+	value = 0
+	if = { limit = { has_global_variable = gg_plata_closed_total global_var:gg_plata_closed_total > 0 } value = 1 }
+}
+gg_ui_plata_hunger_shown = {
+	value = 0
+	if = { limit = { has_global_variable = gg_plata_closed_streak global_var:gg_plata_closed_streak > 0 } value = 1 }
+}
