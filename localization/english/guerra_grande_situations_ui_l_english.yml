@@ -1,5 +1,5 @@
 ﻿l_english:
- gg_war_ui_diplomacy_2:0 "The talks have broken down: for one or two years nobody will call the other to the table."
- gg_war_ui_diplomacy_3:0 "#Y Peace terms are on the table.#! While they are weighed, nobody else is called to negotiate."
- gg_war_ui_diplomacy_4:0 "#Y A truce holds.#! While it lasts, the river does not count and nobody is called to negotiate."
+ gg_war_ui_diplomacy_2:0 "Talks have broken down; for a year or two, neither side will be called back to the table."
+ gg_war_ui_diplomacy_3:0 "#Y Peace terms are on the table.#! While they are under consideration, no other talks will be opened."
+ gg_war_ui_diplomacy_4:0 "#Y A truce is in force.#! While it lasts, the river counts for nothing and no talks will be opened."
  gg_war_ui_diplomacy_5:0 "#P Peace has been signed.#!"
