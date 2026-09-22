@@ -736,6 +736,9 @@ gg_argentina_cal.26 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_26 }
 				exists = s:STATE_ENTRE_RIOS
+				# EN/ES: 22/9/2026 (event audit) -- Vences's army is raised in Argentine Entre Rios
+				#     / el ejercito de Vences se levanta en Entre Rios argentino
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
 				exists = c:ARG
 				exists = c:CRR
 				has_global_variable = gg_alcaraz_rejected

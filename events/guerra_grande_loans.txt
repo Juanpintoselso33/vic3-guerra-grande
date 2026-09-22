@@ -552,7 +552,28 @@ gg_loan.5 = {
 	placement = ROOT
 
 	title = gg_loan.5.t
-	desc = gg_loan.5.d
+	# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the account is told only when there is one
+	#     / la cuenta se cuenta solo si la hay
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_loan.5.d
+				trigger = {
+					OR = {
+						AND = {
+							has_variable = gg_loan_debt
+							var:gg_loan_debt >= 1
+						}
+						# EN/ES: the customs can be pledged without a loan (gg_powers.21.b) / la aduana puede quedar hipotecada sin prestamo
+						has_global_variable = gg_customs_mortgaged
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gg_loan.5.d_none
+			}
+		}
+	}
 	flavor = gg_loan.5.f
 
 	# EN: The reckoning: what the Defensa signed for.
@@ -673,7 +694,22 @@ gg_loan.6 = {
 	placement = ROOT
 
 	title = gg_loan.6.t
-	desc = gg_loan.6.d
+	# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the account is told only when there is one
+	#     / la cuenta se cuenta solo si la hay
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_loan.6.d
+				trigger = {
+					has_variable = gg_loan_debt
+					var:gg_loan_debt >= 1
+				}
+			}
+			triggered_desc = {
+				desc = gg_loan.6.d_none
+			}
+		}
+	}
 	flavor = gg_loan.6.f
 
 	# EN: The reckoning: the debts of the Cerrito.
@@ -796,7 +832,9 @@ gg_loan.7 = {
 				OR = {
 					has_global_variable = gg_peace_settled
 					has_global_variable = gg_war_failed
-					year >= 1855
+					# EN/ES: 22/9/2026 (event audit, decided with Juan) -- "year >= 1855" removed: the
+					#     debts are settled when the war ends, not on a date / las deudas se liquidan
+					#     al terminar la guerra, no en una fecha
 				}
 			}
 			# EN/ES: review -- by government, not by tag: the winning Cerrito is URU after gg_peace.8

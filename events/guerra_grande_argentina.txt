@@ -109,13 +109,18 @@ gg_argentina.1 = {
 			#     de Rosas, no si ocurre / Corrientes secedes either way
 			gg_argentina_create_corrientes = yes
 		}
+		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the war opens with the secession, not with
+		#     the answer: Pago Largo is scheduled by the calendar 25 days on and must never be fought
+		#     without a war. Both options opened it anyway / la guerra se abre con la separacion, no con
+		#     la respuesta: Pago Largo sale por calendario y nunca debe pelearse sin guerra
+		gg_argentina_open_war = { TAG = CRR }
 	}
 
 	option = {
 		name = gg_argentina.1.a
 		default_option = yes
-		# EN/ES: Rosas contesta con el ejercito: Echague marcha / Rosas answers with the army
-		gg_argentina_open_war = { TAG = CRR }
+		# EN/ES: Rosas contesta con el ejercito: Echague marcha (la guerra ya se abrio en immediate)
+		#     / Rosas answers with the army (the war was already opened in immediate)
 		ai_chance = { base = 85 }
 	}
 
@@ -129,7 +134,6 @@ gg_argentina.1 = {
 			is_player = yes
 			c:CRR ?= { is_player = no }
 		}
-		gg_argentina_open_war = { TAG = CRR }
 		ai_chance = { base = 0 }
 		# EN/ES: last, always / ultimo, siempre
 		hidden_effect = {
@@ -358,9 +362,6 @@ gg_argentina.4 = {
 			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
 			gg_delegation_revoked = { KEY = cordoba COUNT = -1 }
 		}
-		# EN/ES: y recien ahora marcha el ejercito: seis provincias con el camino del interior adentro
-		#     son otra cosa que cinco arrinconadas contra la cordillera / and only now does the army march
-		gg_argentina_open_war = { TAG = CLN }
 		ai_chance = { base = 100 }
 	}
 
@@ -371,6 +372,11 @@ gg_argentina.4 = {
 				set_global_variable = gg_arg_cal_done_3
 			}
 		}
+		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the war with the Coalition opens with
+		#     Cordoba's adhesion, not with the answer: Quebracho Herrado and Famailla are scheduled by
+		#     the calendar and must never be fought without a war / la guerra se abre con la adhesion,
+		#     no con la respuesta: Quebracho y Famailla salen por calendario
+		gg_argentina_open_war = { TAG = CLN }
 	}
 }
 
@@ -1110,7 +1116,6 @@ gg_argentina.8 = {
 		name = gg_argentina.8.a
 		default_option = yes
 		custom_tooltip = gg_vences_delegate_tt
-		set_global_variable = gg_urquiza_vences_command
 		# EN: Save the front of the actual ARG-CRR war before creating the formation. The allocation
 		#     is deliberately a game-scale force, not a claim about an undocumented order of battle.
 		# ES: Guarda el frente de la guerra real ARG-CRR antes de crear la formacion. La asignacion es
@@ -1128,6 +1133,12 @@ gg_argentina.8 = {
 			}
 			random_scope_front = { save_scope_as = gg_corrientes_front }
 		}
+		# EN/ES: 22/9/2026 (event audit) -- the popup can stay open while Entre Rios changes hands:
+		#     no Argentine Entre Rios, no army / si Entre Rios dejo de ser argentina, no hay ejercito
+		if = {
+			limit = { exists = scope:gg_entre_rios_state }
+			# EN/ES: the command counts only if the army is raised (Codex) / el mando cuenta solo si hay ejercito
+			set_global_variable = gg_urquiza_vences_command
 		create_military_formation = {
 			type = army
 			hq_region = scope:gg_entre_rios_state.region
@@ -1144,8 +1155,12 @@ gg_argentina.8 = {
 				count = 4
 			}
 		}
+		}
 		random_scope_character = {
-			limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+			limit = {
+				has_template = ARG_Justo_Jose_de_Urquiza
+				exists = scope:gg_vences_army
+			}
 			if = {
 				limit = { NOT = { has_role_of_type = general } }
 				add_character_role = general
@@ -3030,6 +3045,19 @@ gg_argentina.13 = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_28 } }
 				set_global_variable = gg_arg_cal_done_28
+			}
+			# EN/ES: 22/9/2026 (event audit, decided with Juan) -- this convention replaces the
+			#     route without la Argentina (gg_powers.5, gg_contingent.8): mark their calendar
+			#     slots done so the calendar stops retrying them until the end of the war
+			#     / esta convencion reemplaza la ruta sin la Argentina: se marcan sus turnos del
+			#     calendario como cumplidos para que dejen de reintentarse
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_29 } }
+				set_global_variable = gg_cal_done_29
+			}
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_33 } }
+				set_global_variable = gg_cal_done_33
 			}
 		}
 	}

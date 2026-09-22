@@ -825,6 +825,28 @@ gg_peace.2 = {
 
 		custom_tooltip = gg_peace_legal_presidency_tt
 
+		# EN/ES: 22/9/2026 (event audit, decided with Juan: the text rules) -- the foreign legions lose
+		#     their place: their pay and standing go and Garibaldi is sent away. The 5 % mortality in
+		#     Montevideo, which no text announced, is gone. Vic3 1.13 has no script effect to disband
+		#     a formation (none in vanilla, the expansions or the playset's mods), so the legion
+		#     formations are not removed by script / las legiones pierden su lugar: su paga y su
+		#     posicion, y Garibaldi se va. Sin la mortalidad del 5 %. No hay efecto para disolver una
+		#     formacion en 1.13.
+		scope:gg_peace_loser ?= {
+			if = {
+				limit = { has_modifier = guerra_grande_foreign_legions }
+				remove_modifier = guerra_grande_foreign_legions
+			}
+			if = {
+				limit = { has_modifier = guerra_grande_italian_legion }
+				remove_modifier = guerra_grande_italian_legion
+			}
+			if = {
+				limit = { has_variable = gg_garibaldi_ref }
+				var:gg_garibaldi_ref ?= { exile_character = yes }
+				remove_variable = gg_garibaldi_ref
+			}
+		}
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
 		add_modifier = {
@@ -848,12 +870,6 @@ gg_peace.2 = {
 			interest_group = ig:ig_intelligentsia
 		}
 		# The Legions leave, and they were more than half the men on the walls.
-		every_scope_state = {
-			limit = { state_region = s:STATE_MONTEVIDEO }
-			kill_population_percent_in_state = {
-				percent = 0.05
-			}
-		}
 
 		hidden_effect = {
 		}

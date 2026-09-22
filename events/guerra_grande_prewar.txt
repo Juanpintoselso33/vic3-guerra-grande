@@ -86,8 +86,18 @@ gg_prewar.2 = {
 		c:URU ?= this
 	}
 
+	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
+	#     / un evento posterior lee esta respuesta y la espera
+	immediate = {
+		set_global_variable = gg_pending_prewar_2
+	}
+
 	option = {
 		name = gg_prewar.2.a
+		if = {
+			limit = { has_global_variable = gg_pending_prewar_2 }
+			remove_global_variable = gg_pending_prewar_2
+		}
 		default_option = yes
 		# EN: historical: watched neutrality. Rivera still gets the riograndenses in 1837: the
 		#     consequence lands in gg_rivera_1837_strength, which counts the border as open.
@@ -99,6 +109,10 @@ gg_prewar.2 = {
 
 	option = {
 		name = gg_prewar.2.b
+		if = {
+			limit = { has_global_variable = gg_pending_prewar_2 }
+			remove_global_variable = gg_pending_prewar_2
+		}
 		custom_tooltip = gg_prewar.2.b_tt
 		# EN: help the Empire close the border: Brazil up, Rivera weaker in 1837, the farrapos hostile.
 		# ES: ayudar al Imperio a cerrar la frontera: Brasil sube, Rivera mas debil en 1837.
@@ -109,6 +123,10 @@ gg_prewar.2 = {
 
 	option = {
 		name = gg_prewar.2.c
+		if = {
+			limit = { has_global_variable = gg_pending_prewar_2 }
+			remove_global_variable = gg_pending_prewar_2
+		}
 		# EN: tolerate the farrapos: the border stays open both ways, Brazil down.
 		# ES: tolerar a los farrapos: la frontera queda abierta para los dos lados, Brasil baja.
 		gg_patron_change = { PATRON = brasil DELTA = -10 }
@@ -204,8 +222,18 @@ gg_prewar.4 = {
 		c:URU ?= this
 	}
 
+	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
+	#     / un evento posterior lee esta respuesta y la espera
+	immediate = {
+		set_global_variable = gg_pending_prewar_4
+	}
+
 	option = {
 		name = gg_prewar.4.a
+		if = {
+			limit = { has_global_variable = gg_pending_prewar_4 }
+			remove_global_variable = gg_pending_prewar_4
+		}
 		custom_tooltip = gg_prewar.4.a_tt
 		default_option = yes
 		# EN: historical: political chiefs of the government. More control, but the northern caudillos go to Rivera.
@@ -218,6 +246,10 @@ gg_prewar.4 = {
 
 	option = {
 		name = gg_prewar.4.b
+		if = {
+			limit = { has_global_variable = gg_pending_prewar_4 }
+			remove_global_variable = gg_pending_prewar_4
+		}
 		custom_tooltip = gg_prewar.4.b_tt
 		# EN: local caudillos in charge: less control, fewer defections in 1837.
 		# ES: caudillos locales al frente: menos control, menos adhesiones a Rivera en 1837.
@@ -445,4 +477,27 @@ gg_prewar.9 = {
 		ai_chance = { base = 50 }
 	}
 
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: gg_prewar.20 -- 22/9/2026 (event audit, decided with Juan). Yucutuja (gg_prewar.5) reads the answers to the Farrapos (gg_prewar.2) and the departments (gg_prewar.4): it waits, a week at a time, while either is unanswered. / Yucutuja lee las respuestas de los Farrapos y de los departamentos: espera, de a una semana, mientras alguna siga sin contestar.
+# -------------------------------------------------------------------------------------------------
+gg_prewar.20 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+				has_global_variable = gg_pending_prewar_2
+				has_global_variable = gg_pending_prewar_4
+				}
+			}
+			trigger_event = { id = gg_prewar.20 days = 7 }
+		}
+		else = {
+			trigger_event = { id = gg_prewar.5 popup = yes }
+		}
+	}
 }

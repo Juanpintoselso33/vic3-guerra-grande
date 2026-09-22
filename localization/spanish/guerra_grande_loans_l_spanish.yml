@@ -51,3 +51,5 @@
  guerra_grande_debts_of_the_cerrito:0 "Las deudas del Cerrito"
  guerra_grande_treaties_repudiated:0 "Tratados repudiados"
  guerra_grande_creditor_overthrown:0 "El acreedor derrocado"
+ gg_loan.5.d_none:0 "Llega la paz y con ella la cuenta, pero la Defensa no firmó con el Imperio ni hipotecó su aduana: no hay tratados que pagar ni junta extranjera que administre las rentas. La ciudad sale de nueve años de sitio pobre, pero sin deberle a nadie."
+ gg_loan.6.d_none:0 "Termina la guerra y el gobierno del Cerrito no deja deudas propias: lo que gastó en nueve años lo pagaron la aduana del Buceo y la plata que venía de Buenos Aires, y no queda cuenta que pase a otro."

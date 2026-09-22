@@ -1064,6 +1064,12 @@ gg_powers.21 = {
 	option = {
 		name = gg_powers.21.a
 		default_option = yes
+		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- renouncing it ends it: the French
+		#     subsidy is removed wherever it is held / renunciarlo lo termina: se quita el subsidio
+		every_country = {
+			limit = { has_modifier = guerra_grande_french_subsidy }
+			remove_modifier = guerra_grande_french_subsidy
+		}
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		c:URU ?= {

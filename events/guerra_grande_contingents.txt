@@ -377,7 +377,18 @@ gg_contingent.5 = {
 	placement = ROOT
 
 	title = gg_contingent.5.t
-	desc = gg_contingent.5.d
+	# EN/ES: 22/9/2026 (Codex) -- Garibaldi is named only when he comes / Garibaldi se nombra solo si viene
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_contingent.5.d
+				trigger = { has_global_variable = gg_garibaldi_famous }
+			}
+			triggered_desc = {
+				desc = gg_contingent.5.d_nameless
+			}
+		}
+	}
 	flavor = gg_contingent.5.f
 
 	# EN: Garibaldi's Italian Legion.
@@ -396,7 +407,16 @@ gg_contingent.5 = {
 	}
 
 	option = {
-		name = gg_contingent.5.a
+		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- Garibaldi is named only when he comes with
+		#     the legion (gg_garibaldi_famous) / Garibaldi se nombra solo cuando viene con la legion
+		name = {
+			trigger = { has_global_variable = gg_garibaldi_famous }
+			text = gg_contingent.5.a
+		}
+		name = {
+			trigger = { NOT = { has_global_variable = gg_garibaldi_famous } }
+			text = gg_contingent.5.a_nameless
+		}
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Italian Legion takes the Cerro flank /
 		#     la barra tiene que moverse durante la guerra: la Legion Italiana toma el flanco del Cerro
 		gg_score_colorado = { AMOUNT = 1 }

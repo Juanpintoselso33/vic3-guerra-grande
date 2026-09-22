@@ -66,7 +66,13 @@ gg_postwar.1 = {
 		else_if = {
 			limit = { has_global_variable = gg_peace_no_victors }
 			trigger_event = { id = gg_postwar.3 days = 1 popup = yes }
-			trigger_event = { id = gg_postwar.4 days = 150 popup = yes }
+			# EN/ES: 22/9/2026 (event audit, decided with Juan) -- not under Oribe's four-year term:
+			#     gg_postwar.9 calls this election when the term ends / no con el mandato de Oribe en curso:
+			#     lo convoca gg_postwar.9 al vencer el mandato
+			if = {
+				limit = { NOT = { has_variable = guerra_grande_cerrito_government } }
+				trigger_event = { id = gg_postwar.4 days = 150 popup = yes }
+			}
 			# EN/ES: FX-3 -- contained: later and softer / contenidos: mas tarde y mas blandos
 			set_global_variable = gg_postwar_caudillos_contained
 			trigger_event = { id = gg_postwar.5 days = 1825 popup = yes }
@@ -75,7 +81,13 @@ gg_postwar.1 = {
 		# EN/ES: review -- a peace with neither mark (the presidency restored, Rosas's vassal or client):
 		#     elections and the caudillos, no fusion / una paz sin ninguna marca: elecciones y caudillos
 		else = {
-			trigger_event = { id = gg_postwar.4 days = 150 popup = yes }
+			# EN/ES: 22/9/2026 (event audit, decided with Juan) -- not under Oribe's four-year term:
+			#     gg_postwar.9 calls this election when the term ends / no con el mandato de Oribe en curso:
+			#     lo convoca gg_postwar.9 al vencer el mandato
+			if = {
+				limit = { NOT = { has_variable = guerra_grande_cerrito_government } }
+				trigger_event = { id = gg_postwar.4 days = 150 popup = yes }
+			}
 			trigger_event = { id = gg_postwar.5 days = 1095 popup = yes }
 		}
 	}
@@ -231,6 +243,12 @@ gg_postwar.4 = {
 	title = gg_postwar.4.t
 	desc = {
 		first_valid = {
+			# EN/ES: 22/9/2026 (event audit) -- the Cerrito's path reaches here when Oribe's term ends
+			#     / por el camino del Cerrito se llega aca al vencer el mandato de Oribe
+			triggered_desc = {
+				desc = gg_postwar.4.d_oribe
+				trigger = { has_variable = guerra_grande_cerrito_government }
+			}
 			triggered_desc = {
 				desc = gg_postwar.4.d_powers
 				trigger = { has_global_variable = gg_powers_peace }
@@ -468,5 +486,8 @@ gg_postwar.9 = {
 
 	immediate = {
 		remove_global_variable = gg_president_railroad
+		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the election the four years promised
+		#     / la eleccion que prometian los cuatro anios
+		trigger_event = { id = gg_postwar.4 popup = yes }
 	}
 }

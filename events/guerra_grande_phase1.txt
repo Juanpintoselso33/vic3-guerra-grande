@@ -203,7 +203,7 @@ gg_phase1.1 = {
 			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
 			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
 			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
-			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
+			trigger_event = { id = gg_phase1.20 days = 1368 }  # 1842.11.20 Arroyo Grande, espera la respuesta de gg_phase1.7
 		}
 		ai_chance = { base = 60 }
 	}
@@ -230,7 +230,7 @@ gg_phase1.1 = {
 			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
 			trigger_event = { id = gg_phase1.6 days = 967 popup = yes }   # 1841.10.15 Famailla
 			trigger_event = { id = gg_phase1.7 days = 1342 popup = yes }  # 1842.10.25 el Uruguay mayor
-			trigger_event = { id = gg_phase1.8 days = 1368 popup = yes }  # 1842.11.20 Arroyo Grande
+			trigger_event = { id = gg_phase1.20 days = 1368 }  # 1842.11.20 Arroyo Grande, espera la respuesta de gg_phase1.7
 		}
 		ai_chance = { base = 25 }
 	}
@@ -562,8 +562,18 @@ gg_phase1.7 = {
 		NOT = { has_global_variable = guerra_grande_split_done }
 	}
 
+	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
+	#     / un evento posterior lee esta respuesta y la espera
+	immediate = {
+		set_global_variable = gg_pending_phase1_7
+	}
+
 	option = {
 		name = gg_phase1.7.a
+		if = {
+			limit = { has_global_variable = gg_pending_phase1_7 }
+			remove_global_variable = gg_pending_phase1_7
+		}
 		custom_tooltip = gg_phase1.7.a_tt
 		default_option = yes
 		# EN: historical: head the project. Rivera takes the supreme command and Paz withdraws; Rosas and
@@ -579,6 +589,10 @@ gg_phase1.7 = {
 
 	option = {
 		name = gg_phase1.7.b
+		if = {
+			limit = { has_global_variable = gg_pending_phase1_7 }
+			remove_global_variable = gg_pending_phase1_7
+		}
 		# EN: turn it down: fewer allies, a neutral Brazil.
 		# ES: rechazarlo: menos aliados, el Brasil neutral.
 		gg_patron_change = { PATRON = brasil DELTA = 5 }
@@ -692,5 +706,27 @@ gg_phase1.11 = {
 
 	immediate = {
 		gg_president_historical = yes
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: gg_phase1.20 -- 22/9/2026 (event audit, decided with Juan). Arroyo Grande (gg_phase1.8) reads the answer to the greater Uruguay (gg_phase1.7): it waits, a week at a time, while that popup is still unanswered. / Arroyo Grande lee la respuesta del Uruguay mayor: espera, de a una semana, mientras ese aviso siga sin contestar.
+# -------------------------------------------------------------------------------------------------
+gg_phase1.20 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				OR = {
+				has_global_variable = gg_pending_phase1_7
+				}
+			}
+			trigger_event = { id = gg_phase1.20 days = 7 }
+		}
+		else = {
+			trigger_event = { id = gg_phase1.8 popup = yes }
+		}
 	}
 }
