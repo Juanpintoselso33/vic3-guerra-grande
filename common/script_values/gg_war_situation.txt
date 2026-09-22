@@ -28,3 +28,17 @@ gg_ui_war_river_now = {
 	value = gg_plata_pressure_blanco
 	subtract = gg_plata_pressure_colorado
 }
+# EN/ES: 1 the month after the split trimmed the lead / 1 el mes despues de que la particion recorto la ventaja
+gg_ui_war_partition_moved = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = gg_src_last_partition_blanco
+			OR = {
+				global_var:gg_src_last_partition_blanco < 0
+				global_var:gg_src_last_partition_colorado < 0
+			}
+		}
+		value = 1
+	}
+}

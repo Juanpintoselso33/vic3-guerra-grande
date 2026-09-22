@@ -299,17 +299,37 @@ gg_plata_situation_monthly = {
 		c:GBR ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 	}
-	# EN/ES: the flags of the two governments for the factions line / banderas de los dos gobiernos
-	every_country = {
-		limit = { has_variable = guerra_grande_defensa_government }
-		set_global_variable = { name = gg_flag_defensa value = this }
-	}
-	every_country = {
-		limit = { has_variable = guerra_grande_cerrito_government }
-		set_global_variable = { name = gg_flag_cerrito value = this }
-	}
+	gg_plata_flags_sync = yes
+}
+
+# EN: The countries the Overview draws: the two governments (the Cerrito only once it exists; the
+#     Defensa falls back on Uruguay before the partition) and who holds each shore of the key. Run at
+#     game start and every month, so the journal never reads an unset variable.
+# ES: Los paises que dibuja el panel: los dos gobiernos (el Cerrito solo cuando existe; la Defensa
+#     cae en el Uruguay antes de la particion) y quien tiene cada orilla de la llave. Corre al empezar
+#     y cada mes, asi el journal nunca lee una variable sin fijar.
+gg_plata_flags_sync = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_flag_defensa } }
+		limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+		random_country = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			set_global_variable = { name = gg_flag_defensa value = this }
+		}
+	}
+	else = {
 		c:URU ?= { set_global_variable = { name = gg_flag_defensa value = this } }
 	}
+	if = {
+		limit = { any_country = { has_variable = guerra_grande_cerrito_government } }
+		random_country = {
+			limit = { has_variable = guerra_grande_cerrito_government }
+			set_global_variable = { name = gg_flag_cerrito value = this }
+		}
+	}
+	else_if = {
+		limit = { has_global_variable = gg_flag_cerrito }
+		remove_global_variable = gg_flag_cerrito
+	}
+	p:x365A5B.state ?= { owner = { set_global_variable = { name = gg_plata_ba_owner value = this } } }
+	p:x302DDA.state ?= { owner = { set_global_variable = { name = gg_plata_mvd_owner value = this } } }
 }

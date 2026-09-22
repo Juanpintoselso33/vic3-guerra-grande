@@ -113,6 +113,13 @@ flowcontainer = {
 		using = fontsize_medium align = left|nobaseline
 		text = "gg_war_ui_sources"
 	}
+	textbox = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_partition_moved'), '(CFixedPoint)1')]"
+		autoresize = yes multiline = yes
+		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+		using = fontsize_medium align = left|nobaseline
+		text = "gg_war_ui_sources_partition"
+	}
 	flowcontainer = {
 		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 		direction = horizontal spacing = 16

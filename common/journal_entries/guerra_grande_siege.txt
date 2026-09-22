@@ -44,6 +44,10 @@ je_gg_siege = {
 		}
 	}
 
+	immediate = {
+		gg_ui_siege_leaders_sync = yes
+	}
+
 	on_monthly_pulse = {
 		effect = {
 			# EN/ES: who defends the plaza, for the portrait / quien defiende la plaza, para el retrato

@@ -215,6 +215,7 @@ gg_systems_init = {
 	c:FRA ?= { set_global_variable = { name = gg_flag_fra value = this } }
 	c:GBR ?= { set_global_variable = { name = gg_flag_gbr value = this } }
 	c:BRZ ?= { set_global_variable = { name = gg_flag_brz value = this } }
+	gg_plata_flags_sync = yes
 	# EN/ES: patrons, 0-100 / padrinos, 0-100
 	set_global_variable = { name = gg_patron_rosas value = 50 }
 	set_global_variable = { name = gg_patron_francia value = 20 }
@@ -1021,6 +1022,8 @@ gg_cal_fire_if_table_free = {
 gg_partition_calendar = {
 	# EN/ES: T9 -- the new characters, once both governments exist / los personajes nuevos
 	gg_spawn_war_characters = yes
+	# EN/ES: the siege portrait has its defender from the first day / el retrato del sitio, desde el primer dia
+	gg_ui_siege_leaders_sync = yes
 	# EN/ES: playtest 2026-09-17 -- backstop: the Defensa's law of 1842 must not be lost if neither
 	#     Arroyo Grande nor the dated dispatcher reached it / red de seguridad para la ley de 1842
 	gg_abolition_dispatch = { DAYS = 2 }

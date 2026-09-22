@@ -54,12 +54,20 @@ gg_ui_plata_ba_blockaded = {
 #     ultimatum, 3 the intervention, 4 the settlement. Later phases win.
 # ES: La fase de la cuestion. 0 el rio abierto, 1 el bloqueo, 2 el ultimatum, 3 la intervencion,
 #     4 el arreglo. Mandan las fases posteriores.
+# EN: A blockade after the settlement is the blockade again (phase 1), not the settlement.
+# ES: Un bloqueo despues del arreglo vuelve a ser el bloqueo (fase 1), no el arreglo.
 gg_plata_phase = {
 	value = 0
+	if = { limit = { has_global_variable = gg_plata_intervention_over } value = 4 }
 	if = { limit = { gg_plata_closed = yes } value = 1 }
 	if = { limit = { has_global_variable = gg_plata_ultimatum_pending } value = 2 }
-	if = { limit = { has_global_variable = gg_plata_intervention } value = 3 }
-	if = { limit = { has_global_variable = gg_plata_intervention_over } value = 4 }
+	if = {
+		limit = {
+			has_global_variable = gg_plata_intervention
+			NOT = { has_global_variable = gg_plata_intervention_over }
+		}
+		value = 3
+	}
 }
 # EN/ES: which envoy London has in the river, by months of intervention (SOURCES_powers.md 1-6)
 #     / que enviado tiene Londres en el rio, por meses de intervencion
@@ -96,4 +104,15 @@ gg_plata_hunger_pct = {
 	}
 	max = 100
 	min = 0
+}
+# EN/ES: the Overview's key line: is the Cerrito a government yet, and does each shore keep its fort
+#     / la linea de la llave: si el Cerrito ya es gobierno, y si cada orilla conserva su fuerte
+gg_ui_plata_has_cerrito = {
+	value = 0
+	if = { limit = { has_global_variable = gg_flag_cerrito } value = 1 }
+}
+gg_ui_plata_forts = {
+	value = 0
+	if = { limit = { gg_plata_ba_fort = yes } add = 1 }
+	if = { limit = { gg_plata_mvd_fort = yes } add = 2 }
 }

@@ -180,15 +180,65 @@ flowcontainer = {
   using = fontsize_large align = left|nobaseline
   text = "gg_ui_plata_phase_4"
  }
+ textbox = {
+  tooltip = "gg_ui_plata_key_tt"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_plata_key"
+ }
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)0')]"
+  tooltip = "gg_ui_plata_key_tt"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_plata_forts_0"
+ }
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)1')]"
+  tooltip = "gg_ui_plata_key_tt"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_plata_forts_1"
+ }
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)2')]"
+  tooltip = "gg_ui_plata_key_tt"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_plata_forts_2"
+ }
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)3')]"
+  tooltip = "gg_ui_plata_key_tt"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_plata_forts_3"
+ }
  flowcontainer = {
   direction = horizontal spacing = 8 parentanchor = hcenter
  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_has_cerrito'), '(CFixedPoint)1')]"
+   tooltip = "gg_ui_plata_faction_ba_tt"
    autoresize = yes multiline = yes
    minimumsize = { 256 -1 } maximumsize = { 256 -1 }
    using = fontsize_medium align = hcenter|nobaseline
    text = "gg_ui_plata_faction_ba"
   }
  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_has_cerrito'), '(CFixedPoint)0')]"
+   tooltip = "gg_ui_plata_faction_ba_tt"
+   autoresize = yes multiline = yes
+   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
+   using = fontsize_medium align = hcenter|nobaseline
+   text = "gg_ui_plata_faction_ba_alone"
+  }
+ textbox = {
+   tooltip = "gg_ui_plata_faction_mvd_tt"
    autoresize = yes multiline = yes
    minimumsize = { 256 -1 } maximumsize = { 256 -1 }
    using = fontsize_medium align = hcenter|nobaseline

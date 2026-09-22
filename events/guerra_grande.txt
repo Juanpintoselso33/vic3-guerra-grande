@@ -393,12 +393,14 @@ guerra_grande.3 = {
 				set_global_variable = { name = gg_split_trim_amount value = gg_split_trim }
 				set_global_variable = gg_split_trim_blancos
 				change_global_variable = { name = guerra_grande_blanco_score subtract = global_var:gg_split_trim_amount }
+				change_global_variable = { name = gg_src_partition_blanco subtract = global_var:gg_split_trim_amount }
 			}
 			else_if = {
 				limit = { guerra_grande_colorado_lead >= 2 }
 				set_global_variable = { name = gg_split_trim_amount value = gg_split_trim }
 				set_global_variable = gg_split_trim_colorados
 				change_global_variable = { name = guerra_grande_colorado_score subtract = global_var:gg_split_trim_amount }
+				change_global_variable = { name = gg_src_partition_colorado subtract = global_var:gg_split_trim_amount }
 			}
 			# EN/ES: also resyncs a bar that drifted while clamped at -10/10 / resincroniza la barra si se trabo en el tope
 			je:je_guerra_grande ?= {
