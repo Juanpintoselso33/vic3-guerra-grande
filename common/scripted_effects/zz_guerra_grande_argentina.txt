@@ -105,6 +105,7 @@ gg_argentina_create_corrientes = {
 				name = gg_arg_ejercito_correntino
 				combat_unit = {
 					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 4
 				}
 				# EN: THE CORRENTINE HORSE, and it is bigger than it was until 20/9/2026. The army that
@@ -122,10 +123,12 @@ gg_argentina_create_corrientes = {
 				#     batallones.
 				combat_unit = {
 					type = unit_type:combat_unit_type_hussars
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 6
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -231,18 +234,22 @@ gg_argentina_create_coalicion = {
 				name = gg_arg_ejercito_coalicion
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 3
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 2
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_hussars
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 3
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -466,18 +473,22 @@ gg_argentina_create_entre_rios = {
 					name = gg_arg_ejercito_entrerriano
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 6
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 6
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 				}
@@ -496,18 +507,22 @@ gg_argentina_create_entre_rios = {
 					name = gg_arg_ejercito_entrerriano
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 3
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 3
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 				}
@@ -525,18 +540,22 @@ gg_argentina_create_entre_rios = {
 					name = gg_arg_ejercito_entrerriano
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 4
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 4
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 2
 					}
 				}
@@ -874,10 +893,10 @@ gg_argentina_raise_ejercito_grande = {
 			hq_region = scope:gg_formation_hq_state.region
 			name = gg_arg_ejercito_grande
 			save_scope_as = gg_ejercito_grande_army
-			combat_unit = { type = unit_type:combat_unit_type_line_infantry count = 8 }
-			combat_unit = { type = unit_type:combat_unit_type_irregular_infantry count = 2 }
-			combat_unit = { type = unit_type:combat_unit_type_hussars count = 6 }
-			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery count = 2 }
+			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 8 }
+			combat_unit = { type = unit_type:combat_unit_type_irregular_infantry state_region = scope:gg_formation_hq_state.state_region count = 2 }
+			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 6 }
+			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 2 }
 		}
 	}
 	random_scope_character = {
@@ -933,7 +952,7 @@ gg_argentina_complete_foreign_contingents = {
 				name = gg_arg_brazilian_allied_fleet
 				# EN: one frigate is the engine's minimum material fleet, not a sourced ship count.
 				# ES: una fragata es la flota material minima del motor, no una cifra historica de buques.
-				ship = { type = ship_type:ship_type_frigate count = 1 }
+				ship = { type = ship_type:ship_type_frigate state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
 	}

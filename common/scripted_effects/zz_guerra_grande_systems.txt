@@ -838,6 +838,7 @@ gg_river_blockade = {
 						save_scope_as = gg_brown_fleet
 						ship = {
 							type = ship_type:ship_type_frigate
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 3
 						}
 					}

@@ -1568,10 +1568,12 @@ gg_argentina.21 = {
 				name = gg_arg_division_litoral
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_hussars
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -1639,10 +1641,12 @@ gg_argentina.22 = {
 				save_scope_as = gg_parana_batteries
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -1660,10 +1664,12 @@ gg_argentina.22 = {
 				save_scope_as = gg_parana_column
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -1715,10 +1721,12 @@ gg_argentina.22 = {
 				name = gg_arg_defensa_parana_limitada
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = scope:gg_formation_hq_state.state_region
 					count = 1
 				}
 			}
@@ -2565,10 +2573,12 @@ gg_argentina.5 = {
 						save_scope_as = gg_division_rioja
 						combat_unit = {
 							type = unit_type:combat_unit_type_irregular_infantry
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 3
 						}
 						combat_unit = {
 							type = unit_type:combat_unit_type_hussars
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 2
 						}
 					}
@@ -2669,14 +2679,17 @@ gg_argentina.6 = {
 						save_scope_as = gg_ejercito_paz
 						combat_unit = {
 							type = unit_type:combat_unit_type_irregular_infantry
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 3
 						}
 						combat_unit = {
 							type = unit_type:combat_unit_type_hussars
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 3
 						}
 						combat_unit = {
 							type = unit_type:combat_unit_type_cannon_artillery
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 1
 						}
 					}
@@ -2793,10 +2806,12 @@ gg_argentina.7 = {
 						save_scope_as = gg_ejercito_libres
 						combat_unit = {
 							type = unit_type:combat_unit_type_irregular_infantry
+							state_region = scope:gg_formation_hq_state.state_region
 							count = 2
 						}
 						combat_unit = {
 							type = unit_type:combat_unit_type_hussars
+							state_region = scope:gg_formation_hq_state.state_region
 							count = gg_libres_horse
 						}
 					}

@@ -1190,6 +1190,7 @@ gg_rivera.8 = {
 					save_scope_as = gg_mitre_corrientes_formation
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = scope:gg_formation_hq_state.state_region
 						count = 1
 					}
 				}
