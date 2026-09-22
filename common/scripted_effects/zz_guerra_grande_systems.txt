@@ -124,17 +124,8 @@ gg_systems_init = {
 	# EN/ES: cuantas provincias se alzaron alguna vez. No baja nunca: es la memoria de la campania,
 	#     no su foto / how many provinces ever rose. It never goes down: it is the campaign's memory
 	set_global_variable = { name = gg_provincias_alzadas value = 0 }
-	# EN: THE MONTHS THE ARMY HAS SPENT IN FRONT OF MONTEVIDEO, and it is NOT gg_siege_months. That
-	#     name was already taken by the oriental side -- it counts months of closed sea for the war
-	#     bar -- and for a few minutes on 20/9/2026 this journal was adding to it every month, which
-	#     would have moved the Uruguayan war's arbiter with an Argentine number. Caught by a duplicate
-	#     initialisation two hundred lines apart.
-	# ES: LOS MESES QUE EL EJERCITO LLEVA FRENTE A MONTEVIDEO, y NO es gg_siege_months. Ese nombre ya
-	#     estaba tomado por el lado oriental --cuenta meses de mar cerrado para la barra de la guerra--
-	#     y durante unos minutos del 20/9/2026 este journal le estuvo sumando todos los meses, lo que
-	#     habria movido el arbitro de la guerra oriental con un numero argentino. Lo delato una
-	#     inicializacion duplicada a doscientas lineas de distancia.
-	set_global_variable = { name = gg_oribe_siege_months value = 0 }
+	# EN/ES: gg_oribe_siege_months removed 22/9/2026 with the Pact's redesign: nothing read it any more
+	#     / quitado con el rediseño del Pacto: ya nadie lo leia
 	# EN: THERE ARE NO PER-PROVINCE MARKS ANY MORE, and the reason is worth keeping. They were added
 	#     this same day so the panel could ask each province with SelectLocalization; that did not
 	#     render in Juan's game, so the list became sixteen plain descriptions chosen by script, and
@@ -1157,6 +1148,13 @@ gg_argentina_vassals_settle = {
 				limit = { is_subject_of = c:ARG }
 				make_independent = yes
 				gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 }
+				# EN/ES: the others leave with it only where the Coalition holds them (Codex 22/9)
+				#     / las demas se van con ella solo donde la Coalicion las tiene
+				if = { limit = { has_state_in_state_region = STATE_SALTA } gg_delegation_revoked = { KEY = coalicion_salta COUNT = -1 } }
+				if = { limit = { has_state_in_state_region = STATE_JUJUY } gg_delegation_revoked = { KEY = coalicion_jujuy COUNT = -1 } }
+				if = { limit = { has_state_in_state_region = STATE_CATAMARCA } gg_delegation_revoked = { KEY = coalicion_catamarca COUNT = -1 } }
+				if = { limit = { has_state_in_state_region = STATE_LA_RIOJA } gg_delegation_revoked = { KEY = coalicion_la_rioja COUNT = -1 } }
+				if = { limit = { has_state_in_state_region = STATE_CORDOBA } gg_delegation_revoked = { KEY = cordoba COUNT = -1 } }
 			}
 		}
 		c:ENR ?= {

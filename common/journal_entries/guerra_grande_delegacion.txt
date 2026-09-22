@@ -19,17 +19,13 @@
 je_gg_delegation = {
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	# EN/ES: 22/9/2026 redesign -- one widget above everything (header, map, face to face, petitions,
+	#     Rosas's money, the longer account); replaces gg_pact_map and gg_pact_accounts
+	#     / rediseño: un solo widget arriba de todo; reemplaza gg_pact_map y gg_pact_accounts
 	widget = {
-		gui = "gui/gg_pact_map.gui"
-		name = "gg_pact_map"
+		gui = "gui/gg_pact_overview.gui"
+		name = "gg_pact_overview"
 		container = "custom_widget_container_je_icon"
-	}
-	# EN/ES: 22/9/2026 -- Rosas's accounts with the Cerrito (remittance, reunification pledge), moved
-	#     here from the River Plate journal / las cuentas de Rosas con el Cerrito, desde el Plata
-	widget = {
-		gui = "gui/gg_pact_accounts.gui"
-		name = "gg_pact_accounts"
-		container = "custom_widget_container_3"
 	}
 
 	should_be_pinned_by_default_involved = yes
@@ -190,39 +186,9 @@ je_gg_delegation = {
 		}
 	}
 
-	on_monthly_pulse = {
-		effect = {
-			# EN: Shared journals have no country root; resolve the mandate holder.
-			# ES: El diario compartido no tiene pais raiz; resolver quien tiene el mandato.
-			every_country = {
-				limit = { has_variable = gg_arg_rosas_seat }
-			if = {
-				limit = {
-					has_variable = gg_arg_rosas_seat
-					has_global_variable = guerra_grande_split_done
-					NOT = { has_global_variable = gg_peace_settled }
-					exists = c:CER
-				}
-					# EN: THE SIEGE COUNTS ITS OWN MONTHS AND STOPS EATING THE PROVINCES. It used to take a
-					#     point a month off the same number the provinces moved, and that is precisely what
-					#     made the bar unreadable: it fell with nothing happening on the map. Now it counts
-					#     what it is -- how long Oribe has been standing in front of Montevideo -- and the
-					#     journal prints that on a line of its own.
-					# ES: EL SITIO CUENTA SUS PROPIOS MESES Y DEJA DE COMERSE LAS PROVINCIAS. Le sacaba un
-					#     punto por mes al mismo numero que movian las provincias, y eso es exactamente lo
-					#     que hacia ilegible la barra: bajaba sin que pasara nada en el mapa. Ahora cuenta lo
-					#     que es -- cuanto hace que Oribe esta parado frente a Montevideo -- y el journal lo
-					#     imprime en una linea propia.
-					change_global_variable = {
-						name = gg_oribe_siege_months
-						add = 1
-					}
-			}
-			# EN/ES: ya no hay barra que redibujar ni costo que aplicar: el sitio cuenta sus meses arriba
-			#     / no bar to redraw and no cost to charge: the siege counts its months above
-					}
-		}
-	}
+	# EN/ES: 22/9/2026 -- the monthly pulse only counted gg_oribe_siege_months, which nothing read any
+	#     more (the siege counts its own months in El Sitio Grande); removed with the redesign
+	#     / el pulso mensual solo contaba meses de sitio que ya nadie leia; se quito con el rediseño
 
 	# EN: ONE AUTHORITY: the count of provinces that delegate (the internal points and their bar were
 	#     retired on 20-22/9/2026; the journal lists the thirteen one by one).

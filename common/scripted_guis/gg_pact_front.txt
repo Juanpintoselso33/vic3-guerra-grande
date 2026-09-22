@@ -1,0 +1,20 @@
+﻿# EN: Who stands where in the Federal Pact's face to face (GUI only; no effects). 22/9/2026.
+# ES: Quien esta donde en el cara a cara del Pacto Federal (solo interfaz; sin efectos).
+# EN/ES: the holder of the mandate / quien tiene el encargo
+gg_ui_pact_holder = {
+	scope = country
+	is_shown = { has_variable = gg_arg_rosas_seat }
+}
+# EN/ES: the provinces that took it back and stand as countries / las provincias que lo retiraron y son pais
+gg_ui_pact_risen = {
+	scope = country
+	is_shown = {
+		# EN/ES: only while its mandate is still withdrawn: a province back under Buenos Aires is no
+		#     longer against it (Codex 22/9) / solo mientras siga retirado el encargo
+		OR = {
+			AND = { c:CRR ?= this has_global_variable = gg_delegation_gone_corrientes }
+			AND = { c:CLN ?= this has_global_variable = gg_delegation_gone_coalicion_tucuman }
+			AND = { c:ENR ?= this has_global_variable = gg_delegation_gone_entre_rios }
+		}
+	}
+}

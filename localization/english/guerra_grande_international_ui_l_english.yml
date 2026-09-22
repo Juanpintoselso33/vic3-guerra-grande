@@ -8,7 +8,5 @@
  gg_ui_squadrons_action_tt:0 "Requires open war, both governments established, and the squadrons not yet requested. Available from #V 1843#! if a great power has an interest in the Plata, or from #V 1848#! regardless.\n\n[GetScriptedGui('gg_ui_call_squadrons').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_ui_offer_parties:0 "#b Buenos Aires → Oribe's government#!"
  gg_ui_offer_capacity:0 "Funds available: #V £[JournalEntry.MakeScope.ScriptValue('gg_int_arg_aid_capacity')|0]#!"
- gg_ui_offer_answered:0 "The reply has been recorded. The remittance is listed under #b Commitments#!."
  gg_ui_accepted_account:0 "Remitted: #V £[GetGlobalVariable('gg_int_arg_spent').GetValue|0]#!\nIn return: the recipient's diplomatic obligation to Buenos Aires."
  gg_ui_backing_tt:0 "Backing runs from #V 0#! to #V 100#!. The figure alone is no treaty: commitments are entered into only when their terms are accepted."
- gg_ui_pact_mandates:0 "#V [GetGlobalVariable('gg_delegating_provinces').GetValue|0]#! of #V 13#! provinces delegate to Buenos Aires"

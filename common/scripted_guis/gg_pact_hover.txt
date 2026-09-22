@@ -87,51 +87,35 @@ gg_pact_hover_la_rioja = {
 }
 gg_pact_hover_santiago_del_estero = {
  scope = country
- effect = {
-  if = { limit = { has_global_variable = gg_delegation_gone_santiago_del_estero } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_santiago_del_estero } custom_tooltip = gg_pact_state_claim }
-  else = { custom_tooltip = gg_pact_state_delegated }
- }
+ # EN/ES: this province never withdraws nor petitions in the code / esta provincia nunca retira ni reclama
+ effect = { custom_tooltip = gg_pact_state_delegated }
 }
 gg_pact_hover_cordoba = {
  scope = country
  effect = {
   if = { limit = { has_global_variable = gg_delegation_gone_cordoba } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_cordoba } custom_tooltip = gg_pact_state_claim }
   else = { custom_tooltip = gg_pact_state_delegated }
  }
 }
 gg_pact_hover_san_juan = {
  scope = country
- effect = {
-  if = { limit = { has_global_variable = gg_delegation_gone_san_juan } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_san_juan } custom_tooltip = gg_pact_state_claim }
-  else = { custom_tooltip = gg_pact_state_delegated }
- }
+ # EN/ES: this province never withdraws nor petitions in the code / esta provincia nunca retira ni reclama
+ effect = { custom_tooltip = gg_pact_state_delegated }
 }
 gg_pact_hover_san_luis = {
  scope = country
- effect = {
-  if = { limit = { has_global_variable = gg_delegation_gone_san_luis } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_san_luis } custom_tooltip = gg_pact_state_claim }
-  else = { custom_tooltip = gg_pact_state_delegated }
- }
+ # EN/ES: this province never withdraws nor petitions in the code / esta provincia nunca retira ni reclama
+ effect = { custom_tooltip = gg_pact_state_delegated }
 }
 gg_pact_hover_mendoza = {
  scope = country
- effect = {
-  if = { limit = { has_global_variable = gg_delegation_gone_mendoza } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_mendoza } custom_tooltip = gg_pact_state_claim }
-  else = { custom_tooltip = gg_pact_state_delegated }
- }
+ # EN/ES: this province never withdraws nor petitions in the code / esta provincia nunca retira ni reclama
+ effect = { custom_tooltip = gg_pact_state_delegated }
 }
 gg_pact_hover_santa_fe = {
  scope = country
- effect = {
-  if = { limit = { has_global_variable = gg_delegation_gone_santa_fe } custom_tooltip = gg_pact_state_withdrawn }
-  else_if = { limit = { has_global_variable = gg_reclamo_santa_fe } custom_tooltip = gg_pact_state_claim }
-  else = { custom_tooltip = gg_pact_state_delegated }
- }
+ # EN/ES: this province never withdraws nor petitions in the code / esta provincia nunca retira ni reclama
+ effect = { custom_tooltip = gg_pact_state_delegated }
 }
 gg_pact_hover_corrientes = {
  scope = country

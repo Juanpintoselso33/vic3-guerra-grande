@@ -1,0 +1,294 @@
+﻿# EN: THE FEDERAL PACT, full redesign (22/9/2026, the vic3-journals skill), the same frame as the war
+#     and the siege. Header: Pellegrini's "Cabildo y policia" (Buenos Aires, 1829, watercolour; public
+#     domain), the seat of the mandate, with the count of delegating provinces on its band. One short
+#     line; the thirteen provinces on the map; Buenos Aires facing the provinces that took the mandate
+#     back (only while one stands as a country); the unanswered petitions (only while there are
+#     grievances); Rosas's money for Oribe (only when there is somebody to receive it); the longer
+#     account behind the arrow. Every line is backed by docs/guerra-grande-flujo/pacto-textos-mecanica.md.
+#     Replaces gg_pact_map.gui and gg_pact_accounts.gui.
+# ES: EL PACTO FEDERAL, rediseño completo, el mismo marco que la guerra y el sitio. Cabecera: «Cabildo y
+#     policia» de Pellegrini (1829), la sede del encargo, con la cuenta de provincias que delegan en su
+#     franja. Una linea corta; las trece provincias en el mapa; Buenos Aires frente a las provincias que
+#     retiraron el encargo (solo mientras alguna sea pais); los pliegos sin atender (solo si hay
+#     agravios); la plata de Rosas para Oribe (solo si hay quien la reciba); lo largo detras de la
+#     flechita. Reemplaza gg_pact_map.gui y gg_pact_accounts.gui.
+flowcontainer = {
+	name = "gg_pact_overview"
+	direction = vertical
+	parentanchor = hcenter
+	spacing = 16
+	ignoreinvisible = yes
+	# EN/ES: the header with the count on its band / la cabecera con la cuenta en su franja
+	widget = {
+		size = { 520 246 }
+		parentanchor = hcenter
+		icon = { size = { 520 240 } position = { 0 6 } texture = "gfx/interface/gg_situations/pact_header.dds" }
+		textbox = {
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.85 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_pact_j_band"
+			tooltip = "gg_pact_j_band_tt"
+		}
+	}
+	textbox = {
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_pact_j_short"
+	}
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_pact_j_sec_map"
+	}
+	# EN/ES: the thirteen, each in its own colour; hover a province for its state / las trece, cada una en su color
+	widget = {
+		size = { 520 440 }
+		parentanchor = hcenter
+		background = { using = dark_area }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_jujuy.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_jujuy.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_jujuy.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_salta.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_salta.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_salta.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_tucuman.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_tucuman.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_tucuman.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_catamarca.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_catamarca.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_catamarca.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_la_rioja.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_la_rioja.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_la_rioja.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santiago_del_estero.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santiago_del_estero'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santiago_del_estero.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santiago_del_estero'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santiago_del_estero.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santiago_del_estero'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_cordoba.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_cordoba.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_cordoba.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_juan.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_juan'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_juan.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_juan'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_juan.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_juan'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_luis.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_luis'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_luis.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_luis'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_san_luis.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_luis'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_mendoza.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_mendoza'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_mendoza.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_mendoza'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_mendoza.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_mendoza'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santa_fe.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santa_fe'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santa_fe.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santa_fe'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_santa_fe.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santa_fe'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_corrientes.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_corrientes.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_corrientes.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_entre_rios.dds" color = { 0.56 0.70 0.66 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)0')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_entre_rios.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)1')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_entre_rios.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)2')]" }
+		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_buenos_aires.dds" color = { 0.54 0.65 0.78 1 } }
+		gg_pact_hover_map = { position = { 115 12 } }
+	}
+	textbox = {
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_pact_j_legend"
+	}
+	# EN/ES: Buenos Aires facing the provinces that took the mandate back / Buenos Aires frente a las que lo retiraron
+	flowcontainer = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_front_shown'), '(CFixedPoint)1')]"
+		direction = vertical spacing = 12 parentanchor = hcenter ignoreinvisible = yes
+		textbox = {
+			size = { 520 34 }
+			parentanchor = hcenter
+			using = fontsize_large align = center|nobaseline
+			background = { using = entry_bg_fancy_dark alpha = 0.6 }
+			text = "gg_pact_j_sec_front"
+		}
+		flowcontainer = {
+			direction = horizontal spacing = 8 parentanchor = hcenter
+			flowcontainer = {
+				direction = vertical ignoreinvisible = yes
+			dynamicgridbox = {
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 1
+				ignoreinvisible = yes
+				item = {
+					widget = {
+						visible = "[GetScriptedGui('gg_ui_pact_holder').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+						size = { 236 112 }
+						background = { using = dark_area alpha = 0.3 }
+						tooltip = "gg_pact_j_holder_tt"
+						character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+						flag = { position = { 164 8 } datacontext = "[Country]" }
+						textbox = { position = { 96 58 } size = { 134 50 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_pact_j_holder" }
+					}
+				}
+			}
+			}
+			textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_pact_j_versus" }
+			flowcontainer = {
+				direction = vertical spacing = 8 ignoreinvisible = yes
+			dynamicgridbox = {
+				datamodel = "[JournalEntry.GetInvolvedCountries]"
+				datamodel_wrap = 1
+				ignoreinvisible = yes
+				item = {
+					widget = {
+						visible = "[GetScriptedGui('gg_ui_pact_risen').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+						size = { 236 112 }
+						background = { using = dark_area alpha = 0.3 }
+						tooltip = "gg_pact_j_risen_tt"
+						character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+						flag = { position = { 164 8 } datacontext = "[Country]" }
+						textbox = { position = { 96 58 } size = { 134 50 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_pact_j_risen" }
+					}
+				}
+			}
+			}
+		}
+	}
+	# EN/ES: the unanswered petitions, only while there are grievances / los pliegos sin atender, solo si hay agravios
+	flowcontainer = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grievances_shown'), '(CFixedPoint)1')]"
+		direction = vertical spacing = 8 parentanchor = hcenter ignoreinvisible = yes
+		textbox = {
+			size = { 520 34 }
+			parentanchor = hcenter
+			using = fontsize_large align = center|nobaseline
+			background = { using = entry_bg_fancy_dark alpha = 0.6 }
+			text = "gg_pact_j_sec_grievances"
+		}
+		widget = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)1')]"
+			size = { 480 44 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			tooltip = "gg_pact_j_grv_tt"
+			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_corrientes" }
+		}
+		widget = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)1')]"
+			size = { 480 44 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			tooltip = "gg_pact_j_grv_tt"
+			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_norte" }
+		}
+		widget = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)1')]"
+			size = { 480 44 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			tooltip = "gg_pact_j_grv_tt"
+			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_entre_rios" }
+		}
+	}
+	# EN/ES: Rosas's money for Oribe (moved here from the River Plate on 22/9: it is Buenos Aires's money)
+	#     / la plata de Rosas para Oribe
+	flowcontainer = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_accounts_shown'), '(CFixedPoint)1')]"
+		direction = vertical spacing = 10 parentanchor = hcenter ignoreinvisible = yes
+		textbox = {
+			size = { 520 34 }
+			parentanchor = hcenter
+			using = fontsize_large align = center|nobaseline
+			background = { using = entry_bg_fancy_dark alpha = 0.6 }
+			text = "gg_pact_j_sec_accounts"
+		}
+		widget = {
+			size = { 480 44 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/money.dds" }
+			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_offer_parties" }
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)0')]"
+			autoresize = yes multiline = yes
+			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+			parentanchor = hcenter
+			using = fontsize_medium align = center|nobaseline
+			text = "gg_ui_offer_capacity"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)1')]"
+			autoresize = yes multiline = yes
+			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+			parentanchor = hcenter
+			using = fontsize_medium align = center|nobaseline
+			text = "gg_int_status_pending"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)3')]"
+			autoresize = yes multiline = yes
+			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+			parentanchor = hcenter
+			using = fontsize_medium align = center|nobaseline
+			text = "gg_int_status_refused"
+		}
+		widget = {
+			visible = "[GetGlobalVariable('gg_int_arg_accepted').IsSet]"
+			size = { 480 60 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			tooltip = "gg_pact_j_obligation_tt"
+			icon = { position = { 8 14 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/obligation.dds" }
+			textbox = { position = { 50 0 } size = { 422 60 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_accepted_account" }
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)4')]"
+			autoresize = yes multiline = yes
+			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+			parentanchor = hcenter
+			using = fontsize_medium align = center|nobaseline
+			text = "gg_int_status_withdrawn"
+		}
+		widget = {
+			visible = "[GetGlobalVariable('gg_reunification_pledged').IsSet]"
+			size = { 480 60 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.3 }
+			icon = { position = { 8 14 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+			textbox = { position = { 50 0 } size = { 422 60 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_rosas_commitment" }
+		}
+		button_standard = {
+			size = { 480 44 } parentanchor = hcenter
+			text = "gg_int_arg_offer_button" tooltip = "gg_ui_offer_action_tt"
+			visible = "[GetScriptedGui('gg_ui_offer_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			enabled = "[GetScriptedGui('gg_ui_offer_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			onclick = "[GetScriptedGui('gg_ui_offer_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		}
+		button_standard = {
+			size = { 480 44 } parentanchor = hcenter
+			text = "gg_int_arg_withdraw_button" tooltip = "gg_ui_withdraw_action_tt"
+			visible = "[GetScriptedGui('gg_ui_withdraw_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			enabled = "[GetScriptedGui('gg_ui_withdraw_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			onclick = "[GetScriptedGui('gg_ui_withdraw_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		}
+	}
+	# EN/ES: the longer account behind the arrow / lo largo detras de la flechita
+	section_header_button = {
+		blockoverride "layout" { size = { 520 38 } }
+		blockoverride "left_text" { text = "gg_pact_j_more" }
+		blockoverride "onclick" { onclick = "[GetVariableSystem.Toggle('gg_pact_about_open')]" }
+		blockoverride "onclick_showmore" { visible = "[Not(GetVariableSystem.Exists('gg_pact_about_open'))]" }
+		blockoverride "onclick_showless" { visible = "[GetVariableSystem.Exists('gg_pact_about_open')]" }
+	}
+	textbox = {
+		visible = "[GetVariableSystem.Exists('gg_pact_about_open')]"
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = left|nobaseline
+		text = "gg_pact_j_more_body"
+	}
+}
