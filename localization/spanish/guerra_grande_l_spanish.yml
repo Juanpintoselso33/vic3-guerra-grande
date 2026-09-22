@@ -56,7 +56,7 @@
 
 # 2 - La caída de Oribe, 24 de octubre de 1838
  guerra_grande.2.t:0 "La caída de Oribe"
- guerra_grande.2.d:0 "Una escuadra francesa bloquea Buenos Aires, la caballada de Rivera está en las puertas y al Presidente se le acabaron la plata y los amigos. Manuel Oribe puede renunciar y embarcarse para Buenos Aires —donde Rosas va a seguir recibiéndolo como presidente legal del Uruguay, y donde espera por armarse un gobierno del Cerrito— o puede quedarse y hacer de la capital una fortaleza."
+ guerra_grande.2.d:0 "Una escuadra francesa bloquea Buenos Aires, la caballada de Rivera está en las puertas y al Presidente se le acabaron la plata y los amigos. Manuel Oribe puede renunciar y embarcarse para Buenos Aires —donde Rosas va a seguir recibiéndolo como presidente legal del Uruguay, y de donde un día va a volver con un ejército a armar el gobierno del Cerrito frente a la ciudad— o puede quedarse y hacer de la capital una fortaleza."
  guerra_grande.2.f:0 "Un presidente con dos salidas de la ciudad."
  guerra_grande.2.a:0 "Que renuncie. Los colorados toman el gobierno."
  guerra_grande.2.b:0 "No renuncia. Los blancos conservan el Estado."
@@ -136,8 +136,8 @@
  Auxiliares_Argentinos:0 "Auxiliares Argentinos"
  Legion_Italiana:0 "Legión Italiana"
  Legion_Francesa:0 "Legión Francesa"
- gg_rosas_provisional_lock:0 "Rosas sostiene las riendas (provisorio)"
- gg_rosas_provisional_lock_desc:0 "Un candado contundente y provisorio: ninguna reforma de ley mientras dure. Se agregó porque el gobierno de la Confederación se desestabilizaba hacia formas ajenas a mitad de campaña -- probablemente un choque entre la clasificación de dictadura del mod de banderas y las leyes propias de Rosas al arrancar. Debería sacarse una vez que ese choque se corrija de raíz, no quedar apilado encima."
+ gg_rosas_provisional_lock:0 "Rosas sostiene las riendas"
+ gg_rosas_provisional_lock_desc:0 "Rosas conserva en sus manos las riendas del gobierno de la Confederación."
 
 # T3b
  guerra_grande.9.b:0 "Que vengan a mediar, no a pelear."
