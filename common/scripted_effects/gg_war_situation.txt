@@ -93,3 +93,18 @@ gg_war_journal_sync = {
 		}
 	}
 }
+
+# EN: hide what the engine draws on its own in a journal (Community Mod Framework variables, in the
+#     playset), so the journal shows only its own widgets -- as Gates of the Bosphorus does.
+# ES: esconde lo que el motor dibuja solo en un journal (variables del CMF, en el playset), para que el
+#     journal muestre solo sus widgets, como Gates of the Bosphorus.
+gg_journal_hide_engine_parts = {
+	scope:journal_entry ?= {
+		set_variable = com_hide_status_desc
+		set_variable = com_hide_journal_reason
+		set_variable = com_hide_involved_countries
+		set_variable = com_hide_complete_triggers
+		set_variable = com_hide_fail_triggers
+		set_variable = com_hide_modifiers
+	}
+}

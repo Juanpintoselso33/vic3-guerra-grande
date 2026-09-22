@@ -76,8 +76,13 @@ je_gg_delegation = {
 	#     eventualmente es un numero en el que nadie confia.
 	#     El costo del sitio se queda mensual, porque es un costo mensual. Darse cuenta de que una
 	#     provincia volvio no es un costo y no tiene por que esperar.
+	immediate = {
+		gg_journal_hide_engine_parts = yes
+	}
+
 	on_weekly_pulse = {
 		effect = {
+			gg_journal_hide_engine_parts = yes
 			gg_pact_sync = yes
 			# EN: Shared journals have no country root; resolve the mandate holder.
 			# ES: El diario compartido no tiene pais raiz; resolver quien tiene el mandato.

@@ -227,4 +227,21 @@ flowcontainer = {
  textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_1" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)1')]" }
  textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_2" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)2')]" }
  textbox = { size = { 520 50 } multiline = yes using = fontsize_medium text = "gg_siege_ui_orders" }
+	# EN/ES: fold-out with the arrow (same control the old River Plate journal used) / desplegable con flechita
+	section_header_button = {
+		blockoverride "layout" { size = { 520 38 } }
+		blockoverride "left_text" { text = "gg_siege_ui_about" }
+		blockoverride "onclick" { onclick = "[GetVariableSystem.Toggle('gg_siege_about_open')]" }
+		blockoverride "onclick_showmore" { visible = "[Not(GetVariableSystem.Exists('gg_siege_about_open'))]" }
+		blockoverride "onclick_showless" { visible = "[GetVariableSystem.Exists('gg_siege_about_open')]" }
+	}
+	textbox = {
+		visible = "[GetVariableSystem.Exists('gg_siege_about_open')]"
+		autoresize = yes multiline = yes
+		minimumsize = { 500 -1 } maximumsize = { 500 -1 }
+		parentanchor = hcenter
+		align = left|nobaseline
+		using = fontsize_medium
+		text = "je_gg_siege_reason"
+	}
 }

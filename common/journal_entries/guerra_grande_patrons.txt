@@ -36,6 +36,7 @@ je_gg_patrons = {
 	}
 
 	immediate = {
+		gg_journal_hide_engine_parts = yes
 		gg_int_arg_accounts_init = yes
 	}
 
@@ -47,6 +48,7 @@ je_gg_patrons = {
 
 	on_monthly_pulse = {
 		effect = {
+			gg_journal_hide_engine_parts = yes
 			gg_international_sync = yes
 			gg_int_arg_ai_pulse = yes
 			gg_plata_situation_monthly = yes

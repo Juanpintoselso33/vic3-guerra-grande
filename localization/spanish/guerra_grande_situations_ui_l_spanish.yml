@@ -1,8 +1,4 @@
 ﻿l_spanish:
- gg_war_ui_current_ruler:0 "Gobierno\n#b [Character.GetFullName]#!"
- gg_war_ui_cause_leader:0 "Caudillo\n#b [Character.GetFullName]#!"
- gg_war_ui_diplomacy_title:0 "Las negociaciones"
- gg_war_ui_diplomacy_0:0 "Las causas disputan el gobierno; aún no hay una guerra abierta."
  gg_war_ui_diplomacy_1:0 "No hay una propuesta de paz en curso."
  gg_war_ui_diplomacy_2:0 "Las conversaciones quedaron suspendidas. Por ahora no se presenta otro pliego."
  gg_war_ui_diplomacy_3:0 "#Y Hay condiciones de paz en consideración.#! La resolución corresponde a los gobiernos que reciben los pliegos."

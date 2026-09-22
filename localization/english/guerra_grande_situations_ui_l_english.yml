@@ -1,8 +1,4 @@
 ﻿l_english:
- gg_war_ui_current_ruler:0 "Government\n#b [Character.GetFullName]#!"
- gg_war_ui_cause_leader:0 "Cause leader\n#b [Character.GetFullName]#!"
- gg_war_ui_diplomacy_title:0 "Negotiations"
- gg_war_ui_diplomacy_0:0 "The rival causes contest the government; open war has not begun."
  gg_war_ui_diplomacy_1:0 "No peace proposal is currently under consideration."
  gg_war_ui_diplomacy_2:0 "Talks have been suspended. No further terms are being submitted for now."
  gg_war_ui_diplomacy_3:0 "#Y Peace terms are under consideration.#! The governments receiving them retain their decision."

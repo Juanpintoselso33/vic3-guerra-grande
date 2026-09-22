@@ -9,6 +9,11 @@ je_guerra_grande = {
 		name = "gg_war_overview"
 		container = "custom_widget_container_je_icon"
 	}
+	widget = {
+		gui = "gui/gg_war_overview.gui"
+		name = "gg_war_details"
+		container = "custom_widget_container_4"
+	}
 
 	# EN: two fields, not one. The "_uninvolved_or_context" one is the only one vanilla ever uses,
 	#     and it does not cover a country that is involved -- which is exactly our case, since this
@@ -52,6 +57,7 @@ je_guerra_grande = {
 	}
 
 	immediate = {
+		gg_journal_hide_engine_parts = yes
 		gg_ui_prewar_leaders_sync = yes
 		if = {
 			limit = { NOT = { has_global_variable = guerra_grande_blanco_score } }
@@ -363,6 +369,9 @@ je_guerra_grande = {
 			# ES: S19 -- should_be_involved solo siembra la entrada al abrirse (1836, antes del Cerrito):
 			#     los dos gobiernos se agregan a mano cada semana, lo que tambien migra las partidas.
 			gg_war_journal_sync = yes
+			# EN/ES: 22/9/2026 -- only our own widgets; the engine's status box, long text, countries and
+			#     conditions hidden (CMF), also for journals already open / solo lo nuestro (CMF)
+			gg_journal_hide_engine_parts = yes
 			gg_ui_prewar_leaders_sync = yes
 			if = {
 				limit = {
