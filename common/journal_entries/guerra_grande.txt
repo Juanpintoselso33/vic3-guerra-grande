@@ -203,7 +203,10 @@ je_guerra_grande = {
 								year >= 1843
 								gg_plata_ba_held_by_rosas = yes
 								gg_plata_ba_fort = yes
-								NOT = { has_global_variable = gg_plata_intervention }
+								OR = {
+									NOT = { has_global_variable = gg_plata_intervention }
+									has_global_variable = gg_plata_intervention_over
+								}
 							}
 							gg_river_blockade = yes
 						}

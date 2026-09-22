@@ -288,7 +288,8 @@ gg_powers.11 = {
 					var:gg_brown_squadron_ref ?= {
 						every_scope_ship = { set_ship_owner_multiple = c:GBR }
 					}
-					clear_ownership_transfer_fleet = yes
+					# EN/ES: Codex review 22/9 -- on the receiving country / en el pais que recibe
+					c:GBR = { clear_ownership_transfer_fleet = yes }
 				}
 				remove_variable = gg_brown_squadron_ref
 				remove_variable = gg_brown_squadron_raised

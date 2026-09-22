@@ -95,6 +95,35 @@ gg_plata_intervention_start = {
 		}
 		set_global_variable = gg_plata_intervention
 		set_global_variable = { name = gg_plata_intervention_months value = 0 }
+		# EN: Codex review 22/9 -- the clock lives in its own hidden event on Britain (a tag that never
+		#     changes), not in the war journal: a truce or the end of the war must not stop it.
+		# ES: el reloj vive en su propio evento oculto sobre Gran Bretania (un tag que nunca cambia), no
+		#     en el journal de la guerra: ni una tregua ni el fin de la guerra lo pueden frenar.
+		c:GBR ?= { trigger_event = { id = gg_plata.4 days = 30 } }
+		# EN: Codex review 22/9 -- decision B lets the intervention come BEFORE 1845, so its links are
+		#     also scheduled from here, at their historical distance from the ultimatum. The dated
+		#     copies stay: whichever arrives first fires (every relay has its DONE mark).
+		# ES: la decision B deja que la intervencion llegue ANTES de 1845, asi que sus eslabones se
+		#     agendan tambien desde aca, a su distancia historica del ultimatum. Las copias fechadas
+		#     quedan: sale la que llegue primero (cada relevo tiene su marca DONE).
+		c:GBR ?= {
+			trigger_event = { id = gg_cal.10 days = 1 }      # Brown, 2/8/1845
+			trigger_event = { id = gg_cal.31 days = 60 }     # the blockade of Buenos Aires, 18/9/1845
+			trigger_event = { id = gg_cal.12 days = 365 }    # Hood, July 1846
+			trigger_event = { id = gg_cal.15 days = 700 }    # Howden, July 1847
+			trigger_event = { id = gg_cal.19 days = 940 }    # Gore and Gros, March 1848
+			trigger_event = { id = gg_cal.23 days = 1095 }   # Southern, November 1849
+			trigger_event = { id = gg_cal.25 days = 1370 }   # Lepredour, August 1850
+		}
+		c:ARG ?= {
+			if = {
+				limit = { exists = s:STATE_ENTRE_RIOS }
+				trigger_event = { id = gg_argentina_cal.21 days = 60 }    # the blockade from Buenos Aires
+				trigger_event = { id = gg_argentina_cal.22 days = 120 }   # Obligado
+				trigger_event = { id = gg_argentina_cal.23 days = 310 }   # Quebracho
+				trigger_event = { id = gg_argentina_cal.24 days = 365 }   # Hood from Buenos Aires
+			}
+		}
 		c:ARG ?= {
 			save_scope_as = gg_plata_rosas
 			c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
@@ -149,15 +178,23 @@ gg_plata_monthly = {
 			set_global_variable = { name = gg_plata_closed_streak value = 0 }
 		}
 		if = {
-			limit = {
-				has_global_variable = gg_plata_intervention
-				NOT = { has_global_variable = gg_plata_intervention_over }
-			}
-			change_global_variable = { name = gg_plata_intervention_months add = 1 }
-		}
-		if = {
 			limit = { gg_plata_intervention_due = yes }
 			gg_plata_ultimatum_send = yes
+		}
+	}
+	# EN: Codex review 22/9 -- once Rosas has opened the river (he yielded, or Brown's option a), the
+	#     Cerrito may ask again, as the old system allowed when the sea opened.
+	# ES: cuando Rosas abrio el rio (cedio, o la opcion a de Brown), el Cerrito puede volver a pedir.
+	if = {
+		limit = {
+			global_var:gg_plata_rosas_stance = 0
+			gg_plata_open = yes
+		}
+		c:CER ?= {
+			if = {
+				limit = { has_variable = guerra_grande_river_blockade_asked }
+				remove_variable = guerra_grande_river_blockade_asked
+			}
 		}
 	}
 
@@ -227,7 +264,9 @@ gg_plata_monthly = {
 						var:gg_lent_squadron_ref ?= {
 							every_scope_ship = { set_ship_owner_multiple = c:FRA }
 						}
-						clear_ownership_transfer_fleet = yes
+						# EN/ES: Codex review 22/9 -- on the country that receives the ships, as vanilla
+						#     does / en el pais que recibe los barcos, como vanilla
+						c:FRA = { clear_ownership_transfer_fleet = yes }
 					}
 					remove_variable = gg_lent_squadron_ref
 				}

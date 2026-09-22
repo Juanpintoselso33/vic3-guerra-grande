@@ -438,8 +438,10 @@ gg_wartime_modifiers_clear = {
 			limit = { has_variable = gg_lent_squadron_ref exists = var:gg_lent_squadron_ref }
 			var:gg_lent_squadron_ref ?= {
 				if = { limit = { exists = c:FRA } every_scope_ship = { set_ship_owner_multiple = c:FRA } }
-				clear_ownership_transfer_fleet = yes
 			}
+			# EN/ES: S02, Codex review 22/9 -- finished on the receiving country, as vanilla does; it was
+			#     called from the formation scope / se cierra en el pais receptor; se llamaba desde la formacion
+			c:FRA ?= { clear_ownership_transfer_fleet = yes }
 		}
 		if = { limit = { has_variable = gg_lent_squadron } remove_variable = gg_lent_squadron }
 		if = { limit = { has_variable = gg_lent_squadron_ref } remove_variable = gg_lent_squadron_ref }

@@ -127,3 +127,29 @@ gg_plata.10 = {
 		ai_chance = { base = 20 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.4 -- the intervention's clock (Codex review 22/9/2026). One month per tick, on Britain,
+#     independent of the war journal and of truces, until France settles or the war is over. The
+#     links of the chain read it through gg_plata_intervention_at.
+# ES: gg_plata.4 -- el reloj de la intervencion. Un mes por vuelta, sobre Gran Bretania,
+#     independiente del journal de la guerra y de las treguas, hasta que Francia arregla o termina la
+#     guerra. Los eslabones de la cadena lo leen con gg_plata_intervention_at.
+# -------------------------------------------------------------------------------------------------
+gg_plata.4 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_global_variable = gg_plata_intervention
+				NOT = { has_global_variable = gg_plata_intervention_over }
+			}
+			change_global_variable = { name = gg_plata_intervention_months add = 1 }
+			if = {
+				limit = { year < 1862 }
+				trigger_event = { id = gg_plata.4 days = 30 }
+			}
+		}
+	}
+}

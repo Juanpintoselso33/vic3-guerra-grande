@@ -18,9 +18,17 @@ gg_plata_ba_fort = {
 gg_plata_mvd_fort = {
 	p:x302DDA.state ?= { has_building = building_naval_fortification }
 }
+# EN: Vic3 has no state-controller trigger (occupation is per province). Codex review 22/9: owner
+#     alone would still show Rosas with Buenos Aires occupied, so it also asks that Argentina holds
+#     control of a strait, which occupation takes away. The closure itself is the engine's answer
+#     (gg_plata_closed), which already folds occupation in.
+# ES: Vic3 no tiene trigger de controlador de estado (la ocupacion es por provincia). Solo el dueno
+#     seguiria mostrando a Rosas con Buenos Aires ocupada, asi que tambien pide que la Argentina
+#     controle un estrecho, cosa que la ocupacion le saca. El cierre en si es la respuesta del motor.
 gg_plata_ba_held_by_rosas = {
 	exists = c:ARG
 	p:x365A5B.state ?= { owner ?= c:ARG }
+	c:ARG = { has_any_strait_control = yes }
 }
 
 # EN: Is the River Plate shut to foreign flags? Rosas holds his bank, it is fortified, and British
