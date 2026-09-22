@@ -8,13 +8,18 @@ je_gg_patrons = {
 
 	widget = {
 		gui = "gui/gg_international.gui"
-		name = "gg_international_ledger"
+		name = "gg_plata_navigation"
 		container = "custom_widget_container_je_icon"
 	}
 	widget = {
 		gui = "gui/gg_international.gui"
-		name = "gg_international_accounts"
-		container = "custom_widget_container_2"
+		name = "gg_international_ledger"
+		container = "custom_widget_container_1"
+	}
+	widget = {
+		gui = "gui/gg_international.gui"
+		name = "gg_plata_dossiers"
+		container = "custom_widget_container_3"
 	}
 	widget = {
 		gui = "gui/gg_international.gui"
@@ -25,11 +30,8 @@ je_gg_patrons = {
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = no
 
-	scripted_progress_bar = gg_sea_bar
 	# EN/ES: calling in the squadrons is a request to the powers / llamar a las escuadras es un pedido a las potencias
 	scripted_button = guerra_grande_foreign_intervention_button
-	scripted_button = gg_int_arg_offer_button
-	scripted_button = gg_int_arg_withdraw_button
 
 	should_be_involved = {
 		gg_international_participant = yes
@@ -41,19 +43,11 @@ je_gg_patrons = {
 
 	immediate = {
 		gg_int_arg_accounts_init = yes
-		scope:journal_entry = { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
 	}
 
 	status_desc = {
 		first_valid = {
-			triggered_desc = { desc = gg_int_status_withdrawn trigger = { has_global_variable = gg_int_arg_withdrawn } }
-			triggered_desc = { desc = gg_int_status_pending trigger = { gg_int_arg_offer_pending = yes } }
-			triggered_desc = { desc = gg_int_status_accepted trigger = { has_global_variable = gg_int_arg_accepted } }
-			triggered_desc = { desc = gg_int_status_refused trigger = { has_global_variable = gg_int_arg_refused } }
-			triggered_desc = {
-				desc = gg_int_status_initial
-				trigger = { always = yes }
-			}
+			triggered_desc = { desc = gg_ui_empty trigger = { always = yes } }
 		}
 	}
 

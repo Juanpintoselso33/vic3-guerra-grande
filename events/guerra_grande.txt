@@ -423,6 +423,7 @@ guerra_grande.3 = {
 		#     with it -- the character is moved, never cloned.
 		# ES: te quedas en Montevideo. El Cerrito se separa con la campania y Oribe se va con
 		#     el: el personaje se muda, no se clona.
+		gg_return_blanco_commanders = yes
 		set_variable = guerra_grande_defensa_government
 		# EN: grab Oribe BEFORE the country is created. create_country copies characters from the
 		#     origin, so afterwards there can be two of him and the new government ends up ruled
@@ -527,7 +528,7 @@ guerra_grande.3 = {
 		#     surviving original identifiable, via the this != scope:x idiom vanilla uses to exclude one
 		#     specific character from a limit (see events/commander_events.txt, arguing_commander_two's
 		#     limit: NOT = { this = scope:arguing_commander_one }). Excluding all five saved scopes here
-		#     leaves only the create_country clones matching, so this exiles exactly the five copies.
+		#     leaves only the create_country clones matching, so this removes exactly the five copies.
 		# ES: create_country clono a Oribe, Ignacio Oribe, Berro, Aparicio y Lavalleja hacia CER junto
 		#     con todos los demas, y las transferencias de arriba despues movieron cada ORIGINAL tambien
 		#     a CER -- asi que ahora mismo CER tiene dos de cada uno de estos cinco. El bloque de exilio
@@ -538,7 +539,7 @@ guerra_grande.3 = {
 		#     que vanilla usa para excluir a un personaje puntual de un limit (ver
 		#     events/commander_events.txt, el limit de arguing_commander_two: NOT = { this =
 		#     scope:arguing_commander_one }). Excluir aca los cinco scopes guardados deja matcheando solo
-		#     a los clones de create_country, asi que esto exilia justo a las cinco copias.
+		#     a los clones de create_country, asi que esto elimina justo a las cinco copias.
 		c:CER ?= {
 			every_scope_character = {
 				limit = {
@@ -555,7 +556,9 @@ guerra_grande.3 = {
 					NOT = { this = scope:gg_aparicio }
 					NOT = { this = scope:gg_lavalleja }
 				}
-				exile_character = yes
+				# EN: Dispose of a generated copy, not a historical person or an exile.
+				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
+				kill_character = { hidden = yes }
 			}
 		}
 		# EN: the Defensa was presided over by Joaquin Suarez -- an interim presidency that lasted
@@ -618,14 +621,12 @@ guerra_grande.3 = {
 		#     is born holding a duplicate of every man in the country -- including the enemy's.
 		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
 		#     Defensa. Transferring the other side's men is not enough: the transfers move the
-		#     originals, and these copies stay behind. They are exiled, which is also what actually
-		#     happened to a man caught on the wrong side of the lines in 1839.
+		#     originals, and these copies stay behind. Generated copies are removed silently, never sent to the exile pool.
 		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
 		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
 		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
 		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
-		#     estas copias quedan. Se los exilia, que es ademas lo que le pasaba de verdad a un
-		#     hombre que quedaba del lado equivocado de las lineas en 1839.
+		#     estas copias quedan. Las copias se eliminan en silencio, nunca se mandan al exilio.
 		c:CER ?= {
 			every_scope_character = {
 				limit = {
@@ -640,7 +641,9 @@ guerra_grande.3 = {
 					has_template = URU_andres_lamas
 					}
 				}
-				exile_character = yes
+				# EN: Dispose of a generated copy, not a historical person or an exile.
+				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
+				kill_character = { hidden = yes }
 			}
 		}
 		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.
@@ -1039,6 +1042,7 @@ guerra_grande.3 = {
 		trigger = {
 			has_variable = guerra_grande_blanco_path
 		}
+		gg_return_blanco_commanders = yes
 		change_tag = CER
 		set_variable = guerra_grande_cerrito_government
 		if = {
@@ -1180,7 +1184,9 @@ guerra_grande.3 = {
 					NOT = { this = scope:gg_medina }
 					NOT = { this = scope:gg_batlle }
 				}
-				exile_character = yes
+				# EN: Dispose of a generated copy, not a historical person or an exile.
+				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
+				kill_character = { hidden = yes }
 			}
 		}
 		c:URU ?= {
@@ -1213,14 +1219,12 @@ guerra_grande.3 = {
 		#     is born holding a duplicate of every man in the country -- including the enemy's.
 		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
 		#     Defensa. Transferring the other side's men is not enough: the transfers move the
-		#     originals, and these copies stay behind. They are exiled, which is also what actually
-		#     happened to a man caught on the wrong side of the lines in 1839.
+		#     originals, and these copies stay behind. Generated copies are removed silently, never sent to the exile pool.
 		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
 		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
 		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
 		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
-		#     estas copias quedan. Se los exilia, que es ademas lo que le pasaba de verdad a un
-		#     hombre que quedaba del lado equivocado de las lineas en 1839.
+		#     estas copias quedan. Las copias se eliminan en silencio, nunca se mandan al exilio.
 		c:URU ?= {
 			every_scope_character = {
 				limit = {
@@ -1232,7 +1236,9 @@ guerra_grande.3 = {
 					has_template = URU_Juan_Antonio_Lavalleja
 					}
 				}
-				exile_character = yes
+				# EN: Dispose of a generated copy, not a historical person or an exile.
+				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
+				kill_character = { hidden = yes }
 			}
 		}
 		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.

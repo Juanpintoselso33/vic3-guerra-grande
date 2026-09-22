@@ -19,27 +19,16 @@
 je_gg_delegation = {
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	widget = {
+		gui = "gui/gg_pact_map.gui"
+		name = "gg_pact_map"
+		container = "custom_widget_container_je_icon"
+	}
 
 	should_be_pinned_by_default_involved = yes
 
-	# EN: NO PROGRESS BAR ANY MORE. It counted 156 points -- thirteen provinces times twelve -- and
-	#     mixed two different things into that one number: a province withdrawing the charge, which is
-	#     a jump of twelve, and the monthly cost of the siege, which is one. So it fell while nothing
-	#     had happened on the map, and nothing on the map explained why. Juan, playing on 20/9/2026:
-	#     «no se entiende un carajo, podriamos en vez de tener una barra de progreso, listar las
-	#     provincias y ponerles un booleano a cada una».
-	#     What replaces it is exactly that: the thirteen provinces, each answering the only question
-	#     this journal ever asked -- does it still speak through Buenos Aires, yes or no. The siege is
-	#     still there and still counted, said as what it is, on a line of its own.
-	# ES: YA NO HAY BARRA DE PROGRESO. Contaba 156 puntos -- trece provincias por doce -- y metia dos
-	#     cosas distintas en ese unico numero: una provincia que retira el encargo, que es un salto de
-	#     doce, y el costo mensual del sitio, que es uno. Asi que bajaba sin que hubiera pasado nada en
-	#     el mapa, y nada en el mapa explicaba por que. Juan, jugando el 20/9/2026: «no se entiende un
-	#     carajo, podriamos en vez de tener una barra de progreso, listar las provincias y ponerles un
-	#     booleano a cada una».
-	#     La reemplaza exactamente eso: las trece provincias, cada una contestando la unica pregunta
-	#     que este journal hizo siempre -- sigue hablando por Buenos Aires, si o no. El sitio sigue
-	#     estando y sigue contandose, dicho por lo que es, en una linea propia.
+	# EN: The map shows mandate, claim and withdrawal separately; no aggregate bar.
+	# ES: El mapa distingue mandato, reclamo y retiro; sin barra agregada.
 
 	# EN/ES: Rosas y los tres que le pueden retirar la delegacion / Rosas and the three who can
 	#     withdraw it from him
@@ -56,619 +45,11 @@ je_gg_delegation = {
 		always = no
 	}
 
-	# EN/ES: el mismo numero, dicho desde donde esta parado el que mira / the same number, told from
-	#     where the reader is standing
-	# EN: THE LIST, WRITTEN OUT, because the clever way did not work. The first version asked each
-	#     province with SelectLocalization + GetGlobalVariable().IsValid -- a function vanilla uses 841
-	#     times -- and in Juan's game on 20/9/2026 the whole list rendered as nothing: the panel showed
-	#     one province name and the tail. So the list is now sixteen plain descriptions, one per
-	#     combination of the four things that can move (Corrientes, Cordoba, the five of the north, and
-	#     Entre Rios), each with the marks already written into the text. Nothing is computed at draw
-	#     time and nothing can fail at draw time. The five that never secede are always ticked.
-	# ES: LA LISTA, ESCRITA A MANO, porque la forma inteligente no anduvo. La primera version le
-	#     preguntaba a cada provincia con SelectLocalization + GetGlobalVariable().IsValid --una funcion
-	#     que vanilla usa 841 veces-- y en la partida de Juan del 20/9/2026 la lista entera no renderizo
-	#     nada: el panel mostraba un nombre de provincia y la cola. Asi que la lista son ahora dieciseis
-	#     descripciones planas, una por combinacion de las cuatro cosas que se pueden mover (Corrientes,
-	#     Cordoba, las cinco del norte y Entre Rios), cada una con las marcas ya escritas en el texto.
-	#     No se calcula nada al dibujar y no puede fallar nada al dibujar. Las cinco que no se separan
-	#     nunca van siempre tildadas.
+	# EN: Provincial states live on the map; no duplicate list or premature war report.
+	# ES: Estados provinciales en el mapa; sin lista duplicada ni parte de guerra prematuro.
 	status_desc = {
 		first_valid = {
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteok_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteok_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteok_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteclaim_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteclaim_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_norteclaim_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_nortegone_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_nortegone_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobaok_nortegone_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteok_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteok_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteok_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteclaim_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteclaim_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_norteclaim_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_nortegone_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_nortegone_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesok_cordobagone_nortegone_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					NOT = { has_global_variable = gg_reclamo_corrientes }
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteok_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteok_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteok_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteclaim_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteclaim_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_norteclaim_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_nortegone_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_nortegone_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobaok_nortegone_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteok_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteok_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteok_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteclaim_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteclaim_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_norteclaim_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_nortegone_entre_riosok
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_nortegone_entre_riosclaim
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesclaim_cordobagone_nortegone_entre_riosgone
-				trigger = {
-					NOT = { has_global_variable = gg_delegation_gone_corrientes }
-					has_global_variable = gg_reclamo_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteok_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteok_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteok_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteclaim_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteclaim_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_norteclaim_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_nortegone_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_nortegone_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobaok_nortegone_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					NOT = { has_global_variable = gg_delegation_gone_cordoba }
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteok_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteok_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteok_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					NOT = { has_global_variable = gg_reclamo_coalicion_tucuman }
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteclaim_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteclaim_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_norteclaim_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman }
-					has_global_variable = gg_reclamo_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_nortegone_entre_riosok
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					NOT = { has_global_variable = gg_reclamo_entre_rios }
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_nortegone_entre_riosclaim
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-					has_global_variable = gg_reclamo_entre_rios
-				}
-			}
-			triggered_desc = {
-				desc = je_gg_del_l_corrientesgone_cordobagone_nortegone_entre_riosgone
-				trigger = {
-					has_global_variable = gg_delegation_gone_corrientes
-					has_global_variable = gg_delegation_gone_cordoba
-					has_global_variable = gg_delegation_gone_coalicion_tucuman
-					has_global_variable = gg_delegation_gone_entre_rios
-				}
-			}
+			triggered_desc = { desc = gg_ui_empty trigger = { always = yes } }
 		}
 	}
 
@@ -698,25 +79,16 @@ je_gg_delegation = {
 	#     provincia volvio no es un costo y no tiene por que esperar.
 	on_weekly_pulse = {
 		effect = {
+			gg_pact_sync = yes
+			# EN: Shared journals have no country root; resolve the mandate holder.
+			# ES: El diario compartido no tiene pais raiz; resolver quien tiene el mandato.
+			every_country = {
+				limit = { has_variable = gg_arg_rosas_seat }
 			hidden_effect = {
-				# EN: AND THE OTHER DIRECTION, which until now was dead code. gg_delegation_restored
-				#     existed and nobody called it, so a province won back by arms stayed counted as lost
-				#     for ever -- the exact opposite of what a REVOCABLE delegation means. Pago Largo,
-				#     Quebracho Herrado, Famailla and Vences all end with a province back under Buenos
-				#     Aires, and the bar has to say so.
-				#     The test is simply that the country is gone: it was annexed, and its legislature
-				#     delegates again because it no longer has one.
-				# ES: Y LA OTRA DIRECCION, que hasta ahora era codigo muerto. gg_delegation_restored
-				#     existia y nadie lo llamaba, asi que una provincia recuperada por las armas quedaba
-				#     contada como perdida para siempre: lo contrario exacto de lo que significa una
-				#     delegacion REVOCABLE. Pago Largo, Quebracho Herrado, Famailla y Vences terminan con
-				#     una provincia de vuelta bajo Buenos Aires, y la barra tiene que decirlo.
-				#     La prueba es doble, y hasta el 20/9/2026 era una sola: que el pais ya no este, Y que
-				#     el estado sea de Buenos Aires. Con la primera sola, cualquiera que anexara la
-				#     provincia -- el Brasil, por ejemplo -- le devolvia la delegacion a Rosas.
-				# EN/ES: la marca del bloque hace de guarda: gg_delegation_restored la borra, asi que este
-				#     bloque entero corre una sola vez y la noticia sale una sola vez / the block's own
-				#     mark is the guard
+				# EN: Restore a withdrawn mandate after subjugation or full territorial recovery.
+				#     The effect clears the withdrawal flag, preventing repeat weekly notices.
+				# ES: Restituir el mandato retirado tras subordinacion o recuperacion territorial.
+				#     El efecto borra la marca de retiro y evita avisos semanales repetidos.
 				if = {
 					limit = {
 						has_variable = gg_arg_rosas_seat
@@ -735,14 +107,19 @@ je_gg_delegation = {
 							#     asi que ganarla es el segundo camino de vuelta.
 							AND = {
 								NOT = { exists = c:CRR }
-								exists = s:STATE_CORRIENTES.region_state:ARG
+								owns_entire_state_region = STATE_CORRIENTES
 							}
 							c:CRR ?= { is_subject_of = c:ARG }
 						}
 						has_global_variable = gg_delegation_gone_corrientes
 					}
 					gg_delegation_restored = { KEY = corrientes COUNT = 1 POINTS = 12 }
-					trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
+					set_global_variable = { name = gg_corrientes_recovery days = 730 }
+					if = {
+						limit = { c:CRR ?= { is_subject_of = c:ARG } }
+						trigger_event = { id = gg_argentina.51 days = 0 popup = yes }
+					}
+					else = { trigger_event = { id = gg_argentina.52 days = 0 popup = yes } }
 				}
 				# EN/ES: seis provincias que vuelven juntas son UNA noticia, no seis / six at once is one
 				#     piece of news, not six
@@ -754,13 +131,22 @@ je_gg_delegation = {
 							#     pacto como protectorado / same rule as above
 							AND = {
 								NOT = { exists = c:CLN }
-								exists = s:STATE_TUCUMAN.region_state:ARG
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } owns_entire_state_region = STATE_TUCUMAN }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_salta } owns_entire_state_region = STATE_SALTA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_jujuy } owns_entire_state_region = STATE_JUJUY }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_catamarca } owns_entire_state_region = STATE_CATAMARCA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } owns_entire_state_region = STATE_LA_RIOJA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_cordoba } owns_entire_state_region = STATE_CORDOBA }
 							}
 							c:CLN ?= { is_subject_of = c:ARG }
 						}
 						has_global_variable = gg_delegation_gone_coalicion_tucuman
 					}
-					trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
+					if = {
+						limit = { c:CLN ?= { is_subject_of = c:ARG } }
+						trigger_event = { id = gg_argentina.53 days = 0 popup = yes }
+					}
+					else = { trigger_event = { id = gg_argentina.54 days = 0 popup = yes } }
 					gg_delegation_restored = { KEY = coalicion_tucuman COUNT = 1 POINTS = 12 }
 					gg_delegation_restored = { KEY = coalicion_salta COUNT = 1 POINTS = 12 }
 					gg_delegation_restored = { KEY = coalicion_jujuy COUNT = 1 POINTS = 12 }
@@ -776,21 +162,30 @@ je_gg_delegation = {
 							#     pacto como protectorado / same rule as above
 							AND = {
 								NOT = { exists = c:ENR }
-								exists = s:STATE_ENTRE_RIOS.region_state:ARG
+								owns_entire_state_region = STATE_ENTRE_RIOS
 							}
 							c:ENR ?= { is_subject_of = c:ARG }
 						}
 						has_global_variable = gg_delegation_gone_entre_rios
 					}
 					gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
-					trigger_event = { id = gg_argentina.50 days = 0 popup = yes }
+					if = {
+						limit = { c:ENR ?= { is_subject_of = c:ARG } }
+						trigger_event = { id = gg_argentina.55 days = 0 popup = yes }
+					}
+					else = { trigger_event = { id = gg_argentina.56 days = 0 popup = yes } }
 				}
 			}
+					}
 		}
 	}
 
 	on_monthly_pulse = {
 		effect = {
+			# EN: Shared journals have no country root; resolve the mandate holder.
+			# ES: El diario compartido no tiene pais raiz; resolver quien tiene el mandato.
+			every_country = {
+				limit = { has_variable = gg_arg_rosas_seat }
 			if = {
 				limit = {
 					has_variable = gg_arg_rosas_seat
@@ -815,6 +210,7 @@ je_gg_delegation = {
 			}
 			# EN/ES: ya no hay barra que redibujar ni costo que aplicar: el sitio cuenta sus meses arriba
 			#     / no bar to redraw and no cost to charge: the siege counts its months above
+					}
 		}
 	}
 
@@ -839,42 +235,12 @@ je_gg_delegation = {
 	complete = {
 		custom_tooltip = {
 			text = je_gg_delegation_complete_tt
-		# EN: SIX OF THIRTEEN, the ending Juan chose on 20/9/2026. With whole provinces instead of
-		#     points, asking for all thirteen to leave would be asking for something that never
-		#     happens: at most eight can secede in this mod. Fewer than half still delegating is
-		#     reachable by playing -- Corrientes and the six of the north at once is exactly seven --
-		#     and it is the real threshold anyway: a delegate that half the Confederation no longer
-		#     recognises is not conducting anybody's foreign relations.
-		# ES: SEIS DE TRECE, el final que eligio Juan el 20/9/2026. Con provincias enteras en vez de
-		#     puntos, pedir que se vayan las trece seria pedir algo que no pasa nunca: en este mod como
-		#     mucho se pueden separar ocho. Que deleguen menos de la mitad se alcanza jugando
-		#     --Corrientes y las seis del norte a la vez son justo siete-- y ademas es el umbral de
-		#     verdad: un encargado al que media Confederacion ya no reconoce no lleva las relaciones
-		#     exteriores de nadie.
-			global_var:gg_delegating_provinces <= 6
-			# EN: AND THE SIEGE HAS TO HAVE LASTED. The headcount alone was wrong and it was my
-			#     arithmetic, not a design choice: thirteen provinces, Corrientes takes one, the
-			#     Coalition five, Cordoba the sixth -- and six delegating is exactly where history
-			#     lands in October 1840. So «fewer than half» fired in every game that followed the
-			#     historical line, the journal closed and «Nobody delegates any more» came out while
-			#     Rosas still had eleven years of government in front of him. Juan found it the first
-			#     time Cordoba joined.
-			#     What actually broke Rosas was not the count: it was holding Oribe in front of
-			#     Montevideo for eight years WHILE the interior was in arms. So the charge breaks when
-			#     both are true at once, and thirty-six months is three years of paying for a siege
-			#     with a Confederation that is already half gone.
-			# ES: Y EL SITIO TIENE QUE HABER DURADO. La cuenta sola estaba mal y era aritmetica mia, no
-			#     una decision de diseno: trece provincias, Corrientes se lleva una, la Coalicion
-			#     cinco, Cordoba la sexta -- y seis delegando es exactamente donde cae la historia en
-			#     octubre de 1840. Asi que «menos de la mitad» se cumplia en toda partida que siguiera
-			#     la linea historica, el journal cerraba y salia «Ya nadie delega» con Rosas todavia
-			#     once anios de gobierno por delante. Juan lo encontro la primera vez que adhirio
-			#     Cordoba.
-			#     Lo que quebro a Rosas de verdad no fue la cuenta: fue sostener a Oribe frente a
-			#     Montevideo ocho anios MIENTRAS el interior estaba en armas. Asi que el encargo se
-			#     quiebra cuando las dos cosas son ciertas a la vez, y treinta y seis meses son tres
-			#     anios de pagar un sitio con media Confederacion ya ida.
-			global_var:gg_oribe_siege_months >= 36
+			# EN/ES: Independent Argentine closure: a recorded settlement, or a majority withdrawal
+			# after the final political window opens. No Oriental siege counter participates.
+			OR = {
+				has_global_variable = gg_pact_settled
+				AND = { year >= 1851 global_var:gg_delegating_provinces <= 6 }
+			}
 		}
 	}
 
@@ -887,12 +253,8 @@ je_gg_delegation = {
 	#     hombros.
 	on_complete_all_involved = {
 		if = {
-			limit = {
-				has_variable = gg_arg_rosas_seat
-				NOT = { has_global_variable = gg_rosas_fell }
-			}
-			set_global_variable = gg_rosas_fell
-			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
+			limit = { has_variable = gg_arg_rosas_seat }
+			gg_pact_resolve = yes
 		}
 	}
 

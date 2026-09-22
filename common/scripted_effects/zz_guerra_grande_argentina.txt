@@ -149,6 +149,7 @@ gg_argentina_create_coalicion = {
 			set_variable = gg_arg_coalicion_seat
 		}
 	}
+	c:CLN ?= { gg_argentina_rebel_diplomacy_reset = yes }
 	# EN: the four that followed within the month. Santiago del Estero is NOT here and must never be:
 	#     Ibarra refused flatly, and that refusal is what cuts the bloc in two on the map.
 	# ES: las cuatro que la siguieron dentro del mes. Santiago del Estero NO esta aca y no tiene que
@@ -254,6 +255,38 @@ gg_argentina_create_coalicion = {
 		limit = { exists = scope:gg_lamadrid }
 		scope:gg_lamadrid = { transfer_character = c:CLN }
 	}
+}
+
+# EN: A country created from Argentina must not inherit the parent country's friendly military
+#     network. The northern coalition is an uprising, so it begins hostile to Buenos Aires and
+#     without inherited alliances, defensive pacts or guarantees that can pull Peru/Bolivia in.
+# ES: Un pais creado desde la Argentina no debe heredar su red militar amistosa. La Coalicion del
+#     Norte es un levantamiento: nace hostil a Buenos Aires y sin alianzas, pactos defensivos ni
+#     garantias heredadas que puedan arrastrar al Peru o Bolivia.
+gg_argentina_rebel_diplomacy_reset = {
+	set_variable = gg_rebel_diplomacy_reset
+	save_scope_as = gg_rebel_country
+	every_country = {
+		limit = { NOT = { this = scope:gg_rebel_country } }
+		if = {
+			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = alliance } } }
+			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = alliance } }
+		}
+		if = {
+			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = defensive_pact } } }
+			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = defensive_pact } }
+		}
+		if = {
+			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = guarantee_independence } } }
+			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = guarantee_independence } }
+		}
+	}
+	if = {
+		limit = { exists = c:ARG }
+		change_relations = { country = c:ARG value = -100 }
+		set_mutual_secret_goal = { country = c:ARG secret_goal = conquer }
+	}
+	clear_saved_scope = gg_rebel_country
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -640,6 +673,14 @@ gg_argentina_open_war = {
 		limit = {
 			exists = c:$TAG$
 			c:ARG ?= this
+			NOT = { has_war_with = c:$TAG$ }
+			NOT = { is_diplomatic_play_enemy_of = c:$TAG$ }
+			NOT = { has_truce_with = c:$TAG$ }
+			c:$TAG$ ?= { is_subject = no }
+			OR = {
+				NOT = { c:CRR ?= c:$TAG$ }
+				NOT = { has_global_variable = gg_corrientes_recovery }
+			}
 		}
 		# EN: NOT AN ANNEXATION. Rosas never annexed Corrientes and never annexed Tucuman. After Pago
 		#     Largo he put a federal governor in the city and the province went on existing; after
@@ -675,11 +716,6 @@ gg_argentina_open_war = {
 				name = gg_argentina_play_$TAG$
 				target_country = c:$TAG$
 				type = dp_gg_liga_disuelta
-				add_war_goal = {
-					holder = c:ARG
-					target_country = c:$TAG$
-					type = annex_country
-				}
 			}
 		}
 		else = {
@@ -687,11 +723,6 @@ gg_argentina_open_war = {
 				name = gg_argentina_play_$TAG$
 				target_country = c:$TAG$
 				type = dp_gg_pacto_federal
-				add_war_goal = {
-					holder = c:ARG
-					target_country = c:$TAG$
-					type = make_protectorate
-				}
 			}
 		}
 	}
@@ -791,6 +822,26 @@ gg_argentina_sign_montevideo_convention = {
 	}
 	gg_patron_change = { PATRON = brasil DELTA = 20 }
 	gg_score_colorado = { AMOUNT = 2 }
+}
+
+# EN: The November convention, not Rosas's May declaration, decides whether foreign countries
+#     become belligerents in the campaign against Buenos Aires.
+# ES: La convencion de noviembre, no la declaracion de Rosas en mayo, decide si los paises
+#     extranjeros entran como beligerantes contra Buenos Aires.
+gg_argentina_join_ejercito_grande_allies = {
+	c:ENR ?= {
+		every_scope_war = {
+			limit = { is_war_participant = c:ARG }
+			if = {
+				limit = { exists = c:URU NOT = { is_war_participant = c:URU } }
+				join_war = { target = c:URU side = c:ENR }
+			}
+			if = {
+				limit = { exists = c:BRZ NOT = { is_war_participant = c:BRZ } }
+				join_war = { target = c:BRZ side = c:ENR }
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -1022,6 +1073,7 @@ gg_argentina_open_negotiated_confederation = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_confederacion_negociada } }
 		set_global_variable = gg_confederacion_negociada
+		c:ARG ?= { gg_pact_resolve = yes }
 	}
 }
 

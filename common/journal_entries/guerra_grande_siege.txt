@@ -7,6 +7,11 @@
 je_gg_siege = {
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	widget = {
+		gui = "gui/gg_siege_overview.gui"
+		name = "gg_siege_overview"
+		container = "custom_widget_container_je_icon"
+	}
 
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes

@@ -1,0 +1,27 @@
+﻿# EN/ES: First Argentine negotiation; effects shared with AI / primera negociacion argentina, compartida con IA.
+gg_int_arg_offer_button = {
+	name = gg_int_arg_offer_button
+	desc = gg_int_arg_offer_button_desc
+	visible = { has_variable = gg_arg_rosas_seat }
+	possible = {
+		custom_tooltip = { text = gg_int_arg_offer_possible gg_int_arg_can_offer = yes }
+	}
+	effect = { gg_int_arg_offer = yes }
+	ai_chance = { base = 0 }
+}
+
+gg_int_arg_withdraw_button = {
+	name = gg_int_arg_withdraw_button
+	desc = gg_int_arg_withdraw_button_desc
+	visible = { has_variable = gg_arg_rosas_seat }
+	possible = {
+		custom_tooltip = {
+			text = gg_int_arg_withdraw_possible
+			gg_international_open = yes
+			has_global_variable = gg_int_arg_accepted
+			NOT = { has_global_variable = gg_int_arg_withdrawn }
+		}
+	}
+	effect = { gg_int_arg_withdraw = yes }
+	ai_chance = { base = 0 }
+}

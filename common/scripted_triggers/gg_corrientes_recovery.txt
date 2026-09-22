@@ -1,0 +1,16 @@
+﻿# EN: Dated episodes may continue an independent revolt, never undo a recent settlement.
+# ES: Los episodios fechados pueden continuar una rebelion independiente, no deshacer una paz reciente.
+gg_corrientes_episode_allowed = {
+	NOT = { has_global_variable = gg_corrientes_recovery }
+	NOT = { has_global_variable = gg_corrientes_cerrito_exempt }
+	OR = {
+		AND = {
+			NOT = { exists = c:CRR }
+			exists = s:STATE_CORRIENTES.region_state:ARG
+		}
+		c:CRR ?= {
+			is_subject = no
+			NOT = { has_truce_with = c:ARG }
+		}
+	}
+}

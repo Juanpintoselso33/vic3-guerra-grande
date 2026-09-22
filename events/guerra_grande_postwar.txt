@@ -111,6 +111,9 @@ gg_postwar.2 = {
 
 	immediate = {
 		set_global_variable = gg_fusion_blocked
+		# EN/ES: punitive repudiation is one outcome, never debt-free plus inherited debt.
+		if = { limit = { has_modifier = guerra_grande_owes_nobody } remove_modifier = guerra_grande_owes_nobody }
+		if = { limit = { has_modifier = guerra_grande_debts_of_the_cerrito } remove_modifier = guerra_grande_debts_of_the_cerrito }
 		add_modifier = { name = gg_postwar_unrecognised_debts years = 15 is_decaying = yes }
 		every_scope_state = {
 			limit = { NOT = { state_region = s:STATE_MONTEVIDEO } }
@@ -430,6 +433,7 @@ gg_postwar.7 = {
 
 	immediate = {
 		gg_ruler_set = { TEMPLATE = URU_gg_juan_francisco_giro }
+		trigger_event = { id = gg_rivera.5 days = 587 popup = yes }
 	}
 }
 
@@ -443,7 +447,11 @@ gg_postwar.8 = {
 	immediate = {
 		if = {
 			limit = { year >= 1852 }
-			gg_ruler_set = { TEMPLATE = URU_venancio_flores }
+			# EN/ES: only Suarez's historical interim may hand the office to Flores.
+			if = {
+				limit = { ruler = { has_template = URU_joaquin_suarez } }
+				gg_ruler_set = { TEMPLATE = URU_venancio_flores }
+			}
 			remove_global_variable = gg_president_railroad
 		}
 		else = {

@@ -1,0 +1,10 @@
+﻿# EN: Read-only filters for the actual governments, independent of tag swaps.
+# ES: Filtros de solo lectura para los gobiernos reales, independientes del cambio de tag.
+gg_ui_defensa_government = {
+ scope = country
+ is_shown = { has_variable = guerra_grande_defensa_government }
+}
+gg_ui_cerrito_government = {
+ scope = country
+ is_shown = { has_variable = guerra_grande_cerrito_government }
+}

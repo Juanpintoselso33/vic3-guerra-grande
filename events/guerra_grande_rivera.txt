@@ -597,6 +597,7 @@ gg_rivera.3 = {
 	option = {
 		name = gg_rivera.3.a
 		custom_tooltip = gg_rivera.3.a_tt2
+		gg_return_rivera = yes
 		# EN/ES: T7, FR-1 -- back in the countryside, December 1846 / de vuelta en la campania, diciembre de 1846
 		trigger_event = { id = gg_rivera.7 days = 270 popup = yes }
 		# EN/ES: T4 -- FE-7: the Patron is back: the military line / vuelve el Patron: linea militar
@@ -717,7 +718,6 @@ gg_rivera.3 = {
 		}
 		hidden_effect = {
 			# 1853.9.25 - the coup that names a triumvirate of exiles, 2748 days from here.
-			trigger_event = { id = gg_rivera.5 days = 2748 popup = yes }
 		}
 		ai_chance = {
 			base = 40
@@ -776,6 +776,10 @@ gg_rivera.4 = {
 	desc = {
 		first_valid = {
 			triggered_desc = {
+				desc = gg_rivera.4.d_closed
+				trigger = { OR = { NOT = { has_global_variable = guerra_grande_open_war } has_global_variable = gg_peace_settled NOT = { exists = c:CER } } }
+			}
+			triggered_desc = {
 				desc = gg_rivera.4.d_brazilian_arms
 				trigger = {
 					has_global_variable = gg_rivera_brazilian_arms
@@ -832,6 +836,7 @@ gg_rivera.4 = {
 	option = {
 		name = gg_rivera.4.a
 		custom_tooltip = gg_rivera.4.a_tt2
+		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
 		default_option = yes
 		set_global_variable = gg_rivera_exiled
 		if = {
@@ -882,7 +887,6 @@ gg_rivera.4 = {
 		}
 		hidden_effect = {
 			# 1853.9.25 - Flores throws Giro out, 2122 days from here.
-			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
 		}
 		ai_chance = {
 			base = 50
@@ -912,7 +916,9 @@ gg_rivera.4 = {
 	option = {
 		name = gg_rivera.4.b
 		custom_tooltip = gg_rivera.4.b_tt2
+		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
 		set_global_variable = gg_rivera_kept
+		gg_return_rivera = yes
 		if = {
 			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
 			random_scope_character = {
@@ -975,7 +981,6 @@ gg_rivera.4 = {
 			value = medium_radicals
 		}
 		hidden_effect = {
-			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
 		}
 		ai_chance = {
 			base = 25
@@ -1001,6 +1006,7 @@ gg_rivera.4 = {
 	option = {
 		name = gg_rivera.4.c
 		custom_tooltip = gg_rivera.4.c_tt2
+		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
 		set_global_variable = gg_rivera_eight_conditions
 		add_treasury = -25000
 		c:CER ?= {
@@ -1015,11 +1021,16 @@ gg_rivera.4 = {
 			value = medium_radicals
 		}
 		hidden_effect = {
-			trigger_event = { id = gg_rivera.5 days = 2122 popup = yes }
 		}
 		ai_chance = {
 			base = 25
 		}
+	}
+	option = {
+		name = gg_rivera.4.d
+		trigger = { OR = { NOT = { has_global_variable = guerra_grande_open_war } has_global_variable = gg_peace_settled NOT = { exists = c:CER } } }
+		default_option = yes
+		ai_chance = { base = 100 }
 	}
 }
 
@@ -1221,6 +1232,10 @@ gg_rivera.5 = {
 	desc = {
 		first_valid = {
 			triggered_desc = {
+				desc = gg_rivera.5.d_incompatible
+				trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_fusion_blocked NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
+			}
+			triggered_desc = {
 				desc = gg_rivera.5.d_exiled
 				trigger = {
 					OR = {
@@ -1262,13 +1277,15 @@ gg_rivera.5 = {
 	immediate = {
 		hidden_effect = {
 			set_global_variable = gg_rivera_triumvirate_settled
-			# Lavalleja was named to the triumvirate and died three weeks later, on
-			# 23 October 1853. Wherever he is by now, the war is over and he is 69.
-			every_country = {
-				limit = { any_scope_character = { has_template = URU_Juan_Antonio_Lavalleja } }
-				random_scope_character = {
-					limit = { has_template = URU_Juan_Antonio_Lavalleja }
-					kill_character = yes
+			# EN/ES: Only Giró's actual succession appoints Lavalleja and leads to his dated death.
+			if = {
+				limit = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
+				every_country = {
+					limit = { any_scope_character = { has_template = URU_Juan_Antonio_Lavalleja } }
+					random_scope_character = {
+						limit = { has_template = URU_Juan_Antonio_Lavalleja }
+						kill_character = yes
+					}
 				}
 			}
 		}
@@ -1286,6 +1303,8 @@ gg_rivera.5 = {
 		custom_tooltip = gg_rivera.5.a_tt2
 		default_option = yes
 		set_global_variable = gg_rivera_recalled
+		gg_return_rivera = yes
+		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
 		if = {
 			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
 			random_scope_character = {
@@ -1329,6 +1348,7 @@ gg_rivera.5 = {
 	option = {
 		name = gg_rivera.5.b
 		custom_tooltip = gg_rivera.5.b_tt2
+		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
 		set_global_variable = gg_rivera_left_in_rio
 		if = {
 			limit = { any_scope_character = { has_template = URU_venancio_flores } }
@@ -1362,6 +1382,12 @@ gg_rivera.5 = {
 		ai_chance = {
 			base = 40
 		}
+	}
+	option = {
+		name = gg_rivera.5.c
+		trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_fusion_blocked NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
+		default_option = yes
+		ai_chance = { base = 100 }
 	}
 }
 

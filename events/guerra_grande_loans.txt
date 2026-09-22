@@ -592,7 +592,14 @@ gg_loan.5 = {
 				is_decaying = yes
 			}
 		}
-		else = {
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_peace_punished }
+				OR = {
+					NOT = { exists = global_var:gg_loan_cerrito_debt }
+					global_var:gg_loan_cerrito_debt < 1
+				}
+			}
 			add_modifier = {
 				name = guerra_grande_owes_nobody
 				years = 15
@@ -605,6 +612,7 @@ gg_loan.5 = {
 		#     Cerrito tomo prestado. Solo cae aca si el Cerrito ya no existe.
 		if = {
 			limit = {
+				NOT = { has_global_variable = gg_peace_punished }
 				NOT = { exists = c:CER }
 				exists = global_var:gg_loan_cerrito_debt
 				global_var:gg_loan_cerrito_debt >= 1

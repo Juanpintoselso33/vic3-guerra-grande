@@ -1,0 +1,169 @@
+﻿# EN: Tooltip-only evaluation; never executes gameplay changes.
+# ES: Evaluacion exclusiva de tooltips; no ejecuta cambios en la partida.
+gg_pact_hover_jujuy = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_coalicion_jujuy } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_coalicion_jujuy }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_coalicion_jujuy }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_jujuy = 65 } custom_tooltip = gg_pact_source_65 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_jujuy = 68 } custom_tooltip = gg_pact_source_68 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_jujuy = 66 } custom_tooltip = gg_pact_source_66 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_salta = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_coalicion_salta } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_coalicion_salta }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_coalicion_salta }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_salta = 65 } custom_tooltip = gg_pact_source_65 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_salta = 68 } custom_tooltip = gg_pact_source_68 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_salta = 66 } custom_tooltip = gg_pact_source_66 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_tucuman = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_coalicion_tucuman } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_coalicion_tucuman }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_coalicion_tucuman }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_tucuman = 65 } custom_tooltip = gg_pact_source_65 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_tucuman = 68 } custom_tooltip = gg_pact_source_68 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_tucuman = 66 } custom_tooltip = gg_pact_source_66 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_catamarca = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_coalicion_catamarca } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_coalicion_catamarca }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_coalicion_catamarca }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_catamarca = 65 } custom_tooltip = gg_pact_source_65 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_catamarca = 68 } custom_tooltip = gg_pact_source_68 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_catamarca = 66 } custom_tooltip = gg_pact_source_66 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_la_rioja = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_coalicion_la_rioja }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_coalicion_la_rioja }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_la_rioja = 65 } custom_tooltip = gg_pact_source_65 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_la_rioja = 68 } custom_tooltip = gg_pact_source_68 }
+   if = { limit = { global_var:gg_pact_claim_source_coalicion_la_rioja = 66 } custom_tooltip = gg_pact_source_66 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_santiago_del_estero = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_santiago_del_estero } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_santiago_del_estero } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_cordoba = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_cordoba } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_cordoba } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_san_juan = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_san_juan } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_san_juan } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_san_luis = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_san_luis } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_san_luis } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_mendoza = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_mendoza } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_mendoza } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_santa_fe = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_santa_fe } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = { limit = { has_global_variable = gg_reclamo_santa_fe } custom_tooltip = gg_pact_state_claim }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_corrientes = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_corrientes } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_corrientes }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_corrientes }
+   if = { limit = { global_var:gg_pact_claim_source_corrientes = 61 } custom_tooltip = gg_pact_source_61 }
+   if = { limit = { global_var:gg_pact_claim_source_corrientes = 62 } custom_tooltip = gg_pact_source_62 }
+   if = { limit = { global_var:gg_pact_claim_source_corrientes = 63 } custom_tooltip = gg_pact_source_63 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}
+gg_pact_hover_entre_rios = {
+ scope = country
+ effect = {
+  if = { limit = { has_global_variable = gg_delegation_gone_entre_rios } custom_tooltip = gg_pact_state_withdrawn }
+  else_if = {
+   limit = { has_global_variable = gg_reclamo_entre_rios }
+   custom_tooltip = gg_pact_state_claim
+   if = {
+    limit = { has_global_variable = gg_pact_claim_source_entre_rios }
+   if = { limit = { global_var:gg_pact_claim_source_entre_rios = 67 } custom_tooltip = gg_pact_source_67 }
+   if = { limit = { global_var:gg_pact_claim_source_entre_rios = 9 } custom_tooltip = gg_pact_source_9 }
+   if = { limit = { global_var:gg_pact_claim_source_entre_rios = 69 } custom_tooltip = gg_pact_source_69 }
+   }
+  }
+  else = { custom_tooltip = gg_pact_state_delegated }
+ }
+}

@@ -1,0 +1,20 @@
+﻿# EN: Player-scoped controls reuse existing effects. Tab state never changes game state.
+# ES: Controles del jugador reutilizan efectos existentes. Las pestanas no alteran la partida.
+gg_ui_offer_aid = {
+ scope = country
+ is_shown = { has_variable = gg_arg_rosas_seat NOT = { has_global_variable = gg_int_arg_offered } }
+ is_valid = { gg_int_arg_can_offer = yes }
+ effect = { gg_int_arg_offer = yes }
+}
+gg_ui_withdraw_aid = {
+ scope = country
+ is_shown = { has_variable = gg_arg_rosas_seat has_global_variable = gg_int_arg_accepted NOT = { has_global_variable = gg_int_arg_withdrawn } }
+ is_valid = { has_variable = gg_arg_rosas_seat gg_international_open = yes has_global_variable = gg_int_arg_accepted NOT = { has_global_variable = gg_int_arg_withdrawn } }
+ effect = { gg_int_arg_withdraw = yes }
+}
+gg_ui_call_squadrons = {
+ scope = country
+ is_shown = { c:URU ?= this has_global_variable = guerra_grande_split_done }
+ is_valid = { gg_ui_can_call_squadrons = yes has_global_variable = guerra_grande_split_done }
+ effect = { gg_ui_call_squadrons_effect = yes }
+}

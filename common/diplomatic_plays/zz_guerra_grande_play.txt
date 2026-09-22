@@ -2,6 +2,9 @@
 # Modelled on vanilla's dp_taiping_rebellion: annexation war goal on both sides, no infamy,
 # not selectable from the diplomacy lens - it can only be created by the event chain.
 dp_guerra_grande = {
+	# EN: The mod negotiates the settlement; vanilla white peace must not bypass that process.
+	# ES: El mod negocia el cierre; una paz blanca vanilla no debe saltarse ese proceso.
+	allow_negotiated_peace = no
 	war_goal = annex_country
 	mirror_war_goal = yes
 	add_infamy_for_starting_initiator_wargoals = no

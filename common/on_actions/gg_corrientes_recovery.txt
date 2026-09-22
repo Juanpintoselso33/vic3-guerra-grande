@@ -1,0 +1,13 @@
+﻿# EN: A completed ARG-CRR war grants two years without another scripted uprising.
+# ES: Una guerra ARG-CRR terminada da dos anios sin otro levantamiento por guion.
+gg_corrientes_recovery_on_war_end = {
+	trigger = {
+		OR = {
+			AND = { initiator = { c:ARG ?= this } target = { c:CRR ?= this } }
+			AND = { initiator = { c:CRR ?= this } target = { c:ARG ?= this } }
+		}
+	}
+	effect = {
+		set_global_variable = { name = gg_corrientes_recovery days = 730 }
+	}
+}

@@ -1,0 +1,19 @@
+﻿# EN: Presentation-only lists of living pre-partition cause leaders.
+# ES: Listas de presentacion de los caudillos vivos antes de la division.
+gg_ui_prewar_leaders_sync = {
+ if = {
+  limit = { NOT = { has_global_variable = guerra_grande_split_done } }
+  c:URU ?= {
+   clear_variable_list = gg_ui_prewar_colorado
+   every_scope_character = {
+    limit = { has_template = URU_Fructuoso_Rivera is_character_alive = yes }
+    owner = { add_to_variable_list = { name = gg_ui_prewar_colorado target = prev } }
+   }
+   clear_variable_list = gg_ui_prewar_blanco
+   every_scope_character = {
+    limit = { has_template = URU_Manuel_Oribe is_character_alive = yes }
+    owner = { add_to_variable_list = { name = gg_ui_prewar_blanco target = prev } }
+   }
+  }
+ }
+}

@@ -1,0 +1,25 @@
+﻿# EN: Shared existing conditions, no new diplomatic rules.
+# ES: Condiciones existentes compartidas, sin reglas diplomaticas nuevas.
+gg_ui_can_call_squadrons = {
+
+		c:URU ?= THIS
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		hidden_trigger = {
+			NOT = { has_global_variable = gg_intervention_called }
+		}
+		# EN/ES: T3b, FE-8 -- the button brings the powers forward, from 1843 / el boton las adelanta, desde 1843
+		year >= 1843.1.1
+		OR = {
+			custom_tooltip = {
+				text = guerra_grande_requires_great_power_interest
+				any_country = {
+					country_rank = rank_value:great_power
+					has_interest_marker_in_region = region_la_plata
+				}
+			}
+			year >= 1848.1.1
+		}
+}

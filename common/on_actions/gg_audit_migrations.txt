@@ -1,0 +1,69 @@
+﻿# EN: One-shot, reload-safe repairs for saves produced before the 20 September audit fixes.
+# ES: Reparaciones idempotentes para guardados anteriores a las correcciones de la auditoria.
+on_monthly_pulse_country = {
+	on_actions = {
+		gg_audit_postwar_migration
+		gg_pact_negotiated_migration
+		gg_rebel_diplomacy_migration
+	}
+}
+
+gg_audit_postwar_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_peace_settled
+		NOT = { has_global_variable = gg_audit_postwar_cleanup_v2 }
+	}
+	effect = {
+		set_global_variable = gg_audit_postwar_cleanup_v2
+		gg_wartime_modifiers_clear = yes
+		# EN/ES: Old partitions generated extra Oribe copies; keep one canonical living character.
+		# Las particiones viejas generaron copias de los Oribe; conservar un solo personaje vivo.
+		gg_deduplicate_character_worldwide = { TEMPLATE = URU_Manuel_Oribe }
+		gg_deduplicate_character_worldwide = { TEMPLATE = URU_Ignacio_Oribe }
+		# EN/ES: Reconcile the three contradictory debt outcomes already saved by S05.
+		every_country = {
+			if = {
+				limit = { has_global_variable = gg_peace_punished }
+				if = { limit = { has_modifier = guerra_grande_owes_nobody } remove_modifier = guerra_grande_owes_nobody }
+				if = { limit = { has_modifier = guerra_grande_debts_of_the_cerrito } remove_modifier = guerra_grande_debts_of_the_cerrito }
+				if = {
+					limit = { NOT = { has_modifier = gg_postwar_unrecognised_debts } }
+					add_modifier = { name = gg_postwar_unrecognised_debts years = 15 is_decaying = yes }
+				}
+			}
+			else_if = {
+				limit = { has_global_variable = gg_peace_no_victors }
+				if = { limit = { has_modifier = gg_postwar_unrecognised_debts } remove_modifier = gg_postwar_unrecognised_debts }
+			}
+		}
+		# EN/ES: The punitive save contains Rivera's generated copy in Uruguay and the original abroad.
+		# The obsolete postwar event must not leave two men, nor replace Flores again.
+		if = {
+			limit = { has_global_variable = gg_peace_punished exists = c:URU }
+			c:URU = {
+				every_scope_character = {
+					limit = { has_template = URU_Fructuoso_Rivera }
+					kill_character = yes
+				}
+			}
+		}
+	}
+}
+
+gg_pact_negotiated_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_confederacion_negociada
+		NOT = { has_global_variable = gg_pact_settled }
+	}
+	effect = { gg_pact_resolve = yes }
+}
+
+gg_rebel_diplomacy_migration = {
+	trigger = {
+		c:CLN ?= this
+		NOT = { has_variable = gg_rebel_diplomacy_reset }
+	}
+	effect = { gg_argentina_rebel_diplomacy_reset = yes }
+}

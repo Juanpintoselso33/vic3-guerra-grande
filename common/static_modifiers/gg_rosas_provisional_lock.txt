@@ -42,5 +42,7 @@
 #     sacarlo en vez de dejarlo apilado sobre una causa ya corregida.
 gg_rosas_provisional_lock = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
-	country_block_government_reform_bool = yes
+	# EN: Retired 2026-09-20 at Juan's request. Empty definition for existing saves.
+	# ES: Retirado el 20/9/2026 por pedido de Juan. Definicion vacia para saves existentes.
+	# EN/ES: Historical rationale above is obsolete / El fundamento historico de arriba ya no rige.
 }

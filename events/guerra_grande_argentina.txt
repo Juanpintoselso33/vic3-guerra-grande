@@ -425,6 +425,9 @@ gg_argentina.61 = {
 		# EN/ES: el pliego queda sin contestar y el reclamo queda abierto en la cuenta del pacto
 		#     / the petition goes unanswered and the claim stays open on the pact
 		gg_reclamo_abre = { KEY = corrientes }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_corrientes value = 61 } }
+		custom_tooltip = gg_pact_source_61
 		default_option = yes
 		change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
@@ -476,6 +479,9 @@ gg_argentina.62 = {
 	option = {
 		name = gg_argentina.62.a
 		gg_reclamo_abre = { KEY = corrientes }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_corrientes value = 62 } }
+		custom_tooltip = gg_pact_source_62
 		default_option = yes
 		change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		add_modifier = { name = gg_arg_customs_monopoly years = 2 }
@@ -516,6 +522,9 @@ gg_argentina.63 = {
 		# EN/ES: el rio cerrado es la razon que Corrientes va a invocar al separarse: el reclamo se abre
 		#     / the closed river is the reason Corrientes will invoke: the claim opens
 		gg_reclamo_abre = { KEY = corrientes }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_corrientes value = 63 } }
+		custom_tooltip = gg_pact_source_63
 		default_option = yes
 		s:STATE_CORRIENTES.region_state:ARG ?= {
 			add_modifier = { name = gg_arg_corrientes_blockaded months = 18 }
@@ -609,14 +618,32 @@ gg_argentina.65 = {
 		# EN/ES: Buenos Aires niega reconocimiento a las nuevas autoridades y las cinco provincias
 		#     conservan el reclamo / Buenos Aires withholds recognition and all five retain the claim
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_tucuman value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_salta }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_salta value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_jujuy value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_catamarca value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_la_rioja value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_salta }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_salta value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_jujuy value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_catamarca value = 65 } }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_la_rioja value = 65 } }
 		default_option = yes
 		custom_tooltip = gg_norte_refusal_tt
 		change_global_variable = { name = gg_norte_agravio add = 1 }
@@ -677,14 +704,32 @@ gg_argentina.68 = {
 	option = {
 		name = gg_argentina.68.a
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_tucuman value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_salta }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_salta value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_jujuy value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_catamarca value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_la_rioja value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_salta }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_salta value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_jujuy value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_catamarca value = 68 } }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_la_rioja value = 68 } }
 		default_option = yes
 		custom_tooltip = gg_norte_refusal_tt
 		change_global_variable = { name = gg_norte_agravio add = 1 }
@@ -750,10 +795,20 @@ gg_argentina.66 = {
 		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
 		#     / the claim over the weapons lands in Tucuman, which is where they are
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_tucuman value = 66 } }
 		gg_reclamo_abre = { KEY = coalicion_salta }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_salta value = 66 } }
 		gg_reclamo_abre = { KEY = coalicion_jujuy }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_jujuy value = 66 } }
 		gg_reclamo_abre = { KEY = coalicion_catamarca }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_catamarca value = 66 } }
 		gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_la_rioja value = 66 } }
 		default_option = yes
 		# EN/ES: la marca decide despues si Lamadrid se pasa a los sublevados, asi que se dice
 		#     / the mark decides later whether Lamadrid goes over, so it is said
@@ -807,6 +862,8 @@ gg_argentina.67 = {
 		name = gg_argentina.67.a
 		# EN/ES: historical combination / combinacion historica
 		gg_reclamo_abre = { KEY = entre_rios }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_entre_rios value = 67 } }
 		default_option = yes
 		custom_tooltip = gg_urquiza_orders_both_tt
 		set_global_variable = gg_urquiza_double_order
@@ -851,6 +908,8 @@ gg_argentina.67 = {
 		# ES: CONTRAFACTUAL DE DISENO. La fuente no nombra un mando alternativo, asi que el motor elige
 		#     otro general argentino en servicio y el texto no inventa un nombre.
 		gg_reclamo_abre = { KEY = entre_rios }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_entre_rios value = 67 } }
 		custom_tooltip = gg_other_general_close_trade_tt
 		set_global_variable = gg_brazil_command_withheld
 		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
@@ -913,6 +972,8 @@ gg_argentina.9 = {
 		# EN: DESIGN COUNTERFACTUAL. This concrete demand is not documented as an order Rosas sent.
 		# ES: CONTRAFACTUAL DE DISENO. Esta exigencia concreta no esta documentada como orden de Rosas.
 		gg_reclamo_abre = { KEY = entre_rios }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_entre_rios value = 9 } }
 		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
 		set_global_variable = gg_urquiza_press_preparation
 		gg_argentina_arm_urquiza_reserve = yes
@@ -979,6 +1040,8 @@ gg_argentina.69 = {
 		#     abierta la guerra real por el protectorado. Si otra rama la termino, la reabre la misma
 		#     jugada del Pacto Federal; este boton nunca declara un resultado.
 		gg_reclamo_abre = { KEY = entre_rios }
+		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_entre_rios value = 69 } }
 		default_option = yes
 		custom_tooltip = gg_alcaraz_amendments_tt
 		set_global_variable = gg_alcaraz_rejected
@@ -1771,9 +1834,12 @@ gg_argentina.24 = {
 			limit = { has_variable = gg_parana_column_ref }
 			var:gg_parana_column_ref ?= { mobilize_army = yes }
 			if = {
-				limit = { exists = c:CRR is_war_participant = c:CRR }
+				limit = { exists = c:CRR }
 				random_scope_war = {
-					limit = { c:CRR = { is_war_participant = c:ARG } }
+					limit = {
+						is_war_participant = c:CRR
+						is_war_participant = c:ARG
+					}
 					random_scope_front = { save_scope_as = gg_parana_target_front }
 				}
 				if = {
@@ -1792,9 +1858,12 @@ gg_argentina.24 = {
 			limit = { has_variable = gg_parana_column_ref }
 			var:gg_parana_column_ref ?= { mobilize_army = yes }
 			if = {
-				limit = { exists = c:PRG is_war_participant = c:PRG }
+				limit = { exists = c:PRG }
 				random_scope_war = {
-					limit = { c:PRG = { is_war_participant = c:ARG } }
+					limit = {
+						is_war_participant = c:PRG
+						is_war_participant = c:ARG
+					}
 					random_scope_front = { save_scope_as = gg_parana_target_front }
 				}
 				if = {
@@ -2075,21 +2144,14 @@ gg_argentina.27 = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: gg_argentina.30 -- NOBODY DELEGATES ANY MORE. The delegation bar reached zero: no legislature
-#     still lets the governor of Buenos Aires speak for it. That is not a defeat in the field and it
-#     does not need one: Rosas' entire authority over the Confederation WAS the delegation, and a
-#     delegate with nobody to represent is a governor of one province.
-#     It writes the mark the Uruguayan side can read, and it lifts the twenty-year lock the mod used
-#     to put on Argentina so that Rosas would reach Caseros. That lock was provisional, it said so in
-#     its own header, and this is what it was waiting for: whether Rosas gets there is now played.
-# ES: gg_argentina.30 -- YA NADIE DELEGA. La barra de la delegacion llego a cero: ninguna legislatura
-#     deja que el gobernador de Buenos Aires hable por ella. No es una derrota en el campo y no la
-#     necesita: toda la autoridad de Rosas sobre la Confederacion ERA la delegacion, y un delegado
-#     sin a quien representar es un gobernador de una provincia.
-#     Escribe la marca que el lado oriental puede leer, y levanta el candado de veinte anios que el
-#     mod le ponia a la Argentina para que Rosas llegara a Caseros. Ese candado era provisorio, lo
-#     decia su propio encabezado, y esto es lo que estaba esperando: que Rosas llegue o no ahora se
-#     juega.
+# EN: gg_argentina.30 -- THE MANDATE COLLAPSES. A majority of provincial legislatures no longer
+#     lets the governor of Buenos Aires speak for it. This is a political loss rather than a field
+#     defeat, and it does not pretend every province has withdrawn or changed hands. Urquiza replaces
+#     Rosas at the centre; the surviving provincial positions remain visible in the shared journal.
+# ES: gg_argentina.30 -- CAE EL MANDATO. Una mayoria de las legislaturas provinciales deja de
+#     permitir que el gobernador de Buenos Aires hable por ella. Es una derrota politica, no una
+#     derrota militar, y no finge que todas las provincias se retiraron o cambiaron de manos. Urquiza
+#     reemplaza a Rosas en el centro; las posiciones provinciales restantes siguen visibles.
 # -------------------------------------------------------------------------------------------------
 gg_argentina.30 = {
 	type = country_event
@@ -2107,6 +2169,7 @@ gg_argentina.30 = {
 
 	trigger = {
 		c:ARG ?= this
+		has_global_variable = gg_pact_settlement_mandate_collapsed
 	}
 
 	immediate = {
@@ -2274,14 +2337,8 @@ gg_argentina.41 = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: gg_argentina.50 -- A PROVINCE COMES BACK. Fired when a province that had withdrawn its
-#     delegation is annexed and its legislature delegates again -- because it no longer has one.
-#     This is the mirror of the secession events, and the reason the delegation is called REVOCABLE
-#     and not merely lost: Pago Largo, Quebracho Herrado, Famailla and Vences all end this way.
-# ES: gg_argentina.50 -- UNA PROVINCIA VUELVE. Sale cuando una provincia que habia retirado su
-#     delegacion es anexada y su legislatura vuelve a delegar, porque ya no tiene legislatura. Es el
-#     espejo de los eventos de secesion, y la razon por la que la delegacion se llama REVOCABLE y no
-#     simplemente perdida: Pago Largo, Quebracho Herrado, Famailla y Vences terminan asi.
+# EN: Legacy notification retained for queued saves; new returns use .51-.56.
+# ES: Aviso conservado para guardados pendientes; los nuevos retornos usan .51-.56.
 # -------------------------------------------------------------------------------------------------
 gg_argentina.50 = {
 	type = country_event
@@ -2302,6 +2359,114 @@ gg_argentina.50 = {
 		default_option = yes
 		ai_chance = { base = 100 }
 	}
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.51 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.51.t
+ desc = gg_argentina.51.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.52 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.52.t
+ desc = gg_argentina.52.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.53 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.53.t
+ desc = gg_argentina.53.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.54 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.54.t
+ desc = gg_argentina.54.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.55 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.55.t
+ desc = gg_argentina.55.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
+}
+
+# EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
+gg_argentina.56 = {
+ type = country_event
+ placement = ROOT
+ title = gg_argentina.56.t
+ desc = gg_argentina.56.d
+ flavor = gg_argentina.50.f
+ event_image = { video = "gg_arg_cordoba" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
+ duration = 1825
+ trigger = { c:ARG ?= this }
+ option = {
+  name = gg_argentina.50.a
+  default_option = yes
+  ai_chance = { base = 100 }
+ }
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -2333,6 +2498,7 @@ gg_argentina.50 = {
 #     [...] Se elige a Tomas Brizuela (gobernador de la Rioja) director de la Liga del Norte».
 #     Las facultades y la razon del nombramiento, en docs/guerra-grande-argentina/historia-argentina.md.
 # -------------------------------------------------------------------------------------------------
+
 gg_argentina.5 = {
 	type = country_event
 	placement = ROOT
@@ -2468,10 +2634,7 @@ gg_argentina.6 = {
 
 	trigger = {
 		c:ARG ?= this
-		OR = {
-			exists = c:CRR
-			exists = s:STATE_CORRIENTES.region_state:ARG
-		}
+		gg_corrientes_episode_allowed = yes
 	}
 
 	immediate = {
@@ -2586,10 +2749,7 @@ gg_argentina.7 = {
 
 	trigger = {
 		c:ARG ?= this
-		OR = {
-			exists = c:CRR
-			exists = s:STATE_CORRIENTES.region_state:ARG
-		}
+		gg_corrientes_episode_allowed = yes
 	}
 
 	immediate = {
@@ -2864,18 +3024,12 @@ gg_argentina.14 = {
 	option = {
 		name = gg_argentina.14.b
 		custom_tooltip = gg_rosas_declare_alliance_tt
+		set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+		set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
 		set_global_variable = gg_war_against_buenos_aires
-		every_scope_war = {
-			limit = { is_war_participant = c:ENR }
-			if = {
-				limit = { NOT = { is_war_participant = c:URU } }
-				join_war = { target = c:URU side = c:ENR }
-			}
-			if = {
-				limit = { NOT = { is_war_participant = c:BRZ } }
-				join_war = { target = c:BRZ side = c:ENR }
-			}
-		}
+		# EN/ES: the declaration activates the alliance; November's convention decides
+		# whether foreign countries actually enter the campaign against Buenos Aires.
 		ai_chance = { base = 80 }
 	}
 }
@@ -2916,6 +3070,7 @@ gg_argentina.15 = {
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_full_mortgage } }
 		gg_argentina_raise_ejercito_grande = yes
 		gg_argentina_complete_foreign_contingents = yes
+		gg_argentina_join_ejercito_grande_allies = yes
 		ai_chance = { base = 70 }
 	}
 	option = {
@@ -2934,6 +3089,7 @@ gg_argentina.15 = {
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_limited_mortgage } }
 		gg_argentina_raise_ejercito_grande = yes
 		gg_argentina_limited_foreign_contingents = yes
+		gg_argentina_join_ejercito_grande_allies = yes
 		ai_chance = { base = 20 }
 	}
 	option = {
@@ -3005,6 +3161,90 @@ gg_argentina.81 = {
 	option = {
 		name = gg_argentina.81.a
 		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: Political settlements of the Federal Pact. The engine resolves the war; these events state
+#     what that result does to the delegation, the government and the constitutional question.
+# ES: Desenlaces politicos del Pacto Federal. El motor resuelve la guerra; estos eventos establecen
+#     que hace ese resultado con la delegacion, el gobierno y la cuestion constitucional.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/propuesta-codex.md, «El final».
+# -------------------------------------------------------------------------------------------------
+gg_argentina.82 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.82.t
+	desc = gg_argentina.82.d
+	flavor = gg_argentina.82.f
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	trigger = { has_global_variable = gg_pact_settlement_constitutional }
+	option = {
+		name = gg_argentina.82.a
+		default_option = yes
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
+		ai_chance = { base = 100 }
+	}
+}
+
+gg_argentina.83 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.83.t
+	desc = gg_argentina.83.d
+	flavor = gg_argentina.83.f
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+	trigger = { has_global_variable = gg_pact_settlement_urquiza }
+	option = {
+		name = gg_argentina.83.a
+		default_option = yes
+		set_ruling_interest_groups = { ig_rural_folk ig_armed_forces }
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_rural_folk }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_landowners }
+		ai_chance = { base = 100 }
+	}
+}
+
+gg_argentina.84 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.84.t
+	desc = gg_argentina.84.d
+	flavor = gg_argentina.84.f
+	event_image = { video = "gg_arg_cordoba" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+	trigger = { has_global_variable = gg_pact_settlement_rosas }
+	option = {
+		name = gg_argentina.84.a
+		default_option = yes
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = { base = 100 }
+	}
+}
+
+gg_argentina.85 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.85.t
+	desc = gg_argentina.85.d
+	flavor = gg_argentina.85.f
+	event_image = { video = "gg_arg_clausula" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	trigger = { has_global_variable = gg_pact_settlement_stalemate }
+	option = {
+		name = gg_argentina.85.a
+		default_option = yes
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
+		add_radicals = { value = small_radicals interest_group = ig:ig_rural_folk }
 		ai_chance = { base = 100 }
 	}
 }

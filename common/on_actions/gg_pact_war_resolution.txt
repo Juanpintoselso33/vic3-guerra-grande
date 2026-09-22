@@ -1,0 +1,59 @@
+﻿# EN: Capture the enforced side before on_war_end, then resolve the political settlement once.
+# ES: Registrar el lado que impuso su objetivo antes de on_war_end y resolver una sola vez.
+on_wargoal_enforced = {
+	on_actions = { gg_pact_wargoal_enforced }
+}
+
+on_capitulation = {
+	on_actions = { gg_pact_capitulation }
+}
+
+gg_pact_wargoal_enforced = {
+	trigger = {
+		has_global_variable = gg_war_against_buenos_aires
+		exists = scope:diplomatic_play
+		scope:diplomatic_play = { is_diplomatic_play_type = dp_gg_pacto_federal }
+		OR = {
+			AND = { c:ENR ?= this c:ARG ?= scope:target }
+			AND = { c:ARG ?= this c:ENR ?= scope:target }
+		}
+	}
+	effect = {
+		if = { limit = { c:ENR ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
+		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+	}
+}
+
+# EN: Country scope. A capitulation says who lost even when the defending side owns no wargoal.
+#     Requiring the new truce avoids confusing a simultaneous unrelated capitulation with Caseros.
+# ES: Scope pais. La capitulacion identifica al derrotado aunque el defensor no tenga objetivo.
+#     Exigir la tregua nueva evita confundir otra capitulacion simultanea con Caseros.
+gg_pact_capitulation = {
+	trigger = {
+		has_global_variable = gg_war_against_buenos_aires
+		OR = {
+			AND = { c:ARG ?= this has_truce_with = c:ENR }
+			AND = { c:ENR ?= this has_truce_with = c:ARG }
+		}
+	}
+	effect = {
+		if = { limit = { c:ARG ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
+		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+	}
+}
+
+gg_pact_on_war_end = {
+	trigger = {
+		has_global_variable = gg_war_against_buenos_aires
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		c:ARG ?= scope:actor
+		c:ENR ?= scope:target
+	}
+	effect = {
+		if = {
+			limit = { NOT = { global_var:gg_pact_war_urquiza_won = 1 } NOT = { global_var:gg_pact_war_rosas_won = 1 } }
+			set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+		}
+		c:ARG ?= { gg_pact_resolve = yes }
+	}
+}

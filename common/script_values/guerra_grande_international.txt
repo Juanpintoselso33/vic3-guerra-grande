@@ -1,0 +1,61 @@
+﻿# EN: Provisional game pounds, not a claimed historical transfer. Provincial fragmentation caps aid.
+# ES: Libras de juego provisorias, no una transferencia historica atribuida. La fragmentacion limita el auxilio.
+gg_int_arg_aid_capacity = {
+	value = 20000
+	if = {
+		limit = { global_var:gg_delegating_provinces < 10 }
+		multiply = 0.5
+	}
+}
+
+gg_int_arg_aid_cost = {
+	value = global_var:gg_int_arg_quote
+	multiply = -1
+}
+
+# EN: Mutually exclusive dossier states, based only on the existing transaction marks.
+# ES: Estados excluyentes del expediente basados en las marcas existentes.
+gg_ui_aid_state = {
+ value = 0
+ if = { limit = { gg_int_arg_offer_pending = yes } value = 1 }
+ if = { limit = { has_global_variable = gg_int_arg_accepted } value = 2 }
+ if = { limit = { has_global_variable = gg_int_arg_refused } value = 3 }
+ if = { limit = { has_global_variable = gg_int_arg_withdrawn } value = 4 }
+}
+gg_ui_has_commitments = {
+ value = 0
+ if = {
+  limit = { OR = {
+   has_global_variable = gg_int_arg_accepted
+   has_global_variable = gg_reunification_pledged
+   has_global_variable = gg_imperial_pledged
+   has_global_variable = gg_customs_mortgaged
+  } }
+  value = 1
+ }
+}
+
+# EN: Presentation only; actual historical marks, no calendar spoilers or new mechanical gates.
+# ES: Solo presentacion; marcas reales, sin anticipar fechas ni agregar condiciones mecanicas.
+gg_int_ui_phase = {
+	value = 0
+	if = {
+		limit = { OR = { has_global_variable = guerra_grande_split_done has_global_variable = gg_intervention_called } }
+		add = 1
+	}
+	if = {
+		# EN: A completed mission is history, not an indefinitely open negotiation.
+		# ES: Una mision terminada es un antecedente, no una negociacion abierta para siempre.
+		limit = {
+			OR = {
+				has_global_variable = gg_peace_offered
+				has_global_variable = gg_peace_chain_pending
+				AND = {
+					has_global_variable = gg_hood_argentina_pending
+					NOT = { has_global_variable = gg_hood_cerrito_received }
+				}
+			}
+		}
+		value = 2
+	}
+}

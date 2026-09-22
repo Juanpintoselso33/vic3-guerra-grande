@@ -1,0 +1,191 @@
+# EN: Original two-sided war brief. Values are read from the existing arbiter.
+# ES: Parte de dos bandos propio. Los valores vienen del arbitro existente.
+flowcontainer = {
+	name = "gg_war_overview"
+	direction = vertical
+	parentanchor = hcenter
+	spacing = 8
+	ignoreinvisible = yes
+	dynamicgridbox = {
+		visible = "[Not(GetGlobalVariable('guerra_grande_split_done').IsSet)]"
+		datamodel = "[JournalEntry.GetInvolvedCountries]"
+		datamodel_wrap = 1
+		ignoreinvisible = yes
+		item = {
+			flowcontainer = {
+				direction = horizontal
+				spacing = 16
+				dynamicgridbox = {
+					datamodel = "[Country.MakeScope.GetList('gg_ui_prewar_colorado')]"
+					datamodel_wrap = 1
+					item = {
+						widget = {
+							size = { 252 112 }
+							background = { using = dark_area alpha = 0.3 }
+							character_portrait_medium = { position = { 8 12 } datacontext = "[Scope.AccessCharacter]" }
+							textbox = {
+								position = { 100 10 } size = { 144 92 }
+								datacontext = "[Scope.AccessCharacter]"
+								multiline = yes using = fontsize_medium
+								text = "gg_war_ui_cause_leader"
+							}
+						}
+					}
+				}
+				dynamicgridbox = {
+					datamodel = "[Country.MakeScope.GetList('gg_ui_prewar_blanco')]"
+					datamodel_wrap = 1
+					item = {
+						widget = {
+							size = { 252 112 }
+							background = { using = dark_area alpha = 0.3 }
+							character_portrait_medium = { position = { 8 12 } datacontext = "[Scope.AccessCharacter]" }
+							textbox = {
+								position = { 100 10 } size = { 144 92 }
+								datacontext = "[Scope.AccessCharacter]"
+								multiline = yes using = fontsize_medium
+								text = "gg_war_ui_cause_leader"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	flowcontainer = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		direction = horizontal
+		spacing = 16
+		dynamicgridbox = {
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 1
+			ignoreinvisible = yes
+			item = {
+				widget = {
+					visible = "[GetScriptedGui('gg_ui_defensa_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+					size = { 252 112 }
+					background = { using = dark_area alpha = 0.3 }
+					character_portrait_medium = {
+						position = { 8 12 }
+						datacontext = "[Country.GetRuler]"
+					}
+					textbox = {
+						position = { 100 10 } size = { 144 92 }
+						datacontext = "[Country.GetRuler]"
+						multiline = yes using = fontsize_medium
+						text = "gg_war_ui_current_ruler"
+					}
+				}
+			}
+		}
+		dynamicgridbox = {
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 1
+			ignoreinvisible = yes
+			item = {
+				widget = {
+					visible = "[GetScriptedGui('gg_ui_cerrito_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+					size = { 252 112 }
+					background = { using = dark_area alpha = 0.3 }
+					character_portrait_medium = {
+						position = { 8 12 }
+						datacontext = "[Country.GetRuler]"
+					}
+					textbox = {
+						position = { 100 10 } size = { 144 92 }
+						datacontext = "[Country.GetRuler]"
+						multiline = yes using = fontsize_medium
+						text = "gg_war_ui_current_ruler"
+					}
+				}
+			}
+		}
+	}
+	widget = {
+		size = { 520 120 }
+		background = { using = entry_bg_fancy_dark }
+		textbox = {
+			position = { 12 8 }
+			size = { 236 38 }
+			align = left|vcenter
+			using = fontsize_large
+			text = "gg_war_ui_colorados"
+		}
+		textbox = {
+			position = { 272 8 }
+			size = { 236 38 }
+			align = right|vcenter
+			using = fontsize_large
+			text = "gg_war_ui_blancos"
+		}
+		textbox = {
+			position = { 12 52 }
+			size = { 236 62 }
+			align = left|vcenter
+			multiline = yes
+			using = fontsize_large
+			text = "gg_war_ui_colorado_balance"
+			tooltip = "gg_war_ui_balance_tt"
+		}
+		textbox = {
+			position = { 272 52 }
+			size = { 236 62 }
+			align = right|vcenter
+			multiline = yes
+			using = fontsize_large
+			text = "gg_war_ui_blanco_balance"
+			tooltip = "gg_war_ui_balance_tt"
+		}
+	}
+	textbox = {
+		size = { 520 80 }
+		using = fontsize_medium
+		multiline = yes
+		text = "gg_war_ui_balance_causes"
+	}
+	widget = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		size = { 520 76 }
+		background = { using = dark_area alpha = 0.3 }
+		textbox = {
+			position = { 12 6 } size = { 236 64 }
+			multiline = yes using = fontsize_medium align = left|vcenter
+			text = "gg_war_ui_defensa_condition"
+			tooltip = "gg_war_ui_exhaustion_tt"
+		}
+		textbox = {
+			position = { 272 6 } size = { 236 64 }
+			multiline = yes using = fontsize_medium align = right|vcenter
+			text = "gg_war_ui_cerrito_condition"
+			tooltip = "gg_war_ui_exhaustion_tt"
+		}
+	}
+	flowcontainer = {
+		direction = vertical spacing = 4 ignoreinvisible = yes
+		textbox = { size = { 520 32 } using = fontsize_large text = "gg_war_ui_diplomacy_title" }
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)0')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_0"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)1')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_1"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)2')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_2"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)3')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_3"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)4')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_4"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)5')]"
+			size = { 520 62 } multiline = yes using = fontsize_medium text = "gg_war_ui_diplomacy_5"
+		}
+	}
+}

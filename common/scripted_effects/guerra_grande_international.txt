@@ -1,15 +1,18 @@
-﻿# EN: Check the shared entry, not the calling country's membership. Never reopen a closed war.
-# ES: Comprobar la entrada compartida, no la participacion del pais. No reabrir una guerra cerrada.
+﻿# EN: Contextless entries exist even while inactive. Check active ownership across all countries,
+#     not existence of the journal scope or just the caller's membership. Never reopen a closed war.
+# ES: Las entradas contextless existen aun inactivas. Comprobar la entrada activa en todos los
+#     paises, no la existencia del scope ni solo al llamador. No reabrir una guerra cerrada.
 gg_international_ensure = {
 	if = {
 		limit = {
 			gg_international_open = yes
-			NOT = { exists = je:je_gg_patrons }
+			NOT = { any_country = { has_journal_entry = je_gg_patrons } }
 		}
 		add_contextless_journal_entry = je_gg_patrons
 	}
 	if = {
 		limit = { gg_international_open = yes }
+		je:je_gg_patrons ?= { save_scope_as = journal_entry }
 		gg_international_sync = yes
 	}
 }
@@ -17,18 +20,109 @@ gg_international_ensure = {
 # EN: Explicit membership updates are required after activation; should_be_involved only seeds it.
 # ES: Despues de la apertura hay que actualizar participantes; should_be_involved solo los inicia.
 gg_international_sync = {
-	je:je_gg_patrons ?= {
+	gg_int_arg_accounts_init = yes
+	# EN/ES: the monthly context is none; je: needs a country / el pulso no tiene pais; je: lo exige
+	scope:journal_entry ?= {
 		every_scope_je_involved = {
 			limit = { NOT = { gg_international_participant = yes } }
-			je:je_gg_patrons = { remove_involved_country = prev }
+			scope:journal_entry = { remove_involved_country = prev }
 		}
 		every_country = {
 			limit = {
 				gg_international_participant = yes
 				NOT = { is_involved_in_journal_entry = je_gg_patrons }
 			}
-			je:je_gg_patrons = { add_involved_country = prev }
+			scope:journal_entry = { add_involved_country = prev }
 		}
-		set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value }
+	}
+}
+
+# EN/ES: Lazy initialization also covers older saves / inicializacion compatible con guardados previos.
+gg_int_arg_accounts_init = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_int_arg_spent } }
+		set_global_variable = { name = gg_int_arg_spent value = 0 }
+	}
+}
+
+gg_int_arg_offer = {
+	if = {
+		limit = { gg_int_arg_can_offer = yes }
+		custom_tooltip = {
+			text = gg_int_arg_offer_tt
+			gg_int_arg_accounts_init = yes
+			set_global_variable = gg_int_arg_offered
+			set_global_variable = { name = gg_int_arg_quote value = gg_int_arg_aid_capacity }
+			save_scope_as = gg_int_sponsor
+			random_country = {
+				limit = { gg_int_oribe_recipient = yes }
+				trigger_event = { id = gg_international.2 days = 0 popup = yes }
+			}
+		}
+	}
+}
+
+gg_int_arg_accept = {
+	if = {
+		limit = { gg_int_arg_can_accept = yes }
+		custom_tooltip = {
+			text = gg_int_arg_accept_tt
+			set_global_variable = gg_int_arg_accepted
+			gg_int_arg_accounts_init = yes
+			change_global_variable = { name = gg_int_arg_spent add = global_var:gg_int_arg_quote }
+		}
+		scope:gg_int_sponsor = { add_treasury = gg_int_arg_aid_cost }
+		add_treasury = global_var:gg_int_arg_quote
+		set_owes_obligation_to = { country = scope:gg_int_sponsor setting = yes }
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+	}
+}
+
+gg_int_arg_decline = {
+	if = {
+		limit = { gg_int_arg_offer_pending = yes }
+		custom_tooltip = {
+			text = gg_int_arg_decline_tt
+			set_global_variable = gg_int_arg_refused
+		}
+		if = {
+			limit = { gg_international_open = yes }
+			gg_patron_change = { PATRON = rosas DELTA = -5 }
+		}
+	}
+}
+
+gg_int_arg_withdraw = {
+	if = {
+		limit = {
+			has_variable = gg_arg_rosas_seat
+			gg_international_open = yes
+			has_global_variable = gg_int_arg_accepted
+			NOT = { has_global_variable = gg_int_arg_withdrawn }
+		}
+		custom_tooltip = {
+			text = gg_int_arg_withdraw_tt
+			set_global_variable = gg_int_arg_withdrawn
+		}
+		gg_patron_change = { PATRON = rosas DELTA = -20 }
+	}
+}
+
+# EN: Only AI governments originate offers here; human recipients still decide in the event.
+# ES: Solo la IA origina ofertas en el pulso; el destinatario humano decide en el evento.
+gg_int_arg_ai_pulse = {
+	if = {
+		limit = { gg_international_open = yes }
+		every_country = {
+			limit = { is_player = no has_variable = gg_arg_rosas_seat }
+			if = {
+				limit = { gg_int_arg_can_offer = yes global_var:gg_patron_rosas >= 40 }
+				random = { chance = 15 gg_int_arg_offer = yes }
+			}
+			if = {
+				limit = { global_var:gg_delegating_provinces < 4 }
+				gg_int_arg_withdraw = yes
+			}
+		}
 	}
 }

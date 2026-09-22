@@ -1,0 +1,40 @@
+﻿# EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
+# ES: Scope pais (Argentina). Un escritor idempotente para todos los cierres del Pacto Federal.
+gg_pact_resolve = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_pact_settled } }
+		set_global_variable = gg_pact_settled
+		if = {
+			limit = { has_global_variable = gg_confederacion_negociada }
+			set_global_variable = gg_pact_settlement_constitutional
+			trigger_event = { id = gg_argentina.82 days = 0 popup = yes }
+		}
+		else_if = {
+			limit = { global_var:gg_pact_war_urquiza_won = 1 }
+			set_global_variable = gg_pact_settlement_urquiza
+			remove_global_variable = gg_president_railroad
+			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
+			trigger_event = { id = gg_argentina.83 days = 0 popup = yes }
+		}
+		else_if = {
+			limit = { global_var:gg_pact_war_rosas_won = 1 }
+			set_global_variable = gg_pact_settlement_rosas
+			if = {
+				limit = { has_global_variable = gg_delegation_gone_entre_rios }
+				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
+			}
+			trigger_event = { id = gg_argentina.84 days = 0 popup = yes }
+		}
+		else_if = {
+			limit = { global_var:gg_pact_war_white_peace = 1 }
+			set_global_variable = gg_pact_settlement_stalemate
+			trigger_event = { id = gg_argentina.85 days = 0 popup = yes }
+		}
+		else = {
+			set_global_variable = gg_pact_settlement_mandate_collapsed
+			remove_global_variable = gg_president_railroad
+			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
+			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
+		}
+	}
+}

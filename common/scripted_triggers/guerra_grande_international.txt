@@ -21,3 +21,49 @@ gg_international_open = {
 		has_global_variable = gg_war_failed
 	}
 }
+
+# EN/ES: Before exile, Oribe's presidency; afterwards, his separate government / presidencia o Cerrito.
+gg_int_oribe_recipient = {
+	OR = {
+		has_variable = guerra_grande_cerrito_government
+		AND = {
+			c:URU ?= this
+			NOT = { has_global_variable = guerra_grande_split_done }
+			ruler = { has_template = URU_Manuel_Oribe }
+		}
+	}
+}
+
+gg_int_arg_can_offer = {
+	has_variable = gg_arg_rosas_seat
+	gg_international_open = yes
+	NOT = { has_global_variable = gg_int_arg_offered }
+	NOT = { has_global_variable = gg_rosas_abandoned_oribe }
+	global_var:gg_delegating_provinces >= 4
+	gold_reserves >= gg_int_arg_aid_capacity
+	any_country = { gg_int_oribe_recipient = yes }
+}
+
+# EN/ES: Recheck at reply time, not only when scheduling / volver a comprobar al contestar.
+gg_int_arg_can_accept = {
+	gg_international_open = yes
+	NOT = { has_global_variable = gg_rosas_abandoned_oribe }
+	gg_int_arg_offer_pending = yes
+	gg_int_oribe_recipient = yes
+	exists = scope:gg_int_sponsor
+	scope:gg_int_sponsor = {
+		has_variable = gg_arg_rosas_seat
+		gold_reserves >= global_var:gg_int_arg_quote
+		global_var:gg_delegating_provinces >= 4
+		gg_int_arg_aid_capacity >= global_var:gg_int_arg_quote
+	}
+}
+
+# EN/ES: Dispatch and outcomes are permanent; pending is derived / envio y respuestas permanentes.
+gg_int_arg_offer_pending = {
+	has_global_variable = gg_int_arg_offered
+	NOR = {
+		has_global_variable = gg_int_arg_accepted
+		has_global_variable = gg_int_arg_refused
+	}
+}

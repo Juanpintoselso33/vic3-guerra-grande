@@ -21,18 +21,8 @@ guerra_grande_on_game_start = {
 		#     pone una variable global en 0 antes del primer change_global_variable sobre ella
 		#     (ej. common/on_actions/00_code_on_actions.txt: grunderzeit_german_countries) --
 		#     change_global_variable sobre una variable nunca puesta no arranca garantizado en 0.
-		# EN: PROVISIONAL, see the modifier's own header in
-		#     common/static_modifiers/gg_rosas_provisional_lock.txt for the full reasoning. 20
-		#     years comfortably covers 1836 to Caseros (3 February 1852) with slack either side.
-		# ES: PROVISORIO, ver el encabezado del propio modificador en
-		#     common/static_modifiers/gg_rosas_provisional_lock.txt para el razonamiento completo.
-		#     20 anios cubren con margen de 1836 a Caseros (3 de febrero de 1852).
-		c:ARG ?= {
-			add_modifier = {
-				name = gg_rosas_provisional_lock
-				years = 20
-			}
-		}
+		# EN: No political lock: Rosas's continuity must not freeze government reform.
+		# ES: Sin candado politico: sostener a Rosas no debe congelar reformas de gobierno.
 		c:URU ?= {
 			# Manuel Oribe is the caudillo of the countryside, not a moderate: he gets
 			# la Argentina's own autonomist ideology (local caudillos, tenant farmers).
@@ -396,6 +386,8 @@ guerra_grande_battle_score = {
 #     semana que viene.
 on_war_end = {
 	on_actions = {
+		gg_corrientes_recovery_on_war_end
+		gg_pact_on_war_end
 		guerra_grande_on_war_end
 	}
 }

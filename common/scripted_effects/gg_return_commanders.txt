@@ -1,0 +1,145 @@
+﻿# EN: Country scope: retrieve the original returning commanders before partition clones the roster.
+# ES: Scope pais: recuperar a los mandos originales antes de que la particion copie el plantel.
+gg_return_blanco_commanders = {
+	save_scope_as = gg_commanders_return_country
+	c:ARG ?= {
+		every_scope_character = {
+			limit = {
+				is_character_alive = yes
+				OR = {
+					has_template = URU_Manuel_Oribe
+					has_template = URU_Ignacio_Oribe
+					has_template = URU_bernardo_prudencio_berro
+					has_template = URU_timoteo_aparicio
+					has_template = URU_Juan_Antonio_Lavalleja
+				}
+			}
+			if = {
+				limit = { exists = this.commander_military_formation }
+				unassign_from_formation = yes
+			}
+			transfer_character = scope:gg_commanders_return_country
+		}
+	}
+	clear_saved_scope = gg_commanders_return_country
+}
+
+# EN: Country scope. Search every country before creating Rivera, bring one existing character
+#     home, and remove every other living copy worldwide.
+# ES: Scope pais. Buscar a Rivera en todos los paises antes de crearlo, traer un personaje
+#     existente y quitar cualquier otra copia viva en todo el mundo.
+gg_return_rivera = {
+	save_scope_as = gg_rivera_return_country
+	clear_saved_scope = gg_rivera_returning_character
+	random_country = {
+		limit = {
+			NOT = { this = scope:gg_rivera_return_country }
+			any_scope_character = {
+				is_character_alive = yes
+				has_template = URU_Fructuoso_Rivera
+			}
+		}
+		random_scope_character = {
+			limit = {
+				is_character_alive = yes
+				has_template = URU_Fructuoso_Rivera
+			}
+			save_scope_as = gg_rivera_returning_character
+			if = {
+				limit = { exists = this.commander_military_formation }
+				unassign_from_formation = yes
+			}
+			transfer_character = scope:gg_rivera_return_country
+		}
+	}
+	if = {
+		limit = {
+			NOT = { exists = scope:gg_rivera_returning_character }
+			any_scope_character = {
+				is_character_alive = yes
+				has_template = URU_Fructuoso_Rivera
+			}
+		}
+		random_scope_character = {
+			limit = {
+				is_character_alive = yes
+				has_template = URU_Fructuoso_Rivera
+			}
+			save_scope_as = gg_rivera_returning_character
+		}
+	}
+	if = {
+		limit = { NOT = { exists = scope:gg_rivera_returning_character } }
+		create_character = {
+			template = URU_Fructuoso_Rivera
+			save_scope_as = gg_rivera_returning_character
+		}
+	}
+	every_country = {
+		every_scope_character = {
+			limit = {
+				is_character_alive = yes
+				has_template = URU_Fructuoso_Rivera
+				NOT = { this = scope:gg_rivera_returning_character }
+			}
+			kill_character = yes
+		}
+	}
+	clear_saved_scope = gg_rivera_returning_character
+	clear_saved_scope = gg_rivera_return_country
+}
+
+# EN: Country scope. Save migration only: keep the copy attached to an Oriental government when
+#     possible, otherwise the copy in the caller, otherwise any living copy; remove the rest.
+# ES: Scope pais. Solo migracion: conservar la copia de un gobierno oriental cuando exista; si no,
+#     la del pais que llama; como ultimo recurso cualquier copia viva. Eliminar las demas.
+gg_deduplicate_character_worldwide = {
+	clear_saved_scope = gg_character_canonical
+	random_country = {
+		limit = {
+			OR = {
+				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
+			}
+			any_scope_character = { is_character_alive = yes has_template = $TEMPLATE$ }
+		}
+		random_scope_character = {
+			limit = { is_character_alive = yes has_template = $TEMPLATE$ }
+			save_scope_as = gg_character_canonical
+		}
+	}
+	if = {
+		limit = {
+			NOT = { exists = scope:gg_character_canonical }
+			any_scope_character = { is_character_alive = yes has_template = $TEMPLATE$ }
+		}
+		random_scope_character = {
+			limit = { is_character_alive = yes has_template = $TEMPLATE$ }
+			save_scope_as = gg_character_canonical
+		}
+	}
+	if = {
+		limit = { NOT = { exists = scope:gg_character_canonical } }
+		random_country = {
+			limit = { any_scope_character = { is_character_alive = yes has_template = $TEMPLATE$ } }
+			random_scope_character = {
+				limit = { is_character_alive = yes has_template = $TEMPLATE$ }
+				save_scope_as = gg_character_canonical
+			}
+		}
+	}
+	if = {
+		limit = { exists = scope:gg_character_canonical }
+		every_country = {
+			every_scope_character = {
+				limit = {
+					is_character_alive = yes
+					has_template = $TEMPLATE$
+					NOT = { this = scope:gg_character_canonical }
+				}
+				kill_character = yes
+			}
+		}
+	}
+	clear_saved_scope = gg_character_canonical
+}

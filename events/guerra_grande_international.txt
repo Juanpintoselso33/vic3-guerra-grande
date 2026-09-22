@@ -7,3 +7,32 @@ gg_international.1 = {
 	hidden = yes
 	immediate = { gg_international_ensure = yes }
 }
+
+# EN: Counterfactual cabinet proposal, not a dated historical loan. Amounts are game balance.
+# ES: Propuesta contrafactual de gabinete, no un prestamo historico fechado. Montos de balance.
+# SOURCE / FUENTE: SOURCES_loans.md, sections 3 and 4: support for Oribe and limits of evidence.
+gg_international.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_international.2.t
+	desc = gg_international.2.d
+	flavor = gg_international.2.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_international.2.a
+		trigger = { gg_int_arg_can_accept = yes }
+		gg_int_arg_accept = yes
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { gold_reserves < 10000 } add = 25 }
+		}
+	}
+	option = {
+		name = gg_international.2.b
+		default_option = yes
+		gg_int_arg_decline = yes
+		ai_chance = { base = 30 }
+	}
+}

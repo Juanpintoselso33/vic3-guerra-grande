@@ -129,6 +129,9 @@ gg_systems_init = {
 	#     mes de sitio, -1.
 	set_global_variable = { name = gg_delegating_provinces value = 13 }
 	set_global_variable = { name = gg_delegation_points value = 156 }
+	set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+	set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+	set_global_variable = { name = gg_pact_war_white_peace value = 0 }
 	# EN/ES: cuantas provincias se alzaron alguna vez. No baja nunca: es la memoria de la campania,
 	#     no su foto / how many provinces ever rose. It never goes down: it is the campaign's memory
 	set_global_variable = { name = gg_provincias_alzadas value = 0 }
@@ -286,7 +289,6 @@ gg_patron_change = {
 			set_global_variable = { name = gg_patron_$PATRON$ value = 0 }
 		}
 		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_PATRON $PATRON$ $DELTA$"
-		je:je_gg_patrons ?= { set_bar_progress = { name = gg_sea_bar value = gg_sea_bar_value } }
 	}
 }
 
@@ -396,6 +398,13 @@ gg_wartime_modifiers_clear = {
 			OR = {
 				has_modifier = gg_siege_no_breaching_guns
 				has_modifier = guerra_grande_walls_of_montevideo
+				has_modifier = gg_siege_guns_of_the_plaza
+				has_modifier = gg_siege_mortgaged_customs
+				has_modifier = gg_siege_customs_house_at_the_buceo
+				has_modifier = gg_siege_trading_with_the_enemy
+				has_modifier = gg_siege_the_sea_lane_stays_open
+				has_modifier = guerra_grande_montevideo_resupplied
+				has_modifier = guerra_grande_river_plate_blockade
 			}
 		}
 		if = {
@@ -406,12 +415,34 @@ gg_wartime_modifiers_clear = {
 			limit = { has_modifier = guerra_grande_walls_of_montevideo }
 			remove_modifier = guerra_grande_walls_of_montevideo
 		}
+		if = { limit = { has_modifier = gg_siege_guns_of_the_plaza } remove_modifier = gg_siege_guns_of_the_plaza }
+		if = { limit = { has_modifier = gg_siege_mortgaged_customs } remove_modifier = gg_siege_mortgaged_customs }
+		if = { limit = { has_modifier = gg_siege_customs_house_at_the_buceo } remove_modifier = gg_siege_customs_house_at_the_buceo }
+		if = { limit = { has_modifier = gg_siege_trading_with_the_enemy } remove_modifier = gg_siege_trading_with_the_enemy }
+		if = { limit = { has_modifier = gg_siege_the_sea_lane_stays_open } remove_modifier = gg_siege_the_sea_lane_stays_open }
+		if = { limit = { has_modifier = guerra_grande_montevideo_resupplied } remove_modifier = guerra_grande_montevideo_resupplied }
+		if = { limit = { has_modifier = guerra_grande_river_plate_blockade } remove_modifier = guerra_grande_river_plate_blockade }
+	}
+	# EN/ES: Fleet state lives on Uruguay and must be cleared even when it has no country modifier.
+	# El estado de la escuadra vive en Uruguay y se limpia aunque no tenga modificadores de pais.
+	c:URU ?= {
+		if = {
+			limit = { has_variable = gg_lent_squadron_ref exists = var:gg_lent_squadron_ref }
+			var:gg_lent_squadron_ref ?= {
+				if = { limit = { exists = c:FRA } every_scope_ship = { set_ship_owner_multiple = c:FRA } }
+				clear_ownership_transfer_fleet = yes
+			}
+		}
+		if = { limit = { has_variable = gg_lent_squadron } remove_variable = gg_lent_squadron }
+		if = { limit = { has_variable = gg_lent_squadron_ref } remove_variable = gg_lent_squadron_ref }
 	}
 	every_state = {
 		limit = {
 			OR = {
 				has_modifier = gg_siege_port_without_a_countryside
 				has_modifier = gg_siege_countryside_without_a_port
+				has_modifier = gg_siege_the_land_frontier_stays_open
+				has_modifier = gg_naval_anglo_french_station
 			}
 		}
 		if = {
@@ -422,7 +453,48 @@ gg_wartime_modifiers_clear = {
 			limit = { has_modifier = gg_siege_countryside_without_a_port }
 			remove_modifier = gg_siege_countryside_without_a_port
 		}
+		if = { limit = { has_modifier = gg_siege_the_land_frontier_stays_open } remove_modifier = gg_siege_the_land_frontier_stays_open }
+		if = { limit = { has_modifier = gg_naval_anglo_french_station } remove_modifier = gg_naval_anglo_french_station }
 	}
+	gg_calendar_close_wartime_relays = yes
+}
+
+# EN: Relays that require the war or both governments stop retrying after settlement. University
+#     and the independent European withdrawals retain their postwar delivery.
+# ES: Los relevos que requieren guerra o ambos gobiernos dejan de reintentarse tras la paz. La
+#     Universidad y los retiros europeos independientes conservan su entrega de posguerra.
+gg_calendar_close_wartime_relays = {
+	set_global_variable = gg_cal_done_1
+	set_global_variable = gg_cal_done_2
+	set_global_variable = gg_cal_done_3
+	set_global_variable = gg_cal_done_4
+	set_global_variable = gg_cal_done_5
+	set_global_variable = gg_cal_done_6
+	set_global_variable = gg_cal_done_7
+	set_global_variable = gg_cal_done_8
+	set_global_variable = gg_cal_done_9
+	set_global_variable = gg_cal_done_10
+	set_global_variable = gg_cal_done_11
+	set_global_variable = gg_cal_done_12
+	set_global_variable = gg_cal_done_13
+	set_global_variable = gg_cal_done_14
+	set_global_variable = gg_cal_done_15
+	set_global_variable = gg_cal_done_16
+	set_global_variable = gg_cal_done_17
+	set_global_variable = gg_cal_done_18
+	set_global_variable = gg_cal_done_19
+	set_global_variable = gg_cal_done_20
+	set_global_variable = gg_cal_done_21
+	set_global_variable = gg_cal_done_23
+	set_global_variable = gg_cal_done_24
+	set_global_variable = gg_cal_done_26
+	set_global_variable = gg_cal_done_27
+	set_global_variable = gg_cal_done_28
+	set_global_variable = gg_cal_done_29
+	set_global_variable = gg_cal_done_30
+	set_global_variable = gg_cal_done_31
+	set_global_variable = gg_cal_done_33
+	set_global_variable = gg_cal_done_34
 }
 
 # EN: T1/T9, the closing of the war, in one idempotent place (Codex review 2026-09-19). It used to

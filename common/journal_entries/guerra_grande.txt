@@ -4,6 +4,11 @@
 je_guerra_grande = {
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	widget = {
+		gui = "gui/gg_war_overview.gui"
+		name = "gg_war_overview"
+		container = "custom_widget_container_je_icon"
+	}
 
 	# EN: two fields, not one. The "_uninvolved_or_context" one is the only one vanilla ever uses,
 	#     and it does not cover a country that is involved -- which is exactly our case, since this
@@ -47,6 +52,7 @@ je_guerra_grande = {
 	}
 
 	immediate = {
+		gg_ui_prewar_leaders_sync = yes
 		if = {
 			limit = { NOT = { has_global_variable = guerra_grande_blanco_score } }
 			set_global_variable = {
@@ -256,6 +262,18 @@ je_guerra_grande = {
 					if = {
 						limit = { gg_sea_open = yes }
 						c:URU ?= {
+							# EN/ES: S02 migration -- a dead formation cannot keep the creation guard true.
+							if = {
+								limit = {
+									has_variable = gg_lent_squadron
+									OR = {
+										NOT = { has_variable = gg_lent_squadron_ref }
+										NOT = { exists = var:gg_lent_squadron_ref }
+									}
+								}
+								remove_variable = gg_lent_squadron
+								if = { limit = { has_variable = gg_lent_squadron_ref } remove_variable = gg_lent_squadron_ref }
+							}
 							# EN: Codex review 2026-09-19 -- the region has no oriental state, so the fleet was
 							#     never created, and the mark was written first, so it never retried either.
 							# ES: la region no tiene ningun estado oriental, asi que la flota no se creaba
@@ -308,11 +326,11 @@ je_guerra_grande = {
 									# EN/ES: they were lent, so they go home to France instead of vanishing (there is
 									#     no disband effect in script) / eran prestados, asi que vuelven a Francia
 									if = {
-										limit = { exists = c:FRA }
+										limit = { exists = c:FRA exists = var:gg_lent_squadron_ref }
 										var:gg_lent_squadron_ref ?= {
 											every_scope_ship = { set_ship_owner_multiple = c:FRA }
 										}
-										clear_ownership_transfer_fleet = yes
+										var:gg_lent_squadron_ref ?= { clear_ownership_transfer_fleet = yes }
 									}
 									remove_variable = gg_lent_squadron_ref
 								}
@@ -486,6 +504,7 @@ je_guerra_grande = {
 	#     esta cansada y alcanza la mitad de la ventaja.
 	on_weekly_pulse = {
 		effect = {
+			gg_ui_prewar_leaders_sync = yes
 			if = {
 				limit = {
 					has_global_variable = guerra_grande_open_war

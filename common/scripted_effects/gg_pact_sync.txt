@@ -1,0 +1,33 @@
+﻿# EN: Journal scope. should_be_involved only seeds membership when a contextless entry opens;
+#     countries created later must be added explicitly, and dead tags must be removed.
+# ES: Scope journal. should_be_involved solo inicia la membresia al abrir una entrada sin contexto;
+#     los paises creados despues deben agregarse y los tags desaparecidos deben quitarse.
+gg_pact_sync = {
+	save_scope_as = gg_pact_journal
+	every_scope_je_involved = {
+		limit = {
+			NOT = {
+				OR = {
+					has_variable = gg_arg_rosas_seat
+					c:CRR ?= this
+					c:CLN ?= this
+					c:ENR ?= this
+				}
+			}
+		}
+		scope:gg_pact_journal = { remove_involved_country = prev }
+	}
+	every_country = {
+		limit = {
+			OR = {
+				has_variable = gg_arg_rosas_seat
+				c:CRR ?= this
+				c:CLN ?= this
+				c:ENR ?= this
+			}
+			NOT = { is_involved_in_journal_entry = je_gg_delegation }
+		}
+		scope:gg_pact_journal = { add_involved_country = prev }
+	}
+	clear_saved_scope = gg_pact_journal
+}

@@ -1,0 +1,30 @@
+# EN: Original schematic and read-only operational brief; actions remain native scripted buttons.
+# ES: Esquema y parte propios; las acciones siguen siendo los botones de script nativos.
+flowcontainer = {
+ name = "gg_siege_overview"
+ direction = vertical
+ parentanchor = hcenter
+ spacing = 8
+ ignoreinvisible = yes
+ widget = {
+  size = { 520 190 }
+  icon = { size = { 520 190 } texture = "gfx/interface/gg_situations/siege_plan.dds" }
+  icon = { size = { 520 190 } texture = "gfx/interface/gg_situations/siege_route_open.dds" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)1')]" }
+  icon = { size = { 520 190 } texture = "gfx/interface/gg_situations/siege_route_closed.dds" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)0')]" }
+  textbox = { position = { 300 12 } size = { 200 30 } align = right|vcenter using = fontsize_large text = "gg_siege_ui_camp" }
+  textbox = { position = { 20 88 } size = { 150 28 } align = left|vcenter using = fontsize_large text = "gg_siege_ui_city" }
+  textbox = { position = { 16 152 } size = { 480 30 } using = fontsize_large text = "gg_siege_ui_open" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)1')]" }
+  textbox = { position = { 16 152 } size = { 480 30 } using = fontsize_large text = "gg_siege_ui_closed" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)0')]" }
+ }
+ textbox = { size = { 520 24 } using = fontsize_small text = "gg_siege_ui_schematic" }
+ textbox = { size = { 520 65 } multiline = yes using = fontsize_medium text = "gg_siege_ui_duration" }
+ textbox = { size = { 520 58 } multiline = yes using = fontsize_medium text = "gg_siege_ui_blockade_active" visible = "[GreaterThan_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_blockade_effective'), '(CFixedPoint)0')]" }
+ textbox = { size = { 520 58 } multiline = yes using = fontsize_medium text = "gg_siege_ui_blockade_inactive" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_blockade_effective'), '(CFixedPoint)0')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_0" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)0')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_1" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)1')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_2" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)2')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_0" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)0')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_1" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)1')]" }
+ textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_2" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)2')]" }
+ textbox = { size = { 520 50 } multiline = yes using = fontsize_medium text = "gg_siege_ui_orders" }
+}

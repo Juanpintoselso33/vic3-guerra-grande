@@ -1,0 +1,68 @@
+﻿# EN: Provincial display reads the existing delegation marks. Withdrawal takes precedence.
+# ES: La vista provincial lee las marcas existentes. La retirada prevalece sobre el reclamo.
+gg_ui_pact_jujuy = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_coalicion_jujuy } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_coalicion_jujuy } value = 2 }
+}
+gg_ui_pact_salta = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_coalicion_salta } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_coalicion_salta } value = 2 }
+}
+gg_ui_pact_tucuman = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_coalicion_tucuman } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_coalicion_tucuman } value = 2 }
+}
+gg_ui_pact_catamarca = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_coalicion_catamarca } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_coalicion_catamarca } value = 2 }
+}
+gg_ui_pact_la_rioja = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_coalicion_la_rioja } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } value = 2 }
+}
+gg_ui_pact_santiago_del_estero = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_santiago_del_estero } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_santiago_del_estero } value = 2 }
+}
+gg_ui_pact_cordoba = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_cordoba } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_cordoba } value = 2 }
+}
+gg_ui_pact_san_juan = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_san_juan } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_san_juan } value = 2 }
+}
+gg_ui_pact_san_luis = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_san_luis } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_san_luis } value = 2 }
+}
+gg_ui_pact_mendoza = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_mendoza } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_mendoza } value = 2 }
+}
+gg_ui_pact_santa_fe = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_santa_fe } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_santa_fe } value = 2 }
+}
+gg_ui_pact_corrientes = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_corrientes } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_corrientes } value = 2 }
+}
+gg_ui_pact_entre_rios = {
+ value = 0
+ if = { limit = { has_global_variable = gg_reclamo_entre_rios } value = 1 }
+ if = { limit = { has_global_variable = gg_delegation_gone_entre_rios } value = 2 }
+}
+

@@ -1,0 +1,10 @@
+﻿# EN: Remove the retired modifier from existing saves, without restarting the campaign.
+# ES: Quitar el modificador retirado de saves existentes, sin reiniciar la campania.
+on_monthly_pulse_country = {
+	on_actions = { gg_retired_political_lock_cleanup }
+}
+
+gg_retired_political_lock_cleanup = {
+	trigger = { has_modifier = gg_rosas_provisional_lock }
+	effect = { remove_modifier = gg_rosas_provisional_lock }
+}
