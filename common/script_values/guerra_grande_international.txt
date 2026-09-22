@@ -22,16 +22,4 @@ gg_ui_aid_state = {
  if = { limit = { has_global_variable = gg_int_arg_refused } value = 3 }
  if = { limit = { has_global_variable = gg_int_arg_withdrawn } value = 4 }
 }
-# EN/ES: only what the Federal Pact draws (the Defensa's pledges live in the war journal)
-#     / solo lo que dibuja el Pacto (las promesas de la Defensa viven en el journal de la guerra)
-gg_ui_has_commitments = {
- value = 0
- if = {
-  limit = { OR = {
-   has_global_variable = gg_int_arg_accepted
-   has_global_variable = gg_reunification_pledged
-  } }
-  value = 1
- }
-}
 
