@@ -1,9 +1,10 @@
 ﻿# EN: playtest 2026-09-17 -- "El Sitio Grande" (16 February 1843 - 8 October 1851) gets its own
-#     journal from the split: the siege bar, the Cerrito's river blockade and the Defensa's legions.
-#     Display and buttons only: the siege counter itself still runs in je_guerra_grande.
-# ES: "El Sitio Grande" tiene su propio journal desde la particion: la barra del asedio, el bloqueo
-#     del Cerrito y las legiones de la Defensa. Solo muestra y botones: el contador sigue en
-#     je_guerra_grande.
+#     journal from the split. 22/9/2026 redesign: the siege by land only -- the besieger and the
+#     defender face to face, the conditions each side carries, the legions. The river, the hunger
+#     and the blockade moved to the River Plate situation, with its hunger bar.
+# ES: "El Sitio Grande" tiene su propio journal desde la particion. Rediseño del 22/9/2026: el sitio
+#     por tierra -- el que sitia y el que defiende, las condiciones de cada lado, las legiones. El
+#     rio, el hambre y el bloqueo pasaron a la situacion del Plata, con su barra del hambre.
 je_gg_siege = {
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -16,10 +17,10 @@ je_gg_siege = {
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
-	scripted_progress_bar = gg_siege_bar
 	scripted_button = guerra_grande_italian_legion_button
 	scripted_button = guerra_grande_french_legion_button
-	scripted_button = guerra_grande_river_blockade_button
+	# EN/ES: 22/9/2026 -- the Cerrito's blockade request moved to the River Plate situation
+	#     / el pedido de bloqueo del Cerrito paso a la situacion del Plata
 
 	should_be_involved = {
 		OR = {
@@ -37,7 +38,7 @@ je_gg_siege = {
 	status_desc = {
 		first_valid = {
 			triggered_desc = {
-				desc = je_gg_siege_status
+				desc = gg_ui_empty
 				trigger = { always = yes }
 			}
 		}
@@ -45,7 +46,8 @@ je_gg_siege = {
 
 	on_monthly_pulse = {
 		effect = {
-			scope:journal_entry = { set_bar_progress = { name = gg_siege_bar value = global_var:gg_plata_closed_streak } }
+			# EN/ES: who defends the plaza, for the portrait / quien defiende la plaza, para el retrato
+			gg_ui_siege_leaders_sync = yes
 		}
 	}
 

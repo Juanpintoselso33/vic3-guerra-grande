@@ -1,0 +1,22 @@
+﻿# EN: The war phases' own effects (Juan, 22/9/2026: moderate).
+# ES: Los efectos propios de las fases de la guerra (Juan: moderados).
+# EN/ES: the revolution -- a government in arms against itself / la revolucion -- un gobierno contestado
+gg_war_phase_revolution = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_mult = -0.1
+}
+# EN/ES: the war -- the army weighs more in politics / la guerra -- el ejercito pesa mas en la politica
+gg_war_phase_war = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_armed_forces_pol_str_mult = 0.1
+}
+# EN/ES: the siege -- two governments, each calling itself the legal one / dos gobiernos, cada uno el legal
+gg_war_phase_siege = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+}
+# EN/ES: the truce -- the dead are counted more slowly / la tregua -- los muertos se cuentan mas despacio
+gg_war_phase_truce = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_war_exhaustion_casualties_mult = -0.2
+}

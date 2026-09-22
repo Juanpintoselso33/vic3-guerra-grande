@@ -274,3 +274,42 @@ gg_plata_monthly = {
 		}
 	}
 }
+
+# EN: The situation's monthly upkeep (22/9/2026 redesign), from je_gg_patrons: the two bars, the
+#     phases' own effects (two months, renewed, so they fall by themselves when the phase ends), and
+#     the faction flags the Overview draws.
+# ES: El mantenimiento mensual de la situacion, desde je_gg_patrons: las dos barras, los efectos de
+#     cada fase (dos meses, renovados, asi caen solos cuando termina la fase) y las banderas.
+gg_plata_situation_monthly = {
+	scope:journal_entry = {
+		set_bar_progress = { name = gg_plata_patience_bar value = gg_plata_patience_pct }
+		set_bar_progress = { name = gg_plata_hunger_bar value = gg_plata_hunger_pct }
+	}
+	if = {
+		limit = { gg_plata_phase = 1 }
+		p:x302DDA.state ?= { add_modifier = { name = gg_plata_phase_blockade months = 2 } }
+	}
+	if = {
+		limit = { gg_plata_phase = 2 }
+		c:ARG ?= { add_modifier = { name = gg_plata_phase_ultimatum months = 2 } }
+	}
+	if = {
+		limit = { gg_plata_phase = 3 }
+		p:x365A5B.state ?= { add_modifier = { name = gg_plata_phase_intervention_port months = 2 } }
+		c:GBR ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
+		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
+	}
+	# EN/ES: the flags of the two governments for the factions line / banderas de los dos gobiernos
+	every_country = {
+		limit = { has_variable = guerra_grande_defensa_government }
+		set_global_variable = { name = gg_flag_defensa value = this }
+	}
+	every_country = {
+		limit = { has_variable = guerra_grande_cerrito_government }
+		set_global_variable = { name = gg_flag_cerrito value = this }
+	}
+	if = {
+		limit = { NOT = { has_global_variable = gg_flag_defensa } }
+		c:URU ?= { set_global_variable = { name = gg_flag_defensa value = this } }
+	}
+}

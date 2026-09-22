@@ -35,27 +35,3 @@ gg_ui_has_commitments = {
  }
 }
 
-# EN: Presentation only; actual historical marks, no calendar spoilers or new mechanical gates.
-# ES: Solo presentacion; marcas reales, sin anticipar fechas ni agregar condiciones mecanicas.
-gg_int_ui_phase = {
-	value = 0
-	if = {
-		limit = { OR = { has_global_variable = guerra_grande_split_done has_global_variable = gg_intervention_called has_global_variable = gg_plata_intervention } }
-		add = 1
-	}
-	if = {
-		# EN: A completed mission is history, not an indefinitely open negotiation.
-		# ES: Una mision terminada es un antecedente, no una negociacion abierta para siempre.
-		limit = {
-			OR = {
-				has_global_variable = gg_peace_offered
-				has_global_variable = gg_peace_chain_pending
-				AND = {
-					has_global_variable = gg_hood_argentina_pending
-					NOT = { has_global_variable = gg_hood_cerrito_received }
-				}
-			}
-		}
-		value = 2
-	}
-}

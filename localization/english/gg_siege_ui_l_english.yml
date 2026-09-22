@@ -1,12 +1,4 @@
 ﻿l_english:
- gg_siege_ui_camp:0 "Cerrito camp"
- gg_siege_ui_city:0 "Montevideo"
- gg_siege_ui_open:0 "@ships! #P River supply route open#!"
- gg_siege_ui_closed:0 "@ships! #N River access closed#!"
- gg_siege_ui_schematic:0 "Siege schematic · does not show unit positions"
- gg_siege_ui_duration:0 "#b The siege's account#!\nMonths of a shut river in a row: #V [GetGlobalVariable('gg_plata_closed_streak').GetValue|0]#! of #V 24#! (#V 12#! from 1851)."
- gg_siege_ui_blockade_active:0 "#b Rosas shuts the river#!\nNo foreign ship reaches the port; the city eats what it has."
- gg_siege_ui_blockade_inactive:0 "#b The river is open#!\nShips reach the port: the siege by land alone does not bring the city down."
  gg_siege_ui_italian_0:0 "Italian Legion: #V not raised#!"
  gg_siege_ui_italian_1:0 "Italian Legion: #P raised#!"
  gg_siege_ui_italian_2:0 "Italian Legion: #P reinforced#!"

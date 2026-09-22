@@ -1,0 +1,287 @@
+﻿# EN: El Sitio as a local situation (22/9/2026): which of the siege conditions each government
+#     carries right now, on the country or on its states. Presentation only.
+# ES: El Sitio como situacion local: que condiciones del sitio tiene hoy cada gobierno, en el pais
+#     o en sus estados. Solo presentacion.
+gg_ui_siege_def_port_without_a_countryside = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_port_without_a_countryside
+					any_scope_state = { has_modifier = gg_siege_port_without_a_countryside }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_guns_of_the_plaza = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_guns_of_the_plaza
+					any_scope_state = { has_modifier = gg_siege_guns_of_the_plaza }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_mortgaged_customs = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_mortgaged_customs
+					any_scope_state = { has_modifier = gg_siege_mortgaged_customs }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_the_sea_lane_stays_open = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_the_sea_lane_stays_open
+					any_scope_state = { has_modifier = gg_siege_the_sea_lane_stays_open }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_trading_with_the_enemy = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_trading_with_the_enemy
+					any_scope_state = { has_modifier = gg_siege_trading_with_the_enemy }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_countryside_without_a_port = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_countryside_without_a_port
+					any_scope_state = { has_modifier = gg_siege_countryside_without_a_port }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_no_breaching_guns = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_no_breaching_guns
+					any_scope_state = { has_modifier = gg_siege_no_breaching_guns }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_customs_house_at_the_buceo = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_customs_house_at_the_buceo
+					any_scope_state = { has_modifier = gg_siege_customs_house_at_the_buceo }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_the_land_frontier_stays_open = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_the_land_frontier_stays_open
+					any_scope_state = { has_modifier = gg_siege_the_land_frontier_stays_open }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_port_without_a_countryside = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_port_without_a_countryside
+					any_scope_state = { has_modifier = gg_siege_port_without_a_countryside }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_guns_of_the_plaza = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_guns_of_the_plaza
+					any_scope_state = { has_modifier = gg_siege_guns_of_the_plaza }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_mortgaged_customs = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_mortgaged_customs
+					any_scope_state = { has_modifier = gg_siege_mortgaged_customs }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_the_sea_lane_stays_open = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_the_sea_lane_stays_open
+					any_scope_state = { has_modifier = gg_siege_the_sea_lane_stays_open }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_trading_with_the_enemy = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_trading_with_the_enemy
+					any_scope_state = { has_modifier = gg_siege_trading_with_the_enemy }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_countryside_without_a_port = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_countryside_without_a_port
+					any_scope_state = { has_modifier = gg_siege_countryside_without_a_port }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_no_breaching_guns = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_no_breaching_guns
+					any_scope_state = { has_modifier = gg_siege_no_breaching_guns }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_customs_house_at_the_buceo = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_customs_house_at_the_buceo
+					any_scope_state = { has_modifier = gg_siege_customs_house_at_the_buceo }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_the_land_frontier_stays_open = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_the_land_frontier_stays_open
+					any_scope_state = { has_modifier = gg_siege_the_land_frontier_stays_open }
+				}
+			}
+		}
+		value = 1
+	}
+}
+# EN/ES: is Melchor Pacheco y Obes alive in the Defensa? / ¿vive Pacheco y Obes en la Defensa?
+gg_ui_siege_pacheco = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				any_scope_character = { has_template = URU_gg_melchor_pacheco_y_obes is_character_alive = yes }
+			}
+		}
+		value = 1
+	}
+}

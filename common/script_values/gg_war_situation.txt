@@ -1,0 +1,30 @@
+﻿# EN: The phase of the war: 0 the prelude (until Carpinteria, 19/9/1836), 1 the revolution (Rivera in
+#     arms against Oribe), 2 the war (Rivera's presidency, until the split), 3 the siege (two
+#     governments), 4 the truce, 5 the peace. Later phases win.
+# ES: La fase de la guerra: 0 la previa (hasta Carpinteria), 1 la revolucion, 2 la guerra, 3 el sitio,
+#     4 la tregua, 5 la paz. Mandan las posteriores.
+gg_war_phase = {
+	value = 0
+	if = { limit = { game_date >= 1836.9.19 } value = 1 }
+	if = { limit = { has_global_variable = gg_rivera_presidency } value = 2 }
+	if = { limit = { has_global_variable = guerra_grande_split_done } value = 3 }
+	if = { limit = { has_global_variable = gg_truce } value = 4 }
+	if = { limit = { has_global_variable = gg_peace_settled } value = 5 }
+}
+# EN/ES: exhaustion of each government as a share of the three months that open the other's peace
+#     / el agotamiento de cada gobierno como parte de los tres meses que abren la paz del otro
+gg_ui_exhaustion_cerrito_pct = {
+	value = 0
+	if = { limit = { has_global_variable = gg_cerrito_exhausted } value = global_var:gg_cerrito_exhausted multiply = 100 divide = 3 }
+	max = 100
+}
+gg_ui_exhaustion_defensa_pct = {
+	value = 0
+	if = { limit = { has_global_variable = gg_defensa_exhausted } value = global_var:gg_defensa_exhausted multiply = 100 divide = 3 }
+	max = 100
+}
+# EN/ES: the river's weight today, blancos positive / el peso del rio hoy, positivo para los blancos
+gg_ui_war_river_now = {
+	value = gg_plata_pressure_blanco
+	subtract = gg_plata_pressure_colorado
+}

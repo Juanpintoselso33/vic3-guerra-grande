@@ -1,13 +1,4 @@
 ﻿l_english:
- gg_war_ui_blancos:0 "#blue_value Blancos#!"
- gg_war_ui_colorados:0 "#R Colorados#!"
- gg_war_ui_blanco_balance:0 "The cause's advantage\n#V [JournalEntry.MakeScope.ScriptValue('gg_war_balance_blanco')|0]#!"
- gg_war_ui_colorado_balance:0 "The cause's advantage\n#V [JournalEntry.MakeScope.ScriptValue('gg_war_balance_colorado')|0]#!"
- gg_war_ui_balance_tt:0 "The advantage compares the two causes: these are not two separate resources. It includes the score difference and pressure from siege and relief. Peace negotiations use this very same calculation."
- gg_war_ui_balance_causes:0 "#b What tips the scales#!\nThe river: #V [JournalEntry.MakeScope.ScriptValue('gg_plata_pressure_blanco')|0]#! for the blancos, #V [JournalEntry.MakeScope.ScriptValue('gg_plata_pressure_colorado')|0]#! for the colorados (one point per #V 4#! months of a shut or open river, up to #V 4#!)."
- gg_war_ui_defensa_condition:0 "#R Defence government#!\nExhaustion: #V [GetGlobalVariable('gg_defensa_exhausted').GetValue|0]#! months"
- gg_war_ui_cerrito_condition:0 "#blue_value Cerrito government#!\nExhaustion: #V [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0]#! months"
- gg_war_ui_exhaustion_tt:0 "Consecutive months with war support at #V −25#! or below in this war. The count resets when support recovers; it does not measure troop losses."
  gg_war_ui_current_ruler:0 "Government\n#b [Character.GetFullName]#!"
  gg_war_ui_cause_leader:0 "Cause leader\n#b [Character.GetFullName]#!"
  gg_war_ui_diplomacy_title:0 "Negotiations"

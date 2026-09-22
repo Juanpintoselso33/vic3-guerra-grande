@@ -343,6 +343,8 @@ guerra_grande_battle_score = {
 				name = guerra_grande_blanco_score
 				add = 1
 			}
+			# EN/ES: 22/9/2026 -- counted by source for the war journal / contado por fuente
+			change_global_variable = { name = gg_src_battles_blanco add = 1 }
 			je:je_guerra_grande ?= {
 				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
@@ -355,6 +357,7 @@ guerra_grande_battle_score = {
 				name = guerra_grande_colorado_score
 				add = 1
 			}
+			change_global_variable = { name = gg_src_battles_colorado add = 1 }
 			je:je_guerra_grande ?= {
 				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}

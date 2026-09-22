@@ -35,46 +35,6 @@ gg_plata_patience_threshold = {
 	}
 }
 
-# EN: Presentation only (the Overview tab). Read-only; no rule reads these.
-# ES: Solo presentacion (pestana Panorama). De solo lectura; ninguna regla los lee.
-gg_ui_plata_closed = {
-	value = 0
-	if = { limit = { gg_plata_closed = yes } value = 1 }
-}
-# EN/ES: 1 Rosas, 0 someone else (occupied or lost) / 1 Rosas, 0 otro (ocupada o perdida)
-gg_ui_plata_ba_holder = {
-	value = 0
-	if = { limit = { gg_plata_ba_held_by_rosas = yes } value = 1 }
-}
-# EN/ES: 1 the Defensa, 2 the Cerrito, 0 anyone else / 1 la Defensa, 2 el Cerrito, 0 otro
-gg_ui_plata_mvd_holder = {
-	value = 0
-	if = {
-		limit = { p:x302DDA.state ?= { owner ?= { has_variable = guerra_grande_defensa_government } } }
-		value = 1
-	}
-	else_if = {
-		limit = { p:x302DDA.state ?= { owner ?= { has_variable = guerra_grande_cerrito_government } } }
-		value = 2
-	}
-}
-gg_ui_plata_ba_fort = {
-	value = 0
-	if = { limit = { gg_plata_ba_fort = yes } value = 1 }
-}
-gg_ui_plata_mvd_fort = {
-	value = 0
-	if = { limit = { gg_plata_mvd_fort = yes } value = 1 }
-}
-# EN/ES: 0 no pressure, 1 patience running, 2 ultimatum pending, 3 intervention, 4 over
-#     / 0 sin presion, 1 paciencia corriendo, 2 ultimatum, 3 intervencion, 4 terminada
-gg_ui_plata_powers_stage = {
-	value = 0
-	if = { limit = { global_var:gg_plata_closed_total > 0 } value = 1 }
-	if = { limit = { has_global_variable = gg_plata_ultimatum_pending } value = 2 }
-	if = { limit = { has_global_variable = gg_plata_intervention } value = 3 }
-	if = { limit = { has_global_variable = gg_plata_intervention_over } value = 4 }
-}
 # EN/ES: -1 colorados, 0 even, 1 blancos / -1 colorados, 0 parejo, 1 blancos
 gg_ui_plata_weight_side = {
 	value = 0
@@ -89,18 +49,51 @@ gg_ui_plata_ba_blockaded = {
 	value = 0
 	if = { limit = { gg_plata_ba_port_blockaded = yes } value = 1 }
 }
-# EN/ES: relations of the two powers with Rosas, for the Overview / relaciones con Rosas
-gg_ui_plata_gbr_relations = {
+
+# EN: The phase of the question (22/9/2026 redesign). 0 the open river, 1 the blockade, 2 the
+#     ultimatum, 3 the intervention, 4 the settlement. Later phases win.
+# ES: La fase de la cuestion. 0 el rio abierto, 1 el bloqueo, 2 el ultimatum, 3 la intervencion,
+#     4 el arreglo. Mandan las fases posteriores.
+gg_plata_phase = {
 	value = 0
-	if = {
-		limit = { exists = c:ARG exists = c:GBR }
-		c:ARG = { c:GBR = { add = relations:prev } }
-	}
+	if = { limit = { gg_plata_closed = yes } value = 1 }
+	if = { limit = { has_global_variable = gg_plata_ultimatum_pending } value = 2 }
+	if = { limit = { has_global_variable = gg_plata_intervention } value = 3 }
+	if = { limit = { has_global_variable = gg_plata_intervention_over } value = 4 }
 }
-gg_ui_plata_fra_relations = {
+# EN/ES: which envoy London has in the river, by months of intervention (SOURCES_powers.md 1-6)
+#     / que enviado tiene Londres en el rio, por meses de intervencion
+gg_ui_plata_envoy = {
+	value = 0
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 12 } value = 1 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 23 } value = 2 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 31 } value = 3 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 36 } value = 4 }
+}
+# EN/ES: the two native bars, as a share of their threshold / las dos barras, como parte de su umbral
+gg_plata_patience_pct = {
 	value = 0
 	if = {
-		limit = { exists = c:ARG exists = c:FRA }
-		c:ARG = { c:FRA = { add = relations:prev } }
+		limit = { has_global_variable = gg_plata_closed_total }
+		value = global_var:gg_plata_closed_total
+		multiply = 100
+		divide = gg_plata_patience_threshold
 	}
+	max = 100
+	min = 0
+}
+gg_plata_hunger_threshold = {
+	value = 24
+	if = { limit = { year >= 1851 } value = 12 }
+}
+gg_plata_hunger_pct = {
+	value = 0
+	if = {
+		limit = { has_global_variable = gg_plata_closed_streak }
+		value = global_var:gg_plata_closed_streak
+		multiply = 100
+		divide = gg_plata_hunger_threshold
+	}
+	max = 100
+	min = 0
 }

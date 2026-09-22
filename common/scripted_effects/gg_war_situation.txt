@@ -1,0 +1,66 @@
+﻿# EN: BLANCOS Y COLORADOS as a local situation (22/9/2026 redesign, modelled on Gates of the
+#     Bosphorus's Tanzimat journal, no code taken): what moved the balance last month, by source,
+#     and the phases' own moderate effects.
+# ES: BLANCOS Y COLORADOS como situacion local: que movio la balanza el mes pasado, por fuente, y los
+#     efectos moderados de cada fase.
+gg_war_sources_reset = {
+	set_global_variable = { name = gg_src_battles_blanco value = 0 }
+	set_global_variable = { name = gg_src_battles_colorado value = 0 }
+	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
+	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
+	set_global_variable = { name = gg_src_last_battles_blanco value = 0 }
+	set_global_variable = { name = gg_src_last_battles_colorado value = 0 }
+	set_global_variable = { name = gg_src_last_decisions_blanco value = 0 }
+	set_global_variable = { name = gg_src_last_decisions_colorado value = 0 }
+}
+# EN/ES: once a month: this month becomes last month / una vez por mes: este mes pasa a ser el pasado
+gg_war_sources_rollover = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_src_battles_blanco } }
+		gg_war_sources_reset = yes
+	}
+	set_global_variable = { name = gg_src_last_battles_blanco value = global_var:gg_src_battles_blanco }
+	set_global_variable = { name = gg_src_last_battles_colorado value = global_var:gg_src_battles_colorado }
+	set_global_variable = { name = gg_src_last_decisions_blanco value = global_var:gg_src_decisions_blanco }
+	set_global_variable = { name = gg_src_last_decisions_colorado value = global_var:gg_src_decisions_colorado }
+	set_global_variable = { name = gg_src_battles_blanco value = 0 }
+	set_global_variable = { name = gg_src_battles_colorado value = 0 }
+	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
+	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
+}
+# EN: the phases' own effects (Juan: moderate), two months and renewed, so they fall by themselves.
+# ES: los efectos de cada fase, dos meses y renovados, asi caen solos.
+gg_war_phase_effects = {
+	if = {
+		limit = { gg_war_phase = 1 }
+		c:URU ?= { add_modifier = { name = gg_war_phase_revolution months = 2 } }
+	}
+	if = {
+		limit = { gg_war_phase = 2 }
+		c:URU ?= { add_modifier = { name = gg_war_phase_war months = 2 } }
+	}
+	if = {
+		limit = { gg_war_phase = 3 }
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = guerra_grande_defensa_government
+					has_variable = guerra_grande_cerrito_government
+				}
+			}
+			add_modifier = { name = gg_war_phase_siege months = 2 }
+		}
+	}
+	if = {
+		limit = { gg_war_phase = 4 }
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = guerra_grande_defensa_government
+					has_variable = guerra_grande_cerrito_government
+				}
+			}
+			add_modifier = { name = gg_war_phase_truce months = 2 }
+		}
+	}
+}

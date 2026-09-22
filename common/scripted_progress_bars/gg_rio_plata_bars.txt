@@ -1,0 +1,20 @@
+﻿# EN: The River Plate situation's two clocks (Juan, 22/9/2026): the powers' patience and the city's
+#     hunger. Both 0-100 as a share of their threshold; the text says the real months.
+# ES: Los dos relojes de la situacion del Plata: la paciencia de las potencias y el hambre de la
+#     plaza. Los dos 0-100 como parte de su umbral; el texto dice los meses reales.
+gg_plata_patience_bar = {
+	name = "gg_plata_patience_bar"
+	desc = "gg_plata_patience_bar_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}
+gg_plata_hunger_bar = {
+	name = "gg_plata_hunger_bar"
+	desc = "gg_plata_hunger_bar_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}

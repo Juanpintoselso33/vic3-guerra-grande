@@ -1,0 +1,134 @@
+﻿# EN: The Argentine accounts of the war: the extraordinary remittance to the Cerrito and the pledges.
+#     Moved here from the River Plate journal on 22/9/2026 (it is Rosas's money, not the river).
+#     Same controls and script as before; only the place changed, and there are no tabs.
+# ES: Las cuentas argentinas de la guerra: la remesa extraordinaria al Cerrito y los compromisos.
+#     Pasaron aca desde el journal del Plata el 22/9/2026 (es la plata de Rosas, no el rio). Mismos
+#     controles y script; solo cambio el lugar, y no hay pestanias.
+flowcontainer = {
+ name = "gg_pact_accounts"
+ direction = vertical parentanchor = hcenter spacing = 14 ignoreinvisible = yes
+ textbox = {
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_large align = left|nobaseline
+  text = "gg_ui_pact_accounts_title"
+ }
+ flowcontainer = {
+  direction = vertical spacing = 12 ignoreinvisible = yes
+ textbox = {
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_large align = left|nobaseline
+  text = "gg_ui_offer_parties"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)0')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_offer_terms"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)0')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_offer_capacity"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)0')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_delegation_tt"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)1')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_int_status_pending"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)2')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_offer_answered"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)3')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_int_status_refused"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)4')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_offer_answered"
+ }
+
+ button_standard = {
+  size = { 520 48 } text = "gg_int_arg_offer_button" tooltip = "gg_ui_offer_action_tt"
+  visible = "[GetScriptedGui('gg_ui_offer_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+  enabled = "[GetScriptedGui('gg_ui_offer_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+  onclick = "[GetScriptedGui('gg_ui_offer_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ }
+
+ }
+ flowcontainer = {
+  direction = vertical spacing = 14 ignoreinvisible = yes
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_has_commitments'), '(CFixedPoint)0')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_no_commitments"
+ }
+
+  flowcontainer = {
+   visible = "[GetGlobalVariable('gg_int_arg_accepted').IsSet]"
+   direction = vertical spacing = 10 ignoreinvisible = yes
+
+ textbox = {
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_accepted_account"
+ }
+
+ textbox = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)4')]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_int_status_withdrawn"
+ }
+
+ button_standard = {
+  size = { 520 48 } text = "gg_int_arg_withdraw_button" tooltip = "gg_ui_withdraw_action_tt"
+  visible = "[GetScriptedGui('gg_ui_withdraw_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+  enabled = "[GetScriptedGui('gg_ui_withdraw_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+  onclick = "[GetScriptedGui('gg_ui_withdraw_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ }
+
+  }
+ textbox = {
+  visible = "[GetGlobalVariable('gg_reunification_pledged').IsSet]"
+  autoresize = yes multiline = yes
+  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+  using = fontsize_medium align = left|nobaseline
+  text = "gg_ui_rosas_commitment"
+ }
+ }
+}

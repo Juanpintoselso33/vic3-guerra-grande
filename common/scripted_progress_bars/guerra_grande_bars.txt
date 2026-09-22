@@ -60,19 +60,10 @@ guerra_grande_war_score_bar = {
 	max_value = 10
 }
 
-# EN: C10 (22/9/2026) -- the sea bar (0-120, threshold 60) is gone with the 60-point system. The
-#     siege bar counts consecutive months of a shut river: 24 starve the Defensa (12 from 1851).
-# ES: C10 -- la barra del mar (0-120, umbral 60) se fue con el sistema de 60 puntos. La barra del
-#     sitio cuenta meses seguidos de rio cerrado: 24 rinden por hambre a la Defensa (12 desde 1851).
-gg_siege_bar = {
-	name = "gg_siege_bar"
-	desc = "gg_siege_bar_desc"
-	second_desc = "gg_siege_bar_second_desc"
-	default_bad = yes
-	start_value = 0
-	min_value = 0
-	max_value = 24
-}
+# EN: 22/9/2026 -- the sea bar and the siege bar are both gone: the river's two clocks (the powers'
+#     patience and the city's hunger) are the River Plate situation's own bars (gg_rio_plata_bars.txt).
+# ES: la barra del mar y la del sitio se fueron: los dos relojes del rio son las barras de la
+#     situacion del Plata.
 
 # EN: the delegation. Thirteen provinces at the start, zero when Rosas has nothing left to be. Not a
 #     two-sided bar: this one is not a tug of war between two sides, it is one thing draining.

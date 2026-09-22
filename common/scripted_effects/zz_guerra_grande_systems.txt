@@ -230,6 +230,8 @@ gg_systems_init = {
 	#     months, Rosas's stance (0 open) / el Plata: meses con signo, meses cerrados seguidos, meses
 	#     cerrados en total, postura de Rosas (0 abierto)
 	set_global_variable = { name = gg_plata_months value = 0 }
+	# EN/ES: the war journal's sources, this month and last / las fuentes de la balanza, este mes y el pasado
+	gg_war_sources_reset = yes
 	set_global_variable = { name = gg_plata_closed_streak value = 0 }
 	set_global_variable = { name = gg_plata_closed_total value = 0 }
 	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
@@ -262,6 +264,7 @@ gg_score_blanco = {
 	custom_tooltip = {
 		text = gg_tt_score_blanco_$AMOUNT$
 		change_global_variable = { name = guerra_grande_blanco_score add = $AMOUNT$ }
+		change_global_variable = { name = gg_src_decisions_blanco add = $AMOUNT$ }
 		je:je_guerra_grande ?= {
 			set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 		}
@@ -273,6 +276,7 @@ gg_score_colorado = {
 	custom_tooltip = {
 		text = gg_tt_score_colorado_$AMOUNT$
 		change_global_variable = { name = guerra_grande_colorado_score add = $AMOUNT$ }
+		change_global_variable = { name = gg_src_decisions_colorado add = $AMOUNT$ }
 		je:je_guerra_grande ?= {
 			set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 		}

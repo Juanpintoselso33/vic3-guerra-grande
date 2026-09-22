@@ -1,0 +1,46 @@
+﻿# EN: Who stands where in the River Plate situation (GUI only; no effects).
+# ES: Quien esta donde en la situacion del Plata (solo interfaz; sin efectos).
+gg_ui_plata_left_leader = {
+	scope = country
+	is_shown = { c:ARG ?= this }
+}
+# EN/ES: until the ultimatum, the Defensa (or the Republic before the split) / hasta el ultimatum
+gg_ui_plata_right_defensa = {
+	scope = country
+	is_shown = {
+		gg_plata_phase < 2
+		OR = {
+			has_variable = guerra_grande_defensa_government
+			AND = {
+				NOT = { has_global_variable = guerra_grande_split_done }
+				c:URU ?= this
+			}
+		}
+	}
+}
+# EN/ES: from the ultimatum, London / desde el ultimatum, Londres
+gg_ui_plata_right_powers = {
+	scope = country
+	is_shown = {
+		gg_plata_phase >= 2
+		c:GBR ?= this
+	}
+}
+gg_ui_plata_role_involved = {
+	scope = country
+	is_shown = {
+		OR = {
+			c:URU ?= this
+			c:CER ?= this
+			c:ARG ?= this
+			has_variable = guerra_grande_defensa_government
+			has_variable = guerra_grande_cerrito_government
+		}
+	}
+}
+gg_ui_plata_role_outsider = {
+	scope = country
+	is_shown = {
+		OR = { c:GBR ?= this c:FRA ?= this c:BRZ ?= this }
+	}
+}

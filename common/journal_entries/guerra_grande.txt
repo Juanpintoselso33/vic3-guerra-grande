@@ -91,6 +91,9 @@ je_guerra_grande = {
 
 	on_monthly_pulse = {
 		effect = {
+			# EN/ES: 22/9/2026 -- the balance's sources and the phase's own effects / fuentes y efectos de fase
+			gg_war_sources_rollover = yes
+			gg_war_phase_effects = yes
 			# EN: playtest 2026-09-17 -- self-healing: if the split happened and the post-partition
 			#     calendar never ran (a scheduled event whose trigger was checked too early was
 			#     dropped), run it now. This also repairs saves made before the fix.

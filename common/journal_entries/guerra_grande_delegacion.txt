@@ -24,6 +24,13 @@ je_gg_delegation = {
 		name = "gg_pact_map"
 		container = "custom_widget_container_je_icon"
 	}
+	# EN/ES: 22/9/2026 -- Rosas's accounts with the Cerrito (remittance, reunification pledge), moved
+	#     here from the River Plate journal / las cuentas de Rosas con el Cerrito, desde el Plata
+	widget = {
+		gui = "gui/gg_pact_accounts.gui"
+		name = "gg_pact_accounts"
+		container = "custom_widget_container_3"
+	}
 
 	should_be_pinned_by_default_involved = yes
 

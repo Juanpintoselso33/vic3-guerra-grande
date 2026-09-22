@@ -17,3 +17,16 @@ gg_ui_prewar_leaders_sync = {
   }
  }
 }
+
+# EN/ES: 22/9/2026 -- the siege's defender for El Sitio: Melchor Pacheco y Obes while he lives in the
+#     Defensa (presentation only) / el defensor del sitio: Pacheco y Obes mientras viva en la Defensa
+gg_ui_siege_leaders_sync = {
+ every_country = {
+  limit = { has_variable = guerra_grande_defensa_government }
+  clear_variable_list = gg_ui_siege_defender
+  every_scope_character = {
+   limit = { has_template = URU_gg_melchor_pacheco_y_obes is_character_alive = yes }
+   owner = { add_to_variable_list = { name = gg_ui_siege_defender target = prev } }
+  }
+ }
+}

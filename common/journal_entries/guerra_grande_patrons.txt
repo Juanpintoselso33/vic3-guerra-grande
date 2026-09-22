@@ -6,32 +6,26 @@ je_gg_patrons = {
 	group = je_group_global_international_situations
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
+	# EN: 22/9/2026 -- one situation widget (gui/gg_international.gui) and two native bars. The
+	#     three tabs, the patron cards and the details are gone; the remittance lives in the Pact.
+	# ES: un solo widget de situacion y dos barras nativas. Se fueron las tres pestanias, los padrinos
+	#     y los detalles; la remesa vive en el Pacto.
 	widget = {
 		gui = "gui/gg_international.gui"
-		name = "gg_plata_navigation"
-		container = "custom_widget_container_je_icon"
-	}
-	widget = {
-		gui = "gui/gg_international.gui"
-		name = "gg_international_ledger"
+		name = "gg_plata_situation"
 		container = "custom_widget_container_1"
 	}
-	widget = {
-		gui = "gui/gg_international.gui"
-		name = "gg_plata_dossiers"
-		container = "custom_widget_container_3"
-	}
-	widget = {
-		gui = "gui/gg_international.gui"
-		name = "gg_international_details"
-		container = "custom_widget_container_4"
-	}
+	scripted_progress_bar = gg_plata_patience_bar
+	scripted_progress_bar = gg_plata_hunger_bar
 
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = no
 
 	# EN/ES: calling in the squadrons is a request to the powers / llamar a las escuadras es un pedido a las potencias
 	scripted_button = guerra_grande_foreign_intervention_button
+	# EN/ES: 22/9/2026 -- the Cerrito's request moved here from the siege: it is the river
+	#     / el pedido del Cerrito paso aca desde el sitio: es el rio
+	scripted_button = guerra_grande_river_blockade_button
 
 	should_be_involved = {
 		gg_international_participant = yes
@@ -55,6 +49,7 @@ je_gg_patrons = {
 		effect = {
 			gg_international_sync = yes
 			gg_int_arg_ai_pulse = yes
+			gg_plata_situation_monthly = yes
 		}
 	}
 

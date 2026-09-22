@@ -12,3 +12,26 @@ gg_plata_rosas_yielded = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_prestige_mult = -0.15
 }
+
+# EN: The phases' own effects (Juan: moderate), renewed each month while the phase lasts.
+# ES: Los efectos propios de cada fase (Juan: moderados), renovados cada mes mientras dura.
+# EN/ES: the blockade -- hunger in the city / el bloqueo -- el hambre en la plaza
+gg_plata_phase_blockade = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mortality_mult = 0.05
+}
+# EN/ES: the ultimatum -- Rosas under the powers' eyes / el ultimatum -- Rosas bajo la mirada de las potencias
+gg_plata_phase_ultimatum = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.1
+}
+# EN/ES: the intervention -- Buenos Aires blockaded / la intervencion -- Buenos Aires bloqueada
+gg_plata_phase_intervention_port = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_trade_capacity_add = -10
+}
+# EN/ES: the intervention -- London and Paris pay for it abroad / Londres y Paris lo pagan afuera
+gg_plata_phase_intervention_powers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_infamy_generation_mult = 0.1
+}
