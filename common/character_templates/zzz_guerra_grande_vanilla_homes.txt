@@ -30,6 +30,7 @@ REPLACE:URU_Manuel_Oribe = {
 	trait_generation = { }
 }
 REPLACE:URU_Fructuoso_Rivera = {
+	dna = dna_gg_fructuoso_rivera
 	# Fructuoso Rivera, President of Uruguay thrice, and founder of the Colorado Party
 	first_name = Fructuoso
 	last_name = Rivera
@@ -49,6 +50,7 @@ REPLACE:URU_Fructuoso_Rivera = {
 	trait_generation = { }
 }
 REPLACE:URU_Juan_Antonio_Lavalleja = {
+	dna = dna_gg_juan_antonio_lavalleja
 	# Juan Antonio Lavalleja y de la Torre
 	first_name = Juan_Antonio
 	last_name = Lavalleja
@@ -68,6 +70,7 @@ REPLACE:URU_Juan_Antonio_Lavalleja = {
 	trait_generation = { }
 }
 REPLACE:URU_joaquin_suarez = {
+	dna = dna_gg_joaquin_suarez
 	# Joaquín Luis Miguel Suárez de Rondelo y Fernández
 	first_name = Joaquin
 	last_name = Suarez
@@ -85,6 +88,7 @@ REPLACE:URU_joaquin_suarez = {
 	trait_generation = { }
 }
 REPLACE:URU_Ignacio_Oribe = { # Brother of Manuel Oribe
+	dna = dna_gg_ignacio_oribe
 	is_general = yes
 	first_name = Ignacio
 	last_name = Oribe
@@ -100,6 +104,7 @@ REPLACE:URU_Ignacio_Oribe = { # Brother of Manuel Oribe
 	trait_generation = { }
 }
 REPLACE:URU_manuel_herrera_y_obes = { # Manuel Herrera y Obes
+	dna = dna_gg_manuel_herrera_y_obes
 	first_name = Manuel
 	last_name = Herrera_y_Obes
 	historical = yes
@@ -138,6 +143,7 @@ REPLACE:URU_manuel_herrera_y_obes = { # Manuel Herrera y Obes
 	trait_generation = { }
 }
 REPLACE:URU_andres_lamas = { # Andrés Lamas
+	dna = dna_gg_andres_lamas
 	first_name = Andres
 	last_name = Lamas
 	historical = yes
@@ -177,6 +183,7 @@ REPLACE:URU_andres_lamas = { # Andrés Lamas
 	trait_generation = { }
 }
 REPLACE:URU_bernardo_prudencio_berro = { # Bernardo Prudencio Berro Larrañaga
+	dna = dna_gg_bernardo_prudencio_berro
 	first_name = Bernardo_Prudencio
 	last_name = Berro
 	historical = yes
@@ -491,6 +498,7 @@ REPLACE:URU_pedro_manini_rios = { # Pedro Manini Ríos
 	trait_generation = { }
 }
 REPLACE:URU_cesar_diaz = { # César Díaz
+	dna = dna_gg_cesar_diaz
 	first_name = Cesar
 	last_name = Diaz
 	historical = yes
@@ -527,6 +535,7 @@ REPLACE:URU_cesar_diaz = { # César Díaz
 	trait_generation = { }
 }
 REPLACE:URU_venancio_flores = { # Venancio Flores Barrios
+	dna = dna_gg_venancio_flores
 	first_name = Venancio
 	last_name = Flores
 	historical = yes
@@ -564,6 +573,7 @@ REPLACE:URU_venancio_flores = { # Venancio Flores Barrios
 	trait_generation = { }
 }
 REPLACE:URU_timoteo_aparicio = { # Timoteo Aparicio
+	dna = dna_gg_timoteo_aparicio
 	first_name = Timoteo
 	last_name = Aparicio
 	historical = yes
@@ -675,6 +685,7 @@ REPLACE:URU_justino_muniz = { # Justino Muniz
 	trait_generation = { }
 }
 REPLACE:URU_lorenzo_batlle = { # Lorenzo Cristóbal Manuel Batlle y Grau
+	dna = dna_gg_lorenzo_batlle
 	first_name = Lorenzo
 	last_name = Batlle
 	historical = yes
@@ -874,6 +885,7 @@ REPLACE:URU_emilio_reus = { # Emilio Reus Bahamonde
 #     condicion de uso para PLT, no en home_region / these two only named the state in their PLT
 #     usage condition, not in home_region
 REPLACE:URU_anacleto_medina = { # Anacleto Medina y Biera
+	dna = dna_gg_anacleto_medina
 	first_name = Anacleto
 	last_name = Medina
 	historical = yes

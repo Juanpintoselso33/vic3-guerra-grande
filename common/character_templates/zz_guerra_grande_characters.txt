@@ -5,6 +5,7 @@
 
 # Melchor Pacheco y Obes: Buenos Aires 20.1.1809 - 21.5.1855 (Wikipedia ES). Defensa's minister of war; FG-1 line 1.
 URU_gg_melchor_pacheco_y_obes = {
+	dna = dna_gg_melchor_pacheco_y_obes
 	first_name = gg_name_melchor
 	last_name = gg_name_pacheco_y_obes
 	historical = yes
@@ -25,6 +26,7 @@ URU_gg_melchor_pacheco_y_obes = {
 
 # Carlos Geronimo Villademoros: Cerro Largo 1806 (day unknown) - 1.2.1853 (Wikipedia ES). Cerrito's chancellor; FG-2. No Cerro Largo state on this map: Maldonado is the nearest eastern one.
 URU_gg_carlos_villademoros = {
+	dna = dna_gg_carlos_villademoros
 	first_name = gg_name_carlos
 	last_name = gg_name_villademoros
 	historical = yes
@@ -44,6 +46,7 @@ URU_gg_carlos_villademoros = {
 
 # Juan Francisco Giro: Montevideo 3.6.1791 - 14.5.1863 (Wikipedia ES). Cerrito's envoy to Spain (FS-1); president 1852 (FX-3).
 URU_gg_juan_francisco_giro = {
+	dna = dna_gg_juan_francisco_giro
 	first_name = gg_name_juan_francisco
 	last_name = gg_name_giro
 	historical = yes
@@ -63,6 +66,7 @@ URU_gg_juan_francisco_giro = {
 
 # Eugenio Garzon: Montevideo 6.9.1796 - 1.12.1851 (Wikipedia ES). General of the 1851 coalition (F4-3).
 URU_gg_eugenio_garzon = {
+	dna = dna_gg_eugenio_garzon
 	first_name = gg_name_eugenio
 	last_name = gg_name_garzon
 	historical = yes
@@ -83,6 +87,7 @@ URU_gg_eugenio_garzon = {
 
 # Servando Gomez: born c. 1798 (uncertain) - Gualeguaychu 30.5.1865 (Wikipedia ES). Cerrito general who went over in 1851 (F4-3).
 URU_gg_servando_gomez = {
+	dna = dna_gg_servando_gomez
 	first_name = gg_name_servando
 	last_name = gg_name_gomez
 	historical = yes
@@ -129,6 +134,7 @@ URU_gg_gabriel_antonio_pereira = {
 
 # Bartolome Mitre: Buenos Aires 26.6.1821 (Felipe Pigna, Clarin, "Bartolome Mitre: como fue el largo y duro camino de su exilio"). Artillery officer and man of letters in Montevideo.
 URU_gg_bartolome_mitre = {
+	dna = dna_gg_bartolome_mitre
 	first_name = gg_name_bartolome
 	last_name = gg_name_mitre
 	historical = yes

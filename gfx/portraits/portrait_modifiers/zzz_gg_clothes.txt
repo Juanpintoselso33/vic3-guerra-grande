@@ -102,4 +102,111 @@ gg_clothes = {
 			}
 		}
 	}
+
+	# EN: the other soldiers of the war in uniform as their portraits show them, also when they govern
+	#     or sit in a cabinet -- each piece drawn from the period's uniform set, so they do not look cloned.
+	# ES: los demas militares de la guerra de uniforme, como en sus retratos, tambien cuando gobiernan o son
+	#     ministros; cada pieza sale del conjunto de uniforme de la epoca, para que no parezcan clonados.
+	gg_generals_uniform = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = belts
+				template = no_belt
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = civilian_coats
+				template = no_civilian_coat
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = headgear
+				template = no_headgear
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = necklaces
+				template = no_necklace
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = outfits
+				template = no_outfit
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = sashes
+				template = no_sash
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = top_layer
+				template = no_top_layer
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = waistcoats
+				template = no_waistcoat
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = coats
+				template = european_uniform_coats
+				range = { 0 0.35 } # the early single-breasted tailcoats / los fraques de faldones de la epoca
+			}
+			accessory = {
+				mode = add
+				gene = epaulettes
+				template = all_epaulettes
+				range = { 0.2 1 } # never the empty slot / nunca sin charreteras
+			}
+			accessory = {
+				mode = add
+				gene = aiguillettes
+				template = all_aiguillettes
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = legwear
+				template = european_legwear
+				range = { 0 1 }
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				scope:character ?= {
+					OR = {
+					has_template = URU_Fructuoso_Rivera
+					has_template = URU_Juan_Antonio_Lavalleja
+					has_template = URU_Ignacio_Oribe
+					has_template = URU_anacleto_medina
+					has_template = URU_gg_eugenio_garzon
+					has_template = URU_gg_servando_gomez
+					has_template = URU_venancio_flores
+					has_template = URU_cesar_diaz
+					has_template = URU_gg_melchor_pacheco_y_obes
+					has_template = ARG_Justo_Jose_de_Urquiza
+					has_template = ARG_Gregorio_Araoz_de_Lamadrid
+					has_template = CRR_gg_jose_maria_paz
+					has_template = ARG_gg_jose_felix_aldao
+					has_template = ARG_Angel_Pacheco
+					has_template = ARG_Alejandro_Heredia
+					has_template = ARG_gg_nazario_benavidez
+					}
+				}
+			}
+		}
+	}
 }
