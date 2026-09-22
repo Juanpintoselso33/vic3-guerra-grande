@@ -365,14 +365,20 @@ MILITARY_FORMATIONS = {
 			hq_region = sr:region_brazil
 			name = Ejrcito_Nacional
 
+			# EN: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- 2 line + 1 hussar, not 3 line + 1
+			#     cuirassier: the Republic had no heavy cavalry, and with the three battalions the
+			#     barracks add at start this gives six, near the 4,868 men of 1838 (Acevedo).
+			# ES: 2 de linea + 1 de husares, no 3 de linea + 1 de coraceros: la Republica no tenia
+			#     caballeria pesada, y con los tres batallones que suman los cuarteles da seis, cerca
+			#     de los 4.868 hombres de 1838 (Acevedo).
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
 				state_region = s:STATE_MONTEVIDEO
-				count = 3
+				count = 2
 			}
 
 			combat_unit = {
-				type = unit_type:combat_unit_type_cuirassiers
+				type = unit_type:combat_unit_type_hussars
 				state_region = s:STATE_MONTEVIDEO
 				count = 1
 			}

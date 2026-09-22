@@ -119,16 +119,15 @@ gg_rivera.1 = {
 		}
 	}
 
-	# EN: The infantry goes to the campania. This is what Rivera asks for and never gets: at
-	#     India Muerta in 1845 he gives battle still waiting for the foot soldiers Montevideo
-	#     promised, and his own chief of staff, Jose Antonio Costa, writes to him that he doubts
-	#     they will arrive in time. They do not. Sending them is the counterfactual, and it costs
-	#     exactly what it should: the walls.
-	# ES: La infanteria sale a la campania. Es lo que Rivera pide y nunca recibe: en India Muerta,
-	#     en 1845, da batalla todavia esperando los infantes que Montevideo le prometio, y su
-	#     propio jefe de estado mayor, Jose Antonio Costa, le escribe que duda que lleguen a
-	#     tiempo. No llegan. Mandarlos es la contrafactica, y cuesta justo lo que tiene que
-	#     costar: la muralla.
+	# EN: The city rebuilds Rivera's army in the countryside. What he got in 1843 was horsemen --
+	#     4,000 to 7,476, all cavalry -- and what he asked for and never got was the foot soldiers
+	#     Montevideo promised (at India Muerta in 1845 Jose Antonio Costa still doubts they will
+	#     arrive). 22/9/2026: the army is four squadrons of horse; the men and horses it takes out of
+	#     the city still cost the walls.
+	# ES: La ciudad le rehace el ejercito a Rivera en la campaña. Lo que tuvo en 1843 fueron jinetes
+	#     -- de 4.000 a 7.476, toda caballeria -- y lo que pidio y nunca recibio fueron los infantes
+	#     que Montevideo le prometio. El ejercito son cuatro escuadrones; los hombres y caballos que
+	#     saca de la ciudad siguen costando la muralla.
 	option = {
 		name = gg_rivera.1.a
 		custom_tooltip = gg_rivera.1.a_tt2
@@ -160,15 +159,13 @@ gg_rivera.1 = {
 				type = army
 				hq_region = sr:region_brazil
 				name = Ejercito_de_Operaciones
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					state_region = s:STATE_MONTEVIDEO
-					count = 2
-				}
+				# EN/ES: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- all horse: Rivera's field army
+				#     was 4,000-7,476 cavalry / toda caballeria: el ejercito de campaña de Rivera era de
+				#     4.000 a 7.476 jinetes
 				combat_unit = {
 					type = unit_type:combat_unit_type_hussars
 					state_region = s:STATE_MONTEVIDEO
-					count = 2
+					count = 4
 				}
 			}
 		}

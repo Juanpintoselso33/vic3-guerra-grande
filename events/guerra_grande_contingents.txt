@@ -300,10 +300,12 @@ gg_contingent.4 = {
 				#     no tenia nombre, asi que el cuerpo mas numeroso del sitio salia como un ejercito generico
 				name = Legion_Francesa
 				hq_region = scope:gg_formation_hq_state.region
+				# EN/ES: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- 2,904 men in May 1843: two
+				#     battalions and a battery / 2.904 hombres en mayo de 1843: dos batallones y una bateria
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
 					state_region = s:STATE_MONTEVIDEO
-					count = 3
+					count = 2
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_cannon_artillery
@@ -423,7 +425,8 @@ gg_contingent.5 = {
 		default_option = yes
 		set_variable = guerra_grande_italian_legion_raised
 		# EN/ES: FN-3 -- Costa Brava (gg_naval.3.a) made Garibaldi's name in the city: he commands the
-		#     legion and it musters a battalion more / Costa Brava le hizo el nombre: la manda el y suma un batallon
+		#     legion. 22/9/2026: always one battalion (500-700 men at best, docs/tropas-iniciales)
+		#     / Costa Brava le hizo el nombre: la manda el. Siempre un batallon (500 a 700 hombres)
 		if = {
 			limit = { has_global_variable = gg_garibaldi_famous }
 			custom_tooltip = gg_naval.3.a_tt
@@ -438,7 +441,7 @@ gg_contingent.5 = {
 					combat_unit = {
 						type = unit_type:combat_unit_type_line_infantry
 						state_region = s:STATE_MONTEVIDEO
-						count = 2
+						count = 1
 					}
 				}
 			}

@@ -1,0 +1,16 @@
+﻿namespace = gg_troops
+
+# EN: gg_troops.1 -- the armies at the split, two days after guerra_grande.3 (both options). Hidden
+#     and with no trigger, so it cannot be discarded when it is queued; by then the engine has moved
+#     every battalion with its barracks and dropped the empty ones. See scripted_effects/gg_troops.txt.
+# ES: gg_troops.1 -- los ejercitos en el corte, dos dias despues de guerra_grande.3 (las dos
+#     opciones). Oculto y sin trigger, asi no se descarta al encolarse; para entonces el motor ya
+#     movio cada batallon con su cuartel y descarto los vacios.
+gg_troops.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		gg_troops_split_armies = yes
+	}
+}

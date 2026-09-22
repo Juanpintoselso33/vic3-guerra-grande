@@ -15,15 +15,15 @@
  gg_naval.2.a:0 "Desarmar la escuadra y alistar el Pereira y la Constitución para Corrientes."
  gg_naval.2.a_tt:0 "@information! Los dos buques restantes quedan comprometidos con la expedición al Paraná, al alcance de la escuadra de Brown."
  gg_naval.2.b:0 "Vender hasta el último casco. Que el consejo de guerra decida lo de Coe."
- gg_naval.2.b_tt:0 "@information! Sin expedición al Paraná, Garibaldi no gana ni el mando ni los reclutas que ese viaje podía traerle a la Legión Italiana."
+ gg_naval.2.b_tt:0 "@information! Sin expedición al Paraná, Garibaldi no gana el mando de la Legión Italiana."
 
  gg_naval.3.t:0 "Costa Brava"
  gg_naval.3.d:0 "La expedición subió el Paraná con el #b Pereira#! y la #b Constitución#! al mando del marino de Niza #b Giuseppe Garibaldi#!, y Brown salió atrás. El 15 de agosto la alcanzó en el paraje de Costa Brava, en el límite de Entre Ríos con Corrientes, cerca de Esquina. Brown no atacó de frente: mandó gente a tierra para remolcar sus buques a la sirga, desalojó con infantería a los tiradores que le tiraban desde la orilla y fondeó su ala izquierda a distancia de tiro. Garibaldi le mandó un brulote encendido; un grumete de doce años, Bartolomé Cordero, lo abordó en un bote y le cambió el rumbo.\n\nEl combate duró dos días. En la segunda jornada Garibaldi se quedó sin munición, con las cubiertas rotas y la mitad de la gente fuera de combate. Antes de entregar los buques los voló, y se metió tierra adentro con los que quedaban. Los oficiales de Brown pidieron perseguirlo y el almirante no los dejó. En su parte a Rosas describió a esa gente como piratas que saqueaban sin piedad; a sus oficiales les dijo otra cosa.\n\nDe la escuadra de la República no queda nada. Lo que vuelve a Montevideo es un hombre con fama de haber peleado dos días contra el mejor marino del Plata y de haber quemado sus barcos antes que rendirlos, y una tropa de italianos que lo sigue."
  gg_naval.3.f:0 "«Déjenlo escapar, ese gringo es un valiente.» — Guillermo Brown"
  gg_naval.3.a:0 "Recibirlo como lo que la ciudad ya cree que es."
- gg_naval.3.a_tt:0 "@information! Costa Brava le da a #b Garibaldi#! el mando de la Legión Italiana y le suma un batallón."
+ gg_naval.3.a_tt:0 "@information! Costa Brava le da a #b Garibaldi#! el mando de la Legión Italiana."
  gg_naval.3.b:0 "Una derrota es una derrota: ni honores ni ascenso."
- gg_naval.3.b_tt:0 "@information! Sin honores públicos, Garibaldi no gana ni el mando ni nuevos reclutas: la Legión Italiana conserva un batallón. El gobierno gana algo de crédito por no disfrazar la derrota: legitimidad #P +2#!."
+ gg_naval.3.b_tt:0 "@information! Sin honores públicos, Garibaldi no gana el mando de la Legión Italiana. El gobierno gana algo de crédito por no disfrazar la derrota: legitimidad #P +2#!."
 
  gg_naval_port_under_blockade:0 "El puerto bajo bloqueo"
  gg_naval_port_under_blockade_desc:0 "La escuadra de la Confederación fondea frente a Montevideo y nadie se lo discute."

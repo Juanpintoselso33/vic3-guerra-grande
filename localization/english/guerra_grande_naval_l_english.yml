@@ -15,15 +15,15 @@
  gg_naval.2.a:0 "Pay off the squadron and fit out the Pereira and the Constitución for Corrientes."
  gg_naval.2.a_tt:0 "@information! The two remaining ships are committed to the Paraná expedition, within reach of Brown's squadron."
  gg_naval.2.b:0 "Sell every last hull. Let the court martial decide Coe's case."
- gg_naval.2.b_tt:0 "@information! With no Paraná expedition, Garibaldi wins neither the command nor the recruits that voyage could have brought the Italian Legion."
+ gg_naval.2.b_tt:0 "@information! Without the Paraná expedition, Garibaldi does not win command of the Italian Legion."
 
  gg_naval.3.t:0 "Costa Brava"
  gg_naval.3.d:0 "The expedition ascended the Paraná aboard the #b Pereira#! and the #b Constitución#! under #b Giuseppe Garibaldi#!, the sailor from Nice, with Brown in pursuit. On 15 August Brown caught it at Costa Brava, near Esquina on the border between Entre Ríos and Corrientes. He did not attack head-on: men went ashore to tow his vessels upstream by hawser, infantry drove the riflemen from the bank, and his left wing anchored within gunshot. Garibaldi sent a burning fireship towards him; Bartolomé Cordero, a twelve-year-old ship's boy, boarded it from a boat and turned it aside.\n\nThe battle lasted two days. On the second, Garibaldi ran out of ammunition, his decks shattered and half his men out of action. Rather than surrender the vessels, he blew them up and struck inland with the survivors. Brown's officers asked leave to pursue; the admiral refused. His dispatch to Rosas called them pirates who plundered without mercy. To his officers, he said something else.\n\nNothing remains of the Republic's squadron. What returns to Montevideo is a man renowned for having held out for two days against the finest sailor on the Río de la Plata, then burned his ships rather than strike his colours — and a body of Italians prepared to follow him."
  gg_naval.3.f:0 "‘Let him escape; that gringo is a brave man.’ — Guillermo Brown"
  gg_naval.3.a:0 "Receive him as the man the city already believes him to be."
- gg_naval.3.a_tt:0 "@information! Costa Brava gives #b Garibaldi#! command of the Italian Legion and brings it one additional battalion."
+ gg_naval.3.a_tt:0 "@information! Costa Brava gives #b Garibaldi#! command of the Italian Legion."
  gg_naval.3.b:0 "A defeat is a defeat: no honours and no promotion."
- gg_naval.3.b_tt:0 "@information! Without public honours, Garibaldi wins neither command nor new recruits: the Italian Legion keeps one battalion. The government earns some credit for not dressing up the defeat: legitimacy #P +2#!."
+ gg_naval.3.b_tt:0 "@information! Without public honours, Garibaldi does not win command of the Italian Legion. The government earns some credit for not dressing up the defeat: legitimacy #P +2#!."
 
  gg_naval_port_under_blockade:0 "The Port under Blockade"
  gg_naval_port_under_blockade_desc:0 "The Confederation's squadron rides at anchor off Montevideo, unchallenged."

@@ -1,0 +1,122 @@
+﻿# EN: THE ARMIES AT THE SPLIT (22/9/2026, decided with Juan, docs/tropas-iniciales-2026-09-22.md).
+#     Replaces the fixed armies both options of guerra_grande.3 used to create. Two things the
+#     old code did not know, verified in Juan's saves of 1/1/1843 and 1/7/1843:
+#     - Units belong to a barracks, and they follow it when the state changes hands. Whoever holds
+#       Montevideo takes the old Republic's battalions there, in either option.
+#     - A battalion with no men yet does not survive that change of owner. With .3.b the Ejercito
+#       de Operaciones (raised in December 1842, still empty) and the 1836 cuirassiers vanished.
+#     So nothing is fixed any more: two days after the split, once the engine has moved or
+#     dropped what it moves or drops, each government is topped up arm by arm to its sourced
+#     target. What was inherited counts; what is missing is raised. Nothing can be removed: there
+#     is no script effect that disbands a formation (checked in the playset mods, the Workshop,
+#     the expansions and the game's own strings), so an inheritance above the target stays.
+#     New battalions are born with no men and fill over the following months; that is the
+#     engine, and no effect sets manpower.
+# ES: LOS EJERCITOS EN EL CORTE. Reemplaza los ejercitos fijos que creaban las dos opciones. Dos
+#     cosas que el codigo viejo no sabia, verificadas en las saves de Juan:
+#     - Las unidades son de un cuartel y lo siguen cuando el estado cambia de dueño. Quien tiene
+#       Montevideo se queda con los batallones de la vieja Republica ahi, en las dos opciones.
+#     - Un batallon todavia sin hombres no sobrevive ese cambio de dueño. Con .3.b desaparecieron el
+#       Ejercito de Operaciones (levantado en diciembre de 1842, vacio) y los coraceros de 1836.
+#     Entonces ya nada es fijo: dos dias despues del corte, cuando el motor ya movio o descarto lo
+#     suyo, cada gobierno se completa arma por arma hasta su objetivo con fuente. Lo heredado cuenta;
+#     lo que falta se levanta. No se puede quitar nada: no hay efecto que disuelva formaciones, asi
+#     que una herencia por encima del objetivo queda. Los batallones nuevos nacen sin hombres y se
+#     llenan en los meses siguientes; es el motor.
+
+gg_troops_split_armies = {
+	# EN/ES: the Cerrito's own army / el ejercito propio del Cerrito
+	c:CER ?= {
+		if = {
+			limit = {
+				gg_troops_missing_total_cer > 0
+				any_scope_state = { state_region = s:STATE_SAN_JOSE }
+			}
+			create_military_formation = {
+				type = army
+				hq_region = sr:region_brazil
+				name = Ejercito_del_Cerrito
+				combat_unit = {
+					type = unit_type:combat_unit_type_line_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = gg_troops_missing_line_cer
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_irregular_infantry
+					state_region = s:STATE_SAN_JOSE
+					count = gg_troops_missing_irregular_cer
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_hussars
+					state_region = s:STATE_SAN_JOSE
+					count = gg_troops_missing_horse_cer
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = s:STATE_SAN_JOSE
+					count = gg_troops_missing_guns_cer
+				}
+			}
+		}
+	}
+	c:URU ?= {
+		if = {
+			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			# EN/ES: Rivera's field army first, so its horse is not counted as the city's / primero el
+			#     ejercito de campaña de Rivera, asi su caballeria no se cuenta como de la ciudad
+			if = {
+				limit = { gg_troops_missing_horse_defensa > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_de_Operaciones
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_horse_defensa
+					}
+				}
+			}
+			if = {
+				limit = { gg_troops_missing_city_defensa > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_line_defensa
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_irregular_defensa
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_guns_defensa
+					}
+				}
+			}
+			# EN: THE ARSENAL. Montevideo had its port and its battery but no naval base, so every
+			#     fleet raised there (the squadron London and Paris lend the Defensa, in
+			#     scripted_effects/gg_rio_plata.txt) was created with no ships: the only naval base of
+			#     the old Republic was at Maldonado, which goes to the Cerrito. The city kept a small
+			#     arsenal and a naval command through the siege.
+			# ES: EL ARSENAL. Montevideo tenia puerto y bateria pero no base naval, asi que toda flota
+			#     levantada ahi (la escuadra que Londres y Paris le prestan a la Defensa) nacia sin barcos:
+			#     la unica base naval de la vieja Republica estaba en Maldonado, que va al Cerrito.
+			s:STATE_MONTEVIDEO.region_state:URU ?= {
+				if = {
+					limit = { NOT = { has_building = building_naval_administration } }
+					create_building = {
+						building = building_naval_administration
+						level = 1
+					}
+				}
+			}
+		}
+	}
+}

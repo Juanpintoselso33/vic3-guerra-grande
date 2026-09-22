@@ -110,26 +110,9 @@ guerra_grande_italian_legion_button = {
 				years = 10
 				is_decaying = yes
 			}
-			# EN/ES: FN-3 -- with Costa Brava behind him the legion musters a battalion of its own
-			#     / con Costa Brava atras, la legion forma su propio batallon
-			if = {
-				limit = { has_global_variable = gg_garibaldi_famous }
-				gg_select_formation_hq_state = yes
-				# EN: Without an owned state there is no valid HQ; skip this formation.
-				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-				if = {
-					limit = { exists = scope:gg_formation_hq_state }
-					create_military_formation = {
-						type = army
-						hq_region = scope:gg_formation_hq_state.region
-						combat_unit = {
-							type = unit_type:combat_unit_type_line_infantry
-							state_region = s:STATE_MONTEVIDEO
-							count = 1
-						}
-					}
-				}
-			}
+			# EN/ES: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- always one battalion: the one
+			#     guerra_grande.5 raises. Costa Brava gives Garibaldi the command, not more men
+			#     / siempre un batallon, el de guerra_grande.5; Costa Brava da el mando, no mas hombres
 			trigger_event = { id = guerra_grande.5 popup = yes }
 		}
 		else = {

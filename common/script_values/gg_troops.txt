@@ -1,0 +1,153 @@
+﻿# EN: THE ARMIES AT THE SPLIT (22/9/2026, decided with Juan, docs/tropas-iniciales-2026-09-22.md).
+#     Battalions of each arm a country already has, in all its armies. The top-up after the split
+#     (gg_troops_split_armies) creates only what is missing up to the sourced target, so options
+#     .3.a and .3.b of guerra_grande.3 end the same whichever side kept the old country object and
+#     whatever the engine dropped on the way. The same iteration vanilla uses in
+#     at_strength_battalions (common/script_values/je_values.txt).
+# ES: LOS EJERCITOS EN EL CORTE. Batallones de cada arma que un pais ya tiene, en todos sus
+#     ejercitos. El completado despues del corte crea solo lo que falta hasta el objetivo con fuente,
+#     asi las opciones .3.a y .3.b terminan igual, sea quien sea el que se quedo con el pais viejo y
+#     pierda lo que pierda el motor en el camino.
+
+gg_troops_count_line = {
+	value = 0
+	every_military_formation = {
+		limit = { is_army = yes }
+		every_combat_unit = {
+			# EN/ES: line infantry and what it modernises into / la infanteria de linea y en lo que se moderniza
+			limit = {
+				OR = {
+					has_unit_type = unit_type:combat_unit_type_line_infantry
+					has_unit_type = unit_type:combat_unit_type_skirmish_infantry
+					has_unit_type = unit_type:combat_unit_type_trench_infantry
+					has_unit_type = unit_type:combat_unit_type_squad_infantry
+					has_unit_type = unit_type:combat_unit_type_mechanized_infantry
+				}
+			}
+			add = 1
+		}
+	}
+}
+
+gg_troops_count_irregular = {
+	value = 0
+	every_military_formation = {
+		limit = { is_army = yes }
+		every_combat_unit = {
+			limit = { has_unit_type = unit_type:combat_unit_type_irregular_infantry }
+			add = 1
+		}
+	}
+}
+
+# EN/ES: every mounted arm counts as horse / toda arma montada cuenta como caballeria
+gg_troops_count_horse = {
+	value = 0
+	every_military_formation = {
+		limit = { is_army = yes }
+		every_combat_unit = {
+			limit = {
+				OR = {
+					has_unit_type = unit_type:combat_unit_type_hussars
+					has_unit_type = unit_type:combat_unit_type_cuirassiers
+					has_unit_type = unit_type:combat_unit_type_lancers
+					has_unit_type = unit_type:combat_unit_type_dragoons
+				}
+			}
+			add = 1
+		}
+	}
+}
+
+gg_troops_count_guns = {
+	value = 0
+	every_military_formation = {
+		limit = { is_army = yes }
+		every_combat_unit = {
+			limit = {
+				OR = {
+					has_unit_type = unit_type:combat_unit_type_cannon_artillery
+					has_unit_type = unit_type:combat_unit_type_mobile_artillery
+					has_unit_type = unit_type:combat_unit_type_shrapnel_artillery
+					has_unit_type = unit_type:combat_unit_type_siege_artillery
+				}
+			}
+			add = 1
+		}
+	}
+}
+
+# EN: THE TARGETS. The Cerrito's own army: 2 line + 1 irregular + 4 horse + 1 gun (8 bn ~ 8,000
+#     men; one more squadron with a blanco lead of 4). Its infantry for the siege is Rosas's
+#     Vanguardia, which comes apart. The Defensa in the city: 2 line (the libertos) + 1 irregular
+#     (the Guardia Nacional) + 1 gun. Rivera's field army, if the government raised it
+#     (gg_rivera.1.a): 4 horse. Sources: SOURCES_order_of_battle.md sections 2-4.
+# ES: LOS OBJETIVOS. El ejercito propio del Cerrito: 2 de linea + 1 irregular + 4 de caballeria + 1
+#     de artilleria (8 bn ~ 8.000 hombres; un escuadron mas con ventaja blanca de 4). Su infanteria
+#     de sitio es la Vanguardia de Rosas, que viene aparte. La Defensa en la ciudad: 2 de linea (los
+#     libertos) + 1 irregular (la Guardia Nacional) + 1 de artilleria. El ejercito de campaña de
+#     Rivera, si el gobierno lo levanto (gg_rivera.1.a): 4 de caballeria.
+
+gg_troops_missing_line_cer = {
+	value = 2
+	subtract = gg_troops_count_line
+	min = 0
+}
+gg_troops_missing_irregular_cer = {
+	value = 1
+	subtract = gg_troops_count_irregular
+	min = 0
+}
+gg_troops_missing_horse_cer = {
+	value = 4
+	if = {
+		limit = { guerra_grande_blanco_lead >= 4 }
+		value = 5
+	}
+	subtract = gg_troops_count_horse
+	min = 0
+}
+gg_troops_missing_guns_cer = {
+	value = 1
+	subtract = gg_troops_count_guns
+	min = 0
+}
+
+gg_troops_missing_line_defensa = {
+	value = 2
+	subtract = gg_troops_count_line
+	min = 0
+}
+gg_troops_missing_irregular_defensa = {
+	value = 1
+	subtract = gg_troops_count_irregular
+	min = 0
+}
+gg_troops_missing_guns_defensa = {
+	value = 1
+	subtract = gg_troops_count_guns
+	min = 0
+}
+gg_troops_missing_horse_defensa = {
+	value = 0
+	if = {
+		limit = { has_global_variable = gg_rivera_reinforced }
+		value = 4
+	}
+	subtract = gg_troops_count_horse
+	min = 0
+}
+
+# EN/ES: what a top-up formation will hold, to skip creating an empty one / lo que va a tener una
+#     formacion de completado, para no crear una vacia
+gg_troops_missing_city_defensa = {
+	value = gg_troops_missing_line_defensa
+	add = gg_troops_missing_irregular_defensa
+	add = gg_troops_missing_guns_defensa
+}
+gg_troops_missing_total_cer = {
+	value = gg_troops_missing_line_cer
+	add = gg_troops_missing_irregular_cer
+	add = gg_troops_missing_horse_cer
+	add = gg_troops_missing_guns_cer
+}

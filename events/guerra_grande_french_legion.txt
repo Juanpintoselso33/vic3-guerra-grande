@@ -71,13 +71,22 @@ gg_legion.1 = {
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 		if = {
 			limit = { exists = scope:gg_formation_hq_state }
+			# EN/ES: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- the legion as it stood in May
+			#     1843, 2,904 men: two battalions and a battery, as when it is raised by event
+			#     (gg_contingent.4) / la legion de mayo de 1843, 2.904 hombres: dos batallones y una bateria
 			create_military_formation = {
 				type = army
+				name = Legion_Francesa
 				hq_region = scope:gg_formation_hq_state.region
 				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
+					type = unit_type:combat_unit_type_line_infantry
 					state_region = s:STATE_MONTEVIDEO
-					count = 4
+					count = 2
+				}
+				combat_unit = {
+					type = unit_type:combat_unit_type_cannon_artillery
+					state_region = s:STATE_MONTEVIDEO
+					count = 1
 				}
 			}
 		}
@@ -103,13 +112,16 @@ gg_legion.1 = {
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 		if = {
 			limit = { exists = scope:gg_formation_hq_state }
+			# EN/ES: 22/9/2026 -- one battalion fewer than under their own colours: the men who wanted to
+			#     stay French went to the consul / un batallon menos que con bandera propia: los que
+			#     querian seguir siendo franceses se fueron al consulado
 			create_military_formation = {
 				type = army
 				hq_region = scope:gg_formation_hq_state.region
 				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
+					type = unit_type:combat_unit_type_line_infantry
 					state_region = s:STATE_MONTEVIDEO
-					count = 3
+					count = 2
 				}
 			}
 		}
