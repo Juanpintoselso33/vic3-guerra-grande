@@ -13,6 +13,13 @@ flowcontainer = {
  name = "gg_plata_situation"
  direction = vertical parentanchor = hcenter spacing = 10 ignoreinvisible = yes
  widget = { size = { 520 8 } }
+ # EN/ES: header -- "New Chart of the River Plate", E. & G. W. Blunt, New York 1840 (public domain,
+ #     Gallica btv1b53098736b via Commons) / cabecera: la carta del Rio de la Plata de Blunt, 1840
+ icon = {
+  size = { 520 190 }
+  parentanchor = hcenter
+  texture = "gfx/interface/gg_situations/plata_header.dds"
+ }
  textbox = {
   visible = "[GetScriptedGui('gg_ui_plata_role_involved').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
   autoresize = yes multiline = yes
