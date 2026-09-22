@@ -2,32 +2,38 @@
 #     countries created later must be added explicitly, and dead tags must be removed.
 # ES: Scope journal. should_be_involved solo inicia la membresia al abrir una entrada sin contexto;
 #     los paises creados despues deben agregarse y los tags desaparecidos deben quitarse.
+# EN: S04 (reopened by the July 1846 save): saving the root as the journal left gg_pact_journal
+#     undefined -- a weekly pulse has no country root -- so the Pact never took in Corrientes.
+#     The journal comes from scope:journal_entry, as in gg_international_sync (which works in play).
+# ES: S04: guardar el root como journal dejaba gg_pact_journal indefinido (el pulso no tiene pais
+#     raiz) y el Pacto nunca sumo a Corrientes. El journal sale de scope:journal_entry, como en
+#     gg_international_sync, que en partida funciona.
 gg_pact_sync = {
-	save_scope_as = gg_pact_journal
-	every_scope_je_involved = {
-		limit = {
-			NOT = {
+	scope:journal_entry ?= {
+		every_scope_je_involved = {
+			limit = {
+				NOT = {
+					OR = {
+						has_variable = gg_arg_rosas_seat
+						c:CRR ?= this
+						c:CLN ?= this
+						c:ENR ?= this
+					}
+				}
+			}
+			scope:journal_entry = { remove_involved_country = prev }
+		}
+		every_country = {
+			limit = {
 				OR = {
 					has_variable = gg_arg_rosas_seat
 					c:CRR ?= this
 					c:CLN ?= this
 					c:ENR ?= this
 				}
+				NOT = { is_involved_in_journal_entry = je_gg_delegation }
 			}
+			scope:journal_entry = { add_involved_country = prev }
 		}
-		scope:gg_pact_journal = { remove_involved_country = prev }
 	}
-	every_country = {
-		limit = {
-			OR = {
-				has_variable = gg_arg_rosas_seat
-				c:CRR ?= this
-				c:CLN ?= this
-				c:ENR ?= this
-			}
-			NOT = { is_involved_in_journal_entry = je_gg_delegation }
-		}
-		scope:gg_pact_journal = { add_involved_country = prev }
-	}
-	clear_saved_scope = gg_pact_journal
 }

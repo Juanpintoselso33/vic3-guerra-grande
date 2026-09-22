@@ -21,7 +21,7 @@ gg_pact_resolve = {
 			set_global_variable = gg_pact_settlement_rosas
 			if = {
 				limit = { has_global_variable = gg_delegation_gone_entre_rios }
-				gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
+				gg_delegation_restored = { KEY = entre_rios COUNT = 1 }
 			}
 			trigger_event = { id = gg_argentina.84 days = 0 popup = yes }
 		}

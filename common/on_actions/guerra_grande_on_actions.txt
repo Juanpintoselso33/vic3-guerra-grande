@@ -317,9 +317,13 @@ on_empty_battle_won = {
 guerra_grande_battle_score = {
 	trigger = {
 		has_global_variable = guerra_grande_open_war
-		has_journal_entry = je_guerra_grande
-		scope:enemy_country ?= {
-			has_journal_entry = je_guerra_grande
+		# EN: S19 -- the two sides by who they are, not by journal membership (which the Cerrito
+		#     lacked for the whole siege): URU against CER, whichever way round.
+		# ES: S19 -- los dos bandos por quienes son, no por pertenecer al journal (que al Cerrito le
+		#     falto todo el sitio): URU contra CER, en cualquier orden.
+		OR = {
+			AND = { c:URU ?= this scope:enemy_country ?= { c:CER ?= this } }
+			AND = { c:CER ?= this scope:enemy_country ?= { c:URU ?= this } }
 		}
 	}
 

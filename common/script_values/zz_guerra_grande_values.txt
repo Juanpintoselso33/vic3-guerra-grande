@@ -143,23 +143,6 @@ gg_exhaustion_gap = {
 	subtract = global_var:gg_cerrito_exhausted
 }
 
-# EN: THE DELEGATION BAR. Thirteen provinces delegate; twelve internal points make one of them. The
-#     bar divides and shows the result WITHOUT flooring: 8.4 delegations is exactly what we want to
-#     see, because flooring would hide eleven months of wear and make the bar jump once a year --
-#     which would tell the player that holding Oribe costs nothing until suddenly it costs a
-#     province. It is the opposite of what the mechanic is about.
-# ES: LA BARRA DE LA DELEGACION. Trece provincias delegan; doce puntos internos hacen una. La barra
-#     divide y muestra el resultado SIN redondear para abajo: 8,4 delegaciones es exactamente lo que
-#     queremos ver, porque redondear escondería once meses de desgaste y haría que la barra saltara
-#     una vez por año -- le diría al jugador que sostener a Oribe no cuesta nada hasta que de golpe
-#     cuesta una provincia. Es lo contrario de lo que trata la mecánica.
-gg_delegation_bar_value = {
-	value = global_var:gg_delegation_points
-	divide = 12
-	min = 0
-	max = 13
-}
-
 # EN: what is left of the Ejercito Unido de Vanguardia when it crosses, read from how the interior
 #     campaign ended. Five battalions if Rosas had the interior quiet, three if it cost him.
 # ES: lo que queda del Ejercito Unido de Vanguardia cuando cruza, leido de como termino la campania

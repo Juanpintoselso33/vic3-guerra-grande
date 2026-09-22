@@ -120,7 +120,7 @@ je_gg_delegation = {
 						}
 						has_global_variable = gg_delegation_gone_corrientes
 					}
-					gg_delegation_restored = { KEY = corrientes COUNT = 1 POINTS = 12 }
+					gg_delegation_restored = { KEY = corrientes COUNT = 1 }
 					set_global_variable = { name = gg_corrientes_recovery days = 730 }
 					if = {
 						limit = { c:CRR ?= { is_subject_of = c:ARG } }
@@ -136,14 +136,20 @@ je_gg_delegation = {
 						OR = {
 							# EN/ES: la misma regla que arriba: o ya no esta y la tiene Buenos Aires, o volvio al
 							#     pacto como protectorado / same rule as above
+							# EN: S16 -- "has a state in", not "owns the entire": Jujuy and Salta are shared
+							#     with Bolivia from 1836, so the entire region never came back and the six
+							#     stayed withdrawn for good after the Coalition fell in 1841.
+							# ES: S16 -- "tiene un estado en", no "tiene la region entera": Jujuy y Salta
+							#     se comparten con Bolivia desde 1836, asi que la region entera nunca volvia
+							#     y las seis quedaban retiradas para siempre despues de caer la Coalicion.
 							AND = {
 								NOT = { exists = c:CLN }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } owns_entire_state_region = STATE_TUCUMAN }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_salta } owns_entire_state_region = STATE_SALTA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_jujuy } owns_entire_state_region = STATE_JUJUY }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_catamarca } owns_entire_state_region = STATE_CATAMARCA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } owns_entire_state_region = STATE_LA_RIOJA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_cordoba } owns_entire_state_region = STATE_CORDOBA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } has_state_in_state_region = STATE_TUCUMAN }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_salta } has_state_in_state_region = STATE_SALTA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_jujuy } has_state_in_state_region = STATE_JUJUY }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_catamarca } has_state_in_state_region = STATE_CATAMARCA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } has_state_in_state_region = STATE_LA_RIOJA }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_cordoba } has_state_in_state_region = STATE_CORDOBA }
 							}
 							c:CLN ?= { is_subject_of = c:ARG }
 						}
@@ -154,12 +160,12 @@ je_gg_delegation = {
 						trigger_event = { id = gg_argentina.53 days = 0 popup = yes }
 					}
 					else = { trigger_event = { id = gg_argentina.54 days = 0 popup = yes } }
-					gg_delegation_restored = { KEY = coalicion_tucuman COUNT = 1 POINTS = 12 }
-					gg_delegation_restored = { KEY = coalicion_salta COUNT = 1 POINTS = 12 }
-					gg_delegation_restored = { KEY = coalicion_jujuy COUNT = 1 POINTS = 12 }
-					gg_delegation_restored = { KEY = coalicion_catamarca COUNT = 1 POINTS = 12 }
-					gg_delegation_restored = { KEY = coalicion_la_rioja COUNT = 1 POINTS = 12 }
-					gg_delegation_restored = { KEY = cordoba COUNT = 1 POINTS = 12 }
+					gg_delegation_restored = { KEY = coalicion_tucuman COUNT = 1 }
+					gg_delegation_restored = { KEY = coalicion_salta COUNT = 1 }
+					gg_delegation_restored = { KEY = coalicion_jujuy COUNT = 1 }
+					gg_delegation_restored = { KEY = coalicion_catamarca COUNT = 1 }
+					gg_delegation_restored = { KEY = coalicion_la_rioja COUNT = 1 }
+					gg_delegation_restored = { KEY = cordoba COUNT = 1 }
 				}
 				if = {
 					limit = {
@@ -175,7 +181,7 @@ je_gg_delegation = {
 						}
 						has_global_variable = gg_delegation_gone_entre_rios
 					}
-					gg_delegation_restored = { KEY = entre_rios COUNT = 1 POINTS = 12 }
+					gg_delegation_restored = { KEY = entre_rios COUNT = 1 }
 					if = {
 						limit = { c:ENR ?= { is_subject_of = c:ARG } }
 						trigger_event = { id = gg_argentina.55 days = 0 popup = yes }
@@ -221,24 +227,10 @@ je_gg_delegation = {
 		}
 	}
 
-	# EN: ONE AUTHORITY, AND IT IS THE POINTS. This used to complete on gg_delegating_provinces while
-	#     the monthly wear only moved gg_delegation_points, so the two could disagree: the bar could
-	#     read zero, the text still say seven provinces delegate, the journal never close, and the
-	#     points keep falling past -13, -14, -100 with nothing watching. That is not a rounding
-	#     difference, it is two clocks telling different times to the same player.
-	#     The points govern the bar, the text and the ending. The province count stays as what it is
-	#     -- the discrete number of legislatures that have formally withdrawn -- and it is still what
-	#     the status line names, because "eight and a half provinces delegate" is not a sentence
-	#     anybody would say.
-	# ES: UNA SOLA AUTORIDAD, Y SON LOS PUNTOS. Esto cerraba con gg_delegating_provinces mientras el
-	#     desgaste mensual solo movia gg_delegation_points, asi que los dos podian discrepar: la barra
-	#     podia marcar cero, el texto seguir diciendo que delegan siete provincias, el journal no
-	#     cerrar nunca, y los puntos seguir bajando a -13, -14, -100 sin que nadie mirara. No es una
-	#     diferencia de redondeo: son dos relojes dandole la hora distinta al mismo jugador.
-	#     Los puntos gobiernan la barra, el texto y el final. La cuenta de provincias queda como lo
-	#     que es -- el numero discreto de legislaturas que retiraron formalmente la delegacion -- y
-	#     sigue siendo lo que nombra la linea de estado, porque "delegan ocho provincias y media" no
-	#     es una frase que diria nadie.
+	# EN: ONE AUTHORITY: the count of provinces that delegate (the internal points and their bar were
+	#     retired on 20-22/9/2026; the journal lists the thirteen one by one).
+	# ES: UNA SOLA AUTORIDAD: la cuenta de provincias que delegan (los puntos internos y su barra se
+	#     retiraron el 20-22/9/2026; el journal lista las trece una por una).
 	complete = {
 		custom_tooltip = {
 			text = je_gg_delegation_complete_tt

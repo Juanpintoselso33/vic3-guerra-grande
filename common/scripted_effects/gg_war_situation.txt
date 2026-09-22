@@ -79,3 +79,25 @@ gg_war_phase_effects = {
 		}
 	}
 }
+
+# EN: S19 (audit of July 1846): the main war journal is opened in 1836 with Uruguay alone and never
+#     learned about the Cerrito, so battles after the split never scored. Same pattern as the
+#     River Plate's gg_international_sync, which does hold both governments.
+# ES: S19: el journal de la guerra se abre en 1836 solo con el Uruguay y nunca se entero del Cerrito,
+#     asi que las batallas despues de la particion no puntuaban. Mismo patron que gg_international_sync.
+gg_war_journal_sync = {
+	scope:journal_entry ?= {
+		every_country = {
+			limit = {
+				OR = {
+					c:URU ?= this
+					c:CER ?= this
+					has_variable = guerra_grande_cerrito_government
+					has_variable = guerra_grande_defensa_government
+				}
+				NOT = { is_involved_in_journal_entry = je_guerra_grande }
+			}
+			scope:journal_entry = { add_involved_country = prev }
+		}
+	}
+}

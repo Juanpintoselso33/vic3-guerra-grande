@@ -358,6 +358,11 @@ je_guerra_grande = {
 	#     esta cansada y alcanza la mitad de la ventaja.
 	on_weekly_pulse = {
 		effect = {
+			# EN: S19 -- should_be_involved only seeds the entry at activation (1836, before the Cerrito
+			#     existed): both governments are added explicitly, every week, which also migrates saves.
+			# ES: S19 -- should_be_involved solo siembra la entrada al abrirse (1836, antes del Cerrito):
+			#     los dos gobiernos se agregan a mano cada semana, lo que tambien migra las partidas.
+			gg_war_journal_sync = yes
 			gg_ui_prewar_leaders_sync = yes
 			if = {
 				limit = {

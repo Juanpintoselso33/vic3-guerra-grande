@@ -356,7 +356,7 @@ gg_argentina.4 = {
 			limit = { exists = s:STATE_CORDOBA.region_state:ARG }
 			s:STATE_CORDOBA.region_state:ARG = { set_state_owner = c:CLN }
 			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
-			gg_delegation_revoked = { KEY = cordoba COUNT = -1 POINTS = -12 }
+			gg_delegation_revoked = { KEY = cordoba COUNT = -1 }
 		}
 		# EN/ES: y recien ahora marcha el ejercito: seis provincias con el camino del interior adentro
 		#     son otra cosa que cinco arrinconadas contra la cordillera / and only now does the army march
@@ -1474,9 +1474,15 @@ gg_argentina.20 = {
 			# EN/ES: el interior sigue en armas: el ejercito no puede irse a otra guerra
 			#     / the interior is still in arms: the army cannot leave for another war
 			limit = {
+				# EN: S18 -- in arms means independent of Buenos Aires, not merely alive: Corrientes
+				#     brought back as a protectorate in 1839 still exists, and counting it blocked the
+				#     crossing of 1843.
+				# ES: S18 -- en armas quiere decir independiente de Buenos Aires, no solo vivo: la
+				#     Corrientes devuelta como protectorado en 1839 sigue existiendo, y contarla bloqueaba
+				#     el cruce de 1843.
 				OR = {
-					exists = c:CRR
-					exists = c:CLN
+					c:CRR ?= { NOT = { is_subject_of = c:ARG } }
+					c:CLN ?= { NOT = { is_subject_of = c:ARG } }
 				}
 			}
 			set_global_variable = { name = gg_interior_outcome value = 3 }
@@ -1506,10 +1512,9 @@ gg_argentina.20 = {
 			set_global_variable = { name = gg_interior_outcome value = 2 }
 			set_global_variable = { name = gg_vanguardia_status value = 2 }
 		}
-		if = {
-			limit = { NOT = { global_var:gg_vanguardia_status = 3 } }
-			c:ARG ?= { trigger_event = { id = gg_argentina.21 days = 0 popup = yes } }
-		}
+		# EN/ES: S18 -- the news comes in all three outcomes; held back, it says so
+		#     / la noticia llega en los tres resultados; si la Vanguardia se queda, lo dice
+		c:ARG ?= { trigger_event = { id = gg_argentina.21 days = 0 popup = yes } }
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_8 } }
@@ -1535,8 +1540,24 @@ gg_argentina.21 = {
 	type = country_event
 	placement = ROOT
 
-	title = gg_argentina.21.t
-	desc = gg_argentina.21.d
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { global_var:gg_vanguardia_status = 3 }
+				desc = gg_argentina.21.t_held
+			}
+			desc = gg_argentina.21.t
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { global_var:gg_vanguardia_status = 3 }
+				desc = gg_argentina.21.d_held
+			}
+			desc = gg_argentina.21.d
+		}
+	}
 	flavor = gg_argentina.21.f
 
 	event_image = { video = "gg_arg_vanguardia" }
@@ -1547,6 +1568,7 @@ gg_argentina.21 = {
 
 	option = {
 		name = gg_argentina.21.a
+		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_cruce_total_tt
 		default_option = yes
 		set_global_variable = { name = gg_vanguardia_cruce value = 1 }
@@ -1555,6 +1577,7 @@ gg_argentina.21 = {
 
 	option = {
 		name = gg_argentina.21.b
+		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_reserva_litoral_tt
 		set_global_variable = { name = gg_vanguardia_cruce value = 2 }
 		gg_select_formation_hq_state = yes
@@ -1583,9 +1606,19 @@ gg_argentina.21 = {
 
 	option = {
 		name = gg_argentina.21.c
+		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_cruce_postergado_tt
 		set_global_variable = { name = gg_vanguardia_cruce value = 3 }
 		ai_chance = { base = 10 }
+	}
+
+	# EN/ES: S18 -- the interior is still in arms: the Vanguard stays / el interior sigue en armas
+	option = {
+		name = gg_argentina.21.e
+		trigger = { global_var:gg_vanguardia_status = 3 }
+		default_option = yes
+		custom_tooltip = gg_vanguardia_held_tt
+		ai_chance = { base = 100 }
 	}
 }
 

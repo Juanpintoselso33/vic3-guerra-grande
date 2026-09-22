@@ -101,34 +101,23 @@ gg_systems_init = {
 	#     1840 ("withdrawing from him the delegation of foreign relations") and what Entre Rios did on
 	#     1 May 1851 -- the Convention of 29 May says Entre Rios, "habiendo reasumido" the faculty
 	#     granted to the governor of Buenos Aires.
-	#     So the bar counts HOW MANY PROVINCES STILL DELEGATE. It is not popularity: it is facts. If
+	#     So the Pact counts HOW MANY PROVINCES STILL DELEGATE. It is not popularity: it is facts. If
 	#     it reaches zero, Rosas has nothing left to be.
 	#     THIRTEEN, AND WHY. The Confederation was fourteen provinces; thirteen of them delegated,
 	#     because the fourteenth is Buenos Aires, which cannot delegate to itself. Every one of the
 	#     thirteen exists as a state on this map.
-	#     TWELVE POINTS PER PROVINCE, AND WHY. Holding Oribe in front of Montevideo costs Rosas a
-	#     little every month, and a month is not a province. Twelve internal points to the province
-	#     lets a month cost one point without a single decimal -- integers all the way down, which is
-	#     what this engine is comfortable with -- and the bar simply divides by twelve. A province
-	#     lost is -12; a month of siege is -1.
 	# ES: LA DELEGACION REVOCABLE, el corazon del lado argentino. El poder de Rosas sobre las demas
 	#     provincias nunca fue soberania: era una DELEGACION de las relaciones exteriores que cada
 	#     legislatura podia retirar, y retirarla es literalmente lo que hizo Tucuman el 7/4/1840 ("le
 	#     retiraba la delegacion de las relaciones exteriores") y lo que hizo Entre Rios el 1/5/1851
 	#     -- la Convencion del 29 de mayo dice que Entre Rios, "habiendo reasumido" la facultad
 	#     concedida al gobernador de Buenos Aires.
-	#     Asi que la barra cuenta CUANTAS PROVINCIAS SIGUEN DELEGANDO. No es popularidad: son hechos.
+	#     Asi que el Pacto cuenta CUANTAS PROVINCIAS SIGUEN DELEGANDO. No es popularidad: son hechos.
 	#     Si llega a cero, a Rosas no le queda de que ser.
 	#     TRECE, Y POR QUE. La Confederacion eran catorce provincias; delegaban trece, porque la
 	#     catorceava es Buenos Aires, que no puede delegar en si misma. Las trece existen como estado
 	#     en este mapa.
-	#     DOCE PUNTOS POR PROVINCIA, Y POR QUE. Sostener a Oribe frente a Montevideo le cuesta a Rosas
-	#     un poco cada mes, y un mes no es una provincia. Doce puntos internos por provincia dejan que
-	#     un mes cueste un punto sin un solo decimal -- enteros de punta a punta, que es con lo que
-	#     este motor se lleva bien -- y la barra divide por doce. Una provincia perdida son -12; un
-	#     mes de sitio, -1.
 	set_global_variable = { name = gg_delegating_provinces value = 13 }
-	set_global_variable = { name = gg_delegation_points value = 156 }
 	set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
 	set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
 	set_global_variable = { name = gg_pact_war_white_peace value = 0 }
@@ -1159,21 +1148,21 @@ gg_argentina_vassals_settle = {
 			if = {
 				limit = { is_subject_of = c:ARG }
 				make_independent = yes
-				gg_delegation_revoked = { KEY = corrientes COUNT = -1 POINTS = -12 }
+				gg_delegation_revoked = { KEY = corrientes COUNT = -1 }
 			}
 		}
 		c:CLN ?= {
 			if = {
 				limit = { is_subject_of = c:ARG }
 				make_independent = yes
-				gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 POINTS = -12 }
+				gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 }
 			}
 		}
 		c:ENR ?= {
 			if = {
 				limit = { is_subject_of = c:ARG }
 				make_independent = yes
-				gg_delegation_revoked = { KEY = entre_rios COUNT = -1 POINTS = -12 }
+				gg_delegation_revoked = { KEY = entre_rios COUNT = -1 }
 			}
 		}
 		c:ARG ?= { trigger_event = { id = gg_argentina.81 days = 2 popup = yes } }
@@ -1355,42 +1344,8 @@ gg_peace_fight_on = {
 	add_radicals = { value = small_radicals }
 }
 
-# -------------------------------------------------------------------------------------------------
-# EN: THE ONLY WRITERS OF THE DELEGATION. Everything that moves it goes through here, the same way
-#     every patron change goes through gg_patron_change, so the invariant check can prove nobody
-#     writes it anywhere else.
-#     DELTA is in internal points: 12 is one whole provincial delegation, 1 is one month of siege.
-# ES: LOS UNICOS QUE ESCRIBEN LA DELEGACION. Todo lo que la mueve pasa por aca, igual que todo cambio
-#     de padrino pasa por gg_patron_change, asi el chequeo de invariantes puede probar que nadie la
-#     escribe en otro lado.
-#     DELTA va en puntos internos: 12 es una delegacion provincial entera, 1 es un mes de sitio.
-# -------------------------------------------------------------------------------------------------
-gg_delegation_change = {
-	# EN: THE POINTS ARE GONE AND THIS IS WHAT IS LEFT OF THEM. Until 20/9/2026 the delegation was a
-	#     count of 156 -- thirteen provinces times twelve -- and this effect moved it and redrew a bar.
-	#     The bar mixed the provinces with the monthly wear of the siege, so it fell while nothing had
-	#     happened on the map, and Juan could not read it: «no se entiende un carajo». The provinces
-	#     are now thirteen marks and the journal prints them one by one.
-	#     The effect stays because thirteen call sites pass POINTS to it and because the rule of this
-	#     mod is that no global changes in silence: what it keeps is the number nobody has to
-	#     interpret -- how many provinces delegate -- which the list above it now shows one by one.
-	#     There is no bar left to redraw.
-	# ES: LOS PUNTOS SE FUERON Y ESTO ES LO QUE QUEDO DE ELLOS. Hasta el 20/9/2026 la delegacion era
-	#     una cuenta de 156 -- trece provincias por doce -- y este efecto la movia y redibujaba una
-	#     barra. La barra mezclaba las provincias con el desgaste mensual del sitio, asi que bajaba sin
-	#     que hubiera pasado nada en el mapa, y Juan no podia leerla: «no se entiende un carajo». Las
-	#     provincias ahora son trece marcas y el journal las imprime una por una.
-	#     El efecto se queda porque trece lugares le pasan POINTS y porque la regla de este mod es que
-	#     ninguna global cambia en silencio: lo que conserva es el numero que nadie tiene que
-	#     interpretar --cuantas provincias delegan-- que la lista de arriba ahora muestra una por una.
-	#     Ya no hay barra que redibujar.
-	change_global_variable = {
-		name = gg_delegation_points
-		add = $DELTA$
-	}
-}
 
-# EN/ES: a named province (or bloc) stops delegating, once and once only. COUNT y POINTS negativos.
+# EN/ES: a named province (or bloc) stops delegating, once and once only. COUNT negativo.
 # -------------------------------------------------------------------------------------------------
 # EN: A CLAIM OPENED, AND A CLAIM ANSWERED. Written 20/9/2026, and the reason is Juan's, playing:
 #     «los eventos de la previa son todos para corrientes! y no estan conectadas a la mecanica del
@@ -1451,7 +1406,6 @@ gg_delegation_revoked = {
 			name = gg_delegating_provinces
 			add = $COUNT$
 		}
-		gg_delegation_change = { DELTA = $POINTS$ }
 	}
 	# EN: AND THE COUNT THAT NEVER GOES BACK DOWN, added 20 September 2026 after Codex's integral
 	#     review. The delegation bar is a photograph of today: a province that left and was taken
@@ -1485,7 +1439,7 @@ gg_delegation_revoked = {
 	}
 }
 
-# EN/ES: y vuelve a delegar, recuperada por las armas. COUNT y POINTS positivos.
+# EN/ES: y vuelve a delegar, recuperada por las armas. COUNT positivo.
 gg_delegation_restored = {
 	if = {
 		limit = { has_global_variable = gg_delegation_gone_$KEY$ }
@@ -1494,6 +1448,5 @@ gg_delegation_restored = {
 			name = gg_delegating_provinces
 			add = $COUNT$
 		}
-		gg_delegation_change = { DELTA = $POINTS$ }
 	}
 }
