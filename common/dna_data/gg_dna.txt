@@ -4,12 +4,18 @@
 #     parecido y ajustadas a su retrato mas conocido (fuentes: SOURCES_retratos.md).
 
 # Verazzi (1874, postumo): pelo oscuro, patillas cortas, afeitado. Base: vanilla dna_andres_de_santa_cruz.
+# EN/ES: 22/9/2026 -- Rivera from Rugendas (1846), Blanes (c.1870) and Verazzi (1874): clean-shaven with
+#     short sideburns (beards 167 = male_beard_european_11, the middle of its range; 177 sat on the edge
+#     with european_12, a jaw beard), no moustache, dark forelock combed forward (european_03), heavy
+#     lids; skin darkened from 144 (Santa Cruz) to 156 towards Maceo/Juarez: "el Pardejon".
+#     / Rivera segun Rugendas, Blanes y Verazzi: afeitado con patillas cortas, sin bigote, jopo oscuro
+#     hacia adelante, parpados caidos; tez oscurecida: "el Pardejon"
 dna_gg_fructuoso_rivera = {
     portrait_info = {
 
      genes={
           hair_color={ 35 242 35 242 }
-          skin_color={ 144 127 144 127 }
+          skin_color={ 156 127 156 127 }
           eye_color={ 89 245 89 245 }
           gene_cheek_fat={ "cheek_fat" 127 "cheek_fat" 127 }
           gene_cheek_forward={ "cheek_forward" 112 "cheek_forward" 127 }
@@ -109,7 +115,7 @@ dna_gg_fructuoso_rivera = {
           gene_eyebrows_shape={ "avg_spacing_high_thickness" 210 "avg_spacing_high_thickness" 210 }
           gene_eyebrows_fullness={ "layer_2_high_thickness" 178 "layer_2_high_thickness" 178 }
           hairstyles={ "european_hairstyles" 29 "european_hairstyles" 29 }
-          beards={ "european_beards" 177 "no_beard" 194 }
+          beards={ "european_beards" 167 "no_beard" 194 }
           mustaches={ "european_mustaches" 5 "european_mustaches" 5 }
           props={ "no_prop" 0 "no_prop" 0 }
           eye_accessory={ "normal_eyes" 0 "normal_eyes" 0 }
