@@ -225,8 +225,13 @@ gg_plata_monthly = {
 		set_strategy = gg_ai_strategy_plata_defensa
 	}
 
+	# EN/ES: 22/9/2026 -- nor during the two months a human Rosas has to open his shore after yielding:
+	#     that closure is a promise pending, not a blockade / ni durante los dos meses de gracia
 	if = {
-		limit = { NOT = { has_global_variable = gg_truce } }
+		limit = {
+			NOT = { has_global_variable = gg_truce }
+			NOT = { has_global_variable = gg_plata_guarantee_grace }
+		}
 		if = {
 			limit = { gg_plata_closed = yes }
 			if = {

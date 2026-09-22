@@ -12,8 +12,9 @@ gg_ui_plata_right_defensa = {
 		OR = {
 			gg_plata_phase < 2
 			gg_plata_phase = 4
-			# EN/ES: a French intervention alone has no British envoy / sin enviado britanico
-			has_global_variable = gg_plata_france_alone
+			# EN/ES: once London has recognised the right of blockade (Southern, with or without a war) there
+			#     is no British envoy / con Londres ya fuera, no hay enviado britanico
+			has_global_variable = gg_plata_britain_recognizes
 		}
 		OR = {
 			has_variable = guerra_grande_defensa_government
@@ -30,7 +31,7 @@ gg_ui_plata_right_powers = {
 	is_shown = {
 		gg_plata_phase >= 2
 		gg_plata_phase < 4
-		NOT = { has_global_variable = gg_plata_france_alone }
+		NOT = { has_global_variable = gg_plata_britain_recognizes }
 		c:GBR ?= this
 	}
 }

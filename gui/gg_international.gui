@@ -33,7 +33,7 @@ widget = {
    text = "gg_ui_plata_phase_1"
   }
   textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)2')]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)2'), Not(GetGlobalVariable('gg_plata_britain_recognizes').IsSet))]"
    tooltip = "gg_ui_plata_phase_2_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
@@ -41,7 +41,15 @@ widget = {
    text = "gg_ui_plata_phase_2"
   }
   textbox = {
-   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), Not(GetGlobalVariable('gg_plata_france_alone').IsSet))]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)2'), GetGlobalVariable('gg_plata_britain_recognizes').IsSet)]"
+   tooltip = "gg_ui_plata_phase_2_france_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_2"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), Not(GetGlobalVariable('gg_plata_britain_recognizes').IsSet))]"
    tooltip = "gg_ui_plata_phase_3_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
@@ -49,7 +57,7 @@ widget = {
    text = "gg_ui_plata_phase_3"
   }
   textbox = {
-   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), GetGlobalVariable('gg_plata_france_alone').IsSet)]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), GetGlobalVariable('gg_plata_britain_recognizes').IsSet)]"
    tooltip = "gg_ui_plata_phase_3_france_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
@@ -198,10 +206,18 @@ flowcontainer = {
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
       textbox = {
+       visible = "[Not(GetGlobalVariable('gg_plata_britain_recognizes').IsSet)]"
        position = { 96 8 } size = { 134 96 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_defensa"
+      }
+      textbox = {
+       visible = "[GetGlobalVariable('gg_plata_britain_recognizes').IsSet]"
+       position = { 96 8 } size = { 134 96 }
+       datacontext = "[Country.GetRuler]"
+       multiline = yes using = fontsize_medium
+       text = "gg_ui_plata_leader_defensa_france"
       }
      }
     }
