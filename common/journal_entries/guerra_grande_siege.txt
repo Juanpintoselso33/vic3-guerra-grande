@@ -6,6 +6,11 @@
 #     por tierra -- el que sitia y el que defiende, las condiciones de cada lado, las legiones. El
 #     rio, el hambre y el bloqueo pasaron a la situacion del Plata, con su barra del hambre.
 je_gg_siege = {
+	# EN/ES: 22/9/2026 -- listed under Unique Journal Entries in the country selection screen
+	#     / listado en los journals unicos de la pantalla de seleccion de pais
+	is_shown_in_lobby = {
+		c:URU ?= this
+	}
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	widget = {

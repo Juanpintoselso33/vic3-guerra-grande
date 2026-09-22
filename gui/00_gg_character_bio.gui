@@ -1,0 +1,68 @@
+# EN: 22/9/2026 -- a biography button beside the interactions button of the character portrait
+#     (character panel, both places vanilla draws it). The "00_" name makes this definition of the
+#     type win over vanilla's in character_panel.gui, the convention the Community Mod Framework uses
+#     for its own character types (00_com_character_panel.gui). Only this one small type is redefined:
+#     the rest of the panel keeps working, and so does a mod that replaces character_panel.gui without
+#     redefining this type (Historical Character Biographies adds its own button types instead). A mod
+#     that also redefines character_interactions_button would compete with this one. The interactions
+#     button inside is vanilla's, unchanged; vanilla's tutorial name now lands on the container.
+#     The biography shows as the tooltip of the button, only for our 33 characters
+#     (gg_bio_check_sgui, gg_bio_text).
+# ES: un boton de biografia junto al boton de interacciones del retrato (ficha del personaje, en los dos
+#     lugares donde vanilla lo dibuja). El nombre "00_" hace que esta definicion del tipo gane a la de
+#     vanilla, la convencion que usa el Community Mod Framework. Solo se redefine este tipo chico; el
+#     resto de la ficha, y cualquier mod que reemplace character_panel.gui, siguen andando. La biografia
+#     sale en el tooltip del boton, solo para nuestros 33 personajes.
+
+types gg_character_bio_types {
+	type character_interactions_button = widget {
+		block "parentanchor" {
+			parentanchor = left|top
+		}
+
+		block "position" {
+			position = { 20 20 }
+		}
+
+		size = { 106 50 }
+
+		# EN/ES: vanilla's interactions button, unchanged / el boton de interacciones de vanilla, sin cambios
+		button_icon_round = {
+			position = { 0 0 }
+			enabled = "[Not(IsDataModelEmpty(Character.GetInteractions))]"
+			onclick = "[RightClickMenuManager.ShowForCharacter(Character.AccessSelf)]"
+			tooltip = "CHARACTER_INTERACTIONS_BUTTON_TOOLTIP"
+
+			blockoverride "size" {
+				size = { 50 50 }
+			}
+
+			blockoverride "icon_size" {
+				size = { 100% 100% }
+			}
+
+			blockoverride "icon" {
+				texture = "gfx/interface/buttons/button_icons/character_interaction.dds"
+			}
+		}
+
+		# EN/ES: the biography, for our characters only / la biografia, solo para nuestros personajes
+		button_icon_round = {
+			position = { 56 0 }
+			visible = "[GetScriptedGui('gg_bio_check_sgui').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+			tooltip = "gg_bio_button_tt"
+
+			blockoverride "size" {
+				size = { 50 50 }
+			}
+
+			blockoverride "icon_size" {
+				size = { 100% 100% }
+			}
+
+			blockoverride "icon" {
+				texture = "gfx/interface/buttons/button_icons/vickypedia.dds"
+			}
+		}
+	}
+}

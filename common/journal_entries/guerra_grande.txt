@@ -2,6 +2,11 @@
 # a battle-driven double sided bar, two scripted buttons, monthly flavour events, and a
 # completion condition that fires when one of the two rival governments stops existing.
 je_guerra_grande = {
+	# EN/ES: 22/9/2026 -- listed under Unique Journal Entries in the country selection screen
+	#     / listado en los journals unicos de la pantalla de seleccion de pais
+	is_shown_in_lobby = {
+		c:URU ?= this
+	}
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	widget = {

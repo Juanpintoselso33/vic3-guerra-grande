@@ -1,0 +1,38 @@
+﻿# EN: 22/9/2026 -- the biography of each of our characters, by template (sources: SOURCES_biografias.md).
+# ES: la biografia de cada uno de nuestros personajes, por plantilla (fuentes: SOURCES_biografias.md).
+gg_bio_text = {
+	type = character
+	text = { trigger = { has_template = URU_Manuel_Oribe } localization_key = gg_bio_oribe_manuel }
+	text = { trigger = { has_template = URU_Fructuoso_Rivera } localization_key = gg_bio_rivera_fructuoso }
+	text = { trigger = { has_template = URU_Juan_Antonio_Lavalleja } localization_key = gg_bio_lavalleja }
+	text = { trigger = { has_template = URU_joaquin_suarez } localization_key = gg_bio_suarez }
+	text = { trigger = { has_template = URU_Ignacio_Oribe } localization_key = gg_bio_oribe_ignacio }
+	text = { trigger = { has_template = URU_manuel_herrera_y_obes } localization_key = gg_bio_herrera_y_obes }
+	text = { trigger = { has_template = URU_andres_lamas } localization_key = gg_bio_lamas }
+	text = { trigger = { has_template = URU_bernardo_prudencio_berro } localization_key = gg_bio_berro }
+	text = { trigger = { has_template = URU_cesar_diaz } localization_key = gg_bio_diaz_cesar }
+	text = { trigger = { has_template = URU_venancio_flores } localization_key = gg_bio_flores }
+	text = { trigger = { has_template = URU_timoteo_aparicio } localization_key = gg_bio_aparicio }
+	text = { trigger = { has_template = URU_lorenzo_batlle } localization_key = gg_bio_batlle_lorenzo }
+	text = { trigger = { has_template = URU_anacleto_medina } localization_key = gg_bio_medina }
+	text = { trigger = { has_template = URU_gg_melchor_pacheco_y_obes } localization_key = gg_bio_pacheco_y_obes }
+	text = { trigger = { has_template = URU_gg_carlos_villademoros } localization_key = gg_bio_villademoros }
+	text = { trigger = { has_template = URU_gg_juan_francisco_giro } localization_key = gg_bio_giro }
+	text = { trigger = { has_template = URU_gg_eugenio_garzon } localization_key = gg_bio_garzon }
+	text = { trigger = { has_template = URU_gg_servando_gomez } localization_key = gg_bio_gomez_servando }
+	text = { trigger = { has_template = URU_gg_bartolome_mitre } localization_key = gg_bio_mitre }
+	text = { trigger = { has_template = ARG_Justo_Jose_de_Urquiza } localization_key = gg_bio_urquiza }
+	text = { trigger = { has_template = ARG_Gregorio_Araoz_de_Lamadrid } localization_key = gg_bio_lamadrid }
+	text = { trigger = { has_template = ARG_Alejandro_Heredia } localization_key = gg_bio_heredia }
+	text = { trigger = { has_template = ARG_Angel_Pacheco } localization_key = gg_bio_pacheco_angel }
+	text = { trigger = { has_template = ARG_pedro_ferre } localization_key = gg_bio_ferre }
+	text = { trigger = { has_template = CLN_gg_tomas_brizuela } localization_key = gg_bio_brizuela }
+	text = { trigger = { has_template = CLN_gg_marco_avellaneda } localization_key = gg_bio_avellaneda }
+	text = { trigger = { has_template = CRR_gg_jose_maria_paz } localization_key = gg_bio_paz }
+	text = { trigger = { has_template = CRR_gg_genaro_beron_de_astrada } localization_key = gg_bio_beron_de_astrada }
+	text = { trigger = { has_template = CRR_gg_juan_madariaga } localization_key = gg_bio_madariaga_juan }
+	text = { trigger = { has_template = CRR_gg_joaquin_madariaga } localization_key = gg_bio_madariaga_joaquin }
+	text = { trigger = { has_template = ARG_gg_juan_felipe_ibarra } localization_key = gg_bio_ibarra }
+	text = { trigger = { has_template = ARG_gg_nazario_benavidez } localization_key = gg_bio_benavidez }
+	text = { trigger = { has_template = ARG_gg_jose_felix_aldao } localization_key = gg_bio_aldao }
+}

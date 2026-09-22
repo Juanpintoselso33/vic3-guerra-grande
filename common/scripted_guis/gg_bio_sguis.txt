@@ -1,0 +1,47 @@
+﻿# EN: 22/9/2026 -- is this character one of ours with a biography? Read by the biography button that
+#     gui/00_gg_character_bio.gui adds beside the interactions button in the character panel.
+#     Idea from Historical Character Biographies (Workshop 3790651439); our own code and keys, so both
+#     can be loaded together. All 33 templates exist in vanilla or in this mod.
+# ES: ¿es uno de nuestros personajes con biografia? Lo lee el boton de biografia que
+#     gui/00_gg_character_bio.gui agrega junto al boton de interacciones de la ficha. Idea tomada de
+#     Historical Character Biographies; codigo y claves propios, asi pueden cargarse juntos.
+gg_bio_check_sgui = {
+	scope = character
+	is_shown = {
+		OR = {
+			has_template = URU_Manuel_Oribe
+			has_template = URU_Fructuoso_Rivera
+			has_template = URU_Juan_Antonio_Lavalleja
+			has_template = URU_joaquin_suarez
+			has_template = URU_Ignacio_Oribe
+			has_template = URU_manuel_herrera_y_obes
+			has_template = URU_andres_lamas
+			has_template = URU_bernardo_prudencio_berro
+			has_template = URU_cesar_diaz
+			has_template = URU_venancio_flores
+			has_template = URU_timoteo_aparicio
+			has_template = URU_lorenzo_batlle
+			has_template = URU_anacleto_medina
+			has_template = URU_gg_melchor_pacheco_y_obes
+			has_template = URU_gg_carlos_villademoros
+			has_template = URU_gg_juan_francisco_giro
+			has_template = URU_gg_eugenio_garzon
+			has_template = URU_gg_servando_gomez
+			has_template = URU_gg_bartolome_mitre
+			has_template = ARG_Justo_Jose_de_Urquiza
+			has_template = ARG_Gregorio_Araoz_de_Lamadrid
+			has_template = ARG_Alejandro_Heredia
+			has_template = ARG_Angel_Pacheco
+			has_template = ARG_pedro_ferre
+			has_template = CLN_gg_tomas_brizuela
+			has_template = CLN_gg_marco_avellaneda
+			has_template = CRR_gg_jose_maria_paz
+			has_template = CRR_gg_genaro_beron_de_astrada
+			has_template = CRR_gg_juan_madariaga
+			has_template = CRR_gg_joaquin_madariaga
+			has_template = ARG_gg_juan_felipe_ibarra
+			has_template = ARG_gg_nazario_benavidez
+			has_template = ARG_gg_jose_felix_aldao
+		}
+	}
+}

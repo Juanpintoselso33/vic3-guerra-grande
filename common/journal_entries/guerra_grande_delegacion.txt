@@ -17,6 +17,14 @@
 #     episodios sueltos; con esto son una campania.
 # -------------------------------------------------------------------------------------------------
 je_gg_delegation = {
+	# EN/ES: 22/9/2026 -- listed under Unique Journal Entries in the country selection screen
+	#     / listado en los journals unicos de la pantalla de seleccion de pais
+	is_shown_in_lobby = {
+		c:ARG ?= this
+		# EN/ES: only with la Argentina's provinces, the same probe the Argentine events use (README)
+		#     / solo con las provincias de la Argentina, la misma prueba que usan los eventos argentinos
+		exists = s:STATE_ENTRE_RIOS
+	}
 	group = je_group_guerra_grande
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	# EN/ES: 22/9/2026 redesign -- one widget above everything (header, map, face to face, petitions,
