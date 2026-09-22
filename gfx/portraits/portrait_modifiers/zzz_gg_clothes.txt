@@ -1,0 +1,105 @@
+﻿# EN: Characters of the Guerra Grande dressed as their period portraits show them (22/9/2026).
+#     Our own modifier group, loaded after vanilla's clothes (zzz_), so it overrides only the
+#     characters it names and leaves vanilla's files untouched. Everyone else: weight 0, no change.
+# ES: Personajes de la Guerra Grande vestidos como los muestran sus retratos de epoca. Grupo propio,
+#     cargado despues de la ropa de vanilla (zzz_): pisa solo a los que nombra y no toca los archivos
+#     de vanilla. El resto: peso 0, sin cambios.
+gg_clothes = {
+	usage = game
+	selection_behavior = weighted_random
+
+	# EN: Manuel Oribe always in a general's uniform, as in the portraits the events use
+	#     (Brigadier General: high embroidered collar, heavy fringed epaulettes, aiguillettes,
+	#     a medal) -- as president too, where vanilla would dress him as a civilian.
+	# ES: Manuel Oribe siempre de uniforme de general, como en los retratos de los eventos (cuello
+	#     alto bordado, charreteras con flecos, cordones, una medalla), tambien como presidente.
+	gg_oribe_uniform = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = belts
+				template = no_belt
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = civilian_coats
+				template = no_civilian_coat
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = headgear
+				template = no_headgear
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = necklaces
+				template = no_necklace
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = outfits
+				template = no_outfit
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = sashes
+				template = no_sash
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = top_layer
+				template = no_top_layer
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = waistcoats
+				template = no_waistcoat
+				range = { 0 1 }
+			}
+			accessory = {
+				mode = add
+				gene = coats
+				template = european_uniform_coats
+				accessory = male_coat_european_tailcoat_single_breasted_generic
+			}
+			accessory = {
+				mode = add
+				gene = epaulettes
+				template = all_epaulettes
+				accessory = male_epaulettes_01
+			}
+			accessory = {
+				mode = add
+				gene = aiguillettes
+				template = all_aiguillettes
+				accessory = male_aiguillettes_01
+			}
+			accessory = {
+				mode = add
+				gene = medals
+				template = generic_medals
+				accessory = male_medals_generic_01_01
+			}
+			accessory = {
+				mode = add
+				gene = legwear
+				template = european_legwear
+				range = { 0 1 }
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				scope:character ?= { has_template = URU_Manuel_Oribe }
+			}
+		}
+	}
+}
