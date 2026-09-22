@@ -273,9 +273,35 @@ gg_argentina_create_coalicion = {
 gg_argentina_rebel_diplomacy_reset = {
 	set_variable = gg_rebel_diplomacy_reset
 	save_scope_as = gg_rebel_country
-	# EN/ES: 22/9/2026 -- alliances, defensive pacts and guarantees are treaty articles since 1.10 and
-	#     the old pact types no longer load; breaking inherited treaties has no verified script effect
-	#     yet (PENDIENTES) / los pactos viejos ya no existen (son articulos de tratado desde la 1.10)
+	# EN: 22/9/2026 -- alliances, defensive pacts and guarantees are treaty articles since 1.10. The
+	#     rebel withdraws from any treaty carrying one of them, the pattern Gates of the Bosphorus uses
+	#     for Montenegro (2-03_balkfm_montenegro.txt) and vanilla's DLC for the Roman Republic
+	#     (italian_unification.txt): every_scope_treaty + withdraw. No break penalties: the rebel did
+	#     not sign them. Withdrawing leaves the whole treaty, so an economic rider inherited in the
+	#     same treaty goes too: acceptable for an uprising born at war with Buenos Aires (Codex 22/9).
+	# ES: alianzas, pactos defensivos y garantias son articulos de tratado desde la 1.10. El rebelde se
+	#     retira de todo tratado que lleve alguno, con el patron que usa Gates of the Bosphorus para
+	#     Montenegro y el DLC de vanilla para la Republica Romana. Sin penalidad: no los firmo el.
+	every_scope_treaty = {
+		limit = {
+			any_scope_article = {
+				OR = {
+					has_type = alliance
+					has_type = defensive_pact
+					has_type = guarantee_independence
+				}
+				# EN/ES: Codex 22/9 -- only articles the rebel is party to, not someone else's in a
+				#     multilateral treaty / solo articulos de los que el rebelde es parte
+				OR = {
+					source_country = scope:gg_rebel_country
+					target_country = scope:gg_rebel_country
+				}
+			}
+		}
+		withdraw = {
+			country = scope:gg_rebel_country
+		}
+	}
 	if = {
 		limit = { exists = c:ARG }
 		change_relations = { country = c:ARG value = -100 }
