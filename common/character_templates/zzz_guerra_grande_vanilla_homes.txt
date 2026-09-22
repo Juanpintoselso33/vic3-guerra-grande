@@ -19,6 +19,8 @@ REPLACE:URU_Manuel_Oribe = {
 	culture = primary_culture
 	ruler = yes
 	ig_leader = yes
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- ruler and general, like vanilla's Rosas
+	is_general = yes
 	age = 44
 	dna = dna_gg_manuel_oribe
 	interest_group = ig_landowners
@@ -28,6 +30,8 @@ REPLACE:URU_Manuel_Oribe = {
 	home_region = STATE_MONTEVIDEO
 	traits = {
 		imperious
+		meticulous
+		experienced_offensive_planner
 	}
 	trait_generation = { }
 }
@@ -52,6 +56,7 @@ REPLACE:URU_Fructuoso_Rivera = {
 		charismatic
 		celebrity_commander
 		bigoted
+		surveyor
 	}
 	trait_generation = { }
 }
@@ -84,7 +89,8 @@ REPLACE:URU_joaquin_suarez = {
 	culture = primary_culture
 	birth_date = 1781.8.18
 	ig_leader = yes
-	interest_group = ig_petty_bourgeoisie
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- the doctores' government; leads the intelligentsia
+	interest_group = ig_intelligentsia
 	ideology = ideology_abolitionist
 	home_region = STATE_MONTEVIDEO
 	traits = {
@@ -124,6 +130,7 @@ REPLACE:URU_manuel_herrera_y_obes = { # Manuel Herrera y Obes
 	home_region = STATE_MONTEVIDEO
 	traits = {
 		experienced_political_operator
+		experienced_diplomat
 	}
     interest_group_leader_usage = {
         country_trigger = {
@@ -164,6 +171,7 @@ REPLACE:URU_andres_lamas = { # Andrés Lamas
 	traits = {
 		literary
 		innovative
+		experienced_diplomat
 	}
     interest_group_leader_usage = {
         country_trigger = {
@@ -898,14 +906,15 @@ REPLACE:URU_anacleto_medina = { # Anacleto Medina y Biera
 	birth_date = 1788.7.26
 	is_general = yes
 	commander_rank = default
-	interest_group = ig_landowners
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- a Colorado general 1836-1852, born in Colonia
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
 	culture = primary_culture
 	religion = rel:catholic
-	home_region = STATE_CORRIENTES
+	home_region = STATE_SAN_JOSE
 	traits = {
 		cruel
-		forest_commander
+		plains_commander
 	}
 	commander_usage = {
 		country_trigger = {

@@ -20,6 +20,7 @@ URU_gg_melchor_pacheco_y_obes = {
 	traits = {
 		brave
 		imperious
+		inspirational_orator
 	}
 	trait_generation = { }
 }
@@ -35,11 +36,13 @@ URU_gg_carlos_villademoros = {
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
-	ideology = ideology_moderate
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- the hard wing of oribismo
+	ideology = ideology_traditionalist
 	birth_date = 1806.1.1
 	home_region = STATE_MALDONADO
 	traits = {
 		experienced_political_operator
+		literary
 	}
 	trait_generation = { }
 }
@@ -122,7 +125,8 @@ URU_gg_gabriel_antonio_pereira = {
 	role = character_role_politician
 	culture = primary_culture
 	religion = rel:catholic
-	interest_group = ig_landowners
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- a Colorado (Asamblea de Notables, minister of the Defensa)
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
 	birth_date = 1794.1.1
 	home_region = STATE_MONTEVIDEO
