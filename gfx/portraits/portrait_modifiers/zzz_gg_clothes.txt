@@ -66,14 +66,14 @@ gg_clothes = {
 			accessory = {
 				mode = add
 				gene = coats
-				template = european_uniform_coats
-				accessory = male_coat_european_tailcoat_single_breasted_generic
+				template = male_coat_european_tailcoat_single_breasted
+				accessory = male_coat_european_tailcoat_single_breasted_french # dark navy with gold, as in the portraits / azul oscuro con dorado
 			}
 			accessory = {
 				mode = add
 				gene = epaulettes
 				template = all_epaulettes
-				accessory = male_epaulettes_01
+				accessory = male_epaulettes_04 # large fringed, as in the portraits / grandes con flecos
 			}
 			accessory = {
 				mode = add
@@ -160,8 +160,8 @@ gg_clothes = {
 			accessory = {
 				mode = add
 				gene = coats
-				template = european_uniform_coats
-				range = { 0 0.35 } # the early single-breasted tailcoats / los fraques de faldones de la epoca
+				template = male_coat_european_tailcoat_single_breasted
+				accessory = male_coat_european_tailcoat_single_breasted_french # dark navy with gold / azul oscuro con dorado
 			}
 			accessory = {
 				mode = add
