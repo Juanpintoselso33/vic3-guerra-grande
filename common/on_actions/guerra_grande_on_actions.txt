@@ -301,74 +301,17 @@ guerra_grande_on_game_start = {
 	}
 }
 
-# Vanilla moves the carlist bar from on_battle_won; the Guerra Grande bar works the same way.
-on_battle_won = {
-	on_actions = {
-		guerra_grande_battle_score
-	}
-}
-
-on_empty_battle_won = {
-	on_actions = {
-		guerra_grande_battle_score
-	}
-}
-
-guerra_grande_battle_score = {
-	trigger = {
-		has_global_variable = guerra_grande_open_war
-		# EN: S19 -- the two sides by who they are, not by journal membership (which the Cerrito
-		#     lacked for the whole siege): URU against CER, whichever way round.
-		# ES: S19 -- los dos bandos por quienes son, no por pertenecer al journal (que al Cerrito le
-		#     falto todo el sitio): URU contra CER, en cualquier orden.
-		OR = {
-			AND = { c:URU ?= this scope:enemy_country ?= { c:CER ?= this } }
-			AND = { c:CER ?= this scope:enemy_country ?= { c:URU ?= this } }
-		}
-	}
-
-	effect = {
-		# EN: T2, C3 -- the score and the real war move together: every battle won costs the loser
-		#     war support in the Guerra Grande. -5 is provisional until T10.
-		# ES: T2, C3 -- el puntaje y la guerra real se mueven juntos: cada batalla ganada le cuesta
-		#     apoyo a la guerra al perdedor. El -5 es provisorio hasta T10.
-		every_scope_war = {
-			limit = { gg_is_the_war = yes }
-			add_war_war_support = {
-				target = scope:enemy_country
-				value = -5
-			}
-		}
-		if = {
-			limit = {
-				c:CER ?= this
-			}
-			change_global_variable = {
-				name = guerra_grande_blanco_score
-				add = 1
-			}
-			# EN/ES: 22/9/2026 -- counted by source for the war journal / contado por fuente
-			change_global_variable = { name = gg_src_battles_blanco add = 1 }
-			je:je_guerra_grande ?= {
-				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
-			}
-		}
-		else_if = {
-			limit = {
-				c:URU ?= this
-			}
-			change_global_variable = {
-				name = guerra_grande_colorado_score
-				add = 1
-			}
-			change_global_variable = { name = gg_src_battles_colorado add = 1 }
-			je:je_guerra_grande ?= {
-				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
-			}
-		}
-	}
-}
-
+# EN: 22/9/2026 (Juan, S17) -- battles no longer score. The Cerrito's AI attacked the dug-in city
+#     nine times in 1844-1846 and lost all nine, and the script cannot give front orders to stop it;
+#     with every battle scoring (S19), that suicide run would decide a war that lasted until 1851.
+#     The balance moves by decisions, the river and the phases; war support by the engine's own
+#     battles. Juan: «si no podemos hacer que el cerrito deje de atacar como loco a los colorados
+#     entonces habria que sacar el score por batalla».
+# ES: 22/9/2026 (Juan, S17) -- las batallas ya no puntuan. La IA del Cerrito ataco nueve veces la
+#     plaza atrincherada entre 1844 y 1846 y perdio las nueve, y el script no puede darle ordenes de
+#     frente para frenarla; con cada batalla puntuando (S19), esa racha decidiria una guerra que duro
+#     hasta 1851. La balanza la mueven las decisiones, el rio y las fases; el apoyo a la guerra, las
+#     batallas del propio motor.
 # EN: HOTFIX 2026-09-16. Our peace menu (gg_peace.1/.2) only fired off our OWN battle-score lead
 #     reaching 10, checked in the journal's monthly pulse -- a slower, separate clock from the
 #     real war. The real dp_guerra_grande diplomatic play resolves through vanilla's own

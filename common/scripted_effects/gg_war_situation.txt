@@ -4,12 +4,8 @@
 # ES: BLANCOS Y COLORADOS como situacion local: que movio la balanza el mes pasado, por fuente, y los
 #     efectos moderados de cada fase.
 gg_war_sources_reset = {
-	set_global_variable = { name = gg_src_battles_blanco value = 0 }
-	set_global_variable = { name = gg_src_battles_colorado value = 0 }
 	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
 	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
-	set_global_variable = { name = gg_src_last_battles_blanco value = 0 }
-	set_global_variable = { name = gg_src_last_battles_colorado value = 0 }
 	set_global_variable = { name = gg_src_last_decisions_blanco value = 0 }
 	set_global_variable = { name = gg_src_last_decisions_colorado value = 0 }
 	set_global_variable = { name = gg_src_partition_blanco value = 0 }
@@ -20,11 +16,9 @@ gg_war_sources_reset = {
 # EN/ES: once a month: this month becomes last month / una vez por mes: este mes pasa a ser el pasado
 gg_war_sources_rollover = {
 	if = {
-		limit = { NOT = { has_global_variable = gg_src_battles_blanco } }
+		limit = { NOT = { has_global_variable = gg_src_decisions_blanco } }
 		gg_war_sources_reset = yes
 	}
-	set_global_variable = { name = gg_src_last_battles_blanco value = global_var:gg_src_battles_blanco }
-	set_global_variable = { name = gg_src_last_battles_colorado value = global_var:gg_src_battles_colorado }
 	set_global_variable = { name = gg_src_last_decisions_blanco value = global_var:gg_src_decisions_blanco }
 	set_global_variable = { name = gg_src_last_decisions_colorado value = global_var:gg_src_decisions_colorado }
 	# EN/ES: the split's trim, a one-off source (saves from before 22/9 lack the counter)
@@ -36,8 +30,6 @@ gg_war_sources_rollover = {
 	}
 	set_global_variable = { name = gg_src_last_partition_blanco value = global_var:gg_src_partition_blanco }
 	set_global_variable = { name = gg_src_last_partition_colorado value = global_var:gg_src_partition_colorado }
-	set_global_variable = { name = gg_src_battles_blanco value = 0 }
-	set_global_variable = { name = gg_src_battles_colorado value = 0 }
 	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
 	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
 	set_global_variable = { name = gg_src_partition_blanco value = 0 }
