@@ -1,23 +1,27 @@
-﻿# EN: El Sitio as a local situation (22/9/2026): which of the siege conditions each government
-#     carries right now, on the country or on its states. Presentation only.
-# ES: El Sitio como situacion local: que condiciones del sitio tiene hoy cada gobierno, en el pais
-#     o en sus estados. Solo presentacion.
-gg_ui_siege_def_port_without_a_countryside = {
+﻿# EN: EL SITIO GRANDE, presentation only (22/9/2026, vic3-journals skill). Which siege condition
+#     each government carries right now, on the country or on one of its states -- only the ones
+#     that really fall on that side (docs/guerra-grande-flujo/sitio-textos-mecanica.md) -- and the
+#     state of each legion. No counters, no rules.
+# ES: EL SITIO GRANDE, solo presentacion. Que condicion del sitio carga hoy cada gobierno, en el pais
+#     o en uno de sus estados -- solo las que de verdad le tocan a ese lado -- y el estado de cada
+#     legion. Sin contadores ni reglas.
+
+gg_ui_siege_def_walls = {
 	value = 0
 	if = {
 		limit = {
 			any_country = {
 				has_variable = guerra_grande_defensa_government
 				OR = {
-					has_modifier = gg_siege_port_without_a_countryside
-					any_scope_state = { has_modifier = gg_siege_port_without_a_countryside }
+					has_modifier = guerra_grande_walls_of_montevideo
+					any_scope_state = { has_modifier = guerra_grande_walls_of_montevideo }
 				}
 			}
 		}
 		value = 1
 	}
 }
-gg_ui_siege_def_guns_of_the_plaza = {
+gg_ui_siege_def_guns = {
 	value = 0
 	if = {
 		limit = {
@@ -32,117 +36,12 @@ gg_ui_siege_def_guns_of_the_plaza = {
 		value = 1
 	}
 }
-gg_ui_siege_def_mortgaged_customs = {
+gg_ui_siege_def_port = {
 	value = 0
 	if = {
 		limit = {
 			any_country = {
 				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_mortgaged_customs
-					any_scope_state = { has_modifier = gg_siege_mortgaged_customs }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_the_sea_lane_stays_open = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_the_sea_lane_stays_open
-					any_scope_state = { has_modifier = gg_siege_the_sea_lane_stays_open }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_trading_with_the_enemy = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_trading_with_the_enemy
-					any_scope_state = { has_modifier = gg_siege_trading_with_the_enemy }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_countryside_without_a_port = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_countryside_without_a_port
-					any_scope_state = { has_modifier = gg_siege_countryside_without_a_port }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_no_breaching_guns = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_no_breaching_guns
-					any_scope_state = { has_modifier = gg_siege_no_breaching_guns }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_customs_house_at_the_buceo = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_customs_house_at_the_buceo
-					any_scope_state = { has_modifier = gg_siege_customs_house_at_the_buceo }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_def_the_land_frontier_stays_open = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_defensa_government
-				OR = {
-					has_modifier = gg_siege_the_land_frontier_stays_open
-					any_scope_state = { has_modifier = gg_siege_the_land_frontier_stays_open }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_cer_port_without_a_countryside = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_cerrito_government
 				OR = {
 					has_modifier = gg_siege_port_without_a_countryside
 					any_scope_state = { has_modifier = gg_siege_port_without_a_countryside }
@@ -152,42 +51,12 @@ gg_ui_siege_cer_port_without_a_countryside = {
 		value = 1
 	}
 }
-gg_ui_siege_cer_guns_of_the_plaza = {
+gg_ui_siege_def_sea = {
 	value = 0
 	if = {
 		limit = {
 			any_country = {
-				has_variable = guerra_grande_cerrito_government
-				OR = {
-					has_modifier = gg_siege_guns_of_the_plaza
-					any_scope_state = { has_modifier = gg_siege_guns_of_the_plaza }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_cer_mortgaged_customs = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_cerrito_government
-				OR = {
-					has_modifier = gg_siege_mortgaged_customs
-					any_scope_state = { has_modifier = gg_siege_mortgaged_customs }
-				}
-			}
-		}
-		value = 1
-	}
-}
-gg_ui_siege_cer_the_sea_lane_stays_open = {
-	value = 0
-	if = {
-		limit = {
-			any_country = {
-				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
 				OR = {
 					has_modifier = gg_siege_the_sea_lane_stays_open
 					any_scope_state = { has_modifier = gg_siege_the_sea_lane_stays_open }
@@ -197,12 +66,27 @@ gg_ui_siege_cer_the_sea_lane_stays_open = {
 		value = 1
 	}
 }
-gg_ui_siege_cer_trading_with_the_enemy = {
+gg_ui_siege_def_mortgaged = {
 	value = 0
 	if = {
 		limit = {
 			any_country = {
-				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = gg_siege_mortgaged_customs
+					any_scope_state = { has_modifier = gg_siege_mortgaged_customs }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_def_trading = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
 				OR = {
 					has_modifier = gg_siege_trading_with_the_enemy
 					any_scope_state = { has_modifier = gg_siege_trading_with_the_enemy }
@@ -212,22 +96,37 @@ gg_ui_siege_cer_trading_with_the_enemy = {
 		value = 1
 	}
 }
-gg_ui_siege_cer_countryside_without_a_port = {
+gg_ui_siege_def_cattle = {
 	value = 0
 	if = {
 		limit = {
 			any_country = {
-				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
 				OR = {
-					has_modifier = gg_siege_countryside_without_a_port
-					any_scope_state = { has_modifier = gg_siege_countryside_without_a_port }
+					has_modifier = gg_truce_cattle
+					any_scope_state = { has_modifier = gg_truce_cattle }
 				}
 			}
 		}
 		value = 1
 	}
 }
-gg_ui_siege_cer_no_breaching_guns = {
+gg_ui_siege_def_basque = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_defensa_government
+				OR = {
+					has_modifier = guerra_grande_basque_desertion
+					any_scope_state = { has_modifier = guerra_grande_basque_desertion }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_noguns = {
 	value = 0
 	if = {
 		limit = {
@@ -242,7 +141,22 @@ gg_ui_siege_cer_no_breaching_guns = {
 		value = 1
 	}
 }
-gg_ui_siege_cer_customs_house_at_the_buceo = {
+gg_ui_siege_cer_countryside = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_countryside_without_a_port
+					any_scope_state = { has_modifier = gg_siege_countryside_without_a_port }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_buceo = {
 	value = 0
 	if = {
 		limit = {
@@ -257,7 +171,22 @@ gg_ui_siege_cer_customs_house_at_the_buceo = {
 		value = 1
 	}
 }
-gg_ui_siege_cer_the_land_frontier_stays_open = {
+gg_ui_siege_cer_trading = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = gg_siege_trading_with_the_enemy
+					any_scope_state = { has_modifier = gg_siege_trading_with_the_enemy }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_frontier = {
 	value = 0
 	if = {
 		limit = {
@@ -266,6 +195,21 @@ gg_ui_siege_cer_the_land_frontier_stays_open = {
 				OR = {
 					has_modifier = gg_siege_the_land_frontier_stays_open
 					any_scope_state = { has_modifier = gg_siege_the_land_frontier_stays_open }
+				}
+			}
+		}
+		value = 1
+	}
+}
+gg_ui_siege_cer_aux = {
+	value = 0
+	if = {
+		limit = {
+			any_country = {
+				has_variable = guerra_grande_cerrito_government
+				OR = {
+					has_modifier = guerra_grande_argentine_auxiliaries
+					any_scope_state = { has_modifier = guerra_grande_argentine_auxiliaries }
 				}
 			}
 		}
@@ -284,4 +228,31 @@ gg_ui_siege_pacheco = {
 		}
 		value = 1
 	}
+}
+# EN/ES: the legions: 0 not raised, 1 under arms, 2 reinforced (3 French: the city turned it down)
+#     / las legiones: 0 sin formar, 1 en armas, 2 reforzada (3 la francesa: la plaza no la acepto)
+gg_ui_siege_italian = {
+	value = 0
+	if = { limit = { any_country = { has_variable = guerra_grande_italian_legion_raised } } value = 1 }
+	if = { limit = { any_country = { has_variable = guerra_grande_italian_legion_reinforced } } value = 2 }
+}
+gg_ui_siege_french = {
+	value = 0
+	if = { limit = { any_country = { has_variable = guerra_grande_french_legion_refused } } value = 3 }
+	if = { limit = { any_country = { has_variable = guerra_grande_french_legion_raised } } value = 1 }
+	if = { limit = { any_country = { has_variable = guerra_grande_french_legion_reinforced } } value = 2 }
+}
+gg_ui_siege_argentine = {
+	value = 0
+	if = { limit = { any_country = { has_variable = guerra_grande_argentine_legion_raised } } value = 1 }
+}
+# EN/ES: the Basque Chasseurs (gg_contingent.6) and the Allied Army of 1851 (gg_contingent.8)
+#     / los Cazadores Vascos y el Ejercito Aliado de 1851
+gg_ui_siege_brie = {
+	value = 0
+	if = { limit = { any_country = { has_variable = gg_basque_chasseurs_raised } } value = 1 }
+}
+gg_ui_siege_allied = {
+	value = 0
+	if = { limit = { any_country = { has_variable = gg_allied_army_arrived } } value = 1 }
 }

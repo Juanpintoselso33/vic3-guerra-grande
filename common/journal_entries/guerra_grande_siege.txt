@@ -1,7 +1,7 @@
 ﻿# EN: playtest 2026-09-17 -- "El Sitio Grande" (16 February 1843 - 8 October 1851) gets its own
-#     journal from the split. 22/9/2026 redesign: the siege by land only -- the besieger and the
-#     defender face to face, the conditions each side carries, the legions. The river, the hunger
-#     and the blockade moved to the River Plate situation, with its hunger bar.
+#     journal from the split. 22/9/2026 redesign: the siege by land only -- the defender and the
+#     besieger face to face, the conditions each side carries, the forces of each side. The river,
+#     the hunger and the blockade moved to the River Plate situation, with its hunger bar.
 # ES: "El Sitio Grande" tiene su propio journal desde la particion. Rediseño del 22/9/2026: el sitio
 #     por tierra -- el que sitia y el que defiende, las condiciones de cada lado, las legiones. El
 #     rio, el hambre y el bloqueo pasaron a la situacion del Plata, con su barra del hambre.
@@ -12,6 +12,18 @@ je_gg_siege = {
 		gui = "gui/gg_siege_overview.gui"
 		name = "gg_siege_overview"
 		container = "custom_widget_container_je_icon"
+	}
+	# EN/ES: 22/9/2026 redesign -- the forces right above the buttons, the long account below them
+	#     / las fuerzas justo arriba de los botones, lo largo debajo de ellos
+	widget = {
+		gui = "gui/gg_siege_overview.gui"
+		name = "gg_siege_forces"
+		container = "custom_widget_container_2"
+	}
+	widget = {
+		gui = "gui/gg_siege_overview.gui"
+		name = "gg_siege_more"
+		container = "custom_widget_container_4"
 	}
 
 	should_be_pinned_by_default_involved = yes

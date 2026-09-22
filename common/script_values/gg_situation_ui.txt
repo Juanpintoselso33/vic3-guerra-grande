@@ -14,25 +14,3 @@ gg_ui_war_diplomacy = {
  if = { limit = { has_global_variable = gg_truce } value = 4 }
  if = { limit = { has_global_variable = gg_peace_settled } value = 5 }
 }
-gg_ui_italian_legion = {
- value = 0
- if = {
-  limit = { any_country = { has_variable = guerra_grande_italian_legion_raised } }
-  add = 1
- }
- if = {
-  limit = { any_country = { has_variable = guerra_grande_italian_legion_reinforced } }
-  value = 2
- }
-}
-gg_ui_french_legion = {
- value = 0
- if = {
-  limit = { any_country = { has_variable = guerra_grande_french_legion_raised } }
-  add = 1
- }
- if = {
-  limit = { any_country = { has_variable = guerra_grande_french_legion_reinforced } }
-  value = 2
- }
-}

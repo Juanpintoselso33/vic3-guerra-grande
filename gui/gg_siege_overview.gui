@@ -1,236 +1,316 @@
-﻿# EN: EL SITIO GRANDE as a local situation (22/9/2026 redesign, same frame as the war journal):
-#     the besieger and the defender face to face, and the conditions each side carries right now.
-#     The river, the hunger and the blockade are the River Plate situation's; they left this journal.
-# ES: EL SITIO GRANDE como situacion local: el que sitia y el que defiende cara a cara, y las
-#     condiciones que carga hoy cada lado. El rio, el hambre y el bloqueo son de la situacion del
-#     Plata; salieron de este journal.
+﻿# EN: EL SITIO GRANDE, full redesign (22/9/2026, the vic3-journals skill), same frame as the war
+#     journal. Above the buttons: the 1843 plan of Montevideo with its line of fortification as the
+#     header (Anales de la defensa de Montevideo, plate 61, British Library, no restrictions); one
+#     short line; the defender and the besieger face to face; what each side carries, with icons.
+#     Right above the buttons, the forces on each side of the line. Below them, the longer account
+#     behind the arrow. Every line is backed by docs/guerra-grande-flujo/sitio-textos-mecanica.md.
+#     The river, the hunger and the blockade are the River Plate's; the balance and the peace, the war's.
+# ES: EL SITIO GRANDE, rediseño completo, el mismo marco que el journal de la guerra. Arriba: el plano
+#     de Montevideo de 1843 con su linea de fortificacion como encabezado; una linea corta; el que
+#     defiende y el que sitia cara a cara; lo que carga cada lado, con iconos. Justo antes de los
+#     botones, las fuerzas de cada lado de la linea. Debajo, lo largo detras de la flechita. El rio,
+#     el hambre y el bloqueo son del Plata; la balanza y la paz, de la guerra.
+
+# EN/ES: above everything (custom_widget_container_je_icon) / arriba de todo
 flowcontainer = {
- name = "gg_siege_overview"
- direction = vertical parentanchor = hcenter spacing = 10 ignoreinvisible = yes
- widget = { size = { 520 8 } }
- flowcontainer = {
-  direction = horizontal spacing = 8 parentanchor = hcenter
-  dynamicgridbox = {
-   datamodel = "[JournalEntry.GetInvolvedCountries]"
-   datamodel_wrap = 1
-   ignoreinvisible = yes
-   item = {
-    widget = {
-     visible = "[GetScriptedGui('gg_ui_cerrito_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-     size = { 236 112 }
-     background = { using = dark_area alpha = 0.3 }
-     character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
-     textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_ui_siege_leader_besieger" }
-    }
-   }
-  }
-  textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_ui_plata_versus" }
-  dynamicgridbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_pacheco'), '(CFixedPoint)1')]"
-   datamodel = "[JournalEntry.GetInvolvedCountries]"
-   datamodel_wrap = 1
-   ignoreinvisible = yes
-   item = {
-    flowcontainer = {
-     dynamicgridbox = {
-      datamodel = "[Country.MakeScope.GetList('gg_ui_siege_defender')]"
-      datamodel_wrap = 1
-      item = {
-       widget = {
-        size = { 236 112 }
-        background = { using = dark_area alpha = 0.3 }
-        character_portrait_medium = { position = { 6 10 } datacontext = "[Scope.AccessCharacter]" }
-        textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Scope.AccessCharacter]" multiline = yes using = fontsize_medium text = "gg_ui_siege_leader_defender" }
-       }
-      }
-     }
-    }
-   }
-  }
-  dynamicgridbox = {
-    visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_pacheco'), '(CFixedPoint)0')]"
-   datamodel = "[JournalEntry.GetInvolvedCountries]"
-   datamodel_wrap = 1
-   ignoreinvisible = yes
-   item = {
-    widget = {
-     visible = "[GetScriptedGui('gg_ui_defensa_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-     size = { 236 112 }
-     background = { using = dark_area alpha = 0.3 }
-     character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
-     textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_ui_siege_leader_government" }
-    }
-   }
-  }
- }
- flowcontainer = {
-  direction = horizontal spacing = 16 parentanchor = hcenter
-   flowcontainer = {
-    direction = vertical spacing = 4 ignoreinvisible = yes
-    background = { using = dark_area alpha = 0.3 }
-    textbox = { size = { 252 32 } align = hcenter|vcenter using = fontsize_large text = "gg_ui_siege_col_plaza" }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_port_without_a_countryside'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_port_without_a_countryside_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_port_without_a_countryside"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_guns_of_the_plaza'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_guns_of_the_plaza_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_guns_of_the_plaza"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_mortgaged_customs'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_mortgaged_customs_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_mortgaged_customs"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_the_sea_lane_stays_open'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_the_sea_lane_stays_open_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_the_sea_lane_stays_open"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_trading_with_the_enemy'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_trading_with_the_enemy_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_trading_with_the_enemy"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_countryside_without_a_port'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_countryside_without_a_port_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_countryside_without_a_port"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_no_breaching_guns'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_no_breaching_guns_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_no_breaching_guns"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_customs_house_at_the_buceo'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_customs_house_at_the_buceo_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_customs_house_at_the_buceo"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_the_land_frontier_stays_open'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_the_land_frontier_stays_open_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_the_land_frontier_stays_open"
-    }
-   }
-   flowcontainer = {
-    direction = vertical spacing = 4 ignoreinvisible = yes
-    background = { using = dark_area alpha = 0.3 }
-    textbox = { size = { 252 32 } align = hcenter|vcenter using = fontsize_large text = "gg_ui_siege_col_campo" }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_port_without_a_countryside'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_port_without_a_countryside_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_port_without_a_countryside"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_guns_of_the_plaza'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_guns_of_the_plaza_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_guns_of_the_plaza"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_mortgaged_customs'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_mortgaged_customs_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_mortgaged_customs"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_the_sea_lane_stays_open'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_the_sea_lane_stays_open_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_the_sea_lane_stays_open"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_trading_with_the_enemy'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_trading_with_the_enemy_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_trading_with_the_enemy"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_countryside_without_a_port'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_countryside_without_a_port_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_countryside_without_a_port"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_no_breaching_guns'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_no_breaching_guns_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_no_breaching_guns"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_customs_house_at_the_buceo'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_customs_house_at_the_buceo_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_customs_house_at_the_buceo"
-    }
-    textbox = {
-     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_the_land_frontier_stays_open'), '(CFixedPoint)1')]"
-     tooltip = "gg_siege_the_land_frontier_stays_open_desc"
-     autoresize = yes multiline = yes
-     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
-     using = fontsize_medium align = left|nobaseline
-     text = "gg_siege_the_land_frontier_stays_open"
-    }
-   }
- }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_0" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)0')]" }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_1" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)1')]" }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_italian_2" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_italian_legion'), '(CFixedPoint)2')]" }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_0" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)0')]" }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_1" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)1')]" }
- textbox = { size = { 520 35 } using = fontsize_medium text = "gg_siege_ui_french_2" visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_french_legion'), '(CFixedPoint)2')]" }
- textbox = { size = { 520 50 } multiline = yes using = fontsize_medium text = "gg_siege_ui_orders" }
-	# EN/ES: fold-out with the arrow (same control the old River Plate journal used) / desplegable con flechita
+	name = "gg_siege_overview"
+	direction = vertical
+	parentanchor = hcenter
+	spacing = 16
+	ignoreinvisible = yes
+	widget = {
+		size = { 520 246 }
+		parentanchor = hcenter
+		icon = {
+			size = { 520 240 }
+			position = { 0 6 }
+			texture = "gfx/interface/gg_situations/siege_header.dds"
+		}
+	}
+	textbox = {
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_siege_ui_short"
+	}
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_siege_ui_sec_line"
+	}
+	# EN/ES: the defender on the left (the Defensa, as on the war's bar), the besieger on the right
+	#     / el que defiende a la izquierda (la Defensa, como en la barra de la guerra), el que sitia a la derecha
+	flowcontainer = {
+		direction = horizontal
+		spacing = 8
+		parentanchor = hcenter
+		# EN/ES: Pacheco y Obes while he lives in the Defensa / Pacheco y Obes mientras viva en la Defensa
+		dynamicgridbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_pacheco'), '(CFixedPoint)1')]"
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 1
+			ignoreinvisible = yes
+			item = {
+				flowcontainer = {
+					dynamicgridbox = {
+						datamodel = "[Country.MakeScope.GetList('gg_ui_siege_defender')]"
+						datamodel_wrap = 1
+						item = {
+							widget = {
+								size = { 236 112 }
+								background = { using = dark_area alpha = 0.3 }
+								character_portrait_medium = { position = { 6 10 } datacontext = "[Scope.AccessCharacter]" }
+								textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Scope.AccessCharacter]" multiline = yes using = fontsize_medium text = "gg_siege_ui_leader_defender" }
+							}
+						}
+					}
+				}
+			}
+		}
+		# EN/ES: otherwise whoever governs the Defensa / si no, quien gobierne la Defensa
+		dynamicgridbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_pacheco'), '(CFixedPoint)0')]"
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 1
+			ignoreinvisible = yes
+			item = {
+				widget = {
+					visible = "[GetScriptedGui('gg_ui_defensa_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+					size = { 236 112 }
+					background = { using = dark_area alpha = 0.3 }
+					character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+					textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_siege_ui_leader_defender" }
+				}
+			}
+		}
+		textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_war_ui_versus" }
+		dynamicgridbox = {
+			datamodel = "[JournalEntry.GetInvolvedCountries]"
+			datamodel_wrap = 1
+			ignoreinvisible = yes
+			item = {
+				widget = {
+					visible = "[GetScriptedGui('gg_ui_cerrito_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+					size = { 236 112 }
+					background = { using = dark_area alpha = 0.3 }
+					character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+					textbox = { position = { 96 8 } size = { 134 96 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_siege_ui_leader_besieger" }
+				}
+			}
+		}
+	}
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_siege_ui_sec_sides"
+	}
+	# EN/ES: what each side carries: only its own conditions, each with its effects in the tooltip
+	#     / lo que carga cada lado: solo sus condiciones, cada una con sus efectos en el tooltip
+	flowcontainer = {
+		direction = horizontal
+		spacing = 16
+		parentanchor = hcenter
+		flowcontainer = {
+			direction = vertical spacing = 6 ignoreinvisible = yes
+			background = { using = dark_area alpha = 0.3 }
+			minimumsize = { 252 -1 }
+			textbox = { size = { 252 34 } align = center|nobaseline using = fontsize_large text = "gg_siege_ui_col_plaza" }
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_walls'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_walls_tt" texture = "gfx/interface/icons/military_icons/defense.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_walls_tt" using = fontsize_medium align = left|nobaseline text = "guerra_grande_walls_of_montevideo" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_guns'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_guns_tt" texture = "gfx/interface/icons/goods_icons/artillery.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_guns_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_guns_of_the_plaza" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_port'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_port_tt" texture = "gfx/interface/icons/building_icons/building_port.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_port_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_port_without_a_countryside" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_sea'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_sea_tt" texture = "gfx/interface/icons/military_icons/overseas_supply.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_sea_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_the_sea_lane_stays_open" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_mortgaged'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_mortgaged_tt" texture = "gfx/interface/icons/generic_icons/money.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_mortgaged_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_mortgaged_customs" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_trading'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_trading_def_tt" texture = "gfx/interface/icons/generic_icons/trade.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_trading_def_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_trading_with_the_enemy" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_cattle'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_cattle_tt" texture = "gfx/interface/icons/goods_icons/meat.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_cattle_tt" using = fontsize_medium align = left|nobaseline text = "gg_truce_cattle" }
+			}
+			widget = { size = { 252 4 } }
+		}
+		flowcontainer = {
+			direction = vertical spacing = 6 ignoreinvisible = yes
+			background = { using = dark_area alpha = 0.3 }
+			minimumsize = { 252 -1 }
+			textbox = { size = { 252 34 } align = center|nobaseline using = fontsize_large text = "gg_siege_ui_col_campo" }
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_noguns'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_noguns_tt" texture = "gfx/interface/icons/military_icons/offense.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_noguns_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_no_breaching_guns" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_countryside'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_countryside_tt" texture = "gfx/interface/icons/building_icons/cattle_ranch.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_countryside_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_countryside_without_a_port" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_buceo'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_buceo_tt" texture = "gfx/interface/icons/generic_icons/money.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_buceo_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_customs_house_at_the_buceo" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_trading'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_trading_cer_tt" texture = "gfx/interface/icons/generic_icons/trade.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_trading_cer_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_trading_with_the_enemy" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_frontier'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_frontier_tt" texture = "gfx/interface/icons/building_icons/building_trade_center.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_frontier_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_the_land_frontier_stays_open" }
+			}
+			widget = { size = { 252 4 } }
+		}
+	}
+	widget = { size = { 520 4 } }
+}
+
+# EN/ES: right above the buttons (custom_widget_container_2): the forces on each side of the line
+#     / justo arriba de los botones: las fuerzas de cada lado de la linea
+flowcontainer = {
+	name = "gg_siege_forces"
+	direction = vertical
+	parentanchor = hcenter
+	spacing = 14
+	ignoreinvisible = yes
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_siege_ui_sec_forces"
+	}
+	flowcontainer = {
+		direction = horizontal
+		spacing = 16
+		parentanchor = hcenter
+		flowcontainer = {
+			direction = vertical spacing = 6 ignoreinvisible = yes
+			background = { using = dark_area alpha = 0.3 }
+			minimumsize = { 252 -1 }
+			textbox = { size = { 252 34 } align = center|nobaseline using = fontsize_large text = "gg_siege_ui_col_plaza" }
+			flowcontainer = {
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_italian_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				flowcontainer = {
+					direction = vertical ignoreinvisible = yes
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_italian'), '(CFixedPoint)0')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_italian_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_italian_0" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_italian'), '(CFixedPoint)1')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_italian_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_italian_1" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_italian'), '(CFixedPoint)2')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_italian_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_italian_2" }
+				}
+			}
+			flowcontainer = {
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_french_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				flowcontainer = {
+					direction = vertical ignoreinvisible = yes
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_french'), '(CFixedPoint)0')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_french_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_french_0" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_french'), '(CFixedPoint)1')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_french_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_french_1" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_french'), '(CFixedPoint)2')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_french_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_french_2" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_french'), '(CFixedPoint)3')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_french_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_french_3" }
+				}
+			}
+			flowcontainer = {
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_argentine_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				flowcontainer = {
+					direction = vertical ignoreinvisible = yes
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_argentine'), '(CFixedPoint)0')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_argentine_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_argentine_0" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_argentine'), '(CFixedPoint)1')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_argentine_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_argentine_1" }
+				}
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_brie'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_brie_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_brie_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_brie" }
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_allied'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_allied_tt" texture = "gfx/interface/icons/military_icons/manpower.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_allied_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_allied" }
+			}
+			widget = { size = { 252 4 } }
+		}
+		flowcontainer = {
+			direction = vertical spacing = 6 ignoreinvisible = yes
+			background = { using = dark_area alpha = 0.3 }
+			minimumsize = { 252 -1 }
+			textbox = { size = { 252 34 } align = center|nobaseline using = fontsize_large text = "gg_siege_ui_col_campo" }
+			flowcontainer = {
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_aux_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				flowcontainer = {
+					direction = vertical ignoreinvisible = yes
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_aux'), '(CFixedPoint)0')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_aux_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_aux_0" }
+				textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_aux'), '(CFixedPoint)1')]" autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_aux_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_aux_1" }
+				}
+			}
+			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_def_basque'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_basque_tt" texture = "gfx/interface/icons/goods_icons/small_arms.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_basque_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_ui_basque_cer" }
+			}
+			widget = { size = { 252 4 } }
+		}
+	}
+	widget = { size = { 520 4 } }
+}
+
+# EN/ES: below the buttons (custom_widget_container_4): the longer account, behind the arrow
+#     / debajo de los botones: lo largo, detras de la flechita
+flowcontainer = {
+	name = "gg_siege_more"
+	direction = vertical
+	parentanchor = hcenter
+	spacing = 10
+	ignoreinvisible = yes
+	widget = { size = { 520 4 } }
 	section_header_button = {
 		blockoverride "layout" { size = { 520 38 } }
-		blockoverride "left_text" { text = "gg_siege_ui_about" }
+		blockoverride "left_text" { text = "gg_siege_ui_more" }
 		blockoverride "onclick" { onclick = "[GetVariableSystem.Toggle('gg_siege_about_open')]" }
 		blockoverride "onclick_showmore" { visible = "[Not(GetVariableSystem.Exists('gg_siege_about_open'))]" }
 		blockoverride "onclick_showless" { visible = "[GetVariableSystem.Exists('gg_siege_about_open')]" }
@@ -242,6 +322,6 @@ flowcontainer = {
 		parentanchor = hcenter
 		align = left|nobaseline
 		using = fontsize_medium
-		text = "je_gg_siege_reason"
+		text = "gg_siege_ui_more_body"
 	}
 }

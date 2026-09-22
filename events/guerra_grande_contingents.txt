@@ -508,6 +508,8 @@ gg_contingent.6 = {
 
 	option = {
 		name = gg_contingent.6.a
+		# EN/ES: 22/9/2026 -- the siege journal lists the Chasseurs / el journal del sitio lista a los Cazadores
+		set_variable = gg_basque_chasseurs_raised
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Basque Chasseurs fill the ranks again /
 		#     la barra tiene que moverse durante la guerra: los Cazadores Vascos vuelven a llenar los cuadros
 		gg_score_colorado = { AMOUNT = 1 }
@@ -669,6 +671,8 @@ gg_contingent.8 = {
 		name = gg_contingent.8.a
 		default_option = yes
 		set_global_variable = guerra_grande_treaties_signed
+		# EN/ES: 22/9/2026 -- the siege journal lists the Allied Army / el journal del sitio lista al Ejercito Aliado
+		set_variable = gg_allied_army_arrived
 		# EN: the convention of alliance of 29 May 1851 (Brazil, Uruguay, Entre Rios), article I:
 		#     the allies bind themselves "a hacer salir del territorio de esta al General D. Manuel
 		#     Oribe y las fuerzas argentinas que manda". The Ejercito Aliado of the Campanha do
