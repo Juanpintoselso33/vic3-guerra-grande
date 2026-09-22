@@ -1,0 +1,31 @@
+﻿# EN: Once a week from je_gg_siege: the siege's combat modifiers on the generals at the Montevideo
+#     front (10 days, renewed, so a general who leaves the front, or a plaza that falls, loses them
+#     within ten days), and the Cerrito AI's siege strategy, set explicitly.
+#     Weekly, not monthly (Codex 22/9): a monthly snapshot let a general fight almost a month with or
+#     without the walls. Formations with no general get nothing: the modifiers ride on the commander.
+# ES: Una vez por semana desde je_gg_siege: los modificadores de combate del sitio sobre los generales
+#     del frente de Montevideo (10 dias, renovados) y la estrategia de sitio del Cerrito de la IA.
+gg_siege_generals_sync = {
+	every_country = {
+		limit = { has_modifier = guerra_grande_walls_of_montevideo }
+		every_scope_general = {
+			limit = { gg_general_at_the_siege = yes }
+			add_modifier = { name = gg_siege_behind_the_walls days = 10 }
+		}
+	}
+	every_country = {
+		limit = { has_modifier = gg_siege_no_breaching_guns }
+		every_scope_general = {
+			limit = { gg_general_at_the_siege = yes }
+			add_modifier = { name = gg_siege_without_breaching_guns days = 10 }
+		}
+		if = {
+			limit = {
+				is_player = no
+				has_variable = guerra_grande_cerrito_government
+				NOT = { has_strategy = gg_ai_strategy_cerrito_siege }
+			}
+			set_strategy = gg_ai_strategy_cerrito_siege
+		}
+	}
+}

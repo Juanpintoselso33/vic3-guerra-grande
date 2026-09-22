@@ -310,8 +310,10 @@ gg_siege_trading_with_the_enemy = {
 #     entera. Simplemente no puede reducir una plaza fuerte, que es exactamente lo que paso.
 gg_siege_no_breaching_guns = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds"
-	unit_occupation_mult = -0.5
-	unit_provinces_captured_mult = -0.5
+	# EN/ES: 22/9/2026 -- its combat and occupation lines moved to the generals at the plaza
+	#     (gg_siege_without_breaching_guns): as a country modifier they held against Rivera and Brazil too.
+	#     It stays as the marker of the siege on the Cerrito; the comment below explains the -50%.
+	#     / sus lineas pasaron a los generales del frente de Montevideo; queda como marca del sitio
 	# EN: and the assault itself. The two lines above only slow down what happens AFTER the battle is
 	#     won, and Montevideo is a single province: the engine's minimum capture beats any occupation
 	#     penalty, so one won battle took the city. An army with no breaching guns should lose the
@@ -321,7 +323,7 @@ gg_siege_no_breaching_guns = {
 	#     cualquier penalidad de ocupacion, asi que una sola batalla ganada tomaba la ciudad. Un
 	#     ejercito sin canones de brecha tiene que perder la batalla al pie de la muralla, no
 	#     simplemente tardar mas en entrar.
-	unit_offense_mult = -0.5
+
 }
 
 # EN: and the other half of the same fact: the guns of the plaza. The Defensa's artillery park

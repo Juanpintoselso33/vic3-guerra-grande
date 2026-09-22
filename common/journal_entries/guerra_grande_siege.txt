@@ -59,8 +59,16 @@ je_gg_siege = {
 	immediate = {
 		gg_journal_hide_engine_parts = yes
 		gg_ui_siege_leaders_sync = yes
+		gg_siege_generals_sync = yes
 	}
 
+	# EN/ES: 22/9/2026 -- the siege's combat modifiers on the generals at the plaza, weekly
+	#     / los modificadores de combate del sitio sobre los generales de la plaza, cada semana
+	on_weekly_pulse = {
+		effect = {
+			gg_siege_generals_sync = yes
+		}
+	}
 	on_monthly_pulse = {
 		effect = {
 			gg_journal_hide_engine_parts = yes

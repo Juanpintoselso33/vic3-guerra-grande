@@ -1,0 +1,69 @@
+﻿# EN: Two orders of the Great Siege (22/9/2026, decided with Juan). They exist only while the siege
+#     does (the country carries its siege modifier) and only for a general at the Montevideo front.
+#     The walls' +75% and the missing breaching guns' -50% are NOT here: they go by position
+#     (gg_siege_generals_sync), so they hold whatever order is given -- an assault on the wall is
+#     exactly the case the -50% is for, and it would vanish with a defensive order. What the orders
+#     carry is the conduct of each side, and the AI weight: the Cerrito's AI prefers its siege line
+#     while the plaza is all the Defensa has and hunger has not ripened it (gg_siege_hold_the_line).
+#     ai_weight picks among the orders of the behaviour the AI has chosen; whether it also tips the AI
+#     from advancing to defending is not documented (commander_orders/orders.md) -- to verify in game.
+# ES: Dos ordenes del Gran Sitio. Existen solo durante el sitio y solo para un general del frente de
+#     Montevideo. El +75 % y el -50 % no van aca: van por posicion, asi valen con cualquier orden. Lo
+#     que llevan es la conducta de cada lado y el peso para la IA. Si ese peso tambien inclina a la IA
+#     de avanzar a defender no esta documentado: a verificar en partida.
+gg_siege_line = {
+	texture = "gfx/interface/icons/commander_order_icons/defend.dds"
+	military_type = army
+	behavior = defend
+	visible = {
+		has_role_of_type = general
+		owner ?= { has_modifier = gg_siege_no_breaching_guns }
+	}
+	possible = {
+		has_role_of_type = general
+		owner ?= { has_modifier = gg_siege_no_breaching_guns }
+		gg_general_at_the_siege = yes
+	}
+	# EN/ES: the camp at the Cerrito: dug in and fed from the whole countryside
+	#     / el campamento del Cerrito: atrincherado y abastecido por toda la campania
+	modifier = {
+		unit_defense_mult = 0.1
+		unit_recovery_rate_add = 0.1
+	}
+	entity_animation = "defend"
+	clicksound = "event:/SFX/UI/Military/order_general_front_defend"
+	experience = 0.1
+	ai_weight = {
+		value = 1
+		if = {
+			limit = { gg_siege_hold_the_line = yes }
+			value = 50
+		}
+	}
+}
+
+gg_siege_walls = {
+	texture = "gfx/interface/icons/commander_order_icons/defend.dds"
+	military_type = army
+	behavior = defend
+	visible = {
+		has_role_of_type = general
+		owner ?= { has_modifier = guerra_grande_walls_of_montevideo }
+	}
+	possible = {
+		has_role_of_type = general
+		owner ?= { has_modifier = guerra_grande_walls_of_montevideo }
+		gg_general_at_the_siege = yes
+	}
+	# EN/ES: behind the line of the plaza, with the city at their backs / detras de la linea de la plaza
+	modifier = {
+		unit_defense_mult = 0.1
+		unit_morale_loss_mult = -0.1
+	}
+	entity_animation = "defend"
+	clicksound = "event:/SFX/UI/Military/order_general_front_defend"
+	experience = 0.1
+	ai_weight = {
+		value = 20
+	}
+}

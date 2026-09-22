@@ -1,0 +1,20 @@
+﻿# EN: The combat half of the siege, on the generals who are actually at it (22/9/2026). These used to
+#     be country modifiers, so the Cerrito fought with half its attack everywhere -- against Rivera in
+#     the campaign, against Brazil -- and the Defensa kept +75% defence in open country (India Muerta).
+#     gg_siege_generals_sync renews them each week (10 days) on the generals at the Montevideo front, whatever
+#     their order: the assault on the wall is exactly the case the penalty is for, so it cannot ride on
+#     a defensive order. The rest of each country modifier (blockade resistance, attrition, exhaustion,
+#     occupation of the campaign) stays on the country.
+# ES: La mitad de combate del sitio, sobre los generales que estan en el. Antes eran modificadores de
+#     pais y valian en todas partes. Se renuevan cada semana (10 dias) sobre los generales del frente de Montevideo,
+#     sea cual sea su orden: el asalto a la muralla es justo el caso para el que existe la penalidad.
+gg_siege_behind_the_walls = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	unit_defense_mult = 0.75
+}
+gg_siege_without_breaching_guns = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds"
+	unit_offense_mult = -0.5
+	unit_occupation_mult = -0.5
+	unit_provinces_captured_mult = -0.5
+}

@@ -1,0 +1,30 @@
+﻿# EN: The Great Siege, seen from a general (22/9/2026, decided with Juan: the siege's combat modifiers
+#     belong to the plaza, not to the whole country). A general is "at the siege" when his formation
+#     stands on (or is travelling to) a front that includes the Montevideo state, and the Defensa still
+#     owns it. Owner, not controller: Vic3 1.13 has no state-controller trigger (occupation is per
+#     province, see gg_plata_ba_held_by_rosas), so a Montevideo occupied but not yet ceded keeps the
+#     modifiers until the peace settles it. The link chain is the one the Iberia expansion uses
+#     (events/iberia_events/ip4_coup_events.txt: commander_military_formation -> front -> any_scope_state).
+# ES: El Gran Sitio visto desde un general: esta «en el sitio» si su formacion esta en (o va hacia) un
+#     frente que incluye el estado de Montevideo y la Defensa todavia lo tiene. La cadena es la de Iberia.
+gg_general_at_the_siege = {
+	has_role_of_type = general
+	commander_military_formation ?= {
+		front ?= {
+			any_scope_state = {
+				state_region = s:STATE_MONTEVIDEO
+				owner ?= { has_variable = guerra_grande_defensa_government }
+			}
+		}
+	}
+}
+
+# EN/ES: the plaza is all the Defensa has left, and hunger has not ripened it: the moment to hold the
+#     line, not to storm it / la plaza es todo lo que le queda a la Defensa y el hambre no la maduro
+gg_siege_hold_the_line = {
+	any_country = {
+		has_variable = guerra_grande_defensa_government
+		NOT = { any_scope_state = { NOT = { state_region = s:STATE_MONTEVIDEO } } }
+	}
+	NOT = { gg_defensa_ripe = yes }
+}

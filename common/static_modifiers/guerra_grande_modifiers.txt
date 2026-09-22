@@ -92,7 +92,8 @@ guerra_grande_walls_of_montevideo = {
 	#     batallones y mucha mas campania detras, medio punto de defensa no alcanzaba para que la
 	#     plaza fuera inexpugnable: el asalto directo era el camino barato. / half a point of
 	#     defence did not make the place unassailable, and the direct assault was the cheap road.
-	unit_defense_mult = 0.75
+	# EN/ES: 22/9/2026 -- the +75% defence moved to the generals at the plaza (gg_siege_behind_the_walls)
+	#     / el +75 % paso a los generales de la plaza
 	state_blockade_resistance_add = 100
 	military_formation_attrition_risk_mult = -0.25
 	country_war_exhaustion_casualties_mult = -0.25

@@ -1,0 +1,42 @@
+﻿# EN: The Cerrito during the Great Siege (22/9/2026, decided with Juan): no aggression and every war
+#     goal at zero while the siege lasts, as already done with Corrientes and the Coalition
+#     (zz_guerra_grande_argentina.txt). Weights steer the AI; they do not forbid a play outright.
+#     Set explicitly by gg_siege_generals_sync (the AI re-picks strategies rarely, and weight alone
+#     is not enough -- same lesson as common/ai_strategies/gg_rio_plata.txt).
+# ES: El Cerrito durante el Gran Sitio: agresividad baja y sin objetivos de guerra contra terceros.
+gg_ai_strategy_cerrito_siege = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+	type = diplomatic
+	undesirable_infamy_level = { value = 10 }
+	unacceptable_infamy_level = { value = 25 }
+	diplomatic_play_neutrality = { value = 60 }
+	diplomatic_play_boldness = { value = 0 }
+	recklessness = { value = -0.5 }
+	aggression = { value = 0 }
+	# EN/ES: every war goal type of 1.13 at zero (the Guerra Grande itself is a scripted play and is
+	#     not affected) / todos los tipos de objetivo en cero (la Guerra Grande es una jugada por script)
+	wargoal_weights = {
+		annex_country = 0.0
+		conquer_state = 0.0
+		force_nationalization = 0.0
+		humiliation = 0.0
+		increase_autonomy = 0.0
+		independence = 0.0
+		liberate_country = 0.0
+		liberate_subject = 0.0
+		make_dominion = 0.0
+		make_protectorate = 0.0
+		make_tributary = 0.0
+		reduce_autonomy = 0.0
+		regime_change = 0.0
+		return_state = 0.0
+		take_treaty_port = 0.0
+	}
+	possible = {
+		has_variable = guerra_grande_cerrito_government
+		has_modifier = gg_siege_no_breaching_guns
+	}
+	weight = {
+		value = 1000
+	}
+}

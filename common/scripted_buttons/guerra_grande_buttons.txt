@@ -26,6 +26,19 @@ guerra_grande_foreign_intervention_button = {
 
 	ai_chance = {
 		value = 50
+		# EN/ES: 22/9/2026, decided with Juan -- the AI Defensa does not call the squadrons before 1845
+		#     (the intervention came in 1845) unless the river has been shut six months in a row
+		#     / no antes de 1845, salvo con el rio cerrado seis meses seguidos
+		if = {
+			limit = {
+				year < 1845
+				OR = {
+					NOT = { has_global_variable = gg_plata_closed_streak }
+					global_var:gg_plata_closed_streak < 6
+				}
+			}
+			value = 0
+		}
 	}
 }
 

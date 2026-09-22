@@ -71,7 +71,9 @@ guerra_grande_montonera_levy_button = {
 	}
 
 	ai_chance = {
-		value = 70
+		# EN/ES: 22/9/2026, decided with Juan -- one road for the AI: the journal's pulse
+		#     (common/journal_entries/guerra_grande.txt), with the same guards / un solo camino, el del journal
+		value = 0
 	}
 }
 
@@ -172,6 +174,8 @@ guerra_grande_river_blockade_button = {
 	}
 
 	ai_chance = {
-		value = 70
+		# EN/ES: 22/9/2026, decided with Juan -- one road for the AI: the journal's pulse
+		#     (common/journal_entries/guerra_grande.txt), with the same guards / un solo camino, el del journal
+		value = 0
 	}
 }

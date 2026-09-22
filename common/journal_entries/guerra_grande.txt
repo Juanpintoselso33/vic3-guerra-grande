@@ -214,6 +214,9 @@ je_guerra_grande = {
 								is_player = no
 								has_global_variable = guerra_grande_open_war
 								NOT = { has_variable = guerra_grande_montonera_levy_raised }
+								# EN/ES: 22/9/2026 -- the button's guard: the levy is raised in San Jose
+								#     / la guarda del boton: la leva se levanta en San Jose
+								any_scope_state = { state_region = s:STATE_SAN_JOSE }
 							}
 							gg_montonera_levy = yes
 						}
