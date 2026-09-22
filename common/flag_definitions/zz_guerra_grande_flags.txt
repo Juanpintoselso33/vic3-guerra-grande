@@ -32,7 +32,16 @@
 #     Defensa". La imagen bajada y convertida, no redibujada.
 # -------------------------------------------------------------------------------------------------
 
-URU = {
+# EN: 22/9/2026 -- REPLACE, not a plain block. Vanilla already defines URU, and a second "URU = {"
+#     is dropped at load ("Duplicated key URU will not be created"), so the Defensa's flag never
+#     applied. REPLACE carries vanilla's definitions unchanged (00_flag_definitions.txt, 1.13) plus ours.
+# ES: REPLACE, no un bloque comun. Vanilla ya define URU y un segundo "URU = {" se descarta al cargar,
+#     asi que la bandera de la Defensa nunca se aplicaba. REPLACE lleva las definiciones de vanilla sin
+#     cambios mas la nuestra.
+# EN/ES: vanilla's canton scale, used by its URU block below / la escala del canton de vanilla
+@third = @[1/3]
+
+REPLACE:URU = {
 	flag_definition = {
 		coa = gg_defensa_government
 		priority = 100
@@ -41,6 +50,75 @@ URU = {
 				has_variable = guerra_grande_defensa_government
 				NOT = { has_global_variable = gg_peace_settled }
 			}
+		}
+	}
+	# EN/ES: vanilla 1.13, unchanged / sin cambios
+	flag_definition = {
+		coa = URU
+		subject_canton = URU
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = URU_subject
+		overlord_canton_scale = { @third 0.557 }
+		priority = 1
+	}
+	flag_definition = {
+		coa = URU_monarchy
+		subject_canton = URU_monarchy
+		priority = 5
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_absolute_monarchy
+		subject_canton = URU_absolute_monarchy
+		priority = 20
+		trigger = {
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_dictatorship
+		subject_canton = URU_dictatorship
+		priority = 20
+		trigger = {
+			coa_def_dictatorship_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_communist
+		priority = 1500
+		trigger = {
+			coa_def_communist_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_subject_SPA
+		priority = 50
+		trigger = {
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_subject_BRZ
+		priority = 50
+		trigger = {
+			OR = {
+				coa_def_brazilian_ensign_trigger = yes
+				AND = {
+					exists = c:POR
+					scope:actor ?= {
+						is_subject_of = c:POR
+					}
+				}
+			}
+		}
+	}
+	flag_definition = {
+		coa = URU_subject_USA
+		priority = 50
+		trigger = {
+			coa_def_american_ensign_trigger = yes
 		}
 	}
 }
