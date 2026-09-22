@@ -23,7 +23,9 @@
  gg_naval.3.a:0 "Receive him as the man the city already believes him to be."
  gg_naval.3.a_tt:0 "@information! Costa Brava gives #b Garibaldi#! command of the Italian Legion and brings it one additional battalion."
  gg_naval.3.b:0 "A defeat is a defeat: no honours and no promotion."
- gg_naval.3.b_tt:0 "@information! Without public honours, Garibaldi wins neither command nor new recruits: the Italian Legion keeps one battalion."
+ gg_naval.3.b_tt:0 "@information! Without public honours, Garibaldi wins neither command nor new recruits: the Italian Legion keeps one battalion. The government earns some credit for not dressing up the defeat: legitimacy #P +2#!."
 
  gg_naval_port_under_blockade:0 "The Port under Blockade"
  gg_naval_port_under_blockade_desc:0 "The Confederation's squadron rides at anchor off Montevideo, unchallenged."
+ gg_naval_no_false_honours:0 "No Honours for a Defeat"
+ gg_naval_no_false_honours_desc:0 "The government did not dress the defeat up as a victory, and the city credits it for that."

@@ -1660,11 +1660,6 @@ gg_peace.7 = {
 			change_relations = { country = ROOT value = -100 }
 			create_diplomatic_pact = { country = ROOT type = rivalry }
 		}
-		every_scope_state = {
-			state_region = {
-				add_claim = c:ARG
-			}
-		}
 		add_modifier = { name = gg_peace_european_guarantee years = 10 is_decaying = yes }
 		ai_chance = { base = 70 }
 	}
@@ -1679,11 +1674,9 @@ gg_peace.7 = {
 			change_relations = { country = ROOT value = -100 }
 			create_diplomatic_pact = { country = ROOT type = rivalry }
 		}
-		every_scope_state = {
-			state_region = {
-				add_claim = c:ARG
-			}
-		}
+		# EN/ES: 22/9/2026, decided with Juan -- no Argentine claim on the Republic: Rosas refused the
+		#     Gore-Gros offer (8/5/1848) but always recognised oriental independence (SOURCES_powers.md
+		#     section 4). The hostility is the rivalry and the -100 above. / sin reclamo argentino
 		add_modifier = { name = guerra_grande_no_victors_no_vanquished years = 10 is_decaying = yes }
 		ai_chance = { base = 30 }
 	}

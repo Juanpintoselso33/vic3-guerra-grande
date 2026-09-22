@@ -1,0 +1,5 @@
+﻿# EN/ES: gg_naval.3.b -- no honours for a defeat (22/9/2026) / ni honores para una derrota
+gg_naval_no_false_honours = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 2
+}

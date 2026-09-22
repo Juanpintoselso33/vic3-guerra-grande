@@ -811,6 +811,7 @@ gg_powers.18 = {
 
 	option = {
 		name = gg_powers.18.a
+		custom_tooltip = gg_powers.18.a_tt
 		# EN: keep Garibaldi's men, let the Basques go.
 		# ES: retener a los de Garibaldi, dejar ir a los vascos.
 		add_treasury = -30000
@@ -829,6 +830,7 @@ gg_powers.18 = {
 
 	option = {
 		name = gg_powers.18.b
+		custom_tooltip = gg_powers.18.b_tt
 		# EN: keep the Basques, let Garibaldi go.
 		# ES: retener a los vascos, dejar ir a Garibaldi.
 		add_treasury = -30000
@@ -859,6 +861,7 @@ gg_powers.18 = {
 
 	option = {
 		name = gg_powers.18.c
+		custom_tooltip = gg_powers.18.c_tt
 		default_option = yes
 		# EN: historical: let both go. The money stays, the walls are thinner.
 		# ES: lo historico: dejarlos ir a los dos. La plata queda, la muralla se afina.
@@ -959,7 +962,17 @@ gg_powers.19 = {
 		default_option = yes
 		# EN: a mission to Paris (Pacheco y Obes): France falls more slowly. Cheaper with his line.
 		# ES: una mision a Paris (Pacheco y Obes): Francia baja mas lento. Mas barata con su linea.
-		set_global_variable = gg_paris_mission
+		# EN/ES: 22/9/2026, decided with Juan -- one chance in four that the mission is exposed: it costs
+		#     French backing at once and the French fall is not softened. The 25% is a design figure, not
+		#     a documented event (SOURCES_powers.md section 7) / una en cuatro de que se descubra
+		random_list = {
+			75 = {
+				set_global_variable = gg_paris_mission
+			}
+			25 = {
+				gg_patron_change = { PATRON = francia DELTA = -10 }
+			}
+		}
 		add_treasury = -10000
 		ai_chance = { base = 40 }
 	}

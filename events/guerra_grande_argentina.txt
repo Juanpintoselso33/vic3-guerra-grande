@@ -970,6 +970,9 @@ gg_argentina.9 = {
 		name = gg_argentina.9.a
 		custom_tooltip = gg_regeneracion_pass_tt
 		default_option = yes
+		# EN/ES: 22/9/2026, decided with Juan -- letting the reply stand consolidates Urquiza's command
+		#     (the Regeneracion chronology) / dejar pasar consolida el mando de Urquiza
+		gg_patron_change = { PATRON = urquiza DELTA = 5 }
 		ai_chance = { base = 60 }
 	}
 	option = {

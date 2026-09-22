@@ -1276,6 +1276,20 @@ gg_ruler_set = {
 			set_character_as_ruler = yes
 		}
 	}
+	# EN/ES: 22/9/2026 (Codex) -- a man in exile is brought home, not duplicated: the same
+	#     transfer_character vanilla uses on the exile pool (garibaldi_events.txt) / al exiliado se lo trae
+	else_if = {
+		limit = { any_character_in_exile_pool = { has_template = $TEMPLATE$ } }
+		save_scope_as = gg_ruler_claimant
+		random_character_in_exile_pool = {
+			limit = { has_template = $TEMPLATE$ }
+			transfer_character = scope:gg_ruler_claimant
+		}
+		random_scope_character = {
+			limit = { has_template = $TEMPLATE$ }
+			set_character_as_ruler = yes
+		}
+	}
 	else = {
 		create_character = {
 			template = $TEMPLATE$

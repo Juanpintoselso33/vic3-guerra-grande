@@ -152,6 +152,14 @@ gg_phase1.9 = {
 			limit = { has_template = URU_Fructuoso_Rivera }
 			set_character_as_ruler = yes
 		}
+		# EN/ES: 22/9/2026, decided with Juan -- the amnesty has an effect: Rivera's decree of mid-November
+		#     1838 sanctioned «perpetuo y absoluto olvido de opiniones anteriores» and put everyone's liberty
+		#     and safety under his guarantee (E. Acevedo, Anales historicos del Uruguay, t. II). The blancos
+		#     who stay are calmed; the colorados gain the internal peace.
+		#     / el decreto de Rivera de noviembre de 1838: olvido de las opiniones anteriores
+		custom_tooltip = gg_phase1.9.b_tt
+		add_loyalists = { value = small_radicals interest_group = ig:ig_landowners }
+		gg_score_colorado = { AMOUNT = 1 }
 		ai_chance = { base = 40 }
 	}
 

@@ -23,7 +23,9 @@
  gg_naval.3.a:0 "Recibirlo como lo que la ciudad ya cree que es."
  gg_naval.3.a_tt:0 "@information! Costa Brava le da a #b Garibaldi#! el mando de la Legión Italiana y le suma un batallón."
  gg_naval.3.b:0 "Una derrota es una derrota: ni honores ni ascenso."
- gg_naval.3.b_tt:0 "@information! Sin honores públicos, Garibaldi no gana ni el mando ni nuevos reclutas: la Legión Italiana conserva un batallón."
+ gg_naval.3.b_tt:0 "@information! Sin honores públicos, Garibaldi no gana ni el mando ni nuevos reclutas: la Legión Italiana conserva un batallón. El gobierno gana algo de crédito por no disfrazar la derrota: legitimidad #P +2#!."
 
  gg_naval_port_under_blockade:0 "El puerto bajo bloqueo"
  gg_naval_port_under_blockade_desc:0 "La escuadra de la Confederación fondea frente a Montevideo y nadie se lo discute."
+ gg_naval_no_false_honours:0 "Ni honores para una derrota"
+ gg_naval_no_false_honours_desc:0 "El gobierno no disfrazó la derrota de victoria, y eso le suma crédito en la plaza."

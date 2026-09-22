@@ -1,0 +1,14 @@
+﻿# EN/ES: 22/9/2026 -- is this man alive in some country or in exile? A candidate is fetched, never
+#     created: a dead man is not raised / esta vivo en algun pais o en el exilio? al candidato se lo
+#     busca, nunca se lo crea: a un muerto no se lo resucita
+gg_postwar_alive_somewhere = {
+	OR = {
+		any_country = {
+			any_scope_character = {
+				has_template = $TEMPLATE$
+				is_character_alive = yes
+			}
+		}
+		any_character_in_exile_pool = { has_template = $TEMPLATE$ }
+	}
+}

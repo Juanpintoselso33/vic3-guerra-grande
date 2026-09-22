@@ -219,6 +219,9 @@ gg_naval.3 = {
 	option = {
 		name = gg_naval.3.b
 		custom_tooltip = gg_naval.3.b_tt
+		# EN/ES: 22/9/2026, decided with Juan -- a government that does not dress a defeat as a victory
+		#     gains some standing / un gobierno que no disfraza una derrota gana algo de autoridad
+		add_modifier = { name = gg_naval_no_false_honours years = 5 is_decaying = yes }
 		ai_chance = { base = 35 }
 	}
 }
