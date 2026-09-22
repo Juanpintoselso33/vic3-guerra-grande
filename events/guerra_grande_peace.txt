@@ -1727,6 +1727,13 @@ gg_peace.8 = {
 			limit = { NOT = { exists = c:URU } }
 			change_tag = URU
 		}
+		# EN/ES: C10 -- the Republic keeps its port open, as the Defensa did (root is the country
+		#     itself, so the new tag is not needed) / la Republica mantiene abierto su puerto, como la
+		#     Defensa (root es el propio pais, no hace falta el tag nuevo)
+		if = {
+			limit = { is_player = no }
+			set_strategy = gg_ai_strategy_plata_defensa
+		}
 		# EN: playtest 2026-09-17 -- an event queued on the country that just changed tag never fired
 		#     (guerra_grande.3.b lost its calendar that way), so another country relays it: Brazil,
 		#     or any other if Brazil is gone. gg_peace.10 finds the new URU a day later.

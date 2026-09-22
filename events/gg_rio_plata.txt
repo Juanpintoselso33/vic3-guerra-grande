@@ -17,7 +17,8 @@
 # ES: gg_plata.2 -- ORIBE PIDE EL BLOQUEO (1843, solo con Rosas jugador; la IA cierra en el acto).
 # SOURCE / FUENTE: SOURCES_powers.md section 1 -- Rosas announced the partial blockade on 9/3/1843,
 #     in force from 1/4; Purvis's refusal quoted from Caillet-Bois, Historia naval argentina; HMS
-#     Alfred, 74 guns, on the station 1842-1845.
+#     Alfred (ex-Asia, 1811), razeed to 50 guns in 1828, on the station 1842-1845 (SOURCES_powers.md
+#     section 1, corrected 22/9/2026: it said 74).
 # -------------------------------------------------------------------------------------------------
 gg_plata.2 = {
 	type = country_event

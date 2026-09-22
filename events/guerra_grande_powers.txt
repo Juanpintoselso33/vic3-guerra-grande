@@ -921,11 +921,16 @@ gg_powers.19 = {
 		gg_patron_change = { PATRON = britania DELTA = -100 }
 		# EN: C10, A -- article 1: Britain returns the Argentine warships and evacuates Martin Garcia,
 		#     and recognises Rosas's right to blockade (SOURCES_powers.md section 6). The key goes back.
-		#     What Rosas did with it after 1849 is still [source pending]: his stance is left as it was.
+		#     He did not blockade Montevideo again: from late 1847 Oribe already let his ports trade with
+		#     the city and Rosas tolerated it to keep Urquiza, and France kept the city until Lepredour
+		#     (SOURCES_powers.md section 12). So the key comes back with the river open; without this,
+		#     his 1843 stance would shut it again by itself the day the battery returned.
 		# ES: C10, A -- articulo 1: Gran Bretania devuelve los buques de guerra y evacua Martin Garcia, y
-		#     reconoce el derecho de bloqueo. La llave vuelve. Que hizo Rosas con ella despues de 1849
-		#     sigue [pendiente de fuente]: su postura queda como estaba.
+		#     reconoce el derecho de bloqueo. La llave vuelve. No volvio a bloquear Montevideo: desde
+		#     fines de 1847 Oribe ya dejaba comerciar sus puertos con la ciudad y Rosas lo toleraba por
+		#     Urquiza, y Francia sostuvo la plaza hasta Lepredour. La llave vuelve con el rio abierto.
 		gg_plata_fort_restore = yes
+		gg_plata_rosas_open = yes
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_23 } }

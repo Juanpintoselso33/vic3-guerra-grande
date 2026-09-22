@@ -86,6 +86,10 @@ gg_ai_strategy_plata_enemies = {
 }
 
 # EN/ES: the Defensa lives on its port: always open to everyone / la Defensa vive del puerto: abierto a todos
+# EN: So does a Uruguay the Cerrito won: Oribe's ports traded, the Buceo included, and from late 1847
+#     he let them trade with the city itself (SOURCES_powers.md section 12). Set in gg_peace.8.
+# ES: Igual un Uruguay que gano el Cerrito: los puertos de Oribe comerciaban, el Buceo incluido, y
+#     desde fines de 1847 los dejo comerciar con la plaza. Se fija en gg_peace.8.
 gg_ai_strategy_plata_defensa = {
 	icon = "gfx/interface/icons/ai_strategy_icons/placate_population.dds"
 	type = administrative
@@ -103,6 +107,11 @@ gg_ai_strategy_plata_defensa = {
 			}
 		}
 	}
-	possible = { has_variable = guerra_grande_defensa_government }
+	possible = {
+		OR = {
+			has_variable = guerra_grande_defensa_government
+			c:URU ?= this
+		}
+	}
 	weight = { value = 0 }
 }

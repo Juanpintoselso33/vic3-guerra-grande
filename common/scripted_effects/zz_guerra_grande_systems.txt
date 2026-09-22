@@ -401,6 +401,15 @@ gg_postwar_start = {
 #     despacho de cierre). Cada uno con su guarda de has_modifier, asi no se le saca nada a un pais
 #     que nunca lo tuvo.
 gg_wartime_modifiers_clear = {
+	# EN: C10 (22/9/2026) -- the blockade of Montevideo was a siege measure: with the war over, Rosas
+	#     opens the river (otherwise his AI would keep the 1843 closure for good).
+	# ES: C10 -- el bloqueo de Montevideo era una medida del sitio: terminada la guerra, Rosas abre el
+	#     rio (si no, su IA conservaria para siempre el cierre de 1843).
+	if = {
+		limit = { has_global_variable = gg_plata_rosas_stance }
+		set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+		gg_plata_rosas_stance_apply = yes
+	}
 	every_country = {
 		limit = {
 			OR = {
