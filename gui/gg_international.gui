@@ -1,5 +1,5 @@
 ﻿# EN: THE RIVER PLATE QUESTION, third pass (22/9/2026, Juan: «try not to use only text»): the chart as
-#     the header with the phase on it; one short line; the river drawn as two shores (flag, battery)
+#     the header with the phase on it; one short line; the river drawn as two shores (flag; Buenos Aires's battery, Montevideo's supply)
 #     and the passage between them (open/closed); from the split, the two leaders; the two clocks and
 #     the port blockade only while they run; the longer explanation behind the arrow; the action.
 # ES: LA CUESTION DEL PLATA, tercera pasada: la carta de encabezado con la fase encima; una linea
@@ -82,7 +82,7 @@ flowcontainer = {
   widget = {
    position = { 0 0 } size = { 196 204 }
    background = { using = dark_area alpha = 0.3 }
-   tooltip = "gg_ui_plata_key_tt"
+   tooltip = "gg_ui_plata_shore_ba_tt"
    large_flag = { position = { 50 16 } datacontext = "[GetGlobalVariable('gg_plata_ba_owner').GetCountry]" }
    textbox = { position = { 0 92 } size = { 196 50 } multiline = yes using = fontsize_medium align = center|nobaseline text = "gg_ui_plata_shore_ba" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 26 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
@@ -101,13 +101,14 @@ flowcontainer = {
   widget = {
    position = { 324 0 } size = { 196 204 }
    background = { using = dark_area alpha = 0.3 }
-   tooltip = "gg_ui_plata_key_tt"
+   tooltip = "gg_ui_plata_shore_mvd_tt"
    large_flag = { position = { 50 16 } datacontext = "[GetGlobalVariable('gg_plata_mvd_owner').GetCountry]" }
    textbox = { position = { 0 92 } size = { 196 50 } multiline = yes using = fontsize_medium align = center|nobaseline text = "gg_ui_plata_shore_mvd" }
-   icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)1')]" position = { 26 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
-   icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)0')]" position = { 26 150 } size = { 40 40 } alpha = 0.25 texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)1')]" position = { 70 158 } size = { 120 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_yes" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)0')]" position = { 70 158 } size = { 120 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
+   # EN/ES: Montevideo's shore never closes the river; what matters is whether ships reach it / la orilla de Montevideo nunca cierra el rio; importa si le llegan barcos
+   icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 16 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_port.dds" }
+   icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 16 150 } size = { 40 40 } texture = "gfx/interface/icons/famine_icons/famine_icon.dds" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_yes" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_no" }
   }
  }
  widget = { size = { 520 8 } }
@@ -175,7 +176,7 @@ flowcontainer = {
     item = {
      widget = {
       visible = "[GetScriptedGui('gg_ui_plata_right_powers').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-      tooltip = "gg_ui_plata_card_mvd_tt"
+      tooltip = "gg_ui_plata_card_powers_tt"
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }

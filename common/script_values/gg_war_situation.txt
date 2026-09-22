@@ -28,3 +28,27 @@ gg_ui_war_river_now = {
 	value = gg_plata_pressure_blanco
 	subtract = gg_plata_pressure_colorado
 }
+# EN/ES: 22/9/2026 (the vic3-journals skill: bars only when they matter) -- each government's endurance
+#     row shows while it is counting months; the section header while either is
+#     / cada fila del aguante se ve mientras ese gobierno cuenta meses; el encabezado, mientras alguno
+gg_ui_war_endurance_defensa_shown = {
+	value = 0
+	if = { limit = { has_global_variable = guerra_grande_open_war has_global_variable = gg_defensa_exhausted global_var:gg_defensa_exhausted > 0 } value = 1 }
+}
+gg_ui_war_endurance_cerrito_shown = {
+	value = 0
+	if = { limit = { has_global_variable = guerra_grande_open_war has_global_variable = gg_cerrito_exhausted global_var:gg_cerrito_exhausted > 0 } value = 1 }
+}
+gg_ui_war_endurance_shown = {
+	value = gg_ui_war_endurance_defensa_shown
+	add = gg_ui_war_endurance_cerrito_shown
+	max = 1
+}
+# EN/ES: the peace table shows when talks are suspended, on, in truce or done, or a pledge weighs on them
+#     / la mesa de paz se ve con conversaciones suspendidas, en curso, en tregua o cerradas, o con un compromiso encima
+gg_ui_war_table_shown = {
+	value = 0
+	if = { limit = { gg_ui_war_diplomacy >= 2 } value = 1 }
+	if = { limit = { has_global_variable = gg_imperial_pledged } value = 1 }
+	if = { limit = { has_global_variable = gg_customs_mortgaged } value = 1 }
+}

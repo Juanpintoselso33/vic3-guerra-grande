@@ -1,6 +1,5 @@
 ﻿l_spanish:
- gg_war_ui_diplomacy_1:0 "No hay una propuesta de paz en curso."
- gg_war_ui_diplomacy_2:0 "Las conversaciones quedaron suspendidas. Por ahora no se presenta otro pliego."
- gg_war_ui_diplomacy_3:0 "#Y Hay condiciones de paz en consideración.#! La resolución corresponde a los gobiernos que reciben los pliegos."
- gg_war_ui_diplomacy_4:0 "#Y Rige una tregua.#! El cómputo del cerco y del abastecimiento queda suspendido."
- gg_war_ui_diplomacy_5:0 "#P La paz está acordada.#!"
+ gg_war_ui_diplomacy_2:0 "Las conversaciones se rompieron: por uno o dos años nadie volverá a llamar a la mesa."
+ gg_war_ui_diplomacy_3:0 "#Y Hay pliegos de paz sobre la mesa.#! Mientras se consideran, nadie más es llamado a negociar."
+ gg_war_ui_diplomacy_4:0 "#Y Rige una tregua.#! Mientras dure, el río no cuenta y nadie es llamado a negociar."
+ gg_war_ui_diplomacy_5:0 "#P La paz está firmada.#!"

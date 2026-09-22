@@ -1,8 +1,7 @@
 ﻿l_english:
- gg_ui_plata_weight_blancos:0 "In the war, the river weighs #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! for the blancos."
- gg_ui_plata_weight_colorados:0 "In the war, the river weighs #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! for the colorados."
- gg_ui_plata_weight_even:0 "In the war, the river does not tip the scales yet."
- gg_ui_plata_port_blockade:0 "@warning! #b Buenos Aires is blockaded#!: it is Rosas's port that receives no ships, not Montevideo's."
+ gg_ui_plata_weight_blancos:0 "The river tips the war #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! towards the blancos."
+ gg_ui_plata_weight_colorados:0 "The river tips the war #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! towards the colorados."
+ gg_ui_plata_port_blockade:0 "@warning! #b The port of Buenos Aires is blockaded#!: the port shut is Buenos Aires, not Montevideo."
  gg_plata_rosas_close_tt:0 "@ships! Rosas #N shuts the Plata#! to every foreign flag. While his bank has a battery, the closure holds even if Montevideo stays open.\n#gray (If you play Rosas: close your bank in the River Plate strait panel.)#!"
  gg_plata_rosas_open_tt:0 "@ships! Rosas #P opens the Plata#!.\n#gray (If you play Rosas: keep your bank open in the strait panel; close it again and the patience of London and Paris starts counting again.)#!"
  gg_plata_rosas_neutrals_tt:0 "@ships! Rosas's blockade only stops the Defensa's ships: #P neutral ships reach the port#!."

@@ -4,11 +4,15 @@ gg_ui_plata_left_leader = {
 	scope = country
 	is_shown = { c:ARG ?= this }
 }
-# EN/ES: until the ultimatum, the Defensa (or the Republic before the split) / hasta el ultimatum
+# EN/ES: before the ultimatum and after the settlement, the Defensa (or the Republic before the split)
+#     / antes del ultimatum y despues del arreglo, la Defensa (o la Republica antes de la particion)
 gg_ui_plata_right_defensa = {
 	scope = country
 	is_shown = {
-		gg_plata_phase < 2
+		OR = {
+			gg_plata_phase < 2
+			gg_plata_phase = 4
+		}
 		OR = {
 			has_variable = guerra_grande_defensa_government
 			AND = {
@@ -18,11 +22,12 @@ gg_ui_plata_right_defensa = {
 		}
 	}
 }
-# EN/ES: from the ultimatum, London / desde el ultimatum, Londres
+# EN/ES: from the ultimatum to the settlement, London / del ultimatum al arreglo, Londres
 gg_ui_plata_right_powers = {
 	scope = country
 	is_shown = {
 		gg_plata_phase >= 2
+		gg_plata_phase < 4
 		c:GBR ?= this
 	}
 }

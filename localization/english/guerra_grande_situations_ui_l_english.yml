@@ -1,6 +1,5 @@
 ﻿l_english:
- gg_war_ui_diplomacy_1:0 "No peace proposal is currently under consideration."
- gg_war_ui_diplomacy_2:0 "Talks have been suspended. No further terms are being submitted for now."
- gg_war_ui_diplomacy_3:0 "#Y Peace terms are under consideration.#! The governments receiving them retain their decision."
- gg_war_ui_diplomacy_4:0 "#Y A truce is in force.#! Siege and relief counting is suspended."
- gg_war_ui_diplomacy_5:0 "#P Peace has been agreed.#!"
+ gg_war_ui_diplomacy_2:0 "The talks have broken down: for one or two years nobody will call the other to the table."
+ gg_war_ui_diplomacy_3:0 "#Y Peace terms are on the table.#! While they are weighed, nobody else is called to negotiate."
+ gg_war_ui_diplomacy_4:0 "#Y A truce holds.#! While it lasts, the river does not count and nobody is called to negotiate."
+ gg_war_ui_diplomacy_5:0 "#P Peace has been signed.#!"

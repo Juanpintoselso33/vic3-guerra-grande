@@ -12,11 +12,10 @@
 # EN: The Buenos Aires bank (x365A5B) and the Montevideo bank (x302DDA) are the land endpoints of
 #     strait_rio_de_la_plata.
 # ES: La orilla de Buenos Aires (x365A5B) y la de Montevideo (x302DDA) son los extremos del estrecho.
+# EN/ES: only Buenos Aires's battery counts; Montevideo never shuts the river / solo cuenta la bateria
+#     de Buenos Aires; Montevideo nunca cierra el rio
 gg_plata_ba_fort = {
 	p:x365A5B.state ?= { has_building = building_naval_fortification }
-}
-gg_plata_mvd_fort = {
-	p:x302DDA.state ?= { has_building = building_naval_fortification }
 }
 # EN: Vic3 has no state-controller trigger (occupation is per province), so this reads the owner.
 #     has_any_strait_control was tried and rejected at load (22/9/2026: it takes a country target,

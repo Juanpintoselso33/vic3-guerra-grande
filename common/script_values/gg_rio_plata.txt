@@ -105,14 +105,11 @@ gg_plata_hunger_pct = {
 	max = 100
 	min = 0
 }
-# EN/ES: the shore cards: does each shore keep its battery / si cada orilla conserva su bateria
+# EN/ES: the Buenos Aires shore card: does it keep its battery (only that shore can close the river)
+#     / la tarjeta de Buenos Aires: si conserva su bateria (solo esa orilla puede cerrar el rio)
 gg_ui_plata_ba_fort_sv = {
 	value = 0
 	if = { limit = { gg_plata_ba_fort = yes } value = 1 }
-}
-gg_ui_plata_mvd_fort_sv = {
-	value = 0
-	if = { limit = { gg_plata_mvd_fort = yes } value = 1 }
 }
 # EN/ES: 22/9/2026 (Juan: the bars do not appear until they matter) -- the patience from the first
 #     month of a shut river, the hunger while a run of shut months is on
@@ -120,6 +117,17 @@ gg_ui_plata_mvd_fort_sv = {
 gg_ui_plata_patience_shown = {
 	value = 0
 	if = { limit = { has_global_variable = gg_plata_closed_total global_var:gg_plata_closed_total > 0 } value = 1 }
+	# EN/ES: once the ministers have spoken the clock has done its work / cuando los ministros ya
+	#     hablaron, el reloj cumplio su funcion
+	if = {
+		limit = {
+			OR = {
+				has_global_variable = gg_plata_ultimatum_pending
+				has_global_variable = gg_plata_intervention
+			}
+		}
+		value = 0
+	}
 }
 gg_ui_plata_hunger_shown = {
 	value = 0

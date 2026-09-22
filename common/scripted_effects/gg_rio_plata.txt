@@ -292,7 +292,12 @@ gg_plata_situation_monthly = {
 	if = {
 		limit = { gg_plata_phase = 3 }
 		p:x365A5B.state ?= { add_modifier = { name = gg_plata_phase_intervention_port months = 2 } }
-		c:GBR ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
+		# EN/ES: Britain pays only while its squadron is in the river / Gran Bretana paga solo mientras su
+		#     escuadra esta en el rio
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_britain_settled } }
+			c:GBR ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
+		}
 		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 	}
 	gg_plata_flags_sync = yes

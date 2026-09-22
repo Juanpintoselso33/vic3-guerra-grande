@@ -72,7 +72,7 @@ hace de la capital una fortaleza.
 jugada diplomática propia. Si el jugador venía por la vía blanca, puede irse al Cerrito
 (`change_tag`). Rosas decide si lo respalda.
 
-**La journal entry.** Una barra de −10 a +10 que **solo se mueve cuando se gana una batalla**,
+**La journal entry.** Una barra de −10 a +10 que mueven **las decisiones de los dos bandos y el río** (las batallas no puntúan),
 dos botones —llamar a las escuadras anglofrancesas, levantar la Legión Italiana de Garibaldi—
 y eventos mensuales de ambiente. Cierra cuando uno de los dos gobiernos deja de existir, o con
 la paz del 8 de octubre de 1851: *ni vencidos ni vencedores*.
@@ -84,7 +84,7 @@ Nada inventado: cada pieza copia una mecánica que ya existe en el juego.
 | Pieza | Modelo |
 |---|---|
 | Barra −10/+10 sin progreso mensual | `je_the_first_carlist_war_score_bar` |
-| La mueven las batallas | `on_battle_won` → `carlist_war_battle_score` |
+| La mueven las decisiones y el río | `gg_war_balance_blanco`, `gg_plata_pressure_*` |
 | Cierre por desaparición de un bando | `NAND = { exists = c:SPC exists = c:SPA }` |
 | País rival creado por evento | `create_country` de Centroamérica |
 | Guerra civil | `dp_taiping_rebellion` |
@@ -130,7 +130,7 @@ Government** (tag `CER`) is created with the whole country except Montevideo, at
 own diplomatic play. A player who took the blanco road can ride out to the Cerrito
 (`change_tag`). Rosas decides whether to back it.
 
-**The journal entry.** A −10 to +10 bar that **only moves when a battle is won**, two buttons —
+**The journal entry.** A −10 to +10 bar moved by **both sides' decisions and the river** (battles do not score), two buttons —
 call in the Anglo-French squadrons, raise Garibaldi's Italian Legion — and monthly flavour
 events. It closes when one of the two governments ceases to exist, or with the peace of
 8 October 1851: *neither vanquished nor victors*.

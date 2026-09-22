@@ -1,8 +1,7 @@
 ﻿l_spanish:
- gg_ui_plata_weight_blancos:0 "En la guerra, el río pesa #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! para los blancos."
- gg_ui_plata_weight_colorados:0 "En la guerra, el río pesa #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! para los colorados."
- gg_ui_plata_weight_even:0 "En la guerra, el río todavía no inclina la balanza."
- gg_ui_plata_port_blockade:0 "@warning! #b Buenos Aires está bloqueada#!: es el puerto de Rosas el que no recibe barcos, no el de Montevideo."
+ gg_ui_plata_weight_blancos:0 "El río inclina la guerra #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! hacia los blancos."
+ gg_ui_plata_weight_colorados:0 "El río inclina la guerra #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! hacia los colorados."
+ gg_ui_plata_port_blockade:0 "@warning! #b El puerto de Buenos Aires está bloqueado#!: el puerto cerrado es el de Buenos Aires, no el de Montevideo."
  gg_plata_rosas_close_tt:0 "@ships! Rosas #N cierra el Plata#! a toda bandera extranjera. Mientras su orilla tenga batería, el cierre rige aunque Montevideo quede abierta.\n#gray (Con Rosas en tus manos: cerrá tu orilla en el panel del estrecho del Río de la Plata.)#!"
  gg_plata_rosas_open_tt:0 "@ships! Rosas #P abre el Plata#!.\n#gray (Con Rosas en tus manos: dejá abierta tu orilla en el panel del estrecho; si la volvés a cerrar, la paciencia de Londres y París vuelve a contar.)#!"
  gg_plata_rosas_neutrals_tt:0 "@ships! El bloqueo de Rosas sólo detiene a los barcos de la Defensa: #P los neutrales entran al puerto#!."

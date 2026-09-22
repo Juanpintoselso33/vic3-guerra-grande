@@ -9,6 +9,13 @@ je_guerra_grande = {
 		name = "gg_war_overview"
 		container = "custom_widget_container_je_icon"
 	}
+	# EN/ES: the bar's title, right above it (CMF container 3 sits just before the bars)
+	#     / el titulo de la barra, justo arriba (el contenedor 3 del CMF va antes de las barras)
+	widget = {
+		gui = "gui/gg_war_overview.gui"
+		name = "gg_war_balance_head"
+		container = "custom_widget_container_3"
+	}
 	widget = {
 		gui = "gui/gg_war_overview.gui"
 		name = "gg_war_details"
@@ -98,7 +105,16 @@ je_guerra_grande = {
 	on_monthly_pulse = {
 		effect = {
 			# EN/ES: 22/9/2026 -- the balance's sources and the phase's own effects / fuentes y efectos de fase
-			gg_war_sources_rollover = yes
+			# EN: Codex review 22/9/2026 -- after the split the entry has one instance per government and this
+			#     pulse runs twice a month; the second rollover copied the zeroed counters over "last month".
+			#     A 20-day tick makes it roll once a month, like gg_siege_tick below.
+			# ES: tras la particion hay una instancia por gobierno y este pulso corre dos veces por mes; el
+			#     segundo rollover pisaba "el mes pasado" con ceros. La marca de 20 dias lo deja en uno por mes.
+			if = {
+				limit = { NOT = { has_global_variable = gg_src_tick } }
+				set_global_variable = { name = gg_src_tick days = 20 }
+				gg_war_sources_rollover = yes
+			}
 			gg_war_phase_effects = yes
 			# EN: playtest 2026-09-17 -- self-healing: if the split happened and the post-partition
 			#     calendar never ran (a scheduled event whose trigger was checked too early was

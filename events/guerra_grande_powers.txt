@@ -931,6 +931,9 @@ gg_powers.19 = {
 		#     Urquiza, y Francia sostuvo la plaza hasta Lepredour. La llave vuelve con el rio abierto.
 		gg_plata_fort_restore = yes
 		gg_plata_rosas_open = yes
+		# EN/ES: Britain is out of the river; France stays until Lepredour / Gran Bretana sale del rio;
+		#     Francia sigue hasta Lepredour
+		set_global_variable = gg_plata_britain_settled
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_23 } }

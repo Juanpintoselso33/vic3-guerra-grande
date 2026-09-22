@@ -1,7 +1,7 @@
 ﻿l_english:
  gg_ui_rosas_commitment:0 "#b Cerrito's pledge to Buenos Aires#!\nThe reunification pledge constrains the peace terms the Cerrito can accept."
- gg_ui_brazil_commitment:0 "#b The Defence's pledge to Brazil#!\nThe Defence has accepted imperial backing subject to Brazilian peace terms."
- gg_ui_customs_commitment:0 "#b Customs revenues#!\nThe Defence has received a further #V £40,000#!, pledging its customs revenues."
+ gg_ui_brazil_commitment:0 "#b The pledge to the Empire#!\nThe Defensa has accepted Brazil's backing: the peace it signs will be written on Brazilian terms, and it can no longer ask London and Paris for protection."
+ gg_ui_customs_commitment:0 "#b The customs revenue#!\nThe Defensa has drawn #V 40,000#! against its customs house. That debt is left for after the peace."
  gg_ui_empty:0 ""
  gg_ui_offer_action_tt:0 "Extraordinary remittance in return for a #V diplomatic obligation#!. The recipient decides; the money is delivered on acceptance.\n\n$gg_int_arg_offer_possible$\n\n[GetScriptedGui('gg_ui_offer_aid').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_ui_withdraw_action_tt:0 "$gg_int_arg_withdraw_possible$\n\n[GetScriptedGui('gg_ui_withdraw_aid').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

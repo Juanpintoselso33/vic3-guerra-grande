@@ -1,34 +1,117 @@
-﻿# EN: THE GUERRA GRANDE, 22/9/2026 (second pass, after Juan read it on screen): the two sides face to
-#     face above the balance; everything else below it, short, with the rules in a fold-out. The
-#     engine's own status box, long text, countries and conditions are hidden (CMF com_hide_*),
-#     the way Gates of the Bosphorus does it.
-# ES: LA GUERRA GRANDE, segunda pasada: los dos bandos arriba de la balanza; lo demas debajo, corto,
-#     con las reglas en un desplegable. Lo que el motor dibuja solo se esconde (com_hide_* del CMF).
+﻿# EN: THE GUERRA GRANDE, third pass (22/9/2026, the vic3-journals skill): Descalzo's Arroyo Grande
+#     as the header with the phase on it; one short line; the two sides face to face with their
+#     patrons' flags; "The balance" just above the bar; below it, only what is running (each
+#     government's endurance, the peace table); the longer account behind the arrow. Every line is
+#     backed by docs/guerra-grande-flujo/guerra-grande-textos-mecanica.md.
+# ES: LA GUERRA GRANDE, tercera pasada: el Arroyo Grande de Descalzo como encabezado con la fase
+#     encima; una linea corta; los dos bandos cara a cara con las banderas de sus padrinos; "La
+#     balanza" justo arriba de la barra; debajo, solo lo que esta corriendo (el aguante de cada
+#     gobierno, la mesa de paz); lo largo detras de la flechita. Cada linea la respalda la tabla de
+#     mecanica del repo de diseno.
+#     Painting: Carlos Descalzo, "Batalla de Arroyo Grande", 19th century (public domain, Commons).
+
+# EN/ES: above the bar (custom_widget_container_je_icon) / arriba de la barra
 flowcontainer = {
 	name = "gg_war_overview"
 	direction = vertical
 	parentanchor = hcenter
-	spacing = 8
+	spacing = 16
 	ignoreinvisible = yes
+	widget = {
+		size = { 520 252 }
+		parentanchor = hcenter
+		icon = {
+			size = { 520 240 }
+			position = { 0 6 }
+			texture = "gfx/interface/gg_situations/war_header.dds"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)1')]"
+			tooltip = "gg_war_ui_phase_1_tt"
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.8 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_war_ui_phase_1"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)2')]"
+			tooltip = "gg_war_ui_phase_2_tt"
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.8 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_war_ui_phase_2"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)3')]"
+			tooltip = "gg_war_ui_phase_3_tt"
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.8 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_war_ui_phase_3"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)4')]"
+			tooltip = "gg_war_ui_phase_4_tt"
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.8 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_war_ui_phase_4"
+		}
+		textbox = {
+			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)5')]"
+			tooltip = "gg_war_ui_phase_5_tt"
+			position = { 0 206 } size = { 520 40 }
+			background = { using = dark_area alpha = 0.8 }
+			using = fontsize_large align = center|nobaseline
+			text = "gg_war_ui_phase_5"
+		}
+	}
+	# EN/ES: the short line, one before the split and one after / la linea corta, antes y despues de la particion
+	textbox = {
+		visible = "[Not(GetGlobalVariable('guerra_grande_split_done').IsSet)]"
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_war_ui_short_prewar"
+	}
+	textbox = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_war_ui_short_split"
+	}
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_sides"
+	}
+	# EN/ES: before the split, Rivera and Oribe (colorados on the left, as on the bar)
+	#     / antes de la particion, Rivera y Oribe (colorados a la izquierda, como en la barra)
 	dynamicgridbox = {
 		visible = "[Not(GetGlobalVariable('guerra_grande_split_done').IsSet)]"
+		parentanchor = hcenter
 		datamodel = "[JournalEntry.GetInvolvedCountries]"
 		datamodel_wrap = 1
 		ignoreinvisible = yes
 		item = {
 			flowcontainer = {
 				direction = horizontal
-				spacing = 16
+				spacing = 8
 				dynamicgridbox = {
 					datamodel = "[Country.MakeScope.GetList('gg_ui_prewar_colorado')]"
 					datamodel_wrap = 1
 					item = {
 						widget = {
-							size = { 252 112 }
+							size = { 236 112 }
 							background = { using = dark_area alpha = 0.3 }
-							character_portrait_medium = { position = { 8 12 } datacontext = "[Scope.AccessCharacter]" }
+							character_portrait_medium = { position = { 6 10 } datacontext = "[Scope.AccessCharacter]" }
 							textbox = {
-								position = { 100 10 } size = { 144 92 }
+								position = { 96 8 } size = { 134 96 }
 								datacontext = "[Scope.AccessCharacter]"
 								multiline = yes using = fontsize_medium
 								text = "gg_war_ui_leader_colorado"
@@ -36,16 +119,17 @@ flowcontainer = {
 						}
 					}
 				}
+				textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_war_ui_versus" }
 				dynamicgridbox = {
 					datamodel = "[Country.MakeScope.GetList('gg_ui_prewar_blanco')]"
 					datamodel_wrap = 1
 					item = {
 						widget = {
-							size = { 252 112 }
+							size = { 236 112 }
 							background = { using = dark_area alpha = 0.3 }
-							character_portrait_medium = { position = { 8 12 } datacontext = "[Scope.AccessCharacter]" }
+							character_portrait_medium = { position = { 6 10 } datacontext = "[Scope.AccessCharacter]" }
 							textbox = {
-								position = { 100 10 } size = { 144 92 }
+								position = { 96 8 } size = { 134 96 }
 								datacontext = "[Scope.AccessCharacter]"
 								multiline = yes using = fontsize_medium
 								text = "gg_war_ui_leader_blanco"
@@ -56,10 +140,13 @@ flowcontainer = {
 			}
 		}
 	}
+	# EN/ES: from the split, the two governments; the tooltip is who backs each one and what it buys
+	#     / desde la particion, los dos gobiernos; el tooltip es quien sostiene a cada uno y que compra
 	flowcontainer = {
 		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 		direction = horizontal
-		spacing = 16
+		spacing = 8
+		parentanchor = hcenter
 		dynamicgridbox = {
 			datamodel = "[JournalEntry.GetInvolvedCountries]"
 			datamodel_wrap = 1
@@ -67,14 +154,12 @@ flowcontainer = {
 			item = {
 				widget = {
 					visible = "[GetScriptedGui('gg_ui_defensa_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-					size = { 252 112 }
+					tooltip = "gg_war_ui_card_defensa_tt"
+					size = { 236 112 }
 					background = { using = dark_area alpha = 0.3 }
-					character_portrait_medium = {
-						position = { 8 12 }
-						datacontext = "[Country.GetRuler]"
-					}
+					character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
 					textbox = {
-						position = { 100 10 } size = { 144 92 }
+						position = { 96 8 } size = { 134 96 }
 						datacontext = "[Country.GetRuler]"
 						multiline = yes using = fontsize_medium
 						text = "gg_war_ui_leader_defensa"
@@ -82,6 +167,7 @@ flowcontainer = {
 				}
 			}
 		}
+		textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_war_ui_versus" }
 		dynamicgridbox = {
 			datamodel = "[JournalEntry.GetInvolvedCountries]"
 			datamodel_wrap = 1
@@ -89,14 +175,12 @@ flowcontainer = {
 			item = {
 				widget = {
 					visible = "[GetScriptedGui('gg_ui_cerrito_government').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-					size = { 252 112 }
+					tooltip = "gg_war_ui_card_cerrito_tt"
+					size = { 236 112 }
 					background = { using = dark_area alpha = 0.3 }
-					character_portrait_medium = {
-						position = { 8 12 }
-						datacontext = "[Country.GetRuler]"
-					}
+					character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
 					textbox = {
-						position = { 100 10 } size = { 144 92 }
+						position = { 96 8 } size = { 134 96 }
 						datacontext = "[Country.GetRuler]"
 						multiline = yes using = fontsize_medium
 						text = "gg_war_ui_leader_cerrito"
@@ -105,121 +189,125 @@ flowcontainer = {
 			}
 		}
 	}
+	widget = { size = { 520 4 } }
 }
 
-# EN/ES: below the balance / debajo de la balanza
+# EN/ES: right above the bar (custom_widget_container_3): its title, with what moves it in the tooltip
+#     / justo arriba de la barra: su titulo, con lo que la mueve en el tooltip
+flowcontainer = {
+	name = "gg_war_balance_head"
+	direction = vertical
+	parentanchor = hcenter
+	textbox = {
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_balance_tt"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_balance"
+	}
+}
+
+# EN/ES: below the bar (custom_widget_container_4): only what is running / debajo de la barra: solo lo que corre
 flowcontainer = {
 	name = "gg_war_details"
 	direction = vertical
 	parentanchor = hcenter
-	spacing = 6
+	spacing = 14
 	ignoreinvisible = yes
+	widget = { size = { 520 6 } }
+	# EN/ES: each government's endurance, only while one of them is counting months
+	#     / el aguante de cada gobierno, solo mientras alguno cuenta meses
 	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)0')]"
-		tooltip = "gg_war_ui_phase_0_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_0"
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1')]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_endurance_tt"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_endurance"
 	}
-	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)1')]"
-		tooltip = "gg_war_ui_phase_1_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_1"
+	flowcontainer = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_defensa_shown'), '(CFixedPoint)1')]"
+		tooltip = "gg_war_ui_sec_endurance_tt"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
+		flowcontainer = {
+			direction = vertical spacing = 2
+			textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa" }
+			green_progressbar_horizontal = {
+				size = { 472 22 }
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_exhaustion_defensa_pct')]"
+					min = 0 max = 100
+				}
+			}
+		}
 	}
-	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)2')]"
-		tooltip = "gg_war_ui_phase_2_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_2"
+	flowcontainer = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_cerrito_shown'), '(CFixedPoint)1')]"
+		tooltip = "gg_war_ui_sec_endurance_tt"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
+		flowcontainer = {
+			direction = vertical spacing = 2
+			textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito" }
+			green_progressbar_horizontal = {
+				size = { 472 22 }
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_exhaustion_cerrito_pct')]"
+					min = 0 max = 100
+				}
+			}
+		}
 	}
+	# EN/ES: the peace table, only when there is something on it / la mesa de paz, solo si hay algo encima
 	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)3')]"
-		tooltip = "gg_war_ui_phase_3_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_3"
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_table_shown'), '(CFixedPoint)1')]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_table"
 	}
-	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)4')]"
-		tooltip = "gg_war_ui_phase_4_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_4"
-	}
-	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_war_phase'), '(CFixedPoint)5')]"
-		tooltip = "gg_war_ui_phase_5_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_large align = left|nobaseline
-		text = "gg_war_ui_phase_5"
-	}
-	textbox = {
-		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
-		tooltip = "gg_war_ui_exhaustion_tt"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_exhaustion"
-	}
-	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)1')]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_diplomacy_1"
-	}
-	textbox = {
+	flowcontainer = {
 		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)2')]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_diplomacy_2"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_diplomacy_2" }
 	}
-	textbox = {
+	flowcontainer = {
 		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)3')]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_diplomacy_3"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_diplomacy_3" }
 	}
-	textbox = {
+	flowcontainer = {
 		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)4')]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_diplomacy_4"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_diplomacy_4" }
 	}
-	textbox = {
+	flowcontainer = {
 		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_diplomacy'), '(CFixedPoint)5')]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_war_ui_diplomacy_5"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_diplomacy_5" }
 	}
-	textbox = {
+	flowcontainer = {
 		visible = "[GetGlobalVariable('gg_imperial_pledged').IsSet]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_ui_brazil_commitment"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		flag = { datacontext = "[GetGlobalVariable('gg_flag_brz').GetCountry]" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 440 -1 } maximumsize = { 440 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_brazil_commitment" }
 	}
-	textbox = {
+	flowcontainer = {
 		visible = "[GetGlobalVariable('gg_customs_mortgaged').IsSet]"
-		autoresize = yes multiline = yes
-		minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-		using = fontsize_medium align = left|nobaseline
-		text = "gg_ui_customs_commitment"
+		direction = horizontal spacing = 8 parentanchor = hcenter
+		icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/money.dds" }
+		textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_customs_commitment" }
 	}
-	# EN/ES: fold-out with the arrow (same control the old River Plate journal used) / desplegable con flechita
+	widget = { size = { 520 4 } }
+	# EN/ES: the longer account, behind the arrow / lo largo, detras de la flechita
 	section_header_button = {
 		blockoverride "layout" { size = { 520 38 } }
 		blockoverride "left_text" { text = "gg_war_ui_rules_toggle" }
