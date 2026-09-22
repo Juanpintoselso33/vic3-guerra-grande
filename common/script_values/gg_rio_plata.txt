@@ -105,16 +105,14 @@ gg_plata_hunger_pct = {
 	max = 100
 	min = 0
 }
-# EN/ES: the Overview's key line: is the Cerrito a government yet, and does each shore keep its fort
-#     / la linea de la llave: si el Cerrito ya es gobierno, y si cada orilla conserva su fuerte
-gg_ui_plata_has_cerrito = {
+# EN/ES: the shore cards: does each shore keep its battery / si cada orilla conserva su bateria
+gg_ui_plata_ba_fort_sv = {
 	value = 0
-	if = { limit = { has_global_variable = gg_flag_cerrito } value = 1 }
+	if = { limit = { gg_plata_ba_fort = yes } value = 1 }
 }
-gg_ui_plata_forts = {
+gg_ui_plata_mvd_fort_sv = {
 	value = 0
-	if = { limit = { gg_plata_ba_fort = yes } add = 1 }
-	if = { limit = { gg_plata_mvd_fort = yes } add = 2 }
+	if = { limit = { gg_plata_mvd_fort = yes } value = 1 }
 }
 # EN/ES: 22/9/2026 (Juan: the bars do not appear until they matter) -- the patience from the first
 #     month of a shut river, the hunger while a run of shut months is on

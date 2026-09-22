@@ -1013,6 +1013,7 @@ gg_partition_calendar = {
 	gg_spawn_war_characters = yes
 	# EN/ES: the siege portrait has its defender from the first day / el retrato del sitio, desde el primer dia
 	gg_ui_siege_leaders_sync = yes
+	gg_plata_flags_sync = yes
 	# EN/ES: playtest 2026-09-17 -- backstop: the Defensa's law of 1842 must not be lost if neither
 	#     Arroyo Grande nor the dated dispatcher reached it / red de seguridad para la ley de 1842
 	gg_abolition_dispatch = { DAYS = 2 }

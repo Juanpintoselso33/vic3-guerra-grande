@@ -26,35 +26,3 @@ gg_ui_plata_right_powers = {
 		c:GBR ?= this
 	}
 }
-# EN: The role line covers everyone who can open the journal: the parties to the war (the two
-#     Oriental governments, Rosas and Entre Rios's seat) are involved; the powers and any country
-#     with an interest in the Plata follow it from outside.
-# ES: La linea de rol cubre a todo el que puede abrir el journal: las partes de la guerra (los dos
-#     gobiernos orientales, Rosas y el asiento de Entre Rios) estan involucradas; las potencias y
-#     cualquier pais con interes en el Plata la siguen desde afuera.
-gg_ui_plata_role_involved = {
-	scope = country
-	is_shown = {
-		OR = {
-			c:URU ?= this
-			c:CER ?= this
-			has_variable = gg_arg_rosas_seat
-			has_variable = gg_arg_entre_rios_seat
-			has_variable = guerra_grande_defensa_government
-			has_variable = guerra_grande_cerrito_government
-		}
-	}
-}
-gg_ui_plata_role_outsider = {
-	scope = country
-	is_shown = {
-		NOR = {
-			c:URU ?= this
-			c:CER ?= this
-			has_variable = gg_arg_rosas_seat
-			has_variable = gg_arg_entre_rios_seat
-			has_variable = guerra_grande_defensa_government
-			has_variable = guerra_grande_cerrito_government
-		}
-	}
-}

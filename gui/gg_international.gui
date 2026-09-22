@@ -9,8 +9,8 @@
 #     situaciones de Gates of the Bosphorus / Community Mod Framework (sin tomar codigo): tu papel,
 #     dos lideres cara a cara, que gana cada lado, la fase y sus efectos, las facciones, el peso del
 #     rio en la guerra y lo que tu papel te deja hacer. Las dos barras nativas son del journal.
-# EN/ES: the header IS the chart: it takes the icon's place, with the role as a caption on it
-#     / el encabezado ES la carta: ocupa el lugar del icono, con el rol como epigrafe
+# EN/ES: the header IS the chart: it takes the icon's place, nothing on it
+#     / el encabezado ES la carta: ocupa el lugar del icono
 widget = {
  name = "gg_plata_header"
  size = { 520 196 }
@@ -19,20 +19,6 @@ widget = {
   size = { 520 190 }
   position = { 0 6 }
   texture = "gfx/interface/gg_situations/plata_header.dds"
- }
- textbox = {
-  visible = "[GetScriptedGui('gg_ui_plata_role_involved').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-  position = { 0 160 } size = { 520 36 }
-  background = { using = dark_area alpha = 0.75 }
-  using = fontsize_large align = center|nobaseline
-  text = "gg_ui_plata_role_involved"
- }
- textbox = {
-  visible = "[GetScriptedGui('gg_ui_plata_role_outsider').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-  position = { 0 160 } size = { 520 36 }
-  background = { using = dark_area alpha = 0.75 }
-  using = fontsize_large align = center|nobaseline
-  text = "gg_ui_plata_role_outsider"
  }
 }
 flowcontainer = {
@@ -51,6 +37,7 @@ flowcontainer = {
     item = {
      widget = {
       visible = "[GetScriptedGui('gg_ui_plata_left_leader').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+      tooltip = "gg_ui_plata_card_ba_tt"
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
@@ -74,6 +61,7 @@ flowcontainer = {
     item = {
      widget = {
       visible = "[GetScriptedGui('gg_ui_plata_right_defensa').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+      tooltip = "gg_ui_plata_card_mvd_tt"
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
@@ -93,6 +81,7 @@ flowcontainer = {
     item = {
      widget = {
       visible = "[GetScriptedGui('gg_ui_plata_right_powers').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+      tooltip = "gg_ui_plata_card_mvd_tt"
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
@@ -136,24 +125,6 @@ flowcontainer = {
    }
   }
  }
- flowcontainer = {
-  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
-  direction = horizontal spacing = 8 parentanchor = hcenter
- textbox = {
-   tooltip = "gg_ui_plata_win_buenos_aires_tt"
-   autoresize = yes multiline = yes
-   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
-   using = fontsize_medium align = hcenter|nobaseline
-   text = "gg_ui_plata_win_buenos_aires"
-  }
- textbox = {
-   tooltip = "gg_ui_plata_win_montevideo_tt"
-   autoresize = yes multiline = yes
-   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
-   using = fontsize_medium align = hcenter|nobaseline
-   text = "gg_ui_plata_win_montevideo"
-  }
- }
  textbox = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)0')]"
   tooltip = "gg_ui_plata_phase_0_tt"
@@ -194,71 +165,43 @@ flowcontainer = {
   using = fontsize_large align = left|nobaseline
   text = "gg_ui_plata_phase_4"
  }
- textbox = {
-  tooltip = "gg_ui_plata_key_tt"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_plata_key"
- }
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)0')]"
-  tooltip = "gg_ui_plata_key_tt"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_plata_forts_0"
- }
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)1')]"
-  tooltip = "gg_ui_plata_key_tt"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_plata_forts_1"
- }
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)2')]"
-  tooltip = "gg_ui_plata_key_tt"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_plata_forts_2"
- }
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_forts'), '(CFixedPoint)3')]"
-  tooltip = "gg_ui_plata_key_tt"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_plata_forts_3"
- }
+ # EN/ES: the key to the river, one card per shore / la llave del rio, una tarjeta por orilla
  flowcontainer = {
-  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
   direction = horizontal spacing = 8 parentanchor = hcenter
- textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_has_cerrito'), '(CFixedPoint)1')]"
-   tooltip = "gg_ui_plata_faction_ba_tt"
-   autoresize = yes multiline = yes
-   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
-   using = fontsize_medium align = hcenter|nobaseline
-   text = "gg_ui_plata_faction_ba"
+ widget = {
+  size = { 256 76 }
+  background = { using = dark_area alpha = 0.3 }
+  tooltip = "gg_ui_plata_key_tt"
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]"
+   position = { 10 6 } size = { 236 64 }
+   multiline = yes using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_shore_ba_fort"
   }
- textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_has_cerrito'), '(CFixedPoint)0')]"
-   tooltip = "gg_ui_plata_faction_ba_tt"
-   autoresize = yes multiline = yes
-   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
-   using = fontsize_medium align = hcenter|nobaseline
-   text = "gg_ui_plata_faction_ba_alone"
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]"
+   position = { 10 6 } size = { 236 64 }
+   multiline = yes using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_shore_ba_nofort"
   }
- textbox = {
-   tooltip = "gg_ui_plata_faction_mvd_tt"
-   autoresize = yes multiline = yes
-   minimumsize = { 256 -1 } maximumsize = { 256 -1 }
-   using = fontsize_medium align = hcenter|nobaseline
-   text = "gg_ui_plata_faction_mvd"
+ }
+ widget = {
+  size = { 256 76 }
+  background = { using = dark_area alpha = 0.3 }
+  tooltip = "gg_ui_plata_key_tt"
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)1')]"
+   position = { 10 6 } size = { 236 64 }
+   multiline = yes using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_shore_mvd_fort"
   }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort_sv'), '(CFixedPoint)0')]"
+   position = { 10 6 } size = { 236 64 }
+   multiline = yes using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_shore_mvd_nofort"
+  }
+ }
  }
  textbox = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)1')]"
