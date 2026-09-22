@@ -273,21 +273,9 @@ gg_argentina_create_coalicion = {
 gg_argentina_rebel_diplomacy_reset = {
 	set_variable = gg_rebel_diplomacy_reset
 	save_scope_as = gg_rebel_country
-	every_country = {
-		limit = { NOT = { this = scope:gg_rebel_country } }
-		if = {
-			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = alliance } } }
-			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = alliance } }
-		}
-		if = {
-			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = defensive_pact } } }
-			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = defensive_pact } }
-		}
-		if = {
-			limit = { scope:gg_rebel_country = { has_diplomatic_pact = { who = prev type = guarantee_independence } } }
-			scope:gg_rebel_country = { remove_diplomatic_pact = { country = prev type = guarantee_independence } }
-		}
-	}
+	# EN/ES: 22/9/2026 -- alliances, defensive pacts and guarantees are treaty articles since 1.10 and
+	#     the old pact types no longer load; breaking inherited treaties has no verified script effect
+	#     yet (PENDIENTES) / los pactos viejos ya no existen (son articulos de tratado desde la 1.10)
 	if = {
 		limit = { exists = c:ARG }
 		change_relations = { country = c:ARG value = -100 }
@@ -341,7 +329,7 @@ gg_argentina_arm_urquiza_against_brazil = {
 	random_scope_character = {
 		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
 		if = {
-			limit = { NOT = { is_general = yes } }
+			limit = { NOT = { has_role_of_type = general } }
 			add_character_role = general
 			set_commander_rank = 2
 		}
@@ -379,7 +367,7 @@ gg_argentina_arm_other_against_brazil = {
 	}
 	random_scope_character = {
 		limit = {
-			is_general = yes
+			has_role_of_type = general
 			NOT = { has_template = ARG_Justo_Jose_de_Urquiza }
 		}
 		transfer_to_formation = scope:gg_brazil_army
@@ -413,7 +401,7 @@ gg_argentina_arm_urquiza_reserve = {
 	random_scope_character = {
 		limit = { has_template = ARG_Justo_Jose_de_Urquiza }
 		if = {
-			limit = { NOT = { is_general = yes } }
+			limit = { NOT = { has_role_of_type = general } }
 			add_character_role = general
 			set_commander_rank = 2
 		}
@@ -596,7 +584,7 @@ gg_argentina_create_entre_rios = {
 			#     vanilla's Urquiza is not a general. Rank is set only on creation so later events do not
 			#     promote him repeatedly.
 			if = {
-				limit = { NOT = { is_general = yes } }
+				limit = { NOT = { has_role_of_type = general } }
 				add_character_role = general
 				set_commander_rank = 2
 			}
@@ -904,7 +892,7 @@ gg_argentina_raise_ejercito_grande = {
 			has_template = ARG_Justo_Jose_de_Urquiza
 			exists = scope:gg_ejercito_grande_army
 		}
-		if = { limit = { NOT = { is_general = yes } } add_character_role = general }
+		if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
 		set_commander_rank = 3
 		transfer_to_formation = scope:gg_ejercito_grande_army
 	}

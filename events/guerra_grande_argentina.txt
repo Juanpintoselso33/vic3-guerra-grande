@@ -1142,7 +1142,7 @@ gg_argentina.8 = {
 		random_scope_character = {
 			limit = { has_template = ARG_Justo_Jose_de_Urquiza }
 			if = {
-				limit = { NOT = { is_general = yes } }
+				limit = { NOT = { has_role_of_type = general } }
 				add_character_role = general
 			}
 			transfer_to_formation = scope:gg_vences_army
@@ -2968,7 +2968,7 @@ gg_argentina.60 = {
 						has_template = URU_Manuel_Oribe
 						has_template = URU_Ignacio_Oribe
 					}
-					NOT = { has_role = general }
+					NOT = { has_role_of_type = general }
 				}
 				add_character_role = general
 			}

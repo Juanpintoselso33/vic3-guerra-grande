@@ -7,7 +7,7 @@ gg_int_arg_offer_button = {
 		custom_tooltip = { text = gg_int_arg_offer_possible gg_int_arg_can_offer = yes }
 	}
 	effect = { gg_int_arg_offer = yes }
-	ai_chance = { base = 0 }
+	ai_chance = { value = 0 }
 }
 
 gg_int_arg_withdraw_button = {
@@ -23,5 +23,5 @@ gg_int_arg_withdraw_button = {
 		}
 	}
 	effect = { gg_int_arg_withdraw = yes }
-	ai_chance = { base = 0 }
+	ai_chance = { value = 0 }
 }
