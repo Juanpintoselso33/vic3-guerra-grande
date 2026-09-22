@@ -24,17 +24,9 @@ guerra_grande_on_game_start = {
 		# EN: No political lock: Rosas's continuity must not freeze government reform.
 		# ES: Sin candado politico: sostener a Rosas no debe congelar reformas de gobierno.
 		c:URU ?= {
-			# Manuel Oribe is the caudillo of the countryside, not a moderate: he gets
-			# la Argentina's own autonomist ideology (local caudillos, tenant farmers).
-			# EN/ES: load test 2026-09-19 -- ideology_autonomist is la Argentina's, so standalone the key
-			#     did not exist and Oribe kept whatever vanilla gave him. Vanilla has a better one for
-			#     him anyway: caudillismo. / ideology_autonomist es de la Argentina, asi que sin ella la
-			#     clave no existia y Oribe se quedaba con lo que le hubiera puesto vanilla. Y vanilla
-			#     tiene una que le va mejor: el caudillismo.
-			random_scope_character = {
-				limit = { has_template = URU_Manuel_Oribe }
-				set_ideology = ideology:ideology_caudillismo
-			}
+			# EN/ES: 22/9/2026 -- Oribe's ideology lives in his template (republican_leader, decided with
+			#     Juan); the old override to caudillismo here was removed / la ideologia de Oribe vive en su
+			#     plantilla; se saco el viejo reemplazo por caudillismo
 			# EN/ES: playtest 2026-09-17 -- the journal is open from the first day, so every choice of
 			#     1836-1838 shows its effect on the patrons and the score / el journal abre desde el
 			#     primer dia, asi cada decision de 1836-1838 muestra su efecto en padrinos y puntaje.
