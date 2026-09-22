@@ -286,7 +286,14 @@ gg_patron_change = {
 	# EN/ES: 22/9/2026 -- what this patron's backing buys, written out once for every call. The preview
 	#     cannot show the level after the change, so the text gives the thresholds, not a level (Codex)
 	#     / lo que compra el respaldo de este padrino; da los umbrales, no un nivel
-	custom_tooltip = gg_tt_patron_$PATRON$_means
+	# EN/ES: before the split there is no Defensa or Cerrito yet / antes de la particion no hay Defensa ni Cerrito
+	if = {
+		limit = { has_global_variable = guerra_grande_split_done }
+		custom_tooltip = gg_tt_patron_$PATRON$_means
+	}
+	else = {
+		custom_tooltip = gg_tt_patron_$PATRON$_means_pre
+	}
 	# EN/ES: a change of level is announced at once, not a month later / el cambio de nivel se avisa ya
 	hidden_effect = { gg_patron_level_watch_$PATRON$ = yes }
 }

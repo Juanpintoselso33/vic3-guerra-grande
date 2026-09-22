@@ -89,8 +89,31 @@ je_guerra_grande = {
 
 	status_desc = {
 		first_valid = {
+			# EN/ES: 22/9/2026 (playtest) -- the preview follows the phase / la vista previa sigue la fase
 			triggered_desc = {
-				desc = je_guerra_grande_status_factions
+				desc = je_guerra_grande_status_peace
+				trigger = { gg_war_phase = 5 }
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_truce
+				trigger = { gg_war_phase = 4 }
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_rivera
+				trigger = {
+					NOT = { has_global_variable = guerra_grande_open_war }
+					gg_war_phase = 2
+				}
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_rising
+				trigger = {
+					NOT = { has_global_variable = guerra_grande_open_war }
+					gg_war_phase = 1
+				}
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_before
 				trigger = {
 					NOT = { has_global_variable = guerra_grande_open_war }
 				}

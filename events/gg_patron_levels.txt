@@ -1,4 +1,6 @@
 ﻿namespace = gg_patron
+# EN/ES: 22/9/2026 -- before the split there is no Defensa yet: the _pre texts speak of the colorados
+#     / antes de la particion no hay Defensa: los textos _pre hablan de los colorados
 # -------------------------------------------------------------------------------------------------
 # EN: THE POWERS' LEVELS, notices (22/9/2026, design B decided by Juan). France, Britain and Brazil
 #     each stand towards the Defensa as Spectator, Protector or Guarantor (common/script_values/
@@ -12,6 +14,9 @@ gg_patron.1 = {
 	placement = ROOT
 	title = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.1.t_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 2 } }
+			triggered_desc = { desc = gg_patron.1.t_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 1 } }
+			triggered_desc = { desc = gg_patron.1.t_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 0 } }
 			triggered_desc = { desc = gg_patron.1.t_2 trigger = { gg_patron_level_francia = 2 } }
 			triggered_desc = { desc = gg_patron.1.t_1 trigger = { gg_patron_level_francia = 1 } }
 			triggered_desc = { desc = gg_patron.1.t_0 }
@@ -19,6 +24,9 @@ gg_patron.1 = {
 	}
 	desc = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.1.d_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 2 } }
+			triggered_desc = { desc = gg_patron.1.d_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 1 } }
+			triggered_desc = { desc = gg_patron.1.d_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_francia = 0 } }
 			triggered_desc = { desc = gg_patron.1.d_2 trigger = { gg_patron_level_francia = 2 } }
 			triggered_desc = { desc = gg_patron.1.d_1 trigger = { gg_patron_level_francia = 1 } }
 			triggered_desc = { desc = gg_patron.1.d_0 }
@@ -37,6 +45,9 @@ gg_patron.2 = {
 	placement = ROOT
 	title = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.2.t_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 2 } }
+			triggered_desc = { desc = gg_patron.2.t_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 1 } }
+			triggered_desc = { desc = gg_patron.2.t_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 0 } }
 			triggered_desc = { desc = gg_patron.2.t_2 trigger = { gg_patron_level_britania = 2 } }
 			triggered_desc = { desc = gg_patron.2.t_1 trigger = { gg_patron_level_britania = 1 } }
 			triggered_desc = { desc = gg_patron.2.t_0 }
@@ -44,6 +55,9 @@ gg_patron.2 = {
 	}
 	desc = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.2.d_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 2 } }
+			triggered_desc = { desc = gg_patron.2.d_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 1 } }
+			triggered_desc = { desc = gg_patron.2.d_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_britania = 0 } }
 			triggered_desc = { desc = gg_patron.2.d_2 trigger = { gg_patron_level_britania = 2 } }
 			triggered_desc = { desc = gg_patron.2.d_1 trigger = { gg_patron_level_britania = 1 } }
 			triggered_desc = { desc = gg_patron.2.d_0 }
@@ -62,6 +76,9 @@ gg_patron.3 = {
 	placement = ROOT
 	title = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.3.t_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 2 } }
+			triggered_desc = { desc = gg_patron.3.t_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 1 } }
+			triggered_desc = { desc = gg_patron.3.t_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 0 } }
 			triggered_desc = { desc = gg_patron.3.t_2 trigger = { gg_patron_level_brasil = 2 } }
 			triggered_desc = { desc = gg_patron.3.t_1 trigger = { gg_patron_level_brasil = 1 } }
 			triggered_desc = { desc = gg_patron.3.t_0 }
@@ -69,6 +86,9 @@ gg_patron.3 = {
 	}
 	desc = {
 		first_valid = {
+			triggered_desc = { desc = gg_patron.3.d_pre_2 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 2 } }
+			triggered_desc = { desc = gg_patron.3.d_pre_1 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 1 } }
+			triggered_desc = { desc = gg_patron.3.d_pre_0 trigger = { NOT = { has_global_variable = guerra_grande_split_done } gg_patron_level_brasil = 0 } }
 			triggered_desc = { desc = gg_patron.3.d_2 trigger = { gg_patron_level_brasil = 2 } }
 			triggered_desc = { desc = gg_patron.3.d_1 trigger = { gg_patron_level_brasil = 1 } }
 			triggered_desc = { desc = gg_patron.3.d_0 }
