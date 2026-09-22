@@ -1,7 +1,21 @@
 ﻿# EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
 # ES: Scope pais (Argentina). Un escritor idempotente para todos los cierres del Pacto Federal.
 gg_pact_resolve = {
+	# EN: 22/9/2026, Caseros option (c) -- while the siege of Buenos Aires lasts (at least six months
+	#     from the choice) no ending is written: the request is recorded and gg_caseros.1 resolves it
+	#     when the siege ends. Rosas keeps the capital and his government meanwhile. DESIGN: the
+	#     six-month minimum is a counterfactual; Rosas did not take this road on 3/2/1852.
+	# ES: mientras dura el sitio de Buenos Aires (seis meses como minimo desde la eleccion) no se
+	#     escribe ningun final: el pedido queda anotado y gg_caseros.1 lo resuelve al terminar el sitio.
+	#     DISENO: el minimo de seis meses es contrafactico.
 	if = {
+		limit = {
+			has_global_variable = gg_caseros_siege
+			NOT = { has_global_variable = gg_pact_settled }
+		}
+		set_global_variable = gg_pact_resolve_pending
+	}
+	else_if = {
 		limit = { NOT = { has_global_variable = gg_pact_settled } }
 		set_global_variable = gg_pact_settled
 		if = {
@@ -14,7 +28,24 @@ gg_pact_resolve = {
 			set_global_variable = gg_pact_settlement_urquiza
 			remove_global_variable = gg_president_railroad
 			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
+			# EN: Caseros (a) or (c) -- Rosas falls and goes into exile (historically he embarked on
+			#     HMS Centaur for England, February 1852). The Confederation remains.
+			# ES: Caseros (a) o (c) -- cae Rosas y se exilia (se embarco en el Centaur rumbo a
+			#     Inglaterra). La Confederacion queda.
+			if = {
+				limit = {
+					OR = {
+						global_var:gg_caseros_choice ?= 1
+						global_var:gg_caseros_choice ?= 3
+					}
+				}
+				random_scope_character = {
+					limit = { has_template = ARG_Juan_Manuel_de_Rosas }
+					exile_character_with_role_cleanup = yes
+				}
+			}
 			trigger_event = { id = gg_argentina.83 days = 0 popup = yes }
+			gg_caseros_notify_urquiza = { EVENT = gg_caseros.5 }
 		}
 		else_if = {
 			limit = { global_var:gg_pact_war_rosas_won = 1 }
@@ -29,6 +60,7 @@ gg_pact_resolve = {
 			limit = { global_var:gg_pact_war_white_peace = 1 }
 			set_global_variable = gg_pact_settlement_stalemate
 			trigger_event = { id = gg_argentina.85 days = 0 popup = yes }
+			gg_caseros_notify_urquiza = { EVENT = gg_caseros.4 }
 		}
 		else = {
 			set_global_variable = gg_pact_settlement_mandate_collapsed
@@ -38,3 +70,4 @@ gg_pact_resolve = {
 		}
 	}
 }
+

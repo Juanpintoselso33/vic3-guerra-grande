@@ -1,0 +1,12 @@
+﻿# EN/ES: loads before gg_pact_resolution.txt, which uses it / carga antes de gg_pact_resolution.txt, que lo usa
+# EN: Tell the player of Entre Rios (Urquiza's side) what happened at Caseros; Buenos Aires gets its own
+#     events. Only players: the AI does not read.
+# ES: Avisarle al jugador de Entre Rios lo que paso en Caseros; Buenos Aires tiene sus propios eventos.
+gg_caseros_notify_urquiza = {
+	c:ENR ?= {
+		if = {
+			limit = { is_player = yes }
+			trigger_event = { id = $EVENT$ popup = yes }
+		}
+	}
+}

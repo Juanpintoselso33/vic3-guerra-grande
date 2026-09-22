@@ -1,0 +1,204 @@
+﻿namespace = gg_caseros
+# -------------------------------------------------------------------------------------------------
+# EN: CASEROS, THE THREE WAYS OUT (22/9/2026, decided with Juan). gg_argentina.41 offers Rosas the three
+#     roads historical criticism lists for 3 February 1852; each now changes how the war of the
+#     Federal Pact can end (common/scripted_effects/gg_pact_resolution.txt):
+#       (a) give battle -- if Rosas loses, he falls at once and goes into exile;
+#       (b) manoeuvre   -- each month Rosas holds wears Entre Rios down; at six, a negotiated way out;
+#       (c) hold the city -- a siege of Buenos Aires of six months at least before any ending.
+#     SOURCE / FUENTE: the battle of Caseros, 3/2/1852, and Rosas's embarkation for England on HMS
+#     Centaur (SOURCES_peace.md, Caseros section). DESIGN: (b) and (c) are counterfactuals; their
+#     six-month thresholds and the -5 monthly war support are game-scale choices, not history.
+# ES: CASEROS, LAS TRES SALIDAS. Cada una cambia ahora como puede terminar la guerra del Pacto.
+#     DISENO: (b) y (c) son contrafacticos; los seis meses y el -5 mensual son escala de juego.
+# -------------------------------------------------------------------------------------------------
+
+# EN: The monthly clock of (b) and (c), on Argentina. Hidden; reschedules itself while it matters.
+# ES: El reloj mensual de (b) y (c), sobre la Argentina. Oculto; se reagenda mientras importe.
+gg_caseros.1 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		change_global_variable = { name = gg_caseros_months add = 1 }
+		# (b) manoeuvre / maniobrar
+		if = {
+			limit = {
+				global_var:gg_caseros_choice ?= 2
+				NOT = { has_global_variable = gg_pact_settled }
+				exists = c:ENR
+				has_war_with = c:ENR
+			}
+			every_scope_war = {
+				limit = {
+					is_war_participant = c:ENR
+					is_war_participant = c:ARG
+				}
+				add_war_war_support = { target = c:ENR value = -5 }
+			}
+			if = {
+				limit = { global_var:gg_caseros_months >= 6 }
+				set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+				# EN/ES: only the Buenos Aires - Entre Rios play; another Pact war goes on
+				#     / solo la jugada Buenos Aires - Entre Rios; otra guerra del Pacto sigue
+				every_diplomatic_play = {
+					limit = {
+						is_diplomatic_play_type = dp_gg_pacto_federal
+						initiator_is = c:ARG
+						target_is = c:ENR
+					}
+					end_play = yes
+				}
+				gg_pact_resolve = yes
+			}
+			else = {
+				trigger_event = { id = gg_caseros.1 days = 30 }
+			}
+		}
+		# EN/ES: (b) with Entre Rios gone and nothing written yet: the ending is written now, never lost
+		#     / (b) sin Entre Rios y sin final escrito: se escribe ahora, nunca se pierde
+		else_if = {
+			limit = {
+				global_var:gg_caseros_choice ?= 2
+				NOT = { has_global_variable = gg_pact_settled }
+				NOT = { exists = c:ENR }
+			}
+			gg_pact_resolve = yes
+		}
+		# (c) hold the city / sostener la plaza
+		else_if = {
+			limit = {
+				global_var:gg_caseros_choice ?= 3
+				has_global_variable = gg_caseros_siege
+			}
+			if = {
+				limit = { global_var:gg_caseros_months >= 6 }
+				remove_global_variable = gg_caseros_siege
+				if = {
+					limit = { is_player = yes }
+					trigger_event = { id = gg_caseros.3 popup = yes }
+				}
+				gg_caseros_notify_urquiza = { EVENT = gg_caseros.3 }
+				# EN/ES: a pending ending is written now; so is one whose war already ended without
+				#     leaving a mark (Entre Rios gone) / el final pendiente se escribe ahora, y tambien el
+				#     de una guerra que termino sin dejar marca (Entre Rios desaparecida)
+				if = {
+					limit = {
+						OR = {
+							has_global_variable = gg_pact_resolve_pending
+							NOT = { exists = c:ENR }
+							c:ENR ?= { NOT = { has_war_with = c:ARG } }
+						}
+					}
+					if = {
+						limit = { has_global_variable = gg_pact_resolve_pending }
+						remove_global_variable = gg_pact_resolve_pending
+					}
+					gg_pact_resolve = yes
+				}
+			}
+			else = {
+				trigger_event = { id = gg_caseros.1 days = 30 }
+			}
+		}
+	}
+}
+
+# EN/ES: to Entre Rios's player -- what Rosas chose / al jugador de Entre Rios: lo que eligio Rosas
+gg_caseros.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_caseros.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_caseros.2.d_battle
+				trigger = { global_var:gg_caseros_choice ?= 1 }
+			}
+			triggered_desc = {
+				desc = gg_caseros.2.d_manoeuvre
+				trigger = { global_var:gg_caseros_choice ?= 2 }
+			}
+			triggered_desc = { desc = gg_caseros.2.d_siege }
+		}
+	}
+	flavor = gg_argentina.41.f
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+	option = {
+		name = gg_caseros.2.a
+		default_option = yes
+	}
+}
+
+# EN/ES: the siege of Buenos Aires is over / termino el sitio de Buenos Aires
+gg_caseros.3 = {
+	type = country_event
+	placement = ROOT
+	title = gg_caseros.3.t
+	desc = gg_caseros.3.d
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+	option = {
+		name = gg_caseros.3.a
+		default_option = yes
+	}
+}
+
+# EN/ES: to Entre Rios's player -- no victor / al jugador de Entre Rios: sin vencedor
+gg_caseros.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.85.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_caseros.4.d_manoeuvre
+				trigger = {
+					global_var:gg_caseros_choice ?= 2
+					global_var:gg_caseros_months ?= 6
+				}
+			}
+			triggered_desc = { desc = gg_caseros.4.d }
+		}
+	}
+	event_image = { video = "gg_arg_clausula" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+	option = {
+		name = gg_caseros.4.a
+		default_option = yes
+	}
+}
+
+# EN/ES: to Entre Rios's player -- Urquiza's victory / al jugador de Entre Rios: la victoria de Urquiza
+gg_caseros.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.83.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_caseros.5.d_exile
+				trigger = {
+					OR = {
+						global_var:gg_caseros_choice ?= 1
+						global_var:gg_caseros_choice ?= 3
+					}
+				}
+			}
+			triggered_desc = { desc = gg_caseros.5.d }
+		}
+	}
+	event_image = { video = "gg_arg_pronunciamiento" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 1825
+	option = {
+		name = gg_caseros.5.a
+		default_option = yes
+	}
+}

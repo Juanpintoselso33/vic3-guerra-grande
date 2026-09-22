@@ -2397,18 +2397,37 @@ gg_argentina.41 = {
 		name = gg_argentina.41.a
 		default_option = yes
 		add_modifier = { name = gg_caseros_pitched_battle years = 2 }
+		# EN/ES: 22/9/2026 -- a lost battle ends Rosas at once / una batalla perdida termina con Rosas en el acto
+		custom_tooltip = gg_argentina.41.a_tt
+		set_global_variable = { name = gg_caseros_choice value = 1 }
+		gg_caseros_notify_urquiza = { EVENT = gg_caseros.2 }
 		ai_chance = { base = 50 }
 	}
 
 	option = {
 		name = gg_argentina.41.b
 		add_modifier = { name = gg_caseros_manoeuvre years = 2 }
+		# EN/ES: each month Rosas holds wears Entre Rios down; at six, a negotiated way out
+		#     / cada mes que Rosas aguanta desgasta a Entre Rios; a los seis, la salida negociada
+		custom_tooltip = gg_argentina.41.b_tt
+		set_global_variable = { name = gg_caseros_choice value = 2 }
+		set_global_variable = { name = gg_caseros_months value = 0 }
+		trigger_event = { id = gg_caseros.1 days = 30 }
+		gg_caseros_notify_urquiza = { EVENT = gg_caseros.2 }
 		ai_chance = { base = 30 }
 	}
 
 	option = {
 		name = gg_argentina.41.c
 		add_modifier = { name = gg_caseros_hold_the_city years = 2 }
+		# EN/ES: a siege of Buenos Aires of six months at least before any ending
+		#     / un sitio de Buenos Aires de seis meses como minimo antes de cualquier final
+		custom_tooltip = gg_argentina.41.c_tt
+		set_global_variable = { name = gg_caseros_choice value = 3 }
+		set_global_variable = { name = gg_caseros_months value = 0 }
+		set_global_variable = gg_caseros_siege
+		trigger_event = { id = gg_caseros.1 days = 30 }
+		gg_caseros_notify_urquiza = { EVENT = gg_caseros.2 }
 		ai_chance = { base = 20 }
 	}
 
@@ -3280,7 +3299,19 @@ gg_argentina.83 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.83.t
-	desc = gg_argentina.83.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.83.d_pitched
+				trigger = { global_var:gg_caseros_choice ?= 1 }
+			}
+			triggered_desc = {
+				desc = gg_argentina.83.d_siege
+				trigger = { global_var:gg_caseros_choice ?= 3 }
+			}
+			triggered_desc = { desc = gg_argentina.83.d }
+		}
+	}
 	flavor = gg_argentina.83.f
 	event_image = { video = "gg_arg_pronunciamiento" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -3319,7 +3350,18 @@ gg_argentina.85 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.85.t
-	desc = gg_argentina.85.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.85.d_manoeuvre
+				trigger = {
+					global_var:gg_caseros_choice ?= 2
+					global_var:gg_caseros_months ?= 6
+				}
+			}
+			triggered_desc = { desc = gg_argentina.85.d }
+		}
+	}
 	flavor = gg_argentina.85.f
 	event_image = { video = "gg_arg_clausula" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
