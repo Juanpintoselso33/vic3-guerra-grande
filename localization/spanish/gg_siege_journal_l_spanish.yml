@@ -34,7 +34,7 @@
  gg_siege_ui_argentine_tt:0 "Los emigrados que huyeron de Rosas, con las armas de la plaza. Formarla cuesta #N 10.000#! y enfría la relación con Buenos Aires (#N -30#!).\n#b Efectos#! (la Defensa, al formarse; se desvanecen en siete años): ataque #P +5%#!, aprobación de los intelectuales #P +2#!, prestigio #P +5%#!."
  gg_siege_ui_aux_0:0 "#b Batallones de Rosas#!: #V sin auxilio de Buenos Aires#!"
  gg_siege_ui_aux_1:0 "#b Batallones de Rosas#!: #P con auxilio de Buenos Aires#!"
- gg_siege_ui_aux_tt:0 "Las divisiones que Buenos Aires le presta al Cerrito, sin declararle la guerra a la República. Si vienen con el préstamo de Rosas, llegan además con plata y con otro sostén.\n#b Efectos#! (el Cerrito, diez años): ataque #P +10%#!, costo de los bienes militares #P -5%#!, acuñación #P +200#!."
+ gg_siege_ui_aux_tt:0 "Las divisiones que Buenos Aires le presta al Cerrito, sin declararle la guerra a la República. Si vienen con el préstamo de Rosas, llegan además con plata y con otro sostén.\n#b Efectos#! (el Cerrito, diez años): ataque #P +10%#!, costo de los bienes militares #P -5%#!. La plata la pone Rosas en su pago mensual de padrino."
  gg_siege_ui_basque_cer:0 "#b El batallón vasco#!: #P se pasó al Cerrito#!"
  gg_siege_ui_basque_tt:0 "El batallón vasco-navarro levantado en la plaza deserta al campo de Oribe: el Cerrito suma un batallón y a la Defensa le cuesta #N 10.000#!. Si la Legión Argentina está formada, llega a la plaza José María Paz como general.\n#b Efectos#! (la Defensa, al desertar; se desvanecen en cinco años): defensa #N -5%#!, autoridad #N -25#!, aprobación de las Fuerzas Armadas #N -2#!."
  gg_siege_ui_more:0 "El sitio, en detalle"

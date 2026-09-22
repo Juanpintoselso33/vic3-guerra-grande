@@ -5,7 +5,7 @@
  gg_plata_hunger_bar_desc:0 "#V [GetGlobalVariable('gg_plata_closed_streak').GetValue|0]#! months running without a foreign ship making port. A single month with the river open resets the count, and it stops during a truce. At #V [GetPlayer.MakeScope.ScriptValue('gg_plata_hunger_threshold')|0]#! (#V 12#! from 1851), hunger brings the Defensa to the point of treating with the Cerrito."
  gg_plata_phase_blockade:0 "The Port under Blockade"
  gg_plata_phase_blockade_desc:0 "No foreign ship makes port, and the city lives on what it has."
- gg_plata_phase_ultimatum:0 "The Powers' Ultimatum"
+ gg_plata_phase_ultimatum:0 "The Powers’ Ultimatum"
  gg_plata_phase_ultimatum_desc:0 "London and Paris demand that the blockade be lifted, and the whole region waits to see how Buenos Aires replies."
  gg_plata_phase_intervention_port:0 "Buenos Aires under Blockade"
  gg_plata_phase_intervention_port_desc:0 "The Anglo-French squadrons are blockading Rosas's port."

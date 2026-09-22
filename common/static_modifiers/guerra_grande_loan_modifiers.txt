@@ -41,7 +41,8 @@ guerra_grande_french_subsidy = {
 #     ganado y plata fuerte desde Buenos Aires durante toda la campania.
 guerra_grande_confederation_chest = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
-	country_minting_add = 300
+	# EN/ES: 22/9/2026 -- the money is Rosas's monthly patron payment now (1de993d); no minting of its
+	#     own, like the French subsidy it mirrors / la plata es el pago mensual del padrino; sin acunacion
 	country_military_goods_cost_mult = -0.10
 	country_authority_add = -25
 	country_prestige_mult = -0.05
