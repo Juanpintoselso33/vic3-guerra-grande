@@ -137,17 +137,3 @@ gg_troops_missing_horse_defensa = {
 	subtract = gg_troops_count_horse
 	min = 0
 }
-
-# EN/ES: what a top-up formation will hold, to skip creating an empty one / lo que va a tener una
-#     formacion de completado, para no crear una vacia
-gg_troops_missing_city_defensa = {
-	value = gg_troops_missing_line_defensa
-	add = gg_troops_missing_irregular_defensa
-	add = gg_troops_missing_guns_defensa
-}
-gg_troops_missing_total_cer = {
-	value = gg_troops_missing_line_cer
-	add = gg_troops_missing_irregular_cer
-	add = gg_troops_missing_horse_cer
-	add = gg_troops_missing_guns_cer
-}

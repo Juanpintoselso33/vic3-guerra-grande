@@ -27,34 +27,293 @@
 gg_troops_split_armies = {
 	# EN/ES: the Cerrito's own army / el ejercito propio del Cerrito
 	c:CER ?= {
+		# EN: 22/9/2026 (playtest) -- a combat_unit with count 0 invalidates the WHOLE
+		#     create_military_formation ("Invalid unit count 0", error.log), and 1.13 has no effect
+		#     that adds units to an existing formation. So there is one block per combination of
+		#     arms that are actually missing: every combat_unit emitted has a count above 0.
+		# ES: un combat_unit con count 0 invalida TODA la creacion, y 1.13 no tiene efecto para
+		#     sumar unidades a una formacion existente. Entonces hay un bloque por combinacion de
+		#     armas que de verdad faltan: todo combat_unit que se emite tiene count mayor que 0.
 		if = {
-			limit = {
-				gg_troops_missing_total_cer > 0
-				any_scope_state = { state_region = s:STATE_SAN_JOSE }
+			limit = { any_scope_state = { state_region = s:STATE_SAN_JOSE } }
+			if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
 			}
-			create_military_formation = {
-				type = army
-				hq_region = sr:region_brazil
-				name = Ejercito_del_Cerrito
-				combat_unit = {
-					type = unit_type:combat_unit_type_line_infantry
-					state_region = s:STATE_SAN_JOSE
-					count = gg_troops_missing_line_cer
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
 				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					state_region = s:STATE_SAN_JOSE
-					count = gg_troops_missing_irregular_cer
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
 				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					state_region = s:STATE_SAN_JOSE
-					count = gg_troops_missing_horse_cer
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
 				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_cannon_artillery
-					state_region = s:STATE_SAN_JOSE
-					count = gg_troops_missing_guns_cer
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer > 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_line_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer > 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_irregular_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer > 0 gg_troops_missing_guns_cer <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_hussars
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_horse_cer
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_cer <= 0 gg_troops_missing_irregular_cer <= 0 gg_troops_missing_horse_cer <= 0 gg_troops_missing_guns_cer > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Ejercito_del_Cerrito
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_SAN_JOSE
+						count = gg_troops_missing_guns_cer
+					}
 				}
 			}
 		}
@@ -77,8 +336,9 @@ gg_troops_split_armies = {
 					}
 				}
 			}
+			# EN/ES: same combinations as the Cerrito's / mismas combinaciones que el Cerrito
 			if = {
-				limit = { gg_troops_missing_city_defensa > 0 }
+				limit = { gg_troops_missing_line_defensa > 0 gg_troops_missing_irregular_defensa > 0 gg_troops_missing_guns_defensa > 0 }
 				create_military_formation = {
 					type = army
 					hq_region = sr:region_brazil
@@ -93,6 +353,99 @@ gg_troops_split_armies = {
 						state_region = s:STATE_MONTEVIDEO
 						count = gg_troops_missing_irregular_defensa
 					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_guns_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa > 0 gg_troops_missing_irregular_defensa > 0 gg_troops_missing_guns_defensa <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_line_defensa
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_irregular_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa > 0 gg_troops_missing_irregular_defensa <= 0 gg_troops_missing_guns_defensa > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_line_defensa
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_guns_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa > 0 gg_troops_missing_irregular_defensa <= 0 gg_troops_missing_guns_defensa <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_line_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_line_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa <= 0 gg_troops_missing_irregular_defensa > 0 gg_troops_missing_guns_defensa > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_irregular_defensa
+					}
+					combat_unit = {
+						type = unit_type:combat_unit_type_cannon_artillery
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_guns_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa <= 0 gg_troops_missing_irregular_defensa > 0 gg_troops_missing_guns_defensa <= 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
+					combat_unit = {
+						type = unit_type:combat_unit_type_irregular_infantry
+						state_region = s:STATE_MONTEVIDEO
+						count = gg_troops_missing_irregular_defensa
+					}
+				}
+			}
+			else_if = {
+				limit = { gg_troops_missing_line_defensa <= 0 gg_troops_missing_irregular_defensa <= 0 gg_troops_missing_guns_defensa > 0 }
+				create_military_formation = {
+					type = army
+					hq_region = sr:region_brazil
+					name = Guarnicion_de_Montevideo
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
 						state_region = s:STATE_MONTEVIDEO

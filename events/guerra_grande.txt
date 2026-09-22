@@ -567,11 +567,13 @@ guerra_grande.3 = {
 						has_template = URU_timoteo_aparicio
 						has_template = URU_Juan_Antonio_Lavalleja
 					}
-					NOT = { this = scope:gg_oribe }
-					NOT = { this = scope:gg_ignacio_oribe }
-					NOT = { this = scope:gg_berro }
-					NOT = { this = scope:gg_aparicio }
-					NOT = { this = scope:gg_lavalleja }
+					# EN/ES: 22/9/2026 -- ?= compares only when the scope was saved; a missing scope made the old
+					#     comparison invalid (error.log) / ?= compara solo si el scope se guardo; si faltaba, era invalida
+					NOT = { scope:gg_oribe ?= this }
+					NOT = { scope:gg_ignacio_oribe ?= this }
+					NOT = { scope:gg_berro ?= this }
+					NOT = { scope:gg_aparicio ?= this }
+					NOT = { scope:gg_lavalleja ?= this }
 				}
 				# EN: Dispose of a generated copy, not a historical person or an exile.
 				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
@@ -1062,12 +1064,14 @@ guerra_grande.3 = {
 						has_template = URU_anacleto_medina
 						has_template = URU_lorenzo_batlle
 					}
-					NOT = { this = scope:gg_suarez }
-					NOT = { this = scope:gg_rivera }
-					NOT = { this = scope:gg_flores }
-					NOT = { this = scope:gg_diaz }
-					NOT = { this = scope:gg_medina }
-					NOT = { this = scope:gg_batlle }
+					# EN/ES: 22/9/2026 -- ?= compares only when the scope was saved; a missing scope made the old
+					#     comparison invalid (error.log) / ?= compara solo si el scope se guardo; si faltaba, era invalida
+					NOT = { scope:gg_suarez ?= this }
+					NOT = { scope:gg_rivera ?= this }
+					NOT = { scope:gg_flores ?= this }
+					NOT = { scope:gg_diaz ?= this }
+					NOT = { scope:gg_medina ?= this }
+					NOT = { scope:gg_batlle ?= this }
 				}
 				# EN: Dispose of a generated copy, not a historical person or an exile.
 				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
