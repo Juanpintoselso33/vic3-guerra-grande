@@ -40,7 +40,7 @@
  gg_ui_plata_faction_ba_alone:0 "#b Facción de Buenos Aires#!\n[GetGlobalVariable('gg_flag_arg').GetCountry.GetFlagTextIcon]"
  gg_ui_plata_faction_ba_tt:0 "#b Quién sostiene a cada gobierno oriental#! (de 0 a 100):\nRosas #V [GetGlobalVariable('gg_patron_rosas').GetValue|0]#! · Urquiza #V [GetGlobalVariable('gg_patron_urquiza').GetValue|0]#!"
  gg_ui_plata_faction_mvd_tt:0 "#b Quién sostiene a cada gobierno oriental#! (de 0 a 100):\nFrancia #V [GetGlobalVariable('gg_patron_francia').GetValue|0]#! · Gran Bretaña #V [GetGlobalVariable('gg_patron_britania').GetValue|0]#! · Brasil #V [GetGlobalVariable('gg_patron_brasil').GetValue|0]#!"
- gg_ui_plata_key:0 "@ships! #b La llave del río#!: orilla de Buenos Aires #b [GetGlobalVariable('gg_plata_ba_owner').GetCountry.GetName]#! · orilla de Montevideo #b [GetGlobalVariable('gg_plata_mvd_owner').GetCountry.GetName]#!"
+ gg_ui_plata_key:0 "#b La llave del río#!: orilla de Buenos Aires #b [GetGlobalVariable('gg_plata_ba_owner').GetCountry.GetName]#! · orilla de Montevideo #b [GetGlobalVariable('gg_plata_mvd_owner').GetCountry.GetName]#!"
  gg_ui_plata_key_tt:0 "El paso del río se gobierna desde sus dos orillas. Una orilla con su batería puede negar el paso a los barcos extranjeros; sin batería, o en otras manos, deja de cerrarlo."
  gg_ui_plata_forts_0:0 "Baterías: #N ninguna orilla conserva la suya#!"
  gg_ui_plata_forts_1:0 "Baterías: #b Buenos Aires#! conserva la suya; #N Montevideo no#!"

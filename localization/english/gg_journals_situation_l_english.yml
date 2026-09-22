@@ -40,7 +40,7 @@
  gg_ui_plata_faction_ba_alone:0 "#b Buenos Aires faction#!\n[GetGlobalVariable('gg_flag_arg').GetCountry.GetFlagTextIcon]"
  gg_ui_plata_faction_ba_tt:0 "#b Who backs each Oriental government#! (0 to 100):\nRosas #V [GetGlobalVariable('gg_patron_rosas').GetValue|0]#! · Urquiza #V [GetGlobalVariable('gg_patron_urquiza').GetValue|0]#!"
  gg_ui_plata_faction_mvd_tt:0 "#b Who backs each Oriental government#! (0 to 100):\nFrance #V [GetGlobalVariable('gg_patron_francia').GetValue|0]#! · Great Britain #V [GetGlobalVariable('gg_patron_britania').GetValue|0]#! · Brazil #V [GetGlobalVariable('gg_patron_brasil').GetValue|0]#!"
- gg_ui_plata_key:0 "@ships! #b The key to the river#!: Buenos Aires shore #b [GetGlobalVariable('gg_plata_ba_owner').GetCountry.GetName]#! · Montevideo shore #b [GetGlobalVariable('gg_plata_mvd_owner').GetCountry.GetName]#!"
+ gg_ui_plata_key:0 "#b The key to the river#!: Buenos Aires shore #b [GetGlobalVariable('gg_plata_ba_owner').GetCountry.GetName]#! · Montevideo shore #b [GetGlobalVariable('gg_plata_mvd_owner').GetCountry.GetName]#!"
  gg_ui_plata_key_tt:0 "Passage up the river is governed from its two shores. A shore with its battery can deny passage to foreign ships; without the battery, or in other hands, it no longer closes it."
  gg_ui_plata_forts_0:0 "Batteries: #N neither shore keeps its own#!"
  gg_ui_plata_forts_1:0 "Batteries: #b Buenos Aires#! keeps its own; #N Montevideo does not#!"

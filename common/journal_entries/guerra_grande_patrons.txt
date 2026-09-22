@@ -12,6 +12,11 @@ je_gg_patrons = {
 	#     y los detalles; la remesa vive en el Pacto.
 	widget = {
 		gui = "gui/gg_international.gui"
+		name = "gg_plata_header"
+		container = "custom_widget_container_je_icon"
+	}
+	widget = {
+		gui = "gui/gg_international.gui"
 		name = "gg_plata_situation"
 		container = "custom_widget_container_1"
 	}

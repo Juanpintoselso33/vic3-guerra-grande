@@ -9,32 +9,38 @@
 #     situaciones de Gates of the Bosphorus / Community Mod Framework (sin tomar codigo): tu papel,
 #     dos lideres cara a cara, que gana cada lado, la fase y sus efectos, las facciones, el peso del
 #     rio en la guerra y lo que tu papel te deja hacer. Las dos barras nativas son del journal.
-flowcontainer = {
- name = "gg_plata_situation"
- direction = vertical parentanchor = hcenter spacing = 10 ignoreinvisible = yes
- widget = { size = { 520 8 } }
- # EN/ES: header -- "New Chart of the River Plate", E. & G. W. Blunt, New York 1840 (public domain,
- #     Gallica btv1b53098736b via Commons) / cabecera: la carta del Rio de la Plata de Blunt, 1840
+# EN/ES: the header IS the chart: it takes the icon's place, with the role as a caption on it
+#     / el encabezado ES la carta: ocupa el lugar del icono, con el rol como epigrafe
+widget = {
+ name = "gg_plata_header"
+ size = { 520 196 }
+ parentanchor = hcenter
  icon = {
   size = { 520 190 }
-  parentanchor = hcenter
+  position = { 0 6 }
   texture = "gfx/interface/gg_situations/plata_header.dds"
  }
  textbox = {
   visible = "[GetScriptedGui('gg_ui_plata_role_involved').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_large align = hcenter|nobaseline
+  position = { 0 160 } size = { 520 36 }
+  background = { using = dark_area alpha = 0.75 }
+  using = fontsize_large align = center|nobaseline
   text = "gg_ui_plata_role_involved"
  }
  textbox = {
   visible = "[GetScriptedGui('gg_ui_plata_role_outsider').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_large align = hcenter|nobaseline
+  position = { 0 160 } size = { 520 36 }
+  background = { using = dark_area alpha = 0.75 }
+  using = fontsize_large align = center|nobaseline
   text = "gg_ui_plata_role_outsider"
  }
+}
+flowcontainer = {
+ name = "gg_plata_situation"
+ direction = vertical parentanchor = hcenter spacing = 10 ignoreinvisible = yes
+ # EN/ES: face to face only once they face each other (from the split) / cara a cara solo desde la particion
  flowcontainer = {
+  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
   direction = horizontal spacing = 8 parentanchor = hcenter
   flowcontainer = {
    direction = vertical ignoreinvisible = yes
@@ -131,6 +137,7 @@ flowcontainer = {
   }
  }
  flowcontainer = {
+  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
   direction = horizontal spacing = 8 parentanchor = hcenter
  textbox = {
    tooltip = "gg_ui_plata_win_buenos_aires_tt"
@@ -227,6 +234,7 @@ flowcontainer = {
   text = "gg_ui_plata_forts_3"
  }
  flowcontainer = {
+  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
   direction = horizontal spacing = 8 parentanchor = hcenter
  textbox = {
    visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_has_cerrito'), '(CFixedPoint)1')]"
@@ -267,7 +275,7 @@ flowcontainer = {
   text = "gg_ui_plata_weight_colorados"
  }
  textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)0')]"
+  visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)0'))]"
   autoresize = yes multiline = yes
   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
   using = fontsize_medium align = left|nobaseline
