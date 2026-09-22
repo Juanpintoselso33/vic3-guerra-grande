@@ -31,10 +31,14 @@ gg_war_balance_colorado = {
 
 # EN: T3a. Total backing of each side (to-be.md section 2); T3b makes it drain war support.
 # ES: T3a. Sosten total de cada bando (to-be.md seccion 2); en T3b drena el apoyo a la guerra.
+# EN/ES: 22/9/2026, the powers' levels -- only a power that is Protector or Guarantor backs the war;
+#     a Spectator does not (and Brazil is a Spectator before 1850) / solo respalda la guerra la potencia
+#     Protectora o Garante; la Espectadora no (y el Brasil lo es antes de 1850)
 gg_defensa_backing = {
-	value = global_var:gg_patron_francia
-	add = global_var:gg_patron_britania
-	add = global_var:gg_patron_brasil
+	value = 0
+	if = { limit = { gg_patron_level_francia >= 1 } add = global_var:gg_patron_francia }
+	if = { limit = { gg_patron_level_britania >= 1 } add = global_var:gg_patron_britania }
+	if = { limit = { gg_patron_level_brasil >= 1 } add = global_var:gg_patron_brasil }
 	# EN/ES: T7 -- Urquiza counts for the side he is on / Urquiza cuenta para el lado donde esta
 	if = {
 		limit = { has_global_variable = gg_urquiza_flipped }
@@ -98,9 +102,22 @@ gg_cerrito_drain = {
 #     the Cerrito. 30 per point of support is provisional (T10).
 # ES: T3b, C19. Plata mensual de los padrinos que pagan: Francia y Brasil a la Defensa, Rosas al
 #     Cerrito. 30 por punto de apoyo es provisorio (T10).
+# EN/ES: 22/9/2026 -- one payment, not two: a power pays only as Protector or Guarantor; the historical
+#     subsidies (the French convention of 1848, the Brazilian treaties of 1851, Rosas's backing) no
+#     longer mint money of their own: their money is this payment / un solo pago: la potencia paga solo
+#     como Protectora o Garante; los subsidios historicos ya no acunan plata propia: su plata es este pago
 gg_defensa_subsidy = {
-	value = global_var:gg_patron_francia
-	add = global_var:gg_patron_brasil
+	value = 0
+	# EN/ES: renouncing the subsidy (May 1851) is renouncing France's money, even while her squadron or
+	#     her guarantee keeps her Guarantor / renunciar al subsidio es renunciar a la plata francesa
+	if = {
+		limit = {
+			gg_patron_level_francia >= 1
+			NOT = { has_global_variable = gg_french_subsidy_renounced }
+		}
+		add = global_var:gg_patron_francia
+	}
+	if = { limit = { gg_patron_level_brasil >= 1 } add = global_var:gg_patron_brasil }
 	multiply = 30
 }
 

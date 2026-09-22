@@ -8,7 +8,7 @@
  guerra_grande_requires_campana:0 "We must hold the countryside"
 
  guerra_grande_river_blockade_button:0 "Close the River"
- guerra_grande_river_blockade_button_desc:0 "The siege line will never take Montevideo while the sea behind it stays open, for by sea come its flour, its powder and its customs revenue.\n\nWe ask Rosas to close the river, and Admiral William Brown's squadron is fitted out at Maldonado to serve the Cerrito (once only, provided Maldonado is ours). Should Rosas agree, every month the river stays shut tightens the noose on the city, brings it nearer to suing for peace and tips the war towards the #blue_value blancos#! — at the cost of London's and Paris's patience. Should he refuse, we may ask again."
+ guerra_grande_river_blockade_button_desc:0 "The siege line will never take Montevideo while the sea behind it stays open, for by sea come its flour, its powder and its customs revenue.\n\nWe ask Rosas to close the river, and Admiral William Brown's squadron is fitted out at Maldonado to serve the Cerrito (once only, provided Maldonado is ours). Should Rosas agree, every month the river stays shut tightens the noose on the city, brings it nearer to suing for peace and tips the war towards the #blue_value blancos#! — at the cost of the patience of the powers that back the Defensa. Should he refuse, we may ask again."
  guerra_grande_requires_rosas:0 "The Confederation must still stand"
  guerra_grande_requires_river_unwatched:0 "Rosas must hold his shore of the Plata with its battery, with no foreign squadron intervening on the river"
  gg_plata_requires_no_guarantee:0 "The river must not be under the powers' guarantee (Rosas gave way to their ultimatum)"

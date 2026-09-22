@@ -42,4 +42,4 @@
  gg_siege_ui_brie:0 "#b Basque Chasseurs#!: #P raised#!"
  gg_siege_ui_brie_tt:0 "The Basque companies break away from the French Legion and form a regiment of their own under Jean Baptiste Brie: the city gains a battalion."
  gg_siege_ui_allied:0 "#b Allied Army#!: #P landed at Montevideo#!"
- gg_siege_ui_allied_tt:0 "Under the treaties of 1851 with the Empire of Brazil, the city receives infantry and cavalry.\n#b Effects#! (the Defensa; fading over fifteen years): minting #P +400#!, prestige #N -15%#!, authority #N -50#!. The Cerrito loses #N 30#! war support."
+ gg_siege_ui_allied_tt:0 "Under the treaties of 1851 with the Empire of Brazil, the city receives infantry and cavalry.\n#b Effects#! (the Defensa; fading over fifteen years): prestige #N -15%#!, authority #N -50#!. The Empire's money comes through its monthly payment (see «The Powers» in The Guerra Grande). The Cerrito loses #N 30#! war support."

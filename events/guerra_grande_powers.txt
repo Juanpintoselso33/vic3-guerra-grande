@@ -1083,6 +1083,28 @@ gg_powers.21 = {
 			limit = { has_modifier = guerra_grande_french_subsidy }
 			remove_modifier = guerra_grande_french_subsidy
 		}
+		# EN/ES: 22/9/2026 -- renouncing the subsidy takes France out: Spectator (gg_patron_levels.txt),
+		#     unless her guarantee or her squadron keeps her in the river. The mark goes first, so the
+		#     level notice fired by gg_patron_change is the final one (Codex) / renunciar saca a Francia,
+		#     salvo que su garantia o su escuadra la mantengan; la marca va primero
+		hidden_effect = {
+			set_global_variable = gg_french_subsidy_renounced
+		}
+		if = {
+			limit = {
+				OR = {
+					has_global_variable = gg_plata_guarantee
+					AND = {
+						has_global_variable = gg_plata_intervention
+						NOT = { has_global_variable = gg_plata_intervention_over }
+					}
+				}
+			}
+			custom_tooltip = gg_patron_france_out_river_tt
+		}
+		else = {
+			custom_tooltip = gg_patron_france_out_tt
+		}
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		c:URU ?= {

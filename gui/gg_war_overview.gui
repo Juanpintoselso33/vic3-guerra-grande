@@ -189,6 +189,104 @@ flowcontainer = {
 			}
 		}
 	}
+	# EN/ES: 22/9/2026 -- the powers' levels (design B): each power's standing towards the Defensa, with
+	#     what it buys in the tooltip; the level lives here because money and backing live in this
+	#     journal's pulse / los niveles de las potencias: la posicion de cada una frente a la Defensa
+	textbox = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		tooltip = "gg_war_ui_sec_powers_tt"
+		size = { 520 34 }
+		parentanchor = hcenter
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_powers"
+	}
+	flowcontainer = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		direction = horizontal spacing = 8
+		parentanchor = hcenter
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)0')]"
+				tooltip = "gg_tt_patron_francia_now_0"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_francia_0"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)1')]"
+				tooltip = "gg_tt_patron_francia_now_1"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_francia_1"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)2')]"
+				tooltip = "gg_tt_patron_francia_now_2"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_francia_2"
+			}
+		}
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)0')]"
+				tooltip = "gg_tt_patron_britania_now_0"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_britania_0"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)1')]"
+				tooltip = "gg_tt_patron_britania_now_1"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_britania_1"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)2')]"
+				tooltip = "gg_tt_patron_britania_now_2"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_britania_2"
+			}
+		}
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0')]"
+				tooltip = "gg_tt_patron_brasil_now_0"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_brasil_0"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)1')]"
+				tooltip = "gg_tt_patron_brasil_now_1"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_brasil_1"
+			}
+			textbox = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)2')]"
+				tooltip = "gg_tt_patron_brasil_now_2"
+				size = { 164 34 }
+				background = { using = dark_area alpha = 0.3 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_brasil_2"
+			}
+		}
+	}
 	widget = { size = { 520 4 } }
 }
 

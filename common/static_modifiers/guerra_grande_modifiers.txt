@@ -63,7 +63,8 @@ guerra_grande_italian_legion = {
 # Rosas backs the Cerrito with money, cattle and veterans.
 guerra_grande_rosista_support = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
-	country_minting_add = 300
+	# EN/ES: 22/9/2026 -- the money goes by the patron's monthly payment (gg_*_subsidy), not twice
+	#     / la plata va por el pago mensual del padrino, no dos veces (Rosas)
 	unit_offense_mult = 0.10
 	interest_group_ig_armed_forces_approval_add = 2
 }
@@ -141,7 +142,8 @@ guerra_grande_argentine_auxiliaries = {
 # The treaties of 12 October 1851: 60,000 patacones a month, and the customs mortgaged for them.
 guerra_grande_brazilian_subsidy = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
-	country_minting_add = 400
+	# EN/ES: 22/9/2026 -- the money goes by the patron's monthly payment (gg_*_subsidy), not twice
+	#     / la plata va por el pago mensual del padrino, no dos veces (Brazil)
 	country_prestige_mult = -0.15
 	country_authority_add = -50
 }

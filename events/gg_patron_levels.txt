@@ -1,0 +1,84 @@
+﻿namespace = gg_patron
+# -------------------------------------------------------------------------------------------------
+# EN: THE POWERS' LEVELS, notices (22/9/2026, design B decided by Juan). France, Britain and Brazil
+#     each stand towards the Defensa as Spectator, Protector or Guarantor (common/script_values/
+#     gg_patron_levels.txt). When a level changes, gg_patron_levels_monthly sends these to the players
+#     of the Defensa and the Cerrito. They change nothing: the level already changed.
+# ES: LOS NIVELES DE LAS POTENCIAS, avisos. Cuando cambia un nivel, se avisa a los jugadores de la
+#     Defensa y del Cerrito. No cambian nada: el nivel ya cambio.
+# -------------------------------------------------------------------------------------------------
+gg_patron.1 = {
+	type = country_event
+	placement = ROOT
+	title = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.1.t_2 trigger = { gg_patron_level_francia = 2 } }
+			triggered_desc = { desc = gg_patron.1.t_1 trigger = { gg_patron_level_francia = 1 } }
+			triggered_desc = { desc = gg_patron.1.t_0 }
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.1.d_2 trigger = { gg_patron_level_francia = 2 } }
+			triggered_desc = { desc = gg_patron.1.d_1 trigger = { gg_patron_level_francia = 1 } }
+			triggered_desc = { desc = gg_patron.1.d_0 }
+		}
+	}
+	event_image = { video = "gg_money_french_convention" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_patron.a
+		default_option = yes
+	}
+}
+gg_patron.2 = {
+	type = country_event
+	placement = ROOT
+	title = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.2.t_2 trigger = { gg_patron_level_britania = 2 } }
+			triggered_desc = { desc = gg_patron.2.t_1 trigger = { gg_patron_level_britania = 1 } }
+			triggered_desc = { desc = gg_patron.2.t_0 }
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.2.d_2 trigger = { gg_patron_level_britania = 2 } }
+			triggered_desc = { desc = gg_patron.2.d_1 trigger = { gg_patron_level_britania = 1 } }
+			triggered_desc = { desc = gg_patron.2.d_0 }
+		}
+	}
+	event_image = { video = "gg_f2_palmerston" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_patron.a
+		default_option = yes
+	}
+}
+gg_patron.3 = {
+	type = country_event
+	placement = ROOT
+	title = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.3.t_2 trigger = { gg_patron_level_brasil = 2 } }
+			triggered_desc = { desc = gg_patron.3.t_1 trigger = { gg_patron_level_brasil = 1 } }
+			triggered_desc = { desc = gg_patron.3.t_0 }
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_patron.3.d_2 trigger = { gg_patron_level_brasil = 2 } }
+			triggered_desc = { desc = gg_patron.3.d_1 trigger = { gg_patron_level_brasil = 1 } }
+			triggered_desc = { desc = gg_patron.3.d_0 }
+		}
+	}
+	event_image = { video = "gg_money_maua" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_patron.a
+		default_option = yes
+	}
+}

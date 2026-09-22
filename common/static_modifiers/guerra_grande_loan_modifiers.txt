@@ -28,7 +28,8 @@
 #     reembolsables a cargo de la aduana desde 1852.
 guerra_grande_french_subsidy = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
-	country_minting_add = 300
+	# EN/ES: 22/9/2026 -- the money goes by the patron's monthly payment (gg_*_subsidy), not twice
+	#     / la plata va por el pago mensual del padrino, no dos veces (France)
 	country_military_goods_cost_mult = -0.10
 	country_authority_add = -25
 	country_prestige_mult = -0.05

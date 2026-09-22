@@ -283,6 +283,12 @@ gg_patron_change = {
 		}
 		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: GG_PATRON $PATRON$ $DELTA$"
 	}
+	# EN/ES: 22/9/2026 -- what this patron's backing buys, written out once for every call. The preview
+	#     cannot show the level after the change, so the text gives the thresholds, not a level (Codex)
+	#     / lo que compra el respaldo de este padrino; da los umbrales, no un nivel
+	custom_tooltip = gg_tt_patron_$PATRON$_means
+	# EN/ES: a change of level is announced at once, not a month later / el cambio de nivel se avisa ya
+	hidden_effect = { gg_patron_level_watch_$PATRON$ = yes }
 }
 
 # EN: T6, the Defensa's law of 1842, dispatched once (Codex review 2026-09-19). Three places could

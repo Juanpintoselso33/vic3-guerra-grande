@@ -1,0 +1,111 @@
+﻿# EN: THE POWERS' LEVELS (22/9/2026, design B decided by Juan, docs/padrinos-diseno-2026-09-22.md).
+#     France, Britain and Brazil each have a named level; the 0-100 number (gg_patron_*) stays internal
+#     and only moves the level between the historical landmarks, which fix it outright.
+#       0 Spectator  -- does not pay, does not back the war, does not count for the river
+#       1 Protector  -- pays and backs the war; its patience runs on a closed river only alongside the
+#                       other power: it never intervenes on its own
+#       2 Guarantor  -- pays and backs; its patience runs even alone, and it can intervene alone
+#     Number: 20 or more Protector, 60 or more Guarantor (20, not 30, so France starts as Protector,
+#     as she stood behind the Defensa from the French blockade of 1838).
+#     Rosas and Urquiza are not powers: they keep their number, with its consequences written out in
+#     the tooltip of every change (gg_patron_change). Their level is 9 = "no level".
+#     The Brazil of the Cerrito's decade is a spectator: it counts from 1850 (Maua, Lamas in Rio).
+# ES: LOS NIVELES DE LAS POTENCIAS. Francia, Gran Bretana y el Brasil tienen un nivel con nombre; el
+#     numero 0-100 queda interno y solo mueve el nivel entre los hitos historicos, que lo fijan.
+#       0 Espectador, 1 Protector, 2 Garante. Numero: 20 o mas Protector, 60 o mas Garante.
+#     Rosas y Urquiza no son potencias: conservan el numero, con sus consecuencias escritas. Nivel 9.
+#     El Brasil cuenta desde 1850.
+gg_patron_level_francia = {
+	value = 0
+	if = { limit = { global_var:gg_patron_francia >= 20 } value = 1 }
+	if = { limit = { global_var:gg_patron_francia >= 60 } value = 2 }
+	# EN/ES: the convention of 1848 pays the Defensa: while its subsidy runs, France is at least Protector
+	#     (Codex 22/9) / la convencion de 1848 le paga a la Defensa: mientras corre, Francia es por lo menos Protectora
+	if = {
+		limit = {
+			global_var:gg_patron_francia < 20
+			c:URU ?= { has_modifier = guerra_grande_french_subsidy }
+		}
+		value = 1
+	}
+	# EN/ES: Lepredour (the right of blockade recognised) or the subsidy renounced (May 1851): out
+	#     / Lepredour (derecho de bloqueo reconocido) o el subsidio renunciado (mayo de 1851): afuera
+	if = {
+		limit = {
+			OR = {
+				has_global_variable = gg_plata_france_recognizes
+				has_global_variable = gg_french_subsidy_renounced
+			}
+		}
+		value = 0
+	}
+	# EN/ES: guarantor of the river after Rosas gave way, and while her squadron is in it -- last, so a
+	#     squadron in the river is never a Spectator's / garante del rio y mientras su escuadra esta en el:
+	#     al final, asi una escuadra en el rio nunca es de una Espectadora
+	if = {
+		limit = {
+			OR = {
+				has_global_variable = gg_plata_guarantee
+				AND = {
+					has_global_variable = gg_plata_intervention
+					NOT = { has_global_variable = gg_plata_intervention_over }
+				}
+			}
+		}
+		value = 2
+	}
+}
+
+gg_patron_level_britania = {
+	value = 0
+	if = { limit = { global_var:gg_patron_britania >= 20 } value = 1 }
+	if = { limit = { global_var:gg_patron_britania >= 60 } value = 2 }
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					has_global_variable = gg_plata_guarantee
+					NOT = { has_global_variable = gg_plata_guarantee_france_only }
+				}
+				AND = {
+					has_global_variable = gg_plata_intervention
+					NOT = { has_global_variable = gg_plata_intervention_over }
+					NOT = { has_global_variable = gg_plata_france_alone }
+					NOT = { has_global_variable = gg_plata_britain_settled }
+				}
+			}
+		}
+		value = 2
+	}
+	# EN/ES: Southern (the right of blockade recognised): out / Southern: afuera
+	if = { limit = { has_global_variable = gg_plata_britain_recognizes } value = 0 }
+}
+gg_patron_level_brasil = {
+	value = 0
+	if = { limit = { global_var:gg_patron_brasil >= 20 } value = 1 }
+	if = { limit = { global_var:gg_patron_brasil >= 60 } value = 2 }
+	# EN/ES: the Empire's pledge (May 1851) and the treaties of 12 October 1851 make it guarantor
+	#     / el compromiso del Imperio (mayo de 1851) y los tratados del 12/10/1851 lo hacen garante
+	if = {
+		limit = {
+			OR = {
+				has_global_variable = gg_imperial_pledged
+				has_global_variable = guerra_grande_treaties_signed
+			}
+		}
+		value = 2
+	}
+	if = { limit = { year < 1850 } value = 0 }
+}
+# EN/ES: not powers: no level / no son potencias: sin nivel
+gg_patron_level_rosas = { value = 9 }
+gg_patron_level_urquiza = { value = 9 }
+
+# EN/ES: the GUI's reading of London's place in the river: 0 in it, 1 out by recognising the right of
+#     blockade (Southern), 2 out because it does not stand behind the Defensa
+#     / 0 adentro, 1 afuera por Southern, 2 afuera porque no respalda a la Defensa
+gg_ui_plata_london_mode = {
+	value = 0
+	if = { limit = { gg_plata_london_out = yes } value = 2 }
+	if = { limit = { has_global_variable = gg_plata_britain_recognizes } value = 1 }
+}

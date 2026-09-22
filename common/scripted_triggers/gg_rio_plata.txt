@@ -71,13 +71,16 @@ gg_plata_patience_spent = {
 	#     gg_plata_britain_recognizes), only Paris's patience counts / cuando Londres ya reconocio el
 	#     derecho de bloqueo, solo cuenta la paciencia de Paris
 	c:ARG ?= {
+		# EN/ES: 22/9/2026 -- only the powers that count by their level (gg_patron_levels.txt): a
+		#     recognised right of blockade makes that power a Spectator / solo las potencias que
+		#     cuentan por su nivel: reconocer el derecho de bloqueo la vuelve Espectadora
 		OR = {
 			AND = {
-				NOT = { has_global_variable = gg_plata_britain_recognizes }
+				gg_plata_britain_counts = yes
 				c:GBR ?= { relations:prev < relations_threshold:cordial }
 			}
 			AND = {
-				NOT = { has_global_variable = gg_plata_france_recognizes }
+				gg_plata_france_counts = yes
 				c:FRA ?= { relations:prev < relations_threshold:cordial }
 			}
 		}
@@ -125,6 +128,8 @@ gg_plata_intervention_at_any = {
 #     vuelve a estar cordial con Buenos Aires, o en la fecha del tratado Arana-Southern.
 gg_plata_southern_without_war_due = {
 	has_global_variable = gg_plata_guarantee
+	# EN/ES: a guarantee London never gave is not London's to end / una garantia que Londres no dio
+	NOT = { has_global_variable = gg_plata_guarantee_france_only }
 	NOT = { has_global_variable = gg_plata_intervention }
 	NOT = { has_global_variable = gg_plata_britain_recognizes }
 	NOT = { has_global_variable = gg_plata_ultimatum_pending }
@@ -139,7 +144,12 @@ gg_plata_southern_without_war_due = {
 # ES: Paris tambien arregla, sin guerra: la convencion Arana-Lepredour, o Paris otra vez cordial con
 #     Buenos Aires. Desde ahi ninguna potencia responde a un cierre.
 gg_plata_lepredour_without_war_due = {
-	has_global_variable = gg_plata_britain_recognizes
+	# EN/ES: London out of the river, by Southern or by standing aside / Londres fuera del rio
+	OR = {
+		has_global_variable = gg_plata_britain_recognizes
+		has_global_variable = gg_plata_guarantee_france_only
+		gg_plata_london_out = yes
+	}
 	NOT = { has_global_variable = gg_plata_france_recognizes }
 	NOT = { has_global_variable = gg_plata_intervention }
 	NOT = { has_global_variable = gg_plata_ultimatum_pending }

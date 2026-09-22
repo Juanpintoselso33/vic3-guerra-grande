@@ -253,7 +253,6 @@
  je_gg_patrons:0 "La cuestión del Plata"
  je_gg_patrons_reason:0 ""
  je_gg_patrons_desc:0 ""
- je_gg_patrons_status:0 "[GetGlobalVariable('gg_flag_arg').GetCountry.GetFlagTextIcon] #b Rosas#!: #V [GetGlobalVariable('gg_patron_rosas').GetValue|v0]#!  (#blue_value blancos#!)\n[GetGlobalVariable('gg_flag_fra').GetCountry.GetFlagTextIcon] #b Francia#!: #V [GetGlobalVariable('gg_patron_francia').GetValue|v0]#!  (#R colorados#!)\n[GetGlobalVariable('gg_flag_gbr').GetCountry.GetFlagTextIcon] #b Gran Bretaña#!: #V [GetGlobalVariable('gg_patron_britania').GetValue|v0]#!  (#R colorados#!)\n[GetGlobalVariable('gg_flag_brz').GetCountry.GetFlagTextIcon] #b Brasil#!: #V [GetGlobalVariable('gg_patron_brasil').GetValue|v0]#!  (#R colorados#!)\n@gg_entre_rios_flag! #b Urquiza#!: #V [GetGlobalVariable('gg_patron_urquiza').GetValue|v0]#!  (elige bando; con #V 60#! se pronuncia solo)"
  je_gg_patrons_complete_tt:0 "La paz está firmada."
  je_gg_patrons_fail_tt:0 "La República quedó en manos extranjeras."
  je_gg_siege:0 "El Sitio Grande"

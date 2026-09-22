@@ -42,4 +42,4 @@
  gg_siege_ui_brie:0 "#b Cazadores Vascos#!: #P formados#!"
  gg_siege_ui_brie_tt:0 "Las compañías vascas se separan de la Legión Francesa y forman su propio regimiento, a las órdenes de Jean Baptiste Brie: la plaza suma un batallón."
  gg_siege_ui_allied:0 "#b Ejército Aliado#!: #P en la plaza#!"
- gg_siege_ui_allied_tt:0 "Con los tratados de 1851 con el Imperio del Brasil, la plaza recibe infantería y caballería.\n#b Efectos#! (la Defensa; se desvanecen en quince años): acuñación #P +400#!, prestigio #N -15%#!, autoridad #N -50#!. El Cerrito pierde #N 30#! de apoyo a la guerra."
+ gg_siege_ui_allied_tt:0 "Con los tratados de 1851 con el Imperio del Brasil, la plaza recibe infantería y caballería.\n#b Efectos#! (la Defensa; se desvanecen en quince años): prestigio #N -15%#!, autoridad #N -50#!. La plata del Imperio llega por su pago mensual (ver «Las potencias» en La Guerra Grande). El Cerrito pierde #N 30#! de apoyo a la guerra."

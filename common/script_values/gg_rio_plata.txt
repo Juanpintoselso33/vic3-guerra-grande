@@ -121,10 +121,34 @@ gg_ui_plata_powers_word = {
 		}
 		value = 4
 	}
+	# EN/ES: 22/9/2026, the powers' levels -- London out of the river by standing aside: 5 if Paris's
+	#     patience still counts, 6 if no power's does / Londres al margen: 5 si cuenta Paris, 6 si nadie
 	if = {
 		limit = {
-			has_global_variable = gg_plata_britain_recognizes
+			NOT = { has_global_variable = gg_plata_britain_recognizes }
+			NOT = { has_global_variable = gg_plata_intervention }
+			NOT = { has_global_variable = gg_plata_guarantee }
+			gg_plata_london_out = yes
+		}
+		value = 5
+	}
+	if = {
+		limit = {
+			NOT = { has_global_variable = gg_plata_intervention }
+			NOT = { has_global_variable = gg_plata_guarantee }
+			NOT = { has_global_variable = gg_plata_france_recognizes }
+			NOT = { gg_plata_france_counts = yes }
+			NOT = { gg_plata_britain_counts = yes }
+		}
+		value = 6
+	}
+	if = {
+		limit = {
 			has_global_variable = gg_plata_guarantee
+			OR = {
+				has_global_variable = gg_plata_britain_recognizes
+				has_global_variable = gg_plata_guarantee_france_only
+			}
 		}
 		value = 2
 	}
@@ -160,6 +184,11 @@ gg_ui_plata_patience_shown = {
 				# EN/ES: 22/9/2026 -- both powers recognised the right of blockade: no ultimatum left
 				#     / las dos potencias reconocieron el derecho de bloqueo: ya no hay ultimatum
 				has_global_variable = gg_plata_france_recognizes
+				# EN/ES: 22/9/2026 -- no power counts by its level / ninguna potencia cuenta por su nivel
+				AND = {
+					NOT = { gg_plata_france_counts = yes }
+					NOT = { gg_plata_britain_counts = yes }
+				}
 			}
 		}
 		value = 0

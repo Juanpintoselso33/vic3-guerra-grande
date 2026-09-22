@@ -1,0 +1,29 @@
+﻿# EN: Who counts for the river (22/9/2026, the powers' levels, gg_patron_levels.txt). A Guarantor's
+#     patience runs alone; a Protector's only alongside the other power (a Protector never intervenes
+#     alone). London never acted without Paris in the River Plate, and the mod has no British-only
+#     intervention: Britain counts only with France at least Protector.
+# ES: Quien cuenta para el rio. La paciencia de un Garante corre sola; la de un Protector, solo junto a
+#     la otra potencia. Londres nunca actuo sin Paris en el Plata, y el mod no tiene intervencion solo
+#     britanica: Gran Bretana cuenta solo con Francia por lo menos Protectora.
+gg_plata_france_counts = {
+	OR = {
+		gg_patron_level_francia >= 2
+		AND = {
+			gg_patron_level_francia >= 1
+			gg_patron_level_britania >= 1
+		}
+	}
+}
+gg_plata_britain_counts = {
+	gg_patron_level_britania >= 1
+	gg_patron_level_francia >= 1
+}
+# EN/ES: London is out of the river: recognised the right of blockade, or does not stand behind the
+#     Defensa / Londres esta fuera del rio: reconocio el bloqueo, o no respalda a la Defensa
+gg_plata_london_out = {
+	OR = {
+		NOT = { gg_plata_britain_counts = yes }
+		# EN/ES: a guarantee Paris gave alone / una garantia que Paris dio sola
+		has_global_variable = gg_plata_guarantee_france_only
+	}
+}

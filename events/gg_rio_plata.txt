@@ -107,7 +107,7 @@ gg_plata.10 = {
 			#     guerra Londres ya no esta; Paris sola
 			triggered_desc = {
 				desc = gg_plata.10.d_france
-				trigger = { has_global_variable = gg_plata_britain_recognizes }
+				trigger = { gg_plata_london_out = yes }
 			}
 			triggered_desc = { desc = gg_plata.10.d }
 		}
@@ -188,9 +188,18 @@ gg_plata.20 = {
 				desc = gg_plata.20.d_none
 				trigger = { has_global_variable = gg_plata_france_recognizes }
 			}
+			# EN/ES: 22/9/2026 -- no power stands behind the Defensa enough to object (levels)
+			#     / ninguna potencia respalda a la Defensa lo bastante para objetar (niveles)
+			triggered_desc = {
+				desc = gg_plata.20.d_none_aside
+				trigger = {
+					NOT = { gg_plata_france_counts = yes }
+					NOT = { gg_plata_britain_counts = yes }
+				}
+			}
 			triggered_desc = {
 				desc = gg_plata.20.d_france
-				trigger = { has_global_variable = gg_plata_britain_recognizes }
+				trigger = { gg_plata_london_out = yes }
 			}
 			triggered_desc = { desc = gg_plata.20.d }
 		}
@@ -242,7 +251,7 @@ gg_plata.22 = {
 		first_valid = {
 			triggered_desc = {
 				desc = gg_plata.22.d_france
-				trigger = { has_global_variable = gg_plata_britain_recognizes }
+				trigger = { gg_plata_london_out = yes }
 			}
 			triggered_desc = { desc = gg_plata.22.d }
 		}
@@ -308,13 +317,13 @@ gg_plata.25 = {
 			triggered_desc = {
 				desc = gg_plata.25.d_france_cost
 				trigger = {
-					has_global_variable = gg_plata_britain_recognizes
+					gg_plata_london_out = yes
 					has_global_variable = gg_plata_yield_cost_cerrito
 				}
 			}
 			triggered_desc = {
 				desc = gg_plata.25.d_france
-				trigger = { has_global_variable = gg_plata_britain_recognizes }
+				trigger = { gg_plata_london_out = yes }
 			}
 			triggered_desc = {
 				desc = gg_plata.25.d_cost

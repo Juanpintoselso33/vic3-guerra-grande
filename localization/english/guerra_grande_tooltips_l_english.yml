@@ -253,7 +253,6 @@
  je_gg_patrons:0 "The River Plate Question"
  je_gg_patrons_reason:0 ""
  je_gg_patrons_desc:0 ""
- je_gg_patrons_status:0 "[GetGlobalVariable('gg_flag_arg').GetCountry.GetFlagTextIcon] #b Rosas#!: #V [GetGlobalVariable('gg_patron_rosas').GetValue|v0]#!  (#blue_value blancos#!)\n[GetGlobalVariable('gg_flag_fra').GetCountry.GetFlagTextIcon] #b France#!: #V [GetGlobalVariable('gg_patron_francia').GetValue|v0]#!  (#R colorados#!)\n[GetGlobalVariable('gg_flag_gbr').GetCountry.GetFlagTextIcon] #b Britain#!: #V [GetGlobalVariable('gg_patron_britania').GetValue|v0]#!  (#R colorados#!)\n[GetGlobalVariable('gg_flag_brz').GetCountry.GetFlagTextIcon] #b Brazil#!: #V [GetGlobalVariable('gg_patron_brasil').GetValue|v0]#!  (#R colorados#!)\n@gg_entre_rios_flag! #b Urquiza#!: #V [GetGlobalVariable('gg_patron_urquiza').GetValue|v0]#!  (chooses a side; at #V 60#! he issues his own pronunciamiento)"
  je_gg_patrons_complete_tt:0 "Peace has been signed."
  je_gg_patrons_fail_tt:0 "The Republic fell into foreign hands."
  je_gg_siege:0 "The Great Siege of Montevideo"

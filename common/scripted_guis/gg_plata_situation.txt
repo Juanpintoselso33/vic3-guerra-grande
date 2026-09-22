@@ -12,9 +12,9 @@ gg_ui_plata_right_defensa = {
 		OR = {
 			gg_plata_phase < 2
 			gg_plata_phase = 4
-			# EN/ES: once London has recognised the right of blockade (Southern, with or without a war) there
-			#     is no British envoy / con Londres ya fuera, no hay enviado britanico
-			has_global_variable = gg_plata_britain_recognizes
+			# EN/ES: London out of the river (Southern, or not standing behind the Defensa by its level):
+			#     no British envoy / Londres fuera del rio: no hay enviado britanico
+			gg_plata_london_out = yes
 		}
 		OR = {
 			has_variable = guerra_grande_defensa_government
@@ -31,7 +31,7 @@ gg_ui_plata_right_powers = {
 	is_shown = {
 		gg_plata_phase >= 2
 		gg_plata_phase < 4
-		NOT = { has_global_variable = gg_plata_britain_recognizes }
+		NOT = { gg_plata_london_out = yes }
 		c:GBR ?= this
 	}
 }

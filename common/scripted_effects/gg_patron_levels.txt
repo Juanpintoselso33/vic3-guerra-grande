@@ -1,0 +1,30 @@
+﻿# EN: The powers' levels, once a month (22/9/2026, design B): a change of level is a change of state,
+#     and the players of the Defensa and the Cerrito get a popup (gg_patron.1-3). The first month only
+#     records the levels, so a new game or an old save does not announce what was already there.
+#     Called from gg_plata_situation_monthly (je_gg_patrons), which runs for the whole war.
+# ES: Los niveles de las potencias, una vez por mes: un cambio de nivel es un cambio de estado, y los
+#     jugadores de la Defensa y del Cerrito reciben un aviso. El primer mes solo registra.
+gg_patron_levels_monthly = {
+	gg_patron_level_watch_francia = yes
+	gg_patron_level_watch_britania = yes
+	gg_patron_level_watch_brasil = yes
+}
+# EN/ES: also called by gg_patron_change right after the number moves; the landmarks (flags) are caught
+#     by the monthly pulse. Rosas and Urquiza have no level. / tambien lo llama gg_patron_change apenas
+#     se mueve el numero; los hitos los agarra el pulso mensual. Rosas y Urquiza no tienen nivel.
+gg_patron_level_watch_francia = { gg_patron_level_watch = { POWER = francia EVENT = gg_patron.1 } }
+gg_patron_level_watch_britania = { gg_patron_level_watch = { POWER = britania EVENT = gg_patron.2 } }
+gg_patron_level_watch_brasil = { gg_patron_level_watch = { POWER = brasil EVENT = gg_patron.3 } }
+gg_patron_level_watch_rosas = { }
+gg_patron_level_watch_urquiza = { }
+gg_patron_level_watch = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_power_level_seen_$POWER$ } }
+		set_global_variable = { name = gg_power_level_seen_$POWER$ value = gg_patron_level_$POWER$ }
+	}
+	else_if = {
+		limit = { NOT = { global_var:gg_power_level_seen_$POWER$ = gg_patron_level_$POWER$ } }
+		set_global_variable = { name = gg_power_level_seen_$POWER$ value = gg_patron_level_$POWER$ }
+		gg_plata_notify = { EVENT = $EVENT$ }
+	}
+}

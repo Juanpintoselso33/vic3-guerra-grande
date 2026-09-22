@@ -88,10 +88,11 @@ gg_plata_ultimatum_send = {
 # ES: Rosas devuelve los pasaportes: empieza la intervencion. Sus eventos fechados esperan esto y su
 #     propia distancia desde aca.
 gg_plata_intervention_start = {
-	# EN/ES: 22/9/2026 -- after Southern without a war London is out: France intervenes alone
-	#     / despues de Southern sin guerra Londres ya no esta: Francia interviene sola
+	# EN/ES: 22/9/2026 -- London out of the river (Southern, or not standing behind the Defensa by its
+	#     level): France intervenes alone / Londres fuera del rio (Southern, o sin respaldar a la
+	#     Defensa por su nivel): Francia interviene sola
 	if = {
-		limit = { has_global_variable = gg_plata_britain_recognizes }
+		limit = { gg_plata_london_out = yes }
 		custom_tooltip = gg_plata_intervention_start_france_tt
 	}
 	else = {
@@ -102,12 +103,14 @@ gg_plata_intervention_start = {
 			limit = { has_global_variable = gg_plata_ultimatum_pending }
 			remove_global_variable = gg_plata_ultimatum_pending
 		}
-		set_global_variable = gg_plata_intervention
-		set_global_variable = { name = gg_plata_intervention_months value = 0 }
+		# EN/ES: decided BEFORE the intervention mark, which makes the intervening powers Guarantors
+		#     (Codex 22/9) / se decide ANTES de la marca, que vuelve Garantes a las potencias que intervienen
 		if = {
-			limit = { has_global_variable = gg_plata_britain_recognizes }
+			limit = { gg_plata_london_out = yes }
 			set_global_variable = gg_plata_france_alone
 		}
+		set_global_variable = gg_plata_intervention
+		set_global_variable = { name = gg_plata_intervention_months value = 0 }
 		# EN/ES: a broken guarantee brings its own notice (gg_plata.26) / una garantia rota trae su aviso
 		if = {
 			limit = { NOT = { has_global_variable = gg_plata_word_broken } }
@@ -154,7 +157,7 @@ gg_plata_intervention_start = {
 			save_scope_as = gg_plata_rosas
 			# EN/ES: London is out once it has recognised the right of blockade / Londres ya no esta si reconocio el bloqueo
 			if = {
-				limit = { NOT = { has_global_variable = gg_plata_britain_recognizes } }
+				limit = { NOT = { has_global_variable = gg_plata_france_alone } }
 				c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
 			}
 			c:FRA ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
@@ -176,7 +179,7 @@ gg_plata_ultimatum_yield = {
 	if = {
 		limit = { NOT = { has_global_variable = gg_peace_settled } }
 		if = {
-			limit = { has_global_variable = gg_plata_britain_recognizes }
+			limit = { gg_plata_london_out = yes }
 			custom_tooltip = gg_plata_guarantee_france_tt
 		}
 		else = {
@@ -202,6 +205,16 @@ gg_plata_ultimatum_yield = {
 		set_global_variable = { name = gg_plata_notice_closed value = 0 }
 		if = {
 			limit = { NOT = { has_global_variable = gg_peace_settled } }
+			# EN/ES: 22/9/2026 -- London out of the river when Rosas gives way: Paris alone guarantees it.
+			#     Decided BEFORE the guarantee mark, which makes the guarantors Guarantors (Codex 22/9)
+			#     / Londres fuera: garantiza solo Paris; se decide ANTES de la marca de garantia
+			if = {
+				limit = {
+					gg_plata_london_out = yes
+					NOT = { has_global_variable = gg_plata_britain_recognizes }
+				}
+				set_global_variable = gg_plata_guarantee_france_only
+			}
 			set_global_variable = gg_plata_guarantee
 			# EN/ES: two months for a human Rosas to open his shore in the strait panel before a closure
 			#     counts as a broken word / dos meses para que un Rosas jugador abra su orilla en el panel
@@ -239,7 +252,17 @@ gg_plata_monthly = {
 				change_global_variable = { name = gg_plata_months add = 1 }
 			}
 			change_global_variable = { name = gg_plata_closed_streak add = 1 }
-			change_global_variable = { name = gg_plata_closed_total add = 1 }
+			# EN/ES: 22/9/2026 (Codex) -- the patience only runs while some power counts by its level: no
+			#     months banked unseen / la paciencia corre solo si alguna potencia cuenta por su nivel
+			if = {
+				limit = {
+					OR = {
+						gg_plata_france_counts = yes
+						gg_plata_britain_counts = yes
+					}
+				}
+				change_global_variable = { name = gg_plata_closed_total add = 1 }
+			}
 		}
 		else = {
 			if = {
@@ -380,6 +403,8 @@ gg_plata_situation_monthly = {
 	gg_plata_flags_sync = yes
 	gg_plata_guarantee_monthly = yes
 	gg_plata_notices = yes
+	# EN/ES: 22/9/2026 -- the powers' levels / los niveles de las potencias
+	gg_patron_levels_monthly = yes
 }
 
 # EN: The countries the Overview draws: the two governments (the Cerrito only once it exists; the
@@ -479,12 +504,16 @@ gg_plata_guarantee_monthly = {
 		#     / el cierre lo anuncia gg_plata.26, no otra vez gg_plata.20
 		set_global_variable = { name = gg_plata_notice_closed value = 1 }
 		gg_plata_notify = { EVENT = gg_plata.26 }
+		# EN/ES: the France-only mark is read by the intervention (France alone), then cleared
+		#     / la intervencion lee la marca de solo Paris (Francia sola), y despues se borra
 		gg_plata_intervention_start = yes
+		gg_plata_guarantee_france_only_clear = yes
 		remove_global_variable = gg_plata_word_broken
 	}
 	else_if = {
 		limit = { gg_plata_southern_without_war_due = yes }
 		remove_global_variable = gg_plata_guarantee
+		gg_plata_guarantee_france_only_clear = yes
 		set_global_variable = gg_plata_britain_recognizes
 		gg_plata_notify = { EVENT = gg_plata.27 }
 	}
@@ -493,8 +522,17 @@ gg_plata_guarantee_monthly = {
 		if = {
 			limit = { has_global_variable = gg_plata_guarantee }
 			remove_global_variable = gg_plata_guarantee
+			gg_plata_guarantee_france_only_clear = yes
 		}
 		set_global_variable = gg_plata_france_recognizes
 		gg_plata_notify = { EVENT = gg_plata.28 }
+	}
+}
+
+# EN/ES: the France-only mark lives and dies with the guarantee / la marca vive y muere con la garantia
+gg_plata_guarantee_france_only_clear = {
+	if = {
+		limit = { has_global_variable = gg_plata_guarantee_france_only }
+		remove_global_variable = gg_plata_guarantee_france_only
 	}
 }
