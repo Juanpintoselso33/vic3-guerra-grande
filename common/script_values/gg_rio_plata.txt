@@ -130,3 +130,7 @@ gg_ui_plata_closed_sv = {
 	value = 0
 	if = { limit = { gg_plata_closed = yes } value = 1 }
 }
+gg_ui_plata_clocks_shown = {
+	value = 0
+	if = { limit = { OR = { gg_ui_plata_patience_shown > 0 gg_ui_plata_hunger_shown > 0 } } value = 1 }
+}

@@ -75,3 +75,6 @@
  gg_ui_plata_passage_closed:0 "#N Closed#!"
  gg_ui_plata_more:0 "The question, in detail"
  gg_ui_plata_more_body:0 "#b Buenos Aires wins the question#! if the city surrenders to hunger: #V 24#! months of a shut river in a row (#V 12#! from 1851), before London and Paris run out of patience.\n\n#b Montevideo wins the question#! if the river opens again: because Rosas lifts the blockade, or because he loses the means to hold it. While ships come in, the city holds.\n\n#b The river in the war#!: from the split, every four months of a shut river are worth a point to the #blue_value blancos#!, and every four open, one to the #R colorados#!, up to #V 4#! a side."
+ gg_ui_plata_sec_river:0 "The passage of the river"
+ gg_ui_plata_sec_sides:0 "Face to face"
+ gg_ui_plata_sec_clocks:0 "The clocks"
