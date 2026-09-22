@@ -8,6 +8,6 @@
  guerra_grande_requires_campana:0 "We must hold the countryside"
 
  guerra_grande_river_blockade_button:0 "Close the River"
- guerra_grande_river_blockade_button_desc:0 "Eight years of siege lines have not taken Montevideo, because the sea behind it has never closed. Ask Rosas for the squadron. Admiral Guillermo Brown has blockaded that port before — from April 1843, until the British commodore Purvis declared he would not recognise it and victualled the city himself. Done properly, it collapses the Defensa in months. But the squadron is not ours, the Confederation does not enter this war, and if the European squadrons come into the river there will be nothing left to blockade with."
+ guerra_grande_river_blockade_button_desc:0 "The siege line will not take Montevideo while the sea behind it stays open: by that way come its flour, its powder and its customs money.\n\nRosas is asked to shut the river, and Admiral William Brown's squadron is fitted out at Maldonado in the Cerrito's service (once only, if Maldonado is ours). If Rosas agrees, every month of closure squeezes the city, brings it closer to treating for peace and moves the war towards the #blue_value blancos#!, but spends the patience of London and Paris. If he refuses, it can be asked again."
  guerra_grande_requires_rosas:0 "The Confederation must still stand"
  guerra_grande_requires_river_unwatched:0 "Rosas must hold his bank of the Plata with a battery, and no foreign squadron may be intervening in the river"

@@ -154,3 +154,94 @@ gg_plata.4 = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.20-24 -- NOTICES (22/9/2026). The river changed state: shut, open again, the
+#     ultimatum, the intervention, the settlement. Sent by gg_plata_notices to the players of the
+#     Defensa and the Cerrito. They change nothing; what changes is already in the journal.
+# ES: AVISOS. El rio cambio de estado. Los manda gg_plata_notices a los jugadores de la Defensa y del
+#     Cerrito. No cambian nada; lo que cambia ya esta en el journal.
+# -------------------------------------------------------------------------------------------------
+gg_plata.20 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.20.t
+	desc = gg_plata.20.d
+	event_image = { video = "gg_nav_brown_montevideo" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.21 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.21.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.21.d_battery
+				trigger = { NOT = { gg_plata_ba_fort = yes } }
+			}
+			triggered_desc = {
+				desc = gg_plata.21.d_shore
+				trigger = { NOT = { gg_plata_ba_held_by_rosas = yes } }
+			}
+			triggered_desc = {
+				desc = gg_plata.21.d_neutrals
+				trigger = { global_var:gg_plata_rosas_stance ?= 2 }
+			}
+			triggered_desc = {
+				desc = gg_plata.21.d_rosas
+			}
+		}
+	}
+	event_image = { video = "gg_f2_montevideo_port" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.22 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.22.t
+	desc = gg_plata.22.d
+	event_image = { video = "gg_plata_guizot" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.23 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.23.t
+	desc = gg_plata.23.d
+	event_image = { video = "gg_squadrons" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}
+gg_plata.24 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.24.t
+	desc = gg_plata.24.d
+	event_image = { video = "gg_f2_palmerston" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+	}
+}

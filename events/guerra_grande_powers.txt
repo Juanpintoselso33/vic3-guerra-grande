@@ -998,6 +998,8 @@ gg_powers.20 = {
 		# EN/ES: C10 -- France settles too: the intervention is over and its ships go home
 		#     / Francia tambien arregla: se termina la intervencion y sus barcos vuelven
 		set_global_variable = gg_plata_intervention_over
+		# EN/ES: 22/9/2026 -- tell the players of both governments / avisar a los jugadores de los dos gobiernos
+		gg_plata_notify = { EVENT = gg_plata.24 }
 		# EN/ES: the French squadron stops being sea; the Paris mission softens the fall
 		if = {
 			limit = { has_global_variable = gg_paris_mission }

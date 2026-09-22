@@ -8,6 +8,6 @@
  guerra_grande_requires_campana:0 "Tenemos que tener la campaña"
 
  guerra_grande_river_blockade_button:0 "Cerrar el río"
- guerra_grande_river_blockade_button_desc:0 "Ocho años de línea de sitio no tomaron Montevideo, porque el mar que tiene atrás no se cerró nunca. Pedirle la escuadra a Rosas. El almirante Guillermo Brown ya bloqueó ese puerto — desde abril de 1843, hasta que el comodoro inglés Purvis declaró que no lo reconocía y abasteció él mismo a la ciudad. Hecho en serio, hace caer a la Defensa en meses. Pero la escuadra no es nuestra, la Confederación no entra en esta guerra, y si las escuadras europeas se meten en el río no va a quedar nada con que bloquear."
+ guerra_grande_river_blockade_button_desc:0 "La línea de sitio no toma Montevideo mientras el mar que tiene atrás siga abierto: por ahí le llegan la harina, la pólvora y la plata de la aduana.\n\nSe le pide a Rosas que cierre el río, y la escuadra del almirante Guillermo Brown se arma en Maldonado al servicio del Cerrito (una sola vez, si Maldonado es nuestro). Si Rosas accede, cada mes de cierre aprieta a la plaza, la acerca a tratar la paz y corre la guerra hacia los #blue_value blancos#!, pero gasta la paciencia de Londres y París. Si se niega, se puede volver a pedir."
  guerra_grande_requires_rosas:0 "La Confederación tiene que seguir en pie"
  guerra_grande_requires_river_unwatched:0 "Rosas tiene que tener su orilla del Plata con batería, y ninguna escuadra extranjera interviniendo en el río"

@@ -79,6 +79,7 @@ gg_plata_fort_restore = {
 gg_plata_ultimatum_send = {
 	set_global_variable = gg_plata_ultimatum_pending
 	c:ARG ?= { trigger_event = { id = gg_plata.10 popup = yes } }
+	gg_plata_notify = { EVENT = gg_plata.22 }
 }
 
 # EN: Rosas returns the passports: the intervention begins. Its dated events (Brown's squadron, the
@@ -95,6 +96,7 @@ gg_plata_intervention_start = {
 		}
 		set_global_variable = gg_plata_intervention
 		set_global_variable = { name = gg_plata_intervention_months value = 0 }
+		gg_plata_notify = { EVENT = gg_plata.23 }
 		# EN: Codex review 22/9 -- the clock lives in its own hidden event on Britain (a tag that never
 		#     changes), not in the war journal: a truce or the end of the war must not stop it.
 		# ES: el reloj vive en su propio evento oculto sobre Gran Bretania (un tag que nunca cambia), no
@@ -301,6 +303,7 @@ gg_plata_situation_monthly = {
 		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 	}
 	gg_plata_flags_sync = yes
+	gg_plata_notices = yes
 }
 
 # EN: The countries the Overview draws: the two governments (the Cerrito only once it exists; the
@@ -333,4 +336,49 @@ gg_plata_flags_sync = {
 	}
 	p:x365A5B.state ?= { owner = { set_global_variable = { name = gg_plata_ba_owner value = this } } }
 	p:x302DDA.state ?= { owner = { set_global_variable = { name = gg_plata_mvd_owner value = this } } }
+}
+
+# EN: 22/9/2026 (Juan: "the river goes from blocked to open and I do not find out unless I open the
+#     journal") -- the players of the Defensa and the Cerrito (or of Uruguay before the split) get a
+#     popup. The river itself is the engine's, so it is compared once a month with last month's
+#     state, whatever the phase (Codex: during the ultimatum or the intervention the phase hides it).
+#     The ultimatum, the intervention and the settlement are announced where the script sets them,
+#     so a month-long sample cannot skip them. The first month only records the state, so an old
+#     save or a new game does not announce what was already there.
+# ES: los jugadores de la Defensa y del Cerrito reciben un aviso. El rio lo decide el motor, asi que
+#     se compara una vez por mes con el estado del mes anterior, en cualquier fase. El ultimatum, la
+#     intervencion y el arreglo se avisan donde el script los fija, asi el muestreo mensual no los
+#     saltea. El primer mes solo registra el estado.
+gg_plata_notify = {
+	every_country = {
+		limit = {
+			is_player = yes
+			OR = {
+				has_variable = guerra_grande_defensa_government
+				has_variable = guerra_grande_cerrito_government
+				AND = {
+					NOT = { has_global_variable = guerra_grande_split_done }
+					c:URU ?= this
+				}
+			}
+		}
+		trigger_event = { id = $EVENT$ popup = yes }
+	}
+}
+gg_plata_notices = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_plata_notice_closed } }
+		set_global_variable = { name = gg_plata_notice_closed value = gg_ui_plata_closed_sv }
+	}
+	else_if = {
+		limit = { NOT = { global_var:gg_plata_notice_closed = gg_ui_plata_closed_sv } }
+		set_global_variable = { name = gg_plata_notice_closed value = gg_ui_plata_closed_sv }
+		if = {
+			limit = { gg_plata_closed = yes }
+			gg_plata_notify = { EVENT = gg_plata.20 }
+		}
+		else = {
+			gg_plata_notify = { EVENT = gg_plata.21 }
+		}
+	}
 }
