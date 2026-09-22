@@ -27,7 +27,7 @@ gg_plata.2 = {
 	desc = gg_plata.2.d
 	flavor = gg_plata.2.f
 	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_plata_alfred" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 1825
 
@@ -100,7 +100,7 @@ gg_plata.10 = {
 	desc = gg_plata.10.d
 	flavor = gg_plata.10.f
 	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
-	event_image = { video = "votp_gunboat_diplomacy" }
+	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 1825
 

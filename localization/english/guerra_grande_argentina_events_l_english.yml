@@ -232,6 +232,7 @@
  gg_vanguardia_cruce_total_tt:0 "@battalions! The Vanguard will cross with all available strength. The littoral will be left #N without a reserve#!: the cavalry raised there will muster #N +2#! squadrons."
  gg_vanguardia_reserva_litoral_tt:0 "@battalions! The Vanguard will cross with #N -1#! infantry battalion and #N -1#! cavalry squadron. Those same units will form Argentina's own #P division#!."
  gg_vanguardia_held_tt:0 "@battalions! The Vanguard #N does not cross#!: Buenos Aires's army stays in the interior while provinces are risen against the Pact."
+ gg_vanguardia_awaits_tt:0 "@battalions! The Ejército Unido de Vanguardia will cross once Buenos Aires decides what force it sends across the river."
  gg_vanguardia_cruce_postergado_tt:0 "@battalions! The Vanguard will retain all available strength, but its crossing will be delayed by #N six months#!. Any cavalry the littoral can raise will muster #N -2#! squadrons."
  gg_urquiza_double_order_tt:0 "@warning! Command of the army against Brazil travels with the order to cut off Entre Ríos's trade. If the province withdraws the commission from Buenos Aires, #b Urquiza's#! troops will march prepared for #V 2 years#!: #P +10%#! offence and #P +10%#! defence."
  gg_lamadrid_sent_tt:0 "@warning! #b Lamadrid#! carries the demand for the armaments north with #V 50#! grenadiers; if the provinces withdraw the commission from Buenos Aires, he and those officers may enter their service."

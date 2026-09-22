@@ -1667,6 +1667,18 @@ guerra_grande.4 = {
 					trigger_event = { id = guerra_grande.16 days = 183 }
 				}
 			}
+			# EN: Codex review 22/9/2026 -- Buenos Aires has not answered "The Vanguard crosses" yet
+			#     (gg_argentina.21): the contingent waits for that answer instead of leaving now and
+			#     ignoring it. gg_argentina.21 sends it when it is answered.
+			# ES: Buenos Aires todavia no contesto «El cruce de la Vanguardia»: el contingente espera
+			#     esa respuesta en vez de salir ya e ignorarla. gg_argentina.21 lo manda al contestarse.
+			else_if = {
+				limit = { global_var:gg_vanguardia_cruce = 0 }
+				custom_tooltip = {
+					text = gg_vanguardia_awaits_tt
+					set_global_variable = gg_vanguardia_awaits_answer
+				}
+			}
 			else = {
 				trigger_event = { id = gg_contingent.7 days = 3 popup = yes }
 			}

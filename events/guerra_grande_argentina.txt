@@ -1481,8 +1481,8 @@ gg_argentina.20 = {
 				#     Corrientes devuelta como protectorado en 1839 sigue existiendo, y contarla bloqueaba
 				#     el cruce de 1843.
 				OR = {
-					c:CRR ?= { NOT = { is_subject_of = c:ARG } }
-					c:CLN ?= { NOT = { is_subject_of = c:ARG } }
+					c:CRR ?= { OR = { NOT = { is_subject_of = c:ARG } has_war_with = c:ARG } }
+					c:CLN ?= { OR = { NOT = { is_subject_of = c:ARG } has_war_with = c:ARG } }
 				}
 			}
 			set_global_variable = { name = gg_interior_outcome value = 3 }
@@ -1572,6 +1572,12 @@ gg_argentina.21 = {
 		custom_tooltip = gg_vanguardia_cruce_total_tt
 		default_option = yes
 		set_global_variable = { name = gg_vanguardia_cruce value = 1 }
+		# EN/ES: Rosas already backed Oribe and the contingent waited for this answer / el contingente esperaba esta respuesta
+		if = {
+			limit = { has_global_variable = gg_vanguardia_awaits_answer }
+			remove_global_variable = gg_vanguardia_awaits_answer
+			c:CER ?= { trigger_event = { id = gg_contingent.7 days = 3 popup = yes } }
+		}
 		ai_chance = { base = 70 }
 	}
 
@@ -1580,6 +1586,12 @@ gg_argentina.21 = {
 		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_reserva_litoral_tt
 		set_global_variable = { name = gg_vanguardia_cruce value = 2 }
+		# EN/ES: Rosas already backed Oribe and the contingent waited for this answer / el contingente esperaba esta respuesta
+		if = {
+			limit = { has_global_variable = gg_vanguardia_awaits_answer }
+			remove_global_variable = gg_vanguardia_awaits_answer
+			c:CER ?= { trigger_event = { id = gg_contingent.7 days = 3 popup = yes } }
+		}
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
@@ -1609,6 +1621,11 @@ gg_argentina.21 = {
 		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_cruce_postergado_tt
 		set_global_variable = { name = gg_vanguardia_cruce value = 3 }
+		if = {
+			limit = { has_global_variable = gg_vanguardia_awaits_answer }
+			remove_global_variable = gg_vanguardia_awaits_answer
+			c:ARG ?= { trigger_event = { id = guerra_grande.16 days = 183 } }
+		}
 		ai_chance = { base = 10 }
 	}
 
@@ -1618,6 +1635,10 @@ gg_argentina.21 = {
 		trigger = { global_var:gg_vanguardia_status = 3 }
 		default_option = yes
 		custom_tooltip = gg_vanguardia_held_tt
+		if = {
+			limit = { has_global_variable = gg_vanguardia_awaits_answer }
+			remove_global_variable = gg_vanguardia_awaits_answer
+		}
 		ai_chance = { base = 100 }
 	}
 }

@@ -230,6 +230,7 @@
  gg_vanguardia_cruce_total_tt:0 "@battalions! La Vanguardia cruzará con toda la fuerza disponible. El litoral quedará #N sin reserva#!: la caballería que se levante allí contará con #N +2#! escuadrones."
  gg_vanguardia_reserva_litoral_tt:0 "@battalions! La Vanguardia cruzará con #N -1#! batallón de infantería y #N -1#! escuadrón de caballería. Esas mismas unidades formarán una #P división propia#! de la Argentina."
  gg_vanguardia_held_tt:0 "@battalions! La Vanguardia #N no cruza#!: el ejército de Buenos Aires se queda en el interior mientras haya provincias alzadas contra el Pacto."
+ gg_vanguardia_awaits_tt:0 "@battalions! El Ejército Unido de Vanguardia cruzará cuando Buenos Aires decida qué fuerza manda al otro lado del río."
  gg_vanguardia_cruce_postergado_tt:0 "@battalions! La Vanguardia conservará toda la fuerza disponible, pero su cruce se postergará #N seis meses#!. La caballería que pueda levantar el litoral contará con #N -2#! escuadrones."
  gg_urquiza_double_order_tt:0 "@warning! El mando contra el Brasil viaja junto con la orden de cortar el tráfico de Entre Ríos. Si la provincia retira el encargo, las tropas de #b Urquiza#! marcharán prevenidas durante #V 2 años#!: #P +10%#! de ofensiva y #P +10%#! de defensa."
  gg_lamadrid_sent_tt:0 "@warning! #b Lamadrid#! lleva al norte el reclamo de las armas con #V 50#! granaderos; si las provincias retiran el encargo, él y esa oficialidad podrán ponerse a sus órdenes."

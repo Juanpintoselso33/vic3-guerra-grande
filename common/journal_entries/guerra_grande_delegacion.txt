@@ -2,7 +2,7 @@
 # EN: THE REVOCABLE DELEGATION. The Argentine side's journal, and the same object seen from both
 #     sides -- exactly the shape the Defensa and the Cerrito already have. Rosas watches a number he
 #     needs to keep up; Corrientes, the Coalition and Entre Rios watch the same number and need it
-#     down. One bar, one truth, two readings.
+#     down. One count of provinces, one truth, two readings.
 #     WHY IT IS THE HEART. Rosas' power over the other provinces was a delegation of foreign
 #     relations that each legislature could take back. Tucuman took it back on 7 April 1840 and Entre
 #     Rios on 1 May 1851. Without this, Obligado, Alcaraz, the Pronunciamiento and Caseros are four
@@ -10,7 +10,7 @@
 # ES: LA DELEGACION REVOCABLE. El journal del lado argentino, y el mismo objeto visto desde los dos
 #     lados -- exactamente la forma que ya tienen la Defensa y el Cerrito. Rosas mira un numero que
 #     necesita sostener; Corrientes, la Coalicion y Entre Rios miran el mismo numero y lo necesitan
-#     abajo. Una barra, una verdad, dos lecturas.
+#     abajo. Una cuenta de provincias, una verdad, dos lecturas.
 #     POR QUE ES EL CORAZON. El poder de Rosas sobre las demas provincias era una delegacion de las
 #     relaciones exteriores que cada legislatura podia retirar. Tucuman la retiro el 7/4/1840 y Entre
 #     Rios el 1/5/1851. Sin esto, Obligado, Alcaraz, el Pronunciamiento y Caseros son cuatro
@@ -60,22 +60,14 @@ je_gg_delegation = {
 		}
 	}
 
-	# EN: the siege's monthly cost, and the redraw. Only Argentina runs it: this is a global count,
-	#     and running it on every involved country would charge the month once per seat. The cost is
-	#     one point -- a twelfth of a province -- for every month Oribe is in front of Montevideo,
-	#     which is what nine years of holding him actually did to Rosas.
-	# ES: el costo mensual del sitio, y el redibujo. Lo corre solo la Argentina: esto es una cuenta
-	#     global, y correrla en cada pais involucrado cobraria el mes una vez por asiento. El costo es
-	#     un punto -- un doceavo de provincia -- por cada mes que Oribe este frente a Montevideo, que
-	#     es lo que nueve anios de sostenerlo le hicieron a Rosas de verdad.
+	# EN: the monthly pulse (the siege's point-a-month cost went with the points, 22/9/2026).
+	# ES: el pulso mensual (el costo de un punto por mes de sitio se fue con los puntos, 22/9/2026).
 	# EN: THE RESTORATIONS MOVED TO THE WEEK, and the reason is a screenshot. Juan beat Corrientes,
 	#     it capitulated and became a protectorate -- exactly what the design intends -- and the panel
 	#     went on showing it as gone, twelve of thirteen. Nothing was wrong with the test: the test
 	#     lived in the MONTHLY pulse, so the panel could lie for up to thirty days, and the moment a
 	#     player looks at it is the moment he wins, not the first of next month. A number that is
 	#     right eventually is a number nobody trusts.
-	#     The siege's cost stays monthly, because it is a monthly cost. Noticing that a province came
-	#     back is not a cost and has no business waiting.
 	# ES: LAS RESTAURACIONES PASAN A LA SEMANA, y la razon es una captura. Juan batio a Corrientes,
 	#     claudico y quedo de protectorado --que es exactamente lo que el diseno busca-- y el panel la
 	#     seguia mostrando como ida, doce de trece. La prueba no estaba mal: estaba en el pulso

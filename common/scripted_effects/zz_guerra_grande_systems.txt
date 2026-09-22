@@ -1407,28 +1407,16 @@ gg_delegation_revoked = {
 			add = $COUNT$
 		}
 	}
-	# EN: AND THE COUNT THAT NEVER GOES BACK DOWN, added 20 September 2026 after Codex's integral
-	#     review. The delegation bar is a photograph of today: a province that left and was taken
-	#     back gives its twelve points back, and by February 1843 a Rosas who spent four years at war
-	#     in the interior can be sitting on the same 156 points as a Rosas whom nobody ever defied.
-	#     The balance of the interior was reading that photograph and calling both of them a clean
-	#     victory. They are not the same thing, and this counter is what tells them apart: it only
-	#     ever goes up, and the mark that guards it is the same one, so a province is counted once no
-	#     matter how many times it is lost and retaken.
-	#     It is deliberately outside the block above. That block is guarded by the mark and so is
-	#     this, but keeping them apart makes it readable: up there is what the bar shows, down here is
-	#     what the war cost.
-	# ES: Y LA CUENTA QUE NO VUELVE A BAJAR, agregada el 20/9/2026 tras la revision integral de Codex.
-	#     La barra de la delegacion es una foto de hoy: una provincia que se fue y fue recuperada
-	#     devuelve sus doce puntos, y para febrero de 1843 un Rosas que se paso cuatro anios en guerra
-	#     en el interior puede estar sentado sobre los mismos 156 puntos que un Rosas al que nadie
-	#     desafio nunca. El balance del interior leia esa foto y a los dos les decia victoria limpia.
-	#     No son lo mismo, y este contador es lo que los distingue: solo sube, y lo guarda la misma
-	#     marca, asi que una provincia se cuenta una sola vez por mas veces que se pierda y se
-	#     recupere.
-	#     Esta a proposito afuera del bloque de arriba. Aquel lo guarda la marca y a este tambien,
-	#     pero tenerlos separados se lee mejor: arriba esta lo que muestra la barra, aca abajo lo que
-	#     costo la guerra.
+	# EN: AND THE COUNT THAT NEVER GOES BACK DOWN (Codex, 20/9/2026). The count of delegating
+	#     provinces is a photograph of today: a Rosas who fought the interior for four years and took
+	#     it back looks like one nobody defied. gg_provincias_alzadas only ever goes up, guarded by its
+	#     own mark, so a province is counted once however often it is lost and retaken; the balance
+	#     of the interior (gg_argentina.20) reads it.
+	# ES: Y LA CUENTA QUE NO VUELVE A BAJAR (Codex, 20/9/2026). La cuenta de provincias que delegan
+	#     es una foto de hoy: un Rosas que peleo cuatro anios el interior y lo recupero se ve igual que
+	#     uno al que nadie desafio. gg_provincias_alzadas solo sube, guardada por su propia marca, asi
+	#     que una provincia se cuenta una vez por mas que se pierda y se recupere; la lee el balance del
+	#     interior (gg_argentina.20).
 	if = {
 		limit = { NOT = { has_global_variable = gg_alzada_$KEY$ } }
 		set_global_variable = gg_alzada_$KEY$
