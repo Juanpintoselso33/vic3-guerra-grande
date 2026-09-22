@@ -9,6 +9,8 @@ gg_ui_can_call_squadrons = {
 		}
 		hidden_trigger = {
 			NOT = { has_global_variable = gg_intervention_called }
+			# EN/ES: C10 -- pointless once the powers already intervene / inutil si ya intervienen
+			NOT = { has_global_variable = gg_plata_intervention }
 		}
 		# EN/ES: T3b, FE-8 -- the button brings the powers forward, from 1843 / el boton las adelanta, desde 1843
 		year >= 1843.1.1

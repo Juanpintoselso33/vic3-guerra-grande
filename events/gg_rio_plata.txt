@@ -1,0 +1,129 @@
+﻿namespace = gg_plata
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE RIVER PLATE QUESTION, events (rio-plata-spec.md, 22/9/2026). Three on Rosas's side: the
+#     Cerrito's request when Rosas is a player, the reimposition after Purvis, and the ultimatum of
+#     Ouseley and Deffaudis that opens the intervention. The rest of the chain is the powers' own
+#     dated events, which now wait for the intervention (gg_plata_intervention_at).
+#     The texts carry no fixed day: the intervention has none any more (decision B).
+# ES: LA CUESTION DEL PLATA, eventos. Tres del lado de Rosas: el pedido del Cerrito cuando Rosas es
+#     jugador, la reimposicion despues de Purvis, y el ultimatum de Ouseley y Deffaudis que abre la
+#     intervencion. El resto de la cadena son los eventos fechados de las potencias, que ahora
+#     esperan a la intervencion. Los textos no llevan dia fijo: la intervencion ya no lo tiene.
+# -------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.2 -- ORIBE ASKS FOR THE BLOCKADE (1843, human Rosas only; an AI Rosas closes at once).
+# ES: gg_plata.2 -- ORIBE PIDE EL BLOQUEO (1843, solo con Rosas jugador; la IA cierra en el acto).
+# SOURCE / FUENTE: SOURCES_powers.md section 1 -- Rosas announced the partial blockade on 9/3/1843,
+#     in force from 1/4; Purvis's refusal quoted from Caillet-Bois, Historia naval argentina; HMS
+#     Alfred, 74 guns, on the station 1842-1845.
+# -------------------------------------------------------------------------------------------------
+gg_plata.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.2.t
+	desc = gg_plata.2.d
+	flavor = gg_plata.2.f
+	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = guerra_grande_open_war
+	}
+
+	option = {
+		name = gg_plata.2.a
+		default_option = yes
+		gg_plata_rosas_close = yes
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+	}
+
+	option = {
+		name = gg_plata.2.b
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		# EN/ES: the Cerrito may ask again / el Cerrito puede volver a pedirlo
+		custom_tooltip = gg_plata.2.b_tt
+		c:CER ?= {
+			if = {
+				limit = { has_variable = guerra_grande_river_blockade_asked }
+				remove_variable = guerra_grande_river_blockade_asked
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.3 -- London disavows Purvis and the blockade is reimposed (June 1843), 70 days after
+#     gg_powers.10. Hidden: what changes is the passage itself, and the Overview shows it.
+# ES: gg_plata.3 -- Londres desautoriza a Purvis y el bloqueo se reimpone (junio de 1843). Oculto: lo
+#     que cambia es el paso, y el Panorama lo muestra.
+# SOURCE / FUENTE: SOURCES_powers.md section 1 ("Londres lo desautorizo: Aberdeen reconocio el
+#     derecho de bloqueo") and SOURCES_french_legion.md:86 (reimposed from June 1843).
+# -------------------------------------------------------------------------------------------------
+gg_plata.3 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	immediate = {
+		if = {
+			limit = {
+				global_var:gg_plata_rosas_stance = 2
+				NOT = { has_global_variable = gg_plata_intervention }
+			}
+			gg_plata_rosas_close = yes
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.10 -- THE PASSPORTS OF OUSELEY AND DEFFAUDIS. Fires when the powers' patience is
+#     spent (gg_plata_intervention_due). Historically Rosas returned the passports on 31 July 1845
+#     and the squadrons seized Brown's ships on 2 August.
+# ES: gg_plata.10 -- LOS PASAPORTES DE OUSELEY Y DEFFAUDIS. Sale cuando se agota la paciencia de las
+#     potencias. Historicamente Rosas devolvio los pasaportes el 31 de julio de 1845 y las escuadras
+#     tomaron los barcos de Brown el 2 de agosto.
+# SOURCE / FUENTE: SOURCES_powers.md section 8 -- notes of 8 May and 17 June 1845, reiterated;
+#     Oribe not admitted as legal president "ni aun elegido"; ultimatum of 21 July with 31 July as
+#     deadline; Arana returned the passports (es.wikipedia, Bloqueo anglo-frances, and Historia Hoy,
+#     O. Lopez Mato); Guizot's instructions to Deffaudis quoted by Octavio Morato, "Intervencion
+#     franco-inglesa".
+# -------------------------------------------------------------------------------------------------
+gg_plata.10 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.10.t
+	desc = gg_plata.10.d
+	flavor = gg_plata.10.f
+	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
+	event_image = { video = "votp_gunboat_diplomacy" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 1825
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_plata_ultimatum_pending
+	}
+
+	option = {
+		name = gg_plata.10.a
+		default_option = yes
+		# EN/ES: historical: the passports go back / lo historico: se devuelven los pasaportes
+		gg_plata_intervention_start = yes
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = gg_plata.10.b
+		# EN: yield: the river opens, the Cerrito loses its blockade, and the patience starts again.
+		# ES: ceder: se abre el rio, el Cerrito pierde su bloqueo, y la paciencia vuelve a empezar.
+		gg_plata_ultimatum_yield = yes
+		gg_patron_change = { PATRON = rosas DELTA = -15 }
+		add_modifier = { name = gg_plata_rosas_yielded years = 5 is_decaying = yes }
+		ai_chance = { base = 20 }
+	}
+}

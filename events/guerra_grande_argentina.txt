@@ -1916,7 +1916,8 @@ gg_argentina.25 = {
 		NOT = { has_global_variable = gg_peace_offered }
 		NOT = { has_global_variable = gg_hood_done }
 		OR = {
-			gg_sea_open = yes
+			# EN/ES: C10 -- a year into the intervention / al anio de la intervencion
+			gg_plata_intervention_at = { MONTHS = 12 }
 			has_global_variable = gg_powers_mediators
 		}
 	}

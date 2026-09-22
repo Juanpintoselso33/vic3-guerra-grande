@@ -1,0 +1,87 @@
+﻿# EN: THE RIVER PLATE QUESTION (C10, decided 22/9/2026, docs/guerra-grande-flujo/rio-plata-spec.md).
+#     The river has one state, and the engine computes it: whoever controls each bank of the
+#     Montevideo - Buenos Aires strait, whether that bank has a naval fortification (without one no
+#     restriction applies), and what its controller set in the strait panel. The most severe bank
+#     wins. This file only READS that state; nothing here adds up patrons or thresholds (the 60-point
+#     sea was rejected on 20/9/2026 and is gone).
+# ES: LA CUESTION DEL PLATA. El rio tiene un solo estado, y lo calcula el motor: quien controla cada
+#     orilla del estrecho Montevideo - Buenos Aires, si esa orilla tiene fortificacion naval (sin ella
+#     no se aplica ninguna restriccion) y que configuro su controlador. Manda la orilla mas severa.
+#     Este archivo solo LEE ese estado; aca no se suman padrinos ni umbrales.
+
+# EN: The Buenos Aires bank (x365A5B) and the Montevideo bank (x302DDA) are the land endpoints of
+#     strait_rio_de_la_plata.
+# ES: La orilla de Buenos Aires (x365A5B) y la de Montevideo (x302DDA) son los extremos del estrecho.
+gg_plata_ba_fort = {
+	p:x365A5B.state ?= { has_building = building_naval_fortification }
+}
+gg_plata_mvd_fort = {
+	p:x302DDA.state ?= { has_building = building_naval_fortification }
+}
+gg_plata_ba_held_by_rosas = {
+	exists = c:ARG
+	p:x365A5B.state ?= { owner ?= c:ARG }
+}
+
+# EN: Is the River Plate shut to foreign flags? Rosas holds his bank, it is fortified, and British
+#     warships cannot pass Argentina's straits. The last clause is the engine's own answer, and it
+#     already folds in the controller's setting, its permissions and occupation. This is the ONE
+#     place that decides it: if in-game test T3 shows that trigger does not follow the closure, only
+#     this block changes.
+# ES: ¿Esta el Plata cerrado a las banderas extranjeras? Rosas tiene su orilla, esta fortificada y
+#     los barcos de guerra britanicos no pasan por los estrechos argentinos. Lo ultimo es la
+#     respuesta del propio motor, que ya incluye la configuracion, los permisos y la ocupacion. Es el
+#     UNICO lugar que lo decide: si la prueba T3 muestra que ese trigger no sigue al cierre, solo
+#     cambia este bloque.
+gg_plata_closed = {
+	gg_plata_ba_held_by_rosas = yes
+	gg_plata_ba_fort = yes
+	exists = c:GBR
+	c:GBR = { NOT = { has_military_strait_access_through = c:ARG } }
+}
+
+gg_plata_open = {
+	NOT = { gg_plata_closed = yes }
+}
+
+# EN: A port blockade is not a river closure. The French (1838-1840) and Anglo-French (1845-1848)
+#     blockades shut Rosas's own port; they never isolated Montevideo (C10).
+# ES: Un bloqueo de puerto no es un cierre del rio. Los bloqueos frances y anglo-frances cerraban el
+#     puerto de Rosas; nunca aislaron a Montevideo (C10).
+gg_plata_ba_port_blockaded = {
+	p:x365A5B.state ?= { blockade_level > 0 }
+}
+
+# EN: B. The powers' patience runs out: enough months of a shut river, and London or Paris no longer
+#     cordial with Rosas. Twelve months instead of eighteen once the Defensa has called the
+#     squadrons. Relations are read with a scope target, the only form vanilla uses.
+# ES: B. Se acaba la paciencia de las potencias: bastantes meses de rio cerrado, y Londres o Paris
+#     ya no cordiales con Rosas. Doce meses en vez de dieciocho si la Defensa llamo a las escuadras.
+gg_plata_patience_spent = {
+	global_var:gg_plata_closed_total >= gg_plata_patience_threshold
+	exists = c:ARG
+	c:ARG = { save_temporary_scope_as = gg_plata_rosas }
+	OR = {
+		c:GBR ?= { relations:scope:gg_plata_rosas < relations_threshold:cordial }
+		c:FRA ?= { relations:scope:gg_plata_rosas < relations_threshold:cordial }
+	}
+}
+
+gg_plata_intervention_due = {
+	has_global_variable = guerra_grande_split_done
+	has_global_variable = guerra_grande_open_war
+	NOT = { has_global_variable = gg_plata_intervention }
+	NOT = { has_global_variable = gg_plata_ultimatum_pending }
+	gg_plata_patience_spent = yes
+}
+
+# EN: The intervention chain. Each dated event of the powers waits for the intervention and for its
+#     own distance from the ultimatum, so an intervention that comes late keeps the historical
+#     order. The relays already retry every month until the recipient's trigger lets them through.
+# ES: La cadena de la intervencion. Cada evento fechado de las potencias espera a la intervencion y a
+#     su propia distancia desde el ultimatum, asi una intervencion tardia conserva el orden
+#     historico. Los relevos ya reintentan cada mes hasta que el trigger del destinatario los deja.
+gg_plata_intervention_at = {
+	has_global_variable = gg_plata_intervention
+	global_var:gg_plata_intervention_months >= $MONTHS$
+}

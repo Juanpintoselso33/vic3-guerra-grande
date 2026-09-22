@@ -1,0 +1,108 @@
+﻿# EN: C. The river in the war balance (rio-plata-spec.md section 4). One signed counter replaces the
+#     old siege and relief stocks, which could both be positive and cancel out: +1 for each month the
+#     river is shut, -1 for each month it is open, between -16 and +16. Four months per point, capped
+#     at four -- below every threshold the arbiter reads, so the river never decides the war alone.
+#     Positive helps the blancos, negative the colorados.
+# ES: C. El rio en la balanza de la guerra. Un solo contador con signo reemplaza a los stocks del
+#     sitio y del auxilio, que podian ser positivos a la vez y cancelarse: +1 por mes de rio cerrado,
+#     -1 por mes abierto, entre -16 y +16. Cuatro meses por punto, techo cuatro: debajo de todos los
+#     umbrales del arbitro, asi el rio nunca decide la guerra solo. Positivo ayuda a los blancos,
+#     negativo a los colorados.
+gg_plata_pressure_blanco = {
+	value = global_var:gg_plata_months
+	divide = 4
+	floor = yes
+	min = 0
+	max = 4
+}
+
+gg_plata_pressure_colorado = {
+	value = global_var:gg_plata_months
+	multiply = -1
+	divide = 4
+	floor = yes
+	min = 0
+	max = 4
+}
+
+# EN/ES: B -- eighteen months of patience, twelve once the Defensa called the squadrons
+#     / dieciocho meses de paciencia, doce si la Defensa llamo a las escuadras
+gg_plata_patience_threshold = {
+	value = 18
+	if = {
+		limit = { has_global_variable = gg_intervention_called }
+		value = 12
+	}
+}
+
+# EN: Presentation only (the Overview tab). Read-only; no rule reads these.
+# ES: Solo presentacion (pestana Panorama). De solo lectura; ninguna regla los lee.
+gg_ui_plata_closed = {
+	value = 0
+	if = { limit = { gg_plata_closed = yes } value = 1 }
+}
+# EN/ES: 1 Rosas, 0 someone else (occupied or lost) / 1 Rosas, 0 otro (ocupada o perdida)
+gg_ui_plata_ba_holder = {
+	value = 0
+	if = { limit = { gg_plata_ba_held_by_rosas = yes } value = 1 }
+}
+# EN/ES: 1 the Defensa, 2 the Cerrito, 0 anyone else / 1 la Defensa, 2 el Cerrito, 0 otro
+gg_ui_plata_mvd_holder = {
+	value = 0
+	if = {
+		limit = { p:x302DDA.state ?= { owner ?= { has_variable = guerra_grande_defensa_government } } }
+		value = 1
+	}
+	else_if = {
+		limit = { p:x302DDA.state ?= { owner ?= { has_variable = guerra_grande_cerrito_government } } }
+		value = 2
+	}
+}
+gg_ui_plata_ba_fort = {
+	value = 0
+	if = { limit = { gg_plata_ba_fort = yes } value = 1 }
+}
+gg_ui_plata_mvd_fort = {
+	value = 0
+	if = { limit = { gg_plata_mvd_fort = yes } value = 1 }
+}
+# EN/ES: 0 no pressure, 1 patience running, 2 ultimatum pending, 3 intervention, 4 over
+#     / 0 sin presion, 1 paciencia corriendo, 2 ultimatum, 3 intervencion, 4 terminada
+gg_ui_plata_powers_stage = {
+	value = 0
+	if = { limit = { global_var:gg_plata_closed_total > 0 } value = 1 }
+	if = { limit = { has_global_variable = gg_plata_ultimatum_pending } value = 2 }
+	if = { limit = { has_global_variable = gg_plata_intervention } value = 3 }
+	if = { limit = { has_global_variable = gg_plata_intervention_over } value = 4 }
+}
+# EN/ES: -1 colorados, 0 even, 1 blancos / -1 colorados, 0 parejo, 1 blancos
+gg_ui_plata_weight_side = {
+	value = 0
+	if = { limit = { gg_plata_pressure_blanco > 0 } value = 1 }
+	if = { limit = { gg_plata_pressure_colorado > 0 } value = -1 }
+}
+gg_ui_plata_weight_points = {
+	value = gg_plata_pressure_blanco
+	add = gg_plata_pressure_colorado
+}
+gg_ui_plata_ba_blockaded = {
+	value = 0
+	if = { limit = { gg_plata_ba_port_blockaded = yes } value = 1 }
+}
+# EN/ES: relations of the two powers with Rosas, for the Overview / relaciones con Rosas
+gg_ui_plata_gbr_relations = {
+	value = 0
+	if = {
+		limit = { exists = c:ARG exists = c:GBR }
+		c:ARG = { save_temporary_scope_as = gg_plata_rosas_ui }
+		c:GBR = { add = relations:scope:gg_plata_rosas_ui }
+	}
+}
+gg_ui_plata_fra_relations = {
+	value = 0
+	if = {
+		limit = { exists = c:ARG exists = c:FRA }
+		c:ARG = { save_temporary_scope_as = gg_plata_rosas_ui }
+		c:FRA = { add = relations:scope:gg_plata_rosas_ui }
+	}
+}

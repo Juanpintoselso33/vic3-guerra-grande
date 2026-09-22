@@ -1,0 +1,14 @@
+﻿# EN: Magellan's banks hold the strait without forts (there were none in 1836). Control only: it
+#     makes the strait count trade; it cannot close it. Verified in game 21/9/2026.
+# ES: Las orillas de Magallanes controlan el estrecho sin fuertes (no los habia en 1836). Solo
+#     control: hace que el estrecho cuente comercio; no permite cerrarlo.
+gg_strait_control_magellan = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_control_strait_bool = yes
+}
+
+# EN/ES: Rosas lowered his flag before the powers' ultimatum / Rosas arrio su bandera ante el ultimatum
+gg_plata_rosas_yielded = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.15
+}

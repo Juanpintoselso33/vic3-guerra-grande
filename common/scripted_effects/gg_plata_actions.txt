@@ -1,29 +1,19 @@
 ﻿# EN: Shared native action with execution-time revalidation.
 # ES: Accion nativa compartida con validacion al ejecutarla.
+# EN: C10 (22/9/2026) -- calling the squadrons no longer brings them by itself, and it no longer adds
+#     30 to a sea formula (that formula is gone). It is a plea to London and Paris: their patience
+#     with a shut river drops from eighteen months to twelve (gg_plata_patience_threshold), and the
+#     ultimatum to Rosas comes that much sooner. The patrons still rise, because the patrons are
+#     money and legions, not the sea. Calling before 1845 still costs sovereignty (Varela's offer).
+# ES: C10 -- llamar a las escuadras ya no las trae por si solo ni suma 30 a una formula del mar (esa
+#     formula ya no existe). Es un pedido a Londres y Paris: su paciencia con un rio cerrado baja de
+#     dieciocho meses a doce, y el ultimatum a Rosas llega antes. Los padrinos igual suben, porque
+#     los padrinos son plata y legiones, no el mar. Llamarlas antes de 1845 sigue costando soberania.
 gg_ui_call_squadrons_effect = {
- if = {
-  limit = { gg_ui_can_call_squadrons = yes has_global_variable = guerra_grande_split_done }
-
-		# EN/ES: instrumented 2026-09-16 to answer "is the AI ever pressing this button" --
-		#        writes to game.log so the next playthrough gives real data instead of a guess.
-		# EN: visible counter, since debug_log writes nothing in this release build
-		#     (verified: not even vanilla's own debug_log lines appear in game.log).
-		#     Read from the journal's status text.
-		# ES: contador visible, porque debug_log no escribe nada en este build de release
-		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
-		#     desde el texto de estado del journal.
-		# EN: self-healing guard -- this fix landed after some saves already ran
-		#     on_game_started once, so the global init there never fires for them.
-		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
-		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
-		#     de alla nunca les llega.
-		# EN: T3b, C21 -- no more intervention flag: the squadrons are France and Britain rising, and
-		#     they go down again five years later (gg_powers.1). Calling them before 1845 costs
-		#     sovereignty: Varela's offer of a port as a factory.
-		# ES: T3b, C21 -- ya no hay marca de intervencion: las escuadras son Francia y Gran Bretania
-		#     subiendo, y bajan otra vez a los cinco anios. Llamarlas antes de 1845 cuesta
-		#     soberania: la oferta de Varela de un puerto como factoria.
+	if = {
+		limit = { gg_ui_can_call_squadrons = yes has_global_variable = guerra_grande_split_done }
 		set_global_variable = gg_intervention_called
+		custom_tooltip = gg_plata_squadrons_called_tt
 		gg_patron_change = { PATRON = francia DELTA = 30 }
 		gg_patron_change = { PATRON = britania DELTA = 30 }
 		if = {
@@ -35,50 +25,5 @@ gg_ui_call_squadrons_effect = {
 			}
 		}
 		trigger_event = { id = gg_powers.1 days = 1826 }
-		add_modifier = {
-			name = guerra_grande_montevideo_resupplied
-			years = 5
-			is_decaying = yes
-		}
-		# The squadrons blockaded Buenos Aires, not the Cerrito camp itself.
-		c:ARG ?= {
-			add_modifier = {
-				name = guerra_grande_river_plate_blockade
-				years = 5
-				is_decaying = yes
-			}
-		}
-		c:CER ?= {
-			add_modifier = {
-				name = guerra_grande_river_plate_blockade
-				years = 5
-				is_decaying = yes
-			}
-		}
-		# EN: the blockade closes the Plata, so the trade walks north. Oribe habilitated the
-		#     Yaguaron, Merin and Chuy ports and moved the Administracion Central de la Aduana to
-		#     Melo; the saladeros resumed from about 1845 in the north, where the frontier was open
-		#     to the cattle trade while the Plata ports were shut, and the herds left overland into
-		#     Rio Grande do Sul. A squadron in the Plata cannot reach any of that. Sourced in
-		#     SOURCES_siege.md. This is why blockading the Cerrito's ports did not end the war.
-		# ES: el bloqueo cierra el Plata, asi que el comercio se va al norte. Oribe habilito los
-		#     puertos del Yaguaron, el Merin y el Chuy y mudo la Administracion Central de la Aduana
-		#     a Melo; los saladeros se reactivaron desde 1845 en el norte, donde la frontera estaba
-		#     abierta al comercio de ganado mientras los puertos del Plata estaban cerrados, y los
-		#     arreos salian por tierra al Rio Grande do Sul. Una escuadra en el Plata no llega a
-		#     nada de eso. Por eso bloquear los puertos del Cerrito no terminaba la guerra.
-		if = {
-			limit = { exists = s:STATE_BANDA_ORIENTAL.region_state:CER }
-			s:STATE_BANDA_ORIENTAL.region_state:CER = {
-				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
-			}
-		}
-		if = {
-			limit = { exists = s:STATE_PAYSANDU.region_state:CER }
-			s:STATE_PAYSANDU.region_state:CER = {
-				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
-			}
-		}
-		trigger_event = { id = guerra_grande.9 popup = yes }
- }
+	}
 }

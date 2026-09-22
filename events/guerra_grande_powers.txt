@@ -47,14 +47,35 @@ gg_powers.2 = {
 gg_powers.3 = {
 	type = country_event
 	hidden = yes
+	# EN: C10 (22/9/2026) -- a link of the intervention chain: it waits for Rosas to return the
+	#     passports and comes two months after (historically 31 July -> 18 September 1845). The
+	#     Defensa's button no longer brings the squadrons by itself: it shortens the powers' patience.
+	# ES: C10 -- un eslabon de la cadena de la intervencion: espera a que Rosas devuelva los
+	#     pasaportes y llega dos meses despues. El boton de la Defensa ya no trae las escuadras por su
+	#     cuenta: acorta la paciencia de las potencias.
 	trigger = {
 		has_global_variable = guerra_grande_split_done
-		NOT = { has_global_variable = gg_intervention_called }
+		gg_plata_intervention_at = { MONTHS = 2 }
 	}
 	immediate = {
-		set_global_variable = gg_intervention_called
 		gg_patron_change = { PATRON = francia DELTA = 30 }
 		gg_patron_change = { PATRON = britania DELTA = 30 }
+		# EN: the blockade shuts Rosas's ports, so the Cerrito's trade walks north (SOURCES_siege.md):
+		#     moved here from the Defensa's button, because this is the blockade that caused it.
+		# ES: el bloqueo cierra los puertos de Rosas y el comercio del Cerrito se va al norte: pasado
+		#     aca desde el boton de la Defensa, porque es este bloqueo el que lo causo.
+		if = {
+			limit = { exists = s:STATE_BANDA_ORIENTAL.region_state:CER }
+			s:STATE_BANDA_ORIENTAL.region_state:CER = {
+				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_PAYSANDU.region_state:CER }
+			s:STATE_PAYSANDU.region_state:CER = {
+				add_modifier = { name = gg_siege_the_land_frontier_stays_open years = 5 }
+			}
+		}
 		c:URU ?= {
 			trigger_event = { id = guerra_grande.9 popup = yes }
 		}
@@ -154,6 +175,16 @@ gg_powers.10 = {
 		# EN/ES: Purvis refuses to recognise the blockade whatever the Cerrito answers (historical).
 		#     / Purvis no reconoce el bloqueo conteste lo que conteste el Cerrito.
 		gg_patron_change = { PATRON = britania DELTA = 20 }
+		# EN: C10 -- while Purvis keeps supplying the city, Rosas's blockade only stops the Defensa's
+		#     own ships; London disavows him in June 1843 and the blockade is reimposed (gg_plata.3,
+		#     70 days later). SOURCES_powers.md section 1.
+		# ES: C10 -- mientras Purvis abastece la ciudad, el bloqueo de Rosas solo frena a los barcos
+		#     de la Defensa; Londres lo desautoriza en junio de 1843 y el bloqueo se reimpone.
+		if = {
+			limit = { global_var:gg_plata_rosas_stance = 1 }
+			gg_plata_rosas_neutrals_pass = yes
+			c:ARG ?= { trigger_event = { id = gg_plata.3 days = 70 } }
+		}
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_3 } }
@@ -182,10 +213,6 @@ gg_powers.10 = {
 		# ES: lo historico: comercio abierto con la ciudad para sacarle el metalico; el mar queda abierto.
 		c:URU ?= {
 			add_modifier = { name = gg_powers_specie_drain years = 3 is_decaying = yes }
-			if = {
-				limit = { has_modifier = guerra_grande_river_plate_blockade }
-				remove_modifier = guerra_grande_river_plate_blockade
-			}
 		}
 		ai_chance = { base = 60 }
 	}
@@ -212,7 +239,9 @@ gg_powers.11 = {
 	trigger = {
 		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
-		gg_sea_open = yes
+		# EN/ES: C10 -- the first link of the intervention: the squadron is detained the day after the
+		#     ultimatum / el primer eslabon: la escuadra queda detenida al dia siguiente del ultimatum
+		gg_plata_intervention_at = { MONTHS = 0 }
 	}
 
 	option = {
@@ -220,14 +249,11 @@ gg_powers.11 = {
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the squadron stays off the port /
 		#     la barra tiene que moverse durante la guerra: la escuadra queda frente al puerto
 		gg_score_blanco = { AMOUNT = 1 }
-		# EN: lift the blockade and save the squadron: the blockade goes, the ships stay for later.
-		# ES: levantar el bloqueo y salvar la escuadra: se pierde el bloqueo, quedan los barcos.
-		c:URU ?= {
-			if = {
-				limit = { has_modifier = guerra_grande_river_plate_blockade }
-				remove_modifier = guerra_grande_river_plate_blockade
-			}
-		}
+		# EN: lift the blockade and save the squadron: Rosas opens the river, the fort and ships stay.
+		#     Historically Rosas ordered Brown to lift the blockade on 22 July 1845.
+		# ES: levantar el bloqueo y salvar la escuadra: Rosas abre el rio, quedan el fuerte y los barcos.
+		#     Historicamente Rosas ordeno a Brown levantar el bloqueo el 22 de julio de 1845.
+		gg_plata_rosas_open = yes
 		ai_chance = { base = 45 }
 	}
 
@@ -243,6 +269,9 @@ gg_powers.11 = {
 		# ES: lo historico: resistir. Se pierde la escuadra y el bloqueo muere hasta que se vayan las
 		#     potencias, pero suben Rosas y la opinion americana.
 		set_global_variable = gg_brown_fleet_lost
+		# EN/ES: C10, A -- without the squadron the blockade dies: the Buenos Aires bank cannot restrict
+		#     anything until Arana-Southern returns the ships / sin la escuadra muere el bloqueo
+		gg_plata_fort_remove = yes
 		# EN/ES: FN-1 -- Purvis took Brown's ships away, so the squadron leaves the map as well
 		#     / Purvis se llevo los barcos de Brown, asi que la escuadra tambien se va del mapa
 		c:CER ?= {
@@ -333,7 +362,8 @@ gg_powers.12 = {
 			}
 		}
 		OR = {
-			gg_sea_open = yes
+			# EN/ES: C10 -- a year into the intervention (historically July 1846) / al anio de la intervencion
+			gg_plata_intervention_at = { MONTHS = 12 }
 			has_global_variable = gg_powers_mediators
 		}
 	}
@@ -463,6 +493,9 @@ gg_powers.14 = {
 		c:CER ?= this
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
+		# EN/ES: C10 -- Howden comes to end an intervention (historically July 1847)
+		#     / Howden viene a terminar una intervencion
+		gg_plata_intervention_at = { MONTHS = 23 }
 	}
 
 	option = {
@@ -567,6 +600,8 @@ gg_powers.16 = {
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
 		NOT = { has_global_variable = gg_reunification_pledged }
+		# EN/ES: C10 -- Gore and Gros mediate an intervention (historically March 1848)
+		gg_plata_intervention_at = { MONTHS = 31 }
 	}
 
 	# EN: playtest 2026-09-19 -- when the mechanic of doctores and caudillos was removed this mark
@@ -877,10 +912,19 @@ gg_powers.19 = {
 	trigger = {
 		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
+		# EN/ES: C10 -- the treaty that ends the British intervention (historically 24 November 1849)
+		gg_plata_intervention_at = { MONTHS = 36 }
 	}
 
 	immediate = {
 		gg_patron_change = { PATRON = britania DELTA = -100 }
+		# EN: C10, A -- article 1: Britain returns the Argentine warships and evacuates Martin Garcia,
+		#     and recognises Rosas's right to blockade (SOURCES_powers.md section 6). The key goes back.
+		#     What Rosas did with it after 1849 is still [source pending]: his stance is left as it was.
+		# ES: C10, A -- articulo 1: Gran Bretania devuelve los buques de guerra y evacua Martin Garcia, y
+		#     reconoce el derecho de bloqueo. La llave vuelve. Que hizo Rosas con ella despues de 1849
+		#     sigue [pendiente de fuente]: su postura queda como estaba.
+		gg_plata_fort_restore = yes
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_23 } }
@@ -938,9 +982,13 @@ gg_powers.20 = {
 
 	trigger = {
 		has_global_variable = guerra_grande_split_done
+		gg_plata_intervention_at = { MONTHS = 45 }
 	}
 
 	immediate = {
+		# EN/ES: C10 -- France settles too: the intervention is over and its ships go home
+		#     / Francia tambien arregla: se termina la intervencion y sus barcos vuelven
+		set_global_variable = gg_plata_intervention_over
 		# EN/ES: the French squadron stops being sea; the Paris mission softens the fall
 		if = {
 			limit = { has_global_variable = gg_paris_mission }

@@ -40,7 +40,7 @@ gg_ui_has_commitments = {
 gg_int_ui_phase = {
 	value = 0
 	if = {
-		limit = { OR = { has_global_variable = guerra_grande_split_done has_global_variable = gg_intervention_called } }
+		limit = { OR = { has_global_variable = guerra_grande_split_done has_global_variable = gg_intervention_called has_global_variable = gg_plata_intervention } }
 		add = 1
 	}
 	if = {

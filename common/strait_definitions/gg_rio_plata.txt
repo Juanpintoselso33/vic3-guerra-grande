@@ -1,0 +1,31 @@
+﻿# EN: The River Plate strait (Montevideo - Buenos Aires over the estuary's exit) and Magellan.
+#     Verified in game 21/9/2026: a modded strait counts trade once a bank has control, and closing
+#     needs a naval fortification. The three full-control flags are "no" so one bank alone can close
+#     it: with "yes", Rosas could never close while Montevideo was the Defensa's.
+#     Magellan has no forts in 1836; its banks get control by modifier (gg_rio_plata on_actions).
+#     The adjacency lines are in map_data/adjacencies.csv (full vanilla copy plus these two).
+# ES: El estrecho del Plata (Montevideo - Buenos Aires sobre la salida del estuario) y Magallanes.
+#     Verificado en partida el 21/9/2026: un estrecho de mod cuenta comercio si una orilla tiene
+#     control, y cerrar exige fortificacion naval. Las tres banderas de control total van en "no"
+#     para que una orilla sola pueda cerrar. Magallanes no tiene fuertes en 1836: control por
+#     modificador. Las adyacencias van en map_data/adjacencies.csv (copia de vanilla mas estas dos).
+REPLACE_OR_CREATE:strait_rio_de_la_plata = {
+	type = natural
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+	tolls_require_full_control = no
+	first_land_endpoint = x302DDA
+	second_land_endpoint = x365A5B
+	first_sea_endpoint = x1FDEFC
+	second_sea_endpoint = x4499CD
+}
+REPLACE_OR_CREATE:strait_magellan = {
+	type = natural
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+	tolls_require_full_control = no
+	first_land_endpoint = x5A7430
+	second_land_endpoint = x5BA7C2
+	first_sea_endpoint = x858CBF
+	second_sea_endpoint = x26CAFC
+}

@@ -24,7 +24,7 @@
 
 # Botones
  guerra_grande_foreign_intervention_button:0 "Llamar a las escuadras"
- guerra_grande_foreign_intervention_button_desc:0 "Inglaterra y Francia quieren el Paraná y el Uruguay abiertos a su comercio. Si se las invita, cierran al tráfico todos los puertos de la Confederación menos el nuestro: es el bloqueo de 1845 a 1850, la Guerra del Paraná. Les costó la Vuelta de Obligado y terminó igual, con las potencias reconociéndole a Rosas la soberanía sobre sus ríos."
+ guerra_grande_foreign_intervention_button_desc:0 "Inglaterra y Francia quieren el Paraná y el Uruguay abiertos a su comercio. Si se las invita, cierran al tráfico todos los puertos de la Confederación menos el nuestro: es el bloqueo de 1845 a 1850, la Guerra del Paraná. Les costó la Vuelta de Obligado y terminó igual, con las potencias reconociéndole a Rosas la soberanía sobre sus ríos. Llamarlas es pedirle a Londres y París que pierdan antes la paciencia con el bloqueo de Rosas."
  guerra_grande_italian_legion_button:0 "Levantar la Legión Italiana"
  guerra_grande_italian_legion_button_desc:0 "Montevideo está llena de exiliados italianos, y uno de ellos es un marino de Niza llamado Giuseppe Garibaldi. La plaza tiene además una partida barata de camisas coloradas: ropa de trabajo destinada a los saladeros de la otra orilla que el bloqueo dejó sin vender. Que se vistan con ellas."
  guerra_grande_requires_open_war:0 "La Guerra Grande tiene que estar en curso"

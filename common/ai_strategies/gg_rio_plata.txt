@@ -1,0 +1,108 @@
+﻿# EN: What each government does with its bank of the River Plate. The engine has no effect to set a
+#     strait's access: its controller sets it -- the player in the strait panel, the AI through these
+#     scores. Verified in game on 21/9/2026: the AI obeys set_strategy (Rosas closed his bank on
+#     10/1/1836), and weight alone is not enough because the AI only re-rolls its strategies about
+#     every ten years. So weight is 0 and the script sets them (gg_plata_rosas_* effects).
+#     All four are administrative: Argentina's mod strategies are diplomatic, so these never replace
+#     them. Only the Plata scores are touched; every other strait keeps vanilla's behaviour.
+# ES: Que hace cada gobierno con su orilla del Plata. El motor no tiene efecto para fijar el acceso
+#     de un estrecho: lo fija su controlador -- el jugador en el panel, la IA con estos puntajes.
+#     Verificado en partida el 21/9/2026: la IA obedece a set_strategy, y el weight solo no alcanza
+#     porque la IA re-elige estrategias cada unos diez anios. Por eso weight 0 y las fija el script.
+#     Las cuatro son administrativas: las del mod para la Argentina son diplomaticas, asi que estas
+#     nunca las reemplazan. Solo se tocan los puntajes del Plata; los demas estrechos quedan como
+#     en vanilla.
+
+# EN/ES: Rosas, river open -- 1836 until the siege, and after he yields / rio abierto
+gg_ai_strategy_plata_open = {
+	icon = "gfx/interface/icons/ai_strategy_icons/placate_population.dds"
+	type = administrative
+	strait_scores = {
+		status_scores = {
+			open = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+		permissions_scores = {
+			all = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+	}
+	possible = { c:ARG ?= this }
+	weight = { value = 0 }
+}
+
+# EN: Rosas blockades Montevideo: shut to every flag but his own (Only Controller). "No Enemies"
+#     would let British and French merchantmen through, which is Purvis's reading, not Rosas's.
+# ES: Rosas bloquea Montevideo: cerrado a toda bandera menos la suya (Only Controller). "No Enemies"
+#     dejaria pasar a los mercantes britanicos y franceses, que es la lectura de Purvis, no la de Rosas.
+gg_ai_strategy_plata_closed = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+	type = administrative
+	strait_scores = {
+		status_scores = {
+			closed = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+		permissions_scores = {
+			only_controller = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+	}
+	possible = { c:ARG ?= this }
+	weight = { value = 0 }
+}
+
+# EN: April-June 1843: Purvis refuses to recognise the blockade and the neutrals keep supplying the
+#     city. Shut only to enemies: the Defensa's own ships stay out, everyone else passes.
+# ES: Abril-junio de 1843: Purvis no reconoce el bloqueo y los neutrales siguen abasteciendo la
+#     ciudad. Cerrado solo a los enemigos: los barcos de la Defensa no entran, el resto pasa.
+gg_ai_strategy_plata_enemies = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+	type = administrative
+	strait_scores = {
+		status_scores = {
+			closed = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+		permissions_scores = {
+			no_enemies = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+	}
+	possible = { c:ARG ?= this }
+	weight = { value = 0 }
+}
+
+# EN/ES: the Defensa lives on its port: always open to everyone / la Defensa vive del puerto: abierto a todos
+gg_ai_strategy_plata_defensa = {
+	icon = "gfx/interface/icons/ai_strategy_icons/placate_population.dds"
+	type = administrative
+	strait_scores = {
+		status_scores = {
+			open = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+		permissions_scores = {
+			all = {
+				value = 0
+				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
+			}
+		}
+	}
+	possible = { has_variable = guerra_grande_defensa_government }
+	weight = { value = 0 }
+}

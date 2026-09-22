@@ -226,10 +226,18 @@ gg_systems_init = {
 	# ES: T5 -- los eventos de la fase 0 puntuan antes de que Carpinteria cree el journal, asi que
 	#     el puntaje arranca aca; el immediate del journal solo lo pone si todavia falta.
 	set_global_variable = { name = guerra_grande_blanco_score value = 0 }
-	# EN/ES: T2, C15 -- months of closed sea / meses de mar cerrado
-	set_global_variable = { name = gg_siege_months value = 0 }
-	# EN/ES: playtest 2026-09-19 -- months of open sea, the mirror of the siege / meses de mar abierto
-	set_global_variable = { name = gg_relief_months value = 0 }
+	# EN/ES: C10 (22/9/2026) -- the River Plate: signed months, consecutive shut months, total shut
+	#     months, Rosas's stance (0 open) / el Plata: meses con signo, meses cerrados seguidos, meses
+	#     cerrados en total, postura de Rosas (0 abierto)
+	set_global_variable = { name = gg_plata_months value = 0 }
+	set_global_variable = { name = gg_plata_closed_streak value = 0 }
+	set_global_variable = { name = gg_plata_closed_total value = 0 }
+	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+	gg_plata_rosas_stance_apply = yes
+	# EN/ES: Magellan has no forts in 1836: its banks hold the strait by modifier
+	#     / Magallanes no tiene fuertes en 1836: sus orillas lo controlan por modificador
+	p:x5A7430.state ?= { add_modifier = { name = gg_strait_control_magellan } }
+	p:x5BA7C2.state ?= { add_modifier = { name = gg_strait_control_magellan } }
 	# EN/ES: Codex review 2026-09-19 -- half of a government's ground in the other's hands, written
 	#     down monthly while the war lasts / medio pais en manos del otro, anotado mes a mes
 	set_global_variable = { name = gg_cerrito_overrun value = 0 }
@@ -744,17 +752,20 @@ gg_river_blockade = {
 			years = 8
 			is_decaying = yes
 		}
-		# EN: and the city gets the same blockade modifier the Defensa's own button puts on the
-		#     Confederation -- the exact mirror of guerra_grande_foreign_intervention_button,
-		#     pointed the other way.
-		# ES: y la ciudad recibe el mismo modificador de bloqueo que el boton de la Defensa le
-		#     pone a la Confederacion: el espejo exacto de
-		#     guerra_grande_foreign_intervention_button, apuntado para el otro lado.
-		c:URU ?= {
-			add_modifier = {
-				name = guerra_grande_river_plate_blockade
-				years = 8
-				is_decaying = yes
+		# EN: C10 (22/9/2026) -- the blockade is Rosas's, not the Cerrito's: Oribe has no bank (his port
+		#     is the Buceo). He asks, and Rosas shuts his bank of the river: an AI Rosas at once, a
+		#     human Rosas gets the request (gg_plata.2) and closes it himself. No modifier on the city:
+		#     the engine cuts its trade. Historically announced 9 March, in force 1 April 1843.
+		# ES: C10 -- el bloqueo es de Rosas, no del Cerrito: Oribe no tiene orilla (su puerto es el
+		#     Buceo). Oribe pide, y Rosas cierra su orilla: la IA en el acto, un Rosas humano recibe el
+		#     pedido y la cierra el. Ningun modificador sobre la ciudad: el motor le corta el comercio.
+		c:ARG ?= {
+			if = {
+				limit = { is_player = yes }
+				trigger_event = { id = gg_plata.2 popup = yes }
+			}
+			else = {
+				gg_plata_rosas_close = yes
 			}
 		}
 		# EN: FN-1 -- and the squadron itself. Rosas lent Brown with what the Confederation had on

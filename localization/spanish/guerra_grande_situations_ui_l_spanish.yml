@@ -4,7 +4,7 @@
  gg_war_ui_blanco_balance:0 "Ventaja de la causa\n#V [JournalEntry.MakeScope.ScriptValue('gg_war_balance_blanco')|0]#!"
  gg_war_ui_colorado_balance:0 "Ventaja de la causa\n#V [JournalEntry.MakeScope.ScriptValue('gg_war_balance_colorado')|0]#!"
  gg_war_ui_balance_tt:0 "La ventaja contrapone ambas causas: no son dos recursos acumulables. Incluye la diferencia del puntaje y la presión del cerco y del abastecimiento. Es la misma cuenta que determina la negociación de paz."
- gg_war_ui_balance_causes:0 "#b Lo que inclina la balanza#!\nCerco: #V [JournalEntry.MakeScope.ScriptValue('gg_siege_pressure')|0]#! a favor de los blancos. Abastecimiento: #V [JournalEntry.MakeScope.ScriptValue('gg_relief_pressure')|0]#! a favor de los colorados."
+ gg_war_ui_balance_causes:0 "#b Lo que inclina la balanza#!\nEl río: #V [JournalEntry.MakeScope.ScriptValue('gg_plata_pressure_blanco')|0]#! a favor de los blancos, #V [JournalEntry.MakeScope.ScriptValue('gg_plata_pressure_colorado')|0]#! a favor de los colorados (un punto cada #V 4#! meses de río cerrado o abierto, hasta #V 4#!)."
  gg_war_ui_defensa_condition:0 "#R Gobierno de la Defensa#!\nAgotamiento: #V [GetGlobalVariable('gg_defensa_exhausted').GetValue|0]#! meses"
  gg_war_ui_cerrito_condition:0 "#blue_value Gobierno del Cerrito#!\nAgotamiento: #V [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0]#! meses"
  gg_war_ui_exhaustion_tt:0 "Meses consecutivos con apoyo bélico de #V −25#! o menos en esta guerra. La cuenta vuelve a cero cuando se recupera el apoyo; no mide pérdidas de tropas."

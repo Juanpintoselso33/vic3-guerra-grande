@@ -385,7 +385,11 @@ gg_peace.1 = {
 		name = gg_peace.1.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
-			gg_sea_power > 0
+			# EN/ES: C10 -- the patrons themselves, not the retired sea formula / los padrinos, no la formula
+			OR = {
+				global_var:gg_patron_francia > 0
+				global_var:gg_patron_britania > 0
+			}
 			NOT = { has_global_variable = gg_imperial_pledged }
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).

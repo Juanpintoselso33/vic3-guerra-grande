@@ -162,69 +162,16 @@ je_guerra_grande = {
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
 				# EN/ES: T1, C1 -- the peace is no longer scheduled here: the weekly arbiter does it.
-				# EN: T2, C15 -- the siege counter. The sea counts as shut while the Defensa carries the
-				#     river blockade and no squadron came; T3b replaces this with gg_sea_open. The
+				# EN: C10 (22/9/2026) -- the river, once a month: the signed counter, the powers' patience and
+				#     the lent squadron, all in gg_plata_monthly (common/scripted_effects/gg_rio_plata.txt). The
 				#     20-day tick makes it count once a month however many times this pulse runs.
-				# ES: T2, C15 -- el contador del asedio. El mar cuenta como cerrado mientras la Defensa
-				#     tiene el bloqueo fluvial y no vino ninguna escuadra; T3b lo cambia por
-				#     gg_sea_open. La marca de 20 dias hace que cuente una vez por mes, corra este
-				#     pulso las veces que corra.
+				# ES: C10 -- el rio, una vez por mes: el contador con signo, la paciencia de las potencias y la
+				#     escuadra prestada, todo en gg_plata_monthly. La marca de 20 dias hace que cuente una vez
+				#     por mes, corra este pulso las veces que corra.
 				if = {
 					limit = { NOT = { has_global_variable = gg_siege_tick } }
 					set_global_variable = { name = gg_siege_tick days = 20 }
-					if = {
-						# EN/ES: T3b, C15/C21 -- the sea is the one condition (I16) / el mar es la unica condicion
-						# EN: FN-1 -- the month counts with the declared blockade (the Cerrito's button) OR with a
-						#     real one: the Confederation's squadron sitting on Montevideo's water. The engine
-						#     cannot be ordered to blockade, so both count.
-						# ES: FN-1 -- el mes cuenta con el bloqueo declarado (el boton del Cerrito) O con uno real:
-						#     la escuadra sobre el agua de Montevideo. Al motor no se le puede ordenar bloquear.
-						limit = {
-							OR = {
-								c:URU ?= { has_modifier = guerra_grande_river_plate_blockade }
-								c:URU ?= {
-									any_scope_state = {
-										state_region = s:STATE_MONTEVIDEO
-										blockade_level > 0
-									}
-								}
-							}
-							NOT = { gg_sea_open = yes }
-							NOT = { has_global_variable = gg_truce }
-						}
-						change_global_variable = { name = gg_siege_months add = 1 }
-					}
-					else_if = {
-						limit = {
-							global_var:gg_siege_months > 0
-							NOT = { has_global_variable = gg_truce }
-						}
-						change_global_variable = { name = gg_siege_months add = -1 }
-					}
-					# EN: playtest 2026-09-19 -- the mirror of the siege: months with the sea open and no
-					#     blockade are months the city wins, and they push the bar towards the colorados.
-					#     Without this the bar only ever moved one way during the war.
-					# ES: el espejo del sitio: los meses de mar abierto y sin bloqueo son meses que gana la
-					#     ciudad, y empujan la barra hacia los colorados. Sin esto la barra solo se movia
-					#     para un lado durante la guerra.
-					if = {
-						limit = {
-							gg_sea_open = yes
-							NOT = { has_global_variable = gg_truce }
-							global_var:gg_relief_months < 24
-						}
-						change_global_variable = { name = gg_relief_months add = 1 }
-					}
-					else_if = {
-						limit = {
-							NOT = { gg_sea_open = yes }
-							# EN/ES: Codex review -- a truce freezes the siege counter, so it has to freeze this
-							#     one too / la tregua congela el contador del sitio, tiene que congelar este
-							NOT = { has_global_variable = gg_truce }
-							global_var:gg_relief_months > 0
-						}
-						change_global_variable = { name = gg_relief_months add = -1 }
-					}
+					gg_plata_monthly = yes
 					# EN: Codex review 2026-09-19 -- the Cerrito's two mechanics used to live inside scripted
 					#     buttons, and the AI never presses a button. With the player on the Defensa, the
 					#     Cerrito never raised the montonera, never called Brown's squadron and never
@@ -251,113 +198,14 @@ je_guerra_grande = {
 								has_global_variable = guerra_grande_open_war
 								NOT = { has_variable = guerra_grande_river_blockade_asked }
 								NOT = { has_global_variable = gg_brown_fleet_lost }
+								# EN/ES: C10 -- the same gates as the Cerrito's button: 1843, and a bank Rosas can
+								#     shut / las mismas guardas que el boton: 1843, y una orilla que Rosas pueda cerrar
+								year >= 1843
+								gg_plata_ba_held_by_rosas = yes
+								gg_plata_ba_fort = yes
+								NOT = { has_global_variable = gg_plata_intervention }
 							}
 							gg_river_blockade = yes
-						}
-					}
-					# EN: FN-2 -- the Anglo-French station: while the sea is open the city resists a blockade and
-					#     keeps a lent squadron; when the backing falls the powers take their ships back.
-					# ES: FN-2 -- la estacion anglo-francesa: con el mar abierto la ciudad resiste el bloqueo y
-					#     tiene escuadra prestada; si el apoyo cae, las potencias se llevan sus barcos.
-					if = {
-						limit = { gg_sea_open = yes }
-						c:URU ?= {
-							# EN/ES: S02 migration -- a dead formation cannot keep the creation guard true.
-							if = {
-								limit = {
-									has_variable = gg_lent_squadron
-									OR = {
-										NOT = { has_variable = gg_lent_squadron_ref }
-										NOT = { exists = var:gg_lent_squadron_ref }
-									}
-								}
-								remove_variable = gg_lent_squadron
-								if = { limit = { has_variable = gg_lent_squadron_ref } remove_variable = gg_lent_squadron_ref }
-							}
-							# EN: Codex review 2026-09-19 -- the region has no oriental state, so the fleet was
-							#     never created, and the mark was written first, so it never retried either.
-							# ES: la region no tiene ningun estado oriental, asi que la flota no se creaba
-							#     nunca, y la marca se escribia antes, asi que tampoco se reintentaba.
-							if = {
-								limit = { NOT = { has_variable = gg_lent_squadron } }
-								gg_select_formation_hq_state = yes
-								clear_saved_scope = gg_lent_fleet
-								# EN: Without an owned state there is no valid HQ; skip this formation.
-								# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-								if = {
-									limit = { exists = scope:gg_formation_hq_state }
-									create_military_formation = {
-										save_scope_as = gg_lent_fleet
-										type = fleet
-										hq_region = scope:gg_formation_hq_state.region
-										name = gg_lent_squadron_name
-										ship = {
-											type = ship_type:ship_type_frigate
-											state_region = s:STATE_MONTEVIDEO
-											count = 4
-										}
-									}
-								}
-								# EN/ES: the marks go after the creation, so a failed one is tried again next month
-								#     / las marcas van despues de crearla, asi un fallo se reintenta el mes que viene
-								if = {
-									limit = { exists = scope:gg_lent_fleet }
-									set_variable = gg_lent_squadron
-									set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
-								}
-							}
-							every_scope_state = {
-								limit = {
-									state_region = s:STATE_MONTEVIDEO
-									NOT = { has_modifier = gg_naval_anglo_french_station }
-								}
-								add_modifier = { name = gg_naval_anglo_french_station }
-							}
-						}
-					}
-					else = {
-						c:URU ?= {
-							# EN/ES: the station is gone and so are its ships / se fue la estacion y se van sus barcos
-							if = {
-								limit = { has_variable = gg_lent_squadron }
-								remove_variable = gg_lent_squadron
-								if = {
-									limit = { has_variable = gg_lent_squadron_ref }
-									# EN/ES: they were lent, so they go home to France instead of vanishing (there is
-									#     no disband effect in script) / eran prestados, asi que vuelven a Francia
-									if = {
-										limit = { exists = c:FRA exists = var:gg_lent_squadron_ref }
-										var:gg_lent_squadron_ref ?= {
-											every_scope_ship = { set_ship_owner_multiple = c:FRA }
-										}
-										var:gg_lent_squadron_ref ?= { clear_ownership_transfer_fleet = yes }
-									}
-									remove_variable = gg_lent_squadron_ref
-								}
-							}
-							every_scope_state = {
-								limit = { has_modifier = gg_naval_anglo_french_station }
-								remove_modifier = gg_naval_anglo_french_station
-							}
-						}
-					}
-					# EN: T3b, FE-9 -- when the squadrons hold the river, the blockade is lifted.
-					# ES: T3b, FE-9 -- cuando las escuadras sostienen el rio, el bloqueo se levanta.
-					if = {
-						limit = { gg_sea_open = yes }
-						c:URU ?= {
-							if = {
-								limit = { has_modifier = guerra_grande_river_plate_blockade }
-								remove_modifier = guerra_grande_river_plate_blockade
-							}
-						}
-						# EN/ES: review -- the Cerrito may ask again if the sea shuts later
-						#     / el Cerrito puede volver a pedirlo si el mar se cierra despues
-						c:CER ?= {
-							if = {
-								limit = { has_variable = guerra_grande_river_blockade_asked }
-								remove_variable = guerra_grande_river_blockade_asked
-							}
 						}
 					}
 					# EN: T3b, C19 -- the patrons, once a month. A side whose backing is under 40 bleeds

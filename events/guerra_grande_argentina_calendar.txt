@@ -568,11 +568,25 @@ gg_argentina_cal.21 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_21 }
+				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
+				gg_plata_intervention_at = { MONTHS = 2 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = guerra_grande_open_war
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.22 days = 0 popup = yes } }
+		}
+		# EN: C10 -- the intervention has no fixed date any more, so this relay waits for it instead of
+		#     firing once on the historical day and being lost. / la intervencion ya no tiene fecha fija:
+		#     este relevo la espera en vez de salir una vez el dia historico y perderse.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_21 }
+				year < 1856
+				exists = s:STATE_ENTRE_RIOS
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+			trigger_event = { id = gg_argentina_cal.21 days = 30 }
 		}
 	} }
 }
@@ -585,11 +599,25 @@ gg_argentina_cal.22 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_22 }
+				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
+				gg_plata_intervention_at = { MONTHS = 4 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.23 days = 0 popup = yes } }
+		}
+		# EN: C10 -- the intervention has no fixed date any more, so this relay waits for it instead of
+		#     firing once on the historical day and being lost. / la intervencion ya no tiene fecha fija:
+		#     este relevo la espera en vez de salir una vez el dia historico y perderse.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_22 }
+				year < 1856
+				exists = s:STATE_ENTRE_RIOS
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+			trigger_event = { id = gg_argentina_cal.22 days = 30 }
 		}
 	} }
 }
@@ -602,11 +630,25 @@ gg_argentina_cal.23 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_23 }
+				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
+				gg_plata_intervention_at = { MONTHS = 10 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance_continues
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.24 days = 0 popup = yes } }
+		}
+		# EN: C10 -- the intervention has no fixed date any more, so this relay waits for it instead of
+		#     firing once on the historical day and being lost. / la intervencion ya no tiene fecha fija:
+		#     este relevo la espera en vez de salir una vez el dia historico y perderse.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_23 }
+				year < 1856
+				exists = s:STATE_ENTRE_RIOS
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+			trigger_event = { id = gg_argentina_cal.23 days = 30 }
 		}
 	} }
 }
@@ -627,11 +669,23 @@ gg_argentina_cal.24 = {
 				NOT = { has_global_variable = gg_peace_offered }
 				NOT = { has_global_variable = gg_hood_done }
 				OR = {
-					gg_sea_open = yes
+					gg_plata_intervention_at = { MONTHS = 12 }
 					has_global_variable = gg_powers_mediators
 				}
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.25 days = 0 popup = yes } }
+		}
+		# EN: C10 -- the intervention has no fixed date any more, so this relay waits for it instead of
+		#     firing once on the historical day and being lost. / la intervencion ya no tiene fecha fija:
+		#     este relevo la espera en vez de salir una vez el dia historico y perderse.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_24 }
+				year < 1856
+				exists = s:STATE_ENTRE_RIOS
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+			trigger_event = { id = gg_argentina_cal.24 days = 30 }
 		}
 	} }
 }

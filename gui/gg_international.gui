@@ -88,41 +88,183 @@ flowcontainer = {
 			}
   }
  }
+ # EN: C10 (22/9/2026) -- the Overview is the key of the river: both banks, the passage, the powers'
+ #     patience against its threshold, the river's weight in the war, and port blockades on their own
+ #     line. Every value is computed in script (gg_rio_plata.txt); nothing is calculated when drawing.
+ # ES: C10 -- el Panorama es la llave del rio: las dos orillas, el paso, la paciencia de las potencias
+ #     contra su umbral, el peso del rio en la guerra, y los bloqueos de puertos en su propia linea.
+ #     Todo valor se calcula en script; nada se calcula al dibujar.
  flowcontainer = {
   direction = vertical spacing = 8 ignoreinvisible = yes
-  # EN: Siege supply is not control of the whole Plata, nor a prewar blockade.
-  # ES: Abastecer el sitio no equivale a controlar el Plata ni a un bloqueo previo.
-  visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)1')]"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_large align = left|nobaseline
-  text = "gg_ui_river_open"
- }
-
- textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_sea_open'), '(CFixedPoint)0')]"
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_large align = left|nobaseline
-  text = "gg_ui_river_closed"
- }
-
-  green_progressbar_horizontal = {
-   size = { 520 38 }
-   blockoverride "values" {
-    value = "[JournalEntry.MakeScope.ScriptValue('gg_sea_bar_value')]"
-    min = 0 max = 120
-   }
-   tooltip = "gg_ui_river_tt"
+  textbox = {
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_large align = left|nobaseline
+   text = "gg_ui_plata_key_header"
   }
- textbox = {
-  autoresize = yes multiline = yes
-  minimumsize = { 520 -1 } maximumsize = { 520 -1 }
-  using = fontsize_medium align = left|nobaseline
-  text = "gg_ui_river_account"
- }
+  flowcontainer = {
+   direction = horizontal spacing = 16
+   flowcontainer = {
+    direction = vertical spacing = 4 ignoreinvisible = yes
+    background = { using = dark_area alpha = 0.3 }
+    textbox = {
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_large align = left|nobaseline
+     text = "gg_ui_plata_ba_title"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_holder'), '(CFixedPoint)1')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_ba_rosas"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_holder'), '(CFixedPoint)0')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_ba_other"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort'), '(CFixedPoint)1')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_ba_fort_yes"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort'), '(CFixedPoint)0')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_ba_fort_no"
+    }
+   }
+   flowcontainer = {
+    direction = vertical spacing = 4 ignoreinvisible = yes
+    background = { using = dark_area alpha = 0.3 }
+    textbox = {
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_large align = left|nobaseline
+     text = "gg_ui_plata_mvd_title"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_holder'), '(CFixedPoint)1')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_mvd_defensa"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_holder'), '(CFixedPoint)2')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_mvd_cerrito"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_holder'), '(CFixedPoint)0')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_mvd_other"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort'), '(CFixedPoint)1')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_mvd_fort_yes"
+    }
+    textbox = {
+     visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_mvd_fort'), '(CFixedPoint)0')]"
+     autoresize = yes multiline = yes
+     minimumsize = { 252 -1 } maximumsize = { 252 -1 }
+     using = fontsize_medium align = left|nobaseline
+     text = "gg_ui_plata_mvd_fort_no"
+    }
+   }
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed'), '(CFixedPoint)1')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_large align = left|nobaseline
+   text = "gg_ui_plata_passage_closed"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed'), '(CFixedPoint)0')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_large align = left|nobaseline
+   text = "gg_ui_plata_passage_open"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_stage'), '(CFixedPoint)0')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_powers_0"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_stage'), '(CFixedPoint)1')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_powers_1"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_stage'), '(CFixedPoint)2')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_powers_2"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_stage'), '(CFixedPoint)3')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_powers_3"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_stage'), '(CFixedPoint)4')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_powers_4"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)1')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_weight_blancos"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)-1')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_weight_colorados"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)0')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_weight_even"
+  }
+  textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockaded'), '(CFixedPoint)1')]"
+   autoresize = yes multiline = yes
+   minimumsize = { 520 -1 } maximumsize = { 520 -1 }
+   using = fontsize_medium align = left|nobaseline
+   text = "gg_ui_plata_port_blockade"
+  }
 
  button_standard = {
   size = { 520 48 } text = "guerra_grande_foreign_intervention_button" tooltip = "gg_ui_squadrons_action_tt"
@@ -130,7 +272,6 @@ flowcontainer = {
   enabled = "[GetScriptedGui('gg_ui_call_squadrons').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
   onclick = "[GetScriptedGui('gg_ui_call_squadrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  }
-
  }
 
 }

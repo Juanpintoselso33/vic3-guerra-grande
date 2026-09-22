@@ -45,7 +45,7 @@ je_gg_siege = {
 
 	on_monthly_pulse = {
 		effect = {
-			scope:journal_entry = { set_bar_progress = { name = gg_siege_bar value = global_var:gg_siege_months } }
+			scope:journal_entry = { set_bar_progress = { name = gg_siege_bar value = global_var:gg_plata_closed_streak } }
 		}
 	}
 

@@ -1,0 +1,21 @@
+﻿# EN: A. The key of the river is the fort: a level-1 naval fortification on each bank from 1836.
+#     Without it no strait restriction applies, so Rosas's closure lives and dies with his fort
+#     (removed when the powers seize Brown's squadron, restored by Arana-Southern).
+# ES: A. La llave del rio es el fuerte: fortificacion naval nivel 1 en cada orilla desde 1836. Sin
+#     ella no se aplica ninguna restriccion, asi que el cierre de Rosas vive y muere con su fuerte.
+BUILDINGS = {
+	p:x302DDA.state = {
+		create_building = {
+			building = "building_naval_fortification"
+			add_ownership = { country = { country = p:x302DDA.state.owner levels = 1 } }
+			activate_production_methods = { "pm_naval_fortification_basic" }
+		}
+	}
+	p:x365A5B.state = {
+		create_building = {
+			building = "building_naval_fortification"
+			add_ownership = { country = { country = p:x365A5B.state.owner levels = 1 } }
+			activate_production_methods = { "pm_naval_fortification_basic" }
+		}
+	}
+}

@@ -49,13 +49,11 @@ guerra_grande_play_is_allowed = {
 	}
 }
 
-# EN: T3a. The sea is open while France and Britain together keep the river (to-be.md C21).
-#     The single place that decides it (invariant I16). 60 is provisional until T10.
-# ES: T3a. El mar esta abierto mientras Francia y Gran Bretana juntas sostienen el rio (C21).
-#     El unico lugar que lo decide (invariante I16). El 60 es provisorio hasta T10.
-gg_sea_open = {
-	gg_sea_power >= 60
-}
+# EN: C10 (22/9/2026) -- gg_sea_open (France + Britain - blockade >= 60) is gone. Whether the river
+#     is shut is gg_plata_closed, in common/scripted_triggers/gg_rio_plata.txt: the single place that
+#     decides it (invariant I16).
+# ES: C10 -- gg_sea_open ya no existe. Si el rio esta cerrado lo dice gg_plata_closed, en
+#     gg_rio_plata.txt: el unico lugar que lo decide (invariante I16).
 
 # EN: T2. War scope: this is the Guerra Grande -- one government leads each side. Same pattern as
 #     vanilla common/ideologies/01_character_ideologies.txt:2628 (attacker_warleader ?= {...}).
@@ -114,10 +112,10 @@ gg_cerrito_ripe = {
 }
 
 # EN: T2, arbiter. The Defensa is ripe for a peace dictated by the Cerrito: its war support is
-#     spent, the sea has been shut for 24 months, or the blancos lead by ten. Never occupation:
+#     spent, the river has been shut for 24 months in a row, or the blancos lead by ten. Never occupation:
 #     Montevideo is a single province and falling is capitulating (to-be.md, engine facts).
 # ES: T2, arbitro. La Defensa esta madura para una paz del Cerrito: se le acabo el apoyo, lleva 24
-#     meses con el mar cerrado, o los blancos le sacan diez. Nunca por ocupacion: Montevideo es una
+#     meses seguidos con el rio cerrado, o los blancos le sacan diez. Nunca por ocupacion: Montevideo es una
 #     sola provincia y caer es capitular.
 gg_defensa_ripe = {
 	OR = {
@@ -126,10 +124,12 @@ gg_defensa_ripe = {
 			year >= 1851
 			gg_war_balance_blanco >= 5
 		}
-		global_var:gg_siege_months >= 24
+		# EN/ES: C10 -- hunger needs an unbroken blockade: consecutive shut months
+		#     / el hambre exige un bloqueo sin cortes: meses cerrados seguidos
+		global_var:gg_plata_closed_streak >= 24
 		AND = {
 			year >= 1851
-			global_var:gg_siege_months >= 12
+			global_var:gg_plata_closed_streak >= 12
 		}
 		# EN/ES: the same rule on this side / la misma regla de este lado
 		global_var:gg_defensa_exhausted >= 3
@@ -178,7 +178,9 @@ gg_defensa_won_militarily = {
 gg_powers_stalemate = {
 	year >= 1845
 	year < 1851
-	gg_sea_open = yes
+	# EN/ES: C10 -- under the squadrons: the intervention is on / bajo las escuadras: hay intervencion
+	has_global_variable = gg_plata_intervention
+	NOT = { has_global_variable = gg_plata_intervention_over }
 	guerra_grande_blanco_lead < 3
 	guerra_grande_colorado_lead < 3
 	has_global_variable = gg_hood_done

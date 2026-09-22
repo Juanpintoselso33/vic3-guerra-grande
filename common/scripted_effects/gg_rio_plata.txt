@@ -1,0 +1,237 @@
+﻿# EN: THE RIVER PLATE QUESTION, effects (rio-plata-spec.md). What the script does is small on
+#     purpose: it tells Rosas's AI what to do with his bank, touches the fort when history does,
+#     counts months, and opens the intervention when the powers run out of patience. Everything else
+#     -- who can pass, what trade is lost, what London and Paris think of a shut river -- is the
+#     engine's.
+# ES: LA CUESTION DEL PLATA, efectos. Lo que hace el script es chico a proposito: le dice a la IA de
+#     Rosas que hacer con su orilla, toca el fuerte cuando lo hace la historia, cuenta meses y abre la
+#     intervencion cuando a las potencias se les acaba la paciencia. Todo lo demas -- quien pasa, que
+#     comercio se pierde, que piensan Londres y Paris de un rio cerrado -- lo pone el motor.
+
+# EN: Rosas's stance, remembered as a global so the monthly pulse can put it back if the AI re-rolls
+#     its strategies. 0 open, 1 closed to every foreign flag, 2 closed to enemies only (Purvis).
+#     A human Rosas sets his bank himself in the strait panel; the stance still records his word.
+# ES: La postura de Rosas, guardada como global para que el pulso mensual la reponga si la IA
+#     re-elige estrategias. 0 abierto, 1 cerrado a toda bandera, 2 cerrado solo a enemigos (Purvis).
+#     Un Rosas humano fija su orilla en el panel del estrecho; la postura igual registra su palabra.
+gg_plata_rosas_stance_apply = {
+	c:ARG ?= {
+		if = {
+			limit = { is_player = no }
+			if = {
+				limit = { global_var:gg_plata_rosas_stance = 1 NOT = { has_strategy = gg_ai_strategy_plata_closed } }
+				set_strategy = gg_ai_strategy_plata_closed
+			}
+			else_if = {
+				limit = { global_var:gg_plata_rosas_stance = 2 NOT = { has_strategy = gg_ai_strategy_plata_enemies } }
+				set_strategy = gg_ai_strategy_plata_enemies
+			}
+			else_if = {
+				limit = { global_var:gg_plata_rosas_stance = 0 NOT = { has_strategy = gg_ai_strategy_plata_open } }
+				set_strategy = gg_ai_strategy_plata_open
+			}
+		}
+	}
+}
+
+gg_plata_rosas_close = {
+	custom_tooltip = gg_plata_rosas_close_tt
+	set_global_variable = { name = gg_plata_rosas_stance value = 1 }
+	gg_plata_rosas_stance_apply = yes
+}
+gg_plata_rosas_open = {
+	custom_tooltip = gg_plata_rosas_open_tt
+	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+	gg_plata_rosas_stance_apply = yes
+}
+gg_plata_rosas_neutrals_pass = {
+	custom_tooltip = gg_plata_rosas_neutrals_tt
+	set_global_variable = { name = gg_plata_rosas_stance value = 2 }
+	gg_plata_rosas_stance_apply = yes
+}
+
+# EN: A. The fort is the key. Removing it lifts every restriction on the Buenos Aires bank.
+# ES: A. El fuerte es la llave. Sacarlo levanta toda restriccion en la orilla de Buenos Aires.
+gg_plata_fort_remove = {
+	custom_tooltip = gg_plata_fort_remove_tt
+	p:x365A5B.state ?= {
+		if = {
+			limit = { has_building = building_naval_fortification }
+			remove_building = building_naval_fortification
+		}
+	}
+}
+gg_plata_fort_restore = {
+	custom_tooltip = gg_plata_fort_restore_tt
+	p:x365A5B.state ?= {
+		if = {
+			limit = { NOT = { has_building = building_naval_fortification } }
+			create_building = {
+				building = "building_naval_fortification"
+				level = 1
+			}
+		}
+	}
+}
+
+# EN: B. The powers' patience is spent: Ouseley and Deffaudis carry the ultimatum to Rosas.
+# ES: B. Se acabo la paciencia: Ouseley y Deffaudis le llevan el ultimatum a Rosas.
+gg_plata_ultimatum_send = {
+	set_global_variable = gg_plata_ultimatum_pending
+	c:ARG ?= { trigger_event = { id = gg_plata.10 popup = yes } }
+}
+
+# EN: Rosas returns the passports: the intervention begins. Its dated events (Brown's squadron, the
+#     blockade of Buenos Aires, Hood, Howden, Gore and Gros, Southern, Lepredour) wait for this and
+#     for their own distance from it (gg_plata_intervention_at).
+# ES: Rosas devuelve los pasaportes: empieza la intervencion. Sus eventos fechados esperan esto y su
+#     propia distancia desde aca.
+gg_plata_intervention_start = {
+	custom_tooltip = gg_plata_intervention_start_tt
+	hidden_effect = {
+		if = {
+			limit = { has_global_variable = gg_plata_ultimatum_pending }
+			remove_global_variable = gg_plata_ultimatum_pending
+		}
+		set_global_variable = gg_plata_intervention
+		set_global_variable = { name = gg_plata_intervention_months value = 0 }
+		c:ARG ?= {
+			save_scope_as = gg_plata_rosas
+			c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
+			c:FRA ?= { change_relations = { country = scope:gg_plata_rosas value = -30 } }
+		}
+	}
+}
+
+# EN: Rosas yields: the river opens and the patience starts again from zero.
+# ES: Rosas cede: el rio se abre y la paciencia vuelve a empezar de cero.
+gg_plata_ultimatum_yield = {
+	gg_plata_rosas_open = yes
+	hidden_effect = {
+		if = {
+			limit = { has_global_variable = gg_plata_ultimatum_pending }
+			remove_global_variable = gg_plata_ultimatum_pending
+		}
+		set_global_variable = { name = gg_plata_closed_total value = 0 }
+	}
+}
+
+# EN: Once a month, from je_guerra_grande's pulse while the war is open. Frozen in a truce.
+# ES: Una vez por mes, desde el pulso de je_guerra_grande con la guerra abierta. Congelado en tregua.
+gg_plata_monthly = {
+	# EN/ES: the stance survives the AI's own re-roll / la postura sobrevive a la re-eleccion de la IA
+	gg_plata_rosas_stance_apply = yes
+	every_country = {
+		limit = {
+			has_variable = guerra_grande_defensa_government
+			is_player = no
+			NOT = { has_strategy = gg_ai_strategy_plata_defensa }
+		}
+		set_strategy = gg_ai_strategy_plata_defensa
+	}
+
+	if = {
+		limit = { NOT = { has_global_variable = gg_truce } }
+		if = {
+			limit = { gg_plata_closed = yes }
+			if = {
+				limit = { global_var:gg_plata_months < 16 }
+				change_global_variable = { name = gg_plata_months add = 1 }
+			}
+			change_global_variable = { name = gg_plata_closed_streak add = 1 }
+			change_global_variable = { name = gg_plata_closed_total add = 1 }
+		}
+		else = {
+			if = {
+				limit = { global_var:gg_plata_months > -16 }
+				change_global_variable = { name = gg_plata_months add = -1 }
+			}
+			set_global_variable = { name = gg_plata_closed_streak value = 0 }
+		}
+		if = {
+			limit = {
+				has_global_variable = gg_plata_intervention
+				NOT = { has_global_variable = gg_plata_intervention_over }
+			}
+			change_global_variable = { name = gg_plata_intervention_months add = 1 }
+		}
+		if = {
+			limit = { gg_plata_intervention_due = yes }
+			gg_plata_ultimatum_send = yes
+		}
+	}
+
+	# EN: FN-2 -- while the powers intervene, the Defensa sails a lent squadron; when the
+	#     intervention ends they take their ships back. (Before 22/9/2026 this hung off the rejected
+	#     60-point sea, together with a blockade-resistance modifier that is gone.)
+	# ES: FN-2 -- mientras intervienen las potencias, la Defensa navega una escuadra prestada; cuando
+	#     termina, se llevan sus barcos. (Antes colgaba del mar de 60 puntos, con un modificador de
+	#     resistencia al bloqueo que ya no existe.)
+	if = {
+		limit = {
+			has_global_variable = gg_plata_intervention
+			NOT = { has_global_variable = gg_plata_intervention_over }
+		}
+		c:URU ?= {
+			# EN/ES: S02 migration -- a dead formation cannot keep the creation guard true.
+			if = {
+				limit = {
+					has_variable = gg_lent_squadron
+					OR = {
+						NOT = { has_variable = gg_lent_squadron_ref }
+						NOT = { exists = var:gg_lent_squadron_ref }
+					}
+				}
+				remove_variable = gg_lent_squadron
+				if = { limit = { has_variable = gg_lent_squadron_ref } remove_variable = gg_lent_squadron_ref }
+			}
+			if = {
+				limit = { NOT = { has_variable = gg_lent_squadron } }
+				gg_select_formation_hq_state = yes
+				clear_saved_scope = gg_lent_fleet
+				# EN/ES: without an owned state there is no valid HQ / sin estado propio no hay cuartel
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						save_scope_as = gg_lent_fleet
+						type = fleet
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_lent_squadron_name
+						ship = {
+							type = ship_type:ship_type_frigate
+							state_region = s:STATE_MONTEVIDEO
+							count = 4
+						}
+					}
+				}
+				# EN/ES: the marks go after the creation, so a failed one is retried next month
+				#     / las marcas van despues de crearla, asi un fallo se reintenta el mes que viene
+				if = {
+					limit = { exists = scope:gg_lent_fleet }
+					set_variable = gg_lent_squadron
+					set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
+				}
+			}
+		}
+	}
+	else = {
+		c:URU ?= {
+			if = {
+				limit = { has_variable = gg_lent_squadron }
+				remove_variable = gg_lent_squadron
+				if = {
+					limit = { has_variable = gg_lent_squadron_ref }
+					# EN/ES: lent, so they go home to France / prestados, vuelven a Francia
+					if = {
+						limit = { exists = c:FRA exists = var:gg_lent_squadron_ref }
+						var:gg_lent_squadron_ref ?= {
+							every_scope_ship = { set_ship_owner_multiple = c:FRA }
+						}
+						clear_ownership_transfer_fleet = yes
+					}
+					remove_variable = gg_lent_squadron_ref
+				}
+			}
+		}
+	}
+}

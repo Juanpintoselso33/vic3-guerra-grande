@@ -1,12 +1,6 @@
 ﻿# EN: Read-only presentation values; no new counters or military rules.
 # ES: Valores de presentacion de solo lectura; sin contadores ni reglas militares nuevas.
-gg_ui_sea_open = {
- value = 0
- if = { limit = { gg_sea_open = yes } add = 1 }
-}
-gg_ui_blockade_effective = {
- value = gg_blockade_pressure
-}
+# EN/ES: C10 -- the sea's UI values moved to gg_rio_plata.txt (gg_ui_plata_*)
 # EN: Current diplomatic state only; higher-priority conditions override lower ones.
 # ES: Solo el estado diplomatico actual; las condiciones prioritarias prevalecen.
 gg_ui_war_diplomacy = {

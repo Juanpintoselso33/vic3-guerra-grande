@@ -60,30 +60,10 @@ guerra_grande_war_score_bar = {
 	max_value = 10
 }
 
-# EN: playtest 2026-09-17 -- the journal shows the sea and the siege as bars instead of paragraphs.
-#     Both are set every month (and the sea on every patron change) with set_bar_progress.
-# ES: el journal muestra el mar y el asedio como barras en vez de parrafos. Las dos se fijan cada
-#     mes (y el mar en cada cambio de padrino) con set_bar_progress.
-# EN: playtest 2026-09-19 -- the open-sea threshold is exactly 60 (gg_sea_open), so with a bar that
-#     ended at 60 the thing was full the instant the sea opened and every point above it was
-#     invisible: you could not tell a squadron that had just arrived from one that was overwhelming.
-#     The bar now runs to 120, which puts 60 at the MIDDLE: left half is the sea still closing,
-#     right half is how far past the threshold the powers have gone.
-# ES: prueba en partida 19/9/2026 -- el umbral de mar abierto es exactamente 60 (gg_sea_open), asi
-#     que con una barra que terminaba en 60 se llenaba justo cuando el mar se abria y todo punto por
-#     encima quedaba invisible: no se distinguia una escuadra recien llegada de una aplastante.
-#     Ahora la barra llega a 120, que deja el 60 EN EL MEDIO: la mitad izquierda es el mar
-#     cerrandose, la derecha es cuanto se paso del umbral el sosten de las potencias.
-gg_sea_bar = {
-	name = "gg_sea_bar"
-	desc = "gg_sea_bar_desc"
-	second_desc = "gg_sea_bar_second_desc"
-	default_green = yes
-	start_value = 0
-	min_value = 0
-	max_value = 120
-}
-
+# EN: C10 (22/9/2026) -- the sea bar (0-120, threshold 60) is gone with the 60-point system. The
+#     siege bar counts consecutive months of a shut river: 24 starve the Defensa (12 from 1851).
+# ES: C10 -- la barra del mar (0-120, umbral 60) se fue con el sistema de 60 puntos. La barra del
+#     sitio cuenta meses seguidos de rio cerrado: 24 rinden por hambre a la Defensa (12 desde 1851).
 gg_siege_bar = {
 	name = "gg_siege_bar"
 	desc = "gg_siege_bar_desc"

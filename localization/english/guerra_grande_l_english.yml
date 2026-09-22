@@ -24,7 +24,7 @@
 
 # Buttons
  guerra_grande_foreign_intervention_button:0 "Call In the Squadrons"
- guerra_grande_foreign_intervention_button_desc:0 "Britain and France want the Paraná and the Uruguay open to their trade. Invite their squadrons in and every port of the Confederation is closed to commerce except our own - the blockade of 1845 to 1850, which the Argentines call the Paraná War. It cost them Vuelta de Obligado, and it ended with the powers acknowledging Rosas's sovereignty over his rivers anyway."
+ guerra_grande_foreign_intervention_button_desc:0 "Britain and France want the Paraná and the Uruguay open to their trade. Invite their squadrons in and every port of the Confederation is closed to commerce except our own - the blockade of 1845 to 1850, which the Argentines call the Paraná War. It cost them Vuelta de Obligado, and it ended with the powers acknowledging Rosas's sovereignty over his rivers anyway. Calling them asks London and Paris to lose patience sooner with Rosas's blockade."
  guerra_grande_italian_legion_button:0 "Raise the Italian Legion"
  guerra_grande_italian_legion_button_desc:0 "Montevideo is full of Italian exiles, and one of them is a sailor from Nice named Giuseppe Garibaldi. The city has a cheap lot of red shirts on its hands - work clothes meant for the saladeros across the river, which the blockade has left unsold. Put the legion in them."
  guerra_grande_requires_open_war:0 "The Guerra Grande must be under way"

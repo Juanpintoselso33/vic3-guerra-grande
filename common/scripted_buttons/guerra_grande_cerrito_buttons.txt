@@ -126,10 +126,17 @@ guerra_grande_river_blockade_button = {
 		#     guerra_grande_foreign_intervention_button, las escuadras anglo-francesas estan en el
 		#     rio, y despues de agosto de 1845 no quedaba escuadra argentina con que bloquear. Es
 		#     el unico boton del par que el otro bando puede sacar del tablero.
-		# EN/ES: T3b, FE-9 -- the sea must be shut and Rosas must be behind it
+		# EN/ES: C10 -- Rosas has to be able to shut the river: his bank, with its fort, and no
+		#     intervention on the water / Rosas tiene que poder cerrar el rio: su orilla, con fuerte, y
+		#     ninguna intervencion en el agua
 		custom_tooltip = {
 			text = guerra_grande_requires_river_unwatched
-			NOT = { gg_sea_open = yes }
+			gg_plata_ba_held_by_rosas = yes
+			gg_plata_ba_fort = yes
+			OR = {
+				NOT = { has_global_variable = gg_plata_intervention }
+				has_global_variable = gg_plata_intervention_over
+			}
 		}
 		custom_tooltip = {
 			text = guerra_grande_requires_rosas_backing
