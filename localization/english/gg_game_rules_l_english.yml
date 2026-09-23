@@ -1,5 +1,5 @@
 ﻿l_english:
- rule_gg_war_outcome:0 "End of the Guerra Grande"
+ rule_gg_war_outcome:0 "#blue_value GG#! End of the Guerra Grande"
  setting_gg_war_outcome_dynamic:0 "Dynamic"
  setting_gg_war_outcome_dynamic_desc:0 "The arbiter decides by score, endurance and the river, on the siege's calendar: either government may win."
  setting_gg_war_outcome_historical:0 "Historical"

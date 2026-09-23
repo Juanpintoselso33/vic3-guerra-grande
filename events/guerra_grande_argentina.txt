@@ -906,7 +906,10 @@ gg_argentina.67 = {
 			}
 		}
 		hidden_effect = { c:CER ?= { add_treasury = 10000 } }
-		ai_chance = { base = 85 }
+		ai_chance = {
+			base = 85
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.b|" # GG_TRAZA
@@ -1098,7 +1101,10 @@ gg_argentina.69 = {
 			}
 			gg_argentina_open_war = { TAG = CRR }
 		}
-		ai_chance = { base = 80 }
+		ai_chance = {
+			base = 80
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69.b|" # GG_TRAZA
@@ -3156,7 +3162,10 @@ gg_argentina.60 = {
 			name = gg_oribe_pretension
 			years = 20
 		}
-		ai_chance = { base = 90 }
+		ai_chance = {
+			base = 90
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	# EN/ES: recibirlo de militar y no decir nada de la presidencia / take him in as a soldier

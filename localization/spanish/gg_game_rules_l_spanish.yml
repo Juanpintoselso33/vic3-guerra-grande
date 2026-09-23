@@ -1,5 +1,5 @@
 ﻿l_spanish:
- rule_gg_war_outcome:0 "Final de la Guerra Grande"
+ rule_gg_war_outcome:0 "#blue_value GG#! Final de la Guerra Grande"
  setting_gg_war_outcome_dynamic:0 "Dinámico"
  setting_gg_war_outcome_dynamic_desc:0 "El árbitro decide por el puntaje, el aguante y el río, con el calendario del sitio: puede ganar cualquiera de los dos gobiernos."
  setting_gg_war_outcome_historical:0 "Histórico"

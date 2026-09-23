@@ -87,6 +87,7 @@ guerra_grande.1 = {
 			years = 10
 		}
 		ai_chance = {
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 50
 		}
 	}
@@ -257,6 +258,7 @@ guerra_grande.2 = {
 			years = 10
 		}
 		ai_chance = {
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 60
 		}
 	}

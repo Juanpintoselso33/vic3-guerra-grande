@@ -155,7 +155,10 @@ gg_plata.10 = {
 		# EN/ES: historical: the passports go back / lo historico: se devuelven los pasaportes
 		gg_plata_intervention_start = yes
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
-		ai_chance = { base = 80 }
+		ai_chance = {
+			base = 80
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {

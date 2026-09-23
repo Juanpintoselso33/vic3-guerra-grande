@@ -234,7 +234,10 @@ gg_powers.10 = {
 		c:URU ?= {
 			add_modifier = { name = gg_powers_specie_drain years = 3 is_decaying = yes }
 		}
-		ai_chance = { base = 60 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 }
@@ -319,7 +322,10 @@ gg_powers.11 = {
 		}
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		add_modifier = { name = gg_powers_american_cause years = 10 is_decaying = yes }
-		ai_chance = { base = 55 }
+		ai_chance = {
+			base = 55
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 
@@ -413,7 +419,10 @@ gg_powers.12 = {
 		# EN/ES: the table is ours for those 29 days / la mesa es nuestra esos 29 dias
 		gg_peace_chain_hold = yes
 		c:URU ?= { trigger_event = { id = gg_powers.13 days = 29 popup = yes } }
-		ai_chance = { base = 70 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -503,7 +512,10 @@ gg_powers.13 = {
 		# ES: lo historico: rechazar. Las potencias amenazan con irse, y empiezan a hacerlo.
 		gg_patron_change = { PATRON = francia DELTA = -15 }
 		gg_patron_change = { PATRON = britania DELTA = -15 }
-		ai_chance = { base = 70 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 }
@@ -543,7 +555,10 @@ gg_powers.14 = {
 		# EN: historical: no peace without Rosas, but six months of truce and cattle for the city.
 		# ES: lo historico: sin paz sin Rosas, pero seis meses de tregua y ganado para la ciudad.
 		c:URU ?= { trigger_event = { id = gg_powers.15 days = 5 popup = yes } }
-		ai_chance = { base = 65 }
+		ai_chance = {
+			base = 65
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -707,7 +722,10 @@ gg_powers.16 = {
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		gg_patron_change = { PATRON = britania DELTA = -10 }
-		ai_chance = { base = 65 }
+		ai_chance = {
+			base = 65
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -807,7 +825,10 @@ gg_powers.17 = {
 				40 = { gg_urquiza_flip = yes }
 			}
 		}
-		ai_chance = { base = 60 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -932,7 +953,10 @@ gg_powers.18 = {
 		c:URU ?= {
 			gg_endurance_change = { SIDE = defensa VALUE = -15 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
-		ai_chance = { base = 40 }
+		ai_chance = {
+			base = 40
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 
@@ -1266,7 +1290,10 @@ gg_powers.23 = {
 		# EN: historical: send Lucas Moreno to Urquiza and ask for terms (the arbiter ripens the Cerrito).
 		# ES: lo historico: mandar a Lucas Moreno ante Urquiza y pedir condiciones.
 		set_global_variable = gg_cerrito_negotiates
-		ai_chance = { base = 55 }
+		ai_chance = {
+			base = 55
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -1515,7 +1542,10 @@ gg_powers.28 = {
 				}
 			}
 		}
-		ai_chance = { base = 40 }
+		ai_chance = {
+			base = 40
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {

@@ -198,6 +198,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 50
 			# EN/ES: 23/9 -- the historical game rule takes the historical peace / la regla historica toma la paz historica
 			modifier = { trigger = { gg_outcome_historical = yes } add = 10000 }

@@ -52,7 +52,10 @@ gg_prewar.1 = {
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		gg_patron_change = { PATRON = francia DELTA = -5 }
 		gg_score_colorado = { AMOUNT = 1 }
-		ai_chance = { base = 65 }
+		ai_chance = {
+			base = 65
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -114,7 +117,10 @@ gg_prewar.2 = {
 		# ES: lo historico: neutralidad vigilada. Rivera consigue igual a los riograndenses en 1837:
 		#     la consecuencia cae en gg_rivera_1837_strength, que cuenta la frontera como abierta.
 		gg_patron_change = { PATRON = brasil DELTA = -3 }
-		ai_chance = { base = 50 }
+		ai_chance = {
+			base = 50
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -191,7 +197,10 @@ gg_prewar.3 = {
 		#     Ignacio Oribe ahora inclina para el lado blanco, que es lo que era.
 		gg_score_blanco = { AMOUNT = 2 }
 		gg_score_colorado = { AMOUNT = 1 }
-		ai_chance = { base = 55 }
+		ai_chance = {
+			base = 55
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -261,7 +270,10 @@ gg_prewar.4 = {
 		set_global_variable = gg_depts_state_chiefs
 		gg_score_blanco = { AMOUNT = 1 }
 		add_modifier = { name = gg_prewar_state_chiefs years = 5 is_decaying = yes }
-		ai_chance = { base = 60 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -433,7 +445,10 @@ gg_prewar.7 = {
 		# ES: lo historico: alinearse con Rosas y negar los puertos. Leblanc desarmara la flotilla.
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		gg_patron_change = { PATRON = francia DELTA = -15 }
-		ai_chance = { base = 60 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {
@@ -495,7 +510,10 @@ gg_prewar.9 = {
 		# ES: lo historico: Ignacio Oribe da batalla en Palmar y pierde la Republica.
 		# EN/ES: balance 2026-09-17 -- +3 -> +2: the fall of Oribe already counts this defeat / la caida ya la cuenta
 		gg_score_colorado = { AMOUNT = 2 }
-		ai_chance = { base = 50 }
+		ai_chance = {
+			base = 50
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	option = {

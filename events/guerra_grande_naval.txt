@@ -111,7 +111,10 @@ gg_naval.1 = {
 		hidden_effect = {
 			trigger_event = { id = gg_naval.2 days = 315 popup = yes }   # 1841.12.23
 		}
-		ai_chance = { base = 70 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	# EN: leave the river to Brown and keep the money. The port pays for it until the intervention
@@ -173,7 +176,10 @@ gg_naval.2 = {
 		hidden_effect = {
 			trigger_event = { id = gg_naval.3 days = 236 popup = yes }   # 1842.08.16
 		}
-		ai_chance = { base = 60 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
 	}
 
 	# EN: sell every hull and let the court martial clear or condemn Coe in peace. No expedition,
