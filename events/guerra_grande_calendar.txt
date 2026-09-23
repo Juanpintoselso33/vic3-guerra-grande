@@ -46,6 +46,7 @@ gg_cal.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.1|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_1
@@ -63,6 +64,7 @@ gg_cal.2 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.2|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_2
@@ -80,6 +82,7 @@ gg_cal.3 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.3|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_3
@@ -97,6 +100,7 @@ gg_cal.4 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.4|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_4
@@ -114,6 +118,7 @@ gg_cal.5 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.5|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_5
@@ -131,6 +136,7 @@ gg_cal.6 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.6|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_6
@@ -148,6 +154,7 @@ gg_cal.7 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.7|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_7
@@ -165,6 +172,7 @@ gg_cal.8 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.8|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_8
@@ -182,6 +190,7 @@ gg_cal.9 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.9|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_9
@@ -199,6 +208,7 @@ gg_cal.10 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.10|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_10
@@ -216,6 +226,7 @@ gg_cal.11 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.11|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_11
@@ -233,6 +244,7 @@ gg_cal.12 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.12|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: Codex review 2026-09-19 -- las bases Hood se caian para siempre si justo habia un menu de paz abierto, y con ellas el reintento del empate, que las pide
 			gg_cal_fire_if_table_free = {
@@ -251,6 +263,7 @@ gg_cal.13 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.13|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_13
@@ -268,6 +281,7 @@ gg_cal.14 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.14|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_14
@@ -285,6 +299,7 @@ gg_cal.15 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.15|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_15
@@ -302,6 +317,7 @@ gg_cal.16 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.16|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_16
@@ -319,6 +335,7 @@ gg_cal.17 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.17|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_17
@@ -336,6 +353,7 @@ gg_cal.18 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.18|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_18
@@ -353,6 +371,7 @@ gg_cal.19 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.19|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: Codex review 2026-09-19 -- lo mismo con Gore-Gros
 			gg_cal_fire_if_table_free = {
@@ -371,6 +390,7 @@ gg_cal.20 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.20|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_20
@@ -388,6 +408,7 @@ gg_cal.21 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.21|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_21
@@ -405,6 +426,7 @@ gg_cal.22 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.22|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_22
@@ -422,6 +444,7 @@ gg_cal.23 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.23|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_23
@@ -439,6 +462,7 @@ gg_cal.24 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.24|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_24
@@ -456,6 +480,7 @@ gg_cal.25 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.25|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_25
@@ -473,6 +498,7 @@ gg_cal.26 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.26|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_26
@@ -490,6 +516,7 @@ gg_cal.27 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.27|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_27
@@ -507,6 +534,7 @@ gg_cal.28 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.28|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_28
@@ -524,6 +552,7 @@ gg_cal.29 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.29|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_29
@@ -546,6 +575,7 @@ gg_cal.30 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.30|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_here = {
 				DONE = gg_cal_done_30
@@ -561,6 +591,7 @@ gg_cal.31 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.31|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_31
@@ -578,6 +609,7 @@ gg_cal.32 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.32|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_32
@@ -595,6 +627,7 @@ gg_cal.33 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.33|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire_quiet = {
 				DONE = gg_cal_done_33
@@ -612,6 +645,7 @@ gg_cal.34 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.34|" # GG_TRAZA
 		hidden_effect = {
 			gg_cal_fire = {
 				DONE = gg_cal_done_34

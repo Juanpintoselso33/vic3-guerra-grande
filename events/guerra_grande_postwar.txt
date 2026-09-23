@@ -14,6 +14,7 @@ gg_postwar.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.1|" # GG_TRAZA
 		# EN: the handover of 1852, when the Defensa's government survives the war: Suarez resigned
 		#     his command to Bernardo Berro, president of the Senate, on 15 February 1852, and Juan
 		#     Francisco Giro took office as constitutional president (Wikipedia ES, Joaquin Suarez).
@@ -125,6 +126,7 @@ gg_postwar.2 = {
 	duration = 12
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.2|" # GG_TRAZA
 		set_global_variable = gg_fusion_blocked
 		# EN/ES: punitive repudiation is one outcome, never debt-free plus inherited debt.
 		if = { limit = { has_modifier = guerra_grande_owes_nobody } remove_modifier = guerra_grande_owes_nobody }
@@ -138,6 +140,7 @@ gg_postwar.2 = {
 
 	# a -- let them pay / que paguen
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.2.a|" # GG_TRAZA
 		name = gg_postwar.2.a
 		default_option = yes
 		if = {
@@ -155,6 +158,7 @@ gg_postwar.2 = {
 
 	# b -- a late amnesty: the unrest eases, the army resents it / una amnistia tardia
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.2.b|" # GG_TRAZA
 		name = gg_postwar.2.b
 		add_treasury = -50000
 		every_scope_state = {
@@ -175,6 +179,7 @@ gg_postwar.2 = {
 #     cuenta es mayor.
 # -------------------------------------------------------------------------------------------------
 gg_postwar.3 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.3|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -204,6 +209,7 @@ gg_postwar.3 = {
 
 	# a -- both governments' debts / las deudas de los dos gobiernos
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.3.a|" # GG_TRAZA
 		name = gg_postwar.3.a
 		default_option = yes
 		add_modifier = { name = gg_postwar_shared_debts years = 15 is_decaying = yes }
@@ -218,6 +224,7 @@ gg_postwar.3 = {
 
 	# b -- only our own / solo las propias
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.3.b|" # GG_TRAZA
 		name = gg_postwar.3.b
 		if = {
 			limit = { has_variable = guerra_grande_cerrito_government }
@@ -273,6 +280,7 @@ gg_postwar.4 = {
 	duration = 12
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.4|" # GG_TRAZA
 		# EN/ES: T9 -- Garzon died on 1 December 1851 / Garzon murio el 1 de diciembre de 1851
 		every_scope_character = {
 			limit = { has_template = URU_gg_eugenio_garzon }
@@ -286,6 +294,7 @@ gg_postwar.4 = {
 
 	# a -- a compromise blanco (Giro) / un blanco de compromiso (Giro)
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.4.a|" # GG_TRAZA
 		name = gg_postwar.4.a
 		default_option = yes
 		set_ruling_interest_groups = { ig_landowners ig_intelligentsia }
@@ -304,6 +313,7 @@ gg_postwar.4 = {
 
 	# b -- the Defensa's candidate / el candidato de la Defensa
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.4.b|" # GG_TRAZA
 		name = gg_postwar.4.b
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
 		# EN/ES: 22/9/2026, decided with Juan -- the allies pressed Manuel Herrera y Obes's candidacy in
@@ -332,6 +342,7 @@ gg_postwar.4 = {
 
 	# c -- the countryside's candidate / el candidato de la campaña
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.4.c|" # GG_TRAZA
 		name = gg_postwar.4.c
 		set_ruling_interest_groups = { ig_landowners ig_rural_folk }
 		# EN/ES: 22/9/2026, decided with Juan -- Lavalleja, the countryside's vote in 1852; a dead man is
@@ -358,6 +369,7 @@ gg_postwar.4 = {
 #     despues de una paz sin vencidos, mas tarde y mas debiles.
 # -------------------------------------------------------------------------------------------------
 gg_postwar.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -387,6 +399,7 @@ gg_postwar.5 = {
 
 	# a -- let them into the government / dejarlos entrar al gobierno
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.5.a|" # GG_TRAZA
 		name = gg_postwar.5.a
 		default_option = yes
 		set_ruling_interest_groups = { ig_armed_forces ig_landowners }
@@ -404,6 +417,7 @@ gg_postwar.5 = {
 
 	# b -- keep them out / dejarlos afuera
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.5.b|" # GG_TRAZA
 		name = gg_postwar.5.b
 		if = {
 			limit = { has_global_variable = gg_postwar_caudillos_contained }
@@ -428,6 +442,7 @@ gg_postwar.5 = {
 #     el pais, si los caudillos la dejan. La bloquea una paz con castigo (FX-2).
 # -------------------------------------------------------------------------------------------------
 gg_postwar.6 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.6|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -450,6 +465,7 @@ gg_postwar.6 = {
 
 	# a -- adopt it / adoptarla
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.6.a|" # GG_TRAZA
 		name = gg_postwar.6.a
 		default_option = yes
 		add_modifier = { name = gg_postwar_fusion years = 10 is_decaying = yes }
@@ -460,6 +476,7 @@ gg_postwar.6 = {
 
 	# b -- keep the divisas / mantener las divisas
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.6.b|" # GG_TRAZA
 		name = gg_postwar.6.b
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_armed_forces }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
@@ -473,6 +490,7 @@ gg_postwar.7 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.7|" # GG_TRAZA
 		gg_ruler_set = { TEMPLATE = URU_gg_juan_francisco_giro }
 		trigger_event = { id = gg_rivera.5 days = 587 popup = yes }
 	}
@@ -486,6 +504,7 @@ gg_postwar.8 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.8|" # GG_TRAZA
 		if = {
 			limit = { year >= 1852 }
 			# EN/ES: only Suarez's historical interim may hand the office to Flores.
@@ -508,6 +527,7 @@ gg_postwar.9 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.9|" # GG_TRAZA
 		remove_global_variable = gg_president_railroad
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the election the four years promised
 		#     / la eleccion que prometian los cuatro anios

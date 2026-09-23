@@ -77,6 +77,7 @@ gg_loan.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.1.a|" # GG_TRAZA
 		name = gg_loan.1.a
 		custom_tooltip = gg_loan.1.a_tt2
 		# EN/ES: T4 -- FE-2: signing keeps France in the Plata / firmar sostiene a Francia
@@ -110,6 +111,7 @@ gg_loan.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.1.b|" # GG_TRAZA
 		name = gg_loan.1.b
 		# EN/ES: T4 -- FE-2: no convention, France pulls back / sin convenio, Francia se retira
 		gg_patron_change = { PATRON = francia DELTA = -10 }
@@ -124,6 +126,7 @@ gg_loan.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.1|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_20 } }
@@ -177,6 +180,7 @@ gg_loan.2 = {
 	# EN: sign with the Empire, and take the alliance with the money.
 	# ES: firmar con el Imperio, y tomar la alianza junto con la plata.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.a|" # GG_TRAZA
 		name = gg_loan.2.a
 		custom_tooltip = gg_loan.2.a_tt2
 		# EN/ES: T4 -- FE-1: the Empire as ally / el Imperio como aliado
@@ -212,6 +216,7 @@ gg_loan.2 = {
 	#     banker's price. ES: tomarla por la casa de Maua y mantener el nombre del Imperio
 	#     fuera del papel, al precio del banquero.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.b|" # GG_TRAZA
 		name = gg_loan.2.b
 		custom_tooltip = gg_loan.2.b_tt2
 		# EN/ES: T4 -- FE-1: through Souza's house, half the weight / por la casa de Souza, a medias
@@ -242,6 +247,7 @@ gg_loan.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.c|" # GG_TRAZA
 		name = gg_loan.2.c
 		add_modifier = {
 			name = guerra_grande_defensa_self_reliance
@@ -254,6 +260,7 @@ gg_loan.2 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_26 } }
@@ -309,6 +316,7 @@ gg_loan.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.3.a|" # GG_TRAZA
 		name = gg_loan.3.a
 		custom_tooltip = gg_loan.3.a_tt2
 		# EN/ES: T4 -- FE-5: Rosas's till / la caja de Rosas
@@ -358,6 +366,7 @@ gg_loan.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.3.b|" # GG_TRAZA
 		name = gg_loan.3.b
 		# EN/ES: T4 -- FE-5: the Buceo customs, the doctores' answer / la aduana del Buceo, la respuesta de los doctores
 		add_modifier = {
@@ -371,6 +380,7 @@ gg_loan.3 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.3|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_6 } }
@@ -446,6 +456,7 @@ gg_loan.4 = {
 	#     deshacer 1828. Aceptar convierte al Cerrito en parte de la Confederacion, subdito de
 	#     Buenos Aires, y pone el peso entero de Rosas detras suyo.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4.a|" # GG_TRAZA
 		name = gg_loan.4.a
 		# EN/ES: playtest 2026-09-19 -- a Republic folded back into the Confederation is exactly what
 		#     the federal governors of the Litoral fear / una Republica reincorporada a la
@@ -473,6 +484,7 @@ gg_loan.4 = {
 	# ES: ALIANZA. El ejercito y la plata de Rosas, y la Republica sigue siendo republica. Lo que
 	#     cuesta es la pretension de estar solo, que es lo unico que los blancos tenian.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4.d|" # GG_TRAZA
 		name = gg_loan.4.d
 		# EN/ES: T4 -- FE-6: Rosas's auxiliaries / los auxiliares de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
@@ -500,6 +512,7 @@ gg_loan.4 = {
 	# ES: LA COMISION. Lo que Oribe hizo de verdad: no dijo que no, lo mando a una comision de la
 	#     Asamblea y ahi quedo. No se gana ni se pierde nada, y la oferta no vuelve.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4.b|" # GG_TRAZA
 		name = gg_loan.4.b
 		add_modifier = { name = guerra_grande_commission_of_the_assembly years = 10 }
 		ai_chance = { base = 35 }
@@ -508,6 +521,7 @@ gg_loan.4 = {
 	# EN: REFUSAL. The Republic is a republic. Rosas' chest closes.
 	# ES: NEGATIVA. La Republica es una republica. Se cierra la caja de Rosas.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4.c|" # GG_TRAZA
 		name = gg_loan.4.c
 		# EN/ES: T4 -- FE-6: the Republic is a republic / la Republica es una republica
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
@@ -518,6 +532,7 @@ gg_loan.4 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_11 } }
@@ -551,6 +566,7 @@ gg_loan.4 = {
 #     representantes brasilenos administraba las finanzas de la Republica. Las mensualidades
 #     se cortaron en agosto de 1852, cuando las camaras brasilenas pusieron reparos politicos.
 gg_loan.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -589,6 +605,7 @@ gg_loan.5 = {
 	duration = 12
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.5.a|" # GG_TRAZA
 		name = gg_loan.5.a
 		default_option = yes
 		# EN: two instalments is the full 1851 settlement; one is a mortgage; none is a clean
@@ -659,6 +676,7 @@ gg_loan.5 = {
 	#     el papel cancela la hipoteca de la aduana -- y, si se firmo la alianza, termina la
 	#     proteccion que venia con ella. El canje es ese: reputacion por solvencia.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.5.b|" # GG_TRAZA
 		name = gg_loan.5.b
 		trigger = {
 			has_variable = gg_loan_debt
@@ -693,6 +711,7 @@ gg_loan.5 = {
 #     deudas que el Cerrito habia contraido. La guerra termino "sin vencidos ni vencedores", y
 #     con una cuenta.
 gg_loan.6 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.6|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -742,6 +761,7 @@ gg_loan.6 = {
 	duration = 12
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.6.a|" # GG_TRAZA
 		name = gg_loan.6.a
 		default_option = yes
 		if = {
@@ -783,6 +803,7 @@ gg_loan.6 = {
 	# ES: Caseros, 3 de febrero de 1852. El acreedor va en un barco ingles a Southampton. El
 	#     mismo canje que del otro lado de la muralla: se cae la hipoteca y se cae el amparo.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.6.b|" # GG_TRAZA
 		name = gg_loan.6.b
 		trigger = {
 			has_variable = gg_loan_debt
@@ -846,6 +867,7 @@ gg_loan.7 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.7|" # GG_TRAZA
 		if = {
 			limit = {
 				# EN/ES: T1, C14 -- a signed peace or a failed war, not any closing of open_war.

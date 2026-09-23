@@ -5,13 +5,14 @@
 gg_international.1 = {
 	type = country_event
 	hidden = yes
-	immediate = { gg_international_ensure = yes }
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.1|"  gg_international_ensure = yes }
 }
 
 # EN: Counterfactual cabinet proposal, not a dated historical loan. Amounts are game balance.
 # ES: Propuesta contrafactual de gabinete, no un prestamo historico fechado. Montos de balance.
 # SOURCE / FUENTE: SOURCES_loans.md, sections 3 and 4: support for Oribe and limits of evidence.
 gg_international.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_international.2.t
@@ -21,6 +22,7 @@ gg_international.2 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.2.a|" # GG_TRAZA
 		name = gg_international.2.a
 		trigger = { gg_int_arg_can_accept = yes }
 		gg_int_arg_accept = yes
@@ -30,6 +32,7 @@ gg_international.2 = {
 		}
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.2.b|" # GG_TRAZA
 		name = gg_international.2.b
 		default_option = yes
 		gg_int_arg_decline = yes
@@ -43,6 +46,7 @@ gg_international.2 = {
 # ES: la remesa a Oribe sale del journal del Pacto: a un Rosas jugador se le pregunta por evento cuando puede
 #     mandarla (.10), y cuando las provincias se fueron despues de pagar (.11). La IA decide como antes.
 gg_international.10 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.10|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_international.10.t
@@ -54,11 +58,13 @@ gg_international.10 = {
 	is_popup = yes
 	trigger = { has_variable = gg_arg_rosas_seat }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.10.a|" # GG_TRAZA
 		name = gg_international.10.a
 		trigger = { gg_int_arg_can_offer = yes }
 		gg_int_arg_offer = yes
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.10.b|" # GG_TRAZA
 		name = gg_international.10.b
 		default_option = yes
 		custom_tooltip = gg_international.10.b_tt
@@ -67,6 +73,7 @@ gg_international.10 = {
 }
 
 gg_international.11 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.11|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_international.11.t
@@ -78,10 +85,12 @@ gg_international.11 = {
 	is_popup = yes
 	trigger = { has_variable = gg_arg_rosas_seat }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.11.a|" # GG_TRAZA
 		name = gg_international.11.a
 		gg_int_arg_withdraw = yes
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_international.11.b|" # GG_TRAZA
 		name = gg_international.11.b
 		default_option = yes
 		custom_tooltip = gg_international.11.b_tt

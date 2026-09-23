@@ -6,5 +6,5 @@ on_monthly_pulse_country = {
 
 gg_retired_political_lock_cleanup = {
 	trigger = { has_modifier = gg_rosas_provisional_lock }
-	effect = { remove_modifier = gg_rosas_provisional_lock }
+	effect = { debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_retired_political_lock_cleanup"  remove_modifier = gg_rosas_provisional_lock }
 }

@@ -13,6 +13,7 @@ gg_powers.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.1|" # GG_TRAZA
 		gg_patron_change = { PATRON = francia DELTA = -20 }
 		gg_patron_change = { PATRON = britania DELTA = -20 }
 	}
@@ -26,6 +27,7 @@ gg_powers.2 = {
 	# EN/ES: review -- no split requirement: a delayed partition must not lose it
 	#     / sin exigir la particion: una particion atrasada no puede perderlo
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.2|" # GG_TRAZA
 		# EN/ES: balance, first playtest 2026-09-17: the sea was historically open from the start of
 		#     the siege (the French station, Purvis). 20 here plus Purvis's 15 opens it in 1843.
 		#     / balance: el mar estuvo abierto desde el comienzo del sitio; 20 aca mas 15 de Purvis.
@@ -58,6 +60,7 @@ gg_powers.3 = {
 		gg_plata_intervention_at_any = { MONTHS = 2 }
 	}
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.3|" # GG_TRAZA
 		gg_patron_change = { PATRON = francia DELTA = 30 }
 		# EN/ES: 22/9/2026 -- not when France intervenes alone / no cuando Francia interviene sola
 		if = {
@@ -106,6 +109,7 @@ gg_powers.4 = {
 	hidden = yes
 	trigger = { has_global_variable = guerra_grande_split_done }
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.4|" # GG_TRAZA
 		if = {
 			limit = { has_global_variable = gg_french_convention }
 			gg_patron_change = { PATRON = francia DELTA = -5 }
@@ -138,6 +142,7 @@ gg_powers.5 = {
 	NOT = { exists = s:STATE_ENTRE_RIOS }
 	}
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.5|" # GG_TRAZA
 		if = {
 			limit = { has_global_variable = gg_brazil_deal }
 			gg_patron_change = { PATRON = brasil DELTA = 20 }
@@ -184,6 +189,7 @@ gg_powers.10 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.10|" # GG_TRAZA
 		# EN/ES: Purvis refuses to recognise the blockade whatever the Cerrito answers (historical).
 		#     / Purvis no reconoce el bloqueo conteste lo que conteste el Cerrito.
 		gg_patron_change = { PATRON = britania DELTA = 20 }
@@ -206,6 +212,7 @@ gg_powers.10 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.10.a|" # GG_TRAZA
 		name = gg_powers.10.a
 		custom_tooltip = gg_powers.10.a_tt
 		default_option = yes
@@ -220,6 +227,7 @@ gg_powers.10 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.10.b|" # GG_TRAZA
 		name = gg_powers.10.b
 		# EN: historical: open trade with the city to drain its specie; the sea stays open.
 		# ES: lo historico: comercio abierto con la ciudad para sacarle el metalico; el mar queda abierto.
@@ -257,6 +265,7 @@ gg_powers.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.11.a|" # GG_TRAZA
 		name = gg_powers.11.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the squadron stays off the port /
 		#     la barra tiene que moverse durante la guerra: la escuadra queda frente al puerto
@@ -270,6 +279,7 @@ gg_powers.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.11.b|" # GG_TRAZA
 		name = gg_powers.11.b
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: with no squadron, the river is the city's again /
 		#     la barra tiene que moverse durante la guerra: sin escuadra, el rio vuelve a ser de la ciudad
@@ -314,6 +324,7 @@ gg_powers.11 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.11|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_10 } }
@@ -382,6 +393,7 @@ gg_powers.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.12.a|" # GG_TRAZA
 		name = gg_powers.12.a
 		custom_tooltip = gg_powers.12.a_tt
 		trigger = {
@@ -405,6 +417,7 @@ gg_powers.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.12.b|" # GG_TRAZA
 		name = gg_powers.12.b
 		custom_tooltip = gg_powers.12.b_tt2
 		trigger = {
@@ -426,6 +439,7 @@ gg_powers.12 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.12|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_12 } }
@@ -437,6 +451,7 @@ gg_powers.12 = {
 
 # F3-2b - the Hood bases reach the Defensa
 gg_powers.13 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.13|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -461,6 +476,7 @@ gg_powers.13 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.13.a|" # GG_TRAZA
 		name = gg_powers.13.a
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.13.a_tt
@@ -472,6 +488,7 @@ gg_powers.13 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.13.b|" # GG_TRAZA
 		name = gg_powers.13.b
 		gg_peace_chain_clear = yes
 		default_option = yes
@@ -512,6 +529,7 @@ gg_powers.14 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.14.a|" # GG_TRAZA
 		name = gg_powers.14.a
 		custom_tooltip = gg_powers.14.a_tt
 		default_option = yes
@@ -522,6 +540,7 @@ gg_powers.14 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.14.b|" # GG_TRAZA
 		name = gg_powers.14.b
 		# EN: offer nothing: Rosas is pleased.
 		# ES: no ofrecer nada: Rosas lo agradece.
@@ -531,6 +550,7 @@ gg_powers.14 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.14|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_15 } }
@@ -542,6 +562,7 @@ gg_powers.14 = {
 
 # F3-3b - the truce offer reaches the Defensa
 gg_powers.15 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -564,6 +585,7 @@ gg_powers.15 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15.a|" # GG_TRAZA
 		name = gg_powers.15.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the truce freezes the siege with the countryside in the Cerrito's hands /
 		#     la barra tiene que moverse durante la guerra: la tregua congela el sitio con la campania en manos del Cerrito
@@ -581,6 +603,7 @@ gg_powers.15 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15.b|" # GG_TRAZA
 		name = gg_powers.15.b
 		# EN: refuse: nothing stops, and Howden sails for Rio anyway.
 		# ES: rechazar: no se frena nada, y Howden se va a Rio igual.
@@ -624,6 +647,7 @@ gg_powers.16 = {
 	#     por el asesinato de Varela es lo que hizo la Defensa; el campamento responde cerrando filas
 	#     con el, y eso se ve en el journal de la intervencion.
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16|" # GG_TRAZA
 		gg_peace_chain_hold = yes
 		if = {
 			limit = { has_global_variable = gg_varela_blamed }
@@ -638,6 +662,7 @@ gg_powers.16 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.a|" # GG_TRAZA
 		name = gg_powers.16.a
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.16.a_tt
@@ -659,6 +684,7 @@ gg_powers.16 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.b|" # GG_TRAZA
 		name = gg_powers.16.b
 		gg_peace_chain_clear = yes
 		default_option = yes
@@ -671,6 +697,7 @@ gg_powers.16 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.c|" # GG_TRAZA
 		name = gg_powers.16.c
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.16.c_tt2
@@ -728,6 +755,7 @@ gg_powers.17 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.17.a|" # GG_TRAZA
 		name = gg_powers.17.a
 		default_option = yes
 		# EN: offer Urquiza the alliance after Alcaraz. Whether Rosas lets him go depends on how strong
@@ -769,6 +797,7 @@ gg_powers.17 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.17.b|" # GG_TRAZA
 		name = gg_powers.17.b
 		# EN: do not risk it. Alcaraz was Urquiza's own peace and nobody answered it: he notices.
 		# ES: no arriesgar. Alcaraz fue la paz del propio Urquiza y nadie la contesto: se nota.
@@ -779,6 +808,7 @@ gg_powers.17 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.17|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_14 } }
@@ -813,6 +843,7 @@ gg_powers.18 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.18.a|" # GG_TRAZA
 		name = gg_powers.18.a
 		custom_tooltip = gg_powers.18.a_tt
 		# EN: keep Garibaldi's men, let the Basques go.
@@ -832,6 +863,7 @@ gg_powers.18 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.18.b|" # GG_TRAZA
 		name = gg_powers.18.b
 		custom_tooltip = gg_powers.18.b_tt
 		# EN: keep the Basques, let Garibaldi go.
@@ -863,6 +895,7 @@ gg_powers.18 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.18.c|" # GG_TRAZA
 		name = gg_powers.18.c
 		custom_tooltip = gg_powers.18.c_tt
 		default_option = yes
@@ -899,6 +932,7 @@ gg_powers.18 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.18|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_21 } }
@@ -933,6 +967,7 @@ gg_powers.19 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19|" # GG_TRAZA
 		gg_patron_change = { PATRON = britania DELTA = -100 }
 		# EN: C10, A -- article 1: Britain returns the Argentine warships and evacuates Martin Garcia,
 		#     and recognises Rosas's right to blockade (SOURCES_powers.md section 6). The key goes back.
@@ -960,6 +995,7 @@ gg_powers.19 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.a|" # GG_TRAZA
 		name = gg_powers.19.a
 		custom_tooltip = gg_powers.19.a_tt2
 		default_option = yes
@@ -981,6 +1017,7 @@ gg_powers.19 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.b|" # GG_TRAZA
 		name = gg_powers.19.b
 		custom_tooltip = gg_powers.19.b_tt2
 		# EN: look for Brazil (Lamas): Brazil rises early, the treaties will be the price. Cheaper with Herrera.
@@ -997,6 +1034,7 @@ gg_powers.19 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.c|" # GG_TRAZA
 		name = gg_powers.19.c
 		# EN: hold on alone: pride, and no patron.
 		# ES: aguantar solos: orgullo, y ningun padrino.
@@ -1022,6 +1060,7 @@ gg_powers.20 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.20|" # GG_TRAZA
 		# EN/ES: C10 -- France settles too: the intervention is over and its ships go home
 		#     / Francia tambien arregla: se termina la intervencion y sus barcos vuelven
 		set_global_variable = gg_plata_intervention_over
@@ -1078,6 +1117,7 @@ gg_powers.21 = {
 	# ES: el subsidio no lo corto Francia: la Asamblea lo voto siempre por goleada. Lo renuncio
 	#     Montevideo el 29 de mayo de 1851, por Pacheco y Obes y Ellauri, como jugada politica.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.21.a|" # GG_TRAZA
 		name = gg_powers.21.a
 		default_option = yes
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- renouncing it ends it: the French
@@ -1120,6 +1160,7 @@ gg_powers.21 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.21.b|" # GG_TRAZA
 		name = gg_powers.21.b
 		custom_tooltip = gg_powers.21.b_tt2
 		# EN/ES: keep drawing it, and keep paying for it in concessions / seguir cobrandolo y pagarlo en concesiones
@@ -1131,6 +1172,7 @@ gg_powers.21 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.21|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_27 } }
@@ -1160,6 +1202,7 @@ gg_powers.22 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.22|" # GG_TRAZA
 		# EN/ES: C25 -- Urquiza's pronouncement (1 May 1851), if Brazil is strong enough behind the Defensa
 		gg_urquiza_flip = yes
 		hidden_effect = {
@@ -1173,6 +1216,7 @@ gg_powers.22 = {
 
 # F4-3b - the oribista chiefs go over: the Cerrito answers (1851)
 gg_powers.23 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1194,6 +1238,7 @@ gg_powers.23 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23.a|" # GG_TRAZA
 		name = gg_powers.23.a
 		# EN: fight with what is left (Ignacio Oribe): the army may melt.
 		# ES: pelear con lo que queda (Ignacio Oribe): el ejercito puede deshacerse.
@@ -1219,6 +1264,7 @@ gg_powers.23 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23.b|" # GG_TRAZA
 		name = gg_powers.23.b
 		custom_tooltip = gg_powers.23.b_tt
 		default_option = yes
@@ -1229,6 +1275,7 @@ gg_powers.23 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23.c|" # GG_TRAZA
 		name = gg_powers.23.c
 		custom_tooltip = gg_powers.23.c_tt
 		# EN: ask for a naval guarantee to leave with the Argentine troops (exit S12): the Cerrito
@@ -1264,6 +1311,7 @@ gg_powers.25 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.25.a|" # GG_TRAZA
 		name = gg_powers.25.a
 		default_option = yes
 		# EN: show it to the powers: they soften towards the Cerrito.
@@ -1274,6 +1322,7 @@ gg_powers.25 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.25.b|" # GG_TRAZA
 		name = gg_powers.25.b
 		# EN: show it to Rosas as proof of American loyalty.
 		# ES: mostrarlo ante Rosas como prueba de lealtad americana.
@@ -1283,6 +1332,7 @@ gg_powers.25 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.25|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_9 } }
@@ -1315,6 +1365,7 @@ gg_powers.26 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.26.a|" # GG_TRAZA
 		name = gg_powers.26.a
 		custom_tooltip = gg_powers.26.a_tt2
 		default_option = yes
@@ -1326,6 +1377,7 @@ gg_powers.26 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.26.b|" # GG_TRAZA
 		name = gg_powers.26.b
 		# EN: investigate without accusing: the Defensa's own house grows tense.
 		# ES: investigar sin acusar: la interna de la Defensa se tensa.
@@ -1335,6 +1387,7 @@ gg_powers.26 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.26|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_18 } }
@@ -1354,6 +1407,7 @@ gg_powers.27 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.27|" # GG_TRAZA
 		# EN/ES: the side that is behind receives it / lo recibe el que va abajo
 		if = {
 			limit = { guerra_grande_blanco_lead >= 0 }
@@ -1395,12 +1449,14 @@ gg_powers.28 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28|" # GG_TRAZA
 		# EN/ES: this popup can sit open for years; the arbiter waits / este popup puede quedar
 		#     abierto anios; el arbitro espera
 		gg_peace_chain_hold = yes
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28.a|" # GG_TRAZA
 		name = gg_powers.28.a
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.28.a_tt
@@ -1444,6 +1500,7 @@ gg_powers.28 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28.b|" # GG_TRAZA
 		name = gg_powers.28.b
 		gg_peace_chain_clear = yes
 		# EN: respect the ceasefire: both sides tire.
@@ -1488,6 +1545,7 @@ gg_powers.29 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.29.a|" # GG_TRAZA
 		name = gg_powers.29.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: a city that does not fall is the Defensa's best propaganda /
 		#     la barra tiene que moverse durante la guerra: la ciudad que no cae es la mejor propaganda de la Defensa
@@ -1501,6 +1559,7 @@ gg_powers.29 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.29.b|" # GG_TRAZA
 		name = gg_powers.29.b
 		# EN: keep it: the money stays in the city.
 		# ES: guardarlo: la plata queda en la ciudad.
@@ -1510,6 +1569,7 @@ gg_powers.29 = {
 
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.29|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_24 } }
@@ -1532,6 +1592,7 @@ gg_powers.30 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.30|" # GG_TRAZA
 		if = {
 			limit = { c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
 			c:URU ?= { trigger_event = { id = gg_powers.31 popup = yes } }
@@ -1550,6 +1611,7 @@ gg_powers.30 = {
 
 # F0-8b - the Universidad Mayor opens (18 July 1849)
 gg_powers.31 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.31|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1574,6 +1636,7 @@ gg_powers.31 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.31.a|" # GG_TRAZA
 		name = gg_powers.31.a
 		default_option = yes
 		# EN: inaugurate it with ceremony: prestige for whoever holds the city; the doctores for the Cerrito.
@@ -1583,6 +1646,7 @@ gg_powers.31 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.31.b|" # GG_TRAZA
 		name = gg_powers.31.b
 		# EN: open it quietly: less prestige, the money goes to the walls.
 		# ES: abrirla sin ceremonia: menos prestigio, la plata va a la muralla.
@@ -1628,6 +1692,7 @@ gg_powers.32 = {
 	#     a Rio con cualquiera de las dos respuestas; el descuento lee esto, no el compromiso, que es
 	#     una sola de las dos
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.32|" # GG_TRAZA
 		set_global_variable = gg_lamas_in_rio
 		# EN/ES: playtest 2026-09-19 -- the Rio mission worked on Urquiza as much as on the Empire
 		#     / la mision de Rio trabajo tanto al Imperio como a Urquiza
@@ -1641,6 +1706,7 @@ gg_powers.32 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.32.a|" # GG_TRAZA
 		name = gg_powers.32.a
 		custom_tooltip = gg_imperial_pledge_tt
 		set_global_variable = gg_imperial_pledged
@@ -1659,6 +1725,7 @@ gg_powers.32 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.32.b|" # GG_TRAZA
 		name = gg_powers.32.b
 		default_option = yes
 		add_loyalists = {

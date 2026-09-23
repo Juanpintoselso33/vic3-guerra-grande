@@ -4,6 +4,7 @@
 # ES: BLANCOS Y COLORADOS como situacion local: que movio la balanza el mes pasado, por fuente, y los
 #     efectos moderados de cada fase.
 gg_war_sources_reset = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_sources_reset|" # GG_TRAZA
 	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
 	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
 	set_global_variable = { name = gg_src_last_decisions_blanco value = 0 }
@@ -15,6 +16,7 @@ gg_war_sources_reset = {
 }
 # EN/ES: once a month: this month becomes last month / una vez por mes: este mes pasa a ser el pasado
 gg_war_sources_rollover = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_sources_rollover|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_src_decisions_blanco } }
 		gg_war_sources_reset = yes
@@ -38,6 +40,7 @@ gg_war_sources_rollover = {
 # EN: the phases' own effects (Juan: moderate), two months and renewed, so they fall by themselves.
 # ES: los efectos de cada fase, dos meses y renovados, asi caen solos.
 gg_war_phase_effects = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_phase_effects|" # GG_TRAZA
 	if = {
 		limit = { gg_war_phase = 1 }
 		c:URU ?= { add_modifier = { name = gg_war_phase_revolution months = 2 } }
@@ -78,6 +81,7 @@ gg_war_phase_effects = {
 # ES: S19: el journal de la guerra se abre en 1836 solo con el Uruguay y nunca se entero del Cerrito,
 #     asi que las batallas despues de la particion no puntuaban. Mismo patron que gg_international_sync.
 gg_war_journal_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_journal_sync|" # GG_TRAZA
 	scope:journal_entry ?= {
 		every_country = {
 			limit = {
@@ -99,6 +103,7 @@ gg_war_journal_sync = {
 # ES: esconde lo que el motor dibuja solo en un journal (variables del CMF, en el playset), para que el
 #     journal muestre solo sus widgets, como Gates of the Bosphorus.
 gg_journal_hide_engine_parts = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_journal_hide_engine_parts|" # GG_TRAZA
 	scope:journal_entry ?= {
 		set_variable = com_hide_status_desc
 		set_variable = com_hide_journal_reason

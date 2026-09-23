@@ -47,6 +47,7 @@ gg_abolition.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.1|" # GG_TRAZA
 		hidden_effect = {
 			# EN: 1842.12.12 -- only if the defeat that produced the law already happened, or if this
 			#     run has no Arroyo Grande at all (gg_partition_delayed). Otherwise Arroyo Grande
@@ -81,6 +82,7 @@ gg_abolition.1 = {
 # army. Around 1,800 libertos form the line battalions that the garrison's own commanders
 # consider the only real soldiers on the walls (Etchechury 2017, note 28, on Borucki 2015).
 gg_abolition.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -139,6 +141,7 @@ gg_abolition.2 = {
 
 	# The decree as it was written: freedom in article 1, the army in article 2.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.2.a|" # GG_TRAZA
 		name = gg_abolition.2.a
 		default_option = yes
 		set_variable = guerra_grande_abolition_settled
@@ -203,6 +206,7 @@ gg_abolition.2 = {
 	#     pesos al duenio por cada uno, y el hombre libre en el acto con cuatro anios por delante.
 	#     No alcanzo a juntar hombres, y por eso vino la ley de diciembre.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.2.b|" # GG_TRAZA
 		name = gg_abolition.2.b
 		set_variable = guerra_grande_abolition_settled
 		gg_select_formation_hq_state = yes
@@ -233,6 +237,7 @@ gg_abolition.2 = {
 
 	# Property before men: the ranks stay empty and the owners stay loyal.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.2.c|" # GG_TRAZA
 		name = gg_abolition.2.c
 		set_variable = guerra_grande_abolition_settled
 		ig:ig_landowners ?= {
@@ -290,6 +295,7 @@ gg_abolition.3 = {
 	# ES: el espejo de la opcion a de la Defensa, punto por punto. Ningun gobierno puede llegar a
 	#     un techo que el otro no alcance: misma ley, los mismos dos batallones, la misma cuenta.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.3.a|" # GG_TRAZA
 		name = gg_abolition.3.a
 		# EN/ES: T4 -- FE-4: the Cerrito's decree, a doctores' act / el decreto del Cerrito, un acto de los doctores
 		default_option = yes
@@ -342,6 +348,7 @@ gg_abolition.3 = {
 
 	# The Cerrito had its own levies before the decree: men taken and paid for, one at a time.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.3.b|" # GG_TRAZA
 		name = gg_abolition.3.b
 		set_variable = guerra_grande_abolition_settled
 		gg_select_formation_hq_state = yes
@@ -371,6 +378,7 @@ gg_abolition.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.3.c|" # GG_TRAZA
 		name = gg_abolition.3.c
 		set_variable = guerra_grande_abolition_settled
 		ig:ig_landowners ?= {
@@ -395,6 +403,7 @@ gg_abolition.3 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.3|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_13 } }
@@ -422,6 +431,7 @@ gg_abolition.3 = {
 #     servian en su ejercito: una negativa que fue endureciendo la relacion con Rio de Janeiro
 #     hasta 1851.
 gg_abolition.4 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.4|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -465,6 +475,7 @@ gg_abolition.4 = {
 	# "El negro paso de cosa a hombre porque podia cambiarsele esa condicion; y sin gran
 	# injusticia no puede volver al estado de esclavitud." Free soil, and the Empire's enmity.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.4.a|" # GG_TRAZA
 		name = gg_abolition.4.a
 		# EN/ES: T4 -- FE-4: free soil sours Rio / el suelo libre agria a Rio
 		gg_patron_change = { PATRON = brasil DELTA = -5 }
@@ -489,6 +500,7 @@ gg_abolition.4 = {
 
 	# Hand them back, the way the Siete de Abril did. The Empire is placated; the decree is a lie.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition.4.b|" # GG_TRAZA
 		name = gg_abolition.4.b
 		# EN/ES: T4 -- FE-4: returning them buys the Empire / devolverlos compra al Imperio
 		gg_patron_change = { PATRON = brasil DELTA = 10 }

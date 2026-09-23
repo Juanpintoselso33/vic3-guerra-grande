@@ -8,6 +8,7 @@ gg_corrientes_recovery_on_war_end = {
 		}
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_corrientes_recovery_on_war_end" # GG_TRAZA
 		set_global_variable = { name = gg_corrientes_recovery days = 730 }
 	}
 }

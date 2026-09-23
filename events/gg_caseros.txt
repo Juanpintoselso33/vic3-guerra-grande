@@ -22,6 +22,7 @@ gg_caseros.1 = {
 		c:ARG ?= this
 	}
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.1|" # GG_TRAZA
 		change_global_variable = { name = gg_caseros_months add = 1 }
 		# (b) manoeuvre / maniobrar
 		if = {
@@ -108,6 +109,7 @@ gg_caseros.1 = {
 
 # EN/ES: to Entre Rios's player -- what Rosas chose / al jugador de Entre Rios: lo que eligio Rosas
 gg_caseros.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_caseros.2.t
@@ -130,6 +132,7 @@ gg_caseros.2 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.2.a|" # GG_TRAZA
 		name = gg_caseros.2.a
 		default_option = yes
 	}
@@ -137,6 +140,7 @@ gg_caseros.2 = {
 
 # EN/ES: the siege of Buenos Aires is over / termino el sitio de Buenos Aires
 gg_caseros.3 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.3|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_caseros.3.t
@@ -146,6 +150,7 @@ gg_caseros.3 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.3.a|" # GG_TRAZA
 		name = gg_caseros.3.a
 		default_option = yes
 	}
@@ -153,6 +158,7 @@ gg_caseros.3 = {
 
 # EN/ES: to Entre Rios's player -- no victor / al jugador de Entre Rios: sin vencedor
 gg_caseros.4 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.4|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.85.t
@@ -173,6 +179,7 @@ gg_caseros.4 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.4.a|" # GG_TRAZA
 		name = gg_caseros.4.a
 		default_option = yes
 	}
@@ -180,6 +187,7 @@ gg_caseros.4 = {
 
 # EN/ES: to Entre Rios's player -- Urquiza's victory / al jugador de Entre Rios: la victoria de Urquiza
 gg_caseros.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.83.t
@@ -202,6 +210,7 @@ gg_caseros.5 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.5.a|" # GG_TRAZA
 		name = gg_caseros.5.a
 		default_option = yes
 	}

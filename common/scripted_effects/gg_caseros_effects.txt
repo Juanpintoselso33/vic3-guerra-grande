@@ -3,6 +3,7 @@
 #     events. Only players: the AI does not read.
 # ES: Avisarle al jugador de Entre Rios lo que paso en Caseros; Buenos Aires tiene sus propios eventos.
 gg_caseros_notify_urquiza = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_notify_urquiza| EVENT= $EVENT$ " # GG_TRAZA
 	c:ENR ?= {
 		if = {
 			limit = { is_player = yes }

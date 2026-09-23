@@ -109,6 +109,7 @@ gg_peace.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1|" # GG_TRAZA
 		hidden_effect = {
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
@@ -151,6 +152,7 @@ gg_peace.1 = {
 	#     de la deuda de guerra del Cerrito. A Oribe no lo desterraron: una comision de ciudadanos
 	#     le pidio garantias a Urquiza, Urquiza las dio, y se quedo en su quinta hasta 1857.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.a|" # GG_TRAZA
 		name = gg_peace.1.a
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
@@ -225,6 +227,7 @@ gg_peace.1 = {
 	#     1842, y Eduardo Acevedo lo marca como "una diferencia notable" con lo que impuso Urquiza de
 	#     este lado. Esta opcion es esa diferencia, tomada aca.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.b|" # GG_TRAZA
 		name = gg_peace.1.b
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
@@ -309,6 +312,7 @@ gg_peace.1 = {
 	#     gobierno oriental quemo los tratados en una plaza, y en febrero de 1865 el siguiente los
 	#     restablecio.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.c|" # GG_TRAZA
 		name = gg_peace.1.c
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
@@ -388,6 +392,7 @@ gg_peace.1 = {
 	#     respaldo del embajador frances en Rio. A todos les dijeron que no, y por eso esta opcion no
 	#     se resuelve aca: se resuelve en gg_peace.3.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.d|" # GG_TRAZA
 		name = gg_peace.1.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
@@ -447,6 +452,7 @@ gg_peace.1 = {
 	#     Uruguay, el Brasil, Entre Rios y Corrientes; al Uruguay le tocaba una division de dos mil
 	#     hombres. Rosas cayo en Caseros el 3 de febrero de 1852.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.e|" # GG_TRAZA
 		name = gg_peace.1.e
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
@@ -505,6 +511,7 @@ gg_peace.1 = {
 	# ES: g -- T8, FE-13. VASALLO DEL IMPERIO. La mision de Lamas pagada con lo que los cinco
 	#     tratados solo insinuaban: el Imperio garantiza la Republica teniendola.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.g|" # GG_TRAZA
 		name = gg_peace.1.g
 		trigger = { has_global_variable = gg_imperial_pledged }
 		set_global_variable = gg_peace_settled
@@ -555,6 +562,7 @@ gg_peace.1 = {
 	#     subdito del Brasil), y la incorporacion queda a la accion de anexion de vanilla. Sin
 	#     reversion propia del mod.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.h|" # GG_TRAZA
 		name = gg_peace.1.h
 		trigger = {
 			has_global_variable = gg_imperial_pledged
@@ -625,6 +633,7 @@ gg_peace.1 = {
 	#     sitiadores y sitiados se miraron sin tirar un tiro, esperando un voto de la Asamblea
 	#     Nacional de Francia. La oferta vuelve en dos anios, como volvio.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.f|" # GG_TRAZA
 		name = gg_peace.1.f
 		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
@@ -739,6 +748,7 @@ gg_peace.2 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2|" # GG_TRAZA
 		hidden_effect = {
 			random_country = {
 				limit = { has_variable = guerra_grande_defensa_government }
@@ -759,6 +769,7 @@ gg_peace.2 = {
 	#     sus batallones orientales quedaran bajo su mando hasta la eleccion. Ganar es que le
 	#     acepten el pliego entero.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.a|" # GG_TRAZA
 		name = gg_peace.2.a
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
@@ -824,6 +835,7 @@ gg_peace.2 = {
 	#     decreto de los de la ciudad es nulo, incluidos los que tomaron bienes, y las legiones
 	#     extranjeras se van.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.b|" # GG_TRAZA
 		name = gg_peace.2.b
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
@@ -915,6 +927,7 @@ gg_peace.2 = {
 	#     del Restaurador ROSAS. Falta ahora que la de Montevideo vea cumplirse los mios." Esa
 	#     leyenda es propaganda colorada y este archivo lo dice; el parte a Rosas no lo es.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.c|" # GG_TRAZA
 		name = gg_peace.2.c
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
@@ -1009,6 +1022,7 @@ gg_peace.2 = {
 	#     tratado de comercio britanico en 1835-36 antes que cambiar soberania por un emprestito. El
 	#     juego deja tomar la decision que el hombre no tomo. No afirma que la quisiera.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.d|" # GG_TRAZA
 		name = gg_peace.2.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
@@ -1093,6 +1107,7 @@ gg_peace.2 = {
 	#     bajo vigilancia y lo amenazo con fusilarlo en el acto antes que dejar llegar las ordenes de
 	#     Rosas a la division argentina. Esto es la clientela sin esa segunda mitad.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.e|" # GG_TRAZA
 		name = gg_peace.2.e
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
@@ -1163,6 +1178,7 @@ gg_peace.2 = {
 	#     causa federal, asi que entra directo, con una autonomia de Provincia Oriental en sus
 	#     estados. Es el fin de la Republica. No hay documento que muestre que Oribe lo quisiera.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.g|" # GG_TRAZA
 		name = gg_peace.2.g
 		trigger = {
 			has_global_variable = gg_reunification_pledged
@@ -1216,6 +1232,7 @@ gg_peace.2 = {
 	#     nunca un asalto, y por que no lo hizo sigue siendo una incognita en la bibliografia. La
 	#     oferta vuelve en dos anios.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.f|" # GG_TRAZA
 		name = gg_peace.2.f
 		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
@@ -1255,6 +1272,7 @@ gg_peace.2 = {
 #     del 12 de junio de 1848. Esto es ese arreglo hecho formal.
 # -------------------------------------------------------------------------------------------------
 gg_peace.3 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.3|" } # GG_TRAZA
 	type = country_event
 	# EN/ES: T1, I17 -- only after the peace is signed.
 	trigger = { has_global_variable = gg_peace_settled }
@@ -1275,6 +1293,7 @@ gg_peace.3 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.3.a|" # GG_TRAZA
 		name = gg_peace.3.a
 		default_option = yes
 
@@ -1329,6 +1348,7 @@ gg_peace.3 = {
 #     pedirlo y no compra nada.
 # -------------------------------------------------------------------------------------------------
 gg_peace.4 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.4|" } # GG_TRAZA
 	type = country_event
 	# EN/ES: T1, I17 -- only after the peace is signed.
 	trigger = { has_global_variable = gg_peace_settled }
@@ -1349,6 +1369,7 @@ gg_peace.4 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.4.a|" # GG_TRAZA
 		name = gg_peace.4.a
 		default_option = yes
 
@@ -1382,6 +1403,7 @@ gg_peace.4 = {
 #     No hubo mesa.
 # -------------------------------------------------------------------------------------------------
 gg_peace.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1424,6 +1446,7 @@ gg_peace.5 = {
 
 	# a -- clemency / clemencia
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.5.a|" # GG_TRAZA
 		name = gg_peace.5.a
 		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
 		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
@@ -1445,6 +1468,7 @@ gg_peace.5 = {
 
 	# b -- proscription: the defeated chiefs go into exile / proscripcion: exilio de los jefes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.5.b|" # GG_TRAZA
 		name = gg_peace.5.b
 		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
 		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
@@ -1487,6 +1511,7 @@ gg_peace.5 = {
 
 	# c -- terror / deguello
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.5.c|" # GG_TRAZA
 		name = gg_peace.5.c
 		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
 		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
@@ -1511,6 +1536,7 @@ gg_peace.5 = {
 	# d -- hand the defeated chief to his own patron, for that patron's goodwill
 	# d -- entregarle el jefe vencido a su padrino, a cambio de la buena voluntad del padrino
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.5.d|" # GG_TRAZA
 		name = gg_peace.5.d
 		# EN/ES: Codex review 2026-09-19 -- the menu was answered, so the marks that called it
 		#     stop being true / el menu ya se contesto, asi que las marcas que lo llamaron dejan
@@ -1577,6 +1603,7 @@ gg_peace.6 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.6|" # GG_TRAZA
 		hidden_effect = {
 			random_country = {
 				limit = { has_variable = guerra_grande_cerrito_government }
@@ -1586,6 +1613,7 @@ gg_peace.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.6.a|" # GG_TRAZA
 		name = gg_peace.6.a
 		custom_tooltip = gg_peace.6.a_tt2
 		default_option = yes
@@ -1651,6 +1679,7 @@ gg_peace.7 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.7|" # GG_TRAZA
 		hidden_effect = {
 			random_country = {
 				limit = { has_variable = guerra_grande_defensa_government }
@@ -1660,6 +1689,7 @@ gg_peace.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.7.a|" # GG_TRAZA
 		name = gg_peace.7.a
 		default_option = yes
 		set_global_variable = gg_peace_settled
@@ -1677,6 +1707,7 @@ gg_peace.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.7.b|" # GG_TRAZA
 		name = gg_peace.7.b
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_peace_no_victors
@@ -1714,6 +1745,7 @@ gg_peace.8 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.8|" # GG_TRAZA
 		# EN: playtest 2026-09-19 -- "I chose vassalage to Rosas, it vassalised me, and the moment
 		#     the tag changed Uruguay came out free". change_tag drops the subject pact exactly the
 		#     way it drops the journal entry, and the pact cannot be rebuilt here: after change_tag
@@ -1780,6 +1812,7 @@ gg_peace.10 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.10|" # GG_TRAZA
 		c:URU ?= { trigger_event = { id = gg_postwar.1 days = 59 } }
 		# EN: playtest 2026-09-19 -- "if the Cerrito wins and I go back to being Uruguay, the capital
 		#     stays in Florida, not Montevideo". Of course it did: the split gave the Cerrito its
@@ -1877,6 +1910,7 @@ gg_peace.9 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.9|" # GG_TRAZA
 		hidden_effect = {
 			random_country = {
 				limit = { has_variable = guerra_grande_defensa_government }
@@ -1886,6 +1920,7 @@ gg_peace.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.9.a|" # GG_TRAZA
 		name = gg_peace.9.a
 		default_option = yes
 		custom_tooltip = gg_peace.9.a_tt
@@ -1914,6 +1949,7 @@ gg_peace.9 = {
 #     cierra el arbitro por un anio, y el contador de agotamiento vuelve a empezar.
 # -------------------------------------------------------------------------------------------------
 gg_peace.11 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.11|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1937,6 +1973,7 @@ gg_peace.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.11.a|" # GG_TRAZA
 		name = gg_peace.11.a
 		default_option = yes
 		custom_tooltip = gg_peace_ask_terms_tt
@@ -1953,6 +1990,7 @@ gg_peace.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.11.b|" # GG_TRAZA
 		name = gg_peace.11.b
 		# EN: Codex review 2026-09-19 -- the engine can end the war (a white peace, a conceded play)
 		#     while this popup is still open. Offering "fight on" then leaves both governments alive,
@@ -1970,6 +2008,7 @@ gg_peace.11 = {
 }
 
 gg_peace.12 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.12|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1993,6 +2032,7 @@ gg_peace.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.12.a|" # GG_TRAZA
 		name = gg_peace.12.a
 		default_option = yes
 		custom_tooltip = gg_peace_ask_terms_tt
@@ -2009,6 +2049,7 @@ gg_peace.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.12.b|" # GG_TRAZA
 		name = gg_peace.12.b
 		# EN: Codex review 2026-09-19 -- the engine can end the war (a white peace, a conceded play)
 		#     while this popup is still open. Offering "fight on" then leaves both governments alive,

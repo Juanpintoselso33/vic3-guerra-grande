@@ -21,6 +21,7 @@
 #     section 1, corrected 22/9/2026: it said 74).
 # -------------------------------------------------------------------------------------------------
 gg_plata.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.2.t
@@ -39,6 +40,7 @@ gg_plata.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.2.a|" # GG_TRAZA
 		name = gg_plata.2.a
 		default_option = yes
 		gg_plata_rosas_close = yes
@@ -46,6 +48,7 @@ gg_plata.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.2.b|" # GG_TRAZA
 		name = gg_plata.2.b
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
 		# EN/ES: the Cerrito may ask again / el Cerrito puede volver a pedirlo
@@ -75,6 +78,7 @@ gg_plata.3 = {
 	hidden = yes
 	trigger = { c:ARG ?= this }
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.3|" # GG_TRAZA
 		if = {
 			limit = {
 				global_var:gg_plata_rosas_stance = 2
@@ -104,6 +108,7 @@ gg_plata.3 = {
 #     franco-inglesa".
 # -------------------------------------------------------------------------------------------------
 gg_plata.10 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.10|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.10.t
@@ -144,6 +149,7 @@ gg_plata.10 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.10.a|" # GG_TRAZA
 		name = gg_plata.10.a
 		default_option = yes
 		# EN/ES: historical: the passports go back / lo historico: se devuelven los pasaportes
@@ -153,6 +159,7 @@ gg_plata.10 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.10.b|" # GG_TRAZA
 		name = gg_plata.10.b
 		# EN: yield (22/9/2026): the river opens under the powers' guarantee, the Cerrito loses the
 		#     Argentine backing, and it cannot ask for the closure while the guarantee lasts.
@@ -177,6 +184,7 @@ gg_plata.4 = {
 	type = country_event
 	hidden = yes
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.4|" # GG_TRAZA
 		if = {
 			limit = {
 				has_global_variable = gg_plata_intervention
@@ -219,6 +227,7 @@ gg_plata.4 = {
 #     Cerrito. No cambian nada; lo que cambia ya esta en el journal.
 # -------------------------------------------------------------------------------------------------
 gg_plata.20 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.20.t
@@ -271,11 +280,13 @@ gg_plata.20 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.21 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.21|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.21.t
@@ -313,11 +324,13 @@ gg_plata.21 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.22 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.22|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.22.t
@@ -338,11 +351,13 @@ gg_plata.22 = {
 	#     / Rosas recibe el ultimatum mismo, no el aviso sobre el
 	trigger = { NOT = { has_variable = gg_arg_rosas_seat } }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.23 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.23|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.23.t
@@ -360,11 +375,13 @@ gg_plata.23 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.24 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.24|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.24.t
@@ -384,6 +401,7 @@ gg_plata.24 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -399,6 +417,7 @@ gg_plata.24 = {
 #     enseguida; Londres reconoce el derecho de bloqueo sin guerra.
 # -------------------------------------------------------------------------------------------------
 gg_plata.25 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.25|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.25.t
@@ -427,11 +446,13 @@ gg_plata.25 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.26 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.26|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.26.t
@@ -449,11 +470,13 @@ gg_plata.26 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.27 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.27|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.27.t
@@ -473,11 +496,13 @@ gg_plata.27 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
 }
 gg_plata.28 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.28|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.28.t
@@ -487,6 +512,7 @@ gg_plata.28 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -511,6 +537,7 @@ gg_plata.30 = {
 	#     guards live here: no partition yet and the river still open when January 1841 comes.
 	# ES: el trigger de un evento agendado se lee al agendarlo (ver gg_intro.5): las guardas van aca.
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.30|" # GG_TRAZA
 		if = {
 			limit = {
 				NOT = { has_global_variable = guerra_grande_split_done }
@@ -527,6 +554,7 @@ gg_plata.30 = {
 	}
 }
 gg_plata.31 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.31|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.31.t
@@ -538,6 +566,7 @@ gg_plata.31 = {
 	is_popup = yes
 	trigger = { c:ARG ?= this }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.31.a|" # GG_TRAZA
 		name = gg_plata.31.a
 		default_option = yes
 		# EN/ES: Codex 22/9 -- answered late, it must not overwrite a stance the war already set
@@ -552,6 +581,7 @@ gg_plata.31 = {
 		ai_chance = { base = 100 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.31.b|" # GG_TRAZA
 		name = gg_plata.31.b
 		custom_tooltip = gg_plata.31.b_tt
 		ai_chance = { base = 0 }
@@ -571,6 +601,7 @@ gg_plata.40 = {
 	type = country_event
 	hidden = yes
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.40|" # GG_TRAZA
 		set_global_variable = gg_plata_french_blockade
 		p:x365A5B.state ?= { add_modifier = { name = gg_french_blockade_port } }
 		if = { limit = { is_player = yes has_variable = gg_arg_rosas_seat } trigger_event = { id = gg_plata.42 popup = yes } }
@@ -580,6 +611,7 @@ gg_plata.41 = {
 	type = country_event
 	hidden = yes
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.41|" # GG_TRAZA
 		if = { limit = { has_global_variable = gg_plata_french_blockade } remove_global_variable = gg_plata_french_blockade }
 		p:x365A5B.state ?= { if = { limit = { has_modifier = gg_french_blockade_port } remove_modifier = gg_french_blockade_port } }
 		if = { limit = { is_player = yes has_variable = gg_arg_rosas_seat } trigger_event = { id = gg_plata.43 popup = yes } }
@@ -600,6 +632,7 @@ gg_plata.41 = {
 	}
 }
 gg_plata.42 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.42|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.42.t
@@ -610,12 +643,14 @@ gg_plata.42 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.42.a|" # GG_TRAZA
 		name = gg_plata.42.a
 		default_option = yes
 		custom_tooltip = gg_plata.42.a_tt
 	}
 }
 gg_plata.43 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.43|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.43.t
@@ -626,6 +661,7 @@ gg_plata.43 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.43.a|" # GG_TRAZA
 		name = gg_plata.43.a
 		default_option = yes
 		custom_tooltip = gg_plata.43.a_tt
@@ -644,6 +680,7 @@ gg_plata.43 = {
 #     SOURCES_french_legion.md (the blockade reimposed from June 1843).
 # -------------------------------------------------------------------------------------------------
 gg_plata.44 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.44|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.44.t
@@ -655,12 +692,14 @@ gg_plata.44 = {
 	is_popup = yes
 	trigger = { c:ARG ?= this }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.44.a|" # GG_TRAZA
 		name = gg_plata.44.a
 		default_option = yes
 		custom_tooltip = gg_plata.44.a_tt
 	}
 }
 gg_plata.45 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.45|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.45.t
@@ -672,6 +711,7 @@ gg_plata.45 = {
 	is_popup = yes
 	trigger = { c:ARG ?= this }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.45.a|" # GG_TRAZA
 		name = gg_plata.45.a
 		default_option = yes
 		custom_tooltip = gg_plata_rosas_close_tt
@@ -688,6 +728,7 @@ gg_plata.45 = {
 #     compenser» the lifting of the French blockade; Duvergier, Collection complete des lois, t. 50).
 # -------------------------------------------------------------------------------------------------
 gg_plata.46 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.46|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_plata.46.t
@@ -705,6 +746,7 @@ gg_plata.46 = {
 	duration = 12
 	is_popup = yes
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 		custom_tooltip = gg_plata.46.a_tt

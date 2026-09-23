@@ -34,6 +34,7 @@
 
 # EN/ES: 6/3/1839 -- Corrientes se separa. Se lleva Corrientes y Misiones.
 gg_argentina_create_corrientes = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_create_corrientes|" # GG_TRAZA
 	create_country = {
 		tag = CRR
 		origin = this
@@ -143,6 +144,7 @@ gg_argentina_create_corrientes = {
 
 # EN/ES: 7/4/1840 -- Tucuman se pronuncia. Salta, Jujuy, Catamarca y La Rioja dentro del mes.
 gg_argentina_create_coalicion = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_create_coalicion|" # GG_TRAZA
 	create_country = {
 		tag = CLN
 		origin = this
@@ -273,6 +275,7 @@ gg_argentina_create_coalicion = {
 #     Norte es un levantamiento: nace hostil a Buenos Aires y sin alianzas, pactos defensivos ni
 #     garantias heredadas que puedan arrastrar al Peru o Bolivia.
 gg_argentina_rebel_diplomacy_reset = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_rebel_diplomacy_reset|" # GG_TRAZA
 	set_variable = gg_rebel_diplomacy_reset
 	save_scope_as = gg_rebel_country
 	# EN: 22/9/2026 -- alliances, defensive pacts and guarantees are treaty articles since 1.10. The
@@ -327,6 +330,7 @@ gg_argentina_rebel_diplomacy_reset = {
 # «Los momentos de decision», punto 7 [D].
 # -------------------------------------------------------------------------------------------------
 gg_argentina_arm_urquiza_against_brazil = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_arm_urquiza_against_brazil|" # GG_TRAZA
 	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
 	create_military_formation = {
 		type = army
@@ -366,6 +370,7 @@ gg_argentina_arm_urquiza_against_brazil = {
 }
 
 gg_argentina_arm_other_against_brazil = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_arm_other_against_brazil|" # GG_TRAZA
 	s:STATE_BUENOS_AIRES.region_state:ARG ?= { save_scope_as = gg_buenos_aires_state }
 	create_military_formation = {
 		type = army
@@ -409,6 +414,7 @@ gg_argentina_arm_other_against_brazil = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1850-1852 [D] for
 # the article and Urquiza's answer; the demand and this military consequence are design counterfactuals.
 gg_argentina_arm_urquiza_reserve = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_arm_urquiza_reserve|" # GG_TRAZA
 	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
 	create_military_formation = {
 		type = army
@@ -439,6 +445,7 @@ gg_argentina_arm_urquiza_reserve = {
 
 # EN/ES: 1/5/1851 -- el Pronunciamiento de Urquiza.
 gg_argentina_create_entre_rios = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_create_entre_rios|" # GG_TRAZA
 	create_country = {
 		tag = ENR
 		origin = this
@@ -648,6 +655,7 @@ gg_argentina_create_entre_rios = {
 #     porque toda excepcion es un lugar donde un clon puede esconderse. Un pais sin personajes es un
 #     estado normal para el motor: genera los lideres de grupo que necesite.
 gg_argentina_new_country_people = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_new_country_people|" # GG_TRAZA
 	c:$TAG$ ?= {
 		every_scope_character = {
 			# EN: THE CLONES ARE KILLED, NOT EXILED, and the correction is dated 20 September 2026,
@@ -704,6 +712,7 @@ gg_argentina_new_country_people = {
 #     a nadie, dejo de obedecer.
 # -------------------------------------------------------------------------------------------------
 gg_argentina_open_war = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_open_war|" # GG_TRAZA
 	if = {
 		limit = {
 			exists = c:$TAG$
@@ -769,6 +778,7 @@ gg_argentina_open_war = {
 # https://www.dipublico.org/122098/
 # -------------------------------------------------------------------------------------------------
 gg_argentina_sign_montevideo_convention = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_sign_montevideo_convention|" # GG_TRAZA
 	set_global_variable = guerra_grande_treaties_signed
 	set_global_variable = gg_montevideo_free_navigation
 	c:ARG ?= { add_modifier = { name = gg_arg_open_rivers_cost years = 20 } }
@@ -857,6 +867,7 @@ gg_argentina_sign_montevideo_convention = {
 # ES: La convencion de noviembre, no la declaracion de Rosas en mayo, decide si los paises
 #     extranjeros entran como beligerantes contra Buenos Aires.
 gg_argentina_join_ejercito_grande_allies = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_join_ejercito_grande_allies|" # GG_TRAZA
 	c:ENR ?= {
 		every_scope_war = {
 			limit = { is_war_participant = c:ARG }
@@ -884,6 +895,7 @@ gg_argentina_join_ejercito_grande_allies = {
 # https://www.dipublico.org/122100/
 # -------------------------------------------------------------------------------------------------
 gg_argentina_raise_ejercito_grande = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_raise_ejercito_grande|" # GG_TRAZA
 	set_global_variable = gg_ejercito_grande_created
 	c:ARG ?= {
 		every_scope_war = {
@@ -934,6 +946,7 @@ gg_argentina_raise_ejercito_grande = {
 # SOURCE / FUENTE: Convention / Convencion of 21 November 1851, arts. IV-VIII:
 # https://www.dipublico.org/122100/
 gg_argentina_complete_foreign_contingents = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_complete_foreign_contingents|" # GG_TRAZA
 	c:BRZ ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_brazilian_grand_army
@@ -1000,6 +1013,7 @@ gg_argentina_complete_foreign_contingents = {
 # ES: El acuerdo limitado contrafactual manda un batallon adicional de cada aliado. Es una cantidad
 #     de balance, no una cifra historica, y queda visiblemente por debajo de los terminos completos.
 gg_argentina_limited_foreign_contingents = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_limited_foreign_contingents|" # GG_TRAZA
 	c:BRZ ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_brazilian_limited_army
@@ -1065,6 +1079,7 @@ gg_argentina_limited_foreign_contingents = {
 # y el Paraguay» y «Los momentos de decision», punto 6 [D].
 # -------------------------------------------------------------------------------------------------
 gg_argentina_accept_alcaraz = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_accept_alcaraz|" # GG_TRAZA
 	if = {
 		limit = {
 			exists = c:CRR
@@ -1098,6 +1113,7 @@ gg_argentina_accept_alcaraz = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md, section 3; the closure is a
 # design outcome built from the documented delegation and congress terms.
 gg_argentina_open_negotiated_confederation = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_open_negotiated_confederation|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_confederacion_negociada } }
 		set_global_variable = gg_confederacion_negociada
@@ -1132,6 +1148,7 @@ gg_argentina_open_negotiated_confederation = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md
 # -------------------------------------------------------------------------------------------------
 gg_argentina_revive_corrientes = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_revive_corrientes| RULER= $RULER$ " # GG_TRAZA
 	create_country = {
 		tag = CRR
 		origin = this

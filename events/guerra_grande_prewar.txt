@@ -15,6 +15,7 @@
 # F0-2 - El Moderador and the unitarian emigres, late 1835 (fires on 3 January 1836)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande: 'Factores internos' (Oribe closes El Moderador, Rivera protests) and 'Conclusion' (Correa Morales, 'muy firme y casi grosero').
 gg_prewar.1 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.1|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -43,6 +44,7 @@ gg_prewar.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.1.a|" # GG_TRAZA
 		name = gg_prewar.1.a
 		default_option = yes
 		# EN: historical. Rosas starts higher, France lower, and the emigres go to Rivera.
@@ -54,6 +56,7 @@ gg_prewar.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.1.b|" # GG_TRAZA
 		name = gg_prewar.1.b
 		custom_tooltip = gg_prewar.1.b_tt
 		# EN: asylum respected. Rosas lower, France higher, Lavalle stays out for a while (read in T6).
@@ -94,10 +97,12 @@ gg_prewar.2 = {
 	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
 	#     / un evento posterior lee esta respuesta y la espera
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.2|" # GG_TRAZA
 		set_global_variable = gg_pending_prewar_2
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.2.a|" # GG_TRAZA
 		name = gg_prewar.2.a
 		if = {
 			limit = { has_global_variable = gg_pending_prewar_2 }
@@ -113,6 +118,7 @@ gg_prewar.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.2.b|" # GG_TRAZA
 		name = gg_prewar.2.b
 		if = {
 			limit = { has_global_variable = gg_pending_prewar_2 }
@@ -127,6 +133,7 @@ gg_prewar.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.2.c|" # GG_TRAZA
 		name = gg_prewar.2.c
 		if = {
 			limit = { has_global_variable = gg_pending_prewar_2 }
@@ -145,6 +152,7 @@ gg_prewar.2 = {
 # F0-1 - Rivera's accounts and the Comandancia de Campania (June 1836)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Factores internos': 9.1.1836; Juan Maria Perez's letter to Giro; the Ramirez-Costa-Artagaveytia commission ('despilfarro y fraude'); the Command restored for Ignacio Oribe; the flavour quote is cited there.
 gg_prewar.3 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.3|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -167,6 +175,7 @@ gg_prewar.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.3.a|" # GG_TRAZA
 		name = gg_prewar.3.a
 		default_option = yes
 		# EN: historical (June 1836): publish the commission and give the Comandancia to Ignacio Oribe.
@@ -186,6 +195,7 @@ gg_prewar.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.3.b|" # GG_TRAZA
 		name = gg_prewar.3.b
 		# EN: publish without restoring the Comandancia: Rivera rises anyway, with less support.
 		# ES: publicarlas sin restituir la Comandancia: Rivera se alza igual, con menos apoyo.
@@ -195,6 +205,7 @@ gg_prewar.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.3.c|" # GG_TRAZA
 		name = gg_prewar.3.c
 		# EN: shelve the accounts and give him a post: Oribe looks weak.
 		# ES: archivar las cuentas y darle un cargo: Oribe queda como debil.
@@ -232,10 +243,12 @@ gg_prewar.4 = {
 	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
 	#     / un evento posterior lee esta respuesta y la espera
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.4|" # GG_TRAZA
 		set_global_variable = gg_pending_prewar_4
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.4.a|" # GG_TRAZA
 		name = gg_prewar.4.a
 		if = {
 			limit = { has_global_variable = gg_pending_prewar_4 }
@@ -252,6 +265,7 @@ gg_prewar.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.4.b|" # GG_TRAZA
 		name = gg_prewar.4.b
 		if = {
 			limit = { has_global_variable = gg_pending_prewar_4 }
@@ -271,6 +285,7 @@ gg_prewar.4 = {
 # F0-5a - Yucutuja, 22 October 1837
 # SOURCE / FUENTE: Wikipedia ES, Batalla de Yucutuja: 22.10.1837, 785 men and four guns across the Cuaro, colonel Luna's 200, the chiefs, about 800 a side, Servando Gomez's charge absorbed.
 gg_prewar.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -308,6 +323,7 @@ gg_prewar.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.5.a|" # GG_TRAZA
 		name = gg_prewar.5.a
 		default_option = yes
 		# EN: give battle in the north. Rivera's strength depends on F0-3 and F0-4 (gg_rivera_1837_strength).
@@ -324,6 +340,7 @@ gg_prewar.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.5.b|" # GG_TRAZA
 		name = gg_prewar.5.b
 		# EN: fall back to the centre: a smaller defeat, but the north is lost for a while.
 		# ES: replegarse al centro: una derrota mas chica, pero el norte se pierde un tiempo.
@@ -338,6 +355,7 @@ gg_prewar.5 = {
 # F0-5b - the action of the Yi (no exact date in the sources; placed in February 1838)
 # SOURCE / FUENTE: Wikipedia ES, Manuel Oribe ('poco despues, Rivera es derrotado en la accion del Yi'); the unitarian officers from Batalla de Palmar. No exact date in the sources.
 gg_prewar.6 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.6|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -360,6 +378,7 @@ gg_prewar.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.6.a|" # GG_TRAZA
 		name = gg_prewar.6.a
 		default_option = yes
 		# EN: pursue Rivera after the Yi: the whole revenge.
@@ -369,6 +388,7 @@ gg_prewar.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.6.b|" # GG_TRAZA
 		name = gg_prewar.6.b
 		# EN: consolidate: less score, but order in the countryside.
 		# ES: consolidar: menos puntaje, pero orden en la campania.
@@ -383,6 +403,7 @@ gg_prewar.6 = {
 # F0-7 - the French blockade of Buenos Aires (March 1838) and Martin Garcia
 # SOURCE / FUENTE: Wikipedia ES, Bloqueo frances al Rio de la Plata: Leblanc in Montevideo 21.2.1838; the anchorages; schooners bought in Montevideo; the request to use Montevideo as a naval base, refused, after which France backed Rivera.
 gg_prewar.7 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.7|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -405,6 +426,7 @@ gg_prewar.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.7.a|" # GG_TRAZA
 		name = gg_prewar.7.a
 		default_option = yes
 		# EN: historical: side with Rosas and deny the ports. Leblanc will disarm the flotilla (7 Oct 1838).
@@ -415,6 +437,7 @@ gg_prewar.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.7.b|" # GG_TRAZA
 		name = gg_prewar.7.b
 		custom_tooltip = gg_prewar.7.b_tt
 		# EN: deal with France: the flotilla is spared and the fall is delayed (read in T6), but Rosas
@@ -431,6 +454,7 @@ gg_prewar.7 = {
 # F0-6 - Palmar, 15 June 1838
 # SOURCE / FUENTE: Wikipedia ES, Batalla de Palmar: 15.6.1838, Paysandu; Ignacio Oribe and Lavalleja; Lavalle takes command; Piran's artillery; the named officers.
 gg_prewar.9 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.9|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -464,6 +488,7 @@ gg_prewar.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.9.a|" # GG_TRAZA
 		name = gg_prewar.9.a
 		default_option = yes
 		# EN: historical: Ignacio Oribe gives battle at Palmar and loses the Republic.
@@ -474,6 +499,7 @@ gg_prewar.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.9.b|" # GG_TRAZA
 		name = gg_prewar.9.b
 		custom_tooltip = gg_prewar.9.b_tt
 		trigger = {
@@ -502,6 +528,7 @@ gg_prewar.20 = {
 	# ES: espera con tope (22/9/2026). Cada reintento suma una semana en gg_prewar_20_weeks; a las 8
 	#     semanas Yucutuja se entrega igual, haya respuesta o no, y el contador se borra.
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.20|" # GG_TRAZA
 		if = {
 			limit = { NOT = { has_global_variable = gg_prewar_20_weeks } }
 			set_global_variable = { name = gg_prewar_20_weeks value = 0 }

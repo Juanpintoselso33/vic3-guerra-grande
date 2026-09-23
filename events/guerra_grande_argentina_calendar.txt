@@ -78,6 +78,7 @@ gg_argentina_cal.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.1|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -114,6 +115,7 @@ gg_argentina_cal.2 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.2|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -150,6 +152,7 @@ gg_argentina_cal.3 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.3|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -176,6 +179,7 @@ gg_argentina_cal.4 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.4|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -213,6 +217,7 @@ gg_argentina_cal.5 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.5|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -232,6 +237,7 @@ gg_argentina_cal.6 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.6|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -251,6 +257,7 @@ gg_argentina_cal.7 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.7|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -270,6 +277,7 @@ gg_argentina_cal.8 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.8|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -289,6 +297,7 @@ gg_argentina_cal.9 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.9|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -323,6 +332,7 @@ gg_argentina_cal.10 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.10|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -346,6 +356,7 @@ gg_argentina_cal.11 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.11|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -367,6 +378,7 @@ gg_argentina_cal.12 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.12|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -393,6 +405,7 @@ gg_argentina_cal.13 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.13|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -424,7 +437,7 @@ gg_argentina_cal.13 = {
 gg_argentina_cal.14 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.14|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_14 }
@@ -441,7 +454,7 @@ gg_argentina_cal.14 = {
 gg_argentina_cal.15 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.15|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_15 }
@@ -458,7 +471,7 @@ gg_argentina_cal.15 = {
 gg_argentina_cal.16 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.16|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_16 }
@@ -476,7 +489,7 @@ gg_argentina_cal.16 = {
 gg_argentina_cal.17 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.17|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_17 }
@@ -495,7 +508,7 @@ gg_argentina_cal.17 = {
 gg_argentina_cal.18 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.18|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_18 }
@@ -513,7 +526,7 @@ gg_argentina_cal.18 = {
 gg_argentina_cal.19 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.19|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_19 }
@@ -535,7 +548,7 @@ gg_argentina_cal.19 = {
 gg_argentina_cal.20 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.20|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_20 }
@@ -564,7 +577,7 @@ gg_argentina_cal.20 = {
 gg_argentina_cal.21 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.21|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_21 }
@@ -595,7 +608,7 @@ gg_argentina_cal.21 = {
 gg_argentina_cal.22 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.22|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_22 }
@@ -626,7 +639,7 @@ gg_argentina_cal.22 = {
 gg_argentina_cal.23 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.23|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_23 }
@@ -657,7 +670,7 @@ gg_argentina_cal.23 = {
 gg_argentina_cal.24 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.24|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_24 }
@@ -704,7 +717,7 @@ gg_argentina_cal.24 = {
 gg_argentina_cal.25 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.25|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_25 }
@@ -731,7 +744,7 @@ gg_argentina_cal.25 = {
 gg_argentina_cal.26 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.26|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_26 }
@@ -761,7 +774,7 @@ gg_argentina_cal.26 = {
 gg_argentina_cal.27 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.27|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_27 }
@@ -788,7 +801,7 @@ gg_argentina_cal.27 = {
 gg_argentina_cal.28 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.28|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_28 }
@@ -814,7 +827,7 @@ gg_argentina_cal.28 = {
 gg_argentina_cal.29 = {
 	type = country_event
 	hidden = yes
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.29|"  hidden_effect = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_29 }
@@ -838,7 +851,7 @@ gg_argentina_cal.29 = {
 gg_argentina_cal.30 = {
  type = country_event
  hidden = yes
- immediate = { hidden_effect = {
+ immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.30|"  hidden_effect = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_30 }
@@ -857,7 +870,7 @@ gg_argentina_cal.30 = {
 gg_argentina_cal.31 = {
  type = country_event
  hidden = yes
- immediate = { hidden_effect = {
+ immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.31|"  hidden_effect = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_31 }
@@ -876,7 +889,7 @@ gg_argentina_cal.31 = {
 gg_argentina_cal.32 = {
  type = country_event
  hidden = yes
- immediate = { hidden_effect = {
+ immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.32|"  hidden_effect = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_32 }
@@ -895,7 +908,7 @@ gg_argentina_cal.32 = {
 gg_argentina_cal.33 = {
  type = country_event
  hidden = yes
- immediate = { hidden_effect = {
+ immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.33|"  hidden_effect = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_33 }
@@ -916,7 +929,7 @@ gg_argentina_cal.33 = {
 gg_argentina_cal.34 = {
  type = country_event
  hidden = yes
- immediate = { hidden_effect = {
+ immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.34|"  hidden_effect = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_34 }

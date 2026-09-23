@@ -15,6 +15,7 @@
 #     re-elige estrategias. 0 abierto, 1 cerrado a toda bandera, 2 cerrado solo a enemigos (Purvis).
 #     Un Rosas humano fija su orilla en el panel del estrecho; la postura igual registra su palabra.
 gg_plata_rosas_stance_apply = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_rosas_stance_apply|" # GG_TRAZA
 	c:ARG ?= {
 		if = {
 			limit = { is_player = no }
@@ -35,16 +36,19 @@ gg_plata_rosas_stance_apply = {
 }
 
 gg_plata_rosas_close = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_rosas_close|" # GG_TRAZA
 	custom_tooltip = gg_plata_rosas_close_tt
 	set_global_variable = { name = gg_plata_rosas_stance value = 1 }
 	gg_plata_rosas_stance_apply = yes
 }
 gg_plata_rosas_open = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_rosas_open|" # GG_TRAZA
 	custom_tooltip = gg_plata_rosas_open_tt
 	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
 	gg_plata_rosas_stance_apply = yes
 }
 gg_plata_rosas_neutrals_pass = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_rosas_neutrals_pass|" # GG_TRAZA
 	custom_tooltip = gg_plata_rosas_neutrals_tt
 	set_global_variable = { name = gg_plata_rosas_stance value = 2 }
 	gg_plata_rosas_stance_apply = yes
@@ -63,6 +67,7 @@ gg_plata_rosas_neutrals_pass = {
 # EN: A. The fort is the key. Removing it lifts every restriction on the Buenos Aires bank.
 # ES: A. El fuerte es la llave. Sacarlo levanta toda restriccion en la orilla de Buenos Aires.
 gg_plata_fort_remove = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_fort_remove|" # GG_TRAZA
 	custom_tooltip = gg_plata_fort_remove_tt
 	p:x365A5B.state ?= {
 		if = {
@@ -72,6 +77,7 @@ gg_plata_fort_remove = {
 	}
 }
 gg_plata_fort_restore = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_fort_restore|" # GG_TRAZA
 	custom_tooltip = gg_plata_fort_restore_tt
 	p:x365A5B.state ?= {
 		if = {
@@ -87,6 +93,7 @@ gg_plata_fort_restore = {
 # EN: B. The powers' patience is spent: Ouseley and Deffaudis carry the ultimatum to Rosas.
 # ES: B. Se acabo la paciencia: Ouseley y Deffaudis le llevan el ultimatum a Rosas.
 gg_plata_ultimatum_send = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_ultimatum_send|" # GG_TRAZA
 	set_global_variable = gg_plata_ultimatum_pending
 	c:ARG ?= { trigger_event = { id = gg_plata.10 popup = yes } }
 	gg_plata_notify = { EVENT = gg_plata.22 }
@@ -98,6 +105,7 @@ gg_plata_ultimatum_send = {
 # ES: Rosas devuelve los pasaportes: empieza la intervencion. Sus eventos fechados esperan esto y su
 #     propia distancia desde aca.
 gg_plata_intervention_start = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_intervention_start|" # GG_TRAZA
 	# EN/ES: 22/9/2026 -- London out of the river (Southern, or not standing behind the Defensa by its
 	#     level): France intervenes alone / Londres fuera del rio (Southern, o sin respaldar a la
 	#     Defensa por su nivel): Francia interviene sola
@@ -183,6 +191,7 @@ gg_plata_intervention_start = {
 #     argentino que le habia dado el bloqueo. Bajo la garantia el Cerrito no puede pedir el cierre,
 #     y si Rosas cierra igual, las escuadras vienen enseguida. Termina con Southern sin guerra.
 gg_plata_ultimatum_yield = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_ultimatum_yield|" # GG_TRAZA
 	gg_plata_rosas_open = yes
 	# EN/ES: no guarantee once the war is over: nothing would be left to end it
 	#     / sin garantia con la guerra terminada: no quedaria nada que la termine
@@ -241,6 +250,7 @@ gg_plata_ultimatum_yield = {
 # EN: Once a month, from je_guerra_grande's pulse while the war is open. Frozen in a truce.
 # ES: Una vez por mes, desde el pulso de je_guerra_grande con la guerra abierta. Congelado en tregua.
 gg_plata_monthly = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_monthly|" # GG_TRAZA
 	gg_plata_fort_french_supply = yes
 	# EN/ES: the stance survives the AI's own re-roll / la postura sobrevive a la re-eleccion de la IA
 	gg_plata_rosas_stance_apply = yes
@@ -410,6 +420,7 @@ gg_plata_monthly = {
 # ES: El mantenimiento mensual de la situacion, desde je_gg_patrons: los efectos de
 #     cada fase (dos meses, renovados, asi caen solos cuando termina la fase) y las banderas.
 gg_plata_situation_monthly = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_situation_monthly|" # GG_TRAZA
 	# EN: 22/9/2026, decided with Juan -- the city's mortality follows the closure itself, in any
 	#     phase: an ultimatum pending or squadrons in the river do not feed Montevideo while Rosas's
 	#     shore stays shut. / ES: decidido con Juan -- la mortalidad de la plaza sigue al cierre mismo,
@@ -490,6 +501,7 @@ gg_plata_situation_monthly = {
 #     cae en el Uruguay antes de la particion) y quien tiene cada orilla de la llave. Corre al empezar
 #     y cada mes, asi el journal nunca lee una variable sin fijar.
 gg_plata_flags_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_flags_sync|" # GG_TRAZA
 	if = {
 		limit = { any_country = { has_variable = guerra_grande_defensa_government } }
 		random_country = {
@@ -527,6 +539,7 @@ gg_plata_flags_sync = {
 #     intervencion y el arreglo se avisan donde el script los fija, asi el muestreo mensual no los
 #     saltea. El primer mes solo registra el estado.
 gg_plata_notify = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_notify| EVENT= $EVENT$ " # GG_TRAZA
 	every_country = {
 		limit = {
 			is_player = yes
@@ -546,6 +559,7 @@ gg_plata_notify = {
 	}
 }
 gg_plata_notices = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_notices|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_plata_notice_closed } }
 		set_global_variable = { name = gg_plata_notice_closed value = gg_ui_plata_closed_sv }
@@ -571,6 +585,7 @@ gg_plata_notices = {
 #     palabra: la intervencion empieza sin segunda paciencia. Southern sin guerra la termina: Londres
 #     reconoce el derecho de bloqueo y desde ahi solo cuenta la paciencia de Paris.
 gg_plata_guarantee_monthly = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_guarantee_monthly|" # GG_TRAZA
 	if = {
 		limit = {
 			has_global_variable = gg_plata_guarantee
@@ -610,6 +625,7 @@ gg_plata_guarantee_monthly = {
 
 # EN/ES: the France-only mark lives and dies with the guarantee / la marca vive y muere con la garantia
 gg_plata_guarantee_france_only_clear = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_guarantee_france_only_clear|" # GG_TRAZA
 	if = {
 		limit = { has_global_variable = gg_plata_guarantee_france_only }
 		remove_global_variable = gg_plata_guarantee_france_only
@@ -626,6 +642,7 @@ gg_plata_guarantee_france_only_clear = {
 #     sostiene a la Defensa, los insumos del fuerte corren por su cuenta; se renueva cada mes y vence
 #     solo dos meses despues de que Francia se retire o la plaza cambie de manos.
 gg_plata_fort_french_supply = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_fort_french_supply|" # GG_TRAZA
 	if = {
 		limit = { gg_france_pays_legions = yes }
 		every_country = {

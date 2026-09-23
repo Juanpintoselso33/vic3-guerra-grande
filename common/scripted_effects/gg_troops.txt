@@ -34,6 +34,7 @@
 #     que no necesitaba: las cantidades no salian de su propio ejercito. Con root = el propio pais hay
 #     un solo scope de donde leerlas.
 gg_troops_split_armies_cer = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_troops_split_armies_cer|" # GG_TRAZA
 	# EN/ES: the Cerrito's own army / el ejercito propio del Cerrito
 	if = {
 		limit = { exists = c:CER this = c:CER }
@@ -332,6 +333,7 @@ gg_troops_split_armies_cer = {
 }
 
 gg_troops_split_armies_defensa = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_troops_split_armies_defensa|" # GG_TRAZA
 	if = {
 		limit = { exists = c:URU this = c:URU }
 		if = {
@@ -501,6 +503,7 @@ gg_troops_split_armies_defensa = {
 #     proporcion a su gente: infanteria de linea en San Jose, caballeria en Paysandu, irregulares en la
 #     Banda Oriental, la bateria en Maldonado. Si el Cerrito no tiene el departamento, San Jose.
 gg_troops_cer_recruit_states = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_troops_cer_recruit_states|" # GG_TRAZA
 	random_scope_state = { limit = { state_region = s:STATE_SAN_JOSE } save_scope_as = gg_cer_rec_home }
 	if = {
 		limit = { any_scope_state = { state_region = s:STATE_PAYSANDU } }

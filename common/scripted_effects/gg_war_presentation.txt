@@ -1,6 +1,7 @@
 ﻿# EN: Presentation-only lists of living pre-partition cause leaders.
 # ES: Listas de presentacion de los caudillos vivos antes de la division.
 gg_ui_prewar_leaders_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ui_prewar_leaders_sync|" # GG_TRAZA
  if = {
   limit = { NOT = { has_global_variable = guerra_grande_split_done } }
   c:URU ?= {
@@ -36,6 +37,7 @@ gg_ui_prewar_leaders_sync = {
 # EN/ES: 22/9/2026 -- the siege's defender for El Sitio: Melchor Pacheco y Obes while he lives in the
 #     Defensa (presentation only) / el defensor del sitio: Pacheco y Obes mientras viva en la Defensa
 gg_ui_siege_leaders_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ui_siege_leaders_sync|" # GG_TRAZA
  every_country = {
   limit = { has_variable = guerra_grande_defensa_government }
   clear_variable_list = gg_ui_siege_defender

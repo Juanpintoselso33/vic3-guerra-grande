@@ -605,6 +605,7 @@ je_guerra_grande = {
 	}
 
 	on_fail_all_involved = {
+		debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|je_guerra_grande|on_fail_all_involved" # GG_TRAZA
 		add_modifier = {
 			name = guerra_grande_dismembered_republic
 			years = 15
@@ -626,6 +627,7 @@ je_guerra_grande = {
 	# ES: T1, C11 -- una guerra cerrada sin paz firmada termina en gg_peace.5. La marca va primero,
 	#     asi la pasada del segundo pais involucrado no hace nada.
 	on_complete_all_involved = {
+		debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|je_guerra_grande|on_complete_all_involved" # GG_TRAZA
 		# EN: the war that never became one does NOT go through the peace machinery. There is nothing
 		#     to sign: no partition, no two governments, no terms. Running the closing dispatch here
 		#     would mark a peace that nobody made and start a postwar for a war that did not happen.

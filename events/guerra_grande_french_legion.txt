@@ -31,6 +31,7 @@
 #     resolvieron "nacionalizandolos": los voluntarios renunciaron a la ciudadania francesa y el
 #     cuerpo paso a llamarse 2a Legion de Guardia Nacional.
 gg_legion.1 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_legion.1|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -67,6 +68,7 @@ gg_legion.1 = {
 	#     toda la tesis de Etchechury es que ese cosmopolitismo armado estuvo cerca de desatar
 	#     "una 'guerra civil' dentro de la ciudad-puerto".
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_legion.1.a|" # GG_TRAZA
 		name = gg_legion.1.a
 		default_option = yes
 		gg_select_formation_hq_state = yes
@@ -109,6 +111,7 @@ gg_legion.1 = {
 	#     siendo franceses se fueron al consulado -- pero los que quedaron son de la Republica, y
 	#     el pleito diplomatico con Paris se termina.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_legion.1.b|" # GG_TRAZA
 		name = gg_legion.1.b
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.

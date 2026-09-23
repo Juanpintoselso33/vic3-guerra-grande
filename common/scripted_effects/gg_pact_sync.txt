@@ -9,6 +9,7 @@
 #     raiz) y el Pacto nunca sumo a Corrientes. El journal sale de scope:journal_entry, como en
 #     gg_international_sync, que en partida funciona.
 gg_pact_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_sync|" # GG_TRAZA
 	scope:journal_entry ?= {
 		every_scope_je_involved = {
 			limit = { NOT = { gg_is_pact_country = yes } }

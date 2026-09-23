@@ -4,6 +4,7 @@
 # ES: los numeros del arbitro en el momento en que ofrece la paz, para que una corrida sin pantalla diga
 #     POR QUE se dio por batido a un gobierno. Solo escribe con -debug_mode.
 gg_trace_arbiter = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_trace_arbiter|" # GG_TRAZA
 	set_global_variable = { name = gg_debug_arb_bal_bl value = gg_war_balance_blanco }
 	set_global_variable = { name = gg_debug_arb_bal_co value = gg_war_balance_colorado }
 	set_global_variable = { name = gg_debug_arb_gap value = gg_exhaustion_gap }
@@ -18,6 +19,7 @@ gg_trace_arbiter = {
 # ES: el apoyo a la guerra de cada lado, cada semana, redondeado a decenas (-100 = el motor lo hace
 #     capitular solo, salteando los menus de paz del mod). Scope de guerra.
 gg_trace_war_support = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_trace_war_support|" # GG_TRAZA
 	set_global_variable = { name = gg_debug_ws_uru value = -100 }
 	if = { limit = { has_war_support = { target = c:URU value >= -90 } } set_global_variable = { name = gg_debug_ws_uru value = -90 } }
 	if = { limit = { has_war_support = { target = c:URU value >= -80 } } set_global_variable = { name = gg_debug_ws_uru value = -80 } }

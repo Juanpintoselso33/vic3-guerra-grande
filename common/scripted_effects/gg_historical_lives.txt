@@ -5,6 +5,7 @@
 # ES: los hombres sobre los que gira la guerra no mueren antes de su fecha historica. Rivera murio en
 #     una partida de observador en 1840 y goberno el Uruguay un cualquiera.
 gg_historical_life = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_life| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	every_country = {
 		every_scope_character = {
 			limit = { has_template = $TEMPLATE$ }
@@ -17,6 +18,7 @@ gg_historical_life = {
 	}
 }
 gg_historical_lives = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives|" # GG_TRAZA
 	gg_historical_life = { TEMPLATE = ARG_Juan_Manuel_de_Rosas DIES = 1877.3.14 }
 	gg_historical_life = { TEMPLATE = URU_Manuel_Oribe DIES = 1857.11.12 }
 	gg_historical_life = { TEMPLATE = URU_Fructuoso_Rivera DIES = 1854.1.13 }
@@ -35,6 +37,7 @@ gg_historical_lives = {
 #     historia. En dos corridas sin pantalla el gobernante paso a ser Echague en noviembre de 1836 sin
 #     cambio de ley ni script nuestro. La era termina con el cierre del Pacto.
 gg_rosas_keeps_the_seat = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_keeps_the_seat|" # GG_TRAZA
 	c:ARG ?= {
 		if = {
 			limit = {

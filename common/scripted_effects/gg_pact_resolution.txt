@@ -1,6 +1,7 @@
 ﻿# EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
 # ES: Scope pais (Argentina). Un escritor idempotente para todos los cierres del Pacto Federal.
 gg_pact_resolve = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_resolve|" # GG_TRAZA
 	# EN: 22/9/2026, Caseros option (c) -- while the siege of Buenos Aires lasts (at least six months
 	#     from the choice) no ending is written: the request is recorded and gg_caseros.1 resolves it
 	#     when the siege ends. Rosas keeps the capital and his government meanwhile. DESIGN: the

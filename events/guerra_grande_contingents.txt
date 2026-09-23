@@ -63,6 +63,7 @@ gg_contingent.1 = {
 	#     Aires con libertad vigilada y recien llego a Montevideo el 3 de abril de 1840. Se crea
 	#     en gg_contingent.3, en la fecha en que de verdad tomo la linea.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.1.a|" # GG_TRAZA
 		name = gg_contingent.1.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Argentine Legion covers a stretch of the wall /
 		#     la barra tiene que moverse durante la guerra: la Legion Argentina cubre una linea de la muralla
@@ -106,6 +107,7 @@ gg_contingent.1 = {
 	#     un cuerpo. Negarles la legion es la concesion que Buenos Aires venia pidiendo desde 1836:
 	#     cuesta la legion y el general, y compra un deshielo con Rosas.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.1.b|" # GG_TRAZA
 		name = gg_contingent.1.b
 		c:ARG ?= {
 			change_relations = { country = ROOT value = 30 }
@@ -124,6 +126,7 @@ gg_contingent.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.1|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_2 } }
@@ -164,6 +167,7 @@ gg_contingent.3 = {
 	#     tooltip shows it. ES: el batallon que cambia de bando estaba escondido en un immediate,
 	#     asi que el jugador solo veia un modificador. Es el evento entero: va en la opcion.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.3.a|" # GG_TRAZA
 		name = gg_contingent.3.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Basques cross with their arms to the camp /
 		#     la barra tiene que moverse durante la guerra: los vascos se pasan con sus armas al campamento
@@ -238,6 +242,7 @@ gg_contingent.3 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.3|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_1 } }
@@ -283,6 +288,7 @@ gg_contingent.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.4.a|" # GG_TRAZA
 		name = gg_contingent.4.a
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the French Legion is the largest corps of the siege /
 		#     la barra tiene que moverse durante la guerra: la Legion Francesa es el cuerpo mas numeroso del sitio
@@ -345,6 +351,7 @@ gg_contingent.4 = {
 	#     companias eran companias DE esta legion (Etchechury 2017, n. 78). Sin Legion Francesa en
 	#     1843 no hay de que separarse en 1845.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.4.b|" # GG_TRAZA
 		name = gg_contingent.4.b
 		# EN/ES: T4 -- FE-4: Paris would rather they went home / Paris prefiere que vuelvan
 		gg_patron_change = { PATRON = francia DELTA = -5 }
@@ -364,6 +371,7 @@ gg_contingent.4 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.4|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_4 } }
@@ -412,6 +420,7 @@ gg_contingent.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_italian_legion|" # GG_TRAZA
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- Garibaldi is named only when he comes with
 		#     the legion (gg_garibaldi_famous) / Garibaldi se nombra solo cuando viene con la legion
 		name = {
@@ -496,6 +505,7 @@ gg_contingent.5 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.5|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_5 } }
@@ -533,6 +543,7 @@ gg_contingent.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.6.a|" # GG_TRAZA
 		name = gg_contingent.6.a
 		# EN/ES: 22/9/2026 -- the siege journal lists the Chasseurs / el journal del sitio lista a los Cazadores
 		set_variable = gg_basque_chasseurs_raised
@@ -561,6 +572,7 @@ gg_contingent.6 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.6|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_8 } }
@@ -575,6 +587,7 @@ gg_contingent.6 = {
 # de Buenos Aires and a flying battery, all listed in Magarinos de Mello's documents. He crossed
 # with close to 7,000 men in 1842 (Duffau 2019).
 gg_contingent.7 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.7|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -596,6 +609,7 @@ gg_contingent.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.7.a|" # GG_TRAZA
 		name = gg_contingent.7.a
 		# EN/ES: T4 -- FE-4: the Vanguard is Rosas's army / la Vanguardia es el ejercito de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
@@ -700,6 +714,7 @@ gg_contingent.8 = {
 	#     La parte financiera de los tratados del 12 de octubre no se repite aca: es de la cadena
 	#     gg_loan. Los contingentes dan hombres, los emprestitos dan plata.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.8.a|" # GG_TRAZA
 		name = gg_contingent.8.a
 		default_option = yes
 		set_global_variable = guerra_grande_treaties_signed
@@ -789,6 +804,7 @@ gg_contingent.8 = {
 	#     negociador escribiendo que "en cuestion de territorio el titulo verdadero es fuerza"
 	#     (Lamas a su ministro, 13 de octubre de 1851). Y no hay capitulacion: el sitio sigue.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.8.b|" # GG_TRAZA
 		name = gg_contingent.8.b
 		c:BRZ ?= {
 			change_relations = { country = ROOT value = -50 }
@@ -810,6 +826,7 @@ gg_contingent.8 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.8|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_29 } }

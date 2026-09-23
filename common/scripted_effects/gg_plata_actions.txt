@@ -10,6 +10,7 @@
 #     dieciocho meses a doce, y el ultimatum a Rosas llega antes. Los padrinos igual suben, porque
 #     los padrinos son plata y legiones, no el mar. Llamarlas antes de 1845 sigue costando soberania.
 gg_ui_call_squadrons_effect = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ui_call_squadrons_effect|" # GG_TRAZA
 	if = {
 		limit = { gg_ui_can_call_squadrons = yes has_global_variable = guerra_grande_split_done }
 		set_global_variable = gg_intervention_called

@@ -15,6 +15,7 @@ gg_audit_postwar_migration = {
 		NOT = { has_global_variable = gg_audit_postwar_cleanup_v2 }
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_audit_postwar_migration" # GG_TRAZA
 		set_global_variable = gg_audit_postwar_cleanup_v2
 		gg_wartime_modifiers_clear = yes
 		# EN/ES: Old partitions generated extra Oribe copies; keep one canonical living character.
@@ -57,7 +58,7 @@ gg_pact_negotiated_migration = {
 		has_global_variable = gg_confederacion_negociada
 		NOT = { has_global_variable = gg_pact_settled }
 	}
-	effect = { gg_pact_resolve = yes }
+	effect = { debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_negotiated_migration"  gg_pact_resolve = yes }
 }
 
 gg_rebel_diplomacy_migration = {
@@ -65,5 +66,5 @@ gg_rebel_diplomacy_migration = {
 		c:CLN ?= this
 		NOT = { has_variable = gg_rebel_diplomacy_reset }
 	}
-	effect = { gg_argentina_rebel_diplomacy_reset = yes }
+	effect = { debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rebel_diplomacy_migration"  gg_argentina_rebel_diplomacy_reset = yes }
 }

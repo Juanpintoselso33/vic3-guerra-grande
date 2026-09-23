@@ -21,6 +21,7 @@
 
 # EN/ES: find a living man with this template, anywhere / busca un vivo con este template, donde sea
 gg_pact_gov_from_template = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_from_template| TEMPLATE= $TEMPLATE$  VAR= $VAR$ " # GG_TRAZA
 	every_country = {
 		every_scope_character = {
 			limit = { has_template = $TEMPLATE$ is_character_alive = yes }
@@ -33,6 +34,7 @@ gg_pact_gov_from_template = {
 #     creates (Rosas's roster, Urquiza, Echague, Heredia, Beron de Astrada, Avellaneda...).
 # ES: El gobernador de la fecha, si vive. Para personajes que ya crea el juego u otro evento.
 gg_pact_gov_pick = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_pick| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
 	# EN/ES: Codex 22/9 -- alive in exile still counts: shown, not moved (another event owns him)
 	#     / vivo en el exilio igual cuenta: se lo muestra, no se lo mueve
@@ -51,6 +53,7 @@ gg_pact_gov_pick = {
 # ES: Lo mismo, y si NUNCA nacio, nace ahora -- una vez -- en quien tenga la provincia. La marca
 #     gg_gov_born_<template> es lo que mantiene muerto a un gobernador muerto.
 gg_pact_gov_pick_or_create = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_pick_or_create| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
 	if = {
 		limit = { has_global_variable = gg_pact_gov_$KEY$ }
@@ -119,6 +122,7 @@ gg_pact_gov_pick_or_create = {
 
 # EN/ES: one row: the province country's ruler, else the historical governor / una fila
 gg_pact_gov_province = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_province|" # GG_TRAZA
 	if = { limit = { has_global_variable = gg_pact_gov_$KEY$ } remove_global_variable = gg_pact_gov_$KEY$ }
 	if = {
 		limit = { exists = c:$TAG$ c:$TAG$ = { exists = ruler } }
@@ -128,6 +132,7 @@ gg_pact_gov_province = {
 }
 
 gg_pact_governors_update = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update|" # GG_TRAZA
 	gg_pact_gov_province = { KEY = corrientes TAG = CRR }
 	gg_pact_gov_province = { KEY = tucuman TAG = TUC }
 	gg_pact_gov_province = { KEY = salta TAG = SLT }
@@ -166,6 +171,7 @@ gg_pact_governors_update = {
 #     fecha se tomo y por que (gana la que dos fuentes comparten).
 # -------------------------------------------------------------------------------------------------
 gg_pact_gov_hist_corrientes = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_corrientes|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1837.12.2 -- A, R: died in office 2/12/1837
 	if = { limit = { game_date < 1837.12.2 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_rafael_leon_de_atienza KEY = corrientes STATE = STATE_CORRIENTES } }
 	# EN/ES: 1837.12.12 - 1839.3.31 -- A 12/12/1837 (R 14/12, ficha 2/12); dies at Pago Largo
@@ -186,6 +192,7 @@ gg_pact_gov_hist_corrientes = {
 	if = { limit = { game_date >= 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_benjamin_virasoro KEY = corrientes STATE = STATE_CORRIENTES } }
 }
 gg_pact_gov_hist_entre_rios = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_entre_rios|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1841.12.31 -- A, R: 1/3/1832 - 31/12/1841
 	if = { limit = { game_date < 1841.12.31 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = entre_rios } }
 	# EN/ES: 1842.1.1 - 1842.1.29 -- A, R
@@ -196,6 +203,7 @@ gg_pact_gov_hist_entre_rios = {
 	if = { limit = { game_date >= 1842.4.7 } gg_pact_gov_pick = { TEMPLATE = ARG_Justo_Jose_de_Urquiza KEY = entre_rios } }
 }
 gg_pact_gov_hist_santa_fe = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_santa_fe|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1838.6.15 -- died in office 15/6/1838
 	if = { limit = { game_date < 1838.6.15 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_estanislao_lopez KEY = santa_fe STATE = STATE_SANTA_FE } }
 	# EN/ES: 1838.6.15 - 1838.9.16 -- A, ficha 15/6/1838; R 16/9/1838 (art J. P. Lopez 29/9)
@@ -212,6 +220,7 @@ gg_pact_gov_hist_santa_fe = {
 	if = { limit = { game_date >= 1851.12.22 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_domingo_crespo KEY = santa_fe STATE = STATE_SANTA_FE } }
 }
 gg_pact_gov_hist_cordoba = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_cordoba|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1840.10.10 -- titular from 30/3/1836, de facto since 17/11/1835
 	if = { limit = { game_date < 1840.10.10 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
 	# EN/ES: 1840.10.10 - 1840.12.19 -- A, art 10/10 - 19/12/1840
@@ -220,6 +229,7 @@ gg_pact_gov_hist_cordoba = {
 	if = { limit = { game_date >= 1840.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
 }
 gg_pact_gov_hist_santiago_del_estero = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_santiago_del_estero|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1851.7.15 -- died in office 15/7/1851
 	if = { limit = { game_date < 1851.7.15 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_juan_felipe_ibarra KEY = santiago_del_estero } }
 	# EN/ES: 1851.7.15 - 1851.10.5 -- provisional, A, R
@@ -228,6 +238,7 @@ gg_pact_gov_hist_santiago_del_estero = {
 	if = { limit = { game_date >= 1851.10.5 } gg_pact_gov_pick_or_create = { TEMPLATE = SDE_gg_manuel_taboada KEY = santiago_del_estero STATE = STATE_SANTIAGO_DEL_ESTERO } }
 }
 gg_pact_gov_hist_tucuman = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_tucuman|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1838.11.12 -- murdered at Lules 12/11/1838
 	if = { limit = { game_date < 1838.11.12 } gg_pact_gov_pick = { TEMPLATE = ARG_Alejandro_Heredia KEY = tucuman } }
 	# EN/ES: 1838.11.22 - 1840.12.1 -- A, R
@@ -242,6 +253,7 @@ gg_pact_gov_hist_tucuman = {
 	if = { limit = { game_date >= 1841.10.4 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_celedonio_gutierrez KEY = tucuman STATE = STATE_TUCUMAN } }
 }
 gg_pact_gov_hist_salta = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_salta|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1836.3.5 -- A, R
 	if = { limit = { game_date < 1836.3.5 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_jose_antonino_fernandez_cornejo KEY = salta STATE = STATE_SALTA } }
 	# EN/ES: 1836.3.5 - 1838.11.16 -- A 5/3/1836; art 16/11/1838 (R 17/11)
@@ -266,6 +278,7 @@ gg_pact_gov_hist_salta = {
 	if = { limit = { game_date >= 1850.10.25 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_jose_manuel_saravia KEY = salta STATE = STATE_SALTA } }
 }
 gg_pact_gov_hist_jujuy = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_jujuy|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1836.1.18 -- A, R: to 18/1/1836 (art 17/1)
 	if = { limit = { game_date < 1836.1.18 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_eustaquio_medina KEY = jujuy STATE = STATE_JUJUY } }
 	# EN/ES: 1836.1.18 - 1836.3.21 -- A (R names Fermin de la Quintana)
@@ -286,6 +299,7 @@ gg_pact_gov_hist_jujuy = {
 	if = { limit = { game_date >= 1851.9.13 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
 }
 gg_pact_gov_hist_catamarca = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_catamarca|" # GG_TRAZA
 	# EN/ES: 1836.1.2 - 1836.7.20 -- art, R 2/1/1836; A, art 20/7/1836
 	if = { limit = { game_date >= 1836.1.2 game_date < 1836.7.20 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_fernando_villafane KEY = catamarca STATE = STATE_CATAMARCA } }
 	# EN/ES: 1836.7.20 - 1841.4.10 -- A, art 20/7/1836; ends where Balboa begins (A, ficha: 10/4/1841)
@@ -298,6 +312,7 @@ gg_pact_gov_hist_catamarca = {
 	if = { limit = { game_date >= 1845.12.1 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_manuel_navarro KEY = catamarca STATE = STATE_CATAMARCA } }
 }
 gg_pact_gov_hist_la_rioja = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_la_rioja|" # GG_TRAZA
 	# EN/ES: 1836.3.1 - 1836.6.4 -- A, R "mar. 1836" (month only) - 4/6/1836
 	if = { limit = { game_date >= 1836.3.1 game_date < 1836.6.4 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_jacinto_del_rincon KEY = la_rioja STATE = STATE_LA_RIOJA } }
 	# EN/ES: 1836.6.4 - 1837.5.27 -- A, R
@@ -314,6 +329,7 @@ gg_pact_gov_hist_la_rioja = {
 	if = { limit = { game_date >= 1848.3.6 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_manuel_vicente_bustos KEY = la_rioja STATE = STATE_LA_RIOJA } }
 }
 gg_pact_gov_hist_mendoza = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_mendoza|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1838.3.20 -- A, R
 	if = { limit = { game_date < 1838.3.20 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_pedro_molina KEY = mendoza STATE = STATE_MENDOZA } }
 	# EN/ES: 1838.3.20 - 1840.11.4 -- A, R
@@ -332,6 +348,7 @@ gg_pact_gov_hist_mendoza = {
 	if = { limit = { game_date >= 1847.4.4 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_alejo_mallea KEY = mendoza STATE = STATE_MENDOZA } }
 }
 gg_pact_gov_hist_san_juan = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_san_juan|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1836.1.9 -- A, art 9/1/1836 (R 8/1)
 	if = { limit = { game_date < 1836.1.9 } gg_pact_gov_pick_or_create = { TEMPLATE = SJN_gg_martin_yanzon KEY = san_juan STATE = STATE_SAN_JUAN } }
 	# EN/ES: 1836.2.26 - 1841.8.13 -- interim 26/2/1836 (A, art); Acha took the city 13/8/1841
@@ -340,6 +357,7 @@ gg_pact_gov_hist_san_juan = {
 	if = { limit = { game_date >= 1841.10.8 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_nazario_benavidez KEY = san_juan } }
 }
 gg_pact_gov_hist_san_luis = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_hist_san_luis|" # GG_TRAZA
 	# EN/ES: 1836.1.1 - 1840.11.9 -- A 9/11/1840 (R 11/11)
 	if = { limit = { game_date < 1840.11.9 } gg_pact_gov_pick_or_create = { TEMPLATE = SNL_gg_jose_gregorio_calderon KEY = san_luis STATE = STATE_SAN_LUIS } }
 	# EN/ES: 1841.1.6 - ... -- A, ficha, R 6/1/1841
@@ -357,50 +375,62 @@ gg_pact_gov_hist_san_luis = {
 #     gobernador federal que siguio a su caida en la historia.
 # -------------------------------------------------------------------------------------------------
 gg_pact_gov_federal_corrientes = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_corrientes|" # GG_TRAZA
 	if = { limit = { game_date < 1842.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_jose_antonio_romero KEY = corrientes STATE = STATE_CORRIENTES } }
 	else_if = { limit = { game_date >= 1842.12.14 game_date < 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_pedro_cabral KEY = corrientes STATE = STATE_CORRIENTES } }
 	else_if = { limit = { game_date >= 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_benjamin_virasoro KEY = corrientes STATE = STATE_CORRIENTES } }
 	else = { gg_pact_gov_hist_corrientes = yes }
 }
 gg_pact_gov_federal_santa_fe = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_santa_fe|" # GG_TRAZA
 	if = { limit = { game_date >= 1845.7.6 game_date < 1845.8.12 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = santa_fe } }
 	else = { gg_pact_gov_hist_santa_fe = yes }
 }
 gg_pact_gov_federal_cordoba = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_cordoba|" # GG_TRAZA
 	if = { limit = { game_date >= 1840.10.10 game_date < 1840.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
 	else = { gg_pact_gov_hist_cordoba = yes }
 }
 gg_pact_gov_federal_santiago_del_estero = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_santiago_del_estero|" # GG_TRAZA
 	gg_pact_gov_hist_santiago_del_estero = yes
 }
 gg_pact_gov_federal_tucuman = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_tucuman|" # GG_TRAZA
 	if = { limit = { game_date < 1841.10.4 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_celedonio_gutierrez KEY = tucuman STATE = STATE_TUCUMAN } }
 	else = { gg_pact_gov_hist_tucuman = yes }
 }
 gg_pact_gov_federal_salta = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_salta|" # GG_TRAZA
 	if = { limit = { game_date >= 1838.11.17 game_date < 1842.4.1 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_miguel_otero KEY = salta STATE = STATE_SALTA } }
 	else = { gg_pact_gov_hist_salta = yes }
 }
 gg_pact_gov_federal_jujuy = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_jujuy|" # GG_TRAZA
 	if = { limit = { game_date >= 1840.4.18 game_date < 1841.11.19 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
 	else_if = { limit = { game_date >= 1851.1.12 game_date < 1851.9.13 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
 	else = { gg_pact_gov_hist_jujuy = yes }
 }
 gg_pact_gov_federal_catamarca = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_catamarca|" # GG_TRAZA
 	if = { limit = { game_date >= 1836.7.20 game_date < 1841.4.10 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_juan_eusebio_balboa KEY = catamarca STATE = STATE_CATAMARCA } }
 	else = { gg_pact_gov_hist_catamarca = yes }
 }
 gg_pact_gov_federal_la_rioja = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_la_rioja|" # GG_TRAZA
 	if = { limit = { game_date >= 1837.5.27 game_date < 1841.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_hipolito_tello KEY = la_rioja STATE = STATE_LA_RIOJA } }
 	else = { gg_pact_gov_hist_la_rioja = yes }
 }
 gg_pact_gov_federal_mendoza = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_mendoza|" # GG_TRAZA
 	if = { limit = { game_date >= 1841.9.5 game_date < 1841.11.24 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_jose_felix_aldao KEY = mendoza } }
 	else = { gg_pact_gov_hist_mendoza = yes }
 }
 gg_pact_gov_federal_san_juan = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_san_juan|" # GG_TRAZA
 	gg_pact_gov_hist_san_juan = yes
 }
 gg_pact_gov_federal_san_luis = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_san_luis|" # GG_TRAZA
 	gg_pact_gov_hist_san_luis = yes
 }

@@ -31,6 +31,7 @@
 # ES: Una provincia, en el scope del pais batido. Solo se mueve un estado fuera de la provincia de la
 #     capital: la provincia de la capital ES el pais.
 gg_province_split_off = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_split_off| KEY= $KEY$  STATE= $STATE$  TAG= $TAG$ " # GG_TRAZA
 	if = {
 		limit = {
 			has_state_in_state_region = $STATE$
@@ -90,6 +91,7 @@ gg_province_split_off = {
 #     particion las creara, su propio nacimiento se quedaria sin estado. Si un pais batido tiene uno de
 #     sus estados, va a la provincia si ya es sujeta de Buenos Aires, y si no, vuelve a Buenos Aires.
 gg_province_split_home = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_split_home| STATE= $STATE$ " # GG_TRAZA
 	if = {
 		limit = {
 			has_state_in_state_region = $STATE$
@@ -115,6 +117,7 @@ gg_province_split_home = {
 # EN: The whole split, in the scope of the beaten country. Every province but the capital's.
 # ES: La particion entera, en el scope del pais batido. Todas las provincias menos la de la capital.
 gg_province_split_beaten = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_split_beaten|" # GG_TRAZA
 	save_scope_as = gg_split_origin
 	gg_province_split_home = { STATE = STATE_CORRIENTES TAG = CRR }
 	gg_province_split_home = { STATE = STATE_ENTRE_RIOS TAG = ENR }
@@ -146,6 +149,7 @@ gg_province_split_beaten = {
 # SOURCE / FUENTE: Wikipedia ES «Coalicion del Norte» (consecuencias: cada provincia vuelve con un
 #     gobernador federal) and «Celedonio Gutierrez» (Tucuman, 14/11/1841-14/6/1852); decisiones-argentina.md, 12.
 gg_argentina_split_coalition = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_split_coalition|" # GG_TRAZA
 	save_scope_as = gg_split_league
 	# EN/ES: marked BEFORE the tag change, on the league itself (gg_provinces.1) / marcada ANTES del cambio de tag
 	set_variable = { name = gg_split_league_pending value = 0 }
@@ -218,6 +222,7 @@ gg_argentina_split_coalition = {
 #     vive en alguna parte, se lo crea una vez si nunca nacio. Sin gobernador documentado para la fecha
 #     la silla queda como la deja el motor: no se inventa un nombre para llenarla.
 gg_province_install_governor = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_install_governor|" # GG_TRAZA
 	save_scope_as = gg_gov_country
 	gg_pact_gov_federal_$KEY$ = yes
 	if = {
@@ -239,6 +244,7 @@ gg_province_install_governor = {
 # ES: TRAER A UN HOMBRE, NO COPIARLO: la misma regla que gg_ruler_set, sin hacerlo gobernante. Para un
 #     personaje que puede vivir ya en otra parte porque la lista del Pacto lo trajo antes que su evento.
 gg_character_fetch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_character_fetch| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	save_scope_as = gg_fetch_to
 	if = {
 		limit = { any_scope_character = { has_template = $TEMPLATE$ } }

@@ -5,6 +5,7 @@
 # ES: Los niveles de las potencias, una vez por mes: un cambio de nivel es un cambio de estado, y los
 #     jugadores de la Defensa y del Cerrito reciben un aviso. El primer mes solo registra.
 gg_patron_levels_monthly = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_levels_monthly|" # GG_TRAZA
 	gg_patron_level_watch_francia = yes
 	gg_patron_level_watch_britania = yes
 	gg_patron_level_watch_brasil = yes
@@ -12,12 +13,13 @@ gg_patron_levels_monthly = {
 # EN/ES: also called by gg_patron_change right after the number moves; the landmarks (flags) are caught
 #     by the monthly pulse. Rosas and Urquiza have no level. / tambien lo llama gg_patron_change apenas
 #     se mueve el numero; los hitos los agarra el pulso mensual. Rosas y Urquiza no tienen nivel.
-gg_patron_level_watch_francia = { gg_patron_level_watch = { POWER = francia EVENT = gg_patron.1 } }
-gg_patron_level_watch_britania = { gg_patron_level_watch = { POWER = britania EVENT = gg_patron.2 } }
-gg_patron_level_watch_brasil = { gg_patron_level_watch = { POWER = brasil EVENT = gg_patron.3 } }
-gg_patron_level_watch_rosas = { }
-gg_patron_level_watch_urquiza = { }
+gg_patron_level_watch_francia = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch_francia|"  gg_patron_level_watch = { POWER = francia EVENT = gg_patron.1 } }
+gg_patron_level_watch_britania = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch_britania|"  gg_patron_level_watch = { POWER = britania EVENT = gg_patron.2 } }
+gg_patron_level_watch_brasil = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch_brasil|"  gg_patron_level_watch = { POWER = brasil EVENT = gg_patron.3 } }
+gg_patron_level_watch_rosas = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch_rosas|"  }
+gg_patron_level_watch_urquiza = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch_urquiza|"  }
 gg_patron_level_watch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_level_watch| EVENT= $EVENT$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_power_level_seen_$POWER$ } }
 		set_global_variable = { name = gg_power_level_seen_$POWER$ value = gg_patron_level_$POWER$ }

@@ -90,6 +90,7 @@ gg_naval.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.1|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_coe_decided
 		}
@@ -100,6 +101,7 @@ gg_naval.1 = {
 	# ES: la respuesta historica: la Comision Maritima abre una suscripcion entre los ricos de
 	#     Montevideo y Coe sale al rio. Compra Santa Lucia y poco mas.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.1.a|" # GG_TRAZA
 		name = gg_naval.1.a
 		default_option = yes
 		custom_tooltip = gg_naval.1.a_tt
@@ -117,6 +119,7 @@ gg_naval.1 = {
 	# ES: dejarle el rio a Brown y guardarse la plata. Lo paga el puerto hasta que la intervencion
 	#     de 1843 vuelva a abrir el mar.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.1.b|" # GG_TRAZA
 		name = gg_naval.1.b
 		custom_tooltip = gg_naval.1.b_tt
 		add_modifier = {
@@ -134,6 +137,7 @@ gg_naval.1 = {
 # printing lampoons about him. / 23 de diciembre de 1841: Coe vuelve de la ultima refriega y la
 # ciudad ya imprime pasquines contra el.
 gg_naval.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -160,6 +164,7 @@ gg_naval.2 = {
 	#     Brava. / ES: lo historico: se desarma la escuadra salvo el Pereira y la Constitucion, que
 	#     se alistan para Corrientes. Esa expedicion es la de Garibaldi, y termina en Costa Brava.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.2.a|" # GG_TRAZA
 		name = gg_naval.2.a
 		default_option = yes
 		custom_tooltip = gg_naval.2.a_tt
@@ -176,6 +181,7 @@ gg_naval.2 = {
 	# ES: vender todos los cascos y que el consejo de guerra resuelva lo de Coe. Sin expedicion, sin
 	#     Costa Brava, y algo vuelve a la caja.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.2.b|" # GG_TRAZA
 		name = gg_naval.2.b
 		custom_tooltip = gg_naval.2.b_tt
 		add_treasury = 15000
@@ -207,6 +213,7 @@ gg_naval.3 = {
 
 	# EN/ES: the defeat is the defeat, whatever is done with the man / la derrota es la derrota
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.3|" # GG_TRAZA
 		gg_score_blanco = { AMOUNT = 1 }
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 	}
@@ -216,6 +223,7 @@ gg_naval.3 = {
 	# ES: recibirlo como lo que la ciudad ya cree que es. Esa fama es la que llena la Legion
 	#     Italiana de 1843: Garibaldi la manda, y forma un batallon mas.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.3.a|" # GG_TRAZA
 		name = gg_naval.3.a
 		default_option = yes
 		custom_tooltip = gg_naval.3.a_tt
@@ -228,6 +236,7 @@ gg_naval.3 = {
 	#     one the city can pay for. / ES: una derrota es una derrota: sin honores, sin sueldos
 	#     atrasados, sin ascenso. La legion de 1843 es la que la ciudad pueda pagar.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_naval.3.b|" # GG_TRAZA
 		name = gg_naval.3.b
 		custom_tooltip = gg_naval.3.b_tt
 		# EN/ES: 22/9/2026, decided with Juan -- a government that does not dress a defeat as a victory

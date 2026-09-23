@@ -6,6 +6,7 @@
 # ES: Una vez por semana desde je_gg_siege: los modificadores de combate del sitio sobre los generales
 #     del frente de Montevideo (10 dias, renovados) y la estrategia de sitio del Cerrito de la IA.
 gg_siege_generals_sync = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_generals_sync|" # GG_TRAZA
 	every_country = {
 		limit = { has_modifier = guerra_grande_walls_of_montevideo }
 		every_scope_general = {

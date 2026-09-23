@@ -9,6 +9,7 @@
 # ES: Las ideologias con que nace cada divisa. Blanco: + soberanista, - esclavista. Colorado:
 #     reaccionario -> liberal. El grupo que devuelve el nombre recupera tambien la ideologia de vanilla.
 gg_party_blanco_ideologies = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_party_blanco_ideologies|" # GG_TRAZA
 	if = {
 		limit = { has_ideology = ideology:ideology_pro_slavery }
 		remove_ideology = ideology_pro_slavery
@@ -19,6 +20,7 @@ gg_party_blanco_ideologies = {
 	}
 }
 gg_party_colorado_ideologies = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_party_colorado_ideologies|" # GG_TRAZA
 	if = {
 		limit = { has_ideology = ideology:ideology_reactionary }
 		remove_ideology = ideology_reactionary
@@ -30,6 +32,7 @@ gg_party_colorado_ideologies = {
 }
 # EN/ES: back to vanilla when the name is given back / de vuelta a vanilla al devolver el nombre
 gg_party_colorado_ideologies_undo = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_party_colorado_ideologies_undo|" # GG_TRAZA
 	if = {
 		limit = { has_ideology = ideology:ideology_liberal }
 		remove_ideology = ideology_liberal
@@ -40,6 +43,7 @@ gg_party_colorado_ideologies_undo = {
 	}
 }
 gg_party_blanco_ideologies_undo = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_party_blanco_ideologies_undo|" # GG_TRAZA
 	# EN/ES: only what we added; slavery is left to vanilla and the abolition events
 	#     / solo lo que agregamos; la esclavitud queda en manos de vanilla y de los eventos de abolicion
 	if = {

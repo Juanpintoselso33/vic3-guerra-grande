@@ -12,6 +12,7 @@
 # F1-0 - the blanco path converges (1 February 1839)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande ('resignacion', 'licencia temporal'; Oribe received by Rosas as constitutional president).
 gg_phase1.9 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.9|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -42,6 +43,7 @@ gg_phase1.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.9.a|" # GG_TRAZA
 		name = gg_phase1.9.a
 		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
 		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
@@ -101,6 +103,7 @@ gg_phase1.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.9.b|" # GG_TRAZA
 		name = gg_phase1.9.b
 		# EN/ES: playtest 2026-09-17 -- Oribe and his brother leave for Buenos Aires (29 October 1838);
 		#     Rivera governs until the split / Oribe y su hermano se van a Buenos Aires; Rivera gobierna
@@ -173,6 +176,7 @@ gg_phase1.9 = {
 # F1-1 - Rivera declares war on Rosas (21 February 1839)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande: Oribe to Buenos Aires 29.10.1838 on a British ship with 300 men; Rosas offers him command; Beron de Astrada's treaty and Corrientes' ports; the declaration of war quote; Lavalle's reluctance.
 gg_phase1.1 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.1|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -196,6 +200,7 @@ gg_phase1.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.1.a|" # GG_TRAZA
 		name = gg_phase1.1.a
 		default_option = yes
 		# EN: historical: total war. France up, Rosas angry, Echague invades.
@@ -232,6 +237,7 @@ gg_phase1.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.1.b|" # GG_TRAZA
 		name = gg_phase1.1.b
 		custom_tooltip = gg_phase1.1.b_tt
 		# EN: only the alliance with Corrientes: less France, a smaller invasion.
@@ -269,6 +275,7 @@ gg_phase1.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.1.c|" # GG_TRAZA
 		name = gg_phase1.1.c
 		custom_tooltip = gg_phase1.1.c_tt
 		# EN: neutrality: France cools and nobody invades in 1839, but Rosas prepares anyway and
@@ -302,6 +309,7 @@ gg_phase1.1 = {
 # F1-2a - Echague and Lavalleja cross at Salto (29 July 1839)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Pago Largo' and 'Cagancha': 21.3.1839; Echague and Lavalleja cross at Salto 29.7.1839; Rivera's plan (Queguay, Negro, Santa Lucia, infantry from Montevideo).
 gg_phase1.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -336,6 +344,7 @@ gg_phase1.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.2.a|" # GG_TRAZA
 		name = gg_phase1.2.a
 		# EN/ES: F1-1 b -- the invasion is smaller / la invasion es mas chica
 		if = {
@@ -353,6 +362,7 @@ gg_phase1.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.2.b|" # GG_TRAZA
 		name = gg_phase1.2.b
 		# EN/ES: F1-1 b -- the invasion is smaller / la invasion es mas chica
 		if = {
@@ -405,10 +415,12 @@ gg_phase1.3 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.3|" # GG_TRAZA
 		gg_score_colorado = { AMOUNT = 2 }
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.3.a|" # GG_TRAZA
 		name = gg_phase1.3.a
 		custom_tooltip = gg_phase1.3.a_tt
 		# EN: invade Entre Rios as the unitarians ask: France up, the army exposed (Arroyo Grande hits harder).
@@ -419,6 +431,7 @@ gg_phase1.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.3.b|" # GG_TRAZA
 		name = gg_phase1.3.b
 		default_option = yes
 		# EN: historical: stay. Rivera refused to cross.
@@ -433,6 +446,7 @@ gg_phase1.3 = {
 # F1-6 - Lavalle and the emigres (1 September 1839, half a year later with asylum)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Pago Largo' (Lavalle lands in Entre Rios, federalist proclamation, Corrientes under Ferre; Maza; 'Es accion santa matar a Rosas').
 gg_phase1.4 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.4|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -456,6 +470,7 @@ gg_phase1.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.4.a|" # GG_TRAZA
 		name = gg_phase1.4.a
 		default_option = yes
 		# EN: back Lavalle's expedition and its French ships: France and Rosas both rise.
@@ -467,6 +482,7 @@ gg_phase1.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.4.b|" # GG_TRAZA
 		name = gg_phase1.4.b
 		# EN: keep the Republic out of the unitarians' war.
 		# ES: dejar a la Republica afuera de la guerra de los unitarios.
@@ -514,10 +530,12 @@ gg_phase1.5 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.5|" # GG_TRAZA
 		gg_patron_change = { PATRON = francia DELTA = -15 }
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.5.a|" # GG_TRAZA
 		name = gg_phase1.5.a
 		default_option = yes
 		# EN: look for Britain: it rises early, for a price.
@@ -528,6 +546,7 @@ gg_phase1.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.5.b|" # GG_TRAZA
 		name = gg_phase1.5.b
 		# EN: lean on the unitarians and Corrientes: more war support, a harder Rosas.
 		# ES: apoyarse en los unitarios y en Corrientes: mas apoyo a la guerra, Rosas se endurece.
@@ -537,6 +556,7 @@ gg_phase1.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.5.c|" # GG_TRAZA
 		name = gg_phase1.5.c
 		# EN: ask Brazil: it comes early, and the price is the border -- the claim on Rio Grande goes.
 		# ES: pedirle al Brasil: llega antes, y el precio es la frontera: se va el reclamo sobre Rio Grande.
@@ -553,6 +573,7 @@ gg_phase1.5 = {
 # F1-8 - news of Famailla and of Lavalle's death (15 October 1841)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande (Quebracho Herrado 28.11.1840, Famailla 19.9.1841, Lavalle's death 9.10.1841); the Avellaneda dispatch is quoted from SOURCES_peace.md (see gg_peace.2.c).
 gg_phase1.6 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.6|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -576,6 +597,7 @@ gg_phase1.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.6.a|" # GG_TRAZA
 		name = gg_phase1.6.a
 		default_option = yes
 		# EN: use the name 'degollador' in the Montevideo press: France and Europe listen, the blancos harden.
@@ -586,6 +608,7 @@ gg_phase1.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.6.b|" # GG_TRAZA
 		name = gg_phase1.6.b
 		# EN: say nothing: Oribe comes back in 1843 with his veterans and no public stain.
 		# ES: callar: Oribe vuelve en 1843 con sus veteranos y sin mancha publica.
@@ -624,10 +647,12 @@ gg_phase1.7 = {
 	# EN/ES: 22/9/2026 (event audit) -- a later event reads this answer and waits for it
 	#     / un evento posterior lee esta respuesta y la espera
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.7|" # GG_TRAZA
 		set_global_variable = gg_pending_phase1_7
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.7.a|" # GG_TRAZA
 		name = gg_phase1.7.a
 		if = {
 			limit = { has_global_variable = gg_pending_phase1_7 }
@@ -647,6 +672,7 @@ gg_phase1.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.7.b|" # GG_TRAZA
 		name = gg_phase1.7.b
 		if = {
 			limit = { has_global_variable = gg_pending_phase1_7 }
@@ -664,6 +690,7 @@ gg_phase1.7 = {
 # F1-4 - Arroyo Grande: the news that Oribe is 'defenceless' (20 November 1842)
 # SOURCE / FUENTE: Wikipedia ES, Guerra Grande 'Arroyo Grande' (Rosas deceives Mandeville; 'Si el Pardejon supiera aprovecharse').
 gg_phase1.8 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.8|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -687,6 +714,7 @@ gg_phase1.8 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.8.a|" # GG_TRAZA
 		name = gg_phase1.8.a
 		custom_tooltip = gg_phase1.8.a_tt
 		default_option = yes
@@ -709,6 +737,7 @@ gg_phase1.8 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.8.b|" # GG_TRAZA
 		name = gg_phase1.8.b
 		custom_tooltip = gg_phase1.8.b_tt
 		# EN: wait on the coast: Oribe invades anyway and the split comes six months later, but the
@@ -749,6 +778,7 @@ gg_phase1.10 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.10|" # GG_TRAZA
 		gg_president_historical = yes
 	}
 }
@@ -765,6 +795,7 @@ gg_phase1.11 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.11|" # GG_TRAZA
 		gg_president_historical = yes
 	}
 }
@@ -777,6 +808,7 @@ gg_phase1.20 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.20|" # GG_TRAZA
 		if = {
 			limit = {
 				OR = {

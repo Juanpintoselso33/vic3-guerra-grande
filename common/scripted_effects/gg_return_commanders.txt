@@ -1,6 +1,7 @@
 ﻿# EN: Country scope: retrieve the original returning commanders before partition clones the roster.
 # ES: Scope pais: recuperar a los mandos originales antes de que la particion copie el plantel.
 gg_return_blanco_commanders = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_return_blanco_commanders|" # GG_TRAZA
 	save_scope_as = gg_commanders_return_country
 	c:ARG ?= {
 		every_scope_character = {
@@ -29,6 +30,7 @@ gg_return_blanco_commanders = {
 # ES: Scope pais. Buscar a Rivera en todos los paises antes de crearlo, traer un personaje
 #     existente y quitar cualquier otra copia viva en todo el mundo.
 gg_return_rivera = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_return_rivera|" # GG_TRAZA
 	save_scope_as = gg_rivera_return_country
 	clear_saved_scope = gg_rivera_returning_character
 	random_country = {
@@ -94,6 +96,7 @@ gg_return_rivera = {
 # ES: Scope pais. Solo migracion: conservar la copia de un gobierno oriental cuando exista; si no,
 #     la del pais que llama; como ultimo recurso cualquier copia viva. Eliminar las demas.
 gg_deduplicate_character_worldwide = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_deduplicate_character_worldwide| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	clear_saved_scope = gg_character_canonical
 	random_country = {
 		limit = {

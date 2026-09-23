@@ -10,6 +10,7 @@
 #     Defensa y del Cerrito. No cambian nada: el nivel ya cambio.
 # -------------------------------------------------------------------------------------------------
 gg_patron.1 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.1|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = {
@@ -36,11 +37,13 @@ gg_patron.1 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}
 }
 gg_patron.2 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.2|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = {
@@ -67,11 +70,13 @@ gg_patron.2 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}
 }
 gg_patron.3 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.3|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = {
@@ -98,6 +103,7 @@ gg_patron.3 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}

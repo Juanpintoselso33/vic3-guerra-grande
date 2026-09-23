@@ -19,6 +19,7 @@ gg_pact_wargoal_enforced = {
 		}
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_wargoal_enforced" # GG_TRAZA
 		if = { limit = { c:ENR ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
 		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
 	}
@@ -37,6 +38,7 @@ gg_pact_capitulation = {
 		}
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_capitulation" # GG_TRAZA
 		if = { limit = { c:ARG ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
 		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
 	}
@@ -50,6 +52,7 @@ gg_pact_on_war_end = {
 		c:ENR ?= scope:target
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_on_war_end" # GG_TRAZA
 		if = {
 			limit = { NOT = { global_var:gg_pact_war_urquiza_won = 1 } NOT = { global_var:gg_pact_war_rosas_won = 1 } }
 			set_global_variable = { name = gg_pact_war_white_peace value = 1 }

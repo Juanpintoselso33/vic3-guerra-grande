@@ -31,6 +31,7 @@ guerra_grande.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.1|" # GG_TRAZA
 		# EN/ES: 22/9/2026 -- the Guerra Grande opens here, at Carpinteria (Juan), with its bar up to date
 		#     / la Guerra Grande abre aca, en Carpinteria, con la barra al dia
 		if = {
@@ -70,6 +71,7 @@ guerra_grande.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.1.a|" # GG_TRAZA
 		name = guerra_grande.1.a
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the fall of Oribe is queued from the answer,
 		#     not from the popup: an answer given late still counts / la caida se agenda con la respuesta
@@ -90,6 +92,7 @@ guerra_grande.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.1.b|" # GG_TRAZA
 		name = guerra_grande.1.b
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the fall of Oribe is queued from the answer,
 		#     not from the popup: an answer given late still counts / la caida se agenda con la respuesta
@@ -109,6 +112,7 @@ guerra_grande.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.1.c|" # GG_TRAZA
 		name = guerra_grande.1.c
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- the fall of Oribe is queued from the answer,
 		#     not from the popup: an answer given late still counts / la caida se agenda con la respuesta
@@ -152,6 +156,7 @@ guerra_grande.2 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.2|" # GG_TRAZA
 		hidden_effect = {
 			# 1839.2.10 - Rivera declares war on Rosas and the war becomes open.
 			# EN: T6 -- the split no longer follows the fall by 110 days: Arroyo Grande (gg_phase1.8)
@@ -163,6 +168,7 @@ guerra_grande.2 = {
 
 	# Historical: Oribe resigns and sails to Buenos Aires, and Rivera takes the government.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.2.a|" # GG_TRAZA
 		name = guerra_grande.2.a
 		# EN/ES: 22/9/2026 (event audit) -- phase 1 is queued from the answer / la fase 1 se agenda con la respuesta
 		trigger_event = { id = gg_phase1.1 days = 120 popup = yes }   # 1839.02.21 guerra a Rosas
@@ -257,6 +263,7 @@ guerra_grande.2 = {
 
 	# The blanco government digs in instead: Oribe stays, and the blancos take the state alone.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.2.b|" # GG_TRAZA
 		name = guerra_grande.2.b
 		# EN/ES: 22/9/2026 (event audit) -- phase 1 is queued from the answer / la fase 1 se agenda con la respuesta
 		trigger_event = { id = gg_phase1.1 days = 120 popup = yes }   # 1839.02.21 guerra a Rosas
@@ -389,6 +396,7 @@ guerra_grande.3 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.3|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: T1, C13 -- open_war and Rosas's event moved into the options, after the Cerrito exists.
 			# EN: the foreign contingents, each on the day it actually arrived, counted from
@@ -431,6 +439,7 @@ guerra_grande.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.3.a|" # GG_TRAZA
 		name = guerra_grande.3.a
 		default_option = yes
 		# EN/ES: balance 2026-09-17 -- the halved lead, shown / la ventaja reducida, a la vista
@@ -930,6 +939,7 @@ guerra_grande.3 = {
 	#     del jugador se convierte en el. Al cambiar de tag, URU queda libre, y la Defensa se
 	#     separa con ese tag y la plaza amurallada, asi que todo lo que apunta a c:URU sigue bien.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.3.b|" # GG_TRAZA
 		name = guerra_grande.3.b
 		# EN/ES: balance 2026-09-17 -- the halved lead, shown / la ventaja reducida, a la vista
 		if = {
@@ -1390,6 +1400,7 @@ guerra_grande.17 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.17|" # GG_TRAZA
 		if = {
 			limit = {
 				c:ARG ?= this
@@ -1402,6 +1413,7 @@ guerra_grande.17 = {
 }
 
 guerra_grande.4 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.4|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1443,6 +1455,7 @@ guerra_grande.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.4.a|" # GG_TRAZA
 		name = guerra_grande.4.a
 		# EN/ES: T4 -- FE-4: Rosas backs Oribe / Rosas respalda a Oribe
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
@@ -1485,6 +1498,7 @@ guerra_grande.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.4.b|" # GG_TRAZA
 		name = guerra_grande.4.b
 		# EN/ES: T4 -- FE-4: let them sort it out / que lo arreglen entre ellos
 		gg_patron_change = { PATRON = rosas DELTA = -15 }
@@ -1501,6 +1515,7 @@ guerra_grande.4 = {
 
 # The Italian Legion is raised (fired by the button).
 guerra_grande.5 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.5|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1519,6 +1534,7 @@ guerra_grande.5 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.5.a|" # GG_TRAZA
 		name = guerra_grande.5.a
 		# EN: this event is reached ONLY from guerra_grande_italian_legion_button, and that button
 		#     created Garibaldi and a modifier but no troops -- so pressing it raised a legion that
@@ -1553,6 +1569,7 @@ guerra_grande.5 = {
 # EN: the squadrons arrive -- fired by guerra_grande_foreign_intervention_button.
 # ES: llegan las escuadras: lo dispara guerra_grande_foreign_intervention_button.
 guerra_grande.9 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.9|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1572,6 +1589,7 @@ guerra_grande.9 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.9.a|" # GG_TRAZA
 		name = guerra_grande.9.a
 		default_option = yes
 		# EN/ES: T3b, FE-8 -- as allies: more sea / como aliadas: mas mar
@@ -1583,6 +1601,7 @@ guerra_grande.9 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.9.b|" # GG_TRAZA
 		name = guerra_grande.9.b
 		custom_tooltip = guerra_grande.9.b_tt
 		# EN/ES: T3b, FE-8 -- as mediators: less sea, but the powers' peace opens sooner (T7, F3-2)
@@ -1600,6 +1619,7 @@ guerra_grande.9 = {
 
 # Portrait: Manuel Oribe.
 guerra_grande.11 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.11|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1622,6 +1642,7 @@ guerra_grande.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.11.a|" # GG_TRAZA
 		name = guerra_grande.11.a
 		# EN/ES: T5, FE-3 -- the law above the man: the doctores / la ley sobre el hombre: los doctores
 		# EN: this is what the choice is worth when the war finally starts.
@@ -1648,6 +1669,7 @@ guerra_grande.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.11.b|" # GG_TRAZA
 		name = guerra_grande.11.b
 		# EN/ES: T5, FE-3 -- as chosen in fichas.md: towards the caudillos / segun la ficha: hacia los caudillos
 		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
@@ -1674,6 +1696,7 @@ guerra_grande.11 = {
 
 # Portrait: Juan Antonio Lavalleja.
 guerra_grande.12 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.12|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1696,6 +1719,7 @@ guerra_grande.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.12.a|" # GG_TRAZA
 		name = guerra_grande.12.a
 		# EN/ES: T5, FE-3 -- Lavalleja came back with Rosas's men / Lavalleja volvio con hombres de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
@@ -1713,6 +1737,7 @@ guerra_grande.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.12.b|" # GG_TRAZA
 		name = guerra_grande.12.b
 		# EN: refusing Oribe is not a neutral act. These events fire on Uruguay while Oribe governs
 		#     it, so saying no to the cult of authority, or denying Lavalleja his command, is a
@@ -1738,6 +1763,7 @@ guerra_grande.12 = {
 
 # Portrait: Fructuoso Rivera in exile.
 guerra_grande.13 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.13|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1760,6 +1786,7 @@ guerra_grande.13 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.13.a|" # GG_TRAZA
 		name = guerra_grande.13.a
 		# EN/ES: T5, FE-3 -- asking the Empire to hand him over sours Rio / pedirle al Imperio que lo entregue agria a Rio
 		gg_patron_change = { PATRON = brasil DELTA = -5 }
@@ -1777,6 +1804,7 @@ guerra_grande.13 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.13.b|" # GG_TRAZA
 		name = guerra_grande.13.b
 		# EN: this is what the choice is worth when the war finally starts.
 		# ES: esto es lo que vale la eleccion cuando la guerra por fin empiece.
@@ -1793,6 +1821,7 @@ guerra_grande.13 = {
 
 # Portrait: Artigas, thirty years in Paraguay.
 guerra_grande.14 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.14|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1815,6 +1844,7 @@ guerra_grande.14 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.14.a|" # GG_TRAZA
 		name = guerra_grande.14.a
 		# EN/ES: T5, FE-3 -- the government that writes to Artigas borrows his name / el gobierno que le escribe a Artigas toma su nombre
 		add_modifier = { name = gg_artigas_letter years = 5 is_decaying = yes }
@@ -1828,6 +1858,7 @@ guerra_grande.14 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.14.b|" # GG_TRAZA
 		name = guerra_grande.14.b
 		add_modifier = {
 			name = guerra_grande_armed_truce
@@ -1878,6 +1909,7 @@ guerra_grande.15 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.15|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {
@@ -1961,6 +1993,7 @@ guerra_grande.16 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.16|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {

@@ -87,6 +87,7 @@ gg_argentina.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.1|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: Ferre BEFORE the country exists. He has a vanilla template but is NOT created in
 			#     the 1836 history -- his appearance depends on interest_group_leader_usage, on the
@@ -118,6 +119,7 @@ gg_argentina.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.1.a|" # GG_TRAZA
 		name = gg_argentina.1.a
 		default_option = yes
 		# EN/ES: Rosas contesta con el ejercito: Echague marcha (la guerra ya se abrio en immediate)
@@ -126,6 +128,7 @@ gg_argentina.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.1.b|" # GG_TRAZA
 		name = gg_argentina.1.b
 		# EN: the seat change, offered only to the player. Corrientes secedes either way: what this
 		#     option decides is who you are from here on.
@@ -182,6 +185,7 @@ gg_argentina.2 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.2|" # GG_TRAZA
 		hidden_effect = {
 			# EN: Lamadrid can defect only if Rosas sent him to Tucuman in March. The prelude makes
 			#     that choice, and the original character must be saved before the new country exists.
@@ -202,6 +206,7 @@ gg_argentina.2 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.2.a|" # GG_TRAZA
 		name = gg_argentina.2.a
 		default_option = yes
 		# EN: THE WAR WAITS FOR CORDOBA. Asked for by Juan, playing, 20/9/2026: «me gustaria que la
@@ -258,6 +263,7 @@ gg_argentina.3 = {
 	is_popup = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.3|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: the ORIGINAL Urquiza, saved before either peaceful or armed separation creates a
 			#     clone / el Urquiza ORIGINAL, guardado antes de que la separacion pacifica o armada cree
@@ -270,6 +276,7 @@ gg_argentina.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.3.a|" # GG_TRAZA
 		name = gg_argentina.3.a
 		custom_tooltip = gg_pronunciamiento_accept_tt
 		# EN: DESIGN COUNTERFACTUAL: Rosas accepts the lawful reassumption, calls the congress and
@@ -288,6 +295,7 @@ gg_argentina.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.3.b|" # GG_TRAZA
 		name = gg_argentina.3.b
 		custom_tooltip = gg_pronunciamiento_rebelion_tt
 		gg_argentina_create_entre_rios = yes
@@ -297,6 +305,7 @@ gg_argentina.3 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.3.c|" # GG_TRAZA
 		name = gg_argentina.3.c
 		trigger = {
 			is_player = yes
@@ -347,6 +356,7 @@ gg_argentina.4 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.4.a|" # GG_TRAZA
 		name = gg_argentina.4.a
 		default_option = yes
 		# EN: THE DISCOUNT LIVES INSIDE THE TRANSFER, and until 20/9/2026 it lived outside it
@@ -370,6 +380,7 @@ gg_argentina.4 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.4|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_3 } }
@@ -420,6 +431,7 @@ gg_argentina.61 = {
 	# ES: Un pliego sin contestar no puede contar como concesion si el popup queda abierto hasta 1839.
 	#     La llegada suma un agravio; la negativa suma otro y la concesion borra el pendiente.
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.61|" # GG_TRAZA
 		hidden_effect = {
 			change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		}
@@ -432,6 +444,7 @@ gg_argentina.61 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.61.a|" # GG_TRAZA
 		name = gg_argentina.61.a
 		# EN/ES: el pliego queda sin contestar y el reclamo queda abierto en la cuenta del pacto
 		#     / the petition goes unanswered and the claim stays open on the pact
@@ -445,6 +458,7 @@ gg_argentina.61 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.61.b|" # GG_TRAZA
 		name = gg_argentina.61.b
 		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
@@ -477,6 +491,7 @@ gg_argentina.62 = {
 	# EN: The same unanswered-petition guard as in 1836. ES: La misma guarda contra un pliego sin
 	#     contestar que en 1836.
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.62|" # GG_TRAZA
 		hidden_effect = {
 			change_global_variable = { name = gg_corrientes_agravio add = 1 }
 		}
@@ -489,6 +504,7 @@ gg_argentina.62 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.62.a|" # GG_TRAZA
 		name = gg_argentina.62.a
 		gg_reclamo_abre = { KEY = corrientes }
 		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
@@ -500,6 +516,7 @@ gg_argentina.62 = {
 		ai_chance = { base = 75 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.62.b|" # GG_TRAZA
 		name = gg_argentina.62.b
 		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
@@ -531,6 +548,7 @@ gg_argentina.63 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.63.a|" # GG_TRAZA
 		name = gg_argentina.63.a
 		# EN/ES: el rio cerrado es la razon que Corrientes va a invocar al separarse: el reclamo se abre
 		#     / the closed river is the reason Corrientes will invoke: the claim opens
@@ -545,6 +563,7 @@ gg_argentina.63 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.63.b|" # GG_TRAZA
 		name = gg_argentina.63.b
 		gg_reclamo_cierra = { KEY = corrientes }
 		add_treasury = -20000
@@ -552,6 +571,7 @@ gg_argentina.63 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.63|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_16 } }
@@ -565,6 +585,7 @@ gg_argentina.63 = {
 # ES: 6 de marzo de 1839 -- alternativa a la secesion, solo si Rosas pago los dos costos.
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Corrientes — Ferre» [D].
 gg_argentina.64 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.64|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.64.t
@@ -582,6 +603,7 @@ gg_argentina.64 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.64.a|" # GG_TRAZA
 		name = gg_argentina.64.a
 		gg_reclamo_cierra = { KEY = corrientes }
 		default_option = yes
@@ -611,6 +633,7 @@ gg_argentina.65 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.65|" # GG_TRAZA
 		hidden_effect = {
 			random_scope_character = {
 				limit = { has_template = ARG_Alejandro_Heredia }
@@ -629,6 +652,7 @@ gg_argentina.65 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.65.a|" # GG_TRAZA
 		name = gg_argentina.65.a
 		# EN/ES: Buenos Aires niega reconocimiento a las nuevas autoridades y las cinco provincias
 		#     conservan el reclamo / Buenos Aires withholds recognition and all five retain the claim
@@ -665,6 +689,7 @@ gg_argentina.65 = {
 		ai_chance = { base = 75 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.65.b|" # GG_TRAZA
 		name = gg_argentina.65.b
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
@@ -706,6 +731,7 @@ gg_argentina.68 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.68|" # GG_TRAZA
 		hidden_effect = {
 			change_global_variable = { name = gg_norte_agravio add = 1 }
 		}
@@ -718,6 +744,7 @@ gg_argentina.68 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.68.a|" # GG_TRAZA
 		name = gg_argentina.68.a
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
 		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
@@ -758,6 +785,7 @@ gg_argentina.68 = {
 		ai_chance = { base = 80 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.68.b|" # GG_TRAZA
 		name = gg_argentina.68.b
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
@@ -802,12 +830,14 @@ gg_argentina.66 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.66|" # GG_TRAZA
 		hidden_effect = {
 			change_global_variable = { name = gg_norte_agravio add = 1 }
 		}
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.66.a|" # GG_TRAZA
 		name = gg_argentina.66.a
 		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
 		#     / the claim over the weapons lands in Tucuman, which is where they are
@@ -835,6 +865,7 @@ gg_argentina.66 = {
 		ai_chance = { base = 80 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.66.b|" # GG_TRAZA
 		name = gg_argentina.66.b
 		# EN/ES: no se les reclama nada, y el norte queda como estaba / nothing is demanded
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
@@ -877,6 +908,7 @@ gg_argentina.67 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.a|" # GG_TRAZA
 		name = gg_argentina.67.a
 		# EN/ES: historical combination / combinacion historica
 		gg_reclamo_abre = { KEY = entre_rios }
@@ -901,6 +933,7 @@ gg_argentina.67 = {
 		ai_chance = { base = 85 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.b|" # GG_TRAZA
 		name = gg_argentina.67.b
 		# EN/ES: design counterfactual: keep Urquiza's command but withdraw the commercial order /
 		#     contrafactual de diseno: mantener el mando de Urquiza pero retirar la orden comercial
@@ -920,6 +953,7 @@ gg_argentina.67 = {
 		ai_chance = { base = 10 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.c|" # GG_TRAZA
 		name = gg_argentina.67.c
 		# EN: DESIGN COUNTERFACTUAL. The source names no alternative commander, so the engine selects
 		#     another serving Argentine general and the text invents no name.
@@ -945,6 +979,7 @@ gg_argentina.67 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_19 } }
@@ -980,6 +1015,7 @@ gg_argentina.9 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.a|" # GG_TRAZA
 		name = gg_argentina.9.a
 		custom_tooltip = gg_regeneracion_pass_tt
 		default_option = yes
@@ -989,6 +1025,7 @@ gg_argentina.9 = {
 		ai_chance = { base = 60 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.b|" # GG_TRAZA
 		name = gg_argentina.9.b
 		custom_tooltip = gg_regeneracion_submit_tt
 		# EN: DESIGN COUNTERFACTUAL. This concrete demand is not documented as an order Rosas sent.
@@ -1002,6 +1039,7 @@ gg_argentina.9 = {
 		ai_chance = { base = 25 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.c|" # GG_TRAZA
 		name = gg_argentina.9.c
 		custom_tooltip = gg_regeneracion_withdraw_tt
 		gg_reclamo_cierra = { KEY = entre_rios }
@@ -1018,6 +1056,7 @@ gg_argentina.9 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_27 } }
@@ -1055,6 +1094,7 @@ gg_argentina.69 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69.a|" # GG_TRAZA
 		name = gg_argentina.69.a
 		# EN: Rosas's historical answer: the amendments leave the Entre Rios petition pending and
 		#     the real protectorate war open. If another branch ended it, the same Federal Pact play
@@ -1079,6 +1119,7 @@ gg_argentina.69 = {
 		ai_chance = { base = 80 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69.b|" # GG_TRAZA
 		name = gg_argentina.69.b
 		# EN: The treaty itself supplies every term below: peace, reincorporation under the delegated
 		#     foreign relations of the Pact, exemption from the Oriental service and a constituent
@@ -1092,6 +1133,7 @@ gg_argentina.69 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_20 } }
@@ -1131,6 +1173,7 @@ gg_argentina.8 = {
 	#     27 de noviembre de 1847, no cuando el calendario se agenda en 1836.
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.8.a|" # GG_TRAZA
 		name = gg_argentina.8.a
 		default_option = yes
 		custom_tooltip = gg_vences_delegate_tt
@@ -1199,6 +1242,7 @@ gg_argentina.8 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.8.b|" # GG_TRAZA
 		name = gg_argentina.8.b
 		custom_tooltip = gg_vences_reopen_alcaraz_tt
 		# EN: Counterfactual reuse of the real 1846 terms; not a historical November 1847 treaty.
@@ -1209,6 +1253,7 @@ gg_argentina.8 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.8|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_26 } }
@@ -1223,6 +1268,7 @@ gg_argentina.8 = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, 7/4/1840 [D]; counterfactual
 # consequence chosen by the user / consecuencia contrafactual elegida por el usuario.
 gg_argentina.70 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.70|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.70.t
@@ -1241,6 +1287,7 @@ gg_argentina.70 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.70.a|" # GG_TRAZA
 		name = gg_argentina.70.a
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
@@ -1262,6 +1309,7 @@ gg_argentina.70 = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, 1/5/1851 [D]; counterfactual
 # consequence chosen by the user / consecuencia contrafactual elegida por el usuario.
 gg_argentina.71 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.71|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.71.t
@@ -1280,6 +1328,7 @@ gg_argentina.71 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.71.a|" # GG_TRAZA
 		name = gg_argentina.71.a
 		gg_reclamo_cierra = { KEY = entre_rios }
 		# EN/ES: one writer for the constitutional closure opened at Alcaraz / un solo escritor para
@@ -1331,6 +1380,7 @@ gg_argentina.10 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.10|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: muere mandando, como paso / he dies in command, as he did
 			c:CRR ?= {
@@ -1370,6 +1420,7 @@ gg_argentina.10 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.10.a|" # GG_TRAZA
 		name = gg_argentina.10.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -1395,6 +1446,7 @@ gg_argentina.11 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.11|" # GG_TRAZA
 		hidden_effect = {
 			# EN: THE LARGEST BATTLE OF THE CIVIL WAR, and the same rule as the other two. For a few
 			#     hours this event moved Cordoba back to Buenos Aires by script; that is a province
@@ -1428,6 +1480,7 @@ gg_argentina.11 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.11.a|" # GG_TRAZA
 		name = gg_argentina.11.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -1453,6 +1506,7 @@ gg_argentina.12 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.12|" # GG_TRAZA
 		hidden_effect = {
 			c:CLN ?= {
 				random_scope_character = {
@@ -1477,6 +1531,7 @@ gg_argentina.12 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.12.a|" # GG_TRAZA
 		name = gg_argentina.12.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -1513,6 +1568,7 @@ gg_argentina.20 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.20|" # GG_TRAZA
 		if = {
 			# EN/ES: el interior sigue en armas: el ejercito no puede irse a otra guerra
 			#     / the interior is still in arms: the army cannot leave for another war
@@ -1580,6 +1636,7 @@ gg_argentina.20 = {
 #     llegada de Oribe frente a Montevideo, 16/2/1843).
 # -------------------------------------------------------------------------------------------------
 gg_argentina.21 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.21|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1611,6 +1668,7 @@ gg_argentina.21 = {
 	trigger = { c:ARG ?= this }
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.21.a|" # GG_TRAZA
 		name = gg_argentina.21.a
 		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_cruce_total_tt
@@ -1626,6 +1684,7 @@ gg_argentina.21 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.21.b|" # GG_TRAZA
 		name = gg_argentina.21.b
 		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_reserva_litoral_tt
@@ -1661,6 +1720,7 @@ gg_argentina.21 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.21.c|" # GG_TRAZA
 		name = gg_argentina.21.c
 		trigger = { NOT = { global_var:gg_vanguardia_status = 3 } }
 		custom_tooltip = gg_vanguardia_cruce_postergado_tt
@@ -1675,6 +1735,7 @@ gg_argentina.21 = {
 
 	# EN/ES: S18 -- the interior is still in arms: the Vanguard stays / el interior sigue en armas
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.21.e|" # GG_TRAZA
 		name = gg_argentina.21.e
 		trigger = { global_var:gg_vanguardia_status = 3 }
 		default_option = yes
@@ -1719,6 +1780,7 @@ gg_argentina.22 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.a|" # GG_TRAZA
 		name = gg_argentina.22.a
 		custom_tooltip = gg_argentina.22.a_tt
 		default_option = yes
@@ -1778,6 +1840,7 @@ gg_argentina.22 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.b|" # GG_TRAZA
 		name = gg_argentina.22.b
 		custom_tooltip = gg_argentina.22.b_tt
 		# EN/ES: the same Federal-Pact claims are answered; no parallel delegation counter is created.
@@ -1804,6 +1867,7 @@ gg_argentina.22 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.c|" # GG_TRAZA
 		name = gg_argentina.22.c
 		custom_tooltip = gg_argentina.22.c_tt
 		# EN/ES: this is the existing powers' mediation gate read by gg_powers.12, not a second clock.
@@ -1834,6 +1898,7 @@ gg_argentina.22 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_21 } }
@@ -1873,6 +1938,7 @@ gg_argentina.23 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.23.a|" # GG_TRAZA
 		name = gg_argentina.23.a
 		custom_tooltip = gg_argentina.23.a_tt
 		default_option = yes
@@ -1881,6 +1947,7 @@ gg_argentina.23 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.23.b|" # GG_TRAZA
 		name = gg_argentina.23.b
 		custom_tooltip = gg_argentina.23.b_tt
 		set_global_variable = gg_powers_mediators
@@ -1892,6 +1959,7 @@ gg_argentina.23 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.23|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_22 } }
@@ -1929,6 +1997,7 @@ gg_argentina.24 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.24.a|" # GG_TRAZA
 		name = gg_argentina.24.a
 		custom_tooltip = gg_argentina.24.a_tt
 		default_option = yes
@@ -1937,6 +2006,7 @@ gg_argentina.24 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.24.b|" # GG_TRAZA
 		name = gg_argentina.24.b
 		custom_tooltip = gg_argentina.24.b_tt
 		if = {
@@ -1961,6 +2031,7 @@ gg_argentina.24 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.24.c|" # GG_TRAZA
 		name = gg_argentina.24.c
 		custom_tooltip = gg_argentina.24.c_tt
 		if = {
@@ -1985,6 +2056,7 @@ gg_argentina.24 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.24|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_23 } }
@@ -2033,6 +2105,7 @@ gg_argentina.25 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.25.a|" # GG_TRAZA
 		name = gg_argentina.25.a
 		custom_tooltip = gg_argentina.25.a_tt
 		default_option = yes
@@ -2048,6 +2121,7 @@ gg_argentina.25 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.25.b|" # GG_TRAZA
 		name = gg_argentina.25.b
 		custom_tooltip = gg_argentina.25.b_tt
 		set_global_variable = { name = gg_hood_argentina_answer value = 2 }
@@ -2058,6 +2132,7 @@ gg_argentina.25 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.25|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_24 } }
@@ -2123,6 +2198,7 @@ gg_argentina.26 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.a|" # GG_TRAZA
 		name = gg_argentina.26.a
 		custom_tooltip = gg_argentina.26.a_tt
 		default_option = yes
@@ -2144,6 +2220,7 @@ gg_argentina.26 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.b|" # GG_TRAZA
 		name = gg_argentina.26.b
 		custom_tooltip = gg_argentina.26.b_tt
 		# EN: A sharpened excerpt can answer one petition, but not the whole provincial ledger.
@@ -2174,6 +2251,7 @@ gg_argentina.26 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.c|" # GG_TRAZA
 		name = gg_argentina.26.c
 		custom_tooltip = gg_argentina.26.c_tt
 		# EN/ES: deliberate silence leaves every delegation and petition as it stood, but the choice
@@ -2191,6 +2269,7 @@ gg_argentina.26 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_25 } }
@@ -2201,6 +2280,7 @@ gg_argentina.26 = {
 }
 
 gg_argentina.27 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.27|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.27.t
@@ -2233,6 +2313,7 @@ gg_argentina.27 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.27.a|" # GG_TRAZA
 		name = gg_argentina.27.a
 		custom_tooltip = gg_argentina.27.a_tt
 		# EN: the documented opposition line is the sharper political weapon, but disputing the
@@ -2246,6 +2327,7 @@ gg_argentina.27 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.27.b|" # GG_TRAZA
 		name = gg_argentina.27.b
 		custom_tooltip = gg_argentina.27.b_tt
 		# EN/ES: honouring San Martin while denying a domestic endorsement still gives the Defensa
@@ -2287,6 +2369,7 @@ gg_argentina.30 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.30|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: el candado provisorio se va: era para que Rosas llegara a Caseros, y ya no hay a
 			#     que llegar / the provisional lock goes: it was to get Rosas to Caseros
@@ -2298,6 +2381,7 @@ gg_argentina.30 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.30.a|" # GG_TRAZA
 		name = gg_argentina.30.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -2340,6 +2424,7 @@ gg_argentina.40 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.40|" # GG_TRAZA
 		hidden_effect = {
 			# EN: HE RESIGNS, HE DOES NOT EMIGRATE. Correction of 20/9/2026 (Codex): this called
 			#     exile_character_with_role_cleanup, and vanilla's exile does not retire anybody --
@@ -2386,6 +2471,7 @@ gg_argentina.40 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.40.a|" # GG_TRAZA
 		name = gg_argentina.40.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -2424,6 +2510,7 @@ gg_argentina.41 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.41.a|" # GG_TRAZA
 		name = gg_argentina.41.a
 		default_option = yes
 		add_modifier = { name = gg_caseros_pitched_battle years = 2 }
@@ -2435,6 +2522,7 @@ gg_argentina.41 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.41.b|" # GG_TRAZA
 		name = gg_argentina.41.b
 		add_modifier = { name = gg_caseros_manoeuvre years = 2 }
 		# EN/ES: each month Rosas holds wears Entre Rios down; at six, a negotiated way out
@@ -2448,6 +2536,7 @@ gg_argentina.41 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.41.c|" # GG_TRAZA
 		name = gg_argentina.41.c
 		add_modifier = { name = gg_caseros_hold_the_city years = 2 }
 		# EN/ES: a siege of Buenos Aires of six months at least before any ending
@@ -2462,6 +2551,7 @@ gg_argentina.41 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.41|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_10 } }
@@ -2477,6 +2567,7 @@ gg_argentina.41 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.51 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.51|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.51.t
@@ -2488,6 +2579,7 @@ gg_argentina.51 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2496,6 +2588,7 @@ gg_argentina.51 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.52 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.52|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.52.t
@@ -2507,6 +2600,7 @@ gg_argentina.52 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2515,6 +2609,7 @@ gg_argentina.52 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.53 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.53|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.53.t
@@ -2526,6 +2621,7 @@ gg_argentina.53 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2534,6 +2630,7 @@ gg_argentina.53 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.54 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.54|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.54.t
@@ -2545,6 +2642,7 @@ gg_argentina.54 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2553,6 +2651,7 @@ gg_argentina.54 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.55 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.55|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.55.t
@@ -2564,6 +2663,7 @@ gg_argentina.55 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2572,6 +2672,7 @@ gg_argentina.55 = {
 
 # EN/ES: Completed restoration notice / Aviso de restitucion ya realizada.
 gg_argentina.56 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.56|" } # GG_TRAZA
  type = country_event
  placement = ROOT
  title = gg_argentina.56.t
@@ -2583,6 +2684,7 @@ gg_argentina.56 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2636,6 +2738,7 @@ gg_argentina.5 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.5|" # GG_TRAZA
 		hidden_effect = {
 			c:CLN ?= {
 				# EN/ES: si Brizuela no esta -- otra partida, otro camino -- la Liga nombra igual a su
@@ -2713,6 +2816,7 @@ gg_argentina.5 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.5.a|" # GG_TRAZA
 		name = gg_argentina.5.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -2762,6 +2866,7 @@ gg_argentina.6 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.6|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { exists = c:CRR } }
@@ -2825,6 +2930,7 @@ gg_argentina.6 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.6.a|" # GG_TRAZA
 		name = gg_argentina.6.a
 		default_option = yes
 		# EN/ES: si la provincia volvio a levantarse, la guerra vuelve a abrirse: Rosas no reconocio
@@ -2881,6 +2987,7 @@ gg_argentina.7 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.7|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { exists = c:CRR } }
@@ -2948,6 +3055,7 @@ gg_argentina.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.7.a|" # GG_TRAZA
 		name = gg_argentina.7.a
 		default_option = yes
 		if = {
@@ -3018,6 +3126,7 @@ gg_argentina.60 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.60|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_oribe_in_buenos_aires
 			# EN/ES: y el mando, que no tiene: el Oribe de vanilla es presidente, no general, y el
@@ -3042,6 +3151,7 @@ gg_argentina.60 = {
 
 	# EN/ES: reconocerlo presidente legal, que es lo historico / recognise him as lawful president
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.60.a|" # GG_TRAZA
 		name = gg_argentina.60.a
 		default_option = yes
 		# EN/ES: la marca decide despues cuanta Vanguardia le presta Rosas al Cerrito, asi que se dice
@@ -3057,6 +3167,7 @@ gg_argentina.60 = {
 
 	# EN/ES: recibirlo de militar y no decir nada de la presidencia / take him in as a soldier
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.60.b|" # GG_TRAZA
 		name = gg_argentina.60.b
 		# EN/ES: callar la presidencia reduce la Vanguardia que Rosas puede prestar despues; la
 		#     opcion tiene que mostrarlo / withholding recognition reduces the Vanguard Rosas can
@@ -3089,6 +3200,7 @@ gg_argentina.13 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.13.a|" # GG_TRAZA
 		name = gg_argentina.13.a
 		default_option = yes
 		custom_tooltip = gg_montevideo_convention_sign_tt
@@ -3097,6 +3209,7 @@ gg_argentina.13 = {
 		ai_chance = { base = 85 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.13.b|" # GG_TRAZA
 		name = gg_argentina.13.b
 		custom_tooltip = gg_montevideo_convention_refuse_tt
 		set_global_variable = gg_montevideo_convention_refused
@@ -3104,6 +3217,7 @@ gg_argentina.13 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.13|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_28 } }
@@ -3138,6 +3252,7 @@ gg_argentina.13 = {
 # https://www.dipublico.org/122098/
 # -------------------------------------------------------------------------------------------------
 gg_argentina.14 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.14|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.14.t
@@ -3150,6 +3265,7 @@ gg_argentina.14 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.14.a|" # GG_TRAZA
 		name = gg_argentina.14.a
 		custom_tooltip = gg_rosas_abandon_oribe_tt
 		set_global_variable = gg_rosas_abandoned_oribe
@@ -3168,6 +3284,7 @@ gg_argentina.14 = {
 		ai_chance = { base = 20 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.14.b|" # GG_TRAZA
 		name = gg_argentina.14.b
 		custom_tooltip = gg_rosas_declare_alliance_tt
 		set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
@@ -3203,6 +3320,7 @@ gg_argentina.15 = {
 	is_popup = yes
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.a|" # GG_TRAZA
 		name = gg_argentina.15.a
 		default_option = yes
 		custom_tooltip = gg_ejercito_grande_full_tt
@@ -3221,6 +3339,7 @@ gg_argentina.15 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.b|" # GG_TRAZA
 		name = gg_argentina.15.b
 		custom_tooltip = gg_ejercito_grande_limited_tt
 		# EN: DESIGN COUNTERFACTUAL: one documented monthly instalment, not a claimed historical offer.
@@ -3240,6 +3359,7 @@ gg_argentina.15 = {
 		ai_chance = { base = 20 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.c|" # GG_TRAZA
 		name = gg_argentina.15.c
 		custom_tooltip = gg_ejercito_grande_alone_tt
 		set_global_variable = gg_ejercito_grande_alone
@@ -3248,6 +3368,7 @@ gg_argentina.15 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_29 } }
@@ -3271,6 +3392,7 @@ gg_argentina.15 = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md, seccion 11.
 # -------------------------------------------------------------------------------------------------
 gg_argentina.80 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.80|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.80.t
@@ -3286,6 +3408,7 @@ gg_argentina.80 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.80.a|" # GG_TRAZA
 		name = gg_argentina.80.a
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -3300,6 +3423,7 @@ gg_argentina.80 = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/propuesta-codex.md, «El final».
 # -------------------------------------------------------------------------------------------------
 gg_argentina.82 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.82|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.82.t
@@ -3311,6 +3435,7 @@ gg_argentina.82 = {
 	is_popup = yes
 	trigger = { has_global_variable = gg_pact_settlement_constitutional }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.82.a|" # GG_TRAZA
 		name = gg_argentina.82.a
 		default_option = yes
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
@@ -3320,6 +3445,7 @@ gg_argentina.82 = {
 }
 
 gg_argentina.83 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.83|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.83.t
@@ -3343,6 +3469,7 @@ gg_argentina.83 = {
 	is_popup = yes
 	trigger = { has_global_variable = gg_pact_settlement_urquiza }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.83.a|" # GG_TRAZA
 		name = gg_argentina.83.a
 		default_option = yes
 		set_ruling_interest_groups = { ig_rural_folk ig_armed_forces }
@@ -3353,6 +3480,7 @@ gg_argentina.83 = {
 }
 
 gg_argentina.84 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.84|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.84.t
@@ -3364,6 +3492,7 @@ gg_argentina.84 = {
 	is_popup = yes
 	trigger = { has_global_variable = gg_pact_settlement_rosas }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.84.a|" # GG_TRAZA
 		name = gg_argentina.84.a
 		default_option = yes
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
@@ -3373,6 +3502,7 @@ gg_argentina.84 = {
 }
 
 gg_argentina.85 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.85|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.85.t
@@ -3395,6 +3525,7 @@ gg_argentina.85 = {
 	is_popup = yes
 	trigger = { has_global_variable = gg_pact_settlement_stalemate }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.85.a|" # GG_TRAZA
 		name = gg_argentina.85.a
 		default_option = yes
 		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }

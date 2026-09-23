@@ -258,6 +258,7 @@ je_gg_delegation = {
 	#     journal que le enseno una mecanica al jugador durante quince anios y despues se encogio de
 	#     hombros.
 	on_complete_all_involved = {
+		debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|je_gg_delegation|on_complete_all_involved" # GG_TRAZA
 		if = {
 			limit = { has_variable = gg_arg_rosas_seat }
 			gg_pact_resolve = yes

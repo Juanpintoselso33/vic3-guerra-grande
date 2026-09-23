@@ -51,6 +51,7 @@
 #     esta en docs/guerra-grande-argentina/historia-argentina.md.
 # -------------------------------------------------------------------------------------------------
 gg_arg_intro.1 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_intro.1|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -80,6 +81,7 @@ gg_arg_intro.1 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_intro.1.a|" # GG_TRAZA
 		name = gg_arg_intro.1.a
 		default_option = yes
 		add_contextless_journal_entry = je_gg_delegation
@@ -107,6 +109,7 @@ gg_arg_intro.2 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_intro.2|" # GG_TRAZA
 		hidden_effect = {
 			if = {
 				limit = {

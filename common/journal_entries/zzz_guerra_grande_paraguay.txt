@@ -51,6 +51,7 @@ REPLACE:je_expanding_paraguay = {
     }
 
     on_fail = {
+    	debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|REPLACE:je_expanding_paraguay|on_fail" # GG_TRAZA
         trigger_event = { id = paraguay.8 popup = yes }
         show_as_tooltip = {
             if = {
@@ -197,6 +198,7 @@ REPLACE:je_expanding_paraguay = {
     }
 
     on_complete = {
+    	debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|REPLACE:je_expanding_paraguay|on_complete" # GG_TRAZA
         trigger_event = { id = paraguay.9 popup = yes }
         set_variable = paraguay_war_victory_achievement
     }
@@ -274,10 +276,12 @@ REPLACE:je_paraguayan_war = {
     }
 
     on_fail = {
+    	debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|REPLACE:je_paraguayan_war|on_fail" # GG_TRAZA
         trigger_event = { id = paraguay.10 popup = yes }
     }
 
     on_complete = {
+    	debug_log = "GG_JE|[TimeKeeper.GetCurrentDate.GetString]|REPLACE:je_paraguayan_war|on_complete" # GG_TRAZA
         trigger_event = { id = paraguay.7 popup = yes }
     }
 

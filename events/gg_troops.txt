@@ -11,6 +11,7 @@ gg_troops.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_troops.1|" # GG_TRAZA
 		gg_troops_split_armies_defensa = yes
 		# EN/ES: 23/9 -- the city arms fast after the split (~6,500 in Feb 1843) / la ciudad se arma rapido
 		add_modifier = { name = gg_defensa_city_in_arms months = 6 }
@@ -25,6 +26,7 @@ gg_troops.2 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_troops.2|" # GG_TRAZA
 		gg_troops_split_armies_cer = yes
 		# EN: 22/9/2026 (Juan, playtest as Argentina) -- the Cerrito's battalions are born empty and
 		#     fill over months; in that game it had 16 battalions and 894 men against the Defensa's

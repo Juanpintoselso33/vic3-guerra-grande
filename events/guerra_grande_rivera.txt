@@ -102,6 +102,7 @@ gg_rivera.1 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.1|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_rivera_arroyo_grande_settled
 			# EN: playtest 2026-09-17 -- Ley N. 242 hangs on THIS defeat, not on a date. The event
@@ -133,6 +134,7 @@ gg_rivera.1 = {
 	#     que Montevideo le prometio. El ejercito son cuatro escuadrones; los hombres y caballos que
 	#     saca de la ciudad siguen costando la muralla.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.1.a|" # GG_TRAZA
 		name = gg_rivera.1.a
 		custom_tooltip = gg_rivera.1.a_tt2
 		# EN/ES: T4 -- FE-7: backing Rivera's army sets the military line / respaldar a Rivera fija la linea militar
@@ -188,6 +190,7 @@ gg_rivera.1 = {
 	#     "batida en el exterior, sin ejercitos ni soldados, sin material de guerra, sin dinero,
 	#     sin rentas y sin credito". Todo va a la muralla, y Rivera se arregla solo en la campania.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.1.b|" # GG_TRAZA
 		name = gg_rivera.1.b
 		custom_tooltip = gg_rivera.1.b_tt2
 		# EN/ES: T4 -- FE-7: all to the walls, the doctores run the city / todo a la muralla, mandan los doctores
@@ -306,6 +309,7 @@ gg_rivera.2 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2|" # GG_TRAZA
 		# EN/ES: playtest 2026-09-19 -- India Muerta is the biggest battle of the siege years and it
 		#     was not on the bar / India Muerta es la batalla mas grande de los anios del sitio y no
 		#     estaba en la barra
@@ -330,6 +334,7 @@ gg_rivera.2 = {
 	#     registro: tuvo la derecha en India Muerta, fue el que aconsejo no dar batalla y despues
 	#     de Arroyo Grande fue el, con Olazabal, quien reorganizo lo que quedaba de la caballeria.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.a|" # GG_TRAZA
 		name = gg_rivera.2.a
 		custom_tooltip = gg_rivera.2.a_tt2
 		default_option = yes
@@ -404,6 +409,7 @@ gg_rivera.2 = {
 	#     vestuario y caballos recibidos alli. Pagarlo de frente es una decision de gobierno, y el
 	#     Imperio la archiva: el recibo se le lee de vuelta en 1847.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.b|" # GG_TRAZA
 		name = gg_rivera.2.b
 		custom_tooltip = gg_rivera.2.b_tt2
 		# EN/ES: T4 -- FE-7: Brazilian arms / armas brasilenias
@@ -474,6 +480,7 @@ gg_rivera.2 = {
 	#     Rios, Corrientes y Rio Grande do Sul. Pedirle a Rio de Janeiro que lo retenga es la mano
 	#     libre de los doctores.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.c|" # GG_TRAZA
 		name = gg_rivera.2.c
 		custom_tooltip = gg_rivera.2.c_tt2
 		# EN/ES: T4 -- FE-7: handed to the Empire / entregado al Imperio
@@ -567,6 +574,7 @@ gg_rivera.3 = {
 	#     vuelta en una goleta, eso es una negativa, y en Rio de Janeiro se lee como tal.
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.3|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_rivera_landing_settled
 			if = {
@@ -589,6 +597,7 @@ gg_rivera.3 = {
 	#     caudillo -- las armas y el puerto -- y el Ejercito de Operaciones se levanta de nuevo al
 	#     mando de un hombre al que el gobierno ya no puede decirle que no.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.3.a|" # GG_TRAZA
 		name = gg_rivera.3.a
 		custom_tooltip = gg_rivera.3.a_tt2
 		gg_return_rivera = yes
@@ -677,6 +686,7 @@ gg_rivera.3 = {
 	#     hombre que se queda con el pais en 1853. Lo que compra es un gobierno al que sus propios
 	#     soldados no pueden extorsionar.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.3.b|" # GG_TRAZA
 		name = gg_rivera.3.b
 		custom_tooltip = gg_rivera.3.b_tt2
 		# EN/ES: T4 -- FE-7: the decree stands: the doctores / se sostiene el decreto: los doctores
@@ -811,6 +821,7 @@ gg_rivera.4 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.4|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_rivera_destierro_settled
 		}
@@ -829,6 +840,7 @@ gg_rivera.4 = {
 	#     Lo que cuesta es el unico general que esta Republica tuvo que haya mandado un ejercito en
 	#     campania contra Oribe.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.4.a|" # GG_TRAZA
 		name = gg_rivera.4.a
 		custom_tooltip = gg_rivera.4.a_tt2
 		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
@@ -909,6 +921,7 @@ gg_rivera.4 = {
 	#     era otra vez el hombre fuerte". El general se queda. La legalidad por la que la Defensa
 	#     dice pelear, no.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.4.b|" # GG_TRAZA
 		name = gg_rivera.4.b
 		custom_tooltip = gg_rivera.4.b_tt2
 		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
@@ -999,6 +1012,7 @@ gg_rivera.4 = {
 	#     gobierno de Joaquin Suarez se nego a autorizar justamente estas tratativas, renunciaron
 	#     Gabriel Antonio Pereira, Miguel Barreiro y el propio Venancio Flores, que se fue del pais.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.4.c|" # GG_TRAZA
 		name = gg_rivera.4.c
 		custom_tooltip = gg_rivera.4.c_tt2
 		trigger = { has_global_variable = guerra_grande_open_war NOT = { has_global_variable = gg_peace_settled } exists = c:CER }
@@ -1022,6 +1036,7 @@ gg_rivera.4 = {
 		}
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.4.d|" # GG_TRAZA
 		name = gg_rivera.4.d
 		trigger = { OR = { NOT = { has_global_variable = guerra_grande_open_war } has_global_variable = gg_peace_settled NOT = { exists = c:CER } } }
 		default_option = yes
@@ -1085,6 +1100,7 @@ gg_rivera.8 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.8|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_mitre_settled
 		}
@@ -1098,6 +1114,7 @@ gg_rivera.8 = {
 
 	# EN: Historical departure on 12 November 1846. ES: Partida historica del 12 de noviembre de 1846.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.8.a|" # GG_TRAZA
 		name = gg_rivera.8.a
 		custom_tooltip = gg_rivera.8.a_tt2
 		default_option = yes
@@ -1112,6 +1129,7 @@ gg_rivera.8 = {
 	# ES: El contrafactual retiene al artillero formado en la Defensa y hace pesar despues la ruptura
 	#     no documentada con Rivera sin inventarle una causa.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.8.b|" # GG_TRAZA
 		name = gg_rivera.8.b
 		custom_tooltip = gg_rivera.8.b_tt2
 		set_global_variable = gg_mitre_kept
@@ -1158,6 +1176,7 @@ gg_rivera.8 = {
 	#     Paz, que peleaba en Corrientes, y que la derrota de Paz lo mando al Brasil. Ninguna otra
 	#     fuente del informe lo confirma; se usa solo como apoyo para esta rama alternativa.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.8.c|" # GG_TRAZA
 		name = gg_rivera.8.c
 		custom_tooltip = gg_rivera.8.c_tt2
 		trigger = { exists = c:CRR }
@@ -1273,6 +1292,7 @@ gg_rivera.5 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_rivera_triumvirate_settled
 			# EN/ES: Only Giró's actual succession appoints Lavalleja and leads to his dated death.
@@ -1297,6 +1317,7 @@ gg_rivera.5 = {
 	#     ser jefe de Estado. Es la tercera vez que este pais pone a Fructuoso Rivera al frente de
 	#     su gobierno.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5.a|" # GG_TRAZA
 		name = gg_rivera.5.a
 		custom_tooltip = gg_rivera.5.a_tt2
 		default_option = yes
@@ -1344,6 +1365,7 @@ gg_rivera.5 = {
 	#     donde vivia en la mayor pobreza. Los colorados se quedan con el gobierno y pierden al
 	#     hombre por el que media campania todavia cabalga.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5.b|" # GG_TRAZA
 		name = gg_rivera.5.b
 		custom_tooltip = gg_rivera.5.b_tt2
 		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
@@ -1382,6 +1404,7 @@ gg_rivera.5 = {
 		}
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5.c|" # GG_TRAZA
 		name = gg_rivera.5.c
 		trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_fusion_blocked NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
 		default_option = yes
@@ -1465,6 +1488,7 @@ gg_rivera.6 = {
 	}
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.6|" # GG_TRAZA
 		hidden_effect = {
 			set_global_variable = gg_rivera_death_settled
 			random_scope_character = {
@@ -1502,6 +1526,7 @@ gg_rivera.6 = {
 	#     paso nueve anios negandose esta bajo tierra. Cuesta las armas, que ganaron la guerra y
 	#     ahora tienen que compartir el Estado con los que sitiaron la ciudad.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.6.a|" # GG_TRAZA
 		name = gg_rivera.6.a
 		default_option = yes
 		set_ruling_interest_groups = { ig_petty_bourgeoisie ig_landowners }
@@ -1526,6 +1551,7 @@ gg_rivera.6 = {
 	#     Conservadores. El baul de documentos va al gobierno que lo desterro, como el pidio, y sus
 	#     enemigos lo leen.
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.6.b|" # GG_TRAZA
 		name = gg_rivera.6.b
 		set_ruling_interest_groups = { ig_armed_forces ig_petty_bourgeoisie }
 		add_modifier = {
@@ -1548,6 +1574,7 @@ gg_rivera.6 = {
 #     ventana temprana de Urquiza; quedarse la deja abierta; ir a Oribe adelanta la paz de ocho
 #     condiciones y el choque con los doctores.
 gg_rivera.7 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.7|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
@@ -1570,6 +1597,7 @@ gg_rivera.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.7.a|" # GG_TRAZA
 		name = gg_rivera.7.a
 		custom_tooltip = gg_rivera.7.a_tt2
 		default_option = yes
@@ -1589,6 +1617,7 @@ gg_rivera.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.7.b|" # GG_TRAZA
 		name = gg_rivera.7.b
 		# EN: cover Maldonado and let Herrera y Obes negotiate: Rivera loses weight.
 		# ES: cubrir Maldonado y dejar negociar a Herrera y Obes: Rivera pierde peso.
@@ -1597,6 +1626,7 @@ gg_rivera.7 = {
 	}
 
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.7.c|" # GG_TRAZA
 		name = gg_rivera.7.c
 		custom_tooltip = gg_rivera.7.c_tt2
 		# EN: go straight to Oribe with a peace 'between orientales': the eight conditions come early.

@@ -11,6 +11,7 @@ on_game_started = {
 
 guerra_grande_on_game_start = {
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_on_game_start" # GG_TRAZA
 		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
 		gg_systems_init = yes
 		# EN/ES: 23/9 -- the historical men live until their date / viven hasta su fecha
@@ -398,6 +399,7 @@ guerra_grande_on_war_end = {
 	}
 
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_on_war_end" # GG_TRAZA
 		# EN/ES: review 2026-09-17 -- also when a menu is already pending: its f option must go
 		#     / tambien con un menu pendiente: su opcion f tiene que desaparecer
 		set_global_variable = gg_white_peace
@@ -459,6 +461,7 @@ guerra_grande_on_election_end = {
 		}
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_on_election_end" # GG_TRAZA
 		trigger_event = { id = gg_phase1.10 days = 1 }
 	}
 }
@@ -470,6 +473,7 @@ on_monthly_pulse_country = {
 gg_historical_lives_monthly = {
 	trigger = { c:URU ?= this }
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly" # GG_TRAZA
 		gg_historical_lives = yes
 		gg_rosas_keeps_the_seat = yes
 		# EN/ES: 23/9 (headless) -- the engine seated Lavalleja over Rivera in August 1839: the Republic's
@@ -498,6 +502,7 @@ gg_rosas_seat_on_new_ruler = {
 		owner ?= { c:ARG ?= this }
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_seat_on_new_ruler" # GG_TRAZA
 		owner = { gg_rosas_keeps_the_seat = yes }
 	}
 }
@@ -521,6 +526,7 @@ gg_president_seat_on_new_ruler = {
 		}
 	}
 	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_president_seat_on_new_ruler" # GG_TRAZA
 		owner = { gg_president_historical = yes }
 	}
 }

@@ -18,13 +18,14 @@ gg_argentina.16 = {
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16|"  hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_30 } }
 				set_global_variable = gg_arg_cal_done_30
 			}
 		} }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.a|" # GG_TRAZA
 		name = gg_argentina.16.a
 		default_option = yes
 		add_treasury = 10000
@@ -33,6 +34,7 @@ gg_argentina.16 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.b|" # GG_TRAZA
 		name = gg_argentina.16.b
 		add_treasury = 50000
 		add_modifier = { name = gg_arg_paper_issue years = 3 }
@@ -40,6 +42,7 @@ gg_argentina.16 = {
 		ai_chance = { base = 15 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.c|" # GG_TRAZA
 		name = gg_argentina.16.c
 		add_treasury = 40000
 		add_modifier = { name = gg_arg_land_sales years = 8 }
@@ -63,13 +66,14 @@ gg_argentina.17 = {
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17|"  hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_31 } }
 				set_global_variable = gg_arg_cal_done_31
 			}
 		} }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17.a|" # GG_TRAZA
 		name = gg_argentina.17.a
 		default_option = yes
 		add_treasury = 30000
@@ -79,6 +83,7 @@ gg_argentina.17 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17.b|" # GG_TRAZA
 		name = gg_argentina.17.b
 		add_treasury = -20000
 		add_modifier = { name = gg_arg_small_ranchers years = 3 }
@@ -104,13 +109,14 @@ gg_argentina.18 = {
 	event_image = { video = "gg_arg_coalicion" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.18|"  hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_32 } }
 				set_global_variable = gg_arg_cal_done_32
 			}
 		} }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.18.a|" # GG_TRAZA
 		name = gg_argentina.18.a
 		default_option = yes
 		custom_tooltip = gg_arg_flavour_ritual_tt
@@ -119,6 +125,7 @@ gg_argentina.18 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.18.b|" # GG_TRAZA
 		name = gg_argentina.18.b
 		custom_tooltip = gg_arg_flavour_ritual_tt
 		add_modifier = { name = gg_arg_soft_resignation years = 1 }
@@ -126,6 +133,7 @@ gg_argentina.18 = {
 		ai_chance = { base = 15 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.18.c|" # GG_TRAZA
 		name = gg_argentina.18.c
 		custom_tooltip = gg_arg_flavour_omit_tt
 		add_modifier = { name = gg_arg_no_resignation years = 1 }
@@ -165,13 +173,14 @@ gg_argentina.19 = {
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.19|"  hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_33 } }
 				set_global_variable = gg_arg_cal_done_33
 			}
 		} }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.19.a|" # GG_TRAZA
 		name = gg_argentina.19.a
 		default_option = yes
 		# EN: A late answer cannot collect money from a province that has withdrawn.
@@ -205,6 +214,7 @@ gg_argentina.19 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.19.b|" # GG_TRAZA
 		name = gg_argentina.19.b
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
@@ -244,6 +254,7 @@ gg_argentina.19 = {
 		ai_chance = { base = 15 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.19.c|" # GG_TRAZA
 		name = gg_argentina.19.c
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
@@ -300,13 +311,14 @@ gg_argentina.28 = {
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
-	immediate = { hidden_effect = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28|"  hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_34 } }
 				set_global_variable = gg_arg_cal_done_34
 			}
 		} }
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.a|" # GG_TRAZA
 		name = gg_argentina.28.a
 		default_option = yes
 		# EN: A late answer cannot collect money from a province that has withdrawn.
@@ -340,6 +352,7 @@ gg_argentina.28 = {
 		ai_chance = { base = 70 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.b|" # GG_TRAZA
 		name = gg_argentina.28.b
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
@@ -379,6 +392,7 @@ gg_argentina.28 = {
 		ai_chance = { base = 15 }
 	}
 	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.c|" # GG_TRAZA
 		name = gg_argentina.28.c
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.

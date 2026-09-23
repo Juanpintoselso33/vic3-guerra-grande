@@ -14,6 +14,7 @@
 # ES: Scope de pais. Limpia el resultado anterior para no prestarle otro cuartel a un pais sin tierra.
 #     Conserva la capital solo si es propia; si no, usa cualquiera de los estados del pais.
 gg_select_formation_hq_state = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_select_formation_hq_state|" # GG_TRAZA
 	clear_saved_scope = gg_formation_hq_state
 	if = {
 		limit = {
@@ -33,6 +34,7 @@ gg_select_formation_hq_state = {
 # EN: called once from guerra_grande_on_game_start.
 # ES: se llama una sola vez desde guerra_grande_on_game_start.
 gg_systems_init = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_systems_init|" # GG_TRAZA
 	# EN: NO ELECTIONS BEFORE THE SPLIT EITHER. Vanilla starts Uruguay on law_wealth_voting, so the
 	#     engine ran election campaigns from 1836, and vanilla's generic election events
 	#     (events/election_events/, fired from on_monthly_pulse_country_elections, all gated on
@@ -241,6 +243,7 @@ gg_systems_init = {
 #     al otro. Mueve el puntaje, y la barra si el journal ya existe
 #     (antes de Carpinteria no existe; .1 sincroniza la barra al abrirlo).
 gg_score_blanco = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_score_blanco| AMOUNT= $AMOUNT$ " # GG_TRAZA
 	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
 	custom_tooltip = {
 		text = gg_tt_score_blanco_$AMOUNT$
@@ -253,6 +256,7 @@ gg_score_blanco = {
 }
 
 gg_score_colorado = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_score_colorado| AMOUNT= $AMOUNT$ " # GG_TRAZA
 	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
 	custom_tooltip = {
 		text = gg_tt_score_colorado_$AMOUNT$
@@ -269,6 +273,7 @@ gg_score_colorado = {
 # ES: uso: gg_patron_change = { PATRON = francia DELTA = -15 }
 #     PATRON es rosas, francia, britania, brasil o urquiza. El resultado queda entre 0 y 100.
 gg_patron_change = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_change| DELTA= $DELTA$ " # GG_TRAZA
 	# EN/ES: shown to the player; global variables have no tooltip of their own / se muestra al jugador
 	custom_tooltip = {
 		text = gg_tt_patron_$PATRON$_$DELTA$
@@ -309,6 +314,7 @@ gg_patron_change = {
 #     respuesta, asi que una ley sin contestar no estaba resuelta y se podia agendar una segunda
 #     copia encima de la primera. Despachada y resuelta ya no son lo mismo.
 gg_abolition_dispatch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_abolition_dispatch| DAYS= $DAYS$ " # GG_TRAZA
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_abolition_dispatched }
@@ -335,10 +341,12 @@ gg_abolition_dispatch = {
 #     abriera otra paz, y el jugador podia terminar con dos menus de paz a la vez. gg_peace_offered no
 #     sirve para esto, porque la cadena todavia no ofrecio nada: esta negociando.
 gg_peace_chain_hold = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_peace_chain_hold|" # GG_TRAZA
 	set_global_variable = gg_peace_chain_pending
 }
 
 gg_peace_chain_clear = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_peace_chain_clear|" # GG_TRAZA
 	if = {
 		limit = { has_global_variable = gg_peace_chain_pending }
 		remove_global_variable = gg_peace_chain_pending
@@ -351,6 +359,7 @@ gg_peace_chain_clear = {
 #     agendar el menu de la victoria y nadie la apagaba nunca, asi que el trigger del menu quedaba
 #     verdadero el resto de la partida. Las tres son respuestas a una pregunta ya contestada.
 gg_victory_clear = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_victory_clear|" # GG_TRAZA
 	if = { limit = { has_global_variable = gg_victory_pending } remove_global_variable = gg_victory_pending }
 	if = { limit = { has_global_variable = gg_victory_third_party } remove_global_variable = gg_victory_third_party }
 	if = { limit = { has_global_variable = gg_victory_timeout } remove_global_variable = gg_victory_timeout }
@@ -367,6 +376,7 @@ gg_victory_clear = {
 #     Republica. Ahora la llaman los menus de paz y el de la victoria, despues de que el jugador
 #     contesto, asi la posguerra sabe que se decidio.
 gg_postwar_start = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar_start|" # GG_TRAZA
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_postwar_started }
@@ -398,6 +408,7 @@ gg_postwar_start = {
 #     despacho de cierre). Cada uno con su guarda de has_modifier, asi no se le saca nada a un pais
 #     que nunca lo tuvo.
 gg_wartime_modifiers_clear = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_wartime_modifiers_clear|" # GG_TRAZA
 	# EN: C10 (22/9/2026) -- the blockade of Montevideo was a siege measure: with the war over, Rosas
 	#     opens the river (otherwise his AI would keep the 1843 closure for good).
 	# ES: C10 -- el bloqueo de Montevideo era una medida del sitio: terminada la guerra, Rosas abre el
@@ -487,6 +498,7 @@ gg_wartime_modifiers_clear = {
 # ES: Los relevos que requieren guerra o ambos gobiernos dejan de reintentarse tras la paz. La
 #     Universidad y los retiros europeos independientes conservan su entrega de posguerra.
 gg_calendar_close_wartime_relays = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_calendar_close_wartime_relays|" # GG_TRAZA
 	set_global_variable = gg_cal_done_1
 	set_global_variable = gg_cal_done_2
 	set_global_variable = gg_cal_done_3
@@ -532,6 +544,7 @@ gg_calendar_close_wartime_relays = {
 #     Cerrito) si lo recibia. Ahora lo llaman las dos salidas, la marca hace que corra una vez, y
 #     siempre hay destinatario.
 gg_war_closing_dispatch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_closing_dispatch|" # GG_TRAZA
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_peace_settled }
@@ -686,6 +699,7 @@ gg_war_closing_dispatch = {
 #     que tambien puede llamar un evento oculto para la IA.
 
 gg_montonera_levy = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_montonera_levy|" # GG_TRAZA
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -748,6 +762,7 @@ gg_montonera_levy = {
 	}
 
 gg_river_blockade = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_river_blockade|" # GG_TRAZA
 		# EN: visible counter, since debug_log writes nothing in this release build
 		#     (verified: not even vanilla's own debug_log lines appear in game.log).
 		#     Read from the journal's status text.
@@ -1009,6 +1024,7 @@ gg_river_blockade = {
 #     copias agendadas (Rosas y la Republica) por si el cambio de tag de la particion se lleva puestos
 #     los eventos agendados.
 gg_cal_fire = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
@@ -1037,6 +1053,7 @@ gg_cal_fire = {
 
 # EN/ES: the same, for the events that are not a popup / lo mismo, para los que no son popup
 gg_cal_fire_quiet = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_quiet| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
@@ -1064,6 +1081,7 @@ gg_cal_fire_quiet = {
 #     whichever copy of the relay gets there first / el mismo relevo para lo que no necesita dos
 #     gobiernos: el efecto es global, asi que corre en la copia que llegue primero
 gg_cal_fire_here = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_here| DONE= $DONE$  EVENT= $EVENT$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = $DONE$ } }
 		trigger_event = { id = $EVENT$ days = 0 }
@@ -1075,6 +1093,7 @@ gg_cal_fire_here = {
 # ES: Conserva la guarda de la mesa de paz y exige destinatario antes de intentar la entrega.
 #     Como arriba, solo el destinatario escribe done; un rechazo conserva el reintento mensual.
 gg_cal_fire_if_table_free = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_if_table_free| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = $DONE$ } }
 		if = {
@@ -1118,6 +1137,7 @@ gg_cal_fire_if_table_free = {
 #     meses), asi que cada variante tiene sus demoras. Lo que ya paso al partirse dispara al dia
 #     siguiente (demora 1).
 gg_partition_calendar = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_partition_calendar|" # GG_TRAZA
 	# EN/ES: T9 -- the new characters, once both governments exist / los personajes nuevos
 	gg_spawn_war_characters = yes
 	# EN/ES: the siege portrait has its defender from the first day / el retrato del sitio, desde el primer dia
@@ -1161,6 +1181,7 @@ gg_partition_calendar = {
 # ES: T7, C25/C26. Urquiza se da vuelta: su peso pasa a la Defensa, Rosas lo pierde, los jefes
 #     oribistas se pasan, y el Cerrito responde (gg_powers.23).
 gg_urquiza_flip = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza_flip|" # GG_TRAZA
 	set_global_variable = gg_urquiza_flipped
 	# EN/ES: T9, F4-3 -- Servando Gomez goes over; Garzon comes with Urquiza / Servando se pasa; Garzon viene con Urquiza
 	c:CER ?= {
@@ -1220,6 +1241,7 @@ gg_urquiza_flip = {
 #     lista que se esta recorriendo. Tres tags son tres ifs.
 # -------------------------------------------------------------------------------------------------
 gg_argentina_vassals_settle = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_vassals_settle|" # GG_TRAZA
 	# EN: 22/9/2026 (Juan) -- the beaten provinces are annexed when the Federal Pact is settled, whatever
 	#     the settlement ("se anexan cuando se salde el pacto federal"), not when the Guerra Grande ends.
 	#     Called from gg_pact_resolve. Only those still subject to Argentina.
@@ -1258,6 +1280,7 @@ gg_argentina_vassals_settle = {
 }
 
 gg_postwar_dispatch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar_dispatch|" # GG_TRAZA
 	# EN: Codex review 2026-09-19 -- this used to send the Cerrito to gg_peace.8 whenever the blancos
 	#     were ahead on the score, even with the Defensa still alive. gg_peace.8 only changes the tag
 	#     when URU is gone, so in those games nobody changed tag AND the postwar went to the Defensa:
@@ -1293,6 +1316,7 @@ gg_postwar_dispatch = {
 # EN: T9 -- the four characters of 1843, each on his side. Guarded so a second call does nothing.
 # ES: T9 -- los cuatro personajes de 1843, cada uno en su bando. Con guarda para no duplicar.
 gg_spawn_war_characters = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_spawn_war_characters|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_war_characters_spawned } }
 		set_global_variable = gg_war_characters_spawned
@@ -1323,6 +1347,7 @@ gg_spawn_war_characters = {
 #     eleccion en mitad de la guerra le daba la presidencia al politico de partido que ganara la
 #     votacion, en los dos caminos. Fuentes (Wikipedia ES) en el parrafo de arriba.
 gg_ruler_set = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ruler_set| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
 	if = {
 		limit = { any_scope_character = { has_template = $TEMPLATE$ } }
 		random_scope_character = {
@@ -1390,6 +1415,7 @@ gg_ruler_set = {
 # EN/ES: who should be sitting in the chair right now, in this country / quien deberia estar en el
 #     sillon ahora mismo, en este pais
 gg_president_historical = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_president_historical|" # GG_TRAZA
 	if = {
 		limit = { has_variable = guerra_grande_cerrito_government }
 		gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
@@ -1430,6 +1456,7 @@ gg_president_historical = {
 # ES: seguir peleando despues de que el arbitro declaro agotado a este gobierno: el contador vuelve
 #     a cero, el arbitro se cierra por un anio y la decision cuesta lo que cuesta.
 gg_peace_fight_on = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_peace_fight_on|" # GG_TRAZA
 	remove_global_variable = gg_peace_offered
 	set_global_variable = { name = gg_peace_cooldown days = 365 }
 	if = {
@@ -1477,6 +1504,7 @@ gg_peace_fight_on = {
 #     nada. Retirar el encargo cierra el reclamo, porque una provincia que se fue dejo de pedir.
 # -------------------------------------------------------------------------------------------------
 gg_reclamo_abre = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_reclamo_abre|" # GG_TRAZA
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_reclamo_$KEY$ }
@@ -1492,6 +1520,7 @@ gg_reclamo_abre = {
 }
 
 gg_reclamo_cierra = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_reclamo_cierra|" # GG_TRAZA
 	if = {
 		limit = { has_global_variable = gg_reclamo_$KEY$ }
 		remove_global_variable = gg_reclamo_$KEY$
@@ -1499,6 +1528,7 @@ gg_reclamo_cierra = {
 }
 
 gg_delegation_revoked = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_delegation_revoked| COUNT= $COUNT$  KEY= $KEY$ " # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_delegation_gone_$KEY$ } }
 		set_global_variable = gg_delegation_gone_$KEY$
@@ -1531,6 +1561,7 @@ gg_delegation_revoked = {
 
 # EN/ES: y vuelve a delegar, recuperada por las armas. COUNT positivo.
 gg_delegation_restored = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_delegation_restored| COUNT= $COUNT$ " # GG_TRAZA
 	if = {
 		limit = { has_global_variable = gg_delegation_gone_$KEY$ }
 		remove_global_variable = gg_delegation_gone_$KEY$

@@ -10,6 +10,7 @@ gg_provinces.1 = {
 	hidden = yes
 
 	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|" # GG_TRAZA
 		every_country = {
 			limit = { has_variable = gg_split_league_pending }
 			debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|league [THIS.GetCountry.GetNameNoFormatting] found"
