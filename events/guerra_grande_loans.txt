@@ -701,8 +701,20 @@ gg_loan.6 = {
 	#     / la cuenta se cuenta solo si la hay
 	desc = {
 		first_valid = {
+			# EN/ES: 22/9/2026 -- the Pantanoso text only for the peace it tells: neither victors nor
+			#     vanquished, from 1851; any other end of the war gets the account without the date
+			#     / el texto del Pantanoso solo para la paz que cuenta; cualquier otro final, sin fecha
 			triggered_desc = {
 				desc = gg_loan.6.d
+				trigger = {
+					has_variable = gg_loan_debt
+					var:gg_loan_debt >= 1
+					has_global_variable = gg_peace_no_victors
+					game_date >= 1851.1.1
+				}
+			}
+			triggered_desc = {
+				desc = gg_loan.6.d_other
 				trigger = {
 					has_variable = gg_loan_debt
 					var:gg_loan_debt >= 1
