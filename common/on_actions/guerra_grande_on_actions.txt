@@ -13,6 +13,19 @@ guerra_grande_on_game_start = {
 	effect = {
 		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
 		gg_systems_init = yes
+		# EN: 22/9/2026 (Codex) -- Beron de Astrada governs Corrientes from 1837 (by the Pact's list from
+		#     the start): he exists in the Confederation from day one, and the Corrientes rising moves
+		#     him (gg_ruler_set) instead of creating him.
+		# ES: Beron de Astrada gobierna Corrientes: existe en la Confederacion desde el primer dia, y el
+		#     levantamiento de Corrientes lo muda en vez de crearlo.
+		c:ARG ?= {
+			if = {
+				limit = {
+					NOT = { any_country = { any_scope_character = { has_template = CRR_gg_genaro_beron_de_astrada } } }
+				}
+				create_character = { template = CRR_gg_genaro_beron_de_astrada }
+			}
+		}
 		# EN: 22/9/2026 (Juan) -- Oribe keeps imperious (-35 popularity, and a ruler's popularity is
 		#     authority); his party's name for him offsets part of it, leaving him at -10.
 		# ES: Oribe conserva imperious (-35 de popularidad, que en el gobernante es autoridad); el nombre

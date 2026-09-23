@@ -118,7 +118,7 @@ gg_int_arg_ai_pulse = {
 			limit = { is_player = yes has_variable = gg_arg_rosas_seat }
 			if = {
 				limit = { gg_int_arg_can_offer = yes NOT = { has_global_variable = gg_int_arg_player_deferred } }
-				set_global_variable = { name = gg_int_arg_player_deferred days = 365 }
+				set_global_variable = { name = gg_int_arg_player_deferred days = 335 }
 				trigger_event = { id = gg_international.10 days = 0 popup = yes }
 			}
 			if = {
@@ -128,7 +128,7 @@ gg_int_arg_ai_pulse = {
 					NOT = { has_global_variable = gg_int_arg_player_kept }
 					global_var:gg_delegating_provinces <= 6
 				}
-				set_global_variable = { name = gg_int_arg_player_kept days = 365 }
+				set_global_variable = { name = gg_int_arg_player_kept days = 335 }
 				trigger_event = { id = gg_international.11 days = 0 popup = yes }
 			}
 		}

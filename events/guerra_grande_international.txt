@@ -62,7 +62,7 @@ gg_international.10 = {
 		name = gg_international.10.b
 		default_option = yes
 		custom_tooltip = gg_international.10.b_tt
-		set_global_variable = { name = gg_int_arg_player_deferred days = 365 }
+		set_global_variable = { name = gg_int_arg_player_deferred days = 335 }
 	}
 }
 
@@ -85,6 +85,6 @@ gg_international.11 = {
 		name = gg_international.11.b
 		default_option = yes
 		custom_tooltip = gg_international.11.b_tt
-		set_global_variable = { name = gg_int_arg_player_kept days = 365 }
+		set_global_variable = { name = gg_int_arg_player_kept days = 335 }
 	}
 }

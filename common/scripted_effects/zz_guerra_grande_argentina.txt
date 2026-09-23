@@ -78,10 +78,9 @@ gg_argentina_create_corrientes = {
 	c:CRR ?= {
 		set_capital = STATE_CORRIENTES
 		# EN/ES: Beron de Astrada, que se separo y murio mandando veinticinco dias despues
-		create_character = {
-			template = CRR_gg_genaro_beron_de_astrada
-			ruler = yes
-		}
+		# EN/ES: 22/9/2026 -- he already governs Corrientes inside the Confederation from 1836: fetched,
+		#     not copied / ya gobierna Corrientes dentro de la Confederacion desde 1836: se lo trae, no se lo copia
+		gg_ruler_set = { TEMPLATE = CRR_gg_genaro_beron_de_astrada }
 	}
 	# EN/ES: y la delegacion: una provincia menos / and the delegation: one province fewer
 	gg_delegation_revoked = { KEY = corrientes COUNT = -1 }
