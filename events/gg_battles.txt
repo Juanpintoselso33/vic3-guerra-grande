@@ -57,7 +57,7 @@ gg_battle.1 = {
 			set_global_variable = { name = gg_battle_open value = 1 }
 			debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|abre|india_muerta"
 			trigger_event = { id = gg_battle.2 days = 1 }
-			trigger_event = { id = gg_battle.3 days = 7 } # EN/ES: weekly until 30/6/1845 / semanal hasta el 30/6/1845
+			trigger_event = { id = gg_battle.3 days = 7 } # EN/ES: weekly; a safety cap only / semanal; solo un tope de seguridad
 		}
 		else = {
 			random_country = {
@@ -136,16 +136,16 @@ gg_battle.2 = {
 	}
 }
 
-# EN/ES: 30/6/1845 -- no battle: the campaign melts away / sin batalla: la campania se disuelve.
-#     23/9 headless: a war opened on 27/3 closed on 30/4 with no battle (mobilizing and marching take weeks):
-#     it opens on 1/1/1845 and runs to 30/6 / abre el 1/1 y corre hasta el 30/6
+# EN/ES: 1/1/1846 -- a SAFETY CAP, not a historical date (Juan, 23/9: no war left to run a month gives a battle):
+#     the campaign runs until its first battle; only if none by the end of 1845 it melts away
+#     / un TOPE DE SEGURIDAD, no una fecha historica: la campania corre hasta su primera batalla
 gg_battle.3 = {
 	type = country_event
 	hidden = yes
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.3|" # GG_TRAZA
 		if = {
-			limit = { global_var:gg_battle_open ?= 1 game_date >= 1845.6.30 }
+			limit = { global_var:gg_battle_open ?= 1 game_date >= 1846.1.1 }
 			set_global_variable = { name = gg_battle_result value = 0 }
 			gg_battle_close = yes
 		}
@@ -158,7 +158,8 @@ gg_battle.3 = {
 
 # EN: The campaign of 1851: Urquiza crosses the Uruguay on 19 July (sent by the war journal's monthly pulse
 #     once Urquiza has turned), on the Defensa. Entre Rios joins the Defensa's side; Brazil joins when Caxias crosses
-#     (gg_contingent.8). Oribe capitulated on 8 October without a battle: that is the timeout.
+#     (gg_contingent.8). It runs until the first battle or the peace; Oribe historically capitulated on 8 October
+#     without a battle, and the arbiter still decides the peace.
 # ES: La campania de 1851: Urquiza cruza el Uruguay el 19 de julio. Entre Rios se suma a la Defensa; el
 #     Brasil cuando cruza Caxias. Oribe capitulo el 8 de octubre sin batalla: ese es el tope.
 gg_battle.10 = {
@@ -193,7 +194,7 @@ gg_battle.10 = {
 			set_global_variable = { name = gg_battle_open value = 2 }
 			debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|abre|1851"
 			trigger_event = { id = gg_battle.11 days = 1 }
-			trigger_event = { id = gg_battle.12 days = 7 } # EN/ES: weekly until 8/10/1851 / semanal hasta el 8/10/1851
+			trigger_event = { id = gg_battle.12 days = 7 } # EN/ES: weekly; a safety cap only (the peace closes it first) / tope de seguridad
 		}
 	}
 }
@@ -274,15 +275,15 @@ gg_battle.11 = {
 	}
 }
 
-# EN/ES: 8/10/1851 -- no battle: Oribe capitulated without one; the arbiter decides the peace
-#     / sin batalla: Oribe capitulo sin darla; la paz la decide el arbitro
+# EN/ES: the campaign of 1851 runs until its first battle or the peace (gg_wartime_modifiers_clear closes it);
+#     1/1/1853 is only a safety cap / corre hasta la primera batalla o la paz; 1/1/1853 es solo un tope
 gg_battle.12 = {
 	type = country_event
 	hidden = yes
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.12|" # GG_TRAZA
 		if = {
-			limit = { global_var:gg_battle_open ?= 2 game_date >= 1851.10.8 }
+			limit = { global_var:gg_battle_open ?= 2 game_date >= 1853.1.1 }
 			set_global_variable = { name = gg_battle_result value = 0 }
 			gg_battle_close = yes
 		}
