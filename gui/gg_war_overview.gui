@@ -213,15 +213,25 @@ flowcontainer = {
 		background = { using = entry_bg_fancy_dark alpha = 0.6 }
 		text = "gg_war_ui_sec_powers"
 	}
+	# EN/ES: 23/9 (Juan: "filas") -- two rows by side: who backs the colorados (the powers, and Urquiza once he
+	#     turns) and who backs the blancos (Rosas, Urquiza while he stays); Urquiza moves between them
+	#     / dos filas por lado: quien sostiene a los colorados y quien a los blancos; Urquiza pasa de una a otra
+	textbox = {
+		size = { 520 26 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_war_ui_row_colorados"
+	}
 	flowcontainer = {
 		direction = horizontal spacing = 8
 		parentanchor = hcenter
-		flowcontainer = {
+		ignoreinvisible = yes
+				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -230,7 +240,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -239,7 +249,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -248,7 +258,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -257,7 +267,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -266,7 +276,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -275,7 +285,7 @@ flowcontainer = {
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
 			green_progressbar_horizontal = {
-				size = { 120 6 }
+				size = { 100 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
 				blockoverride "values" {
@@ -284,12 +294,12 @@ flowcontainer = {
 				}
 			}
 		}
-		flowcontainer = {
+				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -298,7 +308,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -307,7 +317,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -316,7 +326,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -325,7 +335,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -334,7 +344,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -343,7 +353,7 @@ flowcontainer = {
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
 			green_progressbar_horizontal = {
-				size = { 120 6 }
+				size = { 100 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
 				blockoverride "values" {
@@ -352,12 +362,12 @@ flowcontainer = {
 				}
 			}
 		}
-		flowcontainer = {
+				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -366,7 +376,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_0"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -375,7 +385,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -384,7 +394,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_1"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -393,7 +403,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -402,7 +412,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_2"
-				size = { 164 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
@@ -411,7 +421,7 @@ flowcontainer = {
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
 			green_progressbar_horizontal = {
-				size = { 120 6 }
+				size = { 100 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
 				blockoverride "values" {
@@ -420,30 +430,49 @@ flowcontainer = {
 				}
 			}
 		}
+				flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			visible = "[GetGlobalVariable('gg_urquiza_flipped').IsSet]"
+			textbox = {
+				tooltip = "gg_tt_backer_urquiza_def"
+				size = { 124 62 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_urquiza_def"
+			}
+			green_progressbar_horizontal = {
+				size = { 100 6 }
+				parentanchor = hcenter
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
+					min = 0 max = 100
+				}
+			}
+		}
 	}
-	# EN: 23/9/2026 (Juan: "isn't Argentina missing from the powers? and Urquiza too?") -- the Cerrito's
-	#     backers, on the same footing as the powers: gg_cerrito_backing = Rosas + Urquiza while he is with
-	#     the Cerrito; after his pronouncement Urquiza counts for the Defensa (gg_defensa_backing). From the
-	#     partition, when there is a Cerrito to back.
-	# ES: los padrinos del Cerrito, a la par de las potencias: Rosas y Urquiza mientras este con el Cerrito;
-	#     despues de su pronunciamiento Urquiza cuenta para la Defensa. Desde la particion.
+	textbox = {
+		size = { 520 26 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_war_ui_row_blancos"
+	}
 	flowcontainer = {
 		direction = horizontal spacing = 8
 		parentanchor = hcenter
-		# EN/ES: 23/9 (Juan: "no veo a Argentina y Urquiza") -- from 1836, like the powers: they back the blancos
-		#     before the partition too / desde 1836, como las potencias: sostienen a los blancos antes de la particion
-		flowcontainer = {
+		ignoreinvisible = yes
+				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			textbox = {
 				tooltip = "gg_tt_backer_rosas"
-				size = { 256 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_backer_rosas"
 			}
 			green_progressbar_horizontal = {
-				size = { 160 6 }
+				size = { 100 6 }
 				parentanchor = hcenter
 				blockoverride "values" {
 					value = "[GetGlobalVariable('gg_patron_rosas').GetValue]"
@@ -451,39 +480,19 @@ flowcontainer = {
 				}
 			}
 		}
-		flowcontainer = {
+				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			visible = "[Not(GetGlobalVariable('gg_urquiza_flipped').IsSet)]"
 			textbox = {
 				tooltip = "gg_tt_backer_urquiza_cer"
-				size = { 256 44 }
+				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_backer_urquiza_cer"
 			}
 			green_progressbar_horizontal = {
-				size = { 160 6 }
-				parentanchor = hcenter
-				blockoverride "values" {
-					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
-					min = 0 max = 100
-				}
-			}
-		}
-		flowcontainer = {
-			direction = vertical ignoreinvisible = yes
-			visible = "[GetGlobalVariable('gg_urquiza_flipped').IsSet]"
-			textbox = {
-				tooltip = "gg_tt_backer_urquiza_def"
-				size = { 256 44 }
-				background = { using = dark_area alpha = 0.3 }
-				multiline = yes
-				using = fontsize_medium align = center|nobaseline
-				text = "gg_war_ui_backer_urquiza_def"
-			}
-			green_progressbar_horizontal = {
-				size = { 160 6 }
+				size = { 100 6 }
 				parentanchor = hcenter
 				blockoverride "values" {
 					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
@@ -492,8 +501,6 @@ flowcontainer = {
 			}
 		}
 	}
-	# EN/ES: 23/9 -- which way the backers lean: each side's total backing, 40 the floor
-	#     / hacia donde se inclinan los padrinos: el sosten total de cada lado, 40 el piso
 	textbox = {
 		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 		tooltip = "gg_tt_backers_lean"
