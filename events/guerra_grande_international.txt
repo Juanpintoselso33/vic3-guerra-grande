@@ -36,3 +36,55 @@ gg_international.2 = {
 		ai_chance = { base = 30 }
 	}
 }
+
+# EN: 22/9/2026 (Juan) -- the remittance to Oribe leaves the Federal Pact journal ("this is a journal to follow
+#     Argentina's own politics"): a human Rosas is asked by event when he can send it (.10), and when the
+#     provinces have fallen away after paying (.11). The AI keeps deciding in gg_int_arg_ai_pulse.
+# ES: la remesa a Oribe sale del journal del Pacto: a un Rosas jugador se le pregunta por evento cuando puede
+#     mandarla (.10), y cuando las provincias se fueron despues de pagar (.11). La IA decide como antes.
+gg_international.10 = {
+	type = country_event
+	placement = ROOT
+	title = gg_international.10.t
+	desc = gg_international.10.d
+	flavor = gg_international.10.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { has_variable = gg_arg_rosas_seat }
+	option = {
+		name = gg_international.10.a
+		trigger = { gg_int_arg_can_offer = yes }
+		gg_int_arg_offer = yes
+	}
+	option = {
+		name = gg_international.10.b
+		default_option = yes
+		custom_tooltip = gg_international.10.b_tt
+		set_global_variable = { name = gg_int_arg_player_deferred days = 365 }
+	}
+}
+
+gg_international.11 = {
+	type = country_event
+	placement = ROOT
+	title = gg_international.11.t
+	desc = gg_international.11.d
+	flavor = gg_international.11.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { has_variable = gg_arg_rosas_seat }
+	option = {
+		name = gg_international.11.a
+		gg_int_arg_withdraw = yes
+	}
+	option = {
+		name = gg_international.11.b
+		default_option = yes
+		custom_tooltip = gg_international.11.b_tt
+		set_global_variable = { name = gg_int_arg_player_kept days = 365 }
+	}
+}

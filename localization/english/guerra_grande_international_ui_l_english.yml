@@ -1,12 +1,6 @@
 ﻿l_english:
- gg_ui_rosas_commitment:0 "#b The Cerrito's Pledge to Buenos Aires#!\nThe promise of reunification limits the peace terms the Cerrito can accept."
  gg_ui_brazil_commitment:0 "#b The Pledge to the Empire#!\nThe Defensa has accepted Brazil's backing: any peace it signs will be on Brazilian terms, and it can no longer turn to London and Paris for protection."
  gg_ui_customs_commitment:0 "#b The Customs Revenue#!\nThe Defensa has drawn #V 40,000#! against its customs house. The debt will have to be settled after the peace."
  gg_ui_empty:0 ""
- gg_ui_offer_action_tt:0 "An extraordinary remittance in exchange for a #V diplomatic obligation#!. The recipient decides; the money is paid on acceptance.\n\n$gg_int_arg_offer_possible$\n\n[GetScriptedGui('gg_ui_offer_aid').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
- gg_ui_withdraw_action_tt:0 "$gg_int_arg_withdraw_possible$\n\n[GetScriptedGui('gg_ui_withdraw_aid').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_ui_squadrons_action_tt:0 "Requires open war, both governments established, and the squadrons not yet requested. Available from #V 1843#! if a great power has an interest in the Plata, or from #V 1848#! regardless.\n\n[GetScriptedGui('gg_ui_call_squadrons').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
- gg_ui_offer_parties:0 "#b Buenos Aires → Oribe's government#!"
- gg_ui_offer_capacity:0 "Funds available: #V £[JournalEntry.MakeScope.ScriptValue('gg_int_arg_aid_capacity')|0]#!"
- gg_ui_accepted_account:0 "Remitted: #V £[GetGlobalVariable('gg_int_arg_spent').GetValue|0]#!\nIn return: the recipient's diplomatic obligation to Buenos Aires."
  gg_ui_backing_tt:0 "Backing runs from #V 0#! to #V 100#!. The figure alone is no treaty: commitments are entered into only when their terms are accepted."

@@ -1,0 +1,39 @@
+﻿# EN: 22/9/2026 -- who governs each of the three that can withdraw the mandate, for the Federal Pact's list
+#     (gui/gg_pact_overview.gui). The ruler of the risen province while it stands as a country; otherwise
+#     the historical governor while he lives: Beron de Astrada in Corrientes (governor 1837-1839), Heredia in
+#     the North (Tucuman, "Protector" of the northern provinces until November 1838), Echague in Entre Rios
+#     until Urquiza takes office (December 1841). Cleared first, so a dead man never stays on the list.
+# ES: quien gobierna cada una de las tres que pueden retirar el encargo. El gobernante de la alzada mientras
+#     sea pais; si no, el gobernador historico mientras viva. Se borra primero, asi un muerto no queda.
+gg_pact_gov_from_template = {
+	every_country = {
+		every_scope_character = {
+			limit = { has_template = $TEMPLATE$ is_character_alive = yes }
+			set_global_variable = { name = $VAR$ value = this }
+		}
+	}
+}
+gg_pact_governors_update = {
+	if = { limit = { has_global_variable = gg_pact_gov_corrientes } remove_global_variable = gg_pact_gov_corrientes }
+	if = { limit = { has_global_variable = gg_pact_gov_norte } remove_global_variable = gg_pact_gov_norte }
+	if = { limit = { has_global_variable = gg_pact_gov_entre_rios } remove_global_variable = gg_pact_gov_entre_rios }
+	if = {
+		limit = { exists = c:CRR c:CRR = { exists = ruler } }
+		c:CRR = { ruler = { set_global_variable = { name = gg_pact_gov_corrientes value = this } } }
+	}
+	else = { gg_pact_gov_from_template = { TEMPLATE = CRR_gg_genaro_beron_de_astrada VAR = gg_pact_gov_corrientes } }
+	if = {
+		limit = { exists = c:CLN c:CLN = { exists = ruler } }
+		c:CLN = { ruler = { set_global_variable = { name = gg_pact_gov_norte value = this } } }
+	}
+	else = { gg_pact_gov_from_template = { TEMPLATE = ARG_Alejandro_Heredia VAR = gg_pact_gov_norte } }
+	if = {
+		limit = { exists = c:ENR c:ENR = { exists = ruler } }
+		c:ENR = { ruler = { set_global_variable = { name = gg_pact_gov_entre_rios value = this } } }
+	}
+	else_if = {
+		limit = { game_date >= 1841.12.15 }
+		gg_pact_gov_from_template = { TEMPLATE = ARG_Justo_Jose_de_Urquiza VAR = gg_pact_gov_entre_rios }
+	}
+	else = { gg_pact_gov_from_template = { TEMPLATE = ARG_Pascual_EchagU_e VAR = gg_pact_gov_entre_rios } }
+}

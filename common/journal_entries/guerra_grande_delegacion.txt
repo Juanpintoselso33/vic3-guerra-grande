@@ -82,12 +82,14 @@ je_gg_delegation = {
 	#     provincia volvio no es un costo y no tiene por que esperar.
 	immediate = {
 		gg_journal_hide_engine_parts = yes
+		gg_pact_governors_update = yes
 	}
 
 	on_weekly_pulse = {
 		effect = {
 			gg_journal_hide_engine_parts = yes
 			gg_pact_sync = yes
+			gg_pact_governors_update = yes
 			# EN: Shared journals have no country root; resolve the mandate holder.
 			# ES: El diario compartido no tiene pais raiz; resolver quien tiene el mandato.
 			every_country = {

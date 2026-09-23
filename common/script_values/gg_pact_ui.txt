@@ -62,24 +62,6 @@ gg_ui_pact_entre_rios = {
 }
 
 
-# EN: 22/9/2026 redesign (docs/guerra-grande-flujo/pacto-textos-mecanica.md). Sections that appear only
-#     when they have something to show.
-# ES: rediseño del 22/9/2026. Secciones que aparecen solo cuando tienen algo que mostrar.
-# EN/ES: a province in arms against Buenos Aires exists / existe una provincia alzada contra Buenos Aires
-gg_ui_pact_front_shown = {
- value = 0
- if = {
-  limit = {
-   exists = c:ARG
-   OR = {
-    AND = { exists = c:CRR has_global_variable = gg_delegation_gone_corrientes }
-    AND = { exists = c:CLN has_global_variable = gg_delegation_gone_coalicion_tucuman }
-    AND = { exists = c:ENR has_global_variable = gg_delegation_gone_entre_rios }
-   }
-  }
-  value = 1
- }
-}
 # EN/ES: unrepaired grievances, while the province still delegates / agravios sin reparar, mientras delega
 gg_ui_pact_grv_corrientes = {
  value = 0
@@ -92,23 +74,4 @@ gg_ui_pact_grv_norte = {
 gg_ui_pact_grv_entre_rios = {
  value = 0
  if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 NOT = { has_global_variable = gg_delegation_gone_entre_rios } } value = 1 }
-}
-gg_ui_pact_grievances_shown = {
- value = 0
- if = { limit = { OR = { gg_ui_pact_grv_corrientes > 0 gg_ui_pact_grv_norte > 0 gg_ui_pact_grv_entre_rios > 0 } } value = 1 }
-}
-# EN/ES: Rosas's money for Oribe, once there is somebody to receive it or an offer was made
-#     / la plata de Rosas para Oribe, cuando hay quien la reciba o ya hubo oferta
-gg_ui_pact_accounts_shown = {
- value = 0
- if = {
-  limit = {
-   gg_international_open = yes
-   OR = {
-    has_global_variable = gg_int_arg_offered
-    any_country = { gg_int_oribe_recipient = yes }
-   }
-  }
-  value = 1
- }
 }

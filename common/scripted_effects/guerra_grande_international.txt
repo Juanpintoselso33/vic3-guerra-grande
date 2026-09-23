@@ -113,6 +113,25 @@ gg_int_arg_withdraw = {
 gg_int_arg_ai_pulse = {
 	if = {
 		limit = { gg_international_open = yes }
+		# EN/ES: 22/9/2026 -- a human Rosas is asked by event / a un Rosas jugador se le pregunta por evento
+		every_country = {
+			limit = { is_player = yes has_variable = gg_arg_rosas_seat }
+			if = {
+				limit = { gg_int_arg_can_offer = yes NOT = { has_global_variable = gg_int_arg_player_deferred } }
+				set_global_variable = { name = gg_int_arg_player_deferred days = 365 }
+				trigger_event = { id = gg_international.10 days = 0 popup = yes }
+			}
+			if = {
+				limit = {
+					has_global_variable = gg_int_arg_accepted
+					NOT = { has_global_variable = gg_int_arg_withdrawn }
+					NOT = { has_global_variable = gg_int_arg_player_kept }
+					global_var:gg_delegating_provinces <= 6
+				}
+				set_global_variable = { name = gg_int_arg_player_kept days = 365 }
+				trigger_event = { id = gg_international.11 days = 0 popup = yes }
+			}
+		}
 		every_country = {
 			limit = { is_player = no has_variable = gg_arg_rosas_seat }
 			if = {
