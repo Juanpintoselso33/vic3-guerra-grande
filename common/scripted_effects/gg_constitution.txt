@@ -1,0 +1,78 @@
+﻿# EN: 23/9/2026 (Juan: "a first, simple version; lean it a little towards the federales") -- the Restorer's death
+#     with no constitution (gg_constitution.2) splits the Confederation along an imagined historical line. UNITARIOS:
+#     Corrientes (it rose against Rosas three times) and the heart of the 1840 Coalicion del Norte (Tucuman, Salta,
+#     Jujuy, Catamarca) -- the league reborn under its own tag, CLN. FEDERALES: everyone else with Buenos Aires,
+#     Entre Rios and the Banda Oriental included. An engine war (dp_gg_pacto_federal); the winner writes the
+#     constitution and the autocracy ends either way (gg_constitution.3). A constituent convention where provinces
+#     join a side by the player's choices is for a later release.
+#     A CONSTITUTION MAKES A FEDERATION OR A UNITARY STATE, NOT A CONFEDERATION (Juan, 23/9: "a confederation is not a
+#     federation"): either one incorporates the provinces into one country; only the Pact without a constitution
+#     keeps them as protectorates.
+# ES: la muerte del Restaurador sin constitucion parte la Confederacion por una linea historica imaginaria. El que
+#     gana escribe la constitucion y la autocracia termina igual. Una constitucion hace una federacion o un estado
+#     unitario, no una confederacion: las dos incorporan las provincias; solo el Pacto sin constitucion las deja
+#     como protectorados.
+gg_unitario_rising = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_rising|" # GG_TRAZA
+	# EN/ES: the unitario provinces that are Buenos Aires's subjects bring their ground first / primero su tierra
+	if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:CRR } }
+	if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:TUC } }
+	if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:SLT } }
+	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:JUJ } }
+	if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:CTM } }
+	if = {
+		limit = { exists = s:STATE_TUCUMAN.region_state:ARG NOT = { exists = c:CLN } }
+		create_country = {
+			tag = CLN
+			origin = c:ARG
+			state = s:STATE_TUCUMAN.region_state:ARG
+		}
+		if = { limit = { exists = s:STATE_CORRIENTES.region_state:ARG } s:STATE_CORRIENTES.region_state:ARG = { set_state_owner = c:CLN } }
+		if = { limit = { exists = s:STATE_SALTA.region_state:ARG } s:STATE_SALTA.region_state:ARG = { set_state_owner = c:CLN } }
+		if = { limit = { exists = s:STATE_JUJUY.region_state:ARG } s:STATE_JUJUY.region_state:ARG = { set_state_owner = c:CLN } }
+		if = { limit = { exists = s:STATE_CATAMARCA.region_state:ARG } s:STATE_CATAMARCA.region_state:ARG = { set_state_owner = c:CLN } }
+		gg_argentina_new_country_people = { TAG = CLN }
+		c:CLN ?= { set_capital = STATE_TUCUMAN }
+		set_global_variable = gg_unitario_war
+		c:ARG ?= { gg_argentina_open_war = { TAG = CLN } }
+	}
+	# EN/ES: nobody left to rise: the federales write it in peace / nadie se alza: los federales la escriben en paz
+	else = { c:ARG ?= { trigger_event = { id = gg_constitution.3 days = 1 } } }
+}
+
+# EN/ES: one country: every province of the Pact (and the Banda Oriental, if it is one) incorporated, in Argentina's
+#     scope / un solo pais: todas las provincias del Pacto incorporadas
+gg_constitution_one_country = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_one_country|" # GG_TRAZA
+	gg_argentina_provinces_incorporate = yes
+	if = {
+		limit = { has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG } }
+		annex = c:URU
+		remove_global_variable = gg_oriental_province
+	}
+}
+
+# EN/ES: the federal constitution of 1853, with the universal male suffrage of the electoral law of 1857: a
+#     federation, one country whose provinces keep their governments / la constitucion federal de 1853: una federacion
+gg_constitution_federal = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_federal|" # GG_TRAZA
+	gg_constitution_one_country = yes
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_universal_suffrage
+	activate_law = law_type:law_freedom_of_conscience
+	activate_law = law_type:law_slavery_banned
+	activate_law = law_type:law_no_migration_controls
+	activate_law = law_type:law_right_of_assembly
+}
+
+# EN/ES: a unitary constitution after that of 1826: one country ordered from a capital, the Catholic religion of
+#     the State and a restricted suffrage / una constitucion unitaria como la de 1826
+gg_constitution_unitaria = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_unitaria|" # GG_TRAZA
+	gg_constitution_one_country = yes
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_census_voting
+	activate_law = law_type:law_state_religion
+	activate_law = law_type:law_slavery_banned
+	activate_law = law_type:law_right_of_assembly
+}

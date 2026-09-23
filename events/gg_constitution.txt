@@ -45,11 +45,8 @@ gg_constitution.1 = {
 		name = gg_constitution.1.a
 		default_option = yes
 		set_global_variable = { name = gg_constitution_chosen value = 1 }
-		activate_law = law_type:law_presidential_republic
-		activate_law = law_type:law_freedom_of_conscience
-		activate_law = law_type:law_slavery_banned
-		activate_law = law_type:law_no_migration_controls
-		activate_law = law_type:law_right_of_assembly
+		custom_tooltip = gg_constitution.1.a_tt
+		gg_constitution_federal = yes # EN/ES: 23/9 (Juan) -- a federation: one country, the autocracy ends / una federacion
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_devout }
 		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
@@ -107,5 +104,59 @@ gg_constitution.2 = {
 		name = gg_constitution.2.a
 		default_option = yes
 		custom_tooltip = gg_constitution.2.a_tt
+		gg_unitario_rising = yes
+	}
+}
+
+# EN: 23/9/2026 -- the day after the war between federales and unitarios ends (or at once if nobody rose): the winner
+#     writes the constitution, the country is one either way (a federation or a unitary state), the autocracy ends.
+# ES: el dia despues del fin de la guerra entre federales y unitarios: el que gana escribe la constitucion.
+gg_constitution.3 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.3|" # GG_TRAZA
+		if = { limit = { has_global_variable = gg_unitario_war } remove_global_variable = gg_unitario_war }
+		if = {
+			limit = {
+				exists = c:CLN
+				c:CLN = { is_subject = no }
+				NOT = { c:CLN = { has_war_with = c:ARG } }
+			}
+			set_global_variable = { name = gg_constitution_outcome value = 2 }
+			gg_constitution_unitaria = yes
+		}
+		else = {
+			set_global_variable = { name = gg_constitution_outcome value = 1 }
+			gg_constitution_federal = yes
+		}
+		# EN/ES: the league's ground joins the one country too / la tierra de la liga tambien se incorpora
+		if = { limit = { exists = c:CLN } annex_with_incorporation = c:CLN }
+		trigger_event = { id = gg_constitution.4 days = 0 popup = yes }
+	}
+}
+
+gg_constitution.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_constitution.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_constitution.4.d_unitaria trigger = { global_var:gg_constitution_outcome = 2 } }
+			triggered_desc = { desc = gg_constitution.4.d_federal trigger = { always = yes } }
+		}
+	}
+	flavor = gg_constitution.4.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { c:ARG ?= this has_global_variable = gg_constitution_outcome }
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.4|" } # GG_TRAZA
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.4.a|" # GG_TRAZA
+		name = gg_constitution.4.a
+		default_option = yes
 	}
 }

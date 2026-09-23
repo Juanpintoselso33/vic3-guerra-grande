@@ -18,3 +18,22 @@ gg_rosas_succession_monthly = {
 		trigger_event = { id = gg_constitution.2 days = 0 popup = yes }
 	}
 }
+
+# EN/ES: the war between federales and unitarios ends (by arms or by a backdown): read the day after
+#     / termina la guerra entre federales y unitarios: se lee al dia siguiente
+on_war_end = {
+	on_actions = { gg_unitario_on_war_end }
+}
+on_diplo_play_back_down = {
+	on_actions = { gg_unitario_on_war_end }
+}
+gg_unitario_on_war_end = {
+	trigger = {
+		has_global_variable = gg_unitario_war
+		is_diplomatic_play_type = dp_gg_pacto_federal
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_on_war_end" # GG_TRAZA
+		c:ARG ?= { trigger_event = { id = gg_constitution.3 days = 1 } }
+	}
+}
