@@ -1039,34 +1039,21 @@ gg_peace.2 = {
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
-		# EN/ES: 23/9 (Juan) -- a PROVINCE of the Confederation, not a republic apart: it joins the Federal
-		#     Pact (row, map, its governor), flies the Treinta y Tres flag, and breaks the Convention of 1828
-		#     / una PROVINCIA de la Confederacion: entra al Pacto, lleva la bandera de los Treinta y Tres
-		set_global_variable = gg_oriental_province
-		set_global_variable = gg_oriental_in_pact # EN/ES: the Pact shows it / el Pacto la muestra
 
 		custom_tooltip = gg_peace_confederation_tt
 		custom_tooltip = gg_peace_reincorporation_brazil_tt
-		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 
+		scope:gg_peace_loser ?= { gg_bring_characters_to = { TARGET = root } }
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
-		c:ARG ?= {
-			create_diplomatic_pact = {
-				country = root
-				type = vassal
-			}
-			change_relations = {
-				country = root
-				value = 80
-			}
+		# EN/ES: 23/9/2026 (Juan) -- Buenos Aires decides how it takes the Banda Oriental back when it is a player
+		#     (gg_cisplatina.5); otherwise as Oribe asks / Buenos Aires decide como la recibe si es jugador
+		if = {
+			limit = { c:ARG ?= { is_player = yes } }
+			set_global_variable = { name = gg_oriental_return_pending value = 1 }
+			c:ARG = { trigger_event = { id = gg_cisplatina.5 days = 0 popup = yes } }
 		}
-		c:BRZ ?= {
-			change_relations = {
-				country = root
-				value = -80
-			}
-		}
+		else = { gg_oriental_make_province = yes }
 
 		add_modifier = {
 			name = gg_peace_confederation_province
@@ -1211,48 +1198,21 @@ gg_peace.2 = {
 			exists = c:ARG
 		}
 		set_global_variable = gg_peace_settled
-		set_global_variable = gg_reincorporated
-		# EN/ES: 23/9 (Juan) -- fully reincorporated, it is part of the Pact too / reincorporada, tambien es del Pacto
-		set_global_variable = gg_oriental_in_pact
 
 		custom_tooltip = gg_peace_reincorporation_tt
-		# EN/ES: 23/9 (Juan) -- it breaks the Convention of 1828: Brazil answers in a month (gg_cisplatina.2)
-		#     / rompe la Convencion de 1828: el Brasil contesta en un mes
 		custom_tooltip = gg_peace_reincorporation_brazil_tt
-		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 
-		# EN/ES: 23/9 (Juan) -- the people come too / la gente viene tambien (gg_bring_characters_to)
-		scope:gg_peace_loser ?= { gg_bring_characters_to = { TARGET = c:ARG } }
+		scope:gg_peace_loser ?= { gg_bring_characters_to = { TARGET = root } }
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
-		every_scope_state = {
-			add_modifier = {
-				name = gg_provincia_oriental
-				years = 30
-			}
+		# EN/ES: 23/9/2026 (Juan) -- Buenos Aires decides how it takes the Banda Oriental back when it is a player
+		#     (gg_cisplatina.5); otherwise as Oribe offers / Buenos Aires decide como la recibe si es jugador
+		if = {
+			limit = { c:ARG ?= { is_player = yes } }
+			set_global_variable = { name = gg_oriental_return_pending value = 2 }
+			c:ARG = { trigger_event = { id = gg_cisplatina.5 days = 0 popup = yes } }
 		}
-		c:ARG ?= {
-			c:BRZ ?= {
-				change_relations = {
-					country = prev
-					value = -100
-				}
-			}
-			c:GBR ?= {
-				change_relations = {
-					country = prev
-					value = -50
-				}
-			}
-			c:FRA ?= {
-				change_relations = {
-					country = prev
-					value = -50
-				}
-			}
-			root = { gg_bring_characters_to = { TARGET = c:ARG } }
-			annex_with_incorporation = root
-		}
+		else = { gg_oriental_incorporate = yes }
 
 		ai_chance = {
 			base = 5

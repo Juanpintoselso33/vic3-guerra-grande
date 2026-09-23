@@ -129,7 +129,7 @@ gg_cisplatina.2 = {
 		default_option = yes
 		set_global_variable = { name = gg_cis_goal value = 1 }
 		custom_tooltip = gg_cisplatina.2.b_tt
-		gg_cis_open_war = yes
+		gg_cis_wait = yes
 		ai_chance = {
 			base = 35
 			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 25 }
@@ -142,7 +142,7 @@ gg_cisplatina.2 = {
 		name = gg_cisplatina.2.c
 		set_global_variable = { name = gg_cis_goal value = 2 }
 		custom_tooltip = gg_cisplatina.2.c_tt
-		gg_cis_open_war = yes
+		gg_cis_wait = yes
 		ai_chance = { base = 10 }
 	}
 	# EN: free it under the Empire's protection.
@@ -152,7 +152,7 @@ gg_cisplatina.2 = {
 		name = gg_cisplatina.2.d
 		set_global_variable = { name = gg_cis_goal value = 3 }
 		custom_tooltip = gg_cisplatina.2.d_tt
-		gg_cis_open_war = yes
+		gg_cis_wait = yes
 		ai_chance = {
 			base = 20
 			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 10 }
@@ -233,5 +233,150 @@ gg_cisplatina.4 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.4.a|" # GG_TRAZA
 		name = gg_cisplatina.4.a
+	}
+}
+
+# EN: 23/9/2026 (Juan) -- Oribe has won and asks to come back; Buenos Aires, a player, decides how: fully
+#     incorporated (its people come too) or a province of the Pact under its own government.
+# ES: Oribe gano y pide volver; Buenos Aires, jugador, decide como: incorporada del todo (con su gente) o
+#     provincia del Pacto con gobierno propio.
+gg_cisplatina.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.5.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_cisplatina.5.d_2 trigger = { global_var:gg_oriental_return_pending = 2 } }
+			triggered_desc = { desc = gg_cisplatina.5.d_1 trigger = { always = yes } }
+		}
+	}
+	flavor = gg_cisplatina.5.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_oriental_return_pending
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.5|" # GG_TRAZA
+		random_country = {
+			limit = { has_variable = guerra_grande_cerrito_government }
+			save_scope_as = gg_oriental_country
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.5.a|" # GG_TRAZA
+		name = gg_cisplatina.5.a
+		default_option = yes
+		remove_global_variable = gg_oriental_return_pending
+		custom_tooltip = gg_peace_reincorporation_tt
+		custom_tooltip = gg_peace_reincorporation_brazil_tt
+		scope:gg_oriental_country ?= { gg_oriental_incorporate = yes }
+	}
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.5.b|" # GG_TRAZA
+		name = gg_cisplatina.5.b
+		remove_global_variable = gg_oriental_return_pending
+		custom_tooltip = gg_peace_confederation_tt
+		custom_tooltip = gg_peace_reincorporation_brazil_tt
+		scope:gg_oriental_country ?= { gg_oriental_make_province = yes }
+	}
+}
+
+# EN: 23/9/2026 (Juan) -- Brazil has declared war over the Convention of 1828. Buenos Aires fights, or yields
+#     and lets Brazil have what it went to war for (the settlement runs as if Brazil had won, gg_cisplatina.3).
+# ES: el Brasil declaro la guerra por la Convencion de 1828. Buenos Aires pelea, o cede y le deja al Brasil lo
+#     que fue a buscar (el arreglo corre como si el Brasil hubiera ganado).
+gg_cisplatina.6 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.6.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_cisplatina.6.d_2 trigger = { global_var:gg_cis_goal = 2 } }
+			triggered_desc = { desc = gg_cisplatina.6.d_3 trigger = { global_var:gg_cis_goal = 3 } }
+			triggered_desc = { desc = gg_cisplatina.6.d_1 trigger = { always = yes } }
+		}
+	}
+	flavor = gg_cisplatina.6.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_cis_war
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.6|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.6.a|" # GG_TRAZA
+		name = gg_cisplatina.6.a
+		default_option = yes
+		custom_tooltip = gg_cisplatina.6.a_tt
+		ai_chance = {
+			base = 80
+			modifier = { trigger = { exists = c:BRZ army_size < c:BRZ.army_size } add = -40 }
+		}
+	}
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.6.b|" # GG_TRAZA
+		name = gg_cisplatina.6.b
+		custom_tooltip = gg_cisplatina.6.b_tt
+		set_global_variable = gg_cis_brazil_won
+		every_diplomatic_play = {
+			limit = { is_diplomatic_play_type = dp_gg_cisplatina }
+			end_play = yes
+		}
+		ai_chance = {
+			base = 20
+			modifier = { trigger = { exists = c:BRZ army_size < c:BRZ.army_size } add = 40 }
+		}
+	}
+}
+
+# EN: 23/9/2026 (Juan) -- Brazil's monthly look at the Plata while it waits (gg_cis_wait).
+# ES: la mirada mensual del Brasil sobre el Plata mientras espera.
+gg_cisplatina.7 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:BRZ ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.7|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_cis_waiting
+				OR = {
+					NOT = { has_global_variable = gg_oriental_in_pact }
+					NOT = { exists = c:ARG }
+					game_date >= 1853.1.1
+				}
+			}
+			remove_global_variable = gg_cis_waiting
+		}
+		else_if = {
+			limit = {
+				has_global_variable = gg_cis_waiting
+				OR = {
+					c:ARG ?= { is_at_war = yes }
+					army_size > c:ARG.army_size
+				}
+			}
+			remove_global_variable = gg_cis_waiting
+			gg_cis_open_war = yes
+		}
+		else_if = {
+			limit = { has_global_variable = gg_cis_waiting }
+			trigger_event = { id = gg_cisplatina.7 days = 30 }
+		}
 	}
 }

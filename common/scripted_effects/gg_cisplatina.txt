@@ -32,6 +32,8 @@ gg_cis_open_war = {
 			type = dp_gg_cisplatina
 			war = yes
 		}
+		# EN/ES: 23/9 (Juan) -- Buenos Aires hears of it and answers (gg_cisplatina.6) / Buenos Aires se entera
+		c:ARG ?= { trigger_event = { id = gg_cisplatina.6 days = 0 popup = yes } }
 	}
 }
 
@@ -90,21 +92,121 @@ gg_cis_annex = {
 	}
 }
 
-# EN: 23/9/2026 (Juan) -- when the Republic is absorbed its people come with it: the ruler (Oribe) and the
-#     generals and admirals go to TARGET before the annexation. Interest group leaders stay out: each is tied
-#     to a group of the country that disappears.
-# ES: cuando se absorbe la Republica, su gente viene con ella: el gobernante (Oribe) y los generales y
-#     almirantes pasan a TARGET antes de la anexion. Los jefes de grupos de interes no: estan atados a su grupo.
+# EN: 23/9/2026 (Juan: "all the characters of Uruguay, it is an integration, let it work as one") -- when the
+#     Republic is absorbed, EVERY character comes with it, politicians and interest group leaders included, to TARGET,
+#     before the annexation. (The first version filtered by role with is_admiral, which is not a trigger: error.log.)
+# ES: cuando se absorbe la Republica, TODOS sus personajes vienen con ella, politicos y jefes de grupos de interes
+#     incluidos, antes de la anexion. (La primera version filtraba por rol con is_admiral, que no es trigger.)
 gg_bring_characters_to = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_bring_characters_to|" # GG_TRAZA
 	every_scope_character = {
-		limit = {
-			OR = {
-				is_ruler = yes
-				is_general = yes
-				is_admiral = yes
-			}
-		}
 		transfer_character = $TARGET$
 	}
+}
+
+# EN: 23/9/2026 (Juan) -- the Banda Oriental comes back to the Confederation. Scope: the Oriental country
+#     (the Cerrito's government, after it absorbed the Defensa). Called by Oribe's menu when Buenos Aires is
+#     not a player, or by Buenos Aires's own choice (gg_cisplatina.5).
+# ES: la Banda Oriental vuelve a la Confederacion. Scope: el pais oriental. La llama el menu de Oribe si
+#     Buenos Aires no es jugador, o la eleccion de Buenos Aires (gg_cisplatina.5).
+gg_oriental_incorporate = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_incorporate|" # GG_TRAZA
+	set_global_variable = gg_reincorporated
+	set_global_variable = gg_oriental_in_pact
+	c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
+	every_scope_state = {
+		add_modifier = {
+			name = gg_provincia_oriental
+			years = 30
+		}
+	}
+	save_scope_as = gg_oriental_country
+	# EN/ES: 23/9 (Juan) -- the Oriental army comes too: its size read before the annexation (the engine
+	#     drops the annexed country's formations) / el ejercito oriental viene tambien: su tamanio antes de anexar
+	if = { limit = { army_size >= 20 } set_global_variable = { name = gg_oriental_battalions value = 20 } }
+	else_if = { limit = { army_size >= 12 } set_global_variable = { name = gg_oriental_battalions value = 12 } }
+	else_if = { limit = { army_size >= 6 } set_global_variable = { name = gg_oriental_battalions value = 6 } }
+	else = { set_global_variable = { name = gg_oriental_battalions value = 3 } }
+	c:ARG ?= {
+		c:BRZ ?= { change_relations = { country = prev value = -100 } }
+		c:GBR ?= { change_relations = { country = prev value = -50 } }
+		c:FRA ?= { change_relations = { country = prev value = -50 } }
+		scope:gg_oriental_country = { gg_bring_characters_to = { TARGET = c:ARG } }
+		annex_with_incorporation = scope:gg_oriental_country
+		gg_oriental_army_raise = yes
+	}
+}
+
+# EN: 23/9/2026 (Juan) -- the Army of the Oriental Province, in Argentina's scope, after the annexation:
+#     the same size band as the Cerrito's army, under Oribe. / el Ejercito de la Provincia Oriental, bajo Oribe.
+gg_oriental_army_raise = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_army_raise|" # GG_TRAZA
+	random_scope_state = {
+		limit = { state_region = s:STATE_MONTEVIDEO }
+		save_scope_as = gg_oriental_hq
+	}
+	if = {
+		limit = { exists = scope:gg_oriental_hq }
+		if = {
+			limit = { global_var:gg_oriental_battalions >= 20 }
+			create_military_formation = { type = army hq_region = scope:gg_oriental_hq.region name = gg_oriental_army save_scope_as = gg_oriental_army_scope
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_MONTEVIDEO count = 12 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 8 } }
+		}
+		else_if = {
+			limit = { global_var:gg_oriental_battalions >= 12 }
+			create_military_formation = { type = army hq_region = scope:gg_oriental_hq.region name = gg_oriental_army save_scope_as = gg_oriental_army_scope
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_MONTEVIDEO count = 7 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 5 } }
+		}
+		else_if = {
+			limit = { global_var:gg_oriental_battalions >= 6 }
+			create_military_formation = { type = army hq_region = scope:gg_oriental_hq.region name = gg_oriental_army save_scope_as = gg_oriental_army_scope
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_MONTEVIDEO count = 4 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 2 } }
+		}
+		else = {
+			create_military_formation = { type = army hq_region = scope:gg_oriental_hq.region name = gg_oriental_army save_scope_as = gg_oriental_army_scope
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_MONTEVIDEO count = 2 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 } }
+		}
+		random_scope_character = {
+			limit = { has_template = URU_Manuel_Oribe exists = scope:gg_oriental_army_scope }
+			if = { limit = { NOT = { has_role = character_role_general } } add_character_role = general }
+			transfer_to_formation = scope:gg_oriental_army_scope
+		}
+	}
+	clear_saved_scope = gg_oriental_hq
+}
+
+gg_oriental_make_province = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_make_province|" # GG_TRAZA
+	set_global_variable = gg_oriental_province
+	set_global_variable = gg_oriental_in_pact
+	c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
+	save_scope_as = gg_oriental_country
+	# EN/ES: a subject pact only with the peace signed (I17) / pacto de sujecion solo con la paz firmada
+	if = {
+		limit = { has_global_variable = gg_peace_settled }
+		c:ARG ?= {
+			create_diplomatic_pact = {
+				country = scope:gg_oriental_country
+				type = vassal
+			}
+			change_relations = { country = scope:gg_oriental_country value = 80 }
+		}
+	}
+	c:BRZ ?= { change_relations = { country = scope:gg_oriental_country value = -80 } }
+}
+
+# EN: 23/9/2026 (Juan: "a war at once, me without the Pact, against a whole Brazil") -- Brazil protests and waits
+#     for its moment, as in 1851 when it waited for Urquiza: every month it checks whether Buenos Aires is at war or
+#     weaker than the Empire, and only then declares (gg_cisplatina.7). By 1853 it gives the question up.
+# ES: el Brasil protesta y espera su ocasion, como en 1851 cuando espero a Urquiza: cada mes mira si Buenos Aires
+#     esta en guerra o es mas debil que el Imperio, y recien ahi declara. En 1853 abandona el asunto.
+gg_cis_wait = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_wait|" # GG_TRAZA
+	set_global_variable = gg_cis_waiting
+	c:ARG ?= { change_relations = { country = ROOT value = -50 } }
+	trigger_event = { id = gg_cisplatina.7 days = 30 }
 }
