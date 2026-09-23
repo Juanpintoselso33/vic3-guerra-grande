@@ -24,5 +24,16 @@ gg_troops.2 = {
 
 	immediate = {
 		gg_troops_split_armies_cer = yes
+		# EN: 22/9/2026 (Juan, playtest as Argentina) -- the Cerrito's battalions are born empty and
+		#     fill over months; in that game it had 16 battalions and 894 men against the Defensa's
+		#     5,522, was half occupied by July 1843 and lost the war before the siege began. A
+		#     government born in the middle of a war trains fast: the same answer vanilla gives the
+		#     countries born of an uprising (static modifier "uprising", building_training_rate_mult 2)
+		#     and the Taiping (training rate +1000, x2).
+		# ES: los batallones del Cerrito nacen vacios; en esa partida tenia 16 batallones y 894
+		#     hombres contra 5.522 de la Defensa y perdio antes del sitio. Un gobierno nacido en
+		#     plena guerra entrena rapido: lo mismo que vanilla les da a los paises nacidos de un
+		#     levantamiento y a los Taiping.
+		add_modifier = { name = gg_cerrito_army_forming months = 6 }
 	}
 }

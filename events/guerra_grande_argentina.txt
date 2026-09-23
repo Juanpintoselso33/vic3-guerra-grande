@@ -3292,28 +3292,6 @@ gg_argentina.80 = {
 	}
 }
 
-gg_argentina.81 = {
-	type = country_event
-	placement = ROOT
-	title = gg_argentina.81.t
-	desc = gg_argentina.81.d
-	flavor = gg_argentina.81.f
-	event_image = { video = "gg_arg_pronunciamiento" }
-	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 12
-	is_popup = yes
-
-	trigger = {
-		has_variable = gg_arg_rosas_seat
-	}
-
-	option = {
-		name = gg_argentina.81.a
-		default_option = yes
-		ai_chance = { base = 100 }
-	}
-}
-
 # -------------------------------------------------------------------------------------------------
 # EN: Political settlements of the Federal Pact. The engine resolves the war; these events state
 #     what that result does to the delegation, the government and the constitutional question.

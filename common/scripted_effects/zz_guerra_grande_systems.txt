@@ -374,7 +374,6 @@ gg_postwar_start = {
 		}
 		set_global_variable = gg_postwar_started
 		gg_wartime_modifiers_clear = yes
-		gg_argentina_vassals_settle = yes
 		gg_postwar_dispatch = yes
 	}
 }
@@ -1196,11 +1195,9 @@ gg_urquiza_flip = {
 #     annexed Corrientes or Tucuman -- he beat them and put a federal governor in. A protectorate is
 #     a country whose foreign relations another conducts, which is the delegation itself, so a beaten
 #     province counts as delegating again while it stays one. What was missing is the ending.
-#     AND THE OTHER HALF, which Juan did not ask for and is what gives the rule its edge: if the
-#     DEFENSA wins, the vassals go free. Until now losing at Montevideo cost Rosas nothing on his own
-#     map -- the interior spoke to Montevideo through the size of the contingent and Montevideo never
-#     answered. Now it answers: the provinces he beat become independent again, the charge is
-#     withdrawn a second time, and the Federal Pact falls with them.
+#     22/9/2026 (Juan): if the DEFENSA wins, nothing happens to them -- they stay protectorates of
+#     Buenos Aires. A rule freeing them had been added without being asked for ("quien dijo eso") and
+#     is gone.
 #     WHY BY TAG AND NOT BY ITERATING SUBJECTS: annexing inside an every_subject_or_below changes the
 #     list being walked. Three tags are three ifs.
 # ES: QUE PASA CON LAS PROVINCIAS BATIDAS CUANDO TERMINA LA GUERRA GRANDE. Regla pedida por Juan el
@@ -1212,73 +1209,31 @@ gg_urquiza_flip = {
 #     Corrientes ni a Tucuman: las batio y les puso un gobernador federal. Un protectorado es un pais
 #     cuyas relaciones exteriores lleva otro, que es la delegacion misma, asi que una provincia batida
 #     cuenta como que vuelve a delegar mientras lo sea. Lo que faltaba era el desenlace.
-#     Y LA OTRA MITAD, que Juan no pidio y es la que le da filo a la regla: si gana la DEFENSA, las
-#     vasallas se sueltan. Hasta ahora perder en Montevideo no le costaba nada a Rosas en su propio
-#     mapa -- el interior le hablaba a Montevideo por el tamanio del contingente y Montevideo no le
-#     contestaba nunca. Ahora contesta: las provincias que batio vuelven a ser independientes, el
-#     encargo se retira por segunda vez, y el Pacto Federal baja con ellas.
+#     22/9/2026 (Juan): si gana la DEFENSA no les pasa nada: siguen protectorado de Buenos Aires.
+#     Se habia agregado una regla que las soltaba sin que nadie la pidiera, y se saco.
 #     POR QUE POR TAG Y NO ITERANDO SUJETOS: anexar adentro de un every_subject_or_below cambia la
 #     lista que se esta recorriendo. Tres tags son tres ifs.
 # -------------------------------------------------------------------------------------------------
 gg_argentina_vassals_settle = {
-	if = {
-		limit = {
-			exists = c:ARG
-			# EN/ES: el mismo idioma que usa gg_postwar_dispatch para leer quien gano / the same idiom
-			gg_cerrito_won_militarily = yes
-		}
-		c:ARG = {
-			if = {
-				limit = { exists = c:CRR  c:CRR = { is_subject_of = c:ARG } }
-				annex = c:CRR
+	# EN: 22/9/2026 (Juan) -- the beaten provinces are annexed when the Federal Pact is settled, whatever
+	#     the settlement ("se anexan cuando se salde el pacto federal"), not when the Guerra Grande ends.
+	#     Called from gg_pact_resolve. Only those still subject to Argentina.
+	# ES: las provincias batidas se anexan cuando se salda el Pacto Federal, sea cual sea el cierre, y no
+	#     al terminar la Guerra Grande. Lo llama gg_pact_resolve. Solo las que siguen sujetas.
+	c:ARG ?= {
+		if = {
+			limit = {
+				OR = {
+					c:CRR ?= { is_subject_of = c:ARG }
+					c:CLN ?= { is_subject_of = c:ARG }
+					c:ENR ?= { is_subject_of = c:ARG }
+				}
 			}
-			if = {
-				limit = { exists = c:CLN  c:CLN = { is_subject_of = c:ARG } }
-				annex = c:CLN
-			}
-			if = {
-				limit = { exists = c:ENR  c:ENR = { is_subject_of = c:ARG } }
-				annex = c:ENR
-			}
+			if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } annex = c:CRR }
+			if = { limit = { c:CLN ?= { is_subject_of = c:ARG } } annex = c:CLN }
+			if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } annex = c:ENR }
 			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
 		}
-	}
-	else_if = {
-		limit = {
-			exists = c:ARG
-			gg_defensa_won_militarily = yes
-		}
-		# EN/ES: se sueltan, y el encargo se retira otra vez: una provincia independiente no delega
-		#     / they go free, and the charge is withdrawn again
-		c:CRR ?= {
-			if = {
-				limit = { is_subject_of = c:ARG }
-				make_independent = yes
-				gg_delegation_revoked = { KEY = corrientes COUNT = -1 }
-			}
-		}
-		c:CLN ?= {
-			if = {
-				limit = { is_subject_of = c:ARG }
-				make_independent = yes
-				gg_delegation_revoked = { KEY = coalicion_tucuman COUNT = -1 }
-				# EN/ES: the others leave with it only where the Coalition holds them (Codex 22/9)
-				#     / las demas se van con ella solo donde la Coalicion las tiene
-				if = { limit = { has_state_in_state_region = STATE_SALTA } gg_delegation_revoked = { KEY = coalicion_salta COUNT = -1 } }
-				if = { limit = { has_state_in_state_region = STATE_JUJUY } gg_delegation_revoked = { KEY = coalicion_jujuy COUNT = -1 } }
-				if = { limit = { has_state_in_state_region = STATE_CATAMARCA } gg_delegation_revoked = { KEY = coalicion_catamarca COUNT = -1 } }
-				if = { limit = { has_state_in_state_region = STATE_LA_RIOJA } gg_delegation_revoked = { KEY = coalicion_la_rioja COUNT = -1 } }
-				if = { limit = { has_state_in_state_region = STATE_CORDOBA } gg_delegation_revoked = { KEY = cordoba COUNT = -1 } }
-			}
-		}
-		c:ENR ?= {
-			if = {
-				limit = { is_subject_of = c:ARG }
-				make_independent = yes
-				gg_delegation_revoked = { KEY = entre_rios COUNT = -1 }
-			}
-		}
-		c:ARG ?= { trigger_event = { id = gg_argentina.81 days = 2 popup = yes } }
 	}
 }
 

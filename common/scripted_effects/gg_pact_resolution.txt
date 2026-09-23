@@ -18,6 +18,9 @@ gg_pact_resolve = {
 	else_if = {
 		limit = { NOT = { has_global_variable = gg_pact_settled } }
 		set_global_variable = gg_pact_settled
+		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are annexed now, whatever the
+		#     settlement / las que quedaron protectorado se anexan ahora, sea cual sea el cierre
+		gg_argentina_vassals_settle = yes
 		if = {
 			limit = { has_global_variable = gg_confederacion_negociada }
 			set_global_variable = gg_pact_settlement_constitutional
