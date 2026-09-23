@@ -188,8 +188,13 @@ gg_argentina_create_coalicion = {
 		#     la paz y negociar emprestitos: es su propio evento, del 24/9/1840, y falta escribirlo.
 		# EN/ES: 22/9/2026 -- he exists in the Confederation from 1836: fetched, not copied / se lo trae
 		gg_ruler_set = { TEMPLATE = CLN_gg_marco_avellaneda }
-		create_character = {
-			template = CLN_gg_tomas_brizuela
+		# EN/ES: 22/9/2026 -- Brizuela governs La Rioja from 1837 on the Pact's list: fetched, not copied,
+		#     and his command back (he was born in Buenos Aires's roster without one)
+		#     / gobierna La Rioja desde 1837 en la lista del Pacto: se lo trae, no se lo copia, y recupera el mando
+		gg_character_fetch = { TEMPLATE = CLN_gg_tomas_brizuela }
+		random_scope_character = {
+			limit = { has_template = CLN_gg_tomas_brizuela is_general = no }
+			add_character_role = general
 		}
 	}
 	# EN: one province per state that ACTUALLY left. The four transfers above are conditional -- if
@@ -736,24 +741,17 @@ gg_argentina_open_war = {
 		#     convence este sistema de que Corrientes aparezca y la desaparezca yo a los 3 meses». Una
 		#     provincia batida y no borrada es una provincia que se puede volver a alzar, y Corrientes
 		#     se alzo tres veces: en 1839, en Caa Guazu en 1841 y en el Paso de los Libres en 1843.
-		# EN/ES: la liga se disuelve, la provincia se somete. Una Coalicion batida no queda de vasalla
-		#     porque no hay de que: era un pacto de guerra, no un cuerpo politico. El razonamiento y
-		#     las fuentes estan en common/diplomatic_plays/zz_guerra_grande_play.txt
-		#     / the league dissolves, the province submits
-		if = {
-			limit = { c:CLN ?= c:$TAG$ }
-			create_diplomatic_play = {
-				name = gg_argentina_play_$TAG$
-				target_country = c:$TAG$
-				type = dp_gg_liga_disuelta
-			}
-		}
-		else = {
-			create_diplomatic_play = {
-				name = gg_argentina_play_$TAG$
-				target_country = c:$TAG$
-				type = dp_gg_pacto_federal
-			}
+		# EN: 22/9/2026 (Juan): the Coalition too is fought for a protectorate, and a beaten Coalition is
+		#     split into its provinces, each a protectorate of Buenos Aires (gg_argentina_split_coalition).
+		#     The league still dissolves -- decisiones-argentina.md, 12 -- but into provinces under federal
+		#     governors, not into Buenos Aires's own ground. dp_gg_liga_disuelta is retired.
+		# ES: la Coalicion tambien se pelea por un protectorado, y batida se parte en sus provincias, cada
+		#     una protectorado de Buenos Aires. La liga se sigue disolviendo, pero en provincias con
+		#     gobernador federal, no en suelo de Buenos Aires. dp_gg_liga_disuelta se retira.
+		create_diplomatic_play = {
+			name = gg_argentina_play_$TAG$
+			target_country = c:$TAG$
+			type = dp_gg_pacto_federal
 		}
 	}
 }

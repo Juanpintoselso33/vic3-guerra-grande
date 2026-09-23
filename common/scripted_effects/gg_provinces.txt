@@ -1,0 +1,256 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: A BEATEN COUNTRY SPLITS INTO ITS PROVINCES (22/9/2026, decided with Juan). Rosas never annexed
+#     the provinces he beat: after Pago Largo he put a federal governor in Corrientes, after Famailla
+#     Celedonio Gutierrez governed Tucuman, and each province went on existing with its legislature
+#     and its name. So when a country of the Argentine side ends up a subject of Buenos Aires, every
+#     province state it holds OUTSIDE its capital's province becomes a country of its own, a
+#     protectorate of Buenos Aires under its governor. What is left of the Coalition changes tag to
+#     the province of its capital: the league is gone and Tucuman remains.
+#     The idea comes from Gates of the Bosphorus (balkfm_create_federal_montenegro, Workshop
+#     3384997867): save the state, create_country on it, then create_diplomatic_pact from the overlord.
+#     Written here from scratch for a different case -- the origin is the beaten country, the overlord
+#     is Buenos Aires.
+#     RULES KEPT FROM THE THREE BIRTHS (zz_guerra_grande_argentina.txt): every clone dies first
+#     (gg_argentina_new_country_people); the ruler is FETCHED if alive somewhere, never copied
+#     (gg_ruler_set); after a change_tag the new tag is not used in the same effect (decisiones.md,
+#     «Despues de un change_tag, c:<tag nuevo> no resuelve en el mismo efecto») -- the saved scope is.
+# ES: UN PAIS BATIDO SE PARTE EN SUS PROVINCIAS. Rosas no anexo nunca a las provincias que batio:
+#     despues de Pago Largo puso un gobernador federal en Corrientes, despues de Famailla goberno
+#     Celedonio Gutierrez en Tucuman, y cada provincia siguio existiendo con su legislatura y su nombre.
+#     Asi que cuando un pais del lado argentino queda sujeto a Buenos Aires, cada estado provincial que
+#     tenga FUERA de la provincia de su capital pasa a ser un pais propio, protectorado de Buenos Aires
+#     con su gobernador. Lo que queda de la Coalicion cambia de tag a la provincia de su capital: la
+#     liga se termina y Tucuman queda.
+#     La idea es de Gates of the Bosphorus (guardar el estado, create_country sobre el, pacto desde el
+#     soberano); el codigo es propio y para otro caso.
+# -------------------------------------------------------------------------------------------------
+
+# EN: One province, in the scope of the beaten country (scope:gg_split_origin saved by the caller).
+#     STATE: the province's state region; TAG: its country; KEY: its governor key (gg_pact_governors.txt).
+#     Only a state outside the capital's province moves: the capital's province IS the country.
+# ES: Una provincia, en el scope del pais batido. Solo se mueve un estado fuera de la provincia de la
+#     capital: la provincia de la capital ES el pais.
+gg_province_split_off = {
+	if = {
+		limit = {
+			has_state_in_state_region = $STATE$
+			NOT = { capital ?= { state_region = s:$STATE$ } }
+		}
+		s:$STATE$ = {
+			random_scope_state = {
+				limit = { owner ?= scope:gg_split_origin }
+				save_scope_as = gg_split_state
+			}
+		}
+		if = {
+			# EN/ES: the province already stands as a subject of Buenos Aires: the state goes home
+			#     / la provincia ya es sujeta de Buenos Aires: el estado vuelve a ella
+			limit = { c:$TAG$ ?= { is_subject_of = c:ARG } }
+			scope:gg_split_state = { set_state_owner = c:$TAG$ }
+		}
+		else_if = {
+			# EN/ES: the tag lives but is not under the Pact (at war, or free): Buenos Aires keeps the
+			#     ground rather than hand it to an enemy / el tag vive pero no esta bajo el Pacto: la
+			#     tierra queda en Buenos Aires antes que darsela a un enemigo
+			limit = { exists = c:$TAG$ }
+			scope:gg_split_state = { set_state_owner = c:ARG }
+		}
+		else = {
+			create_country = {
+				tag = $TAG$
+				origin = scope:gg_split_origin
+				state = scope:gg_split_state
+			}
+			gg_argentina_new_country_people = {
+				TAG = $TAG$
+			}
+			c:$TAG$ ?= {
+				set_capital = $STATE$
+				gg_province_install_governor = { KEY = $KEY$ }
+			}
+			c:ARG ?= {
+				if = {
+					limit = { c:$TAG$ ?= { is_subject = no } }
+					create_diplomatic_pact = {
+						country = c:$TAG$
+						type = protectorate
+					}
+				}
+			}
+		}
+		clear_saved_scope = gg_split_state
+	}
+}
+
+# EN: Corrientes and Entre Rios are born by pronouncing, on their calendar (gg_argentina_create_*),
+#     never by a split: a split that made them would leave their own birth with no state to take. If a
+#     beaten country holds one of their states, it goes to the province if it is already a subject of
+#     Buenos Aires, and otherwise back to Buenos Aires.
+# ES: Corrientes y Entre Rios nacen al pronunciarse, en su calendario, nunca por particion: si una
+#     particion las creara, su propio nacimiento se quedaria sin estado. Si un pais batido tiene uno de
+#     sus estados, va a la provincia si ya es sujeta de Buenos Aires, y si no, vuelve a Buenos Aires.
+gg_province_split_home = {
+	if = {
+		limit = {
+			has_state_in_state_region = $STATE$
+			NOT = { capital ?= { state_region = s:$STATE$ } }
+		}
+		s:$STATE$ = {
+			random_scope_state = {
+				limit = { owner ?= scope:gg_split_origin }
+				save_scope_as = gg_split_state
+			}
+		}
+		if = {
+			limit = { c:$TAG$ ?= { is_subject_of = c:ARG } }
+			scope:gg_split_state = { set_state_owner = c:$TAG$ }
+		}
+		else = {
+			scope:gg_split_state = { set_state_owner = c:ARG }
+		}
+		clear_saved_scope = gg_split_state
+	}
+}
+
+# EN: The whole split, in the scope of the beaten country. Every province but the capital's.
+# ES: La particion entera, en el scope del pais batido. Todas las provincias menos la de la capital.
+gg_province_split_beaten = {
+	save_scope_as = gg_split_origin
+	gg_province_split_home = { STATE = STATE_CORRIENTES TAG = CRR }
+	gg_province_split_home = { STATE = STATE_ENTRE_RIOS TAG = ENR }
+	gg_province_split_off = { STATE = STATE_TUCUMAN TAG = TUC KEY = tucuman }
+	gg_province_split_off = { STATE = STATE_SALTA TAG = SLT KEY = salta }
+	gg_province_split_off = { STATE = STATE_JUJUY TAG = JUJ KEY = jujuy }
+	gg_province_split_off = { STATE = STATE_CATAMARCA TAG = CTM KEY = catamarca }
+	gg_province_split_off = { STATE = STATE_LA_RIOJA TAG = LRJ KEY = la_rioja }
+	gg_province_split_off = { STATE = STATE_CORDOBA TAG = CBA KEY = cordoba }
+	gg_province_split_off = { STATE = STATE_SANTA_FE TAG = SFE KEY = santa_fe }
+	gg_province_split_off = { STATE = STATE_SANTIAGO_DEL_ESTERO TAG = SDE KEY = santiago_del_estero }
+	gg_province_split_off = { STATE = STATE_MENDOZA TAG = MZA KEY = mendoza }
+	gg_province_split_off = { STATE = STATE_SAN_JUAN TAG = SJN KEY = san_juan }
+	gg_province_split_off = { STATE = STATE_SAN_LUIS TAG = SNL KEY = san_luis }
+	clear_saved_scope = gg_split_origin
+}
+
+# EN: THE COALITION, BEATEN. Scope: CLN, already a subject of Buenos Aires (the war of the Federal Pact
+#     ends in make_protectorate). The provinces go their own way, and what is left takes the name of
+#     the province of its capital -- Tucuman, where the pronouncement began and where the Coalition
+#     always had its capital. If that province already stands as a country (it cannot be born twice),
+#     Buenos Aires takes the remainder in: a league has nothing left to be.
+#     The Coalition's own men (Brizuela, Lamadrid) are not touched: what became of them is history the
+#     calendar tells, not the split.
+# ES: LA COALICION, BATIDA. Scope: CLN, ya sujeta de Buenos Aires. Las provincias se van cada una por
+#     su lado, y lo que queda toma el nombre de la provincia de su capital -- Tucuman, donde empezo el
+#     pronunciamiento y donde la Coalicion tuvo siempre su capital. Si esa provincia ya es un pais, Buenos
+#     Aires se queda con el resto: a una liga no le queda nada que ser.
+# SOURCE / FUENTE: Wikipedia ES «Coalicion del Norte» (consecuencias: cada provincia vuelve con un
+#     gobernador federal) and «Celedonio Gutierrez» (Tucuman, 14/11/1841-14/6/1852); decisiones-argentina.md, 12.
+gg_argentina_split_coalition = {
+	save_scope_as = gg_split_league
+	set_global_variable = gg_coalition_split
+	gg_province_split_beaten = yes
+	if = {
+		limit = { has_variable = gg_arg_coalicion_seat }
+		remove_variable = gg_arg_coalicion_seat
+	}
+	# EN: the uprising's hostility goes with the league (it was set at birth by
+	#     gg_argentina_rebel_diplomacy_reset): a protectorate under a governor Buenos Aires chose is not
+	#     out to conquer it, nor Buenos Aires out to conquer its own protectorate.
+	# ES: la hostilidad del levantamiento se va con la liga: un protectorado con un gobernador que eligio
+	#     Buenos Aires no quiere conquistarla, ni Buenos Aires a su propio protectorado.
+	if = {
+		limit = { exists = c:ARG }
+		change_relations = { country = c:ARG value = 100 }
+		set_mutual_secret_goal = { country = c:ARG secret_goal = none }
+	}
+	if = {
+		limit = { capital ?= { state_region = s:STATE_TUCUMAN } NOT = { exists = c:TUC } }
+		change_tag = TUC
+		scope:gg_split_league = { gg_province_install_governor = { KEY = tucuman } }
+	}
+	else_if = {
+		limit = { capital ?= { state_region = s:STATE_SALTA } NOT = { exists = c:SLT } }
+		change_tag = SLT
+		scope:gg_split_league = { gg_province_install_governor = { KEY = salta } }
+	}
+	else_if = {
+		limit = { capital ?= { state_region = s:STATE_JUJUY } NOT = { exists = c:JUJ } }
+		change_tag = JUJ
+		scope:gg_split_league = { gg_province_install_governor = { KEY = jujuy } }
+	}
+	else_if = {
+		limit = { capital ?= { state_region = s:STATE_CATAMARCA } NOT = { exists = c:CTM } }
+		change_tag = CTM
+		scope:gg_split_league = { gg_province_install_governor = { KEY = catamarca } }
+	}
+	else_if = {
+		limit = { capital ?= { state_region = s:STATE_LA_RIOJA } NOT = { exists = c:LRJ } }
+		change_tag = LRJ
+		scope:gg_split_league = { gg_province_install_governor = { KEY = la_rioja } }
+	}
+	else_if = {
+		limit = { capital ?= { state_region = s:STATE_CORDOBA } NOT = { exists = c:CBA } }
+		change_tag = CBA
+		scope:gg_split_league = { gg_province_install_governor = { KEY = cordoba } }
+	}
+	else = {
+		c:ARG ?= { annex = scope:gg_split_league }
+	}
+	clear_saved_scope = gg_split_league
+}
+
+# EN: Seat the governor of a province country: the one Buenos Aires installs, for the date
+#     (gg_pact_gov_federal_<KEY>, which also sets gg_pact_gov_<KEY>). Fetched if he lives anywhere,
+#     created once if he was never born. With no sourced governor for the date the seat stays as the
+#     engine leaves it -- no name is invented to fill it.
+# ES: Sienta al gobernador de un pais provincial: el que pone Buenos Aires, segun la fecha. Se lo trae si
+#     vive en alguna parte, se lo crea una vez si nunca nacio. Sin gobernador documentado para la fecha
+#     la silla queda como la deja el motor: no se inventa un nombre para llenarla.
+gg_province_install_governor = {
+	save_scope_as = gg_gov_country
+	gg_pact_gov_federal_$KEY$ = yes
+	if = {
+		limit = { has_global_variable = gg_pact_gov_$KEY$ }
+		global_var:gg_pact_gov_$KEY$ ?= { save_scope_as = gg_gov_person }
+		if = {
+			limit = { exists = scope:gg_gov_person NOT = { scope:gg_gov_country = { any_scope_character = { scope:gg_gov_person ?= this } } } }
+			scope:gg_gov_person = { transfer_character = scope:gg_gov_country }
+		}
+		scope:gg_gov_person ?= { set_character_as_ruler = yes }
+		clear_saved_scope = gg_gov_person
+	}
+	clear_saved_scope = gg_gov_country
+}
+
+# EN: FETCH A MAN, DO NOT COPY HIM: the same rule as gg_ruler_set, without making him ruler. For a
+#     character that may already live elsewhere because the Pact's list brought him into the game
+#     before his event does (Brizuela governs La Rioja from 1837 and heads the Coalition in 1840).
+# ES: TRAER A UN HOMBRE, NO COPIARLO: la misma regla que gg_ruler_set, sin hacerlo gobernante. Para un
+#     personaje que puede vivir ya en otra parte porque la lista del Pacto lo trajo antes que su evento.
+gg_character_fetch = {
+	save_scope_as = gg_fetch_to
+	if = {
+		limit = { any_scope_character = { has_template = $TEMPLATE$ } }
+	}
+	else_if = {
+		limit = { any_country = { any_scope_character = { has_template = $TEMPLATE$ } } }
+		random_country = {
+			limit = { any_scope_character = { has_template = $TEMPLATE$ } }
+			random_scope_character = {
+				limit = { has_template = $TEMPLATE$ }
+				transfer_character = scope:gg_fetch_to
+			}
+		}
+	}
+	else_if = {
+		limit = { any_character_in_exile_pool = { has_template = $TEMPLATE$ } }
+		random_character_in_exile_pool = {
+			limit = { has_template = $TEMPLATE$ }
+			transfer_character = scope:gg_fetch_to
+		}
+	}
+	else = {
+		create_character = { template = $TEMPLATE$ }
+	}
+	clear_saved_scope = gg_fetch_to
+}

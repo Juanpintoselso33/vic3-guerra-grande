@@ -1,0 +1,807 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE PROVINCIAL GOVERNORS the playset does not have (22/9/2026), for the Federal Pact's list and for
+#     the provinces Buenos Aires beats (gg_pact_governors.txt). Created only when their term begins, once
+#     (gg_pact_gov_pick_or_create), in whoever holds the province.
+#     WHAT IS SOURCED AND WHAT IS NOT. Names, provinces and dates come from
+#     docs/guerra-grande-argentina/gobernadores-provincias.md. A birth date is written only when the
+#     source gives one; with only the year it is 1 January of that year (said on the line), and with
+#     «ca.» or nothing it is left out. No traits: the source documents none, and trait_generation is
+#     empty so the engine does not invent them. No portraits yet (dna): out of scope on 22/9/2026.
+#     THE INTEREST GROUP AND IDEOLOGY ARE THE MOD'S READING of the «bando» column, one rule for all:
+#     rosista -> landowners, authoritarian; federal, antirrosista federal or unknown -> landowners,
+#     moderate; Coalition or unitarian -> intelligentsia, radical (as Avellaneda already had).
+#     Politicians only, never generals: none of them is given a command the source does not show.
+# ES: LOS GOBERNADORES PROVINCIALES que el playset no tiene. Nacen solo cuando empieza su mandato, una
+#     vez, en quien tenga la provincia. Nombres, provincias y fechas: gobernadores-provincias.md. La
+#     fecha de nacimiento va solo si la fuente la da; con el anio solo, es el 1 de enero (dicho en la
+#     linea); con «ca.» o nada, no va. Sin traits ni retrato. El grupo de interes y la ideologia son la
+#     lectura del mod de la columna «bando», con una sola regla para todos.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Rafael León de Atienza (1802 - dic. 1837); federal
+CRR_gg_rafael_leon_de_atienza = {
+	first_name = gg_pn_CRR_gg_rafael_leon_de_atienza_first
+	last_name = gg_pn_CRR_gg_rafael_leon_de_atienza_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1802.1.1
+	home_region = STATE_CORRIENTES
+	trait_generation = { }
+}
+
+# EN/ES: Juan Baltasar Acosta (1782 - 1856 (R)); antirrosista federal
+CRR_gg_juan_baltasar_acosta = {
+	first_name = gg_pn_CRR_gg_juan_baltasar_acosta_first
+	last_name = gg_pn_CRR_gg_juan_baltasar_acosta_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1782.1.1
+	home_region = STATE_CORRIENTES
+	trait_generation = { }
+}
+
+# EN/ES: Benjamín Virasoro (1/5/1812 - 30/4/1897); rosista
+CRR_gg_benjamin_virasoro = {
+	first_name = gg_pn_CRR_gg_benjamin_virasoro_first
+	last_name = gg_pn_CRR_gg_benjamin_virasoro_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	birth_date = 1812.5.1
+	home_region = STATE_CORRIENTES
+	trait_generation = { }
+}
+
+# EN/ES: Estanislao López (22/11/1786 - 15/6/1838); federal
+SFE_gg_estanislao_lopez = {
+	first_name = gg_pn_SFE_gg_estanislao_lopez_first
+	last_name = gg_pn_SFE_gg_estanislao_lopez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1786.11.22
+	home_region = STATE_SANTA_FE
+	trait_generation = { }
+}
+
+# EN/ES: Domingo Cullen (26/2/1791 - 22/6/1839); federal
+SFE_gg_domingo_cullen = {
+	first_name = gg_pn_SFE_gg_domingo_cullen_first
+	last_name = gg_pn_SFE_gg_domingo_cullen_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1791.2.26
+	home_region = STATE_SANTA_FE
+	trait_generation = { }
+}
+
+# EN/ES: Juan Pablo López (26/6/1792 - 27/7/1886); antirrosista federal
+SFE_gg_juan_pablo_lopez = {
+	first_name = gg_pn_SFE_gg_juan_pablo_lopez_first
+	last_name = gg_pn_SFE_gg_juan_pablo_lopez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1792.6.26
+	home_region = STATE_SANTA_FE
+	trait_generation = { }
+}
+
+# EN/ES: Domingo Crespo (10/5/1791 - abr. 1871); antirrosista federal
+SFE_gg_domingo_crespo = {
+	first_name = gg_pn_SFE_gg_domingo_crespo_first
+	last_name = gg_pn_SFE_gg_domingo_crespo_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1791.5.10
+	home_region = STATE_SANTA_FE
+	trait_generation = { }
+}
+
+# EN/ES: Manuel López (1780 - 1860); rosista
+CBA_gg_manuel_lopez = {
+	first_name = gg_pn_CBA_gg_manuel_lopez_first
+	last_name = gg_pn_CBA_gg_manuel_lopez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1780.1.1
+	home_region = STATE_CORDOBA
+	trait_generation = { }
+}
+
+# EN/ES: José Francisco Álvarez (17/7/1808 - 22/8/1841); Coalicion del Norte / unitario
+CBA_gg_jose_francisco_alvarez = {
+	first_name = gg_pn_CBA_gg_jose_francisco_alvarez_first
+	last_name = gg_pn_CBA_gg_jose_francisco_alvarez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1808.7.17
+	home_region = STATE_CORDOBA
+	trait_generation = { }
+}
+
+# EN/ES: Mauro Carranza (15/1/1807 - 6/11/1869); federal
+SDE_gg_mauro_carranza = {
+	first_name = gg_pn_SDE_gg_mauro_carranza_first
+	last_name = gg_pn_SDE_gg_mauro_carranza_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1807.1.15
+	home_region = STATE_SANTIAGO_DEL_ESTERO
+	trait_generation = { }
+}
+
+# EN/ES: Manuel Taboada (27/2/1817 - 7/9/1871); federal
+SDE_gg_manuel_taboada = {
+	first_name = gg_pn_SDE_gg_manuel_taboada_first
+	last_name = gg_pn_SDE_gg_manuel_taboada_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1817.2.27
+	home_region = STATE_SANTIAGO_DEL_ESTERO
+	trait_generation = { }
+}
+
+# EN/ES: Bernabé Piedrabuena (ca. 1792 - 30/3/1841); Coalicion del Norte / unitario
+TUC_gg_bernabe_piedrabuena = {
+	first_name = gg_pn_TUC_gg_bernabe_piedrabuena_first
+	last_name = gg_pn_TUC_gg_bernabe_piedrabuena_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: birth ca. 1792 in the source: left out / nacimiento ca. 1792: no va
+	home_region = STATE_TUCUMAN
+	trait_generation = { }
+}
+
+# EN/ES: Pedro Garmendia (31/7/1794 - 23/1/1865); Coalicion del Norte / unitario
+TUC_gg_pedro_garmendia = {
+	first_name = gg_pn_TUC_gg_pedro_garmendia_first
+	last_name = gg_pn_TUC_gg_pedro_garmendia_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1794.7.31
+	home_region = STATE_TUCUMAN
+	trait_generation = { }
+}
+
+# EN/ES: Celedonio Gutiérrez (3/3/1804 - 12/8/1880); rosista
+TUC_gg_celedonio_gutierrez = {
+	first_name = gg_pn_TUC_gg_celedonio_gutierrez_first
+	last_name = gg_pn_TUC_gg_celedonio_gutierrez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	birth_date = 1804.3.3
+	home_region = STATE_TUCUMAN
+	trait_generation = { }
+}
+
+# EN/ES: José Antonino Fernández Cornejo (1768 - 1850 (unitario)); Coalicion del Norte / unitario
+SLT_gg_jose_antonino_fernandez_cornejo = {
+	first_name = gg_pn_SLT_gg_jose_antonino_fernandez_cornejo_first
+	last_name = gg_pn_SLT_gg_jose_antonino_fernandez_cornejo_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1768.1.1
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Felipe Heredia (1797 - 12/6/1852); federal
+SLT_gg_felipe_heredia = {
+	first_name = gg_pn_SLT_gg_felipe_heredia_first
+	last_name = gg_pn_SLT_gg_felipe_heredia_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1797.1.1
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Manuel Solá (17/6/1798 - 1867); Coalicion del Norte / unitario
+SLT_gg_manuel_sola = {
+	first_name = gg_pn_SLT_gg_manuel_sola_first
+	last_name = gg_pn_SLT_gg_manuel_sola_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1798.6.17
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Miguel Otero (23/11/1790 - 13/7/1874); federal
+SLT_gg_miguel_otero = {
+	first_name = gg_pn_SLT_gg_miguel_otero_first
+	last_name = gg_pn_SLT_gg_miguel_otero_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1790.11.23
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Gaspar López (A: unitario); Coalicion del Norte / unitario
+SLT_gg_gaspar_lopez = {
+	first_name = gg_pn_SLT_gg_gaspar_lopez_first
+	last_name = gg_pn_SLT_gg_gaspar_lopez_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: birth ¿1790? in the source: left out / nacimiento ¿1790?: no va
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Dionisio Puch (9/10/1804 - 17/9/1873); Coalicion del Norte / unitario
+SLT_gg_dionisio_puch = {
+	first_name = gg_pn_SLT_gg_dionisio_puch_first
+	last_name = gg_pn_SLT_gg_dionisio_puch_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1804.10.9
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Manuel Antonio Saravia (1790 - 18/10/1879); rosista
+SLT_gg_manuel_antonio_saravia = {
+	first_name = gg_pn_SLT_gg_manuel_antonio_saravia_first
+	last_name = gg_pn_SLT_gg_manuel_antonio_saravia_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1790.1.1
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: José Manuel Saravia (ca. 1800 - ca. 1860); rosista
+SLT_gg_jose_manuel_saravia = {
+	first_name = gg_pn_SLT_gg_jose_manuel_saravia_first
+	last_name = gg_pn_SLT_gg_jose_manuel_saravia_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: birth ca. 1800 in the source: left out / nacimiento ca. 1800: no va
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Vicente Tamayo (sin dato); federal
+SLT_gg_vicente_tamayo = {
+	first_name = gg_pn_SLT_gg_vicente_tamayo_first
+	last_name = gg_pn_SLT_gg_vicente_tamayo_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
+	home_region = STATE_SALTA
+	trait_generation = { }
+}
+
+# EN/ES: Eustaquio Medina (1790 - 30/3/1836); federal
+JUJ_gg_eustaquio_medina = {
+	first_name = gg_pn_JUJ_gg_eustaquio_medina_first
+	last_name = gg_pn_JUJ_gg_eustaquio_medina_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1790.1.1
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: Miguel Puch (1804 - 1844 (unitario)); Coalicion del Norte / unitario
+JUJ_gg_miguel_puch = {
+	first_name = gg_pn_JUJ_gg_miguel_puch_first
+	last_name = gg_pn_JUJ_gg_miguel_puch_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1804.1.1
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: Pablo Alemán (1791 (Canelones) - 22/9/1845); federal
+JUJ_gg_pablo_aleman = {
+	first_name = gg_pn_JUJ_gg_pablo_aleman_first
+	last_name = gg_pn_JUJ_gg_pablo_aleman_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1791.1.1
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: José Mariano Iturbe (1795 - mayo 1852); rosista
+JUJ_gg_jose_mariano_iturbe = {
+	first_name = gg_pn_JUJ_gg_jose_mariano_iturbe_first
+	last_name = gg_pn_JUJ_gg_jose_mariano_iturbe_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1795.1.1
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: Roque Alvarado (16/8/1793 - 27/6/1860); Coalicion del Norte / unitario
+JUJ_gg_roque_alvarado = {
+	first_name = gg_pn_JUJ_gg_roque_alvarado_first
+	last_name = gg_pn_JUJ_gg_roque_alvarado_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1793.8.16
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: Pedro Castañeda (c. 1800 - 1863); federal
+JUJ_gg_pedro_castaneda = {
+	first_name = gg_pn_JUJ_gg_pedro_castaneda_first
+	last_name = gg_pn_JUJ_gg_pedro_castaneda_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth c. 1800 in the source: left out / nacimiento c. 1800: no va
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: José López Villar (unitario moderado); Coalicion del Norte / unitario
+JUJ_gg_jose_lopez_villar = {
+	first_name = gg_pn_JUJ_gg_jose_lopez_villar_first
+	last_name = gg_pn_JUJ_gg_jose_lopez_villar_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
+	home_region = STATE_JUJUY
+	trait_generation = { }
+}
+
+# EN/ES: Fernando Villafañe (1784 - jun. 1841); federal
+CTM_gg_fernando_villafane = {
+	first_name = gg_pn_CTM_gg_fernando_villafane_first
+	last_name = gg_pn_CTM_gg_fernando_villafane_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1784.1.1
+	home_region = STATE_CATAMARCA
+	trait_generation = { }
+}
+
+# EN/ES: José Cubas (1798 - 4/11/1841); Coalicion del Norte / unitario
+CTM_gg_jose_cubas = {
+	first_name = gg_pn_CTM_gg_jose_cubas_first
+	last_name = gg_pn_CTM_gg_jose_cubas_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1798.1.1
+	home_region = STATE_CATAMARCA
+	trait_generation = { }
+}
+
+# EN/ES: Juan Eusebio Balboa (1791 - mayo 1856); rosista
+CTM_gg_juan_eusebio_balboa = {
+	first_name = gg_pn_CTM_gg_juan_eusebio_balboa_first
+	last_name = gg_pn_CTM_gg_juan_eusebio_balboa_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1791.1.1
+	home_region = STATE_CATAMARCA
+	trait_generation = { }
+}
+
+# EN/ES: Santos Nieva y Castilla (1779 - 1860); rosista
+CTM_gg_santos_nieva_y_castilla = {
+	first_name = gg_pn_CTM_gg_santos_nieva_y_castilla_first
+	last_name = gg_pn_CTM_gg_santos_nieva_y_castilla_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1779.1.1
+	home_region = STATE_CATAMARCA
+	trait_generation = { }
+}
+
+# EN/ES: Manuel Navarro (1791 - 3/5/1852); rosista
+CTM_gg_manuel_navarro = {
+	first_name = gg_pn_CTM_gg_manuel_navarro_first
+	last_name = gg_pn_CTM_gg_manuel_navarro_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1791.1.1
+	home_region = STATE_CATAMARCA
+	trait_generation = { }
+}
+
+# EN/ES: Jacinto del Rincón (ca. 1794 - 30/6/1836); federal
+LRJ_gg_jacinto_del_rincon = {
+	first_name = gg_pn_LRJ_gg_jacinto_del_rincon_first
+	last_name = gg_pn_LRJ_gg_jacinto_del_rincon_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth ca. 1794 in the source: left out / nacimiento ca. 1794: no va
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Juan Antonio Carmona (sin dato); bando sin dato
+LRJ_gg_juan_antonio_carmona = {
+	first_name = gg_pn_LRJ_gg_juan_antonio_carmona_first
+	last_name = gg_pn_LRJ_gg_juan_antonio_carmona_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Francisco Ciriaco Bustamante (sin dato); bando sin dato
+LRJ_gg_francisco_ciriaco_bustamante = {
+	first_name = gg_pn_LRJ_gg_francisco_ciriaco_bustamante_first
+	last_name = gg_pn_LRJ_gg_francisco_ciriaco_bustamante_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Hipólito Tello (sin dato); bando sin dato
+LRJ_gg_hipolito_tello = {
+	first_name = gg_pn_LRJ_gg_hipolito_tello_first
+	last_name = gg_pn_LRJ_gg_hipolito_tello_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Vicente Mota (ca. 1805 - 8/8/1851); federal
+LRJ_gg_vicente_mota = {
+	first_name = gg_pn_LRJ_gg_vicente_mota_first
+	last_name = gg_pn_LRJ_gg_vicente_mota_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth ca. 1805 in the source: left out / nacimiento ca. 1805: no va
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Manuel Vicente Bustos (1806 - 5/3/1878); federal
+LRJ_gg_manuel_vicente_bustos = {
+	first_name = gg_pn_LRJ_gg_manuel_vicente_bustos_first
+	last_name = gg_pn_LRJ_gg_manuel_vicente_bustos_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1806.1.1
+	home_region = STATE_LA_RIOJA
+	trait_generation = { }
+}
+
+# EN/ES: Pedro Molina (29/6/1781 - 16/3/1842); federal
+MZA_gg_pedro_molina = {
+	first_name = gg_pn_MZA_gg_pedro_molina_first
+	last_name = gg_pn_MZA_gg_pedro_molina_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1781.6.29
+	home_region = STATE_MENDOZA
+	trait_generation = { }
+}
+
+# EN/ES: Justo Correas (ca. 1770 - 1847); rosista
+MZA_gg_justo_correas = {
+	first_name = gg_pn_MZA_gg_justo_correas_first
+	last_name = gg_pn_MZA_gg_justo_correas_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: birth ca. 1770 in the source: left out / nacimiento ca. 1770: no va
+	home_region = STATE_MENDOZA
+	trait_generation = { }
+}
+
+# EN/ES: Juan Isidro Maza (1795 - 1853); rosista
+MZA_gg_juan_isidro_maza = {
+	first_name = gg_pn_MZA_gg_juan_isidro_maza_first
+	last_name = gg_pn_MZA_gg_juan_isidro_maza_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1795.1.1
+	home_region = STATE_MENDOZA
+	trait_generation = { }
+}
+
+# EN/ES: Pedro Pascual Segura (1802 - 1865); federal
+MZA_gg_pedro_pascual_segura = {
+	first_name = gg_pn_MZA_gg_pedro_pascual_segura_first
+	last_name = gg_pn_MZA_gg_pedro_pascual_segura_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1802.1.1
+	home_region = STATE_MENDOZA
+	trait_generation = { }
+}
+
+# EN/ES: Alejo Mallea (1802 - 1865); rosista
+MZA_gg_alejo_mallea = {
+	first_name = gg_pn_MZA_gg_alejo_mallea_first
+	last_name = gg_pn_MZA_gg_alejo_mallea_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1802.1.1
+	home_region = STATE_MENDOZA
+	trait_generation = { }
+}
+
+# EN/ES: José Gregorio Calderón (1796 - mayo 1851); federal
+SNL_gg_jose_gregorio_calderon = {
+	first_name = gg_pn_SNL_gg_jose_gregorio_calderon_first
+	last_name = gg_pn_SNL_gg_jose_gregorio_calderon_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: only the year is sourced / la fuente da solo el anio
+	birth_date = 1796.1.1
+	home_region = STATE_SAN_LUIS
+	trait_generation = { }
+}
+
+# EN/ES: Pablo Lucero (ca. 1799 - 12/9/1856); rosista
+SNL_gg_pablo_lucero = {
+	first_name = gg_pn_SNL_gg_pablo_lucero_first
+	last_name = gg_pn_SNL_gg_pablo_lucero_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	# EN/ES: birth ca. 1799 in the source: left out / nacimiento ca. 1799: no va
+	home_region = STATE_SAN_LUIS
+	trait_generation = { }
+}

@@ -9,10 +9,8 @@ gov_gg_provincia = {
 	female_ruler = "RULER_TITLE_GOVERNOR"
 	possible = {
 		has_law_or_variant = law_type:law_presidential_republic
-		OR = {
-			c:CRR ?= this
-			c:ENR ?= this
-		}
+		# EN/ES: 22/9/2026 -- every province country (common/scripted_triggers/gg_provinces.txt)
+		gg_is_province_country = yes
 	}
 	on_government_type_change = { change_to_dictatorial = yes }
 	on_post_government_type_change = { post_change_to_dictatorial = yes }

@@ -1,10 +1,25 @@
-﻿# EN: 22/9/2026 -- who governs each of the three that can withdraw the mandate, for the Federal Pact's list
-#     (gui/gg_pact_overview.gui). The ruler of the risen province while it stands as a country; otherwise
-#     the historical governor while he lives: Beron de Astrada in Corrientes (governor 1837-1839), Heredia in
-#     the North (Tucuman, "Protector" of the northern provinces until November 1838), Echague in Entre Rios
-#     until Urquiza takes office (December 1841). Cleared first, so a dead man never stays on the list.
-# ES: quien gobierna cada una de las tres que pueden retirar el encargo. El gobernante de la alzada mientras
-#     sea pais; si no, el gobernador historico mientras viva. Se borra primero, asi un muerto no queda.
+﻿# -------------------------------------------------------------------------------------------------
+# EN: WHO GOVERNS EACH OF THE THIRTEEN, for the Federal Pact's list (gui/gg_pact_overview.gui). Rewritten
+#     22/9/2026 for the thirteen rows (it used to cover three: Corrientes, «the North», Entre Rios).
+#     One global variable per province, gg_pact_gov_<key>, cleared and set again every week:
+#       1. if the province stands as a country (CRR, ENR, TUC...), its ruler;
+#       2. otherwise the HISTORICAL governor for the date, while he lives (gg_pact_gov_hist_<key>).
+#     A governor who is dead stays dead: the row shows the governorship vacant rather than a name the
+#     date does not support. The dates and templates come from
+#     docs/guerra-grande-argentina/gobernadores-provincias.md -- no governor without a source.
+#     gg_pact_gov_federal_<key> is the man Buenos Aires installs when it beats the province
+#     (gg_province_install_governor): the same list, except where a unitarian government held the
+#     province at that date -- Rosas did not leave the man he had just beaten in the chair.
+# ES: QUIEN GOBIERNA CADA UNA DE LAS TRECE, para la lista del Pacto. Reescrito el 22/9/2026 para trece
+#     filas (antes eran tres). Una global por provincia, gg_pact_gov_<clave>, borrada y vuelta a poner
+#     cada semana: 1) si la provincia es pais, su gobernante; 2) si no, el gobernador HISTORICO para la
+#     fecha, mientras viva. Un gobernador muerto sigue muerto: la fila muestra la gobernacion vacante
+#     antes que un nombre que la fecha no respalda. Fechas y templates: gobernadores-provincias.md.
+#     gg_pact_gov_federal_<clave> es el que pone Buenos Aires cuando bate a la provincia: la misma
+#     lista, salvo donde a esa fecha gobernaba un unitario -- Rosas no dejaba en la silla al que batia.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: find a living man with this template, anywhere / busca un vivo con este template, donde sea
 gg_pact_gov_from_template = {
 	every_country = {
 		every_scope_character = {
@@ -13,34 +28,343 @@ gg_pact_gov_from_template = {
 		}
 	}
 }
-gg_pact_governors_update = {
-	if = { limit = { has_global_variable = gg_pact_gov_corrientes } remove_global_variable = gg_pact_gov_corrientes }
-	if = { limit = { has_global_variable = gg_pact_gov_norte } remove_global_variable = gg_pact_gov_norte }
-	if = { limit = { has_global_variable = gg_pact_gov_entre_rios } remove_global_variable = gg_pact_gov_entre_rios }
+
+# EN: The governor for the date, if he lives. For characters the game or another event already
+#     creates (Rosas's roster, Urquiza, Echague, Heredia, Beron de Astrada, Avellaneda...).
+# ES: El gobernador de la fecha, si vive. Para personajes que ya crea el juego u otro evento.
+gg_pact_gov_pick = {
+	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
+}
+
+# EN: The same, and if he was NEVER born, he is born now -- once -- in whoever holds the province
+#     (Argentina, the Coalition or a province country; never Bolivia). The mark gg_gov_born_<template>
+#     is what keeps a dead governor dead: without it the next week would raise him again.
+# ES: Lo mismo, y si NUNCA nacio, nace ahora -- una vez -- en quien tenga la provincia. La marca
+#     gg_gov_born_<template> es lo que mantiene muerto a un gobernador muerto.
+gg_pact_gov_pick_or_create = {
+	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
 	if = {
-		limit = { exists = c:CRR c:CRR = { exists = ruler } }
-		c:CRR = { ruler = { set_global_variable = { name = gg_pact_gov_corrientes value = this } } }
-	}
-	else = { gg_pact_gov_from_template = { TEMPLATE = CRR_gg_genaro_beron_de_astrada VAR = gg_pact_gov_corrientes } }
-	if = {
-		limit = { exists = c:CLN c:CLN = { exists = ruler } }
-		c:CLN = { ruler = { set_global_variable = { name = gg_pact_gov_norte value = this } } }
-	}
-	else = {
-		gg_pact_gov_from_template = { TEMPLATE = ARG_Alejandro_Heredia VAR = gg_pact_gov_norte }
-		# EN/ES: after Heredia's death (Nov 1838), Avellaneda / despues de la muerte de Heredia, Avellaneda
+		limit = { has_global_variable = gg_pact_gov_$KEY$ }
 		if = {
-			limit = { NOT = { has_global_variable = gg_pact_gov_norte } }
-			gg_pact_gov_from_template = { TEMPLATE = CLN_gg_marco_avellaneda VAR = gg_pact_gov_norte }
+			limit = { NOT = { has_global_variable = gg_gov_born_$TEMPLATE$ } }
+			set_global_variable = gg_gov_born_$TEMPLATE$
 		}
 	}
-	if = {
-		limit = { exists = c:ENR c:ENR = { exists = ruler } }
-		c:ENR = { ruler = { set_global_variable = { name = gg_pact_gov_entre_rios value = this } } }
-	}
 	else_if = {
-		limit = { game_date >= 1841.12.15 }
-		gg_pact_gov_from_template = { TEMPLATE = ARG_Justo_Jose_de_Urquiza VAR = gg_pact_gov_entre_rios }
+		limit = {
+			NOT = { has_global_variable = gg_gov_born_$TEMPLATE$ }
+			NOT = { any_character_in_exile_pool = { has_template = $TEMPLATE$ } }
+		}
+		set_global_variable = gg_gov_born_$TEMPLATE$
+		s:$STATE$ = {
+			random_scope_state = {
+				limit = { owner ?= { gg_is_argentine_holder = yes } }
+				owner = {
+					save_scope_as = gg_gov_holder
+					create_character = {
+						template = $TEMPLATE$
+						on_created = {
+							set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+							# EN: a governor born inside Buenos Aires's roster gets no command there: the
+							#     list is not a way to hand Rosas his rivals' generals (Brizuela governs La
+							#     Rioja from 1837; the Coalition gives him back his command in 1840).
+							# ES: un gobernador que nace en el plantel de Buenos Aires no recibe mando ahi:
+							#     la lista no es una forma de darle a Rosas los generales de sus rivales.
+							if = {
+								limit = { c:ARG ?= scope:gg_gov_holder is_general = yes }
+								remove_character_role = general
+							}
+						}
+					}
+					clear_saved_scope = gg_gov_holder
+				}
+			}
+		}
 	}
-	else = { gg_pact_gov_from_template = { TEMPLATE = ARG_Pascual_EchagU_e VAR = gg_pact_gov_entre_rios } }
+}
+
+# EN/ES: one row: the province country's ruler, else the historical governor / una fila
+gg_pact_gov_province = {
+	if = { limit = { has_global_variable = gg_pact_gov_$KEY$ } remove_global_variable = gg_pact_gov_$KEY$ }
+	if = {
+		limit = { exists = c:$TAG$ c:$TAG$ = { exists = ruler } }
+		c:$TAG$ = { ruler = { set_global_variable = { name = gg_pact_gov_$KEY$ value = this } } }
+	}
+	else = { gg_pact_gov_hist_$KEY$ = yes }
+}
+
+gg_pact_governors_update = {
+	gg_pact_gov_province = { KEY = corrientes TAG = CRR }
+	gg_pact_gov_province = { KEY = tucuman TAG = TUC }
+	gg_pact_gov_province = { KEY = salta TAG = SLT }
+	gg_pact_gov_province = { KEY = jujuy TAG = JUJ }
+	gg_pact_gov_province = { KEY = catamarca TAG = CTM }
+	gg_pact_gov_province = { KEY = la_rioja TAG = LRJ }
+	gg_pact_gov_province = { KEY = cordoba TAG = CBA }
+	gg_pact_gov_province = { KEY = entre_rios TAG = ENR }
+	gg_pact_gov_province = { KEY = santa_fe TAG = SFE }
+	gg_pact_gov_province = { KEY = santiago_del_estero TAG = SDE }
+	gg_pact_gov_province = { KEY = mendoza TAG = MZA }
+	gg_pact_gov_province = { KEY = san_juan TAG = SJN }
+	gg_pact_gov_province = { KEY = san_luis TAG = SNL }
+	# EN/ES: the Coalition's head, for the North's heading while the league stands
+	#     / la cabeza de la Coalicion, para el encabezado del Norte mientras exista la liga
+	if = { limit = { has_global_variable = gg_pact_gov_coalicion } remove_global_variable = gg_pact_gov_coalicion }
+	if = {
+		limit = { exists = c:CLN c:CLN = { exists = ruler } }
+		c:CLN = { ruler = { set_global_variable = { name = gg_pact_gov_coalicion value = this } } }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE HISTORICAL GOVERNORS, one effect per province, one window per governor: from the day he took
+#     office to the day he left it. Only titular or de facto governors, and interims of more than about
+#     two months; the shorter interims and the delegates of an absent titular are listed in the source
+#     but not here, so between two windows the row reads «interim government». Where the sources
+#     disagree the comment says which date was taken and why (two sources agreeing wins).
+#     SOURCE / FUENTE: docs/guerra-grande-argentina/gobernadores-provincias.md (22/9/2026): the Wikipedia
+#     ES annex of each province (A), each governor's article (art) and rulers.org «Argentine provinces
+#     1820-62» (R).
+# ES: LOS GOBERNADORES HISTORICOS, un efecto por provincia y una ventana por gobernador: del dia que
+#     asumio al dia que dejo. Solo titulares o de hecho, e interinos de mas de unos dos meses; los mas
+#     cortos y los delegados de un titular ausente estan en la fuente pero no aca, asi que entre dos
+#     ventanas la fila dice «gobierno interino». Donde las fuentes difieren, el comentario dice que
+#     fecha se tomo y por que (gana la que dos fuentes comparten).
+# -------------------------------------------------------------------------------------------------
+gg_pact_gov_hist_corrientes = {
+	# EN/ES: 1836.1.1 - 1837.12.2 -- A, R: died in office 2/12/1837
+	if = { limit = { game_date < 1837.12.2 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_rafael_leon_de_atienza KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1837.12.12 - 1839.3.31 -- A 12/12/1837 (R 14/12, ficha 2/12); dies at Pago Largo
+	if = { limit = { game_date >= 1837.12.12 game_date < 1839.3.31 } gg_pact_gov_pick = { TEMPLATE = CRR_gg_genaro_beron_de_astrada KEY = corrientes } }
+	# EN/ES: 1839.3.31 - 1839.5.9 -- A 31/3; end R 9/5 (art 8/5, A 28/4)
+	if = { limit = { game_date >= 1839.3.31 game_date < 1839.5.9 } gg_pact_gov_pick_or_create = { TEMPLATE = ARG_pedro_ferre KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1839.6.6 - 1839.10.6 -- R 6/6 (A 6/7); A, R: to 6/10/1839
+	if = { limit = { game_date >= 1839.6.6 game_date < 1839.10.6 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_jose_antonio_romero KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1839.10.6 - 1842.12.14 -- A, R, ficha 6/10/1839; art, R 14/12/1842
+	if = { limit = { game_date >= 1839.10.6 game_date < 1842.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = ARG_pedro_ferre KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1842.12.14 - 1843.4.13 -- art, R 14/12/1842 - 13/4/1843
+	if = { limit = { game_date >= 1842.12.14 game_date < 1843.4.13 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_pedro_cabral KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1843.4.13 - 1843.8.1 -- R (provisional); art + R put Madariaga on 1/8/1843
+	if = { limit = { game_date >= 1843.4.13 game_date < 1843.8.1 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_juan_baltasar_acosta KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1843.8.1 - 1847.11.27 -- art, R 1/8/1843; ficha 27/11/1847 (Vences)
+	if = { limit = { game_date >= 1843.8.1 game_date < 1847.11.27 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_joaquin_madariaga KEY = corrientes STATE = STATE_CORRIENTES } }
+	# EN/ES: 1847.12.14 - ... -- 14/12/1847; art + R keep him to 3/7/1852 (A: Latorre from 20/8/1851, not taken)
+	if = { limit = { game_date >= 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_benjamin_virasoro KEY = corrientes STATE = STATE_CORRIENTES } }
+}
+gg_pact_gov_hist_entre_rios = {
+	# EN/ES: 1836.1.1 - 1841.12.31 -- A, R: 1/3/1832 - 31/12/1841
+	if = { limit = { game_date < 1841.12.31 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = entre_rios } }
+	# EN/ES: 1842.1.1 - 1842.1.29 -- A, R
+	if = { limit = { game_date >= 1842.1.1 game_date < 1842.1.29 } gg_pact_gov_pick = { TEMPLATE = ARG_Justo_Jose_de_Urquiza KEY = entre_rios } }
+	# EN/ES: 1842.3.12 - 1842.4.3 -- A, R
+	if = { limit = { game_date >= 1842.3.12 game_date < 1842.4.3 } gg_pact_gov_pick = { TEMPLATE = CRR_gg_jose_maria_paz KEY = entre_rios } }
+	# EN/ES: 1842.4.7 - ... -- A, R: 7/4/1842, on past Caseros
+	if = { limit = { game_date >= 1842.4.7 } gg_pact_gov_pick = { TEMPLATE = ARG_Justo_Jose_de_Urquiza KEY = entre_rios } }
+}
+gg_pact_gov_hist_santa_fe = {
+	# EN/ES: 1836.1.1 - 1838.6.15 -- died in office 15/6/1838
+	if = { limit = { game_date < 1838.6.15 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_estanislao_lopez KEY = santa_fe STATE = STATE_SANTA_FE } }
+	# EN/ES: 1838.6.15 - 1838.9.16 -- A, ficha 15/6/1838; R 16/9/1838 (art J. P. Lopez 29/9)
+	if = { limit = { game_date >= 1838.6.15 game_date < 1838.9.16 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_domingo_cullen KEY = santa_fe STATE = STATE_SANTA_FE } }
+	# EN/ES: 1838.10.14 - 1842.4.18 -- R 14/10/1838; A, art 18/4/1842
+	if = { limit = { game_date >= 1838.10.14 game_date < 1842.4.18 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_juan_pablo_lopez KEY = santa_fe STATE = STATE_SANTA_FE } }
+	# EN/ES: 1842.4.18 - 1845.7.6 -- A, R
+	if = { limit = { game_date >= 1842.4.18 game_date < 1845.7.6 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = santa_fe } }
+	# EN/ES: 1845.7.6 - 1845.8.12 -- A 6/7 (R 7/7); 12/8/1845 Malabrigo
+	if = { limit = { game_date >= 1845.7.6 game_date < 1845.8.12 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_juan_pablo_lopez KEY = santa_fe STATE = STATE_SANTA_FE } }
+	# EN/ES: 1845.8.12 - 1851.12.22 -- A, ficha 22/12/1851 (R 25/12)
+	if = { limit = { game_date >= 1845.8.12 game_date < 1851.12.22 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = santa_fe } }
+	# EN/ES: 1851.12.22 - ... -- A, art 22/12/1851
+	if = { limit = { game_date >= 1851.12.22 } gg_pact_gov_pick_or_create = { TEMPLATE = SFE_gg_domingo_crespo KEY = santa_fe STATE = STATE_SANTA_FE } }
+}
+gg_pact_gov_hist_cordoba = {
+	# EN/ES: 1836.1.1 - 1840.10.10 -- titular from 30/3/1836, de facto since 17/11/1835
+	if = { limit = { game_date < 1840.10.10 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
+	# EN/ES: 1840.10.10 - 1840.12.19 -- A, art 10/10 - 19/12/1840
+	if = { limit = { game_date >= 1840.10.10 game_date < 1840.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_jose_francisco_alvarez KEY = cordoba STATE = STATE_CORDOBA } }
+	# EN/ES: 1840.12.19 - ... -- A, art 19/12/1840 - 28/4/1852
+	if = { limit = { game_date >= 1840.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
+}
+gg_pact_gov_hist_santiago_del_estero = {
+	# EN/ES: 1836.1.1 - 1851.7.15 -- died in office 15/7/1851
+	if = { limit = { game_date < 1851.7.15 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_juan_felipe_ibarra KEY = santiago_del_estero } }
+	# EN/ES: 1851.7.15 - 1851.10.5 -- provisional, A, R
+	if = { limit = { game_date >= 1851.7.15 game_date < 1851.10.5 } gg_pact_gov_pick_or_create = { TEMPLATE = SDE_gg_mauro_carranza KEY = santiago_del_estero STATE = STATE_SANTIAGO_DEL_ESTERO } }
+	# EN/ES: 1851.10.5 - ... -- 5/10/1851
+	if = { limit = { game_date >= 1851.10.5 } gg_pact_gov_pick_or_create = { TEMPLATE = SDE_gg_manuel_taboada KEY = santiago_del_estero STATE = STATE_SANTIAGO_DEL_ESTERO } }
+}
+gg_pact_gov_hist_tucuman = {
+	# EN/ES: 1836.1.1 - 1838.11.12 -- murdered at Lules 12/11/1838
+	if = { limit = { game_date < 1838.11.12 } gg_pact_gov_pick = { TEMPLATE = ARG_Alejandro_Heredia KEY = tucuman } }
+	# EN/ES: 1838.11.22 - 1840.12.1 -- A, R
+	if = { limit = { game_date >= 1838.11.22 game_date < 1840.12.1 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_bernabe_piedrabuena KEY = tucuman STATE = STATE_TUCUMAN } }
+	# EN/ES: 1840.12.1 - 1841.1.10 -- A, art
+	if = { limit = { game_date >= 1840.12.1 game_date < 1841.1.10 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_pedro_garmendia KEY = tucuman STATE = STATE_TUCUMAN } }
+	# EN/ES: 1841.1.10 - 1841.5.23 -- A, art
+	if = { limit = { game_date >= 1841.1.10 game_date < 1841.5.23 } gg_pact_gov_pick = { TEMPLATE = ARG_Gregorio_Araoz_de_Lamadrid KEY = tucuman } }
+	# EN/ES: 1841.5.23 - 1841.10.3 -- ficha art: executed at Metan 3/10/1841
+	if = { limit = { game_date >= 1841.5.23 game_date < 1841.10.3 } gg_pact_gov_pick = { TEMPLATE = CLN_gg_marco_avellaneda KEY = tucuman } }
+	# EN/ES: 1841.10.4 - ... -- A 4/10/1841 (R 27/9 provisional; elected 14/11)
+	if = { limit = { game_date >= 1841.10.4 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_celedonio_gutierrez KEY = tucuman STATE = STATE_TUCUMAN } }
+}
+gg_pact_gov_hist_salta = {
+	# EN/ES: 1836.1.1 - 1836.3.5 -- A, R
+	if = { limit = { game_date < 1836.3.5 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_jose_antonino_fernandez_cornejo KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1836.3.5 - 1838.11.16 -- A 5/3/1836; art 16/11/1838 (R 17/11)
+	if = { limit = { game_date >= 1836.3.5 game_date < 1838.11.16 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_felipe_heredia KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1838.12.17 - 1840.12.16 -- R 17/12/1838 (after the Quiroz-Sola commission); 16/12/1840
+	if = { limit = { game_date >= 1838.12.17 game_date < 1840.12.16 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_manuel_sola KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1840.12.16 - 1841.3.13 -- A, R
+	if = { limit = { game_date >= 1840.12.16 game_date < 1841.3.13 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_miguel_otero KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1841.3.13 - 1841.7.11 -- interim, A 13/3/1841; Puch from 11/7 (ficha)
+	if = { limit = { game_date >= 1841.3.13 game_date < 1841.7.11 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_gaspar_lopez KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1841.7.11 - 1841.9.9 -- ficha art, A
+	if = { limit = { game_date >= 1841.7.11 game_date < 1841.9.9 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_dionisio_puch KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1841.9.9 - 1842.4.1 -- A 9/9/1841; A, art "abril 1842" (month only)
+	if = { limit = { game_date >= 1841.9.9 game_date < 1842.4.1 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_miguel_otero KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1842.4.1 - 1846.10.13 -- art, A "abril 1842" (month only); titular from 13/10/1844
+	if = { limit = { game_date >= 1842.4.1 game_date < 1846.10.13 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_manuel_antonio_saravia KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1846.10.13 - 1848.10.25 -- A, R
+	if = { limit = { game_date >= 1846.10.13 game_date < 1848.10.25 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_jose_manuel_saravia KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1848.10.25 - 1850.10.25 -- A, R
+	if = { limit = { game_date >= 1848.10.25 game_date < 1850.10.25 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_vicente_tamayo KEY = salta STATE = STATE_SALTA } }
+	# EN/ES: 1850.10.25 - ... -- A, ficha 25/10/1850
+	if = { limit = { game_date >= 1850.10.25 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_jose_manuel_saravia KEY = salta STATE = STATE_SALTA } }
+}
+gg_pact_gov_hist_jujuy = {
+	# EN/ES: 1836.1.1 - 1836.1.18 -- A, R: to 18/1/1836 (art 17/1)
+	if = { limit = { game_date < 1836.1.18 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_eustaquio_medina KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1836.1.18 - 1836.3.21 -- A (R names Fermin de la Quintana)
+	if = { limit = { game_date >= 1836.1.18 game_date < 1836.3.21 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_miguel_puch KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1836.3.26 - 1838.11.20 -- A, R 26/3/1836; art, R 20/11/1838
+	if = { limit = { game_date >= 1836.3.26 game_date < 1838.11.20 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_pablo_aleman KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1838.11.20 - 1840.4.18 -- art, R 20/11/1838
+	if = { limit = { game_date >= 1838.11.20 game_date < 1840.4.18 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1840.4.18 - 1841.10.8 -- art: left the night of 7-8/10/1841
+	if = { limit = { game_date >= 1840.4.18 game_date < 1841.10.8 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_roque_alvarado KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1841.11.19 - 1849.1.11 -- A, R 19/11/1841; A, art 11/1/1849
+	if = { limit = { game_date >= 1841.11.19 game_date < 1849.1.11 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1849.1.11 - 1851.1.12 -- A, ficha; A, texto art
+	if = { limit = { game_date >= 1849.1.11 game_date < 1851.1.12 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_pedro_castaneda KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1851.1.12 - 1851.9.13 -- A, texto art; art, R 13/9/1851
+	if = { limit = { game_date >= 1851.1.12 game_date < 1851.9.13 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_lopez_villar KEY = jujuy STATE = STATE_JUJUY } }
+	# EN/ES: 1851.9.13 - ... -- art, R
+	if = { limit = { game_date >= 1851.9.13 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
+}
+gg_pact_gov_hist_catamarca = {
+	# EN/ES: 1836.1.2 - 1836.7.20 -- art, R 2/1/1836; A, art 20/7/1836
+	if = { limit = { game_date >= 1836.1.2 game_date < 1836.7.20 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_fernando_villafane KEY = catamarca STATE = STATE_CATAMARCA } }
+	# EN/ES: 1836.7.20 - 1841.4.10 -- A, art 20/7/1836; ends where Balboa begins (A, ficha: 10/4/1841)
+	if = { limit = { game_date >= 1836.7.20 game_date < 1841.4.10 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_jose_cubas KEY = catamarca STATE = STATE_CATAMARCA } }
+	# EN/ES: 1841.4.10 - 1842.12.13 -- A, ficha 10/4/1841; A, art 13/12/1842
+	if = { limit = { game_date >= 1841.4.10 game_date < 1842.12.13 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_juan_eusebio_balboa KEY = catamarca STATE = STATE_CATAMARCA } }
+	# EN/ES: 1842.12.13 - 1845.12.1 -- A, art
+	if = { limit = { game_date >= 1842.12.13 game_date < 1845.12.1 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_santos_nieva_y_castilla KEY = catamarca STATE = STATE_CATAMARCA } }
+	# EN/ES: 1845.12.1 - ... -- A, art
+	if = { limit = { game_date >= 1845.12.1 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_manuel_navarro KEY = catamarca STATE = STATE_CATAMARCA } }
+}
+gg_pact_gov_hist_la_rioja = {
+	# EN/ES: 1836.3.1 - 1836.6.4 -- A, R "mar. 1836" (month only) - 4/6/1836
+	if = { limit = { game_date >= 1836.3.1 game_date < 1836.6.4 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_jacinto_del_rincon KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1836.6.4 - 1837.5.27 -- A, R
+	if = { limit = { game_date >= 1836.6.4 game_date < 1837.5.27 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_juan_antonio_carmona KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1837.5.27 - 1841.6.20 -- A, R; died at Sanogasta 20/6/1841
+	if = { limit = { game_date >= 1837.5.27 game_date < 1841.6.20 } gg_pact_gov_pick_or_create = { TEMPLATE = CLN_gg_tomas_brizuela KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1841.7.27 - 1841.9.27 -- provisional, A, R
+	if = { limit = { game_date >= 1841.7.27 game_date < 1841.9.27 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_francisco_ciriaco_bustamante KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1841.12.19 - 1846.7.22 -- A, R
+	if = { limit = { game_date >= 1841.12.19 game_date < 1846.7.22 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_hipolito_tello KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1846.8.4 - 1848.3.3 -- A, R
+	if = { limit = { game_date >= 1846.8.4 game_date < 1848.3.3 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_vicente_mota KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	# EN/ES: 1848.3.6 - ... -- A, R
+	if = { limit = { game_date >= 1848.3.6 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_manuel_vicente_bustos KEY = la_rioja STATE = STATE_LA_RIOJA } }
+}
+gg_pact_gov_hist_mendoza = {
+	# EN/ES: 1836.1.1 - 1838.3.20 -- A, R
+	if = { limit = { game_date < 1838.3.20 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_pedro_molina KEY = mendoza STATE = STATE_MENDOZA } }
+	# EN/ES: 1838.3.20 - 1840.11.4 -- A, R
+	if = { limit = { game_date >= 1838.3.20 game_date < 1840.11.4 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_justo_correas KEY = mendoza STATE = STATE_MENDOZA } }
+	# EN/ES: 1840.11.15 - 1841.5.16 -- A, R
+	if = { limit = { game_date >= 1840.11.15 game_date < 1841.5.16 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_justo_correas KEY = mendoza STATE = STATE_MENDOZA } }
+	# EN/ES: 1841.5.16 - 1841.9.2 -- interim, A, R
+	if = { limit = { game_date >= 1841.5.16 game_date < 1841.9.2 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_juan_isidro_maza KEY = mendoza STATE = STATE_MENDOZA } }
+	# EN/ES: 1841.9.5 - 1841.11.24 -- A, ficha, R 5/9; A, ficha 24/11/1841 (R 15/11)
+	if = { limit = { game_date >= 1841.9.5 game_date < 1841.11.24 } gg_pact_gov_pick = { TEMPLATE = ARG_Gregorio_Araoz_de_Lamadrid KEY = mendoza } }
+	# EN/ES: 1841.11.24 - 1845.1.19 -- A, ficha 24/11/1841; died 19/1/1845
+	if = { limit = { game_date >= 1841.11.24 game_date < 1845.1.19 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_jose_felix_aldao KEY = mendoza } }
+	# EN/ES: 1845.2.10 - 1847.4.4 -- A, R
+	if = { limit = { game_date >= 1845.2.10 game_date < 1847.4.4 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_pedro_pascual_segura KEY = mendoza STATE = STATE_MENDOZA } }
+	# EN/ES: 1847.4.4 - ... -- A, R
+	if = { limit = { game_date >= 1847.4.4 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_alejo_mallea KEY = mendoza STATE = STATE_MENDOZA } }
+}
+gg_pact_gov_hist_san_juan = {
+	# EN/ES: 1836.2.26 - 1841.8.13 -- interim 26/2/1836 (A, art); Acha took the city 13/8/1841
+	if = { limit = { game_date >= 1836.2.26 game_date < 1841.8.13 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_nazario_benavidez KEY = san_juan } }
+	# EN/ES: 1841.10.8 - ... -- A, ficha 8/10/1841
+	if = { limit = { game_date >= 1841.10.8 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_nazario_benavidez KEY = san_juan } }
+}
+gg_pact_gov_hist_san_luis = {
+	# EN/ES: 1836.1.1 - 1840.11.9 -- A 9/11/1840 (R 11/11)
+	if = { limit = { game_date < 1840.11.9 } gg_pact_gov_pick_or_create = { TEMPLATE = SNL_gg_jose_gregorio_calderon KEY = san_luis STATE = STATE_SAN_LUIS } }
+	# EN/ES: 1841.1.6 - ... -- A, ficha, R 6/1/1841
+	if = { limit = { game_date >= 1841.1.6 } gg_pact_gov_pick_or_create = { TEMPLATE = SNL_gg_pablo_lucero KEY = san_luis STATE = STATE_SAN_LUIS } }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE GOVERNOR BUENOS AIRES INSTALLS when it beats the province (gg_province_install_governor). The
+#     historical governor for the date, EXCEPT inside a window where the province was held by the
+#     Coalition or another government against Rosas: there it is the federal governor who followed that
+#     government's fall in history -- Rosas did not leave in the chair the man he had just beaten.
+#     Corrientes keeps the rule the Pact already had (Romero, then Cabral, then Virasoro after Vences).
+# ES: EL GOBERNADOR QUE PONE BUENOS AIRES cuando bate a la provincia. El historico de la fecha, SALVO en
+#     una ventana en que la provincia la tenia la Coalicion u otro gobierno contra Rosas: ahi es el
+#     gobernador federal que siguio a su caida en la historia.
+# -------------------------------------------------------------------------------------------------
+gg_pact_gov_federal_corrientes = {
+	if = { limit = { game_date < 1842.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_jose_antonio_romero KEY = corrientes STATE = STATE_CORRIENTES } }
+	else_if = { limit = { game_date >= 1842.12.14 game_date < 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_pedro_cabral KEY = corrientes STATE = STATE_CORRIENTES } }
+	else_if = { limit = { game_date >= 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_benjamin_virasoro KEY = corrientes STATE = STATE_CORRIENTES } }
+	else = { gg_pact_gov_hist_corrientes = yes }
+}
+gg_pact_gov_federal_santa_fe = {
+	if = { limit = { game_date >= 1845.7.6 game_date < 1845.8.12 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = santa_fe } }
+	else = { gg_pact_gov_hist_santa_fe = yes }
+}
+gg_pact_gov_federal_cordoba = {
+	if = { limit = { game_date >= 1840.10.10 game_date < 1840.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = CBA_gg_manuel_lopez KEY = cordoba STATE = STATE_CORDOBA } }
+	else = { gg_pact_gov_hist_cordoba = yes }
+}
+gg_pact_gov_federal_santiago_del_estero = {
+	gg_pact_gov_hist_santiago_del_estero = yes
+}
+gg_pact_gov_federal_tucuman = {
+	if = { limit = { game_date < 1841.10.4 } gg_pact_gov_pick_or_create = { TEMPLATE = TUC_gg_celedonio_gutierrez KEY = tucuman STATE = STATE_TUCUMAN } }
+	else = { gg_pact_gov_hist_tucuman = yes }
+}
+gg_pact_gov_federal_salta = {
+	if = { limit = { game_date >= 1838.11.17 game_date < 1842.4.1 } gg_pact_gov_pick_or_create = { TEMPLATE = SLT_gg_miguel_otero KEY = salta STATE = STATE_SALTA } }
+	else = { gg_pact_gov_hist_salta = yes }
+}
+gg_pact_gov_federal_jujuy = {
+	if = { limit = { game_date >= 1840.4.18 game_date < 1841.11.19 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
+	else_if = { limit = { game_date >= 1851.1.12 game_date < 1851.9.13 } gg_pact_gov_pick_or_create = { TEMPLATE = JUJ_gg_jose_mariano_iturbe KEY = jujuy STATE = STATE_JUJUY } }
+	else = { gg_pact_gov_hist_jujuy = yes }
+}
+gg_pact_gov_federal_catamarca = {
+	if = { limit = { game_date >= 1836.7.20 game_date < 1841.4.10 } gg_pact_gov_pick_or_create = { TEMPLATE = CTM_gg_juan_eusebio_balboa KEY = catamarca STATE = STATE_CATAMARCA } }
+	else = { gg_pact_gov_hist_catamarca = yes }
+}
+gg_pact_gov_federal_la_rioja = {
+	if = { limit = { game_date >= 1837.5.27 game_date < 1841.12.19 } gg_pact_gov_pick_or_create = { TEMPLATE = LRJ_gg_hipolito_tello KEY = la_rioja STATE = STATE_LA_RIOJA } }
+	else = { gg_pact_gov_hist_la_rioja = yes }
+}
+gg_pact_gov_federal_mendoza = {
+	if = { limit = { game_date >= 1841.9.5 game_date < 1841.11.24 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_jose_felix_aldao KEY = mendoza } }
+	else = { gg_pact_gov_hist_mendoza = yes }
+}
+gg_pact_gov_federal_san_juan = {
+	gg_pact_gov_hist_san_juan = yes
+}
+gg_pact_gov_federal_san_luis = {
+	gg_pact_gov_hist_san_luis = yes
 }

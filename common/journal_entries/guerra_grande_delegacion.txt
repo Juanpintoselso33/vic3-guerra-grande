@@ -43,13 +43,10 @@ je_gg_delegation = {
 
 	# EN/ES: Rosas y los tres que le pueden retirar la delegacion / Rosas and the three who can
 	#     withdraw it from him
+	# EN/ES: 22/9/2026 -- and every province standing as a country (common/scripted_triggers/gg_provinces.txt)
+	#     / y toda provincia que sea pais
 	should_be_involved = {
-		OR = {
-			has_variable = gg_arg_rosas_seat
-			c:CRR ?= this
-			c:CLN ?= this
-			c:ENR ?= this
-		}
+		gg_is_pact_country = yes
 	}
 
 	should_show_when_not_involved = {
@@ -126,13 +123,10 @@ je_gg_delegation = {
 					gg_delegation_restored = { KEY = corrientes COUNT = 1 }
 					# EN/ES: 22/9/2026 (Juan) -- a beaten Corrientes gets the governor Rosas installed: Romero
 					#     (July 1839), Cabral after 1842 / el gobernador que puso Rosas: Romero, Cabral desde 1842
-					c:CRR ?= {
-						if = {
-							limit = { game_date >= 1842.1.1 }
-							gg_ruler_set = { TEMPLATE = CRR_gg_pedro_cabral }
-						}
-						else = { gg_ruler_set = { TEMPLATE = CRR_gg_jose_antonio_romero } }
-					}
+					#     22/9/2026: the dates now come from gobernadores-provincias.md (Cabral from 14/12/1842,
+					#     Virasoro after Vences) through the same effect the provinces use
+					#     / las fechas salen ahora de gobernadores-provincias.md, por el mismo efecto que las provincias
+					c:CRR ?= { gg_province_install_governor = { KEY = corrientes } }
 					set_global_variable = { name = gg_corrientes_recovery days = 730 }
 					if = {
 						limit = { c:CRR ?= { is_subject_of = c:ARG } }
@@ -156,19 +150,22 @@ je_gg_delegation = {
 							#     y las seis quedaban retiradas para siempre despues de caer la Coalicion.
 							AND = {
 								NOT = { exists = c:CLN }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } has_state_in_state_region = STATE_TUCUMAN }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_salta } has_state_in_state_region = STATE_SALTA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_jujuy } has_state_in_state_region = STATE_JUJUY }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_catamarca } has_state_in_state_region = STATE_CATAMARCA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } has_state_in_state_region = STATE_LA_RIOJA }
-								OR = { NOT = { has_global_variable = gg_delegation_gone_cordoba } has_state_in_state_region = STATE_CORDOBA }
+								# EN/ES: 22/9/2026 -- or the province stands as a protectorate of Buenos Aires after the
+								#     split (gg_argentina_split_coalition) / o la provincia quedo protectorado tras la particion
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } has_state_in_state_region = STATE_TUCUMAN c:TUC ?= { is_subject_of = c:ARG } }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_salta } has_state_in_state_region = STATE_SALTA c:SLT ?= { is_subject_of = c:ARG } }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_jujuy } has_state_in_state_region = STATE_JUJUY c:JUJ ?= { is_subject_of = c:ARG } }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_catamarca } has_state_in_state_region = STATE_CATAMARCA c:CTM ?= { is_subject_of = c:ARG } }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_coalicion_la_rioja } has_state_in_state_region = STATE_LA_RIOJA c:LRJ ?= { is_subject_of = c:ARG } }
+								OR = { NOT = { has_global_variable = gg_delegation_gone_cordoba } has_state_in_state_region = STATE_CORDOBA c:CBA ?= { is_subject_of = c:ARG } }
 							}
-							c:CLN ?= { is_subject_of = c:ARG }
 						}
 						has_global_variable = gg_delegation_gone_coalicion_tucuman
 					}
+					# EN/ES: 22/9/2026 -- the Coalition beaten is split into provinces (.53); gone any other way, .54
+					#     / la Coalicion batida se parte en provincias (.53); ida de otro modo, .54
 					if = {
-						limit = { c:CLN ?= { is_subject_of = c:ARG } }
+						limit = { has_global_variable = gg_coalition_split }
 						trigger_event = { id = gg_argentina.53 days = 0 popup = yes }
 					}
 					else = { trigger_event = { id = gg_argentina.54 days = 0 popup = yes } }
@@ -199,6 +196,33 @@ je_gg_delegation = {
 						trigger_event = { id = gg_argentina.55 days = 0 popup = yes }
 					}
 					else = { trigger_event = { id = gg_argentina.56 days = 0 popup = yes } }
+				}
+				# EN: THE SPLITS, AFTER THE RESTORATIONS (22/9/2026, decided with Juan). A country of the
+				#     Argentine side that is a subject of Buenos Aires and at peace with it is split into its
+				#     provinces (common/scripted_effects/gg_provinces.txt). They run last on purpose: the
+				#     Coalition changes tag here, and a changed tag is not read again in the same effect,
+				#     so the North's return is counted next week, from a map that already shows it.
+				# ES: LAS PARTICIONES, DESPUES DE LAS RESTAURACIONES. Un pais del lado argentino sujeto de
+				#     Buenos Aires y en paz con ella se parte en sus provincias. Van al final a proposito: la
+				#     Coalicion cambia de tag aca, y un tag cambiado no se vuelve a leer en el mismo efecto,
+				#     asi que la vuelta del Norte se cuenta la semana siguiente.
+				c:CLN ?= {
+					if = {
+						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						gg_argentina_split_coalition = yes
+					}
+				}
+				c:CRR ?= {
+					if = {
+						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						gg_province_split_beaten = yes
+					}
+				}
+				c:ENR ?= {
+					if = {
+						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						gg_province_split_beaten = yes
+					}
 				}
 			}
 					}

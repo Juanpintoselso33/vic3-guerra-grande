@@ -71,3 +71,149 @@ ENR = {
 		texture = "te_entre_rios.dds"
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: PLACEHOLDER ARMS FOR THE ELEVEN PROVINCES -- NOT FLAGS, AND NOT A CHOICE. Most of these provinces
+#     flew no flag of their own in 1836-1852 (docs/guerra-grande-argentina/banderas-tres-paises.md), and
+#     the mod's rule is real flags, never designs of ours. Until Juan picks from the options written up
+#     in docs/guerra-grande-argentina/banderas-provincias-opciones.md, every province shows the SAME
+#     obviously provisional mark: its map colour with an empty white ring. Replace each block with the
+#     chosen flag; nothing else reads these keys.
+# ES: ESCUDOS PROVISORIOS DE LAS ONCE PROVINCIAS -- NO SON BANDERAS NI UNA ELECCION. Casi ninguna tuvo
+#     bandera propia en 1836-1852, y la regla del mod es banderas reales, nunca disenos nuestros. Hasta
+#     que Juan elija entre las opciones de banderas-provincias-opciones.md, todas muestran la MISMA marca
+#     a todas luces provisoria: el color de mapa con un anillo blanco vacio. Cada bloque se reemplaza
+#     por la bandera elegida; ninguna otra cosa lee estas claves.
+# -------------------------------------------------------------------------------------------------
+
+TUC = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 29 57 69 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+SLT = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 3 60 59 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+JUJ = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 83 52 59 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+CTM = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 34 43 77 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+LRJ = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 300 34 55 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+CBA = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 209 52 59 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+SFE = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 165 54 51 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+SDE = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 58 47 67 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+MZA = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 333 71 59 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+SJN = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 22 71 80 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}
+
+SNL = {
+	# EN/ES: PLACEHOLDER / PROVISORIO
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 25 46 44 }
+	colored_emblem = {
+		texture = "ce_frame_circle_outline.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
+	}
+}

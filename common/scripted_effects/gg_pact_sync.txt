@@ -11,26 +11,13 @@
 gg_pact_sync = {
 	scope:journal_entry ?= {
 		every_scope_je_involved = {
-			limit = {
-				NOT = {
-					OR = {
-						has_variable = gg_arg_rosas_seat
-						c:CRR ?= this
-						c:CLN ?= this
-						c:ENR ?= this
-					}
-				}
-			}
+			limit = { NOT = { gg_is_pact_country = yes } }
 			scope:journal_entry = { remove_involved_country = prev }
 		}
 		every_country = {
 			limit = {
-				OR = {
-					has_variable = gg_arg_rosas_seat
-					c:CRR ?= this
-					c:CLN ?= this
-					c:ENR ?= this
-				}
+				# EN/ES: 22/9/2026 -- Buenos Aires, the Coalition and every province country
+				gg_is_pact_country = yes
 				NOT = { is_involved_in_journal_entry = je_gg_delegation }
 			}
 			scope:journal_entry = { add_involved_country = prev }

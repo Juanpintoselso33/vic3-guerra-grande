@@ -1,0 +1,57 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE PROVINCES AS COUNTRIES (22/9/2026, decided with Juan). One list of the province tags, so the
+#     journal, the settlement, the government type and the AI read the same thirteen and nobody keeps
+#     a second copy. CRR and ENR are born by pronouncing; the other eleven only when Rosas beats the
+#     country that holds them (common/scripted_effects/gg_provinces.txt). The Coalition (CLN) is NOT a
+#     province: it is a league of them, and it has its own tests.
+# ES: LAS PROVINCIAS COMO PAISES. Una sola lista de los tags de provincia, para que el journal, el
+#     arreglo, el tipo de gobierno y la IA lean las mismas trece y nadie lleve una segunda copia. CRR y
+#     ENR nacen al pronunciarse; las otras once solo cuando Rosas bate al pais que las tiene. La
+#     Coalicion (CLN) NO es una provincia: es una liga de ellas, y tiene sus propias pruebas.
+# -------------------------------------------------------------------------------------------------
+gg_is_province_country = {
+	OR = {
+		c:CRR ?= this
+		c:ENR ?= this
+		c:TUC ?= this
+		c:SLT ?= this
+		c:JUJ ?= this
+		c:CTM ?= this
+		c:LRJ ?= this
+		c:CBA ?= this
+		c:SFE ?= this
+		c:SDE ?= this
+		c:MZA ?= this
+		c:SJN ?= this
+		c:SNL ?= this
+	}
+}
+
+# EN: The eleven born only by defeat: they have no pronouncement, so they get the quiet AI.
+# ES: Las once que nacen solo por derrota: no tienen pronunciamiento, asi que llevan la IA quieta.
+gg_is_beaten_province_country = {
+	gg_is_province_country = yes
+	NOT = { c:CRR ?= this }
+	NOT = { c:ENR ?= this }
+}
+
+# EN: Who sees and moves the Federal Pact: Buenos Aires, the Coalition and every province country.
+# ES: Quien ve y mueve el Pacto Federal: Buenos Aires, la Coalicion y todo pais provincial.
+gg_is_pact_country = {
+	OR = {
+		has_variable = gg_arg_rosas_seat
+		c:CLN ?= this
+		gg_is_province_country = yes
+	}
+}
+
+# EN: A country that may hold an Argentine province, for where a governor is born: Argentina, the
+#     Coalition or a province country -- never Bolivia, which shares Salta and Jujuy from 1836.
+# ES: Un pais que puede tener una provincia argentina, para saber donde nace un gobernador: la
+#     Argentina, la Coalicion o un pais provincial -- nunca Bolivia, que comparte Salta y Jujuy.
+gg_is_argentine_holder = {
+	OR = {
+		c:ARG ?= this
+		gg_is_pact_country = yes
+	}
+}

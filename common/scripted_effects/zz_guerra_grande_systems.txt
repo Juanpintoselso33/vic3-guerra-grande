@@ -1199,7 +1199,7 @@ gg_urquiza_flip = {
 #     Buenos Aires. A rule freeing them had been added without being asked for ("quien dijo eso") and
 #     is gone.
 #     WHY BY TAG AND NOT BY ITERATING SUBJECTS: annexing inside an every_subject_or_below changes the
-#     list being walked. Three tags are three ifs.
+#     list being walked. Fourteen tags are fourteen ifs (22/9/2026: the province countries joined).
 # ES: QUE PASA CON LAS PROVINCIAS BATIDAS CUANDO TERMINA LA GUERRA GRANDE. Regla pedida por Juan el
 #     20/9/2026: «cuando una provincia se levanta y apago el levantamiento, la provincia queda como
 #     vasalla para reflejar que no esta completamente controlada, y asi hasta la resolucion de la
@@ -1220,18 +1220,33 @@ gg_argentina_vassals_settle = {
 	#     Called from gg_pact_resolve. Only those still subject to Argentina.
 	# ES: las provincias batidas se anexan cuando se salda el Pacto Federal, sea cual sea el cierre, y no
 	#     al terminar la Guerra Grande. Lo llama gg_pact_resolve. Solo las que siguen sujetas.
+	# EN/ES: 22/9/2026 -- every province country too (TUC ... SNL), one if per tag for the same reason
+	#     / y todo pais provincial, un if por tag por la misma razon
 	c:ARG ?= {
 		if = {
 			limit = {
-				OR = {
-					c:CRR ?= { is_subject_of = c:ARG }
-					c:CLN ?= { is_subject_of = c:ARG }
-					c:ENR ?= { is_subject_of = c:ARG }
+				any_subject_or_below = {
+					OR = {
+						c:CLN ?= this
+						gg_is_province_country = yes
+					}
+					is_subject_of = c:ARG
 				}
 			}
 			if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } annex = c:CRR }
 			if = { limit = { c:CLN ?= { is_subject_of = c:ARG } } annex = c:CLN }
 			if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } annex = c:ENR }
+			if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } annex = c:TUC }
+			if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } annex = c:SLT }
+			if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } annex = c:JUJ }
+			if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } annex = c:CTM }
+			if = { limit = { c:LRJ ?= { is_subject_of = c:ARG } } annex = c:LRJ }
+			if = { limit = { c:CBA ?= { is_subject_of = c:ARG } } annex = c:CBA }
+			if = { limit = { c:SFE ?= { is_subject_of = c:ARG } } annex = c:SFE }
+			if = { limit = { c:SDE ?= { is_subject_of = c:ARG } } annex = c:SDE }
+			if = { limit = { c:MZA ?= { is_subject_of = c:ARG } } annex = c:MZA }
+			if = { limit = { c:SJN ?= { is_subject_of = c:ARG } } annex = c:SJN }
+			if = { limit = { c:SNL ?= { is_subject_of = c:ARG } } annex = c:SNL }
 			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
 		}
 	}

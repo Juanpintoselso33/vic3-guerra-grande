@@ -89,3 +89,136 @@ CLN = {
 	#     region_andes, so anything done by strategic region would skip them.
 	capital = STATE_TUCUMAN
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE PROVINCES AS COUNTRIES (22/9/2026, decided with Juan). None of them exists at game start and
+#     none is ever born by pronouncing: a province becomes a country only when Rosas BEATS the country
+#     that holds it. The beaten country splits into its provinces, each a protectorate of Buenos Aires
+#     under its governor (gg_province_split_off in common/scripted_effects/gg_provinces.txt); what is
+#     left of the Coalition changes tag to the province of its capital (Tucuman). Santa Fe, Santiago
+#     del Estero, Mendoza, San Juan and San Luis never withdraw the mandate: their definitions exist
+#     only for the day one of them is beaten inside another country.
+#     TAGS VERIFIED FREE on 22/9/2026 against vanilla 1.13, every downloaded Workshop item and every
+#     local mod (country_definitions, history, events, localization): TUC SLT JUJ CTM LRJ CBA SFE SDE
+#     MZA SJN SNL. SLU is NOT free (Workshop 2898469548 defines it), so San Luis is SNL.
+#     Colours are map colours only, chosen to tell neighbours apart; the flags are PLACEHOLDERS
+#     (common/coat_of_arms/coat_of_arms/zz_guerra_grande_argentina.txt) until Juan picks.
+# ES: LAS PROVINCIAS COMO PAISES. Ninguna existe al empezar ni nace por pronunciarse: una provincia es
+#     pais solo cuando Rosas BATE al pais que la tiene. El batido se parte en sus provincias, cada una
+#     protectorado de Buenos Aires con su gobernador; lo que queda de la Coalicion cambia de tag a la
+#     provincia de su capital (Tucuman). Santa Fe, Santiago, Mendoza, San Juan y San Luis nunca retiran
+#     el encargo: su definicion existe solo para el dia en que se bata a una dentro de otro pais.
+#     TAGS VERIFICADOS LIBRES el 22/9/2026 contra vanilla, todo el Workshop descargado y los mods
+#     locales. SLU NO esta libre (lo define el Workshop 2898469548): San Luis es SNL.
+#     Los colores son solo de mapa; las banderas son PROVISORIAS hasta que Juan elija.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Tucuman / Tucuman
+TUC = {
+	color = { 176 124 76 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_TUCUMAN
+}
+
+# EN/ES: Salta / Salta
+SLT = {
+	color = { 150 64 60 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SALTA
+}
+
+# EN/ES: Jujuy / Jujuy
+JUJ = {
+	color = { 120 150 72 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_JUJUY
+}
+
+# EN/ES: Catamarca / Catamarca
+CTM = {
+	color = { 196 160 112 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_CATAMARCA
+}
+
+# EN/ES: La Rioja / La Rioja
+LRJ = {
+	color = { 140 92 140 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_LA_RIOJA
+}
+
+# EN/ES: Cordoba / Cordoba
+CBA = {
+	color = { 72 112 150 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_CORDOBA
+}
+
+# EN/ES: Santa Fe / Santa Fe
+SFE = {
+	color = { 60 130 112 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SANTA_FE
+}
+
+# EN/ES: Santiago del Estero / Santiago del Estero
+SDE = {
+	color = { 172 170 92 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SANTIAGO_DEL_ESTERO
+}
+
+# EN/ES: Mendoza / Mendoza
+MZA = {
+	color = { 150 44 92 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_MENDOZA
+}
+
+# EN/ES: San Juan / San Juan
+SJN = {
+	color = { 204 112 60 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SAN_JUAN
+}
+
+# EN/ES: San Luis / San Luis
+SNL = {
+	color = { 112 82 60 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SAN_LUIS
+}

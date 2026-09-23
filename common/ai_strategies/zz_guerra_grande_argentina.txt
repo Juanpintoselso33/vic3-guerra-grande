@@ -130,3 +130,47 @@ gg_ai_strategy_entre_rios = {
 		value = 1000
 	}
 }
+
+# EN: THE PROVINCES BUENOS AIRES BEAT (22/9/2026). A protectorate under a governor Rosas installed is not
+#     a pronouncement waiting to happen: it keeps quiet, stays out of other people's plays and never
+#     goes for its independence by war. If a province rises again it is by an event, as Corrientes did
+#     in 1841 and 1843, never by the AI deciding it. Idea of a passive stance from the Coalition's own
+#     strategy above; numbers are the mod's.
+# ES: LAS PROVINCIAS QUE BATIO BUENOS AIRES. Un protectorado con un gobernador puesto por Rosas no es un
+#     pronunciamiento esperando: se queda quieto, no se mete en jugadas ajenas y no busca la
+#     independencia por la guerra. Si una provincia se vuelve a alzar es por evento, como Corrientes en
+#     1841 y 1843, nunca porque lo decida la IA.
+gg_ai_strategy_provincia = {
+	icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+
+	type = diplomatic
+
+	undesirable_infamy_level = { value = 5 }
+	unacceptable_infamy_level = { value = 10 }
+
+	ideological_opinion_effect_mult = { value = 0.5 }
+	diplomatic_play_neutrality = { value = 100 }
+	diplomatic_play_boldness = { value = -25 }
+	recklessness = { value = -1 }
+	aggression = { value = -1 }
+
+	wargoal_weights = {
+		conquer_state = 0.0
+		make_protectorate = 0.0
+		make_tributary = 0.0
+		reduce_autonomy = 0.0
+		independence = 0.0
+		increase_autonomy = 0.0
+		return_state = 0.0
+		humiliation = 0.0
+		regime_change = 0.0
+	}
+
+	possible = {
+		gg_is_beaten_province_country = yes
+	}
+
+	weight = {
+		value = 1000
+	}
+}
