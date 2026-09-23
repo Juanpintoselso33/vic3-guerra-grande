@@ -13,7 +13,7 @@
 #     ejercitos se levantan al dia siguiente de abrir. El candado del sitio se levanta solo al abrir.
 # -------------------------------------------------------------------------------------------------
 
-# EN: India Muerta, 27/3/1845 (gg_cal.7, on the Cerrito). Urquiza, in the service of Rosas and Oribe, against
+# EN: India Muerta: the campaign opens on 1/1/1845 (gg_cal.7, on the Cerrito); the battle was fought on 27/3. Urquiza, in the service of Rosas and Oribe, against
 #     Rivera's army in the countryside. If the war cannot open, the battle is the old event (Rivera's defeat).
 # ES: India Muerta, 27/3/1845. Si la guerra no puede abrirse, la batalla es el evento de antes.
 gg_battle.1 = {
@@ -57,7 +57,7 @@ gg_battle.1 = {
 			set_global_variable = { name = gg_battle_open value = 1 }
 			debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|abre|india_muerta"
 			trigger_event = { id = gg_battle.2 days = 1 }
-			trigger_event = { id = gg_battle.3 days = 34 } # EN/ES: 30/4/1845, no battle / sin batalla
+			trigger_event = { id = gg_battle.3 days = 7 } # EN/ES: weekly until 30/6/1845 / semanal hasta el 30/6/1845
 		}
 		else = {
 			random_country = {
@@ -136,16 +136,22 @@ gg_battle.2 = {
 	}
 }
 
-# EN/ES: 30/4/1845 -- no battle: the campaign melts away / sin batalla: la campania se disuelve
+# EN/ES: 30/6/1845 -- no battle: the campaign melts away / sin batalla: la campania se disuelve.
+#     23/9 headless: a war opened on 27/3 closed on 30/4 with no battle (mobilizing and marching take weeks):
+#     it opens on 1/1/1845 and runs to 30/6 / abre el 1/1 y corre hasta el 30/6
 gg_battle.3 = {
 	type = country_event
 	hidden = yes
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.3|" # GG_TRAZA
 		if = {
-			limit = { global_var:gg_battle_open ?= 1 }
+			limit = { global_var:gg_battle_open ?= 1 game_date >= 1845.6.30 }
 			set_global_variable = { name = gg_battle_result value = 0 }
 			gg_battle_close = yes
+		}
+		else_if = {
+			limit = { global_var:gg_battle_open ?= 1 }
+			trigger_event = { id = gg_battle.3 days = 7 }
 		}
 	}
 }

@@ -148,7 +148,8 @@ gg_cal.6 = {
 	}
 }
 
-# 1845-03-27 -- India Muerta (gg_battle.1, el Cerrito: la guerra corta; gg_rivera.2 si la gana Urquiza)
+# 1845-01-01 -- la campania de India Muerta (gg_battle.1, el Cerrito: la guerra corta, abierta hasta el 30/6;
+#     la batalla fue el 27/3; headless 23/9: con 34 dias no llegaba a haber batalla)
 gg_cal.7 = {
 	type = country_event
 	hidden = yes
