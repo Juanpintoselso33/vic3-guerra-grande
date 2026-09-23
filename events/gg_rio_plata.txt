@@ -29,7 +29,8 @@ gg_plata.2 = {
 	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
 	event_image = { video = "gg_plata_alfred" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:ARG ?= this
@@ -116,7 +117,8 @@ gg_plata.10 = {
 	# EN/ES: vanilla video until the mod's own image is made (PENDIENTES) / video de vanilla por ahora
 	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:ARG ?= this
@@ -206,7 +208,8 @@ gg_plata.20 = {
 	}
 	event_image = { video = "gg_nav_brown_montevideo" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -237,7 +240,8 @@ gg_plata.21 = {
 	}
 	event_image = { video = "gg_f2_montevideo_port" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -258,7 +262,8 @@ gg_plata.22 = {
 	}
 	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -279,7 +284,8 @@ gg_plata.23 = {
 	}
 	event_image = { video = "gg_squadrons" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -292,7 +298,8 @@ gg_plata.24 = {
 	desc = gg_plata.24.d
 	event_image = { video = "gg_f2_palmerston" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -334,7 +341,8 @@ gg_plata.25 = {
 	}
 	event_image = { video = "gg_f2_montevideo_port" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -355,7 +363,8 @@ gg_plata.26 = {
 	}
 	event_image = { video = "gg_squadrons" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -368,7 +377,8 @@ gg_plata.27 = {
 	desc = gg_plata.27.d
 	event_image = { video = "gg_f2_palmerston" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -381,7 +391,8 @@ gg_plata.28 = {
 	desc = gg_plata.28.d
 	event_image = { video = "gg_plata_guizot" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_plata.20.a
 		default_option = yes
@@ -430,7 +441,8 @@ gg_plata.31 = {
 	flavor = gg_plata.31.f
 	event_image = { video = "gg_nav_brown_montevideo" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	trigger = { c:ARG ?= this }
 	option = {
 		name = gg_plata.31.a

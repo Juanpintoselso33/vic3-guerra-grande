@@ -29,10 +29,14 @@ gg_prewar.1 = {
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
-	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
-	#     the game answered for the player. Every event of this mod has consequences, so they wait.
-	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
-	duration = 1825
+	# EN: 22/9/2026 -- duration is in MONTHS (save: utilitarian.4 duration = 3 -> expires 3 months on).
+	#     The 1825 of 17/9 (152 years) left minimized events pending forever, and vanilla's 3 answers for
+	#     the player within seconds at speed 5 (Juan, 17/9): 12 reopens it at 11 months, then resolves.
+	# ES: la duracion va en MESES (en el save, 3 = vence a los 3 meses). El 1825 del 17/9 (152 anos)
+	#     dejaba colgados para siempre los eventos minimizados, y el 3 de vanilla contesta por el jugador
+	#     en segundos a velocidad 5: 12 lo reabre a los 11 meses y recien ahi resuelve.
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -80,7 +84,8 @@ gg_prewar.2 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -154,7 +159,8 @@ gg_prewar.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -216,7 +222,8 @@ gg_prewar.4 = {
 
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -293,7 +300,8 @@ gg_prewar.5 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -344,7 +352,8 @@ gg_prewar.6 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -388,7 +397,8 @@ gg_prewar.7 = {
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -446,7 +456,8 @@ gg_prewar.9 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -486,17 +497,28 @@ gg_prewar.20 = {
 	type = country_event
 	hidden = yes
 
+	# EN: capped wait (22/9/2026). Each retry counts a week in gg_prewar_20_weeks; after 8 weeks
+	#     Yucutuja is delivered anyway, answered or not, and the counter is removed.
+	# ES: espera con tope (22/9/2026). Cada reintento suma una semana en gg_prewar_20_weeks; a las 8
+	#     semanas Yucutuja se entrega igual, haya respuesta o no, y el contador se borra.
 	immediate = {
+		if = {
+			limit = { NOT = { has_global_variable = gg_prewar_20_weeks } }
+			set_global_variable = { name = gg_prewar_20_weeks value = 0 }
+		}
 		if = {
 			limit = {
 				OR = {
-				has_global_variable = gg_pending_prewar_2
-				has_global_variable = gg_pending_prewar_4
+					has_global_variable = gg_pending_prewar_2
+					has_global_variable = gg_pending_prewar_4
 				}
+				global_var:gg_prewar_20_weeks < 8
 			}
+			change_global_variable = { name = gg_prewar_20_weeks add = 1 }
 			trigger_event = { id = gg_prewar.20 days = 7 }
 		}
 		else = {
+			remove_global_variable = gg_prewar_20_weeks
 			trigger_event = { id = gg_prewar.5 popup = yes }
 		}
 	}

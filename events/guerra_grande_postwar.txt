@@ -116,10 +116,13 @@ gg_postwar.2 = {
 
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 
-	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
-	#     the game answered for the player. Every event of this mod has consequences, so they wait.
-	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
-	duration = 1825
+	# EN: 22/9/2026 -- duration is in MONTHS (save: utilitarian.4 duration = 3 -> expires 3 months on).
+	#     The 1825 of 17/9 (152 years) left minimized events pending forever, and vanilla's 3 answers for
+	#     the player within seconds at speed 5 (Juan, 17/9): 12 reopens it at 11 months, then resolves.
+	# ES: la duracion va en MESES (en el save, 3 = vence a los 3 meses). El 1825 del 17/9 (152 anos)
+	#     dejaba colgados para siempre los eventos minimizados, y el 3 de vanilla contesta por el jugador
+	#     en segundos a velocidad 5: 12 lo reabre a los 11 meses y recien ahi resuelve.
+	duration = 12
 
 	immediate = {
 		set_global_variable = gg_fusion_blocked
@@ -197,7 +200,7 @@ gg_postwar.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
-	duration = 1825
+	duration = 12
 
 	# a -- both governments' debts / las deudas de los dos gobiernos
 	option = {
@@ -267,7 +270,7 @@ gg_postwar.4 = {
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
-	duration = 1825
+	duration = 12
 
 	immediate = {
 		# EN/ES: T9 -- Garzon died on 1 December 1851 / Garzon murio el 1 de diciembre de 1851
@@ -380,7 +383,7 @@ gg_postwar.5 = {
 
 	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
 
-	duration = 1825
+	duration = 12
 
 	# a -- let them into the government / dejarlos entrar al gobierno
 	option = {
@@ -439,7 +442,7 @@ gg_postwar.6 = {
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
-	duration = 1825
+	duration = 12
 
 	trigger = {
 		NOT = { has_global_variable = gg_fusion_blocked }

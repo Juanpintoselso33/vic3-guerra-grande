@@ -127,7 +127,8 @@ gg_caseros.2 = {
 	flavor = gg_argentina.41.f
 	event_image = { video = "gg_arg_pronunciamiento" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_caseros.2.a
 		default_option = yes
@@ -142,7 +143,8 @@ gg_caseros.3 = {
 	desc = gg_caseros.3.d
 	event_image = { video = "gg_arg_pronunciamiento" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_caseros.3.a
 		default_option = yes
@@ -168,7 +170,8 @@ gg_caseros.4 = {
 	}
 	event_image = { video = "gg_arg_clausula" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_caseros.4.a
 		default_option = yes
@@ -196,7 +199,8 @@ gg_caseros.5 = {
 	}
 	event_image = { video = "gg_arg_pronunciamiento" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
-	duration = 1825
+	duration = 12
+	is_popup = yes
 	option = {
 		name = gg_caseros.5.a
 		default_option = yes

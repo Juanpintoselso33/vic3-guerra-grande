@@ -17,7 +17,7 @@ gg_argentina.16 = {
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
 	immediate = { hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_30 } }
@@ -62,7 +62,7 @@ gg_argentina.17 = {
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
 	immediate = { hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_31 } }
@@ -103,7 +103,7 @@ gg_argentina.18 = {
 	# ES: Video existente prestado (gg_arg_coalicion); no representa este hecho. Video propio pendiente.
 	event_image = { video = "gg_arg_coalicion" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
 	immediate = { hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_32 } }
@@ -164,7 +164,7 @@ gg_argentina.19 = {
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
 	immediate = { hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_33 } }
@@ -299,7 +299,7 @@ gg_argentina.28 = {
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
 	event_image = { video = "gg_arg_arana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 1825
+	duration = 12
 	immediate = { hidden_effect = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_34 } }

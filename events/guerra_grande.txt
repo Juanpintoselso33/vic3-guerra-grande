@@ -17,10 +17,14 @@ guerra_grande.1 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	# EN/ES: playtest 2026-09-17 -- 3 days is vanilla's default and at speed 4-5 it is one second:
-	#     the game answered for the player. Every event of this mod has consequences, so they wait.
-	#     / 3 dias es el default de vanilla y a velocidad 4-5 es un segundo: el juego elegia solo.
-	duration = 1825
+	# EN: 22/9/2026 -- duration is in MONTHS (save: utilitarian.4 duration = 3 -> expires 3 months on).
+	#     The 1825 of 17/9 (152 years) left minimized events pending forever, and vanilla's 3 answers for
+	#     the player within seconds at speed 5 (Juan, 17/9): 12 reopens it at 11 months, then resolves.
+	# ES: la duracion va en MESES (en el save, 3 = vence a los 3 meses). El 1825 del 17/9 (152 anos)
+	#     dejaba colgados para siempre los eventos minimizados, y el 3 de vanilla contesta por el jugador
+	#     en segundos a velocidad 5: 12 lo reabre a los 11 meses y recien ahi resuelve.
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -140,7 +144,8 @@ guerra_grande.2 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -317,7 +322,8 @@ guerra_grande.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	# EN: AND THE ARMY HAS TO HAVE CROSSED. Codex's playthrough review, 20 September 2026, caught the
 	#     hole at the centre of the tandem: the mod had an ending for "the war that never became one"
@@ -703,6 +709,7 @@ guerra_grande.3 = {
 		#     terminan igual, y los batallones que el motor descarta en el cambio de dueño se vuelven a
 		#     levantar. Las ramas por ventaja colorada que estaban aca eran identicas.
 		c:URU ?= { trigger_event = { id = gg_troops.1 days = 2 } }
+		c:CER ?= { trigger_event = { id = gg_troops.2 days = 2 } }
 		# EN: the guns, or the lack of them -- see SOURCES_order_of_battle.md and the header of
 		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
 		# ES: los canionies, o su ausencia -- ver SOURCES_order_of_battle.md y el encabezado de
@@ -1161,6 +1168,10 @@ guerra_grande.3 = {
 		# EN: 22/9/2026 -- the armies are topped up two days after the split (gg_troops.1), the same
 		#     as in option .3.a. / los ejercitos se completan dos dias despues del corte, igual que en .3.a.
 		c:URU ?= { trigger_event = { id = gg_troops.1 days = 2 } }
+		# EN/ES: Codex 22/9 -- ROOT has just become CER by change_tag and c:CER does not resolve until
+		#     tomorrow, so the Cerrito is addressed as root / ROOT acaba de ser CER por change_tag y c:CER
+		#     no resuelve hasta mañana, asi que al Cerrito se lo llama como root
+		root = { trigger_event = { id = gg_troops.2 days = 2 } }
 		# EN: the guns, or the lack of them -- see SOURCES_order_of_battle.md and the header of
 		#     common/static_modifiers/guerra_grande_siege_modifiers.txt.
 		# ES: los canionies, o su ausencia -- ver SOURCES_order_of_battle.md y el encabezado de
@@ -1398,7 +1409,8 @@ guerra_grande.4 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	# EN: THE TANDEM, READ HERE. Rosas can only lend the Vanguardia if the Vanguardia is free to be
 	#     lent. gg_vanguardia_status is written by the reckoning of the interior on 16 February 1843
@@ -1496,7 +1508,8 @@ guerra_grande.5 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	option = {
 		name = guerra_grande.5.a
@@ -1548,7 +1561,8 @@ guerra_grande.9 = {
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	option = {
 		name = guerra_grande.9.a
@@ -1593,7 +1607,8 @@ guerra_grande.11 = {
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -1666,7 +1681,8 @@ guerra_grande.12 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -1729,7 +1745,8 @@ guerra_grande.13 = {
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this
@@ -1783,7 +1800,8 @@ guerra_grande.14 = {
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	duration = 1825
+	duration = 12
+	is_popup = yes
 
 	trigger = {
 		c:URU ?= this

@@ -34,7 +34,7 @@ gg_patron.1 = {
 	}
 	event_image = { video = "gg_money_french_convention" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
 	option = {
 		name = gg_patron.a
 		default_option = yes
@@ -65,7 +65,7 @@ gg_patron.2 = {
 	}
 	event_image = { video = "gg_f2_palmerston" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
 	option = {
 		name = gg_patron.a
 		default_option = yes
@@ -96,7 +96,7 @@ gg_patron.3 = {
 	}
 	event_image = { video = "gg_money_maua" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
 	option = {
 		name = gg_patron.a
 		default_option = yes

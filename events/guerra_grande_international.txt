@@ -19,7 +19,7 @@ gg_international.2 = {
 	flavor = gg_international.2.f
 	event_image = { video = "southamerica_aristocrats" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
-	duration = 1825
+	duration = 12
 	option = {
 		name = gg_international.2.a
 		trigger = { gg_int_arg_can_accept = yes }
