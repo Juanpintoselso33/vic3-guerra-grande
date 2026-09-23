@@ -221,48 +221,54 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_francia_now_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_2"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_francia'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_francia_pre_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_2"
 			}
@@ -272,48 +278,54 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_britania_now_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_2"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_britania'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_britania_pre_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_2"
 			}
@@ -323,48 +335,54 @@ flowcontainer = {
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_0"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_0"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)1'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)1'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_1"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_1"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)2'), GetGlobalVariable('guerra_grande_split_done').IsSet)]"
 				tooltip = "gg_tt_patron_brasil_now_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_2"
 			}
 			textbox = {
 				visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)2'), Not(GetGlobalVariable('guerra_grande_split_done').IsSet))]"
 				tooltip = "gg_tt_patron_brasil_pre_2"
-				size = { 164 34 }
+				size = { 164 44 }
 				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_2"
 			}
@@ -415,7 +433,7 @@ flowcontainer = {
 		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
 		flowcontainer = {
 			direction = vertical spacing = 2
-			textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa" }
+			textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa" }
 			green_progressbar_horizontal = {
 				size = { 472 22 }
 				blockoverride "values" {
@@ -432,7 +450,7 @@ flowcontainer = {
 		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
 		flowcontainer = {
 			direction = vertical spacing = 2
-			textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito" }
+			textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito" }
 			green_progressbar_horizontal = {
 				size = { 472 22 }
 				blockoverride "values" {

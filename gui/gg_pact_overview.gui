@@ -1,51 +1,19 @@
-﻿# EN: THE FEDERAL PACT, full redesign (22/9/2026, the vic3-journals skill), the same frame as the war
-#     and the siege. Header: Pellegrini's "Cabildo y policia" (Buenos Aires, 1829, watercolour; public
-#     domain), the seat of the mandate, with the count of delegating provinces on its band. One short
-#     line; the thirteen provinces on the map; Buenos Aires facing the provinces that took the mandate
-#     back (only while one stands as a country); the unanswered petitions (only while there are
-#     grievances); Rosas's money for Oribe (only when there is somebody to receive it); the longer
-#     account behind the arrow. Every line is backed by docs/guerra-grande-flujo/pacto-textos-mecanica.md.
-#     Replaces gg_pact_map.gui and gg_pact_accounts.gui.
-# ES: EL PACTO FEDERAL, rediseño completo, el mismo marco que la guerra y el sitio. Cabecera: «Cabildo y
-#     policia» de Pellegrini (1829), la sede del encargo, con la cuenta de provincias que delegan en su
-#     franja. Una linea corta; las trece provincias en el mapa; Buenos Aires frente a las provincias que
-#     retiraron el encargo (solo mientras alguna sea pais); los pliegos sin atender (solo si hay
-#     agravios); la plata de Rosas para Oribe (solo si hay quien la reciba); lo largo detras de la
-#     flechita. Reemplaza gg_pact_map.gui y gg_pact_accounts.gui.
+﻿# EN: THE FEDERAL PACT, second redesign (22/9/2026 night, decided with Juan; the vic3-journals skill).
+#     A journal to follow Argentina's own politics: the map of the thirteen on top, the count on a band
+#     below it, and -- after the daimyos of ep2's Meiji Restoration journal -- a list of the three that
+#     can take the mandate back (Corrientes, the North, Entre Rios), each with who governs it, its state
+#     and its grievances. No header picture and nothing about Oribe: the remittance to him is handled by
+#     events (gg_international.10/.11). Table: docs/guerra-grande-flujo/pacto-textos-mecanica.md.
+# ES: EL PACTO FEDERAL, segundo rediseño. Un journal para seguir la interna argentina: arriba el mapa de
+#     las trece, la cuenta en una franja debajo y, como los daimyos del journal Meiji de ep2, la lista de
+#     las tres que pueden retirar el encargo, con quien gobierna, su estado y sus agravios. Sin cabecera y
+#     sin Oribe: la remesa va por eventos.
 flowcontainer = {
 	name = "gg_pact_overview"
 	direction = vertical
 	parentanchor = hcenter
-	spacing = 16
+	spacing = 10
 	ignoreinvisible = yes
-	# EN/ES: the header with the count on its band / la cabecera con la cuenta en su franja
-	widget = {
-		size = { 520 246 }
-		parentanchor = hcenter
-		icon = { size = { 520 240 } position = { 0 6 } texture = "gfx/interface/gg_situations/pact_header.dds" }
-		textbox = {
-			position = { 0 206 } size = { 520 40 }
-			background = { using = dark_area alpha = 0.85 }
-			using = fontsize_large align = center|nobaseline
-			text = "gg_pact_j_band"
-			tooltip = "gg_pact_j_band_tt"
-		}
-	}
-	textbox = {
-		autoresize = yes multiline = yes
-		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-		parentanchor = hcenter
-		using = fontsize_medium align = center|nobaseline
-		text = "gg_pact_j_short"
-	}
-	textbox = {
-		size = { 520 34 }
-		parentanchor = hcenter
-		using = fontsize_large align = center|nobaseline
-		background = { using = entry_bg_fancy_dark alpha = 0.6 }
-		text = "gg_pact_j_sec_map"
-	}
-	# EN/ES: the thirteen, each in its own colour; hover a province for its state / las trece, cada una en su color
 	widget = {
 		size = { 520 440 }
 		parentanchor = hcenter
@@ -93,186 +61,160 @@ flowcontainer = {
 		gg_pact_hover_map = { position = { 115 12 } }
 	}
 	textbox = {
+		size = { 520 40 }
+		parentanchor = hcenter
+		background = { using = dark_area alpha = 0.85 }
+		using = fontsize_large align = center|nobaseline
+		text = "gg_pact_j_band"
+		tooltip = "gg_pact_j_band_tt"
+	}
+	textbox = {
 		autoresize = yes multiline = yes
 		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
 		parentanchor = hcenter
 		using = fontsize_medium align = center|nobaseline
 		text = "gg_pact_j_legend"
 	}
-	# EN/ES: Buenos Aires facing the provinces that took the mandate back / Buenos Aires frente a las que lo retiraron
+	# EN/ES: the list, open unless closed / la lista, abierta salvo que se la cierre
+	section_header_button = {
+		blockoverride "layout" { size = { 520 38 } }
+		blockoverride "left_text" { text = "gg_pact_j_list_header" }
+		blockoverride "onclick" { onclick = "[GetVariableSystem.Toggle('gg_pact_list_closed')]" }
+		blockoverride "onclick_showmore" { visible = "[GetVariableSystem.Exists('gg_pact_list_closed')]" }
+		blockoverride "onclick_showless" { visible = "[Not(GetVariableSystem.Exists('gg_pact_list_closed'))]" }
+	}
 	flowcontainer = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_front_shown'), '(CFixedPoint)1')]"
-		direction = vertical spacing = 12 parentanchor = hcenter ignoreinvisible = yes
-		textbox = {
-			size = { 520 34 }
+		visible = "[Not(GetVariableSystem.Exists('gg_pact_list_closed'))]"
+		direction = vertical spacing = 6 parentanchor = hcenter ignoreinvisible = yes
+		# EN/ES: corrientes
+		widget = {
+			size = { 500 104 }
 			parentanchor = hcenter
-			using = fontsize_large align = center|nobaseline
-			background = { using = entry_bg_fancy_dark alpha = 0.6 }
-			text = "gg_pact_j_sec_front"
+			background = { using = dark_area alpha = 0.35 }
+			tooltip = "gg_pact_j_row_corrientes_tt"
+			character_portrait_medium = {
+				visible = "[GetGlobalVariable('gg_pact_gov_corrientes').IsSet]"
+				position = { 8 8 }
+				datacontext = "[GetGlobalVariable('gg_pact_gov_corrientes').GetCharacter]"
+			}
+			textbox = { position = { 100 8 } size = { 236 32 } using = fontsize_large align = left|nobaseline text = "gg_pact_j_row_corrientes" }
+			textbox = {
+				visible = "[GetGlobalVariable('gg_pact_gov_corrientes').IsSet]"
+				datacontext = "[GetGlobalVariable('gg_pact_gov_corrientes').GetCharacter]"
+				position = { 100 44 } size = { 236 52 } multiline = yes
+				using = fontsize_medium align = left|nobaseline text = "gg_pact_j_gov_corrientes"
+			}
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)0')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/approval_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)1')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)2')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)0')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_0" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)1')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_1" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)2')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_2" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)1')]" position = { 346 56 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)1')]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_corrientes" }
+			textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)0'), Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_corrientes'), '(CFixedPoint)2')))]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_none" }
 		}
-		flowcontainer = {
-			direction = horizontal spacing = 8 parentanchor = hcenter
+		# EN/ES: norte
+		widget = {
+			size = { 500 152 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.35 }
+			tooltip = "gg_pact_j_row_norte_tt"
+			character_portrait_medium = {
+				visible = "[GetGlobalVariable('gg_pact_gov_norte').IsSet]"
+				position = { 8 8 }
+				datacontext = "[GetGlobalVariable('gg_pact_gov_norte').GetCharacter]"
+			}
+			textbox = { position = { 100 8 } size = { 236 32 } using = fontsize_large align = left|nobaseline text = "gg_pact_j_row_norte" }
+			textbox = {
+				visible = "[GetGlobalVariable('gg_pact_gov_norte').IsSet]"
+				datacontext = "[GetGlobalVariable('gg_pact_gov_norte').GetCharacter]"
+				position = { 100 44 } size = { 236 52 } multiline = yes
+				using = fontsize_medium align = left|nobaseline text = "gg_pact_j_gov_norte"
+			}
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)0')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/approval_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)1')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)0')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_0" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)1')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_1" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_2" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)1')]" position = { 346 56 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)1')]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_norte" }
+			textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)0'), Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')))]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_none" }
+			# EN/ES: the six provinces of the North, each with its own state / las seis del Norte, cada una con su estado
 			flowcontainer = {
-				direction = vertical ignoreinvisible = yes
-			dynamicgridbox = {
-				datamodel = "[JournalEntry.GetInvolvedCountries]"
-				datamodel_wrap = 1
-				ignoreinvisible = yes
-				item = {
-					widget = {
-						visible = "[GetScriptedGui('gg_ui_pact_holder').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-						size = { 236 112 }
-						background = { using = dark_area alpha = 0.3 }
-						tooltip = "gg_pact_j_holder_tt"
-						character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
-						flag = { position = { 164 8 } datacontext = "[Country]" }
-						textbox = { position = { 96 58 } size = { 134 50 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_pact_j_holder" }
-					}
+				position = { 8 110 } direction = horizontal spacing = 4
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_tucuman_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_tucuman_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_tucuman_2" }
+				}
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_salta_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_salta_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_salta_2" }
+				}
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_jujuy_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_jujuy_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_jujuy_2" }
+				}
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_catamarca_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_catamarca_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_catamarca_2" }
+				}
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_la_rioja_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_la_rioja_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_la_rioja_2" }
+				}
+				widget = {
+					size = { 78 34 }
+					background = { using = entry_bg_fancy_dark alpha = 0.6 }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)0')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_cordoba_0" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)1')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_cordoba_1" }
+					textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)2')]" size = { 78 34 } multiline = yes using = fontsize_small align = center|vcenter text = "gg_pact_j_chip_cordoba_2" }
 				}
 			}
+		}
+		# EN/ES: entre_rios
+		widget = {
+			size = { 500 104 }
+			parentanchor = hcenter
+			background = { using = dark_area alpha = 0.35 }
+			tooltip = "gg_pact_j_row_entre_rios_tt"
+			character_portrait_medium = {
+				visible = "[GetGlobalVariable('gg_pact_gov_entre_rios').IsSet]"
+				position = { 8 8 }
+				datacontext = "[GetGlobalVariable('gg_pact_gov_entre_rios').GetCharacter]"
 			}
-			textbox = { size = { 32 112 } align = center|vcenter using = fontsize_large text = "gg_pact_j_versus" }
-			flowcontainer = {
-				direction = vertical spacing = 8 ignoreinvisible = yes
-			dynamicgridbox = {
-				datamodel = "[JournalEntry.GetInvolvedCountries]"
-				datamodel_wrap = 1
-				ignoreinvisible = yes
-				item = {
-					widget = {
-						visible = "[GetScriptedGui('gg_ui_pact_risen').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-						size = { 236 112 }
-						background = { using = dark_area alpha = 0.3 }
-						tooltip = "gg_pact_j_risen_tt"
-						character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
-						flag = { position = { 164 8 } datacontext = "[Country]" }
-						textbox = { position = { 96 58 } size = { 134 50 } datacontext = "[Country.GetRuler]" multiline = yes using = fontsize_medium text = "gg_pact_j_risen" }
-					}
-				}
+			textbox = { position = { 100 8 } size = { 236 32 } using = fontsize_large align = left|nobaseline text = "gg_pact_j_row_entre_rios" }
+			textbox = {
+				visible = "[GetGlobalVariable('gg_pact_gov_entre_rios').IsSet]"
+				datacontext = "[GetGlobalVariable('gg_pact_gov_entre_rios').GetCharacter]"
+				position = { 100 44 } size = { 236 52 } multiline = yes
+				using = fontsize_medium align = left|nobaseline text = "gg_pact_j_gov_entre_rios"
 			}
-			}
-		}
-	}
-	# EN/ES: the unanswered petitions, only while there are grievances / los pliegos sin atender, solo si hay agravios
-	flowcontainer = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grievances_shown'), '(CFixedPoint)1')]"
-		direction = vertical spacing = 8 parentanchor = hcenter ignoreinvisible = yes
-		textbox = {
-			size = { 520 34 }
-			parentanchor = hcenter
-			using = fontsize_large align = center|nobaseline
-			background = { using = entry_bg_fancy_dark alpha = 0.6 }
-			text = "gg_pact_j_sec_grievances"
-		}
-		widget = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)1')]"
-			size = { 480 44 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			tooltip = "gg_pact_j_grv_tt"
-			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
-			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_corrientes" }
-		}
-		widget = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)1')]"
-			size = { 480 44 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			tooltip = "gg_pact_j_grv_tt"
-			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
-			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_norte" }
-		}
-		widget = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)1')]"
-			size = { 480 44 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			tooltip = "gg_pact_j_grv_tt"
-			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
-			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_entre_rios" }
-		}
-	}
-	# EN/ES: Rosas's money for Oribe (moved here from the River Plate on 22/9: it is Buenos Aires's money)
-	#     / la plata de Rosas para Oribe
-	flowcontainer = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_accounts_shown'), '(CFixedPoint)1')]"
-		direction = vertical spacing = 10 parentanchor = hcenter ignoreinvisible = yes
-		textbox = {
-			size = { 520 34 }
-			parentanchor = hcenter
-			using = fontsize_large align = center|nobaseline
-			background = { using = entry_bg_fancy_dark alpha = 0.6 }
-			text = "gg_pact_j_sec_accounts"
-		}
-		widget = {
-			size = { 480 44 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			icon = { position = { 8 6 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/money.dds" }
-			textbox = { position = { 50 0 } size = { 422 44 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_offer_parties" }
-		}
-		textbox = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)0')]"
-			autoresize = yes multiline = yes
-			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-			parentanchor = hcenter
-			using = fontsize_medium align = center|nobaseline
-			text = "gg_ui_offer_capacity"
-		}
-		textbox = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)1')]"
-			autoresize = yes multiline = yes
-			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-			parentanchor = hcenter
-			using = fontsize_medium align = center|nobaseline
-			text = "gg_int_status_pending"
-		}
-		textbox = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)3')]"
-			autoresize = yes multiline = yes
-			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-			parentanchor = hcenter
-			using = fontsize_medium align = center|nobaseline
-			text = "gg_int_status_refused"
-		}
-		widget = {
-			visible = "[GetGlobalVariable('gg_int_arg_accepted').IsSet]"
-			size = { 480 60 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			tooltip = "gg_pact_j_obligation_tt"
-			icon = { position = { 8 14 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/obligation.dds" }
-			textbox = { position = { 50 0 } size = { 422 60 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_accepted_account" }
-		}
-		textbox = {
-			visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_aid_state'), '(CFixedPoint)4')]"
-			autoresize = yes multiline = yes
-			minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-			parentanchor = hcenter
-			using = fontsize_medium align = center|nobaseline
-			text = "gg_int_status_withdrawn"
-		}
-		widget = {
-			visible = "[GetGlobalVariable('gg_reunification_pledged').IsSet]"
-			size = { 480 60 }
-			parentanchor = hcenter
-			background = { using = dark_area alpha = 0.3 }
-			icon = { position = { 8 14 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
-			textbox = { position = { 50 0 } size = { 422 60 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_ui_rosas_commitment" }
-		}
-		button_standard = {
-			size = { 480 44 } parentanchor = hcenter
-			text = "gg_int_arg_offer_button" tooltip = "gg_ui_offer_action_tt"
-			visible = "[GetScriptedGui('gg_ui_offer_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-			enabled = "[GetScriptedGui('gg_ui_offer_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-			onclick = "[GetScriptedGui('gg_ui_offer_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-		}
-		button_standard = {
-			size = { 480 44 } parentanchor = hcenter
-			text = "gg_int_arg_withdraw_button" tooltip = "gg_ui_withdraw_action_tt"
-			visible = "[GetScriptedGui('gg_ui_withdraw_aid').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-			enabled = "[GetScriptedGui('gg_ui_withdraw_aid').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-			onclick = "[GetScriptedGui('gg_ui_withdraw_aid').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)0')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/approval_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)1')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)2')]" position = { 344 10 } size = { 36 36 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)0')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_0" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)1')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_1" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)2')]" position = { 386 8 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_st_2" }
+			icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)1')]" position = { 346 56 } size = { 32 32 } texture = "gfx/interface/icons/generic_icons/population_radical.dds" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)1')]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_entre_rios" }
+			textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)0'), Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)2')))]" position = { 386 52 } size = { 108 40 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_grv_none" }
 		}
 	}
 	# EN/ES: the longer account behind the arrow / lo largo detras de la flechita

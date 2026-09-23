@@ -103,8 +103,8 @@ flowcontainer = {
    textbox = { position = { 0 92 } size = { 196 50 } multiline = yes using = fontsize_medium align = center|nobaseline text = "gg_ui_plata_shore_ba" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 26 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]" position = { 26 150 } size = { 40 40 } alpha = 0.25 texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 70 158 } size = { 120 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_yes" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]" position = { 70 158 } size = { 120 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_yes" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
   }
   widget = {
    position = { 200 0 } size = { 120 204 }
@@ -123,8 +123,8 @@ flowcontainer = {
    # EN/ES: Montevideo's shore never closes the river; what matters is whether ships reach it / la orilla de Montevideo nunca cierra el rio; importa si le llegan barcos
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 16 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_port.dds" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 16 150 } size = { 40 40 } texture = "gfx/interface/icons/famine_icons/famine_icon.dds" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_yes" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 60 158 } size = { 134 26 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_no" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)0')]" position = { 60 150 } size = { 130 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_yes" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_closed_sv'), '(CFixedPoint)1')]" position = { 60 150 } size = { 130 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_supply_no" }
   }
  }
  # EN/ES: 22/9/2026 -- the powers' word on the river, part of the river section / la palabra de las potencias sobre el rio
@@ -322,8 +322,8 @@ flowcontainer = {
   icon = { size = { 40 40 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
   flowcontainer = {
    direction = vertical spacing = 2
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
-   textbox = { visible = "[Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'))]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_france" }
+   textbox = { multiline = yes visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
+   textbox = { multiline = yes visible = "[Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'))]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_france" }
    green_progressbar_horizontal = {
     size = { 472 22 }
     blockoverride "values" {
@@ -340,7 +340,7 @@ flowcontainer = {
   icon = { size = { 40 40 } texture = "gfx/interface/icons/famine_icons/famine_icon.dds" }
   flowcontainer = {
    direction = vertical spacing = 2
-   textbox = { autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_hunger_bar_desc" }
+   textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_hunger_bar_desc" }
    green_progressbar_horizontal = {
     size = { 472 22 }
     blockoverride "values" {
