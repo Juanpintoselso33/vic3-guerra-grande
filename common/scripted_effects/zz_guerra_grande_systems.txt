@@ -792,104 +792,203 @@ gg_river_blockade = {
 		if = {
 			limit = { NOT = { has_variable = gg_brown_squadron_raised } }
 			set_variable = gg_brown_squadron_raised
+			# EN: 22/9/2026 -- one base for ships and crews. The squadron used to be born unmanned: a
+			#     level-1 naval administration gives at most 1000 sailors (pm_simple_sailor_recruitment,
+			#     workforce-scaled) while three frigates need 1500 (ship_crew_max_add = 500 each), and
+			#     without Maldonado the administration went to a random coastal state while the ships
+			#     were raised in the HQ state. Now one coastal state is chosen first -- Maldonado if the
+			#     Cerrito holds it -- and it gets both the administration (level 2 = 2000 sailors) and
+			#     the ships, with the administration built BEFORE the formation. The engine has no
+			#     effect to man ships instantly, so the crews still fill in as the building hires.
+			# ES: 22/9/2026 -- una sola base para barcos y dotaciones. La escuadra nacia sin gente: la
+			#     administracion naval de nivel 1 da como mucho 1000 marineros (pm_simple_sailor_recruitment,
+			#     escalado por empleo) y tres fragatas piden 1500 (ship_crew_max_add = 500 cada una), y
+			#     sin Maldonado la administracion iba a un estado costero al azar mientras los barcos
+			#     nacian en el estado del cuartel. Ahora se elige primero un estado costero -- Maldonado
+			#     si lo tiene el Cerrito -- y ese recibe la administracion (nivel 2 = 2000 marineros) y
+			#     los barcos, con la administracion creada ANTES de la formacion. El motor no tiene
+			#     efecto para tripular al instante, asi que las dotaciones se llenan a medida que el
+			#     edificio contrata.
+			# EN: Playtest 2026-09-19 context kept: vanilla never gives Uruguay a naval administration, and
+			#     a lent squadron comes with its base and its men -- Brown's crews were Argentine.
+			# ES: contexto de la prueba del 19/9: vanilla nunca le da al Uruguay administracion naval, y
+			#     una escuadra prestada viene con su base y su gente -- las dotaciones de Brown eran argentinas.
+			clear_saved_scope = gg_brown_base_state
+			clear_saved_scope = gg_brown_fleet
 			if = {
 				limit = { exists = s:STATE_MALDONADO.region_state:CER }
-				gg_select_formation_hq_state = yes
-				clear_saved_scope = gg_brown_fleet
-				# EN: Without an owned state there is no valid HQ; skip this formation.
-				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-				if = {
-					limit = { exists = scope:gg_formation_hq_state }
-					create_military_formation = {
-						type = fleet
-						# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
-						#     for Cerrito Government in region_la_plata". That region has no oriental state, so
-						#     the squadron was never created. The capital's region is where the country is.
-						#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
-						#     estado oriental, asi que la escuadra nunca se creaba.
-						hq_region = scope:gg_formation_hq_state.region
-						name = gg_brown_squadron_name
-						save_scope_as = gg_brown_fleet
-						ship = {
-							type = ship_type:ship_type_frigate
-							state_region = s:STATE_MALDONADO
-							count = 3
-						}
-					}
-					set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
-				}
-			}
-			else = {
-				gg_select_formation_hq_state = yes
-				clear_saved_scope = gg_brown_fleet
-				# EN: Without an owned state there is no valid HQ; skip this formation.
-				# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-				if = {
-					limit = { exists = scope:gg_formation_hq_state }
-					create_military_formation = {
-						type = fleet
-						# EN/ES: Codex review 2026-09-19 -- the engine log says it all: "Cannot find naval HQ
-						#     for Cerrito Government in region_la_plata". That region has no oriental state, so
-						#     the squadron was never created. The capital's region is where the country is.
-						#     / el log del motor lo dice: no hay HQ naval en region_la_plata, que no tiene ningun
-						#     estado oriental, asi que la escuadra nunca se creaba.
-						hq_region = scope:gg_formation_hq_state.region
-						name = gg_brown_squadron_name
-						save_scope_as = gg_brown_fleet
-						ship = {
-							type = ship_type:ship_type_frigate
-							state_region = scope:gg_formation_hq_state.state_region
-							count = 3
-						}
-					}
-					set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
-				}
-			}
-			# EN: playtest 2026-09-19 -- the squadron arrived with no admiral and no crews: the
-			#     Cerrito was handed three frigates it could not man. Vanilla never gives Uruguay a
-			#     naval administration (only Argentina, Brazil and Chile have one in 1836), and
-			#     building_naval_administration is what recruits_sailors, so the ships sat there.
-			#     A lent squadron comes with its own base and its own men -- Brown's crews were
-			#     Argentine, not oriental -- so Rosas lends both.
-			# ES: prueba en partida 19/9/2026 -- la escuadra llegaba sin almirante y sin dotacion: al
-			#     Cerrito le daban tres fragatas que no podia tripular. Vanilla nunca le da a Uruguay
-			#     una administracion naval (en 1836 solo la tienen la Argentina, el Brasil y Chile), y
-			#     building_naval_administration es la que recluta marineros, asi que los barcos
-			#     quedaban parados. Una escuadra prestada viene con su base y con su gente -- las
-			#     dotaciones de Brown eran argentinas, no orientales -- asi que Rosas presta las dos.
-			if = {
-				limit = { exists = s:STATE_MALDONADO.region_state:CER }
-				s:STATE_MALDONADO.region_state:CER = {
-					create_building = {
-						building = building_naval_administration
-						level = 1
-					}
-				}
+				s:STATE_MALDONADO.region_state:CER = { save_scope_as = gg_brown_base_state }
 			}
 			else_if = {
-				limit = { any_scope_state = { is_coastal = yes } }
-				random_scope_state = {
-					limit = { is_coastal = yes }
-					create_building = {
-						building = building_naval_administration
-						level = 1
+				limit = {
+					any_scope_state = {
+						owner = prev
+						is_coastal = yes
 					}
 				}
+				random_scope_state = {
+					limit = {
+						owner = prev
+						is_coastal = yes
+					}
+					save_scope_as = gg_brown_base_state
+				}
 			}
-			# EN: and the man himself. Guillermo Brown commanded the squadron that blockaded
-			#     Montevideo; without naming him the fleet shows up under nobody.
-			# ES: y el hombre. Guillermo Brown mandaba la escuadra que bloqueo Montevideo; si no se
-			#     lo nombra, la flota aparece sin nadie al mando.
+			# EN: Without an owned coastal state there is no port to raise ships in; skip the squadron.
+			# ES: Sin un estado costero propio no hay puerto donde armar barcos; se omite la escuadra.
+			if = {
+				limit = { exists = scope:gg_brown_base_state }
+				scope:gg_brown_base_state = {
+					# EN: after a lost squadron (gg_powers.11) the base may already stand; do not stack it.
+					# ES: tras perder la escuadra (gg_powers.11) la base puede seguir en pie; no se duplica.
+					if = {
+						limit = { NOT = { has_building = building_naval_administration } }
+						create_building = {
+							building = building_naval_administration
+							level = 2
+						}
+					}
+				}
+				create_military_formation = {
+					type = fleet
+					# EN/ES: Codex review 2026-09-19 -- "Cannot find naval HQ for Cerrito Government in
+					#     region_la_plata": the HQ must be a region where the Cerrito owns a state. The base
+					#     state is owned by definition. / el cuartel tiene que estar en una region con un
+					#     estado del Cerrito; el estado base lo es por definicion.
+					hq_region = scope:gg_brown_base_state.region
+					name = gg_brown_squadron_name
+					save_scope_as = gg_brown_fleet
+					ship = {
+						type = ship_type:ship_type_frigate
+						state_region = scope:gg_brown_base_state.state_region
+						count = 3
+					}
+				}
+				set_variable = { name = gg_brown_squadron_ref value = scope:gg_brown_fleet }
+			}
+			# EN: 22/9/2026 -- and the man himself, the real one. Guillermo Brown commanded the squadron
+			#     that blockaded Montevideo; Rosas lent him to Oribe's blockade. create_character used to
+			#     make a SECOND Brown while the original kept commanding the Armada_Argentina. Now the
+			#     existing Brown is found (the Cerrito's, then Argentina's, then any country, then exile), taken
+			#     off his formation, transferred to the Cerrito and given the squadron. A new one is
+			#     created only if none exists anywhere. Side effect, accepted: Argentina's fleet is left
+			#     without an admiral until the engine or the player names another -- which is what the
+			#     loan meant.
+			# ES: 22/9/2026 -- y el hombre, el verdadero. Guillermo Brown mandaba la escuadra que bloqueo
+			#     Montevideo; Rosas se lo presto al bloqueo de Oribe. create_character creaba un SEGUNDO
+			#     Brown mientras el original seguia al mando de la Armada_Argentina. Ahora se busca al
+			#     Brown que existe (el del Cerrito, despues el de la Argentina, despues cualquier pais,
+			#     despues los exiliados), se lo saca de su formacion, se lo pasa al Cerrito y se le da la escuadra.
+			#     Solo se crea uno si no hay ninguno. Efecto aceptado: la flota argentina queda sin
+			#     almirante hasta que el motor o el jugador nombren otro -- que es lo que era el prestamo.
 			if = {
 				limit = { exists = scope:gg_brown_fleet }
-				create_character = {
-					template = ARG_William_Brown
-					commander_rank = commander_rank_3
+				save_scope_as = gg_brown_receiver
+				clear_saved_scope = gg_brown_admiral
+				clear_saved_scope = gg_brown_already_here
+				# EN: the Cerrito's own Brown first (a squadron raised again after gg_powers.11), then Rosas's.
+				# ES: primero el Brown que ya tenga el Cerrito (escuadra rearmada tras gg_powers.11), despues el de Rosas.
+				random_scope_character = {
+					limit = {
+						is_character_alive = yes
+						has_template = ARG_William_Brown
+					}
 					save_scope_as = gg_brown_admiral
+					save_scope_as = gg_brown_already_here
+				}
+				if = {
+					limit = { NOT = { exists = scope:gg_brown_admiral } }
+					c:ARG ?= {
+						random_scope_character = {
+							limit = {
+								is_character_alive = yes
+								has_template = ARG_William_Brown
+							}
+							save_scope_as = gg_brown_admiral
+						}
+					}
+				}
+				if = {
+					limit = { NOT = { exists = scope:gg_brown_admiral } }
+					random_country = {
+						limit = {
+							any_scope_character = {
+								is_character_alive = yes
+								has_template = ARG_William_Brown
+							}
+						}
+						random_scope_character = {
+							limit = {
+								is_character_alive = yes
+								has_template = ARG_William_Brown
+							}
+							save_scope_as = gg_brown_admiral
+						}
+					}
+				}
+				if = {
+					limit = { NOT = { exists = scope:gg_brown_admiral } }
+					random_character_in_exile_pool = {
+						limit = { has_template = ARG_William_Brown }
+						save_scope_as = gg_brown_admiral
+					}
+				}
+				if = {
+					limit = { exists = scope:gg_brown_admiral }
+					scope:gg_brown_admiral = {
+						if = {
+							limit = { exists = this.commander_military_formation }
+							unassign_from_formation = yes
+						}
+						if = {
+							limit = { is_in_exile_pool = yes }
+							transfer_character = scope:gg_brown_receiver
+							# EN/ES: vanilla's own cleanup when a character leaves exile
+							#     / la limpieza de vanilla cuando un personaje sale del exilio
+							free_from_exile_effect = yes
+						}
+						else_if = {
+							limit = { NOT = { exists = scope:gg_brown_already_here } }
+							transfer_character = scope:gg_brown_receiver
+						}
+						# EN: an exiled character is stripped to agitator; give the admiral role back.
+						# ES: al exiliado le dejan solo el rol de agitador; se le devuelve el de almirante.
+						if = {
+							limit = { NOT = { has_role = character_role_admiral } }
+							replace_character_roles = { add = { admiral } remove_all = yes }
+						}
+					}
+				}
+				else = {
+					create_character = {
+						template = ARG_William_Brown
+						commander_rank = commander_rank_3
+						save_scope_as = gg_brown_admiral
+					}
 				}
 				scope:gg_brown_admiral = {
 					transfer_to_formation = scope:gg_brown_fleet
 				}
+				# EN: insurance for saves where the old create_character already made a second Brown: keep
+				#     the one just given the squadron and remove every other living copy (the same sweep
+				#     as gg_return_rivera; not gg_deduplicate_character_worldwide, whose random pick could
+				#     remove the admiral just placed).
+				# ES: seguro para partidas donde el create_character viejo ya hizo un segundo Brown: se
+				#     queda el que recien recibio la escuadra y se quita cualquier otra copia viva (el mismo
+				#     barrido que gg_return_rivera; no gg_deduplicate_character_worldwide, cuya eleccion al
+				#     azar podria quitar al almirante recien puesto).
+				every_country = {
+					every_scope_character = {
+						limit = {
+							is_character_alive = yes
+							has_template = ARG_William_Brown
+							NOT = { this = scope:gg_brown_admiral }
+						}
+						kill_character = yes
+					}
+				}
+				clear_saved_scope = gg_brown_already_here
+				clear_saved_scope = gg_brown_receiver
 			}
 		}
 	}
