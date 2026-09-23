@@ -48,6 +48,9 @@ je_guerra_grande = {
 		OR = {
 			c:URU ?= this
 			c:CER ?= this
+			# EN/ES: 23/9/2026 (Juan) -- Rosas's Argentina follows the war from its own journal list; it
+			#     only watches: the pulses run in the Oriental governments' entry / Argentina la sigue, solo mira
+			c:ARG ?= this
 			has_variable = guerra_grande_cerrito_government
 			has_variable = guerra_grande_defensa_government
 		}

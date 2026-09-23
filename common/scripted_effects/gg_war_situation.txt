@@ -103,6 +103,7 @@ gg_war_journal_sync = {
 				OR = {
 					c:URU ?= this
 					c:CER ?= this
+					c:ARG ?= this # EN/ES: 23/9 (Juan) -- Argentina watches the war / Argentina mira la guerra
 					has_variable = guerra_grande_cerrito_government
 					has_variable = guerra_grande_defensa_government
 				}
