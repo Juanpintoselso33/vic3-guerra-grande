@@ -19,6 +19,10 @@ gg_province_cells_reconcile = {
 		# ES: la tierra que Buenos Aires gana dentro de la region de una provincia (guerra con Bolivia o los
 		#     guaranies, una paz) se suma a esa provincia mientras sea sujeta. Va ANTES de la lista de celdas.
 		if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } s:STATE_JUJUY = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:JUJ } } }
+		# EN/ES: 23/9 (Juan) -- Tucuman has no Chaco frontier: ground it takes in the Chaco region joins Salta (the
+		#     Chaco salteño, which it touches), or Buenos Aires while Salta is not a subject
+		#     / Tucuman no limita con el Chaco: lo que tome ahi va a Salta, o a Buenos Aires si Salta no es sujeta
+		if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } s:STATE_CHACO = { every_scope_state = { limit = { owner = { c:TUC ?= this } } if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } set_state_owner = c:SLT } else = { set_state_owner = c:ARG } } } }
 		# EN/ES: Tarija, its own region: part of the Intendencia de Salta del Tucuman until it joined Bolivia in 1826,
 		#     claimed by Rosas in the war against the Peru-Bolivian Confederation (1837) -- if taken, it goes to Salta
 		#     / parte de la Intendencia de Salta hasta 1826, reclamada por Rosas en 1837: si se toma, va a Salta
