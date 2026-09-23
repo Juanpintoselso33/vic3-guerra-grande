@@ -335,6 +335,33 @@ je_guerra_grande = {
 							gg_endurance_add = { SIDE = cerrito VALUE = gg_cerrito_drain }
 						}
 						gg_trace_war_support = yes # EN/ES: 23/9 -- monthly trace / traza mensual
+						# EN: 23/9/2026 -- the game rule's date. Outside the dynamic setting the war does not outlive the
+						#     historical peace (8 October 1851): the Defensa's menu, or the Cerrito's if it is the winner
+						#     the rule set. Read in the pulse, not queued: a queued event is lost when a tag changes.
+						# ES: la fecha de la regla: fuera del modo dinamico la guerra no pasa de la paz historica.
+						if = {
+							limit = {
+								NOT = { gg_outcome_dynamic = yes }
+								game_date >= 1851.10.8
+								NOT = { has_global_variable = gg_peace_offered }
+								exists = c:CER
+								exists = c:URU
+							}
+							set_global_variable = gg_peace_offered
+							if = {
+								limit = { gg_outcome_cerrito = yes }
+								random_country = {
+									limit = { has_variable = guerra_grande_cerrito_government }
+									trigger_event = { id = gg_peace.2 days = 1 popup = yes }
+								}
+							}
+							else = {
+								random_country = {
+									limit = { has_variable = guerra_grande_defensa_government }
+									trigger_event = { id = gg_peace.1 days = 1 popup = yes }
+								}
+							}
+						}
 					}
 					c:URU ?= { add_treasury = gg_defensa_subsidy }
 					c:CER ?= { add_treasury = gg_cerrito_subsidy }
@@ -392,7 +419,7 @@ je_guerra_grande = {
 				# EN/ES: review 2026-09-17 -- a Cerrito that asked for terms (F4-3 b/c) goes first
 				#     / un Cerrito que pidio condiciones va primero
 				if = {
-					limit = { has_global_variable = gg_cerrito_negotiates }
+					limit = { has_global_variable = gg_cerrito_negotiates gg_cerrito_can_lose = yes }
 					gg_trace_arbiter = { BRANCH = cerrito_negocia } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					random_country = {

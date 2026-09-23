@@ -1,0 +1,10 @@
+﻿l_spanish:
+ rule_gg_war_outcome:0 "Final de la Guerra Grande"
+ setting_gg_war_outcome_dynamic:0 "Dinámico"
+ setting_gg_war_outcome_dynamic_desc:0 "El árbitro decide por el puntaje, el aguante y el río, con el calendario del sitio: puede ganar cualquiera de los dos gobiernos."
+ setting_gg_war_outcome_historical:0 "Histórico"
+ setting_gg_war_outcome_historical_desc:0 "La paz llega en octubre de 1851, como en la historia: ni vencidos ni vencedores. Nadie se rinde antes."
+ setting_gg_war_outcome_defensa:0 "Gana la Defensa"
+ setting_gg_war_outcome_defensa_desc:0 "El Cerrito puede caer antes; la Defensa nunca. Si en octubre de 1851 la guerra sigue, la Defensa dicta la paz."
+ setting_gg_war_outcome_cerrito:0 "Gana el Cerrito"
+ setting_gg_war_outcome_cerrito_desc:0 "La Defensa puede caer antes; el Cerrito nunca. Si en octubre de 1851 la guerra sigue, el Cerrito dicta la paz."

@@ -1,0 +1,22 @@
+﻿# EN: 23/9/2026 (Juan: "start with game rules to set outcomes as one likes") -- how the Guerra Grande ends.
+#     Dynamic: the arbiter decides by score and endurance, on the calendar. Historical: the peace of October
+#     1851 (the Defensa's menu; the AI takes "neither victors nor vanquished"). Defensa / Cerrito wins: the
+#     other side can lose early, this one never; on 8/10/1851 it dictates the peace if the war still runs.
+#     Read through common/scripted_triggers/gg_game_rules.txt.
+# ES: como termina la Guerra Grande. Dinamico: decide el arbitro. Historico: la paz de octubre de 1851.
+#     Gana la Defensa / el Cerrito: el otro puede perder antes; este nunca, y el 8/10/1851 dicta la paz.
+gg_war_outcome = {
+	default = gg_war_outcome_dynamic
+
+	gg_war_outcome_dynamic = {
+	}
+
+	gg_war_outcome_historical = {
+	}
+
+	gg_war_outcome_defensa = {
+	}
+
+	gg_war_outcome_cerrito = {
+	}
+}

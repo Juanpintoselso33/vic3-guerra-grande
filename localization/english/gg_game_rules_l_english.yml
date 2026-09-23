@@ -1,0 +1,10 @@
+﻿l_english:
+ rule_gg_war_outcome:0 "End of the Guerra Grande"
+ setting_gg_war_outcome_dynamic:0 "Dynamic"
+ setting_gg_war_outcome_dynamic_desc:0 "The arbiter decides by score, endurance and the river, on the siege's calendar: either government may win."
+ setting_gg_war_outcome_historical:0 "Historical"
+ setting_gg_war_outcome_historical_desc:0 "Peace comes in October 1851, as it did: neither victors nor vanquished. Nobody gives in before."
+ setting_gg_war_outcome_defensa:0 "The Defensa Wins"
+ setting_gg_war_outcome_defensa_desc:0 "The Cerrito may fall earlier; the Defensa never. If the war still runs in October 1851, the Defensa dictates the peace."
+ setting_gg_war_outcome_cerrito:0 "The Cerrito Wins"
+ setting_gg_war_outcome_cerrito_desc:0 "The Defensa may fall earlier; the Cerrito never. If the war still runs in October 1851, the Cerrito dictates the peace."

@@ -199,6 +199,8 @@ gg_peace.1 = {
 
 		ai_chance = {
 			base = 50
+			# EN/ES: 23/9 -- the historical game rule takes the historical peace / la regla historica toma la paz historica
+			modifier = { trigger = { gg_outcome_historical = yes } add = 10000 }
 		}
 	}
 

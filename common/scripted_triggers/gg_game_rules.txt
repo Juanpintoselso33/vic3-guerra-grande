@@ -1,0 +1,18 @@
+﻿# EN/ES: the game rule of how the war ends (common/game_rules/zz_gg_game_rules.txt) / la regla de como termina la guerra
+gg_outcome_dynamic = { has_game_rule = gg_war_outcome_dynamic }
+gg_outcome_historical = { has_game_rule = gg_war_outcome_historical }
+gg_outcome_defensa = { has_game_rule = gg_war_outcome_defensa }
+gg_outcome_cerrito = { has_game_rule = gg_war_outcome_cerrito }
+# EN/ES: who may be called beaten / a quien se puede dar por batido
+gg_defensa_can_lose = {
+	OR = {
+		gg_outcome_dynamic = yes
+		gg_outcome_cerrito = yes
+	}
+}
+gg_cerrito_can_lose = {
+	OR = {
+		gg_outcome_dynamic = yes
+		gg_outcome_defensa = yes
+	}
+}

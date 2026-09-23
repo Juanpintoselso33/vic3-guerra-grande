@@ -478,6 +478,8 @@ gg_powers.13 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.13.a|" # GG_TRAZA
 		name = gg_powers.13.a
+		# EN/ES: 23/9 -- an ending of its own: only with the dynamic game rule / un final propio: solo con la regla dinamica
+		trigger = { gg_outcome_dynamic = yes }
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.13.a_tt
 		# EN: accept the powers' peace: elections, amnesty, the foreigners disarmed (final F12).
@@ -664,6 +666,8 @@ gg_powers.16 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.a|" # GG_TRAZA
 		name = gg_powers.16.a
+		# EN/ES: 23/9 -- an ending of its own: only with the dynamic game rule / un final propio: solo con la regla dinamica
+		trigger = { gg_outcome_dynamic = yes }
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.16.a_tt
 		# EN: accept the presidency under a European guarantee and leave Rosas (final F13). With the
@@ -1469,10 +1473,20 @@ gg_powers.28 = {
 					gg_war_balance_blanco >= gg_arbiter_balance_needed
 					gg_war_balance_colorado >= gg_arbiter_balance_needed
 				}
+				NOT = { gg_outcome_historical = yes } # EN/ES: 23/9 -- the historical peace is October 1851 / la paz historica es en octubre de 1851
 			}
 			set_global_variable = gg_peace_offered
 			if = {
-				limit = { guerra_grande_blanco_lead > 0 }
+				# EN/ES: 23/9 -- the game rule's winner writes the terms / el ganador de la regla escribe el pliego
+				limit = {
+					OR = {
+						gg_outcome_cerrito = yes
+						AND = {
+							gg_outcome_dynamic = yes
+							guerra_grande_blanco_lead > 0
+						}
+					}
+				}
 				random_country = {
 					limit = { has_variable = guerra_grande_cerrito_government }
 					trigger_event = { id = gg_peace.2 days = 3 popup = yes }

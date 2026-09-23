@@ -80,6 +80,7 @@ gg_is_the_war = {
 #     guerra, tiene ocupada la mitad de su campania, o los colorados le sacan diez. Desde 1851 la
 #     guerra esta cansada y cada exigencia baja a la mitad. Valores provisorios hasta T10.
 gg_cerrito_ripe = {
+	gg_cerrito_can_lose = yes # EN/ES: 23/9 -- the game rule / la regla de partida
 	OR = {
 		# EN/ES: T7, F4-3 b/c -- the Cerrito sent Lucas Moreno to ask for terms / el Cerrito pidio condiciones
 		has_global_variable = gg_cerrito_negotiates
@@ -120,6 +121,7 @@ gg_cerrito_ripe = {
 #     meses seguidos con el rio cerrado, o los blancos le sacan diez. Nunca por ocupacion: Montevideo es una
 #     sola provincia y caer es capitular.
 gg_defensa_ripe = {
+	gg_defensa_can_lose = yes # EN/ES: 23/9 -- the game rule / la regla de partida
 	OR = {
 		# EN/ES: 23/9 -- the lead needed follows the calendar (gg_arbiter_balance_needed) / la ventaja exigida sigue el calendario
 		gg_war_balance_blanco >= gg_arbiter_balance_needed
