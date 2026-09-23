@@ -13,6 +13,19 @@ guerra_grande_on_game_start = {
 	effect = {
 		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
 		gg_systems_init = yes
+		# EN: 22/9/2026 (Juan) -- Oribe keeps imperious (-35 popularity, and a ruler's popularity is
+		#     authority); his party's name for him offsets part of it, leaving him at -10.
+		# ES: Oribe conserva imperious (-35 de popularidad, que en el gobernante es autoridad); el nombre
+		#     que le da su partido compensa una parte y lo deja en -10.
+		every_country = {
+			every_scope_character = {
+				limit = {
+					has_template = URU_Manuel_Oribe
+					NOT = { has_modifier = gg_defensor_de_las_leyes }
+				}
+				add_modifier = { name = gg_defensor_de_las_leyes }
+			}
+		}
 		# EN: initialise the debug button-press counters. Vanilla itself always sets a global
 		#     variable to 0 before the first change_global_variable on it (e.g.
 		#     common/on_actions/00_code_on_actions.txt: grunderzeit_german_countries) --

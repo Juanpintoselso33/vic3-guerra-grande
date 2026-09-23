@@ -24,9 +24,19 @@
 #     que una herencia por encima del objetivo queda. Los batallones nuevos nacen sin hombres y se
 #     llenan en los meses siguientes; es el motor.
 
-gg_troops_split_armies = {
+# EN: 22/9/2026 (second playtest) -- one effect per government, each run from an event fired on
+#     that country (gg_troops.1 on the Defensa, gg_troops.2 on the Cerrito). With both parts in one
+#     event fired on c:URU, the Cerrito's create_military_formation got "Invalid unit count 0" and
+#     two empty formations it did not need: the counts did not come out of the Cerrito's own army.
+#     With root = the country itself there is only one scope to read them from.
+# ES: un efecto por gobierno, cada uno desde un evento disparado sobre ese pais. Con las dos partes
+#     en un solo evento sobre c:URU, el Cerrito recibio «Invalid unit count 0» y dos formaciones vacias
+#     que no necesitaba: las cantidades no salian de su propio ejercito. Con root = el propio pais hay
+#     un solo scope de donde leerlas.
+gg_troops_split_armies_cer = {
 	# EN/ES: the Cerrito's own army / el ejercito propio del Cerrito
-	c:CER ?= {
+	if = {
+		limit = { exists = c:CER this = c:CER }
 		# EN: 22/9/2026 (playtest) -- a combat_unit with count 0 invalidates the WHOLE
 		#     create_military_formation ("Invalid unit count 0", error.log), and 1.13 has no effect
 		#     that adds units to an existing formation. So there is one block per combination of
@@ -318,7 +328,11 @@ gg_troops_split_armies = {
 			}
 		}
 	}
-	c:URU ?= {
+}
+
+gg_troops_split_armies_defensa = {
+	if = {
+		limit = { exists = c:URU this = c:URU }
 		if = {
 			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
 			# EN/ES: Rivera's field army first, so its horse is not counted as the city's / primero el

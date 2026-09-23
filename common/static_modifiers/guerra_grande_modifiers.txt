@@ -442,3 +442,9 @@ gg_oribe_pretension = {
 	country_diplomatic_reputation_add = -10
 	country_prestige_add = 15
 }
+
+# EN/ES: 22/9/2026 (Juan) -- offsets part of Oribe's imperious (-35) / compensa parte del imperious de Oribe
+gg_defensor_de_las_leyes = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	character_popularity_add = 25
+}

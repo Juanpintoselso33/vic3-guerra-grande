@@ -227,6 +227,7 @@ gg_plata_ultimatum_yield = {
 # EN: Once a month, from je_guerra_grande's pulse while the war is open. Frozen in a truce.
 # ES: Una vez por mes, desde el pulso de je_guerra_grande con la guerra abierta. Congelado en tregua.
 gg_plata_monthly = {
+	gg_plata_fort_french_supply = yes
 	# EN/ES: the stance survives the AI's own re-roll / la postura sobrevive a la re-eleccion de la IA
 	gg_plata_rosas_stance_apply = yes
 	every_country = {
@@ -551,5 +552,30 @@ gg_plata_guarantee_france_only_clear = {
 	if = {
 		limit = { has_global_variable = gg_plata_guarantee_france_only }
 		remove_global_variable = gg_plata_guarantee_france_only
+	}
+}
+
+# EN: 22/9/2026 (Juan, second playtest) -- France supplies the Montevideo fort. In the 1848 save the
+#     Defensa ran 940 a week short: the level-1 naval fortification alone cost 750 a week in small
+#     arms and iron, bought at siege prices with 75% of its inputs short. While France backs the
+#     Defensa (gg_france_pays_legions) the fort's inputs are covered; renewed monthly, so it lapses
+#     by itself two months after France steps back or the city changes hands.
+# ES: Francia abastece el fuerte de Montevideo. En la save de 1848 la Defensa perdia 940 por semana:
+#     solo la fortificacion naval le costaba 750 en armas e hierro a precio de sitio. Mientras Francia
+#     sostiene a la Defensa, los insumos del fuerte corren por su cuenta; se renueva cada mes y vence
+#     solo dos meses despues de que Francia se retire o la plaza cambie de manos.
+gg_plata_fort_french_supply = {
+	if = {
+		limit = { gg_france_pays_legions = yes }
+		every_country = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			every_scope_state = {
+				limit = { state_region = s:STATE_MONTEVIDEO }
+				every_scope_building = {
+					limit = { is_building_type = building_naval_fortification }
+					add_modifier = { name = gg_fort_french_supply months = 2 }
+				}
+			}
+		}
 	}
 }

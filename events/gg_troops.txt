@@ -11,6 +11,18 @@ gg_troops.1 = {
 	hidden = yes
 
 	immediate = {
-		gg_troops_split_armies = yes
+		gg_troops_split_armies_defensa = yes
+	}
+}
+
+# EN: gg_troops.2 -- the same for the Cerrito, fired on the Cerrito itself (see the note in
+#     scripted_effects/gg_troops.txt).
+# ES: gg_troops.2 -- lo mismo para el Cerrito, disparado sobre el propio Cerrito.
+gg_troops.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		gg_troops_split_armies_cer = yes
 	}
 }

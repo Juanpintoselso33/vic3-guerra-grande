@@ -42,3 +42,11 @@ gg_lent_squadron_french_supply = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	country_navy_goods_cost_mult = -1
 }
+
+# EN/ES: 22/9/2026 (Juan) -- France supplies the Montevideo fort's small arms and iron while she backs
+#     the Defensa / Francia abastece las armas y el hierro del fuerte de Montevideo mientras sostiene a
+#     la Defensa (scripted_effects/gg_rio_plata.txt, gg_plata_fort_french_supply)
+gg_fort_french_supply = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	building_goods_input_mult = -1
+}
