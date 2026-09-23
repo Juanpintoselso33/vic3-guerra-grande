@@ -212,8 +212,15 @@ gg_phase1.1 = {
 			else = {
 				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
 			}
-			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840 / Mackau lo cuenta gg_plata.41
-			set_global_variable = gg_mackau_notice_due
+			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840; answered after
+			#     that date (Codex), it is told at once / Mackau lo cuenta gg_plata.41; contestado despues, enseguida
+			if = {
+				limit = { has_global_variable = gg_mackau_date_passed }
+				trigger_event = { id = gg_phase1.5 days = 1 popup = yes }
+			}
+			else = {
+				set_global_variable = gg_mackau_notice_due
+			}
 			# EN/ES: 22/9/2026 (Juan) -- Rosas shuts the rivers on 22 January 1841 / Rosas cierra los rios
 			c:ARG ?= { trigger_event = { id = gg_plata.30 days = 701 } }    # 1841.01.22
 			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
@@ -242,8 +249,15 @@ gg_phase1.1 = {
 			else = {
 				trigger_event = { id = gg_phase1.4 days = 192 popup = yes }   # 1839.09.01 Lavalle
 			}
-			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840 / Mackau lo cuenta gg_plata.41
-			set_global_variable = gg_mackau_notice_due
+			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840; answered after
+			#     that date (Codex), it is told at once / Mackau lo cuenta gg_plata.41; contestado despues, enseguida
+			if = {
+				limit = { has_global_variable = gg_mackau_date_passed }
+				trigger_event = { id = gg_phase1.5 days = 1 popup = yes }
+			}
+			else = {
+				set_global_variable = gg_mackau_notice_due
+			}
 			# EN/ES: 22/9/2026 (Juan) -- Rosas shuts the rivers on 22 January 1841 / Rosas cierra los rios
 			c:ARG ?= { trigger_event = { id = gg_plata.30 days = 701 } }    # 1841.01.22
 			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
@@ -264,8 +278,15 @@ gg_phase1.1 = {
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		set_global_variable = gg_partition_early
 		hidden_effect = {
-			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840 / Mackau lo cuenta gg_plata.41
-			set_global_variable = gg_mackau_notice_due
+			# EN/ES: 22/9/2026 (river audit) -- Mackau is told by gg_plata.41 on 29/10/1840; answered after
+			#     that date (Codex), it is told at once / Mackau lo cuenta gg_plata.41; contestado despues, enseguida
+			if = {
+				limit = { has_global_variable = gg_mackau_date_passed }
+				trigger_event = { id = gg_phase1.5 days = 1 popup = yes }
+			}
+			else = {
+				set_global_variable = gg_mackau_notice_due
+			}
 			# EN/ES: 22/9/2026 (Juan) -- Rosas shuts the rivers on 22 January 1841 / Rosas cierra los rios
 			c:ARG ?= { trigger_event = { id = gg_plata.30 days = 701 } }    # 1841.01.22
 			trigger_event = { id = gg_naval.1 days = 721 popup = yes }    # 1841.02.11 la escuadra de Coe
@@ -464,7 +485,17 @@ gg_phase1.5 = {
 	placement = ROOT
 
 	title = gg_phase1.5.t
-	desc = gg_phase1.5.d
+	# EN/ES: 22/9/2026 (Codex) -- the neutral branch (gg_phase1.1.c) never declared war on Rosas
+	#     / la rama neutral nunca le declaro la guerra a Rosas
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_phase1.5.d_neutral
+				trigger = { has_global_variable = gg_partition_early }
+			}
+			triggered_desc = { desc = gg_phase1.5.d }
+		}
+	}
 	flavor = gg_phase1.5.f
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).

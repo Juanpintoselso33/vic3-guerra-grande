@@ -199,6 +199,8 @@ gg_plata.4 = {
 					NOT = { has_global_variable = gg_plata_ba_blockade_lifted }
 				}
 				set_global_variable = gg_plata_ba_blockade_lifted
+				# EN/ES: Codex 22/9 -- lifted now, not at the next monthly upkeep / levantado ahora, no en el pulso siguiente
+				p:x365A5B.state ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_port } remove_modifier = gg_plata_phase_intervention_port } }
 				gg_plata_notify = { EVENT = gg_plata.46 }
 			}
 			if = {
@@ -587,6 +589,7 @@ gg_plata.41 = {
 		#     decided (gg_phase1.1 sets the mark), as before.
 		# ES: Montevideo se entera de Mackau el dia que se levanta el bloqueo, no 616 dias despues de
 		#     contestar gg_phase1.1. Solo si se decidio la guerra con Rosas, como antes.
+		set_global_variable = gg_mackau_date_passed
 		if = {
 			limit = {
 				has_global_variable = gg_mackau_notice_due
