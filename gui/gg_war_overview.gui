@@ -536,6 +536,14 @@ flowcontainer = {
 	spacing = 14
 	ignoreinvisible = yes
 	widget = { size = { 520 6 } }
+	# EN/ES: 23/9/2026 (Juan) -- the scores under the bar, not on it: on the bar they overlapped
+	#     / los puntajes debajo de la barra, no encima: encima se superponian
+	widget = {
+		size = { 520 28 }
+		parentanchor = hcenter
+		textbox = { position = { 10 0 } size = { 250 28 } using = fontsize_large align = left|vcenter text = "gg_war_ui_bar_score_colorado" tooltip = "gg_war_ui_sec_balance_tt" }
+		textbox = { position = { 260 0 } size = { 250 28 } using = fontsize_large align = right|vcenter text = "gg_war_ui_bar_score_blanco" tooltip = "gg_war_ui_sec_balance_tt" }
+	}
 	# EN/ES: each government's endurance, only while one of them is counting months
 	#     / el aguante de cada gobierno, solo mientras alguno cuenta meses
 	textbox = {
