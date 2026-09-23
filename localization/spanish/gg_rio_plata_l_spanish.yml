@@ -1,7 +1,7 @@
 ﻿l_spanish:
  gg_ui_plata_weight_blancos:0 "El río inclina la guerra #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! hacia los blancos."
  gg_ui_plata_weight_colorados:0 "El río inclina la guerra #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! hacia los colorados."
- gg_plata_rosas_close_tt:0 "@ships! Rosas #N cierra el Plata#! a toda bandera extranjera. Mientras su orilla tenga batería, el cierre rige aunque Montevideo quede abierta.\n#grey (Con Rosas en tus manos: cerrá tu orilla en el panel del estrecho del Río de la Plata.)#!"
+ gg_plata_rosas_close_tt:0 "@ships! Rosas #N cierra el Plata#! a toda bandera extranjera. Mientras su orilla tenga batería, el cierre rige aunque Montevideo quede abierta.\n@warning! #b Con Rosas en tus manos, el bloqueo no rige hasta que cierres tu orilla#! en el panel del estrecho del Río de la Plata (hacé clic en el estrecho, en el mapa, entre Buenos Aires y Montevideo). Sin batería en la orilla de Buenos Aires, tampoco se cierra."
  gg_plata_rosas_open_tt:0 "@ships! Rosas #P abre el Plata#!.\n#grey (Con Rosas en tus manos: dejá abierta tu orilla en el panel del estrecho. Si la volvés a cerrar, vuelve a contar la paciencia de las potencias; si el río está bajo su garantía, sus escuadras entran enseguida.)#!"
  gg_plata_rosas_neutrals_tt:0 "@ships! El bloqueo de Rosas sólo detiene a los barcos de la Defensa: #P los neutrales entran al puerto#!."
  gg_plata_fort_remove_tt:0 "@warning! Se pierde la batería de Buenos Aires: #N Rosas no puede cerrar el río#! hasta recuperarla."
@@ -78,7 +78,7 @@
  gg_ui_plata_ba_port_blockaded:0 "#N Puerto bloqueado#!"
  gg_ui_plata_ba_port_blockaded_tt:0 "Hay barcos de guerra frente al puerto de Buenos Aires. Es un bloqueo del puerto, aparte del paso del río, que sigue dependiendo de la orilla y de su batería."
  gg_ui_plata_decree_pending:0 "#b Rosas decretó el bloqueo#!, pero su orilla todavía deja pasar barcos."
- gg_ui_plata_decree_pending_tt:0 "El decreto está firmado y la batería en pie, pero el cierre todavía no rige en el agua: los barcos siguen llegando a Montevideo, y el río no suma al hambre de la plaza ni gasta la paciencia de las potencias.\n#grey (Con Rosas en tus manos: cerrá tu orilla en el panel del estrecho del Río de la Plata.)#!"
+ gg_ui_plata_decree_pending_tt:0 "El decreto está firmado y la batería en pie, pero el cierre todavía no rige en el agua: los barcos siguen llegando a Montevideo, y el río no suma al hambre de la plaza ni gasta la paciencia de las potencias.\n@warning! #b Con Rosas en tus manos, el bloqueo no rige hasta que cierres tu orilla#! en el panel del estrecho del Río de la Plata (hacé clic en el estrecho, en el mapa, entre Buenos Aires y Montevideo). Sin batería en la orilla de Buenos Aires, tampoco se cierra."
  gg_ui_plata_decree_neutrals:0 "#b Rosas solo detiene a los barcos de la Defensa#!: los neutrales entran al puerto."
  gg_ui_plata_decree_neutrals_tt:0 "La estación británica no reconoce el bloqueo y sigue abasteciendo la plaza. Mientras sea así, la plaza come: el río no suma a su hambre ni gasta la paciencia de las potencias."
  gg_ui_plata_sec_clocks_truce:0 "Relojes detenidos por la tregua"

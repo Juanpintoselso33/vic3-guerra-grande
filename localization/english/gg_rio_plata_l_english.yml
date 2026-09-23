@@ -1,7 +1,7 @@
 ﻿l_english:
  gg_ui_plata_weight_blancos:0 "The river tips the war #blue_value +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! in the blancos' favour."
  gg_ui_plata_weight_colorados:0 "The river tips the war #R +[JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_points')|0]#! in the colorados' favour."
- gg_plata_rosas_close_tt:0 "@ships! Rosas #N closes the Plata#! to every foreign flag. So long as his shore has a battery, the closure holds even if Montevideo stays open.\n#grey (Playing as Rosas: close your shore in the River Plate strait panel.)#!"
+ gg_plata_rosas_close_tt:0 "@ships! Rosas #N closes the Plata#! to every foreign flag. So long as his shore has a battery, the closure holds even if Montevideo stays open.\n@warning! #b Playing as Rosas, the blockade is not enforced until you close your shore#! in the River Plate strait panel (click the strait on the map, between Buenos Aires and Montevideo). Without a battery on the Buenos Aires shore, it does not close either."
  gg_plata_rosas_open_tt:0 "@ships! Rosas #P opens the Plata#!.\n#grey (Playing as Rosas: keep your shore open in the strait panel. Close it again and the powers' patience starts running down once more; if the river is under their guarantee, their squadrons sail in at once.)#!"
  gg_plata_rosas_neutrals_tt:0 "@ships! Rosas's blockade stops only the Defensa's ships: #P neutral vessels make port#!."
  gg_plata_fort_remove_tt:0 "@warning! Buenos Aires loses its battery: #N Rosas cannot close the river#! until he recovers it."
@@ -78,7 +78,7 @@
  gg_ui_plata_ba_port_blockaded:0 "#N Port blockaded#!"
  gg_ui_plata_ba_port_blockaded_tt:0 "Warships lie off the port of Buenos Aires. That is a blockade of the port, apart from the passage of the river, which still turns on the shore and its battery."
  gg_ui_plata_decree_pending:0 "#b Rosas has decreed the blockade#!, but his shore still lets ships through."
- gg_ui_plata_decree_pending_tt:0 "The decree is signed and the battery stands, but the closure is not yet enforced on the water: ships are still reaching Montevideo, and the river neither deepens the city's hunger nor wears down the powers' patience.\n#grey (Playing as Rosas: close your shore in the River Plate strait panel.)#!"
+ gg_ui_plata_decree_pending_tt:0 "The decree is signed and the battery stands, but the closure is not yet enforced on the water: ships are still reaching Montevideo, and the river neither deepens the city's hunger nor wears down the powers' patience.\n@warning! #b Playing as Rosas, the blockade is not enforced until you close your shore#! in the River Plate strait panel (click the strait on the map, between Buenos Aires and Montevideo). Without a battery on the Buenos Aires shore, it does not close either."
  gg_ui_plata_decree_neutrals:0 "#b Rosas stops only the Defensa's ships#!: neutral vessels make port."
  gg_ui_plata_decree_neutrals_tt:0 "The British station does not recognise the blockade and keeps the city supplied. While that lasts the city eats: the river neither deepens its hunger nor wears down the powers' patience."
  gg_ui_plata_sec_clocks_truce:0 "Stilled by the Truce"
