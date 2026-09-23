@@ -274,22 +274,13 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			flowcontainer = {
-				direction = horizontal spacing = 4
+			green_progressbar_horizontal = {
+				size = { 120 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				textbox = {
-					size = { 52 22 }
-					using = fontsize_medium align = right|nobaseline
-					text = "gg_war_ui_power_number_francia"
-				}
-				green_progressbar_horizontal = {
-					size = { 96 6 }
-					parentanchor = vcenter
-					blockoverride "values" {
-						value = "[GetGlobalVariable('gg_patron_francia').GetValue]"
-						min = 0 max = 100
-					}
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_francia').GetValue]"
+					min = 0 max = 100
 				}
 			}
 		}
@@ -351,22 +342,13 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			flowcontainer = {
-				direction = horizontal spacing = 4
+			green_progressbar_horizontal = {
+				size = { 120 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				textbox = {
-					size = { 52 22 }
-					using = fontsize_medium align = right|nobaseline
-					text = "gg_war_ui_power_number_britania"
-				}
-				green_progressbar_horizontal = {
-					size = { 96 6 }
-					parentanchor = vcenter
-					blockoverride "values" {
-						value = "[GetGlobalVariable('gg_patron_britania').GetValue]"
-						min = 0 max = 100
-					}
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_britania').GetValue]"
+					min = 0 max = 100
 				}
 			}
 		}
@@ -428,22 +410,13 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			flowcontainer = {
-				direction = horizontal spacing = 4
+			green_progressbar_horizontal = {
+				size = { 120 6 }
 				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				textbox = {
-					size = { 52 22 }
-					using = fontsize_medium align = right|nobaseline
-					text = "gg_war_ui_power_number_brasil"
-				}
-				green_progressbar_horizontal = {
-					size = { 96 6 }
-					parentanchor = vcenter
-					blockoverride "values" {
-						value = "[GetGlobalVariable('gg_patron_brasil').GetValue]"
-						min = 0 max = 100
-					}
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_brasil').GetValue]"
+					min = 0 max = 100
 				}
 			}
 		}
