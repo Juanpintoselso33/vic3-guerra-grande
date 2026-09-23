@@ -222,6 +222,12 @@ guerra_grande_on_game_start = {
 				trigger_event = { id = gg_argentina_cal.29 days = 5799 } # 1851-11-21 precio del Ejercito Grande
 			}
 			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
+			# EN/ES: 23/9/2026 (Juan) -- Buenos Aires and the siege (events/gg_rosas.txt) / Buenos Aires y el sitio
+			trigger_event = { id = gg_rosas.101 days = 2601 } # 1843-02-16 las divisiones argentinas ante Montevideo
+			trigger_event = { id = gg_rosas.102 days = 3316 } # 1845-02-01 Urquiza cruza el Uruguay
+			trigger_event = { id = gg_rosas.103 days = 4196 } # 1847-07-01 Howden en Buenos Aires
+			trigger_event = { id = gg_rosas.104 days = 5072 } # 1849-11-24 Arana-Southern
+			trigger_event = { id = gg_rosas.105 days = 5352 } # 1850-08-31 Arana-Lepredour
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento

@@ -1,0 +1,323 @@
+﻿namespace = gg_rosas
+# -------------------------------------------------------------------------------------------------
+# EN: BUENOS AIRES AND THE SIEGE (23/9/2026, Juan: "Buenos Aires has no agency in the Guerra Grande... events,
+#     but when they belong, not just to throw them"). Rosas's own decisions about Oribe during the siege, one per
+#     real turning point, each gated so it never fires once the war is over (relays gg_rosas.101-105):
+#     .1 16/2/1843 the Argentine divisions before Montevideo; .2 Feb 1845 Urquiza across the Uruguay (before India
+#     Muerta); .3 Jul 1847 Howden in Buenos Aires; .4 24/11/1849 Arana-Southern; .5 31/8/1850 Arana-Lepredour;
+#     .6 when the arbiter opens the peace: Buenos Aires hears of it.
+#     The treaties' outcome stays in the powers' events (gg_powers.14/.19/.20): here only what Rosas asks for Oribe.
+# ES: BUENOS AIRES Y EL SITIO. Las decisiones propias de Rosas sobre Oribe durante el sitio, una por cada punto de
+#     giro real, y ninguna si la guerra ya termino.
+# SOURCE / FUENTE: ~/dev/juegos/victoria3-uruguay/SOURCES_powers.md (secs. 3 Howden 1847, 6 Arana-Southern
+#     24/11/1849 art. VI, Arana-Lepredour 31/8/1850); docs/guerra-grande-argentina/historia-argentina.md (Arroyo
+#     Grande 6/12/1842, India Muerta 27/3/1845 with Urquiza's army; Oribe's Argentine battalions at the siege).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: relay for gg_rosas.1 (1843-02-16); the conditions live here (a scheduled event reads its trigger when
+#     queued) / relevo; las condiciones viven aca
+gg_rosas.101 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.101|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			c:ARG = { trigger_event = { id = gg_rosas.1 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_rosas.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.1.t
+	desc = gg_rosas.1.d
+	flavor = gg_rosas.1.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.1|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.1.a|" # GG_TRAZA
+		name = gg_rosas.1.a
+		default_option = yes
+		custom_tooltip = gg_rosas.1.a_tt
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		random_country = { limit = { has_variable = guerra_grande_cerrito_government } add_modifier = { name = guerra_grande_argentine_auxiliaries years = 5 is_decaying = yes } }
+		add_treasury = -30000
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.1.b|" # GG_TRAZA
+		name = gg_rosas.1.b
+		custom_tooltip = gg_rosas.1.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		gg_endurance_add = { SIDE = cerrito VALUE = 10 }
+		add_treasury = -20000
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.1.c|" # GG_TRAZA
+		name = gg_rosas.1.c
+		custom_tooltip = gg_rosas.1.c_tt
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		ai_chance = { base = 10 }
+	}
+}
+
+# EN/ES: relay for gg_rosas.2 (1845-02-01); the conditions live here (a scheduled event reads its trigger when
+#     queued) / relevo; las condiciones viven aca
+gg_rosas.102 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.102|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			c:ARG = { trigger_event = { id = gg_rosas.2 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_rosas.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.2.t
+	desc = gg_rosas.2.d
+	flavor = gg_rosas.2.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.2|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.2.a|" # GG_TRAZA
+		name = gg_rosas.2.a
+		default_option = yes
+		custom_tooltip = gg_rosas.2.a_tt
+		gg_endurance_add = { SIDE = defensa VALUE = -10 }
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = urquiza DELTA = 10 }
+		ai_chance = { base = 75 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.2.b|" # GG_TRAZA
+		name = gg_rosas.2.b
+		custom_tooltip = gg_rosas.2.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		ai_chance = { base = 25 }
+	}
+}
+
+# EN/ES: relay for gg_rosas.3 (1847-07-01); the conditions live here (a scheduled event reads its trigger when
+#     queued) / relevo; las condiciones viven aca
+gg_rosas.103 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.103|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			c:ARG = { trigger_event = { id = gg_rosas.3 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_rosas.3 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.3.t
+	desc = gg_rosas.3.d
+	flavor = gg_rosas.3.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.3|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.3.a|" # GG_TRAZA
+		name = gg_rosas.3.a
+		default_option = yes
+		custom_tooltip = gg_rosas.3.a_tt
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		c:GBR ?= { change_relations = { country = ROOT value = -10 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.3.b|" # GG_TRAZA
+		name = gg_rosas.3.b
+		custom_tooltip = gg_rosas.3.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		gg_endurance_add = { SIDE = cerrito VALUE = -10 }
+		c:GBR ?= { change_relations = { country = ROOT value = 20 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+# EN/ES: relay for gg_rosas.4 (1849-11-24); the conditions live here (a scheduled event reads its trigger when
+#     queued) / relevo; las condiciones viven aca
+gg_rosas.104 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.104|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			c:ARG = { trigger_event = { id = gg_rosas.4 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_rosas.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.4.t
+	desc = gg_rosas.4.d
+	flavor = gg_rosas.4.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.4|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.4.a|" # GG_TRAZA
+		name = gg_rosas.4.a
+		default_option = yes
+		custom_tooltip = gg_rosas.4.a_tt
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		c:GBR ?= { change_relations = { country = ROOT value = 40 } }
+		ai_chance = { base = 75 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.4.b|" # GG_TRAZA
+		name = gg_rosas.4.b
+		custom_tooltip = gg_rosas.4.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = -20 }
+		gg_endurance_add = { SIDE = cerrito VALUE = -20 }
+		c:GBR ?= { change_relations = { country = ROOT value = 60 } }
+		ai_chance = { base = 25 }
+	}
+}
+
+# EN/ES: relay for gg_rosas.5 (1850-08-31); the conditions live here (a scheduled event reads its trigger when
+#     queued) / relevo; las condiciones viven aca
+gg_rosas.105 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.105|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			c:ARG = { trigger_event = { id = gg_rosas.5 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_rosas.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.5.t
+	desc = gg_rosas.5.d
+	flavor = gg_rosas.5.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.5|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.5.a|" # GG_TRAZA
+		name = gg_rosas.5.a
+		default_option = yes
+		custom_tooltip = gg_rosas.5.a_tt
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		c:FRA ?= { change_relations = { country = ROOT value = 40 } }
+		ai_chance = { base = 75 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.5.b|" # GG_TRAZA
+		name = gg_rosas.5.b
+		custom_tooltip = gg_rosas.5.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = -20 }
+		gg_endurance_add = { SIDE = cerrito VALUE = -20 }
+		c:FRA ?= { change_relations = { country = ROOT value = 60 } }
+		ai_chance = { base = 25 }
+	}
+}
+
+gg_rosas.6 = {
+	type = country_event
+	placement = ROOT
+	title = gg_rosas.6.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_rosas.6.d_blanco trigger = { gg_war_balance_blanco > gg_war_balance_colorado } }
+			triggered_desc = { desc = gg_rosas.6.d_colorado trigger = { gg_war_balance_colorado > gg_war_balance_blanco } }
+			triggered_desc = { desc = gg_rosas.6.d trigger = { always = yes } }
+		}
+	}
+	flavor = gg_rosas.6.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.6|" } # GG_TRAZA
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.6.a|" # GG_TRAZA
+		name = gg_rosas.6.a
+		default_option = yes
+		custom_tooltip = gg_rosas.6.a_tt
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		gg_endurance_add = { SIDE = cerrito VALUE = 15 }
+		add_treasury = -40000
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.6.b|" # GG_TRAZA
+		name = gg_rosas.6.b
+		custom_tooltip = gg_rosas.6.b_tt
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		c:GBR ?= { change_relations = { country = ROOT value = 10 } }
+		c:FRA ?= { change_relations = { country = ROOT value = 10 } }
+		ai_chance = { base = 40 }
+	}
+}
