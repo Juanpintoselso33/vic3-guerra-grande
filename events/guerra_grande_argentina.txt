@@ -1234,7 +1234,7 @@ gg_argentina.8 = {
 				exists = scope:gg_corrientes_front
 			}
 			scope:gg_vences_army = {
-				fully_mobilize_army = yes
+				if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 				deploy_to_front = scope:gg_corrientes_front
 			}
 		}

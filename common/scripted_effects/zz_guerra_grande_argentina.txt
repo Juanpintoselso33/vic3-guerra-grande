@@ -850,11 +850,11 @@ gg_argentina_sign_montevideo_convention = {
 	if = {
 		limit = { exists = scope:gg_oriental_front }
 		scope:gg_oriental_advance_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_oriental_front
 		}
 		scope:gg_brazilian_advance_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_oriental_front
 		}
 	}
@@ -932,7 +932,7 @@ gg_argentina_raise_ejercito_grande = {
 	if = {
 		limit = { exists = scope:gg_buenos_aires_front }
 		scope:gg_ejercito_grande_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
 	}
@@ -998,11 +998,11 @@ gg_argentina_complete_foreign_contingents = {
 	if = {
 		limit = { exists = scope:gg_buenos_aires_front }
 		scope:gg_brazilian_grand_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
 		scope:gg_oriental_grand_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
 	}
@@ -1049,11 +1049,11 @@ gg_argentina_limited_foreign_contingents = {
 	if = {
 		limit = { exists = scope:gg_buenos_aires_front }
 		scope:gg_brazilian_limited_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
 		scope:gg_oriental_limited_army ?= {
-			fully_mobilize_army = yes
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
 			deploy_to_front = scope:gg_buenos_aires_front
 		}
 	}
