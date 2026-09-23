@@ -600,6 +600,11 @@ gg_contingent.7 = {
 		# EN/ES: T4 -- FE-4: the Vanguard is Rosas's army / la Vanguardia es el ejercito de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		default_option = yes
+		# EN/ES: 22/9/2026 (Juan) -- the Vanguard's battalions are born empty and fill with the Cerrito's
+		#     fast training; the crossing restarts it, since Rosas may send it long after the split
+		#     / los batallones nacen vacios y se llenan con el entrenamiento rapido; el cruce lo reinicia
+		if = { limit = { has_modifier = gg_cerrito_army_forming } remove_modifier = gg_cerrito_army_forming }
+		add_modifier = { name = gg_cerrito_army_forming months = 6 }
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
