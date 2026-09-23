@@ -920,13 +920,9 @@ gg_argentina_raise_ejercito_grande = {
 		set_commander_rank = 3
 		transfer_to_formation = scope:gg_ejercito_grande_army
 	}
-	if = {
-		limit = { exists = scope:gg_buenos_aires_front }
-		scope:gg_ejercito_grande_army ?= {
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-			deploy_to_front = scope:gg_buenos_aires_front
-		}
-	}
+	# EN/ES: 23/9 -- mobilized the next day: a just-created army cannot be (gg_mobilize_next_day)
+	#     / se moviliza al dia siguiente: un ejercito recien creado no se puede movilizar
+	if = { limit = { exists = scope:gg_ejercito_grande_army } gg_mobilize_next_day = { ARMY = scope:gg_ejercito_grande_army ENEMY = c:ARG } }
 }
 
 # EN: Complete the documented foreign contingents and put the Brazilian fleet on the board. The
@@ -954,6 +950,7 @@ gg_argentina_complete_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
 			}
 		}
+		if = { limit = { exists = scope:gg_brazilian_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
@@ -987,17 +984,7 @@ gg_argentina_complete_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
-	}
-	if = {
-		limit = { exists = scope:gg_buenos_aires_front }
-		scope:gg_brazilian_grand_army ?= {
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-			deploy_to_front = scope:gg_buenos_aires_front
-		}
-		scope:gg_oriental_grand_army ?= {
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-			deploy_to_front = scope:gg_buenos_aires_front
-		}
+		if = { limit = { exists = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 }
 
@@ -1022,6 +1009,7 @@ gg_argentina_limited_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
 			}
 		}
+		if = { limit = { exists = scope:gg_brazilian_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
 	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
@@ -1040,17 +1028,7 @@ gg_argentina_limited_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
-	}
-	if = {
-		limit = { exists = scope:gg_buenos_aires_front }
-		scope:gg_brazilian_limited_army ?= {
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-			deploy_to_front = scope:gg_buenos_aires_front
-		}
-		scope:gg_oriental_limited_army ?= {
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-			deploy_to_front = scope:gg_buenos_aires_front
-		}
+		if = { limit = { exists = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 }
 

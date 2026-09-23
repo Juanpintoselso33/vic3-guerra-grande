@@ -80,7 +80,10 @@ gg_battle.2 = {
 	}
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.2|" # GG_TRAZA
-		gg_battle_find_front = yes
+		random_country = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			save_scope_as = gg_battle_enemy_now
+		}
 		gg_select_formation_hq_state = yes
 		if = {
 			limit = { exists = scope:gg_formation_hq_state }
@@ -93,7 +96,7 @@ gg_battle.2 = {
 				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 2 }
 			}
 		}
-		scope:gg_bat_cerrito_army ?= { gg_battle_to_front = yes }
+		if = { limit = { exists = scope:gg_bat_cerrito_army } gg_mobilize_next_day = { ARMY = scope:gg_bat_cerrito_army ENEMY = scope:gg_battle_enemy_now } }
 		random_country = {
 			limit = { has_variable = guerra_grande_defensa_government }
 			gg_select_formation_hq_state = yes
@@ -128,7 +131,7 @@ gg_battle.2 = {
 				if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
 				transfer_to_formation = scope:gg_bat_rivera_army
 			}
-			scope:gg_bat_rivera_army ?= { gg_battle_to_front = yes }
+			if = { limit = { exists = scope:gg_bat_rivera_army } gg_mobilize_next_day = { ARMY = scope:gg_bat_rivera_army ENEMY = c:CER } }
 		}
 	}
 }
@@ -227,7 +230,7 @@ gg_battle.11 = {
 				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 2 }
 			}
 		}
-		scope:gg_bat_defensa_army ?= { gg_battle_to_front = yes }
+		if = { limit = { exists = scope:gg_bat_defensa_army } gg_mobilize_next_day = { ARMY = scope:gg_bat_defensa_army ENEMY = c:CER } }
 		c:ENR ?= {
 			if = {
 				limit = { has_war_with = c:CER }
@@ -252,9 +255,10 @@ gg_battle.11 = {
 					if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
 					transfer_to_formation = scope:gg_bat_entre_rios_army
 				}
-				scope:gg_bat_entre_rios_army ?= { gg_battle_to_front = yes }
+				if = { limit = { exists = scope:gg_bat_entre_rios_army } gg_mobilize_next_day = { ARMY = scope:gg_bat_entre_rios_army ENEMY = c:CER } }
 			}
 		}
+		gg_battle_find_front = yes
 		c:CER ?= {
 			every_military_formation = {
 				limit = { is_army = yes }
@@ -358,5 +362,34 @@ gg_battle.22 = {
 		custom_tooltip = gg_battle.22.a_tt
 		hidden_effect = { set_global_variable = { name = gg_allies_checked days = 30 } } # EN/ES: the crossing waits a month / el cruce espera un mes
 		gg_endurance_change = { SIDE = defensa VALUE = -10 }
+	}
+}
+
+# EN: The next-day mobilizer (gg_mobilize_next_day): on the owner, the day after its armies were created.
+# ES: El movilizador del dia siguiente: sobre el duenio, al dia siguiente de crear sus ejercitos.
+gg_battle.30 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.30|" # GG_TRAZA
+		remove_variable = gg_mob_pending
+		if = {
+			limit = { has_variable = gg_mob_enemy }
+			var:gg_mob_enemy ?= { save_scope_as = gg_mob_enemy_scope }
+			if = {
+				limit = { exists = scope:gg_mob_enemy_scope }
+				random_scope_war = {
+					limit = { is_war_participant = scope:gg_mob_enemy_scope }
+					random_scope_front = { save_scope_as = gg_mob_front }
+				}
+			}
+			remove_variable = gg_mob_enemy
+		}
+		every_in_list = {
+			variable = gg_mob_queue
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes }
+			if = { limit = { exists = scope:gg_mob_front } deploy_to_front = scope:gg_mob_front }
+		}
+		clear_variable_list = gg_mob_queue
 	}
 }

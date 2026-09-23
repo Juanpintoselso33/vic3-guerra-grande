@@ -3,6 +3,22 @@
 #     (the siege itself is no engine war, so that war is always ours).
 # ES: ETAPA 2, las guerras cortas. gg_battle_open: 1 India Muerta, 2 la campania de 1851.
 
+# EN: 23/9 -- an army created in this same effect cannot be mobilized yet ("Scope formation cannot be mobilized",
+#     headless run 161928, the Ejercito Grande). The owner queues it (country scope, where it was created) and
+#     gg_battle.30 mobilizes it the next day and sends it to a front of its war against ENEMY.
+# ES: un ejercito recien creado todavia no se puede movilizar: el duenio lo encola y gg_battle.30 lo moviliza al
+#     dia siguiente y lo manda al frente de su guerra contra ENEMY.
+gg_mobilize_next_day = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mobilize_next_day| ARMY= $ARMY$  ENEMY= $ENEMY$ " # GG_TRAZA
+	add_to_variable_list = { name = gg_mob_queue target = $ARMY$ }
+	set_variable = { name = gg_mob_enemy value = $ENEMY$ }
+	if = {
+		limit = { NOT = { has_variable = gg_mob_pending } }
+		set_variable = gg_mob_pending
+		trigger_event = { id = gg_battle.30 days = 1 }
+	}
+}
+
 # EN/ES: in a formation's scope: mobilize (the country is in the play now) and send it to the front
 #     / en el scope de una formacion: movilizar y mandar al frente
 gg_battle_to_front = {
@@ -109,7 +125,7 @@ gg_battle_brazil_enters = {
 			}
 		}
 		gg_battle_find_front = yes
-		scope:gg_allied_army ?= { gg_battle_to_front = yes }
+		if = { limit = { exists = scope:gg_allied_army } gg_mobilize_next_day = { ARMY = scope:gg_allied_army ENEMY = c:CER } }
 		c:BRZ ?= { var:gg_brazilian_advance_ref ?= { gg_battle_to_front = yes } }
 		c:URU ?= { var:gg_oriental_advance_ref ?= { gg_battle_to_front = yes } }
 	}
