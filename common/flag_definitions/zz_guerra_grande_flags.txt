@@ -42,6 +42,19 @@
 @third = @[1/3]
 
 REPLACE:URU = {
+	# EN/ES: 23/9/2026 (Juan) -- the Pact province flies the Treinta y Tres flag; a republic apart under
+	#     Buenos Aires keeps the Uruguayan flag; under the Empire, the Cisplatina's / la provincia del Pacto
+	#     lleva la de los Treinta y Tres; la republica aparte, la uruguaya de siempre; bajo el Imperio, la Cisplatina
+	flag_definition = {
+		coa = gg_provincia_oriental
+		priority = 150
+		trigger = { exists = c:ARG has_global_variable = gg_oriental_province scope:actor ?= { is_subject_of = c:ARG } }
+	}
+	flag_definition = {
+		coa = gg_cisplatina
+		priority = 150
+		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ } }
+	}
 	flag_definition = {
 		coa = gg_defensa_government
 		priority = 100

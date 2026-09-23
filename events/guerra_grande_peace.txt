@@ -1038,8 +1038,14 @@ gg_peace.2 = {
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
+		# EN/ES: 23/9 (Juan) -- a PROVINCE of the Confederation, not a republic apart: it joins the Federal
+		#     Pact (row, map, its governor), flies the Treinta y Tres flag, and breaks the Convention of 1828
+		#     / una PROVINCIA de la Confederacion: entra al Pacto, lleva la bandera de los Treinta y Tres
+		set_global_variable = gg_oriental_province
 
 		custom_tooltip = gg_peace_confederation_tt
+		custom_tooltip = gg_peace_reincorporation_brazil_tt
+		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
@@ -1091,6 +1097,7 @@ gg_peace.2 = {
 			base = 15
 			# EN/ES: 23/9 (Juan) -- Rosas's support weighs / pesa el respaldo de Rosas
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 15 }
+			modifier = { trigger = { has_global_variable = gg_arg_reincorporation_asked } add = 30 }
 		}
 	}
 
@@ -1121,6 +1128,7 @@ gg_peace.2 = {
 			OR = {
 				global_var:gg_patron_rosas > 0
 				has_global_variable = gg_reunification_pledged
+				has_global_variable = gg_arg_republic_asked # EN/ES: 23/9 -- Argentina asked for it / lo pidio Argentina
 			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
@@ -1174,6 +1182,9 @@ gg_peace.2 = {
 		ai_chance = {
 			base = 10
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 10 }
+			# EN/ES: 23/9 (Juan) -- Argentina asked for a republic apart / Argentina pidio una republica aparte
+			modifier = { trigger = { has_global_variable = gg_arg_republic_asked } add = 40 }
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 has_global_variable = gg_arg_republic_asked } factor = 3 }
 		}
 	}
 
@@ -1206,6 +1217,8 @@ gg_peace.2 = {
 		custom_tooltip = gg_peace_reincorporation_brazil_tt
 		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 
+		# EN/ES: 23/9 (Juan) -- the people come too / la gente viene tambien (gg_bring_characters_to)
+		scope:gg_peace_loser ?= { gg_bring_characters_to = { TARGET = c:ARG } }
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
 		every_scope_state = {
@@ -1233,6 +1246,7 @@ gg_peace.2 = {
 					value = -50
 				}
 			}
+			root = { gg_bring_characters_to = { TARGET = c:ARG } }
 			annex_with_incorporation = root
 		}
 

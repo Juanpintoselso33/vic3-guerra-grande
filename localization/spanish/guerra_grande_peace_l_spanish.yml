@@ -37,14 +37,14 @@
  gg_peace.2.a:0 "Amnistía: ni vencidos ni vencedores, la cláusula del pliego de Oribe."
  gg_peace.2.b:0 "Presidencia restituida: todo decreto de la Defensa es nulo."
  gg_peace.2.c:0 "Castigo: mueran los salvajes unitarios."
- gg_peace.2.d:0 "Vasallaje: la República queda bajo la Confederación de Rosas."
- gg_peace.2.e:0 "Cliente de Rosas: el Restaurador paga, y el Restaurador manda."
+ gg_peace.2.d:0 "Provincia del Pacto: la Banda Oriental vuelve a la Confederación como provincia, con su gobierno propio."
+ gg_peace.2.e:0 "República aparte: reconocida e independiente, pero bajo la protección de Rosas."
  gg_peace.2.f:0 "Sin condiciones. Todavía no."
 
  gg_peace_oribe_pliego_tt:0 "@information! El pliego entero de Oribe se hace ley: ni vencidos ni vencedores, los actos y deudas del #blue_value Cerrito#! reconocidos, y sus batallones bajo su mando hasta las elecciones constitucionales. La escarapela nacional reemplaza a las dos divisas."
  gg_peace_legal_presidency_tt:0 "@warning! El mandato interrumpido de Oribe continúa bajo la Constitución, sin proscripciones, pero todo decreto de la #R Defensa#! queda nulo. Los bienes confiscados se restituyen a costa de la caja, y a las legiones extranjeras se les retira el patrocinio: pierden su paga y sus privilegios, Garibaldi se embarca si las manda, y los hombres que quedan pasan a ser tropa común."
  gg_peace_proscription_cerrito_tt:0 "@warning! El #blue_value Cerrito#! lleva a Montevideo su pregón contra los unitarios: los #R jefes colorados#! van al destierro, sus bienes se confiscan y la ciudad extranjera se vacía. La caja gana lo incautado; la República gana infamia y un rencor duradero."
- gg_peace_confederation_tt:0 "@warning! La República queda como vasalla dentro de la Confederación de Rosas y se deja de lado el arreglo de 1828. Ningún documento conservado prueba que Oribe quisiera dar esta respuesta a la propuesta de Rosas."
+ gg_peace_confederation_tt:0 "@warning! La Banda Oriental vuelve a la Confederación como #b provincia del Pacto Federal#!, con su gobierno propio y la bandera de los #b Treinta y Tres#!, y se deja de lado el arreglo de 1828. Ningún documento conservado prueba que Oribe quisiera dar esta respuesta a la propuesta de Rosas."
  gg_peace_rosista_client_tt:0 "@warning! Buenos Aires sigue pagando y armando a la República, pero Rosas pasa a mandarla afuera. La caja se llena al precio de la sujeción, la infamia y la enemistad del Brasil."
 
 # ---------------------------------------------------------------------------------------------

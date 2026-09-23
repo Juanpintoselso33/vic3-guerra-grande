@@ -42,8 +42,8 @@ gg_cisplatina.1 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1|" # GG_TRAZA
 	}
 
-	# EN: press him. Oribe weighs it with Rosas's whole weight behind the request.
-	# ES: insistir. Oribe lo pesa con todo el respaldo de Rosas detras del pedido.
+	# EN: ask him to come back as a PROVINCE of the Confederation (under the Pact, or fully incorporated).
+	# ES: pedirle que vuelva como PROVINCIA de la Confederacion (del Pacto, o incorporada del todo).
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1.a|" # GG_TRAZA
 		name = gg_cisplatina.1.a
@@ -56,9 +56,21 @@ gg_cisplatina.1 = {
 		c:FRA ?= { change_relations = { country = ROOT value = -25 } }
 		gg_cis_offer_go = yes
 		ai_chance = {
-			base = 40
-			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } add = 40 }
+			base = 30
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } add = 30 }
 		}
+	}
+	# EN: ask him for a REPUBLIC apart, recognised, but under Buenos Aires's protection.
+	# ES: pedirle una REPUBLICA aparte, reconocida, pero bajo la proteccion de Buenos Aires.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1.c|" # GG_TRAZA
+		name = gg_cisplatina.1.c
+		set_global_variable = gg_arg_republic_asked
+		custom_tooltip = gg_cisplatina.1.c_tt
+		c:GBR ?= { change_relations = { country = ROOT value = -10 } }
+		c:FRA ?= { change_relations = { country = ROOT value = -10 } }
+		gg_cis_offer_go = yes
+		ai_chance = { base = 30 }
 	}
 	# EN: leave it as an offer, as it was historically: Oribe sent it to a commission.
 	# ES: dejarlo como oferta, como fue: Oribe la mando a una comision.
@@ -68,7 +80,7 @@ gg_cisplatina.1 = {
 		default_option = yes
 		custom_tooltip = gg_cisplatina.1.b_tt
 		gg_cis_offer_go = yes
-		ai_chance = { base = 60 }
+		ai_chance = { base = 40 }
 	}
 }
 
@@ -87,7 +99,10 @@ gg_cisplatina.2 = {
 
 	trigger = {
 		c:BRZ ?= this
-		has_global_variable = gg_reincorporated
+		OR = {
+			has_global_variable = gg_reincorporated
+			has_global_variable = gg_oriental_province
+		}
 	}
 
 	immediate = {
@@ -158,11 +173,19 @@ gg_cisplatina.3 = {
 			limit = { has_global_variable = gg_cis_brazil_won }
 			if = {
 				limit = { global_var:gg_cis_goal = 2 }
-				gg_cis_annex = yes
+				# EN/ES: the Pact province is a country: Brazil annexes it whole / la provincia del Pacto es un pais
+				if = { limit = { c:URU ?= { is_subject_of = c:ARG } } annex = c:URU }
+				else = { gg_cis_annex = yes }
+				remove_global_variable = gg_oriental_province
 				set_global_variable = { name = gg_cis_outcome value = 2 }
 			}
 			else = {
-				gg_cis_release = yes
+				if = {
+					limit = { c:URU ?= { is_subject_of = c:ARG } }
+					c:URU = { make_independent = yes }
+					remove_global_variable = gg_oriental_province
+				}
+				else = { gg_cis_release = yes }
 				if = {
 					limit = { global_var:gg_cis_goal = 3 c:URU ?= { is_subject = no } }
 					create_diplomatic_pact = { country = c:URU type = protectorate }

@@ -37,14 +37,14 @@
  gg_peace.2.a:0 "Amnesty: no victors and no vanquished, the clause of Oribe's own terms."
  gg_peace.2.b:0 "Presidency restored: every decree of the Defensa is void."
  gg_peace.2.c:0 "Punishment: death to the savage unitarians."
- gg_peace.2.d:0 "Vassalage: the Republic comes under Rosas's Confederation."
- gg_peace.2.e:0 "Rosas's client: the Restorer pays, and the Restorer rules."
+ gg_peace.2.d:0 "A Province of the Pact: the Banda Oriental rejoins the Confederation as a province, with its own government."
+ gg_peace.2.e:0 "A Republic Apart: recognised and independent, but under Rosas's protection."
  gg_peace.2.f:0 "No terms. Not yet."
 
  gg_peace_oribe_pliego_tt:0 "@information! Oribe's full terms become law: no victors or vanquished, the #blue_value Cerrito#!'s acts and debts recognised, and his battalions kept under command until constitutional elections. The national cockade replaces both divisas."
  gg_peace_legal_presidency_tt:0 "@warning! Oribe's interrupted term resumes under the Constitution, without proscriptions, but every decree of the #R Defensa#! is void. Confiscated property is restored at the treasury's expense, and the foreign legions lose their patronage: their pay and privileges go, Garibaldi sails if he commands them, and the men who remain serve as ordinary troops."
  gg_peace_proscription_cerrito_tt:0 "@warning! The #blue_value Cerrito#! carries its cry against the unitarians into Montevideo: the #R colorado chiefs#! are exiled, their property confiscated and the foreign city emptied. The treasury gains the seizures; the Republic gains infamy and lasting unrest."
- gg_peace_confederation_tt:0 "@warning! The Republic becomes a vassal within Rosas's Confederation and the settlement of 1828 is set aside. No surviving document proves that Oribe intended this answer to Rosas's proposal."
+ gg_peace_confederation_tt:0 "@warning! The Banda Oriental rejoins the Confederation as a #b province of the Federal Pact#!, with its own government and the flag of the #b Treinta y Tres#!, and the settlement of 1828 is set aside. No surviving document proves that Oribe intended this answer to Rosas's proposal."
  gg_peace_rosista_client_tt:0 "@warning! Buenos Aires keeps financing and arming the Republic, but Rosas becomes its master abroad. The treasury is replenished at the price of subjection, infamy and hostility from Brazil."
 
 # ---------------------------------------------------------------------------------------------

@@ -62,3 +62,27 @@ gg_defensa_government = {
 	}
 }
 
+# EN: 23/9/2026 (Juan) -- the Republic as a subject after the Guerra Grande. Under Buenos Aires it flies
+#     the Provincia Oriental's own flag of 1825, "Flag of the Treinta y Tres.svg" (Wikimedia Commons: the
+#     Treinta y Tres Orientales' tricolour, "Libertad o Muerte", flown when the Province declared its union
+#     with the Provincias Unidas at Florida); under the Empire, "Flag of the Provincia Cisplatina.svg"
+#     (Wikimedia Commons, the Cisplatine Province 1821-1828). Downloaded and converted, not redrawn.
+# ES: la Republica como sujeta despues de la Guerra Grande. Bajo Buenos Aires, la bandera de los Treinta y
+#     Tres (1825, "Libertad o Muerte"); bajo el Imperio, la de la Provincia Cisplatina (1821-1828).
+gg_provincia_oriental = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_provincia_oriental.dds"
+	}
+}
+
+gg_cisplatina = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_cisplatina.dds"
+	}
+}

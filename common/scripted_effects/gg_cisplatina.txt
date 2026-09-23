@@ -89,3 +89,22 @@ gg_cis_annex = {
 		}
 	}
 }
+
+# EN: 23/9/2026 (Juan) -- when the Republic is absorbed its people come with it: the ruler (Oribe) and the
+#     generals and admirals go to TARGET before the annexation. Interest group leaders stay out: each is tied
+#     to a group of the country that disappears.
+# ES: cuando se absorbe la Republica, su gente viene con ella: el gobernante (Oribe) y los generales y
+#     almirantes pasan a TARGET antes de la anexion. Los jefes de grupos de interes no: estan atados a su grupo.
+gg_bring_characters_to = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_bring_characters_to|" # GG_TRAZA
+	every_scope_character = {
+		limit = {
+			OR = {
+				is_ruler = yes
+				is_general = yes
+				is_admiral = yes
+			}
+		}
+		transfer_character = $TARGET$
+	}
+}

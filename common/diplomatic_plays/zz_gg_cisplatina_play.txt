@@ -17,7 +17,10 @@ dp_gg_cisplatina = {
 
 	possible = {
 		exists = c:ARG
-		has_global_variable = gg_reincorporated
+		OR = {
+			has_global_variable = gg_reincorporated
+			has_global_variable = gg_oriental_province
+		}
 	}
 
 	additional_involvement_trigger = {
