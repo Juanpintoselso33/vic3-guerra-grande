@@ -75,3 +75,14 @@ gg_ui_pact_grv_entre_rios = {
  value = 0
  if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 NOT = { has_global_variable = gg_delegation_gone_entre_rios } } value = 1 }
 }
+
+# EN/ES: 23/9/2026 (Juan) -- the band counts the Banda Oriental when it is in the Pact; the mechanics keep
+#     gg_delegating_provinces over the thirteen / la franja cuenta la Banda Oriental; la mecanica sigue con trece
+gg_ui_pact_delegating_shown = {
+	value = global_var:gg_delegating_provinces
+	if = { limit = { has_global_variable = gg_oriental_in_pact } add = 1 }
+}
+gg_ui_pact_total = {
+	value = 13
+	if = { limit = { has_global_variable = gg_oriental_in_pact } add = 1 }
+}

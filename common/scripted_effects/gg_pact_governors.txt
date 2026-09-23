@@ -140,16 +140,11 @@ gg_pact_governors_update = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG exists = ruler } }
 		c:URU = { ruler = { set_global_variable = { name = gg_pact_gov_oriental value = this } } }
 	}
-	# EN/ES: fully reincorporated: Oribe, who came to Argentina with the annexation, governs it
-	#     / reincorporada del todo: Oribe, que vino a la Argentina con la anexion, la gobierna
+	# EN/ES: 23/9 (Juan) -- fully reincorporated: Oribe governs it, found wherever he is or born from his template
+	#     (the Pact's own rule for governors) / reincorporada: la gobierna Oribe, donde este o nacido de su plantilla
 	else_if = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_reincorporated exists = c:ARG }
-		c:ARG = {
-			random_scope_character = {
-				limit = { has_template = URU_Manuel_Oribe }
-				set_global_variable = { name = gg_pact_gov_oriental value = this }
-			}
-		}
+		gg_pact_gov_pick_or_create = { TEMPLATE = URU_Manuel_Oribe KEY = oriental STATE = STATE_MONTEVIDEO }
 	}
 	gg_pact_gov_province = { KEY = corrientes TAG = CRR }
 	gg_pact_gov_province = { KEY = tucuman TAG = TUC }

@@ -1,9 +1,9 @@
 ﻿l_english:
- gg_pact_j_band:0 "#V [GetGlobalVariable('gg_delegating_provinces').GetValue|0]#! of #V 13#! Provinces Delegate to Buenos Aires"
+ gg_pact_j_band:0 "#V [JournalEntry.MakeScope.ScriptValue('gg_ui_pact_delegating_shown')|0]#! of #V [JournalEntry.MakeScope.ScriptValue('gg_ui_pact_total')|0]#! Provinces Delegate to Buenos Aires"
  gg_pact_j_band_tt:0 "Under the Federal Pact the provinces entrusted the governor of Buenos Aires with the Confederation's foreign relations, and a legislature may take that mandate back. Buenos Aires is not counted: it cannot delegate to itself."
  gg_pact_j_legend:0 "#P Delegating#! · #Y Petition pending#! · #N Mandate withdrawn#! · #blue_value Buenos Aires#!"
  gg_pact_j_more:0 "The Mandate in Detail"
- gg_pact_j_list_header:0 "The Thirteen Provinces"
+ gg_pact_j_list_header:0 "The Provinces"
  gg_pact_j_st_0:0 "#P Delegating#!"
  gg_pact_j_st_1:0 "#Y Petition pending#!"
  gg_pact_j_st_2:0 "#N Mandate withdrawn#!"

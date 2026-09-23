@@ -1,9 +1,9 @@
 ﻿l_spanish:
- gg_pact_j_band:0 "Delegan en Buenos Aires #V [GetGlobalVariable('gg_delegating_provinces').GetValue|0]#! de #V 13#! provincias"
+ gg_pact_j_band:0 "Delegan en Buenos Aires #V [JournalEntry.MakeScope.ScriptValue('gg_ui_pact_delegating_shown')|0]#! de #V [JournalEntry.MakeScope.ScriptValue('gg_ui_pact_total')|0]#! provincias"
  gg_pact_j_band_tt:0 "Por el Pacto Federal, las provincias le encargaron al gobernador de Buenos Aires las relaciones exteriores de la Confederación, y una legislatura puede retirarle ese encargo. Buenos Aires no se cuenta: no puede delegar en sí misma."
  gg_pact_j_legend:0 "#P Delega#! · #Y Reclamo pendiente#! · #N Encargo retirado#! · #blue_value Buenos Aires#!"
  gg_pact_j_more:0 "El encargo, en detalle"
- gg_pact_j_list_header:0 "Las trece provincias"
+ gg_pact_j_list_header:0 "Las provincias"
  gg_pact_j_st_0:0 "#P Delega#!"
  gg_pact_j_st_1:0 "#Y Reclamo pendiente#!"
  gg_pact_j_st_2:0 "#N Encargo retirado#!"
