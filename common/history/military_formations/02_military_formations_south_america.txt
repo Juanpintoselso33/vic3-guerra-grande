@@ -371,15 +371,23 @@ MILITARY_FORMATIONS = {
 			# ES: 2 de linea + 1 de husares, no 3 de linea + 1 de coraceros: la Republica no tenia
 			#     caballeria pesada, y con los tres batallones que suman los cuarteles da seis, cerca
 			#     de los 4.868 hombres de 1838 (Acevedo).
+			# EN: 22/9/2026 (Juan: the Cerrito should arrive strong and the Defensa broken) -- units
+			#     belong to their barracks and pass, manned, with the state. With the whole army in
+			#     Montevideo the Defensa inherited all of it and the Cerrito was born with empty
+			#     battalions (16 bn, 894 men in Juan's game). Stationed in the interior, the same six
+			#     battalions go to the Cerrito at the split; the Defensa keeps Montevideo's barracks.
+			# ES: las unidades son de su cuartel y pasan con el estado, con sus hombres. Con todo el
+			#     ejercito en Montevideo, la Defensa lo heredaba entero y el Cerrito nacia con
+			#     batallones vacios. Acantonados en el interior, pasan al Cerrito en el corte.
 			combat_unit = {
 				type = unit_type:combat_unit_type_line_infantry
-				state_region = s:STATE_MONTEVIDEO
+				state_region = s:STATE_SAN_JOSE
 				count = 2
 			}
 
 			combat_unit = {
 				type = unit_type:combat_unit_type_hussars
-				state_region = s:STATE_MONTEVIDEO
+				state_region = s:STATE_SAN_JOSE
 				count = 1
 			}
 		}
