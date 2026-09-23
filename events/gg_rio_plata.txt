@@ -112,6 +112,13 @@ gg_plata.10 = {
 			# EN/ES: River audit 22/9 -- answered after the peace, yielding brings no guarantee
 			#     (gg_plata_ultimatum_yield) / contestado despues de la paz, ceder no trae garantia
 			triggered_desc = {
+				desc = gg_plata.10.d_peace_france
+				trigger = {
+					has_global_variable = gg_peace_settled
+					gg_plata_london_out = yes
+				}
+			}
+			triggered_desc = {
 				desc = gg_plata.10.d_peace
 				trigger = { has_global_variable = gg_peace_settled }
 			}

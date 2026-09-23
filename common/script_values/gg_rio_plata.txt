@@ -110,6 +110,9 @@ gg_ui_plata_phase3_mode = {
 		limit = {
 			has_global_variable = gg_plata_intervention
 			global_var:gg_plata_intervention_months >= 23
+			# EN/ES: Codex 22/9 -- and Howden has actually come (gg_powers.14 sets the mark)
+			#     / y Howden vino de verdad (gg_powers.14 pone la marca)
+			has_global_variable = gg_cal_done_15
 		}
 		value = 2
 	}
@@ -323,4 +326,11 @@ gg_ui_plata_decree = {
 		}
 		value = 2
 	}
+}
+# EN/ES: river audit 22/9 (Codex) -- why the clocks stand still: 1 a truce, 2 the two months Rosas has
+#     to open his shore after yielding (gg_plata_monthly skips both) / por que se detienen los relojes
+gg_ui_plata_clocks_frozen = {
+	value = 0
+	if = { limit = { has_global_variable = gg_plata_guarantee_grace } value = 2 }
+	if = { limit = { has_global_variable = gg_truce } value = 1 }
 }

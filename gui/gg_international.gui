@@ -410,22 +410,31 @@ flowcontainer = {
  }
  widget = { size = { 520 8 } }
  textbox = {
-  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), Not(GetGlobalVariable('gg_truce').IsSet))]"
+  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_frozen'), '(CFixedPoint)0'))]"
   size = { 520 34 }
   parentanchor = hcenter
   using = fontsize_large align = center|nobaseline
   background = { using = entry_bg_fancy_dark alpha = 0.6 }
   text = "gg_ui_plata_sec_clocks"
  }
- # EN/ES: river audit 22/9 -- in a truce no count moves: the header says so / en tregua no se mueve ninguna cuenta
+ # EN/ES: river audit 22/9 -- in a truce, or in the two months of grace, no count moves: the header says so / en tregua o en el plazo de gracia no se mueve ninguna cuenta
  textbox = {
-  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), GetGlobalVariable('gg_truce').IsSet)]"
+  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_frozen'), '(CFixedPoint)1'))]"
   tooltip = "gg_ui_plata_sec_clocks_truce_tt"
   size = { 520 34 }
   parentanchor = hcenter
   using = fontsize_large align = center|nobaseline
   background = { using = entry_bg_fancy_dark alpha = 0.6 }
   text = "gg_ui_plata_sec_clocks_truce"
+ }
+ textbox = {
+  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_frozen'), '(CFixedPoint)2'))]"
+  tooltip = "gg_ui_plata_sec_clocks_grace_tt"
+  size = { 520 34 }
+  parentanchor = hcenter
+  using = fontsize_large align = center|nobaseline
+  background = { using = entry_bg_fancy_dark alpha = 0.6 }
+  text = "gg_ui_plata_sec_clocks_grace"
  }
  flowcontainer = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_shown'), '(CFixedPoint)1')]"

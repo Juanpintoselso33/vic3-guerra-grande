@@ -432,6 +432,33 @@ gg_plata_situation_monthly = {
 		}
 		c:FRA ?= { add_modifier = { name = gg_plata_phase_intervention_powers months = 2 } }
 	}
+	# EN: River audit 22/9 (Codex) -- a phase's effects end with the phase, not up to two months later:
+	#     the band already reads the next phase (the settlement, Southern) while the old modifiers ran on.
+	# ES: los efectos de una fase terminan con la fase, no hasta dos meses despues: la franja ya mostraba
+	#     la fase siguiente mientras los modificadores viejos seguian.
+	if = {
+		limit = { NOT = { gg_plata_phase = 1 } }
+		p:x302DDA.state ?= { if = { limit = { has_modifier = gg_plata_phase_blockade } remove_modifier = gg_plata_phase_blockade } }
+	}
+	if = {
+		limit = { NOT = { gg_plata_phase = 2 } }
+		c:ARG ?= { if = { limit = { has_modifier = gg_plata_phase_ultimatum } remove_modifier = gg_plata_phase_ultimatum } }
+	}
+	if = {
+		limit = { NOT = { gg_plata_phase = 3 } }
+		p:x365A5B.state ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_port } remove_modifier = gg_plata_phase_intervention_port } }
+		c:FRA ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_powers } remove_modifier = gg_plata_phase_intervention_powers } }
+	}
+	if = {
+		limit = {
+			OR = {
+				NOT = { gg_plata_phase = 3 }
+				has_global_variable = gg_plata_britain_settled
+				has_global_variable = gg_plata_france_alone
+			}
+		}
+		c:GBR ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_powers } remove_modifier = gg_plata_phase_intervention_powers } }
+	}
 	gg_plata_flags_sync = yes
 	gg_plata_guarantee_monthly = yes
 	gg_plata_notices = yes
