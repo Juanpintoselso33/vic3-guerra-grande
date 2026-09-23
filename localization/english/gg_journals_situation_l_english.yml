@@ -47,7 +47,7 @@
  gg_war_phase_siege:0 "Two Governments"
  gg_war_phase_siege_desc:0 "Each claims to be the lawful government of the Republic."
  gg_war_phase_truce:0 "Truce"
- gg_war_phase_truce_desc:0 "While terms are negotiated, losses weigh less heavily."
+ gg_war_phase_truce_desc:0 "While terms are discussed, nobody fights: both governments recover #P 5#! endurance a month."
 
  gg_war_ui_leader_colorado:0 "#R Colorados#!\n#b [Character.GetFullName]#!"
  gg_war_ui_leader_blanco:0 "#blue_value Blancos#!\n#b [Character.GetFullName]#!"

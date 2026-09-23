@@ -8,6 +8,9 @@
 # ES: El Gran Sitio visto desde un general: esta «en el sitio» si su formacion esta en (o va hacia) un
 #     frente que incluye el estado de Montevideo y la Defensa todavia lo tiene. La cadena es la de Iberia.
 gg_general_at_the_siege = {
+	# EN/ES: 23/9 stage 2 -- not during a short war: India Muerta and 1851 were fought in open country, not
+	#     at the walls / no durante una guerra corta: se pelearon en campo abierto, no en la muralla
+	NOT = { has_global_variable = gg_battle_open }
 	has_role_of_type = general
 	commander_military_formation ?= {
 		front ?= {

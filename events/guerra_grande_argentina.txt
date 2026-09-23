@@ -1930,9 +1930,12 @@ gg_argentina.23 = {
 		name = gg_argentina.23.b
 		custom_tooltip = gg_argentina.23.b_tt
 		set_global_variable = gg_powers_mediators
+		# EN/ES: 23/9 -- the engine mobilizes only a country in a play or a war (CANNOT_MOBILIZE_ARMIES_NO_DIPLO_PLAY:
+		#     the error of July 1844); at peace the column simply stays free for another front
+		#     / el motor solo moviliza a un pais en una jugada o una guerra; en paz la columna queda libre
 		if = {
-			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
+			limit = { has_variable = gg_parana_column_ref is_at_war = yes }
+			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } }
 		}
 		ai_chance = { base = 30 }
 	}
@@ -1990,7 +1993,6 @@ gg_argentina.24 = {
 		custom_tooltip = gg_argentina.24.b_tt
 		if = {
 			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
 			if = {
 				limit = { exists = c:CRR }
 				random_scope_war = {
@@ -2002,7 +2004,11 @@ gg_argentina.24 = {
 				}
 				if = {
 					limit = { exists = scope:gg_parana_target_front }
-					var:gg_parana_column_ref ?= { deploy_to_front = scope:gg_parana_target_front }
+					# EN/ES: 23/9 -- mobilized only here, with a war and a front to go to / solo aca, con guerra y frente
+					var:gg_parana_column_ref ?= {
+						if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes }
+						deploy_to_front = scope:gg_parana_target_front
+					}
 				}
 			}
 		}
@@ -2015,7 +2021,6 @@ gg_argentina.24 = {
 		custom_tooltip = gg_argentina.24.c_tt
 		if = {
 			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
 			if = {
 				limit = { exists = c:PRG }
 				random_scope_war = {
@@ -2027,7 +2032,11 @@ gg_argentina.24 = {
 				}
 				if = {
 					limit = { exists = scope:gg_parana_target_front }
-					var:gg_parana_column_ref ?= { deploy_to_front = scope:gg_parana_target_front }
+					# EN/ES: 23/9 -- mobilized only here, with a war and a front to go to / solo aca, con guerra y frente
+					var:gg_parana_column_ref ?= {
+						if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes }
+						deploy_to_front = scope:gg_parana_target_front
+					}
 				}
 			}
 		}
@@ -3317,9 +3326,11 @@ gg_argentina.15 = {
 		hidden_effect = { add_treasury = 400000 } # EN/ES: the text gives it / lo da el texto
 		add_modifier = { name = gg_ejercito_grande_full_mortgage }
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_full_mortgage } }
+		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize
+		#     / el Brasil entra ANTES de levantar su contingente: fuera de la guerra no se moviliza
+		gg_argentina_join_ejercito_grande_allies = yes
 		gg_argentina_raise_ejercito_grande = yes
 		gg_argentina_complete_foreign_contingents = yes
-		gg_argentina_join_ejercito_grande_allies = yes
 		ai_chance = { base = 70 }
 	}
 	option = {
@@ -3337,9 +3348,11 @@ gg_argentina.15 = {
 		hidden_effect = { add_treasury = 100000 } # EN/ES: the text gives it / lo da el texto
 		add_modifier = { name = gg_ejercito_grande_limited_mortgage }
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_limited_mortgage } }
+		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize
+		#     / el Brasil entra ANTES de levantar su contingente: fuera de la guerra no se moviliza
+		gg_argentina_join_ejercito_grande_allies = yes
 		gg_argentina_raise_ejercito_grande = yes
 		gg_argentina_limited_foreign_contingents = yes
-		gg_argentina_join_ejercito_grande_allies = yes
 		ai_chance = { base = 20 }
 	}
 	option = {

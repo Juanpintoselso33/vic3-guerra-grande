@@ -13,3 +13,6 @@
  gg_tt_endurance_cerrito_-5:0 "Endurance of #blue_value the Cerrito#!: #N -5#!"
  gg_tt_endurance_cerrito_10:0 "Endurance of #blue_value the Cerrito#!: #P +10#!"
  gg_tt_endurance_cerrito_15:0 "Endurance of #blue_value the Cerrito#!: #P +15#!"
+ guerra_grande_italian_legion_desc:0 "Garibaldi's Italian volunteers hold the city's line: the Defensa recovers #P 1#! endurance a month."
+ guerra_grande_foreign_legions_desc:0 "The city's French and Basque battalions stand guard on the line: the Defensa recovers #P 1#! endurance a month."
+ guerra_grande_argentine_auxiliaries_desc:0 "The battalions Buenos Aires sends hold the Cerrito's lines: the Cerrito recovers #P 2#! endurance a month."

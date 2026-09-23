@@ -13,3 +13,6 @@
  gg_tt_endurance_cerrito_-5:0 "Aguante del #blue_value Cerrito#!: #N -5#!"
  gg_tt_endurance_cerrito_10:0 "Aguante del #blue_value Cerrito#!: #P +10#!"
  gg_tt_endurance_cerrito_15:0 "Aguante del #blue_value Cerrito#!: #P +15#!"
+ guerra_grande_italian_legion_desc:0 "Los voluntarios italianos de Garibaldi sostienen la línea de la plaza: la Defensa recupera #P 1#! de aguante por mes."
+ guerra_grande_foreign_legions_desc:0 "Los batallones de franceses y vascos de la ciudad montan guardia en la línea: la Defensa recupera #P 1#! de aguante por mes."
+ guerra_grande_argentine_auxiliaries_desc:0 "Los batallones que manda Buenos Aires sostienen las líneas del Cerrito: el Cerrito recupera #P 2#! de aguante por mes."

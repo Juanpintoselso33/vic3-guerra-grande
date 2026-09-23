@@ -1,0 +1,40 @@
+﻿# EN: 23/9/2026 -- STAGE 2 (docs/guerra-grande-flujo/etapa2-batallas-plan.md, approved by Juan). The historical
+#     battles of the siege years as SHORT engine wars, opened and closed by the mod (events/gg_battles.txt):
+#     India Muerta (1845) and the campaign of 1851. Never dp_guerra_grande: its end_play fires the white-peace
+#     hook (guerra_grande_on_war_end). No annexation goal (a capitulating AI would be annexed): humiliation
+#     only, nobody adds goals, nobody joins by itself, never selectable. Closed by gg_battle_close: at the
+#     first battle won, or at its date.
+# ES: ETAPA 2. Las batallas historicas como guerras CORTAS del motor que el mod abre y cierra. Nunca
+#     dp_guerra_grande. Sin anexion: solo humillacion; nadie agrega objetivos ni se suma solo.
+dp_gg_batalla = {
+	allow_negotiated_peace = no
+	war_goal = humiliation
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/humiliation.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		scope:target_country = {
+			OR = {
+				has_variable = guerra_grande_cerrito_government
+				has_variable = guerra_grande_defensa_government
+			}
+		}
+	}
+
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

@@ -699,6 +699,9 @@ gg_contingent.8 = {
 		NOT = { exists = s:STATE_ENTRE_RIOS }
 		NOT = { has_global_variable = guerra_grande_treaties_signed }
 		NOT = { has_global_variable = gg_montevideo_convention_refused }
+		# EN/ES: 23/9 stage 2 -- a month's delay after the Cerrito held the allies (gg_battle.22); the calendar retries
+		#     / un mes de demora si el Cerrito resistio; el calendario reintenta
+		NOT = { has_global_variable = gg_allies_checked }
 	}
 
 	# EN: THE INTERVENTION THAT ENDED THE WAR. This is not a flavour choice and it must not read
@@ -737,6 +740,7 @@ gg_contingent.8 = {
 				type = army
 				hq_region = scope:gg_formation_hq_state.region
 				name = Ejercito_Aliado
+				save_scope_as = gg_allied_army
 				combat_unit = {
 					type = unit_type:combat_unit_type_line_infantry
 					state_region = s:STATE_MONTEVIDEO
@@ -771,7 +775,15 @@ gg_contingent.8 = {
 		custom_tooltip = gg_contingent_capitulation_follows
 		# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks. 23/9 (audit T4):
 		#     out of the hidden_effect, so the player sees it / fuera del hidden_effect, para que se vea
-		gg_endurance_change = { SIDE = cerrito VALUE = -30 }
+		# EN/ES: 23/9 stage 2 -- the same blow as the allies breaking the lines in battle, never twice
+		#     / el mismo golpe que los aliados rompiendo las lineas en batalla, nunca dos veces
+		if = {
+			limit = { NOT = { has_global_variable = gg_cerrito_broken } }
+			set_global_variable = gg_cerrito_broken
+			gg_endurance_change = { SIDE = cerrito VALUE = -30 }
+		}
+		# EN/ES: 23/9 stage 2 -- with the campaign of 1851 open, the Empire enters it (gg_battles.txt)
+		gg_battle_brazil_enters = yes
 		hidden_effect = {
 			# EN: the capitulation that follows. guerra_grande.8 was replaced by the peace menu,
 			#     which routes by government mark instead of by tag.

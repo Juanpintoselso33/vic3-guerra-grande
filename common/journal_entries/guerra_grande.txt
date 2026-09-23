@@ -332,6 +332,29 @@ je_guerra_grande = {
 							limit = { gg_cerrito_backing < 40 }
 							gg_endurance_add = { SIDE = cerrito VALUE = gg_cerrito_drain }
 						}
+						gg_siege_modifiers_endurance = yes # EN/ES: 23/9 -- what sustains each side / lo que sostiene a cada lado
+						# EN: 23/9 stage 2 (Codex) -- the campaign of 1851 on its date, by whichever route Urquiza turned
+						#     (gg_powers.22 does not fire once the convention flipped him), and Brazil's entry on 4 September.
+						# ES: la campania de 1851 en su fecha, por el camino que sea que Urquiza se dio vuelta; el Brasil el 4/9.
+						if = {
+							limit = {
+								game_date >= 1851.7.19
+								has_global_variable = gg_urquiza_flipped
+								NOT = { has_global_variable = gg_battle_1851_sent }
+							}
+							set_global_variable = gg_battle_1851_sent
+							random_country = {
+								limit = { has_variable = guerra_grande_defensa_government }
+								trigger_event = { id = gg_battle.10 days = 0 }
+							}
+						}
+						if = {
+							limit = {
+								game_date >= 1851.9.4
+								NOT = { has_global_variable = gg_allies_checked }
+							}
+							gg_battle_brazil_enters = yes
+						}
 						gg_trace_war_support = yes # EN/ES: 23/9 -- monthly trace / traza mensual
 						# EN: 23/9/2026 -- the game rule's date. Outside the dynamic setting the war does not outlive the
 						#     historical peace (8 October 1851): the Defensa's menu, or the Cerrito's if it is the winner
@@ -342,6 +365,7 @@ je_guerra_grande = {
 								NOT = { gg_outcome_dynamic = yes }
 								game_date >= 1851.10.8
 								NOT = { has_global_variable = gg_peace_offered }
+								NOT = { has_global_variable = gg_battle_open } # EN/ES: 23/9 -- the campaign closes first / primero cierra la campania
 								exists = c:CER
 								exists = c:URU
 							}
@@ -411,6 +435,9 @@ je_guerra_grande = {
 					NOT = { has_global_variable = gg_peace_chain_pending }
 					# EN/ES: T7, I15 -- Howden's truce / la tregua de Howden
 					NOT = { has_global_variable = gg_truce }
+					# EN/ES: 23/9 stage 2 (Codex) -- no peace table while a short war is being fought
+					#     / ninguna mesa de paz mientras se pelea una guerra corta
+					NOT = { has_global_variable = gg_battle_open }
 					exists = c:CER
 					exists = c:URU
 				}

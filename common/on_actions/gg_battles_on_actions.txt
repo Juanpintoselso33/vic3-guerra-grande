@@ -1,0 +1,49 @@
+﻿# EN: 23/9/2026 -- STAGE 2. The first battle won in a short war closes it (vanilla's Texan pattern:
+#     on_battle_won -> texan_war_of_independence.3 -> end_play). Root = the winner; scope:enemy_country = the
+#     loser. Only a battle between the Cerrito and the Defensa's side (the Defensa, Entre Rios, Brazil) counts:
+#     a battle of another war (Entre Rios against Buenos Aires in 1851) does not. India Muerta counts only the
+#     Defensa; 1851 also Entre Rios and Brazil. The battle scope carries no link to its war, so the check is by
+#     country; the siege's locks and I21 keep any other war between these countries from existing.
+# ES: ETAPA 2. La primera batalla ganada cierra la guerra corta. Solo cuenta una batalla entre el Cerrito y el
+#     lado de la Defensa.
+on_battle_won = {
+	on_actions = { gg_battle_won }
+}
+on_empty_battle_won = {
+	on_actions = { gg_battle_won }
+}
+
+gg_battle_won = {
+	trigger = {
+		has_global_variable = gg_battle_open
+		OR = {
+			AND = {
+				has_variable = guerra_grande_cerrito_government
+				scope:enemy_country ?= {
+					OR = {
+						has_variable = guerra_grande_defensa_government
+						AND = { global_var:gg_battle_open ?= 2 OR = { c:ENR ?= this c:BRZ ?= this } }
+					}
+				}
+			}
+			AND = {
+				OR = {
+					has_variable = guerra_grande_defensa_government
+					AND = { global_var:gg_battle_open ?= 2 OR = { c:ENR ?= this c:BRZ ?= this } }
+				}
+				scope:enemy_country ?= { has_variable = guerra_grande_cerrito_government }
+			}
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_battle_won" # GG_TRAZA
+		if = {
+			limit = { has_variable = guerra_grande_cerrito_government }
+			set_global_variable = { name = gg_battle_result value = 1 }
+		}
+		else = {
+			set_global_variable = { name = gg_battle_result value = 2 }
+		}
+		gg_battle_close = yes
+	}
+}

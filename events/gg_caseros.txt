@@ -215,3 +215,22 @@ gg_caseros.5 = {
 		default_option = yes
 	}
 }
+
+# EN: 23/9/2026 -- the war against Buenos Aires ended yesterday: by now on_wargoal_enforced and on_capitulation
+#     have recorded who won (gg_pact_war_*_won). Neither recorded: a white peace. Hidden, on Argentina.
+# ES: la guerra contra Buenos Aires termino ayer: ya se anoto quien gano. Si nadie, paz blanca. Oculto.
+gg_caseros.6 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6|" # GG_TRAZA
+		if = {
+			limit = { NOT = { global_var:gg_pact_war_urquiza_won = 1 } NOT = { global_var:gg_pact_war_rosas_won = 1 } }
+			set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+		}
+		gg_pact_resolve = yes
+	}
+}

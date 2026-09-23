@@ -1,0 +1,116 @@
+﻿# EN: 23/9/2026 -- STAGE 2, the short wars (etapa2-batallas-plan.md). gg_battle_open global: 1 India Muerta,
+#     2 the campaign of 1851; absent when none is open. The front is the war with both governments in it
+#     (the siege itself is no engine war, so that war is always ours).
+# ES: ETAPA 2, las guerras cortas. gg_battle_open: 1 India Muerta, 2 la campania de 1851.
+
+# EN/ES: in a formation's scope: mobilize (the country is in the play now) and send it to the front
+#     / en el scope de una formacion: movilizar y mandar al frente
+gg_battle_to_front = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_battle_to_front|" # GG_TRAZA
+	if = {
+		limit = { exists = scope:gg_battle_front }
+		if = { limit = { is_mobilized = no } fully_mobilize_army = yes }
+		deploy_to_front = scope:gg_battle_front
+	}
+}
+
+# EN/ES: saves scope:gg_battle_front from any country of the war / guarda el frente de la guerra corta
+gg_battle_find_front = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_battle_find_front|" # GG_TRAZA
+	c:CER ?= {
+		random_scope_war = {
+			limit = {
+				is_war_participant = c:CER
+				is_war_participant = c:URU
+			}
+			random_scope_front = { save_scope_as = gg_battle_front }
+		}
+	}
+}
+
+# EN: Close the open short war: end the play, clear the mark. The caller sets gg_battle_result first:
+#     1 the Cerrito won, 2 the allies (the Defensa and whoever stands with it) won, 0 no battle.
+#     The result enters with the mod's own effects (endurance, score, events), never gg_peace_*.
+# ES: Cerrar la guerra corta abierta. El resultado entra con los efectos del mod, nunca gg_peace_*.
+gg_battle_close = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_battle_close|" # GG_TRAZA
+	debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|cierra|batalla= [GetGlobalVariable('gg_battle_open').GetValue|0] resultado= [GetGlobalVariable('gg_battle_result').GetValue|0]"
+	every_diplomatic_play = {
+		limit = { is_diplomatic_play_type = dp_gg_batalla }
+		end_play = yes
+	}
+	if = {
+		limit = { global_var:gg_battle_open ?= 1 }
+		set_global_variable = gg_battle_india_muerta_done # EN/ES: never twice (gg_battle.1) / nunca dos veces
+		if = {
+			limit = { global_var:gg_battle_result ?= 1 }
+			# EN/ES: the historical result: Rivera's defeat (gg_rivera.2 carries it on) / la derrota de Rivera
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_rivera.2 days = 0 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { global_var:gg_battle_result ?= 2 }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_battle.20 days = 0 popup = yes }
+			}
+		}
+		else = {
+			# EN/ES: no battle: the campaign melts away and Rivera's chain goes on without it
+			#     / sin batalla: la campania se disuelve y la cadena de Rivera sigue sin ella
+			set_global_variable = gg_rivera_india_muerta_settled
+		}
+	}
+	else_if = {
+		limit = { global_var:gg_battle_open ?= 2 }
+		set_global_variable = gg_battle_1851_done
+		if = {
+			limit = { global_var:gg_battle_result ?= 2 }
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_battle.21 days = 0 popup = yes }
+			}
+		}
+		else_if = {
+			limit = { global_var:gg_battle_result ?= 1 }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_battle.22 days = 0 popup = yes }
+			}
+		}
+	}
+	remove_global_variable = gg_battle_open
+	remove_global_variable = gg_battle_result
+}
+
+# EN: 23/9 (Codex) -- the Empire enters the campaign of 1851 (4 September, Caxias). Called by gg_contingent.8.a
+#     (the Uruguayan route) and by the war journal's monthly pulse (the Argentine route, where gg_contingent.8
+#     never fires). Brazil joins FIRST (a country outside the war cannot mobilize), then the allied armies go
+#     to the front: Caxias's Allied Army if it was just raised, and the convention's advance corps (country refs).
+# ES: el Imperio entra en la campania de 1851. Primero se suma a la guerra, despues sus ejercitos al frente.
+gg_battle_brazil_enters = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_battle_brazil_enters|" # GG_TRAZA
+	if = {
+		limit = {
+			global_var:gg_battle_open ?= 2
+			NOT = { has_global_variable = gg_battle_brazil_in }
+			exists = c:BRZ
+		}
+		set_global_variable = gg_battle_brazil_in
+		c:CER ?= {
+			random_scope_war = {
+				limit = { is_war_participant = c:CER is_war_participant = c:URU }
+				if = {
+					limit = { NOT = { is_war_participant = c:BRZ } }
+					join_war = { target = c:BRZ side = c:URU }
+				}
+			}
+		}
+		gg_battle_find_front = yes
+		scope:gg_allied_army ?= { gg_battle_to_front = yes }
+		c:BRZ ?= { var:gg_brazilian_advance_ref ?= { gg_battle_to_front = yes } }
+		c:URU ?= { var:gg_oriental_advance_ref ?= { gg_battle_to_front = yes } }
+	}
+}

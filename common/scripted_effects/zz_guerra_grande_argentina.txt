@@ -806,6 +806,8 @@ gg_argentina_sign_montevideo_convention = {
 				}
 			}
 		}
+		# EN/ES: 23/9 -- kept for the campaign of 1851 (gg_battle_brazil_enters) / se guarda para la campania de 1851
+		if = { limit = { exists = scope:gg_oriental_advance_army } set_variable = { name = gg_oriental_advance_ref value = scope:gg_oriental_advance_army } }
 		random_scope_character = {
 			limit = {
 				has_template = URU_gg_eugenio_garzon
@@ -833,6 +835,8 @@ gg_argentina_sign_montevideo_convention = {
 				}
 			}
 		}
+		# EN/ES: 23/9 -- kept for the campaign of 1851 / se guarda para la campania de 1851
+		if = { limit = { exists = scope:gg_brazilian_advance_army } set_variable = { name = gg_brazilian_advance_ref value = scope:gg_brazilian_advance_army } }
 	}
 	# EN: 23/9/2026 (audit R1) -- the siege is no longer an engine war, so the convention cannot join
 	#     Entre Rios and Brazil to it nor send the advance corps to its front: the Cerrito loses 20 of
@@ -858,10 +862,10 @@ gg_argentina_join_ejercito_grande_allies = {
 	c:ENR ?= {
 		every_scope_war = {
 			limit = { is_war_participant = c:ARG }
-			if = {
-				limit = { exists = c:URU NOT = { is_war_participant = c:URU } }
-				join_war = { target = c:URU side = c:ENR }
-			}
+			# EN/ES: 23/9/2026 (Juan: "contingent, not belligerent") -- the Oriental Republic does not enter
+			#     the war: its division (Cesar Diaz's, historically) marches under Urquiza as a contingent of
+			#     Entre Rios (gg_argentina_*_foreign_contingents), so Buenos Aires cannot make it capitulate
+			#     / la Republica no entra a la guerra: su division marcha bajo Urquiza como contingente
 			if = {
 				limit = { exists = c:BRZ NOT = { is_war_participant = c:BRZ } }
 				join_war = { target = c:BRZ side = c:ENR }
@@ -965,7 +969,9 @@ gg_argentina_complete_foreign_contingents = {
 			}
 		}
 	}
-	c:URU ?= {
+	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
+	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
+	c:ENR ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_oriental_grand_army
 		# EN: Without an owned state there is no valid HQ; skip this formation.
@@ -977,8 +983,8 @@ gg_argentina_complete_foreign_contingents = {
 				hq_region = scope:gg_formation_hq_state.region
 				name = gg_arg_oriental_grand_army_contingent
 				save_scope_as = gg_oriental_grand_army
-				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
-				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_MONTEVIDEO count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
 	}
@@ -1017,7 +1023,9 @@ gg_argentina_limited_foreign_contingents = {
 			}
 		}
 	}
-	c:URU ?= {
+	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
+	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
+	c:ENR ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_oriental_limited_army
 		# EN: Without an owned state there is no valid HQ; skip this formation.
@@ -1029,7 +1037,7 @@ gg_argentina_limited_foreign_contingents = {
 				hq_region = scope:gg_formation_hq_state.region
 				name = gg_arg_oriental_limited_contingent
 				save_scope_as = gg_oriental_limited_army
-				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_MONTEVIDEO count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
 	}

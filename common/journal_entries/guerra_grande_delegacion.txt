@@ -197,6 +197,42 @@ je_gg_delegation = {
 					}
 					else = { trigger_event = { id = gg_argentina.56 days = 0 popup = yes } }
 				}
+				# EN: 23/9/2026 (Juan chose "Rosas's victory + a safety net by date"). THE PACT CLOSES WHEN
+				#     ENTRE RIOS IS BEATEN. An 1851 pronouncement answered with the war of the Pact (gg_argentina.3.b/c,
+				#     which set gg_montevideo_convention_enabled) that ends with Entre Rios a protectorate again, and
+				#     no war against Buenos Aires declared (that one closes by gg_pact_on_war_end), used to leave the
+				#     Pact open for ever: no Caseros, no settlement. It is Rosas's victory (gg_argentina.84, then
+				#     gg_argentina.80). And a net: from 1 May 1853 (the Constitution) such a Pact still open while Buenos
+				#     Aires is not at war with Entre Rios closes by how things stand -- Entre Rios subject or gone:
+				#     Rosas's victory; Entre Rios free: two governments, no victor.
+				# ES: EL PACTO SE CIERRA CUANDO ENTRE RIOS ES BATIDO. Un pronunciamiento de 1851 respondido con la
+				#     guerra del Pacto que termina con Entre Rios otra vez protectorado, sin guerra contra Buenos Aires
+				#     declarada, dejaba el Pacto abierto para siempre. Es victoria de Rosas. Y una red: desde el 1 de
+				#     mayo de 1853 (la Constitucion) todo Pacto abierto sin guerra con Entre Rios se cierra segun como
+				#     este: Entre Rios sujeta o desaparecida, victoria de Rosas; Entre Rios libre, tablas.
+				if = {
+					limit = {
+						NOT = { has_global_variable = gg_pact_settled }
+						NOT = { has_global_variable = gg_caseros_siege }
+						NOT = { has_global_variable = gg_war_against_buenos_aires }
+						NOT = { c:ENR ?= { has_war_with = c:ARG } }
+						# EN/ES: only after a pronouncement answered with war (a peaceful one settles on its own; with
+						#     no pronouncement there was no war to win) / solo tras un pronunciamiento respondido con guerra
+						has_global_variable = gg_montevideo_convention_enabled
+						OR = {
+							c:ENR ?= { is_subject_of = c:ARG }
+							game_date >= 1853.5.1
+						}
+					}
+					if = {
+						limit = { c:ENR ?= { is_subject = no } }
+						set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+					}
+					else = {
+						set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+					}
+					gg_pact_resolve = yes
+				}
 				# EN: THE SPLITS, AFTER THE RESTORATIONS (22/9/2026, decided with Juan). A country of the
 				#     Argentine side that is a subject of Buenos Aires and at peace with everybody (Codex 22/9: a
 				#     war with a third country would lose its fronts and goals) is split into its

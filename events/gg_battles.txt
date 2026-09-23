@@ -1,0 +1,362 @@
+﻿namespace = gg_battle
+# -------------------------------------------------------------------------------------------------
+# EN: STAGE 2 (23/9/2026, docs/guerra-grande-flujo/etapa2-batallas-plan.md, approved by Juan): India Muerta
+#     (1845) and the campaign of 1851 as short engine wars (dp_gg_batalla) with a front on the map. Vanilla's
+#     pattern is the Texan war: a play opened by script and closed by an on_battle_won handler with end_play.
+#     Here the handler is gg_battle_won (common/on_actions/gg_battles_on_actions.txt); a dated timeout closes
+#     the war with no result if no battle is fought.
+#     The engine mobilizes only a country in a play or a war, so the armies are raised the day AFTER the play
+#     opens (.2, .11). The siege's lock (gg_siege_no_aggression) forbids aggressive plays: it is lifted for the
+#     instant of the opening and put back at once.
+# ES: ETAPA 2: India Muerta (1845) y la campania de 1851 como guerras cortas del motor, con frente en el mapa.
+#     El patron es la guerra de Texas de vanilla. El motor solo moviliza a un pais en una jugada o guerra: los
+#     ejercitos se levantan al dia siguiente de abrir. El candado del sitio se levanta solo al abrir.
+# -------------------------------------------------------------------------------------------------
+
+# EN: India Muerta, 27/3/1845 (gg_cal.7, on the Cerrito). Urquiza, in the service of Rosas and Oribe, against
+#     Rivera's army in the countryside. If the war cannot open, the battle is the old event (Rivera's defeat).
+# ES: India Muerta, 27/3/1845. Si la guerra no puede abrirse, la batalla es el evento de antes.
+gg_battle.1 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.1|" # GG_TRAZA
+		set_global_variable = gg_cal_done_7
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				NOT = { has_global_variable = gg_peace_offered }
+				NOT = { has_global_variable = gg_truce }
+				NOT = { has_global_variable = gg_battle_open }
+				NOT = { has_global_variable = gg_rivera_india_muerta_settled }
+				NOT = { has_global_variable = gg_battle_india_muerta_done }
+				# EN/ES: Codex -- Rivera's army exists only on these two roads (the gate of gg_rivera.2)
+				#     / el ejercito de Rivera existe solo por estos dos caminos
+				OR = {
+					has_global_variable = gg_rivera_reinforced
+					has_global_variable = gg_rivera_left_alone
+				}
+				any_country = { has_variable = guerra_grande_defensa_government }
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				save_scope_as = gg_battle_enemy
+			}
+			if = { limit = { has_modifier = gg_siege_no_aggression } remove_modifier = gg_siege_no_aggression }
+			create_diplomatic_play = {
+				name = gg_bat_india_muerta
+				target_country = scope:gg_battle_enemy
+				type = dp_gg_batalla
+				war = yes
+			}
+			add_modifier = { name = gg_siege_no_aggression }
+			set_global_variable = { name = gg_battle_open value = 1 }
+			debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|abre|india_muerta"
+			trigger_event = { id = gg_battle.2 days = 1 }
+			trigger_event = { id = gg_battle.3 days = 34 } # EN/ES: 30/4/1845, no battle / sin batalla
+		}
+		else = {
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_rivera.2 days = 0 popup = yes }
+			}
+		}
+	}
+}
+
+# EN: The armies of India Muerta, the day after the war opened. The Cerrito's field army (the cavalry Urquiza
+#     led for Oribe) and Rivera's army, stronger if the Defensa reinforced him (gg_rivera_reinforced).
+# ES: Los ejercitos de India Muerta, al dia siguiente de abrir la guerra.
+gg_battle.2 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		global_var:gg_battle_open ?= 1
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.2|" # GG_TRAZA
+		gg_battle_find_front = yes
+		gg_select_formation_hq_state = yes
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_bat_cerrito_field_army
+				save_scope_as = gg_bat_cerrito_army
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 4 }
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 2 }
+			}
+		}
+		scope:gg_bat_cerrito_army ?= { gg_battle_to_front = yes }
+		random_country = {
+			limit = { has_variable = guerra_grande_defensa_government }
+			gg_select_formation_hq_state = yes
+			# EN/ES: stronger if the Defensa reinforced him / mas fuerte si la Defensa lo reforzo
+			if = {
+				limit = { exists = scope:gg_formation_hq_state has_global_variable = gg_rivera_reinforced }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_bat_rivera_army
+					save_scope_as = gg_bat_rivera_army
+					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 5 }
+					combat_unit = { type = unit_type:combat_unit_type_irregular_infantry state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				}
+			}
+			else_if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_bat_rivera_army
+					save_scope_as = gg_bat_rivera_army
+					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 3 }
+					combat_unit = { type = unit_type:combat_unit_type_irregular_infantry state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				}
+			}
+			random_scope_character = {
+				limit = {
+					has_template = URU_Fructuoso_Rivera
+					exists = scope:gg_bat_rivera_army
+				}
+				if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+				transfer_to_formation = scope:gg_bat_rivera_army
+			}
+			scope:gg_bat_rivera_army ?= { gg_battle_to_front = yes }
+		}
+	}
+}
+
+# EN/ES: 30/4/1845 -- no battle: the campaign melts away / sin batalla: la campania se disuelve
+gg_battle.3 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.3|" # GG_TRAZA
+		if = {
+			limit = { global_var:gg_battle_open ?= 1 }
+			set_global_variable = { name = gg_battle_result value = 0 }
+			gg_battle_close = yes
+		}
+	}
+}
+
+# EN: The campaign of 1851: Urquiza crosses the Uruguay on 19 July (sent by the war journal's monthly pulse
+#     once Urquiza has turned), on the Defensa. Entre Rios joins the Defensa's side; Brazil joins when Caxias crosses
+#     (gg_contingent.8). Oribe capitulated on 8 October without a battle: that is the timeout.
+# ES: La campania de 1851: Urquiza cruza el Uruguay el 19 de julio. Entre Rios se suma a la Defensa; el
+#     Brasil cuando cruza Caxias. Oribe capitulo el 8 de octubre sin batalla: ese es el tope.
+gg_battle.10 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.10|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				NOT = { has_global_variable = gg_peace_offered }
+				NOT = { has_global_variable = gg_battle_open }
+				NOT = { has_global_variable = gg_battle_1851_done }
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				save_scope_as = gg_battle_enemy
+			}
+			if = { limit = { has_modifier = gg_siege_no_aggression } remove_modifier = gg_siege_no_aggression }
+			create_diplomatic_play = {
+				name = gg_bat_1851
+				target_country = scope:gg_battle_enemy
+				type = dp_gg_batalla
+				war = yes
+			}
+			add_modifier = { name = gg_siege_no_aggression }
+			set_global_variable = { name = gg_battle_open value = 2 }
+			debug_log = "GG_BAT2|[TimeKeeper.GetCurrentDate.GetString]|abre|1851"
+			trigger_event = { id = gg_battle.11 days = 1 }
+			trigger_event = { id = gg_battle.12 days = 7 } # EN/ES: weekly until 8/10/1851 / semanal hasta el 8/10/1851
+		}
+	}
+}
+
+# EN: The armies of 1851, the day after. Entre Rios joins and sends Urquiza's army; the Defensa takes the
+#     field; the Cerrito's armies go to the front.
+# ES: Los ejercitos de 1851, al dia siguiente.
+gg_battle.11 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		global_var:gg_battle_open ?= 2
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.11|" # GG_TRAZA
+		# EN/ES: Entre Rios fights the Cerrito only once bound by the convention of 29 May 1851
+		#     / Entre Rios pelea contra el Cerrito solo si firmo la convencion del 29 de mayo
+		c:ENR ?= {
+			if = {
+				limit = { NOT = { has_war_with = c:CER } has_global_variable = gg_convention_allies_ready }
+				c:CER ?= {
+					random_scope_war = {
+						limit = { is_war_participant = c:CER is_war_participant = c:URU }
+						join_war = { target = c:ENR side = c:URU }
+					}
+				}
+			}
+		}
+		gg_battle_find_front = yes
+		gg_select_formation_hq_state = yes
+		if = {
+			limit = { exists = scope:gg_formation_hq_state }
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_formation_hq_state.region
+				name = gg_bat_defensa_field_army
+				save_scope_as = gg_bat_defensa_army
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 2 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 2 }
+			}
+		}
+		scope:gg_bat_defensa_army ?= { gg_battle_to_front = yes }
+		c:ENR ?= {
+			if = {
+				limit = { has_war_with = c:CER }
+				gg_select_formation_hq_state = yes
+				if = {
+					limit = { exists = scope:gg_formation_hq_state }
+					create_military_formation = {
+						type = army
+						hq_region = scope:gg_formation_hq_state.region
+						name = gg_bat_entre_rios_army
+						save_scope_as = gg_bat_entre_rios_army
+						combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 4 }
+						combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 2 }
+					}
+				}
+				random_scope_character = {
+					limit = {
+						has_template = ARG_Justo_Jose_de_Urquiza
+						exists = scope:gg_bat_entre_rios_army
+						NOT = { exists = this.commander_military_formation }
+					}
+					if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+					transfer_to_formation = scope:gg_bat_entre_rios_army
+				}
+				scope:gg_bat_entre_rios_army ?= { gg_battle_to_front = yes }
+			}
+		}
+		c:CER ?= {
+			every_military_formation = {
+				limit = { is_army = yes }
+				gg_battle_to_front = yes
+			}
+		}
+	}
+}
+
+# EN/ES: 8/10/1851 -- no battle: Oribe capitulated without one; the arbiter decides the peace
+#     / sin batalla: Oribe capitulo sin darla; la paz la decide el arbitro
+gg_battle.12 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.12|" # GG_TRAZA
+		if = {
+			limit = { global_var:gg_battle_open ?= 2 game_date >= 1851.10.8 }
+			set_global_variable = { name = gg_battle_result value = 0 }
+			gg_battle_close = yes
+		}
+		else_if = {
+			limit = { global_var:gg_battle_open ?= 2 }
+			trigger_event = { id = gg_battle.12 days = 7 }
+		}
+	}
+}
+
+# EN: India Muerta won by Rivera -- a counterfactual: historically Urquiza destroyed his army and Rivera fled to
+#     Brazil (gg_rivera.2). Rivera keeps his command; the blancos lose the battle's weight.
+# ES: India Muerta ganada por Rivera -- contrafactico: historicamente Urquiza destruyo su ejercito.
+gg_battle.20 = {
+	type = country_event
+	placement = ROOT
+	title = gg_battle.20.t
+	desc = gg_battle.20.d
+	flavor = gg_battle.20.f
+	event_image = { video = "gg_riv_india_muerta" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12 # EN/ES: the mod's convention (e574a83): events that cannot stall / eventos que no se traban
+	is_popup = yes
+	trigger = { has_variable = guerra_grande_defensa_government }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.20|" # GG_TRAZA
+		set_global_variable = gg_rivera_india_muerta_settled
+	}
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.20.a|" # GG_TRAZA
+		name = gg_battle.20.a
+		default_option = yes
+		gg_score_colorado = { AMOUNT = 2 }
+		gg_endurance_change = { SIDE = cerrito VALUE = -15 }
+	}
+}
+
+# EN: 1851 -- the allies break the Cerrito's lines in battle. The same blow as Caxias's crossing, never twice
+#     (gg_cerrito_broken; gg_contingent.8 reads it).
+# ES: 1851 -- los aliados rompen las lineas del Cerrito en batalla. El mismo golpe que el cruce de Caxias, nunca dos veces.
+gg_battle.21 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.21|" } # GG_TRAZA
+	type = country_event
+	placement = ROOT
+	title = gg_battle.21.t
+	desc = gg_battle.21.d
+	flavor = gg_battle.21.f
+	event_image = { video = "gg_riv_india_muerta" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12 # EN/ES: the mod's convention (e574a83): events that cannot stall / eventos que no se traban
+	is_popup = yes
+	trigger = { has_variable = guerra_grande_cerrito_government }
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.21.a|" # GG_TRAZA
+		name = gg_battle.21.a
+		default_option = yes
+		if = {
+			limit = { NOT = { has_global_variable = gg_cerrito_broken } }
+			set_global_variable = gg_cerrito_broken
+			gg_endurance_change = { SIDE = cerrito VALUE = -30 }
+		}
+	}
+}
+
+# EN: 1851 -- the Cerrito holds the allies off in battle (a counterfactual: there was no battle).
+# ES: 1851 -- el Cerrito resiste a los aliados en batalla (contrafactico: no hubo batalla).
+gg_battle.22 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.22|" } # GG_TRAZA
+	type = country_event
+	placement = ROOT
+	title = gg_battle.22.t
+	desc = gg_battle.22.d
+	flavor = gg_battle.22.f
+	event_image = { video = "gg_riv_india_muerta" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12 # EN/ES: the mod's convention (e574a83): events that cannot stall / eventos que no se traban
+	is_popup = yes
+	trigger = { has_variable = guerra_grande_defensa_government }
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_battle.22.a|" # GG_TRAZA
+		name = gg_battle.22.a
+		default_option = yes
+		custom_tooltip = gg_battle.22.a_tt
+		hidden_effect = { set_global_variable = { name = gg_allies_checked days = 30 } } # EN/ES: the crossing waits a month / el cruce espera un mes
+		gg_endurance_change = { SIDE = defensa VALUE = -10 }
+	}
+}

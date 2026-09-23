@@ -53,10 +53,11 @@ gg_pact_on_war_end = {
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_on_war_end" # GG_TRAZA
-		if = {
-			limit = { NOT = { global_var:gg_pact_war_urquiza_won = 1 } NOT = { global_var:gg_pact_war_rosas_won = 1 } }
-			set_global_variable = { name = gg_pact_war_white_peace value = 1 }
-		}
-		c:ARG ?= { gg_pact_resolve = yes }
+		# EN: 23/9/2026 -- headless run 155901: on_war_end fires BEFORE on_wargoal_enforced and on_capitulation
+		#     in the same tick, so the winner was not recorded yet and a won war closed the Pact as a stalemate
+		#     ("two governments, no victor"). The reading waits one day (gg_caseros.6).
+		# ES: on_war_end corre ANTES que on_wargoal_enforced y on_capitulation en el mismo instante: el ganador
+		#     todavia no estaba anotado y una guerra ganada cerraba el Pacto en tablas. La lectura espera un dia.
+		c:ARG ?= { trigger_event = { id = gg_caseros.6 days = 1 } }
 	}
 }

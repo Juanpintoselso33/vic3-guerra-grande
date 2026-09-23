@@ -54,3 +54,28 @@ gg_endurance_add = {
 		set_global_variable = { name = gg_endurance_$SIDE$ value = -100 }
 	}
 }
+
+# EN: 23/9/2026 (Juan: "what describes the siege itself becomes endurance; pure battle stays for stage 2").
+#     The siege has no engine war, so these modifiers' combat stats do nothing during it; what they stand
+#     for sustains a government month after month instead. Monthly, from the war journal's pulse:
+#       the truce (gg_war_phase_truce)            both governments  +5  -- the fighting stopped
+#       the sea lane (gg_siege_the_sea_lane...)   the Defensa        +2  -- men, money and powder by sea
+#       each foreign legion (Italian, French)    the Defensa        +1
+#       the Argentine auxiliaries                the Cerrito        +2
+#     Their combat stats stay for the short wars of stage 2.
+# ES: lo que describe el sitio pasa a aguante; lo de pura batalla queda para la etapa 2. Mensual.
+gg_siege_modifiers_endurance = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_modifiers_endurance|" # GG_TRAZA
+	every_country = {
+		limit = { has_variable = guerra_grande_defensa_government }
+		if = { limit = { has_modifier = gg_war_phase_truce } gg_endurance_add = { SIDE = defensa VALUE = 5 } }
+		if = { limit = { has_modifier = gg_siege_the_sea_lane_stays_open } gg_endurance_add = { SIDE = defensa VALUE = 2 } }
+		if = { limit = { has_modifier = guerra_grande_italian_legion } gg_endurance_add = { SIDE = defensa VALUE = 1 } }
+		if = { limit = { has_modifier = guerra_grande_foreign_legions } gg_endurance_add = { SIDE = defensa VALUE = 1 } }
+	}
+	every_country = {
+		limit = { has_variable = guerra_grande_cerrito_government }
+		if = { limit = { has_modifier = gg_war_phase_truce } gg_endurance_add = { SIDE = cerrito VALUE = 5 } }
+		if = { limit = { has_modifier = guerra_grande_argentine_auxiliaries } gg_endurance_add = { SIDE = cerrito VALUE = 2 } }
+	}
+}

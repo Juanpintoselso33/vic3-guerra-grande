@@ -47,7 +47,7 @@
  gg_war_phase_siege:0 "Dos gobiernos"
  gg_war_phase_siege_desc:0 "Cada uno se dice el gobierno legal de la República."
  gg_war_phase_truce:0 "La tregua"
- gg_war_phase_truce_desc:0 "Mientras se negocia, las bajas pesan menos."
+ gg_war_phase_truce_desc:0 "Mientras se negocia, no se pelea: los dos gobiernos recuperan #P 5#! de aguante por mes."
 
  gg_war_ui_leader_colorado:0 "#R Colorados#!\n#b [Character.GetFullName]#!"
  gg_war_ui_leader_blanco:0 "#blue_value Blancos#!\n#b [Character.GetFullName]#!"
