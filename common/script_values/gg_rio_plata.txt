@@ -116,8 +116,14 @@ gg_ui_plata_phase3_mode = {
 		}
 		value = 2
 	}
+	# EN/ES: 22/9/2026, decided with Juan -- 4 France lifted her blockade (Gros, June 1848) with London
+	#     still in the question; 3 London signed (always after the lifting: month 36 > 34); 5 a French
+	#     intervention alone after the lifting / 4 Francia levanto su bloqueo con Londres todavia en la
+	#     cuestion; 3 Londres firmo; 5 intervencion solo francesa tras el levantamiento
+	if = { limit = { has_global_variable = gg_plata_ba_blockade_lifted } value = 4 }
 	if = { limit = { has_global_variable = gg_plata_britain_settled } value = 3 }
 	if = { limit = { has_global_variable = gg_plata_france_alone } value = 1 }
+	if = { limit = { has_global_variable = gg_plata_france_alone has_global_variable = gg_plata_ba_blockade_lifted } value = 5 }
 }
 # EN/ES: which envoy London has in the river, by months of intervention (SOURCES_powers.md 1-6)
 #     / que enviado tiene Londres en el rio, por meses de intervencion
@@ -281,8 +287,9 @@ gg_ui_plata_clocks_shown = {
 gg_ui_plata_ba_blockader = {
 	value = 0
 	if = { limit = { gg_plata_ba_port_blockaded = yes } value = 4 }
-	if = { limit = { gg_plata_phase = 3 } value = 2 }
-	if = { limit = { gg_plata_phase = 3 gg_ui_plata_phase3_mode > 0 } value = 3 }
+	# EN/ES: only until France lifts her blockade (Gros, June 1848) / solo hasta que Francia levanta su bloqueo
+	if = { limit = { gg_plata_phase = 3 NOT = { has_global_variable = gg_plata_ba_blockade_lifted } } value = 2 }
+	if = { limit = { gg_plata_phase = 3 NOT = { has_global_variable = gg_plata_ba_blockade_lifted } gg_ui_plata_phase3_mode > 0 } value = 3 }
 	if = { limit = { has_global_variable = gg_plata_french_blockade } value = 1 }
 }
 # EN/ES: warships off Montevideo's own port (Brown's squadron), apart from the strait's passage

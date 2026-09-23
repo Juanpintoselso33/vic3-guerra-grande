@@ -48,6 +48,14 @@ gg_naval.1 = {
 	#     Rosas cierra el rio igual
 	desc = {
 		first_valid = {
+			# EN: 22/9/2026 (river audit) -- a human Rosas may have left the river open (gg_plata.31.b) or
+			#     not answered yet: then there is no closure to narrate, only Brown's squadron at hand.
+			# ES: un Rosas jugador pudo dejar el rio abierto (gg_plata.31.b) o no haber contestado: entonces
+			#     no hay cierre que contar, solo la escuadra de Brown a mano.
+			triggered_desc = {
+				desc = gg_naval.1.d_open
+				trigger = { global_var:gg_plata_rosas_stance ?= 0 }
+			}
 			triggered_desc = {
 				desc = gg_naval.1.d_neutral
 				trigger = { has_global_variable = gg_partition_early }

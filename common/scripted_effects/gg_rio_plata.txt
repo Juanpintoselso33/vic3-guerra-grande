@@ -410,8 +410,12 @@ gg_plata_monthly = {
 # ES: El mantenimiento mensual de la situacion, desde je_gg_patrons: los efectos de
 #     cada fase (dos meses, renovados, asi caen solos cuando termina la fase) y las banderas.
 gg_plata_situation_monthly = {
+	# EN: 22/9/2026, decided with Juan -- the city's mortality follows the closure itself, in any
+	#     phase: an ultimatum pending or squadrons in the river do not feed Montevideo while Rosas's
+	#     shore stays shut. / ES: decidido con Juan -- la mortalidad de la plaza sigue al cierre mismo,
+	#     en cualquier fase: ni el ultimatum ni las escuadras la alimentan mientras la orilla este cerrada.
 	if = {
-		limit = { gg_plata_phase = 1 }
+		limit = { gg_plata_closed = yes }
 		p:x302DDA.state ?= { add_modifier = { name = gg_plata_phase_blockade months = 2 } }
 	}
 	if = {
@@ -420,7 +424,12 @@ gg_plata_situation_monthly = {
 	}
 	if = {
 		limit = { gg_plata_phase = 3 }
-		p:x365A5B.state ?= { add_modifier = { name = gg_plata_phase_intervention_port months = 2 } }
+		# EN/ES: 22/9/2026, decided with Juan -- until France lifts her blockade (Gros, June 1848,
+		#     gg_plata_ba_blockade_lifted) / hasta que Francia levanta su bloqueo (Gros, junio de 1848)
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_ba_blockade_lifted } }
+			p:x365A5B.state ?= { add_modifier = { name = gg_plata_phase_intervention_port months = 2 } }
+		}
 		# EN/ES: Britain pays only while its squadron is in the river / Gran Bretana paga solo mientras su
 		#     escuadra esta en el rio
 		if = {
@@ -437,7 +446,7 @@ gg_plata_situation_monthly = {
 	# ES: los efectos de una fase terminan con la fase, no hasta dos meses despues: la franja ya mostraba
 	#     la fase siguiente mientras los modificadores viejos seguian.
 	if = {
-		limit = { NOT = { gg_plata_phase = 1 } }
+		limit = { NOT = { gg_plata_closed = yes } }
 		p:x302DDA.state ?= { if = { limit = { has_modifier = gg_plata_phase_blockade } remove_modifier = gg_plata_phase_blockade } }
 	}
 	if = {
@@ -445,8 +454,16 @@ gg_plata_situation_monthly = {
 		c:ARG ?= { if = { limit = { has_modifier = gg_plata_phase_ultimatum } remove_modifier = gg_plata_phase_ultimatum } }
 	}
 	if = {
-		limit = { NOT = { gg_plata_phase = 3 } }
+		limit = {
+			OR = {
+				NOT = { gg_plata_phase = 3 }
+				has_global_variable = gg_plata_ba_blockade_lifted
+			}
+		}
 		p:x365A5B.state ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_port } remove_modifier = gg_plata_phase_intervention_port } }
+	}
+	if = {
+		limit = { NOT = { gg_plata_phase = 3 } }
 		c:FRA ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_powers } remove_modifier = gg_plata_phase_intervention_powers } }
 	}
 	if = {

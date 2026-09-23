@@ -126,6 +126,23 @@ widget = {
    using = fontsize_large align = center|nobaseline
    text = "gg_ui_plata_phase_3_france"
   }
+  # EN/ES: France lifted her blockade of Buenos Aires (Gros, June 1848) / Francia levanto su bloqueo
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)4'))]"
+   tooltip = "gg_ui_plata_phase_3_lifted_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_3"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)5'))]"
+   tooltip = "gg_ui_plata_phase_3_france_lifted_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_3_france"
+  }
   textbox = {
    visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)5')]"
    tooltip = "gg_ui_plata_phase_5_tt"

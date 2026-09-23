@@ -183,6 +183,24 @@ gg_plata.4 = {
 				NOT = { has_global_variable = gg_plata_intervention_over }
 			}
 			change_global_variable = { name = gg_plata_intervention_months add = 1 }
+			# EN: 22/9/2026, decided with Juan -- France lifts her blockade of Buenos Aires with Gore and
+			#     Gros: the convention of 12/6/1848 was arranged by Baron Gros to compensate Montevideo for
+			#     the lifting of the French blockade (SOURCES_powers.md section 7, Duvergier, Collection
+			#     complete des lois, t. 50). 34 months after the passports (31/7/1845 -> 12/6/1848). France
+			#     stays in the question until Lepredour (month 45). The same month applies to a French
+			#     intervention alone, which has no Gros link of its own.
+			# ES: decidido con Juan -- Francia levanta su bloqueo de Buenos Aires con Gore y Gros: la
+			#     convencion del 12/6/1848 la arreglo el baron Gros para compensar a Montevideo por el
+			#     levantamiento del bloqueo frances. 34 meses despues de los pasaportes. Francia sigue en la
+			#     cuestion hasta Lepredour. El mismo mes vale para una intervencion solo francesa.
+			if = {
+				limit = {
+					global_var:gg_plata_intervention_months >= 34
+					NOT = { has_global_variable = gg_plata_ba_blockade_lifted }
+				}
+				set_global_variable = gg_plata_ba_blockade_lifted
+				gg_plata_notify = { EVENT = gg_plata.46 }
+			}
 			if = {
 				limit = { year < 1862 }
 				trigger_event = { id = gg_plata.4 days = 30 }
@@ -213,11 +231,10 @@ gg_plata.20 = {
 				trigger = { NOT = { has_global_variable = guerra_grande_open_war } }
 			}
 			# EN: River audit 22/9 -- shut again with the ultimatum pending or the squadrons in the river:
-			#     the band shows them, not the blockade, so the city's mortality (phase 1) does not apply,
-			#     and no patience is being spent.
-			# ES: cerrado otra vez con el ultimatum pendiente o las escuadras en el rio: la franja las
-			#     muestra a ellas, no al bloqueo, asi que no rige la mortalidad de la fase 1 ni se gasta
-			#     paciencia.
+			#     no patience is being spent. The city's mortality follows the closure in any phase
+			#     (decided with Juan, gg_plata_situation_monthly).
+			# ES: cerrado otra vez con el ultimatum pendiente o las escuadras en el rio: no se gasta
+			#     paciencia. La mortalidad de la plaza sigue al cierre en cualquier fase (decidido con Juan).
 			triggered_desc = {
 				desc = gg_plata.20.d_squadrons
 				trigger = {
@@ -564,6 +581,19 @@ gg_plata.41 = {
 		if = { limit = { has_global_variable = gg_plata_french_blockade } remove_global_variable = gg_plata_french_blockade }
 		p:x365A5B.state ?= { if = { limit = { has_modifier = gg_french_blockade_port } remove_modifier = gg_french_blockade_port } }
 		if = { limit = { is_player = yes has_variable = gg_arg_rosas_seat } trigger_event = { id = gg_plata.43 popup = yes } }
+		# EN: 22/9/2026 (river audit, decided with Juan) -- Montevideo hears of the Arana-Mackau
+		#     convention (gg_phase1.5) on the day the blockade lifts, not 616 days after its answer to
+		#     gg_phase1.1, which drifted when that answer came late. Only if the war with Rosas was
+		#     decided (gg_phase1.1 sets the mark), as before.
+		# ES: Montevideo se entera de Mackau el dia que se levanta el bloqueo, no 616 dias despues de
+		#     contestar gg_phase1.1. Solo si se decidio la guerra con Rosas, como antes.
+		if = {
+			limit = {
+				has_global_variable = gg_mackau_notice_due
+				NOT = { has_global_variable = guerra_grande_split_done }
+			}
+			c:URU ?= { trigger_event = { id = gg_phase1.5 popup = yes } }
+		}
 	}
 }
 gg_plata.42 = {
@@ -642,5 +672,38 @@ gg_plata.45 = {
 		name = gg_plata.45.a
 		default_option = yes
 		custom_tooltip = gg_plata_rosas_close_tt
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.46 -- FRANCE LIFTS THE BLOCKADE OF BUENOS AIRES (22/9/2026, decided with Juan). Notice
+#     to the players of the river, from the intervention's clock (gg_plata.4). The squadron stays in
+#     the Plata and Paris in the question until Lepredour.
+# ES: FRANCIA LEVANTA EL BLOQUEO DE BUENOS AIRES. Aviso a los jugadores del rio, desde el reloj de la
+#     intervencion. La escuadra sigue en el Plata y Paris en la cuestion hasta Lepredour.
+# SOURCE / FUENTE: SOURCES_powers.md section 7 (the convention of 12/6/1848 arranged by Baron Gros «pour
+#     compenser» the lifting of the French blockade; Duvergier, Collection complete des lois, t. 50).
+# -------------------------------------------------------------------------------------------------
+gg_plata.46 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.46.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.46.d_france
+				trigger = { has_global_variable = gg_plata_france_alone }
+			}
+			triggered_desc = { desc = gg_plata.46.d }
+		}
+	}
+	event_image = { video = "gg_plata_guizot" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	option = {
+		name = gg_plata.20.a
+		default_option = yes
+		custom_tooltip = gg_plata.46.a_tt
 	}
 }
