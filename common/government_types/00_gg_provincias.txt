@@ -1,0 +1,19 @@
+﻿# EN: 22/9/2026 (Juan: "the one left has President as his title") -- the provinces that take the mandate
+#     back were provinces, and their head was the governor. Loads before vanilla's 02_ file, and the
+#     engine takes the first government type whose possible is met (vanilla does the same with its
+#     tag-specific types in 00_/01_ files).
+# ES: las provincias que retiran el encargo eran provincias, y su cabeza era el gobernador.
+gov_gg_provincia = {
+	transfer_of_power = dictatorial
+	male_ruler = "RULER_TITLE_GOVERNOR"
+	female_ruler = "RULER_TITLE_GOVERNOR"
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		OR = {
+			c:CRR ?= this
+			c:ENR ?= this
+		}
+	}
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}

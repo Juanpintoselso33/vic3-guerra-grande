@@ -264,6 +264,9 @@ gg_plata.22 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
+	# EN/ES: Codex 22/9 -- Rosas gets the ultimatum itself (gg_plata.10), not the notice about it
+	#     / Rosas recibe el ultimatum mismo, no el aviso sobre el
+	trigger = { NOT = { has_variable = gg_arg_rosas_seat } }
 	option = {
 		name = gg_plata.20.a
 		default_option = yes

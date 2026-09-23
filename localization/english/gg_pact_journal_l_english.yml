@@ -8,7 +8,7 @@
  gg_pact_j_row_norte:0 "#b The North#!"
  gg_pact_j_row_entre_rios:0 "#b Entre Ríos#!"
  gg_pact_j_gov_corrientes:0 "Governed by #b [Character.GetFullName]#!"
- gg_pact_j_gov_norte:0 "In command in the North: #b [Character.GetFullName]#!"
+ gg_pact_j_gov_norte:0 "Voice of the North: #b [Character.GetFullName]#!"
  gg_pact_j_gov_entre_rios:0 "Governed by #b [Character.GetFullName]#!"
  gg_pact_j_st_0:0 "#P Delegating#!"
  gg_pact_j_st_1:0 "#Y Petition pending#!"

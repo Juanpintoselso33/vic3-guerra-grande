@@ -52,5 +52,6 @@
  guerra_grande_treaties_repudiated:0 "Tratados repudiados"
  guerra_grande_creditor_overthrown:0 "El acreedor derrocado"
  gg_loan.5.d_none:0 "Llega la paz y con ella la cuenta, pero la Defensa no firmó con el Imperio ni hipotecó su aduana: no hay tratados que pagar ni junta extranjera que administre las rentas. La ciudad sale de nueve años de sitio pobre, pero sin deberle a nadie."
+ gg_loan.6.f_other:0 "Terminó la guerra. Las cuentas no."
  gg_loan.6.d_other:0 "Terminó la guerra y las cuentas del Cerrito la sobreviven. Su gobierno pidió prestado para darle de comer y pagarle a la tropa frente a Montevideo, y la paz no pagó un solo peso de eso. El que gobierne ahora la República tiene que decir si esa deuda es del país, o si se muere con el gobierno que la firmó."
  gg_loan.6.d_none:0 "Termina la guerra y el gobierno del Cerrito no deja deudas propias: lo que gastó durante la guerra lo pagaron la aduana del Buceo y la plata que venía de Buenos Aires, y no queda cuenta que pase a otro."

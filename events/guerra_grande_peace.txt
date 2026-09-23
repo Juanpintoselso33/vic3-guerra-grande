@@ -191,6 +191,8 @@ gg_peace.1 = {
 
 		hidden_effect = {
 			set_global_variable = gg_peace_no_victors
+			# EN/ES: Codex 22/9 -- the Pantanoso peace, read by gg_loan.6 / la paz del Pantanoso
+			set_global_variable = gg_peace_pantanoso
 		}
 
 		ai_chance = {

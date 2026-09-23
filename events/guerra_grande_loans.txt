@@ -709,7 +709,7 @@ gg_loan.6 = {
 				trigger = {
 					has_variable = gg_loan_debt
 					var:gg_loan_debt >= 1
-					has_global_variable = gg_peace_no_victors
+					has_global_variable = gg_peace_pantanoso
 					game_date >= 1851.1.1
 				}
 			}
@@ -725,7 +725,12 @@ gg_loan.6 = {
 			}
 		}
 	}
-	flavor = gg_loan.6.f
+	flavor = {
+		first_valid = {
+			triggered_desc = { desc = gg_loan.6.f trigger = { has_global_variable = gg_peace_pantanoso } }
+			triggered_desc = { desc = gg_loan.6.f_other }
+		}
+	}
 
 	# EN: The reckoning: the debts of the Cerrito.
 	event_image = {

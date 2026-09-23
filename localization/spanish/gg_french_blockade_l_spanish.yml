@@ -17,3 +17,8 @@
  gg_plata.43.f:0 "Buenos Aires, octubre de 1840."
  gg_plata.43.a:0 "El puerto vuelve a ser nuestro."
  gg_plata.43.a_tt:0 "Termina el bloqueo francés: la orilla de Buenos Aires recupera su comercio y su puerto."
+ gg_ui_plata_ba_blockaded_powers:0 "#N Bloqueada por las escuadras#!"
+ gg_ui_plata_ba_blockaded_powers_tt:0 "Las escuadras de las potencias están frente al puerto de Buenos Aires: el cerrado es Buenos Aires, no Montevideo. La batería sigue decidiendo si Rosas puede cerrar el río."
+ gg_ui_plata_ba_blockaded_fr_int:0 "#N Bloqueada por Francia#!"
+ gg_ui_plata_mvd_port_blockaded:0 "#N Puerto bloqueado#!"
+ gg_ui_plata_mvd_port_blockaded_tt:0 "Hay barcos de guerra frente al puerto mismo de Montevideo. Es un bloqueo naval, aparte del paso del río que Rosas abre o cierra desde su orilla."

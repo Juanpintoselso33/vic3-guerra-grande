@@ -23,7 +23,12 @@ guerra_grande_on_game_start = {
 				limit = {
 					NOT = { any_country = { any_scope_character = { has_template = CRR_gg_genaro_beron_de_astrada } } }
 				}
-				create_character = { template = CRR_gg_genaro_beron_de_astrada }
+				create_character = {
+					template = CRR_gg_genaro_beron_de_astrada
+					# EN/ES: Codex 22/9 -- no Argentine command before 1839; the rising makes him ruler
+					#     / sin mando argentino antes de 1839; el levantamiento lo hace gobernante
+					on_created = { if = { limit = { is_general = yes } remove_character_role = general } }
+				}
 			}
 		}
 		# EN/ES: 22/9/2026 -- the French blockade of Buenos Aires by date: 28/3/1838 (817 days) to
@@ -31,6 +36,14 @@ guerra_grande_on_game_start = {
 		c:ARG ?= {
 			trigger_event = { id = gg_plata.40 days = 817 }
 			trigger_event = { id = gg_plata.41 days = 1763 }
+		}
+		# EN/ES: 22/9/2026 (Juan) -- Avellaneda carries the North from Heredia's death to the Coalition:
+		#     he exists from day one and the Coalition moves him (gg_ruler_set) / existe desde el primer dia
+		c:ARG ?= {
+			if = {
+				limit = { NOT = { any_country = { any_scope_character = { has_template = CLN_gg_marco_avellaneda } } } }
+				create_character = { template = CLN_gg_marco_avellaneda }
+			}
 		}
 		# EN: 22/9/2026 (Juan) -- Oribe keeps imperious (-35 popularity, and a ruler's popularity is
 		#     authority); his party's name for him offsets part of it, leaving him at -10.

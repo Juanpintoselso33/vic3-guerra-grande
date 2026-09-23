@@ -211,3 +211,19 @@ gg_ui_plata_clocks_shown = {
 	value = 0
 	if = { limit = { OR = { gg_ui_plata_patience_shown > 0 gg_ui_plata_hunger_shown > 0 } } value = 1 }
 }
+
+# EN/ES: 22/9/2026 (Juan) -- who blockades the Buenos Aires shore: 0 nobody, 1 France (1838-1840),
+#     2 the powers' squadrons (phase 3), 3 France alone in the intervention
+#     / quien bloquea la orilla de Buenos Aires
+gg_ui_plata_ba_blockader = {
+	value = 0
+	if = { limit = { gg_plata_phase = 3 } value = 2 }
+	if = { limit = { gg_plata_phase = 3 has_global_variable = gg_plata_france_alone } value = 3 }
+	if = { limit = { has_global_variable = gg_plata_french_blockade } value = 1 }
+}
+# EN/ES: warships off Montevideo's own port (Brown's squadron), apart from the strait's passage
+#     / barcos de guerra frente al puerto de Montevideo, aparte del paso del estrecho
+gg_ui_plata_mvd_port_blockaded = {
+	value = 0
+	if = { limit = { p:x302DDA.state ?= { blockade_level > 0 } } value = 1 }
+}

@@ -186,10 +186,8 @@ gg_argentina_create_coalicion = {
 		#     1840 la cabeza del pronunciamiento es un abogado y periodista, no un caudillo. A
 		#     Brizuela lo nombran Director de la Liga despues, con facultad de hacer la guerra, firmar
 		#     la paz y negociar emprestitos: es su propio evento, del 24/9/1840, y falta escribirlo.
-		create_character = {
-			template = CLN_gg_marco_avellaneda
-			ruler = yes
-		}
+		# EN/ES: 22/9/2026 -- he exists in the Confederation from 1836: fetched, not copied / se lo trae
+		gg_ruler_set = { TEMPLATE = CLN_gg_marco_avellaneda }
 		create_character = {
 			template = CLN_gg_tomas_brizuela
 		}

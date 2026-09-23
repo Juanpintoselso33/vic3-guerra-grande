@@ -124,6 +124,15 @@ je_gg_delegation = {
 						has_global_variable = gg_delegation_gone_corrientes
 					}
 					gg_delegation_restored = { KEY = corrientes COUNT = 1 }
+					# EN/ES: 22/9/2026 (Juan) -- a beaten Corrientes gets the governor Rosas installed: Romero
+					#     (July 1839), Cabral after 1842 / el gobernador que puso Rosas: Romero, Cabral desde 1842
+					c:CRR ?= {
+						if = {
+							limit = { game_date >= 1842.1.1 }
+							gg_ruler_set = { TEMPLATE = CRR_gg_pedro_cabral }
+						}
+						else = { gg_ruler_set = { TEMPLATE = CRR_gg_jose_antonio_romero } }
+					}
 					set_global_variable = { name = gg_corrientes_recovery days = 730 }
 					if = {
 						limit = { c:CRR ?= { is_subject_of = c:ARG } }

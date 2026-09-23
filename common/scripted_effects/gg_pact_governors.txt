@@ -26,7 +26,14 @@ gg_pact_governors_update = {
 		limit = { exists = c:CLN c:CLN = { exists = ruler } }
 		c:CLN = { ruler = { set_global_variable = { name = gg_pact_gov_norte value = this } } }
 	}
-	else = { gg_pact_gov_from_template = { TEMPLATE = ARG_Alejandro_Heredia VAR = gg_pact_gov_norte } }
+	else = {
+		gg_pact_gov_from_template = { TEMPLATE = ARG_Alejandro_Heredia VAR = gg_pact_gov_norte }
+		# EN/ES: after Heredia's death (Nov 1838), Avellaneda / despues de la muerte de Heredia, Avellaneda
+		if = {
+			limit = { NOT = { has_global_variable = gg_pact_gov_norte } }
+			gg_pact_gov_from_template = { TEMPLATE = CLN_gg_marco_avellaneda VAR = gg_pact_gov_norte }
+		}
+	}
 	if = {
 		limit = { exists = c:ENR c:ENR = { exists = ruler } }
 		c:ENR = { ruler = { set_global_variable = { name = gg_pact_gov_entre_rios value = this } } }

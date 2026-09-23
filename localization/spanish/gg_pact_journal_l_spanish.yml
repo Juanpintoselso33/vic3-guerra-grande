@@ -8,7 +8,7 @@
  gg_pact_j_row_norte:0 "#b El Norte#!"
  gg_pact_j_row_entre_rios:0 "#b Entre Ríos#!"
  gg_pact_j_gov_corrientes:0 "Gobierna #b [Character.GetFullName]#!"
- gg_pact_j_gov_norte:0 "Manda en el Norte: #b [Character.GetFullName]#!"
+ gg_pact_j_gov_norte:0 "La voz del Norte: #b [Character.GetFullName]#!"
  gg_pact_j_gov_entre_rios:0 "Gobierna #b [Character.GetFullName]#!"
  gg_pact_j_st_0:0 "#P Delega#!"
  gg_pact_j_st_1:0 "#Y Reclamo pendiente#!"

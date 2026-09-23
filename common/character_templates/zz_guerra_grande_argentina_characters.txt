@@ -246,3 +246,30 @@ ARG_gg_jose_felix_aldao = {
 	}
 	trait_generation = { }
 }
+
+# EN/ES: 22/9/2026 -- the governors Rosas put in Corrientes / los gobernadores que Rosas puso en Corrientes
+#     (Wikipedia ES, Campanas correntinas contra Rosas). No dates or traits in the source: none invented.
+CRR_gg_jose_antonio_romero = {
+	first_name = gg_name_jose_antonio
+	last_name = gg_name_romero
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	home_region = STATE_CORRIENTES
+}
+CRR_gg_pedro_cabral = {
+	first_name = gg_name_pedro
+	last_name = gg_name_cabral
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	home_region = STATE_CORRIENTES
+}
