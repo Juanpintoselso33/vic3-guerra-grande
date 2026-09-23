@@ -376,3 +376,33 @@ gg_cerrito_army_forming = {
 	building_training_rate_add = 1000
 	building_training_rate_mult = 2
 }
+
+# EN: 23/9/2026 (headless run to 1846; decided with Juan) -- the Cerrito's army sat mobilized on the siege
+#     line at 23-25 % supply, bled by attrition and drained San Jose (22,800 workers to 1,400) with no
+#     battle fought. The besiegers ate from their own countryside -- the estancias and the saladeros of the
+#     Buceo worked all through the war -- so they need half the supply the engine assumes. Vanilla
+#     precedent: Paraguay's barracks boost, unit_supply_consumption_mult -0.5 (brazil_2_modifiers.txt).
+#     Added at the split (gg_troops.2), removed with the other wartime modifiers.
+# ES: el ejercito sitiador comia de su propia campania: necesita la mitad del suministro. Se pone en el
+#     corte y se saca con los demas modificadores de guerra.
+gg_cerrito_lives_off_the_land = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	unit_supply_consumption_mult = -0.5
+}
+
+# EN: 23/9/2026 (headless runs; decided with Juan: "Defensa a la par") -- in every run one assault of the
+#     Cerrito's AI on the walls decided the war, because the Defensa's battalions were born empty at the
+#     split (800-1,500 men) and the AI saw a weak city. Montevideo in February 1843 was the zenith of its
+#     mobilisation: ~6,500 combatants, 71 % of them volunteer corps, national guards and urban militias
+#     (Etchechury 2017, note 29; SOURCES_french_legion.md). The city arms fast after the split, the same
+#     answer the Cerrito has (gg_cerrito_army_forming), so the two sides face each other at comparable
+#     strength and the siege stalls, as it did.
+# ES: en cada corrida un asalto de la IA del Cerrito decidio la guerra, porque los batallones de la Defensa
+#     nacian vacios en el corte y la IA veia una ciudad debil. Montevideo en febrero de 1843 estaba en el
+#     cenit de su movilizacion: ~6.500 combatientes. La ciudad se arma rapido tras el corte, como el
+#     Cerrito, asi los dos quedan parejos y el sitio se estanca, como se estanco.
+gg_defensa_city_in_arms = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	building_training_rate_add = 1000
+	building_training_rate_mult = 2
+}

@@ -1,0 +1,265 @@
+﻿# EN: 23/9/2026 (headless run: Tucuman, Jujuy, Corrientes and La Rioja still showed "President") --
+#     the engine does not pick the "best" valid government type, so vanilla keeps its generic
+#     presidential types from ever matching a Peru-Bolivia member (NAND pbc_member, 02_presidential_
+#     republics.txt). Same method here: these eight generic types are vanilla's, copied whole, plus one
+#     line that leaves the Argentine province countries to gov_gg_provincia (governor).
+#     Re-copy from vanilla on a game update; only the gg_is_province_country line is ours.
+# ES: el motor no elige el "mejor" tipo valido, asi que vanilla impide a mano que los tipos presidenciales
+#     genericos le toquen a un miembro de la Confederacion Peru-Boliviana. Mismo metodo: estos ocho son
+#     los de vanilla, copiados enteros, mas una linea que deja a las provincias argentinas en
+#     gov_gg_provincia (gobernador). Recopiar de vanilla si el juego se actualiza.
+
+REPLACE:gov_technate_presidential = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_CHIEF_EXECUTIVE"
+	female_ruler = "RULER_TITLE_CHIEF_EXECUTIVE"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		has_law_or_variant = law_type:law_technocracy
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_banana_republic = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = no
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		gdp < 2000000
+		any_scope_state = {
+			has_building = building_banana_plantation
+		}
+		market = {
+			mg:fruit = {
+				market_goods_exports >= 200
+			}
+		}
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_military_dictatorship = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_GENERAL"
+	female_ruler = "RULER_TITLE_GENERAL"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		has_law_or_variant = law_type:law_autocracy
+		OR = {
+			has_law_or_variant = law_type:law_mass_conscription
+			has_law_or_variant = law_type:law_professional_army
+		}
+		ig:ig_armed_forces ?= {
+			is_in_government = yes
+		}
+		NOT = { # Hispanic/Portuguese countries get juntas instead
+			any_primary_culture = {
+				OR = {
+					has_discrimination_trait = language_hispanophone
+					has_discrimination_trait = language_lusophone
+				}
+			}
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_presidential_dictatorship = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		has_law_or_variant = law_type:law_autocracy
+		OR = {
+			has_law_or_variant = law_type:law_peasant_levies
+			has_law_or_variant = law_type:law_national_militia
+			ig:ig_armed_forces ?= {
+				is_in_government = no
+			}
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_junta = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_GENERAL"
+	female_ruler = "RULER_TITLE_GENERAL"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = no
+		OR = {
+			has_law_or_variant = law_type:law_mass_conscription
+			has_law_or_variant = law_type:law_professional_army
+		}
+		ig:ig_armed_forces ?= {
+			is_in_government = yes
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_presidential_oligarchy = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = no
+		NOT = {
+			coa_fascist_trigger = yes
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+REPLACE:gov_presidential_democracy = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = yes
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+			AND = {
+				country_has_primary_culture = cu:brazilian
+				has_law_or_variant = law_type:law_presidential_republic
+				has_law_or_variant = law_type:law_landed_voting
+				OR = {
+					has_law_or_variant = law_type:law_tenant_farmers
+					has_law_or_variant = law_type:law_serfdom
+				}
+			}
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NAND = {
+			c:EZO ?= this
+			has_variable = ezo_republic_var
+		}
+	}
+
+	on_government_type_change = {
+		change_to_presidential_elective = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_presidential_elective = yes
+	}
+}
+
+REPLACE:gov_presidential_single_party_state = {
+	transfer_of_power = presidential_elective
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		has_law_or_variant = law_type:law_single_party_state
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			has_variable = pbc_member
+		}
+		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NAND = {
+			c:EZO ?= this
+			has_variable = ezo_republic_var
+		}
+	}
+
+	on_government_type_change = {
+		change_to_presidential_elective = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_presidential_elective = yes
+	}
+}

@@ -147,6 +147,8 @@ gg_province_split_beaten = {
 #     gobernador federal) and «Celedonio Gutierrez» (Tucuman, 14/11/1841-14/6/1852); decisiones-argentina.md, 12.
 gg_argentina_split_coalition = {
 	save_scope_as = gg_split_league
+	# EN/ES: marked BEFORE the tag change, on the league itself (gg_provinces.1) / marcada ANTES del cambio de tag
+	set_variable = { name = gg_split_league_pending value = 0 }
 	set_global_variable = gg_coalition_split
 	gg_province_split_beaten = yes
 	if = {
@@ -197,25 +199,14 @@ gg_argentina_split_coalition = {
 		c:ARG ?= { annex = scope:gg_split_league }
 	}
 	# EN: playtest 23/9 -- the remainder came out of the tag change with no protectorate (Tucuman stood
-	#     independent in 1841 and the six never returned to the Pact): Buenos Aires makes it one, as
-	#     it does with every province split off. The saved scope, not c:<new tag>, which does not
-	#     resolve in the same effect after change_tag.
-	# ES: el resto salio del cambio de tag sin protectorado (Tucuman quedo independiente en 1841 y las
-	#     seis no volvian al Pacto): Buenos Aires lo hace protectorado, como a cada provincia separada.
-	if = {
-		limit = {
-			exists = scope:gg_split_league
-			exists = c:ARG
-			scope:gg_split_league = { NOT = { is_subject_of = c:ARG } }
-			NOT = { scope:gg_split_league = c:ARG }
-		}
-		c:ARG = {
-			create_diplomatic_pact = {
-				country = scope:gg_split_league
-				type = protectorate
-			}
-		}
-	}
+	#     independent from June 1841). The league WAS a subject when it changed tag, so a check in this
+	#     same effect still reads it as one and does nothing; the change drops the pact afterwards. As
+	#     with every tag change in this mod, what needs the new tag goes in a hidden event the next day,
+	#     queued on another country (Buenos Aires): gg_provinces.1. The mark survives the tag change.
+	# ES: la liga ERA sujeta al cambiar de tag, asi que un chequeo en este mismo efecto la sigue leyendo
+	#     como sujeta y no hace nada; el cambio deja caer el pacto despues. Como todo cambio de tag del
+	#     mod, lo que necesita el tag nuevo va en un evento oculto al dia siguiente, sobre Buenos Aires.
+	c:ARG ?= { trigger_event = { id = gg_provinces.1 days = 1 } }
 	clear_saved_scope = gg_split_league
 }
 

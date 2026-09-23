@@ -490,7 +490,7 @@ gg_historical_lives_monthly = {
 # ES: el motor sento a un cualquiera en la Argentina sin cambio de ley ni script nuestro. El pulso
 #     mensual devolvia a Rosas dos semanas despues; esto lo devuelve en el acto. Sin bucle.
 on_new_ruler = {
-	on_actions = { gg_rosas_seat_on_new_ruler }
+	on_actions = { gg_rosas_seat_on_new_ruler gg_president_seat_on_new_ruler }
 }
 gg_rosas_seat_on_new_ruler = {
 	trigger = {
@@ -499,5 +499,28 @@ gg_rosas_seat_on_new_ruler = {
 	}
 	effect = {
 		owner = { gg_rosas_keeps_the_seat = yes }
+	}
+}
+
+# EN: 23/9/2026 (headless run: the engine seated Lavalleja over Rivera on 16/11/1839 and the monthly check
+#     took a month to undo it) -- the same guard Rosas has, for the Oriental presidency: when anyone but a
+#     historical president takes the seat, the historical one is put back that day. Root = the new ruler;
+#     a historical president never triggers it, so the reseat cannot loop.
+# ES: la misma guarda que Rosas, para la presidencia oriental: si asume alguien que no es un presidente
+#     historico, se repone al historico ese mismo dia. No puede entrar en bucle.
+gg_president_seat_on_new_ruler = {
+	trigger = {
+		NOT = { has_template = URU_Manuel_Oribe }
+		NOT = { has_template = URU_Fructuoso_Rivera }
+		NOT = { has_template = URU_joaquin_suarez }
+		NOT = { has_template = URU_gg_gabriel_antonio_pereira }
+		owner ?= { OR = { c:URU ?= this c:CER ?= this } }
+		OR = {
+			NOT = { has_global_variable = gg_peace_settled }
+			has_global_variable = gg_president_railroad
+		}
+	}
+	effect = {
+		owner = { gg_president_historical = yes }
 	}
 }

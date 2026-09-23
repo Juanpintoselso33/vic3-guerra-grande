@@ -363,6 +363,7 @@ je_guerra_grande = {
 					c:URU ?= {
 						every_scope_war = {
 							limit = { gg_is_the_war = yes }
+							gg_trace_war_support = yes # EN/ES: 23/9 -- weekly trace / traza semanal
 							if = {
 								limit = { has_war_support = { target = c:URU value <= -25 } }
 								change_global_variable = { name = gg_defensa_exhausted add = 1 }
@@ -449,6 +450,7 @@ je_guerra_grande = {
 				#     / un Cerrito que pidio condiciones va primero
 				if = {
 					limit = { has_global_variable = gg_cerrito_negotiates }
+					gg_trace_arbiter = { BRANCH = cerrito_negocia } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					random_country = {
 						limit = { has_variable = guerra_grande_defensa_government }
@@ -468,6 +470,7 @@ je_guerra_grande = {
 						gg_defensa_ripe = yes
 						gg_cerrito_ripe = yes
 					}
+					gg_trace_arbiter = { BRANCH = los_dos_maduros } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					if = {
 						limit = {
@@ -493,6 +496,7 @@ je_guerra_grande = {
 				}
 				else_if = {
 					limit = { gg_defensa_ripe = yes }
+					gg_trace_arbiter = { BRANCH = defensa_madura } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					# EN: playtest 2026-09-17 -- the side that is beaten is asked first. It used to be annexed by
 					#     the winner's menu without seeing anything; now it can ask for terms or fight on.
@@ -505,6 +509,7 @@ je_guerra_grande = {
 				}
 				else_if = {
 					limit = { gg_cerrito_ripe = yes }
+					gg_trace_arbiter = { BRANCH = cerrito_maduro } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					random_country = {
 						limit = { has_variable = guerra_grande_cerrito_government }

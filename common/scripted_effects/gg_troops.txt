@@ -37,6 +37,7 @@ gg_troops_split_armies_cer = {
 	# EN/ES: the Cerrito's own army / el ejercito propio del Cerrito
 	if = {
 		limit = { exists = c:CER this = c:CER }
+		gg_troops_cer_recruit_states = yes
 		# EN: 22/9/2026 (playtest) -- a combat_unit with count 0 invalidates the WHOLE
 		#     create_military_formation ("Invalid unit count 0", error.log), and 1.13 has no effect
 		#     that adds units to an existing formation. So there is one block per combination of
@@ -59,17 +60,17 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -87,12 +88,12 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 				}
@@ -110,12 +111,12 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -133,7 +134,7 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 				}
@@ -151,12 +152,12 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -174,7 +175,7 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 				}
@@ -192,7 +193,7 @@ gg_troops_split_armies_cer = {
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -218,17 +219,17 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -241,12 +242,12 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 				}
@@ -259,12 +260,12 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -277,7 +278,7 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_irregular_infantry
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_irregular.state_region
 						count = gg_troops_missing_irregular_cer
 					}
 				}
@@ -290,12 +291,12 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -308,7 +309,7 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_hussars
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_horse.state_region
 						count = gg_troops_missing_horse_cer
 					}
 				}
@@ -321,7 +322,7 @@ gg_troops_split_armies_cer = {
 					name = Ejercito_del_Cerrito
 					combat_unit = {
 						type = unit_type:combat_unit_type_cannon_artillery
-						state_region = s:STATE_SAN_JOSE
+						state_region = scope:gg_cer_rec_guns.state_region
 						count = gg_troops_missing_guns_cer
 					}
 				}
@@ -486,4 +487,34 @@ gg_troops_split_armies_defensa = {
 			}
 		}
 	}
+}
+
+# EN: 23/9/2026 (headless run to 1846; decided with Juan) -- WHERE THE CERRITO RECRUITS. Every battalion
+#     used to come from one barracks in San Jose; mobilized on the siege line it bled by attrition and the
+#     barracks re-hired until the state had 1,400 workers out of 22,800. Oribe's army was levied across the
+#     whole countryside, so each arm now comes from the department that could raise it, in rough
+#     proportion to its people (1843 workforce: San Jose 22,800, Paysandu 17,400, Banda Oriental 7,700,
+#     Maldonado 3,700): line infantry stays in San Jose, the cavalry in Paysandu, the irregulars in the
+#     Banda Oriental, the battery in Maldonado. A department the Cerrito does not hold falls back to San
+#     Jose. Country scope (the Cerrito); callers already require San Jose.
+# ES: DONDE RECLUTA EL CERRITO. Cada arma sale del departamento que podia levantarla, mas o menos en
+#     proporcion a su gente: infanteria de linea en San Jose, caballeria en Paysandu, irregulares en la
+#     Banda Oriental, la bateria en Maldonado. Si el Cerrito no tiene el departamento, San Jose.
+gg_troops_cer_recruit_states = {
+	random_scope_state = { limit = { state_region = s:STATE_SAN_JOSE } save_scope_as = gg_cer_rec_home }
+	if = {
+		limit = { any_scope_state = { state_region = s:STATE_PAYSANDU } }
+		random_scope_state = { limit = { state_region = s:STATE_PAYSANDU } save_scope_as = gg_cer_rec_horse }
+	}
+	else = { scope:gg_cer_rec_home ?= { save_scope_as = gg_cer_rec_horse } }
+	if = {
+		limit = { any_scope_state = { state_region = s:STATE_BANDA_ORIENTAL } }
+		random_scope_state = { limit = { state_region = s:STATE_BANDA_ORIENTAL } save_scope_as = gg_cer_rec_irregular }
+	}
+	else = { scope:gg_cer_rec_home ?= { save_scope_as = gg_cer_rec_irregular } }
+	if = {
+		limit = { any_scope_state = { state_region = s:STATE_MALDONADO } }
+		random_scope_state = { limit = { state_region = s:STATE_MALDONADO } save_scope_as = gg_cer_rec_guns }
+	}
+	else = { scope:gg_cer_rec_home ?= { save_scope_as = gg_cer_rec_guns } }
 }

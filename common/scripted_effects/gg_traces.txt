@@ -1,0 +1,66 @@
+﻿# EN: 23/9/2026 (Juan: "add logs everywhere, otherwise you won't understand anything") -- the arbiter's
+#     numbers at the moment it offers the peace, so a headless run says WHY a government was judged
+#     beaten, not only that it was. Written only with -debug_mode (debug_log). BRANCH names the branch.
+# ES: los numeros del arbitro en el momento en que ofrece la paz, para que una corrida sin pantalla diga
+#     POR QUE se dio por batido a un gobierno. Solo escribe con -debug_mode.
+gg_trace_arbiter = {
+	set_global_variable = { name = gg_debug_arb_bal_bl value = gg_war_balance_blanco }
+	set_global_variable = { name = gg_debug_arb_bal_co value = gg_war_balance_colorado }
+	set_global_variable = { name = gg_debug_arb_gap value = gg_exhaustion_gap }
+	debug_log = "GG_ARB|[TimeKeeper.GetCurrentDate.GetString]|$BRANCH$|balanza_blancos= [GetGlobalVariable('gg_debug_arb_bal_bl').GetValue|0] balanza_colorados= [GetGlobalVariable('gg_debug_arb_bal_co').GetValue|0] rio_cerrado_racha= [GetGlobalVariable('gg_plata_closed_streak').GetValue|0] defensa_agotada= [GetGlobalVariable('gg_defensa_exhausted').GetValue|0] cerrito_agotado= [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0] brecha_agotamiento= [GetGlobalVariable('gg_debug_arb_gap').GetValue|0] puntaje_blanco= [GetGlobalVariable('guerra_grande_blanco_score').GetValue|0] puntaje_colorado= [GetGlobalVariable('guerra_grande_colorado_score').GetValue|0]"
+	remove_global_variable = gg_debug_arb_bal_bl
+	remove_global_variable = gg_debug_arb_bal_co
+	remove_global_variable = gg_debug_arb_gap
+}
+
+# EN: 23/9 -- each side's war support, weekly, rounded down to tens (-100 = the engine capitulates it on
+#     its own, skipping every peace menu of the mod). War scope (the Guerra Grande).
+# ES: el apoyo a la guerra de cada lado, cada semana, redondeado a decenas (-100 = el motor lo hace
+#     capitular solo, salteando los menus de paz del mod). Scope de guerra.
+gg_trace_war_support = {
+	set_global_variable = { name = gg_debug_ws_uru value = -100 }
+	if = { limit = { has_war_support = { target = c:URU value >= -90 } } set_global_variable = { name = gg_debug_ws_uru value = -90 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -80 } } set_global_variable = { name = gg_debug_ws_uru value = -80 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -70 } } set_global_variable = { name = gg_debug_ws_uru value = -70 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -60 } } set_global_variable = { name = gg_debug_ws_uru value = -60 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -50 } } set_global_variable = { name = gg_debug_ws_uru value = -50 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -40 } } set_global_variable = { name = gg_debug_ws_uru value = -40 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -30 } } set_global_variable = { name = gg_debug_ws_uru value = -30 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -20 } } set_global_variable = { name = gg_debug_ws_uru value = -20 } }
+	if = { limit = { has_war_support = { target = c:URU value >= -10 } } set_global_variable = { name = gg_debug_ws_uru value = -10 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 0 } } set_global_variable = { name = gg_debug_ws_uru value = 0 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 10 } } set_global_variable = { name = gg_debug_ws_uru value = 10 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 20 } } set_global_variable = { name = gg_debug_ws_uru value = 20 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 30 } } set_global_variable = { name = gg_debug_ws_uru value = 30 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 40 } } set_global_variable = { name = gg_debug_ws_uru value = 40 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 50 } } set_global_variable = { name = gg_debug_ws_uru value = 50 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 60 } } set_global_variable = { name = gg_debug_ws_uru value = 60 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 70 } } set_global_variable = { name = gg_debug_ws_uru value = 70 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 80 } } set_global_variable = { name = gg_debug_ws_uru value = 80 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 90 } } set_global_variable = { name = gg_debug_ws_uru value = 90 } }
+	if = { limit = { has_war_support = { target = c:URU value >= 100 } } set_global_variable = { name = gg_debug_ws_uru value = 100 } }
+	set_global_variable = { name = gg_debug_ws_cer value = -100 }
+	if = { limit = { has_war_support = { target = c:CER value >= -90 } } set_global_variable = { name = gg_debug_ws_cer value = -90 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -80 } } set_global_variable = { name = gg_debug_ws_cer value = -80 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -70 } } set_global_variable = { name = gg_debug_ws_cer value = -70 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -60 } } set_global_variable = { name = gg_debug_ws_cer value = -60 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -50 } } set_global_variable = { name = gg_debug_ws_cer value = -50 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -40 } } set_global_variable = { name = gg_debug_ws_cer value = -40 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -30 } } set_global_variable = { name = gg_debug_ws_cer value = -30 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -20 } } set_global_variable = { name = gg_debug_ws_cer value = -20 } }
+	if = { limit = { has_war_support = { target = c:CER value >= -10 } } set_global_variable = { name = gg_debug_ws_cer value = -10 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 0 } } set_global_variable = { name = gg_debug_ws_cer value = 0 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 10 } } set_global_variable = { name = gg_debug_ws_cer value = 10 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 20 } } set_global_variable = { name = gg_debug_ws_cer value = 20 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 30 } } set_global_variable = { name = gg_debug_ws_cer value = 30 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 40 } } set_global_variable = { name = gg_debug_ws_cer value = 40 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 50 } } set_global_variable = { name = gg_debug_ws_cer value = 50 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 60 } } set_global_variable = { name = gg_debug_ws_cer value = 60 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 70 } } set_global_variable = { name = gg_debug_ws_cer value = 70 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 80 } } set_global_variable = { name = gg_debug_ws_cer value = 80 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 90 } } set_global_variable = { name = gg_debug_ws_cer value = 90 } }
+	if = { limit = { has_war_support = { target = c:CER value >= 100 } } set_global_variable = { name = gg_debug_ws_cer value = 100 } }
+	debug_log = "GG_ARB|[TimeKeeper.GetCurrentDate.GetString]|apoyo_guerra|defensa= [GetGlobalVariable('gg_debug_ws_uru').GetValue|0] cerrito= [GetGlobalVariable('gg_debug_ws_cer').GetValue|0] defensa_agotada= [GetGlobalVariable('gg_defensa_exhausted').GetValue|0] cerrito_agotado= [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0]"
+	remove_global_variable = gg_debug_ws_uru
+	remove_global_variable = gg_debug_ws_cer
+}

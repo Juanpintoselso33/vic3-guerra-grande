@@ -606,6 +606,7 @@ gg_contingent.7 = {
 		if = { limit = { has_modifier = gg_cerrito_army_forming } remove_modifier = gg_cerrito_army_forming }
 		add_modifier = { name = gg_cerrito_army_forming months = 6 }
 		gg_select_formation_hq_state = yes
+		gg_troops_cer_recruit_states = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 		if = {
@@ -637,7 +638,7 @@ gg_contingent.7 = {
 				}
 				combat_unit = {
 					type = unit_type:combat_unit_type_hussars
-					state_region = s:STATE_SAN_JOSE
+					state_region = scope:gg_cer_rec_horse.state_region # EN/ES: 23/9 -- cavalry from Paysandu, where it crossed / la caballeria desde Paysandu
 					count = gg_vanguardia_horse
 				}
 			}

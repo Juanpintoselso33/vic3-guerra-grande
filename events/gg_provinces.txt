@@ -1,0 +1,48 @@
+﻿namespace = gg_provinces
+
+# EN: gg_provinces.1 -- the day after the Coalition splits (gg_argentina_split_coalition): the league,
+#     now a province under its capital's name, comes back to the Pact as a protectorate. Hidden, on
+#     Buenos Aires, no trigger (a trigger is checked when the event is queued, before the split).
+# ES: el dia despues de la particion de la Coalicion: la liga, ya provincia con el nombre de su capital,
+#     vuelve al Pacto como protectorado. Oculto, sobre Buenos Aires, sin trigger.
+gg_provinces.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		every_country = {
+			limit = { has_variable = gg_split_league_pending }
+			debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|league [THIS.GetCountry.GetNameNoFormatting] found"
+			if = {
+				limit = {
+					NOT = { this = ROOT }
+					NOT = { is_subject_of = ROOT }
+				}
+				save_scope_as = gg_pending_league
+				ROOT = {
+					create_diplomatic_pact = {
+						country = scope:gg_pending_league
+						type = protectorate
+					}
+				}
+				if = { limit = { is_subject_of = ROOT } debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|protectorate made" }
+				else = { debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|protectorate FAILED" }
+			}
+			# EN: headless run 23/9 -- on the day of the split the league is still a subject, and the engine
+			#     drops the pact within the week (nothing of ours runs in between). So the mark stays and the
+			#     check repeats every week, five times, and the pact is remade the week it falls.
+			# ES: el dia de la particion la liga todavia es sujeta, y el motor deja caer el pacto dentro de la
+			#     semana (no corre nada nuestro en el medio). La marca queda y el chequeo se repite cada
+			#     semana, cinco veces; el pacto se rehace la semana en que cae.
+			change_variable = { name = gg_split_league_pending add = 1 }
+			if = {
+				limit = { var:gg_split_league_pending >= 5 }
+				remove_variable = gg_split_league_pending
+			}
+		}
+		if = {
+			limit = { any_country = { has_variable = gg_split_league_pending } }
+			trigger_event = { id = gg_provinces.1 days = 7 }
+		}
+	}
+}

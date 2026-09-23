@@ -474,6 +474,11 @@ gg_wartime_modifiers_clear = {
 		if = { limit = { has_modifier = gg_siege_the_land_frontier_stays_open } remove_modifier = gg_siege_the_land_frontier_stays_open }
 		if = { limit = { has_modifier = gg_naval_anglo_french_station } remove_modifier = gg_naval_anglo_french_station }
 	}
+	# EN/ES: 23/9 -- the siege army's supply ends with the siege, whatever tag it wears now / termina con el sitio
+	every_country = {
+		limit = { has_modifier = gg_cerrito_lives_off_the_land }
+		remove_modifier = gg_cerrito_lives_off_the_land
+	}
 	gg_calendar_close_wartime_relays = yes
 }
 
