@@ -98,10 +98,16 @@ gg_pact_gov_pick_or_create = {
 							#     Rioja from 1837; the Coalition gives him back his command in 1840).
 							# ES: un gobernador que nace en el plantel de Buenos Aires no recibe mando ahi:
 							#     la lista no es una forma de darle a Rosas los generales de sus rivales.
-							if = {
-								limit = { c:ARG ?= scope:gg_gov_holder is_general = yes }
-								remove_character_role = general
-							}
+						}
+					}
+					# EN/ES: playtest 23/9 -- saved scopes do not reach on_created, and is_general is not a
+					#     trigger: the command is taken away here, from Buenos Aires's roster
+					#     / los scopes guardados no llegan a on_created: el mando se saca aca
+					if = {
+						limit = { c:ARG ?= this }
+						every_scope_character = {
+							limit = { has_template = $TEMPLATE$ has_role = character_role_general }
+							remove_character_role = general
 						}
 					}
 					clear_saved_scope = gg_gov_holder

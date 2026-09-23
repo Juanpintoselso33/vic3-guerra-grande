@@ -1,0 +1,27 @@
+﻿# EN: 23/9/2026 (playtest) -- the men the war turns on do not die before their historical date. Rivera
+#     died in an observer game in 1840 and a nobody governed Uruguay. Same effect vanilla uses for Pedro II.
+#     Death dates (Wikipedia ES): Rosas 14/3/1877, Oribe 12/11/1857, Rivera 13/1/1854, Joaquin Suarez
+#     26/11/1868, Urquiza 11/4/1870, William Brown 3/3/1857, Lavalleja 22/10/1853.
+# ES: los hombres sobre los que gira la guerra no mueren antes de su fecha historica. Rivera murio en
+#     una partida de observador en 1840 y goberno el Uruguay un cualquiera.
+gg_historical_life = {
+	every_country = {
+		every_scope_character = {
+			limit = { has_template = $TEMPLATE$ }
+			if = {
+				limit = { game_date < $DIES$ }
+				set_character_immortal = yes
+			}
+			else = { set_character_immortal = no }
+		}
+	}
+}
+gg_historical_lives = {
+	gg_historical_life = { TEMPLATE = ARG_Juan_Manuel_de_Rosas DIES = 1877.3.14 }
+	gg_historical_life = { TEMPLATE = URU_Manuel_Oribe DIES = 1857.11.12 }
+	gg_historical_life = { TEMPLATE = URU_Fructuoso_Rivera DIES = 1854.1.13 }
+	gg_historical_life = { TEMPLATE = URU_joaquin_suarez DIES = 1868.11.26 }
+	gg_historical_life = { TEMPLATE = ARG_Justo_Jose_de_Urquiza DIES = 1870.4.11 }
+	gg_historical_life = { TEMPLATE = ARG_William_Brown DIES = 1857.3.3 }
+	gg_historical_life = { TEMPLATE = URU_Juan_Antonio_Lavalleja DIES = 1853.10.22 }
+}

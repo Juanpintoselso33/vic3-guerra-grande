@@ -196,6 +196,26 @@ gg_argentina_split_coalition = {
 	else = {
 		c:ARG ?= { annex = scope:gg_split_league }
 	}
+	# EN: playtest 23/9 -- the remainder came out of the tag change with no protectorate (Tucuman stood
+	#     independent in 1841 and the six never returned to the Pact): Buenos Aires makes it one, as
+	#     it does with every province split off. The saved scope, not c:<new tag>, which does not
+	#     resolve in the same effect after change_tag.
+	# ES: el resto salio del cambio de tag sin protectorado (Tucuman quedo independiente en 1841 y las
+	#     seis no volvian al Pacto): Buenos Aires lo hace protectorado, como a cada provincia separada.
+	if = {
+		limit = {
+			exists = scope:gg_split_league
+			exists = c:ARG
+			scope:gg_split_league = { NOT = { is_subject_of = c:ARG } }
+			NOT = { scope:gg_split_league = c:ARG }
+		}
+		c:ARG = {
+			create_diplomatic_pact = {
+				country = scope:gg_split_league
+				type = protectorate
+			}
+		}
+	}
 	clear_saved_scope = gg_split_league
 }
 
