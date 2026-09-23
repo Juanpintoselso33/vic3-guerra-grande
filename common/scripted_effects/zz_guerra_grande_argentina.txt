@@ -806,8 +806,6 @@ gg_argentina_sign_montevideo_convention = {
 				}
 			}
 		}
-		# EN/ES: 23/9 -- kept for the campaign of 1851 (gg_battle_brazil_enters) / se guarda para la campania de 1851
-		if = { limit = { exists = scope:gg_oriental_advance_army } set_variable = { name = gg_oriental_advance_ref value = scope:gg_oriental_advance_army } }
 		random_scope_character = {
 			limit = {
 				has_template = URU_gg_eugenio_garzon
@@ -835,20 +833,16 @@ gg_argentina_sign_montevideo_convention = {
 				}
 			}
 		}
-		# EN/ES: 23/9 -- kept for the campaign of 1851 / se guarda para la campania de 1851
-		if = { limit = { exists = scope:gg_brazilian_advance_army } set_variable = { name = gg_brazilian_advance_ref value = scope:gg_brazilian_advance_army } }
 	}
 	# EN: 23/9/2026 (audit R1) -- the siege is no longer an engine war, so the convention cannot join
 	#     Entre Rios and Brazil to it nor send the advance corps to its front: the Cerrito loses 20 of
-	#     endurance instead, and the two corps wait, idle, for the short war of 1851 (stage 2), which
-	#     reads this mark.
+	#     endurance instead, and the two corps are raised and wait in their barracks.
 	# ES: el sitio ya no es guerra del motor: la convencion no puede sumar a Entre Rios y al Brasil ni
 	#     mandar los cuerpos adelantados a un frente. El Cerrito pierde 20 de aguante, y los dos cuerpos
-	#     esperan la guerra corta de 1851 (etapa 2), que lee esta marca.
+	#     se levantan y esperan en sus cuarteles.
 	# EN/ES: no tooltip line of its own: Urquiza's turn (gg_urquiza_flip) already prints "-20" and the
 	#     option's text gives this second -20 / sin renglon propio: el vuelco de Urquiza ya imprime un -20
 	gg_endurance_add = { SIDE = cerrito VALUE = -20 }
-	set_global_variable = gg_convention_allies_ready
 	gg_patron_change = { PATRON = brasil DELTA = 20 }
 	gg_score_colorado = { AMOUNT = 2 }
 }

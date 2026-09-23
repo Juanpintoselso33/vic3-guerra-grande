@@ -1,0 +1,15 @@
+﻿# EN: 23/9 -- an army created in this same effect cannot be mobilized yet ("Scope formation cannot be mobilized",
+#     headless run 161928, the Ejercito Grande). The owner queues it (country scope, where it was created) and
+#     gg_troops.10 mobilizes it the next day and sends it to a front of its war against ENEMY.
+# ES: un ejercito recien creado todavia no se puede movilizar: el duenio lo encola y gg_troops.10 lo moviliza al
+#     dia siguiente y lo manda al frente de su guerra contra ENEMY.
+gg_mobilize_next_day = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mobilize_next_day| ARMY= $ARMY$  ENEMY= $ENEMY$ " # GG_TRAZA
+	add_to_variable_list = { name = gg_mob_queue target = $ARMY$ }
+	set_variable = { name = gg_mob_enemy value = $ENEMY$ }
+	if = {
+		limit = { NOT = { has_variable = gg_mob_pending } }
+		set_variable = gg_mob_pending
+		trigger_event = { id = gg_troops.10 days = 1 }
+	}
+}

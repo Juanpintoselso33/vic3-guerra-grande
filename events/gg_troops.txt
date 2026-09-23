@@ -47,3 +47,32 @@ gg_troops.2 = {
 		if = { limit = { NOT = { has_modifier = gg_cerrito_lives_off_the_land } } add_modifier = { name = gg_cerrito_lives_off_the_land } }
 	}
 }
+
+# EN: The next-day mobilizer (gg_mobilize_next_day): on the owner, the day after its armies were created.
+# ES: El movilizador del dia siguiente: sobre el duenio, al dia siguiente de crear sus ejercitos.
+gg_troops.10 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_troops.10|" # GG_TRAZA
+		remove_variable = gg_mob_pending
+		if = {
+			limit = { has_variable = gg_mob_enemy }
+			var:gg_mob_enemy ?= { save_scope_as = gg_mob_enemy_scope }
+			if = {
+				limit = { exists = scope:gg_mob_enemy_scope }
+				random_scope_war = {
+					limit = { is_war_participant = scope:gg_mob_enemy_scope }
+					random_scope_front = { save_scope_as = gg_mob_front }
+				}
+			}
+			remove_variable = gg_mob_enemy
+		}
+		every_in_list = {
+			variable = gg_mob_queue
+			if = { limit = { is_mobilized = no } fully_mobilize_army = yes }
+			if = { limit = { exists = scope:gg_mob_front } deploy_to_front = scope:gg_mob_front }
+		}
+		clear_variable_list = gg_mob_queue
+	}
+}

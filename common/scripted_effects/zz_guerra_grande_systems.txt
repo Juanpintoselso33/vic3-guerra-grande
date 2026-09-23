@@ -407,13 +407,6 @@ gg_postwar_start = {
 #     que nunca lo tuvo.
 gg_wartime_modifiers_clear = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_wartime_modifiers_clear|" # GG_TRAZA
-	# EN/ES: 23/9 stage 2 (Codex) -- a short war still open closes with the peace, before any annexation or tag change
-	#     / una guerra corta abierta se cierra con la paz, antes de anexar o cambiar de tag
-	every_diplomatic_play = {
-		limit = { is_diplomatic_play_type = dp_gg_batalla }
-		end_play = yes
-	}
-	if = { limit = { has_global_variable = gg_battle_open } remove_global_variable = gg_battle_open }
 	# EN: C10 (22/9/2026) -- the blockade of Montevideo was a siege measure: with the war over, Rosas
 	#     opens the river (otherwise his AI would keep the 1843 closure for good).
 	# ES: C10 -- el bloqueo de Montevideo era una medida del sitio: terminada la guerra, Rosas abre el

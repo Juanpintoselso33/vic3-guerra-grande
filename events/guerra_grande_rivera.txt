@@ -336,8 +336,6 @@ gg_rivera.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.a|" # GG_TRAZA
 		name = gg_rivera.2.a
-		# EN/ES: 23/9 stage 2 -- the army lost at India Muerta costs the Defensa / la derrota le cuesta a la Defensa
-		gg_endurance_change = { SIDE = defensa VALUE = -15 }
 		custom_tooltip = gg_rivera.2.a_tt2
 		default_option = yes
 		set_global_variable = gg_rivera_stripped
@@ -413,8 +411,6 @@ gg_rivera.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.b|" # GG_TRAZA
 		name = gg_rivera.2.b
-		# EN/ES: 23/9 stage 2 -- the army lost at India Muerta costs the Defensa / la derrota le cuesta a la Defensa
-		gg_endurance_change = { SIDE = defensa VALUE = -15 }
 		custom_tooltip = gg_rivera.2.b_tt2
 		# EN/ES: T4 -- FE-7: Brazilian arms / armas brasilenias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
@@ -486,8 +482,6 @@ gg_rivera.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.c|" # GG_TRAZA
 		name = gg_rivera.2.c
-		# EN/ES: 23/9 stage 2 -- the army lost at India Muerta costs the Defensa / la derrota le cuesta a la Defensa
-		gg_endurance_change = { SIDE = defensa VALUE = -15 }
 		custom_tooltip = gg_rivera.2.c_tt2
 		# EN/ES: T4 -- FE-7: handed to the Empire / entregado al Imperio
 		gg_patron_change = { PATRON = brasil DELTA = 5 }

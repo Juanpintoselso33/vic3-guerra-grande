@@ -246,7 +246,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.4 days = 2651 }   # 1843-04-07 Legion Francesa
 			trigger_event = { id = gg_cal.5 days = 2653 }   # 1843-04-09 Legion Italiana
 			trigger_event = { id = gg_cal.6 days = 2745 }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_cal.7 days = 3285 }   # 1845-01-01 India Muerta: the campaign opens (stage 2; the battle was 27/3)
+			trigger_event = { id = gg_cal.7 days = 3370 }   # 1845-03-27 India Muerta
 			trigger_event = { id = gg_cal.8 days = 3389 }   # 1845-04-15 Cazadores Vascos
 			trigger_event = { id = gg_cal.9 days = 3436 }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_cal.10 days = 3486 }   # 1845-07-21 la escuadra de Brown
@@ -282,7 +282,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.4 days = 2651 }   # 1843-04-07 Legion Francesa
 			trigger_event = { id = gg_cal.5 days = 2653 }   # 1843-04-09 Legion Italiana
 			trigger_event = { id = gg_cal.6 days = 2745 }   # 1843-07-10 el Buceo y la caja
-			trigger_event = { id = gg_cal.7 days = 3285 }   # 1845-01-01 India Muerta: the campaign opens (stage 2; the battle was 27/3)
+			trigger_event = { id = gg_cal.7 days = 3370 }   # 1845-03-27 India Muerta
 			trigger_event = { id = gg_cal.8 days = 3389 }   # 1845-04-15 Cazadores Vascos
 			trigger_event = { id = gg_cal.9 days = 3436 }   # 1845-06-01 convenio con Espana (no ratificado)
 			trigger_event = { id = gg_cal.10 days = 3486 }   # 1845-07-21 la escuadra de Brown
