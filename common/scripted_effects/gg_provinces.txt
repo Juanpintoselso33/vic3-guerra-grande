@@ -123,6 +123,15 @@ gg_province_split_beaten = {
 	gg_province_split_home = { STATE = STATE_ENTRE_RIOS TAG = ENR }
 	gg_province_split_off = { STATE = STATE_TUCUMAN TAG = TUC KEY = tucuman }
 	gg_province_split_off = { STATE = STATE_SALTA TAG = SLT KEY = salta }
+	# EN/ES: 23/9/2026 (Juan) -- Tarija held by the beaten country goes to Salta, or to Buenos Aires
+	#     / Tarija en manos del pais batido va a Salta, o a Buenos Aires
+	s:STATE_TARIJA = {
+		every_scope_state = {
+			limit = { owner ?= scope:gg_split_origin }
+			if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } set_state_owner = c:SLT }
+			else = { set_state_owner = c:ARG }
+		}
+	}
 	gg_province_split_off = { STATE = STATE_JUJUY TAG = JUJ KEY = jujuy }
 	gg_province_split_off = { STATE = STATE_CATAMARCA TAG = CTM KEY = catamarca }
 	gg_province_split_off = { STATE = STATE_LA_RIOJA TAG = LRJ KEY = la_rioja }

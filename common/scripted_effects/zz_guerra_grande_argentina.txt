@@ -175,6 +175,12 @@ gg_argentina_create_coalicion = {
 		limit = { exists = s:STATE_LA_RIOJA.region_state:ARG }
 		s:STATE_LA_RIOJA.region_state:ARG = { set_state_owner = c:CLN }
 	}
+	# EN/ES: 23/9/2026 (Juan) -- Tarija, when Buenos Aires holds it, is Salta's (gg_province_cells.txt):
+	#     if Salta rises with the Coalition, Tarija goes with it / si Salta se alza, Tarija va con ella
+	if = {
+		limit = { exists = s:STATE_TARIJA.region_state:ARG exists = s:STATE_SALTA.region_state:CLN }
+		s:STATE_TARIJA.region_state:ARG = { set_state_owner = c:CLN }
+	}
 	gg_argentina_new_country_people = {
 		TAG = CLN
 	}
@@ -944,7 +950,7 @@ gg_argentina_complete_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_brazilian_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_brazilian_grand_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
@@ -978,7 +984,7 @@ gg_argentina_complete_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_oriental_grand_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 }
 
@@ -1003,7 +1009,7 @@ gg_argentina_limited_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_brazilian_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_brazilian_limited_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
 	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
@@ -1022,7 +1028,7 @@ gg_argentina_limited_foreign_contingents = {
 				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_oriental_limited_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 }
 
