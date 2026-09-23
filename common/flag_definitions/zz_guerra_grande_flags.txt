@@ -122,3 +122,388 @@ REPLACE:URU = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE ELEVEN PROVINCES AS COUNTRIES: WHICH FLAG, WHEN. Decided by Juan on 22/9/2026: «the
+#     proposals, historically, and afterwards, if they are alive when historical flags appear, we use
+#     those» (docs/guerra-grande-argentina/banderas-provincias-opciones.md). The coats of arms are in
+#     common/coat_of_arms/coat_of_arms/zz_guerra_grande_argentina.txt. Priorities, lowest to highest:
+#       1  the period flag, keyed on the tag: the Confederation's dark blue for nine of them, Cordoba's
+#          and Santa Fe's own tricolours for the other two.
+#       10 once the period flag is gone, the national celeste and white: the dark blue was Rosas's and
+#          ends at Caseros (3/2/1852, the same cut the playset's ARG flags use in
+#          la-argentina-compatches/tools/build_dnfc_compatch.py); Cordoba's tricolour «must have been
+#          abandoned before March 1854» (Prando 2009); Santa Fe's was abandoned in 1880 (Wikipedia ES,
+#          «Bandera de la provincia de Santa Fe»).
+#       20 Tucuman, Salta, Jujuy, Catamarca and La Rioja only: the celeste while the Coalition of the
+#          North stands and the province is on its side -- not under anyone. «Tucuman changed flag
+#          when it changed side» (the doc). Beaten provinces are born as protectorates of Buenos
+#          Aires (gg_province_split_off), so under the Pact they keep the federal flag.
+#       30 and 31 the provincial flag of today, from the date of the law that adopted it.
+#     No other mod in the playset defines these eleven tags in flag_definitions (checked 22/9/2026
+#     against every downloaded Workshop item, DNFC's REPLACE_OR_CREATE lists included), so a plain
+#     block is not dropped at load. The DEFAULT list's communist (1000) and anarchist (2000) flags
+#     still win above these, as for any country.
+# ES: LAS ONCE PROVINCIAS COMO PAISES: QUE BANDERA, CUANDO. Decidido por Juan el 22/9/2026: «las
+#     propuestas historicamente y despues, si estan vivos cuando aparecen banderas historicas, usamos
+#     esas». Prioridades, de menor a mayor:
+#       1  la bandera del periodo, con la clave del tag: el azul oscuro de la Confederacion para nueve,
+#          las tricolores propias de Cordoba y Santa Fe para las otras dos.
+#       10 cuando se acaba la del periodo, la celeste y blanca nacional: el azul oscuro era de Rosas y
+#          termina en Caseros (3/2/1852, el mismo corte que usan las banderas de ARG del playset); la
+#          tricolor cordobesa «debe haber sido abandonada antes de marzo de 1854» (Prando 2009); la
+#          santafesina se abandono en 1880 (Wikipedia ES).
+#       20 solo Tucuman, Salta, Jujuy, Catamarca y La Rioja: la celeste mientras la Coalicion del Norte
+#          siga en pie y la provincia este de su lado, sin nadie encima. «Tucuman cambio de bandera al
+#          cambiar de bando». Las provincias batidas nacen protectorado de Buenos Aires, asi que bajo
+#          el Pacto llevan la federal.
+#       30 y 31 la bandera provincial de hoy, desde la fecha de la ley que la adopto.
+#     Ningun otro mod del playset define estos once tags en flag_definitions (verificado el 22/9/2026
+#     contra todo el Workshop descargado, incluidas las listas REPLACE_OR_CREATE de DNFC), asi que un
+#     bloque comun no se descarta al cargar.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Tucuman
+TUC = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = TUC
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# the Coalition of the North stands and the province is on its side / la Coalicion en pie y la provincia de su lado
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 20
+		trigger = {
+			c:CLN ?= { is_subject = no }
+			scope:actor ?= { is_subject = no }
+		}
+	}
+	# law 6696, sanctioned 9/10/1995; repealed 3/12/2008 / ley 6696, derogada el 3/12/2008
+	flag_definition = {
+		coa = gg_flag_tucuman_1995
+		priority = 30
+		trigger = {
+			game_date >= 1995.10.9
+			game_date < 2008.12.3
+		}
+	}
+	# approved by the Legislature 13/4/2010 (the «Bandera de Macha») / aprobada el 13/4/2010
+	flag_definition = {
+		coa = gg_flag_tucuman_2010
+		priority = 31
+		trigger = {
+			game_date >= 2010.4.13
+		}
+	}
+}
+
+# EN/ES: Salta
+SLT = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = SLT
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# the Coalition of the North stands and the province is on its side / la Coalicion en pie y la provincia de su lado
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 20
+		trigger = {
+			c:CLN ?= { is_subject = no }
+			scope:actor ?= { is_subject = no }
+		}
+	}
+	# law 6946, promulgated 14/6/1997 / ley 6946, promulgada el 14/6/1997
+	flag_definition = {
+		coa = gg_flag_salta_1997
+		priority = 30
+		trigger = {
+			game_date >= 1997.6.14
+		}
+	}
+}
+
+# EN/ES: Jujuy
+JUJ = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = JUJ
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# the Coalition of the North stands and the province is on its side / la Coalicion en pie y la provincia de su lado
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 20
+		trigger = {
+			c:CLN ?= { is_subject = no }
+			scope:actor ?= { is_subject = no }
+		}
+	}
+	# law 4816 of 29/11/1994: the 1813 Bandera de la Libertad Civil / ley 4816
+	flag_definition = {
+		coa = gg_flag_jujuy_1994
+		priority = 30
+		trigger = {
+			game_date >= 1994.11.29
+		}
+	}
+}
+
+# EN/ES: Catamarca
+CTM = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = CTM
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# the Coalition of the North stands and the province is on its side / la Coalicion en pie y la provincia de su lado
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 20
+		trigger = {
+			c:CLN ?= { is_subject = no }
+			scope:actor ?= { is_subject = no }
+		}
+	}
+	# decree ECyT 1210 of 25/8/2011 (law 5231) / decreto ECyT 1210
+	flag_definition = {
+		coa = gg_flag_catamarca_2011
+		priority = 30
+		trigger = {
+			game_date >= 2011.8.25
+		}
+	}
+}
+
+# EN/ES: La Rioja
+LRJ = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = LRJ
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# the Coalition of the North stands and the province is on its side / la Coalicion en pie y la provincia de su lado
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 20
+		trigger = {
+			c:CLN ?= { is_subject = no }
+			scope:actor ?= { is_subject = no }
+		}
+	}
+	# Constituent Convention, 14/8/1986 / Convencion Constituyente
+	flag_definition = {
+		coa = gg_flag_la_rioja_1986
+		priority = 30
+		trigger = {
+			game_date >= 1986.8.14
+		}
+	}
+}
+
+# EN/ES: Cordoba
+CBA = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = CBA
+		priority = 1
+	}
+	# from 1854.3.1: the national celeste and white / desde 1854.3.1: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1854.3.1
+		}
+	}
+	# adopted 16/12/2010 / adoptada el 16/12/2010
+	flag_definition = {
+		coa = gg_flag_cordoba_2010
+		priority = 30
+		trigger = {
+			game_date >= 2010.12.16
+		}
+	}
+	# law 10193 of 21/4/2014, deeper colours / ley 10193, colores nuevos
+	flag_definition = {
+		coa = gg_flag_cordoba_2014
+		priority = 31
+		trigger = {
+			game_date >= 2014.4.21
+		}
+	}
+}
+
+# EN/ES: Santa Fe
+SFE = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = SFE
+		priority = 1
+	}
+	# from 1880.1.1: the national celeste and white / desde 1880.1.1: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1880.1.1
+		}
+	}
+	# re-adopted 11/9/1986 (FOTW) / readoptada el 11/9/1986
+	flag_definition = {
+		coa = gg_flag_santa_fe_1986
+		priority = 30
+		trigger = {
+			game_date >= 1986.9.11
+		}
+	}
+}
+
+# EN/ES: Santiago del Estero
+SDE = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = SDE
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# law 5535, 30/9/1985 (FOTW) / ley 5535
+	flag_definition = {
+		coa = gg_flag_santiago_1985
+		priority = 30
+		trigger = {
+			game_date >= 1985.9.30
+		}
+	}
+}
+
+# EN/ES: Mendoza
+MZA = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = MZA
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# law 5930 of 21/10/1992: the Army of the Andes flag / ley 5930
+	flag_definition = {
+		coa = gg_flag_mendoza_1992
+		priority = 30
+		trigger = {
+			game_date >= 1992.10.21
+		}
+	}
+}
+
+# EN/ES: San Juan
+SJN = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = SJN
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# law 586-F of 11/12/1997 / ley 586-F
+	flag_definition = {
+		coa = gg_flag_san_juan_1997
+		priority = 30
+		trigger = {
+			game_date >= 1997.12.11
+		}
+	}
+	# new version of 17/12/2018 / version nueva del 17/12/2018
+	flag_definition = {
+		coa = gg_flag_san_juan_2018
+		priority = 31
+		trigger = {
+			game_date >= 2018.12.17
+		}
+	}
+}
+
+# EN/ES: San Luis
+SNL = {
+	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
+	flag_definition = {
+		coa = SNL
+		priority = 1
+	}
+	# from 1852.2.3: the national celeste and white / desde 1852.2.3: la nacional celeste y blanca
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+	# law 4810 of 22/6/1988 / ley 4810
+	flag_definition = {
+		coa = gg_flag_san_luis_1988
+		priority = 30
+		trigger = {
+			game_date >= 1988.6.22
+		}
+	}
+}

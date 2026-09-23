@@ -73,147 +73,202 @@ ENR = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: PLACEHOLDER ARMS FOR THE ELEVEN PROVINCES -- NOT FLAGS, AND NOT A CHOICE. Most of these provinces
-#     flew no flag of their own in 1836-1852 (docs/guerra-grande-argentina/banderas-tres-paises.md), and
-#     the mod's rule is real flags, never designs of ours. Until Juan picks from the options written up
-#     in docs/guerra-grande-argentina/banderas-provincias-opciones.md, every province shows the SAME
-#     obviously provisional mark: its map colour with an empty white ring. Replace each block with the
-#     chosen flag; nothing else reads these keys.
-# ES: ESCUDOS PROVISORIOS DE LAS ONCE PROVINCIAS -- NO SON BANDERAS NI UNA ELECCION. Casi ninguna tuvo
-#     bandera propia en 1836-1852, y la regla del mod es banderas reales, nunca disenos nuestros. Hasta
-#     que Juan elija entre las opciones de banderas-provincias-opciones.md, todas muestran la MISMA marca
-#     a todas luces provisoria: el color de mapa con un anillo blanco vacio. Cada bloque se reemplaza
-#     por la bandera elegida; ninguna otra cosa lee estas claves.
+# EN: THE ELEVEN PROVINCES AS COUNTRIES (TUC SLT JUJ CTM LRJ CBA SFE SDE MZA SJN SNL). Decided by Juan
+#     on 22/9/2026 from docs/guerra-grande-argentina/banderas-provincias-opciones.md: «the proposals,
+#     historically, and afterwards, if they are alive when historical flags appear, we use those».
+#     The key named after each tag is its flag for 1836-1852; everything that changes with the date or
+#     with the side it is on lives in common/flag_definitions/zz_guerra_grande_flags.txt.
+#     Nine of the eleven had no provincial flag of their own with a real image in the period: they flew
+#     the Confederation's -- dark blue, white, dark blue with the sun, the colour Rosas fixed in writing
+#     to the governor of Santiago del Estero in June 1836. Only Cordoba (the tricolour the Junta
+#     restored on 17/1/1831) and Santa Fe (red, white and blue, seen in d'Hastrel's watercolour of the
+#     1839 Rosario battery) have one. Real Wikimedia images, rendered at 3840 px, converted with Pillow
+#     to 768x512 BGRA8888 (the header of te_coalicion.dds), never redrawn; sources and licences in
+#     SOURCES_flujo_images.md.
+# ES: LAS ONCE PROVINCIAS COMO PAISES. Decidido por Juan el 22/9/2026 sobre banderas-provincias-opciones.md:
+#     «las propuestas historicamente y despues, si estan vivos cuando aparecen banderas historicas,
+#     usamos esas». La clave con el nombre de cada tag es su bandera de 1836-1852; todo lo que cambia
+#     con la fecha o con el bando esta en common/flag_definitions/zz_guerra_grande_flags.txt.
+#     Nueve de las once no tuvieron bandera propia con imagen real en el periodo: izaban la de la
+#     Confederacion -- azul oscuro, blanco, azul oscuro con el sol, el color que Rosas le fijo por
+#     carta al gobernador de Santiago del Estero en junio de 1836. Solo Cordoba (la tricolor que la
+#     Junta restablecio el 17/1/1831) y Santa Fe (colorada, blanca y azul, a la vista en la acuarela de
+#     d'Hastrel de la bateria del Rosario, 1839) tienen propia. Imagenes reales de Wikimedia, nunca
+#     redibujadas.
 # -------------------------------------------------------------------------------------------------
 
+# EN: the plain Confederation flag (option A of the doc): «Flag of Liga Federal.svg», whose own
+#     description says «Flag of the Argentine Confederation». The name is misleading; the image is not.
+# ES: la Confederacion lisa (opcion A del documento): «Flag of Liga Federal.svg», cuya descripcion dice
+#     «Flag of the Argentine Confederation». El nombre engana; la imagen no.
+gg_flag_confederacion = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = {
+		texture = "te_gg_confederacion.dds"
+	}
+}
+
+# EN: the celeste and white without a sun (option D): the national flag as the unitarians and the
+#     Coalition of the North flew it, and the national flag again after Caseros. The same Commons file
+#     as the Coalition's own (te_coalicion.dds: «Flag of Argentina (alternative).svg» is a redirect to
+#     «Flag of Argentina (civil).svg», the file the doc names), so a Coalition province and the
+#     Coalition fly the very same cloth.
+# ES: la celeste y blanca sin sol (opcion D): la nacional como la izaban los unitarios y la Coalicion
+#     del Norte, y otra vez la nacional despues de Caseros. El mismo archivo de Commons que la de la
+#     Coalicion (te_coalicion.dds: «Flag of Argentina (alternative).svg» redirige a «Flag of Argentina
+#     (civil).svg», el que nombra el documento), asi que una provincia de la Coalicion y la Coalicion
+#     izan el mismo pano.
+gg_flag_argentina_celeste = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = {
+		texture = "te_coalicion.dds"
+	}
+}
+
+# EN: 1836-1852: the Confederation flag, for the nine without a flag of their own.
+# ES: 1836-1852: la de la Confederacion, para las nueve sin bandera propia.
 TUC = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 29 57 69 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 SLT = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 3 60 59 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 JUJ = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 83 52 59 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 CTM = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 34 43 77 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 LRJ = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 300 34 55 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
-CBA = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
-	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 209 52 59 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
-}
-
-SFE = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
-	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 165 54 51 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
-}
-
 SDE = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 58 47 67 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 MZA = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 333 71 59 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
-
 SJN = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 22 71 80 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+SNL = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
 }
 
-SNL = {
-	# EN/ES: PLACEHOLDER / PROVISORIO
+# EN: Cordoba -- red, white and celeste, horizontal: «Flag of Cordoba 1815.svg». The Junta de
+#     Representantes restored it on 17/1/1831 (Prando 2009; Aviles 1961). How long it lasted is not
+#     known; it «must have been abandoned before March 1854».
+# ES: Cordoba -- colorada, blanca y celeste, horizontal. La Junta la restablecio el 17/1/1831; no se
+#     sabe hasta cuando duro, «debe haber sido abandonada antes de marzo de 1854».
+CBA = {
 	pattern = "pattern_solid.tga"
-	color1 = hsv360 { 25 46 44 }
-	colored_emblem = {
-		texture = "ce_frame_circle_outline.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { scale = { 0.5 0.75 } position = { 0.5 0.5 } }
-	}
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_cordoba_1815.dds" }
+}
+
+# EN: Santa Fe -- red, white and blue, horizontal: «Flag of Santa Fe (1819).svg». Law of 22/8/1825;
+#     the tricolour in d'Hastrel's 1839 watercolour of the Rosario battery; in use «until after 1852»
+#     (Prando 2009).
+# ES: Santa Fe -- colorada, blanca y azul, horizontal. Ley del 22/8/1825; la tricolor de la acuarela
+#     de d'Hastrel de 1839; en uso «hasta despues de 1852» (Prando 2009).
+SFE = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_santa_fe_1819.dds" }
+}
+
+# EN: THE PROVINCIAL FLAGS OF TODAY, each from the date its law adopted it (table in the doc; dates
+#     from the laws quoted on FOTW and Wikipedia). Only a province country still alive on that date
+#     ever shows one.
+# ES: LAS BANDERAS PROVINCIALES DE HOY, cada una desde la fecha de su ley. Solo las ve un pais
+#     provincial que siga vivo en esa fecha.
+gg_flag_tucuman_1995 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_tucuman_1995.dds" }
+}
+gg_flag_tucuman_2010 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_tucuman_2010.dds" }
+}
+gg_flag_salta_1997 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_salta_1997.dds" }
+}
+gg_flag_jujuy_1994 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_jujuy_1994.dds" }
+}
+gg_flag_catamarca_2011 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_catamarca_2011.dds" }
+}
+gg_flag_la_rioja_1986 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_la_rioja_1986.dds" }
+}
+gg_flag_cordoba_2010 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_cordoba_2010.dds" }
+}
+gg_flag_cordoba_2014 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_cordoba_2014.dds" }
+}
+gg_flag_santa_fe_1986 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_santa_fe_1986.dds" }
+}
+gg_flag_santiago_1985 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_santiago_1985.dds" }
+}
+gg_flag_mendoza_1992 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_mendoza_1992.dds" }
+}
+gg_flag_san_juan_1997 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_san_juan_1997.dds" }
+}
+gg_flag_san_juan_2018 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_san_juan_2018.dds" }
+}
+gg_flag_san_luis_1988 = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_san_luis_1988.dds" }
 }
