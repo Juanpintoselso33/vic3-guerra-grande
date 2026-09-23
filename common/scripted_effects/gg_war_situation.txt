@@ -97,16 +97,22 @@ gg_war_phase_effects = {
 #     asi que las batallas despues de la particion no puntuaban. Mismo patron que gg_international_sync.
 gg_war_journal_sync = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_war_journal_sync|" # GG_TRAZA
-	# EN/ES: 23/9/2026 (Juan) -- Buenos Aires hears when the peace is on the table (gg_rosas.6), once per offer
-	#     / Buenos Aires se entera cuando la paz esta sobre la mesa, una vez por oferta
+	# EN/ES: 23/9/2026 (Juan) -- Buenos Aires hears BEFORE the peace (gg_rosas.6): when the leading side is two points
+	#     from the arbiter's threshold, or six months before the rule's date; at most once a year
+	#     / Buenos Aires se entera ANTES de la paz: a dos puntos del umbral, o seis meses antes de la fecha de la regla
 	if = {
 		limit = {
-			has_global_variable = gg_peace_offered
+			has_global_variable = guerra_grande_split_done
+			has_global_variable = guerra_grande_open_war
 			NOT = { has_global_variable = gg_peace_settled }
 			NOT = { has_global_variable = gg_rosas_peace_told }
 			exists = c:ARG
+			OR = {
+				AND = { gg_outcome_dynamic = yes gg_rosas_peace_margin >= -2 }
+				AND = { NOT = { gg_outcome_dynamic = yes } game_date >= 1851.4.8 }
+			}
 		}
-		set_global_variable = { name = gg_rosas_peace_told days = 120 }
+		set_global_variable = { name = gg_rosas_peace_told days = 365 }
 		c:ARG = { trigger_event = { id = gg_rosas.6 days = 0 popup = yes } }
 	}
 	scope:journal_entry ?= {

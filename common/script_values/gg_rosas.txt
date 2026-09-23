@@ -1,0 +1,8 @@
+﻿# EN/ES: 23/9/2026 (headless run 203155: the peace was offered and signed inside one week, and Buenos Aires never
+#     heard) -- how far the leading side is from the arbiter's threshold; Buenos Aires is told when it is close
+#     / cuanto le falta al lado que va arriba para el umbral del arbitro; se avisa cuando esta cerca
+gg_rosas_peace_margin = {
+	value = gg_war_balance_blanco
+	if = { limit = { gg_war_balance_colorado > gg_war_balance_blanco } value = gg_war_balance_colorado }
+	subtract = gg_arbiter_balance_needed
+}

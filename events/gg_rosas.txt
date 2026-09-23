@@ -30,6 +30,12 @@ gg_rosas.101 = {
 			}
 			c:ARG = { trigger_event = { id = gg_rosas.1 days = 0 popup = yes } }
 		}
+		# EN/ES: headless 23/9 -- the partition may come after 16/2/1843: retry monthly through 1843
+		#     / la particion puede llegar despues: se reintenta cada mes durante 1843
+		else_if = {
+			limit = { game_date < 1843.12.31 NOT = { has_global_variable = gg_peace_settled } }
+			trigger_event = { id = gg_rosas.101 days = 30 }
+		}
 	}
 }
 
