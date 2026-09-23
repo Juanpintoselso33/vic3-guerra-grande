@@ -58,6 +58,8 @@ flowcontainer = {
 		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_entre_rios.dds" color = { 0.84 0.65 0.31 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)1')]" }
 		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_entre_rios.dds" color = { 0.76 0.32 0.29 1 } visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_entre_rios'), '(CFixedPoint)2')]" }
 		icon = { position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_buenos_aires.dds" color = { 0.54 0.65 0.78 1 } }
+		# EN/ES: 23/9 (Juan) -- the Oriental Province, only while it is one / solo mientras lo sea
+		icon = { visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" position = { 115 12 } size = { 290 416 } texture = "gfx/interface/gg_situations/pact_oriental.dds" color = { 0.56 0.70 0.66 1 } }
 		gg_pact_hover_map = { position = { 115 12 } }
 	}
 	textbox = {
@@ -406,6 +408,19 @@ flowcontainer = {
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_san_luis').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
 				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
 				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
+			}
+			# EN/ES: 23/9 (Juan) -- oriental: the Banda Oriental as a province of the Pact, it delegates
+			#     / la Banda Oriental como provincia del Pacto, delega
+			widget = {
+				visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]"
+				size = { 520 88 }
+				background = { using = dark_area alpha = 0.35 }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_oriental" tooltip = "gg_pact_j_name_oriental_tt" }
+				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_oriental').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_oriental').GetCharacter]" }
+				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_oriental').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_oriental').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
+				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_oriental').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
+				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/approval_icon.dds" }
+				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_0" tooltip = "gg_pact_j_st_0_tt" }
 			}
 			# EN/ES: corrientes
 			widget = {

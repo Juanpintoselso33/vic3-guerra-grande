@@ -171,6 +171,7 @@ gg_cisplatina.3 = {
 		remove_global_variable = gg_cis_war
 		if = {
 			limit = { has_global_variable = gg_cis_brazil_won }
+			if = { limit = { has_global_variable = gg_oriental_in_pact } remove_global_variable = gg_oriental_in_pact }
 			if = {
 				limit = { global_var:gg_cis_goal = 2 }
 				# EN/ES: the Pact province is a country: Brazil annexes it whole / la provincia del Pacto es un pais

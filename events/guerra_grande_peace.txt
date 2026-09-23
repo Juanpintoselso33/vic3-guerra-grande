@@ -1042,6 +1042,7 @@ gg_peace.2 = {
 		#     Pact (row, map, its governor), flies the Treinta y Tres flag, and breaks the Convention of 1828
 		#     / una PROVINCIA de la Confederacion: entra al Pacto, lleva la bandera de los Treinta y Tres
 		set_global_variable = gg_oriental_province
+		set_global_variable = gg_oriental_in_pact # EN/ES: the Pact shows it / el Pacto la muestra
 
 		custom_tooltip = gg_peace_confederation_tt
 		custom_tooltip = gg_peace_reincorporation_brazil_tt
@@ -1210,6 +1211,8 @@ gg_peace.2 = {
 		}
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_reincorporated
+		# EN/ES: 23/9 (Juan) -- fully reincorporated, it is part of the Pact too / reincorporada, tambien es del Pacto
+		set_global_variable = gg_oriental_in_pact
 
 		custom_tooltip = gg_peace_reincorporation_tt
 		# EN/ES: 23/9 (Juan) -- it breaks the Convention of 1828: Brazil answers in a month (gg_cisplatina.2)
