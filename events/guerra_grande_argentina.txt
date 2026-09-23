@@ -3271,10 +3271,7 @@ gg_argentina.14 = {
 		set_global_variable = gg_rosas_abandoned_oribe
 		c:CER ?= {
 			add_modifier = { name = gg_oribe_abandoned_army years = 2 is_decaying = yes }
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:CER value = -1000 }
-			}
+			gg_endurance_add = { SIDE = cerrito VALUE = -200 } # EN/ES: 23/9 -- was engine war support -1000 / era apoyo -1000
 		}
 		every_scope_war = {
 			limit = { is_war_participant = c:ENR }

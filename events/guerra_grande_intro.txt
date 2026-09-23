@@ -106,20 +106,10 @@ gg_intro.5 = {
 		if = {
 			limit = { has_global_variable = gg_play_pending }
 			remove_global_variable = gg_play_pending
-			c:CER ?= {
-				create_diplomatic_play = {
-					name = guerra_grande_play
-					target_country = c:URU
-					type = dp_guerra_grande
-					# EN: 23/9/2026 (headless runs 15-16) -- the play opens AS a war. Without it the Defensa's AI
-					#     backed down within weeks and the Cerrito's annex_country goal was enforced with no war at all
-					#     (the Defensa gone in April 1843, not one battle). Vanilla does the same for the wars already
-					#     burning in 1836 (common/history/diplomatic_plays/00_south_american_wars.txt).
-					# ES: la jugada abre COMO guerra. Sin esto la IA de la Defensa cedia en semanas y se aplicaba la
-					#     anexion del Cerrito sin guerra (la Defensa desaparecia en abril de 1843, sin una batalla).
-					war = yes
-				}
-			}
+			# EN: 23/9/2026 (sitio-sin-guerra-plan.md, decided with Juan) -- no engine war at the split: the siege runs on
+			#     the journal (score, river, events, endurance) and the arbiter closes it on the calendar. Headless runs
+			#     1-27: with the engine war open, two or three AI battles ended it between 1843 and 1848.
+			# ES: sin guerra del motor en el corte: el sitio corre sobre el journal y lo cierra el arbitro con el calendario.
 		}
 	}
 }

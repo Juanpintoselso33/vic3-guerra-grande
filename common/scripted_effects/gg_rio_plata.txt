@@ -688,8 +688,11 @@ gg_siege_river_scores = {
 			set_global_variable = { name = gg_siege_river_tally value = 0 }
 			change_global_variable = { name = guerra_grande_blanco_score add = 1 }
 			change_global_variable = { name = gg_src_river_blanco add = 1 }
-			je:je_guerra_grande ?= {
-				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+			# EN/ES: the journal is reached from a country (this runs in the monthly pulse, no scope) / desde un pais
+			c:URU ?= {
+				je:je_guerra_grande ?= {
+					set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+				}
 			}
 		}
 		else_if = {
@@ -697,8 +700,11 @@ gg_siege_river_scores = {
 			set_global_variable = { name = gg_siege_river_tally value = 0 }
 			change_global_variable = { name = guerra_grande_colorado_score add = 1 }
 			change_global_variable = { name = gg_src_river_colorado add = 1 }
-			je:je_guerra_grande ?= {
-				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+			# EN/ES: the journal is reached from a country (this runs in the monthly pulse, no scope) / desde un pais
+			c:URU ?= {
+				je:je_guerra_grande ?= {
+					set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+				}
 			}
 		}
 	}

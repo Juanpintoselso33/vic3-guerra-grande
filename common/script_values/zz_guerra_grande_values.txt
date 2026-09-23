@@ -244,3 +244,17 @@ gg_libres_horse = {
 	}
 	min = 2
 }
+
+# EN: 23/9/2026 (Juan: "the war should end on historical dates, give or take one or two years") -- the
+#     lead the arbiter needs to call a government beaten. The siege did not break for eight years: before
+#     1849 only a rout counts (15); from 1849, when both governments were at the end of their means, a
+#     clear lead (10); from 1851, the year Urquiza's pronouncement and the Brazilian alliance broke it, a
+#     modest one (5, as before). Headless run 21 ended by score in November 1847 at 10.
+# ES: la ventaja que el arbitro exige para dar por batido a un gobierno. El sitio no se quebro en ocho
+#     anios: antes de 1849 solo una paliza (15); desde 1849, una ventaja clara (10); desde 1851, el anio de
+#     Urquiza y la alianza con el Brasil, una modesta (5, como antes).
+gg_arbiter_balance_needed = {
+	value = 15
+	if = { limit = { year >= 1849 } value = 10 }
+	if = { limit = { year >= 1851 } value = 5 }
+}

@@ -854,10 +854,7 @@ gg_powers.18 = {
 			remove_modifier = guerra_grande_foreign_legions
 		}
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -5 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 35 }
 	}
@@ -886,10 +883,7 @@ gg_powers.18 = {
 			}
 		}
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -5 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 25 }
 	}
@@ -922,10 +916,7 @@ gg_powers.18 = {
 			}
 		}
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -15 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = -15 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 40 }
 	}
@@ -1039,10 +1030,7 @@ gg_powers.19 = {
 		# EN: hold on alone: pride, and no patron.
 		# ES: aguantar solos: orgullo, y ningun padrino.
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = 10 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = 10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 20 }
 	}
@@ -1151,10 +1139,7 @@ gg_powers.21 = {
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -10 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = -10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 55 }
 	}
@@ -1245,18 +1230,12 @@ gg_powers.23 = {
 		random_list = {
 			60 = {
 				c:CER ?= {
-					every_scope_war = {
-						limit = { gg_is_the_war = yes }
-						add_war_war_support = { target = c:CER value = -30 }
-					}
+					gg_endurance_change = { SIDE = cerrito VALUE = -30 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 				}
 			}
 			40 = {
 				c:CER ?= {
-					every_scope_war = {
-						limit = { gg_is_the_war = yes }
-						add_war_war_support = { target = c:CER value = -10 }
-					}
+					gg_endurance_change = { SIDE = cerrito VALUE = -10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 				}
 			}
 		}
@@ -1480,6 +1459,16 @@ gg_powers.28 = {
 					has_global_variable = gg_rivera_eight_conditions
 					has_global_variable = gg_cerrito_negotiates
 				}
+				# EN: 23/9/2026 (headless run 30: the mediation closed the war in February 1848 with a lead of 2)
+				#     -- the powers only bring the parties to the table when one side has the lead the arbiter's
+				#     calendar asks for (gg_arbiter_balance_needed: 15 before 1849, 10 to 1851, 5 after). The
+				#     Gore-Gros mission of 1848 historically failed.
+				# ES: las potencias solo sientan a las partes si un bando tiene la ventaja que pide el calendario
+				#     del arbitro. La mision Gore-Gros de 1848 fracaso.
+				OR = {
+					gg_war_balance_blanco >= gg_arbiter_balance_needed
+					gg_war_balance_colorado >= gg_arbiter_balance_needed
+				}
 			}
 			set_global_variable = gg_peace_offered
 			if = {
@@ -1506,16 +1495,10 @@ gg_powers.28 = {
 		# EN: respect the ceasefire: both sides tire.
 		# ES: respetar el cese del fuego: los dos se cansan.
 		c:URU ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:URU value = -5 }
-			}
+			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		c:CER ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:CER value = -5 }
-			}
+			gg_endurance_change = { SIDE = cerrito VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		ai_chance = { base = 60 }
 	}
@@ -1713,10 +1696,7 @@ gg_powers.32 = {
 		gg_patron_change = { PATRON = brasil DELTA = 30 }
 		gg_patron_change = { PATRON = britania DELTA = -5 }
 		c:CER ?= {
-			every_scope_war = {
-				limit = { gg_is_the_war = yes }
-				add_war_war_support = { target = c:CER value = -10 }
-			}
+			gg_endurance_change = { SIDE = cerrito VALUE = -10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
 		c:ARG ?= {
 			change_relations = { country = ROOT value = -30 }

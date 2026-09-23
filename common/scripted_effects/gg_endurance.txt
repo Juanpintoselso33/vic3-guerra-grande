@@ -1,0 +1,56 @@
+﻿# EN: 23/9/2026 (docs/guerra-grande-flujo/sitio-sin-guerra-plan.md, decided with Juan) -- THE ENDURANCE OF
+#     EACH GOVERNMENT. The siege is no longer an engine war, so what used to move the engine's war support
+#     moves this instead: same scale (-100 to 100), same numbers, same thresholds (three months at -25 or
+#     below and that government is asked whether it asks for terms). It starts at 100 at the split. Only
+#     events, the patrons' backing and the monthly recovery below -60 move it -- no engine exhaustion.
+#     SIDE is defensa or cerrito.
+# ES: EL AGUANTE DE CADA GOBIERNO. El sitio ya no es una guerra del motor: lo que movia el apoyo a la guerra
+#     del motor mueve esto. Misma escala, mismos numeros, mismos umbrales. Arranca en 100 en el corte.
+gg_endurance_init = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_endurance_init|" # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_endurance_defensa } }
+		set_global_variable = { name = gg_endurance_defensa value = 100 }
+	}
+	if = {
+		limit = { NOT = { has_global_variable = gg_endurance_cerrito } }
+		set_global_variable = { name = gg_endurance_cerrito value = 100 }
+	}
+}
+
+# EN/ES: shown to the player: global variables have no tooltip of their own / se muestra al jugador
+gg_endurance_change = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_endurance_change| SIDE= $SIDE$  VALUE= $VALUE$ " # GG_TRAZA
+	custom_tooltip = {
+		text = gg_tt_endurance_$SIDE$_$VALUE$
+		gg_endurance_add = { SIDE = $SIDE$ VALUE = $VALUE$ }
+	}
+}
+
+# EN/ES: the same, for the calling government, whichever it is / lo mismo para el gobierno que llama
+gg_endurance_change_self = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_endurance_change_self| VALUE= $VALUE$ " # GG_TRAZA
+	if = {
+		limit = { has_variable = guerra_grande_defensa_government }
+		gg_endurance_change = { SIDE = defensa VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { has_variable = guerra_grande_cerrito_government }
+		gg_endurance_change = { SIDE = cerrito VALUE = $VALUE$ }
+	}
+}
+
+# EN/ES: without a tooltip (monthly pulses, script values), kept inside -100..100 / sin tooltip, entre -100 y 100
+gg_endurance_add = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_endurance_add| VALUE= $VALUE$ " # GG_TRAZA
+	gg_endurance_init = yes
+	change_global_variable = { name = gg_endurance_$SIDE$ add = $VALUE$ }
+	if = {
+		limit = { global_var:gg_endurance_$SIDE$ > 100 }
+		set_global_variable = { name = gg_endurance_$SIDE$ value = 100 }
+	}
+	if = {
+		limit = { global_var:gg_endurance_$SIDE$ < -100 }
+		set_global_variable = { name = gg_endurance_$SIDE$ value = -100 }
+	}
+}

@@ -287,122 +287,54 @@ je_guerra_grande = {
 					# ES: el agotamiento se cuenta, no se mira de golpe, y tiene piso. Un gobierno esta agotado
 					#     con el apoyo en -25 o peor; tres meses seguidos abren el menu de paz del enemigo. Y a
 					#     nadie se lo deja caer a -100, que es donde el motor capitula solo.
-					c:CER ?= {
-						every_scope_war = {
-							limit = { gg_is_the_war = yes }
-							if = {
-								limit = { has_war_support = { target = c:CER value <= -25 } }
-								change_global_variable = { name = gg_cerrito_exhausted add = 1 }
-							}
-							else = {
-								set_global_variable = { name = gg_cerrito_exhausted value = 0 }
-							}
-							if = {
-								limit = { has_war_support = { target = c:CER value <= -60 } }
-								add_war_war_support = { target = c:CER value = 15 }
-							}
-						}
-					}
-					# EN: Codex review 2026-09-19 -- the closing used to read enemy_occupation at the moment the
-					#     journal closed, and that number counts ground taken by ANY enemy: a Brazilian war
-					#     somewhere else could be read as the Cerrito's victory. It is written down here
-					#     instead, month by month and only while this war is the one being fought, so the
-					#     closing reads who took whose ground in the Guerra Grande.
-					# ES: el cierre leia enemy_occupation en el momento de cerrar, y ese numero cuenta el
-					#     suelo tomado por CUALQUIER enemigo: una guerra con el Brasil en otro lado podia
-					#     leerse como victoria del Cerrito. Se anota aca, mes a mes y solo mientras la
-					#     guerra que se pelea sea esta, asi el cierre lee quien tomo el suelo de quien.
-					# EN: Codex review 2026-09-19, second pass -- wrapping this in the war's scope was not
-					#     enough: enemy_occupation belongs to the country and adds up the ground taken by
-					#     ANY enemy, whatever war it came from. The engine has no per-attacker occupation
-					#     in script (attacker_occupation_progress is a war-goal contestion type, not a
-					#     trigger), so the number is only trusted while the Guerra Grande is the ONLY war
-					#     either government is fighting. With another war open the marks are left alone.
-					# ES: envolverlo en el scope de la guerra no alcanzaba: enemy_occupation es del pais y
-					#     suma el suelo tomado por CUALQUIER enemigo, venga de la guerra que venga. El motor
-					#     no expone ocupacion por bando en script, asi que el numero solo se cree mientras
-					#     la Guerra Grande sea la UNICA guerra de los dos gobiernos. Con otra guerra abierta
-					#     las marcas se dejan como estan.
+					# EN: 23/9/2026 (sitio-sin-guerra-plan.md) -- the siege is not an engine war: each government's
+					#     endurance (common/scripted_effects/gg_endurance.txt) replaces the engine's war support. Three
+					#     months in a row at -25 or below and that government is asked first (gg_peace.11/12); at -60
+					#     or below the men pull themselves together a little each month (+15). The patrons' backing
+					#     drains it as it drained the war support. No occupation: without an engine war there is none.
+					# ES: el sitio no es una guerra del motor: el aguante de cada gobierno reemplaza al apoyo a la
+					#     guerra. Tres meses seguidos en -25 o menos y a ese gobierno se le pregunta primero.
 					if = {
+						# EN/ES: only while the siege lasts / solo mientras dura el sitio
 						limit = {
-							c:CER ?= {
-								any_scope_war = { gg_is_the_war = yes }
-								NOT = { any_scope_war = { NOT = { gg_is_the_war = yes } } }
-							}
-							c:URU ?= {
-								NOT = { any_scope_war = { NOT = { gg_is_the_war = yes } } }
-							}
+							has_global_variable = guerra_grande_split_done
+							has_global_variable = guerra_grande_open_war
+							NOT = { has_global_variable = gg_peace_settled }
 						}
+						gg_endurance_init = yes
 						if = {
-							limit = { c:URU ?= { enemy_occupation >= 0.5 } }
-							set_global_variable = { name = gg_defensa_overrun value = 1 }
+							limit = { global_var:gg_endurance_cerrito <= -25 }
+							change_global_variable = { name = gg_cerrito_exhausted add = 1 }
 						}
 						else = {
-							set_global_variable = { name = gg_defensa_overrun value = 0 }
+							set_global_variable = { name = gg_cerrito_exhausted value = 0 }
 						}
 						if = {
-							limit = { c:CER ?= { enemy_occupation >= 0.5 } }
-							set_global_variable = { name = gg_cerrito_overrun value = 1 }
+							limit = { global_var:gg_endurance_defensa <= -25 }
+							change_global_variable = { name = gg_defensa_exhausted add = 1 }
 						}
 						else = {
-							set_global_variable = { name = gg_cerrito_overrun value = 0 }
+							set_global_variable = { name = gg_defensa_exhausted value = 0 }
 						}
-					}
-					# EN: Codex review 2026-09-19, third pass -- when another war opens, the block above stops
-					#     writing, and "leaving the marks as they are" meant a 1 from last month could decide
-					#     the closing months later. A reading that cannot be trusted is not kept: both go to
-					#     zero, and the war has to earn them again once it is the only one being fought.
-					# ES: cuando se abre otra guerra el bloque de arriba deja de escribir, y "dejar las marcas
-					#     como estan" queria decir que un 1 del mes pasado podia decidir el cierre meses
-					#     despues. Una lectura que no se puede creer no se guarda: las dos van a cero, y la
-					#     guerra tiene que volver a ganarselas cuando sea la unica que se pelea.
-					else = {
+						if = {
+							limit = { global_var:gg_endurance_cerrito <= -60 }
+							gg_endurance_add = { SIDE = cerrito VALUE = 15 }
+						}
+						if = {
+							limit = { global_var:gg_endurance_defensa <= -60 }
+							gg_endurance_add = { SIDE = defensa VALUE = 15 }
+						}
 						set_global_variable = { name = gg_cerrito_overrun value = 0 }
 						set_global_variable = { name = gg_defensa_overrun value = 0 }
-					}
-					c:URU ?= {
-						every_scope_war = {
-							limit = { gg_is_the_war = yes }
-							# EN: 23/9/2026 (headless run 17; decided with Juan: "sostener a los dos") -- the engine's war
-							#     exhaustion took both sides from 90 to -60 in eleven months, so no war outlived a year and
-							#     the arbiter read it as exhaustion. Neither government could stop without ceasing to exist:
-							#     each gets back about what the engine takes (~15 a month). Battles still wear them down;
-							#     the score, the river and the events decide the peace.
-							# ES: el desgaste del motor llevaba a los dos de 90 a -60 en once meses. Ninguno de los dos podia
-							#     parar sin dejar de existir: cada uno recupera mas o menos lo que el motor le saca.
-							add_war_war_support = { target = c:URU value = 15 }
-							add_war_war_support = { target = c:CER value = 15 }
-							gg_trace_war_support = yes # EN/ES: 23/9 -- monthly trace / traza mensual
-							if = {
-								limit = { has_war_support = { target = c:URU value <= -25 } }
-								change_global_variable = { name = gg_defensa_exhausted add = 1 }
-							}
-							else = {
-								set_global_variable = { name = gg_defensa_exhausted value = 0 }
-							}
-							if = {
-								limit = { has_war_support = { target = c:URU value <= -60 } }
-								add_war_war_support = { target = c:URU value = 15 }
-							}
+						if = {
+							limit = { gg_defensa_backing < 40 }
+							gg_endurance_add = { SIDE = defensa VALUE = gg_defensa_drain }
 						}
-					}
-					if = {
-						limit = { gg_defensa_backing < 40 }
-						c:URU ?= {
-							every_scope_war = {
-								limit = { gg_is_the_war = yes }
-								add_war_war_support = { target = c:URU value = gg_defensa_drain }
-							}
+						if = {
+							limit = { gg_cerrito_backing < 40 }
+							gg_endurance_add = { SIDE = cerrito VALUE = gg_cerrito_drain }
 						}
-					}
-					if = {
-						limit = { gg_cerrito_backing < 40 }
-						c:CER ?= {
-							every_scope_war = {
-								limit = { gg_is_the_war = yes }
-								add_war_war_support = { target = c:CER value = gg_cerrito_drain }
-							}
-						}
+						gg_trace_war_support = yes # EN/ES: 23/9 -- monthly trace / traza mensual
 					}
 					c:URU ?= { add_treasury = gg_defensa_subsidy }
 					c:CER ?= { add_treasury = gg_cerrito_subsidy }
@@ -435,6 +367,8 @@ je_guerra_grande = {
 			# ES: S19 -- should_be_involved solo siembra la entrada al abrirse (1836, antes del Cerrito):
 			#     los dos gobiernos se agregan a mano cada semana, lo que tambien migra las partidas.
 			gg_war_journal_sync = yes
+			# EN/ES: 23/9 -- the siege on the map, weekly (gg_siege_map.txt) / el sitio en el mapa, cada semana
+			gg_siege_map_pulse = yes
 			# EN/ES: 22/9/2026 -- only our own widgets; the engine's status box, long text, countries and
 			#     conditions hidden (CMF), also for journals already open / solo lo nuestro (CMF)
 			gg_journal_hide_engine_parts = yes

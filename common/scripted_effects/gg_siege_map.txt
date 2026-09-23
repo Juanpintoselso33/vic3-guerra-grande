@@ -1,0 +1,28 @@
+﻿# EN: The Great Siege of Montevideo (1843-1851) is no longer an engine war, so nothing on the map
+#     showed it. This spawns gg_siege_camp_entity (gfx/models/gg_siege/gg_siege.asset: camps,
+#     campfires, smoke and batteries firing) on the Montevideo state region, the same way vanilla
+#     shows earthquakes. Meant to be called monthly, from any scope. PROTOTYPE for Juan to look at.
+#     duration is in real-time SECONDS, not game days (engine doc string in the game binary:
+#     "Spawns a temporary entity at the center of the scoped state region for a number of seconds").
+#     A game month lasts very different real times depending on speed, so 60 s is a compromise:
+#     it may leave a gap at speed 1 and overlaps several copies at speed 5.
+# ES: El Sitio Grande ya no es una guerra del motor y el mapa no lo mostraba. Esto pone la entidad
+#     del sitio sobre la region de Montevideo, como vanilla muestra los terremotos. Se llama una vez
+#     por mes, desde cualquier scope. Prototipo para que Juan lo mire en el juego. duration va en
+#     SEGUNDOS reales, no en dias: 60 s es un compromiso segun la velocidad del juego.
+gg_siege_map_pulse = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_map_pulse|" # GG_TRAZA
+	if = {
+		limit = {
+			has_global_variable = guerra_grande_split_done
+			has_global_variable = guerra_grande_open_war
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		s:STATE_MONTEVIDEO = {
+			spawn_entity_effect = {
+				name = "gg_siege_camp_entity"
+				duration = 20 # EN/ES: real-time seconds, renewed weekly (journal) / segundos reales, se renueva cada semana
+			}
+		}
+	}
+}

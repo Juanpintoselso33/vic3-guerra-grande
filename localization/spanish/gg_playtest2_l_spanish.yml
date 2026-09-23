@@ -11,4 +11,5 @@
  gg_defensa_city_in_arms_desc:0 "Guardias nacionales, batallones de libertos, milicias urbanas y los voluntarios de las legiones: en febrero de 1843 Montevideo tiene unos seis mil quinientos hombres armados detrás de sus líneas."
  gg_brazil_stays_out:0 "El Imperio se queda afuera"
  gg_brazil_stays_out_desc:0 "Río de Janeiro mira la guerra del Plata sin entrar en ella: la alianza que proyectó Sinimbú en 1845 no pasa del papel, y el ejército imperial recién cruzará la frontera en 1851."
- ai_strategy_gg_siege_caution:0 "Prudencia del sitio"
+ gg_siege_no_aggression:0 "Sin guerras propias"
+ gg_siege_no_aggression_desc:0 "Mientras dura el sitio, la guerra de este gobierno es la de la Banda Oriental: no abre otra."

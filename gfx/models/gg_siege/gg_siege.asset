@@ -1,0 +1,60 @@
+# EN: Great Siege of Montevideo (1843-1851): map entity spawned on STATE_MONTEVIDEO by
+#     gg_siege_map_pulse (common/scripted_effects/gg_siege_map.txt), the way vanilla shows
+#     earthquakes (spawn_entity_effect + earthquake_event_entity in harvest_conditions.asset).
+#     The siege is no longer an engine war, so this is what puts it on the map. PROTOTYPE.
+# ES: Entidad del Sitio Grande sobre Montevideo; el sitio ya no es guerra del motor y esto lo
+#     muestra en el mapa. Prototipo para mirar en el juego.
+#
+# EN: Reuses vanilla pieces only (no new meshes or particles):
+#     - particles: "particle_campfire" (gfx/models/particles/vfx_entities_war.asset),
+#       "devastation_stage_1" (vfx_entities_dynamic.asset), "war/war_after_side_smoke"
+#       (vfx_entities_war.asset), "arms/siege_firing" + "arms/siege_explosion"
+#       (military/units/military_units_artillery.asset), "ships/cannon_large"
+#       (military/units/military_units_ships.asset), "muzzle_smoke" (gfx/particles/muzzle_smoke.particle2;
+#       no vanilla .asset references it, name follows the path-under-gfx/particles convention).
+#     - entities: "military_basecamp_generic_entity" (tents + campfire + camp ambience,
+#       military_units_camp.asset) and "military_artillery_cannon_generic_entity"
+#       (military_units_artillery.asset; get_state_from_parent = yes, so it plays our "defend").
+#     Locator offsets and scales are guesses: only an in-game look can tune them.
+# ES: Solo piezas de vanilla. Las posiciones y escalas de los locators son a ojo: se ajustan
+#     mirando en el juego.
+
+entity = {
+	name = "gg_siege_camp_entity"
+	cull_radius = 2000	# EN: same as vanilla devastation VFX / ES: igual que la devastacion de vanilla
+
+	# EN: the Cerrito lines, a few map units around the state center / ES: las lineas del Cerrito
+	locator = { name = "gg_camp_01"		position = { -4.0 0.0 3.0 }		rotation = { 0 0 0 } scale = 1.0 }
+	locator = { name = "gg_camp_02"		position = { -1.5 0.0 5.0 }		rotation = { 0 30 0 } scale = 1.0 }
+	locator = { name = "gg_camp_03"		position = { 2.5 0.0 4.5 }		rotation = { 0 -20 0 } scale = 1.0 }
+	locator = { name = "gg_battery_01"	position = { -3.0 0.0 1.0 }		rotation = { 0 180 0 } scale = 1.0 }
+	locator = { name = "gg_battery_02"	position = { 0.5 0.0 2.0 }		rotation = { 0 180 0 } scale = 1.0 }
+	locator = { name = "gg_battery_03"	position = { 3.5 0.0 1.5 }		rotation = { 0 180 0 } scale = 1.0 }
+	# EN: shells land on the walled town / ES: las bombas caen sobre la ciudad amurallada
+	locator = { name = "gg_impact"		position = { 0.0 0.0 -2.0 }		rotation = { 0 0 0 } scale = 1.0 }
+
+	# EN: vanilla camp (tents) and one vanilla cannon / ES: campamento y un canon de vanilla
+	attach = { gg_camp_02 = "military_basecamp_generic_entity" }
+	attach = { gg_battery_02 = "military_artillery_cannon_generic_entity" }
+
+	# EN: named "defend" so the attached vanilla cannon (get_state_from_parent = yes) fires in loop.
+	# ES: se llama "defend" para que el canon de vanilla adjunto dispare en bucle.
+	default_state = "defend"
+	state = { name = "defend" state_time = 8 looping = yes
+		# EN: persistent layer, started once / ES: capa fija, una sola vez
+		start_event = { particle = "devastation_stage_1" trigger_once = yes keep_particle = yes }
+		event = { time = 0 node = "gg_camp_01" particle = "particle_campfire" trigger_once = yes keep_particle = yes }
+		event = { time = 0 node = "gg_camp_02" particle = "particle_campfire" trigger_once = yes keep_particle = yes }
+		event = { time = 0 node = "gg_camp_03" particle = "particle_campfire" trigger_once = yes keep_particle = yes }
+		event = { time = 0 node = "gg_impact" particle = "war/war_after_side_smoke" trigger_once = yes keep_particle = yes }
+
+		# EN: batteries, every loop (trigger_once = no), staggered / ES: baterias, en cada vuelta, escalonadas
+		event = { time = 1.0 node = "gg_battery_01" particle = "arms/siege_firing" trigger_once = no keep_particle = no }
+		event = { time = 1.1 node = "gg_battery_01" particle = "muzzle_smoke" trigger_once = no keep_particle = no }
+		event = { time = 1.6 node = "gg_impact" particle = "arms/siege_explosion" trigger_once = no keep_particle = no }
+		event = { time = 4.5 node = "gg_battery_03" particle = "ships/cannon_large" trigger_once = no keep_particle = no }
+		event = { time = 6.0 node = "gg_battery_01" particle = "ships/cannon_large" trigger_once = no keep_particle = no }
+		event = { time = 6.5 node = "gg_battery_03" particle = "arms/siege_firing" trigger_once = no keep_particle = no }
+		event = { time = 7.1 node = "gg_impact" particle = "arms/siege_explosion" trigger_once = no keep_particle = no }
+	}
+}

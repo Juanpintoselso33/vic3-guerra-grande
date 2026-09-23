@@ -420,3 +420,12 @@ gg_brazil_stays_out = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_disallow_aggressive_plays_bool = yes
 }
+
+# EN: 23/9/2026 (sitio-sin-guerra-plan.md) -- the siege is not an engine war, so neither government may open
+#     one of its own on the other or on anyone else while it lasts: the war between them is the journal's.
+#     Vanilla's switch (country_cut_down_to_size). Placed at the split, removed at the peace.
+# ES: el sitio no es una guerra del motor: ninguno de los dos gobiernos abre una propia mientras dura.
+gg_siege_no_aggression = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_disallow_aggressive_plays_bool = yes
+}

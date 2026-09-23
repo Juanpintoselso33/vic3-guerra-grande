@@ -83,11 +83,8 @@ gg_cerrito_ripe = {
 	OR = {
 		# EN/ES: T7, F4-3 b/c -- the Cerrito sent Lucas Moreno to ask for terms / el Cerrito pidio condiciones
 		has_global_variable = gg_cerrito_negotiates
-		gg_war_balance_colorado >= 10
-		AND = {
-			year >= 1851
-			gg_war_balance_colorado >= 5
-		}
+		# EN/ES: 23/9 -- the lead needed follows the calendar (gg_arbiter_balance_needed) / la ventaja exigida sigue el calendario
+		gg_war_balance_colorado >= gg_arbiter_balance_needed
 		c:CER ?= {
 			OR = {
 				# EN: Codex review 2026-09-19 -- this read enemy_occupation raw, which counts ground taken
@@ -98,7 +95,12 @@ gg_cerrito_ripe = {
 				#     una guerra con el Brasil en otro lado podia sentar al Cerrito a una mesa de paz
 				#     dictada por la Defensa. La marca mensual es la misma medicion, escrita solo mientras
 				#     la Guerra Grande sea la unica guerra de los dos gobiernos.
-				global_var:gg_cerrito_overrun = 1
+				# EN/ES: 23/9 -- occupation alone decides only from 1849, like the balance (run 23: the Cerrito
+				#     was called beaten in May 1843) / la ocupacion sola decide recien desde 1849
+				AND = {
+					year >= 1849
+					global_var:gg_cerrito_overrun = 1
+				}
 				# EN: playtest 2026-09-17 -- war support at zero used to be enough, and the player was
 				#     annexed by the enemy's peace menu the week it touched zero. Exhaustion now has
 				#     to be deep AND sustained: three months counted by the journal's pulse.
@@ -119,11 +121,8 @@ gg_cerrito_ripe = {
 #     sola provincia y caer es capitular.
 gg_defensa_ripe = {
 	OR = {
-		gg_war_balance_blanco >= 10
-		AND = {
-			year >= 1851
-			gg_war_balance_blanco >= 5
-		}
+		# EN/ES: 23/9 -- the lead needed follows the calendar (gg_arbiter_balance_needed) / la ventaja exigida sigue el calendario
+		gg_war_balance_blanco >= gg_arbiter_balance_needed
 		# EN/ES: C10 -- hunger needs an unbroken blockade: consecutive shut months
 		#     / el hambre exige un bloqueo sin cortes: meses cerrados seguidos
 		global_var:gg_plata_closed_streak >= 24

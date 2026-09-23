@@ -491,6 +491,10 @@ gg_wartime_modifiers_clear = {
 		remove_modifier = gg_cerrito_lives_off_the_land
 	}
 	c:BRZ ?= { if = { limit = { has_modifier = gg_brazil_stays_out } remove_modifier = gg_brazil_stays_out } }
+	every_country = {
+		limit = { has_modifier = gg_siege_no_aggression }
+		remove_modifier = gg_siege_no_aggression
+	}
 	gg_calendar_close_wartime_relays = yes
 }
 
@@ -1202,10 +1206,7 @@ gg_urquiza_flip = {
 	}
 	gg_patron_change = { PATRON = rosas DELTA = -20 }
 	c:CER ?= {
-		every_scope_war = {
-			limit = { gg_is_the_war = yes }
-			add_war_war_support = { target = c:CER value = -20 }
-		}
+		gg_endurance_change = { SIDE = cerrito VALUE = -20 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		trigger_event = { id = gg_powers.23 days = 30 popup = yes }
 	}
 }
@@ -1467,10 +1468,7 @@ gg_peace_fight_on = {
 	else = {
 		set_global_variable = { name = gg_defensa_exhausted value = 0 }
 	}
-	every_scope_war = {
-		limit = { gg_is_the_war = yes }
-		add_war_war_support = { target = root value = -10 }
-	}
+	gg_endurance_change_self = { VALUE = -10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 	add_radicals = { value = small_radicals }
 }
 

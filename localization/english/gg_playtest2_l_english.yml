@@ -11,4 +11,5 @@
  gg_defensa_city_in_arms_desc:0 "National guards, liberto battalions, urban militias and the volunteers of the legions: in February 1843 Montevideo has some six thousand five hundred armed men behind its lines."
  gg_brazil_stays_out:0 "The Empire Stays Out"
  gg_brazil_stays_out_desc:0 "Rio de Janeiro watches the war in the Plata without entering it: the alliance Sinimbú planned in 1845 never leaves the paper, and the imperial army will not cross the frontier until 1851."
- ai_strategy_gg_siege_caution:0 "Caution of the Siege"
+ gg_siege_no_aggression:0 "No Wars of Its Own"
+ gg_siege_no_aggression_desc:0 "While the siege lasts, this government's war is the one in the Banda Oriental: it opens no other."

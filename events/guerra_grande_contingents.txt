@@ -780,10 +780,7 @@ gg_contingent.8 = {
 			gg_score_colorado = { AMOUNT = 3 }
 			# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks
 			c:CER ?= {
-				every_scope_war = {
-					limit = { gg_is_the_war = yes }
-					add_war_war_support = { target = c:CER value = -30 }
-				}
+				gg_endurance_change = { SIDE = cerrito VALUE = -30 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 			}
 		}
 		ai_chance = {
