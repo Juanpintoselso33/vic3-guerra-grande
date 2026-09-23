@@ -70,13 +70,6 @@ flowcontainer = {
 		text = "gg_pact_j_band"
 		tooltip = "gg_pact_j_band_tt"
 	}
-	textbox = {
-		autoresize = yes multiline = yes
-		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
-		parentanchor = hcenter
-		using = fontsize_medium align = center|nobaseline
-		text = "gg_pact_j_legend"
-	}
 	# EN/ES: the list, open unless closed / la lista, abierta salvo que se la cierre
 	section_header_button = {
 		blockoverride "layout" { size = { 520 38 } }
