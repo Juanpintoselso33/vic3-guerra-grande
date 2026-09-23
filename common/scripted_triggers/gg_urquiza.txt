@@ -1,0 +1,28 @@
+﻿# EN: 23/9/2026 (Juan: "a Rosas that consolidated should not lose to Entre Rios... my decisions to appease Entre
+#     Rios do not count") -- the state of things on 1 May 1851, read by Urquiza's choice (gg_urquiza_discontent).
+# ES: el estado de las cosas el 1/5/1851, que lee la decision de Urquiza.
+
+# EN/ES: Rosas won the Guerra Grande: peace signed, not "no victors", and the Defensa's government is gone
+#     / Rosas gano la Guerra Grande: paz firmada, no "ni vencidos ni vencedores", y la Defensa ya no existe
+gg_rosas_won_guerra_grande = {
+	has_global_variable = gg_peace_settled
+	NOT = { has_global_variable = gg_peace_no_victors }
+	NOT = { any_country = { has_variable = guerra_grande_defensa_government } }
+}
+
+# EN/ES: Brazil went to war over the Convention of 1828 and did not get its way (gg_cisplatina.3, outcome 0)
+#     / el Brasil fue a la guerra por la Convencion y no se salio con la suya
+gg_brazil_beaten = {
+	has_global_variable = gg_cis_outcome
+	global_var:gg_cis_outcome = 0
+}
+
+# EN/ES: Urquiza has nobody to sign a convention with: Rosas holds the Banda Oriental or won its war, or Brazil
+#     is beaten / Urquiza no tiene con quien firmar una convencion
+gg_urquiza_alone = {
+	OR = {
+		gg_rosas_won_guerra_grande = yes
+		has_global_variable = gg_oriental_in_pact
+		gg_brazil_beaten = yes
+	}
+}

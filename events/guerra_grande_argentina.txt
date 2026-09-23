@@ -1297,7 +1297,20 @@ gg_argentina.71 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.71.t
-	desc = gg_argentina.71.d
+	# EN/ES: 23/9 (Juan) -- he may stay because of what was conceded, or because Rosas is too strong to defy
+	#     / se queda por lo concedido, o porque Rosas es demasiado fuerte para desafiarlo
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.71.d
+				trigger = {
+					has_global_variable = gg_alcaraz_accepted
+					has_global_variable = gg_corrientes_cerrito_exempt
+				}
+			}
+			triggered_desc = { desc = gg_argentina.71.d_strong trigger = { always = yes } }
+		}
+	}
 	flavor = gg_argentina.71.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
 	event_image = { video = "unspecific_politicians_arguing" }

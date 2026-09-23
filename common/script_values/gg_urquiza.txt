@@ -1,0 +1,21 @@
+﻿# EN: 23/9/2026 (Juan) -- Urquiza's discontent on 1 May 1851, instead of an all-or-nothing checklist. The
+#     grievances Rosas left open push towards the pronouncement; a consolidated Rosas and a Brazil already beaten
+#     hold it back. 4+ pronounces; 2-3 a formal representation without arms (gg_urquiza.1); 1 or less the
+#     negotiated confederation (gg_argentina.71). Read by gg_argentina_cal.4.
+# ES: el descontento de Urquiza el 1/5/1851, en vez de una lista de todo o nada. 4 o mas: pronunciamiento;
+#     2-3: representacion sin armas; 1 o menos: confederacion negociada.
+gg_urquiza_discontent = {
+	value = 0
+	# EN/ES: what Rosas left open / lo que Rosas dejo abierto
+	if = { limit = { NOT = { has_global_variable = gg_alcaraz_accepted } } add = 3 }
+	if = { limit = { NOT = { has_global_variable = gg_corrientes_cerrito_exempt } } add = 3 }
+	if = { limit = { NOT = { has_global_variable = gg_constituent_congress_route } } add = 1 }
+	if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 } add = global_var:gg_entre_rios_agravio }
+	if = { limit = { exists = c:BRZ NOT = { gg_brazil_beaten = yes } } add = 2 }
+	# EN/ES: what holds him back / lo que lo frena
+	if = { limit = { gg_rosas_won_guerra_grande = yes } add = -2 }
+	if = { limit = { has_global_variable = gg_oriental_in_pact } add = -2 }
+	if = { limit = { gg_brazil_beaten = yes } add = -4 }
+	if = { limit = { has_global_variable = gg_delegating_provinces global_var:gg_delegating_provinces >= 10 } add = -1 }
+	if = { limit = { has_global_variable = gg_patron_urquiza global_var:gg_patron_urquiza >= 50 } add = -1 }
+}

@@ -191,17 +191,17 @@ gg_argentina_cal.4 = {
 					exists = s:STATE_ENTRE_RIOS.region_state:ARG
 				}
 				set_global_variable = gg_arg_cal_done_4
+				# EN: 23/9/2026 (Juan) -- Urquiza weighs it (gg_urquiza_discontent), instead of an all-or-nothing
+				#     checklist: 4+ pronounces, 2-3 a formal representation, 1 or less the negotiated confederation.
+				# ES: Urquiza lo pesa, en vez de una lista de todo o nada.
+				set_global_variable = { name = gg_urquiza_discontent_now value = gg_urquiza_discontent }
 				if = {
-					# EN: Alcaraz and the 1850 orders must both have been conceded.
-					# ES: Tanto Alcaraz como las ordenes de 1850 tienen que haberse concedido.
-					limit = {
-						has_global_variable = gg_constituent_congress_route
-						has_global_variable = gg_alcaraz_accepted
-						has_global_variable = gg_corrientes_cerrito_exempt
-						has_global_variable = gg_entre_rios_agravio
-						global_var:gg_entre_rios_agravio = 0
-					}
+					limit = { gg_urquiza_discontent <= 1 }
 					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
+				}
+				else_if = {
+					limit = { gg_urquiza_discontent <= 3 }
+					c:ARG = { trigger_event = { id = gg_urquiza.1 days = 0 popup = yes } }
 				}
 				else = {
 					c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
@@ -811,7 +811,20 @@ gg_argentina_cal.28 = {
 				has_global_variable = gg_montevideo_convention_enabled
 				NOT = { has_global_variable = gg_confederacion_negociada }
 			}
-			c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
+			# EN/ES: 23/9 (Juan) -- nobody to sign the convention with: Urquiza fights alone, in the war his
+			#     pronouncement opened; its end is read as the Pact's war / sin con quien firmar: Urquiza pelea solo
+			if = {
+				limit = { gg_urquiza_alone = yes }
+				set_global_variable = gg_arg_cal_done_28
+				set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+				set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+				set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+				set_global_variable = gg_war_against_buenos_aires
+				c:ARG = { trigger_event = { id = gg_urquiza.2 days = 0 popup = yes } }
+			}
+			else = {
+				c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
+			}
 		}
 	} }
 }

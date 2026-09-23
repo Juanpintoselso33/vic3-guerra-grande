@@ -1,0 +1,96 @@
+﻿namespace = gg_urquiza
+# -------------------------------------------------------------------------------------------------
+# EN: URQUIZA WEIGHS IT (23/9/2026, Juan). On 1 May 1851 Entre Rios no longer pronounces by calendar: its
+#     discontent is added up (common/script_values/gg_urquiza.txt) and there are three ways out. This file
+#     holds the middle one (.1, a formal representation without arms) and the case where he has nobody to sign
+#     a convention with (.2, Urquiza alone: Rosas won the Guerra Grande, holds the Banda Oriental, or Brazil is
+#     beaten). The pronouncement (gg_argentina.3) and the negotiated confederation (gg_argentina.71) stay.
+# ES: URQUIZA LO PESA. El 1/5/1851 Entre Rios ya no se pronuncia por calendario: se suma su descontento y hay
+#     tres salidas. Aca la intermedia (.1, una representacion sin armas) y el caso en que no tiene con quien
+#     firmar (.2, Urquiza solo). El pronunciamiento y la confederacion negociada siguen.
+# SOURCE / FUENTE: the representations the provinces addressed to Buenos Aires under the Pact of 1831 (the
+#     delegation could be questioned without being withdrawn): docs/guerra-grande-argentina/historia-argentina.md.
+# -------------------------------------------------------------------------------------------------
+
+# EN: 1 May 1851, discontent 2-3. Entre Rios keeps the mandate in Buenos Aires but sends a formal representation:
+#     the constitutional question, the rivers, the orders of 1850. Rosas concedes (the negotiated confederation) or
+#     refuses (the pronouncement comes in three months).
+# ES: 1/5/1851, descontento 2-3. Entre Rios mantiene el encargo pero manda una representacion formal. Rosas cede
+#     (confederacion negociada) o se niega (el pronunciamiento llega en tres meses).
+gg_urquiza.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_urquiza.1.t
+	desc = gg_urquiza.1.d
+	flavor = gg_urquiza.1.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		exists = s:STATE_ENTRE_RIOS
+		NOT = { exists = c:ENR }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1|" # GG_TRAZA
+		gg_reclamo_abre = { KEY = entre_rios }
+	}
+
+	# EN: concede: the constituent route, and Entre Rios stays / ceder: la ruta constituyente, y Entre Rios se queda
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1.a|" # GG_TRAZA
+		name = gg_urquiza.1.a
+		default_option = yes
+		custom_tooltip = gg_urquiza.1.a_tt
+		gg_patron_change = { PATRON = urquiza DELTA = 10 }
+		trigger_event = { id = gg_argentina.71 days = 0 popup = yes }
+		ai_chance = { base = 60 }
+	}
+	# EN: refuse: the representation becomes a pronouncement / negarse: la representacion se vuelve pronunciamiento
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1.b|" # GG_TRAZA
+		name = gg_urquiza.1.b
+		custom_tooltip = gg_urquiza.1.b_tt
+		gg_patron_change = { PATRON = urquiza DELTA = -10 }
+		trigger_event = { id = gg_argentina.3 days = 90 popup = yes }
+		ai_chance = {
+			base = 40
+			modifier = { trigger = { gg_rosas_won_guerra_grande = yes } add = 20 }
+		}
+	}
+}
+
+# EN: 29 May 1851 with nobody to sign with: Urquiza pronounced, but there is no Defensa to ally with and no
+#     Brazil to lend an army. He fights alone; the war with Entre Rios is the one his pronouncement opened.
+# ES: 29/5/1851 sin con quien firmar: Urquiza se pronuncio, pero no hay Defensa ni Brasil. Pelea solo; la guerra es
+#     la que abrio su pronunciamiento.
+gg_urquiza.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_urquiza.2.t
+	desc = gg_urquiza.2.d
+	flavor = gg_urquiza.2.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		exists = c:ENR
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.2|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.2.a|" # GG_TRAZA
+		name = gg_urquiza.2.a
+		default_option = yes
+		custom_tooltip = gg_urquiza.2.a_tt
+	}
+}
