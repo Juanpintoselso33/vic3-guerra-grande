@@ -24,4 +24,6 @@ gg_pact_sync = {
 			scope:journal_entry = { add_involved_country = prev }
 		}
 	}
+	# EN/ES: 23/9 (Juan) -- the provinces' ground by ownership, weekly (gg_province_cells.txt) / la tierra de las provincias
+	gg_province_cells_reconcile = yes
 }
