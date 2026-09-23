@@ -469,5 +469,35 @@ on_monthly_pulse_country = {
 }
 gg_historical_lives_monthly = {
 	trigger = { c:URU ?= this }
-	effect = { gg_historical_lives = yes }
+	effect = {
+		gg_historical_lives = yes
+		gg_rosas_keeps_the_seat = yes
+		# EN/ES: 23/9 (headless) -- the engine seated Lavalleja over Rivera in August 1839: the Republic's
+		#     presidency follows history every month, not only from its events / la presidencia sigue la
+		#     historia todos los meses, no solo desde sus eventos
+		if = {
+			limit = { OR = { NOT = { has_global_variable = gg_peace_settled } has_global_variable = gg_president_railroad } }
+			gg_president_historical = yes
+			c:CER ?= { gg_president_historical = yes }
+		}
+	}
+}
+
+# EN: 23/9/2026 (headless playtests) -- the engine seated a nobody in Argentina (Echague in Nov 1836,
+#     "Candido Rodriguez" in Dec 1837) with no law changed and no script of ours. The monthly pulse put
+#     Rosas back two weeks later; this puts him back at once. No loop: seating Rosas fires this again
+#     with him as the new ruler, and the limit fails.
+# ES: el motor sento a un cualquiera en la Argentina sin cambio de ley ni script nuestro. El pulso
+#     mensual devolvia a Rosas dos semanas despues; esto lo devuelve en el acto. Sin bucle.
+on_new_ruler = {
+	on_actions = { gg_rosas_seat_on_new_ruler }
+}
+gg_rosas_seat_on_new_ruler = {
+	trigger = {
+		NOT = { has_template = ARG_Juan_Manuel_de_Rosas }
+		owner ?= { c:ARG ?= this }
+	}
+	effect = {
+		owner = { gg_rosas_keeps_the_seat = yes }
+	}
 }

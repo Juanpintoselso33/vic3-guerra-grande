@@ -25,3 +25,29 @@ gg_historical_lives = {
 	gg_historical_life = { TEMPLATE = ARG_William_Brown DIES = 1857.3.3 }
 	gg_historical_life = { TEMPLATE = URU_Juan_Antonio_Lavalleja DIES = 1853.10.22 }
 }
+
+# EN: 23/9/2026 (headless playtests) -- while Rosas's era lasts, Argentina's head of state is Rosas, as
+#     Uruguay's follows history (gg_president_historical). In two headless runs Argentina's ruler became
+#     Echague in November 1836 with no law changed and no script of ours involved (the engine's pick,
+#     cause still under a probe). The era ends with the Pact's settlement (the same marks as the
+#     compatch's gg_x_arg_rosas_era_over, read here directly so the mod works without it).
+# ES: mientras dura la era de Rosas, el jefe de Estado argentino es Rosas, como el uruguayo sigue la
+#     historia. En dos corridas sin pantalla el gobernante paso a ser Echague en noviembre de 1836 sin
+#     cambio de ley ni script nuestro. La era termina con el cierre del Pacto.
+gg_rosas_keeps_the_seat = {
+	c:ARG ?= {
+		if = {
+			limit = {
+				has_variable = gg_arg_rosas_seat
+				NOR = {
+					has_global_variable = gg_pact_settlement_urquiza
+					has_global_variable = gg_pact_settlement_constitutional
+					has_global_variable = gg_pact_settlement_mandate_collapsed
+				}
+				any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes }
+				NOT = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+			gg_ruler_set = { TEMPLATE = ARG_Juan_Manuel_de_Rosas }
+		}
+	}
+}

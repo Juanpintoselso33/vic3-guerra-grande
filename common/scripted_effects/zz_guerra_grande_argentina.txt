@@ -193,7 +193,7 @@ gg_argentina_create_coalicion = {
 		#     / gobierna La Rioja desde 1837 en la lista del Pacto: se lo trae, no se lo copia, y recupera el mando
 		gg_character_fetch = { TEMPLATE = CLN_gg_tomas_brizuela }
 		random_scope_character = {
-			limit = { has_template = CLN_gg_tomas_brizuela is_general = no }
+			limit = { has_template = CLN_gg_tomas_brizuela NOT = { has_role = character_role_general } }
 			add_character_role = general
 		}
 	}
