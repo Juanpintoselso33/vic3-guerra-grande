@@ -1886,7 +1886,7 @@ gg_argentina.23 = {
 		set_global_variable = gg_powers_mediators
 		if = {
 			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { mobilize_army = yes }
+			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
 		}
 		ai_chance = { base = 30 }
 	}
@@ -1941,7 +1941,7 @@ gg_argentina.24 = {
 		custom_tooltip = gg_argentina.24.b_tt
 		if = {
 			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { mobilize_army = yes }
+			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
 			if = {
 				limit = { exists = c:CRR }
 				random_scope_war = {
@@ -1965,7 +1965,7 @@ gg_argentina.24 = {
 		custom_tooltip = gg_argentina.24.c_tt
 		if = {
 			limit = { has_variable = gg_parana_column_ref }
-			var:gg_parana_column_ref ?= { mobilize_army = yes }
+			var:gg_parana_column_ref ?= { if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes } } # EN: only an idle army can mobilize / ES: solo si no está ya movilizada
 			if = {
 				limit = { exists = c:PRG }
 				random_scope_war = {
