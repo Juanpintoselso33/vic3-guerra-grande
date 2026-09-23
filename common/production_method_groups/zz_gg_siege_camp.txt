@@ -1,0 +1,10 @@
+﻿# EN/ES: the siege camp does nothing but show / el campamento del sitio solo se muestra
+pmg_gg_siege_camp = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	ai_selection = most_productive
+	is_hidden_when_unavailable = yes
+
+	production_methods = {
+		pm_monument_no_effects
+	}
+}
