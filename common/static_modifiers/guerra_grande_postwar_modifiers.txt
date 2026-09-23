@@ -98,3 +98,15 @@ gg_postwar_fusion = {
 	state_loyalists_from_political_movements_mult = 0.10
 	country_legitimacy_base_add = 5
 }
+
+# EN: 23/9/2026 (Juan) -- Rosas won the Pact and gave no constitution: all the power is his, and the question
+#     between federales and unitarios stays open under it. Lasts while he lives (gg_rosas_succession.txt).
+# ES: Rosas gano el Pacto y no dio constitucion: todo el poder es suyo, y la cuestion entre federales y unitarios
+#     sigue abierta por debajo. Dura mientras viva.
+gg_pais_sin_constitucion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+	interest_group_ig_intelligentsia_approval_add = -3
+	state_radicals_from_political_movements_mult = 0.25
+}

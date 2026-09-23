@@ -1,0 +1,20 @@
+﻿# EN: 23/9/2026 (Juan) -- while Rosas rules without a constitution, the month he dies ends it: the modifier goes,
+#     and the question between federales and unitarios opens (gg_constitution.2).
+# ES: mientras Rosas gobierne sin constitucion, el mes en que muere lo termina.
+on_monthly_pulse_country = {
+	on_actions = { gg_rosas_succession_monthly }
+}
+
+gg_rosas_succession_monthly = {
+	trigger = {
+		c:ARG ?= this
+		has_modifier = gg_pais_sin_constitucion
+		NOT = { any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } } }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_succession_monthly" # GG_TRAZA
+		remove_modifier = gg_pais_sin_constitucion
+		set_global_variable = gg_rosas_succession_crisis
+		trigger_event = { id = gg_constitution.2 days = 0 popup = yes }
+	}
+}

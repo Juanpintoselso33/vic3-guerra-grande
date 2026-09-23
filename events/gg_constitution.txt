@@ -64,9 +64,12 @@ gg_constitution.1 = {
 		name = gg_constitution.1.b
 		trigger = { NOT = { has_global_variable = gg_pact_settlement_urquiza } }
 		set_global_variable = { name = gg_constitution_chosen value = 2 }
+		custom_tooltip = gg_constitution.1.b_tt
 		activate_law = law_type:law_autocracy
 		activate_law = law_type:law_state_religion
 		activate_law = law_type:law_censorship
+		# EN/ES: 23/9 (Juan) -- the question stays open under him / la cuestion sigue abierta por debajo
+		add_modifier = { name = gg_pais_sin_constitucion }
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
 		add_loyalists = { value = small_radicals interest_group = ig:ig_devout }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
@@ -74,5 +77,35 @@ gg_constitution.1 = {
 			base = 30
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_rosas } add = 60 }
 		}
+	}
+}
+
+# EN: 23/9/2026 (Juan) -- the Restorer dies without having given a constitution: the sum of public power dies with
+#     him and the question between federales and unitarios comes back into the open. What each province does is
+#     the next piece (to be defined province by province with Juan); this event opens it (gg_rosas_succession_crisis).
+# ES: muere el Restaurador sin haber dado constitucion: la suma del poder publico muere con el y la cuestion entre
+#     federales y unitarios vuelve a la superficie. Lo que haga cada provincia es la pieza siguiente.
+gg_constitution.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_constitution.2.t
+	desc = gg_constitution.2.d
+	flavor = gg_constitution.2.f
+	event_image = { video = "southamerica_public_figure_assassination" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = { c:ARG ?= this }
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.2|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.2.a|" # GG_TRAZA
+		name = gg_constitution.2.a
+		default_option = yes
+		custom_tooltip = gg_constitution.2.a_tt
 	}
 }
