@@ -34,6 +34,15 @@ gg_pact_gov_from_template = {
 # ES: El gobernador de la fecha, si vive. Para personajes que ya crea el juego u otro evento.
 gg_pact_gov_pick = {
 	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
+	# EN/ES: Codex 22/9 -- alive in exile still counts: shown, not moved (another event owns him)
+	#     / vivo en el exilio igual cuenta: se lo muestra, no se lo mueve
+	if = {
+		limit = { NOT = { has_global_variable = gg_pact_gov_$KEY$ } }
+		random_character_in_exile_pool = {
+			limit = { has_template = $TEMPLATE$ }
+			set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+		}
+	}
 }
 
 # EN: The same, and if he was NEVER born, he is born now -- once -- in whoever holds the province
@@ -50,12 +59,30 @@ gg_pact_gov_pick_or_create = {
 			set_global_variable = gg_gov_born_$TEMPLATE$
 		}
 	}
+	# EN/ES: Codex 22/9 -- a governor of the date who is in exile comes home to whoever holds the province
+	#     / un gobernador de la fecha que esta en el exilio vuelve a quien tenga la provincia
 	else_if = {
-		limit = {
-			NOT = { has_global_variable = gg_gov_born_$TEMPLATE$ }
-			NOT = { any_character_in_exile_pool = { has_template = $TEMPLATE$ } }
+		limit = { any_character_in_exile_pool = { has_template = $TEMPLATE$ } }
+		s:$STATE$ = {
+			random_scope_state = {
+				limit = { owner ?= { gg_is_argentine_holder = yes } }
+				owner = { save_scope_as = gg_gov_holder }
+			}
 		}
-		set_global_variable = gg_gov_born_$TEMPLATE$
+		if = {
+			limit = { exists = scope:gg_gov_holder }
+			random_character_in_exile_pool = {
+				limit = { has_template = $TEMPLATE$ }
+				transfer_character = scope:gg_gov_holder
+				set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+			}
+			clear_saved_scope = gg_gov_holder
+		}
+	}
+	else_if = {
+		limit = { NOT = { has_global_variable = gg_gov_born_$TEMPLATE$ } }
+		# EN/ES: the mark is set on birth, not before: with no Argentine holder of the province nobody is
+		#     born, and he must stay bornable / la marca va al nacer: sin duenio argentino no nace nadie
 		s:$STATE$ = {
 			random_scope_state = {
 				limit = { owner ?= { gg_is_argentine_holder = yes } }
@@ -65,6 +92,7 @@ gg_pact_gov_pick_or_create = {
 						template = $TEMPLATE$
 						on_created = {
 							set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+							set_global_variable = gg_gov_born_$TEMPLATE$
 							# EN: a governor born inside Buenos Aires's roster gets no command there: the
 							#     list is not a way to hand Rosas his rivals' generals (Brizuela governs La
 							#     Rioja from 1837; the Coalition gives him back his command in 1840).
@@ -298,6 +326,8 @@ gg_pact_gov_hist_mendoza = {
 	if = { limit = { game_date >= 1847.4.4 } gg_pact_gov_pick_or_create = { TEMPLATE = MZA_gg_alejo_mallea KEY = mendoza STATE = STATE_MENDOZA } }
 }
 gg_pact_gov_hist_san_juan = {
+	# EN/ES: 1836.1.1 - 1836.1.9 -- A, art 9/1/1836 (R 8/1)
+	if = { limit = { game_date < 1836.1.9 } gg_pact_gov_pick_or_create = { TEMPLATE = SJN_gg_martin_yanzon KEY = san_juan STATE = STATE_SAN_JUAN } }
 	# EN/ES: 1836.2.26 - 1841.8.13 -- interim 26/2/1836 (A, art); Acha took the city 13/8/1841
 	if = { limit = { game_date >= 1836.2.26 game_date < 1841.8.13 } gg_pact_gov_pick = { TEMPLATE = ARG_gg_nazario_benavidez KEY = san_juan } }
 	# EN/ES: 1841.10.8 - ... -- A, ficha 8/10/1841

@@ -773,6 +773,22 @@ MZA_gg_alejo_mallea = {
 	trait_generation = { }
 }
 
+# EN/ES: Martín Yanzón (dic. 1801 - 29/7/1842); federal
+SJN_gg_martin_yanzon = {
+	first_name = gg_pn_SJN_gg_martin_yanzon_first
+	last_name = gg_pn_SJN_gg_martin_yanzon_last
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	# EN/ES: birth dic. 1801 (art; NF 1799) in the source: left out / nacimiento dic. 1801 (art; NF 1799): no va
+	home_region = STATE_SAN_JUAN
+	trait_generation = { }
+}
+
 # EN/ES: José Gregorio Calderón (1796 - mayo 1851); federal
 SNL_gg_jose_gregorio_calderon = {
 	first_name = gg_pn_SNL_gg_jose_gregorio_calderon_first

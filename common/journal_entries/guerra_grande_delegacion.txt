@@ -198,7 +198,8 @@ je_gg_delegation = {
 					else = { trigger_event = { id = gg_argentina.56 days = 0 popup = yes } }
 				}
 				# EN: THE SPLITS, AFTER THE RESTORATIONS (22/9/2026, decided with Juan). A country of the
-				#     Argentine side that is a subject of Buenos Aires and at peace with it is split into its
+				#     Argentine side that is a subject of Buenos Aires and at peace with everybody (Codex 22/9: a
+				#     war with a third country would lose its fronts and goals) is split into its
 				#     provinces (common/scripted_effects/gg_provinces.txt). They run last on purpose: the
 				#     Coalition changes tag here, and a changed tag is not read again in the same effect,
 				#     so the North's return is counted next week, from a map that already shows it.
@@ -208,19 +209,19 @@ je_gg_delegation = {
 				#     asi que la vuelta del Norte se cuenta la semana siguiente.
 				c:CLN ?= {
 					if = {
-						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						limit = { is_subject_of = c:ARG is_at_war = no }
 						gg_argentina_split_coalition = yes
 					}
 				}
 				c:CRR ?= {
 					if = {
-						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						limit = { is_subject_of = c:ARG is_at_war = no }
 						gg_province_split_beaten = yes
 					}
 				}
 				c:ENR ?= {
 					if = {
-						limit = { is_subject_of = c:ARG NOT = { has_war_with = c:ARG } }
+						limit = { is_subject_of = c:ARG is_at_war = no }
 						gg_province_split_beaten = yes
 					}
 				}
