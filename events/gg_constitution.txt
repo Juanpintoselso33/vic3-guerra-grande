@@ -1,0 +1,78 @@
+﻿namespace = gg_constitution
+# -------------------------------------------------------------------------------------------------
+# EN: THE CONSTITUTION (23/9/2026, Juan: "the end of the Federal Pact, the annexation or the confederation,
+#     also means choosing a constitution, and that has to be there"). A month after the settlement of the Pact
+#     (gg_argentina.80, incorporation or confederation), Buenos Aires's government writes it -- or does not.
+#     a) the Constitution of 1853, after Alberdi's Bases: a presidential republic; freedom of worship (art. 14);
+#        no slaves (art. 15); immigration encouraged (art. 25); the press without prior censorship and the right
+#        of association (art. 14). Free navigation of the rivers (art. 26) is already the mod's modifier.
+#     b) the Pact without a constitution: the Restorer's regime, the sum of public power (law of 7 March 1835),
+#        the Catholic religion of the State and the press under control. Not open if Urquiza won.
+# ES: LA CONSTITUCION. Un mes despues del arreglo del Pacto, el gobierno de Buenos Aires la escribe, o no.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), arts. 14, 15, 25, 26:
+#     https://es.wikisource.org/wiki/Constituci%C3%B3n_de_la_Naci%C3%B3n_Argentina_(1853)
+#     Ley de la Sala de Representantes de Buenos Aires, 7 March 1835 (suma del poder publico):
+#     docs/guerra-grande-argentina/historia-argentina.md.
+# -------------------------------------------------------------------------------------------------
+gg_constitution.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_constitution.1.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_constitution.1.d_urquiza trigger = { has_global_variable = gg_pact_settlement_urquiza } }
+			triggered_desc = { desc = gg_constitution.1.d_rosas trigger = { has_global_variable = gg_pact_settlement_rosas } }
+			triggered_desc = { desc = gg_constitution.1.d trigger = { always = yes } }
+		}
+	}
+	flavor = gg_constitution.1.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		NOT = { has_global_variable = gg_constitution_chosen }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.a|" # GG_TRAZA
+		name = gg_constitution.1.a
+		default_option = yes
+		set_global_variable = { name = gg_constitution_chosen value = 1 }
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_freedom_of_conscience
+		activate_law = law_type:law_slavery_banned
+		activate_law = law_type:law_no_migration_controls
+		activate_law = law_type:law_right_of_assembly
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_devout }
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
+		ai_chance = {
+			base = 50
+			modifier = { trigger = { has_global_variable = gg_pact_settlement_urquiza } add = 100 }
+			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = 30 }
+		}
+	}
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.b|" # GG_TRAZA
+		name = gg_constitution.1.b
+		trigger = { NOT = { has_global_variable = gg_pact_settlement_urquiza } }
+		set_global_variable = { name = gg_constitution_chosen value = 2 }
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_censorship
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
+		add_loyalists = { value = small_radicals interest_group = ig:ig_devout }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { has_global_variable = gg_pact_settlement_rosas } add = 60 }
+		}
+	}
+}

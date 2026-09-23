@@ -3446,6 +3446,8 @@ gg_argentina.80 = {
 		}
 		custom_tooltip = gg_argentina.80.a_tt
 		gg_argentina_provinces_incorporate = yes
+		# EN/ES: 23/9 (Juan) -- and then the constitution / y despues la constitucion
+		trigger_event = { id = gg_constitution.1 days = 30 popup = yes }
 		ai_chance = {
 			base = 20
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = 50 }
@@ -3458,6 +3460,7 @@ gg_argentina.80 = {
 		name = gg_argentina.80.b
 		default_option = yes
 		custom_tooltip = gg_argentina.80.b_tt
+		trigger_event = { id = gg_constitution.1 days = 30 popup = yes } # EN/ES: 23/9 (Juan) -- the constitution / la constitucion
 		# EN/ES: the protectorates stay as they are, and the governors keep their seats
 		#     / los protectorados quedan como estan, con sus gobernadores
 		ai_chance = {
