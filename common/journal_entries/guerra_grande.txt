@@ -365,7 +365,6 @@ je_guerra_grande = {
 								NOT = { gg_outcome_dynamic = yes }
 								game_date >= 1851.10.8
 								NOT = { has_global_variable = gg_peace_offered }
-								NOT = { has_global_variable = gg_battle_open } # EN/ES: 23/9 -- the campaign closes first / primero cierra la campania
 								exists = c:CER
 								exists = c:URU
 							}
@@ -419,6 +418,19 @@ je_guerra_grande = {
 			# EN/ES: 23/9 -- the siege on the map, weekly (gg_siege_map.txt) / el sitio en el mapa, cada semana
 			gg_siege_map_pulse = yes
 			gg_siege_locks_ensure = yes # EN/ES: audit R5/R6 -- the siege's locks / los candados del sitio
+			# EN/ES: 23/9 stage 2 -- a peace on the table closes the campaign of 1851 before the menus annex or retag
+			#     anybody / una paz sobre la mesa cierra la campania de 1851 antes de que los menus anexen o cambien tags
+			if = {
+				limit = {
+					global_var:gg_battle_open ?= 2
+					OR = {
+						has_global_variable = gg_peace_offered
+						has_global_variable = gg_peace_settled
+					}
+				}
+				set_global_variable = { name = gg_battle_result value = 0 }
+				gg_battle_close = yes
+			}
 			# EN/ES: 22/9/2026 -- only our own widgets; the engine's status box, long text, countries and
 			#     conditions hidden (CMF), also for journals already open / solo lo nuestro (CMF)
 			gg_journal_hide_engine_parts = yes
@@ -435,9 +447,9 @@ je_guerra_grande = {
 					NOT = { has_global_variable = gg_peace_chain_pending }
 					# EN/ES: T7, I15 -- Howden's truce / la tregua de Howden
 					NOT = { has_global_variable = gg_truce }
-					# EN/ES: 23/9 stage 2 (Codex) -- no peace table while a short war is being fought
-					#     / ninguna mesa de paz mientras se pelea una guerra corta
-					NOT = { has_global_variable = gg_battle_open }
+					# EN/ES: 23/9 stage 2 -- no peace table during India Muerta (1845); the campaign of 1851 gives way to
+					#     the peace (below) / ninguna mesa de paz durante India Muerta; la campania de 1851 le cede el paso a la paz
+					NOT = { global_var:gg_battle_open ?= 1 }
 					exists = c:CER
 					exists = c:URU
 				}
