@@ -346,10 +346,27 @@ gg_plata_monthly = {
 					set_variable = { name = gg_lent_squadron_ref value = scope:gg_lent_fleet }
 				}
 			}
+			# EN: 22/9/2026 (Juan) -- France keeps the ships it lends: while the squadron sails for the
+			#     Defensa, its naval goods cost the city nothing (the closest effect in 1.13: there is no
+			#     per-formation upkeep; naval administration wages are not covered). Renewed monthly.
+			# ES: Francia sostiene los barcos que presta: mientras la escuadra navega para la Defensa,
+			#     sus bienes navales no le cuestan nada a la plaza (lo mas cercano en 1.13). Mensual.
+			if = {
+				limit = { has_variable = gg_lent_squadron }
+				add_modifier = { name = gg_lent_squadron_french_supply months = 2 }
+			}
+			# EN/ES: Codex 22/9 -- a sunk squadron that could not be raised again takes the supply with it
+			#     / una escuadra hundida que no pudo rehacerse se lleva el sosten
+			else_if = {
+				limit = { has_modifier = gg_lent_squadron_french_supply }
+				remove_modifier = gg_lent_squadron_french_supply
+			}
 		}
 	}
 	else = {
 		c:URU ?= {
+			# EN/ES: Codex 22/9 -- France's supply leaves with her ships / el sosten frances se va con sus barcos
+			if = { limit = { has_modifier = gg_lent_squadron_french_supply } remove_modifier = gg_lent_squadron_french_supply }
 			if = {
 				limit = { has_variable = gg_lent_squadron }
 				remove_variable = gg_lent_squadron

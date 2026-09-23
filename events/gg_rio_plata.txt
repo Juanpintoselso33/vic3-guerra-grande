@@ -387,3 +387,68 @@ gg_plata.28 = {
 		default_option = yes
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.30/31 -- ROSAS SHUTS THE RIVERS, 22 January 1841 (22/9/2026, decided with Juan). With
+#     France gone after the Mackau convention, Rosas closed the Parana and the Uruguay, authorised
+#     privateering and declared Montevideo blockaded (the text of gg_naval.1, SOURCES_powers.md s.1).
+#     An AI Rosas closes at once; a human Rosas decides. Before the partition the monthly river
+#     counters do not run (gg_plata_monthly lives in the open war), so hunger and patience start with
+#     the siege; the closure shows in the journal, the notice and the city's mortality.
+# ES: ROSAS CIERRA LOS RIOS, 22 de enero de 1841. Una IA cierra en el acto; un Rosas humano decide.
+#     Antes de la particion los contadores del rio no corren, asi que hambre y paciencia empiezan con
+#     el sitio; el cierre se ve en el journal, en el aviso y en la mortalidad de la plaza.
+# -------------------------------------------------------------------------------------------------
+gg_plata.30 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	# EN: Codex 22/9 -- a scheduled event's trigger is read when it is queued (see gg_intro.5), so the
+	#     guards live here: no partition yet and the river still open when January 1841 comes.
+	# ES: el trigger de un evento agendado se lee al agendarlo (ver gg_intro.5): las guardas van aca.
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = guerra_grande_split_done }
+				global_var:gg_plata_rosas_stance ?= 0
+			}
+			if = {
+				limit = { is_player = yes }
+				trigger_event = { id = gg_plata.31 popup = yes }
+			}
+			else = {
+				gg_plata_rosas_close = yes
+			}
+		}
+	}
+}
+gg_plata.31 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.31.t
+	desc = gg_plata.31.d
+	flavor = gg_plata.31.f
+	event_image = { video = "gg_nav_brown_montevideo" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 1825
+	trigger = { c:ARG ?= this }
+	option = {
+		name = gg_plata.31.a
+		default_option = yes
+		# EN/ES: Codex 22/9 -- answered late, it must not overwrite a stance the war already set
+		#     / contestado tarde, no pisa una postura que la guerra ya fijo
+		if = {
+			limit = {
+				NOT = { has_global_variable = guerra_grande_split_done }
+				global_var:gg_plata_rosas_stance ?= 0
+			}
+			gg_plata_rosas_close = yes
+		}
+		ai_chance = { base = 100 }
+	}
+	option = {
+		name = gg_plata.31.b
+		custom_tooltip = gg_plata.31.b_tt
+		ai_chance = { base = 0 }
+	}
+}

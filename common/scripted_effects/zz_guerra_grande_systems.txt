@@ -441,6 +441,8 @@ gg_wartime_modifiers_clear = {
 	# EN/ES: Fleet state lives on Uruguay and must be cleared even when it has no country modifier.
 	# El estado de la escuadra vive en Uruguay y se limpia aunque no tenga modificadores de pais.
 	c:URU ?= {
+		# EN/ES: 22/9 -- France's supply of the lent squadron ends with it / el sosten frances termina con la escuadra
+		if = { limit = { has_modifier = gg_lent_squadron_french_supply } remove_modifier = gg_lent_squadron_french_supply }
 		if = {
 			limit = { has_variable = gg_lent_squadron_ref exists = var:gg_lent_squadron_ref }
 			var:gg_lent_squadron_ref ?= {

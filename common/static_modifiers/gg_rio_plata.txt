@@ -35,3 +35,10 @@ gg_plata_phase_intervention_powers = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_infamy_generation_mult = 0.1
 }
+
+# EN/ES: 22/9/2026 (Juan) -- France supplies the squadron it lends the Defensa / Francia abastece la
+#     escuadra que le presta a la Defensa
+gg_lent_squadron_french_supply = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_navy_goods_cost_mult = -1
+}

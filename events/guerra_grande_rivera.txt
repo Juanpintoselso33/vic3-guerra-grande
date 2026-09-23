@@ -153,22 +153,13 @@ gg_rivera.1 = {
 				add_commander_rank = 1
 			}
 		}
-		if = {
-			limit = { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
-			create_military_formation = {
-				type = army
-				hq_region = sr:region_brazil
-				name = Ejercito_de_Operaciones
-				# EN/ES: 22/9/2026 (docs/tropas-iniciales-2026-09-22.md) -- all horse: Rivera's field army
-				#     was 4,000-7,476 cavalry / toda caballeria: el ejercito de campaña de Rivera era de
-				#     4.000 a 7.476 jinetes
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					state_region = s:STATE_MONTEVIDEO
-					count = 4
-				}
-			}
-		}
+		# EN: 22/9/2026 (Juan) -- no army is raised here any more. Arroyo Grande is always before the
+		#     partition, and with guerra_grande.3.b a formation raised now ended in exile, empty, when
+		#     Montevideo passed to the Defensa. gg_rivera_reinforced makes gg_troops raise Rivera's four
+		#     squadrons for the Defensa two days after the split (common/scripted_effects/gg_troops.txt).
+		# ES: aca ya no se levanta ejercito. Arroyo Grande es siempre antes de la particion, y con .3.b una
+		#     formacion levantada ahora terminaba exiliada y vacia. gg_rivera_reinforced hace que gg_troops
+		#     le levante a la Defensa los cuatro escuadrones de Rivera dos dias despues del corte.
 		add_modifier = {
 			name = gg_rivera_walls_stripped
 			years = 6
