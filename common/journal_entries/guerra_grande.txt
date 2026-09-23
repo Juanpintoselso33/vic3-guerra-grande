@@ -363,7 +363,16 @@ je_guerra_grande = {
 					c:URU ?= {
 						every_scope_war = {
 							limit = { gg_is_the_war = yes }
-							gg_trace_war_support = yes # EN/ES: 23/9 -- weekly trace / traza semanal
+							# EN: 23/9/2026 (headless run 17; decided with Juan: "sostener a los dos") -- the engine's war
+							#     exhaustion took both sides from 90 to -60 in eleven months, so no war outlived a year and
+							#     the arbiter read it as exhaustion. Neither government could stop without ceasing to exist:
+							#     each gets back about what the engine takes (~15 a month). Battles still wear them down;
+							#     the score, the river and the events decide the peace.
+							# ES: el desgaste del motor llevaba a los dos de 90 a -60 en once meses. Ninguno de los dos podia
+							#     parar sin dejar de existir: cada uno recupera mas o menos lo que el motor le saca.
+							add_war_war_support = { target = c:URU value = 15 }
+							add_war_war_support = { target = c:CER value = 15 }
+							gg_trace_war_support = yes # EN/ES: 23/9 -- monthly trace / traza mensual
 							if = {
 								limit = { has_war_support = { target = c:URU value <= -25 } }
 								change_global_variable = { name = gg_defensa_exhausted add = 1 }

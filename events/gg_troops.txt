@@ -15,6 +15,8 @@ gg_troops.1 = {
 		gg_troops_split_armies_defensa = yes
 		# EN/ES: 23/9 -- the city arms fast after the split (~6,500 in Feb 1843) / la ciudad se arma rapido
 		add_modifier = { name = gg_defensa_city_in_arms months = 6 }
+		# EN/ES: 23/9 -- the Empire stays out until 1851 / el Imperio se queda afuera hasta 1851
+		c:BRZ ?= { if = { limit = { NOT = { has_modifier = gg_brazil_stays_out } } add_modifier = { name = gg_brazil_stays_out } } }
 	}
 }
 

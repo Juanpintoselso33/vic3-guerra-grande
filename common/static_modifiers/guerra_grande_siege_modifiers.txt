@@ -406,3 +406,17 @@ gg_defensa_city_in_arms = {
 	building_training_rate_add = 1000
 	building_training_rate_mult = 2
 }
+
+# EN: 23/9/2026 (headless run 18) -- Brazil's AI opened a war of its own on the young Cerrito and took the
+#     four departments in July 1844, outside the Guerra Grande. The Empire stayed out of the war until the
+#     alliance of 1851: Sinimbu's alliance of early 1845 remained a project (Acevedo, Anales II, in
+#     SOURCES_order_of_battle.md) and Caxias crossed on 4 September 1851, which the mod brings in by
+#     events (gg_contingent.8). Vanilla's switch for "no aggressive plays" (country_cut_down_to_size).
+#     Placed at the split, removed with the other wartime modifiers.
+# ES: la IA del Brasil le abrio una guerra propia al Cerrito y se quedo con los cuatro departamentos en julio
+#     de 1844. El Imperio se mantuvo afuera hasta la alianza de 1851: la alianza de Sinimbu de 1845 quedo
+#     en proyecto y Caxias cruzo el 4 de setiembre de 1851, cosa que el mod trae por eventos.
+gg_brazil_stays_out = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_disallow_aggressive_plays_bool = yes
+}

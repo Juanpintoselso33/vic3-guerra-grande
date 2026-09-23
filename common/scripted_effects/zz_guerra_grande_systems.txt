@@ -490,6 +490,7 @@ gg_wartime_modifiers_clear = {
 		limit = { has_modifier = gg_cerrito_lives_off_the_land }
 		remove_modifier = gg_cerrito_lives_off_the_land
 	}
+	c:BRZ ?= { if = { limit = { has_modifier = gg_brazil_stays_out } remove_modifier = gg_brazil_stays_out } }
 	gg_calendar_close_wartime_relays = yes
 }
 
