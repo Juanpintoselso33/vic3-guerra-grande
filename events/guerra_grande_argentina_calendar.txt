@@ -814,7 +814,7 @@ gg_argentina_cal.28 = {
 			# EN/ES: 23/9 (Juan) -- nobody to sign the convention with: Urquiza fights alone, in the war his
 			#     pronouncement opened; its end is read as the Pact's war / sin con quien firmar: Urquiza pelea solo
 			if = {
-				limit = { gg_urquiza_alone = yes }
+				limit = { gg_urquiza_no_convention = yes }
 				set_global_variable = gg_arg_cal_done_28
 				set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
 				set_global_variable = { name = gg_pact_war_rosas_won value = 0 }

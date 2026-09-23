@@ -26,3 +26,12 @@ gg_urquiza_alone = {
 		gg_brazil_beaten = yes
 	}
 }
+
+# EN/ES: 23/9 (text audit) -- no Montevideo convention to sign: Urquiza alone, or the Guerra Grande already over
+#     (gg_international_open false: peace, never crossed, failed) / sin convencion: Urquiza solo o la guerra terminada
+gg_urquiza_no_convention = {
+	OR = {
+		gg_urquiza_alone = yes
+		NOT = { gg_international_open = yes }
+	}
+}

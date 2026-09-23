@@ -246,7 +246,12 @@ gg_argentina.3 = {
 	placement = ROOT
 
 	title = gg_argentina.3.t
-	desc = gg_argentina.3.d
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.3.d_alone trigger = { gg_urquiza_no_convention = yes } }
+			triggered_desc = { desc = gg_argentina.3.d trigger = { always = yes } }
+		}
+	}
 	flavor = gg_argentina.3.f
 
 	# ES: IMAGEN PROVISORIA, y queda dicho que lo es. La regla del mod es una imagen real de Wikimedia
@@ -301,7 +306,8 @@ gg_argentina.3 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.3.b|" # GG_TRAZA
 		name = gg_argentina.3.b
-		custom_tooltip = gg_pronunciamiento_rebelion_tt
+		if = { limit = { gg_urquiza_no_convention = yes } custom_tooltip = gg_pronunciamiento_rebelion_alone_tt }
+		else = { custom_tooltip = gg_pronunciamiento_rebelion_tt }
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
 		set_global_variable = gg_montevideo_convention_enabled
@@ -315,7 +321,8 @@ gg_argentina.3 = {
 		trigger = {
 			is_player = yes
 		}
-		custom_tooltip = gg_pronunciamiento_rebelion_tt
+		if = { limit = { gg_urquiza_no_convention = yes } custom_tooltip = gg_pronunciamiento_rebelion_alone_tt }
+		else = { custom_tooltip = gg_pronunciamiento_rebelion_tt }
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
 		set_global_variable = gg_montevideo_convention_enabled
@@ -869,7 +876,12 @@ gg_argentina.67 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.67.t
-	desc = gg_argentina.67.d
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.67.d_postwar trigger = { OR = { has_global_variable = gg_oriental_in_pact gg_brazil_beaten = yes } } }
+			triggered_desc = { desc = gg_argentina.67.d trigger = { always = yes } }
+		}
+	}
 	flavor = gg_argentina.67.f
 	event_image = { video = "europenorthamerica_before_the_battle" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -1115,7 +1127,8 @@ gg_argentina.69 = {
 		# ES: El propio tratado aporta todos los terminos: paz, reincorporacion bajo las relaciones
 		#     exteriores delegadas del Pacto, exencion del servicio oriental y congreso constituyente.
 		#     El efecto compartido hace que la reapertura contrafactual de Vences use lo mismo.
-		custom_tooltip = gg_alcaraz_accept_tt
+		if = { limit = { gg_international_open = yes } custom_tooltip = gg_alcaraz_accept_tt }
+		else = { custom_tooltip = gg_alcaraz_accept_postwar_tt }
 		gg_argentina_accept_alcaraz = yes
 		ai_chance = { base = 20 }
 	}
@@ -2208,6 +2221,7 @@ gg_argentina.26 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.a|" # GG_TRAZA
 		name = gg_argentina.26.a
 		custom_tooltip = gg_argentina.26.a_tt
+		if = { limit = { has_global_variable = guerra_grande_open_war } custom_tooltip = gg_argentina.26.defensa_tt } # EN/ES: 23/9 -- only while the Defensa exists / solo mientras exista la Defensa
 		default_option = yes
 		# EN/ES: the complete publication answers every claim that is still pending; withdrawn
 		#     delegations are not restored. / la publicacion completa contesta todo reclamo todavia
@@ -2232,6 +2246,7 @@ gg_argentina.26 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.b|" # GG_TRAZA
 		name = gg_argentina.26.b
 		custom_tooltip = gg_argentina.26.b_tt
+		if = { limit = { has_global_variable = guerra_grande_open_war } custom_tooltip = gg_argentina.26.defensa_tt } # EN/ES: 23/9 -- only while the Defensa exists / solo mientras exista la Defensa
 		# EN: A sharpened excerpt can answer one petition, but not the whole provincial ledger.
 		#     The current Entre Rios claim comes first, then Corrientes, then the northern bloc.
 		# ES: Un recorte afilado puede contestar un pliego, no toda la cuenta provincial. Va primero
@@ -2265,6 +2280,7 @@ gg_argentina.26 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.26.c|" # GG_TRAZA
 		name = gg_argentina.26.c
 		custom_tooltip = gg_argentina.26.c_tt
+		if = { limit = { has_global_variable = guerra_grande_open_war } custom_tooltip = gg_argentina.26.defensa_tt } # EN/ES: 23/9 -- only while the Defensa exists / solo mientras exista la Defensa
 		# EN/ES: deliberate silence leaves every delegation and petition as it stood, but the choice
 		#     is shared with the other shore and read by the Defensa event. / el silencio deja cada
 		#     delegacion y reclamo como estaba, pero la otra orilla lee la decision
@@ -3507,6 +3523,7 @@ gg_argentina.83 = {
 	title = gg_argentina.83.t
 	desc = {
 		first_valid = {
+			triggered_desc = { desc = gg_argentina.83.d_alone trigger = { NOT = { has_global_variable = gg_ejercito_grande_mortgage } } }
 			triggered_desc = {
 				desc = gg_argentina.83.d_pitched
 				trigger = { global_var:gg_caseros_choice ?= 1 }
