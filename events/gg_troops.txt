@@ -71,7 +71,17 @@ gg_troops.10 = {
 		every_in_list = {
 			variable = gg_mob_queue
 			if = { limit = { is_mobilized = no } fully_mobilize_army = yes }
-			if = { limit = { exists = scope:gg_mob_front } deploy_to_front = scope:gg_mob_front }
+			# EN/ES: 23/9 -- only a mobilized army can go to a front; log the ones the engine refused
+			#     / solo un ejercito movilizado va al frente; se trazan los que el motor rechazo
+			if = {
+				limit = { is_mobilized = no }
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|not_mobilized|" # GG_TRAZA
+			}
+			else_if = {
+				limit = { exists = scope:gg_mob_front }
+				deploy_to_front = scope:gg_mob_front
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|deployed|" # GG_TRAZA
+			}
 		}
 		clear_variable_list = gg_mob_queue
 	}

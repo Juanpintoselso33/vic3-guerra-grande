@@ -13,3 +13,63 @@ gg_mobilize_next_day = {
 		trigger_event = { id = gg_troops.10 days = 1 }
 	}
 }
+
+# EN: 23/9 -- the engine refuses to mobilize an army with no commander (its check is "all commanders busy",
+#     true with none): the Ejercito Grande's foreign contingents were raised without one (headless run
+#     172225, "Scope formation cannot be mobilized"). Each gets its documented chief, created once per
+#     country and reused (the full and the limited terms both call this). Run in the owner's scope.
+# ES: el motor no moviliza un ejercito sin comandante (su chequeo es "todos ocupados", que se cumple con
+#     ninguno): los contingentes se levantaban sin jefe. Cada uno recibe su jefe documentado, creado una
+#     vez por pais y reutilizado. Se corre en el scope del duenio.
+# SOURCE / FUENTE: es.wikipedia.org/wiki/Ejército_Grande (Brazilian 1st Division under brigadier Manuel
+#     Marques de Sousa; Oriental contingent under colonel Cesar Diaz, named by decree of 5/11/1851);
+#     perio.unlp.edu.ar, Tomo 01 de la Batalla de Caseros (Ruiz Moreno 2006).
+gg_commander_marques_de_sousa = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_commander_marques_de_sousa|" # GG_TRAZA
+	if = {
+		limit = { NOT = { any_scope_character = { has_variable = gg_marques_de_sousa } } }
+		create_character = {
+			first_name = "Manuel"
+			last_name = "Marques de Sousa"
+			historical = yes
+			birth_date = 1804.6.13
+			is_general = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			culture = cu:brazilian
+			religion = rel:catholic
+			traits = { experienced_offensive_planner }
+			save_scope_as = gg_new_commander
+		}
+		scope:gg_new_commander = { set_variable = gg_marques_de_sousa }
+	}
+	random_scope_character = {
+		limit = { has_variable = gg_marques_de_sousa }
+		transfer_to_formation = $ARMY$
+	}
+}
+
+gg_commander_cesar_diaz = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_commander_cesar_diaz|" # GG_TRAZA
+	if = {
+		limit = { NOT = { any_scope_character = { has_variable = gg_cesar_diaz_contingent } } }
+		create_character = {
+			first_name = "Cesar"
+			last_name = "Diaz"
+			historical = yes
+			birth_date = 1812.7.6
+			is_general = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			culture = primary_culture
+			religion = rel:catholic
+			traits = { persistent }
+			save_scope_as = gg_new_commander
+		}
+		scope:gg_new_commander = { set_variable = gg_cesar_diaz_contingent }
+	}
+	random_scope_character = {
+		limit = { has_variable = gg_cesar_diaz_contingent }
+		transfer_to_formation = $ARMY$
+	}
+}
