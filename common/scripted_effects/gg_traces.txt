@@ -62,7 +62,11 @@ gg_trace_war_support = {
 	if = { limit = { has_war_support = { target = c:CER value >= 80 } } set_global_variable = { name = gg_debug_ws_cer value = 80 } }
 	if = { limit = { has_war_support = { target = c:CER value >= 90 } } set_global_variable = { name = gg_debug_ws_cer value = 90 } }
 	if = { limit = { has_war_support = { target = c:CER value >= 100 } } set_global_variable = { name = gg_debug_ws_cer value = 100 } }
-	debug_log = "GG_ARB|[TimeKeeper.GetCurrentDate.GetString]|apoyo_guerra|defensa= [GetGlobalVariable('gg_debug_ws_uru').GetValue|0] cerrito= [GetGlobalVariable('gg_debug_ws_cer').GetValue|0] defensa_agotada= [GetGlobalVariable('gg_defensa_exhausted').GetValue|0] cerrito_agotado= [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0]"
+	set_global_variable = { name = gg_debug_caution value = 0 }
+	c:CER ?= { if = { limit = { has_strategy = ai_strategy_gg_siege_caution } change_global_variable = { name = gg_debug_caution add = 1 } } }
+	c:URU ?= { if = { limit = { has_strategy = ai_strategy_gg_siege_caution } change_global_variable = { name = gg_debug_caution add = 10 } } }
+	debug_log = "GG_ARB|[TimeKeeper.GetCurrentDate.GetString]|apoyo_guerra|prudencia(1=cerrito,10=defensa)= [GetGlobalVariable('gg_debug_caution').GetValue|0] defensa= [GetGlobalVariable('gg_debug_ws_uru').GetValue|0] cerrito= [GetGlobalVariable('gg_debug_ws_cer').GetValue|0] defensa_agotada= [GetGlobalVariable('gg_defensa_exhausted').GetValue|0] cerrito_agotado= [GetGlobalVariable('gg_cerrito_exhausted').GetValue|0]"
 	remove_global_variable = gg_debug_ws_uru
 	remove_global_variable = gg_debug_ws_cer
+	remove_global_variable = gg_debug_caution
 }

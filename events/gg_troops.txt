@@ -13,6 +13,8 @@ gg_troops.1 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_troops.1|" # GG_TRAZA
 		gg_troops_split_armies_defensa = yes
+		# EN/ES: 23/9 -- no assaults on the line / sin asaltos a la linea
+		set_strategy = ai_strategy_gg_siege_caution
 		# EN/ES: 23/9 -- the city arms fast after the split (~6,500 in Feb 1843) / la ciudad se arma rapido
 		add_modifier = { name = gg_defensa_city_in_arms months = 6 }
 		# EN/ES: 23/9 -- the Empire stays out until 1851 / el Imperio se queda afuera hasta 1851

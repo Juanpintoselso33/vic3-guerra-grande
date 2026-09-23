@@ -1,0 +1,36 @@
+﻿# EN: 23/9/2026 (Juan: "is there no way to make the Cerrito's AI more conservative?") -- in every headless
+#     run one AI assault on Montevideo's walls decided the Guerra Grande (June 1844: 15,854 against 4,958,
+#     all lost; December 1843: 10,856 against 3,899). Vanilla's recklessness multiplies the AI's estimate
+#     of its own strength (00_default_strategy.txt: at 2 it believes it is twice as strong); strategies
+#     add to it. The two governments of the siege get -0.6, so each believes itself at 40 % of its real
+#     strength and only attacks with a clear advantage -- as in the siege, which saw no assault on the
+#     line in eight years. Only while the war of the split is open.
+# ES: en cada corrida un asalto de la IA a las murallas decidio la guerra. La temeridad de vanilla
+#     multiplica la estimacion que la IA hace de su propia fuerza; las estrategias se suman. Los dos
+#     gobiernos del sitio llevan -0.6: cada uno se cree al 40 % de su fuerza y solo ataca con ventaja
+#     clara, como en el sitio, que no vio un asalto a la linea en ocho anios.
+ai_strategy_gg_siege_caution = {
+	icon = "gfx/interface/icons/ai_strategy_icons/maintain_power_balance.dds"
+	type = diplomatic
+
+	possible = {
+		# EN/ES: the Defensa only -- the Cerrito has its own (gg_ai_strategy_cerrito_siege, recklessness -0.5,
+		#     re-set monthly), and run 21 showed recklessness does not stop assaults on the front: it governs
+		#     wars and plays / solo la Defensa: el Cerrito tiene la suya, y la temeridad no frena los asaltos
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	weight = {
+		value = 1000
+	}
+
+	recklessness = {
+		value = -0.6
+	}
+
+	diplomatic_play_boldness = {
+		value = -25
+	}
+}
