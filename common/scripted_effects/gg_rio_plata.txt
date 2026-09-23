@@ -277,6 +277,8 @@ gg_plata_monthly = {
 				change_global_variable = { name = gg_plata_months add = 1 }
 			}
 			change_global_variable = { name = gg_plata_closed_streak add = 1 }
+			# EN/ES: 23/9 -- in the siege, what goes past the cap stays in the score / en el sitio lo que pasa del techo queda
+			if = { limit = { global_var:gg_plata_months >= 16 } gg_siege_river_scores = { STEP = 1 } }
 			# EN/ES: 22/9/2026 (Codex) -- the patience only runs while some power counts by its level: no
 			#     months banked unseen / la paciencia corre solo si alguna potencia cuenta por su nivel
 			if = {
@@ -295,6 +297,7 @@ gg_plata_monthly = {
 				change_global_variable = { name = gg_plata_months add = -1 }
 			}
 			set_global_variable = { name = gg_plata_closed_streak value = 0 }
+			if = { limit = { global_var:gg_plata_months <= -16 } gg_siege_river_scores = { STEP = -1 } }
 		}
 		if = {
 			limit = { gg_plata_intervention_due = yes }
@@ -653,6 +656,49 @@ gg_plata_fort_french_supply = {
 					limit = { is_building_type = building_naval_fortification }
 					add_modifier = { name = gg_fort_french_supply months = 2 }
 				}
+			}
+		}
+	}
+}
+
+# EN: 23/9/2026 (headless run 19; decided with Juan: "el sitio puntua") -- THE SIEGE SCORES. The score
+#     moved one to three points a year during the siege and the arbiter asks for a balance of 10, so the
+#     negotiated peace -- the design's main path -- never fired: only the battlefield decided. The river's
+#     running account stays as it was (four months a point, up to 4 a side: the journal's "river now");
+#     during the siege, each four months it runs PAST that cap stay in the score for the side it favours
+#     (closed: blancos; open: colorados), so years of siege add up. Called only at the cap, only while the
+#     war of the split is open; a signed tally, so only a sustained river banks points.
+# ES: EL SITIO PUNTUA. La cuenta del rio queda como estaba (cuatro meses un punto, hasta 4 por lado); en el
+#     sitio, cada cuatro meses que corre MAS ALLA de ese techo quedan en el puntaje del bando que favorece.
+gg_siege_river_scores = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_river_scores| STEP= $STEP$ " # GG_TRAZA
+	if = {
+		limit = {
+			has_global_variable = guerra_grande_split_done
+			has_global_variable = guerra_grande_open_war
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_siege_river_tally } }
+			set_global_variable = { name = gg_siege_river_tally value = 0 }
+		}
+		change_global_variable = { name = gg_siege_river_tally add = $STEP$ }
+		if = {
+			limit = { global_var:gg_siege_river_tally >= 4 }
+			set_global_variable = { name = gg_siege_river_tally value = 0 }
+			change_global_variable = { name = guerra_grande_blanco_score add = 1 }
+			change_global_variable = { name = gg_src_river_blanco add = 1 }
+			je:je_guerra_grande ?= {
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
+			}
+		}
+		else_if = {
+			limit = { global_var:gg_siege_river_tally <= -4 }
+			set_global_variable = { name = gg_siege_river_tally value = 0 }
+			change_global_variable = { name = guerra_grande_colorado_score add = 1 }
+			change_global_variable = { name = gg_src_river_colorado add = 1 }
+			je:je_guerra_grande ?= {
+				set_bar_progress = { name = guerra_grande_war_score_bar value = gg_war_score_bar_value }
 			}
 		}
 	}

@@ -13,6 +13,10 @@ gg_war_sources_reset = {
 	set_global_variable = { name = gg_src_partition_colorado value = 0 }
 	set_global_variable = { name = gg_src_last_partition_blanco value = 0 }
 	set_global_variable = { name = gg_src_last_partition_colorado value = 0 }
+	set_global_variable = { name = gg_src_river_blanco value = 0 }
+	set_global_variable = { name = gg_src_river_colorado value = 0 }
+	set_global_variable = { name = gg_src_last_river_blanco value = 0 }
+	set_global_variable = { name = gg_src_last_river_colorado value = 0 }
 }
 # EN/ES: once a month: this month becomes last month / una vez por mes: este mes pasa a ser el pasado
 gg_war_sources_rollover = {
@@ -32,6 +36,17 @@ gg_war_sources_rollover = {
 	}
 	set_global_variable = { name = gg_src_last_partition_blanco value = global_var:gg_src_partition_blanco }
 	set_global_variable = { name = gg_src_last_partition_colorado value = global_var:gg_src_partition_colorado }
+	# EN/ES: 23/9 -- the siege's river points, a monthly source (older saves lack the counter)
+	#     / los puntos del rio en el sitio, fuente mensual
+	if = {
+		limit = { NOT = { has_global_variable = gg_src_river_blanco } }
+		set_global_variable = { name = gg_src_river_blanco value = 0 }
+		set_global_variable = { name = gg_src_river_colorado value = 0 }
+	}
+	set_global_variable = { name = gg_src_last_river_blanco value = global_var:gg_src_river_blanco }
+	set_global_variable = { name = gg_src_last_river_colorado value = global_var:gg_src_river_colorado }
+	set_global_variable = { name = gg_src_river_blanco value = 0 }
+	set_global_variable = { name = gg_src_river_colorado value = 0 }
 	set_global_variable = { name = gg_src_decisions_blanco value = 0 }
 	set_global_variable = { name = gg_src_decisions_colorado value = 0 }
 	set_global_variable = { name = gg_src_partition_blanco value = 0 }
