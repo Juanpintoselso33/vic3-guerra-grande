@@ -3,7 +3,7 @@
  gg_ui_plata_phase_5_tt:0 "La escuadra del contraalmirante Leblanc bloquea el puerto de Buenos Aires, y lo va a bloquear hasta que Francia y Rosas se arreglen. El río está abierto para todos los demás: el que queda aislado es Buenos Aires.\n#b Efectos#!: orilla de Buenos Aires, capacidad comercial #N -50%#! y rendimiento del puerto #N -50%#!."
  gg_ui_plata_ba_blockaded_fr:0 "#N Bloqueada por Francia#!"
  gg_ui_plata_ba_blockaded_fr_tt:0 "La escuadra francesa está frente al puerto: la batería sigue en pie, pero los barcos que podría detener no son los que importan ahora."
- gg_ui_plata_word_french_blockade:0 "#b Francia#! bloquea Buenos Aires: la cuestión del río es su pleito con Rosas, no un cierre de Rosas."
+ gg_ui_plata_word_french_blockade:0 "#b Francia#! bloquea el puerto de Buenos Aires por su propio pleito con Rosas."
  gg_ui_plata_word_french_blockade_tt:0 "El bloqueo empezó en marzo de 1838 por el trato a los súbditos franceses en Buenos Aires, y dura hasta que Francia y Rosas lo arreglen."
  gg_french_blockade_port:0 "Bloqueo francés"
  gg_french_blockade_port_desc:0 "Una escuadra francesa bloquea el puerto: casi no entra un barco, y la aduana que pagaba al gobierno está parada."

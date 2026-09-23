@@ -81,6 +81,11 @@ gg_plata.3 = {
 				NOT = { has_global_variable = gg_plata_intervention }
 			}
 			gg_plata_rosas_close = yes
+			# EN/ES: River audit 22/9 -- a human Rosas hears of it (gg_plata.45) / un Rosas humano se entera
+			if = {
+				limit = { is_player = yes }
+				trigger_event = { id = gg_plata.45 popup = yes }
+			}
 		}
 	}
 }
@@ -104,6 +109,12 @@ gg_plata.10 = {
 	title = gg_plata.10.t
 	desc = {
 		first_valid = {
+			# EN/ES: River audit 22/9 -- answered after the peace, yielding brings no guarantee
+			#     (gg_plata_ultimatum_yield) / contestado despues de la paz, ceder no trae garantia
+			triggered_desc = {
+				desc = gg_plata.10.d_peace
+				trigger = { has_global_variable = gg_peace_settled }
+			}
 			# EN/ES: after Southern without a war London is out; Paris alone / despues de Southern sin
 			#     guerra Londres ya no esta; Paris sola
 			triggered_desc = {
@@ -186,6 +197,29 @@ gg_plata.20 = {
 	title = gg_plata.20.t
 	desc = {
 		first_valid = {
+			# EN: River audit 22/9 -- before the split the monthly counters do not run (gg_plata_monthly
+			#     lives in the open war): the closure presses the city, and nothing more.
+			# ES: antes de la particion los contadores mensuales no corren: el cierre aprieta a la plaza,
+			#     y nada mas.
+			triggered_desc = {
+				desc = gg_plata.20.d_prewar
+				trigger = { NOT = { has_global_variable = guerra_grande_open_war } }
+			}
+			# EN: River audit 22/9 -- shut again with the ultimatum pending or the squadrons in the river:
+			#     the band shows them, not the blockade, so the city's mortality (phase 1) does not apply,
+			#     and no patience is being spent.
+			# ES: cerrado otra vez con el ultimatum pendiente o las escuadras en el rio: la franja las
+			#     muestra a ellas, no al bloqueo, asi que no rige la mortalidad de la fase 1 ni se gasta
+			#     paciencia.
+			triggered_desc = {
+				desc = gg_plata.20.d_squadrons
+				trigger = {
+					OR = {
+						gg_plata_phase = 2
+						gg_plata_phase = 3
+					}
+				}
+			}
 			triggered_desc = {
 				desc = gg_plata.20.d_none
 				trigger = { has_global_variable = gg_plata_france_recognizes }
@@ -221,6 +255,16 @@ gg_plata.21 = {
 	title = gg_plata.21.t
 	desc = {
 		first_valid = {
+			# EN/ES: River audit 22/9 -- the battery went with Brown's squadron (gg_powers.11.b): say who
+			#     took it / la bateria se fue con la escuadra de Brown: decir quien se la llevo
+			triggered_desc = {
+				desc = gg_plata.21.d_squadron
+				trigger = {
+					NOT = { gg_plata_ba_fort = yes }
+					has_global_variable = gg_brown_fleet_lost
+					NOT = { has_global_variable = gg_plata_britain_settled }
+				}
+			}
 			triggered_desc = {
 				desc = gg_plata.21.d_battery
 				trigger = { NOT = { gg_plata_ba_fort = yes } }
@@ -298,7 +342,17 @@ gg_plata.24 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.24.t
-	desc = gg_plata.24.d
+	# EN/ES: River audit 22/9 -- after a French intervention alone, London had no squadron to withdraw
+	#     / tras una intervencion solo francesa, Londres no tenia escuadra que retirar
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.24.d_france
+				trigger = { has_global_variable = gg_plata_france_alone }
+			}
+			triggered_desc = { desc = gg_plata.24.d }
+		}
+	}
 	event_image = { video = "gg_f2_palmerston" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
@@ -377,7 +431,17 @@ gg_plata.27 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.27.t
-	desc = gg_plata.27.d
+	# EN/ES: River audit 22/9 -- «only Paris's patience counts» only if Paris counts by her level
+	#     / «solo cuenta la paciencia de Paris» solo si Paris cuenta por su nivel
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.27.d_none
+				trigger = { NOT = { gg_plata_france_counts = yes } }
+			}
+			triggered_desc = { desc = gg_plata.27.d }
+		}
+	}
 	event_image = { video = "gg_f2_palmerston" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
@@ -525,5 +589,51 @@ gg_plata.43 = {
 		name = gg_plata.43.a
 		default_option = yes
 		custom_tooltip = gg_plata.43.a_tt
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.44/45 -- PURVIS, TOLD TO A HUMAN ROSAS (river audit 22/9/2026). Purvis's refusal
+#     (gg_powers.10) and London's disavowal (gg_plata.3) turn Rosas's stance to «neutrals pass» and
+#     back to «closed»; an AI Rosas applies it to his shore, a human one was never told. Notices only:
+#     the shore is still set in the strait panel.
+# ES: PURVIS, CONTADO A UN ROSAS HUMANO. La negativa de Purvis y la desautorizacion de Londres cambian
+#     la postura de Rosas; una IA la aplica a su orilla, a un humano nadie le avisaba. Solo avisos: la
+#     orilla se sigue fijando en el panel del estrecho.
+# SOURCE / FUENTE: SOURCES_powers.md section 1 (Purvis, the Alfred, Aberdeen's disavowal) and
+#     SOURCES_french_legion.md (the blockade reimposed from June 1843).
+# -------------------------------------------------------------------------------------------------
+gg_plata.44 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.44.t
+	desc = gg_plata.44.d
+	flavor = gg_plata.44.f
+	event_image = { video = "gg_plata_alfred" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { c:ARG ?= this }
+	option = {
+		name = gg_plata.44.a
+		default_option = yes
+		custom_tooltip = gg_plata.44.a_tt
+	}
+}
+gg_plata.45 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.45.t
+	desc = gg_plata.45.d
+	flavor = gg_plata.45.f
+	event_image = { video = "gg_plata_alfred" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { c:ARG ?= this }
+	option = {
+		name = gg_plata.45.a
+		default_option = yes
+		custom_tooltip = gg_plata_rosas_close_tt
 	}
 }

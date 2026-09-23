@@ -3,7 +3,7 @@
  gg_ui_plata_phase_5_tt:0 "Rear Admiral Leblanc's squadron blockades the port of Buenos Aires, and will until France and Rosas come to terms. The river is open to everyone else; Buenos Aires is the one cut off.\n#b Effects#!: the Buenos Aires shore, trade capacity #N -50%#! and port throughput #N -50%#!."
  gg_ui_plata_ba_blockaded_fr:0 "#N Blockaded by France#!"
  gg_ui_plata_ba_blockaded_fr_tt:0 "The French squadron lies off the port: the battery still stands, but the ships it would stop are not the ones that matter now."
- gg_ui_plata_word_french_blockade:0 "#b France#! is blockading Buenos Aires: the river question is her quarrel with Rosas, not a closure of his."
+ gg_ui_plata_word_french_blockade:0 "#b France#! is blockading the port of Buenos Aires over her own quarrel with Rosas."
  gg_ui_plata_word_french_blockade_tt:0 "The blockade began in March 1838 over the treatment of French subjects in Buenos Aires, and lasts until France and Rosas settle it."
  gg_french_blockade_port:0 "French Blockade"
  gg_french_blockade_port_desc:0 "A French squadron blockades the port: almost no ship comes in, and the customs house that paid the government stands idle."

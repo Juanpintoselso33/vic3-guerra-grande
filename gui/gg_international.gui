@@ -1,11 +1,13 @@
 ﻿# EN: THE RIVER PLATE QUESTION, third pass (22/9/2026, Juan: «try not to use only text»): the chart as
 #     the header with the phase on it; one short line; the river drawn as two shores (flag; Buenos Aires's battery, Montevideo's supply)
-#     and the passage between them (open/closed); from the split, the two leaders; the two clocks and
-#     the port blockade only while they run; the longer explanation behind the arrow; the action.
+#     and the passage between them (open/closed); Rosas's decree when his shore does not obey it; from
+#     the split, the two leaders; the two clocks only while they run; the longer explanation behind
+#     the arrow; the action. A port blockade is said on the shore's card (river audit 22/9).
 # ES: LA CUESTION DEL PLATA, tercera pasada: la carta de encabezado con la fase encima; una linea
 #     corta; el rio dibujado como dos orillas (bandera, bateria) y el paso entre ellas (abierto o
-#     cerrado); desde la particion, los dos lideres; los dos relojes y el bloqueo de puerto solo
-#     mientras corren; lo largo detras de la flechita; la accion.
+#     cerrado); el decreto de Rosas cuando su orilla no lo cumple; desde la particion, los dos lideres;
+#     los dos relojes solo mientras corren; lo largo detras de la flechita; la accion. Un bloqueo de
+#     puerto lo dice la tarjeta de la orilla.
 #     Chart: "New Chart of the River Plate", E. & G. W. Blunt, New York 1840 (public domain, Gallica).
 widget = {
  name = "gg_plata_header"
@@ -24,9 +26,51 @@ widget = {
    using = fontsize_large align = center|nobaseline
    text = "gg_ui_plata_phase_0"
   }
+  # EN/ES: river audit 22/9 -- the blockade's tooltip says which counts run (gg_ui_plata_phase1_mode)
+  #     / el tooltip del bloqueo dice que cuentas corren
   textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1')]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)0'))]"
    tooltip = "gg_ui_plata_phase_1_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)1'))]"
+   tooltip = "gg_ui_plata_phase_1_prewar_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)2'))]"
+   tooltip = "gg_ui_plata_phase_1_truce_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)3'))]"
+   tooltip = "gg_ui_plata_phase_1_grace_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)4'))]"
+   tooltip = "gg_ui_plata_phase_1_none_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)5'))]"
+   tooltip = "gg_ui_plata_phase_1_france_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
    using = fontsize_large align = center|nobaseline
@@ -48,8 +92,10 @@ widget = {
    using = fontsize_large align = center|nobaseline
    text = "gg_ui_plata_phase_2"
   }
+  # EN/ES: river audit 22/9 -- whose squadrons (gg_ui_plata_phase3_mode): both, France alone, London's
+  #     blockade lifted (Howden), London signed (Southern) / de quien son las escuadras
   textbox = {
-   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), Not(GetGlobalVariable('gg_plata_france_alone').IsSet))]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)0'))]"
    tooltip = "gg_ui_plata_phase_3_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
@@ -57,8 +103,24 @@ widget = {
    text = "gg_ui_plata_phase_3"
   }
   textbox = {
-   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), GetGlobalVariable('gg_plata_france_alone').IsSet)]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)1'))]"
    tooltip = "gg_ui_plata_phase_3_france_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_3_france"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)2'))]"
+   tooltip = "gg_ui_plata_phase_3_howden_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_3"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)3'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase3_mode'), '(CFixedPoint)3'))]"
+   tooltip = "gg_ui_plata_phase_3_southern_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
    using = fontsize_large align = center|nobaseline
@@ -73,8 +135,16 @@ widget = {
    text = "gg_ui_plata_phase_5"
   }
   textbox = {
-   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)4')]"
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)4'), Not(GetGlobalVariable('gg_plata_france_alone').IsSet))]"
    tooltip = "gg_ui_plata_phase_4_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_4"
+  }
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)4'), GetGlobalVariable('gg_plata_france_alone').IsSet)]"
+   tooltip = "gg_ui_plata_phase_4_france_tt"
    position = { 0 206 } size = { 520 40 }
    background = { using = dark_area alpha = 0.8 }
    using = fontsize_large align = center|nobaseline
@@ -115,7 +185,10 @@ flowcontainer = {
    textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)0'))]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
    textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)1')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_blockaded_fr" tooltip = "gg_ui_plata_ba_blockaded_fr_tt" }
    textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)2')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_blockaded_powers" tooltip = "gg_ui_plata_ba_blockaded_powers_tt" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)3')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_blockaded_fr_int" tooltip = "gg_ui_plata_ba_blockaded_powers_tt" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)3')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_blockaded_fr_int" tooltip = "gg_ui_plata_ba_blockaded_fr_int_tt" }
+   # EN/ES: river audit 22/9 -- warships the engine reports off the port, with no blockade of the question (the old separate line)
+   #     / barcos de guerra frente al puerto que ve el motor, sin bloqueo de la cuestion (la linea aparte de antes)
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockader'), '(CFixedPoint)4')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_port_blockaded" tooltip = "gg_ui_plata_ba_port_blockaded_tt" }
   }
   widget = {
    position = { 200 0 } size = { 120 204 }
@@ -189,6 +262,22 @@ flowcontainer = {
   direction = horizontal spacing = 8 parentanchor = hcenter
   icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
   textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_settled" }
+ }
+ # EN/ES: river audit 22/9 -- Rosas's decree against what his shore does (gg_ui_plata_decree)
+ #     / el decreto de Rosas frente a lo que hace su orilla
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_decree'), '(CFixedPoint)1')]"
+  tooltip = "gg_ui_plata_decree_pending_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/warning.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_decree_pending" }
+ }
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_decree'), '(CFixedPoint)2')]"
+  tooltip = "gg_ui_plata_decree_neutrals_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/warning.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_decree_neutrals" }
  }
  widget = { size = { 520 8 } }
  textbox = {
@@ -308,12 +397,6 @@ flowcontainer = {
   }
  }
  flowcontainer = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_blockaded'), '(CFixedPoint)1')]"
-  direction = horizontal spacing = 8 parentanchor = hcenter
-  icon = { size = { 32 32 } texture = "gfx/interface/icons/state_status_icons/blockaded.dds" }
-  textbox = { autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_port_blockade" }
- }
- flowcontainer = {
   visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_weight_side'), '(CFixedPoint)1'))]"
   direction = horizontal spacing = 8 parentanchor = hcenter
   icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/clock.dds" }
@@ -327,12 +410,22 @@ flowcontainer = {
  }
  widget = { size = { 520 8 } }
  textbox = {
-  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1')]"
+  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), Not(GetGlobalVariable('gg_truce').IsSet))]"
   size = { 520 34 }
   parentanchor = hcenter
   using = fontsize_large align = center|nobaseline
   background = { using = entry_bg_fancy_dark alpha = 0.6 }
   text = "gg_ui_plata_sec_clocks"
+ }
+ # EN/ES: river audit 22/9 -- in a truce no count moves: the header says so / en tregua no se mueve ninguna cuenta
+ textbox = {
+  visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_clocks_shown'), '(CFixedPoint)1'), GetGlobalVariable('gg_truce').IsSet)]"
+  tooltip = "gg_ui_plata_sec_clocks_truce_tt"
+  size = { 520 34 }
+  parentanchor = hcenter
+  using = fontsize_large align = center|nobaseline
+  background = { using = entry_bg_fancy_dark alpha = 0.6 }
+  text = "gg_ui_plata_sec_clocks_truce"
  }
  flowcontainer = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_shown'), '(CFixedPoint)1')]"

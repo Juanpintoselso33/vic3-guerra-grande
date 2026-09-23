@@ -48,6 +48,16 @@ gg_plata_rosas_neutrals_pass = {
 	custom_tooltip = gg_plata_rosas_neutrals_tt
 	set_global_variable = { name = gg_plata_rosas_stance value = 2 }
 	gg_plata_rosas_stance_apply = yes
+	# EN: River audit 22/9 -- Purvis (gg_powers.10) is the Cerrito's event: a human Rosas changed stance
+	#     without a word. He hears of it, and his shore stays his to set (SOURCES_powers.md section 1).
+	# ES: Purvis es un evento del Cerrito: un Rosas humano cambiaba de postura sin enterarse. Ahora se
+	#     entera, y su orilla la sigue fijando el.
+	c:ARG ?= {
+		if = {
+			limit = { is_player = yes }
+			trigger_event = { id = gg_plata.44 popup = yes }
+		}
+	}
 }
 
 # EN: A. The fort is the key. Removing it lifts every restriction on the Buenos Aires bank.
@@ -200,9 +210,13 @@ gg_plata_ultimatum_yield = {
 			remove_global_variable = gg_plata_ultimatum_pending
 		}
 		set_global_variable = { name = gg_plata_closed_total value = 0 }
-		# EN/ES: the opening is announced by gg_plata.25, not again by gg_plata.21
-		#     / la apertura la anuncia gg_plata.25, no otra vez gg_plata.21
-		set_global_variable = { name = gg_plata_notice_closed value = 0 }
+		# EN: River audit 22/9 -- the notice mark is left alone. Setting it to «open» here announced a
+		#     closure (gg_plata.20) the next month whenever the shore had not opened yet -- an AI takes
+		#     weeks to apply the strategy, a human has two months -- although Rosas had just yielded.
+		#     gg_plata.25 announces the pledge; gg_plata.21 announces the opening when it happens.
+		# ES: la marca del aviso no se toca. Ponerla en «abierto» aca anunciaba un cierre (gg_plata.20) al
+		#     mes siguiente si la orilla todavia no se habia abierto, aunque Rosas acababa de ceder.
+		#     gg_plata.25 anuncia la promesa; gg_plata.21 anuncia la apertura cuando ocurre.
 		if = {
 			limit = { NOT = { has_global_variable = gg_peace_settled } }
 			# EN/ES: 22/9/2026 -- London out of the river when Rosas gives way: Paris alone guarantees it.
