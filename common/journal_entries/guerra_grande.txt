@@ -39,17 +39,6 @@ je_guerra_grande = {
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	scripted_progress_bar = guerra_grande_war_score_bar
-	# EN: the Cerrito's own two. The mirror of a foreign legion is not another foreign legion:
-	#     the Defensa bought men from outside with foreign money and an open port, so the Cerrito
-	#     raises its own off the countryside it already holds, and its one road to victory is
-	#     shutting the sea. The blockade is the only button on this entry the other side can take
-	#     off the board -- calling in the European squadrons ends it, as it did in August 1845.
-	# ES: los dos propios del Cerrito. El espejo de una legion extranjera no es otra legion
-	#     extranjera: la Defensa compraba hombres de afuera con plata ajena y puerto abierto, asi
-	#     que el Cerrito levanta los suyos de la campania que ya tiene, y su unico camino a la
-	#     victoria es cerrar el mar. El bloqueo es el unico boton de esta entrada que el otro bando
-	#     puede sacar del tablero: llamar a las escuadras europeas lo termina, como en agosto de 1845.
-	scripted_button = guerra_grande_montonera_levy_button
 
 	# EN: by tag or by mark. If the player took the Cerrito, the tags swap around -- the mark each
 	#     government carries is what identifies it either way.
@@ -237,17 +226,6 @@ je_guerra_grande = {
 					#     solo y el sitio no hacia nada. Un Cerrito de la IA hace las dos, en el orden en
 					#     que las haria un gobierno: los jinetes apenas hay guerra, el bloqueo despues.
 					c:CER ?= {
-						if = {
-							limit = {
-								is_player = no
-								has_global_variable = guerra_grande_open_war
-								NOT = { has_variable = guerra_grande_montonera_levy_raised }
-								# EN/ES: 22/9/2026 -- the button's guard: the levy is raised in San Jose
-								#     / la guarda del boton: la leva se levanta en San Jose
-								any_scope_state = { state_region = s:STATE_SAN_JOSE }
-							}
-							gg_montonera_levy = yes
-						}
 						if = {
 							limit = {
 								is_player = no

@@ -699,68 +699,8 @@ gg_war_closing_dispatch = {
 #     de ese bando -- no hacia nada. El codigo es el mismo; ahora es un efecto que llama el boton, y
 #     que tambien puede llamar un evento oculto para la IA.
 
-gg_montonera_levy = {
-	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_montonera_levy|" # GG_TRAZA
-		# EN: visible counter, since debug_log writes nothing in this release build
-		#     (verified: not even vanilla's own debug_log lines appear in game.log).
-		#     Read from the journal's status text.
-		# ES: contador visible, porque debug_log no escribe nada en este build de release
-		#     (verificado: ni los debug_log propios de vanilla aparecen en game.log). Se lee
-		#     desde el texto de estado del journal.
-		# EN: self-healing guard -- this fix landed after some saves already ran
-		#     on_game_started once, so the global init there never fires for them.
-		# ES: guarda auto-reparable -- este arreglo llego despues de que algunas
-		#     partidas ya corrieron on_game_started una vez, asi que la inicializacion
-		#     de alla nunca les llega.
-		set_variable = guerra_grande_montonera_levy_raised
-		# EN/ES: T3b, FE-9 -- the caudillos' levy: the balance tilts, the till pays
-		add_treasury = -10000
-		# EN: cavalry first and most of it. This is the one thing the besiegers had that the city
-		#     could never buy: men who came with their own horses.
-		# ES: caballeria primero y casi todo. Es lo unico que tenian los sitiadores que la ciudad
-		#     no podia comprar: hombres que venian con caballo propio.
-		gg_select_formation_hq_state = yes
-		# EN: Without an owned state there is no valid HQ; skip this formation.
-		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-		if = {
-			limit = { exists = scope:gg_formation_hq_state }
-			create_military_formation = {
-				type = army
-				hq_region = scope:gg_formation_hq_state.region
-				combat_unit = {
-					type = unit_type:combat_unit_type_hussars
-					state_region = s:STATE_SAN_JOSE
-					count = 3
-				}
-				combat_unit = {
-					type = unit_type:combat_unit_type_irregular_infantry
-					state_region = s:STATE_SAN_JOSE
-					count = 1
-				}
-			}
-		}
-		# EN: this modifier is already the mod's name for what the levy renews -- caudillos,
-		#     estancias and the parish militias. If the Cerrito already carries it from the
-		#     faction choice, applying it again refreshes the duration rather than stacking, which
-		#     is the intended reading: the countryside is called on a second time.
-		# ES: este modificador ya es el nombre que el mod le da a lo que renueva la leva:
-		#     caudillos, estancias y milicias de parroquia. Si el Cerrito ya lo trae de la eleccion
-		#     de bando, aplicarlo de nuevo renueva la duracion en vez de acumularse, que es la
-		#     lectura buscada: se llama a la campania por segunda vez.
-		add_modifier = {
-			name = guerra_grande_blanco_order
-			years = 10
-			is_decaying = yes
-		}
-		# EN: and this is the price. Every man on a horse is a man off the estancia; the levy is
-		#     paid for by the rural economy, not by a customs house.
-		# ES: y este es el precio. Cada hombre a caballo es un hombre menos en la estancia; la leva
-		#     la paga la economia rural, no una aduana.
-		add_radicals = {
-			value = medium_radicals
-			strata = lower
-		}
-	}
+# EN/ES: the montonera levy was removed on 23/9/2026 (Juan): without an engine war it did nothing
+#     / la leva de montoneras se saco el 23/9/2026 (Juan): sin guerra del motor no hacia nada
 
 gg_river_blockade = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_river_blockade|" # GG_TRAZA

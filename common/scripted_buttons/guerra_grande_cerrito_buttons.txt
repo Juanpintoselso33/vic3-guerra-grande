@@ -1,11 +1,11 @@
-﻿# EN: The Cerrito's two buttons, the counterpart to the Defensa's legion buttons. They are
+﻿# EN: The Cerrito's button (the countryside levy was removed on 23/9/2026, Juan), the counterpart to the Defensa's legion buttons. They are
 #     deliberately NOT foreign legions. The asymmetry is the historical point: the Defensa bought
 #     men from outside with foreign money and a port, while the Cerrito raised its own from the
 #     countryside it already held and squeezed the one thing the city could not do without --
 #     the sea. Neither button makes a foreign power a belligerent: the montonera is oriental, and
 #     Rosas lending Brown's squadron is support, exactly as Oribe's Argentine battalions in
 #     gg_contingent.7 are a contingent and not a declaration of war.
-# ES: Los dos botones del Cerrito, contraparte de los botones de legiones de la Defensa. A
+# ES: El boton del Cerrito (la leva de la campania se saco el 23/9/2026, Juan), contraparte de los botones de legiones de la Defensa. A
 #     proposito NO son legiones extranjeras. La asimetria es el punto historico: la Defensa
 #     compraba hombres de afuera con plata extranjera y un puerto, mientras el Cerrito levantaba
 #     los suyos de la campania que ya tenia y apretaba lo unico sin lo que la ciudad no podia
@@ -14,68 +14,6 @@
 #     argentinos de Oribe en gg_contingent.7 son un contingente y no una declaracion de guerra.
 #
 # Sources / Fuentes: see ~/dev/juegos/victoria3-uruguay/SOURCES_french_legion.md, section 3.
-
-# EN: Levy the countryside. The Cerrito held the whole Republic except Montevideo (and Colonia)
-#     from 1843 to 1851, and that relation with the rural world is what gave the Partido Blanco
-#     its profile. Oribe divided the country into two great military circumscriptions, north and
-#     south of the Rio Negro, under generals Servando Gomez and Ignacio Oribe, with military
-#     commanders in each department -- an apparatus for raising men off the estancias. It worked:
-#     in 1851, after eight years of war, he still had some 8,000 men and 25 guns at the siege
-#     lines, 4,000 more under Ignacio Oribe north of the Rio Negro and a 1,500-strong vanguard on
-#     the Uruguay. Horses were the currency of it -- Urquiza took some 6,000 head off Ignacio
-#     Oribe's retreating force in a single move.
-# ES: Levantar la campania. El Cerrito controlo toda la Republica menos Montevideo (y Colonia)
-#     entre 1843 y 1851, y esa relacion con el medio rural es lo que le dio su perfil al Partido
-#     Blanco. Oribe dividio el pais en dos grandes circunscripciones militares, al norte y al sur
-#     del Rio Negro, al mando de los generales Servando Gomez e Ignacio Oribe, con comandantes
-#     militares en cada departamento: un aparato para sacar hombres de las estancias. Funciono:
-#     en 1851, despues de ocho anios de guerra, todavia tenia unos 8.000 hombres y 25 piezas en
-#     la linea del sitio, 4.000 mas con Ignacio Oribe al norte del Rio Negro y una vanguardia de
-#     1.500 sobre el Uruguay. Los caballos eran la moneda -- Urquiza le saco unos 6.000 a la
-#     fuerza en retirada de Ignacio Oribe de un solo golpe.
-guerra_grande_montonera_levy_button = {
-	name = guerra_grande_montonera_levy_button
-	desc = guerra_grande_montonera_levy_button_desc
-
-	visible = {
-		c:CER ?= this
-	}
-
-	possible = {
-		c:CER ?= THIS
-		custom_tooltip = {
-			text = guerra_grande_requires_open_war
-			has_global_variable = guerra_grande_open_war
-		}
-		hidden_trigger = {
-			NOT = { has_variable = guerra_grande_montonera_levy_raised }
-		}
-		# EN: the mirror of the Defensa's "we must hold Montevideo": the Cerrito levies the
-		#     countryside, so it has to hold some of it.
-		# ES: el espejo del "tenemos que tener Montevideo" de la Defensa: el Cerrito levanta la
-		#     campania, asi que tiene que tener campania.
-		custom_tooltip = {
-			text = guerra_grande_requires_campana
-			any_scope_state = {
-				state_region = s:STATE_SAN_JOSE
-			}
-		}
-	}
-
-	selected = {
-		has_variable = guerra_grande_montonera_levy_raised
-	}
-
-	effect = {
-		gg_montonera_levy = yes
-	}
-
-	ai_chance = {
-		# EN/ES: 22/9/2026, decided with Juan -- one road for the AI: the journal's pulse
-		#     (common/journal_entries/guerra_grande.txt), with the same guards / un solo camino, el del journal
-		value = 0
-	}
-}
 
 # EN: Ask Rosas to close the river. The Defensa's single strength is the port: Montevideo held
 #     out because the sea stayed open. Rosas saw it too. He decreed on 9 March 1843 that from 1
