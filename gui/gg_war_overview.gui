@@ -274,17 +274,22 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			textbox = {
+			flowcontainer = {
+				direction = horizontal spacing = 4
+				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				size = { 164 24 }
-				using = fontsize_medium align = center|nobaseline
-				text = "gg_war_ui_power_number_francia"
-			}
-			green_progressbar_horizontal = {
-				size = { 164 10 }
-				blockoverride "values" {
-					value = "[GetGlobalVariable('gg_patron_francia').GetValue]"
-					min = 0 max = 100
+				textbox = {
+					size = { 52 22 }
+					using = fontsize_medium align = right|nobaseline
+					text = "gg_war_ui_power_number_francia"
+				}
+				green_progressbar_horizontal = {
+					size = { 96 6 }
+					parentanchor = vcenter
+					blockoverride "values" {
+						value = "[GetGlobalVariable('gg_patron_francia').GetValue]"
+						min = 0 max = 100
+					}
 				}
 			}
 		}
@@ -346,17 +351,22 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			textbox = {
+			flowcontainer = {
+				direction = horizontal spacing = 4
+				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				size = { 164 24 }
-				using = fontsize_medium align = center|nobaseline
-				text = "gg_war_ui_power_number_britania"
-			}
-			green_progressbar_horizontal = {
-				size = { 164 10 }
-				blockoverride "values" {
-					value = "[GetGlobalVariable('gg_patron_britania').GetValue]"
-					min = 0 max = 100
+				textbox = {
+					size = { 52 22 }
+					using = fontsize_medium align = right|nobaseline
+					text = "gg_war_ui_power_number_britania"
+				}
+				green_progressbar_horizontal = {
+					size = { 96 6 }
+					parentanchor = vcenter
+					blockoverride "values" {
+						value = "[GetGlobalVariable('gg_patron_britania').GetValue]"
+						min = 0 max = 100
+					}
 				}
 			}
 		}
@@ -418,17 +428,22 @@ flowcontainer = {
 			}
 			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
 			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
-			textbox = {
+			flowcontainer = {
+				direction = horizontal spacing = 4
+				parentanchor = hcenter
 				tooltip = "gg_tt_power_number"
-				size = { 164 24 }
-				using = fontsize_medium align = center|nobaseline
-				text = "gg_war_ui_power_number_brasil"
-			}
-			green_progressbar_horizontal = {
-				size = { 164 10 }
-				blockoverride "values" {
-					value = "[GetGlobalVariable('gg_patron_brasil').GetValue]"
-					min = 0 max = 100
+				textbox = {
+					size = { 52 22 }
+					using = fontsize_medium align = right|nobaseline
+					text = "gg_war_ui_power_number_brasil"
+				}
+				green_progressbar_horizontal = {
+					size = { 96 6 }
+					parentanchor = vcenter
+					blockoverride "values" {
+						value = "[GetGlobalVariable('gg_patron_brasil').GetValue]"
+						min = 0 max = 100
+					}
 				}
 			}
 		}
@@ -442,10 +457,10 @@ flowcontainer = {
 	flowcontainer = {
 		direction = horizontal spacing = 8
 		parentanchor = hcenter
-		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		# EN/ES: 23/9 (Juan: "no veo a Argentina y Urquiza") -- from 1836, like the powers: they back the blancos
+		#     before the partition too / desde 1836, como las potencias: sostienen a los blancos antes de la particion
 		flowcontainer = {
 			direction = vertical ignoreinvisible = yes
-			visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 			textbox = {
 				tooltip = "gg_tt_backer_rosas"
 				size = { 256 44 }
@@ -455,7 +470,8 @@ flowcontainer = {
 				text = "gg_war_ui_backer_rosas"
 			}
 			green_progressbar_horizontal = {
-				size = { 256 10 }
+				size = { 160 6 }
+				parentanchor = hcenter
 				blockoverride "values" {
 					value = "[GetGlobalVariable('gg_patron_rosas').GetValue]"
 					min = 0 max = 100
@@ -464,7 +480,7 @@ flowcontainer = {
 		}
 		flowcontainer = {
 			direction = vertical ignoreinvisible = yes
-			visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, Not(GetGlobalVariable('gg_urquiza_flipped').IsSet))]"
+			visible = "[Not(GetGlobalVariable('gg_urquiza_flipped').IsSet)]"
 			textbox = {
 				tooltip = "gg_tt_backer_urquiza_cer"
 				size = { 256 44 }
@@ -474,7 +490,8 @@ flowcontainer = {
 				text = "gg_war_ui_backer_urquiza_cer"
 			}
 			green_progressbar_horizontal = {
-				size = { 256 10 }
+				size = { 160 6 }
+				parentanchor = hcenter
 				blockoverride "values" {
 					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
 					min = 0 max = 100
@@ -483,7 +500,7 @@ flowcontainer = {
 		}
 		flowcontainer = {
 			direction = vertical ignoreinvisible = yes
-			visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, GetGlobalVariable('gg_urquiza_flipped').IsSet)]"
+			visible = "[GetGlobalVariable('gg_urquiza_flipped').IsSet]"
 			textbox = {
 				tooltip = "gg_tt_backer_urquiza_def"
 				size = { 256 44 }
@@ -493,7 +510,8 @@ flowcontainer = {
 				text = "gg_war_ui_backer_urquiza_def"
 			}
 			green_progressbar_horizontal = {
-				size = { 256 10 }
+				size = { 160 6 }
+				parentanchor = hcenter
 				blockoverride "values" {
 					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
 					min = 0 max = 100
