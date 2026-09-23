@@ -214,7 +214,8 @@ je_gg_delegation = {
 					limit = {
 						NOT = { has_global_variable = gg_pact_settled }
 						NOT = { has_global_variable = gg_caseros_siege }
-						NOT = { has_global_variable = gg_war_against_buenos_aires }
+						# EN/ES: 23/9/2026 (Juan: "the war with Entre Rios never came, they backed down") -- the war mark no longer
+						#     blocks a Pact already decided (Entre Rios a subject, or the 1853 net) / la marca de guerra ya no traba
 						NOT = { c:ENR ?= { has_war_with = c:ARG } }
 						# EN/ES: only after a pronouncement answered with war (a peaceful one settles on its own; with
 						#     no pronouncement there was no war to win) / solo tras un pronunciamiento respondido con guerra

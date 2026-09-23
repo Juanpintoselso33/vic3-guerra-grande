@@ -99,3 +99,32 @@ gg_cis_on_war_end = {
 		c:BRZ ?= { trigger_event = { id = gg_cisplatina.3 days = 1 } }
 	}
 }
+
+# EN: 23/9/2026 (Juan) -- a backdown in the Pact's play with Entre Rios decides it as a war would: whoever backs
+#     down loses, and the settlement is read the next day (gg_caseros.6), as after on_war_end.
+# ES: un retroceso en la jugada del Pacto con Entre Rios la decide como una guerra: el que retrocede pierde, y
+#     el arreglo se lee al dia siguiente, como despues de on_war_end.
+on_diplo_play_back_down = {
+	on_actions = { gg_pact_back_down }
+}
+
+gg_pact_back_down = {
+	trigger = {
+		has_global_variable = gg_war_against_buenos_aires
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		exists = scope:actor
+		OR = {
+			c:ENR ?= scope:actor
+			c:ARG ?= scope:actor
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_back_down" # GG_TRAZA
+		if = {
+			limit = { c:ENR ?= scope:actor }
+			set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+		}
+		else = { set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
+		c:ARG ?= { trigger_event = { id = gg_caseros.6 days = 1 } }
+	}
+}
