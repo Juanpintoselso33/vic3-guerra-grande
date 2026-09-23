@@ -1,0 +1,269 @@
+﻿# EN: 23/9/2026 (Juan: "Rosas won the war against the Northern Coalition and annexed everything; the
+#     Coalition's provinces were not left as separate subjects"). Seven more vanilla plays, copied VERBATIM
+#     with one line added at the TOP LEVEL of possible (same method as zz_guerra_grande_plays.txt):
+#     gg_argentine_play_is_allowed. Nobody opens a vanilla play against the Coalition or a province of the
+#     Confederation -- annexing, conquering, lowering its autonomy or taking it as a subject. Buenos Aires
+#     fights them only with dp_gg_pacto_federal, which ends in a protectorate, and a beaten Coalition is
+#     split into its provinces (gg_provinces.txt). Vanilla dp_annex_war (any minor country) was open to
+#     Rosas's AI against the Coalition, and our play does not open when another one is already running.
+# ES: siete jugadas de vanilla mas, copiadas TAL CUAL con una linea en el nivel superior de possible. Nadie
+#     abre una jugada de vanilla contra la Coalicion o una provincia de la Confederacion: Buenos Aires las
+#     pelea solo con dp_gg_pacto_federal, que termina en protectorado.
+
+REPLACE:dp_annex_war = {
+	war_goal = annex_country
+
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	selectable_in_lens = {
+		aggressive_diplomatic_plays_permitted = yes
+	}
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			NOT = { is_subject_of = root }
+			country_rank <= rank_value:insignificant_power
+		}
+		diplomatic_play_has_no_relations_blockers = yes
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 75
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_reduce_autonomy = {
+	war_goal = reduce_autonomy
+
+	requires_interest_marker = no
+
+	texture = "gfx/interface/icons/war_goals/reduce_autonomy.dds"
+
+	possible = {
+		OR = {
+			NOT = {
+				scope:target_country = { is_subject_type = subject_type_personal_union }
+			}
+			has_technology_researched = nationalism
+		}
+
+		OR = {
+			NOT = {
+				scope:target_country = { has_government_type = gov_chartered_company }
+			}
+			has_technology_researched = civilizing_mission
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_ryukyu_rivalry
+			scope:target_country = {
+				c:RYU ?= this
+			}
+		}
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_annex_subject = {
+	war_goal = annex_country
+
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	confirmation_sound = "event:/SFX/UI/SubjectInteractions/subject_button_small_annex"
+	possible = {
+		trigger_if = {
+			limit = {
+				c:BIC ?= this
+				is_at_war = no
+				NOT = { has_variable = doctrine_of_lapse_cooldown }
+				NOT = { has_variable = doctrine_of_lapse_ended }
+				scope:target_country = {
+					is_subject_of = ROOT
+					has_variable = princely_state
+					NOT = { country_tier = empire }
+					is_player = no
+				}
+			}
+			custom_tooltip = {
+				text = CAN_USE_DOCTRINE_OF_LAPSE_INSTEAD
+				always = no
+			}
+		}
+
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			is_direct_subject_of = root
+			OR = {
+				has_diplomatic_pact = { who = root type = colony }
+				has_diplomatic_pact = { who = root type = puppet }
+				has_diplomatic_pact = { who = root type = vassal }
+				has_diplomatic_pact = { who = root type = crown_land }
+			}
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_peru_bolivia
+			scope:target_country = {
+				OR = {
+					country_has_primary_culture = cu:quechua
+					country_has_primary_culture = cu:south_andean
+				}
+			}
+		}
+		NAND = {
+			is_involved_in_journal_entry = je_ryukyu_rivalry
+			scope:target_country = {
+				c:RYU ?= this
+			}
+		}
+		NAND = {
+			c:JAP ?= this
+			has_law_or_variant = law_type:law_serfdom # Proxy for feudalism
+		}
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 75
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {
+		scope:initiator = {
+			every_direct_subject = {
+				limit = {
+					NOT = { this = scope:target_country }
+				}
+				add_liberty_desire = annex_subject_base_liberty_desire_change
+				add_modifier = {
+					name = modifier_has_annexed_another_subject
+					months = 60
+					is_decaying = no
+				}
+			}
+		}
+	}
+
+	on_war_end = {}
+
+	on_demand_accepted = {
+		every_direct_subject = {
+			limit = {
+				NOT = { this = scope:target_country }
+			}
+			add_liberty_desire = annex_subject_base_liberty_desire_change
+			add_modifier = {
+				name = modifier_has_annexed_another_subject
+				months = 60
+				is_decaying = no
+			}
+		}
+	}
+}
+
+REPLACE:dp_make_protectorate = {
+	war_goal = make_protectorate
+
+	texture = "gfx/interface/icons/war_goals/make_protectorate.dds"
+
+	possible = {
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_make_dominion = {
+	war_goal = make_dominion
+
+	texture = "gfx/interface/icons/war_goals/make_dominion.dds"
+
+	possible = {
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_make_tributary = {
+	war_goal = make_tributary
+
+	texture = "gfx/interface/icons/war_goals/make_tributary.dds"
+
+	possible = {
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+REPLACE:dp_transfer_subject = {
+	war_goal = transfer_subject
+
+	texture = "gfx/interface/icons/war_goals/transfer_subject.dds"
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			is_subject = yes
+			NOT = { is_subject_of = root }
+		}
+		diplomatic_play_has_no_relations_blocker_with_overlord = yes
+		gg_argentine_play_is_allowed = yes
+		guerra_grande_play_is_allowed = yes # EN/ES: nor against the two oriental governments / ni contra los dos gobiernos orientales
+	}
+
+	ai_acceptance_max = 90
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

@@ -33,6 +33,7 @@ REPLACE:dp_return_state = {
 		}
 		diplomatic_play_has_no_relations_blockers = yes
 		guerra_grande_play_is_allowed = yes
+		gg_argentine_play_is_allowed = yes # EN/ES: 23/9 -- zz_gg_argentine_plays.txt
 	}
 
 	ai_acceptance_max = 90
@@ -59,6 +60,7 @@ REPLACE:dp_conquer_state = {
 		}
 		diplomatic_play_has_no_relations_blockers = yes
 		guerra_grande_play_is_allowed = yes
+		gg_argentine_play_is_allowed = yes # EN/ES: 23/9 -- zz_gg_argentine_plays.txt
 	}
 
 	ai_acceptance_max = 75
@@ -78,6 +80,7 @@ REPLACE:dp_humiliation = {
 	possible = {
 		aggressive_diplomatic_plays_permitted = yes
 		guerra_grande_play_is_allowed = yes
+		gg_argentine_play_is_allowed = yes # EN/ES: 23/9 -- zz_gg_argentine_plays.txt
 	}
 
 	on_weekly_pulse = {}
@@ -101,6 +104,7 @@ REPLACE:dp_regime_change = {
 			NOT = { is_subject_of = root }
 		}
 		guerra_grande_play_is_allowed = yes
+		gg_argentine_play_is_allowed = yes # EN/ES: 23/9 -- zz_gg_argentine_plays.txt
 	}
 
 	ai_acceptance_max = 90

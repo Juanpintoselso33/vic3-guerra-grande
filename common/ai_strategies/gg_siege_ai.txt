@@ -13,8 +13,9 @@ gg_ai_strategy_cerrito_siege = {
 	diplomatic_play_boldness = { value = 0 }
 	recklessness = { value = -0.5 }
 	aggression = { value = 0 }
-	# EN/ES: every war goal type of 1.13 at zero (the Guerra Grande itself is a scripted play and is
-	#     not affected) / todos los tipos de objetivo en cero (la Guerra Grande es una jugada por script)
+	# EN/ES: every war goal type of 1.13 at zero. 23/9: the siege is no longer an engine war, and
+	#     gg_siege_no_aggression already forbids every aggressive play; kept as a second guard / todos los
+	#     tipos de objetivo en cero; el sitio ya no es guerra del motor y el candado ya prohibe toda jugada
 	wargoal_weights = {
 		annex_country = 0.0
 		conquer_state = 0.0

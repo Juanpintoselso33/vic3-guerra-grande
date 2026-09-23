@@ -29,9 +29,9 @@ guerra_grande_play_is_allowed = {
 				has_variable = guerra_grande_defensa_government
 			}
 		}
-		# or it is the other government: the civil war itself, which must stay possible
-		has_variable = guerra_grande_cerrito_government
-		has_variable = guerra_grande_defensa_government
+		# EN/ES: 23/9/2026 (audit R5) -- no longer "or it is the other government": the siege is not an
+		#     engine war, and a play between the two governments would reopen it / ya no se permite la
+		#     jugada entre los dos gobiernos: reabriria la guerra del motor que el sitio saco
 		# EN: Codex review 2026-09-19 -- this said only "year >= 1851", which from 1 January 1851 let
 		#     ANY country in the world open a play against either oriental government, not just the
 		#     historical intervention. That is also the main way a foreign power ends up holding
@@ -73,44 +73,23 @@ gg_is_the_war = {
 	}
 }
 
-# EN: T2, arbiter (to-be.md section 3). The Cerrito is ripe for a peace dictated by the Defensa:
-#     its war support is spent, half its countryside is occupied, or the colorados lead by ten.
-#     From 1851 the war is tired and every bar is halved (FA-2). Values provisional until T10.
-# ES: T2, arbitro. El Cerrito esta maduro para una paz de la Defensa: se le acabo el apoyo a la
-#     guerra, tiene ocupada la mitad de su campania, o los colorados le sacan diez. Desde 1851 la
-#     guerra esta cansada y cada exigencia baja a la mitad. Valores provisorios hasta T10.
+# EN: T2, arbiter. The Cerrito is ripe for a peace dictated by the Defensa: it asked for terms (from
+#     1849), its endurance is spent (three months at -25 or below), or the colorados hold the lead the
+#     calendar asks for (gg_arbiter_balance_needed). 23/9/2026: no occupation any more -- the siege is
+#     not an engine war (audit D4) -- and asking for terms waits for 1849 (audit R2).
+# ES: T2, arbitro. El Cerrito esta maduro para una paz de la Defensa: pidio condiciones (desde 1849),
+#     se le acabo el aguante (tres meses en -25 o menos), o los colorados tienen la ventaja que pide el
+#     calendario. Sin ocupacion: el sitio no es guerra del motor; pedir condiciones espera a 1849.
 gg_cerrito_ripe = {
 	gg_cerrito_can_lose = yes # EN/ES: 23/9 -- the game rule / la regla de partida
 	OR = {
 		# EN/ES: T7, F4-3 b/c -- the Cerrito sent Lucas Moreno to ask for terms / el Cerrito pidio condiciones
-		has_global_variable = gg_cerrito_negotiates
-		# EN/ES: 23/9 -- the lead needed follows the calendar (gg_arbiter_balance_needed) / la ventaja exigida sigue el calendario
-		gg_war_balance_colorado >= gg_arbiter_balance_needed
-		c:CER ?= {
-			OR = {
-				# EN: Codex review 2026-09-19 -- this read enemy_occupation raw, which counts ground taken
-				#     by ANY enemy: a Brazilian war somewhere else could sit the Cerrito at a peace table
-				#     dictated by the Defensa. The monthly mark is the same measurement, written only
-				#     while the Guerra Grande is the only war the two governments are fighting.
-				# ES: esto leia enemy_occupation crudo, que cuenta el suelo tomado por CUALQUIER enemigo:
-				#     una guerra con el Brasil en otro lado podia sentar al Cerrito a una mesa de paz
-				#     dictada por la Defensa. La marca mensual es la misma medicion, escrita solo mientras
-				#     la Guerra Grande sea la unica guerra de los dos gobiernos.
-				# EN/ES: 23/9 -- occupation alone decides only from 1849, like the balance (run 23: the Cerrito
-				#     was called beaten in May 1843) / la ocupacion sola decide recien desde 1849
-				AND = {
-					year >= 1849
-					global_var:gg_cerrito_overrun = 1
-				}
-				# EN: playtest 2026-09-17 -- war support at zero used to be enough, and the player was
-				#     annexed by the enemy's peace menu the week it touched zero. Exhaustion now has
-				#     to be deep AND sustained: three months counted by the journal's pulse.
-				# ES: el apoyo en cero alcanzaba, y al jugador lo anexaba el menu de paz del enemigo
-				#     la semana que lo tocaba. Ahora el agotamiento tiene que ser hondo Y sostenido:
-				#     tres meses contados por el pulso del journal.
-				global_var:gg_cerrito_exhausted >= 3
-			}
+		AND = {
+			has_global_variable = gg_cerrito_negotiates
+			year >= 1849
 		}
+		gg_war_balance_colorado >= gg_arbiter_balance_needed
+		global_var:gg_cerrito_exhausted >= 3
 	}
 }
 
@@ -156,10 +135,6 @@ gg_cerrito_won_militarily = {
 	exists = c:CER
 	OR = {
 		NOT = { exists = c:URU }
-		AND = {
-			global_var:gg_defensa_overrun = 1
-			global_var:gg_cerrito_overrun = 0
-		}
 	}
 }
 
@@ -167,10 +142,6 @@ gg_defensa_won_militarily = {
 	exists = c:URU
 	OR = {
 		NOT = { exists = c:CER }
-		AND = {
-			global_var:gg_cerrito_overrun = 1
-			global_var:gg_defensa_overrun = 0
-		}
 	}
 }
 

@@ -194,9 +194,9 @@ gg_argentina.19 = {
 			add_treasury = 10000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_enforcement years = 2 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -204,8 +204,8 @@ gg_argentina.19 = {
 				gg_reclamo_abre = { KEY = entre_rios }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_open_trade
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_open_trade } remove_modifier = gg_arg_littoral_open_trade }
 				add_modifier = { name = gg_arg_littoral_restricted years = 2 }
 				add_radicals_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
 			}
@@ -227,9 +227,9 @@ gg_argentina.19 = {
 			add_treasury = -20000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_tolerance years = 2 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -244,8 +244,8 @@ gg_argentina.19 = {
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_restricted
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
 				add_loyalists_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
 			}
@@ -267,9 +267,9 @@ gg_argentina.19 = {
 			add_treasury = 15000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_licences years = 3 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -284,8 +284,8 @@ gg_argentina.19 = {
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_restricted
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
 				add_modifier = { name = gg_arg_customs_shared years = 3 }
 				add_loyalists_in_state = { value = 0.01 interest_group = owner.ig:ig_landowners }
@@ -332,9 +332,9 @@ gg_argentina.28 = {
 			add_treasury = 10000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_enforcement years = 2 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -342,8 +342,8 @@ gg_argentina.28 = {
 				gg_reclamo_abre = { KEY = entre_rios }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_open_trade
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_open_trade } remove_modifier = gg_arg_littoral_open_trade }
 				add_modifier = { name = gg_arg_littoral_restricted years = 2 }
 				add_radicals_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
 			}
@@ -365,9 +365,9 @@ gg_argentina.28 = {
 			add_treasury = -20000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_tolerance years = 2 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -382,8 +382,8 @@ gg_argentina.28 = {
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_restricted
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
 				add_loyalists_in_state = { value = 0.02 interest_group = owner.ig:ig_landowners }
 			}
@@ -405,9 +405,9 @@ gg_argentina.28 = {
 			add_treasury = 15000
 			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
 			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			remove_modifier = gg_arg_port_enforcement
-			remove_modifier = gg_arg_port_tolerance
-			remove_modifier = gg_arg_port_licences
+			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
 			add_modifier = { name = gg_arg_port_licences years = 3 }
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
@@ -422,8 +422,8 @@ gg_argentina.28 = {
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
 			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-				remove_modifier = gg_arg_customs_shared
-				remove_modifier = gg_arg_littoral_restricted
+				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
+				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
 				add_modifier = { name = gg_arg_customs_shared years = 3 }
 				add_loyalists_in_state = { value = 0.01 interest_group = owner.ig:ig_landowners }

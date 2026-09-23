@@ -642,6 +642,9 @@ gg_peace.1 = {
 		trigger = {
 			NOT = { has_global_variable = gg_white_peace }
 			NOT = { has_global_variable = gg_oribe_withdraws }
+			# EN/ES: 23/9 (audit R4) -- the game rule's peace of October 1851 cannot be refused: the monthly
+			#     pulse would bring it back every month / la paz de la regla no se rechaza: volveria cada mes
+			NOT = { AND = { NOT = { gg_outcome_dynamic = yes } game_date >= 1851.10.8 } }
 		}
 
 		add_modifier = {
@@ -1238,7 +1241,12 @@ gg_peace.2 = {
 		name = gg_peace.2.f
 		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
-		trigger = { NOT = { has_global_variable = gg_white_peace } }
+		trigger = {
+			NOT = { has_global_variable = gg_white_peace }
+			# EN/ES: 23/9 (audit R4) -- the game rule's peace of October 1851 cannot be refused: the monthly
+			#     pulse would bring it back every month / la paz de la regla no se rechaza: volveria cada mes
+			NOT = { AND = { NOT = { gg_outcome_dynamic = yes } game_date >= 1851.10.8 } }
+		}
 
 		add_modifier = {
 			name = guerra_grande_divided_country

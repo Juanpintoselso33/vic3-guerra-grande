@@ -225,8 +225,6 @@ gg_systems_init = {
 	p:x5BA7C2.state ?= { add_modifier = { name = gg_strait_control_magellan } }
 	# EN/ES: Codex review 2026-09-19 -- half of a government's ground in the other's hands, written
 	#     down monthly while the war lasts / medio pais en manos del otro, anotado mes a mes
-	set_global_variable = { name = gg_cerrito_overrun value = 0 }
-	set_global_variable = { name = gg_defensa_overrun value = 0 }
 	# EN/ES: months in a row with the war support of each government at -25 or worse / meses seguidos
 	#     con el apoyo de cada gobierno en -25 o peor
 	set_global_variable = { name = gg_cerrito_exhausted value = 0 }
@@ -594,8 +592,6 @@ gg_war_closing_dispatch = {
 			set_global_variable = gg_victory_third_party
 			# EN/ES: nobody oriental won this one, so the occupation marks must not say otherwise
 			#     / no gano ningun oriental, asi que las marcas de ocupacion no pueden decir otra cosa
-			set_global_variable = { name = gg_cerrito_overrun value = 0 }
-			set_global_variable = { name = gg_defensa_overrun value = 0 }
 		}
 		else_if = {
 			limit = {
@@ -1244,13 +1240,13 @@ gg_urquiza_flip = {
 # -------------------------------------------------------------------------------------------------
 gg_argentina_vassals_settle = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_vassals_settle|" # GG_TRAZA
-	# EN: 22/9/2026 (Juan) -- the beaten provinces are annexed when the Federal Pact is settled, whatever
-	#     the settlement ("se anexan cuando se salde el pacto federal"), not when the Guerra Grande ends.
-	#     Called from gg_pact_resolve. Only those still subject to Argentina.
-	# ES: las provincias batidas se anexan cuando se salda el Pacto Federal, sea cual sea el cierre, y no
-	#     al terminar la Guerra Grande. Lo llama gg_pact_resolve. Solo las que siguen sujetas.
-	# EN/ES: 22/9/2026 -- every province country too (TUC ... SNL), one if per tag for the same reason
-	#     / y todo pais provincial, un if por tag por la misma razon
+	# EN: 23/9/2026 (Juan: "it depends on how the Federal Pact is signed: one option can be a completely
+	#     decentralised confederation with every province a subject, another the annexation, etc."). The
+	#     settlement no longer annexes on its own: gg_argentina.80 asks Buenos Aires, and which answers it
+	#     has depends on the settlement (gg_pact_settlement_*, set by gg_pact_resolve before the event fires).
+	#     Called from gg_pact_resolve. Only the provinces still subject to Argentina.
+	# ES: el cierre ya no anexa solo: gg_argentina.80 le pregunta a Buenos Aires, y las respuestas dependen
+	#     de como se firmo el Pacto. Lo llama gg_pact_resolve. Solo las provincias que siguen sujetas.
 	c:ARG ?= {
 		if = {
 			limit = {
@@ -1262,23 +1258,30 @@ gg_argentina_vassals_settle = {
 					is_subject_of = c:ARG
 				}
 			}
-			if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } annex = c:CRR }
-			if = { limit = { c:CLN ?= { is_subject_of = c:ARG } } annex = c:CLN }
-			if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } annex = c:ENR }
-			if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } annex = c:TUC }
-			if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } annex = c:SLT }
-			if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } annex = c:JUJ }
-			if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } annex = c:CTM }
-			if = { limit = { c:LRJ ?= { is_subject_of = c:ARG } } annex = c:LRJ }
-			if = { limit = { c:CBA ?= { is_subject_of = c:ARG } } annex = c:CBA }
-			if = { limit = { c:SFE ?= { is_subject_of = c:ARG } } annex = c:SFE }
-			if = { limit = { c:SDE ?= { is_subject_of = c:ARG } } annex = c:SDE }
-			if = { limit = { c:MZA ?= { is_subject_of = c:ARG } } annex = c:MZA }
-			if = { limit = { c:SJN ?= { is_subject_of = c:ARG } } annex = c:SJN }
-			if = { limit = { c:SNL ?= { is_subject_of = c:ARG } } annex = c:SNL }
 			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
 		}
 	}
+}
+
+# EN: The provinces held as subjects become Argentine ground (gg_argentina.80, national organisation).
+#     One if per tag: a tag that does not exist is skipped. Scope: Argentina.
+# ES: las provincias sujetas pasan a ser suelo argentino (organizacion nacional). Scope: la Argentina.
+gg_argentina_provinces_incorporate = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_provinces_incorporate|" # GG_TRAZA
+	if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } annex = c:CRR }
+	if = { limit = { c:CLN ?= { is_subject_of = c:ARG } } annex = c:CLN }
+	if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } annex = c:ENR }
+	if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } annex = c:TUC }
+	if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } annex = c:SLT }
+	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } annex = c:JUJ }
+	if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } annex = c:CTM }
+	if = { limit = { c:LRJ ?= { is_subject_of = c:ARG } } annex = c:LRJ }
+	if = { limit = { c:CBA ?= { is_subject_of = c:ARG } } annex = c:CBA }
+	if = { limit = { c:SFE ?= { is_subject_of = c:ARG } } annex = c:SFE }
+	if = { limit = { c:SDE ?= { is_subject_of = c:ARG } } annex = c:SDE }
+	if = { limit = { c:MZA ?= { is_subject_of = c:ARG } } annex = c:MZA }
+	if = { limit = { c:SJN ?= { is_subject_of = c:ARG } } annex = c:SJN }
+	if = { limit = { c:SNL ?= { is_subject_of = c:ARG } } annex = c:SNL }
 }
 
 gg_postwar_dispatch = {

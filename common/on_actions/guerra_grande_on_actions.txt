@@ -393,6 +393,9 @@ guerra_grande_on_war_end = {
 		# Root = the diplomatic play that just concluded.
 		is_diplomatic_play_type = dp_guerra_grande
 		has_global_variable = guerra_grande_split_done
+		# EN/ES: 23/9 -- not when the siege's locks close an old save's engine war (gg_siege_locks.txt)
+		#     / no cuando los candados del sitio cierran la guerra de una partida vieja
+		NOT = { has_global_variable = gg_siege_war_migrated }
 		NOT = { has_global_variable = gg_peace_settled }
 		exists = c:CER
 		exists = c:URU

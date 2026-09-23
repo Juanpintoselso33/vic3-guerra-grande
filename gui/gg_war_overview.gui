@@ -272,6 +272,21 @@ flowcontainer = {
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_francia_2"
 			}
+			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
+			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
+			textbox = {
+				tooltip = "gg_tt_power_number"
+				size = { 164 24 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_number_francia"
+			}
+			green_progressbar_horizontal = {
+				size = { 164 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_francia').GetValue]"
+					min = 0 max = 100
+				}
+			}
 		}
 		flowcontainer = {
 			direction = vertical ignoreinvisible = yes
@@ -328,6 +343,21 @@ flowcontainer = {
 				multiline = yes
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_britania_2"
+			}
+			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
+			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
+			textbox = {
+				tooltip = "gg_tt_power_number"
+				size = { 164 24 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_number_britania"
+			}
+			green_progressbar_horizontal = {
+				size = { 164 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_britania').GetValue]"
+					min = 0 max = 100
+				}
 			}
 		}
 		flowcontainer = {
@@ -386,7 +416,100 @@ flowcontainer = {
 				using = fontsize_medium align = center|nobaseline
 				text = "gg_war_ui_power_brasil_2"
 			}
+			# EN/ES: 23/9 (Juan: "tengo que ver el puntaje de cada potencia y como se inclina") -- the number
+			#     behind the level, 20 Protector / 60 Guarantor / el numero detras del nivel
+			textbox = {
+				tooltip = "gg_tt_power_number"
+				size = { 164 24 }
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_power_number_brasil"
+			}
+			green_progressbar_horizontal = {
+				size = { 164 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_brasil').GetValue]"
+					min = 0 max = 100
+				}
+			}
 		}
+	}
+	# EN: 23/9/2026 (Juan: "isn't Argentina missing from the powers? and Urquiza too?") -- the Cerrito's
+	#     backers, on the same footing as the powers: gg_cerrito_backing = Rosas + Urquiza while he is with
+	#     the Cerrito; after his pronouncement Urquiza counts for the Defensa (gg_defensa_backing). From the
+	#     partition, when there is a Cerrito to back.
+	# ES: los padrinos del Cerrito, a la par de las potencias: Rosas y Urquiza mientras este con el Cerrito;
+	#     despues de su pronunciamiento Urquiza cuenta para la Defensa. Desde la particion.
+	flowcontainer = {
+		direction = horizontal spacing = 8
+		parentanchor = hcenter
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+			textbox = {
+				tooltip = "gg_tt_backer_rosas"
+				size = { 256 44 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_rosas"
+			}
+			green_progressbar_horizontal = {
+				size = { 256 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_rosas').GetValue]"
+					min = 0 max = 100
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, Not(GetGlobalVariable('gg_urquiza_flipped').IsSet))]"
+			textbox = {
+				tooltip = "gg_tt_backer_urquiza_cer"
+				size = { 256 44 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_urquiza_cer"
+			}
+			green_progressbar_horizontal = {
+				size = { 256 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
+					min = 0 max = 100
+				}
+			}
+		}
+		flowcontainer = {
+			direction = vertical ignoreinvisible = yes
+			visible = "[And(GetGlobalVariable('guerra_grande_split_done').IsSet, GetGlobalVariable('gg_urquiza_flipped').IsSet)]"
+			textbox = {
+				tooltip = "gg_tt_backer_urquiza_def"
+				size = { 256 44 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_urquiza_def"
+			}
+			green_progressbar_horizontal = {
+				size = { 256 10 }
+				blockoverride "values" {
+					value = "[GetGlobalVariable('gg_patron_urquiza').GetValue]"
+					min = 0 max = 100
+				}
+			}
+		}
+	}
+	# EN/ES: 23/9 -- which way the backers lean: each side's total backing, 40 the floor
+	#     / hacia donde se inclinan los padrinos: el sosten total de cada lado, 40 el piso
+	textbox = {
+		visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
+		tooltip = "gg_tt_backers_lean"
+		size = { 520 30 }
+		parentanchor = hcenter
+		using = fontsize_medium align = center|nobaseline
+		text = "gg_war_ui_backers_lean"
 	}
 	widget = { size = { 520 4 } }
 }

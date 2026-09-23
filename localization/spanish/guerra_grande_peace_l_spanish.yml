@@ -122,4 +122,4 @@
  gg_peace.12.a:0 "Pedir condiciones. Que escriban ellos el pliego."
  gg_peace.12.b:0 "Seguir peleando. Todavía no."
  gg_peace_ask_terms_tt:0 "@warning! El otro gobierno escribe el pliego de paz, y ahí se decide qué pasa con este gobierno."
- gg_peace_fight_on_tt:0 "@battalions! La guerra sigue: #N -10#! de apoyo a la guerra y algo de descontento, pero no hay nueva mesa de paz por un año."
+ gg_peace_fight_on_tt:0 "@battalions! La guerra sigue, con algo de descontento, y por un año nadie vuelve a sentar a las partes."

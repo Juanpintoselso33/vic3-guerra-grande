@@ -258,3 +258,17 @@ gg_arbiter_balance_needed = {
 	if = { limit = { year >= 1849 } value = 10 }
 	if = { limit = { year >= 1851 } value = 5 }
 }
+
+# EN: 23/9/2026 (Juan: "the bar is in the middle and the blancos have 19, the colorados 17") -- the
+#     numbers at the ends of the bar are each side's TOTAL on the bar: decisions plus the river. The
+#     bar is their difference (gg_war_score_bar_value), so ends and bar always agree.
+# ES: los numeros de las puntas de la barra son el total de cada lado en la barra: decisiones mas el
+#     rio. La barra es su diferencia, asi puntas y barra coinciden siempre.
+gg_ui_bar_total_blanco = {
+	value = global_var:guerra_grande_blanco_score
+	add = gg_plata_pressure_blanco
+}
+gg_ui_bar_total_colorado = {
+	value = global_var:guerra_grande_colorado_score
+	add = gg_plata_pressure_colorado
+}

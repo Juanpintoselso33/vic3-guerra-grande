@@ -55,3 +55,17 @@ gg_is_argentine_holder = {
 		gg_is_pact_country = yes
 	}
 }
+
+# EN: 23/9/2026 -- in the possible block of the vanilla plays and of da_decrease_autonomy (scope: the
+#     initiator; scope:target_country the target). False against the Coalition or a province country:
+#     those are fought only with dp_gg_pacto_federal (zz_gg_argentine_plays.txt).
+# ES: en el possible de las jugadas de vanilla y de da_decrease_autonomy. Falso contra la Coalicion o un
+#     pais provincial: a esos se los pelea solo con dp_gg_pacto_federal.
+gg_argentine_play_is_allowed = {
+	scope:target_country = {
+		NOR = {
+			gg_is_province_country = yes
+			c:CLN ?= this
+		}
+	}
+}

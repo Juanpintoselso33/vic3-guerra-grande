@@ -1113,13 +1113,6 @@ guerra_grande.3 = {
 				}
 			}
 		}
-		# EN: playtest 2026-09-17 -- ROOT just became CER by change_tag, and c:CER does not resolve
-		#     until the next day, so the play's 'exists = c:CER' failed and no war opened. gg_intro.5
-		#     opens it a day later. Inside this option the Cerrito is ROOT, never c:CER.
-		# ES: ROOT recien paso a ser CER por change_tag y c:CER no se resuelve hasta el dia siguiente:
-		#     la jugada fallaba su 'exists = c:CER' y la guerra no abria. gg_intro.5 la abre un dia
-		#     despues. Dentro de esta opcion el Cerrito es ROOT, nunca c:CER.
-		set_global_variable = gg_play_pending
 		# EN: create_country copies the whole character roster from origin, so the new government
 		#     is born holding a duplicate of every man in the country -- including the enemy's.
 		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the

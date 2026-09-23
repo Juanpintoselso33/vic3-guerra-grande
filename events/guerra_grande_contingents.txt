@@ -769,6 +769,9 @@ gg_contingent.8 = {
 		#     treinta y cuatro dias despues del cruce, sin batalla. La cadena ya estaba, pero
 		#     enterrada en un hidden_effect: el jugador veia un modificador y nada mas.
 		custom_tooltip = gg_contingent_capitulation_follows
+		# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks. 23/9 (audit T4):
+		#     out of the hidden_effect, so the player sees it / fuera del hidden_effect, para que se vea
+		gg_endurance_change = { SIDE = cerrito VALUE = -30 }
 		hidden_effect = {
 			# EN: the capitulation that follows. guerra_grande.8 was replaced by the peace menu,
 			#     which routes by government mark instead of by tag.
@@ -778,10 +781,6 @@ gg_contingent.8 = {
 			#     T2/T3b turn this into a war-support blow and a Brazilian patron rise.
 			gg_patron_change = { PATRON = brasil DELTA = 20 }
 			gg_score_colorado = { AMOUNT = 3 }
-			# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks
-			c:CER ?= {
-				gg_endurance_change = { SIDE = cerrito VALUE = -30 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
-			}
 		}
 		ai_chance = {
 			base = 85

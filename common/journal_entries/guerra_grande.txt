@@ -324,8 +324,6 @@ je_guerra_grande = {
 							limit = { global_var:gg_endurance_defensa <= -60 }
 							gg_endurance_add = { SIDE = defensa VALUE = 15 }
 						}
-						set_global_variable = { name = gg_cerrito_overrun value = 0 }
-						set_global_variable = { name = gg_defensa_overrun value = 0 }
 						if = {
 							limit = { gg_defensa_backing < 40 }
 							gg_endurance_add = { SIDE = defensa VALUE = gg_defensa_drain }
@@ -396,6 +394,7 @@ je_guerra_grande = {
 			gg_war_journal_sync = yes
 			# EN/ES: 23/9 -- the siege on the map, weekly (gg_siege_map.txt) / el sitio en el mapa, cada semana
 			gg_siege_map_pulse = yes
+			gg_siege_locks_ensure = yes # EN/ES: audit R5/R6 -- the siege's locks / los candados del sitio
 			# EN/ES: 22/9/2026 -- only our own widgets; the engine's status box, long text, countries and
 			#     conditions hidden (CMF), also for journals already open / solo lo nuestro (CMF)
 			gg_journal_hide_engine_parts = yes
@@ -419,7 +418,9 @@ je_guerra_grande = {
 				# EN/ES: review 2026-09-17 -- a Cerrito that asked for terms (F4-3 b/c) goes first
 				#     / un Cerrito que pidio condiciones va primero
 				if = {
-					limit = { has_global_variable = gg_cerrito_negotiates gg_cerrito_can_lose = yes }
+					# EN/ES: 23/9 (audit R2) -- not before 1849: Urquiza turning in 1847 does not end the war on its own
+					#     / no antes de 1849: el vuelco de Urquiza en 1847 no cierra la guerra solo
+					limit = { has_global_variable = gg_cerrito_negotiates gg_cerrito_can_lose = yes year >= 1849 }
 					gg_trace_arbiter = { BRANCH = cerrito_negocia } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					random_country = {

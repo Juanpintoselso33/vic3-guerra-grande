@@ -486,7 +486,12 @@ gg_powers.13 = {
 		# ES: aceptar la paz de las potencias: elecciones, amnistia, desarme de los extranjeros (F12).
 		set_global_variable = gg_peace_offered
 		trigger_event = { id = gg_peace.6 days = 3 popup = yes }
-		ai_chance = { base = 30 }
+		ai_chance = {
+			base = 30
+			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
+			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
+			modifier = { trigger = { year < 1849 } factor = 0 }
+		}
 	}
 
 	option = {
@@ -684,7 +689,12 @@ gg_powers.16 = {
 		}
 		set_global_variable = gg_peace_offered
 		trigger_event = { id = gg_peace.7 days = 3 popup = yes }
-		ai_chance = { base = 15 }
+		ai_chance = {
+			base = 15
+			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
+			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
+			modifier = { trigger = { year < 1849 } factor = 0 }
+		}
 	}
 
 	option = {
@@ -1249,6 +1259,8 @@ gg_powers.23 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23.b|" # GG_TRAZA
 		name = gg_powers.23.b
+		# EN/ES: 23/9 (audit T8) -- only when the game rule lets the Cerrito lose / solo si la regla deja perder al Cerrito
+		trigger = { gg_cerrito_can_lose = yes }
 		custom_tooltip = gg_powers.23.b_tt
 		default_option = yes
 		# EN: historical: send Lucas Moreno to Urquiza and ask for terms (the arbiter ripens the Cerrito).
@@ -1260,6 +1272,8 @@ gg_powers.23 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23.c|" # GG_TRAZA
 		name = gg_powers.23.c
+		# EN/ES: 23/9 (audit T8) -- only when the game rule lets the Cerrito lose / solo si la regla deja perder al Cerrito
+		trigger = { gg_cerrito_can_lose = yes }
 		custom_tooltip = gg_powers.23.c_tt
 		# EN: ask for a naval guarantee to leave with the Argentine troops (exit S12): the Cerrito
 		#     dissolves in peace and Urquiza does not keep the park.
@@ -1481,9 +1495,11 @@ gg_powers.28 = {
 				limit = {
 					OR = {
 						gg_outcome_cerrito = yes
+						# EN/ES: 23/9 (audit R7) -- by the same balance that opened the door, river included
+						#     / por la misma balanza que abrio la puerta, con el rio
 						AND = {
 							gg_outcome_dynamic = yes
-							guerra_grande_blanco_lead > 0
+							gg_war_balance_blanco >= gg_arbiter_balance_needed
 						}
 					}
 				}

@@ -101,15 +101,5 @@ gg_intro.5 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_intro.5|" # GG_TRAZA
 		set_global_variable = gg_partition_calendar_done
 		gg_partition_calendar = yes
-		# EN/ES: playtest 2026-09-17 -- the war of option guerra_grande.3.b, opened once CER resolves
-		#     / la guerra de la opcion .3.b, que se abre cuando CER ya se resuelve
-		if = {
-			limit = { has_global_variable = gg_play_pending }
-			remove_global_variable = gg_play_pending
-			# EN: 23/9/2026 (sitio-sin-guerra-plan.md, decided with Juan) -- no engine war at the split: the siege runs on
-			#     the journal (score, river, events, endurance) and the arbiter closes it on the calendar. Headless runs
-			#     1-27: with the engine war open, two or three AI battles ended it between 1843 and 1848.
-			# ES: sin guerra del motor en el corte: el sitio corre sobre el journal y lo cierra el arbitro con el calendario.
-		}
 	}
 }

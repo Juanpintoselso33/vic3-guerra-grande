@@ -122,4 +122,4 @@
  gg_peace.12.a:0 "Ask for terms. Let them draft the treaty."
  gg_peace.12.b:0 "Fight on. Not yet."
  gg_peace_ask_terms_tt:0 "@warning! The other government draws up the peace terms, and with them the fate of this one."
- gg_peace_fight_on_tt:0 "@battalions! The war goes on: #N -10#! war support and some unrest, but no arbiter comes to the table for a year."
+ gg_peace_fight_on_tt:0 "@battalions! The war goes on, with some unrest, and for a year no one brings the parties to the table again."

@@ -1,0 +1,49 @@
+﻿# EN: 23/9/2026 (audit R5, R6) -- THE SIEGE'S LOCKS, kept every week. Called from the war journal's weekly
+#     pulse. gg_troops.1/.2 put them at the split, but gg_troops.2 is queued on a country that has just
+#     changed tag (guerra_grande.3.b, the player going to the Cerrito) and may be lost; and a game saved
+#     after the split with the version before the siege-without-war still has the engine war open.
+#     So, every week while the siege lasts:
+#       1. an engine war between the two governments left from an old save is closed (once), without
+#          the white-peace hook (gg_siege_war_migrated gates guerra_grande_on_war_end);
+#       2. both governments keep gg_siege_no_aggression, and Brazil gg_brazil_stays_out.
+# ES: LOS CANDADOS DEL SITIO, repuestos cada semana. gg_troops.2 se agenda sobre un pais que acaba de
+#     cambiar de tag y se puede perder; y una partida guardada despues del corte con la version anterior
+#     tiene la guerra del motor abierta. Cada semana, mientras dura el sitio: se cierra esa guerra vieja
+#     (una vez, sin la paz blanca), y los dos gobiernos y el Brasil conservan sus candados.
+gg_siege_locks_ensure = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_locks_ensure|" # GG_TRAZA
+	if = {
+		limit = {
+			has_global_variable = guerra_grande_split_done
+			has_global_variable = guerra_grande_open_war
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_siege_war_migrated }
+				any_diplomatic_play = { is_diplomatic_play_type = dp_guerra_grande }
+			}
+			set_global_variable = gg_siege_war_migrated
+			every_diplomatic_play = {
+				limit = { is_diplomatic_play_type = dp_guerra_grande }
+				end_play = yes
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = guerra_grande_cerrito_government
+					has_variable = guerra_grande_defensa_government
+				}
+				NOT = { has_modifier = gg_siege_no_aggression }
+			}
+			add_modifier = { name = gg_siege_no_aggression }
+		}
+		c:BRZ ?= {
+			if = {
+				limit = { NOT = { has_modifier = gg_brazil_stays_out } }
+				add_modifier = { name = gg_brazil_stays_out }
+			}
+		}
+	}
+}
