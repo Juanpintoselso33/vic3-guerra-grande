@@ -1,97 +1,84 @@
 ﻿# EN: 23/9/2026 (Juan) -- the provinces' ground, by OWNERSHIP ONLY (no map edit). The state regions come from
 #     the la Argentina mod and cut a few border cells into the wrong province. Each listed cell goes to the
 #     country of its real province (official borders, datos.gob.ar georef, fitted to the game map by its coast)
-#     while that province is a subject of Buenos Aires; if the province has no country yet, to Buenos Aires.
+#     while that province is a subject of Buenos Aires; until it has a country, the cell stays where it is
+#     (handing it to Buenos Aires would make the merge below give it back every week).
 #     Kept as they are, by decision: the southern frontier (south of 33.3S and the La Pampa region) and the
 #     Chaco. Nothing moves while the region has an owner outside the Pact (at war, or foreign). Idempotent:
 #     run weekly from gg_pact_sync. Cell list: tools/mapa_celdas (scratch run 23/9, moves.json).
 # ES: la tierra de las provincias, solo por dueño (sin editar el mapa). Cada celda va al pais de su provincia
-#     real mientras sea sujeta de Buenos Aires; si la provincia no tiene pais todavia, a Buenos Aires. Quedan
+#     real mientras sea sujeta de Buenos Aires; si no tiene pais todavia, la celda queda donde esta. Quedan
 #     como estan la frontera sur y el Chaco. No se mueve nada si la region tiene un duenio fuera del Pacto.
 gg_province_cells_reconcile = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_cells_reconcile|" # GG_TRAZA
 	if = {
 		limit = { exists = c:ARG }
+		# EN: 23/9 (Juan) -- ground Buenos Aires takes inside a province's region (a war with Bolivia or the
+		#     Guaranies, a peace) joins that province while it is a subject of Buenos Aires. Runs BEFORE the
+		#     cell list below, so a border cell that belongs to another province is handed on in the same tick.
+		# ES: la tierra que Buenos Aires gana dentro de la region de una provincia (guerra con Bolivia o los
+		#     guaranies, una paz) se suma a esa provincia mientras sea sujeta. Va ANTES de la lista de celdas.
+		if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } s:STATE_JUJUY = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:JUJ } } }
+		# EN/ES: Tarija, its own region: part of the Intendencia de Salta del Tucuman until it joined Bolivia in 1826,
+		#     claimed by Rosas in the war against the Peru-Bolivian Confederation (1837) -- if taken, it goes to Salta
+		#     / parte de la Intendencia de Salta hasta 1826, reclamada por Rosas en 1837: si se toma, va a Salta
+		if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } s:STATE_TARIJA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SLT } } }
+		if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } s:STATE_SALTA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SLT } } }
+		if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } s:STATE_TUCUMAN = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:TUC } } }
+		if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } s:STATE_CATAMARCA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:CTM } } }
+		if = { limit = { c:LRJ ?= { is_subject_of = c:ARG } } s:STATE_LA_RIOJA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:LRJ } } }
+		if = { limit = { c:CBA ?= { is_subject_of = c:ARG } } s:STATE_CORDOBA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:CBA } } }
+		if = { limit = { c:SFE ?= { is_subject_of = c:ARG } } s:STATE_SANTA_FE = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SFE } } }
+		if = { limit = { c:SDE ?= { is_subject_of = c:ARG } } s:STATE_SANTIAGO_DEL_ESTERO = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SDE } } }
+		if = { limit = { c:MZA ?= { is_subject_of = c:ARG } } s:STATE_MENDOZA = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:MZA } } }
+		if = { limit = { c:SJN ?= { is_subject_of = c:ARG } } s:STATE_SAN_JUAN = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SJN } } }
+		if = { limit = { c:SNL ?= { is_subject_of = c:ARG } } s:STATE_SAN_LUIS = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:SNL } } }
+		if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } s:STATE_CORRIENTES = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:CRR } } }
+		if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } s:STATE_ENTRE_RIOS = { every_scope_state = { limit = { owner = { c:ARG ?= this } } set_state_owner = c:ENR } } }
 		# EN/ES: CORDOBA -> SANTIAGO_DEL_ESTERO
 		if = {
 			limit = { s:STATE_CORDOBA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:SDE ?= { is_subject_of = c:ARG } }
 			s:STATE_CORDOBA = { set_owner_of_provinces = { country = c:SDE provinces = { xDC526D } } }
-		}
-		else_if = {
-			limit = { s:STATE_CORDOBA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:SDE } }
-			s:STATE_CORDOBA = { set_owner_of_provinces = { country = c:ARG provinces = { xDC526D } } }
 		}
 		# EN/ES: ENTRE_RIOS -> SANTA_FE
 		if = {
 			limit = { s:STATE_ENTRE_RIOS = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:SFE ?= { is_subject_of = c:ARG } }
 			s:STATE_ENTRE_RIOS = { set_owner_of_provinces = { country = c:SFE provinces = { x5C52A5 x32AD9F } } }
 		}
-		else_if = {
-			limit = { s:STATE_ENTRE_RIOS = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:SFE } }
-			s:STATE_ENTRE_RIOS = { set_owner_of_provinces = { country = c:ARG provinces = { x5C52A5 x32AD9F } } }
-		}
 		# EN/ES: JUJUY -> SALTA
 		if = {
 			limit = { s:STATE_JUJUY = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:SLT ?= { is_subject_of = c:ARG } }
 			s:STATE_JUJUY = { set_owner_of_provinces = { country = c:SLT provinces = { x239211 x4C03D0 } } }
-		}
-		else_if = {
-			limit = { s:STATE_JUJUY = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:SLT } }
-			s:STATE_JUJUY = { set_owner_of_provinces = { country = c:ARG provinces = { x239211 x4C03D0 } } }
 		}
 		# EN/ES: LA_RIOJA -> CATAMARCA
 		if = {
 			limit = { s:STATE_LA_RIOJA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:CTM ?= { is_subject_of = c:ARG } }
 			s:STATE_LA_RIOJA = { set_owner_of_provinces = { country = c:CTM provinces = { x69CE0A xEFB9CB xE44569 } } }
 		}
-		else_if = {
-			limit = { s:STATE_LA_RIOJA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:CTM } }
-			s:STATE_LA_RIOJA = { set_owner_of_provinces = { country = c:ARG provinces = { x69CE0A xEFB9CB xE44569 } } }
-		}
 		# EN/ES: MENDOZA -> SAN_JUAN
 		if = {
 			limit = { s:STATE_MENDOZA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:SJN ?= { is_subject_of = c:ARG } }
 			s:STATE_MENDOZA = { set_owner_of_provinces = { country = c:SJN provinces = { x780AF9 x80C791 xCF4A9B } } }
-		}
-		else_if = {
-			limit = { s:STATE_MENDOZA = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:SJN } }
-			s:STATE_MENDOZA = { set_owner_of_provinces = { country = c:ARG provinces = { x780AF9 x80C791 xCF4A9B } } }
 		}
 		# EN/ES: SANTA_FE -> CORDOBA
 		if = {
 			limit = { s:STATE_SANTA_FE = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:CBA ?= { is_subject_of = c:ARG } }
 			s:STATE_SANTA_FE = { set_owner_of_provinces = { country = c:CBA provinces = { x36A907 xB81311 } } }
 		}
-		else_if = {
-			limit = { s:STATE_SANTA_FE = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:CBA } }
-			s:STATE_SANTA_FE = { set_owner_of_provinces = { country = c:ARG provinces = { x36A907 xB81311 } } }
-		}
 		# EN/ES: SANTA_FE -> SANTIAGO_DEL_ESTERO
 		if = {
 			limit = { s:STATE_SANTA_FE = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:SDE ?= { is_subject_of = c:ARG } }
 			s:STATE_SANTA_FE = { set_owner_of_provinces = { country = c:SDE provinces = { x694D91 xB5EF97 } } }
-		}
-		else_if = {
-			limit = { s:STATE_SANTA_FE = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:SDE } }
-			s:STATE_SANTA_FE = { set_owner_of_provinces = { country = c:ARG provinces = { x694D91 xB5EF97 } } }
 		}
 		# EN/ES: SANTIAGO_DEL_ESTERO -> CATAMARCA
 		if = {
 			limit = { s:STATE_SANTIAGO_DEL_ESTERO = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:CTM ?= { is_subject_of = c:ARG } }
 			s:STATE_SANTIAGO_DEL_ESTERO = { set_owner_of_provinces = { country = c:CTM provinces = { xB315A7 } } }
 		}
-		else_if = {
-			limit = { s:STATE_SANTIAGO_DEL_ESTERO = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:CTM } }
-			s:STATE_SANTIAGO_DEL_ESTERO = { set_owner_of_provinces = { country = c:ARG provinces = { xB315A7 } } }
-		}
 		# EN/ES: SAN_JUAN -> LA_RIOJA
 		if = {
 			limit = { s:STATE_SAN_JUAN = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } c:LRJ ?= { is_subject_of = c:ARG } }
 			s:STATE_SAN_JUAN = { set_owner_of_provinces = { country = c:LRJ provinces = { xCD566B } } }
-		}
-		else_if = {
-			limit = { s:STATE_SAN_JUAN = { NOT = { any_scope_state = { NOT = { owner = { OR = { c:ARG ?= this is_subject_of = c:ARG } } } } } } NOT = { exists = c:LRJ } }
-			s:STATE_SAN_JUAN = { set_owner_of_provinces = { country = c:ARG provinces = { xCD566B } } }
 		}
 	}
 }
