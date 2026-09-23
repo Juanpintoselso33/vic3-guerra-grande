@@ -101,8 +101,8 @@ CLN = {
 #     TAGS VERIFIED FREE on 22/9/2026 against vanilla 1.13, every downloaded Workshop item and every
 #     local mod (country_definitions, history, events, localization): TUC SLT JUJ CTM LRJ CBA SFE SDE
 #     MZA SJN SNL. SLU is NOT free (Workshop 2898469548 defines it), so San Luis is SNL.
-#     Colours are map colours only, chosen to tell neighbours apart; the flags are PLACEHOLDERS
-#     (common/coat_of_arms/coat_of_arms/zz_guerra_grande_argentina.txt) until Juan picks.
+#     Colours are map colours only, chosen to tell neighbours apart. Flags (decided with Juan 22/9):
+#     real Wikimedia flags by date and side, in common/flag_definitions/zz_guerra_grande_flags.txt.
 # ES: LAS PROVINCIAS COMO PAISES. Ninguna existe al empezar ni nace por pronunciarse: una provincia es
 #     pais solo cuando Rosas BATE al pais que la tiene. El batido se parte en sus provincias, cada una
 #     protectorado de Buenos Aires con su gobernador; lo que queda de la Coalicion cambia de tag a la
