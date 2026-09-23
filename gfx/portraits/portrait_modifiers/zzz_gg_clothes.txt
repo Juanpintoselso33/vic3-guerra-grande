@@ -300,6 +300,17 @@ gg_clothes = {
 					has_template = ARG_Angel_Pacheco
 					has_template = ARG_Alejandro_Heredia
 					has_template = ARG_gg_nazario_benavidez
+					# EN/ES: provincial governors painted in uniform (SOURCES_retratos.md, «Gobernadores») /
+					#     gobernadores provinciales retratados de uniforme
+					has_template = CRR_gg_benjamin_virasoro
+					has_template = SFE_gg_estanislao_lopez
+					has_template = CBA_gg_manuel_lopez
+					has_template = TUC_gg_celedonio_gutierrez
+					has_template = SLT_gg_felipe_heredia
+					has_template = JUJ_gg_pablo_aleman
+					has_template = MZA_gg_pedro_molina
+					has_template = SNL_gg_jose_gregorio_calderon
+					has_template = SNL_gg_pablo_lucero
 					}
 				}
 			}

@@ -6,7 +6,7 @@
 #     docs/guerra-grande-argentina/gobernadores-provincias.md. A birth date is written only when the
 #     source gives one; with only the year it is 1 January of that year (said on the line), and with
 #     «ca.» or nothing it is left out. No traits: the source documents none, and trait_generation is
-#     empty so the engine does not invent them. No portraits yet (dna): out of scope on 22/9/2026.
+#     empty so the engine does not invent them. Faces (dna): common/dna_data/gg_dna_governors.txt.
 #     THE INTEREST GROUP AND IDEOLOGY ARE THE MOD'S READING of the «bando» column, one rule for all:
 #     rosista -> landowners, authoritarian; federal, antirrosista federal or unknown -> landowners,
 #     moderate; Coalition or unitarian -> intelligentsia, radical (as Avellaneda already had).
@@ -14,12 +14,13 @@
 # ES: LOS GOBERNADORES PROVINCIALES que el playset no tiene. Nacen solo cuando empieza su mandato, una
 #     vez, en quien tenga la provincia. Nombres, provincias y fechas: gobernadores-provincias.md. La
 #     fecha de nacimiento va solo si la fuente la da; con el anio solo, es el 1 de enero (dicho en la
-#     linea); con «ca.» o nada, no va. Sin traits ni retrato. El grupo de interes y la ideologia son la
-#     lectura del mod de la columna «bando», con una sola regla para todos.
+#     linea); con «ca.» o nada, no va. Sin traits; la cara esta en gg_dna_governors.txt. El grupo de
+#     interes y la ideologia son la lectura del mod de la columna «bando», con una sola regla para todos.
 # -------------------------------------------------------------------------------------------------
 
 # EN/ES: Rafael León de Atienza (1802 - dic. 1837); federal
 CRR_gg_rafael_leon_de_atienza = {
+	dna = dna_gg_rafael_leon_de_atienza # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CRR_gg_rafael_leon_de_atienza_first
 	last_name = gg_pn_CRR_gg_rafael_leon_de_atienza_last
 	historical = yes
@@ -37,6 +38,7 @@ CRR_gg_rafael_leon_de_atienza = {
 
 # EN/ES: Juan Baltasar Acosta (1782 - 1856 (R)); antirrosista federal
 CRR_gg_juan_baltasar_acosta = {
+	dna = dna_gg_juan_baltasar_acosta # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CRR_gg_juan_baltasar_acosta_first
 	last_name = gg_pn_CRR_gg_juan_baltasar_acosta_last
 	historical = yes
@@ -54,6 +56,7 @@ CRR_gg_juan_baltasar_acosta = {
 
 # EN/ES: Benjamín Virasoro (1/5/1812 - 30/4/1897); rosista
 CRR_gg_benjamin_virasoro = {
+	dna = dna_gg_benjamin_virasoro # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_CRR_gg_benjamin_virasoro_first
 	last_name = gg_pn_CRR_gg_benjamin_virasoro_last
 	historical = yes
@@ -70,6 +73,7 @@ CRR_gg_benjamin_virasoro = {
 
 # EN/ES: Estanislao López (22/11/1786 - 15/6/1838); federal
 SFE_gg_estanislao_lopez = {
+	dna = dna_gg_estanislao_lopez # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SFE_gg_estanislao_lopez_first
 	last_name = gg_pn_SFE_gg_estanislao_lopez_last
 	historical = yes
@@ -86,6 +90,7 @@ SFE_gg_estanislao_lopez = {
 
 # EN/ES: Domingo Cullen (26/2/1791 - 22/6/1839); federal
 SFE_gg_domingo_cullen = {
+	dna = dna_gg_domingo_cullen # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SFE_gg_domingo_cullen_first
 	last_name = gg_pn_SFE_gg_domingo_cullen_last
 	historical = yes
@@ -102,6 +107,7 @@ SFE_gg_domingo_cullen = {
 
 # EN/ES: Juan Pablo López (26/6/1792 - 27/7/1886); antirrosista federal
 SFE_gg_juan_pablo_lopez = {
+	dna = dna_gg_juan_pablo_lopez # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SFE_gg_juan_pablo_lopez_first
 	last_name = gg_pn_SFE_gg_juan_pablo_lopez_last
 	historical = yes
@@ -118,6 +124,7 @@ SFE_gg_juan_pablo_lopez = {
 
 # EN/ES: Domingo Crespo (10/5/1791 - abr. 1871); antirrosista federal
 SFE_gg_domingo_crespo = {
+	dna = dna_gg_domingo_crespo # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SFE_gg_domingo_crespo_first
 	last_name = gg_pn_SFE_gg_domingo_crespo_last
 	historical = yes
@@ -134,6 +141,7 @@ SFE_gg_domingo_crespo = {
 
 # EN/ES: Manuel López (1780 - 1860); rosista
 CBA_gg_manuel_lopez = {
+	dna = dna_gg_manuel_lopez # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_CBA_gg_manuel_lopez_first
 	last_name = gg_pn_CBA_gg_manuel_lopez_last
 	historical = yes
@@ -151,6 +159,7 @@ CBA_gg_manuel_lopez = {
 
 # EN/ES: José Francisco Álvarez (17/7/1808 - 22/8/1841); Coalicion del Norte / unitario
 CBA_gg_jose_francisco_alvarez = {
+	dna = dna_gg_jose_francisco_alvarez # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CBA_gg_jose_francisco_alvarez_first
 	last_name = gg_pn_CBA_gg_jose_francisco_alvarez_last
 	historical = yes
@@ -167,6 +176,7 @@ CBA_gg_jose_francisco_alvarez = {
 
 # EN/ES: Mauro Carranza (15/1/1807 - 6/11/1869); federal
 SDE_gg_mauro_carranza = {
+	dna = dna_gg_mauro_carranza # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SDE_gg_mauro_carranza_first
 	last_name = gg_pn_SDE_gg_mauro_carranza_last
 	historical = yes
@@ -183,6 +193,7 @@ SDE_gg_mauro_carranza = {
 
 # EN/ES: Manuel Taboada (27/2/1817 - 7/9/1871); federal
 SDE_gg_manuel_taboada = {
+	dna = dna_gg_manuel_taboada # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SDE_gg_manuel_taboada_first
 	last_name = gg_pn_SDE_gg_manuel_taboada_last
 	historical = yes
@@ -199,6 +210,7 @@ SDE_gg_manuel_taboada = {
 
 # EN/ES: Bernabé Piedrabuena (ca. 1792 - 30/3/1841); Coalicion del Norte / unitario
 TUC_gg_bernabe_piedrabuena = {
+	dna = dna_gg_bernabe_piedrabuena # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_TUC_gg_bernabe_piedrabuena_first
 	last_name = gg_pn_TUC_gg_bernabe_piedrabuena_last
 	historical = yes
@@ -215,6 +227,7 @@ TUC_gg_bernabe_piedrabuena = {
 
 # EN/ES: Pedro Garmendia (31/7/1794 - 23/1/1865); Coalicion del Norte / unitario
 TUC_gg_pedro_garmendia = {
+	dna = dna_gg_pedro_garmendia # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_TUC_gg_pedro_garmendia_first
 	last_name = gg_pn_TUC_gg_pedro_garmendia_last
 	historical = yes
@@ -231,6 +244,7 @@ TUC_gg_pedro_garmendia = {
 
 # EN/ES: Celedonio Gutiérrez (3/3/1804 - 12/8/1880); rosista
 TUC_gg_celedonio_gutierrez = {
+	dna = dna_gg_celedonio_gutierrez # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_TUC_gg_celedonio_gutierrez_first
 	last_name = gg_pn_TUC_gg_celedonio_gutierrez_last
 	historical = yes
@@ -247,6 +261,7 @@ TUC_gg_celedonio_gutierrez = {
 
 # EN/ES: José Antonino Fernández Cornejo (1768 - 1850 (unitario)); Coalicion del Norte / unitario
 SLT_gg_jose_antonino_fernandez_cornejo = {
+	dna = dna_gg_jose_antonino_fernandez_cornejo # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_jose_antonino_fernandez_cornejo_first
 	last_name = gg_pn_SLT_gg_jose_antonino_fernandez_cornejo_last
 	historical = yes
@@ -264,6 +279,7 @@ SLT_gg_jose_antonino_fernandez_cornejo = {
 
 # EN/ES: Felipe Heredia (1797 - 12/6/1852); federal
 SLT_gg_felipe_heredia = {
+	dna = dna_gg_felipe_heredia # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_felipe_heredia_first
 	last_name = gg_pn_SLT_gg_felipe_heredia_last
 	historical = yes
@@ -281,6 +297,7 @@ SLT_gg_felipe_heredia = {
 
 # EN/ES: Manuel Solá (17/6/1798 - 1867); Coalicion del Norte / unitario
 SLT_gg_manuel_sola = {
+	dna = dna_gg_manuel_sola # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_manuel_sola_first
 	last_name = gg_pn_SLT_gg_manuel_sola_last
 	historical = yes
@@ -297,6 +314,7 @@ SLT_gg_manuel_sola = {
 
 # EN/ES: Miguel Otero (23/11/1790 - 13/7/1874); federal
 SLT_gg_miguel_otero = {
+	dna = dna_gg_miguel_otero # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_miguel_otero_first
 	last_name = gg_pn_SLT_gg_miguel_otero_last
 	historical = yes
@@ -313,6 +331,7 @@ SLT_gg_miguel_otero = {
 
 # EN/ES: Gaspar López (A: unitario); Coalicion del Norte / unitario
 SLT_gg_gaspar_lopez = {
+	dna = dna_gg_gaspar_lopez # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_gaspar_lopez_first
 	last_name = gg_pn_SLT_gg_gaspar_lopez_last
 	historical = yes
@@ -329,6 +348,7 @@ SLT_gg_gaspar_lopez = {
 
 # EN/ES: Dionisio Puch (9/10/1804 - 17/9/1873); Coalicion del Norte / unitario
 SLT_gg_dionisio_puch = {
+	dna = dna_gg_dionisio_puch # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_dionisio_puch_first
 	last_name = gg_pn_SLT_gg_dionisio_puch_last
 	historical = yes
@@ -345,6 +365,7 @@ SLT_gg_dionisio_puch = {
 
 # EN/ES: Manuel Antonio Saravia (1790 - 18/10/1879); rosista
 SLT_gg_manuel_antonio_saravia = {
+	dna = dna_gg_manuel_antonio_saravia # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_manuel_antonio_saravia_first
 	last_name = gg_pn_SLT_gg_manuel_antonio_saravia_last
 	historical = yes
@@ -362,6 +383,7 @@ SLT_gg_manuel_antonio_saravia = {
 
 # EN/ES: José Manuel Saravia (ca. 1800 - ca. 1860); rosista
 SLT_gg_jose_manuel_saravia = {
+	dna = dna_gg_jose_manuel_saravia # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_jose_manuel_saravia_first
 	last_name = gg_pn_SLT_gg_jose_manuel_saravia_last
 	historical = yes
@@ -378,6 +400,7 @@ SLT_gg_jose_manuel_saravia = {
 
 # EN/ES: Vicente Tamayo (sin dato); federal
 SLT_gg_vicente_tamayo = {
+	dna = dna_gg_vicente_tamayo # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_SLT_gg_vicente_tamayo_first
 	last_name = gg_pn_SLT_gg_vicente_tamayo_last
 	historical = yes
@@ -394,6 +417,7 @@ SLT_gg_vicente_tamayo = {
 
 # EN/ES: Eustaquio Medina (1790 - 30/3/1836); federal
 JUJ_gg_eustaquio_medina = {
+	dna = dna_gg_eustaquio_medina # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_eustaquio_medina_first
 	last_name = gg_pn_JUJ_gg_eustaquio_medina_last
 	historical = yes
@@ -411,6 +435,7 @@ JUJ_gg_eustaquio_medina = {
 
 # EN/ES: Miguel Puch (1804 - 1844 (unitario)); Coalicion del Norte / unitario
 JUJ_gg_miguel_puch = {
+	dna = dna_gg_miguel_puch # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_miguel_puch_first
 	last_name = gg_pn_JUJ_gg_miguel_puch_last
 	historical = yes
@@ -428,6 +453,7 @@ JUJ_gg_miguel_puch = {
 
 # EN/ES: Pablo Alemán (1791 (Canelones) - 22/9/1845); federal
 JUJ_gg_pablo_aleman = {
+	dna = dna_gg_pablo_aleman # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_pablo_aleman_first
 	last_name = gg_pn_JUJ_gg_pablo_aleman_last
 	historical = yes
@@ -445,6 +471,7 @@ JUJ_gg_pablo_aleman = {
 
 # EN/ES: José Mariano Iturbe (1795 - mayo 1852); rosista
 JUJ_gg_jose_mariano_iturbe = {
+	dna = dna_gg_jose_mariano_iturbe # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_jose_mariano_iturbe_first
 	last_name = gg_pn_JUJ_gg_jose_mariano_iturbe_last
 	historical = yes
@@ -462,6 +489,7 @@ JUJ_gg_jose_mariano_iturbe = {
 
 # EN/ES: Roque Alvarado (16/8/1793 - 27/6/1860); Coalicion del Norte / unitario
 JUJ_gg_roque_alvarado = {
+	dna = dna_gg_roque_alvarado # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_roque_alvarado_first
 	last_name = gg_pn_JUJ_gg_roque_alvarado_last
 	historical = yes
@@ -478,6 +506,7 @@ JUJ_gg_roque_alvarado = {
 
 # EN/ES: Pedro Castañeda (c. 1800 - 1863); federal
 JUJ_gg_pedro_castaneda = {
+	dna = dna_gg_pedro_castaneda # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_pedro_castaneda_first
 	last_name = gg_pn_JUJ_gg_pedro_castaneda_last
 	historical = yes
@@ -494,6 +523,7 @@ JUJ_gg_pedro_castaneda = {
 
 # EN/ES: José López Villar (unitario moderado); Coalicion del Norte / unitario
 JUJ_gg_jose_lopez_villar = {
+	dna = dna_gg_jose_lopez_villar # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_JUJ_gg_jose_lopez_villar_first
 	last_name = gg_pn_JUJ_gg_jose_lopez_villar_last
 	historical = yes
@@ -510,6 +540,7 @@ JUJ_gg_jose_lopez_villar = {
 
 # EN/ES: Fernando Villafañe (1784 - jun. 1841); federal
 CTM_gg_fernando_villafane = {
+	dna = dna_gg_fernando_villafane # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CTM_gg_fernando_villafane_first
 	last_name = gg_pn_CTM_gg_fernando_villafane_last
 	historical = yes
@@ -527,6 +558,7 @@ CTM_gg_fernando_villafane = {
 
 # EN/ES: José Cubas (1798 - 4/11/1841); Coalicion del Norte / unitario
 CTM_gg_jose_cubas = {
+	dna = dna_gg_jose_cubas # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_CTM_gg_jose_cubas_first
 	last_name = gg_pn_CTM_gg_jose_cubas_last
 	historical = yes
@@ -544,6 +576,7 @@ CTM_gg_jose_cubas = {
 
 # EN/ES: Juan Eusebio Balboa (1791 - mayo 1856); rosista
 CTM_gg_juan_eusebio_balboa = {
+	dna = dna_gg_juan_eusebio_balboa # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CTM_gg_juan_eusebio_balboa_first
 	last_name = gg_pn_CTM_gg_juan_eusebio_balboa_last
 	historical = yes
@@ -561,6 +594,7 @@ CTM_gg_juan_eusebio_balboa = {
 
 # EN/ES: Santos Nieva y Castilla (1779 - 1860); rosista
 CTM_gg_santos_nieva_y_castilla = {
+	dna = dna_gg_santos_nieva_y_castilla # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CTM_gg_santos_nieva_y_castilla_first
 	last_name = gg_pn_CTM_gg_santos_nieva_y_castilla_last
 	historical = yes
@@ -578,6 +612,7 @@ CTM_gg_santos_nieva_y_castilla = {
 
 # EN/ES: Manuel Navarro (1791 - 3/5/1852); rosista
 CTM_gg_manuel_navarro = {
+	dna = dna_gg_manuel_navarro # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_CTM_gg_manuel_navarro_first
 	last_name = gg_pn_CTM_gg_manuel_navarro_last
 	historical = yes
@@ -595,6 +630,7 @@ CTM_gg_manuel_navarro = {
 
 # EN/ES: Jacinto del Rincón (ca. 1794 - 30/6/1836); federal
 LRJ_gg_jacinto_del_rincon = {
+	dna = dna_gg_jacinto_del_rincon # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_jacinto_del_rincon_first
 	last_name = gg_pn_LRJ_gg_jacinto_del_rincon_last
 	historical = yes
@@ -611,6 +647,7 @@ LRJ_gg_jacinto_del_rincon = {
 
 # EN/ES: Juan Antonio Carmona (sin dato); bando sin dato
 LRJ_gg_juan_antonio_carmona = {
+	dna = dna_gg_juan_antonio_carmona # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_juan_antonio_carmona_first
 	last_name = gg_pn_LRJ_gg_juan_antonio_carmona_last
 	historical = yes
@@ -627,6 +664,7 @@ LRJ_gg_juan_antonio_carmona = {
 
 # EN/ES: Francisco Ciriaco Bustamante (sin dato); bando sin dato
 LRJ_gg_francisco_ciriaco_bustamante = {
+	dna = dna_gg_francisco_ciriaco_bustamante # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_francisco_ciriaco_bustamante_first
 	last_name = gg_pn_LRJ_gg_francisco_ciriaco_bustamante_last
 	historical = yes
@@ -643,6 +681,7 @@ LRJ_gg_francisco_ciriaco_bustamante = {
 
 # EN/ES: Hipólito Tello (sin dato); bando sin dato
 LRJ_gg_hipolito_tello = {
+	dna = dna_gg_hipolito_tello # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_hipolito_tello_first
 	last_name = gg_pn_LRJ_gg_hipolito_tello_last
 	historical = yes
@@ -659,6 +698,7 @@ LRJ_gg_hipolito_tello = {
 
 # EN/ES: Vicente Mota (ca. 1805 - 8/8/1851); federal
 LRJ_gg_vicente_mota = {
+	dna = dna_gg_vicente_mota # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_vicente_mota_first
 	last_name = gg_pn_LRJ_gg_vicente_mota_last
 	historical = yes
@@ -675,6 +715,7 @@ LRJ_gg_vicente_mota = {
 
 # EN/ES: Manuel Vicente Bustos (1806 - 5/3/1878); federal
 LRJ_gg_manuel_vicente_bustos = {
+	dna = dna_gg_manuel_vicente_bustos # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_LRJ_gg_manuel_vicente_bustos_first
 	last_name = gg_pn_LRJ_gg_manuel_vicente_bustos_last
 	historical = yes
@@ -692,6 +733,7 @@ LRJ_gg_manuel_vicente_bustos = {
 
 # EN/ES: Pedro Molina (29/6/1781 - 16/3/1842); federal
 MZA_gg_pedro_molina = {
+	dna = dna_gg_pedro_molina # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_MZA_gg_pedro_molina_first
 	last_name = gg_pn_MZA_gg_pedro_molina_last
 	historical = yes
@@ -708,6 +750,7 @@ MZA_gg_pedro_molina = {
 
 # EN/ES: Justo Correas (ca. 1770 - 1847); rosista
 MZA_gg_justo_correas = {
+	dna = dna_gg_justo_correas # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_MZA_gg_justo_correas_first
 	last_name = gg_pn_MZA_gg_justo_correas_last
 	historical = yes
@@ -724,6 +767,7 @@ MZA_gg_justo_correas = {
 
 # EN/ES: Juan Isidro Maza (1795 - 1853); rosista
 MZA_gg_juan_isidro_maza = {
+	dna = dna_gg_juan_isidro_maza # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_MZA_gg_juan_isidro_maza_first
 	last_name = gg_pn_MZA_gg_juan_isidro_maza_last
 	historical = yes
@@ -741,6 +785,7 @@ MZA_gg_juan_isidro_maza = {
 
 # EN/ES: Pedro Pascual Segura (1802 - 1865); federal
 MZA_gg_pedro_pascual_segura = {
+	dna = dna_gg_pedro_pascual_segura # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_MZA_gg_pedro_pascual_segura_first
 	last_name = gg_pn_MZA_gg_pedro_pascual_segura_last
 	historical = yes
@@ -758,6 +803,7 @@ MZA_gg_pedro_pascual_segura = {
 
 # EN/ES: Alejo Mallea (1802 - 1865); rosista
 MZA_gg_alejo_mallea = {
+	dna = dna_gg_alejo_mallea # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_MZA_gg_alejo_mallea_first
 	last_name = gg_pn_MZA_gg_alejo_mallea_last
 	historical = yes
@@ -775,6 +821,7 @@ MZA_gg_alejo_mallea = {
 
 # EN/ES: Martín Yanzón (dic. 1801 - 29/7/1842); federal
 SJN_gg_martin_yanzon = {
+	dna = dna_gg_martin_yanzon # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_SJN_gg_martin_yanzon_first
 	last_name = gg_pn_SJN_gg_martin_yanzon_last
 	historical = yes
@@ -791,6 +838,7 @@ SJN_gg_martin_yanzon = {
 
 # EN/ES: José Gregorio Calderón (1796 - mayo 1851); federal
 SNL_gg_jose_gregorio_calderon = {
+	dna = dna_gg_jose_gregorio_calderon # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SNL_gg_jose_gregorio_calderon_first
 	last_name = gg_pn_SNL_gg_jose_gregorio_calderon_last
 	historical = yes
@@ -808,6 +856,7 @@ SNL_gg_jose_gregorio_calderon = {
 
 # EN/ES: Pablo Lucero (ca. 1799 - 12/9/1856); rosista
 SNL_gg_pablo_lucero = {
+	dna = dna_gg_pablo_lucero # EN/ES: from his portrait / segun su retrato (gg_dna_governors.txt)
 	first_name = gg_pn_SNL_gg_pablo_lucero_first
 	last_name = gg_pn_SNL_gg_pablo_lucero_last
 	historical = yes
