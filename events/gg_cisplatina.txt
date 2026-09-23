@@ -1,0 +1,213 @@
+﻿namespace = gg_cisplatina
+# -------------------------------------------------------------------------------------------------
+# EN: THE REINCORPORATION AND THE SECOND CISPLATINE WAR (23/9/2026, decided with Juan; plan in
+#     docs/guerra-grande-argentina/reincorporacion-y-cisplatina-plan.md).
+#     .1 Argentina, 11/8/1845: press Oribe to rejoin the Confederation, or leave it as an offer. It goes
+#        out before Rosas's offer reaches the Cerrito (gg_loan.4), so Oribe's answer knows.
+#     .2 Brazil, a month after a reincorporation (gg_peace.2.g): the Preliminary Peace Convention of
+#        1828 is broken. Stay out, or go to war to free the Republic, annex the Cisplatina, or make it
+#        a protectorate.
+#     .3 hidden, the day after the war ends: the result is applied by script (the engine war goal is
+#        a humiliation, so it never takes ground on its own).
+#     .4 the outcome, to both governments.
+# ES: LA REINCORPORACION Y LA SEGUNDA GUERRA CISPLATINA. .1 Argentina insiste o no; .2 el Brasil
+#     responde a la reincorporacion; .3 oculto, aplica el resultado al dia siguiente del fin de la
+#     guerra; .4 el resultado.
+# SOURCE / FUENTE: Convencion Preliminar de Paz, Rio de Janeiro, 27/8/1828, arts. 1-3 (independence of
+#     the Province of Montevideo, and both signatories bound to defend it):
+#     https://es.wikisource.org/wiki/Convenci%C3%B3n_Preliminar_de_Paz_(1828)
+#     The 1845 offer and the historians' disagreement about it: events/guerra_grande_loans.txt, gg_loan.4.
+# -------------------------------------------------------------------------------------------------
+
+# EN: 11 August 1845. Buenos Aires decides how hard to push the reunification it offers the Cerrito.
+# ES: 11 de agosto de 1845. Buenos Aires decide cuanto empujar la reunificacion que le ofrece al Cerrito.
+gg_cisplatina.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.1.t
+	desc = gg_cisplatina.1.d
+	flavor = gg_cisplatina.1.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = guerra_grande_open_war
+		any_country = { has_variable = guerra_grande_cerrito_government }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1|" # GG_TRAZA
+	}
+
+	# EN: press him. Oribe weighs it with Rosas's whole weight behind the request.
+	# ES: insistir. Oribe lo pesa con todo el respaldo de Rosas detras del pedido.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1.a|" # GG_TRAZA
+		name = gg_cisplatina.1.a
+		set_global_variable = gg_arg_reincorporation_asked
+		custom_tooltip = gg_cisplatina.1.a_tt
+		# EN/ES: the Litoral fears a bigger Buenos Aires; London and Paris want the Republic and the river
+		#     open / el Litoral teme una Buenos Aires mas grande; Londres y Paris quieren la Republica
+		gg_patron_change = { PATRON = urquiza DELTA = -10 }
+		c:GBR ?= { change_relations = { country = ROOT value = -25 } }
+		c:FRA ?= { change_relations = { country = ROOT value = -25 } }
+		gg_cis_offer_go = yes
+		ai_chance = {
+			base = 40
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } add = 40 }
+		}
+	}
+	# EN: leave it as an offer, as it was historically: Oribe sent it to a commission.
+	# ES: dejarlo como oferta, como fue: Oribe la mando a una comision.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.1.b|" # GG_TRAZA
+		name = gg_cisplatina.1.b
+		default_option = yes
+		custom_tooltip = gg_cisplatina.1.b_tt
+		gg_cis_offer_go = yes
+		ai_chance = { base = 60 }
+	}
+}
+
+# EN: A month after the Republic rejoined the Confederation. Rio de Janeiro reads the Convention of 1828.
+# ES: Un mes despues de que la Republica volvio a la Confederacion. Rio de Janeiro relee la Convencion.
+gg_cisplatina.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.2.t
+	desc = gg_cisplatina.2.desc
+	flavor = gg_cisplatina.2.f
+	event_image = { video = "votp_gunboat_diplomacy" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:BRZ ?= this
+		has_global_variable = gg_reincorporated
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2|" # GG_TRAZA
+	}
+
+	# EN: stay out. The Empire protests and does nothing.
+	# ES: no intervenir. El Imperio protesta y no hace nada.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.a|" # GG_TRAZA
+		name = gg_cisplatina.2.a
+		custom_tooltip = gg_cisplatina.2.a_tt
+		c:ARG ?= { change_relations = { country = ROOT value = -30 } }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { exists = c:ARG army_size < c:ARG.army_size } add = 20 }
+		}
+	}
+	# EN: free the Republic, the guarantee of 1828 enforced to the letter.
+	# ES: liberar la Republica, la garantia de 1828 cumplida al pie de la letra.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.b|" # GG_TRAZA
+		name = gg_cisplatina.2.b
+		default_option = yes
+		set_global_variable = { name = gg_cis_goal value = 1 }
+		custom_tooltip = gg_cisplatina.2.b_tt
+		gg_cis_open_war = yes
+		ai_chance = {
+			base = 35
+			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 25 }
+		}
+	}
+	# EN: take the Cisplatina back into the Empire.
+	# ES: recuperar la Cisplatina para el Imperio.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.c|" # GG_TRAZA
+		name = gg_cisplatina.2.c
+		set_global_variable = { name = gg_cis_goal value = 2 }
+		custom_tooltip = gg_cisplatina.2.c_tt
+		gg_cis_open_war = yes
+		ai_chance = { base = 10 }
+	}
+	# EN: free it under the Empire's protection.
+	# ES: liberarla bajo la proteccion del Imperio.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.d|" # GG_TRAZA
+		name = gg_cisplatina.2.d
+		set_global_variable = { name = gg_cis_goal value = 3 }
+		custom_tooltip = gg_cisplatina.2.d_tt
+		gg_cis_open_war = yes
+		ai_chance = {
+			base = 20
+			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 10 }
+		}
+	}
+}
+
+# EN: The day after the war ends (on_war_end fires before the winner is recorded; gg_cis_on_war_end).
+# ES: El dia despues del fin de la guerra (on_war_end corre antes de que se anote el ganador).
+gg_cisplatina.3 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:BRZ ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.3|" # GG_TRAZA
+		remove_global_variable = gg_cis_war
+		if = {
+			limit = { has_global_variable = gg_cis_brazil_won }
+			if = {
+				limit = { global_var:gg_cis_goal = 2 }
+				gg_cis_annex = yes
+				set_global_variable = { name = gg_cis_outcome value = 2 }
+			}
+			else = {
+				gg_cis_release = yes
+				if = {
+					limit = { global_var:gg_cis_goal = 3 c:URU ?= { is_subject = no } }
+					create_diplomatic_pact = { country = c:URU type = protectorate }
+					set_global_variable = { name = gg_cis_outcome value = 3 }
+				}
+				else = { set_global_variable = { name = gg_cis_outcome value = 1 } }
+			}
+		}
+		else = { set_global_variable = { name = gg_cis_outcome value = 0 } }
+		trigger_event = { id = gg_cisplatina.4 days = 0 popup = yes }
+		c:ARG ?= { trigger_event = { id = gg_cisplatina.4 days = 0 popup = yes } }
+	}
+}
+
+# EN: The outcome, told to each government.
+# ES: El resultado, contado a cada gobierno.
+gg_cisplatina.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_cisplatina.4.d_1 trigger = { global_var:gg_cis_outcome = 1 } }
+			triggered_desc = { desc = gg_cisplatina.4.d_2 trigger = { global_var:gg_cis_outcome = 2 } }
+			triggered_desc = { desc = gg_cisplatina.4.d_3 trigger = { global_var:gg_cis_outcome = 3 } }
+			triggered_desc = { desc = gg_cisplatina.4.d_0 trigger = { always = yes } }
+		}
+	}
+	flavor = gg_cisplatina.4.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		OR = { c:BRZ ?= this c:ARG ?= this }
+		has_global_variable = gg_cis_outcome
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.4|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.4.a|" # GG_TRAZA
+		name = gg_cisplatina.4.a
+	}
+}

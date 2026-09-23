@@ -1,0 +1,91 @@
+﻿# EN: The reincorporation and the second Cisplatine war (events/gg_cisplatina.txt).
+# ES: La reincorporacion y la segunda guerra cisplatina (events/gg_cisplatina.txt).
+
+# EN: Argentina has answered (gg_cisplatina.1): Rosas's offer now goes to the Cerrito, through the calendar
+#     relay so the usual delivery and retry rules hold (gg_cal_fire, DONE gg_cal_done_11).
+# ES: Argentina ya contesto: la oferta de Rosas va al Cerrito por el relevo del calendario.
+gg_cis_offer_go = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_offer_go|" # GG_TRAZA
+	set_global_variable = gg_cis_offer_decided
+	hidden_effect = {
+		gg_cal_fire = {
+			DONE = gg_cal_done_11
+			EVENT = gg_loan.4
+			SIDE = guerra_grande_cerrito_government
+			RETRY = gg_cal.11
+		}
+	}
+}
+
+# EN: Brazil goes to war (gg_cisplatina.2). The engine war goal is a humiliation: the front and the
+#     battles are the engine's, the settlement is the script's (gg_cisplatina.3).
+# ES: El Brasil va a la guerra. El objetivo del motor es una humillacion: el frente y las batallas son
+#     del motor, el arreglo lo aplica el script.
+gg_cis_open_war = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_open_war|" # GG_TRAZA
+	if = {
+		limit = { exists = c:ARG NOT = { has_global_variable = gg_cis_war } }
+		set_global_variable = gg_cis_war
+		create_diplomatic_play = {
+			name = gg_cis_play_name
+			target_country = c:ARG
+			type = dp_gg_cisplatina
+			war = yes
+		}
+	}
+}
+
+# EN: Free the Republic: the Oriental states (marked gg_provincia_oriental by the reincorporation,
+#     gg_peace.2.g) leave the Confederation as the Republica Oriental del Uruguay. Montevideo first, so the
+#     new country is born with its capital.
+# ES: Liberar la Republica: los estados orientales (marcados gg_provincia_oriental) salen de la
+#     Confederacion como la Republica Oriental del Uruguay. Montevideo primero, para que nazca con su capital.
+gg_cis_release = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_release|" # GG_TRAZA
+	c:ARG ?= {
+		random_scope_state = {
+			limit = { state_region = s:STATE_MONTEVIDEO has_modifier = gg_provincia_oriental }
+			save_scope_as = gg_cis_first
+		}
+		if = {
+			limit = { NOT = { exists = scope:gg_cis_first } }
+			random_scope_state = {
+				limit = { has_modifier = gg_provincia_oriental }
+				save_scope_as = gg_cis_first
+			}
+		}
+	}
+	if = {
+		limit = { exists = scope:gg_cis_first NOT = { exists = c:URU } }
+		create_country = {
+			tag = URU
+			origin = c:ARG
+			state = scope:gg_cis_first
+		}
+		gg_argentina_new_country_people = { TAG = URU }
+		c:ARG ?= {
+			every_scope_state = {
+				limit = { has_modifier = gg_provincia_oriental }
+				set_state_owner = c:URU
+			}
+		}
+		c:URU ?= {
+			every_scope_state = { remove_modifier = gg_provincia_oriental }
+			if = { limit = { has_state_in_state_region = STATE_MONTEVIDEO } set_capital = STATE_MONTEVIDEO }
+		}
+	}
+	clear_saved_scope = gg_cis_first
+}
+
+# EN: Take the Cisplatina back into the Empire: the Oriental states pass to Brazil.
+# ES: Recuperar la Cisplatina para el Imperio: los estados orientales pasan al Brasil.
+gg_cis_annex = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_annex|" # GG_TRAZA
+	c:ARG ?= {
+		every_scope_state = {
+			limit = { has_modifier = gg_provincia_oriental }
+			remove_modifier = gg_provincia_oriental
+			set_state_owner = c:BRZ
+		}
+	}
+}

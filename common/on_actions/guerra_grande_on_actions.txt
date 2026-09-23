@@ -378,6 +378,7 @@ on_war_end = {
 	on_actions = {
 		gg_corrientes_recovery_on_war_end
 		gg_pact_on_war_end
+		gg_cis_on_war_end
 		guerra_grande_on_war_end
 	}
 }

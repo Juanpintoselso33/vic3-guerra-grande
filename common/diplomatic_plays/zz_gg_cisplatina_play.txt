@@ -1,0 +1,32 @@
+﻿# EN: The second Cisplatine war (events/gg_cisplatina.txt): Brazil against the Confederation after the
+#     reincorporation. A humiliation, so the engine never takes ground itself; the settlement is scripted
+#     (gg_cisplatina.3). Two countries only: nobody joins.
+# ES: La segunda guerra cisplatina. Una humillacion, para que el motor no tome tierra solo; el arreglo lo
+#     aplica el script. Solo dos paises: no se suma nadie.
+dp_gg_cisplatina = {
+	war_goal = humiliation
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/humiliation.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		exists = c:ARG
+		has_global_variable = gg_reincorporated
+	}
+
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

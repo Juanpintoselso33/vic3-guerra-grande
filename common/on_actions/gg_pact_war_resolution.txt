@@ -1,11 +1,11 @@
 ﻿# EN: Capture the enforced side before on_war_end, then resolve the political settlement once.
 # ES: Registrar el lado que impuso su objetivo antes de on_war_end y resolver una sola vez.
 on_wargoal_enforced = {
-	on_actions = { gg_pact_wargoal_enforced }
+	on_actions = { gg_pact_wargoal_enforced gg_cis_wargoal_enforced }
 }
 
 on_capitulation = {
-	on_actions = { gg_pact_capitulation }
+	on_actions = { gg_pact_capitulation gg_cis_capitulation }
 }
 
 gg_pact_wargoal_enforced = {
@@ -59,5 +59,43 @@ gg_pact_on_war_end = {
 		# ES: on_war_end corre ANTES que on_wargoal_enforced y on_capitulation en el mismo instante: el ganador
 		#     todavia no estaba anotado y una guerra ganada cerraba el Pacto en tablas. La lectura espera un dia.
 		c:ARG ?= { trigger_event = { id = gg_caseros.6 days = 1 } }
+	}
+}
+
+# EN: 23/9/2026 -- the second Cisplatine war (events/gg_cisplatina.txt): who won, recorded before the
+#     day-late reading (gg_cisplatina.3), the same way as the Pact wars above.
+# ES: la segunda guerra cisplatina: quien gano, anotado antes de la lectura del dia siguiente.
+gg_cis_wargoal_enforced = {
+	trigger = {
+		has_global_variable = gg_cis_war
+		exists = scope:diplomatic_play
+		scope:diplomatic_play = { is_diplomatic_play_type = dp_gg_cisplatina }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_wargoal_enforced" # GG_TRAZA
+		if = { limit = { c:BRZ ?= this } set_global_variable = gg_cis_brazil_won }
+	}
+}
+
+gg_cis_capitulation = {
+	trigger = {
+		has_global_variable = gg_cis_war
+		c:ARG ?= this
+		has_truce_with = c:BRZ
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_capitulation" # GG_TRAZA
+		set_global_variable = gg_cis_brazil_won
+	}
+}
+
+gg_cis_on_war_end = {
+	trigger = {
+		has_global_variable = gg_cis_war
+		is_diplomatic_play_type = dp_gg_cisplatina
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_on_war_end" # GG_TRAZA
+		c:BRZ ?= { trigger_event = { id = gg_cisplatina.3 days = 1 } }
 	}
 }

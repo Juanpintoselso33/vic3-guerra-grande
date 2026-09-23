@@ -227,12 +227,40 @@ gg_cal.11 = {
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.11|" # GG_TRAZA
-		hidden_effect = {
-			gg_cal_fire = {
-				DONE = gg_cal_done_11
-				EVENT = gg_loan.4
-				SIDE = guerra_grande_cerrito_government
-				RETRY = gg_cal.11
+		# EN: 23/9/2026 (Juan) -- Buenos Aires answers first whether it presses the reincorporation
+		#     (gg_cisplatina.1); its option sends the offer. A second copy of this relay the same day waits;
+		#     if Argentina never answers, the offer goes after 20 days anyway.
+		# ES: Buenos Aires contesta primero si insiste con la reincorporacion; su opcion manda la oferta. Otra
+		#     copia de este relevo el mismo dia espera; si Argentina no contesta, la oferta sale a los 20 dias.
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_cal_done_11 }
+				NOT = { has_global_variable = gg_cis_offer_decided }
+				NOT = { has_global_variable = gg_cis_offer_sent }
+				has_global_variable = guerra_grande_open_war
+				exists = c:ARG
+				any_country = { has_variable = guerra_grande_cerrito_government }
+			}
+			set_global_variable = gg_cis_offer_sent
+			set_global_variable = { name = gg_cis_offer_wait days = 19 }
+			c:ARG = { trigger_event = { id = gg_cisplatina.1 days = 0 popup = yes } }
+			trigger_event = { id = gg_cal.11 days = 20 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					NOT = { has_global_variable = gg_cis_offer_sent }
+					has_global_variable = gg_cis_offer_decided
+					NOT = { has_global_variable = gg_cis_offer_wait }
+				}
+			}
+			hidden_effect = {
+				gg_cal_fire = {
+					DONE = gg_cal_done_11
+					EVENT = gg_loan.4
+					SIDE = guerra_grande_cerrito_government
+					RETRY = gg_cal.11
+				}
 			}
 		}
 	}

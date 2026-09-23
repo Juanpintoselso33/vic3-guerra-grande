@@ -1089,6 +1089,8 @@ gg_peace.2 = {
 
 		ai_chance = {
 			base = 15
+			# EN/ES: 23/9 (Juan) -- Rosas's support weighs / pesa el respaldo de Rosas
+			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 15 }
 		}
 	}
 
@@ -1171,6 +1173,7 @@ gg_peace.2 = {
 
 		ai_chance = {
 			base = 10
+			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 10 }
 		}
 	}
 
@@ -1186,7 +1189,11 @@ gg_peace.2 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.g|" # GG_TRAZA
 		name = gg_peace.2.g
 		trigger = {
-			has_global_variable = gg_reunification_pledged
+			# EN/ES: 23/9 (Juan) -- the 1845 pledge or Argentina's request / la promesa de 1845 o el pedido argentino
+			OR = {
+				has_global_variable = gg_reunification_pledged
+				has_global_variable = gg_arg_reincorporation_asked
+			}
 			global_var:gg_patron_rosas >= 60
 			exists = c:ARG
 		}
@@ -1194,6 +1201,10 @@ gg_peace.2 = {
 		set_global_variable = gg_reincorporated
 
 		custom_tooltip = gg_peace_reincorporation_tt
+		# EN/ES: 23/9 (Juan) -- it breaks the Convention of 1828: Brazil answers in a month (gg_cisplatina.2)
+		#     / rompe la Convencion de 1828: el Brasil contesta en un mes
+		custom_tooltip = gg_peace_reincorporation_brazil_tt
+		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
@@ -1227,6 +1238,11 @@ gg_peace.2 = {
 
 		ai_chance = {
 			base = 5
+			# EN/ES: 23/9 (Juan) -- total support and Argentina's request make it his likeliest choice
+			#     / el respaldo total y el pedido argentino la vuelven su opcion mas probable
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } add = 40 }
+			modifier = { trigger = { has_global_variable = gg_arg_reincorporation_asked } add = 40 }
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 has_global_variable = gg_arg_reincorporation_asked } factor = 3 }
 		}
 	}
 

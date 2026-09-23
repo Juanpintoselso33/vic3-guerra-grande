@@ -476,7 +476,13 @@ gg_loan.4 = {
 		gg_patron_change = { PATRON = francia DELTA = -5 }
 		gg_patron_change = { PATRON = britania DELTA = -5 }
 		set_global_variable = gg_reunification_pledged
-		ai_chance = { base = 10 }
+		ai_chance = {
+			base = 10
+			# EN/ES: 23/9 (Juan) -- Rosas's support and Argentina's request weigh / pesan el respaldo y el pedido
+			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } factor = 2 }
+			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } factor = 2 }
+			modifier = { trigger = { has_global_variable = gg_arg_reincorporation_asked } factor = 3 }
+		}
 	}
 
 	# EN: ALLIANCE. Rosas' army and Rosas' money, and the Republic stays a republic. What it costs
