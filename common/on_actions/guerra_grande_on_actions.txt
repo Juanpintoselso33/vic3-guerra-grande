@@ -26,6 +26,12 @@ guerra_grande_on_game_start = {
 				create_character = { template = CRR_gg_genaro_beron_de_astrada }
 			}
 		}
+		# EN/ES: 22/9/2026 -- the French blockade of Buenos Aires by date: 28/3/1838 (817 days) to
+		#     29/10/1840 (1763 days) / el bloqueo frances por fecha (events/gg_rio_plata.txt, .40/.41)
+		c:ARG ?= {
+			trigger_event = { id = gg_plata.40 days = 817 }
+			trigger_event = { id = gg_plata.41 days = 1763 }
+		}
 		# EN: 22/9/2026 (Juan) -- Oribe keeps imperious (-35 popularity, and a ruler's popularity is
 		#     authority); his party's name for him offsets part of it, leaving him at -10.
 		# ES: Oribe conserva imperious (-35 de popularidad, que en el gobernante es autoridad); el nombre

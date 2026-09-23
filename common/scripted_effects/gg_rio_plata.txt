@@ -473,6 +473,9 @@ gg_plata_notify = {
 		limit = {
 			is_player = yes
 			OR = {
+				# EN/ES: 22/9/2026 (Juan, playing Rosas) -- Buenos Aires hears of its river too
+				#     / Buenos Aires tambien se entera de su rio
+				has_variable = gg_arg_rosas_seat
 				has_variable = guerra_grande_defensa_government
 				has_variable = guerra_grande_cerrito_government
 				AND = {

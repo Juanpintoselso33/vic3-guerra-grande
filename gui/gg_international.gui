@@ -65,6 +65,14 @@ widget = {
    text = "gg_ui_plata_phase_3_france"
   }
   textbox = {
+   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)5')]"
+   tooltip = "gg_ui_plata_phase_5_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_5"
+  }
+  textbox = {
    visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)4')]"
    tooltip = "gg_ui_plata_phase_4_tt"
    position = { 0 206 } size = { 520 40 }
@@ -103,8 +111,9 @@ flowcontainer = {
    textbox = { position = { 0 92 } size = { 196 50 } multiline = yes using = fontsize_medium align = center|nobaseline text = "gg_ui_plata_shore_ba" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 26 150 } size = { 40 40 } texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
    icon = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]" position = { 26 150 } size = { 40 40 } alpha = 0.25 texture = "gfx/interface/icons/building_icons/building_naval_fortification.dds" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_yes" }
-   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0')]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
+   textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)1'), Not(GetGlobalVariable('gg_plata_french_blockade').IsSet))]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_yes" }
+   textbox = { visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_ba_fort_sv'), '(CFixedPoint)0'), Not(GetGlobalVariable('gg_plata_french_blockade').IsSet))]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_battery_no" }
+   textbox = { visible = "[GetGlobalVariable('gg_plata_french_blockade').IsSet]" position = { 70 150 } size = { 120 44 } multiline = yes using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_ba_blockaded_fr" tooltip = "gg_ui_plata_ba_blockaded_fr_tt" }
   }
   widget = {
    position = { 200 0 } size = { 120 204 }
@@ -163,6 +172,13 @@ flowcontainer = {
   direction = horizontal spacing = 8 parentanchor = hcenter
   icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
   textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_none" }
+ }
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)7')]"
+  tooltip = "gg_ui_plata_word_french_blockade_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_word_french_blockade" }
  }
  flowcontainer = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_powers_word'), '(CFixedPoint)3')]"

@@ -67,7 +67,9 @@ gg_plata_phase = {
 			NOT = { has_global_variable = gg_plata_intervention_over }
 		}
 		value = 3
-	}
+	}	# EN/ES: 22/9/2026 (Juan) -- the French blockade of Buenos Aires, 28/3/1838 to Mackau (29/10/1840)
+	#     / el bloqueo frances de Buenos Aires, del 28/3/1838 a Mackau
+	if = { limit = { has_global_variable = gg_plata_french_blockade } value = 5 }
 }
 # EN/ES: which envoy London has in the river, by months of intervention (SOURCES_powers.md 1-6)
 #     / que enviado tiene Londres en el rio, por meses de intervencion
@@ -160,7 +162,9 @@ gg_ui_plata_powers_word = {
 			}
 		}
 		value = 3
-	}
+	}	# EN/ES: 22/9/2026 -- while France blockades Buenos Aires, that is the powers' word
+	#     / mientras Francia bloquea Buenos Aires, esa es la palabra de las potencias
+	if = { limit = { has_global_variable = gg_plata_french_blockade } value = 7 }
 }
 # EN/ES: the Buenos Aires shore card: does it keep its battery (only that shore can close the river)
 #     / la tarjeta de Buenos Aires: si conserva su bateria (solo esa orilla puede cerrar el rio)

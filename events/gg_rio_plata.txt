@@ -464,3 +464,63 @@ gg_plata.31 = {
 		ai_chance = { base = 0 }
 	}
 }
+
+# EN: 22/9/2026 (Juan: the journal said Buenos Aires held the river while the events told of France
+#     blockading it) -- THE FRENCH BLOCKADE OF BUENOS AIRES, 28 March 1838 (Rear Admiral Leblanc) to the
+#     Arana-Mackau convention of 29 October 1840. It was France's quarrel with Rosas and happened
+#     whatever Montevideo answered to Leblanc (gg_prewar.7), so it runs by date: .40 opens it, .41
+#     closes it, both scheduled at game start. .42 and .43 tell a human Rosas.
+# ES: EL BLOQUEO FRANCES DE BUENOS AIRES, del 28/3/1838 (contraalmirante Leblanc) a la convencion
+#     Arana-Mackau del 29/10/1840. Era la pelea de Francia con Rosas y ocurrio contestara lo que
+#     contestara Montevideo, asi que corre por fecha.
+# SOURCE / FUENTE: Wikipedia ES, Bloqueo frances al Rio de la Plata (already cited in gg_prewar.7).
+gg_plata.40 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		set_global_variable = gg_plata_french_blockade
+		p:x365A5B.state ?= { add_modifier = { name = gg_french_blockade_port } }
+		if = { limit = { is_player = yes has_variable = gg_arg_rosas_seat } trigger_event = { id = gg_plata.42 popup = yes } }
+	}
+}
+gg_plata.41 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = { limit = { has_global_variable = gg_plata_french_blockade } remove_global_variable = gg_plata_french_blockade }
+		p:x365A5B.state ?= { if = { limit = { has_modifier = gg_french_blockade_port } remove_modifier = gg_french_blockade_port } }
+		if = { limit = { is_player = yes has_variable = gg_arg_rosas_seat } trigger_event = { id = gg_plata.43 popup = yes } }
+	}
+}
+gg_plata.42 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.42.t
+	desc = gg_plata.42.d
+	flavor = gg_plata.42.f
+	event_image = { video = "gg_f2_montevideo_port" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	option = {
+		name = gg_plata.42.a
+		default_option = yes
+		custom_tooltip = gg_plata.42.a_tt
+	}
+}
+gg_plata.43 = {
+	type = country_event
+	placement = ROOT
+	title = gg_plata.43.t
+	desc = gg_plata.43.d
+	flavor = gg_plata.43.f
+	event_image = { video = "gg_f2_mackau" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+	option = {
+		name = gg_plata.43.a
+		default_option = yes
+		custom_tooltip = gg_plata.43.a_tt
+	}
+}
