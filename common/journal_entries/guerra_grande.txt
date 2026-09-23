@@ -371,8 +371,6 @@ je_guerra_grande = {
 			# ES: S19 -- should_be_involved solo siembra la entrada al abrirse (1836, antes del Cerrito):
 			#     los dos gobiernos se agregan a mano cada semana, lo que tambien migra las partidas.
 			gg_war_journal_sync = yes
-			# EN/ES: 23/9 -- the siege on the map, weekly (gg_siege_map.txt) / el sitio en el mapa, cada semana
-			gg_siege_map_pulse = yes
 			gg_siege_locks_ensure = yes # EN/ES: audit R5/R6 -- the siege's locks / los candados del sitio
 			# EN/ES: 22/9/2026 -- only our own widgets; the engine's status box, long text, countries and
 			#     conditions hidden (CMF), also for journals already open / solo lo nuestro (CMF)
