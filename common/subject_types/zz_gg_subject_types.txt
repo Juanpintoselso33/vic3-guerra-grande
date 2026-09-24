@@ -26,7 +26,7 @@
 # -------------------------------------------------------------------------------------------------
 subject_type_gg_pact_province = {
 	allow_change_country_flag = yes # EN/ES: the Treinta y Tres flag (zz_guerra_grande_flags.txt) / la bandera de los Treinta y Tres
-	use_overlord_map_color = no
+	use_overlord_map_color = yes # EN/ES: 24/9 (Juan) -- the Pact's provinces show the Confederation's colour / las provincias del Pacto con el color de la Confederacion
 	use_overlord_ruler = no
 	annex_on_country_formation = no
 	can_start_own_diplomatic_plays = yes
