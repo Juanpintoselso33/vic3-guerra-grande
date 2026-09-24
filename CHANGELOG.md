@@ -12,6 +12,12 @@
   The AI recognizes nine times in ten, unless Rosas rules. If the settlement comes late or Paraguay is at war with
   the recipient, the question waits, until June 1856 at the latest. Games already past July 1852 get it on the next
   monthly pulse.
+- **Each province flies its first provincial flag under the confederation:** while the confederation stands, every
+  Argentine province country flies the first flag of its own it ever had, whatever the year — Tucumán's «TUCUMAN
+  1814», Santa Fe's and Corrientes's of 1815, the federal flag of Ramírez's Entre Ríos, Andresito's flag in Misiones,
+  Córdoba's 1815 tricolour, and the first provincial flag of the rest, however recent. A deliberate anachronism, so
+  the confederation does not show the same flag twenty times. Outside the confederation nothing changes. Thirteen new
+  flags, real Wikimedia images; credits in CREDITS.md.
 
 ## 0.1.3-alpha — 24/9/2026
 
