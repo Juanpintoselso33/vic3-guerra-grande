@@ -21,13 +21,19 @@ REPLACE:URU_Manuel_Oribe = {
 	ig_leader = yes
 	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- ruler and general, like vanilla's Rosas
 	is_general = yes
-	age = 44
+	# EN/ES: 23/9/2026 -- Montevideo, 26/8/1792 (es.wikipedia, «Manuel Oribe»); vanilla's age = 44 put him in 1791
+	#     / vanilla lo hacia nacer en 1791
+	birth_date = 1792.8.26
 	dna = dna_gg_manuel_oribe
 	interest_group = ig_landowners
 	# EN/ES: 22/9/2026, decided with Juan -- the "Defensor de las Leyes", the lawful president who claims
 	#     his mandate through the whole war / el presidente legal que reclama su mandato toda la guerra
 	ideology = ideology_republican_leader
 	home_region = STATE_MONTEVIDEO
+	# EN/ES: traits -- imperious: Pivel Devoto's "culto a la disciplina y a la autoridad" (in Martinez
+	#     Menditeguy, «Manuel Oribe»); meticulous: the Gran Libro de la Deuda and the model budget of 1835
+	#     (es.wikipedia); offensive planner: Quebracho Herrado, Famailla, Arroyo Grande (es.wikipedia).
+	#     Detail / detalle: docs/personajes-propuesta.md, docs/guerra-grande-flujo/personajes-auditoria.md
 	traits = {
 		imperious
 		meticulous
@@ -52,6 +58,10 @@ REPLACE:URU_Fructuoso_Rivera = {
 	#     commerce, sale of public land) / la politica liberal y librecambista de sus dos gobiernos
 	ideology = ideology_market_liberal
 	home_region = STATE_MONTEVIDEO
+	# EN/ES: traits -- charismatic: "caudillo de gran popularidad" (es.wikipedia); celebrity_commander:
+	#     Guayabos, Rincon, Cagancha (El Pais, «Don Frutos», 13/1/2004); bigoted: Salsipuedes, 1831 (es.wikipedia;
+	#     kept by Juan on 22/9 over the proposed ruthless / Juan lo mantuvo); surveyor: Sarmiento's "baqueano",
+	#     Facundo ch. II. Detail / detalle: docs/guerra-grande-flujo/personajes-auditoria.md
 	traits = {
 		charismatic
 		celebrity_commander
@@ -126,7 +136,9 @@ REPLACE:URU_manuel_herrera_y_obes = { # Manuel Herrera y Obes
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_market_liberal
-	birth_date = 1806.8.9 # Guesswork
+	# EN/ES: 23/9/2026 -- only the year is sourced (es.wikipedia, «Manuel Herrera y Obes»); vanilla's day was
+	#     marked "Guesswork" / la fuente da solo el anio; el dia de vanilla era inventado
+	birth_date = 1806.1.1
 	home_region = STATE_MONTEVIDEO
 	traits = {
 		experienced_political_operator

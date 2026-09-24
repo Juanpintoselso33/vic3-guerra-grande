@@ -109,11 +109,11 @@ URU_gg_servando_gomez = {
 	trait_generation = { }
 }
 
-# EN: Gabriel Antonio Pereira: Montevideo 1794 - 1861 (Wikipedia ES). On 1 November 1838 the Senate
+# EN: Gabriel Antonio Pereira: Montevideo 17.3.1794 - 14.4.1861 (Wikipedia ES). On 1 November 1838 the Senate
 #     elected him to hold the executive after Oribe's resignation, because the president of the
 #     Senate, Carlos Anaya, had sailed for Buenos Aires. He ran the interim until Rivera took the
 #     presidency on 1 March 1839, and was president of the Republic himself in 1856-1860.
-# ES: Gabriel Antonio Pereira: Montevideo 1794 - 1861. El 1 de noviembre de 1838 el Senado lo eligio
+# ES: Gabriel Antonio Pereira: Montevideo 17.3.1794 - 14.4.1861. El 1 de noviembre de 1838 el Senado lo eligio
 #     para ocupar interinamente el Poder Ejecutivo tras la renuncia de Oribe, porque el presidente
 #     del Senado, Carlos Anaya, se habia embarcado a Buenos Aires. Ejercio el interinato hasta que
 #     Rivera asumio el 1 de marzo de 1839; fue presidente de la Republica en 1856-1860.
@@ -128,7 +128,8 @@ URU_gg_gabriel_antonio_pereira = {
 	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- a Colorado (Asamblea de Notables, minister of the Defensa)
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
-	birth_date = 1794.1.1
+	# EN/ES: 23/9/2026 -- Montevideo, 17/3/1794 (es.wikipedia, «Gabriel Antonio Pereira»; it was 1/1)
+	birth_date = 1794.3.17
 	home_region = STATE_MONTEVIDEO
 	traits = {
 		experienced_political_operator

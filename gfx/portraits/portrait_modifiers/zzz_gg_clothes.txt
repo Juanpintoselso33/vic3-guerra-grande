@@ -106,10 +106,10 @@ gg_clothes = {
 	# EN: Fructuoso Rivera in the general's uniform of Blanes (c.1870) and Verazzi (1874): near-black
 	#     navy coat with red high collar and cuffs and gold embroidery (vanilla tailcoat, Serbian palette:
 	#     18,18,30 / red 178,60,51 / gold), large gold fringed epaulettes, no aiguillettes, no medals.
-	#     The light-blue and white waist sash of the portraits has no vanilla piece; the closest is the
-	#     Community Outfit Mod's com_male_sash_civil_ARG, which needs a compatch (see SOURCES_retratos.md).
+	#     The light-blue and white waist sash of the portraits: vanilla's male_sashes_tricolor_argentina
+	#     (23/9/2026; the 22/9 note said vanilla had none -- it is in the tricolour sash template).
 	# ES: Rivera con el uniforme de general de Blanes y Verazzi: levita azul casi negro, cuello alto y
-	#     punos rojos, bordado de oro, charreteras grandes con flecos; sin cordones ni medallas.
+	#     punos rojos, bordado de oro, charreteras grandes con flecos, faja celeste y blanca; sin cordones ni medallas.
 	gg_rivera_uniform = {
 		dna_modifiers = {
 			accessory = {
@@ -145,8 +145,14 @@ gg_clothes = {
 			accessory = {
 				mode = add
 				gene = sashes
-				template = no_sash
-				range = { 0 1 }
+				template = male_sashes_tricolor
+				# EN: the light-blue and white waist sash of Blanes: vanilla's Argentine palette is exactly those two
+				#     colours (color_palette_tricolor_sash_argentina.dds: 48,143,191 and 244,255,255); the Uruguayan one
+				#     is navy and white (15,26,77), not what the portrait shows. Vanilla gives this sash to generals of
+				#     rank 5 (01_accessories.txt, uruguayan_sash). Clothes reload live: check it in game.
+				# ES: la faja celeste y blanca de Blanes: la paleta argentina de vanilla es justo esos dos colores; la
+				#     uruguaya es azul marino y blanca. Vanilla se la da a los generales de rango 5. Verla en partida.
+				accessory = male_sashes_tricolor_argentina
 			}
 			accessory = {
 				mode = add

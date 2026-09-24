@@ -42,6 +42,9 @@ CLN_gg_tomas_brizuela = {
 	ideology = ideology_moderate
 	birth_date = 1800.1.1
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- alcoholic: 'se volvio un alcoholico', despised for it by the
+	#     Coalition's officers; ambitious: had himself named governor (1831) and tried to impose his command on
+	#     Lavalle; mountain_commander: fought from the sierras, fell back to Famatina («Tomas Brizuela»)
 	traits = {
 		mountain_commander
 		ambitious
@@ -66,6 +69,9 @@ CLN_gg_marco_avellaneda = {
 	ideology = ideology_radical
 	birth_date = 1813.6.18
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- erudite: doctor in law with outstanding marks, 1834; inspirational_orator:
+	#     'se destacaba como orador', his fellows called him Marco Tulio; political operator: head of the 1840
+	#     pronouncement («Marco Avellaneda»)
 	traits = {
 		erudite
 		inspirational_orator
@@ -90,10 +96,13 @@ CRR_gg_jose_maria_paz = {
 	ideology = ideology_radical
 	birth_date = 1791.9.9
 	home_region = STATE_CORDOBA
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- meticulous: trained in mathematics, 'llego a disciplinar correctamente'
+	#     his army; expert_defensive_strategist: Caaguazu, 'aun hoy materia militar de estudio', and the Ubajay
+	#     trap. experienced_artillery_commander REMOVED: no source makes him a gunner (the article's only
+	#     artillery is '80 artilleros' in one column) / sin fuente que lo haga artillero («Jose Maria Paz»)
 	traits = {
 		meticulous
 		expert_defensive_strategist
-		experienced_artillery_commander
 	}
 	trait_generation = { }
 }
@@ -115,8 +124,10 @@ CRR_gg_genaro_beron_de_astrada = {
 	ideology = ideology_radical
 	birth_date = 1801.9.19
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- brave: offered escape at Pago Largo, 'decidio quedarse y luchar';
+	#     reckless: gave battle 'falto de oficiales experimentados'. direct REMOVED: nothing in the source /
+	#     sin fuente («Genaro Beron de Astrada»)
 	traits = {
-		direct
 		reckless
 		brave
 	}
@@ -139,6 +150,8 @@ CRR_gg_juan_madariaga = {
 	ideology = ideology_radical
 	birth_date = 1809.1.1
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- basic_offensive_planner: Laguna Brava and Puntas del Sauce; brave: stood
+	#     against Urquiza at Laguna Limpia; persistent: fought on from 1840 to Pavon and Paraguay («Juan Madariaga»)
 	traits = {
 		brave
 		basic_offensive_planner
@@ -164,6 +177,8 @@ CRR_gg_joaquin_madariaga = {
 	ideology = ideology_radical
 	birth_date = 1799.11.27
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- ruthless: 'confisco los bienes de todos los federales'; political operator:
+	#     'formo un partido unitario distinto'; basic_diplomat: the Alcaraz treaty, 1846 («Joaquin Madariaga»)
 	traits = {
 		experienced_political_operator
 		basic_diplomat
@@ -189,6 +204,8 @@ ARG_gg_juan_felipe_ibarra = {
 	ideology = ideology_authoritarian
 	birth_date = 1787.5.1
 	home_region = STATE_SANTIAGO_DEL_ESTERO
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- cautious: 'guardo prudente silencio' before the 1844 alliance; persistent and
+	#     expert_political_operator: governed Santiago del Estero from 1820 to his death in 1851 («Juan Felipe Ibarra»)
 	traits = {
 		cautious
 		persistent
@@ -214,6 +231,9 @@ ARG_gg_nazario_benavidez = {
 	ideology = ideology_moderate
 	birth_date = 1805.7.28
 	home_region = STATE_SAN_JUAN
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- 'el caudillo manso', 'tolerante con sus enemigos y generoso con los
+	#     vencidos', recognised even by Sarmiento (honorable, tactful); a long, orderly government (political
+	#     operator) («Nazario Benavidez»)
 	traits = {
 		tactful
 		honorable
@@ -239,6 +259,8 @@ ARG_gg_jose_felix_aldao = {
 	ideology = ideology_authoritarian
 	birth_date = 1785.10.11
 	home_region = STATE_MENDOZA
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- 'lider absoluto del Partido Federal' of Mendoza (imperious); 'su capacidad
+	#     como lider militar llego a ser legendaria' (brave, offensive planner) («Jose Felix Aldao»)
 	traits = {
 		imperious
 		brave
@@ -274,12 +296,13 @@ CRR_gg_pedro_cabral = {
 	home_region = STATE_CORRIENTES
 }
 
-# EN/ES: 23/9/2026 -- the governors of the State of Buenos Aires (events/gg_buenos_aires.txt). No DNA yet: the
-#     faces are pending (vanilla's random generation meanwhile) / los gobernadores del Estado de Buenos Aires;
-#     sin ADN todavia.
+# EN/ES: 23/9/2026 -- the governors of the State of Buenos Aires (events/gg_buenos_aires.txt). Faces: gg_dna.txt,
+#     from their portraits (SOURCES_retratos.md) / los gobernadores del Estado de Buenos Aires; caras segun sus
+#     retratos.
 # EN/ES: Valentin Alsina: Buenos Aires 16/12/1802 - Buenos Aires 6/9/1869. Unitarian jurist and writer; governor
 #     in 1852 and 1858-1859 (es.wikipedia, «Valentin Alsina»).
 ARG_gg_valentin_alsina = {
+	dna = dna_gg_valentin_alsina # EN/ES: from his 1854 daguerreotype / segun su daguerrotipo de 1854 (gg_dna.txt)
 	first_name = gg_name_valentin
 	last_name = gg_name_alsina
 	historical = yes
@@ -291,8 +314,11 @@ ARG_gg_valentin_alsina = {
 	ideology = ideology_liberal_leader
 	birth_date = 1802.12.16
 	home_region = STATE_BUENOS_AIRES
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- experienced_political_operator: Rivadavia's under-secretary, led the
+	#     11 September 1852 revolution, twice governor; literary: writer, editor of El Comercio del Plata after
+	#     Florencio Varela. honorable REMOVED: nothing in the source / sin fuente («Valentin Alsina»)
 	traits = {
-		honorable
+		literary
 		experienced_political_operator
 	}
 	trait_generation = { }
@@ -301,6 +327,7 @@ ARG_gg_valentin_alsina = {
 # EN/ES: Pastor Obligado: Buenos Aires 9/8/1818 - Jesus Maria 12/3/1870. Lawyer; first constitutional governor of
 #     the State of Buenos Aires, 1853-1858 (es.wikipedia, «Pastor Obligado»).
 ARG_gg_pastor_obligado = {
+	dna = dna_gg_pastor_obligado # EN/ES: from his portraits / segun sus retratos (gg_dna.txt)
 	first_name = gg_name_pastor
 	last_name = gg_name_obligado
 	historical = yes
@@ -312,8 +339,10 @@ ARG_gg_pastor_obligado = {
 	ideology = ideology_moderate
 	birth_date = 1818.8.9
 	home_region = STATE_BUENOS_AIRES
+	# EN/ES: traits (23/9/2026, es.wikipedia) -- experienced_political_operator: joined the autonomists, then made the pact
+	#     with Mitre's wing that elected him governor in 1854. ambitious REMOVED: nothing in the source / sin
+	#     fuente («Pastor Obligado»)
 	traits = {
-		ambitious
 		experienced_political_operator
 	}
 	trait_generation = { }
