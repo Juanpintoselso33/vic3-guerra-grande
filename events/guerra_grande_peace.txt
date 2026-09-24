@@ -2213,18 +2213,14 @@ gg_peace.12 = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: gg_peace.13 -- 23/9/2026 (AUD-RULES-CLIENT). THE CLIENT OUTLIVES ITS PATRON: NO LONGER. The Republic became
-#     Rosas's client (gg_peace.2.e); Rosas has fallen and Urquiza governs the Confederation. The new government does
-#     not keep a client it never asked for and releases it, on the title of 1828. Sent by gg_rosista_client_release
-#     (common/scripted_effects/gg_pact_resolution.txt). DESIGN: the release is a design decision (decisiones.md,
-#     23/9); the Rosista client never existed historically.
-# ES: gg_peace.13 -- EL CLIENTE YA NO SOBREVIVE A SU PADRINO. La Republica quedo como cliente de Rosas; Rosas cayo y
-#     Urquiza gobierna la Confederacion. El gobierno nuevo no conserva un cliente que no pidio y lo libera, con el
-#     titulo de 1828. DISENO.
-# SOURCE / FUENTE: Preliminary Convention of Peace, Rio de Janeiro, 27 August 1828, art. 2 (the United Provinces
-#     "concuerda en declarar por su parte la independencia de la Provincia de Montevideo ... y en que se constituya
-#     en Estado libre e independiente"), https://es.wikisource.org/wiki/Convenci%C3%B3n_Preliminar_de_Paz_(1828) ;
-#     the 1851 Convention invokes the same rights (preamble, https://www.dipublico.org/122098/).
+# EN: gg_peace.13 -- 23/9/2026 (Juan, AUD-RULES-CLIENT). The Republic's notice when Urquiza frees it
+#     (gg_argentina.86.a, which already made it independent). Rosas has fallen; the new government in Parana does not
+#     keep the client and invokes the title of 1828.
+# ES: gg_peace.13 -- el aviso a la Republica cuando Urquiza la libera (gg_argentina.86.a, que ya la independizo).
+# SOURCE / FUENTE: Preliminary Convention of Peace, 27 August 1828, art. 2 ("concuerda en declarar por su parte la
+#     independencia de la provincia de Montevideo ... y en que se constituya en Estado libre e independiente"), text
+#     in ANEP/Uruguay Educa, https://uruguayeduca.anep.edu.uy/sites/default/files/2020-08/LECTURA%20DE%20DOCUMENTOS%20HIST%C3%93RICOS%20%281%29.pdf ; the 1851 Convention
+#     invokes the same rights (preamble and art. I, https://www.dipublico.org/122098/).
 # -------------------------------------------------------------------------------------------------
 gg_peace.13 = {
 	type = country_event
@@ -2251,14 +2247,43 @@ gg_peace.13 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.13.a|" # GG_TRAZA
 		name = gg_peace.13.a
 		default_option = yes
-		if = {
-			limit = { exists = c:ARG }
-			if = {
-				limit = { is_subject_of = c:ARG }
-				make_independent = yes
-			}
-		}
-		remove_modifier = gg_peace_rosista_client
+		custom_tooltip = gg_peace.13.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.15 -- 23/9/2026 (Juan, AUD-RULES-CLIENT). The Republic's notice when Urquiza keeps the protection
+#     (gg_argentina.86.b). Nothing changes here: the subjection stays as it was; the notice says so.
+# ES: gg_peace.15 -- el aviso a la Republica cuando Urquiza conserva la proteccion. Aca no cambia nada: la sujecion
+#     sigue como estaba; el aviso lo dice.
+# SOURCE / FUENTE: the same as gg_peace.13.
+# -------------------------------------------------------------------------------------------------
+gg_peace.15 = {
+	type = country_event
+	placement = ROOT
+	title = gg_peace.15.t
+	desc = gg_peace.15.d
+	flavor = gg_peace.15.f
+	# EN/ES: reused until T9, as gg_peace.13 (the two never fire together) / reusado, como gg_peace.13
+	event_image = { video = "gg_in_constitution" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:URU ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.15|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.15.a|" # GG_TRAZA
+		name = gg_peace.15.a
+		default_option = yes
+		custom_tooltip = gg_peace.15.a_tt
 		ai_chance = { base = 100 }
 	}
 }

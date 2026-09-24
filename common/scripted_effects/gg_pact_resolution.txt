@@ -1,19 +1,20 @@
 ﻿# EN/ES: defined first: gg_pact_resolve below uses it / definido primero: lo usa gg_pact_resolve
-# EN: 23/9/2026 (AUD-RULES-CLIENT, decisiones.md) -- the Republic made Rosas's client by the Cerrito's peace
-#     (gg_peace.2.e, modifier gg_peace_rosista_client) does not outlive Rosas: when his government falls to Urquiza
-#     the Republic is released (gg_peace.13, which it sees). A puppet made any other way is not touched.
-# ES: la Republica hecha cliente de Rosas por la paz del Cerrito no sobrevive a Rosas: cuando su gobierno cae ante
-#     Urquiza la Republica queda libre (gg_peace.13, que ve). Otra sujecion no se toca.
+# EN: 23/9/2026 (Juan, AUD-RULES-CLIENT, decisiones.md) -- when Rosas's government falls to Urquiza, the Republic made
+#     Rosas's client by the Cerrito's peace (gg_peace.2.e, modifier gg_peace_rosista_client) is Urquiza's to decide:
+#     free it or keep the protection (gg_argentina.86, player or AI). A puppet made any other way is not touched.
+# ES: cuando el gobierno de Rosas cae ante Urquiza, la Republica hecha cliente de Rosas la decide Urquiza: liberarla o
+#     conservar la proteccion. Otra sujecion no se toca.
 gg_rosista_client_release = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosista_client_release|" # GG_TRAZA
-	c:URU ?= {
-		if = {
-			limit = {
+	if = {
+		limit = {
+			exists = c:ARG
+			c:URU ?= {
 				has_modifier = gg_peace_rosista_client
-				exists = c:ARG
+				is_subject_of = c:ARG
 			}
-			trigger_event = { id = gg_peace.13 days = 0 popup = yes }
 		}
+		c:ARG = { trigger_event = { id = gg_argentina.86 days = 0 popup = yes } }
 	}
 }
 

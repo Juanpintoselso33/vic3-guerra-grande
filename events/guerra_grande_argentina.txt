@@ -3671,3 +3671,75 @@ gg_argentina.85 = {
 		ai_chance = { base = 100 }
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.86 -- 23/9/2026 (Juan, AUD-RULES-CLIENT). URQUIZA AND ROSAS'S CLIENT. The Cerrito's peace made the
+#     Oriental Republic Rosas's client (gg_peace.2.e); Rosas has fallen and Urquiza governs. He decides: free it, as his
+#     own 1851 alliance with Brazil and Montevideo promised ("mantener la independencia") and as the Provinces bound
+#     themselves in 1828 (art. 2, and art. 3: both parties defend that independence), or keep Buenos Aires's
+#     protection. Brazil reads the second as a breach of 1828. Sent by gg_rosista_client_release
+#     (common/scripted_effects/gg_pact_resolution.txt). DESIGN: the Rosista client never existed historically.
+#     Brazil's answer to (b) is a relations penalty, not the Cisplatine chain (gg_cis_wait): that chain is written
+#     for a Banda Oriental incorporated into the Pact (gg_oriental_in_pact) and gives up without it.
+# ES: gg_argentina.86 -- URQUIZA Y EL CLIENTE DE ROSAS. La paz del Cerrito hizo a la Republica cliente de Rosas; Rosas
+#     cayo y gobierna Urquiza. Decide el: liberarla, como prometia su alianza de 1851 y como se obligaron las Provincias
+#     en 1828, o conservar la proteccion de Buenos Aires. El Brasil lee lo segundo como una violacion de 1828: castigo
+#     de relaciones, no la cadena cisplatina (escrita para una Banda Oriental incorporada al Pacto).
+# SOURCE / FUENTE: Convention of Montevideo, 29 May 1851, preamble and art. I, https://www.dipublico.org/122098/ ;
+#     Preliminary Convention of Peace, 27 August 1828, arts. 2-3 (ANEP/Uruguay Educa,
+#     https://uruguayeduca.anep.edu.uy/sites/default/files/2020-08/LECTURA%20DE%20DOCUMENTOS%20HIST%C3%93RICOS%20%281%29.pdf).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.86 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.86.t
+	desc = gg_argentina.86.d
+	flavor = gg_argentina.86.f
+	# EN/ES: reused until T9: Carneiro Leao, who negotiated the 1851 alliance / reusado: el negociador de 1851
+	event_image = { video = "gg_arg_convencion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		c:URU ?= { is_subject_of = c:ARG }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.86|" # GG_TRAZA
+	}
+
+	# EN/ES: free the Republic, his 1851 cause / liberar la Republica, su causa de 1851
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.86.a|" # GG_TRAZA
+		name = gg_argentina.86.a
+		default_option = yes
+		custom_tooltip = gg_argentina.86.a_tt
+		hidden_effect = {
+			c:URU ?= {
+				if = {
+					limit = { is_subject_of = c:ARG }
+					make_independent = yes
+				}
+				remove_modifier = gg_peace_rosista_client
+				trigger_event = { id = gg_peace.13 days = 0 popup = yes }
+			}
+		}
+		c:BRZ ?= { change_relations = { country = ROOT value = 30 } }
+		ai_chance = { base = 80 }
+	}
+
+	# EN/ES: keep Buenos Aires's protection / conservar la proteccion de Buenos Aires
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.86.b|" # GG_TRAZA
+		name = gg_argentina.86.b
+		custom_tooltip = gg_argentina.86.b_tt
+		c:BRZ ?= { change_relations = { country = ROOT value = -50 } }
+		hidden_effect = { c:URU ?= { trigger_event = { id = gg_peace.15 days = 0 popup = yes } } }
+		ai_chance = {
+			base = 20
+			modifier = { trigger = { gg_pact_historical = yes } factor = 0 } # EN/ES: the historical Pact rule: never for the AI / la regla historica del Pacto: nunca para la IA
+		}
+	}
+}
