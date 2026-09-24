@@ -146,6 +146,14 @@ gg_urq_mhn = {
 	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
 }
 
+# gg_urquiza.4: Carlos Morel, "Combate de caballeria en la epoca de Rosas" (c. 1839) -- public domain. The bk2
+#     is the one built for gg_fl_palmar (removed as unused on 24/9/2026, mod 6bc4763); no other event uses it.
+#     / el bk2 es el que se hizo para gg_fl_palmar (sacado por no usarse); ningun otro evento lo usa.
+gg_urq_caballeria = {
+	video = "gfx/media_aliases/gg_urq_caballeria.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
 # gg_argentina.61: "Brigadier General Pedro Ferre.jpg" -- Franciscojosemoreno -- CC0
 gg_arg_ferre = {
 	video = "gfx/media_aliases/gg_arg_ferre.bk2"

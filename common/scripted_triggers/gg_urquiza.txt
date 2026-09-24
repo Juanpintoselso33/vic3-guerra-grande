@@ -94,3 +94,49 @@ gg_urquiza_prelude_possible = {
 		NOT = { exists = c:ENR }
 	}
 }
+
+# EN: 24/9/2026 (Juan: «la decision es de Urquiza y pesa mas el no levantamiento») -- Brazil is committed to Urquiza:
+#     it has marched or is bound to march in 1851 (gg_brazil_marches, the Brazil lane: the convention or the September
+#     contracts), the September loan is still falling due in a war that is still open (gg_brazil_deal with the siege
+#     not over), the Montevideo Convention is signed (gg_argentina.13, guerra_grande_treaties_signed) or the Ejercito
+#     Grande's loan is taken (gg_argentina.15). A loan the Defensa took before the Cerrito won does NOT count: that
+#     contract was to save Montevideo, and the Brazil lane stops the march when the war is over (gg_brazil_deal_falls_due
+#     reads NOT gg_cal_war_over). The last two come after 1 May; they are here in case a later path moves them earlier.
+# ES: el Brasil esta comprometido con Urquiza: marcho o tiene que marchar en 1851, el emprestito de setiembre se cobra
+#     en una guerra todavia abierta, la Convencion esta firmada o el prestamo del Ejercito Grande tomado. Un emprestito
+#     que tomo la Defensa antes de que ganara el Cerrito NO cuenta: era para salvar Montevideo, y el carril del Brasil
+#     corta la marcha cuando la guerra termino.
+gg_brazil_committed_to_urquiza = {
+	OR = {
+		has_global_variable = gg_brazil_marches
+		AND = {
+			has_global_variable = gg_brazil_deal
+			NOT = { gg_cal_war_over = yes }
+		}
+		has_global_variable = guerra_grande_treaties_signed
+		has_global_variable = gg_ejercito_grande_mortgage
+	}
+}
+
+# EN: 24/9/2026 (Juan) -- Urquiza between Oribe and Rosas on 1 May 1851: the Cerrito won the Guerra Grande before his
+#     rising (Oribe governs the Republic as a province of the Pact, as Rosas's ally or as a Republic friendly to him),
+#     there is no Defensa left to ally with, and Brazil is not committed to him. Historically he would not pronounce
+#     until the Imperial squadron was in the Plata and a convention bound each ally (Cuyas to Urquiza, 17/4/1851, in
+#     J. M. Rosa, «El pronunciamiento de Urquiza», cap. V). Read by gg_argentina_cal.4 under the dynamic Pact rule only.
+# ES: Urquiza entre Oribe y Rosas el 1/5/1851: el Cerrito gano la Guerra Grande antes del levantamiento (Oribe gobierna
+#     la Republica como provincia del Pacto, como aliado de Rosas o como Republica amiga), no queda Defensa con quien
+#     aliarse y el Brasil no esta comprometido con el. En la historia no se pronuncio hasta tener la escuadra imperial en
+#     el Plata y una convencion que atara a cada aliado. Lo lee gg_argentina_cal.4, solo con la regla dinamica del Pacto.
+gg_urquiza_between_oribe_and_rosas = {
+	OR = {
+		gg_rosas_won_guerra_grande = yes
+		has_global_variable = gg_oriental_in_pact
+		c:URU ?= { gg_is_oriental_pact_province = yes } # EN/ES: 24/9 (AUD-ORIENTAL-PROVINCE) the Oriental Province / la Provincia Oriental
+	}
+	NOT = { any_country = { has_variable = guerra_grande_defensa_government } }
+	NOT = { gg_brazil_committed_to_urquiza = yes }
+	# EN/ES: 24/9 (Codex) -- and no one on this bank either: no Coalition, no Corrientes outside Rosas's hand
+	#     / y nadie de este lado tampoco: ni Coalicion ni Corrientes fuera de la mano de Rosas
+	NOT = { exists = c:CLN }
+	NOT = { c:CRR ?= { NOT = { is_subject_of = c:ARG } } }
+}

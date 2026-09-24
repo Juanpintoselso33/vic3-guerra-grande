@@ -208,3 +208,205 @@ gg_urquiza.3 = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 1 May 1851, URQUIZA BETWEEN ORIBE AND ROSAS (24/9/2026, Juan: «la decision es de Urquiza y pesa mas el no
+#     levantamiento»; the rule interaction confirmed by Juan the same day). The Cerrito won the Guerra Grande before
+#     the rising, no Defensa is left to ally with and Brazil is not committed (gg_urquiza_between_oribe_and_rosas):
+#     under the dynamic Pact rule Urquiza decides whether to accept Rosas's annual resignation. Not rising is the
+#     negotiated confederation (gg_argentina.71, whose «strong Rosas» text is this very case); rising anyway is the
+#     Pronouncement (gg_argentina.3, told as a pronouncement without a convention), which Rosas then answers. The
+#     representation of 22/2/1851 is not reopened: it was already answered (gg_urquiza.1) and its answer is part of
+#     the discontent read here. The forced Pact rules never reach this event (gg_argentina_cal.4 decides first).
+#     .4 goes to Urquiza's own country (the loyal Entre Rios of Alcaraz), AI or player; .5 is the same weighing for
+#     the AI when Entre Rios is Argentine ground and Urquiza has no country, so Rosas's player never chooses for him.
+#     AI WEIGHTS (the same numbers in .4's ai_chance and .5's random_list; the balance lab pins them): stay 85 /
+#     rise 15; discontent >= 8 moves 5 to rising, >= 11 another 5 (75/25 at most); discontent <= 3 moves 10 back to
+#     staying (95/5).
+# ES: 1/5/1851, URQUIZA ENTRE ORIBE Y ROSAS. El Cerrito gano la Guerra Grande antes del levantamiento, no queda Defensa
+#     y el Brasil no esta comprometido: con la regla dinamica del Pacto decide Urquiza si acepta la renuncia anual de
+#     Rosas. No levantarse es la confederacion negociada (gg_argentina.71, cuyo texto de «Rosas fuerte» es este caso);
+#     levantarse igual es el Pronunciamiento (gg_argentina.3, contado como pronunciamiento sin convencion), que Rosas
+#     contesta. La representacion del 22/2 no se reabre: ya se contesto y su respuesta esta en el descontento. Las
+#     reglas forzadas del Pacto nunca llegan aca. .4 va al pais propio de Urquiza (Alcaraz), IA o jugador; .5 es el
+#     mismo peso para la IA cuando Entre Rios es suelo argentino, asi el jugador de Rosas nunca elige por el.
+#     PESOS DE LA IA (iguales en .4 y .5; los fija el laboratorio): quedarse 85 / levantarse 15; descontento >= 8 pasa
+#     5 a levantarse, >= 11 otros 5 (75/25 como mucho); descontento <= 3 devuelve 10 a quedarse (95/5).
+# SOURCE / FUENTE: Jose Maria Rosa, «El pronunciamiento de Urquiza» (Instituto Rosas), caps. II, IV and V: Silva
+#     Pontes to Rio, March 1850 («conoce perfectamente los riesgos de su posicion, pero ... podria salir de ella
+#     apenas se convenza de poder hacerlo con buen exito»); Cuyas, «No tiene plan fijo. Obrara segun las
+#     circunstancias se presenten»; Urquiza to Cuyas, 20/4/1850, printed in El Federal Entre-Riano on 6/6/1850;
+#     Paulino to Silva Pontes, 11/3/1851 («con Rosas no hay terminos medios: u obediencia ciega y absoluta, o rebelion
+#     abierta»); Muñoz's message of April 1851 (Brazil's army on the frontier and its squadron on the interior rivers);
+#     Cuyas to Urquiza, 17/4/1851 («Conviene que V. E. no de la cara de frente hasta que se asegure los elementos con
+#     que debe contribuir cada uno de los Estados de la coalicion en un tratado o convencion»); Urquiza's step back in
+#     early May 1851 until the Imperial squadron was in the port:
+#     https://institutorosas.cultura.gob.ar/media/uploads/site-35/multimedia/rosa-jose-maria-el-pronunciamiento-de-urquiza.pdf
+#     The Convention of 29/5/1851, art. 2 (a «acto publico y consumado» demanded of Urquiza): Cisneros and Escude,
+#     «Historia general de las relaciones exteriores de la Republica Argentina», t. IV, cap. 7:
+#     https://argentinahistorica.com.ar/intro_libros?cap=330&doc=76&tema=7
+#     Rosas to Echague, 1836 («Tenga cuidado; ese jefe sera su ruina»): docs/guerra-grande-argentina/historia-argentina.md.
+# -------------------------------------------------------------------------------------------------
+gg_urquiza.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_urquiza.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_urquiza.4.d_province
+				trigger = {
+					OR = {
+						has_global_variable = gg_oriental_in_pact
+						c:URU ?= { gg_is_oriental_pact_province = yes }
+					}
+				}
+			}
+			triggered_desc = { desc = gg_urquiza.4.d trigger = { always = yes } }
+		}
+	}
+	flavor = gg_urquiza.4.f
+	# EN/ES: Carlos Morel, «Combate de caballeria en la epoca de Rosas» (c. 1839) -- the lances he would stake
+	#     / las lanzas que se jugaria
+	event_image = { video = "gg_urq_caballeria" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ENR ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.4|" # GG_TRAZA
+	}
+
+	# EN/ES: stay: the Legislature refuses the resignation, as every year / quedarse: la Legislatura rechaza la renuncia
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.4.a|" # GG_TRAZA
+		name = gg_urquiza.4.a
+		default_option = yes
+		custom_tooltip = gg_urquiza.4.a_tt
+		# EN/ES: 24/9 (Codex) -- only while Entre Rios is still Rosas's: the popup lives up to 12 months, and if Entre
+		#     Rios broke away meanwhile the question was overtaken (gg_urquiza.6 logs it) / solo si Entre Rios sigue con
+		#     Rosas: si se separo mientras tanto, la pregunta quedo atras (.6 lo anota)
+		hidden_effect = {
+			if = {
+				limit = { gg_entre_rios_with_rosas = yes NOT = { has_global_variable = gg_urquiza_1851_answered } }
+				set_global_variable = gg_urquiza_1851_answered # EN/ES: read by gg_urquiza.6 and gg_argentina.71 (its text) / la leen .6 y .71
+				c:ARG ?= { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
+			}
+		}
+		ai_chance = {
+			base = 85
+			modifier = { trigger = { gg_urquiza_discontent >= 8 } add = -5 }
+			modifier = { trigger = { gg_urquiza_discontent >= 11 } add = -5 }
+			modifier = { trigger = { gg_urquiza_discontent <= 3 } add = 10 }
+		}
+	}
+	# EN/ES: rise anyway: accept the resignation without a convention / levantarse igual: aceptar la renuncia sin convencion
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.4.b|" # GG_TRAZA
+		name = gg_urquiza.4.b
+		custom_tooltip = gg_urquiza.4.b_tt
+		# EN/ES: 24/9 (Codex) -- only while Entre Rios is still Rosas's: the popup lives up to 12 months, and if Entre
+		#     Rios broke away meanwhile the question was overtaken (gg_urquiza.6 logs it) / solo si Entre Rios sigue con
+		#     Rosas: si se separo mientras tanto, la pregunta quedo atras (.6 lo anota)
+		hidden_effect = {
+			if = {
+				limit = { gg_entre_rios_with_rosas = yes NOT = { has_global_variable = gg_urquiza_1851_answered } }
+				set_global_variable = gg_urquiza_1851_answered # EN/ES: read by gg_urquiza.6 and gg_argentina.71 (its text) / la leen .6 y .71
+				c:ARG ?= { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
+			}
+		}
+		ai_chance = {
+			base = 15
+			modifier = { trigger = { gg_urquiza_discontent >= 8 } add = 5 }
+			modifier = { trigger = { gg_urquiza_discontent >= 11 } add = 5 }
+			modifier = { trigger = { gg_urquiza_discontent <= 3 } add = -10 }
+		}
+	}
+}
+
+# EN: 1 May 1851 -- the same weighing as gg_urquiza.4, for the AI, when Entre Rios is Argentine ground and Urquiza has
+#     no country of his own. Hidden, on Argentina: Rosas's player never decides for Urquiza. Same weights as .4.
+# ES: el mismo peso que gg_urquiza.4, para la IA, cuando Entre Rios es suelo argentino y Urquiza no tiene pais. Oculto,
+#     sobre la Argentina: el jugador de Rosas nunca decide por Urquiza. Los mismos pesos que .4.
+gg_urquiza.5 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:ARG ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.5|" # GG_TRAZA
+		hidden_effect = {
+			random_list = {
+				85 = {
+					modifier = {
+						if = { limit = { gg_urquiza_discontent >= 8 } add = -5 }
+						if = { limit = { gg_urquiza_discontent >= 11 } add = -5 }
+						if = { limit = { gg_urquiza_discontent <= 3 } add = 10 }
+					}
+					debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.5.a|" # GG_TRAZA
+					set_global_variable = gg_urquiza_1851_answered
+					trigger_event = { id = gg_argentina.71 days = 0 popup = yes }
+				}
+				15 = {
+					modifier = {
+						if = { limit = { gg_urquiza_discontent >= 8 } add = 5 }
+						if = { limit = { gg_urquiza_discontent >= 11 } add = 5 }
+						if = { limit = { gg_urquiza_discontent <= 3 } add = -10 }
+					}
+					debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.5.b|" # GG_TRAZA
+					set_global_variable = gg_urquiza_1851_answered
+					trigger_event = { id = gg_argentina.3 days = 0 popup = yes }
+				}
+			}
+		}
+	}
+}
+
+# EN: the net under gg_urquiza.4 (Codex, 24/9/2026, two passes). gg_arg_cal_done_4 is already set, so the calendar does
+#     not retry, and .4 lives up to 12 months (duration is in months). Scheduled by gg_argentina_cal.4 next to .4, on
+#     Argentina, and every 30 days after, until someone answered: while Urquiza's Entre Rios still exists and is still
+#     Rosas's, his popup is pending and the net waits; if that Entre Rios is gone (the popup went with it) and the ground
+#     is Rosas's again, the AI decides for Urquiza as in .5; if Entre Rios broke away from Rosas meanwhile, the question
+#     of 1 May was overtaken by that break (its own war settles the Pact) and the net only records it. Hidden and without
+#     a trigger (a scheduled event's trigger is read when it is scheduled); the state is read in immediate.
+# ES: la red de gg_urquiza.4. El relevo ya marco gg_arg_cal_done_4 y no reintenta, y .4 dura hasta 12 meses. Cada 30
+#     dias hasta que alguien conteste: si el Entre Rios de Urquiza sigue y sigue con Rosas, el popup esta pendiente y la
+#     red espera; si ese Entre Rios ya no existe (el popup se fue con el) y el suelo volvio a Rosas, la IA decide por
+#     Urquiza como en .5; si Entre Rios se separo de Rosas, la pregunta del 1/5 quedo atras y la red solo lo anota.
+gg_urquiza.6 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.6|" # GG_TRAZA
+		if = {
+			limit = {
+				c:ARG ?= this
+				NOT = { has_global_variable = gg_urquiza_1851_answered }
+				NOT = { has_global_variable = gg_pact_settled }
+			}
+			if = {
+				limit = {
+					exists = c:ENR
+					gg_entre_rios_with_rosas = yes
+				}
+				trigger_event = { id = gg_urquiza.6 days = 30 }
+			}
+			else_if = {
+				limit = { gg_entre_rios_with_rosas = yes }
+				trigger_event = { id = gg_urquiza.5 days = 0 }
+			}
+			else = {
+				set_global_variable = gg_urquiza_1851_answered
+				debug_log = "GG_URQ1851|[TimeKeeper.GetCurrentDate.GetString]|overtaken: Entre Rios broke away before answering|" # GG_TRAZA
+			}
+		}
+	}
+}

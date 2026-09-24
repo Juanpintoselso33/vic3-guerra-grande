@@ -201,6 +201,31 @@ gg_argentina_cal.4 = {
 					limit = { gg_pact_forced_war = yes }
 					c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
 				}
+				# EN: 24/9/2026 (Juan: «la decision es de Urquiza y pesa mas el no levantamiento»; rule interaction
+				#     confirmed by Juan the same day) -- under the dynamic rule only (the forced rules above still
+				#     decide): if the Cerrito won before the rising and Brazil is not committed, Urquiza decides, and
+				#     not rising weighs more. A country of his own (the loyal Entre Rios of Alcaraz, AI or player) gets
+				#     the choice (gg_urquiza.4); on Argentine ground he has no country and the AI decides for him
+				#     (gg_urquiza.5), never Rosas's player.
+				# ES: solo con la regla dinamica (las forzadas de arriba siguen decidiendo): si el Cerrito gano antes
+				#     del levantamiento y el Brasil no esta comprometido, decide Urquiza y pesa mas no levantarse. Con
+				#     pais propio (el Entre Rios leal de Alcaraz, IA o jugador) elige el (gg_urquiza.4); en suelo
+				#     argentino no tiene pais y decide la IA por el (gg_urquiza.5), nunca el jugador de Rosas.
+				else_if = {
+					limit = {
+						gg_pact_dynamic = yes
+						gg_urquiza_between_oribe_and_rosas = yes
+					}
+					if = {
+						limit = { exists = c:ENR }
+						c:ENR = { trigger_event = { id = gg_urquiza.4 days = 0 popup = yes } }
+						# EN/ES: the net if the popup is lost (Codex) / la red si el popup se pierde
+						c:ARG = { trigger_event = { id = gg_urquiza.6 days = 30 } }
+					}
+					else = {
+						c:ARG = { trigger_event = { id = gg_urquiza.5 days = 0 } }
+					}
+				}
 				else_if = {
 					limit = { gg_urquiza_discontent <= 1 }
 					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }

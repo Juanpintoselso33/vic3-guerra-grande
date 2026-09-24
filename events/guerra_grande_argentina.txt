@@ -1506,6 +1506,10 @@ gg_argentina.71 = {
 					has_global_variable = gg_corrientes_cerrito_exempt
 				}
 			}
+			# EN/ES: 24/9/2026 (Juan, Codex) -- Urquiza stood down alone (gg_urquiza.4.a / .5): the Empire is not
+			#     beaten, only uncommitted, so d_strong's claims do not hold / Urquiza no se levanto, solo: el Imperio no
+			#     esta vencido, solo sin compromiso, asi que lo que afirma d_strong no vale
+			triggered_desc = { desc = gg_argentina.71.d_alone trigger = { has_global_variable = gg_urquiza_1851_answered } }
 			triggered_desc = { desc = gg_argentina.71.d_strong trigger = { always = yes } }
 		}
 	}
