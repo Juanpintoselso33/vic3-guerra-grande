@@ -435,7 +435,8 @@ gg_notice.13 = {
 #     the littoral: Cerrito endurance -10, Defensa endurance -15 (the plaza loses the littoral); b) historical, the
 #     Cerrito waited until December: +1 colorado, Cerrito endurance +10; c) the historical remedy of the end of
 #     1846, a division from Buenos Aires: Cerrito endurance +10, Rosas -5 (the proposal's Urquiza -10 has no fact
-#     behind it: Urquiza was back in Entre Rios from 6/3/1846 and did not recross until 1851).
+#     behind it: Urquiza was back in Entre Rios from 6/3/1846 and did not recross until 1851). 24/9/2026, later
+#     (Juan): c also scores +1 blanco; he accepts the human Cerrito at ~78 % that the lab measures with it.
 #     Only with the Anglo-French intervention on the river (gg_plata_intervention): the Defensa's river campaign of
 #     1845 was made with the squadrons. The San Antonio paragraph follows whether the Defensa raised the Italian
 #     Legion and has Garibaldi (gg_garibaldi_gref).
@@ -528,6 +529,8 @@ gg_notice.14 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.14.c|" # GG_TRAZA
 		name = gg_notice.14.c
 		custom_tooltip = gg_notice.14.c_tt
+		# EN/ES: 24/9/2026 (Juan) -- +1 blanco accepted, with a human Cerrito at ~78 % in the lab / aceptado
+		gg_score_blanco = { AMOUNT = 1 }
 		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
 		gg_patron_change = { PATRON = rosas DELTA = -5 }
 		ai_chance = { base = 15 }
