@@ -882,7 +882,9 @@ gg_powers.17 = {
 # SOURCE / FUENTE: fichas.md F3-6 (es.wikipedia "Bloqueo anglo-frances", Gore-Gros: the Basques
 #     gone to Buenos Aires, Garibaldi about to sail); SOURCES_french_legion.md s.1-2 and
 #     SOURCES_order_of_battle.md s.3a (Italian Legion ~700 at its best, Etchechury 2017);
-#     SOURCES_powers.md s.7 (the French blockade traded for 40,000 pesos a month, 12.VI.1848).
+#     SOURCES_powers.md s.7 (the French blockade traded for 40,000 pesos a month, 12.VI.1848);
+#     Garibaldi sailed from Montevideo in the Speranza on 15.IV.1848 (it.wikipedia "Legione italiana
+#     (Garibaldi)": 62 companions; G. Guerzoni gives 85), so on 20.VI he is already gone.
 gg_powers.18 = {
 	type = country_event
 	placement = ROOT
@@ -1773,7 +1775,12 @@ gg_powers.31 = {
 # -------------------------------------------------------------------------------------------------
 # SOURCE / FUENTE: SOURCES_powers.md s.8 (Lamas in Rio from XI.1847; Maua; the five treaties
 #     and the pledged customs); SOURCES_loans.md s.1-2.
-# SOURCE / FUENTE: 23/9 -- the unsourced line on Lamas and London was removed from the text.
+# SOURCE / FUENTE: 23/9 -- the text is dated 1.X.1847: Lamas named envoy to Rio on 9.XI.1847
+#     (N. Duffau, Revista de Historia de la Justicia, doi 10.4000/rhj.3771), in Rio in exile
+#     VIII-XII.1836 (ANPUH 2025, "Andres Lamas e as relacoes com o Brasil"); Brazil neutral until
+#     1851 and the Abrantes mission of 1844 (R. Tamae 2025, doi 10.29327/5559346.1-10; El arcon de
+#     la historia, "Brasil busca aliados contra Rosas"); Howden and Walewski, SOURCES_powers.md s.3.
+#     Maua (1850) and Lamas in Rio were removed from the text as anachronisms.
 gg_powers.32 = {
 	type = country_event
 	placement = ROOT
