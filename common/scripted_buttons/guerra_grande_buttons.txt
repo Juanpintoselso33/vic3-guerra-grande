@@ -131,6 +131,22 @@ guerra_grande_italian_legion_button = {
 
 	ai_chance = {
 		value = 50
+		# EN: 24/9/2026 (Juan) -- reinforcing needs need: once the legion is raised, the AI reinforces it only while the
+		#     Defensa is under pressure (gg_defensa_under_pressure), and then with a small chance a month (6). Before
+		#     this the Italian Legion was reinforced in every story, costing France 5 each time.
+		# ES: reforzar exige necesidad: con la legion levantada, la IA la refuerza solo con la Defensa bajo presion, y
+		#     entonces con una probabilidad chica por mes (6). Antes se reforzaba en toda historia.
+		if = {
+			limit = { has_variable = guerra_grande_italian_legion_raised }
+			value = 0
+		}
+		if = {
+			limit = {
+				has_variable = guerra_grande_italian_legion_raised
+				gg_defensa_under_pressure = yes
+			}
+			value = 6
+		}
 		# EN/ES: 22/9/2026 (Juan) -- the AI does not reinforce on credit: once raised, a reinforcement it
 		#     must pay itself waits while the debt passes a quarter of the credit limit / la IA no refuerza
 		#     endeudada si tiene que pagarlo ella

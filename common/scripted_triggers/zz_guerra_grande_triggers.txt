@@ -285,6 +285,32 @@ gg_powers_stalemate = {
 	NOT = { has_global_variable = gg_hood_retried }
 }
 
+# EN: 24/9/2026 (Juan) -- the Defensa is under pressure: the only moment the AI reinforces a legion it already raised
+#     (guerra_grande_italian_legion_button, guerra_grande_french_legion_button). Before this the AI pressed both
+#     reinforcements with 50-60 % a month and reinforced in every story (France -5 each). Three of the mod's own measures,
+#     chosen with the balance lab (tools/lab_balance, «legion_pressure»): its war support is falling (endurance 50 or
+#     less), the blancos lead the war's balance by 12 or more, or the river has been shut for 18 months in a row (three
+#     quarters of the hunger that ripens the Defensa). With lower marks (8 and 12) the lab still saw a reinforcement in
+#     96 % of the AI's stories: the river's early blockade and an ordinary blanco lead are the siege's normal state.
+# ES: la Defensa esta bajo presion: el unico momento en que la IA refuerza una legion ya levantada. Antes la IA apretaba
+#     los dos refuerzos con 50-60 % por mes y reforzaba en toda historia. Tres medidas del propio mod, elegidas con el
+#     laboratorio: el aguante cae (50 o menos), los blancos le sacan 12 o mas en la balanza, o el rio lleva 18 meses
+#     seguidos cerrado (tres cuartos del hambre que madura a la Defensa). Con 8 y 12 el laboratorio seguia viendo un
+#     refuerzo en el 96 % de las historias de la IA: el bloqueo temprano y una ventaja blanca comun son el sitio normal.
+gg_defensa_under_pressure = {
+	OR = {
+		AND = {
+			has_global_variable = gg_endurance_defensa
+			global_var:gg_endurance_defensa <= 50
+		}
+		gg_war_balance_blanco >= 12
+		AND = {
+			has_global_variable = gg_plata_closed_streak
+			global_var:gg_plata_closed_streak >= 18
+		}
+	}
+}
+
 # EN: France pays the legions (F3-6). Not a sea condition: legions live on French money.
 # ES: Francia paga las legiones (F3-6). No es una condición del mar: las legiones viven de la plata francesa.
 gg_france_pays_legions = {
