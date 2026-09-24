@@ -73,3 +73,27 @@ gg_entre_rios_alcaraz_loyal = {
 		exists = s:STATE_ENTRE_RIOS.region_state:ENR
 	}
 }
+
+# EN: 24/9/2026 (Juan: the representation of Entre Rios has to come every game) -- when Urquiza's letter of
+#     22/2/1851 (gg_urquiza.1, relay gg_argentina_cal.35) can reach Buenos Aires: the Pact still open and Urquiza
+#     not yet broken with Rosas (Entre Rios has not taken back its delegation and has no country of its own outside
+#     the loyal seat of Alcaraz). Wider than gg_entre_rios_with_rosas on purpose: if Corrientes, the Coalition or a
+#     foreign army holds the ground of Entre Rios, Urquiza is still Rosas's general and his grievances still stand,
+#     so the letter still comes. Only what depends on the province (its claim, its grievance count) waits for
+#     gg_entre_rios_with_rosas inside the event; the 1 May decision (gg_argentina_cal.4) keeps its own stricter test.
+# ES: cuando la carta de Urquiza del 22/2/1851 puede llegar a Buenos Aires: el Pacto sigue abierto y Urquiza todavia
+#     no rompio con Rosas (Entre Rios no reasumio la delegacion ni tiene pais propio fuera del asiento leal de
+#     Alcaraz). Mas ancho que gg_entre_rios_with_rosas a proposito: si Corrientes, la Coalicion o un ejercito
+#     extranjero tiene el suelo de Entre Rios, Urquiza sigue siendo general de Rosas y sus agravios siguen en pie,
+#     asi que la carta llega igual. Lo que depende de la provincia (su reclamo, su cuenta de agravios) espera
+#     gg_entre_rios_with_rosas adentro del evento; la decision del 1/5 conserva su propia prueba, mas estricta.
+gg_urquiza_prelude_possible = {
+	exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard / la guarda de «la Argentina»
+	exists = c:ARG
+	NOT = { has_global_variable = gg_pact_settled }
+	NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+	OR = {
+		gg_entre_rios_with_rosas = yes
+		NOT = { exists = c:ENR }
+	}
+}

@@ -217,6 +217,12 @@ guerra_grande_on_game_start = {
 				#     Controles: 1/12/1850 = 5110+334 = 5444 (gg_argentina_cal.19), y
 				#     1/5/1851 = 5475+120 = 5595 (gg_argentina_cal.4).
 				trigger_event = { id = gg_argentina_cal.27 days = 5479 } # 1851-01-05 La Regeneracion
+				# EN: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
+				#     Cross-checks: 5/1/1851 = 5479 (gg_argentina_cal.27) and 1/5/1851 = 5595 (gg_argentina_cal.4).
+				# ES: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
+				#     Controles: 5/1/1851 = 5479 (gg_argentina_cal.27) y 1/5/1851 = 5595 (gg_argentina_cal.4).
+				trigger_event = { id = gg_argentina_cal.35 days = 5527 } # 1851-02-22 la carta de Urquiza (gg_urquiza.1)
+				set_global_variable = gg_urquiza_prelude_seeded # EN/ES: old saves get it from gg_urquiza_prelude_migration / las partidas viejas lo reciben de la migracion
 				# EN: 29/5/1851. (1851-1836)*365 + (149-1) = 5475 + 148 = 5623.
 				#     Cross-checks already in this file: 5/1/1851 = 5479 (gg_argentina_cal.27), and
 				#     4/9/1851 = 5721 (gg_cal.29).

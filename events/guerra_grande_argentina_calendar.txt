@@ -192,8 +192,13 @@ gg_argentina_cal.4 = {
 				}
 				set_global_variable = gg_arg_cal_done_4
 				# EN: 23/9/2026 (Juan) -- Urquiza weighs it (gg_urquiza_discontent), instead of an all-or-nothing
-				#     checklist: 4+ pronounces, 2-3 a formal representation, 1 or less the negotiated confederation.
-				# ES: Urquiza lo pesa, en vez de una lista de todo o nada.
+				#     checklist: 4+ pronounces, 1 or less the negotiated confederation. 24/9/2026 (Juan) -- 2-3 no
+				#     longer fires the representation (it comes every game on 22/2/1851, gg_argentina_cal.35): the
+				#     grievance was already voiced, and Rosas's answer to it decides. Heard (gg_urquiza.1.a): the
+				#     negotiated confederation; unanswered, or never delivered: the pronouncement.
+				# ES: Urquiza lo pesa. 4 o mas: pronunciamiento; 1 o menos: confederacion negociada. 24/9 (Juan): 2-3
+				#     ya no dispara la representacion (sale siempre el 22/2/1851): el reclamo ya se hizo y decide la
+				#     respuesta de Rosas. Atendida: confederacion negociada; sin respuesta: pronunciamiento.
 				set_global_variable = { name = gg_urquiza_discontent_now value = gg_urquiza_discontent }
 				# EN/ES: 23/9 -- the Pact's game rule decides before the weighing / la regla del Pacto decide antes de pesar
 				if = {
@@ -209,8 +214,11 @@ gg_argentina_cal.4 = {
 					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
 				}
 				else_if = {
-					limit = { gg_urquiza_discontent <= 3 }
-					c:ARG = { trigger_event = { id = gg_urquiza.1 days = 0 popup = yes } }
+					limit = {
+						gg_urquiza_discontent <= 3
+						has_global_variable = gg_urquiza_representation_heard
+					}
+					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
 				}
 				else = {
 					c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
@@ -889,6 +897,8 @@ gg_argentina_cal.28 = {
 				c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
 			}
 		}
+		# EN: 24/9/2026 -- gg_urquiza.1.b no longer schedules a late Pronunciamiento (the representation is now the
+		#     prelude of 22/2/1851); the retry stays as a net for any later one.
 		# EN: 23/9/2026 (AUD-CONV-RETRY) -- a late Pronunciamiento (gg_urquiza.1.b, 90 days on) made Entre Rios after
 		#     29 May and the convention never came, nor the second one of November. While Entre Rios has not yet
 		#     answered with war (gg_montevideo_convention_enabled), the relay tries again every 7 days (the answer may
@@ -1047,4 +1057,52 @@ gg_argentina_cal.34 = {
    }
   }
  } }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 22 February 1851 (day 5527) -- Urquiza's first warning, the representation of Entre Rios (gg_urquiza.1).
+#     24/9/2026 (Juan: «almost never fires, that is a bug») -- an always-on prelude to 1 May, under every Pact
+#     rule, instead of the middle band of gg_argentina_cal.4. The date is Urquiza's letter to Rufino de Elizalde,
+#     written for Rosas («with the single exception of General Rosas»): the grievances of Entre Rios, the customs
+#     of Buenos Aires deaf to its claims, and the port captain's declaration taken from its skippers as if the
+#     province were an enemy -- while he still approved of Rosas keeping the foreign relations.
+#     Conditions (gg_urquiza_prelude_possible) are read here, on the day, not at game start. If they do not hold
+#     yet, the relay tries again every 7 days; no delivery on or after 24/4/1851, one week ahead of the 1 May decision.
+#     gg_urquiza.1 writes gg_arg_cal_done_35 itself, as every single-recipient event does.
+# ES: 22 de febrero de 1851 (dia 5527) -- el primer aviso de Urquiza, la representacion de Entre Rios. Juan, 24/9:
+#     «casi nunca sale, es un error»: una previa que sale en toda partida, con cualquier regla del Pacto, en vez de
+#     la banda media del 1/5. La fecha es la carta de Urquiza a Rufino de Elizalde, escrita para Rosas: los agravios
+#     de Entre Rios, la aduana sorda a sus reclamos y la declaracion que el capitan del puerto les toma a sus
+#     patrones como si la provincia fuera enemiga, mientras seguia conforme con que Rosas llevara las relaciones
+#     exteriores. Las condiciones se leen aca, el dia de la entrega; si todavia no se cumplen, el relevo reintenta
+#     cada 7 dias; nada se entrega desde el 24/4/1851, una semana antes de la decision del 1/5.
+# SOURCE / FUENTE: Jose Maria Rosa, «El pronunciamiento de Urquiza», cap. III, «En Entre Rios (enero, febrero de
+#     1851)», with the letter of 22/2/1851 (his note 43) / con la carta del 22/2/1851 (su nota 43):
+#     https://institutorosas.cultura.gob.ar/media/uploads/site-35/multimedia/rosa-jose-maria-el-pronunciamiento-de-urquiza.pdf
+#     Context / contexto: «Una lectura del pronunciamiento de Justo Jose de Urquiza», Almanack (SciELO):
+#     https://www.scielo.br/j/alm/a/sjhGsFChMMt49y8yC99B4yc/?lang=es
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.35 = {
+	type = country_event
+	hidden = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.35|"  hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_35 }
+				game_date < 1851.4.24 # EN/ES: a week ahead of 1 May at the latest / a mas tardar una semana antes del 1/5
+				gg_urquiza_prelude_possible = yes
+			}
+			# EN/ES: the weight at the time of the letter, for the tooltip / el peso al llegar la carta, para el tooltip
+			set_global_variable = { name = gg_urquiza_discontent_now value = gg_urquiza_discontent }
+			c:ARG = { trigger_event = { id = gg_urquiza.1 days = 0 popup = yes } }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_35 }
+				c:ARG ?= this
+				game_date < 1851.4.17 # EN/ES: the last retry lands by 23/4 (Codex review) / el ultimo reintento cae a mas tardar el 23/4
+			}
+			trigger_event = { id = gg_argentina_cal.35 days = 7 }
+		}
+	} }
 }

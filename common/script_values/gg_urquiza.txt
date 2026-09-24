@@ -1,9 +1,10 @@
 ﻿# EN: 23/9/2026 (Juan) -- Urquiza's discontent on 1 May 1851, instead of an all-or-nothing checklist. The
 #     grievances Rosas left open push towards the pronouncement; a consolidated Rosas and a Brazil already beaten
-#     hold it back. 4+ pronounces; 2-3 a formal representation without arms (gg_urquiza.1); 1 or less the
-#     negotiated confederation (gg_argentina.71). Read by gg_argentina_cal.4.
+#     hold it back. 4+ pronounces; 1 or less the negotiated confederation (gg_argentina.71); 2-3 is decided by
+#     Rosas's answer to the representation of 22/2/1851 (gg_urquiza.1, since 24/9/2026 a prelude every game):
+#     heard, the negotiated confederation; unanswered, the pronouncement. Read by gg_argentina_cal.4.
 # ES: el descontento de Urquiza el 1/5/1851, en vez de una lista de todo o nada. 4 o mas: pronunciamiento;
-#     2-3: representacion sin armas; 1 o menos: confederacion negociada.
+#     1 o menos: confederacion negociada; 2-3: lo decide la respuesta de Rosas a la representacion del 22/2/1851.
 gg_urquiza_discontent = {
 	value = 0
 	# EN/ES: what Rosas left open / lo que Rosas dejo abierto

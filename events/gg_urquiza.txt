@@ -1,22 +1,42 @@
 ﻿namespace = gg_urquiza
 # -------------------------------------------------------------------------------------------------
 # EN: URQUIZA WEIGHS IT (23/9/2026, Juan). On 1 May 1851 Entre Rios no longer pronounces by calendar: its
-#     discontent is added up (common/script_values/gg_urquiza.txt) and there are three ways out. This file
-#     holds the middle one (.1, a formal representation without arms) and the case where he has nobody to sign
-#     a convention with (.2, Urquiza alone: Rosas won the Guerra Grande, holds the Banda Oriental, or Brazil is
-#     beaten). The pronouncement (gg_argentina.3) and the negotiated confederation (gg_argentina.71) stay.
+#     discontent is added up (common/script_values/gg_urquiza.txt) and there are three ways out (gg_argentina_cal.4).
+#     This file holds Urquiza's first warning (.1, the representation of 22/2/1851, since 24/9/2026 a prelude that
+#     comes every game), the case where he has nobody to sign a convention with (.2, Urquiza alone: Rosas won the
+#     Guerra Grande, holds the Banda Oriental, or Brazil is beaten) and the Pact's net after Caseros (.3). The
+#     pronouncement (gg_argentina.3) and the negotiated confederation (gg_argentina.71) stay.
 # ES: URQUIZA LO PESA. El 1/5/1851 Entre Rios ya no se pronuncia por calendario: se suma su descontento y hay
-#     tres salidas. Aca la intermedia (.1, una representacion sin armas) y el caso en que no tiene con quien
-#     firmar (.2, Urquiza solo). El pronunciamiento y la confederacion negociada siguen.
+#     tres salidas. Aca el primer aviso de Urquiza (.1, la representacion del 22/2/1851, desde el 24/9/2026 una
+#     previa que sale en toda partida), el caso en que no tiene con quien firmar (.2, Urquiza solo) y la red del
+#     Pacto despues de Caseros (.3). El pronunciamiento y la confederacion negociada siguen.
 # SOURCE / FUENTE: the representations the provinces addressed to Buenos Aires under the Pact of 1831 (the
 #     delegation could be questioned without being withdrawn): docs/guerra-grande-argentina/historia-argentina.md.
 # -------------------------------------------------------------------------------------------------
 
-# EN: 1 May 1851, discontent 2-3. Entre Rios keeps the mandate in Buenos Aires but sends a formal representation:
-#     the constitutional question, the rivers, the orders of 1850. Rosas concedes (the negotiated confederation) or
-#     refuses (the pronouncement comes in three months).
-# ES: 1/5/1851, descontento 2-3. Entre Rios mantiene el encargo pero manda una representacion formal. Rosas cede
-#     (confederacion negociada) o se niega (el pronunciamiento llega en tres meses).
+# EN: 22/2/1851 (relay gg_argentina_cal.35), every game, under every Pact rule. 24/9/2026 (Juan: «almost never
+#     fires, that is a bug») -- it was the 2-3 band of 1 May and a base discontent of 9 almost never reached it.
+#     Urquiza writes to Rufino de Elizalde a letter meant for Rosas: the Gaceta Mercantil gives Arroyo Grande to
+#     Oribe and Pacheco alone, Baldomero Garcia left Urquiza out of his speech of 2 November, the
+#     customs of Buenos Aires is deaf to its claims (the export of gold), and the port captain takes a declaration
+#     from every skipper coming from Entre Rios, as if it were an enemy. He keeps the mandate in Buenos Aires.
+#     Historically Elizalde never showed the letter to Rosas and nothing was answered; here Rosas answers.
+#     THE ANSWER IS WHAT 1 MAY READS. Heard: one grievance less, and in the middle band (discontent 2-3) the
+#     negotiated confederation. Unanswered: one grievance more, and in the middle band the pronouncement. The
+#     Pact's game rules still decide first, and 4+ or 1 or less decide by themselves (gg_argentina_cal.4).
+# ES: 22/2/1851, en toda partida y con cualquier regla del Pacto. Era la banda 2-3 del 1/5 y con un descontento
+#     base de 9 casi nunca se llegaba. Urquiza le escribe a Rufino de Elizalde una carta para Rosas: la Gaceta le da
+#     Arroyo Grande solo a Oribe y Pacheco, Baldomero Garcia omitio a Urquiza el 2 de noviembre, la
+#     aduana es sorda a sus reclamos (la extraccion del oro) y el capitan del puerto les toma declaracion a los
+#     patrones que vienen de Entre Rios como si fuera enemiga. Mantiene el encargo. En la historia Elizalde no le
+#     mostro la carta a Rosas y nadie contesto; aca Rosas contesta. LA RESPUESTA ES LO QUE LEE EL 1/5: atendida, un
+#     agravio menos y, en la banda media, la confederacion negociada; sin respuesta, un agravio mas y, en la banda
+#     media, el pronunciamiento. Las reglas del Pacto siguen decidiendo primero.
+# SOURCE / FUENTE: Jose Maria Rosa, «El pronunciamiento de Urquiza», cap. III, «En Entre Rios (enero, febrero de
+#     1851)»: the letter of 22/2/1851 and its quotations (his note 43) / la carta y sus citas:
+#     https://institutorosas.cultura.gob.ar/media/uploads/site-35/multimedia/rosa-jose-maria-el-pronunciamiento-de-urquiza.pdf
+#     Elizalde's letter of 15/1/1851 and the context / la carta de Elizalde y el contexto: «Una lectura del
+#     pronunciamiento de Justo Jose de Urquiza», Almanack (SciELO), https://www.scielo.br/j/alm/a/sjhGsFChMMt49y8yC99B4yc/?lang=es
 gg_urquiza.1 = {
 	type = country_event
 	placement = ROOT
@@ -30,31 +50,69 @@ gg_urquiza.1 = {
 
 	trigger = {
 		c:ARG ?= this
-		gg_entre_rios_with_rosas = yes # EN/ES: 23/9 (Juan, §2) -- or the Entre Rios of Alcaraz / o el de Alcaraz
+		NOT = { has_global_variable = gg_arg_cal_done_35 }
+		# EN/ES: 24/9 -- wider than gg_entre_rios_with_rosas: the letter comes every game / la carta sale en toda partida
+		gg_urquiza_prelude_possible = yes
 	}
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1|" # GG_TRAZA
-		gg_reclamo_abre = { KEY = entre_rios }
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_35 } }
+				set_global_variable = gg_arg_cal_done_35
+			}
+		}
+		# EN/ES: the claim is the province's: only while Entre Rios is still Rosas's / el reclamo es de la provincia
+		if = {
+			limit = { gg_entre_rios_with_rosas = yes }
+			gg_reclamo_abre = { KEY = entre_rios }
+		}
 	}
 
-	# EN: concede: the constituent route, and Entre Rios stays / ceder: la ruta constituyente, y Entre Rios se queda
+	# EN: hear it: the grievance answered, and Urquiza takes note / atenderla: el agravio contestado, y Urquiza lo anota
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1.a|" # GG_TRAZA
 		name = gg_urquiza.1.a
 		default_option = yes
-		custom_tooltip = gg_urquiza.1.a_tt
+		# EN/ES: the grievance count moves only while Entre Rios is Rosas's / la cuenta se mueve solo si Entre Rios es de Rosas
+		if = { limit = { gg_entre_rios_with_rosas = yes } custom_tooltip = gg_urquiza.1.a_tt }
+		else = { custom_tooltip = gg_urquiza.1.a_far_tt }
 		gg_patron_change = { PATRON = urquiza DELTA = 10 }
-		trigger_event = { id = gg_argentina.71 days = 0 popup = yes }
+		# EN/ES: read by gg_argentina_cal.4 in the middle band / la lee el 1/5 en la banda media
+		set_global_variable = gg_urquiza_representation_heard
+		# EN/ES: the gg_pact_all_grievances_down pattern / el patron de gg_pact_all_grievances_down
+		if = {
+			limit = {
+				gg_entre_rios_with_rosas = yes
+				has_global_variable = gg_entre_rios_agravio
+			}
+			if = {
+				limit = { global_var:gg_entre_rios_agravio > 0 }
+				change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+			}
+			if = {
+				limit = { global_var:gg_entre_rios_agravio = 0 }
+				gg_reclamo_cierra = { KEY = entre_rios }
+			}
+		}
 		ai_chance = { base = 60 }
 	}
-	# EN: refuse: the representation becomes a pronouncement / negarse: la representacion se vuelve pronunciamiento
+	# EN: refuse: the representation goes unanswered / negarse: la representacion queda sin respuesta
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.1.b|" # GG_TRAZA
 		name = gg_urquiza.1.b
-		custom_tooltip = gg_urquiza.1.b_tt
+		# EN/ES: the grievance count moves only while Entre Rios is Rosas's / la cuenta se mueve solo si Entre Rios es de Rosas
+		if = { limit = { gg_entre_rios_with_rosas = yes } custom_tooltip = gg_urquiza.1.b_tt }
+		else = { custom_tooltip = gg_urquiza.1.b_far_tt }
 		gg_patron_change = { PATRON = urquiza DELTA = -10 }
-		trigger_event = { id = gg_argentina.3 days = 90 popup = yes }
+		if = {
+			limit = {
+				gg_entre_rios_with_rosas = yes
+				has_global_variable = gg_entre_rios_agravio
+			}
+			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+		}
 		ai_chance = {
 			base = 40
 			modifier = { trigger = { gg_rosas_won_guerra_grande = yes } add = 20 }
