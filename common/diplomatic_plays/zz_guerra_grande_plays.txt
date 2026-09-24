@@ -1,4 +1,4 @@
-﻿# EN: four vanilla plays, copied VERBATIM with exactly one line added at the TOP LEVEL of each
+﻿# EN: five vanilla plays (take_treaty_port since 23/9), copied VERBATIM with exactly one line added at the TOP LEVEL of each
 #     possible block: guerra_grande_play_is_allowed.
 #     The top level is the whole point. A first version put that line inside the
 #     "scope:target_country = { ... }" block, where 'this' is the target instead of the initiator,
@@ -7,7 +7,7 @@
 #     absolutely nothing. Brazil could still open a return_state play on the Cerrito in 1847.
 #     Insertion is done by brace counting, not by regex, because the regex is what put it in the
 #     wrong block in the first place.
-# ES: cuatro jugadas de vanilla, copiadas TAL CUAL con exactamente una linea agregada en el NIVEL
+# ES: cinco jugadas de vanilla (take_treaty_port desde el 23/9), copiadas TAL CUAL con exactamente una linea agregada en el NIVEL
 #     SUPERIOR de cada bloque possible: guerra_grande_play_is_allowed.
 #     El nivel superior es todo el asunto. Una primera version metio esa linea adentro del bloque
 #     "scope:target_country = { ... }", donde 'this' es el objetivo y no el iniciador, lo que
@@ -116,3 +116,35 @@ REPLACE:dp_regime_change = {
 	on_war_end = {}
 }
 
+# EN: CB-01, Codex review 23/9/2026 -- a treaty port is Montevideo in foreign hands, the war's failure state; the
+#     fifth vanilla play copied verbatim with the same top-level line.
+# ES: un puerto de tratado es Montevideo en manos extranjeras, el fracaso de la guerra; la quinta jugada de
+#     vanilla copiada tal cual con la misma linea en el nivel superior.
+REPLACE:dp_take_treaty_port = {
+
+	war_goal = take_treaty_port
+
+	texture = "gfx/interface/icons/war_goals/take_treaty_port.dds"
+
+	add_infamy_for_starting_target_wargoals = yes
+
+	possible = {
+		NOT = { is_country_type = decentralized }
+		aggressive_diplomatic_plays_permitted = yes
+		NOT = { is_subject_of = scope:target_country }
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			NOT = { is_subject_of = root }
+		}
+		diplomatic_play_has_no_relations_blockers = yes
+		guerra_grande_play_is_allowed = yes
+	}
+
+	ai_acceptance_max = 100
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

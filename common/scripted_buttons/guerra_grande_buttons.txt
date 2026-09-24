@@ -110,6 +110,7 @@ guerra_grande_italian_legion_button = {
 				}
 			}
 			set_variable = { name = gg_garibaldi_ref value = scope:gg_garibaldi }
+			set_global_variable = { name = gg_garibaldi_gref value = scope:gg_garibaldi } # EN/ES: CB-05 -- survives an annexed Defensa / sobrevive a una Defensa anexada
 			add_modifier = {
 				name = guerra_grande_italian_legion
 				years = 10

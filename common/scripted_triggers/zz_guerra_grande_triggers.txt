@@ -66,10 +66,14 @@ guerra_grande_play_is_allowed = {
 		#     historica. Es ademas el camino principal por el que una potencia extranjera termina con
 		#     Montevideo, que es el fracaso de la guerra. La hora es la del Brasil: Caxias cruzando la
 		#     frontera en setiembre, que ya esta escrito como gg_contingent.8.
-		AND = {
-			year >= 1851
-			c:BRZ ?= this
-		}
+		# EN: CB-01, Codex review 23/9/2026 -- the 1851 door for Brazil is closed: decisiones.md (23/9, "the siege
+		#     without the engine's war") keeps Brazil out until the signed peace, not until 1851, and Caxias's
+		#     crossing is gg_contingent.8, which opens no play. After the peace the Republic is an ordinary
+		#     country again: the marks never go away, so without this it stayed untouchable for ever.
+		# ES: se cierra la puerta de 1851 para el Brasil: decisiones.md deja al Brasil afuera hasta la paz firmada,
+		#     no hasta 1851, y el cruce de Caxias es gg_contingent.8, que no abre ninguna jugada. Despues de la
+		#     paz la Republica vuelve a ser un pais comun: las marcas no se borran, y sin esto quedaba intocable.
+		has_global_variable = gg_peace_settled
 	}
 }
 
