@@ -77,7 +77,11 @@ gg_constitution.1 = {
 		trigger = { gg_constitution_offers_1853 = yes } # EN/ES: not after Rosas's victory nor with two governments / ni tras la victoria de Rosas ni con dos gobiernos
 		set_global_variable = { name = gg_constitution_chosen value = 1 }
 		gg_constitution_clear_old_answer = yes # EN/ES: AUD-CONST-CHOICE -- an old save asked again / una partida vieja preguntada de nuevo
-		custom_tooltip = gg_constitution.1.a_tt
+		# EN/ES: 24/9/2026 (AUD-END-A6) -- it does not promise the incorporation gg_argentina.80.a already made
+		#     / no promete la incorporacion que gg_argentina.80.a ya hizo
+		if = { limit = { gg_constitution_provinces_to_join = yes } custom_tooltip = gg_constitution.1.a_tt }
+		else = { custom_tooltip = gg_constitution.1.a_tt_one }
+		gg_constitution_first_term = yes # EN/ES: AUD-END-A1 -- Rosas's first term, six years (art. 74) / su primer periodo
 		gg_constitution_federal = yes # EN/ES: 23/9 (Juan) -- a federation: one country, the autocracy ends / una federacion
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_devout }
@@ -128,7 +132,16 @@ gg_constitution.1 = {
 		trigger = { gg_constitution_offers_pact_congress = yes }
 		set_global_variable = { name = gg_constitution_chosen value = 1 } # EN/ES: a constitution: Rosas's era ends / una constitucion: termina la era de Rosas
 		gg_constitution_clear_old_answer = yes
-		custom_tooltip = gg_constitution.1.c_tt
+		# EN/ES: 24/9/2026 (AUD-END-A6) -- not the incorporation gg_argentina.80.a already made / no la ya hecha
+		if = { limit = { gg_constitution_provinces_to_join = yes } custom_tooltip = gg_constitution.1.c_tt }
+		else = { custom_tooltip = gg_constitution.1.c_tt_one }
+		# EN/ES: 24/9/2026 (AUD-END-A1) -- the Restorer serves the first term; without him in the seat, the vote at once
+		#     / el Restaurador cumple el primer periodo; sin el en el sillon, el voto enseguida
+		gg_constitution_first_term = yes
+		if = {
+			limit = { NOT = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } } }
+			custom_tooltip = gg_constitution.1.c_vote_tt
+		}
 		gg_constitution_federal = yes
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
 		add_radicals = { value = small_radicals interest_group = ig:ig_devout }

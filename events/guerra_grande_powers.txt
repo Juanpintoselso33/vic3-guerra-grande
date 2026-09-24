@@ -1162,6 +1162,9 @@ gg_powers.20 = {
 		gg_plata_settlement_reset = yes
 		# EN/ES: 22/9/2026 -- tell the players of both governments / avisar a los jugadores de los dos gobiernos
 		gg_plata_notify = { EVENT = gg_plata.24 }
+		# EN/ES: 24/9/2026 (AUD-END-B1) -- gg_plata.24 went to every player the level notice would reach, and it says the
+		#     level: no «Francia se aparta» the same day / gg_plata.24 ya dice el nivel: sin segundo aviso el mismo dia
+		gg_patron_fold_all = { POWER = francia }
 		# EN/ES: the French squadron stops being sea; the Paris mission softens the fall
 		if = {
 			limit = { has_global_variable = gg_paris_mission }

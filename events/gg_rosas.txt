@@ -256,6 +256,7 @@ gg_rosas.4 = {
 		name = gg_rosas.4.a
 		default_option = yes
 		custom_tooltip = gg_rosas.4.a_tt
+		gg_patron_folded_tt = { POWER = britania } # EN/ES: AUD-END-B1 -- London's level, instead of its own notice / el nivel de Londres, en vez de su aviso
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		c:GBR ?= { change_relations = { country = ROOT value = 40 } }
 		ai_chance = { base = 75 }
@@ -265,6 +266,7 @@ gg_rosas.4 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.4.b|" # GG_TRAZA
 		name = gg_rosas.4.b
 		custom_tooltip = gg_rosas.4.b_tt
+		gg_patron_folded_tt = { POWER = britania } # EN/ES: AUD-END-B1
 		gg_patron_change = { PATRON = rosas DELTA = -20 }
 		gg_endurance_add = { SIDE = cerrito VALUE = -20 }
 		c:GBR ?= { change_relations = { country = ROOT value = 60 } }

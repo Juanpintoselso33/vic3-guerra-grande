@@ -1532,6 +1532,14 @@ gg_argentina.71 = {
 		# EN/ES: one writer for the constitutional closure opened at Alcaraz / un solo escritor para
 		#     el cierre constitucional abierto en Alcaraz
 		custom_tooltip = gg_confederacion_negociada_tt
+		# EN: 24/9/2026 (AUD-END-B2, Juan) -- what gg_argentina.82 said the same day, with the same title and one option, is
+		#     now this answer's result: the Congress convened, Rosas keeping Buenos Aires under the written settlement, and
+		#     the same weight on the interest groups.
+		# ES: lo que decia gg_argentina.82 el mismo dia, con el mismo titulo y una sola opcion, es ahora el resultado de esta
+		#     respuesta: el Congreso convocado, Rosas en Buenos Aires bajo lo firmado, y el mismo peso en los grupos.
+		custom_tooltip = gg_argentina.71.a_congress_tt
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_open_negotiated_confederation = yes }
 		default_option = yes
@@ -3705,7 +3713,15 @@ gg_argentina.80 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.80.t
-	desc = gg_argentina.80.d
+	# EN/ES: 24/9/2026 (AUD-END-A5) -- after the negotiated confederation nobody was beaten: its own text. Since AUD-END-B3
+	#     only an old save repaired by gg_oriental_left_out_migration reaches it on that road
+	#     / tras la confederacion negociada nadie fue batido: su propio texto
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.80.d_negotiated trigger = { has_global_variable = gg_confederacion_negociada } }
+			triggered_desc = { desc = gg_argentina.80.d }
+		}
+	}
 	flavor = gg_argentina.80.f
 	event_image = { video = "gg_arg_mendoza" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -3738,6 +3754,11 @@ gg_argentina.80 = {
 			}
 		}
 		custom_tooltip = gg_argentina.80.a_tt
+		# EN/ES: 24/9/2026 (AUD-END-A5) -- the Oriental Province goes too, and says so / la Provincia Oriental tambien, y se dice
+		if = {
+			limit = { c:URU ?= { gg_is_oriental_pact_province = yes } }
+			custom_tooltip = gg_argentina.80.a_oriental_tt
+		}
 		gg_argentina_provinces_incorporate = yes
 		# EN/ES: 23/9 (Juan) -- and then the constitution / y despues la constitucion
 		gg_constitution_schedule = yes # EN/ES: AUD-CONST-CHOICE -- a month on, and never during a war with Brazil / al mes, y nunca en guerra con el Brasil
@@ -3790,28 +3811,6 @@ gg_argentina.80 = {
 #     que hace ese resultado con la delegacion, el gobierno y la cuestion constitucional.
 # SOURCE / FUENTE: docs/guerra-grande-argentina/propuesta-codex.md, «El final».
 # -------------------------------------------------------------------------------------------------
-gg_argentina.82 = {
-	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.82|" } # GG_TRAZA
-	type = country_event
-	placement = ROOT
-	title = gg_argentina.82.t
-	desc = gg_argentina.82.d
-	flavor = gg_argentina.82.f
-	event_image = { video = "gg_arg_san_nicolas" }
-	icon = "gfx/interface/icons/event_icons/event_scales.dds"
-	duration = 12
-	is_popup = yes
-	trigger = { has_global_variable = gg_pact_settlement_constitutional }
-	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.82.a|" # GG_TRAZA
-		name = gg_argentina.82.a
-		default_option = yes
-		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
-		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
-		ai_chance = { base = 100 }
-	}
-}
-
 gg_argentina.83 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.83|" } # GG_TRAZA
 	type = country_event

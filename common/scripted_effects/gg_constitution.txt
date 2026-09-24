@@ -119,13 +119,44 @@ gg_constitution_unitaria = {
 #     treinta dias; un relevo oculto pregunta al mes, y el pulso mensual de la sede de Rosas vuelve a preguntar cada mes
 #     hasta que el evento salio (lo borra en su immediate).
 # -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (AUD-END-B3, Juan) -- ELEVEN MONTHS, NOT ONE. The Acuerdo de San Nicolas was signed on 31/5/1852 and the
+#     Constitution sanctioned in Santa Fe on 1/5/1853: 335 days on the engine's 365-day years. The question now comes that
+#     far from the settlement (or from gg_argentina.80's answer), not thirty days on; the Congress in between is not given a
+#     date of its own (its installation is not sourced yet). Every other rule stays: the pending mark, the monthly retry,
+#     the wait while Brazil is at war or waiting (gg_constitution_brazil_war).
+# ES: ONCE MESES, NO UNO. San Nicolas el 31/5/1852 y la Constitucion sancionada el 1/5/1853: 335 dias en los anios de 365
+#     del motor. La pregunta llega a esa distancia del cierre, no a treinta dias; el Congreso no tiene fecha propia (su
+#     instalacion no esta fuenteada). El resto sigue igual.
+# SOURCE / FUENTE: design repo docs/guerra-grande-argentina/historia-argentina.md (epilogue [D], San Nicolas 31/5/1852);
+#     docs/guerra-grande-argentina/buenos-aires-separada-plan.md (the Constitution sanctioned 1/5/1853).
 gg_constitution_schedule = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_schedule|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_constitution_chosen } }
 		set_global_variable = gg_constitution_pending
-		set_global_variable = { name = gg_constitution_wait days = 29 } # EN/ES: expires the day before the relay / vence el dia antes del relevo
-		trigger_event = { id = gg_constitution.10 days = 30 }
+		set_global_variable = { name = gg_constitution_wait days = 334 } # EN/ES: expires the day before the relay / vence el dia antes del relevo
+		trigger_event = { id = gg_constitution.10 days = 335 }
+	}
+}
+
+# EN: 24/9/2026 (AUD-END-A1, Juan: «one term»; AUD-END-B4) -- the Constitution of 1853 (gg_constitution.1.a/.c) with Rosas
+#     in the seat: his first term, six years (art. 74), kept by gg_rosas_keeps_the_seat through every election until it
+#     ends; then the engine's elections, re-election neither forced nor forbidden. Scope: Argentina (the Rosas seat).
+#     gg_rosas_first_term_known says this save answered with this rule, so the old-save repair never runs on it.
+# ES: la Constitucion de 1853 con Rosas en el sillon: su primer periodo, seis anios (art. 74), que la guarda de la sede
+#     sostiene en cada eleccion hasta que termine; despues, las elecciones del motor.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), art. 74 (above, gg_rosas_first_term_running).
+gg_constitution_first_term = {
+	hidden_effect = { set_global_variable = gg_rosas_first_term_known }
+	if = {
+		limit = {
+			ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas }
+		}
+		custom_tooltip = gg_constitution_rosas_first_term_tt
+		hidden_effect = {
+			set_global_variable = { name = gg_rosas_first_term days = 2190 }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_first_term| FIRST_TERM=yes " # GG_TRAZA
+		}
 	}
 }
 

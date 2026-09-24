@@ -887,6 +887,21 @@ gg_loan.6 = {
 #     gg_loan_settled puesto con una foto de mitad de guerra, y bloquear para siempre gg_loan.1-4
 #     (los cuatro llevan NOT has_variable=gg_loan_settled) para una guerra que seguia. gg_peace_settled
 #     nunca se pone en la rama de rechazo, asi que esto ya no puede pasar.
+# EN: 24/9/2026 (AUD-END-A7) -- the accounts the day the war ends, not up to 120 days later (in Juan's game the peace of
+#     22/12/1849 reached gg_loan.6 on 4/4/1850). gg_postwar_start queues this on Argentina (a tag that never changes) three
+#     days on, after gg_peace.8 has made a winning Cerrito URU (+1 day). Idempotent: gg_loan_settled per government, and the
+#     watcher (gg_loan.7) finds them settled and stops.
+# ES: las cuentas el dia que termina la guerra, no hasta 120 dias despues. gg_postwar_start lo agenda en la Argentina tres
+#     dias despues, cuando gg_peace.8 ya hizo URU al Cerrito ganador. Idempotente.
+gg_loan.8 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.8|" # GG_TRAZA
+		gg_loan_accounts = yes
+	}
+}
+
 gg_loan.7 = {
 	type = country_event
 	hidden = yes
@@ -904,24 +919,7 @@ gg_loan.7 = {
 					#     al terminar la guerra, no en una fecha
 				}
 			}
-			# EN/ES: review -- by government, not by tag: the winning Cerrito is URU after gg_peace.8
-			#     / por gobierno y no por tag: el Cerrito ganador es URU despues de gg_peace.8
-			every_country = {
-				limit = {
-					has_variable = guerra_grande_defensa_government
-					NOT = { has_variable = gg_loan_settled }
-				}
-				set_variable = gg_loan_settled
-				trigger_event = { id = gg_loan.5 days = 4 popup = yes }
-			}
-			every_country = {
-				limit = { has_variable = guerra_grande_cerrito_government }
-				if = {
-					limit = { NOT = { has_variable = gg_loan_settled } }
-					set_variable = gg_loan_settled
-					trigger_event = { id = gg_loan.6 days = 4 popup = yes }
-				}
-			}
+			gg_loan_accounts = yes
 		}
 		else_if = {
 			limit = { year < 1870 }
@@ -952,15 +950,11 @@ gg_loan.7 = {
 			#     cadena se reagenda sola sobre su propio ROOT, asi que no hay abanico ni
 			#     crecimiento exponencial: son dos vigias en vez de uno, y el gobierno que
 			#     sobreviva sigue latiendo pase lo que le pase al otro.
-			if = {
-				limit = { NOT = { has_global_variable = gg_loan_watcher_split } }
-				set_global_variable = gg_loan_watcher_split
-				c:URU ?= { trigger_event = { id = gg_loan.7 days = 120 } }
-				c:CER ?= { trigger_event = { id = gg_loan.7 days = 120 } }
-			}
-			else = {
-				trigger_event = { id = gg_loan.7 days = 120 }
-			}
+			# EN: 24/9/2026 (AUD-END-A7) -- the fork is gone: gg_partition_calendar has scheduled one copy on each government
+			#     since 19/9, and the first copy to fire forked again, so three chains ran. Each copy re-arms on its own ROOT.
+			# ES: sin bifurcacion: el reparto ya agenda una copia en cada gobierno, y la primera se volvia a bifurcar (tres
+			#     cadenas). Cada copia se reagenda sobre su propio ROOT.
+			trigger_event = { id = gg_loan.7 days = 120 }
 		}
 	}
 }

@@ -27,6 +27,6 @@ gg_patron_level_watch = {
 	else_if = {
 		limit = { NOT = { global_var:gg_power_level_seen_$POWER$ = gg_patron_level_$POWER$ } }
 		set_global_variable = { name = gg_power_level_seen_$POWER$ value = gg_patron_level_$POWER$ }
-		gg_plata_notify = { EVENT = $EVENT$ }
+		gg_patron_notify = { EVENT = $EVENT$ POWER = $POWER$ }
 	}
 }

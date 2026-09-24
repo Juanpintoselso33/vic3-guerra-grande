@@ -488,7 +488,7 @@ guerra_grande_on_election_end = {
 
 # EN/ES: 23/9/2026 -- the historical lives, renewed monthly (common/scripted_effects/gg_historical_lives.txt)
 on_monthly_pulse_country = {
-	on_actions = { gg_historical_lives_monthly }
+	on_actions = { gg_historical_lives_monthly gg_historical_lives_monthly_arg }
 }
 gg_historical_lives_monthly = {
 	trigger = { c:URU ?= this }
@@ -504,6 +504,24 @@ gg_historical_lives_monthly = {
 			gg_president_historical = yes
 			c:CER ?= { gg_president_historical = yes }
 		}
+	}
+}
+# EN: 24/9/2026 (AUD-END-A2) -- the pulse lived only on URU, and the Oriental Province absorbed by the Pact
+#     (gg_oriental_province_absorb) took it along: in Juan's game no historical life was renewed or cleared after
+#     30/4/1851, Rosas stayed immortal past 1877 and the Rosas seat lost its monthly check. When URU does not exist,
+#     Argentina runs it -- the lives and the Rosas seat only; the Oriental presidency is the Republic's. No migration:
+#     the first pulse on or after each date clears that man.
+# ES: el pulso vivia solo en URU, y la Provincia Oriental absorbida se lo llevaba. Sin URU lo corre la Argentina: las
+#     vidas y la sede de Rosas; la presidencia oriental es de la Republica. Sin migracion.
+gg_historical_lives_monthly_arg = {
+	trigger = {
+		c:ARG ?= this
+		NOT = { exists = c:URU }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly_arg" # GG_TRAZA
+		gg_historical_lives = yes
+		gg_rosas_keeps_the_seat = yes
 	}
 }
 

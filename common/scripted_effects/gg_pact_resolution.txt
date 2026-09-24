@@ -137,7 +137,8 @@ gg_pact_resolve = {
 		if = {
 			limit = { has_global_variable = gg_confederacion_negociada }
 			set_global_variable = gg_pact_settlement_constitutional
-			trigger_event = { id = gg_argentina.82 days = 0 popup = yes }
+			# EN/ES: 24/9/2026 (AUD-END-B2) -- no second window: gg_argentina.71.a, the only road here, already told it
+			#     / sin segunda ventana: gg_argentina.71.a, el unico camino hasta aca, ya lo conto
 		}
 		else_if = {
 			limit = { global_var:gg_pact_war_urquiza_won = 1 }

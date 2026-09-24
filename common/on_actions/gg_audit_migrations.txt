@@ -22,6 +22,7 @@ on_monthly_pulse_country = {
 		gg_brazil_deal_migration
 		gg_province_incorporation_migration
 		gg_cis_note_migration
+		gg_rosas_first_term_migration
 	}
 }
 
@@ -264,5 +265,39 @@ gg_cis_note_migration = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_note_migration" # GG_TRAZA
 		set_global_variable = gg_cis_note_known
 		trigger_event = { id = gg_cisplatina.10 days = 45 }
+	}
+}
+
+# EN: 24/9/2026 (AUD-END-A1; Juan's game: gg_constitution.1.a on 16/6/1851, Rosas out of the seat on 17/6/1851) -- a save
+#     that gave the Constitution of 1853 before the first term existed. The Restorer gets his term back: the Rosas seat
+#     puts him in again (gg_rosas_keeps_the_seat, on this pulse or at the next ruler change) until it ends. THE DATE OF
+#     THE ANSWER IS NOT IN THE SAVE, so the term runs to 31/5/1857: six years from the earliest day the old flow could
+#     ask (the settlement of 1/5/1851 plus its thirty days). For Juan (16/6/1851) that is 16 days short, never long --
+#     art. 75: the president «cesa en el poder el dia mismo en que expira su periodo». Only after the negotiated or
+#     Rosas's own settlement (the roads where he held the seat), with Rosas alive in Argentina. Once per save
+#     (gg_rosas_first_term_known, which the new answer writes too). Not guarded by gg_new_game_no_migrations: Juan's game
+#     carries that mark.
+# ES: una partida que dio la Constitucion de 1853 antes de que existiera el primer periodo. El Restaurador recupera su
+#     periodo hasta el 31/5/1857: la fecha de la respuesta no esta en la partida, asi que se cuenta desde el primer dia en
+#     que el flujo viejo pudo preguntar. Para Juan son 16 dias menos, nunca mas (art. 75). Una vez por partida.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), arts. 74-75 (es.wikisource).
+gg_rosas_first_term_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_variable = gg_arg_rosas_seat
+		global_var:gg_constitution_chosen ?= 1
+		NOT = { has_global_variable = gg_rosas_first_term_known }
+		OR = {
+			has_global_variable = gg_pact_settlement_constitutional
+			has_global_variable = gg_pact_settlement_rosas
+		}
+		game_date < 1857.5.31
+		any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_first_term_migration" # GG_TRAZA
+		set_global_variable = gg_rosas_first_term_known
+		set_global_variable = gg_rosas_first_term_legacy
+		gg_rosas_keeps_the_seat = yes
 	}
 }

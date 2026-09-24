@@ -2,7 +2,7 @@
 #     and the question between federales and unitarios opens (gg_constitution.2).
 # ES: mientras Rosas gobierne sin constitucion, el mes en que muere lo termina.
 on_monthly_pulse_country = {
-	on_actions = { gg_rosas_succession_monthly gg_constitution_monthly gg_constitution_choice_migration gg_constitution_legacy_bootstrap }
+	on_actions = { gg_rosas_succession_monthly gg_constitution_monthly gg_constitution_choice_migration gg_constitution_legacy_bootstrap gg_pact_80_monthly }
 }
 
 # EN: 24/9/2026 (AUD-CONST-CHOICE) -- the monthly retry of the constitution: while it is pending (gg_constitution_schedule)
@@ -10,6 +10,22 @@ on_monthly_pulse_country = {
 #     war with Brazil. A pulse cannot be lost the way a queued event can.
 # ES: el reintento mensual de la constitucion: mientras este pendiente y no haya salido, la sede de Rosas vuelve a
 #     preguntar cada mes; gg_constitution_try la frena mientras Buenos Aires este en guerra con el Brasil.
+# EN: 24/9/2026 (AUD-END-A3) -- gg_argentina.80 held off by the Cisplatine question (gg_argentina_vassals_settle): asked
+#     on the first pulse after it is settled. A pulse cannot be lost the way a queued event can.
+# ES: gg_argentina.80 frenado por la cuestion cisplatina: se pregunta en el primer pulso despues de saldada.
+gg_pact_80_monthly = {
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = gg_pact_80_pending
+		NOT = { gg_constitution_brazil_war = yes }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_80_monthly" # GG_TRAZA
+		remove_global_variable = gg_pact_80_pending
+		trigger_event = { id = gg_argentina.80 days = 0 popup = yes }
+	}
+}
+
 gg_constitution_monthly = {
 	trigger = {
 		has_variable = gg_arg_rosas_seat
@@ -90,6 +106,7 @@ gg_constitution_legacy_bootstrap = {
 		NOT = { has_global_variable = gg_constitution_pending }
 		NOT = { has_global_variable = gg_constitution_offer_v2 }
 		NOT = { has_global_variable = gg_constitution_legacy_seeded }
+		NOT = { has_global_variable = gg_pact_settled_v3 } # EN/ES: AUD-END-B3 -- only a save settled before the new flow / solo una partida cerrada antes del flujo nuevo
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_legacy_bootstrap" # GG_TRAZA

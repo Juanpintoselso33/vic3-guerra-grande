@@ -72,10 +72,77 @@ gg_constitution_brazil_war = {
 			has_war_with = c:BRZ
 		}
 		any_diplomatic_play = { is_diplomatic_play_type = dp_gg_cisplatina }
+		# EN: 24/9/2026 (AUD-END-A3, Juan) -- and while Brazil waits for its moment (gg_cis_wait, after gg_cisplatina.2.b/.c/.d):
+		#     the Cisplatine question is still open. The wait cannot hang: gg_cisplatina.7 clears it when the war opens, when
+		#     the Banda Oriental leaves the Pact, or on 1/1/1853.
+		# ES: y mientras el Brasil espera su ocasion: la cuestion cisplatina sigue abierta. La espera no queda colgada:
+		#     gg_cisplatina.7 la corta al abrir la guerra, si la Banda Oriental deja el Pacto o el 1/1/1853.
+		# EN/ES: Codex review -- only while Brazil stands and before 1/1/1853, the wait's own end: its only clearer
+		#     (gg_cisplatina.7) lives on Brazil, and a lost copy must not hold the question forever
+		#     / solo mientras exista el Brasil y antes del 1/1/1853: quien la borra vive en el Brasil
+		AND = {
+			has_global_variable = gg_cis_waiting
+			exists = c:BRZ
+			game_date < 1853.1.1
+		}
 	}
 }
 
 # EN/ES: 24/9/2026 (Codex) -- the Restorer is alive, in whatever country / el Restaurador vive, en el pais que sea
 gg_constitution_rosas_alive = {
 	any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
+}
+
+# EN: 24/9/2026 (AUD-END-A6) -- the constitution still has provinces to join: a province country (or the Coalition, or the
+#     Oriental Province) under Buenos Aires, or -- after Urquiza's victory or the negotiated confederation -- an independent
+#     Corrientes, Entre Rios or Coalition at peace with it (gg_argentina_province_join, ALLY = yes). Scope: Argentina.
+#     Only for the tooltip: an Argentina that already incorporated them (gg_argentina.80.a) is not promised it again.
+# ES: a la constitucion todavia le quedan provincias por sumar. Solo para el tooltip: no se promete lo ya hecho.
+gg_constitution_provinces_to_join = {
+	OR = {
+		any_subject_or_below = {
+			is_subject_of = c:ARG
+			OR = {
+				gg_is_province_country = yes
+				c:CLN ?= this
+				gg_is_oriental_pact_province = yes
+			}
+		}
+		AND = {
+			OR = {
+				has_global_variable = gg_pact_settlement_urquiza
+				has_global_variable = gg_pact_settlement_constitutional
+			}
+			any_country = {
+				OR = {
+					c:CRR ?= this
+					c:ENR ?= this
+					c:CLN ?= this
+				}
+				is_subject = no
+				NOT = { has_war_with = c:ARG }
+			}
+		}
+	}
+}
+
+# EN: 24/9/2026 (AUD-END-A1, Juan: «one term») -- Rosas's first term under the Constitution of 1853 is running: six years
+#     from gg_constitution.1.a/.c (art. 74: «El Presidente y Vicepresidente duran en sus empleos el termino de seis anos»).
+#     gg_rosas_first_term expires by itself (days = 2190, the engine's six years). gg_rosas_first_term_legacy is the
+#     one-time repair of a save that answered before this existed (gg_rosas_first_term_migration): its date is unknown,
+#     so the term is counted from the earliest day the old flow could have asked, 31/5/1851 -- it can end a little early,
+#     never late. After it, the engine's elections decide (AUD-END-B4).
+# ES: corre el primer periodo de Rosas bajo la Constitucion de 1853: seis anios (art. 74). La marca vence sola. La de
+#     partidas viejas cuenta desde el primer dia en que el flujo viejo pudo preguntar (31/5/1851): puede terminar un poco
+#     antes, nunca despues. Despues deciden las elecciones del motor.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), art. 74:
+#     https://es.wikisource.org/wiki/Constituci%C3%B3n_de_la_Naci%C3%B3n_Argentina_(1853)
+gg_rosas_first_term_running = {
+	OR = {
+		has_global_variable = gg_rosas_first_term
+		AND = {
+			has_global_variable = gg_rosas_first_term_legacy
+			game_date < 1857.5.31
+		}
+	}
 }

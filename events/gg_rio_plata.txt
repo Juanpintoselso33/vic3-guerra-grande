@@ -254,6 +254,11 @@ gg_plata.20 = {
 	type = country_event
 	placement = ROOT
 	title = gg_plata.20.t
+	# EN: 24/9/2026 (AUD-END-B1, Juan) -- never to the Rosas seat: the river is shut from the Buenos Aires shore
+	#     (gg_plata_closed: Rosas's shore and battery), so the closure is his own, and every text of this notice is
+	#     written from Montevideo («la plaza se aprieta»). Its reopening (gg_plata.21) still reaches him.
+	# ES: nunca a la sede de Rosas: el rio se cierra desde su orilla, y el texto esta escrito desde Montevideo.
+	trigger = { NOT = { has_variable = gg_arg_rosas_seat } }
 	desc = {
 		first_valid = {
 			# EN: River audit 22/9 -- before the split the monthly counters do not run (gg_plata_monthly
@@ -432,6 +437,9 @@ gg_plata.24 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.24.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
+		# EN/ES: 24/9/2026 (AUD-END-B1) -- France's level, instead of its own notice the same day (gg_powers.20)
+		#     / el nivel de Francia, en vez de su propio aviso el mismo dia
+		gg_patron_folded_tt = { POWER = francia }
 	}
 }
 
@@ -803,10 +811,33 @@ gg_plata.5 = {
 	}
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.5|" # GG_TRAZA
+		# EN/ES: 24/9/2026 (AUD-END-B1) -- while the war runs, Buenos Aires hears of the treaty in gg_rosas.4 and the
+		#     Defensa in gg_powers.19 and the Cerrito in gg_notice.13, which say what it does to London's backing: no
+		#     «Londres se aparta» on top
+		#     / con la guerra abierta, Buenos Aires y la Defensa se enteran del tratado en su propio evento
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+			every_country = {
+				limit = {
+					OR = {
+						has_variable = gg_arg_rosas_seat
+						has_variable = guerra_grande_defensa_government
+						# EN/ES: Codex review -- the Cerrito hears of it in gg_notice.13 / el Cerrito se entera en gg_notice.13
+						has_variable = guerra_grande_cerrito_government
+					}
+				}
+				gg_patron_fold_for = { POWER = britania }
+			}
+		}
 		gg_plata_southern_signs = yes
 		# EN/ES: 23/9/2026 (D2) -- Buenos Aires hears of the same treaty the same day (its relay checks the war)
 		#     / Buenos Aires se entera del mismo tratado el mismo dia (su relevo mira la guerra)
-		c:ARG ?= { trigger_event = { id = gg_rosas.104 days = 1 } }
+		# EN/ES: 24/9/2026 (AUD-END-A4) -- days = 0: with days = 1 it came the day after the signing, asking whether to sign
+		#     / days = 0: con 1 llegaba al dia siguiente de la firma, preguntando si firmar
+		c:ARG ?= { trigger_event = { id = gg_rosas.104 days = 0 } }
 		# EN/ES: the Defensa's own answer to the treaty, while the war runs / la respuesta de la Defensa
 		if = {
 			limit = {

@@ -367,6 +367,13 @@ gg_postwar_start = {
 	# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- the war is over for every ending, the reincorporation included: the siege
 	#     modifiers go here, not only when the Oriental postwar runs / la guerra termino para todo final
 	gg_wartime_modifiers_clear_once = yes
+	# EN/ES: 24/9/2026 (AUD-END-A7) -- the loan accounts come with the peace, not with the 120-day watcher
+	#     / las cuentas de los emprestitos llegan con la paz, no con el vigia de 120 dias
+	if = {
+		limit = { NOT = { has_global_variable = gg_loan_accounts_queued } }
+		set_global_variable = gg_loan_accounts_queued
+		c:ARG ?= { trigger_event = { id = gg_loan.8 days = 3 } }
+	}
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_postwar_started }
@@ -1417,6 +1424,10 @@ gg_urquiza_flip = {
 # -------------------------------------------------------------------------------------------------
 gg_argentina_vassals_settle = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_vassals_settle|" # GG_TRAZA
+	# EN/ES: 24/9/2026 (AUD-END-B3) -- this save settles with the eleven-month flow: the 0.1.1 repair
+	#     (gg_constitution_legacy_bootstrap) must not put a thirty-day question in front of it
+	#     / esta partida cierra con el flujo de once meses: la reparacion de 0.1.1 no le antepone una pregunta a treinta dias
+	set_global_variable = gg_pact_settled_v3
 	# EN: 23/9/2026 (Juan: "it depends on how the Federal Pact is signed: one option can be a completely
 	#     decentralised confederation with every province a subject, another the annexation, etc."). The
 	#     settlement no longer annexes on its own: gg_argentina.80 asks Buenos Aires, and which answers it
@@ -1431,6 +1442,14 @@ gg_argentina_vassals_settle = {
 				#     provinces to Urquiza's Confederation, and neither answer of gg_argentina.80 applies to what is left
 				#     / no con dos gobiernos: la particion le dio las provincias a la Confederacion de Urquiza
 				NOT = { has_global_variable = gg_pact_settlement_stalemate }
+				# EN: 24/9/2026 (AUD-END-B3, Juan) -- nor after Urquiza's victory or the negotiated confederation: there
+				#     gg_argentina.80 had one answer, the incorporation, a month before the constitution that makes it
+				#     anyway. As in 1853, the constitution incorporates the provinces (gg_constitution_one_country); until
+				#     then they stay Provinces of the Pact, and gg_constitution.1.g can still keep them so.
+				# ES: ni tras la victoria de Urquiza o la confederacion negociada: ahi .80 tenia una sola respuesta. Como en
+				#     1853, las incorpora la constitucion; hasta entonces siguen provincias del Pacto.
+				NOT = { has_global_variable = gg_pact_settlement_urquiza }
+				NOT = { has_global_variable = gg_pact_settlement_constitutional }
 				any_subject_or_below = {
 					OR = {
 						c:CLN ?= this
@@ -1442,7 +1461,18 @@ gg_argentina_vassals_settle = {
 					is_subject_of = c:ARG
 				}
 			}
-			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
+			# EN: 24/9/2026 (AUD-END-A3, Juan) -- never while the Cisplatine question is open (Brazil at war with Buenos
+			#     Aires, its play on, or its wait after gg_cisplatina.2.b/.c/.d): the question stays pending and the Rosas
+			#     seat's monthly pulse asks once it is settled (gg_pact_80_monthly, gg_rosas_succession.txt).
+			# ES: nunca con la cuestion cisplatina abierta: queda pendiente y el pulso mensual pregunta cuando se salda.
+			if = {
+				limit = { gg_constitution_brazil_war = yes }
+				set_global_variable = gg_pact_80_pending
+				debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_vassals_settle| WAIT=brazil " # GG_TRAZA
+			}
+			else = {
+				trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
+			}
 		}
 		# EN: 23/9/2026 (Codex audit, AUD-CONST-SCHEDULE) -- no province left to ask about (a negotiated Pact
 		#     without Entre Rios, or every province already Argentine ground): the constitution still comes, a month

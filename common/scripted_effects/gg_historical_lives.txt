@@ -74,15 +74,26 @@ gg_rosas_keeps_the_seat = {
 		if = {
 			limit = {
 				has_variable = gg_arg_rosas_seat
-				NOR = {
-					has_global_variable = gg_pact_settlement_urquiza
-					has_global_variable = gg_pact_settlement_constitutional
-					has_global_variable = gg_pact_settlement_mandate_collapsed
+				OR = {
+					# EN: 24/9/2026 (AUD-END-A1, Juan: «one term») -- the Constitution of 1853 gives him his first term, six
+					#     years (art. 74), whatever the settlement: the vote the constitution brings (law_universal_suffrage
+					#     over law_presidential_republic) seated an interest group's leader the day after gg_constitution.1.a
+					#     in Juan's game (17/6/1851). This puts him back, also after every election, until the term ends.
+					# ES: la Constitucion de 1853 le da su primer periodo, seis anios, sea cual sea el cierre: el voto sento
+					#     al lider de un grupo al dia siguiente en la partida de Juan. Esto lo repone hasta que termine.
+					gg_rosas_first_term_running = yes
+					AND = {
+						NOR = {
+							has_global_variable = gg_pact_settlement_urquiza
+							has_global_variable = gg_pact_settlement_constitutional
+							has_global_variable = gg_pact_settlement_mandate_collapsed
+						}
+						# EN/ES: 24/9/2026 (AUD-CONST-CHOICE, Codex) -- nor once he has given a constitution (gg_constitution.1.c/.e): the
+						#     vote decides the government / ni despues de que dio una constitucion: el gobierno lo decide el voto
+						NOT = { global_var:gg_constitution_chosen ?= 1 }
+						NOT = { global_var:gg_constitution_chosen ?= 3 }
+					}
 				}
-				# EN/ES: 24/9/2026 (AUD-CONST-CHOICE, Codex) -- nor once he has given a constitution (gg_constitution.1.c/.e): the
-				#     vote decides the government / ni despues de que dio una constitucion: el gobierno lo decide el voto
-				NOT = { global_var:gg_constitution_chosen ?= 1 }
-				NOT = { global_var:gg_constitution_chosen ?= 3 }
 				any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes }
 				NOT = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } }
 			}

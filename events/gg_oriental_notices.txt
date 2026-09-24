@@ -416,6 +416,7 @@ gg_notice.13 = {
 		name = gg_notice.13.a
 		default_option = yes
 		custom_tooltip = gg_notice.13.a_tt
+		gg_patron_folded_tt = { POWER = britania } # EN/ES: AUD-END-B1 -- London's level, instead of its own notice / el nivel de Londres
 		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
 		ai_chance = { base = 75 }
@@ -428,6 +429,7 @@ gg_notice.13 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13.b|" # GG_TRAZA
 		name = gg_notice.13.b
+		gg_patron_folded_tt = { POWER = britania } # EN/ES: AUD-END-B1
 		custom_tooltip = gg_notice.13.b_tt
 		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
 		gg_score_blanco = { AMOUNT = 2 }

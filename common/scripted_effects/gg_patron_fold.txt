@@ -1,0 +1,66 @@
+﻿# EN/ES: 24/9/2026 (AUD-END-B1) -- before gg_patron_levels.txt, which calls these / antes de gg_patron_levels.txt, que las llama
+
+# EN/ES: this country already hears of the power's level from the cause (three days) / este pais ya se entera por la causa
+gg_patron_fold_for = {
+	set_variable = { name = gg_patron_folded_$POWER$ days = 3 }
+}
+# EN: 24/9/2026 (AUD-END-B1, Juan) -- a change of level does not open a window of its own when its cause already opened one
+#     for that player: in Juan's game Arana-Southern brought gg_rosas.4 and «Londres se aparta» in the same week, and
+#     Arana-Lepredour gg_plata.24 and «Francia se aparta» on the same day. The cause marks who already hears of it -- a
+#     country variable gg_patron_folded_<power> (gg_plata.5 for Southern) or, when the cause went to every one of these
+#     players, every one of them (gg_patron_fold_all, gg_powers.20 for Lepredour) -- and says the level in its own tooltip
+#     (gg_patron_folded_tt). Everyone else still gets the notice. The level is recorded either way.
+# ES: un cambio de nivel no abre ventana propia si su causa ya le abrio una a ese jugador: la causa marca quien ya se
+#     entera y dice el nivel en su propio tooltip. Los demas reciben el aviso igual. El nivel se registra siempre.
+gg_patron_notify = {
+	every_country = {
+		limit = {
+			is_player = yes
+			OR = {
+				has_variable = gg_arg_rosas_seat
+				has_variable = guerra_grande_defensa_government
+				has_variable = guerra_grande_cerrito_government
+				AND = {
+					NOT = { has_global_variable = guerra_grande_split_done }
+					c:URU ?= this
+				}
+			}
+			NOT = { has_variable = gg_patron_folded_$POWER$ }
+		}
+		trigger_event = { id = $EVENT$ popup = yes }
+	}
+	every_country = {
+		limit = {
+			is_player = yes
+			has_variable = gg_patron_folded_$POWER$
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_patron_notify| FOLDED= $POWER$ " # GG_TRAZA
+	}
+}
+
+# EN/ES: 24/9/2026 (AUD-END-B1) -- the level line the cause shows instead of the notice; the level read when the
+#     tooltip is drawn, after the change / la linea de nivel que muestra la causa en vez del aviso
+gg_patron_folded_tt = {
+	if = { limit = { gg_patron_level_$POWER$ = 2 } custom_tooltip = gg_patron_folded_$POWER$_2 }
+	else_if = { limit = { gg_patron_level_$POWER$ = 1 } custom_tooltip = gg_patron_folded_$POWER$_1 }
+	else = { custom_tooltip = gg_patron_folded_$POWER$_0 }
+}
+
+# EN/ES: 24/9/2026 (AUD-END-B1) -- the cause went to every country gg_plata_notify reaches (gg_plata.24): all of them already
+#     hear of the level / la causa llego a todos los que alcanza gg_plata_notify: todos se enteran del nivel
+gg_patron_fold_all = {
+	every_country = {
+		limit = {
+			OR = {
+				has_variable = gg_arg_rosas_seat
+				has_variable = guerra_grande_defensa_government
+				has_variable = guerra_grande_cerrito_government
+				AND = {
+					NOT = { has_global_variable = guerra_grande_split_done }
+					c:URU ?= this
+				}
+			}
+		}
+		gg_patron_fold_for = { POWER = $POWER$ }
+	}
+}

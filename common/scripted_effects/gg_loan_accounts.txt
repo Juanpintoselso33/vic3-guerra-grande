@@ -1,0 +1,25 @@
+﻿# EN: 24/9/2026 (AUD-END-A7) -- the two reckonings of the loans when the war ends (gg_loan.5 for the Defensa, gg_loan.6 for
+#     the Cerrito), once per government (gg_loan_settled). Moved out of gg_loan.7 so the peace can call it at once
+#     (gg_loan.8, from gg_postwar_start) and the 120-day watcher stays only as the net. By government, not by tag: the
+#     winning Cerrito is URU after gg_peace.8.
+# ES: las dos cuentas de los emprestitos al terminar la guerra, una vez por gobierno. Sacado de gg_loan.7 para que la paz
+#     lo llame enseguida (gg_loan.8) y el vigia de 120 dias quede solo de red. Por gobierno y no por tag.
+gg_loan_accounts = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_loan_accounts|" # GG_TRAZA
+	every_country = {
+		limit = {
+			has_variable = guerra_grande_defensa_government
+			NOT = { has_variable = gg_loan_settled }
+		}
+		set_variable = gg_loan_settled
+		trigger_event = { id = gg_loan.5 days = 4 popup = yes }
+	}
+	every_country = {
+		limit = {
+			has_variable = guerra_grande_cerrito_government
+			NOT = { has_variable = gg_loan_settled }
+		}
+		set_variable = gg_loan_settled
+		trigger_event = { id = gg_loan.6 days = 4 popup = yes }
+	}
+}
