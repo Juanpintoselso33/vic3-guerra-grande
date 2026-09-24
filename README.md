@@ -30,6 +30,14 @@ Carpintería, the Republic split between the government of the **Defensa** (Mont
 Federal Pact, Corrientes, the Northern Coalition, Urquiza, Caseros and Pavón. See [`CHANGELOG.md`](CHANGELOG.md)
 for what changed in each release.
 
+## What this mod is
+
+A mod focused on **historical accuracy**. Until the founding events of Argentina and Uruguay are resolved —
+the Guerra Grande, the Federal Pact, Urquiza's rising, Caseros, and Buenos Aires apart until its reunion —
+it deliberately **railroads** the game along the historical track: dated events, guided AI and scripted wars.
+Game rules let you pick other endings for the war and the Pact. Once those questions are settled, the game is
+yours again.
+
 ## Who to play
 
 | Play as | What you get |
@@ -69,11 +77,3 @@ the river** (battles do not score), each government's endurance and the arbiter 
 cuestión del Plata» follows the foreign powers; «El Sitio Grande» opens in 1843; «El Pacto Federal»
 is the Argentine side. The war closes when one of the two governments ceases to exist, or with the
 peace of 8 October 1851: *neither vanquished nor victors*.
-
-## How it is built
-
-Nothing invented: every piece copies a mechanic the game already has — the First Carlist War
-journal entry, the Central American `create_country` secessions, the Taiping play, la
-Argentina's own scripted buttons. Texts come from period and academic sources, cited in
-[`SOURCES.md`](SOURCES.md); images are public-domain paintings, lithographs and photographs
-(credits in [`CREDITS.md`](CREDITS.md)).
