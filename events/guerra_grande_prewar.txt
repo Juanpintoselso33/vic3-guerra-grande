@@ -184,7 +184,7 @@ gg_prewar.3 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_f2_doma"
+		video = "gg_f2_mate_besnes"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -441,7 +441,7 @@ gg_prewar.7 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_f2_montevideo_port"
+		video = "gg_f2_martens_bahia"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"

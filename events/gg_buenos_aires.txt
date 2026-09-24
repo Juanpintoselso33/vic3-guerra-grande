@@ -667,7 +667,7 @@ gg_ba.11 = {
 		}
 	}
 	flavor = gg_ba.11.f
-	event_image = { video = "gg_ba_pavon" }
+	event_image = { video = "gg_ba_pavon_manzoni" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

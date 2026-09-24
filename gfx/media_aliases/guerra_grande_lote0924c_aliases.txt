@@ -55,3 +55,57 @@ gg_plata_gorgon_besnes = {
 	video = "gfx/media_aliases/gg_plata_gorgon_besnes.bk2"
 	audio = "event:/SFX/Events/unspecific/naval_battle"
 }
+
+# gg_naval.1: J. Gielis, "Primera salida de la Escuadra Oriental el 24 de mayo de 1841", lithograph, Montevideo 1841 -- National Maritime Museum, Greenwich, PAD5867 (web image; request a licence before a Workshop release)
+gg_nav_gielis_salida = {
+	video = "gfx/media_aliases/gg_nav_gielis_salida.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
+
+# gg_naval.2: J. Gielis, "Combate de la tarde el 24 de mayo de 1841 a las 5", lithograph, 1841 -- NMM Greenwich, PAD5868 (request a licence before a Workshop release); gentle autocontrast
+gg_nav_gielis_combate = {
+	video = "gfx/media_aliases/gg_nav_gielis_combate.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
+
+# gg_prewar.7: Conrad Martens, Montevideo from the anchorage of HMS Beagle, 4/12/1833 -- Cambridge University Library, MS Add. 7983 -- CC BY-NC 4.0
+gg_f2_martens_bahia = {
+	video = "gfx/media_aliases/gg_f2_martens_bahia.bk2"
+	audio = "event:/SFX/Events/unspecific/steam_ship"
+}
+
+# gg_rivera.3: Conrad Martens, Montevideo, outer wall, 22/8/1833 -- Cambridge University Library, MS Add. 7983 -- CC BY-NC 4.0
+gg_riv_martens_muralla = {
+	video = "gfx/media_aliases/gg_riv_martens_muralla.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_prewar.3: J. M. Besnes e Irigoyen, "Mi General, un mate... Muy bien, mi Amigo", lithograph, c. 1832-38 -- Museo Historico Nacional (UY), via Anaforas -- Public domain
+gg_f2_mate_besnes = {
+	video = "gfx/media_aliases/gg_f2_mate_besnes.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.2: Angel Paganelli, Casa de Tucuman, photograph, 1869 -- via Commons -- Public domain
+gg_arg_casa_tucuman = {
+	video = "gfx/media_aliases/gg_arg_casa_tucuman.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_phase1.4: General Don Juan Lavalle, chromolithograph, La Mujer (Buenos Aires), 27/7/1900 -- via Commons -- Public domain
+gg_fl_lavalle_lamujer = {
+	video = "gfx/media_aliases/gg_fl_lavalle_lamujer.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_argentina.23: Links of the chains of Vuelta de Obligado, photograph, Museo del Bicentenario, 2005 -- via Commons -- CC BY-SA 3.0 (credit)
+gg_arg_cadenas_obligado = {
+	video = "gfx/media_aliases/gg_arg_cadenas_obligado.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
+
+# gg_ba.11: Ignacio Manzoni, "Batalla de Pavon", oil, 1861, Museo Mitre -- via Commons (558x356) -- Public domain
+gg_ba_pavon_manzoni = {
+	video = "gfx/media_aliases/gg_ba_pavon_manzoni.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}

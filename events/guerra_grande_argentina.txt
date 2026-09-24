@@ -172,7 +172,7 @@ gg_argentina.2 = {
 	#     romperia la regla de no repetir adentro del mod y pareceria una eleccion terminada. Anotado
 	#     en PENDIENTES.md.
 	event_image = {
-		video = "gg_arg_coalicion"
+		video = "gg_arg_casa_tucuman"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -2132,7 +2132,7 @@ gg_argentina.23 = {
 	title = gg_argentina.23.t
 	desc = gg_argentina.23.d
 	flavor = gg_argentina.23.f
-	event_image = { video = "gg_in_obligado" }
+	event_image = { video = "gg_arg_cadenas_obligado" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes

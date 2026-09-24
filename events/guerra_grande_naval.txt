@@ -70,7 +70,7 @@ gg_naval.1 = {
 
 	# EN/ES: "El almirante Brown frente a Montevideo", Diogenes Hequet (1866-1902), public domain.
 	event_image = {
-		video = "gg_nav_brown_montevideo"
+		video = "gg_nav_gielis_salida"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_raiding.dds"
@@ -149,7 +149,7 @@ gg_naval.2 = {
 	flavor = gg_naval.2.f
 
 	event_image = {
-		video = "gg_nav_pasquines"
+		video = "gg_nav_gielis_combate"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

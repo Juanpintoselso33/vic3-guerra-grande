@@ -457,7 +457,7 @@ gg_phase1.4 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_fl_lavalle"
+		video = "gg_fl_lavalle_lamujer"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
