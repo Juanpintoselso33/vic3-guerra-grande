@@ -827,6 +827,12 @@ gg_powers.17 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.17.a|" # GG_TRAZA
 		name = gg_powers.17.a
 		default_option = yes
+		# EN/ES: 23/9 (story audit C3) -- the text takes the Alcaraz peace as signed: only if Urquiza and Corrientes
+		#     signed it (gg_argentina.69: Rosas accepted or rejected it) / solo si Urquiza y Corrientes lo firmaron
+		OR = {
+			has_global_variable = gg_alcaraz_accepted
+			has_global_variable = gg_alcaraz_rejected
+		}
 		# EN: offer Urquiza the alliance after Alcaraz. Whether Rosas lets him go depends on how strong
 		#     Rosas is.
 		# ES: ofrecerle la alianza a Urquiza despues de Alcaraz. Que Rosas lo deje ir depende de cuan
@@ -1279,6 +1285,29 @@ gg_powers.22 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.22|" # GG_TRAZA
 		# EN/ES: C25 -- Urquiza's pronouncement (1 May 1851), if Brazil is strong enough behind the Defensa
+# EN: 23/9/2026 (story audit C2) -- relay for gg_powers.23, scheduled by gg_urquiza_flip 30 days out. The
+#     chiefs do not go over to an Urquiza that Rosas has already beaten in the war of the Pact
+#     (gg_pact_settlement_rosas, or the war won by Rosas before the settlement): the check has to be made
+#     when the month is up, not when the flip queues it.
+# ES: relevo de gg_powers.23. Los jefes no se pasan a un Urquiza que Rosas ya vencio en la guerra del
+#     Pacto: el chequeo se hace al cumplirse el mes, no cuando el cambio de bando lo agenda.
+gg_powers.123 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.123|" # GG_TRAZA
+		if = {
+			limit = {
+				c:CER ?= this
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_pact_settlement_rosas }
+				NOT = { global_var:gg_pact_war_rosas_won ?= 1 }
+			}
+			trigger_event = { id = gg_powers.23 days = 0 popup = yes }
+		}
+	}
+}
+
 		gg_urquiza_flip = yes
 		hidden_effect = {
 			if = {

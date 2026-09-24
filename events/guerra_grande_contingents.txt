@@ -763,16 +763,16 @@ gg_contingent.8 = {
 		# EN/ES: T3b, C9 -- sixteen thousand Brazilians cross: the Cerrito's will breaks. 23/9 (audit T4):
 		#     out of the hidden_effect, so the player sees it / fuera del hidden_effect, para que se vea
 		gg_endurance_change = { SIDE = cerrito VALUE = -30 }
-		hidden_effect = {
-			# EN: the capitulation that follows. guerra_grande.8 was replaced by the peace menu,
-			#     which routes by government mark instead of by tag.
-			# ES: la capitulacion que sigue. guerra_grande.8 fue reemplazado por el menu de paz,
-			#     que rutea por marca de gobierno en vez de por tag.
-			# EN/ES: T1, C9 -- Caxias no longer hands the Defensa the peace: the arbiter decides.
-			#     T2/T3b turn this into a war-support blow and a Brazilian patron rise.
-			gg_patron_change = { PATRON = brasil DELTA = 20 }
-			gg_score_colorado = { AMOUNT = 3 }
-		}
+		# EN: the capitulation that follows. guerra_grande.8 was replaced by the peace menu,
+		#     which routes by government mark instead of by tag.
+		# ES: la capitulacion que sigue. guerra_grande.8 fue reemplazado por el menu de paz,
+		#     que rutea por marca de gobierno en vez de por tag.
+		# EN/ES: T1, C9 -- Caxias no longer hands the Defensa the peace: the arbiter decides.
+		#     T2/T3b turn this into a war-support blow and a Brazilian patron rise.
+		#     23/9 (hidden consequences audit, row 2) -- out of the hidden_effect: the Brazilian backing and the
+		#     three points move the arbiter, so they show / fuera del hidden_effect: mueven al arbitro, se ven
+		gg_patron_change = { PATRON = brasil DELTA = 20 }
+		gg_score_colorado = { AMOUNT = 3 }
 		ai_chance = {
 			base = 85
 		}

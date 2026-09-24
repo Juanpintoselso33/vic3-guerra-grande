@@ -273,3 +273,20 @@ guerra_grande_creditor_overthrown = {
 	country_legitimacy_base_add = 10
 	country_radicals_from_legitimacy_mult = -0.10
 }
+
+# EN: 23/9/2026 (Juan: the Ejercito Grande debt must weigh for real). The imperial letras still to come:
+#     100,000 patacones a month for the loan months (paid by common/on_actions/gg_ejercito_grande_debt.txt).
+#     A marker: the money is the monthly add_treasury, not this modifier.
+# ES: las letras imperiales que faltan: 100.000 patacones por mes. Marcador: la plata es el add_treasury mensual.
+# SOURCE / FUENTE: Convention / Convencion of 21/11/1851, arts. VI-VII: https://www.dipublico.org/122100/
+gg_ejercito_grande_imperial_letras = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+}
+
+# EN: the 6% a year on what has been paid out, as a weekly expense. Applied with multiplier =
+#     gg_ejercito_grande_weekly_interest (1 = 1 patacon a week). It outlives the war.
+# ES: el 6% anual sobre lo desembolsado, como gasto semanal. Sobrevive a la guerra.
+gg_ejercito_grande_debt_service = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_expenses_add = 1
+}

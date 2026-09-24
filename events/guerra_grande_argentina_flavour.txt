@@ -28,6 +28,26 @@ gg_argentina.16 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.a|" # GG_TRAZA
 		name = gg_argentina.16.a
 		default_option = yes
+		# EN/ES: 23/9 (Juan: the decision moves the Pact) -- the blockade is Corrientes's cause (it broke with Rosas
+		#     on 6/3/1839 to have it lifted): who pays for it moves Corrientes's grievance, only while it delegates
+		#     / el bloqueo es la causa de Corrientes: quien lo paga mueve su agravio, solo mientras delega
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_corrientes }
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_corrientes_relief_tt
+			if = {
+				limit = { has_global_variable = gg_corrientes_agravio global_var:gg_corrientes_agravio > 0 }
+				change_global_variable = { name = gg_corrientes_agravio add = -1 }
+			}
+			if = {
+				limit = { OR = { NOT = { has_global_variable = gg_corrientes_agravio } global_var:gg_corrientes_agravio = 0 } }
+				gg_reclamo_cierra = { KEY = corrientes }
+			}
+			else = { gg_reclamo_abre = { KEY = corrientes } }
+		}
+		else = { custom_tooltip = gg_arg_flavour_corrientes_gone_tt }
 		add_treasury = 10000
 		add_modifier = { name = gg_arg_direct_tax years = 3 }
 		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
@@ -36,6 +56,19 @@ gg_argentina.16 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.b|" # GG_TRAZA
 		name = gg_argentina.16.b
+		# EN/ES: 23/9 (Juan: the decision moves the Pact) -- the blockade is Corrientes's cause (it broke with Rosas
+		#     on 6/3/1839 to have it lifted): who pays for it moves Corrientes's grievance, only while it delegates
+		#     / el bloqueo es la causa de Corrientes: quien lo paga mueve su agravio, solo mientras delega
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_corrientes }
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_corrientes_hard_tt
+			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+			gg_reclamo_abre = { KEY = corrientes }
+		}
+		else = { custom_tooltip = gg_arg_flavour_corrientes_gone_tt }
 		add_treasury = 50000
 		add_modifier = { name = gg_arg_paper_issue years = 3 }
 		add_radicals = { value = 0.01 }
@@ -44,6 +77,19 @@ gg_argentina.16 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16.c|" # GG_TRAZA
 		name = gg_argentina.16.c
+		# EN/ES: 23/9 (Juan: the decision moves the Pact) -- the blockade is Corrientes's cause (it broke with Rosas
+		#     on 6/3/1839 to have it lifted): who pays for it moves Corrientes's grievance, only while it delegates
+		#     / el bloqueo es la causa de Corrientes: quien lo paga mueve su agravio, solo mientras delega
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_corrientes }
+				exists = s:STATE_CORRIENTES.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_corrientes_hard_tt
+			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+			gg_reclamo_abre = { KEY = corrientes }
+		}
+		else = { custom_tooltip = gg_arg_flavour_corrientes_gone_tt }
 		add_treasury = 40000
 		add_modifier = { name = gg_arg_land_sales years = 8 }
 		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
@@ -76,6 +122,19 @@ gg_argentina.17 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17.a|" # GG_TRAZA
 		name = gg_argentina.17.a
 		default_option = yes
+		# EN/ES: 23/9 (Juan: the decision moves the Pact) -- the Litoral's ranchers sold cheap under the blockade too:
+		#     whom Buenos Aires rewards after it moves Entre Rios's grievance, only while it delegates
+		#     / los hacendados del Litoral tambien vendieron barato: a quien premia Buenos Aires mueve el agravio entrerriano
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_hard_tt
+			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+			gg_reclamo_abre = { KEY = entre_rios }
+		}
+		else = { custom_tooltip = gg_arg_flavour_entre_rios_gone_tt }
 		add_treasury = 30000
 		add_modifier = { name = gg_arg_land_sales years = 8 }
 		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
@@ -85,6 +144,26 @@ gg_argentina.17 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17.b|" # GG_TRAZA
 		name = gg_argentina.17.b
+		# EN/ES: 23/9 (Juan: the decision moves the Pact) -- the Litoral's ranchers sold cheap under the blockade too:
+		#     whom Buenos Aires rewards after it moves Entre Rios's grievance, only while it delegates
+		#     / los hacendados del Litoral tambien vendieron barato: a quien premia Buenos Aires mueve el agravio entrerriano
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
+				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			custom_tooltip = gg_arg_flavour_relief_tt
+			if = {
+				limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 }
+				change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+			}
+			if = {
+				limit = { OR = { NOT = { has_global_variable = gg_entre_rios_agravio } global_var:gg_entre_rios_agravio = 0 } }
+				gg_reclamo_cierra = { KEY = entre_rios }
+			}
+			else = { gg_reclamo_abre = { KEY = entre_rios } }
+		}
+		else = { custom_tooltip = gg_arg_flavour_entre_rios_gone_tt }
 		add_treasury = -20000
 		add_modifier = { name = gg_arg_small_ranchers years = 3 }
 		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }

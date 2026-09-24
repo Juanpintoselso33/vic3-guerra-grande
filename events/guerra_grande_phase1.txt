@@ -278,6 +278,7 @@ gg_phase1.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.1.c|" # GG_TRAZA
 		name = gg_phase1.1.c
 		custom_tooltip = gg_phase1.1.c_tt
+		custom_tooltip = gg_phase1.1.c_calendar_tt # EN/ES: 23/9 (hidden consequences audit, row 4)
 		# EN: neutrality: France cools and nobody invades in 1839, but Rosas prepares anyway and
 		#     Arroyo Grande comes a year early -- and with it the split (gg_partition_calendar).
 		# ES: neutralidad: Francia se enfria y nadie invade en 1839, pero Rosas se prepara igual y

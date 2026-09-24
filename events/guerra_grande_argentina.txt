@@ -424,6 +424,7 @@ gg_argentina.4 = {
 			s:STATE_CORDOBA.region_state:ARG = { set_state_owner = c:CLN }
 			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
 			# EN/ES: Cordoba never opens a claim: the variant without one (bug hunt 7) / Cordoba nunca abre reclamo
+			custom_tooltip = gg_cordoba_stops_delegating_tt # EN/ES: 23/9 (hidden consequences audit)
 			gg_delegation_revoked_no_claim = { KEY = cordoba COUNT = -1 }
 		}
 		ai_chance = { base = 100 }
@@ -496,6 +497,9 @@ gg_argentina.61 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.61.a|" # GG_TRAZA
 		name = gg_argentina.61.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
+		custom_tooltip = gg_corrientes_refusal_tt
 		# EN/ES: el pliego queda sin contestar y el reclamo queda abierto en la cuenta del pacto
 		#     / the petition goes unanswered and the claim stays open on the pact
 		gg_reclamo_abre = { KEY = corrientes }
@@ -509,6 +513,9 @@ gg_argentina.61 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.61.b|" # GG_TRAZA
 		name = gg_argentina.61.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
+		custom_tooltip = gg_corrientes_concession_tt
 		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
 		add_treasury = -25000
@@ -555,6 +562,9 @@ gg_argentina.62 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.62.a|" # GG_TRAZA
 		name = gg_argentina.62.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
+		custom_tooltip = gg_corrientes_refusal_tt
 		gg_reclamo_abre = { KEY = corrientes }
 		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
 		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_corrientes value = 62 } }
@@ -566,6 +576,9 @@ gg_argentina.62 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.62.b|" # GG_TRAZA
 		name = gg_argentina.62.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
+		custom_tooltip = gg_corrientes_concession_tt
 		gg_reclamo_cierra = { KEY = corrientes }
 		change_global_variable = { name = gg_corrientes_agravio add = -1 }
 		add_treasury = -25000
@@ -598,6 +611,8 @@ gg_argentina.63 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.63.a|" # GG_TRAZA
 		name = gg_argentina.63.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_corrientes_claim_opens_tt
 		# EN/ES: el rio cerrado es la razon que Corrientes va a invocar al separarse: el reclamo se abre
 		#     / the closed river is the reason Corrientes will invoke: the claim opens
 		gg_reclamo_abre = { KEY = corrientes }
@@ -612,6 +627,8 @@ gg_argentina.63 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.63.b|" # GG_TRAZA
 		name = gg_argentina.63.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_corrientes_claim_answered_tt
 		gg_reclamo_cierra = { KEY = corrientes }
 		add_treasury = -20000
 		ai_chance = { base = 30 }
@@ -652,6 +669,8 @@ gg_argentina.64 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.64.a|" # GG_TRAZA
 		name = gg_argentina.64.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_corrientes_claim_answered_tt
 		gg_reclamo_cierra = { KEY = corrientes }
 		default_option = yes
 		ai_chance = { base = 100 }
@@ -701,6 +720,8 @@ gg_argentina.65 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.65.a|" # GG_TRAZA
 		name = gg_argentina.65.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		# EN/ES: Buenos Aires niega reconocimiento a las nuevas autoridades y las cinco provincias
 		#     conservan el reclamo / Buenos Aires withholds recognition and all five retain the claim
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
@@ -726,6 +747,8 @@ gg_argentina.65 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.65.b|" # GG_TRAZA
 		name = gg_argentina.65.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
@@ -777,6 +800,8 @@ gg_argentina.68 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.68.a|" # GG_TRAZA
 		name = gg_argentina.68.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
 		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
 		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_coalicion_tucuman value = 68 } }
@@ -806,6 +831,8 @@ gg_argentina.68 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.68.b|" # GG_TRAZA
 		name = gg_argentina.68.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
@@ -854,6 +881,8 @@ gg_argentina.66 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.66.a|" # GG_TRAZA
 		name = gg_argentina.66.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		# EN/ES: el reclamo de las armas se planta en Tucuman, que es donde estan
 		#     / the claim over the weapons lands in Tucuman, which is where they are
 		gg_reclamo_abre = { KEY = coalicion_tucuman }
@@ -882,6 +911,8 @@ gg_argentina.66 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.66.b|" # GG_TRAZA
 		name = gg_argentina.66.b
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_petition_arrival_tt
 		# EN/ES: no se les reclama nada, y el norte queda como estaba / nothing is demanded
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
@@ -1372,6 +1403,8 @@ gg_argentina.70 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.70.a|" # GG_TRAZA
 		name = gg_argentina.70.a
+		# EN/ES: 23/9 (hidden consequences audit) -- what the answer does to the Pact / lo que la respuesta le hace al Pacto
+		custom_tooltip = gg_norte_claims_answered_tt
 		gg_reclamo_cierra = { KEY = coalicion_tucuman }
 		gg_reclamo_cierra = { KEY = coalicion_salta }
 		gg_reclamo_cierra = { KEY = coalicion_jujuy }
@@ -3480,7 +3513,15 @@ gg_argentina.15 = {
 		set_global_variable = { name = gg_ejercito_grande_loan_months value = 4 }
 		set_global_variable = { name = gg_ejercito_grande_interest_percent value = 6 }
 		set_global_variable = gg_ejercito_grande_mortgage
-		hidden_effect = { add_treasury = 400000 } # EN/ES: the text gives it / lo da el texto
+		# EN/ES: 23/9 (Juan) -- no lump sum: the first letra now, the rest month by month, and the interest
+		#     after the war (gg_ejercito_grande_debt.txt) / sin suma de una vez: la primera letra ahora, el resto
+		#     mes a mes, y el interes despues de la guerra
+		hidden_effect = {
+			set_global_variable = { name = gg_ejercito_grande_instalments_paid value = 0 }
+			set_global_variable = { name = gg_ejercito_grande_paid value = 0 }
+			gg_ejercito_grande_pay_letra = yes
+		}
+		add_modifier = { name = gg_ejercito_grande_imperial_letras months = 4 }
 		add_modifier = { name = gg_ejercito_grande_full_mortgage }
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_full_mortgage } }
 		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize
@@ -3502,7 +3543,12 @@ gg_argentina.15 = {
 		set_global_variable = { name = gg_ejercito_grande_loan_months value = 1 }
 		set_global_variable = { name = gg_ejercito_grande_interest_percent value = 6 }
 		set_global_variable = gg_ejercito_grande_mortgage
-		hidden_effect = { add_treasury = 100000 } # EN/ES: the text gives it / lo da el texto
+		# EN/ES: 23/9 (Juan) -- the one letra now; the interest after the war / la unica letra ahora; el interes despues
+		hidden_effect = {
+			set_global_variable = { name = gg_ejercito_grande_instalments_paid value = 0 }
+			set_global_variable = { name = gg_ejercito_grande_paid value = 0 }
+			gg_ejercito_grande_pay_letra = yes
+		}
 		add_modifier = { name = gg_ejercito_grande_limited_mortgage }
 		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_limited_mortgage } }
 		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize

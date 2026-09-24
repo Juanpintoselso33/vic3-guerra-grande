@@ -1267,7 +1267,7 @@ gg_rivera.5 = {
 		first_valid = {
 			triggered_desc = {
 				desc = gg_rivera.5.d_incompatible
-				trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_fusion_blocked NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
+				trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_peace_punished NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
 			}
 			triggered_desc = {
 				desc = gg_rivera.5.d_exiled
@@ -1315,7 +1315,7 @@ gg_rivera.5 = {
 			set_global_variable = gg_rivera_triumvirate_settled
 			# EN/ES: Only Giró's actual succession appoints Lavalleja and leads to his dated death.
 			if = {
-				limit = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
+				limit = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_peace_punished } ruler = { has_template = URU_gg_juan_francisco_giro } }
 				every_country = {
 					limit = { any_scope_character = { has_template = URU_Juan_Antonio_Lavalleja } }
 					random_scope_character = {
@@ -1341,7 +1341,7 @@ gg_rivera.5 = {
 		default_option = yes
 		set_global_variable = gg_rivera_recalled
 		gg_return_rivera = yes
-		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
+		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_peace_punished } ruler = { has_template = URU_gg_juan_francisco_giro } }
 		if = {
 			limit = { any_scope_character = { has_template = URU_Fructuoso_Rivera } }
 			random_scope_character = {
@@ -1387,7 +1387,7 @@ gg_rivera.5 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5.b|" # GG_TRAZA
 		name = gg_rivera.5.b
 		custom_tooltip = gg_rivera.5.b_tt2
-		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_fusion_blocked } ruler = { has_template = URU_gg_juan_francisco_giro } }
+		trigger = { has_global_variable = gg_peace_no_victors NOT = { has_global_variable = gg_peace_punished } ruler = { has_template = URU_gg_juan_francisco_giro } }
 		set_global_variable = gg_rivera_left_in_rio
 		if = {
 			limit = { any_scope_character = { has_template = URU_venancio_flores } }
@@ -1425,7 +1425,7 @@ gg_rivera.5 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.5.c|" # GG_TRAZA
 		name = gg_rivera.5.c
-		trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_fusion_blocked NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
+		trigger = { OR = { NOT = { has_global_variable = gg_peace_no_victors } has_global_variable = gg_peace_punished NOT = { ruler = { has_template = URU_gg_juan_francisco_giro } } } }
 		default_option = yes
 		ai_chance = { base = 100 }
 	}

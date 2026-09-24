@@ -1,0 +1,30 @@
+﻿# EN: 23/9/2026 -- THE EJERCITO GRANDE DEBT (Juan: "must weigh for real"). Until today the whole loan
+#     landed at once in a hidden add_treasury and the only trace was the permanent mortgage. Now each
+#     letra reaches the borrower's treasury month by month (the first on signing), the interest on
+#     what was paid out becomes a weekly expense (gg_ejercito_grande_debt_service), and none of it is
+#     tied to the war: it goes on after the peace, as gg_argentina.15 promises. The ledger:
+#     gg_ejercito_grande_debt (agreed principal), _monthly_loan, _loan_months, _interest_percent,
+#     _instalments_paid, _paid. Paid by the monthly pulse in common/on_actions/gg_ejercito_grande_debt.txt.
+# ES: LA DEUDA DEL EJERCITO GRANDE. Hasta hoy el prestamo entraba entero en un add_treasury oculto y
+#     solo quedaba la hipoteca. Ahora cada letra llega al tesoro del prestatario mes a mes (la primera
+#     al firmar), el interes de lo desembolsado es un gasto semanal, y nada depende de la guerra.
+# SOURCE / FUENTE: Convention / Convencion of 21/11/1851, arts. VI-VII: https://www.dipublico.org/122100/
+
+# EN/ES: scope: the country that holds the debt (Entre Rios, or the Confederation after it)
+#     / scope: el pais que carga la deuda (Entre Rios, o la Confederacion despues)
+gg_ejercito_grande_pay_letra = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ejercito_grande_pay_letra|" # GG_TRAZA
+	add_treasury = gg_ejercito_grande_letra
+	change_global_variable = { name = gg_ejercito_grande_instalments_paid add = 1 }
+	change_global_variable = { name = gg_ejercito_grande_paid add = gg_ejercito_grande_letra }
+	gg_ejercito_grande_reset_service = yes
+}
+
+# EN/ES: the weekly interest follows what has been paid out / el interes semanal sigue a lo desembolsado
+gg_ejercito_grande_reset_service = {
+	if = {
+		limit = { has_modifier = gg_ejercito_grande_debt_service }
+		remove_modifier = gg_ejercito_grande_debt_service
+	}
+	add_modifier = { name = gg_ejercito_grande_debt_service multiplier = gg_ejercito_grande_weekly_interest }
+}

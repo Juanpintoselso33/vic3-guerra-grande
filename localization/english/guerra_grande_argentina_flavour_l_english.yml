@@ -44,3 +44,7 @@
  gg_argentina.28.a:0 "Channel all exports through Buenos Aires."
  gg_argentina.28.b:0 "Allow the Entre Ríos outlet for now."
  gg_argentina.28.c:0 "Recognise provincial licences in return for a share."
+ gg_arg_flavour_corrientes_hard_tt:0 "@arrow_up! #b Corrientes#!'s grievance: #N +1#! if it still delegates; its petition stays open."
+ gg_arg_flavour_corrientes_relief_tt:0 "@arrow_down! #b Corrientes#!'s grievance: #P −1#!, down to a minimum of #V 0#!, if it still delegates. Its petition closes only if no grievance remains."
+ gg_arg_flavour_corrientes_gone_tt:0 "@information! #b Corrientes#! is no longer under this delegation: the account does not move its grievances."
+ gg_arg_flavour_entre_rios_gone_tt:0 "@information! #b Entre Ríos#! is no longer under this delegation: the account does not move its grievances."

@@ -130,7 +130,8 @@ gg_postwar.2 = {
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.2|" # GG_TRAZA
-		set_global_variable = gg_fusion_blocked
+		# EN/ES: 23/9 (hidden consequences audit, row 10) -- gg_fusion_blocked removed: it only ever repeated
+		#     gg_peace_punished, the mark that brings this event / se saco: solo repetia gg_peace_punished
 		# EN/ES: punitive repudiation is one outcome, never debt-free plus inherited debt.
 		if = { limit = { has_modifier = guerra_grande_owes_nobody } remove_modifier = guerra_grande_owes_nobody }
 		if = { limit = { has_modifier = guerra_grande_debts_of_the_cerrito } remove_modifier = guerra_grande_debts_of_the_cerrito }
@@ -472,7 +473,7 @@ gg_postwar.6 = {
 	duration = 12
 
 	trigger = {
-		NOT = { has_global_variable = gg_fusion_blocked }
+		NOT = { has_global_variable = gg_peace_punished } # EN/ES: 23/9 -- was gg_fusion_blocked, set only under it / era gg_fusion_blocked
 	}
 
 	# a -- adopt it / adoptarla

@@ -1331,6 +1331,9 @@ gg_partition_calendar = {
 #     oribistas se pasan, y el Cerrito responde (gg_powers.23).
 gg_urquiza_flip = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza_flip|" # GG_TRAZA
+	# EN/ES: 23/9 (hidden consequences audit, row 3) -- the mark moves Urquiza's backing from the Cerrito's side to
+	#     the Defensa's (gg_cerrito_backing / gg_defensa_backing), so it says so / la marca pasa su respaldo de lado
+	custom_tooltip = gg_urquiza_flip_backing_tt
 	set_global_variable = gg_urquiza_flipped
 	# EN/ES: T9, F4-3 -- Servando Gomez goes over; Garzon comes with Urquiza / Servando se pasa; Garzon viene con Urquiza
 	c:CER ?= {
@@ -1349,9 +1352,38 @@ gg_urquiza_flip = {
 		}
 	}
 	gg_patron_change = { PATRON = rosas DELTA = -20 }
-	c:CER ?= {
-		gg_endurance_change = { SIDE = cerrito VALUE = -20 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
-		trigger_event = { id = gg_powers.23 days = 30 popup = yes }
+	# EN: 23/9/2026 (Juan, D2 of auditoria-balanza-2026-09-23.md) -- the pronouncement of 1851 is what broke
+	#     the Cerrito, and it used to cost it 20 of endurance, made good in ten months. From 1851: 60 of
+	#     endurance, the Argentine auxiliaries stop sustaining it (their +2 a month, gg_siege_modifiers_endurance),
+	#     and Urquiza counts against its backing (gg_cerrito_backing). The Cerrito answers (gg_powers.23, through
+	#     the relay) 150 days on, after the crossing of July: historically Oribe treated in September and
+	#     October, not in June. A turn before 1851 (gg_powers.17, 1847) stays as it was: the war was not tired yet.
+	# ES: el pronunciamiento de 1851 es lo que quebro al Cerrito, y le costaba 20 de aguante que reponia en
+	#     diez meses. Desde 1851: 60 de aguante, los auxiliares argentinos dejan de sostenerlo, y Urquiza resta
+	#     de su sosten. El Cerrito contesta a los 150 dias, despues del cruce de julio: Oribe trato en
+	#     septiembre y octubre, no en junio. Un vuelco antes de 1851 (1847) queda como estaba.
+	if = {
+		limit = { year >= 1851 }
+		set_global_variable = gg_urquiza_pronounced_1851
+		custom_tooltip = gg_urquiza_1851_backing_tt
+		c:CER ?= {
+			gg_endurance_change = { SIDE = cerrito VALUE = -60 }
+			if = {
+				limit = { has_modifier = guerra_grande_argentine_auxiliaries }
+				remove_modifier = guerra_grande_argentine_auxiliaries
+			}
+			# EN/ES: 23/9 (story audit C2) -- through a relay that looks at the Pact's outcome when it arrives: a
+			#     scheduled event reads its trigger when queued / por un relevo que mira el desenlace del Pacto al llegar
+			trigger_event = { id = gg_powers.123 days = 150 }
+		}
+	}
+	else = {
+		c:CER ?= {
+			gg_endurance_change = { SIDE = cerrito VALUE = -20 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
+			# EN/ES: 23/9 (story audit C2) -- through a relay that looks at the Pact's outcome when it arrives: a
+			#     scheduled event reads its trigger when queued / por un relevo que mira el desenlace del Pacto al llegar
+			trigger_event = { id = gg_powers.123 days = 30 }
+		}
 	}
 }
 

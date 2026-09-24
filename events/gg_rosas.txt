@@ -43,7 +43,14 @@ gg_rosas.1 = {
 	type = country_event
 	placement = ROOT
 	title = gg_rosas.1.t
-	desc = gg_rosas.1.d
+	# EN/ES: 23/9 (story audit C8) -- Arroyo Grande is only fought on gg_phase1.8.a/.c; on .8.b Rivera waited on
+	#     his own bank / Arroyo Grande solo se da con gg_phase1.8.a/.c; con .8.b Rivera espero en su costa
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_rosas.1.d_no_battle trigger = { has_global_variable = gg_partition_delayed } }
+			triggered_desc = { desc = gg_rosas.1.d trigger = { always = yes } }
+		}
+	}
 	flavor = gg_rosas.1.f
 	event_image = { video = "southamerica_war_civilians" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

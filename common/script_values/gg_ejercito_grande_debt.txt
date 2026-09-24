@@ -1,0 +1,21 @@
+﻿# EN: 23/9/2026 (Juan: "the Ejercito Grande debt must weigh for real"). The imperial loan of the
+#     Convention of 21 November 1851 (arts. VI-VII): monthly instalments, 6% a year. The ledger is
+#     global (gg_argentina.15 writes it) because Entre Rios may cease to exist and the Confederation
+#     inherits the debt.
+# ES: El emprestito imperial de la Convencion del 21/11/1851: mensualidades, 6% anual. El libro es
+#     global porque Entre Rios puede dejar de existir y la Confederacion hereda la deuda.
+# SOURCE / FUENTE: https://www.dipublico.org/122100/ ; docs/guerra-grande-argentina/historia-argentina.md
+
+# EN/ES: one instalment (letra) / una letra
+gg_ejercito_grande_letra = {
+	value = global_var:gg_ejercito_grande_monthly_loan
+}
+
+# EN: the interest on what has been paid out so far, per WEEK (the budget's unit): paid x rate / 100 / 52.
+#     400,000 at 6% = 24,000 a year = 461.5 a week.
+# ES: el interes sobre lo desembolsado, por SEMANA (la unidad del presupuesto).
+gg_ejercito_grande_weekly_interest = {
+	value = global_var:gg_ejercito_grande_paid
+	multiply = global_var:gg_ejercito_grande_interest_percent
+	divide = 5200
+}

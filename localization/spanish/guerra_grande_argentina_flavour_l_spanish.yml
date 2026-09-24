@@ -44,3 +44,7 @@
  gg_argentina.28.a:0 "Concentremos las exportaciones en Buenos Aires."
  gg_argentina.28.b:0 "Admitamos provisionalmente la salida entrerriana."
  gg_argentina.28.c:0 "Reconozcamos licencias a cambio de participación."
+ gg_arg_flavour_corrientes_hard_tt:0 "@arrow_up! Agravio de #b Corrientes#!: #N +1#! si todavía delega; su pliego queda abierto."
+ gg_arg_flavour_corrientes_relief_tt:0 "@arrow_down! Agravio de #b Corrientes#!: #P −1#!, hasta un mínimo de #V 0#!, si todavía delega. Su pliego se cierra sólo si no queda agravio."
+ gg_arg_flavour_corrientes_gone_tt:0 "@information! #b Corrientes#! ya no está bajo esta delegación: la cuenta no mueve sus agravios."
+ gg_arg_flavour_entre_rios_gone_tt:0 "@information! #b Entre Ríos#! ya no está bajo esta delegación: la cuenta no mueve sus agravios."

@@ -1,0 +1,37 @@
+﻿# EN: 23/9/2026 (Juan) -- the Ejercito Grande debt, month by month (common/scripted_effects/gg_ejercito_grande_debt.txt).
+#     Not tied to the war: the letras still arrive and the interest is still owed after the peace. The holder is
+#     Entre Rios; if it no longer exists, the Confederation (ARG) that inherits the debt.
+#     EXISTING SAVES: a game that already answered gg_argentina.15 took the old lump sum and has no
+#     gg_ejercito_grande_instalments_paid, so nothing is paid or charged twice (new game for the new debt).
+# ES: la deuda del Ejercito Grande, mes a mes. No depende de la guerra. La carga Entre Rios; si ya no existe, la
+#     Confederacion. PARTIDAS EXISTENTES: la que ya contesto gg_argentina.15 cobro el monto viejo de una vez y no
+#     tiene la marca de letras: no se paga ni se cobra dos veces (la deuda nueva pide partida nueva).
+on_monthly_pulse_country = {
+	on_actions = { gg_ejercito_grande_debt_monthly }
+}
+
+gg_ejercito_grande_debt_monthly = {
+	trigger = {
+		gg_argentina_has_ejercito_grande_debt = yes
+		has_global_variable = gg_ejercito_grande_instalments_paid
+		OR = {
+			c:ENR ?= this
+			AND = {
+				NOT = { exists = c:ENR }
+				c:ARG ?= this
+			}
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_ejercito_grande_debt_monthly" # GG_TRAZA
+		if = {
+			limit = { global_var:gg_ejercito_grande_instalments_paid < global_var:gg_ejercito_grande_loan_months }
+			gg_ejercito_grande_pay_letra = yes
+		}
+		# EN/ES: the Confederation inherits the interest when Entre Rios is gone / la Confederacion hereda el interes
+		else_if = {
+			limit = { NOT = { has_modifier = gg_ejercito_grande_debt_service } }
+			gg_ejercito_grande_reset_service = yes
+		}
+	}
+}
