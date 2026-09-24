@@ -29,6 +29,19 @@ gg_war_balance_colorado = {
 	subtract = gg_plata_pressure_blanco
 }
 
+# EN: 24/9/2026 (Juan, decision 1) -- the lead on the war's balance the Hood bases (gg_powers.13.a) need to end the
+#     war: below it, accepting them is a six-month truce and the war goes on. Chosen with the balance lab: 5 brings
+#     a human Defensa's peaces before 1849 down from 21 % to a modest share and keeps the path alive. Must stay above
+#     the river's cap (gg_plata_pressure_*, 2), so the side ahead on the balance is also ahead on the score that
+#     decides gg_peace.6's election (the lab asserts it: estructura_hood_margen). The tooltips gg_powers.13.a_tt and
+#     gg_powers.13.a_truce_tt (localization, *_postwar_l_*) say the number: change them with it.
+# ES: la ventaja en la balanza que necesitan las bases Hood para cerrar la guerra; por debajo, aceptarlas es una
+#     tregua de seis meses y la guerra sigue. Elegido con el laboratorio. Tiene que quedar arriba del techo del rio
+#     (2), asi el que va adelante en la balanza tambien va adelante en el puntaje que decide la eleccion de gg_peace.6.
+gg_hood_lead_needed = {
+	value = 5
+}
+
 # EN: T3a. Total backing of each side (to-be.md section 2); T3b makes it drain war support.
 # ES: T3a. Sosten total de cada bando (to-be.md seccion 2); en T3b drena el apoyo a la guerra.
 # EN/ES: 22/9/2026, the powers' levels -- only a power that is Protector or Guarantor backs the war;

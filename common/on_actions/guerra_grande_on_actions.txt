@@ -284,6 +284,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.17 days = 4426 }   # 1848-02-16 exequias de Larraniaga
 			trigger_event = { id = gg_cal.18 days = 4458 }   # 1848-03-20 Varela
 			trigger_event = { id = gg_cal.19 days = 4463 }   # 1848-03-25 Gore-Gros
+			trigger_event = { id = gg_cal.35 days = 4531 }   # 1848-06-01 los jefes piden entenderse con Oribe (Herrera y Obes)
 			trigger_event = { id = gg_cal.20 days = 4542 }   # 1848-06-12 convenio frances
 			trigger_event = { id = gg_cal.21 days = 4550 }   # 1848-06-20 se van vascos y Garibaldi
 			trigger_event = { id = gg_cal.22 days = 4943 }   # 1849-07-18 Universidad
@@ -320,6 +321,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.17 days = 4426 }   # 1848-02-16 exequias de Larraniaga
 			trigger_event = { id = gg_cal.18 days = 4458 }   # 1848-03-20 Varela
 			trigger_event = { id = gg_cal.19 days = 4463 }   # 1848-03-25 Gore-Gros
+			trigger_event = { id = gg_cal.35 days = 4531 }   # 1848-06-01 los jefes piden entenderse con Oribe (Herrera y Obes)
 			trigger_event = { id = gg_cal.20 days = 4542 }   # 1848-06-12 convenio frances
 			trigger_event = { id = gg_cal.21 days = 4550 }   # 1848-06-20 se van vascos y Garibaldi
 			trigger_event = { id = gg_cal.22 days = 4943 }   # 1849-07-18 Universidad

@@ -712,3 +712,23 @@ gg_cal.34 = {
 		}
 	}
 }
+
+# 1848-06-01 -- los jefes piden entenderse con Oribe (gg_powers.36, la Defensa). 24/9/2026 (Juan, decision 2): the
+#     letter gives no day; after Rosas's refusal of Gore-Gros (8.V.1848) and before the French convention (12.VI.1848)
+#     / la carta no da dia: despues del rechazo de Rosas y antes del convenio frances
+gg_cal.35 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.35|" # GG_TRAZA
+		hidden_effect = {
+			gg_cal_fire = {
+				DONE = gg_cal_done_35
+				EVENT = gg_powers.36
+				SIDE = guerra_grande_defensa_government
+				RETRY = gg_cal.35
+			}
+		}
+	}
+}

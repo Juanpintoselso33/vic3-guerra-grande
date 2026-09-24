@@ -511,11 +511,31 @@ gg_powers.13 = {
 		# EN/ES: 23/9 -- an ending of its own: only with the dynamic game rule / un final propio: solo con la regla dinamica
 		trigger = { gg_outcome_dynamic = yes }
 		gg_peace_chain_clear = yes
-		custom_tooltip = gg_powers.13.a_tt
 		# EN: accept the powers' peace: elections, amnesty, the foreigners disarmed (final F12).
-		# ES: aceptar la paz de las potencias: elecciones, amnistia, desarme de los extranjeros (F12).
-		set_global_variable = gg_peace_offered
-		trigger_event = { id = gg_peace.6 days = 3 popup = yes }
+		#     24/9/2026 (Juan, decision 1): the bases end the war only if one side leads the balance by a real margin
+		#     (gg_hood_lead_needed, the river included, either side); otherwise the powers' cessation of hostilities is
+		#     a six-month truce -- the existing one (gg_truce: river, arbiter and siege stand still, both sides
+		#     rest) -- and the war goes on. Balance lab: human Defensa's peaces before 1849 from 21 % to a modest share.
+		# ES: aceptar la paz de las potencias (F12). Solo cierra la guerra si un bando lleva en la balanza, con el rio,
+		#     una ventaja clara (gg_hood_lead_needed); si no, el cese de hostilidades es una tregua de seis meses -- la
+		#     que ya existe (gg_truce) -- y la guerra sigue.
+		if = {
+			limit = {
+				OR = {
+					gg_war_balance_blanco >= gg_hood_lead_needed
+					gg_war_balance_colorado >= gg_hood_lead_needed
+				}
+			}
+			custom_tooltip = gg_powers.13.a_tt
+			set_global_variable = gg_peace_offered
+			trigger_event = { id = gg_peace.6 days = 3 popup = yes }
+		}
+		else = {
+			custom_tooltip = {
+				text = gg_powers.13.a_truce_tt
+				set_global_variable = { name = gg_truce days = 180 }
+			}
+		}
 		ai_chance = {
 			base = 30
 			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
@@ -1577,11 +1597,16 @@ gg_powers.27 = {
 	}
 }
 
-# FS-3b - Larranaga's funeral, a ceasefire (1848)
+# FS-3b - Larranaga's funeral (1848): a mourning, not a table
 # SOURCE / FUENTE: SOURCES_powers.md s.10 (death at the Miguelete quinta 16.II.1848, burial in
 #     his oratory, Villademoros's necrology, the Defensa's own rites and the rank of general);
 #     es.wikipedia "Damaso Antonio Larranaga" (b. 9.XII.1771; bearer of the Instrucciones del
 #     ano XIII; public librarian), Academia Nacional de Letras, academiadeletras.gub.uy.
+# EN: 24/9/2026 (Juan, decision 2) -- the funeral lost its peace option: nobody sounded out a peace over Larranaga's
+#     body (no source; the "funeral truce" had none either). The pressure to settle with Oribe that did happen, in
+#     mid-1848 after Gore-Gros, is gg_powers.36. What stays is the mourning, with its cost: who honours him, and how.
+# ES: las exequias pierden la opcion de paz: nadie tanteo una paz sobre el cuerpo de Larranaga. La presion para
+#     arreglarse con Oribe que si hubo, a mediados de 1848, es gg_powers.36. Queda el duelo, con su costo.
 gg_powers.28 = {
 	type = country_event
 	placement = ROOT
@@ -1595,7 +1620,7 @@ gg_powers.28 = {
 		video = "gg_fl_larranaga"
 	}
 
-	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 
 	duration = 12
 
@@ -1606,21 +1631,121 @@ gg_powers.28 = {
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28|" # GG_TRAZA
-		# EN/ES: this popup can sit open for years; the arbiter waits / este popup puede quedar
-		#     abierto anios; el arbitro espera
-		gg_peace_chain_hold = yes
 	}
 
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28.a|" # GG_TRAZA
 		name = gg_powers.28.a
-		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.28.a_tt
 		default_option = yes
-		# EN: sound out a peace 'between orientales'. It only goes anywhere with the doctores strong in
-		#     the Cerrito or Herrera leading the Defensa; then the side ahead gets the menu.
-		# ES: tantear una paz 'entre orientales'. Solo prospera con los doctores fuertes en el Cerrito o
-		#     con Herrera al frente de la Defensa; entonces el que va arriba recibe el menu.
+		# EN: historical: honours of our own -- the Defensa made him a general of the Republic, the Cerrito buried him in
+		#     his oratory with Villademoros's necrology. The rites cost money; the mourning closes ranks and the clergy
+		#     notice who honoured the vicar.
+		# ES: lo historico: honores propios -- la Defensa lo hizo general de la Republica, el Cerrito lo enterro en su
+		#     oratorio con la necrologica de Villademoros. Las exequias cuestan; el duelo cierra filas y el clero anota
+		#     quien honro al vicario.
+		add_treasury = -5000
+		gg_endurance_change_self = { VALUE = 5 }
+		add_loyalists = { value = small_radicals interest_group = ig:ig_devout }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28.b|" # GG_TRAZA
+		name = gg_powers.28.b
+		# EN: respect the ceasefire: both sides tire.
+		# ES: respetar el cese del fuego: los dos se cansan.
+		c:URU ?= {
+			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
+		}
+		c:CER ?= {
+			gg_endurance_change = { SIDE = cerrito VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
+		}
+		ai_chance = { base = 40 }
+	}
+
+}
+
+# FS-3c - the Defensa's chiefs press for an arrangement with Oribe (mid-1848)
+# SOURCE / FUENTE: SOURCES_powers.md s.15. Manuel Herrera y Obes to Hector F. Varela, 30.III.1867, «Los pactos de 1851 y sus
+#     antecedentes» (typescript, Museo Historico Nacional - Archivo; Anaforas/FIC-UdelaR, handle
+#     123456789/89277; printed in Revista Historica t. IV, 1911, p. 207 ff.), typescript pp. 4-7: Gore-Gros
+#     arrived the night Varela's father was murdered; Rosas «se opuso energica y decididamente»; Gore's reserved
+#     instructions: oppose «hasta con la fuerza» the renewed blockade of Buenos Aires the French commissioner asked
+#     for; «Los principales jefes del ejercito ... me instaban porque me prestase a entrar en arreglos con el general
+#     Oribe»; their reasons («Para ellos la causa estaba perdida. El abandono de Inglaterra no era sino el precursor
+#     del de la Francia», the blockade «la unica renta», «tres cuartas partes vivian del Estado»); his refusal
+#     («Tendremos ... como sostenernos», the fall of the French monarchy, «viviremos a costa de su Erario»); the
+#     monthly subsidy of 40,000 pesos that followed. The letter names no chief and gives no day: the date sits
+#     between Rosas's refusal (8.V.1848, SOURCES_powers.md s.4) and the French convention of 12.VI.1848 (gg_loan.1,
+#     SOURCES_loans.md), which the letter says came after. Herrera y Obes, minister of Government and Foreign
+#     Relations of the Defensa (SOURCES_peace.md s.4; SOURCES_rivera.md, 1847).
+#     Image: Adolphe d'Hastrel, «General en uniforme de campana» (1839), an unnamed chief (SOURCES_flujo_images.md).
+# EN: 24/9/2026 (Juan, decision 2). The peace option keeps the G0 guard (gg_arbiter_asks): it was the Larranaga
+#     mediation's, moved here verbatim. Before 1849 the arrangement goes nowhere, which is what happened.
+# ES: la opcion de paz conserva la guarda G0: era la de la mediacion de Larranaga, movida tal cual. Antes de 1849
+#     el arreglo no prospera, que es lo que paso.
+gg_powers.36 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_powers.36.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_powers.36.d_varela
+				trigger = { has_global_variable = gg_varela_murdered }
+			}
+			triggered_desc = {
+				desc = gg_powers.36.d
+			}
+		}
+	}
+	flavor = gg_powers.36.f
+
+	event_image = {
+		video = "gg_leg_general_hastrel"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:URU ?= this
+		has_global_variable = guerra_grande_open_war
+		NOT = { has_global_variable = gg_peace_settled }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.36|" # GG_TRAZA
+		# EN/ES: this popup can sit open for months; the arbiter waits / este popup puede quedar abierto meses; el arbitro espera
+		gg_peace_chain_hold = yes
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_cal_done_35 } }
+				set_global_variable = gg_cal_done_35
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.36.a|" # GG_TRAZA
+		name = gg_powers.36.a
+		gg_peace_chain_clear = yes
+		custom_tooltip = gg_powers.36.a_tt
+		# EN: do what the chiefs ask: sound out Oribe. The army is content; but a government that seeks terms from the
+		#     besieger frees the French commissioner from his duty to sustain the city. The arrangement only goes
+		#     anywhere under the old conditions of the Larranaga mediation, G0 included.
+		# ES: hacer lo que piden los jefes: tantear a Oribe. El ejercito queda conforme; pero un gobierno que busca
+		#     arreglo con el sitiador libera al comisario frances de su deber de sostener la plaza. El arreglo solo
+		#     prospera con las condiciones de la mediacion de Larranaga, G0 incluida.
+		add_loyalists = { value = small_radicals interest_group = ig:ig_armed_forces }
+		gg_patron_change = { PATRON = francia DELTA = -10 }
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_peace_offered }
@@ -1677,27 +1802,27 @@ gg_powers.28 = {
 				}
 			}
 		}
-		ai_chance = {
-			base = 40
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
-		}
+		ai_chance = { base = 30 }
 	}
 
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.28.b|" # GG_TRAZA
-		name = gg_powers.28.b
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.36.b|" # GG_TRAZA
+		name = gg_powers.36.b
 		gg_peace_chain_clear = yes
-		# EN: respect the ceasefire: both sides tire.
-		# ES: respetar el cese del fuego: los dos se cansan.
-		c:URU ?= {
-			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
+		custom_tooltip = gg_powers.36.b_tt
+		default_option = yes
+		# EN: historical: refuse. The chiefs leave angry and the garrison's spirits sink; the government holds the
+		#     French commissioner to his instructions: with no blockade, France must keep the city.
+		# ES: lo historico: resistir. Los jefes se van enojados y la guarnicion se desanima; el gobierno ata al
+		#     comisario frances a sus instrucciones: sin bloqueo, Francia tiene que sostener la plaza.
+		add_radicals = { value = small_radicals interest_group = ig:ig_armed_forces }
+		gg_endurance_change = { SIDE = defensa VALUE = -5 }
+		gg_patron_change = { PATRON = francia DELTA = 5 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
-		c:CER ?= {
-			gg_endurance_change = { SIDE = cerrito VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
-		}
-		ai_chance = { base = 60 }
 	}
-
 }
 
 # FS-4 - Montevideo, ou une nouvelle Troie (1850), fused with guerra_grande.6
