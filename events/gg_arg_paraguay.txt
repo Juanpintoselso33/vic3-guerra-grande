@@ -1,0 +1,141 @@
+﻿namespace = gg_arg_paraguay
+# -------------------------------------------------------------------------------------------------
+# EN: THE INDEPENDENCE OF PARAGUAY (24/9/2026, Juan: «an event on the recognition of Paraguay's independence, yes or
+#     no; no gives infamy, and perhaps claims»). Argentine side, after the Pact is settled, anchored to 17 July 1852
+#     (relay gg_argentina_cal.36). It goes to whoever conducts the Confederation's foreign relations: Argentina
+#     (Urquiza after his victory or the collapsed mandate; Rosas after his victory or the negotiated confederation),
+#     or, with two governments, Urquiza's Confederation (Entre Rios), which is the government that historically signed.
+#     The text and the AI follow the man in the seat, not the path: Rosas answers as he did from 1843.
+#     Recognize: relations with Paraguay up, every Argentine claim on ground wholly Paraguayan dropped, and Brazil,
+#       Paraguay's guarantor since 25/12/1850, pleased.
+#     Withhold: infamy 5 (one year of the engine's decay, BASE_YEARLY_INFAMY_DECAY_RATE = 5; a declaration, not a
+#       seizure, so below the 10-15 of the mod's confiscation peaces), relations with Paraguay and Brazil down, and a
+#       claim on every state region wholly Paraguayan: the «rebel province» Rosas's government wrote about. Regions
+#       Paraguay shares with a third country (its part of Mato Grosso) are left out, so no claim falls on Brazil's
+#       ground; the Chaco (STATE_ALTO_PARAGUAY, STATE_FORMOSA_ARG) is never touched, even if Paraguay holds it, as the
+#       Argentine Congress left the limits pending in 1856.
+#     The relay writes gg_arg_cal_done_36 when it delivers (exactly once); this event reads no mark.
+# ES: LA INDEPENDENCIA DEL PARAGUAY. Lado argentino, despues del cierre del Pacto, anclado al 17/7/1852. Va a quien
+#     lleva las relaciones exteriores: la Argentina (Urquiza o Rosas) o, con dos gobiernos, la Confederacion de
+#     Urquiza (Entre Rios), que es el gobierno que firmo en la historia. El texto y la IA siguen al hombre en el
+#     sillon: Rosas contesta como desde 1843. Reconocer: relaciones con el Paraguay arriba, se levanta todo reclamo
+#     argentino sobre suelo enteramente paraguayo, y el Brasil, garante del Paraguay desde el 25/12/1850, conforme.
+#     Negarse: infamia 5 (un anio de decaimiento del motor; una declaracion, no un despojo), relaciones con el
+#     Paraguay y el Brasil abajo, y reclamo sobre cada region enteramente paraguaya: la «provincia rebelde». Las
+#     regiones que el Paraguay comparte con un tercero (su parte de Mato Grosso) quedan afuera; el Chaco no se toca nunca.
+#     El relevo escribe gg_arg_cal_done_36 al entregar (una sola vez); este evento no lee marcas.
+#
+# SOURCE / FUENTE:
+#   - The act of 17/7/1852, text: «Documentos relativos a la Independencia del Paraguay», dipublico.org,
+#     https://www.dipublico.org/122112/documentos-relativos-a-la-independencia-del-paraguay/ (Derqui's notes of 12,
+#     21, 26 and 28/7/1852; the approval of 20/8/1852; the law of 7/6/1856 «con reserva» of the limits).
+#     Original: Archivo Nacional de Asuncion, PY-ANA-SH-298n10-120-123, 1852-07-17,
+#     https://historia.archivonacional.gov.py/index.php/acta-de-reconocimiento-de-la-independencia-y-soberania-del-paraguay-firmada-por-el-gobierno-de-la-confederacion-argentina
+#   - The Derqui-Varela treaty of 15/7/1852 (Parana as boundary, arts. 7-8 free navigation; ratified by Lopez
+#     19/7, by Urquiza 20/8, exchanged 14/9/1852): Comision Nacional Demarcadora de Limites (MRE Paraguay),
+#     https://www2.mre.gov.py/cndl/index.php/noticias/historia-de-los-tratados-limites-firmados-entre-paraguay-y-la-republica-argentina
+#     and Biblioteca Digital de Tratados, Cancilleria argentina. Negotiations opened 25/6/1852: M. D. Terren,
+#     «Los tratados de 1853 sobre la libre navegacion de los rios», UNLP (SEDICI 10915/14855).
+#   - Derqui named by decree of 24/4/1852; Brazil's recognition by Pimenta Bueno on 14/9/1844; Guido's protest;
+#     the Brazil-Paraguay alliance of 25/12/1850 against the Confederation: R. Antonio Ramos, «La independencia del
+#     Paraguay y el Imperio del Brasil» (1976) and «El ocaso de Rosas», portalguarani.com.
+#   - Rosas never recognized it and treated it as a provincial claim; he forbade trade with Corrientes and Paraguay
+#     to every ship in the Confederation's ports; Paraguay declared war on Rosas on 4/12/1845: M. V. Baratta,
+#     «Representaciones en torno al concepto Independencia en los inicios de la prensa paraguaya (1845-1852)»,
+#     Historia y Memoria 24 (2022), https://doi.org/10.19053/20275137.n24.2022.12692
+#   - Rosas's note of 26/4/1843 (no assent; «jamas las armas de la Confederacion Argentina turbaran la paz y
+#     tranquilidad del pueblo paraguayo»): «Historia diplomatica del Paraguay», Carlos Antonio Lopez, aspecto
+#     diplomatico de su gobierno, cap. 2 (monografias.com, a reproduction; secondary).
+#   - The Congress of November 1842 and its oath: Carlos Antonio Lopez's own account, «La politica de defensa
+#     paraguaya a traves de los discursos presidenciales», IAEE (portalguarani.com).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: 17/7/1852 (relay gg_argentina_cal.36): recognize or withhold / reconocer o negarse
+gg_arg_paraguay.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_arg_paraguay.1.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_arg_paraguay.1.d_rosas
+				trigger = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+			triggered_desc = {
+				desc = gg_arg_paraguay.1.d_confederation
+				trigger = { c:ENR ?= this }
+			}
+			triggered_desc = {
+				desc = gg_arg_paraguay.1.d_urquiza
+			}
+		}
+	}
+	flavor = gg_arg_paraguay.1.f
+	event_image = { video = "gg_arg_san_nicolas" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		OR = {
+			c:ARG ?= this
+			c:ENR ?= this
+		}
+		exists = c:PRG
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_paraguay.1|" # GG_TRAZA
+	}
+
+	# EN: recognize it «as an accomplished fact» / reconocerla «como un hecho consumado»
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_paraguay.1.a|" # GG_TRAZA
+		name = gg_arg_paraguay.1.a
+		custom_tooltip = gg_arg_paraguay.1.a_tt
+		change_relations = { country = c:PRG value = 30 }
+		c:BRZ ?= { change_relations = { country = ROOT value = 10 } }
+		# EN/ES: every Argentine claim on ground wholly Paraguayan / todo reclamo argentino sobre suelo enteramente paraguayo
+		c:PRG = {
+			every_scope_state = {
+				limit = {
+					state_region = { NOT = { any_scope_state = { NOT = { owner = c:PRG } } } }
+					# EN/ES: never the Chaco: its limits stayed pending (law of 7/6/1856, «con reserva») / nunca el Chaco
+					NOT = { state_region = s:STATE_ALTO_PARAGUAY }
+					NOT = { state_region = s:STATE_FORMOSA_ARG }
+				}
+				state_region = { remove_claim = ROOT }
+			}
+		}
+		ai_chance = {
+			base = 90
+			modifier = { trigger = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } } factor = 0.11 }
+		}
+	}
+	# EN: withhold assent: a province that has not come back / no dar aquiescencia: una provincia que no volvio
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_paraguay.1.b|" # GG_TRAZA
+		name = gg_arg_paraguay.1.b
+		custom_tooltip = gg_arg_paraguay.1.b_tt
+		change_infamy = 5
+		change_relations = { country = c:PRG value = -30 }
+		c:BRZ ?= { change_relations = { country = ROOT value = -10 } }
+		# EN/ES: the «rebel province»: every state region wholly Paraguayan, never one shared with a third country
+		#     / la «provincia rebelde»: cada region enteramente paraguaya, nunca una compartida con un tercero
+		c:PRG = {
+			every_scope_state = {
+				limit = {
+					state_region = { NOT = { any_scope_state = { NOT = { owner = c:PRG } } } }
+					# EN/ES: never the Chaco: its limits stayed pending (law of 7/6/1856, «con reserva») / nunca el Chaco
+					NOT = { state_region = s:STATE_ALTO_PARAGUAY }
+					NOT = { state_region = s:STATE_FORMOSA_ARG }
+				}
+				state_region = { add_claim = ROOT }
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } } factor = 9 }
+		}
+	}
+}

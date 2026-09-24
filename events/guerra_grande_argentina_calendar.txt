@@ -1087,3 +1087,63 @@ gg_argentina_cal.35 = {
 		}
 	} }
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 17 July 1852 (day 6037) -- the independence of Paraguay (gg_arg_paraguay.1). 24/9/2026 (Juan). The date is the
+#     act Derqui signed in Asuncion in Urquiza's name. Delivered only once the Pact is settled (gg_pact_settled): to
+#     Urquiza's Confederation (Entre Rios) while two governments stand (the stalemate settlement, Entre Rios free),
+#     otherwise to Argentina, whoever sits in its chair -- also after a stalemate whose Entre Rios is gone or a
+#     subject, or became Argentina itself (gg_ba.21). Paraguay has to exist, be nobody's subject and not be at war
+#     with the recipient. Conditions are read here, on the day, not at game start.
+#     NO SELF-RETRY: while the conditions do not hold (a siege of Buenos Aires still delaying the settlement, a war
+#     with Paraguay) the monthly pulse gg_paraguay_recognition_pulse (common/on_actions/gg_audit_migrations.txt) calls
+#     this relay again on whatever country is ARG that month, the last time in the last pulse before 7/6/1856, the day the Argentine Congress approved
+#     the recognition (Codex review: a retry queued on an ARG later annexed in the Buenos Aires chain would be lost).
+#     The same pulse serves saves begun before this relay existed. Without a settlement by then nothing comes: the
+#     status quo is Rosas's, non-recognition. The relay writes gg_arg_cal_done_36 when it delivers, so a pulse and
+#     the dated call on the same day cannot deliver twice (the visible event's trigger holds when it is queued).
+#     Cross-checks: 17/7/1852 = (1852-1836)*365 + (198-1) = 5840 + 197 = 6037; 11/9/1852 = 5840 + 253 = 6093 (gg_ba.101).
+# ES: 17 de julio de 1852 (dia 6037) -- la independencia del Paraguay. La fecha es el acta que Derqui firmo en la
+#     Asuncion en nombre de Urquiza. Solo despues del cierre del Pacto: a la Confederacion de Urquiza (Entre Rios)
+#     mientras haya dos gobiernos; si no, a la Argentina, la gobierne quien la gobierne (tambien tras unas tablas cuya
+#     Entre Rios ya no existe, es sujeta o se volvio la Argentina). El Paraguay tiene que existir, no ser sujeto de
+#     nadie ni estar en guerra con quien recibe. Sin reintento propio: mientras no se cumpla, el pulso mensual
+#     gg_paraguay_recognition_pulse vuelve a llamar al relevo sobre la ARG de ese mes, hasta el 7/6/1856 (la ley del
+#     Congreso argentino); un reintento encolado sobre una ARG anexada despues se perderia. El mismo pulso cubre las
+#     partidas viejas. Sin cierre para entonces no sale nada: el statu quo es el de Rosas. El relevo escribe
+#     gg_arg_cal_done_36 al entregar: el pulso y la llamada fechada no pueden entregar dos veces.
+# SOURCE / FUENTE: events/gg_arg_paraguay.txt
+# -------------------------------------------------------------------------------------------------
+gg_argentina_cal.36 = {
+	type = country_event
+	hidden = yes
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.36|"  hidden_effect = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_36 }
+				has_global_variable = gg_pact_settled
+				exists = c:PRG
+				c:PRG = { is_subject = no }
+				gg_paraguay_two_governments = yes
+				c:ENR = { NOT = { has_war_with = c:PRG } }
+			}
+			set_global_variable = gg_arg_cal_done_36
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.36| TO=ENR " # GG_TRAZA
+			c:ENR = { trigger_event = { id = gg_arg_paraguay.1 days = 0 popup = yes } }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_36 }
+				has_global_variable = gg_pact_settled
+				exists = c:PRG
+				c:PRG = { is_subject = no }
+				NOT = { gg_paraguay_two_governments = yes }
+				exists = c:ARG
+				c:ARG = { NOT = { has_war_with = c:PRG } }
+			}
+			set_global_variable = gg_arg_cal_done_36
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.36| TO=ARG " # GG_TRAZA
+			c:ARG = { trigger_event = { id = gg_arg_paraguay.1 days = 0 popup = yes } }
+		}
+	} }
+}

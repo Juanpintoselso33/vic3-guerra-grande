@@ -1,0 +1,10 @@
+﻿# EN: 24/9/2026 (Juan, the independence of Paraguay) -- two governments stand: the Pact ended in a draw and Urquiza's
+#     Confederation (Entre Rios) still exists and is free (after gg_ba.21 turns it into ARG, c:ENR no longer exists). Read by the relay
+#     gg_argentina_cal.36 to pick the recipient: Entre Rios while this holds, Argentina otherwise.
+# ES: hay dos gobiernos: el Pacto termino en tablas y la Confederacion de Urquiza (Entre Rios) sigue existiendo, libre.
+#     El relevo gg_argentina_cal.36 elige con esto a quien entregar: Entre Rios mientras valga, la Argentina si no.
+gg_paraguay_two_governments = {
+	has_global_variable = gg_pact_settlement_stalemate
+	exists = c:ENR
+	c:ENR = { is_subject = no }
+}

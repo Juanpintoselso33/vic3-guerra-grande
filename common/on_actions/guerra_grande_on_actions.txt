@@ -223,6 +223,9 @@ guerra_grande_on_game_start = {
 			# ES: 21/11/1851. (1851-1836)*365 + (325-1) = 5475 + 324 = 5799.
 			#     Los mismos controles lo encierran: 4/9/1851 = 5721 y 1/2/1852 = 5871.
 			trigger_event = { id = gg_argentina_cal.29 days = 5799 } # 1851-11-21 precio del Ejercito Grande
+			# EN: 17/7/1852. (1852-1836)*365 + (198-1) = 5840 + 197 = 6037. Cross-check: 11/9/1852 = 5840+253 = 6093 (gg_ba.101).
+			# ES: 17/7/1852, el acta de Derqui en la Asuncion. Control: 11/9/1852 = 6093 (gg_ba.101).
+			trigger_event = { id = gg_argentina_cal.36 days = 6037 } # 1852-07-17 la independencia del Paraguay
 			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
 			# EN/ES: 23/9/2026 (Juan) -- Buenos Aires and the siege (events/gg_rosas.txt) / Buenos Aires y el sitio
 			trigger_event = { id = gg_rosas.101 days = 2601 } # 1843-02-16 las divisiones argentinas ante Montevideo

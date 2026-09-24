@@ -23,6 +23,7 @@ on_monthly_pulse_country = {
 		gg_province_incorporation_migration
 		gg_cis_note_migration
 		gg_rosas_first_term_migration
+		gg_paraguay_recognition_pulse
 	}
 }
 
@@ -299,5 +300,28 @@ gg_rosas_first_term_migration = {
 		set_global_variable = gg_rosas_first_term_known
 		set_global_variable = gg_rosas_first_term_legacy
 		gg_rosas_keeps_the_seat = yes
+	}
+}
+
+# EN: 24/9/2026 (Juan, the independence of Paraguay; Codex review) -- the retry of gg_argentina_cal.36, and its
+#     delivery to saves begun before it existed. From 17/7/1852 (day 6037, when the dated call comes) to 7/6/1856 (the
+#     Argentine Congress's law), every month, on whatever country is ARG that month, until the relay delivers
+#     (gg_arg_cal_done_36). A pulse, not a self-queued retry: a retry queued on an Argentina later annexed in the Buenos
+#     Aires chain (gg_ba.20/.21) would be lost. Not an old-save repair only, so not guarded by gg_new_game_no_migrations.
+#     The last check is ARG's last monthly pulse before 7/6/1856 (Codex, round 2): conditions that only come true after
+#     it deliver nothing, which is the cutoff meant (the recognition was the Congress's by then).
+# ES: el reintento de gg_argentina_cal.36 y su entrega a las partidas empezadas antes de que existiera. Desde el
+#     17/7/1852 hasta el 7/6/1856, cada mes, sobre la ARG de ese mes, hasta que el relevo entregue. Un pulso y no un
+#     reintento encolado: el encolado sobre una Argentina anexada despues en la cadena de Buenos Aires se perderia.
+gg_paraguay_recognition_pulse = {
+	trigger = {
+		c:ARG ?= this
+		NOT = { has_global_variable = gg_arg_cal_done_36 }
+		game_date >= 1852.7.18 # EN/ES: the day after the dated call / el dia despues de la llamada fechada
+		game_date < 1856.6.7
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_paraguay_recognition_pulse" # GG_TRAZA
+		trigger_event = { id = gg_argentina_cal.36 days = 0 }
 	}
 }
