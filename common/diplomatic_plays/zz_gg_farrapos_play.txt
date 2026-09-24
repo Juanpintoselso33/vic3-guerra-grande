@@ -1,0 +1,49 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: dp_gg_farrapos -- THE RAGAMUFFIN WAR, Brazil against the Riograndense Republic (PNI). 23/9/2026
+#     (Juan, balance A). Vanilla starts it as dp_annex_war and the engine ends it in months: a one-state
+#     country loses its war support to occupation, capitulates by itself at -100 and is annexed -- in 11 of
+#     12 saves before the Republic was even proclaimed (11/9/1836). In 1835-1845 the Empire could not close
+#     the war: the Oriental refuge, the horses of the Banda Oriental, a Regency with four risings at once.
+#     Here: the same goal (annex_country, so vanilla's annexation, brazilian_minors.3 and Brazil's
+#     ragamuffin_war journal run as always), NO negotiated peace, nobody joins, and the end is dated:
+#     Ponche Verde, 25/2-1/3/1845 (events/gg_farrapos.txt). Until then gg_farrapos.1 keeps the Farrapos'
+#     war support above a floor that the Oriental refuge sets (-60 at the lowest).
+# ES: dp_gg_farrapos -- LA GUERRA DE LOS FARRAPOS, el Brasil contra la Republica Riograndense (PNI).
+#     Vanilla la abre como dp_annex_war y el motor la cierra en meses. Aca: el mismo objetivo (annex_country,
+#     asi la anexion de vanilla, brazilian_minors.3 y el journal ragamuffin_war del Brasil andan como
+#     siempre), SIN paz negociada, sin nadie que se sume, y con final fechado: Ponche Verde, 25/2-1/3/1845.
+#     Hasta entonces gg_farrapos.1 sostiene el apoyo farrapo sobre un piso que fija el refugio oriental
+#     (-60 como minimo).
+# SOURCE / FUENTE: docs/farrapos/farrapos-investigacion-y-opciones.md (design repo), sections 1.1, 3 and 4.A.
+# -------------------------------------------------------------------------------------------------
+dp_gg_farrapos = {
+	war_goal = annex_country
+	# EN/ES: the war ends at Ponche Verde, not by a vanilla peace / la guerra termina en Ponche Verde
+	allow_negotiated_peace = no
+	initiator_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	# EN/ES: created only by the history file; never offered in the lens / solo la crea el archivo de historia
+	possible = {
+		guerra_grande_play_is_allowed = yes # EN/ES: the guard every play carries (Brazil vs PNI passes it) / la guarda de toda jugada
+	}
+
+	# EN: nobody joins. The Uruguayan AI has the secret goal "befriend PNI"; the Republic never went to war for
+	#     Piratini -- its help came as horses, refuge and treaties (gg_prewar.2, gg_prewar.9, gg_phase1.8).
+	# ES: no se suma nadie. La Republica nunca fue a la guerra por Piratini: su ayuda fue caballos, refugio y
+	#     tratados.
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

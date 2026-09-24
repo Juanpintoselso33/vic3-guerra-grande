@@ -1,0 +1,73 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: ONE GARIBALDI. 23/9/2026 (Juan). The mod used to create its own Giuseppe Garibaldi for the Italian
+#     Legion without the marker vanilla checks (character variable garibaldi_var and global
+#     garibaldi_is_alive_global_var, events/agitators_events/garibaldi_events.txt:30-44 and the template's
+#     on_created), so vanilla's garibaldi_events.1 could create a second one. Seen in Juan's save
+#     "cerrito government_1846_12_01": vanilla's (born 4/7/1807, Provence, recruited 1844) and ours (Defensa,
+#     recruited 1843), both alive. With the Farrapos alive until 1845, vanilla's path "PNI at war with
+#     Brazil, year <= 1839" is live too, which is his real arrival in the Plata.
+#     So: if a Garibaldi with the marker already exists (in the exile pool or in a country), he is brought
+#     here; only if none exists is ours created, with the marker, so vanilla's event finds him (and, once he
+#     is exiled in 1848, takes him from the exile pool instead of creating another).
+#     Scope: the country that raises the Legion. Leaves scope:gg_garibaldi.
+# ES: UN SOLO GARIBALDI. El mod creaba su Garibaldi sin la marca que mira vanilla, y el evento de vanilla
+#     podia crear un segundo (visto en la save de Juan de 1846: dos vivos). Si ya existe uno con la marca, se
+#     lo trae; solo si no existe se crea el nuestro, con la marca, para que vanilla lo encuentre.
+# -------------------------------------------------------------------------------------------------
+gg_garibaldi_obtain = {
+	if = {
+		limit = { any_character_in_exile_pool = { has_variable = garibaldi_var } }
+		random_character_in_exile_pool = {
+			limit = { has_variable = garibaldi_var }
+			transfer_character = root
+			save_scope_as = gg_garibaldi
+		}
+	}
+	else_if = {
+		limit = {
+			any_character = {
+				has_variable = garibaldi_var
+				is_character_alive = yes
+			}
+		}
+		random_character = {
+			limit = {
+				has_variable = garibaldi_var
+				is_character_alive = yes
+			}
+			if = {
+				limit = { exists = this.commander_military_formation }
+				unassign_from_formation = yes
+			}
+			if = {
+				limit = { NOT = { owner ?= root } }
+				transfer_character = root
+			}
+			save_scope_as = gg_garibaldi
+		}
+	}
+	else = {
+		# EN/ES: Codex 23/9 -- from vanilla's template, so vanilla's death on_action (has_template) clears
+		#     garibaldi_is_alive_global_var (the template's on_created sets it) / desde la plantilla de vanilla,
+		#     asi la muerte limpia la global
+		create_character = {
+			template = garibaldi_character_template
+			save_scope_as = gg_garibaldi
+			on_created = {
+				set_variable = garibaldi_var # EN/ES: the marker vanilla checks / la marca que mira vanilla
+			}
+		}
+		# EN/ES: also here, in case our on_created replaces the template's / tambien aca, por si nuestro on_created reemplaza al de la plantilla
+		set_global_variable = garibaldi_is_alive_global_var
+	}
+	scope:gg_garibaldi ?= {
+		# EN/ES: Codex 23/9 -- vanilla's garibaldi_events.2 exiles him from a country at peace in the engine
+		#     (the siege has no engine war) unless this cooldown is set; the mod sends him away itself in 1848
+		#     / sin este enfriamiento vanilla lo exilia de un pais en paz; el mod lo despide en 1848
+		set_variable = { name = garibaldi_cooldown_var days = 2190 } # EN/ES: six years / seis anios
+		if = {
+			limit = { NOT = { has_role_of_type = general } }
+			add_character_role = general
+		}
+	}
+}

@@ -626,7 +626,20 @@ gg_phase1.7 = {
 	placement = ROOT
 
 	title = gg_phase1.7.t
-	desc = gg_phase1.7.d
+	# EN/ES: 23/9 (Farrapos, I2) -- Bento Goncalves's Rio Grande only while the Republic is alive
+	#     / el Rio Grande de Bento Goncalves solo mientras la Republica viva
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_phase1.7.d
+				trigger = { exists = c:PNI }
+			}
+			triggered_desc = {
+				desc = gg_phase1.7.d_nopni
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = gg_phase1.7.f
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
@@ -734,6 +747,45 @@ gg_phase1.8 = {
 			trigger_event = { id = guerra_grande.15 days = 88 }              # la puerta de la particion
 		}
 		ai_chance = { base = 60 }
+	}
+
+	# EN: 23/9 (Juan, I2) -- SAN FRUCTUOSO. By the treaty of 28/12/1841 Bento Goncalves lends Rivera 500
+	#     infantry and 200 cavalry, freedmen under Netto, for the campaign in Entre Rios, and the Republic
+	#     receives 2,000 horses. In history it stayed on paper (Mendes: the horses never reached Rio Grande
+	#     and the contingent never went; he gives 1,000 horses, Guazzelli's copy of the treaty 2,000). Keeping
+	#     it: the same crossing as option a, with Netto's men -- the defeat costs less -- and the horses make
+	#     the refuge one step stronger; Rio de Janeiro sees a treaty with its rebels.
+	# ES: SAN FRUCTUOSO. 500 infantes y 200 jinetes libertos de Netto para Entre Rios, contra 2.000 caballos.
+	#     En la historia quedo en el papel. Cumplirlo: el mismo cruce que la opcion a, con la gente de Netto
+	#     -- la derrota cuesta menos --, y el refugio sube un escalon; Rio de Janeiro ve un tratado con sus
+	#     rebeldes.
+	# SOURCE / FUENTE: GUAZZELLI-PA (San Fructuoso, 28/12/1841: "500 soldados de infantaria e 200 de
+	#     cavalaria ... em contrapartida, a Republica receberia 2.000 cavalos", "negros libertos ...
+	#     comandados pelo proprio General Souza Netto"; copy in Spalding 1982); UFGD-MENDES (1,000 horses;
+	#     "o dito tratado nunca passou do papel").
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_phase1.8.c|" # GG_TRAZA
+		name = gg_phase1.8.c
+		trigger = {
+			exists = c:PNI
+		}
+		custom_tooltip = gg_phase1.8.c_tt
+		gg_score_blanco = { AMOUNT = 2 }
+		if = {
+			limit = { has_global_variable = gg_invaded_entre_rios }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
+		if = {
+			limit = { has_global_variable = gg_greater_uruguay }
+			gg_score_blanco = { AMOUNT = 1 }
+		}
+		gg_farrapos_refuge_change = { DELTA = 1 }
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
+		hidden_effect = {
+			trigger_event = { id = gg_rivera.1 days = 16 popup = yes }       # la derrota, 6 de diciembre
+			trigger_event = { id = guerra_grande.15 days = 88 }              # la puerta de la particion
+		}
+		ai_chance = { base = 20 }
 	}
 
 	option = {

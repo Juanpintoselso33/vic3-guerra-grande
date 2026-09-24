@@ -1,0 +1,42 @@
+﻿# EN: 23/9/2026 (Juan, integration I2) -- the Oriental refuge of the Farrapos, on PNI, one tier at a time
+#     (global gg_farrapos_refuge, 0-3, set by gg_farrapos_refuge_apply). The combat part follows the
+#     "argentina nuevos eventos" Workshop mod (3750562635, clandestine_support2: +30% owned-province defence,
+#     -10% morale loss): the Republic held the campaign and crossed the border for horses when pressed.
+# ES: el refugio oriental de los Farrapos, sobre PNI, por escalones. La parte de combate sigue al mod del
+#     Workshop «argentina nuevos eventos» (3750562635): la Republica tenia la campania y cruzaba la frontera a
+#     buscar caballos cuando la apuraban.
+# SOURCE / FUENTE: GUAZZELLI-PA (the Republic depended on the Estado Oriental for refuge, horses and trade);
+#     ANPUH-CAXIAS, UFGD-MENDES (the Farrapos escaped into the Estado Oriental when pressed).
+gg_farrapos_refuge_1 = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	battle_defense_owned_province_mult = 0.10
+}
+
+gg_farrapos_refuge_2 = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	battle_defense_owned_province_mult = 0.20
+	unit_morale_loss_mult = -0.05
+}
+
+gg_farrapos_refuge_3 = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	battle_defense_owned_province_mult = 0.30
+	unit_morale_loss_mult = -0.10
+}
+
+# EN: Ponche Verde, art. 8 (Caxias's own version, Wiederspahn 1980): the republican officers enter the
+#     imperial army with their ranks. The province's men are the Empire's for the Plata (Carrion, Gandia).
+# ES: Ponche Verde, art. 8: los oficiales republicanos entran al ejercito imperial con sus grados.
+gg_ponche_verde_officers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	unit_offense_mult = 0.05
+	unit_morale_loss_mult = -0.05
+}
+
+# EN: only the published decree of 18/12/1844 (amnesty) is kept; the reserved articles are not. The
+#     province is pacified, not won over.
+# ES: se cumple solo el decreto publicado del 18/12/1844 (amnistia); los articulos reservados no.
+gg_ponche_verde_decree_only = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+}

@@ -1,0 +1,303 @@
+﻿namespace = gg_farrapos
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE RAGAMUFFIN WAR (1835-1845) and its Oriental links. 23/9/2026 (Juan: balance A + integration I2).
+#     The war is vanilla's (tag PNI, the play dp_gg_farrapos since this change); this file only keeps it
+#     alive until Ponche Verde and ends it there. Everything runs on Brazil, which never changes tag, and is
+#     scheduled from game start (common/scripted_effects/gg_farrapos.txt, gg_farrapos_start):
+#       gg_farrapos.1  hidden, weekly: the war-support floor (the Oriental refuge sets it)
+#       gg_farrapos.5  hidden, 9/11/1842: Caxias takes command -> gg_farrapos.6 to the Cerrito
+#       gg_farrapos.2  hidden, 25/2/1845: Ponche Verde -> gg_farrapos.3 (Brazil) -> gg_farrapos.4 (Defensa)
+#     The end is ALWAYS Ponche Verde: the pieces of 1851 (gg_contingent.8, the treaties of 12/10/1851) assume
+#     Brazil holds Rio Grande.
+# ES: LA GUERRA DE LOS FARRAPOS y sus lazos orientales. La guerra es la de vanilla; este archivo la sostiene
+#     hasta Ponche Verde y la termina ahi. Todo sobre el Brasil, agendado desde el inicio de la partida. El
+#     final es SIEMPRE Ponche Verde: las piezas de 1851 dan por hecho que el Brasil tiene Rio Grande.
+# SOURCE / FUENTE: docs/farrapos/farrapos-investigacion-y-opciones.md (design repo), with the source keys below.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: weekly, hidden, on Brazil. Stops by itself at Ponche Verde or when the war is gone.
+#     / semanal, oculto, sobre el Brasil. Se corta solo en Ponche Verde o cuando no hay guerra.
+gg_farrapos.1 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:BRZ ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.1|" # GG_TRAZA
+		if = {
+			limit = {
+				exists = c:PNI
+				has_war_with = c:PNI
+				NOT = { has_global_variable = gg_farrapos_ponche_verde }
+			}
+			every_scope_war = {
+				limit = { is_war_participant = c:PNI }
+				gg_farrapos_floor = yes
+			}
+			trigger_event = { id = gg_farrapos.1 days = 7 }
+		}
+	}
+}
+
+# EN/ES: 25/2/1845, hidden dispatcher: the visible event is queued only if the war is still there
+#     (a scheduled event reads its trigger when queued) / despachador: solo si la guerra sigue
+gg_farrapos.2 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:BRZ ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.2|" # GG_TRAZA
+		if = {
+			limit = {
+				exists = c:PNI
+				has_war_with = c:PNI
+				NOT = { has_global_variable = gg_farrapos_ponche_verde }
+			}
+			trigger_event = { id = gg_farrapos.3 popup = yes }
+		}
+	}
+}
+
+# EN: PONCHE VERDE, 25/2-1/3/1845. Fontoura reads the twelve articles on the 25th; Canabarro and Lucas de
+#     Oliveira sign the act on the 28th; Caxias proclaims the peace on 1 March. There was no treaty signed
+#     by two parties: the Empire did not recognise the Republic. The capitulation is in immediate, so the
+#     date holds whatever Brazil answers and whenever: PNI's war support goes to -1000, it capitulates, and
+#     vanilla's annex_country, brazilian_minors.3 and the ragamuffin_war journal do the rest.
+# ES: PONCHE VERDE. La capitulacion va en immediate, asi la fecha se cumple conteste lo que conteste el
+#     Brasil y cuando lo conteste: el apoyo de PNI va a -1000, capitula, y la anexion de vanilla hace el resto.
+# SOURCE / FUENTE: CARRION (the twelve articles in Caxias's hand, Wiederspahn 1980; the act of 28/2 and the
+#     proclamation of 1/3; "necessidade do Imperio de contar com os rio-grandenses"); CONJUR (Caxias's
+#     proclamation of 1/3/1845, verbatim, and Canabarro's "a continuacao de uma guerra seria o ultimatum da
+#     destruicao e do aniquilamento de nossa terra", "poder estranho"; the decree of 18/12/1844);
+#     IHGRGS-GANDIA (Ponche Verde and the Plata). The 25% duty on Plata jerked beef is NOT cited: the
+#     sources disagree on its date (CARDOZO 1851, UFMG-TEMP before 1840).
+gg_farrapos.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_farrapos.3.t
+	desc = gg_farrapos.3.d
+	flavor = gg_farrapos.3.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:BRZ ?= this
+		exists = c:PNI
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.3|" # GG_TRAZA
+		set_global_variable = gg_farrapos_ponche_verde
+		every_scope_war = {
+			limit = { is_war_participant = c:PNI }
+			add_war_war_support = { target = c:PNI value = -1000 }
+		}
+		# EN/ES: the Oriental side hears of it: the Defensa, or the Republic before the partition
+		#     / se entera el lado oriental: la Defensa, o la Republica antes de la particion
+		if = {
+			limit = { any_country = { has_variable = guerra_grande_defensa_government } }
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_farrapos.4 days = 4 popup = yes }
+			}
+		}
+		else = {
+			c:URU ?= { trigger_event = { id = gg_farrapos.4 days = 4 popup = yes } }
+		}
+	}
+
+	# EN: historical: the twelve articles, the reserved ones included -- the Empire guarantees the Republic's
+	#     public debt (art. 4) and takes its officers with their ranks (art. 8), not its generals (art. 10).
+	# ES: lo historico: los doce articulos, tambien los reservados: la deuda (art. 4) y los oficiales con sus
+	#     grados (art. 8), no los generales (art. 10).
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.3.a|" # GG_TRAZA
+		name = gg_farrapos.3.a
+		default_option = yes
+		custom_tooltip = gg_farrapos.3.a_tt
+		add_treasury = -30000
+		add_modifier = {
+			name = gg_ponche_verde_officers
+			years = 10
+			is_decaying = yes
+		}
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
+	}
+
+	# EN: only the published decree of 18/12/1844: the amnesty, nothing reserved.
+	# ES: solo el decreto publicado del 18/12/1844: la amnistia, nada de lo reservado.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.3.b|" # GG_TRAZA
+		name = gg_farrapos.3.b
+		custom_tooltip = gg_farrapos.3.b_tt
+		add_modifier = {
+			name = gg_ponche_verde_decree_only
+			years = 5
+			is_decaying = yes
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+# EN: the news in Montevideo. Ponche Verde frees the Empire's hands for the Plata: Brazil's backing rises
+#     (gg_patron_brasil), and from there gg_patron_level_brasil -> the Defensa's backing and subsidy.
+#     India Muerta (gg_rivera.2, 27/3/1845) comes a month later and its options b and c read this peace.
+# ES: la noticia en Montevideo. Ponche Verde le libera las manos al Imperio para el Plata: sube el padrino
+#     Brasil. India Muerta llega un mes despues y sus opciones b y c leen esta paz.
+# SOURCE / FUENTE: CONJUR (the three proclamations of 28/2 and 1/3/1845; Caxias's from "a costa do Santa
+#     Maria, campo de Alexandre Simoes"; Canabarro's "poder estranho"); CARRION and CARDOZO (the Empire needed
+#     the riograndenses for the Plata); Wikipedia ES, Guerra Grande (Bento Goncalves, Rivera's comrade in the
+#     Portuguese army -- the same line gg_prewar.2 cites).
+gg_farrapos.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_farrapos.4.t
+	desc = gg_farrapos.4.d
+	flavor = gg_farrapos.4.f
+
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		OR = {
+			has_variable = guerra_grande_defensa_government
+			c:URU ?= this
+		}
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.4|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.4.a|" # GG_TRAZA
+		name = gg_farrapos.4.a
+		default_option = yes
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		ai_chance = { base = 1 }
+	}
+}
+
+# EN/ES: 9/11/1842, hidden dispatcher. Caxias's pact is with Oribe: it reaches the Cerrito if it exists,
+#     and waits a month at a time until it does, while the war lasts / el pacto de Caxias es con Oribe: llega
+#     al Cerrito si existe, y espera de a un mes mientras dure la guerra
+gg_farrapos.5 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:BRZ ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.5|" # GG_TRAZA
+		if = {
+			limit = {
+				exists = c:PNI
+				has_war_with = c:PNI
+				NOT = { has_global_variable = gg_farrapos_ponche_verde }
+			}
+			if = {
+				limit = { exists = c:CER }
+				c:CER = { trigger_event = { id = gg_farrapos.6 popup = yes } }
+			}
+			else = {
+				trigger_event = { id = gg_farrapos.5 days = 30 }
+			}
+		}
+	}
+}
+
+# EN: CAXIAS ON THE BORDER, November 1842. On taking the presidency of Rio Grande and the command of arms
+#     (9/11/1842) Caxias found 11,549 imperial men (4,549 in garrisons) against some 3,500 republicans who
+#     crossed into the Estado Oriental when pressed, where Rivera sheltered them; he at once sought an
+#     agreement with Oribe that the republicans should not cross the border, and bought horses in the
+#     Estado Oriental for a cavalry he admitted was inferior. On 24/3/1843 the Empire and the Confederation
+#     signed in Rio an alliance "para restabelecer a paz na Republica Oriental do Uruguay e na Provincia de
+#     Rio Grande de Sao Pedro" -- never ratified by Rosas.
+# ES: CAXIAS EN LA FRONTERA. Al asumir encontro 11.549 plazas imperiales contra unos 3.500 republicanos que
+#     cruzaban al Estado Oriental cuando los apuraban; pacto enseguida con Oribe que no cruzaran la frontera.
+# SOURCE / FUENTE: ANPUH-CAXIAS (appointment 28/9 and command 9/11/1842; 11,549 and 4,549 against ~3,500;
+#     the refuge with Rivera); UFGD-MENDES (Mendes 2008, p. 8: "promoveu imediatamente um acordo com Manuel
+#     Oribe para que os republicanos nao atravessassem a fronteira"; the horses negotiated with Oribe);
+#     GUAZZELLI-PA (the Rio treaty of 24/3/1843, annex VII, and its "rebeldes ... aliado e unido a Fructuoso
+#     Rivera"); IHGRGS-GANDIA (Caxias on the inferiority of his cavalry, after Guazzelli 2011).
+gg_farrapos.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = gg_farrapos.6.t
+	desc = gg_farrapos.6.d
+	flavor = gg_farrapos.6.f
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:CER ?= this
+		exists = c:PNI
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.6|" # GG_TRAZA
+	}
+
+	# EN: historical: the border closes to the republicans. The refuge is gone; the Empire needs Rivera
+	#     less (Brazil's backing of the colorados down); watching the line costs the Cerrito men.
+	# ES: lo historico: la frontera se cierra a los republicanos. Se acaba el refugio; el Imperio necesita
+	#     menos a Rivera; vigilar la linea le cuesta hombres al Cerrito.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.6.a|" # GG_TRAZA
+		name = gg_farrapos.6.a
+		default_option = yes
+		gg_farrapos_refuge_change = { DELTA = -3 }
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
+		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
+		}
+	}
+
+	# EN: refuse: the refuge stays as it is, and Rio de Janeiro leans harder on the Defensa.
+	# ES: negarse: el refugio queda como esta, y Rio de Janeiro se apoya mas en la Defensa.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.6.b|" # GG_TRAZA
+		name = gg_farrapos.6.b
+		gg_farrapos_refuge_change = { DELTA = 0 }
+		gg_patron_change = { PATRON = brasil DELTA = 5 }
+		ai_chance = { base = 30 }
+	}
+}

@@ -412,6 +412,14 @@ gg_rivera.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.b|" # GG_TRAZA
 		name = gg_rivera.2.b
+		# EN/ES: 23/9 (Farrapos) -- Caxias has horses and arms to sell only after Ponche Verde
+		#     / Caxias tiene armas y caballos para vender recien despues de Ponche Verde
+		trigger = {
+			OR = {
+				has_global_variable = gg_farrapos_ponche_verde
+				NOT = { exists = c:PNI }
+			}
+		}
 		custom_tooltip = gg_rivera.2.b_tt2
 		# EN/ES: T4 -- FE-7: Brazilian arms / armas brasilenias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
@@ -483,6 +491,13 @@ gg_rivera.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.2.c|" # GG_TRAZA
 		name = gg_rivera.2.c
+		# EN/ES: 23/9 (Farrapos) -- the Empire holds Rivera only with its own war over / el Imperio lo retiene solo con su guerra terminada
+		trigger = {
+			OR = {
+				has_global_variable = gg_farrapos_ponche_verde
+				NOT = { exists = c:PNI }
+			}
+		}
 		custom_tooltip = gg_rivera.2.c_tt2
 		# EN/ES: T4 -- FE-7: handed to the Empire / entregado al Imperio
 		gg_patron_change = { PATRON = brasil DELTA = 5 }

@@ -16,6 +16,9 @@ guerra_grande_on_game_start = {
 		gg_systems_init = yes
 		# EN/ES: 23/9 -- the historical men live until their date / viven hasta su fecha
 		gg_historical_lives = yes
+		# EN/ES: 23/9 (Juan) -- the Farrapos last until Ponche Verde, 1845 (common/scripted_effects/gg_farrapos.txt)
+		#     / los Farrapos duran hasta Ponche Verde
+		gg_farrapos_start = yes
 		# EN: 22/9/2026 (Codex) -- Beron de Astrada governs Corrientes from 1837 (by the Pact's list from
 		#     the start): he exists in the Confederation from day one, and the Corrientes rising moves
 		#     him (gg_ruler_set) instead of creating him.

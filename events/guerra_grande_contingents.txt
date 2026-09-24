@@ -459,22 +459,9 @@ gg_contingent.5 = {
 			}
 		# EN/ES: Codex review 2026-09-19 -- kept in a variable so 1848 can put him on the boat
 		#     / guardado en una variable para que 1848 lo pueda embarcar
-		create_character = {
-			save_scope_as = gg_garibaldi
-			first_name = "Giuseppe"
-			last_name = "Garibaldi"
-			historical = yes
-			is_general = yes
-			interest_group = ig_armed_forces
-			ideology = ideology_radical
-			culture = cu:north_italian
-			religion = rel:catholic
-			traits = {
-				charismatic
-				brave
-				experienced_offensive_planner
-			}
-		}
+		# EN/ES: 23/9 (Juan) -- one Garibaldi: reuse vanilla's if he exists, else create ours WITH the marker
+		#     vanilla checks (common/scripted_effects/gg_garibaldi.txt) / un solo Garibaldi
+		gg_garibaldi_obtain = yes
 		set_variable = { name = gg_garibaldi_ref value = scope:gg_garibaldi }
 		set_global_variable = { name = gg_garibaldi_gref value = scope:gg_garibaldi } # EN/ES: CB-05 -- survives an annexed Defensa / sobrevive a una Defensa anexada
 		}

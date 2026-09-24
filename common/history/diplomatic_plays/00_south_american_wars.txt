@@ -1,0 +1,44 @@
+﻿# EN: 23/9/2026 (Juan, balance A of docs/farrapos/farrapos-investigacion-y-opciones.md in the design repo).
+#     Vanilla's file, VERBATIM, except the ragamuffin war's type: dp_gg_farrapos instead of dp_annex_war.
+#     dp_annex_war is REPLACEd by the mod for every annexation in the world (zz_gg_argentine_plays.txt) and must
+#     not change; the Farrapos get their own type, with no negotiated peace. The Cabanagem stays vanilla.
+#     No mod of the playset ships this file (checked in content_load.json on 23/9/2026).
+# ES: el archivo de vanilla TAL CUAL, salvo el tipo de la guerra de los Farrapos: dp_gg_farrapos en vez de
+#     dp_annex_war. dp_annex_war lo reemplaza el mod para todas las anexiones del mundo y no se toca; los
+#     Farrapos tienen su tipo propio, sin paz negociada. La Cabanagem queda como en vanilla.
+DIPLOMATIC_PLAYS = {
+	c:BRZ ?= {
+		create_diplomatic_play = {
+			name = ragamuffin_war
+
+			target_state = s:STATE_RIO_GRANDE_DO_SUL.region_state:PNI
+
+			war = yes
+
+			type = dp_gg_farrapos # EN/ES: was dp_annex_war / era dp_annex_war
+
+			add_war_goal = {
+				holder = c:PNI
+				type = conquer_state
+				target_state = s:STATE_SANTA_CATARINA.region_state:BRZ
+			}
+		}
+	}
+	c:BRZ ?= {
+		create_diplomatic_play = {
+			name = cabanagem_war
+
+			target_state = s:STATE_PARA.region_state:PRA
+
+			war = yes
+
+			type = dp_annex_war
+
+			add_war_goal = {
+				holder = c:PRA
+				type = conquer_state
+				target_state = s:STATE_MARANHAO.region_state:BRZ
+			}
+		}
+	}
+}

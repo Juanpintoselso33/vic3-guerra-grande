@@ -117,6 +117,12 @@ gg_prewar.2 = {
 		# ES: lo historico: neutralidad vigilada. Rivera consigue igual a los riograndenses en 1837:
 		#     la consecuencia cae en gg_rivera_1837_strength, que cuenta la frontera como abierta.
 		gg_patron_change = { PATRON = brasil DELTA = -3 }
+		# EN/ES: 23/9 (Juan, I2) -- the answer sets how strong the Farrapos' Oriental refuge is: watched
+		#     / la respuesta fija la fuerza del refugio oriental de los farrapos: vigilado
+		if = {
+			limit = { exists = c:PNI }
+			gg_farrapos_refuge_change = { DELTA = 0 }
+		}
 		ai_chance = {
 			base = 50
 			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
@@ -135,6 +141,11 @@ gg_prewar.2 = {
 		# ES: ayudar al Imperio a cerrar la frontera: Brasil sube, Rivera mas debil en 1837.
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		set_global_variable = gg_farrapos_closed
+		# EN/ES: 23/9 (Juan, I2) -- closed: the refuge goes down one step / cerrado: el refugio baja un escalon
+		if = {
+			limit = { exists = c:PNI }
+			gg_farrapos_refuge_change = { DELTA = -1 }
+		}
 		ai_chance = { base = 30 }
 	}
 
@@ -149,6 +160,11 @@ gg_prewar.2 = {
 		# ES: tolerar a los farrapos: la frontera queda abierta para los dos lados, Brasil baja.
 		gg_patron_change = { PATRON = brasil DELTA = -10 }
 		gg_score_colorado = { AMOUNT = 1 }
+		# EN/ES: 23/9 (Juan, I2) -- tolerated: the refuge goes up one step / tolerados: el refugio sube un escalon
+		if = {
+			limit = { exists = c:PNI }
+			gg_farrapos_refuge_change = { DELTA = 1 }
+		}
 		ai_chance = { base = 20 }
 	}
 
@@ -510,10 +526,43 @@ gg_prewar.9 = {
 		# ES: lo historico: Ignacio Oribe da batalla en Palmar y pierde la Republica.
 		# EN/ES: balance 2026-09-17 -- +3 -> +2: the fall of Oribe already counts this defeat / la caida ya la cuenta
 		gg_score_colorado = { AMOUNT = 2 }
+		# EN: 23/9 (Juan, I2) -- CANGUE. Master of the campaign, Rivera signs with the Riograndense Republic
+		#     on 21/8/1838 (art. 11: three thousand horses; art. 12: a force at Santa Teresa against the
+		#     Empire's supplies from the Banda Oriental). The refuge goes up one step.
+		# ES: CANGUE. Duenio de la campania, Rivera firma con la Republica Riograndense el 21/8/1838: tres
+		#     mil caballos y una fuerza en Santa Teresa. El refugio sube un escalon.
+		if = {
+			limit = { exists = c:PNI }
+			custom_tooltip = gg_prewar.9.a_cangue_tt
+			gg_farrapos_refuge_change = { DELTA = 1 }
+		}
 		ai_chance = {
 			base = 50
 			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
+	}
+
+	# EN: 23/9 (Juan, I2) -- the Regency's treaty. In 1837 the Regency offered Oribe a treaty of mutual aid
+	#     against the rebels on each side (fight and capture the Farrapos who crossed); it did not prosper.
+	#     Taking it now: Oribe still gives battle, but Rivera's Riograndense friends are hunted on this side,
+	#     Cangue stays on paper and the refuge goes down one step; Rivera wins with less, and the Empire,
+	#     which already bought Rivera's silence in 1838-1839, counts the favour.
+	# ES: el tratado de la Regencia. En 1837 la Regencia le ofrecio a Oribe un tratado de ayuda mutua contra
+	#     los rebeldes de cada lado; no prospero. Tomarlo ahora: Cangue queda en el papel y el refugio baja un
+	#     escalon; Rivera gana con menos, y el Imperio anota el favor.
+	# SOURCE / FUENTE: UFMG-TEMP (the Regency's proposal to Oribe, 1837; the Regency paying Rivera not to keep
+	#     Cangue); GUAZZELLI-PA (Cangue, 21/8/1838, annex I, arts. 11-12).
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_prewar.9.c|" # GG_TRAZA
+		name = gg_prewar.9.c
+		trigger = {
+			exists = c:PNI
+		}
+		custom_tooltip = gg_prewar.9.c_tt
+		gg_score_colorado = { AMOUNT = 1 }
+		gg_farrapos_refuge_change = { DELTA = -1 }
+		gg_patron_change = { PATRON = brasil DELTA = 5 }
+		ai_chance = { base = 25 }
 	}
 
 	option = {

@@ -1,0 +1,148 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE FARRAPOS (Ragamuffin War, 1835-1845). 23/9/2026 (Juan: balance A + integration I2; design in the
+#     design repo, docs/farrapos/farrapos-investigacion-y-opciones.md). One global, gg_farrapos_refuge
+#     (0-3), is how strong the Oriental refuge of the Riograndense Republic is. It sets two things, and only
+#     these two:
+#       - the floor of the Farrapos' war support in the war with Brazil (gg_farrapos.1, weekly):
+#         0 = -60, 1 = -50, 2 = -40, 3 = -30. The floor never goes below -60 before Ponche Verde, so the
+#         engine never forces their capitulation before 1845 (AUTO_CAPITULATE_WAR_SUPPORT = -100);
+#       - one modifier on PNI (gg_farrapos_refuge_N, common/static_modifiers/gg_farrapos_modifiers.txt).
+#     Who moves it: gg_prewar.2 (the 1836 border), gg_prewar.9 (Cangue, 1838), gg_phase1.8 (San
+#     Fructuoso, 1841) and gg_farrapos.6 (Caxias's pact with Oribe, 1842). The end is always Ponche Verde
+#     (gg_farrapos.3, 25/2/1845).
+# ES: LOS FARRAPOS. Una global, gg_farrapos_refuge (0-3), es la fuerza del refugio oriental de la
+#     Republica Riograndense. Fija el piso del apoyo farrapo a la guerra (nunca por debajo de -60 antes de
+#     Ponche Verde) y un modificador sobre PNI. La mueven la frontera de 1836, Cangue (1838), San Fructuoso
+#     (1841) y el pacto de Caxias con Oribe (1842). El final es siempre Ponche Verde.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: from guerra_grande_on_game_start. Everything is scheduled on Brazil, which never changes tag, and
+#     directly: NOT through the gg_cal relays, which wait for the partition and hand events to an Oriental
+#     government / todo sobre el Brasil, que no cambia de tag, y directo: no por los relevos gg_cal
+gg_farrapos_start = {
+	if = {
+		limit = {
+			exists = c:PNI
+			exists = c:BRZ
+		}
+		set_global_variable = { name = gg_farrapos_refuge value = 1 }
+		gg_farrapos_refuge_apply = yes
+		c:BRZ = {
+			trigger_event = { id = gg_farrapos.1 days = 7 }      # weekly floor / piso semanal
+			# EN: 9/11/1842: (1842-1836)*365 + (313-1) = 2190 + 312 = 2502
+			trigger_event = { id = gg_farrapos.5 days = 2502 }   # Caxias takes command / Caxias asume
+			# EN: 25/2/1845: (1845-1836)*365 + (56-1) = 3285 + 55 = 3340
+			trigger_event = { id = gg_farrapos.2 days = 3340 }   # Ponche Verde
+		}
+	}
+}
+
+# EN/ES: the modifier that matches the refuge, on PNI (hidden; the tooltip is gg_farrapos_refuge_change's)
+#     / el modificador que corresponde al refugio, sobre PNI
+gg_farrapos_refuge_apply = {
+	c:PNI ?= {
+		if = {
+			limit = { has_modifier = gg_farrapos_refuge_1 }
+			remove_modifier = gg_farrapos_refuge_1
+		}
+		if = {
+			limit = { has_modifier = gg_farrapos_refuge_2 }
+			remove_modifier = gg_farrapos_refuge_2
+		}
+		if = {
+			limit = { has_modifier = gg_farrapos_refuge_3 }
+			remove_modifier = gg_farrapos_refuge_3
+		}
+		if = {
+			limit = { global_var:gg_farrapos_refuge = 1 }
+			add_modifier = { name = gg_farrapos_refuge_1 }
+		}
+		else_if = {
+			limit = { global_var:gg_farrapos_refuge = 2 }
+			add_modifier = { name = gg_farrapos_refuge_2 }
+		}
+		else_if = {
+			limit = { global_var:gg_farrapos_refuge >= 3 }
+			add_modifier = { name = gg_farrapos_refuge_3 }
+		}
+	}
+}
+
+# EN: DELTA = -3 (closed), -1 or 1. Shown to the player: a global has no tooltip of its own (CLAUDE.md).
+# ES: se muestra al jugador; una global no tiene tooltip propio.
+gg_farrapos_refuge_change = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_refuge_change| DELTA= $DELTA$ " # GG_TRAZA
+	custom_tooltip = {
+		text = gg_tt_farrapos_refuge_$DELTA$
+		if = {
+			limit = { NOT = { has_global_variable = gg_farrapos_refuge } }
+			set_global_variable = { name = gg_farrapos_refuge value = 1 }
+		}
+		change_global_variable = { name = gg_farrapos_refuge add = $DELTA$ }
+		if = {
+			limit = { global_var:gg_farrapos_refuge > 3 }
+			set_global_variable = { name = gg_farrapos_refuge value = 3 }
+		}
+		else_if = {
+			limit = { global_var:gg_farrapos_refuge < 0 }
+			set_global_variable = { name = gg_farrapos_refuge value = 0 }
+		}
+	}
+	custom_tooltip = gg_tt_farrapos_refuge_means
+	hidden_effect = { gg_farrapos_refuge_apply = yes }
+}
+
+# EN/ES: war scope (the ragamuffin war). Tops the Farrapos' support up to the refuge's floor, and keeps
+#     Brazil from capitulating too: the war ends at Ponche Verde / scope de guerra: sube el apoyo farrapo
+#     hasta el piso del refugio, y tampoco deja capitular al Brasil
+gg_farrapos_floor = {
+	# EN/ES: the Farrapos' war support in bands, for the headless trace / el apoyo farrapo por franjas, para la traza
+	if = {
+		limit = { has_war_support = { target = c:PNI value < -60 } }
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|support PNI <-60|"
+	}
+	else_if = {
+		limit = { has_war_support = { target = c:PNI value < -30 } }
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|support PNI -60..-30|"
+	}
+	else_if = {
+		limit = { has_war_support = { target = c:PNI value < 0 } }
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|support PNI -30..0|"
+	}
+	else = {
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|support PNI >=0|"
+	}
+	if = {
+		limit = { global_var:gg_farrapos_refuge >= 3 }
+		gg_farrapos_floor_at = { FLOOR = -30 }
+	}
+	else_if = {
+		limit = { global_var:gg_farrapos_refuge = 2 }
+		gg_farrapos_floor_at = { FLOOR = -40 }
+	}
+	else_if = {
+		limit = { global_var:gg_farrapos_refuge = 1 }
+		gg_farrapos_floor_at = { FLOOR = -50 }
+	}
+	else = {
+		gg_farrapos_floor_at = { FLOOR = -60 }
+	}
+	if = {
+		limit = { has_war_support = { target = c:BRZ value < -50 } }
+		add_war_war_support = { target = c:BRZ value = 10 }
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|floor BRZ -50|"
+	}
+}
+
+gg_farrapos_floor_at = {
+	if = {
+		limit = { has_war_support = { target = c:PNI value < $FLOOR$ } }
+		add_war_war_support = { target = c:PNI value = 10 }
+		# EN/ES: a bad week can take more than 10 / una mala semana puede llevarse mas de 10
+		if = {
+			limit = { has_war_support = { target = c:PNI value < $FLOOR$ } }
+			add_war_war_support = { target = c:PNI value = 20 }
+		}
+		debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|floor PNI $FLOOR$|"
+	}
+}
