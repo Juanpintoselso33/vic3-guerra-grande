@@ -205,10 +205,11 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 50
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			# EN/ES: 23/9 -- the historical game rule takes the historical peace / la regla historica toma la paz historica
 			modifier = { trigger = { gg_outcome_historical = yes } add = 10000 }
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_outcome_historical = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -305,8 +306,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
+			modifier = { trigger = { gg_terms_defensa_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_punish = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -394,8 +396,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_brazil_treaties = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 25
+			modifier = { trigger = { gg_terms_defensa_brazil_treaties = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_brazil_treaties = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -459,8 +462,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_europe = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
+			modifier = { trigger = { gg_terms_defensa_europe = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_europe = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -539,8 +543,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_war_rosas = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 15
+			modifier = { trigger = { gg_terms_defensa_war_rosas = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_war_rosas = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -593,8 +598,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_brazil_vassal = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 20
+			modifier = { trigger = { gg_terms_defensa_brazil_vassal = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_brazil_vassal = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -671,8 +677,9 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_defensa_cisplatina = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
+			modifier = { trigger = { gg_terms_defensa_cisplatina = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_defensa_terms_forced = yes NOT = { gg_terms_defensa_cisplatina = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -711,6 +718,7 @@ gg_peace.1 = {
 
 		ai_chance = {
 			base = 5
+			modifier = { trigger = { gg_defensa_terms_forced = yes } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 }
@@ -873,8 +881,9 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_amnesty = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 35
+			modifier = { trigger = { gg_terms_cerrito_amnesty = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_amnesty = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -962,8 +971,9 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_presidency = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 25
+			modifier = { trigger = { gg_terms_cerrito_presidency = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_presidency = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -1071,8 +1081,9 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
+			modifier = { trigger = { gg_terms_cerrito_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_punish = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -1159,11 +1170,12 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_pact_province = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 15
+			modifier = { trigger = { gg_terms_cerrito_pact_province = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			# EN/ES: 23/9 (Juan) -- Rosas's support weighs / pesa el respaldo de Rosas
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 15 }
 			modifier = { trigger = { has_global_variable = gg_arg_reincorporation_asked } add = 30 }
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_pact_province = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -1252,12 +1264,13 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_rosas_client = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
+			modifier = { trigger = { gg_terms_cerrito_rosas_client = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 10 }
 			# EN/ES: 23/9 (Juan) -- Argentina asked for a republic apart / Argentina pidio una republica aparte
 			modifier = { trigger = { has_global_variable = gg_arg_republic_asked } add = 40 }
 			modifier = { trigger = { global_var:gg_patron_rosas >= 80 has_global_variable = gg_arg_republic_asked } factor = 3 }
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_rosas_client = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -1302,16 +1315,31 @@ gg_peace.2 = {
 			set_global_variable = { name = gg_oriental_return_pending value = 2 }
 			c:ARG = { trigger_event = { id = gg_cisplatina.5 days = 0 popup = yes } }
 		}
+		# EN: 23/9/2026 (Codex audit, AUD-SEAT-ANNEX) -- a player who ends his own country takes Buenos Aires's seat
+		#     first, as vanilla does with Cuba (cuba_independencia.6): the annexation runs the next day on Argentina
+		#     (gg_cisplatina.8), with the player already there. play_as last, through a saved scope (gg_argentina.1.b).
+		# ES: el jugador que termina con su propio pais pasa antes a la sede de Buenos Aires, como hace vanilla con
+		#     Cuba: la anexion corre al dia siguiente sobre la Argentina, con el jugador ya ahi. play_as al final.
+		else_if = {
+			limit = { is_player = yes exists = c:ARG }
+			custom_tooltip = gg_play_as_argentina_tt
+			c:ARG = { trigger_event = { id = gg_cisplatina.8 days = 1 } }
+			hidden_effect = {
+				c:ARG = { save_scope_as = gg_new_seat }
+				play_as = scope:gg_new_seat
+			}
+		}
 		else = { gg_oriental_incorporate = yes }
 
 		ai_chance = {
-			modifier = { trigger = { gg_terms_cerrito_reincorporation = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
+			modifier = { trigger = { gg_terms_cerrito_reincorporation = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			# EN/ES: 23/9 (Juan) -- total support and Argentina's request make it his likeliest choice
 			#     / el respaldo total y el pedido argentino la vuelven su opcion mas probable
 			modifier = { trigger = { global_var:gg_patron_rosas >= 80 } add = 40 }
 			modifier = { trigger = { has_global_variable = gg_arg_reincorporation_asked } add = 40 }
 			modifier = { trigger = { global_var:gg_patron_rosas >= 80 has_global_variable = gg_arg_reincorporation_asked } factor = 3 }
+			modifier = { trigger = { gg_cerrito_terms_forced = yes NOT = { gg_terms_cerrito_reincorporation = yes } } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 
@@ -1347,6 +1375,7 @@ gg_peace.2 = {
 
 		ai_chance = {
 			base = 5
+			modifier = { trigger = { gg_cerrito_terms_forced = yes } factor = 0 } # EN/ES: another setting of the war's rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 }
@@ -1601,7 +1630,10 @@ gg_peace.5 = {
 			years = 10
 			is_decaying = yes
 		}
-		ai_chance = { base = 30 }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { gg_outcome_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule ends it without victors (8/10/1851): never for the AI / la regla historica: sin vencedores, nunca para la IA
+		}
 	}
 
 	# c -- terror / deguello
@@ -1625,7 +1657,10 @@ gg_peace.5 = {
 			is_decaying = yes
 		}
 		add_radicals = { value = large_radicals }
-		ai_chance = { base = 10 }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { gg_outcome_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule ends it without victors (8/10/1851): never for the AI / la regla historica: sin vencedores, nunca para la IA
+		}
 	}
 
 	# d -- hand the defeated chief to his own patron, for that patron's goodwill
@@ -1661,7 +1696,10 @@ gg_peace.5 = {
 			years = 10
 			is_decaying = yes
 		}
-		ai_chance = { base = 15 }
+		ai_chance = {
+			base = 15
+			modifier = { trigger = { gg_outcome_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule ends it without victors (8/10/1851): never for the AI / la regla historica: sin vencedores, nunca para la IA
+		}
 	}
 }
 

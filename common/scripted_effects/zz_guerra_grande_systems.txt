@@ -654,6 +654,36 @@ gg_war_closing_dispatch = {
 				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
 			}
 		}
+		# EN: 23/9/2026 (rules/AI audit, AUD-RULES-AI) -- no winner and a game rule that names one: the paper goes to
+		#     the rule's side while its government stands, not to whoever leads on the bar. A side the rule forbids
+		#     to win only gets this menu by conquering the other government outright (the branches above): then
+		#     there is nobody else left to sign, and the rule cannot be honoured.
+		# ES: sin ganador y con una regla que nombra uno: el papel es del lado de la regla mientras su gobierno
+		#     exista, no del que va arriba en la barra. El lado que la regla no deja ganar solo recibe este menu si
+		#     conquisto al otro gobierno entero (las ramas de arriba): ahi no queda nadie mas para firmar.
+		else_if = {
+			limit = {
+				exists = c:URU
+				OR = {
+					gg_outcome_defensa = yes
+					gg_outcome_historical = yes
+				}
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_defensa_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:CER
+				gg_outcome_cerrito = yes
+			}
+			random_country = {
+				limit = { has_variable = guerra_grande_cerrito_government }
+				trigger_event = { id = gg_peace.5 days = 1 popup = yes }
+			}
+		}
 		# EN/ES: no winner (the 1860 cut, or a stalemate): the paper is read by whoever is ahead on the
 		#     same number the bar shows, and if nobody is ahead, by the Defensa / sin ganador (el corte
 		#     de 1860 o un empate): lee el papel el que va arriba en el mismo numero que muestra la
@@ -1360,28 +1390,81 @@ gg_argentina_vassals_settle = {
 			}
 			trigger_event = { id = gg_argentina.80 days = 2 popup = yes }
 		}
+		# EN: 23/9/2026 (Codex audit, AUD-CONST-SCHEDULE) -- no province left to ask about (a negotiated Pact
+		#     without Entre Rios, or every province already Argentine ground): the constitution still comes, a month
+		#     on, as it does after gg_argentina.80.
+		# ES: no queda provincia sobre la que preguntar: la constitucion llega igual, al mes, como despues de .80.
+		else = {
+			trigger_event = { id = gg_constitution.1 days = 30 popup = yes }
+		}
 	}
 }
 
-# EN: The provinces held as subjects become Argentine ground (gg_argentina.80, national organisation).
-#     One if per tag: a tag that does not exist is skipped. Scope: Argentina.
-# ES: las provincias sujetas pasan a ser suelo argentino (organizacion nacional). Scope: la Argentina.
+# EN: The provinces held as subjects become Argentine ground (gg_argentina.80, national organisation; the
+#     constitution, gg_constitution_one_country). One line per tag: a tag that does not exist is skipped. Scope: Argentina.
+#     23/9/2026 (Codex audit, AUD-CONST-ENR) -- ALLY = yes: Entre Rios and Corrientes also join when they are
+#     independent, if the Pact ended with Urquiza's victory or the negotiated confederation (historically both signed
+#     the San Nicolas Agreement of 31/5/1852 and the Constitution of 1853). Before, an independent Entre Rios stayed
+#     outside the "one country".
+#     AUD-SEAT-ANNEX -- a player's province is never annexed out from under him (gg_argentina_province_join).
+# ES: las provincias sujetas pasan a ser suelo argentino. Con ALLY = yes, Entre Rios y Corrientes entran tambien
+#     independientes si el Pacto termino con la victoria de Urquiza o la confederacion negociada (las dos firmaron el
+#     Acuerdo de San Nicolas y la Constitucion de 1853). La provincia de un jugador nunca se anexa sin el.
 gg_argentina_provinces_incorporate = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_provinces_incorporate|" # GG_TRAZA
-	if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } annex = c:CRR }
-	if = { limit = { c:CLN ?= { is_subject_of = c:ARG } } annex = c:CLN }
-	if = { limit = { c:ENR ?= { is_subject_of = c:ARG } } annex = c:ENR }
-	if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } annex = c:TUC }
-	if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } annex = c:SLT }
-	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } annex = c:JUJ }
-	if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } annex = c:CTM }
-	if = { limit = { c:LRJ ?= { is_subject_of = c:ARG } } annex = c:LRJ }
-	if = { limit = { c:CBA ?= { is_subject_of = c:ARG } } annex = c:CBA }
-	if = { limit = { c:SFE ?= { is_subject_of = c:ARG } } annex = c:SFE }
-	if = { limit = { c:SDE ?= { is_subject_of = c:ARG } } annex = c:SDE }
-	if = { limit = { c:MZA ?= { is_subject_of = c:ARG } } annex = c:MZA }
-	if = { limit = { c:SJN ?= { is_subject_of = c:ARG } } annex = c:SJN }
-	if = { limit = { c:SNL ?= { is_subject_of = c:ARG } } annex = c:SNL }
+	gg_argentina_province_join = { TAG = CRR ALLY = yes }
+	gg_argentina_province_join = { TAG = CLN ALLY = no }
+	gg_argentina_province_join = { TAG = ENR ALLY = yes }
+	gg_argentina_province_join = { TAG = TUC ALLY = no }
+	gg_argentina_province_join = { TAG = SLT ALLY = no }
+	gg_argentina_province_join = { TAG = JUJ ALLY = no }
+	gg_argentina_province_join = { TAG = CTM ALLY = no }
+	gg_argentina_province_join = { TAG = LRJ ALLY = no }
+	gg_argentina_province_join = { TAG = CBA ALLY = no }
+	gg_argentina_province_join = { TAG = SFE ALLY = no }
+	gg_argentina_province_join = { TAG = SDE ALLY = no }
+	gg_argentina_province_join = { TAG = MZA ALLY = no }
+	gg_argentina_province_join = { TAG = SJN ALLY = no }
+	gg_argentina_province_join = { TAG = SNL ALLY = no }
+}
+
+# EN: One province into the one country. Scope: Argentina. Vanilla's rule for Cuba (cuba_independencia.6):
+#     - the province is not a player's: annexed;
+#     - it is a player's and Argentina is not: the player is offered Argentina's seat (gg_constitution.5), and the
+#       annexation runs the day after, with the player already in Buenos Aires (gg_constitution.6);
+#     - both are players: nobody's country is annexed; the province stays (or becomes) a protectorate.
+# ES: una provincia al pais unico. Si es de un jugador y la Argentina no, el jugador pasa a la sede argentina y la
+#     anexion corre al dia siguiente; si las dos son de jugadores, la provincia queda protectorado.
+gg_argentina_province_join = {
+	if = {
+		limit = {
+			exists = c:$TAG$
+			OR = {
+				c:$TAG$ = { is_subject_of = c:ARG }
+				AND = {
+					always = $ALLY$
+					c:$TAG$ = { is_subject = no }
+					NOT = { has_war_with = c:$TAG$ }
+					OR = {
+						has_global_variable = gg_pact_settlement_urquiza
+						has_global_variable = gg_pact_settlement_constitutional
+					}
+				}
+			}
+		}
+		if = {
+			limit = { c:$TAG$ = { is_player = no } }
+			annex = c:$TAG$
+		}
+		else_if = {
+			limit = { is_player = no }
+			c:$TAG$ = { trigger_event = { id = gg_constitution.5 days = 0 popup = yes } }
+		}
+		else_if = {
+			limit = { c:$TAG$ = { is_subject = no } }
+			create_diplomatic_pact = { country = c:$TAG$ type = protectorate }
+		}
+	}
 }
 
 gg_postwar_dispatch = {

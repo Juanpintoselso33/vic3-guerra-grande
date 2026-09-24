@@ -86,7 +86,7 @@ gg_ba.1 = {
 		custom_tooltip = gg_ba.1.a_tt
 		ai_chance = {
 			base = 40
-			modifier = { trigger = { gg_pact_historical = yes } add = -30 }
+			modifier = { trigger = { gg_pact_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule: never for the AI / la regla historica: nunca para la IA
 		}
 	}
 	# EN/ES: back Lagos: besiege the city (war on 1/12, 81 days on) / apoyar a Lagos: sitiar la ciudad
@@ -486,7 +486,10 @@ gg_ba.7 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.7.b|" # GG_TRAZA
 		name = gg_ba.7.b
 		custom_tooltip = gg_ba.7.b_tt
-		ai_chance = { base = 30 }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { gg_pact_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule: never for the AI / la regla historica: nunca para la IA
+		}
 	}
 }
 
@@ -587,7 +590,10 @@ gg_ba.10 = {
 		name = gg_ba.10.b
 		custom_tooltip = gg_ba.10.b_tt
 		gg_ba_unify = { WINNER = conf }
-		ai_chance = { base = 30 }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { gg_pact_historical = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- the historical rule: never for the AI / la regla historica: nunca para la IA
+		}
 	}
 }
 

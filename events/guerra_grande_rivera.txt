@@ -392,8 +392,8 @@ gg_rivera.2 = {
 			trigger_event = { id = gg_rivera.3 days = 356 popup = yes }
 		}
 		ai_chance = {
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 50
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
 	}
 
@@ -669,8 +669,8 @@ gg_rivera.3 = {
 			trigger_event = { id = gg_rivera.4 days = 626 popup = yes }
 		}
 		ai_chance = {
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
 	}
 
@@ -1122,8 +1122,8 @@ gg_rivera.8 = {
 		default_option = yes
 		set_global_variable = gg_mitre_gone
 		ai_chance = {
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 70
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
 	}
 
@@ -1355,8 +1355,8 @@ gg_rivera.5 = {
 			trigger_event = { id = gg_rivera.6 days = 110 popup = yes }
 		}
 		ai_chance = {
-			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 			base = 60
+			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
 		}
 	}
 

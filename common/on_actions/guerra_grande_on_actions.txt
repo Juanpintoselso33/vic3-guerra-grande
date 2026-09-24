@@ -231,7 +231,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento
-			trigger_event = { id = gg_urquiza.3 days = 5873 }  # 1852-02-03 Caseros: the Pact's game rule closes it / la regla del Pacto lo cierra
+			trigger_event = { id = gg_urquiza.3 days = 5874 }  # 1852-02-04, the day after Caseros (gg_argentina_cal.10, day 5873; same-day order is not guaranteed): the Pact's game rule closes it / el dia despues de Caseros: la regla del Pacto lo cierra
 			# EN/ES: 23/9/2026 (Juan) -- the State of Buenos Aires (events/gg_buenos_aires.txt) / el Estado de Buenos Aires
 			trigger_event = { id = gg_ba.101 days = 6093 }  # 1852-09-11 la revolucion de septiembre
 			trigger_event = { id = gg_ba.103 days = 6671 }  # 1854-04-12 la constitucion del Estado

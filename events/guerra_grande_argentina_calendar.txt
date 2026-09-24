@@ -845,9 +845,8 @@ gg_argentina_cal.28 = {
 			if = {
 				limit = { gg_urquiza_no_convention = yes }
 				set_global_variable = gg_arg_cal_done_28
-				set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
-				set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
-				set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+				# EN/ES: 23/9 (AUD-PACT-MARK) -- the mark and the outcome were set when the war opened (gg_argentina.3)
+				#     / la marca y el resultado se pusieron al abrir la guerra
 				set_global_variable = gg_war_against_buenos_aires
 				c:ARG = { trigger_event = { id = gg_urquiza.2 days = 0 popup = yes } }
 			}

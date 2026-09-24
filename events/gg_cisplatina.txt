@@ -273,6 +273,9 @@ gg_cisplatina.5 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.5.a|" # GG_TRAZA
 		name = gg_cisplatina.5.a
 		default_option = yes
+		# EN/ES: 23/9 (AUD-SEAT-ANNEX) -- two players: the Oriental one is not annexed, it stays a province of the Pact
+		#     (.b) / dos jugadores: al oriental no se lo anexa, queda provincia del Pacto
+		trigger = { NOT = { scope:gg_oriental_country ?= { is_player = yes } } }
 		remove_global_variable = gg_oriental_return_pending
 		custom_tooltip = gg_peace_reincorporation_tt
 		custom_tooltip = gg_peace_reincorporation_brazil_tt
@@ -377,6 +380,24 @@ gg_cisplatina.7 = {
 		else_if = {
 			limit = { has_global_variable = gg_cis_waiting }
 			trigger_event = { id = gg_cisplatina.7 days = 30 }
+		}
+	}
+}
+
+# EN: 23/9/2026 (AUD-SEAT-ANNEX) -- the day after the Cerrito's player chose reincorporation and took Buenos Aires's
+#     seat (gg_peace.2.g): the Banda Oriental, no longer anyone's seat, is incorporated. Hidden; no trigger beyond the
+#     tag, which is checked when it is scheduled.
+# ES: el dia despues de que el jugador del Cerrito eligio la reincorporacion y paso a Buenos Aires: la Banda
+#     Oriental, que ya no es la sede de nadie, se incorpora.
+gg_cisplatina.8 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.8|" # GG_TRAZA
+		random_country = {
+			limit = { has_variable = guerra_grande_cerrito_government NOT = { c:ARG ?= this } }
+			gg_oriental_incorporate = yes
 		}
 	}
 }

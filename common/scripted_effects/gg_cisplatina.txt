@@ -111,29 +111,38 @@ gg_bring_characters_to = {
 #     Buenos Aires no es jugador, o la eleccion de Buenos Aires (gg_cisplatina.5).
 gg_oriental_incorporate = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_incorporate|" # GG_TRAZA
-	set_global_variable = gg_reincorporated
-	set_global_variable = gg_oriental_in_pact
-	c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
-	every_scope_state = {
-		add_modifier = {
-			name = gg_provincia_oriental
-			years = 30
-		}
+	# EN: 23/9/2026 (AUD-SEAT-ANNEX) -- both governments in human hands: nobody's country is annexed; the Banda Oriental
+	#     stays a province of the Pact, a subject (the vanilla rule for Cuba when both are players).
+	# ES: los dos gobiernos en manos de jugadores: no se anexa el pais de nadie; queda provincia del Pacto, sujeta.
+	if = {
+		limit = { is_player = yes c:ARG ?= { is_player = yes } }
+		gg_oriental_make_province = yes
 	}
-	save_scope_as = gg_oriental_country
-	# EN/ES: 23/9 (Juan) -- the Oriental army comes too: its size read before the annexation (the engine
-	#     drops the annexed country's formations) / el ejercito oriental viene tambien: su tamanio antes de anexar
-	if = { limit = { army_size >= 20 } set_global_variable = { name = gg_oriental_battalions value = 20 } }
-	else_if = { limit = { army_size >= 12 } set_global_variable = { name = gg_oriental_battalions value = 12 } }
-	else_if = { limit = { army_size >= 6 } set_global_variable = { name = gg_oriental_battalions value = 6 } }
-	else = { set_global_variable = { name = gg_oriental_battalions value = 3 } }
-	c:ARG ?= {
-		c:BRZ ?= { change_relations = { country = prev value = -100 } }
-		c:GBR ?= { change_relations = { country = prev value = -50 } }
-		c:FRA ?= { change_relations = { country = prev value = -50 } }
-		scope:gg_oriental_country = { gg_bring_characters_to = { TARGET = c:ARG } }
-		annex_with_incorporation = scope:gg_oriental_country
-		gg_oriental_army_raise = yes
+	else = {
+		set_global_variable = gg_reincorporated
+		set_global_variable = gg_oriental_in_pact
+		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
+		every_scope_state = {
+			add_modifier = {
+				name = gg_provincia_oriental
+				years = 30
+			}
+		}
+		save_scope_as = gg_oriental_country
+		# EN/ES: 23/9 (Juan) -- the Oriental army comes too: its size read before the annexation (the engine
+		#     drops the annexed country's formations) / el ejercito oriental viene tambien: su tamanio antes de anexar
+		if = { limit = { army_size >= 20 } set_global_variable = { name = gg_oriental_battalions value = 20 } }
+		else_if = { limit = { army_size >= 12 } set_global_variable = { name = gg_oriental_battalions value = 12 } }
+		else_if = { limit = { army_size >= 6 } set_global_variable = { name = gg_oriental_battalions value = 6 } }
+		else = { set_global_variable = { name = gg_oriental_battalions value = 3 } }
+		c:ARG ?= {
+			c:BRZ ?= { change_relations = { country = prev value = -100 } }
+			c:GBR ?= { change_relations = { country = prev value = -50 } }
+			c:FRA ?= { change_relations = { country = prev value = -50 } }
+			scope:gg_oriental_country = { gg_bring_characters_to = { TARGET = c:ARG } }
+			annex_with_incorporation = scope:gg_oriental_country
+			gg_oriental_army_raise = yes
+		}
 	}
 }
 

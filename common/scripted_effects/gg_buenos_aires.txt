@@ -9,18 +9,21 @@
 #       dos gobiernos  -> Buenos Aires = ARG (Rosas)                   · Confederacion = ENR (Urquiza)
 
 # EN: Scope ARG, Urquiza's Confederation after Caseros. The September revolution of 1852: Entre Rios joins the
-#     Confederation (unless a player holds it), the seat moves up the river, and Buenos Aires is born apart.
+#     Confederation (a player holding it is offered the national seat), the seat moves up the river, and Buenos Aires is born apart.
 #     create_country clones the roster, so the clones are killed first thing (the reasoning is in
 #     gg_argentina_new_country_people; this copy leaves out its Pact journal, which has nothing to do here).
 # ES: Scope ARG, la Confederacion de Urquiza despues de Caseros. La revolucion de septiembre: Entre Rios entra a la
-#     Confederacion (salvo que la lleve un jugador), la sede sube por el rio, y Buenos Aires nace aparte.
+#     Confederacion (al jugador que la lleve se le ofrece la sede nacional), la sede sube por el rio, y Buenos Aires nace aparte.
 gg_ba_split_historical = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_split_historical|" # GG_TRAZA
+	# EN/ES: 23/9 (AUD-CONST-ENR, AUD-SEAT-ANNEX) -- the same rule as the constitution (gg_argentina_province_join): a
+	#     player's Entre Rios is offered Buenos Aires's seat, or with two players stays a protectorate
+	#     / la misma regla que la constitucion: el Entre Rios de un jugador pasa a la sede, o con dos jugadores queda protectorado
 	if = {
 		limit = { c:ENR ?= { is_player = no } }
 		c:ENR = { gg_bring_characters_to = { TARGET = c:ARG } }
-		annex = c:ENR
 	}
+	gg_argentina_province_join = { TAG = ENR ALLY = yes }
 	# EN/ES: Parana, capital of the Confederation; Santa Fe if Entre Rios is not ours / Parana; Santa Fe si no
 	if = {
 		limit = { has_state_in_state_region = STATE_ENTRE_RIOS }

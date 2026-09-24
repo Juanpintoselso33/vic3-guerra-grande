@@ -34,6 +34,10 @@ gg_unitario_rising = {
 		gg_argentina_new_country_people = { TAG = CLN }
 		c:CLN ?= { set_capital = STATE_TUCUMAN }
 		set_global_variable = gg_unitario_war
+		# EN/ES: AUD-CONST-PEACE -- the winner is recorded when it ends / el ganador se anota al terminar
+		set_global_variable = { name = gg_unitario_federales_won value = 0 }
+		set_global_variable = { name = gg_unitario_unitarios_won value = 0 }
+		if = { limit = { has_global_variable = gg_unitario_war_ended } remove_global_variable = gg_unitario_war_ended }
 		c:ARG ?= { gg_argentina_open_war = { TAG = CLN } }
 	}
 	# EN/ES: nobody left to rise: the federales write it in peace / nadie se alza: los federales la escriben en paz

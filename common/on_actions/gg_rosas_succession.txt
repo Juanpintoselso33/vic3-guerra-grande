@@ -35,6 +35,67 @@ gg_unitario_on_war_end = {
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_on_war_end" # GG_TRAZA
+		set_global_variable = gg_unitario_war_ended # EN/ES: AUD-CONST-PEACE -- with no winner recorded, a white peace / sin ganador anotado, paz blanca
 		c:ARG ?= { trigger_event = { id = gg_constitution.3 days = 1 } }
+	}
+}
+
+# EN: 23/9/2026 (Codex audit, AUD-CONST-PEACE) -- who won the war between federales and unitarios, recorded the way
+#     the Pact's wars record it (common/on_actions/gg_pact_war_resolution.txt): on_war_end runs before these in the
+#     same tick, so gg_constitution.3 reads them the day after. Only Buenos Aires holds a war goal (the play's target
+#     cannot add any): its war goal enforced, or the league capitulating or backing down, is a federal victory;
+#     Buenos Aires capitulating or backing down, a unitario one. Nothing recorded is a white peace.
+# ES: quien gano la guerra entre federales y unitarios, anotado como en las guerras del Pacto; gg_constitution.3 lo
+#     lee al dia siguiente. Nada anotado es paz blanca.
+on_wargoal_enforced = {
+	on_actions = { gg_unitario_wargoal_enforced }
+}
+on_capitulation = {
+	on_actions = { gg_unitario_capitulation }
+}
+on_diplo_play_back_down = {
+	on_actions = { gg_unitario_back_down }
+}
+gg_unitario_wargoal_enforced = {
+	trigger = {
+		has_global_variable = gg_unitario_war
+		exists = scope:diplomatic_play
+		scope:diplomatic_play = { is_diplomatic_play_type = dp_gg_pacto_federal }
+		c:ARG ?= this
+		c:CLN ?= scope:target
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_wargoal_enforced" # GG_TRAZA
+		set_global_variable = { name = gg_unitario_federales_won value = 1 }
+	}
+}
+gg_unitario_capitulation = {
+	trigger = {
+		has_global_variable = gg_unitario_war
+		OR = {
+			AND = { c:ARG ?= this has_truce_with = c:CLN }
+			AND = { c:CLN ?= this has_truce_with = c:ARG }
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_capitulation" # GG_TRAZA
+		if = { limit = { c:ARG ?= this } set_global_variable = { name = gg_unitario_unitarios_won value = 1 } }
+		else = { set_global_variable = { name = gg_unitario_federales_won value = 1 } }
+	}
+}
+gg_unitario_back_down = {
+	trigger = {
+		has_global_variable = gg_unitario_war
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		exists = scope:actor
+		OR = {
+			c:ARG ?= scope:actor
+			c:CLN ?= scope:actor
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_back_down" # GG_TRAZA
+		if = { limit = { c:ARG ?= scope:actor } set_global_variable = { name = gg_unitario_unitarios_won value = 1 } }
+		else = { set_global_variable = { name = gg_unitario_federales_won value = 1 } }
 	}
 }

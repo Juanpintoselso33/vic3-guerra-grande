@@ -44,6 +44,11 @@ gg_constitution.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.a|" # GG_TRAZA
 		name = gg_constitution.1.a
 		default_option = yes
+		# EN: 23/9/2026 (Juan's decision, decisiones.md; bug hunt run 205411, AUD-CONST-ROSAS) -- a Rosas victory means
+		#     no constitution: autocracy while he lives, the question reopened at his death (gg_constitution.2). The
+		#     AI took this option about a third of the time, and the elections it brought kept putting Rosas back.
+		# ES: la victoria de Rosas es sin constitucion: autocracia mientras viva, la cuestion se reabre a su muerte.
+		trigger = { NOT = { has_global_variable = gg_pact_settlement_rosas } }
 		set_global_variable = { name = gg_constitution_chosen value = 1 }
 		custom_tooltip = gg_constitution.1.a_tt
 		gg_constitution_federal = yes # EN/ES: 23/9 (Juan) -- a federation: one country, the autocracy ends / una federacion
@@ -55,6 +60,7 @@ gg_constitution.1 = {
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_urquiza } add = 100 }
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = 30 }
 			modifier = { trigger = { OR = { gg_pact_historical = yes gg_pact_negotiated = yes } } add = 10000 } # EN/ES: the Pact's game rule / la regla del Pacto
+			modifier = { trigger = { gg_pact_rosas = yes } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- another setting of the rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 	option = {
@@ -75,6 +81,7 @@ gg_constitution.1 = {
 			base = 30
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_rosas } add = 60 }
 			modifier = { trigger = { gg_pact_rosas = yes } add = 10000 } # EN/ES: the Pact's game rule / la regla del Pacto
+			modifier = { trigger = { OR = { gg_pact_historical = yes gg_pact_negotiated = yes } } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- another setting of the rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
 	}
 }
@@ -120,14 +127,25 @@ gg_constitution.3 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.3|" # GG_TRAZA
 		if = { limit = { has_global_variable = gg_unitario_war } remove_global_variable = gg_unitario_war }
+		# EN: 23/9/2026 (Codex audit, AUD-CONST-PEACE) -- the winner is the one recorded when the war ended
+		#     (gg_unitario_* in common/on_actions/gg_rosas_succession.txt), as the Pact's wars do. It used to be read
+		#     from the map, and a white peace (the league still independent, no war) passed for a unitario victory.
+		#     A WHITE PEACE: the federales keep the government and write the federal constitution (design choice,
+		#     decisiones.md 23/9) -- the league rose to overturn them and did not.
+		# ES: el ganador es el anotado al terminar la guerra, como en las del Pacto. Se leia del mapa, y una paz blanca
+		#     pasaba por victoria unitaria. PAZ BLANCA: los federales siguen en el gobierno y escriben la federal.
 		if = {
-			limit = {
-				exists = c:CLN
-				c:CLN = { is_subject = no }
-				NOT = { c:CLN = { has_war_with = c:ARG } }
-			}
+			limit = { global_var:gg_unitario_unitarios_won ?= 1 }
 			set_global_variable = { name = gg_constitution_outcome value = 2 }
 			gg_constitution_unitaria = yes
+		}
+		else_if = {
+			limit = {
+				has_global_variable = gg_unitario_war_ended
+				NOT = { global_var:gg_unitario_federales_won ?= 1 }
+			}
+			set_global_variable = { name = gg_constitution_outcome value = 3 }
+			gg_constitution_federal = yes
 		}
 		else = {
 			set_global_variable = { name = gg_constitution_outcome value = 1 }
@@ -146,6 +164,7 @@ gg_constitution.4 = {
 	desc = {
 		first_valid = {
 			triggered_desc = { desc = gg_constitution.4.d_unitaria trigger = { global_var:gg_constitution_outcome = 2 } }
+			triggered_desc = { desc = gg_constitution.4.d_peace trigger = { global_var:gg_constitution_outcome = 3 } }
 			triggered_desc = { desc = gg_constitution.4.d_federal trigger = { always = yes } }
 		}
 	}
@@ -160,5 +179,62 @@ gg_constitution.4 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.4.a|" # GG_TRAZA
 		name = gg_constitution.4.a
 		default_option = yes
+	}
+}
+
+# EN: 23/9/2026 (Codex audit, AUD-SEAT-ANNEX) -- the constitution makes one country, and the province this player
+#     governs goes into it (gg_argentina_province_join). As vanilla does with Cuba (cuba_independencia.6), the player
+#     takes the seat of the country that absorbs his, Argentina; the annexation runs the next day (gg_constitution.6),
+#     with the player already there. One option, so the default is the same one. play_as last, through a saved
+#     scope (gg_argentina.1.b, gg_ba.13).
+# ES: la constitucion hace un solo pais, y la provincia que gobierna este jugador entra en el. Como hace vanilla con
+#     Cuba, el jugador pasa a la sede del pais que absorbe al suyo; la anexion corre al dia siguiente.
+gg_constitution.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_constitution.5.t
+	desc = gg_constitution.5.d
+	flavor = gg_constitution.5.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	# EN/ES: once per country: gg_constitution.6 runs the incorporation again / una vez por pais: .6 vuelve a correr la incorporacion
+	trigger = {
+		exists = c:ARG
+		NOT = { has_variable = gg_join_seat_offered }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.5|" # GG_TRAZA
+		set_variable = gg_join_seat_offered
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.5.a|" # GG_TRAZA
+		name = gg_constitution.5.a
+		default_option = yes
+		custom_tooltip = gg_play_as_argentina_tt
+		ai_chance = { base = 100 }
+		hidden_effect = {
+			c:ARG ?= {
+				trigger_event = { id = gg_constitution.6 days = 1 }
+				save_scope_as = gg_new_seat
+			}
+			play_as = scope:gg_new_seat
+		}
+	}
+}
+
+# EN/ES: the day after gg_constitution.5: the provinces no player holds any more join / el dia despues: entran las
+#     provincias que ya no lleva ningun jugador
+gg_constitution.6 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.6|" # GG_TRAZA
+		gg_argentina_provinces_incorporate = yes
 	}
 }

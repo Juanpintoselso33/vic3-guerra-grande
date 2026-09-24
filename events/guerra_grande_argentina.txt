@@ -302,7 +302,7 @@ gg_argentina.3 = {
 		default_option = yes
 		ai_chance = {
 			base = 20
-			modifier = { trigger = { gg_pact_forced_war = yes } add = -20 } # EN/ES: the Pact's game rule / la regla del Pacto
+			modifier = { trigger = { gg_pact_forced_war = yes } factor = 0 } # EN/ES: the Pact's game rule: never for the AI (AUD-RULES-AI) / la regla del Pacto: nunca para la IA
 		}
 	}
 
@@ -314,6 +314,15 @@ gg_argentina.3 = {
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
 		set_global_variable = gg_montevideo_convention_enabled
+		# EN: 23/9/2026 (Codex audit, AUD-PACT-MARK) -- the war of the Pact with Entre Rios starts here, so its mark and
+		#     its outcome start here too, whatever comes later: before, only Rosas declaring the alliance
+		#     (gg_argentina.14.b) or Urquiza fighting alone set them, and with the Convention refused or Oribe
+		#     abandoned an Urquiza victory went unread until the 1853 net.
+		# ES: la guerra del Pacto con Entre Rios empieza aca, y su marca y su resultado tambien, pase lo que pase despues.
+		set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+		set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+		set_global_variable = gg_war_against_buenos_aires
 		gg_argentina_open_war = { TAG = ENR }
 		ai_chance = { base = 80 }
 	}
@@ -329,6 +338,15 @@ gg_argentina.3 = {
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
 		set_global_variable = gg_montevideo_convention_enabled
+		# EN: 23/9/2026 (Codex audit, AUD-PACT-MARK) -- the war of the Pact with Entre Rios starts here, so its mark and
+		#     its outcome start here too, whatever comes later: before, only Rosas declaring the alliance
+		#     (gg_argentina.14.b) or Urquiza fighting alone set them, and with the Convention refused or Oribe
+		#     abandoned an Urquiza victory went unread until the 1853 net.
+		# ES: la guerra del Pacto con Entre Rios empieza aca, y su marca y su resultado tambien, pase lo que pase despues.
+		set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+		set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+		set_global_variable = gg_war_against_buenos_aires
 		gg_argentina_open_war = { TAG = ENR }
 		ai_chance = { base = 0 }
 		custom_tooltip = gg_play_as_entre_rios_tt
@@ -3331,9 +3349,8 @@ gg_argentina.14 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.14.b|" # GG_TRAZA
 		name = gg_argentina.14.b
 		custom_tooltip = gg_rosas_declare_alliance_tt
-		set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
-		set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
-		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+		# EN/ES: 23/9 (AUD-PACT-MARK) -- the mark is set when the war opens (gg_argentina.3); not reset here, or a result
+		#     recorded in between would be lost / la marca se pone al abrir la guerra; no se reinicia aca
 		set_global_variable = gg_war_against_buenos_aires
 		# EN/ES: the declaration activates the alliance; November's convention decides
 		# whether foreign countries actually enter the campaign against Buenos Aires.
@@ -3488,6 +3505,10 @@ gg_argentina.80 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.80.b|" # GG_TRAZA
 		name = gg_argentina.80.b
 		default_option = yes
+		# EN: 23/9/2026 (Codex audit, AUD-PACT-80B) -- not after Urquiza's victory: his constitution makes one country
+		#     a month later (gg_constitution.1, only option a), so "each province keeps its government" would be undone.
+		# ES: no despues de la victoria de Urquiza: su constitucion hace un solo pais al mes, y esto se desharia.
+		trigger = { NOT = { has_global_variable = gg_pact_settlement_urquiza } }
 		custom_tooltip = gg_argentina.80.b_tt
 		trigger_event = { id = gg_constitution.1 days = 30 popup = yes } # EN/ES: 23/9 (Juan) -- the constitution / la constitucion
 		# EN/ES: the protectorates stay as they are, and the governors keep their seats
@@ -3495,7 +3516,6 @@ gg_argentina.80 = {
 		ai_chance = {
 			base = 80
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = -50 }
-			modifier = { trigger = { has_global_variable = gg_pact_settlement_urquiza } add = -60 }
 		}
 	}
 }
