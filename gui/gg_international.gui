@@ -373,37 +373,39 @@ flowcontainer = {
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+      # EN/ES: 23/9/2026 (tools/desborde_textos.py) -- the envoy lines run to six rows in English
+      #     (Southern ... Lepredour): the box takes the card's full height / hasta seis renglones: la caja usa todo el alto
       textbox = {
        visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_envoy'), '(CFixedPoint)0')]"
-       position = { 96 8 } size = { 134 96 }
+       position = { 96 4 } size = { 134 106 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_envoy_0"
       }
       textbox = {
        visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_envoy'), '(CFixedPoint)1')]"
-       position = { 96 8 } size = { 134 96 }
+       position = { 96 4 } size = { 134 106 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_envoy_1"
       }
       textbox = {
        visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_envoy'), '(CFixedPoint)2')]"
-       position = { 96 8 } size = { 134 96 }
+       position = { 96 4 } size = { 134 106 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_envoy_2"
       }
       textbox = {
        visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_envoy'), '(CFixedPoint)3')]"
-       position = { 96 8 } size = { 134 96 }
+       position = { 96 4 } size = { 134 106 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_envoy_3"
       }
       textbox = {
        visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_envoy'), '(CFixedPoint)4')]"
-       position = { 96 8 } size = { 134 96 }
+       position = { 96 4 } size = { 134 106 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_envoy_4"
