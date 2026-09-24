@@ -238,6 +238,8 @@ gg_cal.11 = {
 				NOT = { has_global_variable = gg_cis_offer_decided }
 				NOT = { has_global_variable = gg_cis_offer_sent }
 				has_global_variable = guerra_grande_open_war
+				# EN/ES: AUD-CAL-POSTWAR -- no reunification offer to a war already over / sin oferta a una guerra terminada
+				NOT = { gg_cal_war_over = yes }
 				exists = c:ARG
 				any_country = { has_variable = guerra_grande_cerrito_government }
 			}
@@ -510,7 +512,9 @@ gg_cal.25 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.25|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire_quiet = {
+			# EN/ES: AUD-CAL-POSTWAR -- the powers' settlement outlives the war (see the effect)
+			#     / el arreglo de las potencias sobrevive a la guerra (ver el efecto)
+			gg_cal_fire_quiet_outlives_war = {
 				DONE = gg_cal_done_25
 				EVENT = gg_powers.20
 				SIDE = guerra_grande_defensa_government

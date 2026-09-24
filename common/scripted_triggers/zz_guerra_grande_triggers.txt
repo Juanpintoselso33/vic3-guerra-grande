@@ -199,3 +199,34 @@ gg_argentina_has_ejercito_grande_debt = {
 	global_var:gg_ejercito_grande_loan_months > 0
 	global_var:gg_ejercito_grande_interest_percent = 6
 }
+
+# EN: AUD-CAL-POSTWAR (23/9/2026, Juan: after the Defensa won, the dated calendar kept delivering
+#     wartime events). The dated calendar's relays (events/guerra_grande_calendar.txt, through
+#     gg_cal_fire and its variants) are wartime: every event they carry speaks of the siege, the two
+#     governments or the powers' patronage of one of them. This is the one gate they all read. The war
+#     is over when any ending was written (gg_peace_settled is set by every peace, the closing dispatch,
+#     the reincorporation and the Cisplatina), when it failed or never crossed, or -- the window before
+#     the closing mark, or an engine war that annexed a government -- once the country has split and one
+#     of the two governments no longer exists. Before the split it is never over: a late partition must
+#     still receive what was dated before it (the retry).
+# ES: Los relevos del calendario fechado son de guerra: todo lo que entregan habla del sitio, de los dos
+#     gobiernos o del padrinazgo de las potencias. Esta es la unica guarda que leen todos. La guerra
+#     termino cuando se escribio cualquier final (gg_peace_settled lo prende toda paz, el despacho de
+#     cierre, la reincorporacion y la Cisplatina), cuando fracaso o no llego a cruzar, o --la ventana
+#     antes de la marca de cierre, o una guerra del motor que anexo a un gobierno-- cuando el pais ya se
+#     partio y uno de los dos gobiernos ya no existe. Antes de la particion nunca termino: una particion
+#     tardia tiene que recibir igual lo fechado antes (el reintento).
+gg_cal_war_over = {
+	OR = {
+		has_global_variable = gg_peace_settled
+		has_global_variable = gg_war_failed
+		has_global_variable = gg_war_never_crossed
+		AND = {
+			has_global_variable = guerra_grande_split_done
+			OR = {
+				NOT = { any_country = { has_variable = guerra_grande_defensa_government } }
+				NOT = { any_country = { has_variable = guerra_grande_cerrito_government } }
+			}
+		}
+	}
+}

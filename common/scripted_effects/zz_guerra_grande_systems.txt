@@ -496,10 +496,19 @@ gg_wartime_modifiers_clear = {
 	gg_calendar_close_wartime_relays = yes
 }
 
-# EN: Relays that require the war or both governments stop retrying after settlement. University
-#     and the independent European withdrawals retain their postwar delivery.
-# ES: Los relevos que requieren guerra o ambos gobiernos dejan de reintentarse tras la paz. La
-#     Universidad y los retiros europeos independientes conservan su entrega de posguerra.
+# EN: Relays that require the war or both governments stop retrying after settlement.
+#     AUD-CAL-POSTWAR (23/9/2026): this only runs from gg_postwar_start, which is late (after the
+#     victory menu is answered, after the journal closes) and never runs for a reincorporation, so it
+#     is no longer what stops the calendar: every relay reads gg_cal_war_over itself, on its own date.
+#     This stays as the second lock. The University (22) and the 1848 revolution (32) are closed now
+#     too: the University's text is a besieged city, and the patrons' journal ends with the peace.
+#     Only the powers' settlement with Rosas (25) outlives the war (gg_cal_fire_quiet_outlives_war).
+# ES: Los relevos que requieren guerra o ambos gobiernos dejan de reintentarse tras la paz. Esto solo
+#     corre desde gg_postwar_start, que llega tarde y nunca corre con una reincorporacion, asi que ya no
+#     es lo que corta el calendario: cada relevo lee gg_cal_war_over por su cuenta, en su fecha. Esto
+#     queda como segundo candado. La Universidad (22) y la revolucion de 1848 (32) ahora tambien se
+#     cierran: el texto de la Universidad es una ciudad sitiada, y el journal de los padrinos termina
+#     con la paz. Solo el arreglo de las potencias con Rosas (25) sobrevive a la guerra.
 gg_calendar_close_wartime_relays = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_calendar_close_wartime_relays|" # GG_TRAZA
 	set_global_variable = gg_cal_done_1
@@ -523,6 +532,7 @@ gg_calendar_close_wartime_relays = {
 	set_global_variable = gg_cal_done_19
 	set_global_variable = gg_cal_done_20
 	set_global_variable = gg_cal_done_21
+	set_global_variable = gg_cal_done_22
 	set_global_variable = gg_cal_done_23
 	set_global_variable = gg_cal_done_24
 	set_global_variable = gg_cal_done_26
@@ -531,6 +541,7 @@ gg_calendar_close_wartime_relays = {
 	set_global_variable = gg_cal_done_29
 	set_global_variable = gg_cal_done_30
 	set_global_variable = gg_cal_done_31
+	set_global_variable = gg_cal_done_32
 	set_global_variable = gg_cal_done_33
 	set_global_variable = gg_cal_done_34
 }
@@ -967,7 +978,12 @@ gg_river_blockade = {
 gg_cal_fire = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
-		limit = { NOT = { has_global_variable = $DONE$ } }
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			# EN/ES: AUD-CAL-POSTWAR -- once the war is over nothing wartime is delivered and the retry stops
+			#     / terminada la guerra no se entrega nada de guerra y se corta el reintento
+			NOT = { gg_cal_war_over = yes }
+		}
 		if = {
 			# EN: Only the recipient's immediate acknowledges delivery. Its trigger can reject
 			#     this attempt even when the country exists; retry independently below.
@@ -996,7 +1012,12 @@ gg_cal_fire = {
 gg_cal_fire_quiet = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_quiet| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
-		limit = { NOT = { has_global_variable = $DONE$ } }
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			# EN/ES: AUD-CAL-POSTWAR -- once the war is over nothing wartime is delivered and the retry stops
+			#     / terminada la guerra no se entrega nada de guerra y se corta el reintento
+			NOT = { gg_cal_war_over = yes }
+		}
 		if = {
 			# EN/ES: same guard as gg_cal_fire above / la misma guarda que gg_cal_fire de arriba
 			limit = {
@@ -1018,13 +1039,60 @@ gg_cal_fire_quiet = {
 	}
 }
 
+# EN: AUD-CAL-POSTWAR -- the one dated link that outlives the war: the powers' settlement with Rosas
+#     (gg_powers.20, relay gg_cal.25). The river and the intervention belong to Rosas and the powers,
+#     not to the Guerra Grande (gg_plata.10 already has its after-the-peace texts), and gg_powers.20 is
+#     what writes gg_plata_intervention_over; gated like the others, an intervention still running at
+#     the peace would never end. While the war runs it goes to the Defensa as before. Once the war is
+#     over the event is global and hidden, so it runs on this relay's own country; before this, in a
+#     Cerrito victory (no Defensa left) it was never delivered at all.
+# ES: el unico eslabon fechado que sobrevive a la guerra: el arreglo de las potencias con Rosas. El rio y
+#     la intervencion son de Rosas y las potencias, no de la Guerra Grande, y gg_powers.20 es el que
+#     escribe gg_plata_intervention_over; cortado como los demas, una intervencion abierta a la paz no
+#     terminaria nunca. Durante la guerra va a la Defensa como antes. Terminada la guerra el evento es
+#     global y oculto, asi que corre en el propio pais del relevo; antes, con victoria del Cerrito (sin
+#     Defensa) no se entregaba nunca.
+gg_cal_fire_quiet_outlives_war = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_quiet_outlives_war| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = $DONE$ } }
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				NOT = { gg_cal_war_over = yes }
+				any_country = { has_variable = $SIDE$ }
+			}
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 }
+			}
+		}
+		else_if = {
+			limit = { gg_cal_war_over = yes }
+			trigger_event = { id = $EVENT$ days = 0 }
+		}
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
 # EN/ES: the same relay for what does not need two governments: the effect is global, so it runs on
 #     whichever copy of the relay gets there first / el mismo relevo para lo que no necesita dos
 #     gobiernos: el efecto es global, asi que corre en la copia que llegue primero
 gg_cal_fire_here = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_here| DONE= $DONE$  EVENT= $EVENT$ " # GG_TRAZA
 	if = {
-		limit = { NOT = { has_global_variable = $DONE$ } }
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			# EN/ES: AUD-CAL-POSTWAR -- once the war is over nothing wartime is delivered and the retry stops
+			#     / terminada la guerra no se entrega nada de guerra y se corta el reintento
+			NOT = { gg_cal_war_over = yes }
+		}
 		trigger_event = { id = $EVENT$ days = 0 }
 	}
 }
@@ -1036,7 +1104,12 @@ gg_cal_fire_here = {
 gg_cal_fire_if_table_free = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_if_table_free| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
 	if = {
-		limit = { NOT = { has_global_variable = $DONE$ } }
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			# EN/ES: AUD-CAL-POSTWAR -- once the war is over nothing wartime is delivered and the retry stops
+			#     / terminada la guerra no se entrega nada de guerra y se corta el reintento
+			NOT = { gg_cal_war_over = yes }
+		}
 		if = {
 			limit = {
 				has_global_variable = guerra_grande_split_done
