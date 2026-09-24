@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Brazil's note reaches Buenos Aires:** when the Banda Oriental rejoins the Confederation and Brazil answers under
+  the Preliminary Peace Convention of 1828, Argentina now hears of it. If the Empire stays out, its protest arrives;
+  if it chooses war, a note that breaks off relations and reserves the right to enforce the Convention. Buenos Aires
+  answers with a conciliatory note (better relations with Brazil and a calmer Entre Ríos, but the provinces grumble)
+  or rejects it (worse relations, the provinces close ranks, and Brazil gains a pretext with Entre Ríos before
+  1 May 1851). Games in progress where Brazil already answered get the note once.
+- **Brazil intervenes more often** over the Banda Oriental: staying out is now about half as likely for the AI.
 - **The constitution can be a confederation:** a new answer to «The Constitution», «The Pact of 1831 and nothing
   more». No constitution is written: every historical province becomes its own country again, a Province of the
   Pact under Buenos Aires, which keeps the foreign relations; Buenos Aires keeps its own province and the frontier
