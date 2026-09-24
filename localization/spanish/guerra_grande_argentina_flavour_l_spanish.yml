@@ -49,3 +49,8 @@
  gg_arg_flavour_corrientes_gone_tt:0 "@information! #b Corrientes#! ya no está bajo esta delegación: la cuenta no mueve sus agravios."
  gg_pact_all_grievances_up_tt:0 "@arrow_up! Agravios de #b Corrientes#!, del #b Norte#! y de #b Entre Ríos#!: #N +1#! cada uno, en las que todavía delegan; sus pliegos quedan abiertos."
  gg_pact_all_grievances_down_tt:0 "@arrow_down! Agravios de #b Corrientes#!, del #b Norte#! y de #b Entre Ríos#!: #P −1#! cada uno, hasta un mínimo de #V 0#!, en las que todavía delegan. Cada pliego se cierra sólo si no le queda agravio."
+ # 23/9/2026 (Juan, AUD-SEAT-ALCARAZ): la orden de puertos leída en el Entre Ríos leal de Alcaraz
+ gg_argentina.28.d_enr:0 "Señor gobernador: las cuentas de comercio de #V 1846–1847#! atribuyen a #b Montevideo#! el #V 68%#! de los productos rioplatenses exportados, y buena parte sale de nuestros puertos. Buenos Aires lo sabe: desde #V 1845#! exige que el tráfico vaya sólo en buques nacionales, con fianza por el doble del cargamento, y prohíbe mandar a Montevideo carnes, charque, sebo, velas, grasa y lenguas saladas.\n\nEl tráfico del litoral se corrió del Paraná al Uruguay, hacia Concepción del Uruguay y Concordia, y los saladeros de la provincia crecen con él. Hasta ahora los flujos se ocultaron para no chocar con Buenos Aires; ahora llega la orden de concentrar las exportaciones en su puerto.\n\nPodemos obedecer y cerrar la salida, seguir despachando por el Uruguay como si la orden no hubiera llegado, o pedir licencias provinciales y pagarle a Buenos Aires una parte de la renta."
+ gg_argentina.28.a_enr:0 "Obedezcamos: las exportaciones, por Buenos Aires."
+ gg_argentina.28.b_enr:0 "Sigamos despachando por el Uruguay."
+ gg_argentina.28.c_enr:0 "Pidamos licencias y paguemos la participación."

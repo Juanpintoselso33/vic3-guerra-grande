@@ -319,6 +319,21 @@ gg_argentina_rebel_diplomacy_reset = {
 	clear_saved_scope = gg_rebel_country
 }
 
+# EN: 23/9/2026 (AUD-SEAT-ALCARAZ) -- the Entre Rios state that still answers to Rosas, saved as gg_entre_rios_state:
+#     Buenos Aires's own ground, or the loyal Entre Rios of Alcaraz (gg_entre_rios_alcaraz_loyal). Used by the orders
+#     of 1847-1851 wherever they reach Urquiza. Nothing is saved when neither holds.
+# ES: el estado de Entre Rios que todavia responde a Rosas: suelo de Buenos Aires o el Entre Rios leal de Alcaraz.
+gg_save_entre_rios_rosas_state = {
+	if = {
+		limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+		s:STATE_ENTRE_RIOS.region_state:ARG = { save_scope_as = gg_entre_rios_state }
+	}
+	else_if = {
+		limit = { gg_entre_rios_alcaraz_loyal = yes }
+		s:STATE_ENTRE_RIOS.region_state:ENR = { save_scope_as = gg_entre_rios_state }
+	}
+}
+
 # -------------------------------------------------------------------------------------------------
 # EN: THE TWO ORDERS LEAVE AN ARMY ON THE MAP. Giving Urquiza the Brazilian command forms the
 #     force in Entre Rios and puts him at its head; withholding it forms the same national force in
@@ -335,7 +350,9 @@ gg_argentina_rebel_diplomacy_reset = {
 # -------------------------------------------------------------------------------------------------
 gg_argentina_arm_urquiza_against_brazil = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_arm_urquiza_against_brazil|" # GG_TRAZA
-	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
+	# EN/ES: 23/9 (AUD-SEAT-ALCARAZ) -- Buenos Aires's Entre Rios, or the loyal Entre Rios of Alcaraz when the order
+	#     reaches Urquiza there (the caller is then c:ENR) / o el Entre Rios leal de Alcaraz, y el que llama es c:ENR
+	gg_save_entre_rios_rosas_state = yes
 	create_military_formation = {
 		type = army
 		hq_region = scope:gg_entre_rios_state.region
@@ -370,6 +387,12 @@ gg_argentina_arm_urquiza_against_brazil = {
 			set_commander_rank = 2
 		}
 		transfer_to_formation = scope:gg_brazil_army
+	}
+	# EN/ES: 23/9 (AUD-SEAT-ALCARAZ-ORDERS) -- an army of Entre Rios's own: the Pronouncement raises no second one
+	#     / un ejercito propio de Entre Rios: el Pronunciamiento no levanta otro
+	if = {
+		limit = { c:ENR ?= this exists = scope:gg_brazil_army }
+		set_variable = gg_enr_orders_army
 	}
 }
 
@@ -419,7 +442,9 @@ gg_argentina_arm_other_against_brazil = {
 # the article and Urquiza's answer; the demand and this military consequence are design counterfactuals.
 gg_argentina_arm_urquiza_reserve = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_arm_urquiza_reserve|" # GG_TRAZA
-	s:STATE_ENTRE_RIOS.region_state:ARG ?= { save_scope_as = gg_entre_rios_state }
+	# EN/ES: 23/9 (AUD-SEAT-ALCARAZ) -- Buenos Aires's Entre Rios, or the loyal Entre Rios of Alcaraz when the order
+	#     reaches Urquiza there (the caller is then c:ENR) / o el Entre Rios leal de Alcaraz, y el que llama es c:ENR
+	gg_save_entre_rios_rosas_state = yes
 	create_military_formation = {
 		type = army
 		hq_region = scope:gg_entre_rios_state.region
@@ -513,6 +538,17 @@ gg_argentina_create_entre_rios = {
 		c:ENR = {
 			remove_variable = gg_enr_alcaraz_seat
 			if = { limit = { is_subject = yes } make_independent = yes }
+			# EN: 23/9 (AUD-SEAT-ALCARAZ-ORDERS, Codex) -- if Urquiza marched on Corrientes at Buenos Aires's side
+			#     (gg_argentina.8.a from Entre Rios joins the ARG-CRR war) and that war is still open, he leaves it now,
+			#     as vanilla's Ezo does after independence; otherwise the Pact's war on him could not open.
+			# ES: si Urquiza marcho sobre Corrientes del lado de Buenos Aires y esa guerra sigue, sale ahora de ella.
+			every_scope_war = {
+				limit = { is_war_participant = c:ARG }
+				diplomatic_play = {
+					remove_initiator_backers = { c:ENR }
+					remove_target_backers = { c:ENR }
+				}
+			}
 			# EN/ES: make_independent leaves a truce, and gg_argentina_open_war (.3.b/.c) refuses a target under truce
 			#     (Codex review of 64ca7e5) / la independencia deja una tregua y la guerra del Pacto no se abriria
 			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
@@ -549,7 +585,16 @@ gg_argentina_create_entre_rios = {
 	#     que aca se le da rango de mando: un Entre Rios cuyo gobernante no puede salir a campania es
 	#     un Entre Rios que no puede pelear la guerra que acaba de declarar.
 	c:ENR ?= {
+		# EN: 23/9 (AUD-SEAT-ALCARAZ-ORDERS, Codex) -- the Entre Rios of Alcaraz already raised its own army when it
+		#     obeyed Vences or took the Brazilian command (gg_enr_orders_army): that army is the force Urquiza keeps, and
+		#     no second one is raised. In the Buenos Aires path those armies stay with Rosas and this one replaces them.
+		# ES: el Entre Rios de Alcaraz ya levanto su ejercito al obedecer Vences o tomar el mando contra el Brasil: ese
+		#     es el que conserva Urquiza y no se levanta otro. Por Buenos Aires, esos quedan con Rosas y este los reemplaza.
 		if = {
+			limit = { has_variable = gg_enr_orders_army }
+			remove_variable = gg_enr_orders_army
+		}
+		else_if = {
 			limit = {
 				OR = {
 					has_global_variable = gg_urquiza_vences_command

@@ -49,3 +49,8 @@
  gg_arg_flavour_corrientes_gone_tt:0 "@information! #b Corrientes#! is no longer under this delegation: the account does not move its grievances."
  gg_pact_all_grievances_up_tt:0 "@arrow_up! Grievances of #b Corrientes#!, the #b North#! and #b Entre Ríos#!: #N +1#! each, for those still delegating; their petitions stay open."
  gg_pact_all_grievances_down_tt:0 "@arrow_down! Grievances of #b Corrientes#!, the #b North#! and #b Entre Ríos#!: #P −1#! each, down to a minimum of #V 0#!, for those still delegating. Each petition closes only if no grievance remains."
+ # 23/9/2026 (Juan, AUD-SEAT-ALCARAZ): the port order as read in the loyal Entre Ríos of Alcaraz
+ gg_argentina.28.d_enr:0 "Governor: the trade returns for #V 1846–1847#! credit #b Montevideo#! with #V 68%#! of the River Plate's exports, and a good part of it leaves from our ports. Buenos Aires knows it: since #V 1845#! it has demanded that the trade go only in national ships, under a bond of twice the cargo, and forbidden sending meat, jerky, tallow, candles, grease and salted tongues to Montevideo.\n\nThe littoral's trade has moved from the Paraná to the Uruguay, towards Concepción del Uruguay and Concordia, and the province's saladeros grow with it. Until now the flows were kept quiet to avoid a clash with Buenos Aires; now comes the order to gather all exports into its port.\n\nWe can obey and close the outlet, keep shipping by the Uruguay as if the order had never arrived, or ask for provincial licences and pay Buenos Aires a share of the revenue."
+ gg_argentina.28.a_enr:0 "We obey: exports go through Buenos Aires."
+ gg_argentina.28.b_enr:0 "Keep shipping by the Uruguay."
+ gg_argentina.28.c_enr:0 "Ask for licences and pay the share."

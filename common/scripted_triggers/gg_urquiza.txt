@@ -56,3 +56,20 @@ gg_entre_rios_with_rosas = {
 		}
 	}
 }
+
+# EN: 23/9/2026 (Juan, AUD-SEAT-ALCARAZ) -- Urquiza governs the loyal Entre Rios of Alcaraz and Buenos Aires no longer
+#     holds the province's ground. The 1847-1851 orders of Rosas (Vences gg_argentina.8, the port order .28, the two
+#     orders .67, La Regeneracion .9) are then delivered to c:ENR, from Urquiza's side; with Argentine Entre Rios they
+#     go to Buenos Aires as before.
+# ES: Urquiza gobierna el Entre Rios leal de Alcaraz y Buenos Aires ya no tiene el suelo de la provincia. Las ordenes
+#     de Rosas de 1847-1851 se entregan entonces a c:ENR, del lado de Urquiza; con Entre Rios argentino van a Buenos
+#     Aires como antes.
+gg_entre_rios_alcaraz_loyal = {
+	exists = s:STATE_ENTRE_RIOS
+	NOT = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+	c:ENR ?= {
+		has_variable = gg_enr_alcaraz_seat
+		is_subject_of = c:ARG
+		exists = s:STATE_ENTRE_RIOS.region_state:ENR
+	}
+}

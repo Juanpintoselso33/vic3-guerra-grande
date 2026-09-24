@@ -356,7 +356,18 @@ gg_argentina.28 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.28.t
-	desc = gg_argentina.28.d
+	# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- Buenos Aires's order read in the loyal Entre Rios of Alcaraz
+	#     (gg_argentina_cal.34): a = obey, b = keep shipping by the Uruguay, c = licences and the share. The effects are
+	#     the same; Buenos Aires's treasury and port modifiers go to c:ARG, the Entre Rios state ones to whoever holds it.
+	#     / la orden de Buenos Aires leida en el Entre Rios leal de Alcaraz; mismos efectos, los de Buenos Aires a c:ARG
+	# SOURCE / FUENTE (ENR text): historia-argentina.md, «El litoral -- el dato duro» (Schmit): the 1845 intimation,
+	#     the shift to Concepcion del Uruguay and Concordia, the 68% of 1846-47.
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.28.d_enr trigger = { c:ENR ?= this } }
+			triggered_desc = { desc = gg_argentina.28.d }
+		}
+	}
 	flavor = gg_argentina.28.f
 	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
@@ -371,29 +382,34 @@ gg_argentina.28 = {
 		} }
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.a|" # GG_TRAZA
-		name = gg_argentina.28.a
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.28.a }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.28.a_enr }
+		gg_save_entre_rios_rosas_state = yes
 		default_option = yes
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				exists = scope:gg_entre_rios_state
 			}
 			custom_tooltip = gg_arg_flavour_hard_tt
-			add_treasury = 10000
-			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
-			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
-			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
-			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
-			add_modifier = { name = gg_arg_port_enforcement years = 2 }
+			# EN/ES: Buenos Aires's customs and port stance, also when Urquiza answers / la aduana de Buenos Aires
+			c:ARG ?= {
+				add_treasury = 10000
+				# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+				# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+				if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+				if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+				if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
+				add_modifier = { name = gg_arg_port_enforcement years = 2 }
+			}
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
 				change_global_variable = { name = gg_entre_rios_agravio add = 1 }
 				gg_reclamo_abre = { KEY = entre_rios }
 			}
-			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+			scope:gg_entre_rios_state = {
 				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
 				if = { limit = { has_modifier = gg_arg_littoral_open_trade } remove_modifier = gg_arg_littoral_open_trade }
 				add_modifier = { name = gg_arg_littoral_restricted years = 2 }
@@ -405,22 +421,27 @@ gg_argentina.28 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.b|" # GG_TRAZA
-		name = gg_argentina.28.b
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.28.b }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.28.b_enr }
+		gg_save_entre_rios_rosas_state = yes
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				exists = scope:gg_entre_rios_state
 			}
 			custom_tooltip = gg_arg_flavour_relief_tt
-			add_treasury = -20000
-			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
-			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
-			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
-			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
-			add_modifier = { name = gg_arg_port_tolerance years = 2 }
+			# EN/ES: Buenos Aires's customs and port stance, also when Urquiza answers / la aduana de Buenos Aires
+			c:ARG ?= {
+				add_treasury = -20000
+				# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+				# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+				if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+				if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+				if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
+				add_modifier = { name = gg_arg_port_tolerance years = 2 }
+			}
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
 				if = {
@@ -433,7 +454,7 @@ gg_argentina.28 = {
 				}
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
-			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+			scope:gg_entre_rios_state = {
 				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
 				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }
@@ -445,22 +466,27 @@ gg_argentina.28 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28.c|" # GG_TRAZA
-		name = gg_argentina.28.c
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.28.c }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.28.c_enr }
+		gg_save_entre_rios_rosas_state = yes
 		# EN: A late answer cannot collect money from a province that has withdrawn.
 		# ES: Una respuesta tardía no puede cobrar a una provincia que retiró el encargo.
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				exists = scope:gg_entre_rios_state
 			}
 			custom_tooltip = gg_arg_flavour_relief_tt
-			add_treasury = 15000
-			# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
-			# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
-			if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
-			if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
-			if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
-			add_modifier = { name = gg_arg_port_licences years = 3 }
+			# EN/ES: Buenos Aires's customs and port stance, also when Urquiza answers / la aduana de Buenos Aires
+			c:ARG ?= {
+				add_treasury = 15000
+				# EN: Replace this commercial stance, preserving the earlier Corrientes fiscal concessions.
+				# ES: Reemplaza esta postura comercial y conserva las concesiones fiscales anteriores a Corrientes.
+				if = { limit = { has_modifier = gg_arg_port_enforcement } remove_modifier = gg_arg_port_enforcement }
+				if = { limit = { has_modifier = gg_arg_port_tolerance } remove_modifier = gg_arg_port_tolerance }
+				if = { limit = { has_modifier = gg_arg_port_licences } remove_modifier = gg_arg_port_licences }
+				add_modifier = { name = gg_arg_port_licences years = 3 }
+			}
 			if = {
 				limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } }
 				if = {
@@ -473,7 +499,7 @@ gg_argentina.28 = {
 				}
 				else = { gg_reclamo_abre = { KEY = entre_rios } }
 			}
-			s:STATE_ENTRE_RIOS.region_state:ARG ?= {
+			scope:gg_entre_rios_state = {
 				if = { limit = { has_modifier = gg_arg_customs_shared } remove_modifier = gg_arg_customs_shared }
 				if = { limit = { has_modifier = gg_arg_littoral_restricted } remove_modifier = gg_arg_littoral_restricted }
 				add_modifier = { name = gg_arg_littoral_open_trade years = 2 }

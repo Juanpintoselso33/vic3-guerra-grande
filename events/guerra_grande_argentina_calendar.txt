@@ -541,9 +541,20 @@ gg_argentina_cal.19 = {
 				NOT = { has_global_variable = gg_arg_cal_done_19 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
+				#     / o el Entre Rios leal de Alcaraz: la orden le llega a Urquiza alli
+				OR = {
+					exists = s:STATE_ENTRE_RIOS.region_state:ARG
+					gg_entre_rios_alcaraz_loyal = yes
+				}
 			}
-			c:ARG = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
+			if = {
+				limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+				c:ARG = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
+			}
+			else = {
+				c:ENR = { trigger_event = { id = gg_argentina.67 days = 0 popup = yes } }
+			}
 		}
 	} }
 }
@@ -780,13 +791,24 @@ gg_argentina_cal.26 = {
 				exists = s:STATE_ENTRE_RIOS
 				# EN/ES: 22/9/2026 (event audit) -- Vences's army is raised in Argentine Entre Rios
 				#     / el ejercito de Vences se levanta en Entre Rios argentino
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
+				#     / o el Entre Rios leal de Alcaraz: la orden le llega a Urquiza alli
+				OR = {
+					exists = s:STATE_ENTRE_RIOS.region_state:ARG
+					gg_entre_rios_alcaraz_loyal = yes
+				}
 				exists = c:ARG
 				exists = c:CRR
 				has_global_variable = gg_alcaraz_rejected
 				c:ARG = { has_war_with = c:CRR }
 			}
-			c:ARG = { trigger_event = { id = gg_argentina.8 days = 0 popup = yes } }
+			if = {
+				limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+				c:ARG = { trigger_event = { id = gg_argentina.8 days = 0 popup = yes } }
+			}
+			else = {
+				c:ENR = { trigger_event = { id = gg_argentina.8 days = 0 popup = yes } }
+			}
 		}
 	} }
 }
@@ -809,10 +831,23 @@ gg_argentina_cal.27 = {
 				NOT = { has_global_variable = gg_arg_cal_done_27 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
-				NOT = { exists = c:ENR }
-				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
+				#     / o el Entre Rios leal de Alcaraz: la orden le llega a Urquiza alli
+				OR = {
+					AND = {
+						NOT = { exists = c:ENR }
+						exists = s:STATE_ENTRE_RIOS.region_state:ARG
+					}
+					gg_entre_rios_alcaraz_loyal = yes
+				}
 			}
-			c:ARG = { trigger_event = { id = gg_argentina.9 days = 0 popup = yes } }
+			if = {
+				limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+				c:ARG = { trigger_event = { id = gg_argentina.9 days = 0 popup = yes } }
+			}
+			else = {
+				c:ENR = { trigger_event = { id = gg_argentina.9 days = 0 popup = yes } }
+			}
 		}
 	} }
 }
@@ -997,9 +1032,19 @@ gg_argentina_cal.34 = {
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
      NOT = { has_global_variable = gg_delegation_gone_entre_rios }
-     exists = s:STATE_ENTRE_RIOS.region_state:ARG
+     # EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz / o el Entre Rios leal de Alcaraz
+     OR = {
+      exists = s:STATE_ENTRE_RIOS.region_state:ARG
+      gg_entre_rios_alcaraz_loyal = yes
+     }
    }
-   c:ARG = { trigger_event = { id = gg_argentina.28 days = 0 popup = yes } }
+   if = {
+   	limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+   	c:ARG = { trigger_event = { id = gg_argentina.28 days = 0 popup = yes } }
+   }
+   else = {
+   	c:ENR = { trigger_event = { id = gg_argentina.28 days = 0 popup = yes } }
+   }
   }
  } }
 }

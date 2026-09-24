@@ -943,6 +943,10 @@ gg_argentina.67 = {
 	title = gg_argentina.67.t
 	desc = {
 		first_valid = {
+			# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- the same orders read by Urquiza in the loyal Entre Rios of Alcaraz
+			#     / las mismas ordenes leidas por Urquiza en el Entre Rios leal de Alcaraz
+			triggered_desc = { desc = gg_argentina.67.d_enr_postwar trigger = { c:ENR ?= this OR = { has_global_variable = gg_oriental_in_pact gg_brazil_beaten = yes } } }
+			triggered_desc = { desc = gg_argentina.67.d_enr trigger = { c:ENR ?= this } }
 			triggered_desc = { desc = gg_argentina.67.d_postwar trigger = { OR = { has_global_variable = gg_oriental_in_pact gg_brazil_beaten = yes } } }
 			triggered_desc = { desc = gg_argentina.67.d trigger = { always = yes } }
 		}
@@ -954,13 +958,25 @@ gg_argentina.67 = {
 	is_popup = yes
 
 	trigger = {
-		c:ARG ?= this
+		# EN/ES: 23/9 (AUD-SEAT-ALCARAZ) -- Buenos Aires, or Urquiza's loyal Entre Rios (gg_argentina_cal.19 routes it)
+		OR = {
+			c:ARG ?= this
+			c:ENR ?= this
+		}
 		exists = s:STATE_ENTRE_RIOS
 	}
 
+	# EN: 23/9/2026 (Juan, AUD-SEAT-ALCARAZ) -- in the loyal Entre Rios of Alcaraz this event is Urquiza receiving the
+	#     two orders: a = obey both, b = take the command and keep the trade, c = obey the closure and decline the
+	#     command. The effects are the same ones; what belongs to Buenos Aires (its modifiers, the army under another
+	#     general) is applied to c:ARG, and the army under Urquiza is raised by the country that holds Entre Rios.
+	# ES: en el Entre Rios leal de Alcaraz, Urquiza recibe las dos ordenes: a = obedecer las dos, b = tomar el mando y
+	#     seguir comerciando, c = cerrar los puertos y declinar el mando. Los efectos son los mismos; lo que es de Buenos
+	#     Aires va a c:ARG y el ejercito de Urquiza lo levanta el pais que tiene Entre Rios.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.a|" # GG_TRAZA
-		name = gg_argentina.67.a
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.67.a }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.67.a_enr }
 		# EN/ES: historical combination / combinacion historica
 		gg_reclamo_abre = { KEY = entre_rios }
 		# EN/ES: Tooltip provenance only / origen del pliego para el tooltip.
@@ -971,8 +987,10 @@ gg_argentina.67 = {
 		set_global_variable = gg_urquiza_brazil_command
 		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
 		gg_argentina_arm_urquiza_against_brazil = yes
-		add_modifier = { name = gg_arg_brazil_command months = 18 }
-		add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		c:ARG ?= {
+			add_modifier = { name = gg_arg_brazil_command months = 18 }
+			add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		}
 		hidden_effect = { # EN/ES: 23/9 -- the text gives the amount / el texto da el monto
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_defensa_government } }
@@ -990,7 +1008,8 @@ gg_argentina.67 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.b|" # GG_TRAZA
-		name = gg_argentina.67.b
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.67.b }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.67.b_enr }
 		# EN/ES: design counterfactual: keep Urquiza's command but withdraw the commercial order /
 		#     contrafactual de diseno: mantener el mando de Urquiza pero retirar la orden comercial
 		gg_reclamo_cierra = { KEY = entre_rios }
@@ -998,7 +1017,7 @@ gg_argentina.67 = {
 		set_global_variable = gg_urquiza_brazil_command
 		set_global_variable = { name = gg_entre_rios_agravio value = 0 }
 		gg_argentina_arm_urquiza_against_brazil = yes
-		add_modifier = { name = gg_arg_brazil_command months = 18 }
+		c:ARG ?= { add_modifier = { name = gg_arg_brazil_command months = 18 } }
 		hidden_effect = { # EN/ES: 23/9 -- the text gives the amount / el texto da el monto
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_defensa_government } }
@@ -1012,7 +1031,8 @@ gg_argentina.67 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.67.c|" # GG_TRAZA
-		name = gg_argentina.67.c
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.67.c }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.67.c_enr }
 		# EN: DESIGN COUNTERFACTUAL. The source names no alternative commander, so the engine selects
 		#     another serving Argentine general and the text invents no name.
 		# ES: CONTRAFACTUAL DE DISENO. La fuente no nombra un mando alternativo, asi que el motor elige
@@ -1023,8 +1043,10 @@ gg_argentina.67 = {
 		custom_tooltip = gg_other_general_close_trade_tt
 		set_global_variable = gg_brazil_command_withheld
 		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
-		gg_argentina_arm_other_against_brazil = yes
-		add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		c:ARG ?= {
+			gg_argentina_arm_other_against_brazil = yes
+			add_modifier = { name = gg_arg_traffic_cut months = 18 }
+		}
 		hidden_effect = { # EN/ES: 23/9 -- the text gives the amount / el texto da el monto
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_defensa_government } }
@@ -1066,7 +1088,14 @@ gg_argentina.9 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.9.t
-	desc = gg_argentina.9.d
+	# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- from Urquiza's desk in the loyal Entre Rios of Alcaraz (gg_argentina_cal.27)
+	#     / desde el escritorio de Urquiza en el Entre Rios leal de Alcaraz
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.9.d_enr trigger = { c:ENR ?= this } }
+			triggered_desc = { desc = gg_argentina.9.d }
+		}
+	}
 	flavor = gg_argentina.9.f
 	# EN/ES: c. 1850 press, not La Regeneracion or its 5 January issue / prensa c. 1850, no ese diario
 	event_image = { video = "gg_arg_regeneracion" }
@@ -1076,7 +1105,9 @@ gg_argentina.9 = {
 
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.a|" # GG_TRAZA
-		name = gg_argentina.9.a
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.9.a }
+		# EN/ES: Urquiza sends the documented answer / Urquiza manda la respuesta documentada
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.9.a_enr }
 		custom_tooltip = gg_regeneracion_pass_tt
 		default_option = yes
 		# EN/ES: 22/9/2026, decided with Juan -- letting the reply stand consolidates Urquiza's command
@@ -1086,8 +1117,11 @@ gg_argentina.9 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.b|" # GG_TRAZA
-		name = gg_argentina.9.b
-		custom_tooltip = gg_regeneracion_submit_tt
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.9.b }
+		# EN/ES: DESIGN COUNTERFACTUAL on Urquiza's side: he answers and arms the reserve / contrafactual: contesta y arma
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.9.b_enr }
+		if = { limit = { c:ENR ?= this } custom_tooltip = gg_regeneracion_submit_enr_tt }
+		else = { custom_tooltip = gg_regeneracion_submit_tt }
 		# EN: DESIGN COUNTERFACTUAL. This concrete demand is not documented as an order Rosas sent.
 		# ES: CONTRAFACTUAL DE DISENO. Esta exigencia concreta no esta documentada como orden de Rosas.
 		gg_reclamo_abre = { KEY = entre_rios }
@@ -1100,11 +1134,14 @@ gg_argentina.9 = {
 	}
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.9.c|" # GG_TRAZA
-		name = gg_argentina.9.c
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.9.c }
+		# EN/ES: DESIGN COUNTERFACTUAL on Urquiza's side: the paper for the trade / contrafactual: el periodico por el comercio
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.9.c_enr }
 		custom_tooltip = gg_regeneracion_withdraw_tt
 		gg_reclamo_cierra = { KEY = entre_rios }
 		set_global_variable = { name = gg_entre_rios_agravio value = 0 }
-		if = { limit = { has_modifier = gg_arg_traffic_cut } remove_modifier = gg_arg_traffic_cut }
+		# EN/ES: the trade restriction is Buenos Aires's modifier / la restriccion es de Buenos Aires
+		c:ARG ?= { if = { limit = { has_modifier = gg_arg_traffic_cut } remove_modifier = gg_arg_traffic_cut } }
 		hidden_effect = { # EN/ES: 23/9 -- the text gives the amount / el texto da el monto
 			if = {
 				limit = { any_country = { has_variable = guerra_grande_defensa_government } }
@@ -1273,7 +1310,14 @@ gg_argentina.8 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.8.t
-	desc = gg_argentina.8.d
+	# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- Rosas's order read by Urquiza in the loyal Entre Rios of Alcaraz
+	#     (gg_argentina_cal.26) / la orden de Rosas leida por Urquiza en el Entre Rios leal de Alcaraz
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.8.d_enr trigger = { c:ENR ?= this } }
+			triggered_desc = { desc = gg_argentina.8.d }
+		}
+	}
 	flavor = gg_argentina.8.f
 	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
 	event_image = { video = "gg_arg_vences" }
@@ -1288,25 +1332,47 @@ gg_argentina.8 = {
 
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.8.a|" # GG_TRAZA
-		name = gg_argentina.8.a
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.8.a }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.8.a_enr }
 		default_option = yes
-		custom_tooltip = gg_vences_delegate_tt
+		if = { limit = { c:ENR ?= this } custom_tooltip = gg_vences_delegate_enr_tt }
+		else = { custom_tooltip = gg_vences_delegate_tt }
 		# EN: Save the front of the actual ARG-CRR war before creating the formation. The allocation
 		#     is deliberately a game-scale force, not a claim about an undocumented order of battle.
 		# ES: Guarda el frente de la guerra real ARG-CRR antes de crear la formacion. La asignacion es
 		#     deliberadamente una fuerza a escala de juego, no una afirmacion sobre un orden de batalla
 		#     no documentado.
-		s:STATE_ENTRE_RIOS.region_state:ARG ?= {
-			save_scope_as = gg_entre_rios_state
-		}
-		random_scope_war = {
-			# EN/ES: is_war_participant is a war-scope trigger (22/9/2026, "Inconsistent trigger scopes")
-			#     / es un trigger de guerra
-			limit = {
-				is_war_participant = c:CRR
-				is_war_participant = c:ARG
+		# EN/ES: 23/9 (AUD-SEAT-ALCARAZ) -- Buenos Aires's Entre Rios or the loyal one of Alcaraz / o el leal de Alcaraz
+		gg_save_entre_rios_rosas_state = yes
+		# EN: In the loyal Entre Rios of Alcaraz, Urquiza marches as Buenos Aires's protectorate: Entre Rios enters the
+		#     actual ARG-CRR war on Buenos Aires's side, so its army can take the front (the war is looked up from c:ARG).
+		# ES: en el Entre Rios leal de Alcaraz, Urquiza marcha como protectorado de Buenos Aires: entra en la guerra real
+		#     ARG-CRR del lado de Buenos Aires, para que su ejercito pueda tomar el frente.
+		if = {
+			limit = { c:ENR ?= this }
+			hidden_effect = { # EN/ES: the tooltip says it / lo dice el tooltip
+				c:ARG ?= {
+					random_scope_war = {
+						limit = {
+							is_war_participant = c:CRR
+							is_war_participant = c:ARG
+							NOT = { is_war_participant = root }
+						}
+						join_war = { target = root side = c:ARG }
+					}
+				}
 			}
-			random_scope_front = { save_scope_as = gg_corrientes_front }
+		}
+		c:ARG ?= {
+			random_scope_war = {
+				# EN/ES: is_war_participant is a war-scope trigger (22/9/2026, "Inconsistent trigger scopes")
+				#     / es un trigger de guerra
+				limit = {
+					is_war_participant = c:CRR
+					is_war_participant = c:ARG
+				}
+				random_scope_front = { save_scope_as = gg_corrientes_front }
+			}
 		}
 		# EN/ES: 22/9/2026 (event audit) -- the popup can stay open while Entre Rios changes hands:
 		#     no Argentine Entre Rios, no army / si Entre Rios dejo de ser argentina, no hay ejercito
@@ -1342,6 +1408,12 @@ gg_argentina.8 = {
 			}
 			transfer_to_formation = scope:gg_vences_army
 		}
+		# EN/ES: 23/9 (AUD-SEAT-ALCARAZ-ORDERS) -- Entre Rios's own army: the Pronouncement raises no second one
+		#     / ejercito propio de Entre Rios: el Pronunciamiento no levanta otro
+		if = {
+			limit = { c:ENR ?= this exists = scope:gg_vences_army }
+			set_variable = gg_enr_orders_army
+		}
 		if = {
 			limit = {
 				exists = scope:gg_vences_army
@@ -1357,12 +1429,14 @@ gg_argentina.8 = {
 
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.8.b|" # GG_TRAZA
-		name = gg_argentina.8.b
+		name = { trigger = { NOT = { c:ENR ?= this } } text = gg_argentina.8.b }
+		name = { trigger = { c:ENR ?= this } text = gg_argentina.8.b_enr }
 		custom_tooltip = gg_vences_reopen_alcaraz_tt
 		# EN: Counterfactual reuse of the real 1846 terms; not a historical November 1847 treaty.
 		# ES: Reutilizacion contrafactual de los terminos reales de 1846; no un tratado historico de
 		#     noviembre de 1847.
-		gg_argentina_accept_alcaraz = yes
+		# EN/ES: 23/9 (AUD-SEAT-ALCARAZ) -- the settlement is Buenos Aires's, whoever asks for it / el arreglo es de Buenos Aires
+		c:ARG ?= { gg_argentina_accept_alcaraz = yes }
 		ai_chance = { base = 20 }
 	}
 
