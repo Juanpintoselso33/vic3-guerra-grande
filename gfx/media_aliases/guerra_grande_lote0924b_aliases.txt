@@ -25,3 +25,27 @@ gg_ntc_varela_lebeaud = {
 	video = "gfx/media_aliases/gg_ntc_varela_lebeaud.bk2"
 	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
+
+# gg_phase1.9: Manuel Rose (1882-1961), "Brigadier Gral. Manuel Oribe", oil, Palacio Legislativo -- 20th century, likely under copyright: replace before a public Workshop release
+gg_f2_oribe_rose = {
+	video = "gfx/media_aliases/gg_f2_oribe_rose.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_contingent.1: "Le general don Jose Maria Paz", L'Illustration no. 407, 14/12/1850, after a daguerreotype sent by d'Hastrel -- Gallica (BnF) -- Public domain
+gg_leg_paz_1850 = {
+	video = "gfx/media_aliases/gg_leg_paz_1850.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_postwar.3: 1 peso fuerte "Sitio de Montevideo", 1844, obverse and reverse -- BnF, Monnaies (via Commons) -- Public domain
+gg_money_peso_sitio = {
+	video = "gfx/media_aliases/gg_money_peso_sitio.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_notice.10: "H.M.S. Gorgon", lithograph by T. G. Dutton after A. C. Key, 1847 (aground at Montevideo, 1844) -- Anaforas (MHN copy) -- Public domain
+gg_ntc_gorgon = {
+	video = "gfx/media_aliases/gg_ntc_gorgon.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}

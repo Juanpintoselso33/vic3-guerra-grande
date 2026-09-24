@@ -179,7 +179,7 @@ gg_notice.10 = {
 	}
 	flavor = gg_notice.10.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "asia_westerners_arriving" }
+	event_image = { video = "gg_ntc_gorgon" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

@@ -27,7 +27,7 @@ gg_contingent.1 = {
 
 	# EN: The Argentine Legion of the unitarian emigres.
 	event_image = {
-		video = "gg_leg_argentine"
+		video = "gg_leg_paz_1850"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

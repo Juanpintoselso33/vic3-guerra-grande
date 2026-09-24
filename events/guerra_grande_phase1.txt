@@ -22,7 +22,7 @@ gg_phase1.9 = {
 
 	# EN/ES: T6 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_f2_oribe_carbajal"
+		video = "gg_f2_oribe_rose"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

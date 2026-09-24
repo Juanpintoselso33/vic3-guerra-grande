@@ -207,7 +207,7 @@ gg_postwar.3 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_fl_aduana"
+		video = "gg_money_peso_sitio"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
