@@ -36,6 +36,7 @@ REPLACE:PLT = {
 	ai_will_do = { always = yes }
 
 	possible = {
+		gg_arg_chain_pending = no # EN/ES: 24/9/2026 (Juan, AUD-ARG-1850) -- not while Argentina's calendar runs (to 13/10/1862): forming changes the tag and loses it / no mientras corre el calendario argentino: formar cambia el tag y lo pierde
 		always = yes
 	}
 }

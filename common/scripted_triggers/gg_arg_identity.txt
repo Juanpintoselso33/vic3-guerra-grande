@@ -1,0 +1,40 @@
+﻿# EN: AUD-ARG-1850 (23/9/2026, Juan's decisions of 24/9) -- Argentina has to stay the SAME country (same object,
+#     same tag) while its dated calendar is pending: everything the first day queues on c:ARG, the last being
+#     gg_ba.105 on 12/10/1862. Three doors took that away or could: an engine revolution (the modifier
+#     gg_arg_caudillos_grip, common/static_modifiers/gg_arg_identity.txt), a formable that changes ARG's tag
+#     (La Plata, and la Argentina's Great_ARG in the compatch), and a third country annexing it
+#     (guerra_grande_play_is_allowed, below). One date for all three, here.
+# ES: la Argentina tiene que seguir siendo el MISMO pais (mismo objeto, mismo tag) mientras su calendario fechado
+#     este pendiente: el ultimo evento agendado sobre c:ARG es gg_ba.105, el 12/10/1862. Tres puertas: la
+#     revolucion del motor, una formable que le cambia el tag, y la anexion por un tercero. Una sola fecha.
+gg_arg_chain_pending = {
+	game_date < 1862.10.13
+}
+
+# EN: The play or war goal guard for Argentina (root = the initiator or holder, scope:target_country the target).
+#     While the calendar is pending nobody opens a vanilla play or lists a war goal against Argentina: an
+#     annexation, or a conquest down to its last state, would end it. The mod's own wars on Argentina (the
+#     Cisplatine war, the Buenos Aires wars of 1852-1861 up to Pavon) are its own play types, which do not call
+#     this, and gg_war_goal_is_allowed lets their goals through by play type. Its own civil wars pass too.
+# ES: la guarda de jugadas y objetivos para la Argentina. Mientras el calendario este pendiente nadie le abre una
+#     jugada de vanilla ni le pone un objetivo de guerra. Las guerras propias del mod contra la Argentina son sus
+#     propios tipos de jugada y pasan.
+gg_arg_target_is_allowed = {
+	OR = {
+		NOT = { gg_arg_chain_pending = yes }
+		NOT = { exists = scope:target_country }
+		scope:target_country = { NOT = { c:ARG ?= this } }
+	}
+}
+
+# EN: The mod's own wars on Argentina, created only by script (selectable_in_lens always = no, no goal can be
+#     added to them): the Cisplatine war (Brazil on Argentina) and the Buenos Aires wars (Lagos, Cepeda, Pavon).
+#     Scope: a diplomatic play. Only these two: the other dp_gg_* never target Argentina.
+# ES: las guerras propias del mod contra la Argentina, creadas solo por script: la cisplatina y las de Buenos
+#     Aires. Scope: una jugada diplomatica.
+gg_is_mod_play_on_arg = {
+	OR = {
+		is_diplomatic_play_type = dp_gg_buenos_aires
+		is_diplomatic_play_type = dp_gg_cisplatina
+	}
+}

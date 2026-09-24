@@ -21,6 +21,10 @@
 #     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que ya
 #     esta escrita como gg_contingent.8.
 guerra_grande_play_is_allowed = {
+	# EN/ES: 24/9/2026 (Juan, AUD-ARG-1850) -- nobody annexes or conquers Argentina while its dated calendar is
+	#     pending (common/scripted_triggers/gg_arg_identity.txt) / nadie anexa ni conquista a la Argentina
+	#     mientras su calendario fechado este pendiente
+	gg_arg_target_is_allowed = yes
 	# EN/ES: 23/9/2026 (Juan, AUD-FARRAPOS-A) -- no engine war Brazil-Riograndense Republic before Ponche Verde
 	#     (common/scripted_triggers/gg_farrapos.txt) / ninguna guerra del motor Brasil-Republica Riograndense antes de Ponche Verde
 	gg_farrapos_play_is_allowed = yes
@@ -108,6 +112,9 @@ gg_is_oriental_side = {
 gg_war_goal_is_allowed = {
 	OR = {
 		NOT = { exists = scope:target_country }
+		# EN/ES: 24/9/2026 (AUD-ARG-1850) -- the goal of one of the mod's own wars on Argentina (Cisplatine, Buenos
+		#     Aires up to Pavon) / el objetivo de una de las guerras propias del mod contra la Argentina
+		scope:diplomatic_play ?= { gg_is_mod_play_on_arg = yes }
 		is_revolutionary = yes
 		is_secessionist = yes
 		scope:target_country = {

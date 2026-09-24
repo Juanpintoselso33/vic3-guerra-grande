@@ -17,14 +17,14 @@ gg_arg_identity_guard = {
 	c:ARG ?= {
 		if = {
 			limit = {
-				game_date < 1862.10.13
+				gg_arg_chain_pending = yes # EN/ES: until 13/10/1862 (gg_arg_identity triggers)
 				NOT = { has_modifier = gg_arg_caudillos_grip }
 			}
 			add_modifier = { name = gg_arg_caudillos_grip }
 		}
 		else_if = {
 			limit = {
-				game_date >= 1862.10.13
+				gg_arg_chain_pending = no
 				has_modifier = gg_arg_caudillos_grip
 			}
 			remove_modifier = gg_arg_caudillos_grip
