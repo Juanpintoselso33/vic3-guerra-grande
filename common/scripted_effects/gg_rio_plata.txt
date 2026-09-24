@@ -156,7 +156,9 @@ gg_plata_intervention_start = {
 		# ES: la decision B deja que la intervencion llegue ANTES de 1845, asi que sus eslabones se
 		#     agendan tambien desde aca, a su distancia historica del ultimatum. Las copias fechadas
 		#     quedan: sale la que llegue primero (cada relevo tiene su marca DONE).
-		c:GBR ?= {
+		# EN/ES: 23/9/2026 (Codex, B1) -- on Rosas's Argentina, not Britain: a British revolution dropped these copies
+		#     too, and a late intervention has no dated copy left after 1856 / en la Argentina de Rosas, no en Gran Bretania
+		c:ARG ?= {
 			trigger_event = { id = gg_cal.31 days = 60 }     # the blockade of Buenos Aires, 18/9/1845
 			trigger_event = { id = gg_cal.25 days = 1370 }   # Lepredour, August 1850
 			# EN/ES: the British and joint links, only when London is in / los eslabones britanicos y
@@ -283,6 +285,9 @@ gg_plata_monthly = {
 		}
 		if = {
 			limit = { gg_plata_closed = yes }
+			# EN/ES: 23/9/2026 (Codex) -- only a month already at the cap goes past it: scored before the counter moves
+			#     / solo un mes que ya estaba en el techo pasa de el: se puntua antes de mover el contador
+			if = { limit = { global_var:gg_plata_months >= 16 } gg_siege_river_scores = { STEP = 1 } }
 			if = {
 				limit = { global_var:gg_plata_months < 16 }
 				change_global_variable = { name = gg_plata_months add = 1 }
@@ -293,8 +298,8 @@ gg_plata_monthly = {
 				limit = { NOT = { gg_plata_hunger_held = yes } }
 				change_global_variable = { name = gg_plata_closed_streak add = 1 }
 			}
-			# EN/ES: 23/9 -- in the siege, what goes past the cap stays in the score / en el sitio lo que pasa del techo queda
-			if = { limit = { global_var:gg_plata_months >= 16 } gg_siege_river_scores = { STEP = 1 } }
+			# EN/ES: 23/9 -- in the siege, what goes past the cap stays in the score (scored above, before the counter moves)
+			#     / en el sitio lo que pasa del techo queda en el puntaje (se puntua arriba)
 			# EN/ES: 22/9/2026 (Codex) -- the patience only runs while some power counts by its level: no
 			#     months banked unseen / la paciencia corre solo si alguna potencia cuenta por su nivel
 			if = {
@@ -317,12 +322,12 @@ gg_plata_monthly = {
 			}
 		}
 		else = {
+			if = { limit = { global_var:gg_plata_months <= -16 } gg_siege_river_scores = { STEP = -1 } }
 			if = {
 				limit = { global_var:gg_plata_months > -16 }
 				change_global_variable = { name = gg_plata_months add = -1 }
 			}
 			set_global_variable = { name = gg_plata_closed_streak value = 0 }
-			if = { limit = { global_var:gg_plata_months <= -16 } gg_siege_river_scores = { STEP = -1 } }
 		}
 		if = {
 			limit = { gg_plata_intervention_due = yes }
