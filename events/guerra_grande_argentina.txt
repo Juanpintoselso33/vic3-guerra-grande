@@ -3162,7 +3162,12 @@ gg_argentina.6 = {
 					exists = scope:gg_paz
 					exists = scope:gg_ejercito_paz
 				}
-				scope:gg_paz = { transfer_to_formation = scope:gg_ejercito_paz }
+				# EN: 24/9 -- only a commander can take a formation (headless sweep: "Created character is not a commander")
+				# ES: solo un comandante puede tomar una formacion
+				scope:gg_paz = {
+					if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+					transfer_to_formation = scope:gg_ejercito_paz
+				}
 			}
 		}
 		hidden_effect = {
