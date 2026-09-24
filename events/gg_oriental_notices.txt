@@ -353,11 +353,17 @@ gg_notice.12 = {
 #     Oriental question without foreign intervention, blockade included).
 # EN: 24/9/2026 (Juan, C4 «Orientales solos» of cerrito-mas-aire-propuestas.md, at half strength) -- the
 #     notice becomes the Cerrito's answer to article 3. a) historical: assent as an ally, the divisions stay
-#     until France disarms the legion: Rosas +10. b) assent, and the divisions recross now: +2 blanco (half of
-#     the proposal's +3), the Argentine auxiliaries go home (their +2 endurance a month ends), Rosas -20 -- the
-#     trade between standing alone and Rosas's backing in 1851. The +10 of the news stays in both.
+#     until France disarms the legion: Rosas +10. b) assent, and the Republic bears its war alone: +2 blanco
+#     (half of the proposal's +3), Rosas stops paying and supplying the auxiliaries (the modifier and its +2
+#     endurance a month end), Rosas -20 -- the trade between standing alone and Rosas's backing in 1851. The +10
+#     of the news stays in both. 24/9/2026 (Codex cross-review, M1): the battalions created by gg_loan.4.d and
+#     gg_contingent.7.a stay on the map -- Vic3 1.13 has no script effect that disbands or transfers a land
+#     formation (disband_military_formation and transfer_combat_units are interface commands; none in the
+#     playset's mods) -- so the text no longer says the divisions recross the Uruguay.
 # ES: el aviso pasa a ser la respuesta del Cerrito al articulo 3. a) la historica: conforme como aliado, Rosas
-#     +10. b) conforme, y que las divisiones repasen ya el Uruguay: +2 blanco, se van los auxiliares, Rosas -20.
+#     +10. b) conforme, y la Republica sostiene sola su guerra: +2 blanco, Rosas deja de pagar y abastecer a los
+#     auxiliares, Rosas -20. Los batallones quedan en el mapa (no hay efecto que disuelva formaciones en 1.13),
+#     asi que el texto ya no dice que repasan el Uruguay.
 # SOURCE / FUENTE (C4): text of the convention, 24/11/1849, https://es.wikisource.org/wiki/Convenci%C3%B3n_Arana_-_Southern
 #     -- art. 3 (the Argentine auxiliary divisions "repasaran el Uruguay cuando el gobierno frances desarme a la
 #     legion extranjera"), art. 6 (Oribe's prior assent, "una condicion indispensable"); SOURCES_loans.md section 4.
@@ -400,8 +406,10 @@ gg_notice.13 = {
 		ai_chance = { base = 75 }
 	}
 
-	# EN: assent, and ask Buenos Aires to take the divisions back across the Uruguay now: the Republic alone.
-	# ES: conforme, y pedirle a Buenos Aires que las divisiones repasen ya el Uruguay: la Republica sola.
+	# EN: assent, and give up Rosas's pay and supply of the auxiliaries now: the Republic bears its war alone.
+	#     The battalions themselves stay (no script effect removes a land formation in 1.13).
+	# ES: conforme, y renunciar ya a la paga y los pertrechos de Rosas para los auxiliares: la Republica sola.
+	#     Los batallones se quedan (no hay efecto de script que saque una formacion de tierra en 1.13).
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13.b|" # GG_TRAZA
 		name = gg_notice.13.b

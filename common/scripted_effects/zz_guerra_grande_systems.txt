@@ -443,6 +443,7 @@ gg_wartime_modifiers_clear = {
 				has_modifier = gg_siege_the_sea_lane_stays_open
 				has_modifier = guerra_grande_montevideo_resupplied
 				has_modifier = guerra_grande_river_plate_blockade
+				has_modifier = gg_siege_buceo_open_to_all_flags # EN/ES: 24/9 (Codex cross-review, M2) -- C3, 36 months / C3, 36 meses
 			}
 		}
 		if = {
@@ -460,6 +461,9 @@ gg_wartime_modifiers_clear = {
 		if = { limit = { has_modifier = gg_siege_the_sea_lane_stays_open } remove_modifier = gg_siege_the_sea_lane_stays_open }
 		if = { limit = { has_modifier = guerra_grande_montevideo_resupplied } remove_modifier = guerra_grande_montevideo_resupplied }
 		if = { limit = { has_modifier = guerra_grande_river_plate_blockade } remove_modifier = guerra_grande_river_plate_blockade }
+		# EN: C3's Buceo lasts 36 months from June 1848; an earlier peace must not leave it running until 1851.
+		# ES: el Buceo de C3 dura 36 meses desde junio de 1848; una paz anterior no puede dejarlo andando hasta 1851.
+		if = { limit = { has_modifier = gg_siege_buceo_open_to_all_flags } remove_modifier = gg_siege_buceo_open_to_all_flags }
 	}
 	# EN/ES: Fleet state lives on Uruguay and must be cleared even when it has no country modifier.
 	# El estado de la escuadra vive en Uruguay y se limpia aunque no tenga modificadores de pais.
