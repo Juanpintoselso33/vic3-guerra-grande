@@ -216,6 +216,10 @@ gg_powers.10 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.10.a|" # GG_TRAZA
 		name = gg_powers.10.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		custom_tooltip = gg_powers.10.a_tt
 		default_option = yes
 		# EN: keep the blockade: Britain takes offence, and the ships are at risk.
@@ -516,13 +520,12 @@ gg_powers.13 = {
 			base = 30
 			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
 			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
-			# EN: INTENTIONAL (AUD-AI-POWERS-DEAD, 23/9): this event fires 1845-1847 (Hood), so for the AI
-			#     this option is dead on purpose -- historically Montevideo refused the Hood bases, and an AI
-			#     peace in 1845 would end the war years before the plan's 1849-1853 window. Only a player takes it.
-			# ES: A PROPOSITO: el evento sale en 1845-1847 (Hood), asi que para la IA esta opcion esta
-			#     muerta adrede -- Montevideo rechazo las bases de Hood, y una paz de la IA en 1845 cerraria
-			#     la guerra anos antes de la ventana 1849-1853 del plan. Solo la toma un jugador.
-			modifier = { trigger = { year < 1849 } factor = 0 }
+			# EN: 24/9/2026 (Juan, balance lab LAB-5; was dead on purpose, AUD-AI-POWERS-DEAD): this event fires
+			#     1845-1847 (Hood) and Montevideo refused the bases, so the AI takes it rarely, not never:
+			#     x0.25 before 1849, about 3-4 % of AI stories in the lab.
+			# ES: el evento sale en 1845-1847 (Hood) y Montevideo rechazo las bases: la IA la toma rara vez,
+			#     no nunca (x0,25 antes de 1849, un 3-4 % de las historias del laboratorio).
+			modifier = { trigger = { year < 1849 } factor = 0.25 }
 		}
 	}
 
@@ -575,6 +578,10 @@ gg_powers.14 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.14.a|" # GG_TRAZA
 		name = gg_powers.14.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		custom_tooltip = gg_powers.14.a_tt
 		default_option = yes
 		# EN: historical: no peace without Rosas, but six months of truce and cattle for the city.
@@ -735,6 +742,10 @@ gg_powers.16 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.a|" # GG_TRAZA
 		name = gg_powers.16.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		# EN/ES: 23/9 -- an ending of its own: only with the dynamic game rule / un final propio: solo con la regla dinamica
 		trigger = { gg_outcome_dynamic = yes }
 		gg_peace_chain_clear = yes
@@ -757,13 +768,12 @@ gg_powers.16 = {
 			base = 15
 			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
 			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
-			# EN: INTENTIONAL (AUD-AI-POWERS-DEAD, 23/9): the Gore-Gros mission comes in 1846-1848 and failed
-			#     (Oribe refused on 18 May 1848 after Rosas's warning), so for the AI this option is dead on
-			#     purpose before 1849. Only a player takes it.
-			# ES: A PROPOSITO: la mision Gore-Gros llega en 1846-1848 y fracaso (Oribe rechazo el 18 de mayo
-			#     de 1848 tras la advertencia de Rosas), asi que para la IA esta opcion esta muerta adrede
-			#     antes de 1849. Solo la toma un jugador.
-			modifier = { trigger = { year < 1849 } factor = 0 }
+			# EN: 24/9/2026 (Juan, balance lab LAB-5; was dead on purpose, AUD-AI-POWERS-DEAD): the Gore-Gros
+			#     mission comes in 1846-1848 and failed (Oribe refused on 18 May 1848 after Rosas's warning), so
+			#     the AI takes it rarely, not never: x0.5 before 1849, about 3-4 % of AI stories in the lab.
+			# ES: la mision Gore-Gros llega en 1846-1848 y fracaso (Oribe rechazo el 18 de mayo de 1848): la IA
+			#     la toma rara vez, no nunca (x0,5 antes de 1849, un 3-4 % de las historias del laboratorio).
+			modifier = { trigger = { year < 1849 } factor = 0.5 }
 		}
 	}
 
@@ -1444,6 +1454,10 @@ gg_powers.25 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.25.a|" # GG_TRAZA
 		name = gg_powers.25.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		default_option = yes
 		# EN: show it to the powers: they soften towards the Cerrito.
 		# ES: mostrarlo ante las potencias: se ablandan con el Cerrito.

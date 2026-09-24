@@ -266,6 +266,10 @@ gg_farrapos.6 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.6.a|" # GG_TRAZA
 		name = gg_farrapos.6.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		default_option = yes
 		gg_farrapos_refuge_change = { DELTA = -3 }
 		gg_patron_change = { PATRON = brasil DELTA = -5 }

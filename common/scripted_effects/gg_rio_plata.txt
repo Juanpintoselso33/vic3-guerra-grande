@@ -732,13 +732,13 @@ gg_plata_fort_french_supply = {
 # EN: 23/9/2026 (headless run 19; decided with Juan: "el sitio puntua") -- THE SIEGE SCORES. The score
 #     moved one to three points a year during the siege and the arbiter asks for a balance of 10, so the
 #     negotiated peace -- the design's main path -- never fired: only the battlefield decided. The river's
-#     running account stays as it was (four months a point, up to 4 a side: the journal's "river now");
-#     during the siege, each four months it runs PAST that cap stay in the score for the side it favours
+#     running account stays as it was (four months a point, up to 2 a side since 24/9/2026: the journal's "river now");
+#     during the siege, each four months the counter runs PAST its end (16) stay in the score for the side it favours
 #     (closed: blancos; open: colorados), so years of siege add up -- up to gg_siege_river_bank_cap points
 #     a side (23/9/2026, D1). Called only at the cap, only while the war of the split is open; a signed
 #     tally, so only a sustained river banks points.
-# ES: EL SITIO PUNTUA. La cuenta del rio queda como estaba (cuatro meses un punto, hasta 4 por lado); en el
-#     sitio, cada cuatro meses que corre MAS ALLA de ese techo quedan en el puntaje del bando que favorece.
+# ES: EL SITIO PUNTUA. La cuenta del rio queda como estaba (cuatro meses un punto, hasta 2 por lado desde el 24/9); en el
+#     sitio, cada cuatro meses que el contador corre MAS ALLA de su tope (16) quedan en el puntaje del bando que favorece.
 gg_siege_river_scores = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_river_scores| STEP= $STEP$ " # GG_TRAZA
 	if = {

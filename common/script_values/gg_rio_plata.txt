@@ -1,22 +1,26 @@
 ﻿# EN: C. The river in the war balance (rio-plata-spec.md section 4). One signed counter replaces the
 #     old siege and relief stocks, which could both be positive and cancel out: +1 for each month the
 #     river is shut, -1 for each month it is open, between -16 and +16. Four months per point, capped
-#     at four a side: the river's weight as things stand. During the siege, every four months beyond
-#     that cap stay on the war's score for the side it favours (gg_siege_river_scores), up to
-#     gg_siege_river_bank_cap points a side (5, decided 23/9/2026: 4 + 5 = 9 stays under the 1849
-#     threshold of 10, so the river leans on the war but never decides it alone before 1851).
+#     at two a side (24/9/2026, Juan, balance lab P2 / LAB-3: it was four, and the open river of 1845-1851
+#     set the winner): the river's weight as things stand. During the siege, every four months the
+#     counter runs past its end (16) stay on the war's score for the side it favours (gg_siege_river_scores), up to
+#     gg_siege_river_bank_cap points a side (5, decided 23/9/2026; with the pressure at 2 since 24/9 the
+#     river gives at most 2 + 5 = 7, under the arbiter's lead of 15 before 1849 and 10 or more until 1850,
+#     so the river leans on the war but never decides it alone).
 #     Positive helps the blancos, negative the colorados.
 # ES: C. El rio en la balanza de la guerra. Un solo contador con signo: +1 por mes de rio cerrado, -1 por
-#     mes abierto, entre -16 y +16. Cuatro meses por punto, techo cuatro por lado: el peso del rio hoy. En
-#     el sitio, cada cuatro meses mas alla de ese techo quedan en el puntaje del bando que favorece, hasta
-#     gg_siege_river_bank_cap puntos por lado (5, decidido el 23/9: 4 + 5 = 9 no llega al 10 de 1849, asi
-#     el rio inclina la guerra pero no la decide solo antes de 1851). Positivo ayuda a los blancos.
+#     mes abierto, entre -16 y +16. Cuatro meses por punto, techo dos por lado (24/9/2026, Juan, P2 del
+#     laboratorio: era cuatro, y el rio abierto de 1845-1851 fijaba al ganador): el peso del rio hoy. En
+#     el sitio, cada cuatro meses que el contador corre mas alla de su tope (16) quedan en el puntaje del bando que favorece, hasta
+#     gg_siege_river_bank_cap puntos por lado (5, decidido el 23/9; con la presion en 2 desde el 24/9 el rio
+#     da como mucho 2 + 5 = 7, debajo de la ventaja de 15 antes de 1849 y de 10 o mas hasta 1850: el rio
+#     inclina la guerra pero no la decide solo). Positivo ayuda a los blancos.
 gg_plata_pressure_blanco = {
 	value = global_var:gg_plata_months
 	divide = 4
 	floor = yes
 	min = 0
-	max = 4
+	max = 2
 }
 
 gg_plata_pressure_colorado = {
@@ -25,7 +29,7 @@ gg_plata_pressure_colorado = {
 	divide = 4
 	floor = yes
 	min = 0
-	max = 4
+	max = 2
 }
 
 # EN/ES: B -- eighteen months of patience, twelve once the Defensa called the squadrons

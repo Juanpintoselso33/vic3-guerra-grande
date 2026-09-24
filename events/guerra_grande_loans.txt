@@ -318,6 +318,10 @@ gg_loan.3 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.3.a|" # GG_TRAZA
 		name = gg_loan.3.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		custom_tooltip = gg_loan.3.a_tt2
 		# EN/ES: T4 -- FE-5: Rosas's till / la caja de Rosas
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
@@ -458,6 +462,10 @@ gg_loan.4 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.4.a|" # GG_TRAZA
 		name = gg_loan.4.a
+		# EN: 24/9/2026 (Juan, balance lab P1 / LAB-2) -- the Cerrito's committing answer moves the scales:
+		#     +2 for the blancos, shown next to what it costs.
+		# ES: la respuesta que compromete al Cerrito mueve la balanza: +2 blancos, junto a lo que cuesta.
+		gg_score_blanco = { AMOUNT = 2 }
 		# EN/ES: playtest 2026-09-19 -- a Republic folded back into the Confederation is exactly what
 		#     the federal governors of the Litoral fear / una Republica reincorporada a la
 		#     Confederacion es justo lo que temen los gobernadores federales del Litoral
