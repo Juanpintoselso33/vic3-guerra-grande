@@ -1,0 +1,262 @@
+﻿namespace = gg_arg_notice
+
+# -------------------------------------------------------------------------------------------------
+# EN: 23/9/2026 (Juan) -- Rosas's Argentina, 1846-1849 (gap G2 of docs/grafo/historia-por-pais-2026-09-23.md):
+#     what the Oriental bank already gets, told to Buenos Aires in its own voice, and only if it happened
+#     in this game (the trigger reads the mark the source event wrote). Delivered by gg_notice_relay
+#     (common/scripted_effects/gg_notices.txt), which stops at the end of the war. The Oriental side's
+#     namespace is gg_notice (events/gg_oriental_notices.txt).
+# ES: la Argentina de Rosas, 1846-1849: lo que la orilla oriental ya recibe, contado a Buenos Aires con su
+#     voz, y solo si paso en esta partida. El lado oriental usa el namespace gg_notice.
+# VIDEO: all images here are provisional vanilla videos (AUD-NOTICES-VIDEO) / videos vanilla provisorios.
+# -------------------------------------------------------------------------------------------------
+
+# 1/4/1846 -- Rivera lands in Montevideo, heard in Buenos Aires. The Defensa's gg_rivera.3.a (the mutiny
+#     wins, the decree is annulled) writes gg_rivera_restored.
+# SOURCE / FUENTE: SOURCES_rivera.md, chronology 1845-1846 and 18.III / 1.IV.1846 (S1, S10, S11): prison in
+#     Rio, the Paraguay appointment, the schooner Perla, the landing banned, the rising of 1 April (the
+#     Basque battalion, the freedmen of the infantry, Cesar Diaz and Venancio Flores), Pacheco y Obes
+#     resigns and sails for Europe, Rivera lands on Bernardina Fragoso's arm, general in chief of the
+#     Ejercito de Operaciones and gran mariscal.
+gg_arg_notice.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_arg_notice.1.t
+	desc = gg_arg_notice.1.d
+	flavor = gg_arg_notice.1.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "votp_barricade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_rivera_restored
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.1|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_notice_done_1 } }
+				set_global_variable = gg_arg_notice_done_1
+			}
+		}
+	}
+
+	# EN: the Confederation watches the Uruguay river: it pays, and stands closer to Oribe.
+	# ES: la Confederacion vigila el rio Uruguay: paga, y queda mas cerca de Oribe.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.1.a|" # GG_TRAZA
+		name = gg_arg_notice.1.a
+		default_option = yes
+		custom_tooltip = gg_arg_notice.1.a_tt
+		add_treasury = -10000
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 70 }
+	}
+
+	# EN: Rivera is the Oriental president's business. ES: Rivera es asunto del presidente oriental.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.1.b|" # GG_TRAZA
+		name = gg_arg_notice.1.b
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# 15/7/1847 -- Howden lifts the British blockade, heard in Buenos Aires. The Defensa's gg_powers.15 writes
+#     gg_howden_answered in both options; gg_howden_truce_accepted says it took the truce. Buenos Aires already had Howden at its
+#     table (gg_rosas.3); this is how that mission ends on the river.
+# SOURCE / FUENTE: SOURCES_powers.md section 3 (Howden lifts the British blockade on both banks on 15 July
+#     1847, dated by art. 1 of Arana-Southern; Walewski refuses; the Anglo-French alliance in the Plata breaks).
+gg_arg_notice.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_arg_notice.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_arg_notice.2.d_truce
+				trigger = { has_global_variable = gg_howden_truce_accepted }
+			}
+			triggered_desc = { desc = gg_arg_notice.2.d }
+		}
+	}
+	flavor = gg_arg_notice.2.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_howden_answered
+		has_global_variable = gg_plata_intervention
+		NOT = { has_global_variable = gg_plata_france_alone }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.2|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_notice_done_2 } }
+				set_global_variable = gg_arg_notice_done_2
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.2.a|" # GG_TRAZA
+		name = gg_arg_notice.2.a
+		default_option = yes
+		custom_tooltip = gg_arg_notice.2.a_tt
+		add_treasury = 15000
+	}
+}
+
+# 20/3/1848 -- Varela's murder, heard in Buenos Aires. The Defensa's gg_powers.26 writes gg_varela_murdered.
+# SOURCE / FUENTE: SOURCES_powers.md sections 4 and 5 (Varela, Argentine lawyer and journalist, director of
+#     El Comercio del Plata, the Defensa's envoy to London and Paris; the night of Monday 20 March, calle
+#     Misiones; Andres Cabrera, Canarian, did not know him by sight, fled to the besiegers' side; the city's
+#     press: Oribe, Rosas or both; Gore and Gros arrived 17 and 19 March and did not go ashore; the Archivo
+#     Americano, Rosas's paper).
+gg_arg_notice.3 = {
+	type = country_event
+	placement = ROOT
+	title = gg_arg_notice.3.t
+	desc = gg_arg_notice.3.d
+	flavor = gg_arg_notice.3.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "votp_agitator_speaking" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_varela_murdered
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.3|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_notice_done_3 } }
+				set_global_variable = gg_arg_notice_done_3
+			}
+		}
+	}
+
+	# EN: the Archivo Americano answers for Buenos Aires and for its ally. ES: contesta el Archivo Americano.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.3.a|" # GG_TRAZA
+		name = gg_arg_notice.3.a
+		default_option = yes
+		custom_tooltip = gg_arg_notice.3.a_tt
+		add_treasury = -5000
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 70 }
+	}
+
+	# EN: let Oribe answer for his own camp. ES: que Oribe conteste por su campamento.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.3.b|" # GG_TRAZA
+		name = gg_arg_notice.3.b
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# 8/5/1848 -- Rosas answers Gore and Gros. The Cerrito's gg_powers.16.b (the historical refusal, whose text
+#     already quotes this answer) writes gg_gore_gros_refused.
+# SOURCE / FUENTE: SOURCES_powers.md section 4 (the mediators' four bases of 5/4/1848; Rosas, 8/5/1848,
+#     Busaniche p. 606; the Archivo Americano: "insidiosa en su plan, torpe en su ejecucion, ridicula en sus
+#     resultados").
+gg_arg_notice.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_arg_notice.4.t
+	desc = gg_arg_notice.4.d
+	flavor = gg_arg_notice.4.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "middleeast_upperclass_party" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_gore_gros_refused
+		NOT = { has_global_variable = gg_peace_offered }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.4|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_notice_done_4 } }
+				set_global_variable = gg_arg_notice_done_4
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.4.a|" # GG_TRAZA
+		name = gg_arg_notice.4.a
+		default_option = yes
+		c:GBR ?= { change_relations = { country = ROOT value = -10 } }
+		c:FRA ?= { change_relations = { country = ROOT value = -10 } }
+	}
+}
+
+
+# =================================================================================================
+# RELAYS / RELEVOS (scheduled by gg_notices_schedule, common/scripted_effects/gg_notices.txt)
+# =================================================================================================
+
+# 1846-04-15 -- Rivera lands (gg_arg_notice.1)
+gg_arg_notice.101 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.101|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_arg_notice_done_1 EVENT = gg_arg_notice.1 MARK = gg_rivera_restored SIDE = gg_arg_rosas_seat RETRY = gg_arg_notice.101 UNTIL = 1847.1.1 }
+	}
+}
+
+# from 1846-01-01 -- Howden lifts the British blockade (gg_arg_notice.2)
+gg_arg_notice.102 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.102|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_arg_notice_done_2 EVENT = gg_arg_notice.2 MARK = gg_howden_answered SIDE = gg_arg_rosas_seat RETRY = gg_arg_notice.102 UNTIL = 1850.1.1 }
+	}
+}
+
+# 1848-03-30 -- Varela (gg_arg_notice.3)
+gg_arg_notice.103 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.103|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_arg_notice_done_3 EVENT = gg_arg_notice.3 MARK = gg_varela_murdered SIDE = gg_arg_rosas_seat RETRY = gg_arg_notice.103 UNTIL = 1848.7.1 }
+	}
+}
+
+# from 1846-06-01 -- Rosas answers Gore and Gros (gg_arg_notice.4)
+gg_arg_notice.104 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_notice.104|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_arg_notice_done_4 EVENT = gg_arg_notice.4 MARK = gg_gore_gros_refused SIDE = gg_arg_rosas_seat RETRY = gg_arg_notice.104 UNTIL = 1850.1.1 }
+	}
+}

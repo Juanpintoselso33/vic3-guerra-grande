@@ -636,6 +636,14 @@ gg_powers.15 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15.a|" # GG_TRAZA
 		name = gg_powers.15.a
+		# EN/ES: 23/9/2026 (Juan) -- the answer, once given, reaches the Cerrito and Buenos Aires (gg_notice.10,
+		#     gg_arg_notice.2); written by the option, not the immediate, so no notice runs ahead of it (Codex)
+		#     / la respuesta, dada, llega al Cerrito y a Buenos Aires; la escribe la opcion (Codex)
+		custom_tooltip = {
+			text = gg_howden_answered_tt
+			set_global_variable = gg_howden_answered
+			set_global_variable = gg_howden_truce_accepted
+		}
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the truce freezes the siege with the countryside in the Cerrito's hands /
 		#     la barra tiene que moverse durante la guerra: la tregua congela el sitio con la campania en manos del Cerrito
 		gg_score_blanco = { AMOUNT = 1 }
@@ -654,6 +662,13 @@ gg_powers.15 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15.b|" # GG_TRAZA
 		name = gg_powers.15.b
+		# EN/ES: 23/9/2026 (Juan) -- the answer, once given, reaches the Cerrito and Buenos Aires (gg_notice.10,
+		#     gg_arg_notice.2); written by the option, not the immediate, so no notice runs ahead of it (Codex)
+		#     / la respuesta, dada, llega al Cerrito y a Buenos Aires; la escribe la opcion (Codex)
+		custom_tooltip = {
+			text = gg_howden_answered_tt
+			set_global_variable = gg_howden_answered
+		}
 		# EN: refuse: nothing stops, and Howden sails for Rio anyway.
 		# ES: rechazar: no se frena nada, y Howden se va a Rio igual.
 		gg_patron_change = { PATRON = britania DELTA = -10 }
@@ -756,6 +771,11 @@ gg_powers.16 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.16.b|" # GG_TRAZA
 		name = gg_powers.16.b
 		gg_peace_chain_clear = yes
+		# EN/ES: 23/9/2026 (Juan) -- the refusal Buenos Aires signs on 8 May (gg_arg_notice.4) / la negativa que Buenos Aires firma el 8 de mayo
+		custom_tooltip = {
+			text = gg_gore_gros_refused_tt
+			set_global_variable = gg_gore_gros_refused
+		}
 		default_option = yes
 		# EN: historical (18 May 1848): refuse after Rosas's warning. Rosas rises, the powers leave sooner.
 		# ES: lo historico: rechazar tras la advertencia de Rosas. Rosas sube, las potencias se van antes.
@@ -1498,6 +1518,9 @@ gg_powers.26 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.26|" # GG_TRAZA
 		hidden_effect = {
+			# EN/ES: 23/9/2026 (Juan) -- the murder happened: the Cerrito and Buenos Aires hear it (gg_notice.11,
+			#     gg_arg_notice.3) / el asesinato paso: el Cerrito y Buenos Aires se enteran
+			set_global_variable = gg_varela_murdered
 			if = {
 				limit = { NOT = { has_global_variable = gg_cal_done_18 } }
 				set_global_variable = gg_cal_done_18

@@ -179,5 +179,18 @@ guerra_grande_french_legion_button = {
 			}
 			value = 0
 		}
+		# EN: 23/9/2026 (Juan) -- the AI waits for the dated event (gg_contingent.4, 7/4/1843): until its calendar relay
+		#     has made its one attempt (gg_cal_done_4), the AI does not raise the legion with the button. Before this it
+		#     raised both legions on 21/2/1843 and the dated events never fired. The player keeps the button.
+		# ES: la IA espera el evento fechado: hasta que su relevo del calendario hizo su intento, la IA no levanta
+		#     la legion con el boton. Antes levantaba las dos el 21/2/1843 y los eventos fechados no salian nunca.
+		#     El jugador conserva el boton.
+		if = {
+			limit = {
+				NOT = { has_variable = guerra_grande_french_legion_raised }
+				NOT = { has_global_variable = gg_cal_done_4 }
+			}
+			value = 0
+		}
 	}
 }

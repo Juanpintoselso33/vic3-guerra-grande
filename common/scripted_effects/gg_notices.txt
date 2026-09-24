@@ -1,0 +1,47 @@
+﻿# EN: 23/9/2026 (Juan) -- the relay of the cross-notices and of the Defensa's 1851 events
+#     (events/gg_oriental_notices.txt, events/gg_arg_notices.txt). Same contract as the dated calendar's
+#     gg_cal_fire_wait (zz_guerra_grande_systems.txt): it hands the event to whichever country holds the
+#     role (SIDE) once the source's mark (MARK) exists, the event's own trigger decides whether what it tells actually happened in this game,
+#     only the event's immediate writes DONE, and a rejected attempt tries again a month later. Two
+#     differences: the retry stops at UNTIL (news that has not come by then did not happen), and nothing
+#     is delivered once the war is over (gg_cal_war_over), as with every wartime link of the calendar.
+#     Scheduled once (common/on_actions/gg_notices_on_actions.txt), on Rosas's Argentina (it never changes
+#     tag; the Republic only if Rosas does not exist), so no copy can deliver twice.
+# ES: el relevo de los avisos cruzados y de los eventos de 1851 de la Defensa. El mismo contrato que
+#     gg_cal_fire_wait: se lo entrega al pais que tiene el rol, el trigger del evento decide si lo que
+#     cuenta paso en esta partida, solo el immediate del evento escribe DONE, y un intento rechazado
+#     reintenta al mes. Dos diferencias: el reintento se corta en UNTIL (la noticia que no llego para
+#     entonces no paso), y terminada la guerra no se entrega nada (gg_cal_war_over). Se agenda una sola
+#     vez, sobre la Argentina de Rosas (no cambia de tag), asi ninguna copia entrega dos veces.
+gg_notice_relay = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_notice_relay| DONE= $DONE$  MARK= $MARK$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
+	if = {
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			NOT = { gg_cal_war_over = yes }
+		}
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				# EN/ES: Codex 23/9 -- the cutoff holds for the delivery too, not only for the retry
+				#     / el corte vale tambien para la entrega, no solo para el reintento
+				game_date < $UNTIL$
+				# EN/ES: the source's mark, read here too so nothing is handed over before it exists
+				#     / la marca de la fuente, leida tambien aca para no entregar nada antes de que exista
+				AND = { has_global_variable = $MARK$ }
+				any_country = { has_variable = $SIDE$ }
+			}
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 popup = yes }
+			}
+		}
+		if = {
+			limit = {
+				game_date < $UNTIL$
+				NOT = { has_global_variable = $DONE$ }
+			}
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}

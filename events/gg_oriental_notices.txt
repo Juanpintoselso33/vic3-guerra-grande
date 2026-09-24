@@ -1,0 +1,413 @@
+﻿namespace = gg_notice
+
+# -------------------------------------------------------------------------------------------------
+# EN: 23/9/2026 (Juan) -- the Oriental side of two gaps of docs/grafo/historia-por-pais-2026-09-23.md:
+#     C4, the Defensa never heard how its war ended (the Convention of 29 May 1851 and Caxias's crossing,
+#     which with la Argentina loaded is switched off in gg_contingent.8), and G1, the Cerrito had almost
+#     nothing from late 1846 to 1850. Each event here tells, in its own side's voice, something that the
+#     other side already gets, and only if it happened in this game: the trigger reads the mark the
+#     source event wrote. Delivery goes through gg_notice_relay (common/scripted_effects/gg_notices.txt),
+#     which stops at the end of the war (gg_cal_war_over).
+# ES: el lado oriental de dos huecos del informe de historia por pais: C4, la Defensa no se enteraba de
+#     como terminaba su guerra, y G1, el Cerrito casi no tenia nada de fines de 1846 a 1850. Cada evento
+#     cuenta, con la voz de su lado, algo que el otro lado ya recibe, y solo si paso en esta partida: el
+#     trigger lee la marca que escribio el evento fuente. Lo entrega gg_notice_relay, que se corta al
+#     terminar la guerra.
+# VIDEO: all images here are provisional vanilla videos; the list for the video lane is in
+#     AUDITORIAS.md (AUD-NOTICES-VIDEO) / todas las imagenes son videos vanilla provisorios.
+# -------------------------------------------------------------------------------------------------
+
+
+# =================================================================================================
+# THE DEFENSA, 1851 / LA DEFENSA, 1851
+# =================================================================================================
+
+# 29/5/1851 -- the Convention of Montevideo, from the Defensa's side.
+# SOURCE / FUENTE: text of the convention (Brasil, Republica Oriental, Entre Rios, Montevideo 29/5/1851),
+#     https://www.dipublico.org/122098/ -- signatories, arts. I, IV, V, VII, XIV, XIX, XXI, XXIV quoted
+#     literally; SOURCES_powers.md section 8.
+# EN: signed = the mark of the signature: Entre Rios's gg_argentina.13.a (gg_argentina_sign_montevideo_convention
+#     writes gg_montevideo_free_navigation, and nothing else does). Only with la Argentina: without it the
+#     Pronunciamiento that enables the convention never comes (its relay needs s:STATE_ENTRE_RIOS; Codex 23/9),
+#     and gg_contingent.8 carries the alliance and the crossing in one decision.
+# ES: firmada = la marca de la firma (gg_argentina.13.a). Solo con la Argentina: sin ella no hay Pronunciamiento
+#     que habilite la convencion, y gg_contingent.8 lleva la alianza y el cruce en una sola decision.
+gg_notice.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.1.t
+	desc = gg_notice.1.d
+	flavor = gg_notice.1.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "votp_monarch_holding_court" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = guerra_grande_open_war
+		any_country = { has_variable = guerra_grande_cerrito_government }
+		has_global_variable = gg_montevideo_free_navigation
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.1|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_1 } }
+				set_global_variable = gg_notice_done_1
+			}
+		}
+	}
+
+	# EN: art. IV -- the Empire's army marches to the frontier. The city sees the end; Brazil weighs more.
+	# ES: art. IV -- el ejercito del Imperio marcha a la frontera. La ciudad ve el final; el Brasil pesa mas.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.1.a|" # GG_TRAZA
+		name = gg_notice.1.a
+		default_option = yes
+		custom_tooltip = gg_notice.1.a_tt
+		gg_endurance_change = { SIDE = defensa VALUE = 10 }
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		ai_chance = { base = 70 }
+	}
+
+	# EN: art. VII -- the Oriental emigres come back under the general in chief, "por cuenta de la
+	#     Republica": the treasury pays, and the men count for the Defensa at the table.
+	# ES: art. VII -- vuelven los emigrados, por cuenta de la Republica: paga la caja, y cuentan en la mesa.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.1.b|" # GG_TRAZA
+		name = gg_notice.1.b
+		custom_tooltip = gg_notice.1.b_tt
+		add_treasury = -20000
+		gg_endurance_change = { SIDE = defensa VALUE = 5 }
+		gg_score_colorado = { AMOUNT = 1 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# 9/1851 -- the Empire's army crosses, from the Defensa's side. Only with la Argentina loaded: without it
+#     gg_contingent.8 is this crossing and its treaties.
+# SOURCE / FUENTE: pt.wikipedia, Campanha do Uruguai (16,200 men in four divisions, by the Santana pass;
+#     the figures of gg_contingent.8); convention of 29/5/1851, arts. IV, V, VI, https://www.dipublico.org/122098/
+# EN: crossing = the convention signed (gg_montevideo_free_navigation) and the Empire in the game; the
+#     event itself is the crossing, and its first option lists the Allied Army in the siege journal, as
+#     gg_contingent.8.a does.
+# ES: el cruce = la convencion firmada y el Imperio en la partida; el evento es el cruce, y su primera
+#     opcion lista al Ejercito Aliado en el journal del sitio, como gg_contingent.8.a.
+gg_notice.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.2.t
+	desc = gg_notice.2.d
+	flavor = gg_notice.2.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "votp_cops_march" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = guerra_grande_open_war
+		any_country = { has_variable = guerra_grande_cerrito_government }
+		exists = s:STATE_ENTRE_RIOS
+		exists = c:BRZ
+		has_global_variable = gg_montevideo_free_navigation
+		NOT = { has_variable = gg_allied_army_arrived }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.2|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_2 } }
+				set_global_variable = gg_notice_done_2
+			}
+		}
+	}
+
+	# EN: the Empire enters with everything it brought (art. VI, its own general in chief).
+	# ES: el Imperio entra con todo lo que trajo (art. VI, con su propio general en jefe).
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.2.a|" # GG_TRAZA
+		name = gg_notice.2.a
+		default_option = yes
+		custom_tooltip = gg_notice.2.a_tt
+		set_variable = gg_allied_army_arrived
+		gg_endurance_change = { SIDE = cerrito VALUE = -15 }
+		gg_patron_change = { PATRON = brasil DELTA = 10 }
+		ai_chance = { base = 80 }
+	}
+
+	# EN: the Empire keeps to the twenty leagues of art. V; the campaign stays with Orientals and Entre Rios.
+	# ES: el Imperio se atiene a las veinte leguas del art. V; la campania queda en manos orientales y entrerrianas.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.2.b|" # GG_TRAZA
+		name = gg_notice.2.b
+		custom_tooltip = gg_notice.2.b_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+		gg_patron_change = { PATRON = brasil DELTA = -5 }
+		ai_chance = { base = 20 }
+	}
+}
+
+
+# =================================================================================================
+# THE CERRITO, 1847-1850 / EL CERRITO, 1847-1850
+# =================================================================================================
+
+# 15/7/1847 -- Montevideo's answer to Howden, and the British blockade lifted, heard in the Cerrito.
+#     The Cerrito made the offer (gg_powers.14.a), the Defensa answered it (gg_powers.15, which writes
+#     gg_howden_answered in both options, gg_howden_truce_accepted in the truce).
+# SOURCE / FUENTE: SOURCES_powers.md section 3 (the four bases of 13/7/1847; Barreiro's answer of 15/7;
+#     Howden lifts the British blockade on both banks that day, dated by art. 1 of Arana-Southern;
+#     Walewski refuses to lift the French one).
+gg_notice.10 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.10.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_notice.10.d_truce
+				trigger = { has_global_variable = gg_howden_truce_accepted }
+			}
+			triggered_desc = { desc = gg_notice.10.d }
+		}
+	}
+	flavor = gg_notice.10.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "asia_westerners_arriving" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_howden_answered
+		has_global_variable = gg_plata_intervention
+		NOT = { has_global_variable = gg_plata_france_alone }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.10|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_10 } }
+				set_global_variable = gg_notice_done_10
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.10.a|" # GG_TRAZA
+		name = gg_notice.10.a
+		default_option = yes
+		gg_endurance_change = { SIDE = cerrito VALUE = 5 }
+	}
+}
+
+# 20/3/1848 -- Florencio Varela's murder, heard in the Cerrito. The Defensa's gg_powers.26 writes the mark.
+# SOURCE / FUENTE: SOURCES_powers.md sections 4 and 5 (the night of Monday 20 March in calle Misiones;
+#     Andres Cabrera, Canarian and illiterate, pointed at Varela by someone in the dark, fled to the
+#     besiegers' side; the city's press blamed Oribe, Rosas or both; Gore and Gros arrived on 17 and 19
+#     March and did not go ashore); section 10 (El Defensor de la Independencia Americana, the Cerrito's paper).
+gg_notice.11 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.11.t
+	desc = gg_notice.11.d
+	flavor = gg_notice.11.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "votp_conspiring" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_varela_murdered
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.11|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_11 } }
+				set_global_variable = gg_notice_done_11
+			}
+		}
+	}
+
+	# EN: the camp's paper answers; the camp closes ranks. ES: contesta el diario del campamento.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.11.a|" # GG_TRAZA
+		name = gg_notice.11.a
+		default_option = yes
+		gg_endurance_change = { SIDE = cerrito VALUE = 5 }
+		ai_chance = { base = 70 }
+	}
+
+	# EN: look for the man and put him before a judge: the camp resents it, the mediators take note.
+	# ES: buscar al hombre y ponerlo ante un juez: el campamento lo resiente, los mediadores lo anotan.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.11.b|" # GG_TRAZA
+		name = gg_notice.11.b
+		custom_tooltip = gg_notice.11.b_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+		gg_patron_change = { PATRON = francia DELTA = -5 }
+		ai_chance = { base = 30 }
+	}
+}
+
+# 12/6/1848 -- the Gros convention: France lifts her blockade of Buenos Aires and pays the city 40,000
+#     pesos a month. The Defensa's gg_loan.1.a writes gg_french_convention.
+# SOURCE / FUENTE: SOURCES_powers.md section 7 (convention of 12/6/1848 arranged by Baron Gros to
+#     compensate the city for the lifting of the French blockade, "une somme mensuelle de 40.000 piastres
+#     ... a titre d'avance"); SOURCES_loans.md (Gros, Le Predour and Devoize sign; "en dinero o en letras
+#     sobre Francia"), the text of gg_loan.1.
+gg_notice.12 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.12.t
+	desc = gg_notice.12.d
+	flavor = gg_notice.12.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "africa_leader_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_french_convention
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.12|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_12 } }
+				set_global_variable = gg_notice_done_12
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.12.a|" # GG_TRAZA
+		name = gg_notice.12.a
+		default_option = yes
+		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+	}
+}
+
+# 24/11/1849 -- Arana-Southern, heard in the Cerrito, whenever the river's clock signs it (gg_plata_southern_signs
+#     writes gg_plata_britain_settled; Buenos Aires hears it in gg_rosas.4, the Defensa in gg_powers.19).
+# SOURCE / FUENTE: SOURCES_powers.md section 6 (Arana and Southern sign; fifteen postponements; Martin
+#     Garcia evacuated, the warships returned, twenty-one guns; the Confederation's right to settle the
+#     Oriental question without foreign intervention, blockade included).
+gg_notice.13 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.13.t
+	desc = gg_notice.13.d
+	flavor = gg_notice.13.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "europenorthamerica_london_center" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_plata_britain_settled
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_13 } }
+				set_global_variable = gg_notice_done_13
+			}
+		}
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13.a|" # GG_TRAZA
+		name = gg_notice.13.a
+		default_option = yes
+		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
+	}
+}
+
+
+# =================================================================================================
+# RELAYS / RELEVOS (scheduled by gg_notices_schedule, common/scripted_effects/gg_notices.txt)
+# =================================================================================================
+
+# 1851-05-30 -- the Convention (gg_notice.1); Entre Rios may sign late (its relay retries until 14/11/1851)
+gg_notice.100 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.100|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_1 EVENT = gg_notice.1 MARK = gg_montevideo_free_navigation SIDE = guerra_grande_defensa_government RETRY = gg_notice.100 UNTIL = 1851.12.1 }
+	}
+}
+
+# 1851-09-04 -- Caxias crosses (gg_notice.2); a late convention brings a late crossing
+gg_notice.101 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.101|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_2 EVENT = gg_notice.2 MARK = gg_montevideo_free_navigation SIDE = guerra_grande_defensa_government RETRY = gg_notice.101 UNTIL = 1852.6.1 }
+	}
+}
+
+# from 1846-01-01 -- Montevideo's answer to Howden (gg_notice.10), whenever the intervention's clock brings it
+gg_notice.110 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.110|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_10 EVENT = gg_notice.10 MARK = gg_howden_answered SIDE = guerra_grande_cerrito_government RETRY = gg_notice.110 UNTIL = 1850.1.1 }
+	}
+}
+
+# 1848-03-28 -- Varela (gg_notice.11)
+gg_notice.111 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.111|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_11 EVENT = gg_notice.11 MARK = gg_varela_murdered SIDE = guerra_grande_cerrito_government RETRY = gg_notice.111 UNTIL = 1848.7.1 }
+	}
+}
+
+# 1848-06-25 -- the Gros convention (gg_notice.12)
+gg_notice.112 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.112|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_12 EVENT = gg_notice.12 MARK = gg_french_convention SIDE = guerra_grande_cerrito_government RETRY = gg_notice.112 UNTIL = 1849.3.1 }
+	}
+}
+
+# from 1846-01-01 -- Arana-Southern (gg_notice.13), whenever the river's clock signs it
+gg_notice.113 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.113|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_13 EVENT = gg_notice.13 MARK = gg_plata_britain_settled SIDE = guerra_grande_cerrito_government RETRY = gg_notice.113 UNTIL = 1856.1.1 }
+	}
+}

@@ -1,0 +1,53 @@
+﻿# EN: 23/9/2026 (Juan) -- schedules the relays of events/gg_oriental_notices.txt and events/gg_arg_notices.txt.
+#     Hooked to the list, never the effect (see guerra_grande_on_actions.txt). Day offsets from 1 January 1836
+#     on the engine's 365-day years: (year-1836)*365 + (day of year - 1), with no leap days. Cross-checks against the calendar:
+#     20/3/1848 = 4458 (gg_cal.18), 29/5/1851 = 5623 (gg_cal.27), 4/9/1851 = 5721 (gg_cal.29).
+#     One copy only, on Rosas's Argentina, which never changes tag; the Republic only if Rosas does not exist.
+# ES: agenda los relevos de los avisos cruzados y de los eventos de 1851 de la Defensa. Corrimientos desde el
+#     1/1/1836 en anios de 365 dias. Una sola copia, sobre la Argentina de Rosas; la Republica solo si Rosas no existe.
+on_game_started = {
+	on_actions = {
+		gg_notices_on_game_start
+	}
+}
+
+gg_notices_on_game_start = {
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_notices_on_game_start" # GG_TRAZA
+		# EN/ES: written out twice (not through a scripted effect) so the event graph can date them
+		#     / escrito dos veces (no por un efecto) para que el grafo de eventos pueda fecharlos
+		c:ARG ?= {
+			# EN/ES: the Defensa, 1851 / la Defensa, 1851
+			trigger_event = { id = gg_notice.100 days = 5624 }      # 1851-05-30: (1851-1836)*365+(150-1) the Convention of 29 May
+			trigger_event = { id = gg_notice.101 days = 5721 }      # 1851-09-04: (1851-1836)*365+(247-1) Caxias crosses
+			# EN/ES: the Cerrito, 1846-1851 / el Cerrito
+			trigger_event = { id = gg_notice.110 days = 3650 }      # 1846-01-01: waits for Montevideo's answer to Howden
+			trigger_event = { id = gg_notice.111 days = 4466 }      # 1848-03-28: (1848-1836)*365+(87-1) Varela, 20/3
+			trigger_event = { id = gg_notice.112 days = 4555 }      # 1848-06-25: (1848-1836)*365+(176-1) the Gros convention, 12/6
+			trigger_event = { id = gg_notice.113 days = 3650 }      # 1846-01-01: waits for Arana-Southern
+			# EN/ES: Rosas's Argentina, 1846-1849 / la Argentina de Rosas
+			trigger_event = { id = gg_arg_notice.101 days = 3754 }  # 1846-04-15: (1846-1836)*365+(105-1) Rivera lands, 1/4
+			trigger_event = { id = gg_arg_notice.102 days = 3650 }  # 1846-01-01: waits for Montevideo's answer to Howden
+			trigger_event = { id = gg_arg_notice.103 days = 4468 }  # 1848-03-30: (1848-1836)*365+(89-1) Varela, 20/3
+			trigger_event = { id = gg_arg_notice.104 days = 3801 }  # 1846-06-01: (1846-1836)*365+(152-1) waits for the Cerrito's answer to Gore and Gros
+		}
+		if = {
+			limit = { NOT = { exists = c:ARG } }
+			c:URU ?= {
+				# EN/ES: the Defensa, 1851 / la Defensa, 1851
+				trigger_event = { id = gg_notice.100 days = 5624 }      # 1851-05-30: (1851-1836)*365+(150-1) the Convention of 29 May
+				trigger_event = { id = gg_notice.101 days = 5721 }      # 1851-09-04: (1851-1836)*365+(247-1) Caxias crosses
+				# EN/ES: the Cerrito, 1846-1851 / el Cerrito
+				trigger_event = { id = gg_notice.110 days = 3650 }      # 1846-01-01: waits for Montevideo's answer to Howden
+				trigger_event = { id = gg_notice.111 days = 4466 }      # 1848-03-28: (1848-1836)*365+(87-1) Varela, 20/3
+				trigger_event = { id = gg_notice.112 days = 4555 }      # 1848-06-25: (1848-1836)*365+(176-1) the Gros convention, 12/6
+				trigger_event = { id = gg_notice.113 days = 3650 }      # 1846-01-01: waits for Arana-Southern
+				# EN/ES: Rosas's Argentina, 1846-1849 / la Argentina de Rosas
+				trigger_event = { id = gg_arg_notice.101 days = 3754 }  # 1846-04-15: (1846-1836)*365+(105-1) Rivera lands, 1/4
+				trigger_event = { id = gg_arg_notice.102 days = 3650 }  # 1846-01-01: waits for Montevideo's answer to Howden
+				trigger_event = { id = gg_arg_notice.103 days = 4468 }  # 1848-03-30: (1848-1836)*365+(89-1) Varela, 20/3
+				trigger_event = { id = gg_arg_notice.104 days = 3801 }  # 1846-06-01: (1846-1836)*365+(152-1) waits for the Cerrito's answer to Gore and Gros
+			}
+		}
+	}
+}
