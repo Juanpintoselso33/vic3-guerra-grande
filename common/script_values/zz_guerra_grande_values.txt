@@ -269,6 +269,14 @@ gg_libres_horse = {
 # ES: la ventaja que el arbitro exige para dar por batido a un gobierno. El sitio no se quebro en ocho
 #     anios: antes de 1849 solo una paliza (15); desde 1849, una ventaja clara (10); desde 1851, el anio de
 #     Urquiza y la alianza con el Brasil, una modesta (5, como antes).
+# EN: 23/9/2026 (Juan, BAL-03 of auditoria-balanza-2026-09-23.md) -- no more steps: the steps of 1/1/1849
+#     (15 -> 10) and 1851 (10 -> 5) dated the war (8 of 14 first asks came the week after one, and the bar
+#     jumped from three quarters to full overnight). From 1849 the lead asked for drops one point a quarter,
+#     from 15 at the end of 1848 to 5 from April 1851. The bar (gg_war_score_bar_value) and Buenos Aires's
+#     warning (gg_rosas_peace_margin) read this same value.
+# ES: sin escalones: los del 1/1/1849 y 1851 fechaban la guerra. Desde 1849 la ventaja exigida baja un punto
+#     por trimestre, de 15 a fines de 1848 a 5 desde abril de 1851. La barra y el aviso a Buenos Aires leen
+#     este mismo valor.
 gg_arbiter_balance_needed = {
 	value = 15
 	if = { limit = { game_date >= 1849.1.1 } value = 14 }
