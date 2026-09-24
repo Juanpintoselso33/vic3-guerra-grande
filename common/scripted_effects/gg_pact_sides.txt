@@ -334,72 +334,159 @@ gg_conf_province_join = {
 #     https://www.scielo.org.ar/scielo.php?pid=S1669-90412007000100002&script=sci_arttext.
 # -------------------------------------------------------------------------------------------------
 
-# EN: Mitre, fetched to this country. The mod's own Mitre (URU_gg_bartolome_mitre, kept in the Defensa or Corrientes by
-#     gg_rivera.8.b/c) if he lives anywhere, else la Argentina's ARG_bartolome_mitre, which is created if nobody lives.
-# ES: Mitre, traido a este pais. El Mitre del mod (el que retuvo la Defensa o Corrientes) si vive; si no, el de «la
-#     Argentina», que se crea si no vive ninguno.
+# EN: 24/9/2026 (AUD-PAZ-DUP, AUD-MITRE-DUP) -- ONE PAZ AND ONE MITRE, EVER. Every site that brings either man into a
+#     country goes through these two effects (gg_contingent.3, gg_argentina.6, gg_rivera.8.b/c, the emigres, gg_ba.20):
+#     he is looked for by identity (gg_is_the_paz / gg_is_the_mitre: template or marker) wherever he lives -- here, in
+#     another country, in the exile pool -- and moved; he is created only if he never lived (gg_paz_born /
+#     gg_mitre_born), so a man who died is not made again. Vanilla's own spawn of ARG_bartolome_mitre from 1859 is shut
+#     by the same marks (REPLACE in common/character_templates/zzz_guerra_grande_vanilla_homes.txt).
+#     Scope: the country that receives him. Every branch says itself in the trace.
+# ES: UN SOLO PAZ Y UN SOLO MITRE, SIEMPRE. Todo sitio que trae a uno de los dos pasa por aca: se lo busca por
+#     identidad donde viva y se lo muda; se crea solo si nunca vivio, asi que un muerto no se vuelve a fabricar. El
+#     Mitre que vanilla saca desde 1859 queda cerrado por las mismas marcas.
+# -------------------------------------------------------------------------------------------------
+
+# EN: Mitre. The mod's own template (URU_gg_bartolome_mitre: face and biography) when he has to be made.
+# ES: Mitre. Si hay que hacerlo, con la plantilla del mod (cara y biografia).
 gg_mitre_fetch = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch|" # GG_TRAZA
+	save_scope_as = gg_mitre_to
 	if = {
-		limit = {
-			OR = {
-				any_country = { any_scope_character = { has_template = URU_gg_bartolome_mitre } }
-				any_character_in_exile_pool = { has_template = URU_gg_bartolome_mitre }
-			}
-		}
-		gg_character_fetch = { TEMPLATE = URU_gg_bartolome_mitre }
+		limit = { any_scope_character = { gg_is_the_mitre = yes } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch| MITRE=here " # GG_TRAZA
 	}
 	else_if = {
-		limit = {
-			OR = {
-				any_country = { any_scope_character = { has_template = ARG_bartolome_mitre } }
-				any_character_in_exile_pool = { has_template = ARG_bartolome_mitre }
+		limit = { any_country = { any_scope_character = { gg_is_the_mitre = yes } } }
+		random_country = {
+			limit = { any_scope_character = { gg_is_the_mitre = yes } }
+			random_scope_character = {
+				limit = { gg_is_the_mitre = yes }
+				transfer_character = scope:gg_mitre_to
 			}
 		}
-		gg_character_fetch = { TEMPLATE = ARG_bartolome_mitre }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch| MITRE=moved " # GG_TRAZA
 	}
-	# EN/ES: 24/9 (Codex review, round 1) -- when neither lives, la Argentina's ARG_bartolome_mitre, the template the
-	#     engine would also spawn from 1859 (commander_usage): one man, not a second from 1859 on (AUD-MITRE-DUP)
-	#     / si no vive ninguno, el ARG_bartolome_mitre de «la Argentina», el mismo que el motor sacaria desde 1859
+	else_if = {
+		limit = { any_character_in_exile_pool = { gg_is_the_mitre = yes } }
+		random_character_in_exile_pool = {
+			limit = { gg_is_the_mitre = yes }
+			transfer_character = scope:gg_mitre_to
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch| MITRE=from_exile " # GG_TRAZA
+	}
+	else_if = {
+		limit = { NOT = { has_global_variable = gg_mitre_born } }
+		create_character = { template = URU_gg_bartolome_mitre }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch| MITRE=created " # GG_TRAZA
+	}
 	else = {
-		create_character = { template = ARG_bartolome_mitre }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch| MITRE=dead " # GG_TRAZA
 	}
+	if = {
+		limit = { NOT = { has_global_variable = gg_mitre_born } gg_mitre_lives = yes }
+		set_global_variable = gg_mitre_born
+	}
+	clear_saved_scope = gg_mitre_to
+	gg_unique_characters_census = yes
 }
 
-# EN: Paz, fetched to this country: the emigre of 1843 (gg_contingent.3, marked gg_foreign_commander) if he lives, the one
-#     who went with the Defensa and the Ejercito Grande; else the template's Paz (CRR_gg_jose_maria_paz); else from the
-#     exile pool; created only when CREATE = yes. (Two Paz can exist since 1843 -- AUD-PAZ-DUP, not this file's doing.)
-# ES: Paz, traido a este pais: el emigrado de 1843 si vive; si no el del template; se crea solo con CREATE. (Desde 1843
-#     pueden existir dos Paz: AUD-PAZ-DUP.)
+# EN: Paz. The template's Paz (CRR_gg_jose_maria_paz), or the untemplated one of an old save. A Paz who GOVERNS another
+#     country stays where he is (the receiver goes without him; PAZ=ruler_stays): moving him would behead that country
+#     (decisiones.md, 24/9/2026). Created only with CREATE = yes and only if he never lived.
+# ES: Paz. Si gobierna otro pais se queda (el que lo pide se queda sin el): mudarlo descabezaria a ese pais. Se crea
+#     solo con CREATE = yes y solo si nunca vivio.
 gg_paz_fetch = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| CREATE= $CREATE$ " # GG_TRAZA
 	save_scope_as = gg_paz_to
 	if = {
-		limit = { any_scope_character = { OR = { has_template = CRR_gg_jose_maria_paz has_variable = gg_foreign_commander } } }
+		limit = { any_scope_character = { gg_is_the_paz = yes } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=here " # GG_TRAZA
 	}
 	else_if = {
-		limit = { any_country = { any_scope_character = { has_variable = gg_foreign_commander } } }
+		limit = { any_country = { any_scope_character = { gg_is_the_paz = yes has_role_of_type = ruler } } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=ruler_stays " # GG_TRAZA
+	}
+	else_if = {
+		limit = { any_country = { any_scope_character = { gg_is_the_paz = yes } } }
 		random_country = {
-			limit = { any_scope_character = { has_variable = gg_foreign_commander } }
+			limit = { any_scope_character = { gg_is_the_paz = yes } }
 			random_scope_character = {
-				limit = { has_variable = gg_foreign_commander }
+				limit = { gg_is_the_paz = yes }
 				transfer_character = scope:gg_paz_to
 			}
 		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=moved " # GG_TRAZA
 	}
 	else_if = {
-		limit = { any_country = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } } }
-		gg_character_fetch = { TEMPLATE = CRR_gg_jose_maria_paz }
+		limit = { any_character_in_exile_pool = { gg_is_the_paz = yes } }
+		random_character_in_exile_pool = {
+			limit = { gg_is_the_paz = yes }
+			transfer_character = scope:gg_paz_to
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=from_exile " # GG_TRAZA
 	}
 	else_if = {
-		limit = { any_character_in_exile_pool = { has_template = CRR_gg_jose_maria_paz } }
-		gg_character_fetch = { TEMPLATE = CRR_gg_jose_maria_paz }
-	}
-	else_if = {
-		limit = { always = $CREATE$ }
+		limit = {
+			always = $CREATE$
+			NOT = { has_global_variable = gg_paz_born }
+		}
 		create_character = { template = CRR_gg_jose_maria_paz }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=created " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| PAZ=none " # GG_TRAZA
+	}
+	if = {
+		limit = { NOT = { has_global_variable = gg_paz_born } gg_paz_lives = yes }
+		set_global_variable = gg_paz_born
 	}
 	clear_saved_scope = gg_paz_to
+	gg_unique_characters_census = yes
+}
+
+# EN: The census: how many Paz and Mitre live, in countries and in the exile pool, and it marks as born whoever lives
+#     (a man the engine made is thus never made again). Yearly, on Argentina's pulse
+#     (common/on_actions/gg_unique_characters_on_actions.txt), and after every fetch. DUP=yes is a regression of
+#     AUD-PAZ-DUP / AUD-MITRE-DUP (tools/barrido_nocturno.yaml reads it).
+# ES: El censo: cuantos Paz y Mitre viven; ademas marca nacido al que vive. Una vez por anio y despues de cada traida.
+#     DUP=yes es una regresion.
+gg_unique_characters_census = {
+	set_global_variable = { name = gg_debug_census_paz value = 0 }
+	set_global_variable = { name = gg_debug_census_mitre value = 0 }
+	every_country = {
+		every_scope_character = {
+			if = { limit = { gg_is_the_paz = yes } change_global_variable = { name = gg_debug_census_paz add = 1 } }
+			if = { limit = { gg_is_the_mitre = yes } change_global_variable = { name = gg_debug_census_mitre add = 1 } }
+		}
+	}
+	every_character_in_exile_pool = {
+		if = { limit = { gg_is_the_paz = yes } change_global_variable = { name = gg_debug_census_paz add = 1 } }
+		if = { limit = { gg_is_the_mitre = yes } change_global_variable = { name = gg_debug_census_mitre add = 1 } }
+	}
+	# EN/ES: 24/9 (Codex) -- a man the engine or another mod made (vanilla's ARG_ Mitre from 1859) is marked born here, so
+	#     that if he dies he is not made again / al que hizo el motor u otro mod se lo marca nacido aca
+	if = {
+		limit = { global_var:gg_debug_census_paz > 0 NOT = { has_global_variable = gg_paz_born } }
+		set_global_variable = gg_paz_born
+	}
+	if = {
+		limit = { global_var:gg_debug_census_mitre > 0 NOT = { has_global_variable = gg_mitre_born } }
+		set_global_variable = gg_mitre_born
+	}
+	if = {
+		limit = {
+			OR = {
+				global_var:gg_debug_census_paz > 1
+				global_var:gg_debug_census_mitre > 1
+			}
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_unique_characters_census| DUP=yes PAZ= [GetGlobalVariable('gg_debug_census_paz').GetValue|0] MITRE= [GetGlobalVariable('gg_debug_census_mitre').GetValue|0] " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_unique_characters_census| DUP=no PAZ= [GetGlobalVariable('gg_debug_census_paz').GetValue|0] MITRE= [GetGlobalVariable('gg_debug_census_mitre').GetValue|0] " # GG_TRAZA
+	}
+	remove_global_variable = gg_debug_census_paz
+	remove_global_variable = gg_debug_census_mitre
 }
 
 # EN: 21/11/1851 -- the emigres join the Ejercito Grande. Scope: Entre Rios, after gg_argentina_raise_ejercito_grande
@@ -418,17 +505,12 @@ gg_emigres_join_ejercito_grande = {
 		#     not a Paz elsewhere / el Paz que esta en la Defensa, ese mismo, no otro Paz de otra parte
 		save_scope_as = gg_eg_country
 		c:URU ?= {
+			# EN/ES: 24/9 (AUD-PAZ-DUP) -- since then there is only one Paz, whatever made him (gg_is_the_paz)
+			#     / desde entonces hay un solo Paz, lo haya hecho quien lo haya hecho
 			if = {
-				limit = { any_scope_character = { has_variable = gg_foreign_commander } }
+				limit = { any_scope_character = { gg_is_the_paz = yes } }
 				random_scope_character = {
-					limit = { has_variable = gg_foreign_commander }
-					transfer_character = scope:gg_eg_country
-				}
-			}
-			else_if = {
-				limit = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } }
-				random_scope_character = {
-					limit = { has_template = CRR_gg_jose_maria_paz }
+					limit = { gg_is_the_paz = yes }
 					transfer_character = scope:gg_eg_country
 				}
 			}
@@ -437,10 +519,8 @@ gg_emigres_join_ejercito_grande = {
 		every_scope_character = {
 			limit = {
 				OR = {
-					has_template = URU_gg_bartolome_mitre
-					has_template = ARG_bartolome_mitre
-					has_template = CRR_gg_jose_maria_paz
-					has_variable = gg_foreign_commander
+					gg_is_the_mitre = yes
+					gg_is_the_paz = yes
 				}
 				exists = scope:gg_ejercito_grande_army
 			}
@@ -460,7 +540,7 @@ gg_emigres_to_buenos_aires = {
 	gg_character_fetch = { TEMPLATE = ARG_domingo_sarmiento }
 	if = {
 		limit = {
-			any_scope_character = { OR = { has_template = URU_gg_bartolome_mitre has_template = ARG_bartolome_mitre } }
+			any_scope_character = { gg_is_the_mitre = yes }
 			any_scope_character = { has_template = ARG_gg_valentin_alsina }
 		}
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_to_buenos_aires| MITRE_ALSINA_IN_BUE=yes " # GG_TRAZA

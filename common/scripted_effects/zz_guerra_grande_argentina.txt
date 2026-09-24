@@ -1347,10 +1347,11 @@ gg_argentina_revive_corrientes = {
 	}
 	c:CRR ?= {
 		set_capital = STATE_CORRIENTES
-		create_character = {
-			template = $RULER$
-			ruler = yes
-		}
+		# EN: 24/9/2026 (AUD-PAZ-DUP, Codex) -- the ruler is NOT made here any more: this used to create the RULER template
+		#     unconditionally, a second Paz if he lived elsewhere or had died. Each caller seats its own man right after
+		#     (gg_argentina.6: the one Paz through gg_paz_fetch; gg_argentina.7: Joaquin Madariaga). RULER stays for the
+		#     trace.
+		# ES: el gobernante ya no se hace aca (creaba un segundo Paz); cada llamador sienta al suyo enseguida.
 	}
 	# EN: the delegation is withdrawn again -- but ONLY if the country is actually there. The effect
 	#     is guarded by its own mark, so it cannot charge twice for the same absence; what this extra

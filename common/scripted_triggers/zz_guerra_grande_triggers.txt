@@ -141,6 +141,42 @@ gg_is_foreigner = {
 	}
 }
 
+# EN: 24/9/2026 (AUD-PAZ-DUP, AUD-MITRE-DUP) -- ONE PAZ, ONE MITRE. Character scope: is this THE man, whatever made
+#     him. The script has no trigger on a character's name, so identity is the template or the mod's own marker:
+#     Paz is CRR_gg_jose_maria_paz, or the untemplated Paz that gg_contingent.3 made before 24/9/2026 (marked
+#     gg_foreign_commander, which only he ever carried; old saves). Mitre is the mod's URU_gg_bartolome_mitre or
+#     vanilla's ARG_bartolome_mitre (the one the engine spawns from 1859, and the one gg_mitre_fetch created before
+#     24/9/2026). No playset mod defines another Paz or Mitre (la Argentina has no character templates; ECCHI's
+#     Mitre is commented out). Every site that creates or moves them goes through gg_paz_fetch / gg_mitre_fetch.
+# ES: UN SOLO PAZ, UN SOLO MITRE. Este es EL hombre, lo haya hecho quien lo haya hecho. El script no tiene trigger
+#     sobre el nombre, asi que la identidad es la plantilla o la marca del mod (el Paz sin plantilla de partidas
+#     viejas lleva gg_foreign_commander; el Mitre puede ser el del mod o el ARG_ de vanilla).
+gg_is_the_paz = {
+	OR = {
+		has_template = CRR_gg_jose_maria_paz
+		has_variable = gg_foreign_commander
+	}
+}
+gg_is_the_mitre = {
+	OR = {
+		has_template = URU_gg_bartolome_mitre
+		has_template = ARG_bartolome_mitre
+	}
+}
+# EN/ES: any scope -- he lives somewhere: in a country or in the exile pool / vive en alguna parte
+gg_paz_lives = {
+	OR = {
+		any_country = { any_scope_character = { gg_is_the_paz = yes } }
+		any_character_in_exile_pool = { gg_is_the_paz = yes }
+	}
+}
+gg_mitre_lives = {
+	OR = {
+		any_country = { any_scope_character = { gg_is_the_mitre = yes } }
+		any_character_in_exile_pool = { gg_is_the_mitre = yes }
+	}
+}
+
 # EN: C10 (22/9/2026) -- gg_sea_open (France + Britain - blockade >= 60) is gone. Whether the river
 #     is shut is gg_plata_closed, in common/scripted_triggers/gg_rio_plata.txt: the single place that
 #     decides it (invariant I16).

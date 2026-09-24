@@ -1152,11 +1152,14 @@ gg_rivera.8 = {
 		custom_tooltip = gg_rivera.8.b_tt2
 		set_global_variable = gg_mitre_kept
 		set_global_variable = gg_mitre_contra_rivera
-		create_character = {
-			template = URU_gg_bartolome_mitre
+		# EN/ES: 24/9/2026 (AUD-MITRE-DUP) -- the one Mitre, fetched if he already lives, created only if he never lived
+		#     (gg_mitre_fetch) / el unico Mitre, traido si ya vive, creado solo si nunca vivio
+		gg_mitre_fetch = yes
+		random_scope_character = {
+			limit = { gg_is_the_mitre = yes }
 			save_scope_as = gg_mitre
 		}
-		scope:gg_mitre = {
+		scope:gg_mitre ?= {
 			if = {
 				limit = { NOT = { has_role_of_type = general } }
 				add_character_role = general
@@ -1180,7 +1183,7 @@ gg_rivera.8 = {
 					count = 2
 				}
 			}
-			scope:gg_mitre = { transfer_to_formation = scope:gg_mitre_defensa_formation }
+			scope:gg_mitre ?= { transfer_to_formation = scope:gg_mitre_defensa_formation }
 		}
 		ai_chance = {
 			base = 20
@@ -1199,11 +1202,14 @@ gg_rivera.8 = {
 		custom_tooltip = gg_rivera.8.c_tt2
 		trigger = { exists = c:CRR }
 		c:CRR = {
-			create_character = {
-				template = URU_gg_bartolome_mitre
+			# EN/ES: 24/9/2026 (AUD-MITRE-DUP) -- the one Mitre, fetched if he already lives, created only if he never lived
+			#     (gg_mitre_fetch) / el unico Mitre, traido si ya vive, creado solo si nunca vivio
+			gg_mitre_fetch = yes
+			random_scope_character = {
+				limit = { gg_is_the_mitre = yes }
 				save_scope_as = gg_mitre_corrientes
 			}
-			scope:gg_mitre_corrientes = {
+			scope:gg_mitre_corrientes ?= {
 				if = {
 					limit = { NOT = { has_role_of_type = general } }
 					add_character_role = general
@@ -1227,7 +1233,7 @@ gg_rivera.8 = {
 						count = 1
 					}
 				}
-				scope:gg_mitre_corrientes = { transfer_to_formation = scope:gg_mitre_corrientes_formation }
+				scope:gg_mitre_corrientes ?= { transfer_to_formation = scope:gg_mitre_corrientes_formation }
 			}
 		}
 		ai_chance = {

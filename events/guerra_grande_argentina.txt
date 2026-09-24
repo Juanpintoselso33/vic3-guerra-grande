@@ -3121,14 +3121,22 @@ gg_argentina.6 = {
 			if = {
 				limit = { NOT = { exists = c:CRR } }
 				gg_argentina_revive_corrientes = { RULER = CRR_gg_jose_maria_paz }
+				# EN/ES: 24/9/2026 (AUD-PAZ-DUP) -- the reborn province is Paz's: the one Paz, fetched or made once, governs
+				#     it (if he governs elsewhere or is dead the engine seats someone) / la provincia renacida es de Paz
+				c:CRR ?= {
+					gg_paz_fetch = { CREATE = yes }
+					random_scope_character = {
+						limit = { gg_is_the_paz = yes }
+						set_character_as_ruler = yes
+					}
+				}
 			}
 			c:CRR ?= {
-				if = {
-					limit = { NOT = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } } }
-					create_character = { template = CRR_gg_jose_maria_paz }
-				}
+				# EN/ES: 24/9/2026 (AUD-PAZ-DUP) -- the one Paz, fetched wherever he lives, created only if he never
+				#     lived (gg_paz_fetch) / el unico Paz, traido de donde viva, creado solo si nunca vivio
+				gg_paz_fetch = { CREATE = yes }
 				random_scope_character = {
-					limit = { has_template = CRR_gg_jose_maria_paz }
+					limit = { gg_is_the_paz = yes }
 					add_commander_rank = 2
 					save_scope_as = gg_paz
 				}

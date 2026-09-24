@@ -868,7 +868,7 @@ gg_ba.20 = {
 					#     with the Ejercito Grande) / el unico Mitre, traido, nunca una segunda copia
 					gg_mitre_fetch = yes
 					random_scope_character = {
-						limit = { OR = { has_template = URU_gg_bartolome_mitre has_template = ARG_bartolome_mitre } }
+						limit = { gg_is_the_mitre = yes }
 						set_character_as_ruler = yes
 					}
 				}

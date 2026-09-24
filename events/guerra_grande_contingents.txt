@@ -216,22 +216,19 @@ gg_contingent.3 = {
 		#     hasta que se fue al Brasil a mediados de 1844. Sin legion en 1839, nadie toma la linea.
 		if = {
 			limit = { has_variable = guerra_grande_argentine_legion_raised }
-			create_character = {
-				first_name = "Jose_Maria"
-				last_name = "Paz"
-				historical = yes
-				is_general = yes
-				interest_group = ig_armed_forces
-				ideology = ideology_republican_leader
-				culture = cu:platinean
-				religion = rel:catholic
-				traits = {
-					experienced_defensive_strategist
-					meticulous
-				}
+			# EN: 24/9/2026 (AUD-PAZ-DUP) -- THE Paz, not a second one: this used to create an untemplated Paz while the
+			#     template's Paz of Caa Guazu (gg_argentina.6) could still live in Corrientes. He is fetched wherever he
+			#     is (gg_paz_fetch) and created from the template only if he never lived; if he governs another country
+			#     he stays there and the plaza goes without him (decisiones.md, 24/9/2026).
+			# ES: EL Paz, no un segundo: antes se creaba un Paz sin plantilla mientras el de Caa Guazu podia seguir en
+			#     Corrientes. Se lo trae de donde este; si gobierna otro pais se queda alla y la plaza sigue sin el.
+			gg_paz_fetch = { CREATE = yes }
+			random_scope_character = {
+				limit = { gg_is_the_paz = yes }
 				# EN/ES: 23/9/2026 (Juan) -- an Argentine brought to the war: never the Republic's head of state
 				#     (gg_is_foreigner) / un argentino traido a la guerra: nunca jefe de Estado de la Republica
-				on_created = { set_variable = gg_foreign_commander }
+				if = { limit = { NOT = { has_variable = gg_foreign_commander } } set_variable = gg_foreign_commander }
+				if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
 			}
 		}
 		add_modifier = {

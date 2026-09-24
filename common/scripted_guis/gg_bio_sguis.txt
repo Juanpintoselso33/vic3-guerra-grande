@@ -28,6 +28,7 @@ gg_bio_check_sgui = {
 			has_template = URU_gg_eugenio_garzon
 			has_template = URU_gg_servando_gomez
 			has_template = URU_gg_bartolome_mitre
+			has_template = ARG_bartolome_mitre # EN/ES: 24/9 (AUD-MITRE-DUP) -- the same man in an old save / el mismo hombre en una partida vieja
 			has_template = ARG_Justo_Jose_de_Urquiza
 			has_template = ARG_Gregorio_Araoz_de_Lamadrid
 			has_template = ARG_Alejandro_Heredia

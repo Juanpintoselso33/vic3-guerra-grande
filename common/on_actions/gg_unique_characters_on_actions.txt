@@ -1,0 +1,24 @@
+﻿# EN: 24/9/2026 (AUD-PAZ-DUP, AUD-MITRE-DUP) -- the yearly census of the two men who must exist once (it counts and
+#     marks the living as born: gg_unique_characters_census in common/scripted_effects/gg_pact_sides.txt). On Argentina's pulse (or La Plata's, if
+#     Argentina became it). tools/barrido_nocturno.yaml reads DUP=yes.
+# ES: el censo anual de los dos hombres que tienen que existir una sola vez (cuenta y marca nacido al que vive). En el pulso de la Argentina.
+on_yearly_pulse_country = {
+	on_actions = { gg_unique_characters_yearly }
+}
+gg_unique_characters_yearly = {
+	# EN/ES: 24/9 (Codex, round 2) -- ARG, or PLT if Argentina became La Plata: the two countries vanilla's Mitre spawns
+	#     for / ARG, o PLT si la Argentina paso a ser La Plata: los dos paises donde vanilla saca a Mitre
+	trigger = {
+		OR = {
+			c:ARG ?= this
+			AND = {
+				NOT = { exists = c:ARG }
+				c:PLT ?= this
+			}
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unique_characters_yearly" # GG_TRAZA
+		gg_unique_characters_census = yes
+	}
+}

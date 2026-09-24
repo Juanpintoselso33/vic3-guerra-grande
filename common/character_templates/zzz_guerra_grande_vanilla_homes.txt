@@ -948,3 +948,54 @@ REPLACE:URU_anacleto_medina = { # Anacleto Medina y Biera
 	}
 	trait_generation = { }
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (AUD-MITRE-DUP) -- ONE MITRE. Vanilla's ARG_bartolome_mitre (common/character_templates/country_arg.txt,
+#     re-served unchanged in the playset by la_argentina_estados_fix; «la Argentina» itself defines no characters)
+#     is spawned by the engine for ARG or PLT from 1859 (commander_usage, "guaranteed to spawn if possible"). The
+#     mod has its own Mitre since 1846 (URU_gg_bartolome_mitre, gg_rivera.8.b/c, or created by gg_mitre_fetch for
+#     the Ejercito Grande), so the engine's spawn is shut when a Mitre lives or ever lived (gg_mitre_born, written
+#     by gg_mitre_fetch, the one door every creation site goes through). Replaced here and not in the compatch
+#     because the template is vanilla's: the duplicate exists with or without «la Argentina». Verbatim otherwise,
+#     plus the mod's face, so an old save's ARG_ Mitre (gg_mitre_fetch created him before 24/9) looks like ours.
+# ES: UN SOLO MITRE. El motor saca el ARG_bartolome_mitre de vanilla desde 1859; el mod tiene su Mitre desde 1846.
+#     La aparicion del motor queda cerrada si un Mitre vive o vivio. Va aca y no en el compatch porque la plantilla
+#     es de vanilla: el duplicado existe con o sin «la Argentina». Igual a vanilla salvo la cara y el cierre.
+# -------------------------------------------------------------------------------------------------
+REPLACE:ARG_bartolome_mitre = {
+	# Bartolomé Mitre
+	dna = dna_gg_bartolome_mitre
+	first_name = Bartolome
+	last_name = Mitre
+	historical = yes
+	birth_date = 1821.6.26
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_intelligentsia
+	ideology = ideology_jingoist_leader
+	home_region = STATE_BUENOS_AIRES
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		expert_political_operator
+		experienced_artillery_commander
+		ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			OR = {
+				c:ARG ?= THIS
+				c:PLT ?= THIS
+			}
+			has_dlc_feature = rp1_content
+			# EN/ES: 24/9/2026 (AUD-MITRE-DUP) -- never a second Mitre / nunca un segundo Mitre
+			NOT = { has_global_variable = gg_mitre_born }
+			gg_mitre_lives = no
+		}
+		role = general
+		earliest_usage_date = 1859.1.1
+		latest_usage_date = 1895.1.1
+		#guaranteed to spawn if possible
+	}
+	trait_generation = { }
+}

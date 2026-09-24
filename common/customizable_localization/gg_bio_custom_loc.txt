@@ -20,7 +20,7 @@ gg_bio_text = {
 	text = { trigger = { has_template = URU_gg_juan_francisco_giro } localization_key = gg_bio_giro }
 	text = { trigger = { has_template = URU_gg_eugenio_garzon } localization_key = gg_bio_garzon }
 	text = { trigger = { has_template = URU_gg_servando_gomez } localization_key = gg_bio_gomez_servando }
-	text = { trigger = { has_template = URU_gg_bartolome_mitre } localization_key = gg_bio_mitre }
+	text = { trigger = { gg_is_the_mitre = yes } localization_key = gg_bio_mitre } # EN/ES: 24/9 (AUD-MITRE-DUP) -- either template / cualquiera de las dos plantillas
 	text = { trigger = { has_template = ARG_Justo_Jose_de_Urquiza } localization_key = gg_bio_urquiza }
 	text = { trigger = { has_template = ARG_Gregorio_Araoz_de_Lamadrid } localization_key = gg_bio_lamadrid }
 	text = { trigger = { has_template = ARG_Alejandro_Heredia } localization_key = gg_bio_heredia }
