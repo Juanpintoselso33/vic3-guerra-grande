@@ -49,3 +49,9 @@ gg_ntc_gorgon = {
 	video = "gfx/media_aliases/gg_ntc_gorgon.bk2"
 	audio = "event:/SFX/Events/unspecific/naval_battle"
 }
+
+# gg_notice.12: Baron Jean-Baptiste Louis Gros, lithograph by Jean-Baptiste Adolphe Lafosse, 1865 (Le Pantheon des illustrations francaises au XIXe siecle) -- via Commons -- Public domain
+gg_ntc_gros_lafosse = {
+	video = "gfx/media_aliases/gg_ntc_gros_lafosse.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}

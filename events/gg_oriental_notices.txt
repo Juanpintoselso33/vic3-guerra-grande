@@ -277,7 +277,7 @@ gg_notice.12 = {
 	desc = gg_notice.12.d
 	flavor = gg_notice.12.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "africa_leader_arguing" }
+	event_image = { video = "gg_ntc_gros_lafosse" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
