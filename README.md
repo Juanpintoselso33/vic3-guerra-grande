@@ -1,4 +1,4 @@
-# Guerra Grande — Uruguay, 1836-1852
+# Guerra Grande — el Río de la Plata, 1836-1862
 
 Victoria 3 (1.13). La Guerra Grande oriental: el nacimiento de las divisas blanca y colorada en
 Carpintería, la partición de la República en el gobierno de la **Defensa** (Montevideo) y el del
