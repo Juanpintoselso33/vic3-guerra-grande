@@ -5,8 +5,9 @@
 #     WHAT IS SOURCED AND WHAT IS NOT. Names, provinces and dates come from
 #     docs/guerra-grande-argentina/gobernadores-provincias.md. A birth date is written only when the
 #     source gives one; with only the year it is 1 January of that year (said on the line), and with
-#     «ca.» or nothing it is left out. No traits: the source documents none, and trait_generation is
-#     empty so the engine does not invent them. Faces (dna): common/dna_data/gg_dna_governors.txt.
+#     «ca.» or nothing it is left out. Traits (23/9/2026): only where a source documents the conduct,
+#     one comment per template; the rest have none, and trait_generation is empty so the engine
+#     does not invent them. Faces (dna): common/dna_data/gg_dna_governors.txt.
 #     THE INTEREST GROUP AND IDEOLOGY ARE THE MOD'S READING of the «bando» column, one rule for all:
 #     rosista -> landowners, authoritarian; federal, antirrosista federal or unknown -> landowners,
 #     moderate; Coalition or unitarian -> intelligentsia, radical (as Avellaneda already had).
@@ -14,7 +15,7 @@
 # ES: LOS GOBERNADORES PROVINCIALES que el playset no tiene. Nacen solo cuando empieza su mandato, una
 #     vez, en quien tenga la provincia. Nombres, provincias y fechas: gobernadores-provincias.md. La
 #     fecha de nacimiento va solo si la fuente la da; con el anio solo, es el 1 de enero (dicho en la
-#     linea); con «ca.» o nada, no va. Sin traits; la cara esta en gg_dna_governors.txt. El grupo de
+#     linea); con «ca.» o nada, no va. Traits solo con fuente (comentario en cada uno); la cara esta en gg_dna_governors.txt. El grupo de
 #     interes y la ideologia son la lectura del mod de la columna «bando», con una sola regla para todos.
 # -------------------------------------------------------------------------------------------------
 
@@ -33,6 +34,12 @@ CRR_gg_rafael_leon_de_atienza = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1802.1.1
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits -- cautious: 'se manejo con prudencia', 'la politica prudente' (1833-37); basic_diplomat: 'tuvo
+	#     exito en las negociaciones con Paraguay' over Misiones (es.wikipedia «Rafael Leon de Atienza»)
+	traits = {
+		cautious
+		basic_diplomat
+	}
 	trait_generation = { }
 }
 
@@ -51,6 +58,8 @@ CRR_gg_juan_baltasar_acosta = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1782.1.1
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits: none: no article; the only biography found (es-academic mirror of a removed es.wikipedia page)
+	#     gives no conduct beyond opposing Rosas, and a birth year (1806) that contradicts ours / sin fuente
 	trait_generation = { }
 }
 
@@ -68,6 +77,11 @@ CRR_gg_benjamin_virasoro = {
 	ideology = ideology_authoritarian
 	birth_date = 1812.5.1
 	home_region = STATE_CORRIENTES
+	# EN/ES: traits -- master_bureaucrat: as governor 'recupero la economia y el presupuesto publico', set up an
+	#     efficient post and a complete judicial system (1847-51) (es.wikipedia «Benjamin Virasoro»)
+	traits = {
+		master_bureaucrat
+	}
 	trait_generation = { }
 }
 
@@ -85,6 +99,13 @@ SFE_gg_estanislao_lopez = {
 	ideology = ideology_moderate
 	birth_date = 1786.11.22
 	home_region = STATE_SANTA_FE
+	# EN/ES: traits -- expert_political_operator: governed Santa Fe 1818-1838, 'el patriarca de la federacion';
+	#     tuberculosis: 'el avance de la tuberculosis le impedia salir... de su casa' in his last years
+	#     (es.wikipedia «Estanislao Lopez»)
+	traits = {
+		expert_political_operator
+		tuberculosis
+	}
 	trait_generation = { }
 }
 
@@ -102,6 +123,11 @@ SFE_gg_domingo_cullen = {
 	ideology = ideology_moderate
 	birth_date = 1791.2.26
 	home_region = STATE_SANTA_FE
+	# EN/ES: traits -- basic_diplomat: drafted the Pacto Federal (1831); negotiated directly with Leblanc the lifting
+	#     of the French blockade for Santa Fe (1838) (es.wikipedia «Domingo Cullen»)
+	traits = {
+		basic_diplomat
+	}
 	trait_generation = { }
 }
 
@@ -119,6 +145,12 @@ SFE_gg_juan_pablo_lopez = {
 	ideology = ideology_moderate
 	birth_date = 1792.6.26
 	home_region = STATE_SANTA_FE
+	# EN/ES: traits -- brave: 'destacandose como soldado valiente' on the Chaco frontier; wrathful: back in Santa Fe
+	#     in 1845 'se dedico a tomar venganza de sus enemigos' (es.wikipedia «Juan Pablo Lopez»)
+	traits = {
+		brave
+		wrathful
+	}
 	trait_generation = { }
 }
 
@@ -136,6 +168,13 @@ SFE_gg_domingo_crespo = {
 	ideology = ideology_moderate
 	birth_date = 1791.5.10
 	home_region = STATE_SANTA_FE
+	# EN/ES: traits -- basic_diplomat: signed Santa Fe's alliance of 12/4/1842 with Entre Rios, Corrientes and
+	#     Uruguay; mediator in 1868; honorable: refused a second term (1862) because such a governor is chosen
+	#     'por tonto... o por pillo' (es.wikipedia «Domingo Crespo»)
+	traits = {
+		basic_diplomat
+		honorable
+	}
 	trait_generation = { }
 }
 
@@ -154,6 +193,13 @@ CBA_gg_manuel_lopez = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1780.1.1
 	home_region = STATE_CORDOBA
+	# EN/ES: traits -- cruel: 'persiguio sin piedad a los unitarios', 'una cruel persecucion' (1841), ordered
+	#     suspects shot at once (1851); experienced_political_operator: governed Cordoba 17 years (es.wikipedia
+	#     «Manuel Lopez (gobernador)»)
+	traits = {
+		cruel
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -171,6 +217,12 @@ CBA_gg_jose_francisco_alvarez = {
 	ideology = ideology_radical
 	birth_date = 1808.7.17
 	home_region = STATE_CORDOBA
+	# EN/ES: traits -- brave: led a bayonet charge down a street at La Chacarilla (1841), killed by a cannon shot;
+	#     erudite: lawyer, Universidad de San Carlos (es.wikipedia «Jose Francisco Alvarez»)
+	traits = {
+		brave
+		erudite
+	}
 	trait_generation = { }
 }
 
@@ -188,6 +240,12 @@ SDE_gg_mauro_carranza = {
 	ideology = ideology_moderate
 	birth_date = 1807.1.15
 	home_region = STATE_SANTIAGO_DEL_ESTERO
+	# EN/ES: traits -- 'un caballero honorable, serio, circunspecto, bien intencionado, moderado y apacible'
+	#     (es.wikipedia «Mauro Carranza»)
+	traits = {
+		honorable
+		reserved
+	}
 	trait_generation = { }
 }
 
@@ -205,6 +263,13 @@ SDE_gg_manuel_taboada = {
 	ideology = ideology_moderate
 	birth_date = 1817.2.27
 	home_region = STATE_SANTIAGO_DEL_ESTERO
+	# EN/ES: traits -- brave: accepted Col. Tomas Lobo's challenge at Tacanitas (1853) and killed him hand to hand;
+	#     experienced_political_operator: 'el hombre politico entre sus hermanos', organized the 1851 election
+	#     'habilmente', caudillo for 20 years (es.wikipedia «Manuel Taboada»)
+	traits = {
+		brave
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -222,6 +287,12 @@ TUC_gg_bernabe_piedrabuena = {
 	ideology = ideology_radical
 	# EN/ES: birth ca. 1792 in the source: left out / nacimiento ca. 1792: no va
 	home_region = STATE_TUCUMAN
+	# EN/ES: traits -- compliant: 'el verdadero lider' of the Coalition was his minister Avellaneda; sickly: resigned
+	#     'gravemente enfermo' (Nov. 1840), died March 1841 (es.wikipedia «Bernabe Piedrabuena (politico)»)
+	traits = {
+		compliant
+		sickly
+	}
 	trait_generation = { }
 }
 
@@ -239,6 +310,7 @@ TUC_gg_pedro_garmendia = {
 	ideology = ideology_radical
 	birth_date = 1794.7.31
 	home_region = STATE_TUCUMAN
+	# EN/ES: traits: none: the article (es.wikipedia) only gives offices and a five-week term / sin fuente
 	trait_generation = { }
 }
 
@@ -256,6 +328,13 @@ TUC_gg_celedonio_gutierrez = {
 	ideology = ideology_authoritarian
 	birth_date = 1804.3.3
 	home_region = STATE_TUCUMAN
+	# EN/ES: traits -- experienced_political_operator: 'astuto y de gran sentido practico, y que sabia juzgar a los
+	#     hombres', ten years in power; imperious: 'autoritario', ruled with facultades extraordinarias and did
+	#     not let the opposition organize (es.wikipedia «Celedonio Gutierrez»)
+	traits = {
+		experienced_political_operator
+		imperious
+	}
 	trait_generation = { }
 }
 
@@ -274,6 +353,13 @@ SLT_gg_jose_antonino_fernandez_cornejo = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1768.1.1
 	home_region = STATE_SALTA
+	# EN/ES: traits -- innovative: experiments with sugar cane, then founded a sugar mill; basic_diplomat: armistice
+	#     with Olaneta (1821) and the 1834 treaty of peace and trade with Santiago and Tucuman (es.wikipedia «Jose
+	#     Antonino Fernandez Cornejo»)
+	traits = {
+		innovative
+		basic_diplomat
+	}
 	trait_generation = { }
 }
 
@@ -292,6 +378,11 @@ SLT_gg_felipe_heredia = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1797.1.1
 	home_region = STATE_SALTA
+	# EN/ES: traits -- brave: at Humahuaca (12/9/1837) 'tras varias cargas logro derrotar a la vanguardia enemiga'
+	#     (es.wikipedia «Felipe Heredia»)
+	traits = {
+		brave
+	}
 	trait_generation = { }
 }
 
@@ -309,6 +400,13 @@ SLT_gg_manuel_sola = {
 	ideology = ideology_radical
 	birth_date = 1798.6.17
 	home_region = STATE_SALTA
+	# EN/ES: traits -- literary: edited a newspaper for Latorre, later wrote a life of Guemes and a political
+	#     catechism; reckless: took personal command in 1840 and occupied Santiago 'convencido de haber vencido a
+	#     Ibarra', leaving three days later 'falto de todo' (es.wikipedia «Manuel Sola»)
+	traits = {
+		literary
+		reckless
+	}
 	trait_generation = { }
 }
 
@@ -326,6 +424,11 @@ SLT_gg_miguel_otero = {
 	ideology = ideology_moderate
 	birth_date = 1790.11.23
 	home_region = STATE_SALTA
+	# EN/ES: traits -- tactful: rosista, but 'sus actitudes como gobernante fueron muy conciliadoras con sus
+	#     comprovincianos' of the unitarian side (Rafael P. Sosa, «Don Miguel Otero», edisalta.ar)
+	traits = {
+		tactful
+	}
 	trait_generation = { }
 }
 
@@ -343,6 +446,8 @@ SLT_gg_gaspar_lopez = {
 	ideology = ideology_radical
 	# EN/ES: birth ¿1790? in the source: left out / nacimiento ¿1790?: no va
 	home_region = STATE_SALTA
+	# EN/ES: traits: none: no article; edisalta.ar lists him only as Otero's minister left in charge (1841) / sin
+	#     fuente
 	trait_generation = { }
 }
 
@@ -360,6 +465,11 @@ SLT_gg_dionisio_puch = {
 	ideology = ideology_radical
 	birth_date = 1804.10.9
 	home_region = STATE_SALTA
+	# EN/ES: traits -- persistent: through the 1830s 'varios intentos de invadir desde Bolivia... fracaso
+	#     repetidamente', then won La Fragua (1841) (es.wikipedia «Dionisio Puch»)
+	traits = {
+		persistent
+	}
 	trait_generation = { }
 }
 
@@ -378,6 +488,11 @@ SLT_gg_manuel_antonio_saravia = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1790.1.1
 	home_region = STATE_SALTA
+	# EN/ES: traits -- reserved: turned down the rank of brigadier general 'contentandose con el de coronel' (1845)
+	#     and after 1846 'abandono para siempre la actividad politica' (es.wikipedia «Manuel Antonio Saravia»)
+	traits = {
+		reserved
+	}
 	trait_generation = { }
 }
 
@@ -395,6 +510,11 @@ SLT_gg_jose_manuel_saravia = {
 	ideology = ideology_authoritarian
 	# EN/ES: birth ca. 1800 in the source: left out / nacimiento ca. 1800: no va
 	home_region = STATE_SALTA
+	# EN/ES: traits -- ruthless: forced Lopez Villar out of Jujuy and had Mariano Santibanez shot after a summary
+	#     trial (1851) (es.wikipedia «Jose Manuel Saravia»)
+	traits = {
+		ruthless
+	}
 	trait_generation = { }
 }
 
@@ -412,6 +532,7 @@ SLT_gg_vicente_tamayo = {
 	ideology = ideology_moderate
 	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
 	home_region = STATE_SALTA
+	# EN/ES: traits: none: the article (es.wikipedia) gives offices only / sin fuente
 	trait_generation = { }
 }
 
@@ -430,6 +551,11 @@ JUJ_gg_eustaquio_medina = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1790.1.1
 	home_region = STATE_JUJUY
+	# EN/ES: traits -- basic_diplomat: 'logro que todas las demas provincias... reconocieran la autonomia de Jujuy
+	#     por medio de tratados' (es.wikipedia «Eustaquio Medina»)
+	traits = {
+		basic_diplomat
+	}
 	trait_generation = { }
 }
 
@@ -448,6 +574,7 @@ JUJ_gg_miguel_puch = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1804.1.1
 	home_region = STATE_JUJUY
+	# EN/ES: traits: none: the article (es.wikipedia) gives battles and offices, no conduct / sin fuente
 	trait_generation = { }
 }
 
@@ -466,6 +593,8 @@ JUJ_gg_pablo_aleman = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1791.1.1
 	home_region = STATE_JUJUY
+	# EN/ES: traits: none: the article (es.wikipedia) says only that he was never popular and that little can be said
+	#     of his government / sin fuente
 	trait_generation = { }
 }
 
@@ -484,6 +613,13 @@ JUJ_gg_jose_mariano_iturbe = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1795.1.1
 	home_region = STATE_JUJUY
+	# EN/ES: traits -- honorable: 'se le reconocia... firmeza y honradez en el manejo de los fondos publicos';
+	#     experienced_political_operator: governed Jujuy 1838-40 and 1841-49, reelected 1843 and 1846
+	#     (es.wikipedia «Mariano Iturbe»)
+	traits = {
+		honorable
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -501,6 +637,7 @@ JUJ_gg_roque_alvarado = {
 	ideology = ideology_radical
 	birth_date = 1793.8.16
 	home_region = STATE_JUJUY
+	# EN/ES: traits: none: the article (es.wikipedia) gives offices and dates only / sin fuente
 	trait_generation = { }
 }
 
@@ -518,6 +655,11 @@ JUJ_gg_pedro_castaneda = {
 	ideology = ideology_moderate
 	# EN/ES: birth c. 1800 in the source: left out / nacimiento c. 1800: no va
 	home_region = STATE_JUJUY
+	# EN/ES: traits -- tactful: 'por su caracter pacifico' got Iturbe to let the unitarians back; formed a two-party
+	#     cabinet and forgave his captors (1849) (es.wikipedia «Pedro Castaneda»)
+	traits = {
+		tactful
+	}
 	trait_generation = { }
 }
 
@@ -535,6 +677,7 @@ JUJ_gg_jose_lopez_villar = {
 	ideology = ideology_radical
 	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
 	home_region = STATE_JUJUY
+	# EN/ES: traits: none: the article (es.wikipedia) gives his fortune and offices, no conduct / sin fuente
 	trait_generation = { }
 }
 
@@ -553,6 +696,11 @@ CTM_gg_fernando_villafane = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1784.1.1
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits -- compliant: 'oficiaba de titere de Heredia' (es.wikipedia «Manuel Navarro (gobernador)») and
+	#     let Tucuman annex western Catamarca (es.wikipedia «Fernando Villafane»)
+	traits = {
+		compliant
+	}
 	trait_generation = { }
 }
 
@@ -571,6 +719,12 @@ CTM_gg_jose_cubas = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1798.1.1
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits -- 'hombre carismatico, honorable y querido en su provincia', after Catamarca's historians (E.
+	#     Birkmann, Seminario de DD.HH., mesa 18, 2021, n. 7; conti.derhuman.jus.gov.ar)
+	traits = {
+		charismatic
+		honorable
+	}
 	trait_generation = { }
 }
 
@@ -589,6 +743,11 @@ CTM_gg_juan_eusebio_balboa = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1791.1.1
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits -- experienced_political_operator: imposed Nieva y Castilla's election (1842), overthrew him
+	#     (1845) and had Navarro elected (es.wikipedia «Santos Nieva y Castilla», «Juan Eusebio Balboa»)
+	traits = {
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -607,6 +766,13 @@ CTM_gg_santos_nieva_y_castilla = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1779.1.1
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits -- inept: 'un militar sin capacidad alguna para el gobierno' (es.wikipedia «Juan Eusebio
+	#     Balboa»); ambitious: dissolved the legislature to be reelected (1843), 'intento nuevamente perpetuarse
+	#     en el poder' (1845) (es.wikipedia «Santos Nieva y Castilla»)
+	traits = {
+		inept
+		ambitious
+	}
 	trait_generation = { }
 }
 
@@ -625,6 +791,13 @@ CTM_gg_manuel_navarro = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1791.1.1
 	home_region = STATE_CATAMARCA
+	# EN/ES: traits -- cautious: 'quiso mantenerse aparte del problema' (1835), kept 'alejado de problemas... no le
+	#     permitia embarcarse en aventuras'; experienced_political_operator: eased Figueroa out by promoting him,
+	#     governor 1833-35 and 1845-52 (es.wikipedia «Manuel Navarro (gobernador)»)
+	traits = {
+		cautious
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -642,6 +815,11 @@ LRJ_gg_jacinto_del_rincon = {
 	ideology = ideology_moderate
 	# EN/ES: birth ca. 1794 in the source: left out / nacimiento ca. 1794: no va
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits -- grifter: part of San Juan's indemnity 'nunca llego a las arcas provinciales'; arrested for
+	#     taking 25 000 pesos of it (1836) (es.wikipedia «Jacinto del Rincon»)
+	traits = {
+		grifter
+	}
 	trait_generation = { }
 }
 
@@ -659,6 +837,8 @@ LRJ_gg_juan_antonio_carmona = {
 	ideology = ideology_moderate
 	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits: none: no article; only 'un caudillejo menor' (es.wikipedia «Jacinto del Rincon») and one coinage
+	#     letter (ifinra.org) / sin fuente
 	trait_generation = { }
 }
 
@@ -676,6 +856,7 @@ LRJ_gg_francisco_ciriaco_bustamante = {
 	ideology = ideology_moderate
 	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits: none: no article or other source found / sin fuente
 	trait_generation = { }
 }
 
@@ -693,6 +874,13 @@ LRJ_gg_hipolito_tello = {
 	ideology = ideology_moderate
 	# EN/ES: birth sin dato in the source: left out / nacimiento sin dato: no va
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits -- on his 1834 term: 'sin tener la mas remota idea de lo que era el gobierno... ni las aptitudes
+	#     necesarias', but 'un hombre honrado... muy apreciado por su bondad' (revisionistas.com.ar, «Fernando
+	#     Villafane»)
+	traits = {
+		honorable
+		inept
+	}
 	trait_generation = { }
 }
 
@@ -710,6 +898,11 @@ LRJ_gg_vicente_mota = {
 	ideology = ideology_moderate
 	# EN/ES: birth ca. 1805 in the source: left out / nacimiento ca. 1805: no va
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits -- master_bureaucrat: took La Rioja with 'exhausto su erario, gravado con una enorme deuda' and
+	#     'logro ordenar la situacion en gran medida' (1846-48) (es.wikipedia «Vicente Mota»)
+	traits = {
+		master_bureaucrat
+	}
 	trait_generation = { }
 }
 
@@ -728,6 +921,13 @@ LRJ_gg_manuel_vicente_bustos = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1806.1.1
 	home_region = STATE_LA_RIOJA
+	# EN/ES: traits -- experienced_political_operator: 'trayectoria politica acomodaticia', trusted man of Rosas,
+	#     Urquiza and Mitre in turn, four times governor; ruthless: had Vicente Mota shot (8/8/1851) (es.wikipedia
+	#     «Manuel Vicente Bustos», «Vicente Mota»)
+	traits = {
+		experienced_political_operator
+		ruthless
+	}
 	trait_generation = { }
 }
 
@@ -745,6 +945,12 @@ MZA_gg_pedro_molina = {
 	ideology = ideology_moderate
 	birth_date = 1781.6.29
 	home_region = STATE_MENDOZA
+	# EN/ES: traits -- innovative: Lancasterian society, public library, printing press, Mendoza's first theatre and
+	#     silkworms; experienced_political_operator: governor four times (es.wikipedia «Pedro Molina y Sotomayor»)
+	traits = {
+		innovative
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
 
@@ -762,6 +968,11 @@ MZA_gg_justo_correas = {
 	ideology = ideology_authoritarian
 	# EN/ES: birth ca. 1770 in the source: left out / nacimiento ca. 1770: no va
 	home_region = STATE_MENDOZA
+	# EN/ES: traits -- compliant: 'aliado incondicional' of Aldao (es.wikipedia «Pedro Molina y Sotomayor»), to whom
+	#     he delegated his government (1840-41) (es.wikipedia «Justo Correas»)
+	traits = {
+		compliant
+	}
 	trait_generation = { }
 }
 
@@ -780,6 +991,7 @@ MZA_gg_juan_isidro_maza = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1795.1.1
 	home_region = STATE_MENDOZA
+	# EN/ES: traits: none: the article (es.wikipedia) gives offices only / sin fuente
 	trait_generation = { }
 }
 
@@ -798,6 +1010,11 @@ MZA_gg_pedro_pascual_segura = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1802.1.1
 	home_region = STATE_MENDOZA
+	# EN/ES: traits -- tactful: after Aldao 'permitio volver a algunos emigrados unitarios'; in 1852 a 'gobierno
+	#     moderado' that banned party symbols (es.wikipedia «Pedro Pascual Segura»)
+	traits = {
+		tactful
+	}
 	trait_generation = { }
 }
 
@@ -816,6 +1033,7 @@ MZA_gg_alejo_mallea = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1802.1.1
 	home_region = STATE_MENDOZA
+	# EN/ES: traits: none: the article (es.wikipedia) is three lines, no conduct / sin fuente
 	trait_generation = { }
 }
 
@@ -833,6 +1051,12 @@ SJN_gg_martin_yanzon = {
 	ideology = ideology_moderate
 	# EN/ES: birth dic. 1801 (art; NF 1799) in the source: left out / nacimiento dic. 1801 (art; NF 1799): no va
 	home_region = STATE_SAN_JUAN
+	# EN/ES: traits -- compliant: his minister Domingo de Oro 'domino completamente a Yanzon'; reckless: invaded La
+	#     Rioja (1836) with 'muy pocos hombres', counting only on surprise (es.wikipedia «Martin Yanzon»)
+	traits = {
+		compliant
+		reckless
+	}
 	trait_generation = { }
 }
 
@@ -851,6 +1075,11 @@ SNL_gg_jose_gregorio_calderon = {
 	# EN/ES: only the year is sourced / la fuente da solo el anio
 	birth_date = 1796.1.1
 	home_region = STATE_SAN_LUIS
+	# EN/ES: traits -- imperious: 'expulso a sus opositores de la provincia e hizo obligatorio el uso de los simbolos
+	#     federales' (es.wikipedia «Jose Gregorio Calderon»)
+	traits = {
+		imperious
+	}
 	trait_generation = { }
 }
 
@@ -868,5 +1097,11 @@ SNL_gg_pablo_lucero = {
 	ideology = ideology_authoritarian
 	# EN/ES: birth ca. 1799 in the source: left out / nacimiento ca. 1799: no va
 	home_region = STATE_SAN_LUIS
+	# EN/ES: traits -- ruthless: 'hacia fusilar a los Videla' (1841); experienced_political_operator: governed San
+	#     Luis 1841-1854 (es.wikipedia «Pablo Lucero»)
+	traits = {
+		ruthless
+		experienced_political_operator
+	}
 	trait_generation = { }
 }
