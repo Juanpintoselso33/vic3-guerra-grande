@@ -1229,6 +1229,9 @@ gg_peace.2 = {
 		name = gg_peace.2.e
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 (Juan, AUD-RULES-CLIENT2) -- not with Rosas already fallen: nobody to be the client of
+			#     / no con Rosas ya caido: no queda de quien ser cliente
+			NOT = { gg_rosas_fallen = yes }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_cerrito_rosas_client = yes exists = c:ARG }
@@ -1245,9 +1248,6 @@ gg_peace.2 = {
 		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_rosista_client_tt
-			# EN/ES: 23/9 (Juan, AUD-RULES-CLIENT2) -- not with Rosas already fallen: nobody to be the client of
-			#     / no con Rosas ya caido: no queda de quien ser cliente
-			NOT = { gg_rosas_fallen = yes }
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 

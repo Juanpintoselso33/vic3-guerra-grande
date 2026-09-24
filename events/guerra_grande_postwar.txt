@@ -537,7 +537,6 @@ gg_postwar.8 = {
 			limit = { game_date < 1851.2.15 }
 			trigger_event = { id = gg_postwar.8 days = 365 }
 		}
-	}
 		else_if = {
 			limit = { game_date < 1852.1.16 }
 			trigger_event = { id = gg_postwar.8 days = 30 }
@@ -549,6 +548,7 @@ gg_postwar.8 = {
 		else = {
 			trigger_event = { id = gg_postwar.8 days = 1 }
 		}
+	}
 }
 
 # EN/ES: gg_postwar.9 -- the four years the Assembly gave Oribe are up: the ballot decides again

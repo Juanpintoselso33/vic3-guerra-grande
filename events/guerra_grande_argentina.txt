@@ -1208,37 +1208,6 @@ gg_argentina.69 = {
 		gg_argentina_accept_alcaraz = yes
 		ai_chance = { base = 20 }
 	}
-
-	immediate = {
-		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69|" # GG_TRAZA
-		hidden_effect = {
-			if = {
-				limit = { NOT = { has_global_variable = gg_arg_cal_done_20 } }
-				set_global_variable = gg_arg_cal_done_20
-			}
-		}
-	}
-}
-
-# EN: 27 November 1847 -- Urquiza destroyed the Madariaga army at Vences: 700 killed and 2,200
-#     prisoners. This event does NOT reproduce that result. It occurs only while the Federal Pact
-#     war is still being fought and decides who receives the force and the front; the engine decides
-#     whether a battle is fought and who wins it. Reopening Alcaraz is an explicit counterfactual
-#     reuse of the documented 1846 proposal, not a treaty proposed in November 1847.
-# ES: 27 de noviembre de 1847 -- Urquiza destruyo al ejercito de los Madariaga en Vences: 700 muertos
-#     y 2.200 prisioneros. Este evento NO reproduce ese resultado. Solo aparece mientras se sigue
-#     peleando la guerra del Pacto Federal y decide quien recibe la fuerza y el frente; el motor
-#     decide si hay batalla y quien la gana. Reabrir Alcaraz es una reutilizacion contrafactual
-#     explicita de la propuesta documentada de 1846, no un tratado propuesto en noviembre de 1847.
-# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1843-1847 [D];
-# docs/guerra-grande-argentina/plan-contenido-argentino.md, 1847, «Vences».
-gg_argentina.8 = {
-	type = country_event
-	placement = ROOT
-	title = gg_argentina.8.t
-	desc = gg_argentina.8.d
-	flavor = gg_argentina.8.f
-	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
 	# EN: 23/9/2026 (Juan, §2 of decisiones-argentina.md) -- the seat change of August 1846, offered only to the player,
 	#     the pattern of gg_argentina.1.b and .3.c. Buenos Aires gives Rosas's historical answer (option a, the same
 	#     effects) and the player crosses to the man who signed the treaty: Entre Rios is born loyal, a protectorate
@@ -1276,6 +1245,37 @@ gg_argentina.8 = {
 			play_as = scope:gg_new_seat
 		}
 	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_arg_cal_done_20 } }
+				set_global_variable = gg_arg_cal_done_20
+			}
+		}
+	}
+}
+
+# EN: 27 November 1847 -- Urquiza destroyed the Madariaga army at Vences: 700 killed and 2,200
+#     prisoners. This event does NOT reproduce that result. It occurs only while the Federal Pact
+#     war is still being fought and decides who receives the force and the front; the engine decides
+#     whether a battle is fought and who wins it. Reopening Alcaraz is an explicit counterfactual
+#     reuse of the documented 1846 proposal, not a treaty proposed in November 1847.
+# ES: 27 de noviembre de 1847 -- Urquiza destruyo al ejercito de los Madariaga en Vences: 700 muertos
+#     y 2.200 prisioneros. Este evento NO reproduce ese resultado. Solo aparece mientras se sigue
+#     peleando la guerra del Pacto Federal y decide quien recibe la fuerza y el frente; el motor
+#     decide si hay batalla y quien la gana. Reabrir Alcaraz es una reutilizacion contrafactual
+#     explicita de la propuesta documentada de 1846, no un tratado propuesto en noviembre de 1847.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, cronologia 1843-1847 [D];
+# docs/guerra-grande-argentina/plan-contenido-argentino.md, 1847, «Vences».
+gg_argentina.8 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.8.t
+	desc = gg_argentina.8.d
+	flavor = gg_argentina.8.f
+	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
 	event_image = { video = "gg_arg_vences" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
