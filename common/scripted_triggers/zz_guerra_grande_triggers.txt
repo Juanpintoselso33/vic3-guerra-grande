@@ -21,6 +21,9 @@
 #     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que ya
 #     esta escrita como gg_contingent.8.
 guerra_grande_play_is_allowed = {
+	# EN/ES: 23/9/2026 (Juan, AUD-FARRAPOS-A) -- no engine war Brazil-Riograndense Republic before Ponche Verde
+	#     (common/scripted_triggers/gg_farrapos.txt) / ninguna guerra del motor Brasil-Republica Riograndense antes de Ponche Verde
+	gg_farrapos_play_is_allowed = yes
 	# EN: bug hunt 23/9/2026 (CB-01) -- the other direction. The Republic holds a claim on Rio Grande do
 	#     Sul from 1836 (guerra_grande_on_actions.txt), so an Oriental AI could open return_state on
 	#     Brazil and hand the Empire the war the target-side guard forbids. Until the peace, neither the

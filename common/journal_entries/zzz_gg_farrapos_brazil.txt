@@ -1,0 +1,121 @@
+﻿# EN: 23/9/2026 (Juan, AUD-FARRAPOS-A option 1). Vanilla's ragamuffin_war (Brazil), VERBATIM
+#     (common/journal_entries/00_central_and_south_america.txt), with one change in fail: while the Republic
+#     lives and Ponche Verde (25/2/1845) has not come, Brazil at peace with it is not a failure -- there is no
+#     engine war before that date by design. Complete is unchanged: at peace, PNI and PRA gone.
+# ES: el ragamuffin_war de vanilla TAL CUAL, con un cambio en fail: mientras viva la Republica y no haya
+#     llegado Ponche Verde, el Brasil en paz con ella no fracasa: antes de esa fecha no hay guerra del motor.
+REPLACE:ragamuffin_war = {
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+
+	group = je_group_brazil
+
+
+	complete = {
+		is_at_war = no
+		OR = {
+			NOT = { exists = c:PNI }
+			c:PNI ?= {
+				is_country_alive = no
+			}
+		}
+		OR = {
+			NOT = { exists = c:PRA }
+			c:PRA ?= {
+				is_country_alive = no
+			}
+		}
+	}
+
+	on_complete = {
+		hidden_effect = { set_variable = ragamuffin_war_completed }
+	}
+
+	fail = {
+		is_at_war = no
+		OR = {
+			c:PNI ?= {
+				is_country_alive = yes
+			}
+			c:PRA ?= {
+				is_country_alive = yes
+			}
+		}
+		# EN/ES: the only change / el unico cambio
+		OR = {
+			has_global_variable = gg_farrapos_ponche_verde
+			NOT = { exists = c:PNI }
+		}
+	}
+
+	on_fail = {
+		trigger_event = { id = south_america.5 }
+		hidden_effect = { set_variable = ragamuffin_war_completed }
+		if = {
+			limit = {
+				has_journal_entry = je_pedro_brazil
+			}
+			remove_pedropoint_effect = yes
+		}
+	}
+
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+}
+
+# EN: Codex 23/9 -- vanilla's ragamuffin_war_minors (PNI and PRA), VERBATIM, with one change in complete: with no
+#     engine war PNI was "at peace and alive" on day one and closed its journal as a victory in January 1836.
+#     PNI's completes only after Ponche Verde; PRA's is unchanged.
+# ES: el ragamuffin_war_minors de vanilla TAL CUAL con un cambio en complete: sin guerra del motor PNI lo
+#     cerraba como victoria en enero de 1836. El de PNI se completa solo despues de Ponche Verde.
+REPLACE:ragamuffin_war_minors = {
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+
+	group = je_group_historical_content
+
+	is_shown_in_lobby = {
+		OR = {
+			c:PNI ?= THIS
+			c:PRA ?= THIS
+		}
+	}
+
+
+	immediate = {
+		c:BRZ ?= {
+			save_scope_as = brz_scope
+		}
+	}
+
+	complete = {
+		is_at_war = no
+		is_country_alive = yes
+		# EN/ES: the only change / el unico cambio
+		OR = {
+			NOT = { c:PNI ?= THIS }
+			has_global_variable = gg_farrapos_ponche_verde
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = {
+				c:PNI ?= THIS
+			}
+			custom_tooltip = {
+				text = ragamuffin_war_minors_tt
+			}
+		}
+		else = {
+			trigger_event = { id = brazilian_minors.4 popup = yes }
+		}
+	}
+
+	fail = {
+		is_country_alive = no
+	}
+
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+}

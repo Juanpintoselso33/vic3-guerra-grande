@@ -1,50 +1,24 @@
 ﻿namespace = gg_farrapos
 
 # -------------------------------------------------------------------------------------------------
-# EN: THE RAGAMUFFIN WAR (1835-1845) and its Oriental links. 23/9/2026 (Juan: balance A + integration I2).
-#     The war is vanilla's (tag PNI, the play dp_gg_farrapos since this change); this file only keeps it
-#     alive until Ponche Verde and ends it there. Everything runs on Brazil, which never changes tag, and is
-#     scheduled from game start (common/scripted_effects/gg_farrapos.txt, gg_farrapos_start):
-#       gg_farrapos.1  hidden, weekly: the war-support floor (the Oriental refuge sets it)
+# EN: THE RAGAMUFFIN WAR (1835-1845) and its Oriental links. 23/9/2026 (Juan: integration I2; AUD-FARRAPOS-A
+#     option 1). There is no engine war between Brazil and PNI before Ponche Verde, the same way there is none
+#     in the siege of Montevideo: the war is told by these events, the Oriental refuge and the treaties
+#     (common/scripted_effects/gg_farrapos.txt). Everything runs on Brazil, which never changes tag, and is
+#     scheduled from game start:
 #       gg_farrapos.5  hidden, 9/11/1842: Caxias takes command -> gg_farrapos.6 to the Cerrito
-#       gg_farrapos.2  hidden, 25/2/1845: Ponche Verde -> gg_farrapos.3 (Brazil) -> gg_farrapos.4 (Defensa)
+#       gg_farrapos.2  hidden, 25/2/1845: opens dp_gg_farrapos -> gg_farrapos.3 (Brazil, capitulation)
+#                      -> gg_farrapos.4 (Defensa); gg_farrapos.7 annexes by script if the capitulation failed
 #     The end is ALWAYS Ponche Verde: the pieces of 1851 (gg_contingent.8, the treaties of 12/10/1851) assume
 #     Brazil holds Rio Grande.
-# ES: LA GUERRA DE LOS FARRAPOS y sus lazos orientales. La guerra es la de vanilla; este archivo la sostiene
-#     hasta Ponche Verde y la termina ahi. Todo sobre el Brasil, agendado desde el inicio de la partida. El
-#     final es SIEMPRE Ponche Verde: las piezas de 1851 dan por hecho que el Brasil tiene Rio Grande.
+# ES: LA GUERRA DE LOS FARRAPOS y sus lazos orientales. No hay guerra del motor antes de Ponche Verde, igual
+#     que en el sitio: la cuentan los eventos, el refugio y los tratados. El final es SIEMPRE Ponche Verde.
 # SOURCE / FUENTE: docs/farrapos/farrapos-investigacion-y-opciones.md (design repo), with the source keys below.
 # -------------------------------------------------------------------------------------------------
 
-# EN/ES: weekly, hidden, on Brazil. Stops by itself at Ponche Verde or when the war is gone.
-#     / semanal, oculto, sobre el Brasil. Se corta solo en Ponche Verde o cuando no hay guerra.
-gg_farrapos.1 = {
-	type = country_event
-	hidden = yes
-
-	trigger = {
-		c:BRZ ?= this
-	}
-
-	immediate = {
-		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.1|" # GG_TRAZA
-		if = {
-			limit = {
-				exists = c:PNI
-				has_war_with = c:PNI
-				NOT = { has_global_variable = gg_farrapos_ponche_verde }
-			}
-			every_scope_war = {
-				limit = { is_war_participant = c:PNI }
-				gg_farrapos_floor = yes
-			}
-			trigger_event = { id = gg_farrapos.1 days = 7 }
-		}
-	}
-}
-
-# EN/ES: 25/2/1845, hidden dispatcher: the visible event is queued only if the war is still there
-#     (a scheduled event reads its trigger when queued) / despachador: solo si la guerra sigue
+# EN/ES: 25/2/1845, hidden: Ponche Verde. The mark first (the play's possible and every relay read it), then
+#     the war opens -- for one day -- and the visible event follows the next day, when the war exists
+#     / primero la marca, despues se abre la guerra, un dia, y al dia siguiente el evento visible
 gg_farrapos.2 = {
 	type = country_event
 	hidden = yes
@@ -58,21 +32,31 @@ gg_farrapos.2 = {
 		if = {
 			limit = {
 				exists = c:PNI
-				has_war_with = c:PNI
 				NOT = { has_global_variable = gg_farrapos_ponche_verde }
 			}
-			trigger_event = { id = gg_farrapos.3 popup = yes }
+			set_global_variable = gg_farrapos_ponche_verde
+			gg_farrapos_tied_down_clear = yes
+			create_diplomatic_play = {
+				name = ragamuffin_war
+				target_country = c:PNI
+				type = dp_gg_farrapos
+				war = yes
+			}
+			trigger_event = { id = gg_farrapos.3 days = 1 popup = yes }
+			# EN/ES: the net: if PNI still exists on 2 March, Brazil annexes it by script / la red: si PNI sigue el 2/3
+			trigger_event = { id = gg_farrapos.7 days = 5 }
 		}
 	}
 }
 
 # EN: PONCHE VERDE, 25/2-1/3/1845. Fontoura reads the twelve articles on the 25th; Canabarro and Lucas de
-#     Oliveira sign the act on the 28th; Caxias proclaims the peace on 1 March. There was no treaty signed
-#     by two parties: the Empire did not recognise the Republic. The capitulation is in immediate, so the
-#     date holds whatever Brazil answers and whenever: PNI's war support goes to -1000, it capitulates, and
-#     vanilla's annex_country, brazilian_minors.3 and the ragamuffin_war journal do the rest.
-# ES: PONCHE VERDE. La capitulacion va en immediate, asi la fecha se cumple conteste lo que conteste el
-#     Brasil y cuando lo conteste: el apoyo de PNI va a -1000, capitula, y la anexion de vanilla hace el resto.
+#     Oliveira sign the act on the 28th; Caxias proclaims the peace on 1 March. A negotiated peace, not a
+#     conquest, and no treaty signed by two parties: the Empire did not recognise the Republic. The
+#     capitulation is in immediate, so the date holds whatever Brazil answers and whenever: PNI's war support
+#     in the one-day war goes to -1000, it capitulates, and vanilla's annex_country, brazilian_minors.3 and the
+#     ragamuffin_war journal do the rest.
+# ES: PONCHE VERDE. Una paz negociada, no una conquista. La capitulacion va en immediate: el apoyo de PNI en
+#     la guerra de un dia va a -1000, capitula, y la anexion de vanilla hace el resto.
 # SOURCE / FUENTE: CARRION (the twelve articles in Caxias's hand, Wiederspahn 1980; the act of 28/2 and the
 #     proclamation of 1/3; "necessidade do Imperio de contar com os rio-grandenses"); CONJUR (Caxias's
 #     proclamation of 1/3/1845, verbatim, and Canabarro's "a continuacao de uma guerra seria o ultimatum da
@@ -103,9 +87,11 @@ gg_farrapos.3 = {
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.3|" # GG_TRAZA
-		set_global_variable = gg_farrapos_ponche_verde
 		every_scope_war = {
-			limit = { is_war_participant = c:PNI }
+			limit = {
+				is_war_participant = c:PNI
+				is_war_participant = c:BRZ
+			}
 			add_war_war_support = { target = c:PNI value = -1000 }
 		}
 		# EN/ES: the Oriental side hears of it: the Defensa, or the Republic before the partition
@@ -220,7 +206,6 @@ gg_farrapos.5 = {
 		if = {
 			limit = {
 				exists = c:PNI
-				has_war_with = c:PNI
 				NOT = { has_global_variable = gg_farrapos_ponche_verde }
 			}
 			if = {
@@ -299,5 +284,33 @@ gg_farrapos.6 = {
 		gg_farrapos_refuge_change = { DELTA = 0 }
 		gg_patron_change = { PATRON = brasil DELTA = 5 }
 		ai_chance = { base = 30 }
+	}
+}
+
+# EN/ES: 2/3/1845, the day after Caxias's proclamation, hidden: if the capitulation did not annex the Republic, Brazil annexes it
+#     by script, so the 1851 pieces always find Rio Grande in Brazil / si la capitulacion no anexo a la
+#     Republica, el Brasil la anexa por script
+gg_farrapos.7 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		c:BRZ ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos.7|" # GG_TRAZA
+		if = {
+			limit = { exists = c:PNI }
+			debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|PNI still alive: annexed by script|"
+			annex = c:PNI
+			# EN/ES: what vanilla's on_wargoal_enforced would have done: the amnesty event
+			#     / lo que habria hecho on_wargoal_enforced de vanilla: el evento de la amnistia
+			if = {
+				limit = { NOT = { has_variable = ragamuffin_defeat_var } }
+				set_variable = ragamuffin_defeat_var
+				trigger_event = { id = brazilian_minors.3 days = 1 popup = yes }
+			}
+		}
 	}
 }

@@ -1,29 +1,15 @@
-﻿# EN: 23/9/2026 (Juan, balance A of docs/farrapos/farrapos-investigacion-y-opciones.md in the design repo).
-#     Vanilla's file, VERBATIM, except the ragamuffin war's type: dp_gg_farrapos instead of dp_annex_war.
-#     dp_annex_war is REPLACEd by the mod for every annexation in the world (zz_gg_argentine_plays.txt) and must
-#     not change; the Farrapos get their own type, with no negotiated peace. The Cabanagem stays vanilla.
+﻿# EN: 23/9/2026 (Juan, AUD-FARRAPOS-A, option 1). Vanilla's file without the ragamuffin war: the Farrapos
+#     are NOT in an engine war with Brazil from 1836 to 1845, the same way the siege of Montevideo is not.
+#     A one-state country in an engine war capitulates the moment it is fully occupied (it fell in June-July
+#     1836 in every headless run, war-support floor or not). The war is told by events, the Oriental refuge
+#     and the treaties (events/gg_farrapos.txt); on 25/2/1845 gg_farrapos.2 opens dp_gg_farrapos and PNI
+#     capitulates at once on the Ponche Verde terms. The Cabanagem stays as in vanilla.
 #     No mod of the playset ships this file (checked in content_load.json on 23/9/2026).
-# ES: el archivo de vanilla TAL CUAL, salvo el tipo de la guerra de los Farrapos: dp_gg_farrapos en vez de
-#     dp_annex_war. dp_annex_war lo reemplaza el mod para todas las anexiones del mundo y no se toca; los
-#     Farrapos tienen su tipo propio, sin paz negociada. La Cabanagem queda como en vanilla.
+# ES: el archivo de vanilla sin la guerra de los Farrapos: de 1836 a 1845 no hay guerra del motor entre los
+#     Farrapos y el Brasil, igual que no la hay en el sitio de Montevideo. Un pais de un solo estado capitula
+#     en cuanto esta totalmente ocupado. La guerra la cuentan los eventos, el refugio y los tratados; el
+#     25/2/1845 se abre dp_gg_farrapos y PNI capitula en el acto en los terminos de Ponche Verde.
 DIPLOMATIC_PLAYS = {
-	c:BRZ ?= {
-		create_diplomatic_play = {
-			name = ragamuffin_war
-
-			target_state = s:STATE_RIO_GRANDE_DO_SUL.region_state:PNI
-
-			war = yes
-
-			type = dp_gg_farrapos # EN/ES: was dp_annex_war / era dp_annex_war
-
-			add_war_goal = {
-				holder = c:PNI
-				type = conquer_state
-				target_state = s:STATE_SANTA_CATARINA.region_state:BRZ
-			}
-		}
-	}
 	c:BRZ ?= {
 		create_diplomatic_play = {
 			name = cabanagem_war

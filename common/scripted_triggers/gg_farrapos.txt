@@ -1,0 +1,23 @@
+﻿# EN: 23/9/2026 (Juan, AUD-FARRAPOS-A option 1) -- no engine war between Brazil and the Riograndense Republic
+#     before Ponche Verde, from either side (Brazil's AI has the secret goal "conquer PNI"; PNI's, "antagonize
+#     BRZ"). Called at the top of guerra_grande_play_is_allowed, which every war play of the mod carries.
+#     Root = the initiator, scope:target_country = the target.
+# ES: ninguna guerra del motor entre el Brasil y la Republica Riograndense antes de Ponche Verde, desde
+#     ningun lado. Lo llama guerra_grande_play_is_allowed, que llevan todas las jugadas de guerra del mod.
+gg_farrapos_play_is_allowed = {
+	OR = {
+		has_global_variable = gg_farrapos_ponche_verde
+		NOT = { exists = c:PNI }
+		# EN/ES: Codex 23/9 -- only the pair Brazil-PNI, in either direction / solo el par Brasil-PNI
+		NOR = {
+			AND = {
+				c:PNI ?= this
+				scope:target_country ?= { c:BRZ ?= this }
+			}
+			AND = {
+				c:BRZ ?= this
+				scope:target_country ?= { c:PNI ?= this }
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+﻿# EN: 23/9/2026 (Juan, AUD-FARRAPOS-A option 1; Codex review) -- the war goal of the one-day war of Ponche
+#     Verde (dp_gg_farrapos). Vanilla's annex_country with ONE change: contestion_type. annex_country is
+#     contested until the holder controls half the target's states, and while a goal is contested the target's
+#     war support cannot go below 0 -- so in a war opened that morning, with nothing occupied, -1000 would stop
+#     at 0 and PNI would never capitulate. control_all_own_states is met from the first day (Brazil controls all
+#     its own states), so gg_farrapos.3's -1000 takes PNI to capitulation and the engine enforces the
+#     annexation (on_wargoal_enforced: brazilian_minors.3). Offered to nobody (possible = no).
+# ES: el objetivo de la guerra de un dia de Ponche Verde: el annex_country de vanilla con UN cambio, el tipo de
+#     disputa. Con annex_country el objetivo queda disputado hasta ocupar medio pais, y mientras esta disputado
+#     el apoyo del objetivo no baja de 0; control_all_own_states se cumple desde el primer dia, asi el -1000 de
+#     gg_farrapos.3 lleva a PNI a capitular y el motor ejecuta la anexion.
+gg_ponche_verde = {
+	icon = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	kind = annex_country
+
+	settings = {
+		require_target_be_part_of_war
+		annexes_entire_country
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_conflicts_annex_country
+	}
+
+	execution_priority = 80
+
+	contestion_type = control_all_own_states # EN/ES: the one change / el unico cambio
+
+	target_type = country
+
+	possible = {
+		gg_war_goal_is_allowed = yes
+		always = no
+	}
+
+	valid = {
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
