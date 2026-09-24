@@ -1430,7 +1430,7 @@ guerra_grande.4 = {
 #     Lucy Riall, Garibaldi: Invention of a Hero (Yale UP, 2007), ch. "Exile"; Museo del
 #     Risorgimento di Lucca, "How the red shirt was created" (museodelrisorgimento.lucca.it).
 #     Riall and en.wikipedia "Redshirts (Italy)" note the saladero story is a later claim with
-#     no contemporary record: the text states it as fact (listed in the 23/9 source report).
+#     no contemporary record: since 23/9 the text tells it as tradition ("cuentan que").
 guerra_grande.5 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.5|" } # GG_TRAZA
 	type = country_event
@@ -1543,8 +1543,8 @@ guerra_grande.9 = {
 #     and minister of war 9.X.1833 under Rivera; refused Rosas's hint of reincorporation, citing
 #     B. P. Berro, Bosquejo historico, archive.org/details/bosquejohistric00berrgoog);
 #     es.wikipedia "Juan Antonio Lavalleja" (risings of 1832 and 1834). Divisa: guerra_grande.1.
-# SOURCE / FUENTE: design (no source for "Oribe organizo el cruce"; the sources say he
-#     co-led it).
+# SOURCE / FUENTE: 23/9 -- "Oribe organizo el cruce" had no source and was removed; the text
+#     now says only that he was Lavalleja's second.
 guerra_grande.11 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.11|" } # GG_TRAZA
 	type = country_event

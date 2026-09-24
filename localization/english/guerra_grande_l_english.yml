@@ -76,7 +76,7 @@
 
 # 5 - The Italian Legion
  guerra_grande.5.t:0 "The Red Shirts of Montevideo"
- guerra_grande.5.d:0 "The legion has its commander: Giuseppe Garibaldi, a sailor from Nice condemned to death in Genoa, who came to the Plata to privateer for Río Grande and stayed. His men drill in the shirts nobody else wanted — a lot of red work smocks meant for the saladeros of the Confederation, stranded here by the war. In 1860 the same shirt will be worn in Sicily."
+ guerra_grande.5.d:0 "The legion has its commander: Giuseppe Garibaldi, a sailor from Nice condemned to death in Genoa, who came to the Plata to privateer for Río Grande and stayed. The story goes that his men drill in the shirts nobody else wanted — a lot of red work smocks meant for the saladeros of the Confederation, stranded here by the war. In 1860 the same shirt will be worn in Sicily."
  guerra_grande.5.f:0 "A uniform bought by accident, and kept on purpose."
  guerra_grande.5.a:0 "Put them on the line."
 
@@ -94,7 +94,7 @@
 
 # 11 - Portrait: Manuel Oribe
  guerra_grande.11.t:0 "The President and the Laws"
- guerra_grande.11.d:0 "Manuel Oribe was born in Montevideo in 1792, joined the revolution as a boy and was second in command of the Thirty-Three Orientals: Lavalleja led them, Oribe organised the crossing. He is a lodge man, of the Caballeros Orientales, and a legalist to the bone — when Lavalleja rose against President Rivera in 1832 and again in 1834, it was Oribe who stood by the government he disliked, because it was the lawful one.\n\nThat is the whole of him: the cult of discipline and of authority, and a badge that says Defenders of the Laws. He has already refused Rosas once, when Buenos Aires suggested the Banda Oriental might return to the Argentine Confederation."
+ guerra_grande.11.d:0 "Manuel Oribe was born in Montevideo in 1792, joined the revolution as a boy and was second in command of the Thirty-Three Orientals: Lavalleja led them, and Oribe was his second. He is a lodge man, of the Caballeros Orientales, and a legalist to the bone — when Lavalleja rose against President Rivera in 1832 and again in 1834, it was Oribe who stood by the government he disliked, because it was the lawful one.\n\nThat is the whole of him: the cult of discipline and of authority, and a badge that says Defenders of the Laws. He has already refused Rosas once, when Buenos Aires suggested the Banda Oriental might return to the Argentine Confederation."
  guerra_grande.11.f:0 "A president who would rather be obeyed than loved."
  guerra_grande.11.a:0 "The law stands above the man."
  guerra_grande.11.b:0 "A republic is not a barracks."
@@ -115,7 +115,7 @@
 
 # 14 - Portrait: Artigas
  guerra_grande.14.t:0 "The Old Man of Curuguaty"
- guerra_grande.14.d:0 "José Gervasio Artigas crossed the Paraná in September 1820 with a hundred and fifty men and never came back. Doctor Francia gave him asylum and made sure he would have no politics with it: no correspondence, no visitors, and eighteen years in the villa of San Isidro de Curuguaty, which the Paraguayans call their Siberia. The dictator never once agreed to see him.\n\nThey say Francia sends him a gold ounce a month, and that he gives most of it away to the poor of the village. He farms, he prays the rosary at dusk with his neighbours answering in Guarani, and he has asked for nothing. He is seventy-four. The Republic his men invented has just seen its president fall, and nobody in Montevideo has written to him."
+ guerra_grande.14.d:0 "José Gervasio Artigas crossed the Paraná in September 1820 with a hundred and fifty men and never came back. Doctor Francia gave him asylum and made sure he would have no politics with it: no correspondence, no visitors, and eighteen years in the villa of San Isidro de Curuguaty, which the Paraguayans call their Siberia. The dictator never once agreed to see him.\n\nThey say Francia sends him a gold ounce a month, and that he gives most of it away to the poor of the village. He farms, and he has asked for nothing. Years later, at Ibiray, his son will see him pray the rosary at dusk, his neighbours answering in Guarani. He is seventy-four. The Republic his men invented has just seen its president fall, and nobody in Montevideo has written to him."
  guerra_grande.14.f:0 "The father of the country, farming in someone else's."
  guerra_grande.14.a:0 "Send word to Curuguaty."
  guerra_grande.14.b:0 "Let the old man rest. This war is not his."

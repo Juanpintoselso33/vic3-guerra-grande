@@ -656,8 +656,8 @@ gg_powers.15 = {
 #     and the Protocolo of the Gore-Gros negotiation (BN Uruguay, handle 123456789/132464);
 #     Oribe's own bases of 20.IV.1848 signed by Villademoros: Ernesto Carranza via Jorge
 #     Pelfort, "El despecho en el despacho", jorgepelfort.blogspot.com (2012).
-# SOURCE / FUENTE: design (no source for the "seven hours" in the camp; the quoted "echar un
-#     velo sobre lo pasado" is from Oribe's 1851 commissioners, SOURCES_peace.md s.1).
+#     Herrera y Obes on those bases ("no hay aceptacion ... sino simplemente otras bases"), same
+#     source. 23/9: the unsourced "seven hours" and the 1851 "velo sobre lo pasado" were removed.
 gg_powers.16 = {
 	type = country_event
 	placement = ROOT
@@ -881,7 +881,8 @@ gg_powers.17 = {
 # F3-6 - the Basques go to Buenos Aires and Garibaldi to Italy (1848)
 # SOURCE / FUENTE: fichas.md F3-6 (es.wikipedia "Bloqueo anglo-frances", Gore-Gros: the Basques
 #     gone to Buenos Aires, Garibaldi about to sail); SOURCES_french_legion.md s.1-2 and
-#     SOURCES_order_of_battle.md s.3a (Italian Legion ~700 at its best, Etchechury 2017).
+#     SOURCES_order_of_battle.md s.3a (Italian Legion ~700 at its best, Etchechury 2017);
+#     SOURCES_powers.md s.7 (the French blockade traded for 40,000 pesos a month, 12.VI.1848).
 gg_powers.18 = {
 	type = country_event
 	placement = ROOT
@@ -1415,7 +1416,9 @@ gg_powers.25 = {
 
 # FS-2 - Florencio Varela is murdered (20 March 1848)
 # SOURCE / FUENTE: SOURCES_powers.md s.5 (Varela killed on Monday 20.III.1848 in calle
-#     Misiones; Andres Cabrera; Herrera y Obes to Lamas 27.III.1848; authorship never proved).
+#     Misiones; Andres Cabrera; Herrera y Obes to Lamas 27.III.1848; authorship never proved);
+#     Jose Marmol, Asesinato del Sr. D. Florencio Varela (Montevideo, 1849; cervantesvirtual.com):
+#     stabbed "en el acto de llamar a la puerta de su casa", fell at Charbonier's, Misiones 91.
 gg_powers.26 = {
 	type = country_event
 	placement = ROOT
@@ -1770,7 +1773,7 @@ gg_powers.31 = {
 # -------------------------------------------------------------------------------------------------
 # SOURCE / FUENTE: SOURCES_powers.md s.8 (Lamas in Rio from XI.1847; Maua; the five treaties
 #     and the pledged customs); SOURCES_loans.md s.1-2.
-# SOURCE / FUENTE: design (no source for Lamas writing that London tried to hold the Empire back).
+# SOURCE / FUENTE: 23/9 -- the unsourced line on Lamas and London was removed from the text.
 gg_powers.32 = {
 	type = country_event
 	placement = ROOT
