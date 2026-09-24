@@ -556,8 +556,14 @@ guerra_grande.3 = {
 			limit = { exists = s:STATE_PAYSANDU.region_state:URU }
 			s:STATE_PAYSANDU.region_state:URU = { set_state_owner = c:CER }
 		}
+		# EN/ES: CB-08, headless run 20260923-221612 -- the emptying kills the Cerrito's cloned ruler, the engine's
+		#     on_new_ruler seats Oribe through gg_ruler_set, and he may already be in c:CER here ("Can't transfer to
+		#     the same country") / el vaciado mata al gobernante clonado y gg_ruler_set puede haber traido ya a Oribe
 		if = {
-			limit = { exists = scope:gg_oribe }
+			limit = {
+				exists = scope:gg_oribe
+				NOT = { c:CER ?= { any_scope_character = { scope:gg_oribe ?= this } } }
+			}
 			scope:gg_oribe = { transfer_character = c:CER }
 		}
 		# EN: and the rest of the divisa goes with him. Ignacio Oribe commanded at Carpinteria,
@@ -1018,8 +1024,13 @@ guerra_grande.3 = {
 				kill_character = { hidden = yes } # EN/ES: a generated copy, never a person / una copia generada, no una persona
 			}
 		}
+		# EN/ES: CB-08 -- mirror of 3.a: gg_ruler_set may already have brought Suarez in after the emptying
+		#     / espejo de 3.a: gg_ruler_set puede haber traido ya a Suarez despues del vaciado
 		if = {
-			limit = { exists = scope:gg_suarez }
+			limit = {
+				exists = scope:gg_suarez
+				NOT = { c:URU ?= { any_scope_character = { scope:gg_suarez ?= this } } }
+			}
 			scope:gg_suarez = { transfer_character = c:URU }
 		}
 		# EN: mirror of the other branch -- the colorados go into Montevideo with Suarez.
