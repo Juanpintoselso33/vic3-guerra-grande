@@ -1,0 +1,15 @@
+﻿# EN: 24/9/2026 (Juan) -- Brazil marches against Oribe in 1851 (common/scripted_triggers/gg_brazil_deal.txt). One mark
+#     for both routes: the convention of 29 May (ROUTE = convention, gg_argentina_sign_montevideo_convention) and the
+#     September contracts alone (ROUTE = contracts, gg_notice.101). gg_notice.2, the crossing, reads it. The trace
+#     line is what the night sweep expects after an accepted loan (tools/barrido_nocturno.yaml, brasil_cumple_contratos).
+#     No numbers here: what Brazil's entry weighs is in the visible options that carry it (gg_argentina.13.a, gg_notice.2).
+# ES: el Brasil marcha contra Oribe en 1851. Una marca para las dos rutas: la convencion del 29 de mayo y los contratos
+#     de setiembre solos. La lee gg_notice.2, el cruce. Sin numeros aca: lo que pesa la entrada esta en las opciones
+#     visibles que la traen.
+gg_brazil_marches_set = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_brazil_marches_set| ROUTE= $ROUTE$ " # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_brazil_marches } }
+		set_global_variable = gg_brazil_marches
+	}
+}

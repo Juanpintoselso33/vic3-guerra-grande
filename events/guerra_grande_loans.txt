@@ -182,7 +182,13 @@ gg_loan.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.a|" # GG_TRAZA
 		name = gg_loan.2.a
-		custom_tooltip = gg_loan.2.a_tt2
+		# EN/ES: 24/9/2026 (Juan) -- the promise is kept: gg_brazil_deal brings the Empire into the war against Oribe in
+		#     1851, with Entre Rios's convention or, without it, by these contracts (gg_notice.101, gg_brazil_deal.txt)
+		#     / la promesa se cumple: la marca trae al Imperio a la guerra contra Oribe en 1851, con o sin Entre Rios
+		custom_tooltip = {
+			text = gg_loan.2.a_tt2
+			set_global_variable = gg_brazil_deal
+		}
 		# EN/ES: T4 -- FE-1: the Empire as ally / el Imperio como aliado
 		gg_patron_change = { PATRON = brasil DELTA = 25 }
 		default_option = yes
@@ -217,7 +223,11 @@ gg_loan.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.b|" # GG_TRAZA
 		name = gg_loan.2.b
-		custom_tooltip = gg_loan.2.b_tt2
+		# EN/ES: 24/9/2026 (Juan) -- the same promise through Souza's house / la misma promesa por la casa de Souza
+		custom_tooltip = {
+			text = gg_loan.2.b_tt2
+			set_global_variable = gg_brazil_deal
+		}
 		# EN/ES: T4 -- FE-1: through Souza's house, half the weight / por la casa de Souza, a medias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
 		add_treasury = 10000
@@ -247,6 +257,9 @@ gg_loan.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_loan.2.c|" # GG_TRAZA
 		name = gg_loan.2.c
+		# EN/ES: 24/9/2026 (Juan) -- without the contracts the Empire owes the Defensa nothing: it enters only if a
+		#     convention brings it / sin los contratos el Imperio no le debe nada a la Defensa: entra solo si lo trae una convencion
+		custom_tooltip = gg_loan.2.c_tt
 		add_modifier = {
 			name = guerra_grande_defensa_self_reliance
 			years = 5

@@ -965,6 +965,9 @@ gg_argentina_sign_montevideo_convention = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_sign_montevideo_convention|" # GG_TRAZA
 	set_global_variable = guerra_grande_treaties_signed
 	set_global_variable = gg_montevideo_free_navigation
+	# EN/ES: 24/9/2026 (Juan) -- Brazil marches: the mark the crossing reads (gg_notice.2), one for both routes
+	#     / el Brasil marcha: la marca que lee el cruce, una para las dos rutas (gg_brazil_deal.txt)
+	gg_brazil_marches_set = { ROUTE = convention }
 	c:ARG ?= { add_modifier = { name = gg_arg_open_rivers_cost years = 20 } }
 	if = {
 		limit = { NOT = { has_global_variable = gg_urquiza_flipped } }

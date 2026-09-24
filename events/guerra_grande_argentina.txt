@@ -3464,12 +3464,23 @@ gg_argentina.13 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.13.b|" # GG_TRAZA
 		name = gg_argentina.13.b
-		custom_tooltip = gg_montevideo_convention_refuse_tt
+		# EN/ES: 24/9/2026 (Juan) -- with the Defensa's September contracts (gg_brazil_deal) the Empire marches against Oribe
+		#     anyway (gg_notice.101): the refusal gives up Entre Rios's share, not Brazil's entry, and the tooltip says so
+		#     / con los contratos de setiembre el Imperio marcha igual: la negativa renuncia a lo de Entre Rios, no a la
+		#     entrada del Brasil
+		if = {
+			limit = { has_global_variable = gg_brazil_deal }
+			custom_tooltip = gg_montevideo_convention_refuse_deal_tt
+		}
+		else = { custom_tooltip = gg_montevideo_convention_refuse_tt }
 		set_global_variable = gg_montevideo_convention_refused
 		ai_chance = {
 			base = 15
 			# EN/ES: 23/9 (AUD-AI-13B) -- the historical Pact: Urquiza signed; never for the AI / el Pacto historico: Urquiza firmo; nunca para la IA
 			modifier = { trigger = { gg_pact_historical = yes } factor = 0 }
+			# EN/ES: 24/9/2026 (Juan) -- the Empire already pays the Defensa: the alliance of 29/5/1851 is signed; never for
+			#     the AI / el Imperio ya le paga a la Defensa: la alianza se firma; nunca para la IA
+			modifier = { trigger = { has_global_variable = gg_brazil_deal } factor = 0 }
 		}
 	}
 
@@ -3647,7 +3658,12 @@ gg_argentina.15 = {
 		else = { custom_tooltip = gg_ejercito_grande_alone_tt }
 		set_global_variable = gg_ejercito_grande_alone
 		gg_argentina_raise_ejercito_grande = yes
-		ai_chance = { base = 10 }
+		ai_chance = {
+			base = 10
+			# EN/ES: 24/9/2026 (Juan) -- with the Defensa's September contracts the Empire keeps to the historical convention of
+			#     21/11/1851; never for the AI / con los contratos de setiembre el Imperio va a la convencion historica; nunca para la IA
+			modifier = { trigger = { has_global_variable = gg_brazil_deal } factor = 0 }
+		}
 	}
 
 	immediate = {

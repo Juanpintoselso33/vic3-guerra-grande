@@ -19,6 +19,7 @@ on_monthly_pulse_country = {
 		gg_rebel_diplomacy_migration
 		gg_urquiza_prelude_migration
 		gg_oriental_left_out_migration
+		gg_brazil_deal_migration
 	}
 }
 
@@ -152,5 +153,52 @@ gg_oriental_left_out_migration = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_left_out_migration" # GG_TRAZA
 		set_global_variable = gg_pact_80_knows_oriental
 		trigger_event = { id = gg_argentina.80 days = 0 popup = yes }
+	}
+}
+
+# EN: 24/9/2026 (Juan, the Empire keeps the September contracts: common/scripted_triggers/gg_brazil_deal.txt) -- a save
+#     from before this change: (1) a loan taken while gg_loan.2 wrote no mark (mod 247b25d to this commit) is read from
+#     the modifier only gg_loan.2.a/.b add (guerra_grande_imperial_client / guerra_grande_maua_paper); (2) a convention
+#     signed before gg_brazil_marches existed marks it, or its crossing (gg_notice.101) would wait for a mark that never
+#     comes. Idempotent; not guarded by gg_new_game_no_migrations (saves of 23-24/9 have that mark and lack these).
+# ES: una partida de antes de este cambio: (1) un emprestito tomado cuando gg_loan.2 no escribia la marca se lee del
+#     modificador que solo ponen gg_loan.2.a/.b; (2) una convencion firmada antes de que existiera gg_brazil_marches la
+#     marca, o el cruce esperaria una marca que no llega. Idempotente; sin la guarda de partida nueva.
+gg_brazil_deal_migration = {
+	trigger = {
+		c:URU ?= this
+		OR = {
+			AND = {
+				NOT = { has_global_variable = gg_brazil_deal }
+				OR = {
+					has_modifier = guerra_grande_imperial_client
+					has_modifier = guerra_grande_maua_paper
+				}
+			}
+			AND = {
+				has_global_variable = gg_montevideo_free_navigation
+				NOT = { has_global_variable = gg_brazil_marches }
+			}
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_brazil_deal_migration" # GG_TRAZA
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_brazil_deal }
+				OR = {
+					has_modifier = guerra_grande_imperial_client
+					has_modifier = guerra_grande_maua_paper
+				}
+			}
+			set_global_variable = gg_brazil_deal
+		}
+		if = {
+			limit = {
+				has_global_variable = gg_montevideo_free_navigation
+				NOT = { has_global_variable = gg_brazil_marches }
+			}
+			gg_brazil_marches_set = { ROUTE = migration }
+		}
 	}
 }

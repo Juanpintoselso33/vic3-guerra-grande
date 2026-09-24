@@ -89,15 +89,31 @@ gg_notice.1 = {
 # 9/1851 -- the Empire's army crosses, from the Defensa's side.
 # SOURCE / FUENTE: pt.wikipedia, Campanha do Uruguai (16,200 men in four divisions, by the Santana pass;
 #     the figures of the removed gg_contingent.8); convention of 29/5/1851, arts. IV, V, VI, https://www.dipublico.org/122098/
-# EN: crossing = the convention signed (gg_montevideo_free_navigation) and the Empire in the game; the
-#     event itself is the crossing, and its first option lists the Allied Army in the siege journal.
-# ES: el cruce = la convencion firmada y el Imperio en la partida; el evento es el cruce, y su primera
-#     opcion lista al Ejercito Aliado en el journal del sitio.
+# EN: crossing = Brazil marches (gg_brazil_marches: the convention signed, or, since 24/9/2026, the September contracts
+#     of gg_loan.2 falling due without it -- common/scripted_triggers/gg_brazil_deal.txt) and the Empire in the game; the
+#     event itself is the crossing, and its first option lists the Allied Army in the siege journal. Without the
+#     convention the text says what brings the army (the contracts) and the twenty leagues of art. V do not exist, so
+#     the second option is only offered with the convention signed.
+# ES: el cruce = el Brasil marcha (la convencion firmada o, desde el 24/9/2026, los contratos de setiembre de gg_loan.2
+#     sin ella) y el Imperio en la partida; el evento es el cruce, y su primera opcion lista al Ejercito Aliado en el
+#     journal del sitio. Sin convencion el texto dice que lo trae (los contratos) y no hay veinte leguas del art. V: la
+#     segunda opcion solo se ofrece con la convencion firmada.
+# SOURCE / FUENTE (the contracts variant / la variante de los contratos): SOURCES_loans.md s.1 (Relatorio of 1852 via
+#     P. R. de Almeida; T. A. de Messias 2021, the contracts of 6/9/1850 and art. 6). DESIGN COUNTERFACTUAL: the crossing
+#     without a convention with Entre Rios / CONTRAFACTUAL DE DISENO: el cruce sin convencion con Entre Rios.
 gg_notice.2 = {
 	type = country_event
 	placement = ROOT
 	title = gg_notice.2.t
-	desc = gg_notice.2.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_notice.2.d
+				trigger = { has_global_variable = gg_montevideo_free_navigation }
+			}
+			triggered_desc = { desc = gg_notice.2.d_contracts }
+		}
+	}
 	flavor = gg_notice.2.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
 	event_image = { video = "gg_ntc_caxias_orden" }
@@ -110,7 +126,7 @@ gg_notice.2 = {
 		has_global_variable = guerra_grande_open_war
 		any_country = { has_variable = guerra_grande_cerrito_government }
 		exists = c:BRZ
-		has_global_variable = gg_montevideo_free_navigation
+		has_global_variable = gg_brazil_marches
 		NOT = { has_variable = gg_allied_army_arrived }
 	}
 
@@ -142,6 +158,9 @@ gg_notice.2 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.2.b|" # GG_TRAZA
 		name = gg_notice.2.b
+		# EN/ES: 24/9/2026 -- the twenty leagues are art. V of the convention: without it there is no strip to keep to
+		#     / las veinte leguas son el art. V de la convencion: sin ella no hay franja a la que atenerse
+		trigger = { has_global_variable = gg_montevideo_free_navigation }
 		custom_tooltip = gg_notice.2.b_tt
 		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
 		gg_patron_change = { PATRON = brasil DELTA = -5 }
@@ -630,13 +649,27 @@ gg_notice.100 = {
 	}
 }
 
-# 1851-09-04 -- Caxias crosses (gg_notice.2); a late convention brings a late crossing
+# 1851-09-04 -- Caxias crosses (gg_notice.2); a late convention brings a late crossing.
+# EN: 24/9/2026 (Juan) -- first, the September contracts: if the Defensa took the loan and the convention will not come
+#     (refused, the Pact negotiated, no Entre Rios to sign it), the Empire marches by the contracts alone
+#     (gg_brazil_deal_falls_due). While the convention may still come, the monthly retry waits for it.
+# ES: primero, los contratos de setiembre: si la Defensa tomo el emprestito y la convencion no va a llegar, el Imperio
+#     marcha por los contratos solos. Mientras la convencion todavia pueda llegar, el reintento mensual la espera.
 gg_notice.101 = {
 	type = country_event
 	hidden = yes
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.101|" # GG_TRAZA
-		gg_notice_relay = { DONE = gg_notice_done_2 EVENT = gg_notice.2 MARK = gg_montevideo_free_navigation SIDE = guerra_grande_defensa_government RETRY = gg_notice.101 UNTIL = 1852.6.1 }
+		# EN/ES: Codex 24/9 -- never on or after the relay's cutoff (the retries from 4/9/1851 land exactly on 1/6/1852):
+		#     a march set there would never be delivered / nunca en el corte del relevo: esa marcha no se entregaria
+		if = {
+			limit = {
+				game_date < 1852.6.1
+				gg_brazil_deal_falls_due = yes
+			}
+			gg_brazil_marches_set = { ROUTE = contracts }
+		}
+		gg_notice_relay = { DONE = gg_notice_done_2 EVENT = gg_notice.2 MARK = gg_brazil_marches SIDE = guerra_grande_defensa_government RETRY = gg_notice.101 UNTIL = 1852.6.1 }
 	}
 }
 

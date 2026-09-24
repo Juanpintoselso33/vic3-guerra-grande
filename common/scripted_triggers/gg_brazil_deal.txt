@@ -1,0 +1,46 @@
+﻿# EN: 24/9/2026 (Juan) -- THE EMPIRE KEEPS THE SEPTEMBER CONTRACTS. The tooltips of gg_loan.2 promise that the
+#     Empire's full weight can be called upon; until today only gg_powers.5 delivered it, and that route was removed
+#     with the «without la Argentina» leftovers (mod 247b25d). A Defensa that took the loan (gg_loan.2.a/.b write
+#     gg_brazil_deal) gets Brazil into the war against Oribe in 1851 whatever Entre Rios does: through the convention
+#     of 29 May (gg_argentina.13.a, as before), or, when that convention will not come, by these contracts alone
+#     (gg_notice.101 -> gg_brazil_marches_set ROUTE=contracts -> gg_notice.2, the crossing).
+# ES: EL IMPERIO CUMPLE LOS CONTRATOS DE SETIEMBRE. Los tooltips de gg_loan.2 prometen que se puede reclamar todo el
+#     peso del Imperio; solo gg_powers.5 lo cumplia, y esa ruta se saco con la limpieza «sin la Argentina». Una Defensa
+#     que tomo el emprestito tiene al Brasil en la guerra contra Oribe en 1851 haga lo que haga Entre Rios: por la
+#     convencion del 29 de mayo, como antes, o, si esa convencion no va a llegar, por estos contratos solos.
+# SOURCE / FUENTE: SOURCES_loans.md s.1 (Relatorio of 1852, via P. R. de Almeida: the loan was granted to stop the fall
+#     of the besieged plaza of Montevideo; the debt is collected «quando se restabelecer a ordem»); SOURCES_powers.md s.8.
+
+# EN: the convention of 29 May may still come: its relay is still retrying (gg_argentina_cal.28, every 7 days until
+#     14/11/1851, while Entre Rios has neither signed nor refused and the Pact was not negotiated), or gg_argentina.13 is
+#     on Entre Rios's table (the relay is done, nothing answered yet, and it was not the «Urquiza alone» branch).
+# ES: la convencion del 29 de mayo todavia puede llegar: su relevo sigue reintentando, o gg_argentina.13 esta sobre la
+#     mesa de Entre Rios sin contestar (y no fue la rama de «Urquiza solo»).
+gg_montevideo_convention_pending = {
+	NOT = { has_global_variable = gg_montevideo_free_navigation }
+	NOT = { has_global_variable = gg_montevideo_convention_refused }
+	NOT = { has_global_variable = gg_confederacion_negociada }
+	OR = {
+		AND = {
+			NOT = { has_global_variable = gg_arg_cal_done_28 }
+			game_date < 1851.11.14
+		}
+		AND = {
+			has_global_variable = gg_arg_cal_done_28
+			NOT = { gg_urquiza_no_convention = yes }
+		}
+	}
+}
+
+# EN: the contracts fall due: the loan was taken, Brazil has not marched yet, the war of the siege is still open, the
+#     Empire is in the game, and the convention will not come.
+# ES: los contratos se cobran: se tomo el emprestito, el Brasil no marcho todavia, la guerra del sitio sigue abierta,
+#     el Imperio esta en la partida y la convencion no va a llegar.
+gg_brazil_deal_falls_due = {
+	has_global_variable = gg_brazil_deal
+	NOT = { has_global_variable = gg_brazil_marches }
+	has_global_variable = guerra_grande_split_done
+	NOT = { gg_cal_war_over = yes }
+	exists = c:BRZ
+	NOT = { gg_montevideo_convention_pending = yes }
+}
