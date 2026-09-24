@@ -423,6 +423,193 @@ gg_notice.13 = {
 
 
 # =================================================================================================
+# THE CERRITO'S DECISIONS, 1846 AND 1849 / LAS DECISIONES DEL CERRITO, 1846 Y 1849
+# EN: 24/9/2026 (Juan, C2 and C6 of docs/guerra-grande-flujo/cerrito-mas-aire-propuestas.md, corrected by
+#     docs/guerra-grande-flujo/cerrito-c2-c6-fuentes.md) -- delivered by the same dated relay as the notices.
+# ES: entregadas por el mismo relevo fechado que los avisos.
+# =================================================================================================
+
+# March 1846 -- the littoral after San Antonio (8/2/1846). C2, lowered below half strength by the balance lab (Juan's
+#     rule: the human Cerrito must not rise well above the ~72 % of the G0 package): with a +1 blanco on any option a
+#     greedy human takes it and wins 78 %, so the Cerrito's options carry no balance points. a) the two divisions on
+#     the littoral: Cerrito endurance -10, Defensa endurance -15 (the plaza loses the littoral); b) historical, the
+#     Cerrito waited until December: +1 colorado, Cerrito endurance +10; c) the historical remedy of the end of
+#     1846, a division from Buenos Aires: Cerrito endurance +10, Rosas -5 (the proposal's Urquiza -10 has no fact
+#     behind it: Urquiza was back in Entre Rios from 6/3/1846 and did not recross until 1851).
+#     Only with the Anglo-French intervention on the river (gg_plata_intervention): the Defensa's river campaign of
+#     1845 was made with the squadrons. The San Antonio paragraph follows whether the Defensa raised the Italian
+#     Legion and has Garibaldi (gg_garibaldi_gref).
+# ES: el litoral despues de San Antonio. C2 a media potencia. Solo con la intervencion en el rio; el parrafo de San
+#     Antonio depende de si la Defensa levanto la Legion Italiana y de si tiene a Garibaldi.
+# SOURCE / FUENTE: Eduardo Acevedo, Anales historicos del Uruguay, t. II (1933), pp. 134-142,
+#     https://archive.org/details/EduardoAcevedo1933AnalesHistoricosdelUruguayTomoII -- August 1845, «reconquistar
+#     todos los puertos del Uruguay»; Colonia, Martin Garcia, Gualeguaychu, the Salto «sin lucha alguna»; Urquiza
+#     repulsed at the Salto in early December 1845 with «3,000 hombres de caballeria», on to Corrientes; San
+#     Antonio: 200 legionaries and 100 of Baez's horse against Gomez's 1,200, «una tercera parte de infanteria»,
+#     from noon to nine at night; Medina with 300 from the Brazilian frontier; the Montevideo ceremony in mid-March;
+#     Gomez north of the Rio Negro, Ignacio Oribe south; the 1,000-man division from Buenos Aires that crossed at
+#     the Hervidero. J. M. Fernandez Saldana, «La victoria de San Antonio» (1940), letras-uruguay.espaciolatino.com
+#     -- the Patricios de Buenos Aires battalion; Gomez's dispatch «campo de la Victoria de San Antonio del
+#     Uruguay»; the camp's paper: «El salvaje pirata Garibaldi se ha librado apenas de quedar tendido como los mas
+#     de sus soldados»; the Defensa's decree of 24/2/1846, «Invencibles, combatieron el 8 de febrero de 1846».
+#     G. E. Poenitz, Temas de Historia Argentina 6 (UCA, 2005), pp. 197-199 -- Urquiza in Corrientes by Rosas's
+#     order, Laguna Limpia 4/2/1846, back in Entre Rios on 6/3/1846.
+gg_notice.14 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.14.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_notice.14.d
+				trigger = {
+					any_country = { has_variable = guerra_grande_defensa_government has_variable = guerra_grande_italian_legion_raised }
+					has_global_variable = gg_garibaldi_gref
+				}
+			}
+			triggered_desc = {
+				desc = gg_notice.14.d_legion
+				trigger = {
+					any_country = { has_variable = guerra_grande_defensa_government has_variable = guerra_grande_italian_legion_raised }
+				}
+			}
+			triggered_desc = { desc = gg_notice.14.d_nolegion }
+		}
+	}
+	flavor = gg_notice.14.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_plata_intervention
+		# EN/ES: the squadrons were already on the river for the campaign of August 1845 (Codex 24/9)
+		#     / las escuadras ya estaban en el rio para la campania de agosto de 1845
+		global_var:gg_plata_intervention_months >= 7
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.14|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_14 } }
+				set_global_variable = gg_notice_done_14
+			}
+		}
+	}
+
+	# EN: the two divisions on the littoral: the siege line thins. ES: las dos divisiones sobre el litoral.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.14.a|" # GG_TRAZA
+		name = gg_notice.14.a
+		custom_tooltip = gg_notice.14.a_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = -10 }
+		gg_endurance_change = { SIDE = defensa VALUE = -15 }
+		ai_chance = { base = 55 }
+	}
+
+	# EN: historical: hold the line and leave the river to the plaza for now. ES: lo historico: sostener la linea.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.14.b|" # GG_TRAZA
+		name = gg_notice.14.b
+		default_option = yes
+		custom_tooltip = gg_notice.14.b_tt
+		gg_score_colorado = { AMOUNT = 1 }
+		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
+		ai_chance = { base = 30 }
+	}
+
+	# EN: ask Rosas for a division, as the Cerrito did at the end of 1846. ES: pedirle a Rosas una division.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.14.c|" # GG_TRAZA
+		name = gg_notice.14.c
+		custom_tooltip = gg_notice.14.c_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
+		gg_patron_change = { PATRON = rosas DELTA = -5 }
+		ai_chance = { base = 15 }
+	}
+}
+
+# July 1849 -- the Universidad Mayor opens in the besieged plaza (gg_powers.31, the Defensa's event): the Cerrito
+#     answers. C6, without points on the balance (Juan): a) schools in every town and a commission to direct them:
+#     10,000 from the treasury for legitimacy and the Church's approval (the schools under the priest's
+#     inspection); b) answer with the pen: no cost, the intelligentsia disapproves. Nothing here moves the
+#     war's balance, endurance or patrons, so the balance lab does not see it.
+# ES: la plaza abre la Universidad y el Cerrito contesta. C6, sin puntos en la balanza: a) escuelas en cada pueblo y
+#     una comision: 10.000 de la caja por legitimidad y la aprobacion de la Iglesia; b) contestar con la pluma: gratis,
+#     los intelectuales lo desaprueban. No mueve la balanza, el aguante ni los padrinos.
+# SOURCE / FUENTE: Orestes Araujo, Historia de la escuela uruguaya (1911), «En el campo sitiador», pp. 227-236,
+#     https://archive.org/details/historia-de-la-escuela-uruguaya-orestes-araujo-1911 -- Massini's Colegio
+#     Uruguayo (1843); Cordero's first benches of «tablones de la Maestranza del ejercito sitiador, barricas
+#     americanas llenas de piedra y arena y cajones de polvora», with «algunos mocetones del ejercito»; the college
+#     Oribe had built, directed by Cayetano Rivas; the Mercedes teacher (20/7/1846), 25 pesos a month, under the
+#     priest's inspection, to inspire «el amor patrio y apego a las instituciones republicanas que nos rigen»;
+#     Gadea's school (8/8/1849) and his couplet; El Defensor: «una porcion de casas de educacion han sido creadas o
+#     rehabilitadas en todos los pueblos del Estado»; Oribe acting «a imitacion de los hombres de la Defensa»; the
+#     Comision de Instruccion Publica decreed only on 16/2/1850 (Giro, Acevedo, Reyes), so here it is only
+#     proposed. L. M. Delio Machado, Revista de la Facultad de Derecho 22 (2003), pp. 36-37. SOURCES_powers.md
+#     section 11 (Oribe's decree of 27/5/1838; the inauguration of 18/7/1849 in San Ignacio).
+gg_notice.15 = {
+	type = country_event
+	placement = ROOT
+	title = gg_notice.15.t
+	desc = gg_notice.15.d
+	flavor = gg_notice.15.f
+	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
+	event_image = { video = "southamerica_christianity" }
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_variable = guerra_grande_cerrito_government
+		has_global_variable = guerra_grande_open_war
+		has_global_variable = gg_university_opened
+		# EN/ES: the University opened in the plaza, not in a Montevideo the Cerrito holds
+		#     / la Universidad se abrio en la plaza, no en una Montevideo del Cerrito
+		any_country = {
+			has_variable = guerra_grande_defensa_government
+			any_scope_state = { state_region = s:STATE_MONTEVIDEO }
+		}
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.15|" # GG_TRAZA
+		hidden_effect = {
+			if = {
+				limit = { NOT = { has_global_variable = gg_notice_done_15 } }
+				set_global_variable = gg_notice_done_15
+			}
+		}
+	}
+
+	# EN: schools in every town, and a commission to direct them. ES: una escuela en cada pueblo, y una comision.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.15.a|" # GG_TRAZA
+		name = gg_notice.15.a
+		default_option = yes
+		custom_tooltip = gg_notice.15.a_tt
+		add_treasury = -10000
+		add_modifier = { name = gg_cerrito_schools_of_the_restauracion years = 10 is_decaying = yes }
+		ai_chance = { base = 60 }
+	}
+
+	# EN: answer with the pen. ES: contestar con la pluma.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.15.b|" # GG_TRAZA
+		name = gg_notice.15.b
+		custom_tooltip = gg_notice.15.b_tt
+		add_modifier = { name = gg_cerrito_answers_with_the_pen years = 5 is_decaying = yes }
+		ai_chance = { base = 40 }
+	}
+}
+
+
+# =================================================================================================
 # RELAYS / RELEVOS (scheduled by gg_notices_schedule, common/scripted_effects/gg_notices.txt)
 # =================================================================================================
 
@@ -483,5 +670,26 @@ gg_notice.113 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.113|" # GG_TRAZA
 		gg_notice_relay = { DONE = gg_notice_done_13 EVENT = gg_notice.13 MARK = gg_plata_britain_settled SIDE = guerra_grande_cerrito_government RETRY = gg_notice.113 UNTIL = 1856.1.1 }
+	}
+}
+
+# 1846-03-15 -- the littoral after San Antonio (gg_notice.14, C2), while the squadrons are on the river; one attempt only
+#     (the retry falls after UNTIL): the text is about mid-March (Codex 24/9)
+gg_notice.114 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.114|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_14 EVENT = gg_notice.14 MARK = gg_plata_intervention SIDE = guerra_grande_cerrito_government RETRY = gg_notice.114 UNTIL = 1846.4.1 }
+	}
+}
+
+# 1849-07-19 -- the schools of the Restauracion (gg_notice.15, C6), the day after the University opens
+gg_notice.115 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.115|" # GG_TRAZA
+		gg_notice_relay = { DONE = gg_notice_done_15 EVENT = gg_notice.15 MARK = gg_university_opened SIDE = guerra_grande_cerrito_government RETRY = gg_notice.115 UNTIL = 1849.10.1 }
 	}
 }

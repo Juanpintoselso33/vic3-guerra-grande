@@ -25,6 +25,8 @@ gg_notices_on_game_start = {
 			trigger_event = { id = gg_notice.111 days = 4466 }      # 1848-03-28: (1848-1836)*365+(87-1) Varela, 20/3
 			trigger_event = { id = gg_notice.112 days = 4555 }      # 1848-06-25: (1848-1836)*365+(176-1) the Gros convention, 12/6
 			trigger_event = { id = gg_notice.113 days = 3650 }      # 1846-01-01: waits for Arana-Southern
+			trigger_event = { id = gg_notice.114 days = 3723 }      # 1846-03-15: (1846-1836)*365+(74-1) the littoral after San Antonio (C2)
+			trigger_event = { id = gg_notice.115 days = 4944 }      # 1849-07-19: (1849-1836)*365+(200-1) the schools, the day after the University (C6)
 			# EN/ES: Rosas's Argentina, 1846-1849 / la Argentina de Rosas
 			trigger_event = { id = gg_arg_notice.101 days = 3754 }  # 1846-04-15: (1846-1836)*365+(105-1) Rivera lands, 1/4
 			trigger_event = { id = gg_arg_notice.102 days = 3650 }  # 1846-01-01: waits for Montevideo's answer to Howden
@@ -42,6 +44,8 @@ gg_notices_on_game_start = {
 				trigger_event = { id = gg_notice.111 days = 4466 }      # 1848-03-28: (1848-1836)*365+(87-1) Varela, 20/3
 				trigger_event = { id = gg_notice.112 days = 4555 }      # 1848-06-25: (1848-1836)*365+(176-1) the Gros convention, 12/6
 				trigger_event = { id = gg_notice.113 days = 3650 }      # 1846-01-01: waits for Arana-Southern
+				trigger_event = { id = gg_notice.114 days = 3723 }      # 1846-03-15: (1846-1836)*365+(74-1) the littoral after San Antonio (C2)
+				trigger_event = { id = gg_notice.115 days = 4944 }      # 1849-07-19: (1849-1836)*365+(200-1) the schools, the day after the University (C6)
 				# EN/ES: Rosas's Argentina, 1846-1849 / la Argentina de Rosas
 				trigger_event = { id = gg_arg_notice.101 days = 3754 }  # 1846-04-15: (1846-1836)*365+(105-1) Rivera lands, 1/4
 				trigger_event = { id = gg_arg_notice.102 days = 3650 }  # 1846-01-01: waits for Montevideo's answer to Howden

@@ -255,6 +255,24 @@ gg_university_inaugurated = {
 	interest_group_ig_intelligentsia_approval_add = 3
 }
 
+# EN: 24/9/2026 (Juan, C6) -- the Cerrito answers the University with schools (gg_notice.15.a): paid teachers and
+#     schools under the priest's inspection in the towns of the State (Araujo 1911, pp. 227-236). Legitimacy and
+#     the Church's approval; no effect on the war's balance (Juan: no points).
+# ES: el Cerrito contesta a la Universidad con escuelas: legitimidad y la aprobacion de la Iglesia; nada en la balanza.
+gg_cerrito_schools_of_the_restauracion = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	interest_group_ig_devout_approval_add = 2
+}
+
+# EN: 24/9/2026 (Juan, C6) -- the Cerrito answers the University with the pen (gg_notice.15.b): a polemic in place of
+#     schools; the intelligentsia disapproves (game consequence, not a sourced reaction).
+# ES: el Cerrito contesta con la pluma: una polemica en lugar de escuelas; los intelectuales lo desaprueban.
+gg_cerrito_answers_with_the_pen = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_ig_intelligentsia_approval_add = -2
+}
+
 # EN: 1841-1842 -- the Republic does not dispute the river and Brown's squadron sits off the port.
 #     Not a scripted blockade: the mod's blockade machinery only exists from 1843, so this is the
 #     price of the decision, decaying as the Anglo-French intervention reopens the sea.
