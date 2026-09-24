@@ -21,12 +21,36 @@
 #     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que ya
 #     esta escrita como gg_contingent.8.
 guerra_grande_play_is_allowed = {
+	# EN: bug hunt 23/9/2026 (CB-01) -- the other direction. The Republic holds a claim on Rio Grande do
+	#     Sul from 1836 (guerra_grande_on_actions.txt), so an Oriental AI could open return_state on
+	#     Brazil and hand the Empire the war the target-side guard forbids. Until the peace, neither the
+	#     Republic before the partition nor either wartime government opens one of these plays.
+	# ES: la otra direccion. La Republica tiene un reclamo sobre Rio Grande do Sul desde 1836, asi que
+	#     una IA oriental podia abrirle un return_state al Brasil y darle al Imperio la guerra que la
+	#     guarda del objetivo prohibe. Hasta la paz, ni la Republica antes de la particion ni ninguno de
+	#     los dos gobiernos abre una de estas jugadas.
+	NOT = {
+		AND = {
+			gg_is_oriental_side = yes
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+	}
 	OR = {
 		# the target is nobody's wartime government
 		scope:target_country = {
 			NOR = {
 				has_variable = guerra_grande_cerrito_government
 				has_variable = guerra_grande_defensa_government
+				# EN: bug hunt 23/9/2026 (CB-01) -- nor the Republic before the partition. The marks
+				#     above only exist from guerra_grande.3, and in run 211244 Brazil took all five
+				#     Oriental states on 31/1/1842, before there was any Guerra Grande to protect.
+				# ES: ni la Republica antes de la particion. Las marcas de arriba existen recien desde
+				#     guerra_grande.3, y en la corrida 211244 el Brasil se quedo con los cinco estados
+				#     orientales el 31/1/1842, antes de que hubiera Guerra Grande que proteger.
+				AND = {
+					c:URU ?= this
+					NOT = { has_global_variable = guerra_grande_split_done }
+				}
 			}
 		}
 		# EN/ES: 23/9/2026 (audit R5) -- no longer "or it is the other government": the siege is not an
@@ -45,6 +69,21 @@ guerra_grande_play_is_allowed = {
 		AND = {
 			year >= 1851
 			c:BRZ ?= this
+		}
+	}
+}
+
+# EN: CB-01 (23/9/2026) -- a country that is one side of the Guerra Grande: either wartime government,
+#     or the Republic itself before the partition. Country scope.
+# ES: un pais que es un bando de la Guerra Grande: cualquiera de los dos gobiernos, o la Republica
+#     misma antes de la particion. Scope de pais.
+gg_is_oriental_side = {
+	OR = {
+		has_variable = guerra_grande_cerrito_government
+		has_variable = guerra_grande_defensa_government
+		AND = {
+			c:URU ?= this
+			NOT = { has_global_variable = guerra_grande_split_done }
 		}
 	}
 }
