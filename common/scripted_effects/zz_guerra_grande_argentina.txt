@@ -39,11 +39,9 @@ gg_argentina_create_corrientes = {
 		tag = CRR
 		origin = this
 		state = s:STATE_CORRIENTES.region_state:ARG
-		on_created = {
-			# EN/ES: la variable de ROL, no de tag: el calendario argentino se dirige por rol, porque
-			#     un asiento puede cambiar de manos / the ROLE variable, not the tag
-			set_variable = gg_arg_corrientes_seat
-		}
+		# EN/ES: 23/9/2026 (graph H1) -- the role mark gg_arg_corrientes_seat was set here and read nowhere
+		#     since 19/9 (the calendar addresses Corrientes as c:CRR, which a revival keeps); removed
+		#     / la marca de rol se ponia aca y nada la leia; el calendario va por c:CRR, que el renacimiento conserva
 	}
 	# EN: MISIONES AND THE EASTERN MISSIONS GO WITH IT. Corrientes had occupied the land south of the
 	#     Aguapey since 1830, handed it out in enfiteusis and claimed the whole territory on 1
@@ -1187,9 +1185,6 @@ gg_argentina_revive_corrientes = {
 		tag = CRR
 		origin = this
 		state = s:STATE_CORRIENTES.region_state:ARG
-		on_created = {
-			set_variable = gg_arg_corrientes_seat
-		}
 	}
 	# EN/ES: las mismas tres, por la misma razon / the same three, for the same reason
 	if = {

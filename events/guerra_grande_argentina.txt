@@ -423,7 +423,8 @@ gg_argentina.4 = {
 			limit = { exists = s:STATE_CORDOBA.region_state:ARG }
 			s:STATE_CORDOBA.region_state:ARG = { set_state_owner = c:CLN }
 			# EN/ES: la sexta provincia que deja de delegar / the sixth province to stop delegating
-			gg_delegation_revoked = { KEY = cordoba COUNT = -1 }
+			# EN/ES: Cordoba never opens a claim: the variant without one (bug hunt 7) / Cordoba nunca abre reclamo
+			gg_delegation_revoked_no_claim = { KEY = cordoba COUNT = -1 }
 		}
 		ai_chance = { base = 100 }
 	}
@@ -1108,7 +1109,18 @@ gg_argentina.69 = {
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.69.t
-	desc = gg_argentina.69.d
+	# EN/ES: 23/9/2026 (Juan) -- after an early Oriental peace the Uruguay clause binds nothing (a signed
+	#     peace only: a war that never crossed did not end) / tras una paz oriental firmada la clausula del
+	#     Uruguay no obliga a nada (solo paz firmada: una guerra que nunca cruzo no termino)
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.69.d_postwar
+				trigger = { has_global_variable = gg_peace_settled }
+			}
+			triggered_desc = { desc = gg_argentina.69.d }
+		}
+	}
 	flavor = gg_argentina.69.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
 	event_image = { video = "gg_arg_alcaraz" }
@@ -2565,10 +2577,27 @@ gg_argentina.41 = {
 				desc = gg_argentina.41.d_limited
 				trigger = { has_global_variable = gg_ejercito_grande_limited_terms }
 			}
+			# EN/ES: 23/9 (AUD-WAR-ROSAS) -- the Republic's pledged division marches with Urquiza anyway
+			#     / la division que comprometio la Republica marcha con Urquiza igual
+			triggered_desc = {
+				desc = gg_argentina.41.d_alone_oriental
+				trigger = { has_global_variable = gg_ejercito_grande_alone has_global_variable = gg_oriental_division_sent }
+			}
 			triggered_desc = {
 				desc = gg_argentina.41.d_alone
 				trigger = { has_global_variable = gg_ejercito_grande_alone }
 			}
+			# EN: 23/9/2026 (Juan) -- fallback, so the event is never blank (every route of gg_argentina.15 sets
+			#     one of the marks above, but an old save may not): the «orientales de la Defensa» text only if
+			#     the Defensa did not lose; if the Cerrito won there is no Montevideo convention and no foreign
+			#     army (gg_urquiza_no_convention), so Entre Rios and Corrientes march alone.
+			# ES: respaldo para que el evento nunca salga en blanco; «orientales de la Defensa» solo si la
+			#     Defensa no perdio; si gano el Cerrito no hay convencion ni ejercito extranjero: van solos.
+			triggered_desc = {
+				desc = gg_argentina.41.d_cerrito_won
+				trigger = { gg_rosas_won_guerra_grande = yes }
+			}
+			triggered_desc = { desc = gg_argentina.41.d }
 		}
 	}
 	flavor = gg_argentina.41.f
@@ -2576,12 +2605,6 @@ gg_argentina.41 = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
-			# EN/ES: 23/9 (AUD-WAR-ROSAS) -- the Republic's pledged division marches with Urquiza anyway
-			#     / la division que comprometio la Republica marcha con Urquiza igual
-			triggered_desc = {
-				desc = gg_argentina.41.d_alone_oriental
-				trigger = { has_global_variable = gg_ejercito_grande_alone has_global_variable = gg_oriental_division_sent }
-			}
 
 	trigger = {
 		c:ARG ?= this

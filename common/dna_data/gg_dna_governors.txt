@@ -2762,7 +2762,7 @@ dna_gg_rafael_leon_de_atienza = {
     enabled=yes
 }
 
-# EN: CRR_gg_juan_baltasar_acosta -- NOT PORTRAIT-BASED: no known portrait; a generic face of the period (antirrosista federal, 61 in 1843).
+# EN: CRR_gg_juan_baltasar_acosta -- NOT PORTRAIT-BASED: no known portrait; a generic face of the period (antirrosista federal, 37 in 1843: born 1806, see its character template).
 # ES: SIN RETRATO: cara generica de epoca, no sale de ningun retrato.
 #     Base: vanilla dna_edouard_suenson; ten face genes nudged +-15 so the base is not recognisable / diez genes corridos +-15.
 dna_gg_juan_baltasar_acosta = {

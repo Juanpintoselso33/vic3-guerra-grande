@@ -1711,12 +1711,29 @@ gg_powers.30 = {
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.30|" # GG_TRAZA
+		# EN: 23/9/2026 (Juan) -- the University is not wartime: after the peace relay 22 delivers it too
+		#     (gg_cal_fire_quiet_outlives_war), and then both copies of the relay can reach this event on the
+		#     same day, so the delivery is guarded by its own mark. gg_powers.31 picks the text by state.
+		# ES: la Universidad no es de guerra: despues de la paz el relevo 22 tambien la entrega, y entonces
+		#     las dos copias del relevo pueden llegar aca el mismo dia; la entrega lleva su propia marca.
+		#     Only an Oriental government opens it: after a reincorporation (Montevideo Argentine) or under
+		#     Brazil nobody does, and the mark is set only when someone receives it.
+		#     / Solo la abre un gobierno oriental; la marca se pone solo si alguien la recibe.
 		if = {
-			limit = { c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } } }
-			c:URU ?= { trigger_event = { id = gg_powers.31 popup = yes } }
+			limit = {
+				NOT = { has_global_variable = gg_university_opened }
+				c:URU ?= { any_scope_state = { state_region = s:STATE_MONTEVIDEO } }
+			}
+			set_global_variable = gg_university_opened
+			c:URU = { trigger_event = { id = gg_powers.31 popup = yes } }
 		}
-		else = {
-			c:CER ?= { trigger_event = { id = gg_powers.31 popup = yes } }
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_university_opened }
+				exists = c:CER
+			}
+			set_global_variable = gg_university_opened
+			c:CER = { trigger_event = { id = gg_powers.31 popup = yes } }
 		}
 		hidden_effect = {
 			if = {
@@ -1731,14 +1748,50 @@ gg_powers.30 = {
 # SOURCE / FUENTE: SOURCES_powers.md s.11 (decree of Oribe 27.V.1838, Larranaga's law of
 #     1833, Suarez's decree 14.VII.1849, inauguration 18.VII.1849 in San Ignacio, Ardao, rector
 #     Lorenzo A. Fernandez, only Jurisprudencia, ~60 students, Herrera y Obes patron then rector).
+# SOURCE / FUENTE: postwar variants (23/9/2026) -- Arturo Ardao, «La Universidad de Montevideo: su
+#     evolucion historica» (1950; Ediciones Universitarias 2008): the Gimnasio Nacional of 1847 made
+#     Colegio Nacional in June 1849 and seat of the University in the old Casa de Ejercicios; Oribe's
+#     1838 letter to Larranaga («ya que esta Vd. a la cabeza de nuestra Iglesia, quisiera verlo a Vd.
+#     tambien a la cabeza de aquel honroso establecimiento»); the organic law sent on 28.V.1838 and
+#     stopped by the civil war. udelar.edu.uy/historia (same dates). The Cerrito's schools:
+#     SOURCES_powers.md s.11 (Escuela Normal, «Universidad Menor de la villa de la Restauracion»).
+#     What the Cerrito does in 1849 after winning is the game's outcome, not history: the text says
+#     only what Oribe had decreed and written.
 gg_powers.31 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.31|" } # GG_TRAZA
 	type = country_event
 	placement = ROOT
 
 	title = gg_powers.31.t
-	desc = gg_powers.31.d
-	flavor = gg_powers.31.f
+	# EN: 23/9/2026 (Juan) -- three texts: the besieged city (history), the city at peace, and the city
+	#     at peace under the Cerrito, which kept its government's mark after the peace.
+	# ES: tres textos: la ciudad sitiada (la historia), la ciudad en paz, y la ciudad en paz bajo el
+	#     Cerrito, que conserva la marca de su gobierno despues de la paz.
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_powers.31.d_postwar_cerrito
+				trigger = {
+					gg_cal_war_over = yes
+					has_variable = guerra_grande_cerrito_government
+				}
+			}
+			triggered_desc = {
+				desc = gg_powers.31.d_postwar
+				trigger = { gg_cal_war_over = yes }
+			}
+			triggered_desc = { desc = gg_powers.31.d }
+		}
+	}
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_powers.31.f_postwar
+				trigger = { gg_cal_war_over = yes }
+			}
+			triggered_desc = { desc = gg_powers.31.f }
+		}
+	}
 
 	event_image = {
 		video = "gg_fl_matriz"

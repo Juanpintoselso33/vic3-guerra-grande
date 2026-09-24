@@ -465,7 +465,10 @@ gg_cal.22 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.22|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire_quiet = {
+			# EN/ES: 23/9/2026 (Juan) -- the University outlives the war: after the peace it opens in a city
+			#     at peace (gg_powers.31 has the postwar texts) / la Universidad sobrevive a la guerra: despues
+			#     de la paz se abre en una ciudad en paz (gg_powers.31 tiene los textos de posguerra)
+			gg_cal_fire_quiet_outlives_war = {
 				DONE = gg_cal_done_22
 				EVENT = gg_powers.30
 				SIDE = guerra_grande_defensa_government

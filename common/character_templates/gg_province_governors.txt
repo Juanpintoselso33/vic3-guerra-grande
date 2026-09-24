@@ -43,7 +43,7 @@ CRR_gg_rafael_leon_de_atienza = {
 	trait_generation = { }
 }
 
-# EN/ES: Juan Baltasar Acosta (1782 - 1856 (R)); antirrosista federal
+# EN/ES: Juan Baltasar Acosta (1806 - 1856); antirrosista federal
 CRR_gg_juan_baltasar_acosta = {
 	dna = dna_gg_juan_baltasar_acosta # EN/ES: no portrait: generic period face / sin retrato: cara generica (gg_dna_governors.txt)
 	first_name = gg_pn_CRR_gg_juan_baltasar_acosta_first
@@ -55,11 +55,15 @@ CRR_gg_juan_baltasar_acosta = {
 	religion = rel:catholic
 	interest_group = ig_landowners
 	ideology = ideology_moderate
-	# EN/ES: only the year is sourced / la fuente da solo el anio
-	birth_date = 1782.1.1
+	# EN: 23/9/2026 (Juan) -- birth year 1806, from the only biography found (es-academic mirror of a removed
+	#     es.wikipedia page, see docs/guerra-grande-flujo/personajes-auditoria.md); rulers.org gives 1782,
+	#     which conflicts. Only the year is sourced.
+	# ES: anio 1806, de la unica biografia hallada (espejo es-academic de una pagina borrada de es.wikipedia);
+	#     rulers.org da 1782, en conflicto. La fuente da solo el anio.
+	birth_date = 1806.1.1
 	home_region = STATE_CORRIENTES
 	# EN/ES: traits: none: no article; the only biography found (es-academic mirror of a removed es.wikipedia page)
-	#     gives no conduct beyond opposing Rosas, and a birth year (1806) that contradicts ours / sin fuente
+	#     gives no conduct beyond opposing Rosas / sin fuente
 	trait_generation = { }
 }
 
@@ -99,12 +103,11 @@ SFE_gg_estanislao_lopez = {
 	ideology = ideology_moderate
 	birth_date = 1786.11.22
 	home_region = STATE_SANTA_FE
-	# EN/ES: traits -- expert_political_operator: governed Santa Fe 1818-1838, 'el patriarca de la federacion';
-	#     tuberculosis: 'el avance de la tuberculosis le impedia salir... de su casa' in his last years
-	#     (es.wikipedia «Estanislao Lopez»)
+	# EN/ES: traits -- expert_political_operator: governed Santa Fe 1818-1838, 'el patriarca de la federacion'
+	#     (es.wikipedia «Estanislao Lopez»). 23/9/2026 (Juan): tuberculosis removed -- its health penalty could
+	#     kill him before June 1838 / se saco tuberculosis: podia matarlo antes de junio de 1838
 	traits = {
 		expert_political_operator
-		tuberculosis
 	}
 	trait_generation = { }
 }
