@@ -1,0 +1,161 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: The provinces subject to Argentina join its FOREIGN wars on its side (Juan, 24/9/2026; the triggers and the
+#     why in common/scripted_triggers/gg_arg_provinces_war.txt). Scope: any. Called a week after a war starts
+#     (gg_arg_allies.1, from common/on_actions/gg_arg_provinces_war.txt) and on Argentina's monthly pulse, which also
+#     brings in a province that becomes a subject mid-war and a war the engine opened with war = yes (no play stage).
+#     Per war: a province already in it, or at war with anyone in it, stays out (a pair cannot stand in two wars).
+#     A truce with an enemy in that war does not keep it out (Codex review, 24/9: a Brazil-URU truce would
+#     have left the Oriental Province home again when Brazil attacked): the truce is ended both ways first, as
+#     gg_pact_join_urquiza_side does with Buenos Aires. Each province remembers the enemy leader it marched against
+#     (gg_arg_marched_against), so gg_arg_provinces_leave_argentine_wars can take it out if that war later turns into
+#     one between Argentines. A no-op the second time.
+# ES: las provincias sujetas a la Argentina entran a sus guerras EXTERIORES de su lado. Se llama una semana despues de
+#     que empieza una guerra y en el pulso mensual de la Argentina, que tambien trae a una provincia que pasa a ser
+#     sujeta en plena guerra. Guerra por guerra: la que ya esta, o esta en guerra con alguno de sus participantes,
+#     queda afuera. Una tregua con un enemigo de esa guerra no la deja afuera: se termina primero, en los
+#     dos sentidos. Cada provincia recuerda contra que lider marcho, para sacarla si esa guerra se vuelve una guerra
+#     entre argentinos. La segunda vez no hace nada.
+# -------------------------------------------------------------------------------------------------
+gg_arg_provinces_join_foreign_wars = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars|" # GG_TRAZA
+	if = {
+		limit = {
+			exists = c:ARG
+			c:ARG = {
+				is_at_war = yes
+				any_scope_war = { gg_arg_war_is_foreign = yes }
+			}
+		}
+		every_country = {
+			limit = { gg_arg_province_marches = yes }
+			save_scope_as = gg_arg_ally_province
+			c:ARG = {
+				every_scope_war = {
+					limit = {
+						gg_arg_war_is_foreign = yes
+						NOT = { is_war_participant = scope:gg_arg_ally_province }
+						NOT = { any_war_participant = { has_war_with = scope:gg_arg_ally_province } }
+					}
+					# EN/ES: the truces with this war's enemies go first, only this war's (Codex review, round 2: with two wars at
+					#     once, a truce with an enemy of the other war is kept) / primero las treguas con los enemigos de esta
+					#     guerra, solo de esta
+					save_scope_as = gg_arg_joined_war
+					every_country = {
+						limit = {
+							has_war_with = c:ARG
+							scope:gg_arg_joined_war = { is_war_participant = PREV }
+							NOT = { gg_is_born_of_argentina = yes }
+							is_revolutionary = no
+							is_secessionist = no
+							OR = {
+								has_truce_with = scope:gg_arg_ally_province
+								scope:gg_arg_ally_province = { has_truce_with = PREV }
+							}
+						}
+						save_scope_as = gg_arg_truce_enemy
+						if = { limit = { has_truce_with = scope:gg_arg_ally_province } end_truce = scope:gg_arg_ally_province }
+						scope:gg_arg_ally_province = {
+							if = { limit = { has_truce_with = scope:gg_arg_truce_enemy } end_truce = scope:gg_arg_truce_enemy }
+						}
+					}
+					join_war = { target = scope:gg_arg_ally_province side = c:ARG }
+					gg_arg_save_enemy_leader = yes
+					if = {
+						limit = { is_war_participant = scope:gg_arg_ally_province }
+						if = {
+							limit = { exists = scope:gg_arg_enemy_leader }
+							scope:gg_arg_ally_province = {
+								add_to_variable_list = { name = gg_arg_marched_against target = scope:gg_arg_enemy_leader }
+							}
+						}
+						# EN/ES: the trace names the play type on its own (not through gg_arg_war_is_foreign), so the
+						#     night sweep can forbid a join in a Pact or Buenos Aires war / la traza nombra el tipo de jugada
+						#     por su cuenta, para que el barrido prohiba una entrada en una guerra del Pacto o de Buenos Aires
+						diplomatic_play = {
+							if = {
+								limit = { is_diplomatic_play_type = dp_gg_pacto_federal }
+								debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= yes PLAY= pacto " # GG_TRAZA
+							}
+							else_if = {
+								limit = { is_diplomatic_play_type = dp_gg_buenos_aires }
+								debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= yes PLAY= buenos_aires " # GG_TRAZA
+							}
+							else_if = {
+								limit = { is_diplomatic_play_type = dp_gg_cisplatina }
+								debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= yes PLAY= cisplatina " # GG_TRAZA
+							}
+							else = {
+								debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= yes PLAY= other " # GG_TRAZA
+							}
+						}
+						scope:gg_arg_ally_province = {
+							debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINER= [THIS.GetCountry.GetNameNoFormatting] " # GG_TRAZA
+						}
+					}
+					# EN/ES: the engine refused the join: the sweep forbids this line / el motor rechazo la entrada: el
+					#     barrido prohibe esta linea
+					else = {
+						debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= no " # GG_TRAZA
+					}
+				}
+			}
+		}
+	}
+}
+
+# EN: War scope: the leader of the side at war with Argentina, as scope:gg_arg_enemy_leader (cleared first, so a
+#     leader saved for another war never leaks into this one).
+# ES: scope guerra: el lider del lado en guerra con la Argentina, como scope:gg_arg_enemy_leader (se limpia antes).
+gg_arg_save_enemy_leader = {
+	clear_saved_scope = gg_arg_enemy_leader
+	if = {
+		limit = { attacker_warleader ?= { has_war_with = c:ARG } }
+		attacker_warleader = { save_scope_as = gg_arg_enemy_leader }
+	}
+	else_if = {
+		limit = { defender_warleader ?= { has_war_with = c:ARG } }
+		defender_warleader = { save_scope_as = gg_arg_enemy_leader }
+	}
+}
+
+# EN: The other half of «never between Argentines» (Codex review, 24/9/2026): the foreign test is made when a province
+#     joins, and an Argentine country (a province, the Coalition, Buenos Aires, a revolution) may join the enemy side
+#     of that war later. Then every province that marched against that war's leader (gg_arg_marched_against) and is
+#     still on Argentina's side leaves it, as vanilla's Ezo leaves a play (ep2_ezo_republic.txt: remove_*_backers on
+#     the war's play) and as gg_argentina's Alcaraz code takes Entre Rios out of Argentina's wars. A province the mod
+#     put into a war between Argentines by other code (Alcaraz's Entre Rios against Corrientes) never marched against
+#     that war's leader, so it stays. Scope: any; Argentina's monthly pulse.
+# ES: la otra mitad de «nunca entre argentinos»: la prueba se hace al entrar, y un pais argentino puede sumarse despues
+#     al lado enemigo. Entonces cada provincia que marcho contra el lider de esa guerra y sigue del lado de la
+#     Argentina sale de ella, como sale Ezo en vanilla. Una provincia que el mod metio por otro codigo en una guerra
+#     entre argentinos (el Entre Rios de Alcaraz contra Corrientes) nunca marcho contra ese lider y se queda.
+gg_arg_provinces_leave_argentine_wars = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_leave_argentine_wars|" # GG_TRAZA
+	c:ARG ?= {
+		every_scope_war = {
+			limit = { NOT = { gg_arg_war_is_foreign = yes } }
+			save_scope_as = gg_arg_turned_war
+			gg_arg_save_enemy_leader = yes
+			if = {
+				limit = { exists = scope:gg_arg_enemy_leader }
+				every_country = {
+					limit = {
+						has_variable_list = gg_arg_marched_against
+						is_target_in_variable_list = { name = gg_arg_marched_against target = scope:gg_arg_enemy_leader }
+						NOT = { has_war_with = c:ARG }
+						scope:gg_arg_turned_war = { is_war_participant = PREV }
+					}
+					save_scope_as = gg_arg_leaving_province
+					scope:gg_arg_turned_war = {
+						diplomatic_play = {
+							remove_initiator_backers = { scope:gg_arg_leaving_province }
+							remove_target_backers = { scope:gg_arg_leaving_province }
+						}
+					}
+					remove_list_variable = { name = gg_arg_marched_against target = scope:gg_arg_enemy_leader }
+					debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_leave_argentine_wars| LEFT= [THIS.GetCountry.GetNameNoFormatting] " # GG_TRAZA
+				}
+			}
+		}
+	}
+}

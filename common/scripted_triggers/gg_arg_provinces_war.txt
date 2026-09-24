@@ -1,0 +1,61 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE PROVINCES MARCH IN ARGENTINA'S FOREIGN WARS, NEVER IN ITS WARS BETWEEN ARGENTINES (Juan, 24/9/2026,
+#     decisiones.md). Under the Federal Pact of 1831 the provinces delegated war and foreign relations to Buenos
+#     Aires and sent contingents to its wars; a province held by Rosas is a protectorate here, and
+#     subject_type_protectorate has join_overlord_wars = no (vanilla 00_subject_types.txt:8, kept by the playset's
+#     Dynamic Names override), which is all-or-nothing. So the joining is scripted, per war
+#     (common/scripted_effects/gg_arg_provinces_war.txt), and these two triggers say which wars and which provinces.
+#     Reference: the Workshop's war rework 3474730999 (common/treaty_articles/28_join_wars.txt) joins a country to a
+#     standing war per war (every_diplomatic_play + is_war + war = { join_war }) after checking it may fight every
+#     enemy (no truce, not a subject of theirs); its play-stage variant (add_*_backers) is commented out.
+# ES: LAS PROVINCIAS MARCHAN EN LAS GUERRAS EXTERIORES DE LA ARGENTINA, NUNCA EN SUS GUERRAS ENTRE ARGENTINOS. Por el
+#     Pacto Federal de 1831 las provincias delegaban la guerra y las relaciones exteriores en Buenos Aires y le
+#     mandaban contingentes; aca una provincia de Rosas es protectorado, y el protectorado no se suma a las guerras
+#     de su soberano (todo o nada). Por eso la entrada es por script, guerra por guerra, y estos dos triggers dicen
+#     en cuales guerras y cuales provincias.
+# -------------------------------------------------------------------------------------------------
+
+# EN: War scope. A foreign war of Argentina: Argentina fights in it, it has an enemy, and no enemy is Argentine --
+#     not a province country, the Coalition, Buenos Aires's State (gg_is_born_of_argentina: CRR, ENR, the eleven,
+#     CLN, BUE), not a revolution or a secession (a civil war). So the Pact war (dp_gg_pacto_federal: Entre Rios,
+#     Corrientes or the Coalition on the other side), the Buenos Aires wars (dp_gg_buenos_aires: BUE) and the
+#     Ejercito Grande (Entre Rios among the enemies, Brazil and the Defensa with it) are out. Brazil, the Defensa
+#     (URU), the Cerrito (CER: Oribe's Oriental government, Rosas's ally, so a war with it is foreign too), France,
+#     Britain, Paraguay, Bolivia, Chile are in. Checks every enemy, not only the leader: one Argentine among them
+#     makes it a war between Argentines.
+# ES: scope guerra. Una guerra exterior de la Argentina: la Argentina pelea, hay enemigo y ningun enemigo es
+#     argentino (pais provincial, la Coalicion, el Estado de Buenos Aires) ni una revolucion o secesion. Se
+#     revisan todos los enemigos, no solo el lider: con un argentino entre ellos es guerra entre argentinos.
+gg_arg_war_is_foreign = {
+	exists = c:ARG
+	is_war_participant = c:ARG
+	any_war_participant = { has_war_with = c:ARG }
+	NOT = {
+		any_war_participant = {
+			has_war_with = c:ARG
+			OR = {
+				gg_is_born_of_argentina = yes
+				is_revolutionary = yes
+				is_secessionist = yes
+			}
+		}
+	}
+}
+
+# EN: Country scope. A province that marches: a direct subject of Argentina that is a province country
+#     (gg_is_province_country) or the Oriental Province of the Pact (subject_type_gg_pact_province, hotfix 0.1.1:
+#     «a protectorate in everything», the Republic taken in as a province of the Confederation), and not a player --
+#     the player's province is never put into a war by script: it keeps the vanilla means of backing Buenos Aires's
+#     play (decisiones.md, 24/9/2026).
+# ES: scope pais. Una provincia que marcha: sujeto directo de la Argentina que es pais provincial o la Provincia
+#     Oriental del Pacto, y no un jugador: a la provincia del jugador nunca la mete el script en una guerra; le
+#     quedan los medios de vanilla para respaldar la jugada de Buenos Aires.
+gg_arg_province_marches = {
+	exists = c:ARG
+	is_subject_of = c:ARG
+	OR = {
+		gg_is_province_country = yes
+		is_subject_type = subject_type_gg_pact_province
+	}
+	is_player = no
+}

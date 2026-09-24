@@ -1,0 +1,16 @@
+﻿namespace = gg_arg_allies
+
+# EN: gg_arg_allies.1 -- a week after a war involving Argentina starts: the provinces subject to it join it if it
+#     is a foreign war (common/scripted_effects/gg_arg_provinces_war.txt). Hidden, on Argentina, no trigger (a
+#     trigger is checked when the event is queued).
+# ES: una semana despues de que empieza una guerra de la Argentina: las provincias sujetas entran si es una guerra
+#     exterior. Oculto, sobre la Argentina, sin trigger.
+gg_arg_allies.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_allies.1|" # GG_TRAZA
+		gg_arg_provinces_join_foreign_wars = yes
+	}
+}
