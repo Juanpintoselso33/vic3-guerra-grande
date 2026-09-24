@@ -61,6 +61,7 @@ gg_endurance_add = {
 #       the truce (gg_war_phase_truce)            both governments  +5  -- the fighting stopped
 #       the sea lane (gg_siege_the_sea_lane...)   the Defensa        +2  -- men, money and powder by sea
 #       each foreign legion (Italian, French)    the Defensa        +1
+#       the French subsidy (1848 convention)     the Defensa        +5
 #       the Argentine auxiliaries                the Cerrito        +2
 #     Their combat stats stay for the short wars of stage 2.
 # ES: lo que describe el sitio pasa a aguante; lo de pura batalla queda para la etapa 2. Mensual.
@@ -72,6 +73,11 @@ gg_siege_modifiers_endurance = {
 		if = { limit = { has_modifier = gg_siege_the_sea_lane_stays_open } gg_endurance_add = { SIDE = defensa VALUE = 2 } }
 		if = { limit = { has_modifier = guerra_grande_italian_legion } gg_endurance_add = { SIDE = defensa VALUE = 1 } }
 		if = { limit = { has_modifier = guerra_grande_foreign_legions } gg_endurance_add = { SIDE = defensa VALUE = 1 } }
+		# EN/ES: 23/9/2026 (Juan) -- the French subsidy of the convention of 12/6/1848 (40,000 pesos a month, gg_loan.1.a)
+		#     kept the Defensa alive when the other backers left: +5 a month while it runs (ends when renounced,
+		#     gg_powers.21.a, or when the modifier runs out). Tuned with tools/simular_balanza.py
+		#     / el subsidio frances sostuvo a la Defensa cuando los otros padrinos se fueron: +5 por mes mientras corre
+		if = { limit = { has_modifier = guerra_grande_french_subsidy } gg_endurance_add = { SIDE = defensa VALUE = 5 } }
 	}
 	every_country = {
 		limit = { has_variable = guerra_grande_cerrito_government }
