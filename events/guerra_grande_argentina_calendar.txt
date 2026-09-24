@@ -638,6 +638,13 @@ gg_argentina_cal.22 = {
 				year < 1856
 				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
+				# EN/ES: CB-04 (23/9/2026) -- Buenos Aires answered the blockade without fortifying the Parana:
+				#     there is no Obligado to wait for (it used to retry a hundred times) / se contesto el
+				#     bloqueo sin fortificar el Parana: no hay Obligado que esperar
+				NAND = {
+					has_global_variable = gg_parana_answered
+					NOT = { has_global_variable = gg_parana_resistance }
+				}
 			}
 			trigger_event = { id = gg_argentina_cal.22 days = 30 }
 		}
@@ -669,6 +676,16 @@ gg_argentina_cal.23 = {
 				year < 1856
 				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
+				# EN/ES: CB-04 -- the branch closed before Quebracho: no resistance on the Parana, or Obligado
+				#     answered by taking the mediation / la rama se cerro antes de Quebracho
+				NAND = {
+					has_global_variable = gg_parana_answered
+					NOT = { has_global_variable = gg_parana_resistance }
+				}
+				NAND = {
+					has_global_variable = gg_obligado_answered
+					NOT = { has_global_variable = gg_parana_resistance_continues }
+				}
 			}
 			trigger_event = { id = gg_argentina_cal.23 days = 30 }
 		}
@@ -706,6 +723,9 @@ gg_argentina_cal.24 = {
 				year < 1856
 				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
+				# EN/ES: CB-04 -- the Hood bases were already put to the table (gg_powers.12 on the oriental side):
+				#     nothing left to wait for / las bases Hood ya se pusieron sobre la mesa
+				NOT = { has_global_variable = gg_hood_done }
 			}
 			trigger_event = { id = gg_argentina_cal.24 days = 30 }
 		}

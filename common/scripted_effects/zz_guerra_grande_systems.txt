@@ -997,6 +997,18 @@ gg_cal_fire = {
 				limit = { has_variable = $SIDE$ }
 				trigger_event = { id = $EVENT$ days = 0 popup = yes }
 			}
+			# EN: CB-04 (23/9/2026) -- a dated event gets ONE attempt once its government exists. If its own
+			#     trigger rejects it (a legion already raised with the button, Rivera not in the field, the
+			#     conditions of the day not met) it did not happen, and the relay stops: it used to retry every
+			#     month and deliver the event months or years late (gg_powers.18, dated June 1848, arrived in
+			#     December), or never, after a hundred hidden attempts. The retry below is now only for the
+			#     partition that has not happened yet. Relays that are meant to wait for a condition use
+			#     gg_cal_fire_wait / gg_cal_fire_quiet_wait instead.
+			# ES: un evento fechado tiene UN intento cuando ya existe su gobierno. Si su trigger lo rechaza, no
+			#     paso, y el relevo se detiene: antes reintentaba cada mes y lo entregaba meses o anios tarde, o
+			#     nunca, despues de cien intentos ocultos. El reintento de abajo queda solo para la particion que
+			#     todavia no ocurrio. Los relevos que esperan una condicion usan las variantes _wait.
+			set_global_variable = $DONE$
 		}
 		if = {
 			limit = {
@@ -1020,6 +1032,81 @@ gg_cal_fire_quiet = {
 		}
 		if = {
 			# EN/ES: same guard as gg_cal_fire above / la misma guarda que gg_cal_fire de arriba
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				any_country = { has_variable = $SIDE$ }
+			}
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 }
+			}
+			# EN: CB-04 (23/9/2026) -- a dated event gets ONE attempt once its government exists. If its own
+			#     trigger rejects it (a legion already raised with the button, Rivera not in the field, the
+			#     conditions of the day not met) it did not happen, and the relay stops: it used to retry every
+			#     month and deliver the event months or years late (gg_powers.18, dated June 1848, arrived in
+			#     December), or never, after a hundred hidden attempts. The retry below is now only for the
+			#     partition that has not happened yet. Relays that are meant to wait for a condition use
+			#     gg_cal_fire_wait / gg_cal_fire_quiet_wait instead.
+			# ES: un evento fechado tiene UN intento cuando ya existe su gobierno. Si su trigger lo rechaza, no
+			#     paso, y el relevo se detiene: antes reintentaba cada mes y lo entregaba meses o anios tarde, o
+			#     nunca, despues de cien intentos ocultos. El reintento de abajo queda solo para la particion que
+			#     todavia no ocurrio. Los relevos que esperan una condicion usan las variantes _wait.
+			set_global_variable = $DONE$
+		}
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
+
+# EN: CB-04 -- the relays that are MEANT to wait for a condition: the links of the powers' intervention,
+#     which since C10 has no fixed date (Brown's squadron, 10; Southern, 23; the Anglo-French blockade,
+#     31). While the war runs, a rejected attempt retries every month, as every relay did before; the
+#     war's end stops them like the others (gg_cal_war_over).
+# ES: los relevos que SI esperan una condicion: los eslabones de la intervencion de las potencias, que
+#     desde C10 no tiene fecha fija. Mientras dura la guerra, un intento rechazado reintenta cada mes; el
+#     fin de la guerra los corta como a los demas.
+gg_cal_fire_wait = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_wait| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
+	if = {
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			NOT = { gg_cal_war_over = yes }
+		}
+		if = {
+			limit = {
+				has_global_variable = guerra_grande_split_done
+				any_country = { has_variable = $SIDE$ }
+			}
+			random_country = {
+				limit = { has_variable = $SIDE$ }
+				trigger_event = { id = $EVENT$ days = 0 popup = yes }
+			}
+		}
+		if = {
+			limit = {
+				year < 1856
+				NOT = { has_global_variable = $DONE$ }
+			}
+			trigger_event = { id = $RETRY$ days = 30 }
+		}
+	}
+}
+
+# EN/ES: the same, not a popup / lo mismo, sin popup
+gg_cal_fire_quiet_wait = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cal_fire_quiet_wait| DONE= $DONE$  EVENT= $EVENT$  RETRY= $RETRY$  SIDE= $SIDE$ " # GG_TRAZA
+	if = {
+		limit = {
+			NOT = { has_global_variable = $DONE$ }
+			NOT = { gg_cal_war_over = yes }
+		}
+		if = {
 			limit = {
 				has_global_variable = guerra_grande_split_done
 				any_country = { has_variable = $SIDE$ }

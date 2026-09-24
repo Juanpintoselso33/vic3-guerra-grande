@@ -17,6 +17,9 @@
 #     a mark makes the event fire once: a country that changes tag at the partition can lose the
 #     events queued on it (that is what cost the Cerrito its war in the first playtest), and Rosas
 #     never changes tag.
+#     CB-04 (23/9/2026): the monthly retry is for the partition only. Once the government exists a
+#     dated event gets one attempt; if its trigger rejects it, it did not happen and the relay stops.
+#     Only the links of the powers' intervention (10, 12, 19, 23, 25, 31) wait for their condition.
 #     Day offsets are counted with 365-day years, which is the calendar the engine runs on: there
 #     are no leap days in it.
 # ES: EL CALENDARIO FECHADO DE LA GUERRA. Todo lo de abajo paso un dia que las fuentes dan, y hasta
@@ -35,6 +38,9 @@
 #     una marca hace que el evento salga una sola vez: un pais que cambia de tag en la particion
 #     puede perder los eventos agendados sobre el (eso le costo la guerra al Cerrito en la primera
 #     prueba), y Rosas no cambia de tag nunca.
+#     CB-04: el reintento mensual es solo para la particion. Con el gobierno ya creado, un evento
+#     fechado tiene un intento; si su trigger lo rechaza, no paso y el relevo se detiene. Solo los
+#     eslabones de la intervencion de las potencias (10, 12, 19, 23, 25, 31) esperan su condicion.
 #     Los corrimientos se cuentan con anios de 365 dias, que es el calendario del motor: no tiene
 #     dias bisiestos.
 # -------------------------------------------------------------------------------------------------
@@ -210,7 +216,8 @@ gg_cal.10 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.10|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire = {
+			# EN/ES: CB-04 -- waits for the intervention (C10) / espera la intervencion
+			gg_cal_fire_wait = {
 				DONE = gg_cal_done_10
 				EVENT = gg_powers.11
 				SIDE = guerra_grande_cerrito_government
@@ -476,7 +483,8 @@ gg_cal.23 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.23|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire = {
+			# EN/ES: CB-04 -- waits for the intervention (C10) / espera la intervencion
+			gg_cal_fire_wait = {
 				DONE = gg_cal_done_23
 				EVENT = gg_powers.19
 				SIDE = guerra_grande_defensa_government
@@ -625,7 +633,8 @@ gg_cal.31 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.31|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire_quiet = {
+			# EN/ES: CB-04 -- waits for the intervention (C10) / espera la intervencion
+			gg_cal_fire_quiet_wait = {
 				DONE = gg_cal_done_31
 				EVENT = gg_powers.3
 				SIDE = guerra_grande_defensa_government

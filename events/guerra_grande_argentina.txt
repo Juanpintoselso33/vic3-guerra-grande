@@ -1796,6 +1796,8 @@ gg_argentina.22 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.a|" # GG_TRAZA
 		name = gg_argentina.22.a
+		# EN/ES: CB-04 -- answered: the calendar relay of the next link reads it / contestado: lo lee el relevo del eslabon siguiente
+		set_global_variable = gg_parana_answered
 		custom_tooltip = gg_argentina.22.a_tt
 		default_option = yes
 		set_global_variable = gg_parana_resistance
@@ -1856,6 +1858,8 @@ gg_argentina.22 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.b|" # GG_TRAZA
 		name = gg_argentina.22.b
+		# EN/ES: CB-04 -- answered: the calendar relay of the next link reads it / contestado: lo lee el relevo del eslabon siguiente
+		set_global_variable = gg_parana_answered
 		custom_tooltip = gg_argentina.22.b_tt
 		# EN/ES: the same Federal-Pact claims are answered; no parallel delegation counter is created.
 		#     / se contestan los mismos reclamos del Pacto; no se crea otro contador de delegacion
@@ -1883,6 +1887,8 @@ gg_argentina.22 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.22.c|" # GG_TRAZA
 		name = gg_argentina.22.c
+		# EN/ES: CB-04 -- answered: the calendar relay of the next link reads it / contestado: lo lee el relevo del eslabon siguiente
+		set_global_variable = gg_parana_answered
 		custom_tooltip = gg_argentina.22.c_tt
 		# EN/ES: this is the existing powers' mediation gate read by gg_powers.12, not a second clock.
 		#     / esta es la misma llave de mediacion que lee gg_powers.12, no otro reloj
@@ -1954,6 +1960,8 @@ gg_argentina.23 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.23.a|" # GG_TRAZA
 		name = gg_argentina.23.a
+		# EN/ES: CB-04 -- answered: the calendar relay of the next link reads it / contestado: lo lee el relevo del eslabon siguiente
+		set_global_variable = gg_obligado_answered
 		custom_tooltip = gg_argentina.23.a_tt
 		default_option = yes
 		set_global_variable = gg_parana_resistance_continues
@@ -1963,6 +1971,8 @@ gg_argentina.23 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.23.b|" # GG_TRAZA
 		name = gg_argentina.23.b
+		# EN/ES: CB-04 -- answered: the calendar relay of the next link reads it / contestado: lo lee el relevo del eslabon siguiente
+		set_global_variable = gg_obligado_answered
 		custom_tooltip = gg_argentina.23.b_tt
 		set_global_variable = gg_powers_mediators
 		# EN/ES: 23/9 -- the engine mobilizes only a country in a play or a war (CANNOT_MOBILIZE_ARMIES_NO_DIPLO_PLAY:
