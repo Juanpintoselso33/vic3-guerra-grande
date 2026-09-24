@@ -147,24 +147,6 @@ gg_is_foreigner = {
 # ES: C10 -- gg_sea_open ya no existe. Si el rio esta cerrado lo dice gg_plata_closed, en
 #     gg_rio_plata.txt: el unico lugar que lo decide (invariante I16).
 
-# EN: T2. War scope: this is the Guerra Grande -- one government leads each side. Same pattern as
-#     vanilla common/ideologies/01_character_ideologies.txt:2628 (attacker_warleader ?= {...}).
-#     Marks, not tags, so it survives the change_tag of guerra_grande.3.b.
-# ES: T2. Scope de guerra: esta es la Guerra Grande -- un gobierno lidera cada bando. Mismo patron
-#     que vanilla. Por marca y no por tag, asi sobrevive al change_tag de guerra_grande.3.b.
-gg_is_the_war = {
-	OR = {
-		AND = {
-			attacker_warleader ?= { has_variable = guerra_grande_cerrito_government }
-			defender_warleader ?= { has_variable = guerra_grande_defensa_government }
-		}
-		AND = {
-			attacker_warleader ?= { has_variable = guerra_grande_defensa_government }
-			defender_warleader ?= { has_variable = guerra_grande_cerrito_government }
-		}
-	}
-}
-
 # EN: T2, arbiter. The Cerrito is ripe for a peace dictated by the Defensa: it asked for terms (from
 #     1849), its endurance is spent (three months at -25 or below), or the colorados hold the lead the
 #     calendar asks for (gg_arbiter_balance_needed). 23/9/2026: no occupation any more -- the siege is

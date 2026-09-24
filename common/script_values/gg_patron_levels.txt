@@ -97,9 +97,6 @@ gg_patron_level_brasil = {
 	}
 	if = { limit = { year < 1850 } value = 0 }
 }
-# EN/ES: not powers: no level / no son potencias: sin nivel
-gg_patron_level_rosas = { value = 9 }
-gg_patron_level_urquiza = { value = 9 }
 
 # EN/ES: the GUI's reading of London's place in the river: 0 in it, 1 out by recognising the right of
 #     blockade (Southern), 2 out because it does not stand behind the Defensa
