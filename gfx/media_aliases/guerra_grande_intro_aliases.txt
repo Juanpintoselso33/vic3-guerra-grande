@@ -7,12 +7,6 @@ gg_in_montevideo_plan = {
 	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 
-# Museo del Bicentenario (Buenos Aires), Combate de la Vuelta de Obligado, 20.11.1845 -- public domain
-gg_in_obligado = {
-	video = "gfx/media_aliases/gg_in_obligado.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
 # Pedro Blanes Viale, Jura de la Constitucion de 1830 (Palacio Legislativo) -- public domain
 gg_in_constitution = {
 	video = "gfx/media_aliases/gg_in_constitution.bk2"

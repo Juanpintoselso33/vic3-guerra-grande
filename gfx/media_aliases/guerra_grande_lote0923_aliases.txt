@@ -56,12 +56,6 @@ gg_ba_mitre = {
 	audio = "event:/SFX/Events/unspecific/military_parade"
 }
 
-# gg_ba.11: "Partida Guardia Nacional Pavon Leon Paliere.jpg" -- Leon_Palliere (1823-1866) -- Public domain
-gg_ba_pavon = {
-	video = "gfx/media_aliases/gg_ba_pavon.bk2"
-	audio = "event:/SFX/Events/unspecific/leader_speaking_to_a_group_of_people"
-}
-
 # gg_ba.12: "Vista de Buenos Aires, segun Brayer.tif" -- Brayer -- Public domain
 gg_ba_brayer = {
 	video = "gfx/media_aliases/gg_ba_brayer.bk2"
@@ -84,18 +78,6 @@ gg_cis_oribe = {
 gg_cis_paco = {
 	video = "gfx/media_aliases/gg_cis_paco.bk2"
 	audio = "event:/SFX/DLC/1.3_ip1/Events/unspecific/gunboat_diplomacy"
-}
-
-# gg_cisplatina.4: "Adolphe D Hastrel - Azoteas de Montevideo.png" -- Adolphe Hastrel de Rivedoux -- Public domain
-gg_cis_azoteas = {
-	video = "gfx/media_aliases/gg_cis_azoteas.bk2"
-	audio = "event:/SFX/Events/unspecific/signed_contract"
-}
-
-# gg_cisplatina.5: "The Roads, Montevideo, 1840.jpg" -- Adolphe D'Hastrel (1805-1875) -- Public domain
-gg_cis_roads = {
-	video = "gfx/media_aliases/gg_cis_roads.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
 }
 
 # gg_cisplatina.6: "Visconde d'Uruguay - Litografia.jpg" -- Sebastien Auguste Sisson -- Public domain
@@ -138,12 +120,6 @@ gg_ros_santa_lucia = {
 gg_ros_ministro_ingles = {
 	video = "gfx/media_aliases/gg_ros_ministro_ingles.bk2"
 	audio = "event:/SFX/Events/africa/diplomats_negotiating"
-}
-
-# gg_rosas.4: "Vista de Buenos Aires, segun Durand Brager.tif" -- Jean-Baptiste Henri Durand-Brager -- Public domain
-gg_ros_durand = {
-	video = "gfx/media_aliases/gg_ros_durand.bk2"
-	audio = "event:/SFX/Events/unspecific/signed_contract"
 }
 
 # gg_rosas.5: "Fuerte de Buenos Aires, anonimo.tif" -- AnonymousUnknown author -- Public domain
@@ -350,12 +326,6 @@ gg_arg_coraceros = {
 	audio = "event:/SFX/Events/southamerica/aristocrats"
 }
 
-# gg_argentina.10: "Juan Genaro Beron de Astrada.jpg" -- HyDPL -- Public domain
-gg_arg_beron = {
-	video = "gfx/media_aliases/gg_arg_beron.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
-}
-
 # gg_argentina.11: "Battle of Sarandi, Juan Manuel Blanes.jpg" -- Juan Manuel Blanes -- Public domain
 gg_arg_sarandi = {
 	video = "gfx/media_aliases/gg_arg_sarandi.bk2"
@@ -413,12 +383,6 @@ gg_arg_casa_caseros = {
 # gg_argentina.82: "Vista de San Nicolas de los Arroyos - Buenos Aires, segun Mousse.tif" -- Mousse -- Public domain
 gg_arg_san_nicolas = {
 	video = "gfx/media_aliases/gg_arg_san_nicolas.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
-}
-
-# gg_argentina.83: "Batalla de Caseros, Litografia de Carlo Penuti, ca. 1852.jpg" -- Carlo Penuti -- Public domain
-gg_arg_caseros_penuti = {
-	video = "gfx/media_aliases/gg_arg_caseros_penuti.bk2"
 	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 

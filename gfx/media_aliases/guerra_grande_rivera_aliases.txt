@@ -8,17 +8,3 @@ gg_rivera_arroyo_grande = {
 	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
 }
 
-gg_rivera_exile = {
-	video = "gfx/media_aliases/gg_rivera_exile.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
-}
-
-gg_rivera_return = {
-	video = "gfx/media_aliases/gg_rivera_return.bk2"
-	audio = "event:/SFX/Events/southamerica/election"
-}
-
-gg_rivera_death = {
-	video = "gfx/media_aliases/gg_rivera_death.bk2"
-	audio = "event:/SFX/Events/southamerica/christianity"
-}

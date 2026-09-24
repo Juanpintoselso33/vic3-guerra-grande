@@ -1,19 +1,6 @@
 ﻿# Media aliases for the river war of 1841-1842 (FN-3). Sources / Fuentes: SOURCES_flujo_images.md.
 # Alias de los eventos de la guerra del rio de 1841-1842.
 
-# "El almirante Brown frente a Montevideo", Diogenes Hequet (1866-1902) -- public domain / dominio publico
-gg_nav_brown_montevideo = {
-	video = "gfx/media_aliases/gg_nav_brown_montevideo.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
-# "Combate Naval", Eduardo de Martino (d. 1912), Museu Nacional de Belas Artes -- public domain.
-# EN/ES: two sail warships trading fire at dusk, as the 24 May 1841 action was fought / al anochecer, como el combate del 24 de mayo de 1841
-gg_nav_pasquines = {
-	video = "gfx/media_aliases/gg_nav_pasquines.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
 # "Battle of Monte Santiago", Edoardo de Martino, 1870 -- public domain.
 # EN: NOT Costa Brava: it is the 1827 action, used for the dismasted hull and the men in the water.
 # ES: NO es Costa Brava: es el combate de 1827, usado por el casco desarbolado y los naufragos.

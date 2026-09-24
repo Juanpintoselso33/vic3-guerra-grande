@@ -12,11 +12,6 @@ gg_oribe_fall = {
 	audio = "event:/SFX/Events/southamerica/election"
 }
 
-gg_two_governments = {
-	video = "gfx/media_aliases/gg_two_governments.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
 gg_rosas_cerrito = {
 	video = "gfx/media_aliases/gg_rosas_cerrito.bk2"
 	audio = "event:/SFX/Events/southamerica/aristocrats"

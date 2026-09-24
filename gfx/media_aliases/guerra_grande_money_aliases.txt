@@ -23,16 +23,6 @@ gg_money_reunification = {
 	audio = "event:/SFX/Events/southamerica/election"
 }
 
-gg_money_reckoning = {
-	video = "gfx/media_aliases/gg_money_reckoning.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
-gg_money_cerrito_debts = {
-	video = "gfx/media_aliases/gg_money_cerrito_debts.bk2"
-	audio = "event:/SFX/Events/southamerica/election"
-}
-
 gg_money_brazilian_claims = {
 	video = "gfx/media_aliases/gg_money_brazilian_claims.bk2"
 	audio = "event:/SFX/Events/southamerica/war_civilians"

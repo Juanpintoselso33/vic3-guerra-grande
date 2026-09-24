@@ -1,24 +1,6 @@
 ﻿# Media aliases, second batch for the flow events (T9 review, 2026-09-17). Sources: SOURCES_flujo_images.md.
 # Alias de medios, segundo lote de los eventos del flujo (revision de T9). Fuentes: SOURCES_flujo_images.md.
 
-# Wikimedia Commons: Manuel Oribe ElIndiscreto n63.jpg
-gg_f2_oribe_indiscreto = {
-	video = "gfx/media_aliases/gg_f2_oribe_indiscreto.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
-}
-
-# Wikimedia Commons: Juan Manuel Blanes - La doma.png
-gg_f2_doma = {
-	video = "gfx/media_aliases/gg_f2_doma.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
-}
-
-# Wikimedia Commons: Le Tour du monde-01-p229.jpg
-gg_f2_montevideo_port = {
-	video = "gfx/media_aliases/gg_f2_montevideo_port.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
 # Wikimedia Commons: Gaucho Pialando, según Pallière.tif
 gg_f2_pialando = {
 	video = "gfx/media_aliases/gg_f2_pialando.bk2"
@@ -29,12 +11,6 @@ gg_f2_pialando = {
 gg_f2_mackau = {
 	video = "gfx/media_aliases/gg_f2_mackau.bk2"
 	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
-# Wikimedia Commons: Eduardo Carbajal - Brigadier General Manuel Oribe.png
-gg_f2_oribe_carbajal = {
-	video = "gfx/media_aliases/gg_f2_oribe_carbajal.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 
 # Wikimedia Commons: ManuelOribe12.jpg
@@ -113,18 +89,6 @@ gg_f2_dumas = {
 gg_f2_isabel = {
 	video = "gfx/media_aliases/gg_f2_isabel.bk2"
 	audio = "event:/SFX/Events/southamerica/aristocrats"
-}
-
-# Wikimedia Commons: Gilberto Bellini - Entrevista del general Artigas con el doctor Dámaso Antonio Larrañaga.png
-gg_f2_bellini = {
-	video = "gfx/media_aliases/gg_f2_bellini.bk2"
-	audio = "event:/SFX/Events/southamerica/christianity"
-}
-
-# Wikimedia Commons: Juan Manuel Blanes - Dos gauchos en el palenque.png
-gg_f2_palenque = {
-	video = "gfx/media_aliases/gg_f2_palenque.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 
 # Wikimedia Commons: Retrato de Venancio Flores.jpg

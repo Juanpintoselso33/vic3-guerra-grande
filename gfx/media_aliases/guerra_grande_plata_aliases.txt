@@ -1,13 +1,6 @@
 ﻿# Media aliases for the River Plate question (22/9/2026). Sources / Fuentes: SOURCES_flujo_images.md.
 # Alias de los eventos de la cuestion del Plata.
 
-# "HMS Alfred leaving Grand Harbour", Giuseppe Schranz, 12/1/1833 -- public domain / dominio publico
-# EN/ES: Purvis's Alfred (ex-Asia, 50 guns), the ship that would not recognise the 1843 blockade / el Alfred de Purvis
-gg_plata_alfred = {
-	video = "gfx/media_aliases/gg_plata_alfred.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
 # Francois Guizot, Paul Delaroche (Haddo House, Lord Aberdeen's house) -- public domain / dominio publico
 gg_plata_guizot = {
 	video = "gfx/media_aliases/gg_plata_guizot.bk2"

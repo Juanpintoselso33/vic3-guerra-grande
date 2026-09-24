@@ -20,12 +20,6 @@ gg_peace_rosario_hastrel = {
 	audio = "event:/SFX/Events/unspecific/naval_battle"
 }
 
-# gg_prewar.9: "Carga de Cavalaria by Guilherme Litran.jpg" -- Guilherme Litran -- Public domain
-gg_fl_carga_litran = {
-	video = "gfx/media_aliases/gg_fl_carga_litran.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
 # gg_cisplatina.4: "Passagem de Tonelero (1851) (52322130726).jpg" -- Trajano Augusto de Carvalho, 18761942 -- CC BY-SA 2.0
 gg_cis_tonelero_1938 = {
 	video = "gfx/media_aliases/gg_cis_tonelero_1938.bk2"

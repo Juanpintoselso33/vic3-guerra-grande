@@ -18,7 +18,3 @@ gg_riv_india_muerta = {
 	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
 }
 
-gg_riv_triumvirate = {
-	video = "gfx/media_aliases/gg_riv_triumvirate.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
-}

@@ -62,14 +62,6 @@ gg_arg_alcaraz = {
 	audio = "event:/SFX/Events/southamerica/aristocrats"
 }
 
-# General Juan Madariaga, unidentified photographer, before 1879, public domain.
-# WARNING: this later portrait is not the battle of Vences on 27 November 1847; it depicts the
-# commander of the Corrientes army defeated there, and does not claim the event's historical result.
-gg_arg_vences = {
-	video = "gfx/media_aliases/gg_arg_vences.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
 # Washington-model printing press manufactured c. 1850 by the Cincinnati Type Foundry; modern
 # photograph by Quadell, CC BY-SA 3.0. WARNING: this is not La Regeneracion's press or its issue of
 # 5 January 1851; it is a surviving contemporary type of press used to represent the act of printing.

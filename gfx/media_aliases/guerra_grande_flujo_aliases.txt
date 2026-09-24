@@ -1,12 +1,6 @@
 ﻿# Media aliases for the Guerra Grande flow events (T9). Sources: SOURCES_flujo_images.md.
 # Alias de medios de los eventos del flujo de la Guerra Grande (T9). Fuentes: SOURCES_flujo_images.md.
 
-# Fernando Garcia del Molino, Retrato del General Juan Manuel de Rosas (1843)
-gg_fl_rosas = {
-	video = "gfx/media_aliases/gg_fl_rosas.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
-}
-
 # anon., General Bento Goncalves da Silva (1840-1847), Google Art Project
 gg_fl_farrapos = {
 	video = "gfx/media_aliases/gg_fl_farrapos.bk2"
@@ -22,12 +16,6 @@ gg_fl_map = {
 # Juan Manuel Blanes, Lancero de la epoca de Rivera
 gg_fl_lancero = {
 	video = "gfx/media_aliases/gg_fl_lancero.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
-# Carlos Morel, Combate de caballeria en la epoca de Rosas (c. 1839)
-gg_fl_palmar = {
-	video = "gfx/media_aliases/gg_fl_palmar.bk2"
 	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
 }
 
@@ -55,18 +43,6 @@ gg_fl_cagancha = {
 	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
 }
 
-# Juan Manuel Estrada, Lavalle
-gg_fl_lavalle = {
-	video = "gfx/media_aliases/gg_fl_lavalle.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
-}
-
-# Francois Barry, Prise des batteries de Punta Obligado (1846)
-gg_fl_barry = {
-	video = "gfx/media_aliases/gg_fl_barry.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
 # Juan Manuel Blanes, Mazorquero
 gg_fl_mazorquero = {
 	video = "gfx/media_aliases/gg_fl_mazorquero.bk2"
@@ -76,12 +52,6 @@ gg_fl_mazorquero = {
 # Emile Desmaisons, Jose Maria Paz (lithograph, before 1854)
 gg_fl_paz = {
 	video = "gfx/media_aliases/gg_fl_paz.bk2"
-	audio = "event:/SFX/Events/southamerica/aristocrats"
-}
-
-# Roberto Castellanos, Aduana de Oribe (the Buceo customs house)
-gg_fl_aduana = {
-	video = "gfx/media_aliases/gg_fl_aduana.bk2"
 	audio = "event:/SFX/Events/southamerica/aristocrats"
 }
 
@@ -113,12 +83,6 @@ gg_fl_pacheco = {
 gg_fl_giro = {
 	video = "gfx/media_aliases/gg_fl_giro.bk2"
 	audio = "event:/SFX/Events/southamerica/election"
-}
-
-# Alfredo Godel, Florencio Varela, El Indiscreto no. 48 (1885)
-gg_fl_varela = {
-	video = "gfx/media_aliases/gg_fl_varela.bk2"
-	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 
 # Ferdinand Krumholz, Dom Pedro II (1849)
