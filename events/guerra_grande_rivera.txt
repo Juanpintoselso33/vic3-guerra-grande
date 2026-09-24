@@ -30,7 +30,7 @@
 #     El relato que la Defensa hacia de si misma -- la libertad, Europa, la civilizacion contra la
 #     barbarie caudillesca -- exigia destruir al caudillo que la habia fundado.
 #
-# Sources, with URLs and bilingual notes, in SOURCES_rivera.md.
+# SOURCE / FUENTE: SOURCES_rivera.md (with URLs and bilingual notes).
 #
 # SCHEDULING. These events are scheduled from the end of each option of guerra_grande.3, inside
 # the existing `c:URU ?= { ... }` block, with day offsets from a base of 10 February 1839 -- the

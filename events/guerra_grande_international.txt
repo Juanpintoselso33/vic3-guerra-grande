@@ -45,6 +45,9 @@ gg_international.2 = {
 #     provinces have fallen away after paying (.11). The AI keeps deciding in gg_int_arg_ai_pulse.
 # ES: la remesa a Oribe sale del journal del Pacto: a un Rosas jugador se le pregunta por evento cuando puede
 #     mandarla (.10), y cuando las provincias se fueron despues de pagar (.11). La IA decide como antes.
+# SOURCE / FUENTE: SOURCES_peace.md s.5 and SOURCES_loans.md s.4 (Rosas financed Oribe's army
+#     to the last). design (no source for the GBP 20,000 / 10,000 figures or the delegation
+#     threshold: game values).
 gg_international.10 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.10|" } # GG_TRAZA
 	type = country_event
@@ -72,6 +75,9 @@ gg_international.10 = {
 	}
 }
 
+# SOURCE / FUENTE: es.wikipedia "Bloqueo anglo-frances del Rio de la Plata" (the Sala de
+#     Representantes votes on Rosas's Oriental policy, 1845); SOURCES_loans.md s.4. design (no
+#     source for a Sala debate on withdrawing support from Oribe: counterfactual).
 gg_international.11 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_international.11|" } # GG_TRAZA
 	type = country_event

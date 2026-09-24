@@ -102,6 +102,8 @@ gg_postwar.1 = {
 #     vencido, sus hombres vuelven a la campaña con el rencor, y la fusion queda descartada. Lo
 #     unico que se elige es si se ablanda tarde.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_peace.md s.4 (punishment decreed and threatened by both sides).
+#     design (a punitive peace did not happen; this branch is counterfactual).
 gg_postwar.2 = {
 	type = country_event
 	placement = ROOT
@@ -178,6 +180,9 @@ gg_postwar.2 = {
 #     debian los dos gobiernos. Si la Defensa volvio a hipotecar la aduana (gg_powers.21), la
 #     cuenta es mayor.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_peace.md s.1 (8.X.1851: the Cerrito's acts lawful, its debts
+#     assumed); historia.md s.3 (terms of the real peace); SOURCES_loans.md s.3 (the customs
+#     already pledged) for the _mortgaged variant.
 gg_postwar.3 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.3|" } # GG_TRAZA
 	type = country_event
@@ -246,6 +251,8 @@ gg_postwar.3 = {
 #     de 1851 y las Camaras eligieron a Giro, un blanco aceptable para los dos bandos. Con la paz
 #     de las potencias (F12), se vota bajo la mirada europea.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_peace.md (the election of 1 March 1852) and SOURCES_rivera.md
+#     (Garzon expected, died XII.1851; Giro chosen on the fusion policy).
 gg_postwar.4 = {
 	type = country_event
 	placement = ROOT
@@ -368,6 +375,8 @@ gg_postwar.4 = {
 #     (Rivera, Lavalleja, Flores). Despues de una paz con castigo llegan antes y con fuerza;
 #     despues de una paz sin vencidos, mas tarde y mas debiles.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_rivera.md, chronology 1851-1854 (Flores's coup and the
+#     triumvirate of 1853 with Rivera and Lavalleja). The punished-peace branch is design.
 gg_postwar.5 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.5|" } # GG_TRAZA
 	type = country_event
@@ -441,6 +450,8 @@ gg_postwar.5 = {
 # ES: gg_postwar.6 -- FX-3. LA POLITICA DE FUSION (Lamas, 1855). La lealtad a las divisas cede ante
 #     el pais, si los caudillos la dejan. La bloquea una paz con castigo (FX-2).
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_peace.md s.6 (Andres Lamas, Manifiesto a sus compatriotas, 1855,
+#     and the fusion policy) and SOURCES_rivera.md (Giro elected on the fusion policy).
 gg_postwar.6 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.6|" } # GG_TRAZA
 	type = country_event

@@ -2,6 +2,14 @@
 
 # 1836.9.19 - The battle of Carpinteria. Oribe's men wear white ribbons, Rivera's red ones:
 # the two parties of Uruguay are born here, three years before the war itself.
+# SOURCE / FUENTE: decree of 10.VIII.1836 (divisa blanca, "Defensor de las Leyes"): Jose L.
+#     Rapetti Tassano, "Oribe y la Divisa Blanca", Correo de Punta del Este, 22.VIII.2021,
+#     quoting the decree; Factum, portal.factum.uy/analisis/2007/ana070610.php. Celeste that faded,
+#     red cut from the poncho lining: Museo Zorrilla, "Las divisas partidarias: origen del ser
+#     nacional" (zorrilla.com.uy); es.wikipedia "Batalla de Carpinteria" (white cintillos of the
+#     patriots of the Revolucion Oriental, Uteda 1917). Forces 3,000 vs 1,400 and Lavalle with
+#     Rivera: SOURCES_order_of_battle.md s.1.2 (Estado Mayor del Ejercito, "Periodo
+#     independiente"); Zeballos & Melo, Revista de derecho, historia y letras 39 (1911), p. 249.
 guerra_grande.1 = {
 	type = country_event
 	placement = ROOT
@@ -134,6 +142,10 @@ guerra_grande.1 = {
 }
 
 # 1838.10.24 - Rivera, backed by the French squadron blockading Buenos Aires, forces Oribe out.
+# SOURCE / FUENTE: historia.md s.0b and s.1 phase 0 (French blockade of Buenos Aires,
+#     Leblanc 7.X.1838, Oribe "resigns" 24.X.1838); Micaela Miralles Bianconi, "Relaciones
+#     entre guerra y politica... (1838-1842)", cdsa.aacademica.org/000-019/590.pdf (Oribe's
+#     protest, the 300 who followed him, Rosas recognises him as "Presidente legal").
 guerra_grande.2 = {
 	type = country_event
 	placement = ROOT
@@ -316,6 +328,8 @@ guerra_grande.2 = {
 }
 
 # 1839 - The country splits: the Defensa keeps Montevideo, the Cerrito takes the countryside.
+# SOURCE / FUENTE: SOURCES_order_of_battle.md (the armies sized from the sources, see the
+#     block below); historia.md s.1 phase 2 and s.4.5 (the Cerrito government, Restauracion).
 guerra_grande.3 = {
 	type = country_event
 	placement = ROOT
@@ -1399,6 +1413,10 @@ guerra_grande.17 = {
 	}
 }
 
+# SOURCE / FUENTE: SOURCES_loans.md s.4 (Rosas finances Oribe) and SOURCES_peace.md s.5
+#     ("ochocientas onzas de oro", pertrechos to the last); SOURCES_powers.md s.12 (the
+#     Anglo-French squadrons that the support brings on). Oribe as "presidente legal": Miralles
+#     Bianconi (see guerra_grande.2).
 guerra_grande.4 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.4|" } # GG_TRAZA
 	type = country_event
@@ -1501,6 +1519,12 @@ guerra_grande.4 = {
 }
 
 # The Italian Legion is raised (fired by the button).
+# SOURCE / FUENTE: Italian Legion, decree of 9.IV.1843: SOURCES_order_of_battle.md s.2b
+#     (Acevedo, Anales II; Etchechury 2017). Red shirts from a stock made for saladero workers:
+#     Lucy Riall, Garibaldi: Invention of a Hero (Yale UP, 2007), ch. "Exile"; Museo del
+#     Risorgimento di Lucca, "How the red shirt was created" (museodelrisorgimento.lucca.it).
+#     Riall and en.wikipedia "Redshirts (Italy)" note the saladero story is a later claim with
+#     no contemporary record: the text states it as fact (listed in the 23/9 source report).
 guerra_grande.5 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.5|" } # GG_TRAZA
 	type = country_event
@@ -1555,6 +1579,9 @@ guerra_grande.5 = {
 }
 # EN: the squadrons arrive -- fired by guerra_grande_foreign_intervention_button.
 # ES: llegan las escuadras: lo dispara guerra_grande_foreign_intervention_button.
+# SOURCE / FUENTE: es.wikipedia "Bloqueo anglo-frances del Rio de la Plata" (intro: from
+#     2.VIII.1845 all ports of the Confederation and of the Republic closed except Montevideo);
+#     SOURCES_powers.md s.12 (Ouseley-Deffaudis, the ultimatum, free navigation of the rivers).
 guerra_grande.9 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.9|" } # GG_TRAZA
 	type = country_event
@@ -1605,6 +1632,13 @@ guerra_grande.9 = {
 
 
 # Portrait: Manuel Oribe.
+# SOURCE / FUENTE: es.wikipedia "Manuel Oribe" (b. Montevideo 26.VIII.1792; Caballeros
+#     Orientales; with Lavalleja at the head of the Treinta y Tres; coronel mayor 14.VIII.1832
+#     and minister of war 9.X.1833 under Rivera; refused Rosas's hint of reincorporation, citing
+#     B. P. Berro, Bosquejo historico, archive.org/details/bosquejohistric00berrgoog);
+#     es.wikipedia "Juan Antonio Lavalleja" (risings of 1832 and 1834). Divisa: guerra_grande.1.
+# SOURCE / FUENTE: design (no source for "Oribe organizo el cruce"; the sources say he
+#     co-led it).
 guerra_grande.11 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.11|" } # GG_TRAZA
 	type = country_event
@@ -1682,6 +1716,9 @@ guerra_grande.11 = {
 }
 
 # Portrait: Juan Antonio Lavalleja.
+# SOURCE / FUENTE: es.wikipedia "Juan Antonio Lavalleja" (Agraciada 19.IV.1825; Gobernador y
+#     Capitan General of the Provincia Oriental; risings of July 1832 and 1834, both defeated;
+#     offers his sword to Oribe 1.VIII.1836 and shares Carpinteria with Ignacio Oribe).
 guerra_grande.12 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.12|" } # GG_TRAZA
 	type = country_event
@@ -1749,6 +1786,12 @@ guerra_grande.12 = {
 }
 
 # Portrait: Fructuoso Rivera in exile.
+# SOURCE / FUENTE: Miguel Arregui, "Uruguay nacio saqueado y dividido en dos bandos",
+#     Montevideo Portal 20.VI.2024 (El Observador 28.VI.2017): Tres Arboles, barony of
+#     Tacuarembo refused, Monzon, Misiones 1828, first president, Durazno; Hood's letter of
+#     3.III.1829 from J. P. Barran, A. Frega y M. Nicoliello, El consul britanico en Montevideo
+#     y la independencia del Uruguay (Universidad de la Republica, 1999). es.wikipedia
+#     "Fructuoso Rivera" (Tres Arboles, Monzon).
 guerra_grande.13 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.13|" } # GG_TRAZA
 	type = country_event
@@ -1807,6 +1850,12 @@ guerra_grande.13 = {
 }
 
 # Portrait: Artigas, thirty years in Paraguay.
+# SOURCE / FUENTE: Marcia Collazo, "Artigas en el Paraguay: un enigma de treinta anos",
+#     Caras y Caretas 30.XI.2021 (150 men, Parana crossed 5.IX.1820, Curuguaty "la Siberia
+#     paraguaya", Francia never received him; after Hammerly Dupuy); Tomas Sanson Corbo, "Morir
+#     en Paraguay", ABC Color 13.IX.2020 (the monthly onza, oral tradition via Fidel Maiz to
+#     Zorrilla de San Martin; the rosary answered in guarani, told by his son at Ibiray);
+#     es.wikipedia "Jose Gervasio Artigas" (b. 1764, no correspondence, farming).
 guerra_grande.14 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande.14|" } # GG_TRAZA
 	type = country_event

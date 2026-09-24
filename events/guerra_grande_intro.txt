@@ -9,6 +9,9 @@
 #     journals. El del sitio sigue saliendo para los dos gobiernos al dia siguiente de la particion.
 
 # EN/ES: day 1 -- the opening: it opens both journals / la apertura: abre los dos journals
+# SOURCE / FUENTE: historia.md s.0b (Oribe president from 1.III.1835; Comandancia General de
+#     Campana suppressed 9.I.1836) and s.1-2 (the patrons and the sea); divisas: guerra_grande.1.
+#     The 10-point threshold and the siege months are design.
 gg_intro.1 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_intro.1|" } # GG_TRAZA
 	type = country_event
@@ -48,6 +51,9 @@ gg_intro.1 = {
 	}
 }
 # EN/ES: the day after the split, for both governments -- El Sitio Grande
+# SOURCE / FUENTE: historia.md s.1 phase 2 (Oribe at the Cerrito 16.II.1843, the Cerrito
+#     government, Brown's blockade from 1.IV.1843) and s.2 (the sea decides; foreigners
+#     outnumber orientals in arms: 800 of 6,500 in June 1843). The 24 months are design.
 gg_intro.4 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_intro.4|" } # GG_TRAZA
 	type = country_event

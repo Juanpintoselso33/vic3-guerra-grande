@@ -9,6 +9,9 @@
 # ES: LOS NIVELES DE LAS POTENCIAS, avisos. Cuando cambia un nivel, se avisa a los jugadores de la
 #     Defensa y del Cerrito. No cambian nada: el nivel ya cambio.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_powers.md s.7 (the French subsidy and the Assembly votes on it,
+#     Duvergier t.50) and s.12 (the French blockade and Arana-Lepredour); historia.md s.2
+#     ("la plata francesa"). The three levels and their effects are design (C10 patrons).
 gg_patron.1 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.1|" } # GG_TRAZA
 	type = country_event
@@ -42,6 +45,10 @@ gg_patron.1 = {
 		default_option = yes
 	}
 }
+# SOURCE / FUENTE: SOURCES_powers.md s.1 (Purvis), s.3 (Howden lifts the British blockade,
+#     15.VII.1847) and s.6 (Arana-Southern: Britain recognises Rosas's right to blockade);
+#     historia.md s.1 phase 2. Britain never paid the Defensa: the text says so.
+# SOURCE / FUENTE: design (no source for the City merchants lobbying the cabinet; flavour).
 gg_patron.2 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.2|" } # GG_TRAZA
 	type = country_event
@@ -75,6 +82,9 @@ gg_patron.2 = {
 		default_option = yes
 	}
 }
+# SOURCE / FUENTE: SOURCES_loans.md s.1 (secret subsidy of 1850 through Maua, contract of
+#     7.IX.1850) and s.2 (the treaties of 12.X.1851); SOURCES_powers.md s.8 (Lamas in Rio).
+#     The "from 1850" gate follows those dates; the levels are design.
 gg_patron.3 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.3|" } # GG_TRAZA
 	type = country_event

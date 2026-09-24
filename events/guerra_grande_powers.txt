@@ -161,6 +161,8 @@ gg_powers.5 = {
 
 
 # F2-1 - Purvis does not recognise the blockade (April 1843)
+# SOURCE / FUENTE: SOURCES_powers.md s.1 (Purvis, Caillet-Bois via es.wikipedia, the Isla de
+#     Ratas powder, "Mr. Brown", Sarmiento, Aberdeen).
 gg_powers.10 = {
 	type = country_event
 	placement = ROOT
@@ -243,6 +245,11 @@ gg_powers.10 = {
 }
 
 # F3-1 - the allies seize Brown's squadron (July-August 1845)
+# SOURCE / FUENTE: SOURCES_powers.md s.12 (ultimatum 21.VII.1845, Rosas's order to Brown,
+#     capture 2.VIII.1845); es.wikipedia "Bloqueo anglo-frances del Rio de la Plata", "El robo
+#     de la escuadra" (25 de Mayo, General Echague, San Martin, Maipu, 9 de Julio: five ships;
+#     ports closed from 2.VIII.1845 except Montevideo); Brown's letter to Rosas ("treinta y tres
+#     anos" of the flag), in La Gazeta, lagazeta.com.ar/robo_de_la_escuadra.htm.
 gg_powers.11 = {
 	type = country_event
 	placement = ROOT
@@ -341,6 +348,8 @@ gg_powers.11 = {
 }
 
 # F3-2a - the Hood bases reach the Cerrito (July 1846)
+# SOURCE / FUENTE: SOURCES_powers.md s.2 (Thomas Samuel Hood, the seven bases, Oribe's approval
+#     11.VIII.1846, the threat to abandon Montevideo); fichas.md F3-2.
 gg_powers.12 = {
 	type = country_event
 	placement = ROOT
@@ -459,6 +468,8 @@ gg_powers.12 = {
 }
 
 # F3-2b - the Hood bases reach the Defensa
+# SOURCE / FUENTE: SOURCES_powers.md s.2 (Hood bases, Montevideo's refusal IX.1846);
+#     historia.md s.2 (foreigners and libertos in the garrison) and fichas.md F3-2.
 gg_powers.13 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.13|" } # GG_TRAZA
 	type = country_event
@@ -521,6 +532,8 @@ gg_powers.13 = {
 }
 
 # F3-3a - Howden and Walewski at the Cerrito (9 July 1847)
+# SOURCE / FUENTE: SOURCES_powers.md s.3 (Howden and Walewski, the Raleigh, Oribe's four bases
+#     of 13.VII.1847, Rosas's "cielo e infierno"); es.wikipedia "Bloqueo anglo-frances" (9.VII.1847).
 gg_powers.14 = {
 	type = country_event
 	placement = ROOT
@@ -583,6 +596,8 @@ gg_powers.14 = {
 }
 
 # F3-3b - the truce offer reaches the Defensa
+# SOURCE / FUENTE: SOURCES_powers.md s.3 (the four bases; Barreiro's reply 15.VII.1847; Howden
+#     lifts the British blockade, Walewski does not).
 gg_powers.15 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.15|" } # GG_TRAZA
 	type = country_event
@@ -636,6 +651,13 @@ gg_powers.15 = {
 }
 
 # F3-4 - the Gore-Gros mission: the presidency for Oribe (March-May 1848)
+# SOURCE / FUENTE: SOURCES_powers.md s.4 (Gore and Gros stay aboard, Varela killed 20.III,
+#     the presidency offer, Rosas's letter of 8.V.1848, Busaniche p. 606); historia.md s.3 S5
+#     and the Protocolo of the Gore-Gros negotiation (BN Uruguay, handle 123456789/132464);
+#     Oribe's own bases of 20.IV.1848 signed by Villademoros: Ernesto Carranza via Jorge
+#     Pelfort, "El despecho en el despacho", jorgepelfort.blogspot.com (2012).
+# SOURCE / FUENTE: design (no source for the "seven hours" in the camp; the quoted "echar un
+#     velo sobre lo pasado" is from Oribe's 1851 commissioners, SOURCES_peace.md s.1).
 gg_powers.16 = {
 	type = country_event
 	placement = ROOT
@@ -745,6 +767,9 @@ gg_powers.16 = {
 }
 
 # F3-5 - Urquiza, the early window (1847)
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md (Alcaraz, VIII.1846;
+#     Rosas demands changes); historia.md s.3 S7 (Urquiza and Montevideo, 1846-47, "estuvo a
+#     punto de firmar"). The Entre Rios economy line is design.
 gg_powers.17 = {
 	type = country_event
 	placement = ROOT
@@ -854,6 +879,9 @@ gg_powers.17 = {
 }
 
 # F3-6 - the Basques go to Buenos Aires and Garibaldi to Italy (1848)
+# SOURCE / FUENTE: fichas.md F3-6 (es.wikipedia "Bloqueo anglo-frances", Gore-Gros: the Basques
+#     gone to Buenos Aires, Garibaldi about to sail); SOURCES_french_legion.md s.1-2 and
+#     SOURCES_order_of_battle.md s.3a (Italian Legion ~700 at its best, Etchechury 2017).
 gg_powers.18 = {
 	type = country_event
 	placement = ROOT
@@ -972,6 +1000,8 @@ gg_powers.18 = {
 }
 
 # F3-7 - the Southern-Arana treaty: Britain leaves (24 November 1849)
+# SOURCE / FUENTE: SOURCES_powers.md s.6 (Arana-Southern 24.XI.1849, 14:30, fifteen
+#     postponements, article 1) and s.12.
 gg_powers.19 = {
 	type = country_event
 	placement = ROOT
@@ -1114,6 +1144,8 @@ gg_powers.20 = {
 }
 
 # F4-1b - the French subsidy runs out (1851)
+# SOURCE / FUENTE: SOURCES_powers.md s.7 (convention of 12.VI.1848, the Assembly votes,
+#     Duvergier t.50; Pacheco y Obes and Ellauri renounce it 29.V.1851; Marmol's line).
 gg_powers.21 = {
 	type = country_event
 	placement = ROOT
@@ -1238,6 +1270,12 @@ gg_powers.22 = {
 }
 
 # F4-3b - the oribista chiefs go over: the Cerrito answers (1851)
+# SOURCE / FUENTE: historia.md s.1 phase 4 and s.2.7 (Urquiza crosses 19.VII.1851; Servando
+#     Gomez and Lucas Piriz go over; mass desertion of Ignacio Oribe's troops);
+#     SOURCES_french_legion.md s.3.1 (two circumscriptions under Servando Gomez and Ignacio
+#     Oribe; "11,000 men in arms", es.wikipedia "Gobierno del Cerrito"); SOURCES_peace.md s.5
+#     (Oribe asks Gore for a naval guarantee); docs/guerra-grande-flujo/fichas.md F4-3 (Lucas
+#     Moreno sent to Urquiza).
 gg_powers.23 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.23|" } # GG_TRAZA
 	type = country_event
@@ -1313,6 +1351,10 @@ gg_powers.23 = {
 
 }
 # FS-1 - Spain recognises the independence, through Giro (1845)
+# SOURCE / FUENTE: SOURCES_powers.md s.9 (treaties of 9.X.1841 and 26.III.1846, never ratified;
+#     Oribe Stemmer on why); Barbara Diaz, La diplomacia espanola en Uruguay en el siglo XIX
+#     (CSIC-Universidad de la Republica, 2008), ch. "Primera representacion diplomatica espanola
+#     en el Rio de la Plata (1845-1851)" (Carlos Creus's mission).
 gg_powers.25 = {
 	type = country_event
 	placement = ROOT
@@ -1367,6 +1409,8 @@ gg_powers.25 = {
 }
 
 # FS-2 - Florencio Varela is murdered (20 March 1848)
+# SOURCE / FUENTE: SOURCES_powers.md s.5 (Varela killed on Monday 20.III.1848 in calle
+#     Misiones; Andres Cabrera; Herrera y Obes to Lamas 27.III.1848; authorship never proved).
 gg_powers.26 = {
 	type = country_event
 	placement = ROOT
@@ -1450,6 +1494,10 @@ gg_powers.27 = {
 }
 
 # FS-3b - Larranaga's funeral, a ceasefire (1848)
+# SOURCE / FUENTE: SOURCES_powers.md s.10 (death at the Miguelete quinta 16.II.1848, burial in
+#     his oratory, Villademoros's necrology, the Defensa's own rites and the rank of general);
+#     es.wikipedia "Damaso Antonio Larranaga" (b. 9.XII.1771; bearer of the Instrucciones del
+#     ano XIII; public librarian), Academia Nacional de Letras, academiadeletras.gub.uy.
 gg_powers.28 = {
 	type = country_event
 	placement = ROOT
@@ -1566,6 +1614,11 @@ gg_powers.28 = {
 }
 
 # FS-4 - Montevideo, ou une nouvelle Troie (1850), fused with guerra_grande.6
+# SOURCE / FUENTE: Alexandre Dumas, Montevideo ou une nouvelle Troie (Paris, Napoleon Chaix,
+#     1850); "Montevideo ou une nouvelle Troie: two finals in dispute", Anales de Literatura
+#     Hispanoamericana (UCM), 2021; Arturo di Maggio, "Oribe, Dumas y La Nueva Troya"
+#     (anaforas.fic.edu.uy): propaganda inspired by Pacheco y Obes in Paris; dumaspere.com,
+#     Cahiers 34. SOURCES_powers.md s.7 (the Assembly votes on the subsidy).
 gg_powers.29 = {
 	type = country_event
 	placement = ROOT
@@ -1653,6 +1706,9 @@ gg_powers.30 = {
 }
 
 # F0-8b - the Universidad Mayor opens (18 July 1849)
+# SOURCE / FUENTE: SOURCES_powers.md s.11 (decree of Oribe 27.V.1838, Larranaga's law of
+#     1833, Suarez's decree 14.VII.1849, inauguration 18.VII.1849 in San Ignacio, Ardao, rector
+#     Lorenzo A. Fernandez, only Jurisprudencia, ~60 students, Herrera y Obes patron then rector).
 gg_powers.31 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.31|" } # GG_TRAZA
 	type = country_event
@@ -1707,6 +1763,9 @@ gg_powers.31 = {
 #     insinua algo mas que una alianza. Aceptar trae al Brasil antes y fuerte, y ata el menu de paz
 #     de la Defensa a condiciones brasileras.
 # -------------------------------------------------------------------------------------------------
+# SOURCE / FUENTE: SOURCES_powers.md s.8 (Lamas in Rio from XI.1847; Maua; the five treaties
+#     and the pledged customs); SOURCES_loans.md s.1-2.
+# SOURCE / FUENTE: design (no source for Lamas writing that London tried to hold the Empire back).
 gg_powers.32 = {
 	type = country_event
 	placement = ROOT
