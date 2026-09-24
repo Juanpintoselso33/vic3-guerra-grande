@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.3-alpha — 24/9/2026
 
 - **Rosas serves a first term under the Constitution of 1853:** if he is in the seat when he gives it, he governs the
   six years its art. 74 sets, and is put back after every election until the term ends; after it the elections decide,
@@ -46,6 +46,8 @@
   constitution, the Coalition, the Oriental Province — its states become incorporated at once instead of showing as
   unincorporated. Only the historical provinces (and the Banda Oriental once it rejoined as a province) are affected.
   Games in progress are repaired once on the next monthly tick.
+- **Small fixes:** Provinces of the Pact now show Buenos Aires's map colour; missing names for the Río de la Plata
+  strait and the provinces' AI strategy.
 - **The great malón (la Argentina's `mapuche_malon.1`) is rarer:** at most once every 5 years per country, and only
   for a country that borders an independent Mapuche country. It used to come about every two years (5% a month with
   a 3-month cooldown, ~9 in 1836-1852); now ~3 in 1836-1852, never more than 2 in 10 years, in line with the relative
