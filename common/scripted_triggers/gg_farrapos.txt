@@ -25,9 +25,12 @@ gg_farrapos_play_is_allowed = {
 # EN: 23/9/2026 (Codex review; AUD-FARRAPOS-A) -- the other door: JOINING someone else's play (a pact, a sway).
 #     At the top level of additional_involvement_trigger of every war play the mod REPLACEs (the 32 guarded
 #     vanilla plays); root = the country that would join. Before Ponche Verde neither Brazil nor PNI joins a play
-#     in which the other is the initiator, the target or already involved.
+#     in which the other is the initiator, the target or already on a side. 24/9/2026 (AUD-FARRAPOS-B): "on a
+#     side", not any_scope_play_involved -- that list also holds every neutral and interested country (hundreds
+#     per play), so Brazil and PNI were barred from joining almost any play in the world.
 # ES: la otra puerta: SUMARSE a la jugada de otro (un pacto, un soborno). En el nivel superior de
 #     additional_involvement_trigger de toda jugada de guerra que el mod reemplaza; root = el que se sumaria.
+#     Cuenta solo quien esta en un bando, no la lista de involucrados (ahi estan tambien los neutrales).
 gg_farrapos_involvement_is_allowed = {
 	OR = {
 		has_global_variable = gg_farrapos_ponche_verde
@@ -38,7 +41,7 @@ gg_farrapos_involvement_is_allowed = {
 				OR = {
 					scope:initiator ?= { c:BRZ ?= this }
 					scope:target_country ?= { c:BRZ ?= this }
-					scope:diplomatic_play ?= { any_scope_play_involved = { c:BRZ ?= this } }
+					scope:diplomatic_play ?= { gg_farrapos_play_side_has = { TAG = BRZ } }
 				}
 			}
 			AND = {
@@ -46,9 +49,26 @@ gg_farrapos_involvement_is_allowed = {
 				OR = {
 					scope:initiator ?= { c:PNI ?= this }
 					scope:target_country ?= { c:PNI ?= this }
-					scope:diplomatic_play ?= { any_scope_play_involved = { c:PNI ?= this } }
+					scope:diplomatic_play ?= { gg_farrapos_play_side_has = { TAG = PNI } }
 				}
 			}
 		}
+	}
+}
+
+# EN: 24/9/2026 (AUD-FARRAPOS-B) -- is c:$TAG$ on a side of this play (initiator, target or a backer of either)?
+#     Scope: a diplomatic play. NOT any_scope_play_involved: in a save, a play's `involved` list holds every
+#     country that took any stance, neutrals and interested parties included (375 countries for an annex war in
+#     Persia in 11/1842, Brazil and PNI among them and on no side), while the sides are initiator/target and the
+#     backers (initiators/targets). Links as in vanilla's alert_types (initiator = {}, target = {}) and
+#     00_code_on_actions (any_scope_initiator_ally); the Waddle war mod reads a side the same way.
+# ES: esta c:$TAG$ en un bando de la jugada (iniciador, objetivo o respaldo de alguno)? Scope: una jugada. No
+#     any_scope_play_involved: esa lista tiene a todo pais que tomo postura, neutrales incluidos.
+gg_farrapos_play_side_has = {
+	OR = {
+		initiator ?= { c:$TAG$ ?= this }
+		target ?= { c:$TAG$ ?= this }
+		any_scope_initiator_ally = { c:$TAG$ ?= this }
+		any_scope_target_ally = { c:$TAG$ ?= this }
 	}
 }

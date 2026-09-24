@@ -2,23 +2,45 @@
 #     playset the mod does not REPLACE (the engine's civil wars and other regions' unifications) have no such
 #     guard; if Brazil and PNI ever end up in the same war before Ponche Verde, this leaves a trace
 #     (GG_OA gg_farrapos_pulled_in) that the night sweep forbids. Root = the diplomatic play.
+#     24/9/2026 (AUD-FARRAPOS-B): it read any_scope_play_involved, which also lists every neutral and interested
+#     country of a play, so it fired for wars on the other side of the world (sweep farrapos_ponche_verde: 2168
+#     lines on five dates from 29/12/1838; every run of that night had them). It now asks whether both are ON A
+#     SIDE (gg_farrapos_play_side_has), the same one or opposite ones. A real case can write hundreds of
+#     identical lines on one date (the engine ran it about once per involved country).
+#     Positive control: gg_farrapos_sides_seen, the same test on the one BRZ-PNI play allowed, Ponche Verde's
+#     (gg_farrapos.2, 25/2/1845) -- a detector that could never fire would pass the sweep too.
 # ES: el detector: si el Brasil y PNI terminan en la misma guerra antes de Ponche Verde, deja una traza que el
-#     barrido nocturno prohibe. Root = la jugada.
+#     barrido nocturno prohibe. Root = la jugada. Leia any_scope_play_involved, que incluye a los neutrales e
+#     interesados de toda jugada, y saltaba por guerras del otro lado del mundo; ahora pregunta si los dos estan
+#     EN UN BANDO. Control positivo: gg_farrapos_sides_seen, con la misma prueba, en la jugada de Ponche Verde.
 on_diplo_play_war_start = {
-	on_actions = { gg_farrapos_pulled_in }
+	on_actions = { gg_farrapos_pulled_in gg_farrapos_sides_seen }
 }
 
 on_diplo_play_join_side = {
-	on_actions = { gg_farrapos_pulled_in }
+	on_actions = { gg_farrapos_pulled_in gg_farrapos_sides_seen }
 }
 
 gg_farrapos_pulled_in = {
 	trigger = {
 		NOT = { has_global_variable = gg_farrapos_ponche_verde }
-		any_scope_play_involved = { c:BRZ ?= this }
-		any_scope_play_involved = { c:PNI ?= this }
+		gg_farrapos_play_side_has = { TAG = BRZ }
+		gg_farrapos_play_side_has = { TAG = PNI }
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_pulled_in" # GG_TRAZA
+	}
+}
+
+# EN/ES: the positive control -- Ponche Verde's own play (dp_gg_farrapos, opened after the mark) / el control positivo
+gg_farrapos_sides_seen = {
+	trigger = {
+		has_global_variable = gg_farrapos_ponche_verde
+		is_diplomatic_play_type = dp_gg_farrapos
+		gg_farrapos_play_side_has = { TAG = BRZ }
+		gg_farrapos_play_side_has = { TAG = PNI }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_sides_seen" # GG_TRAZA
 	}
 }
