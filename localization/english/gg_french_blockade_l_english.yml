@@ -18,7 +18,7 @@
  gg_plata.43.a:0 "The port is ours again."
  gg_plata.43.a_tt:0 "The French blockade ends: the Buenos Aires shore recovers its trade and its port."
  gg_ui_plata_ba_blockaded_powers:0 "#N Blockaded by the squadrons#!"
- gg_ui_plata_ba_blockaded_powers_tt:0 "The powers' squadrons lie off the port of Buenos Aires: it is Buenos Aires that is closed, not Montevideo. The battery still decides whether Rosas can shut the river."
+ gg_ui_plata_ba_blockaded_powers_tt:0 "The powers' squadrons lie off the port of Buenos Aires: it is Buenos Aires that is closed, not Montevideo. The battery still decides whether Rosas can close the river."
  gg_ui_plata_ba_blockaded_fr_int:0 "#N Blockaded by France#!"
  gg_ui_plata_mvd_port_blockaded:0 "#N Port blockaded#!"
  gg_ui_plata_mvd_port_blockaded_tt:0 "Warships lie off Montevideo's own port. That is a naval blockade, apart from the passage of the river that Rosas opens or shuts from his shore."

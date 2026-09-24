@@ -6,7 +6,7 @@
 
 # Interest groups renamed by the ribbons of Carpintería
  ig_blanco_party:0 "Blanco Party"
- ig_blanco_party_desc:0 "Those who wore Oribe's white ribbon, lettered 'Defensores de las Leyes' - Defenders of the Laws. Estancieros, parish priests and the militias of the countryside, who claim to be the lawful government and the party of order."
+ ig_blanco_party_desc:0 "Those who wore Oribe's white ribbon, lettered ‘Defensores de las Leyes’ — Defenders of the Laws. Estancieros, parish priests and the militias of the countryside, who claim to be the lawful government and the party of order."
  ig_colorado_party:0 "Colorado Party"
  ig_colorado_party_desc:0 "Those who wore Rivera's ribbon, cut from the red lining of their own ponchos after the sky-blue one bleached white in the sun. The port, the customs house, the printers and the foreign merchants of Montevideo."
 
@@ -47,7 +47,7 @@
 
 # 1 - Carpintería, 19 September 1836
  guerra_grande.1.t:0 "The Ribbons of Carpintería"
- guerra_grande.1.d:0 "Last August the President decreed that every man, soldier or civilian, wear a white badge on hat or coat lettered 'Defensores de las Leyes' - the same white the patriots of 1811 had worn. Rivera's rebels answered with the sky blue of the national cockade, but sun and rain bleached it white within weeks, so they cut new ribbons from the red lining of their ponchos.\n\nOn the banks of the Carpintería stream in Durazno the two met at last: three thousand men under Oribe and Lavalleja against fourteen hundred under Rivera and the exiled Argentine unitarian Juan Lavalle. The government won the field. What was born there outlived every man on it — from this day the Republic has two parties, and every estancia, parish and regiment will be asked which ribbon it wears. The white ribbon makes a #b blanco#!, the red one a #b colorado#! - the plain Spanish for white and red, and the only names these two will answer to for the next century and a half."
+ guerra_grande.1.d:0 "Last August the President decreed that every man, soldier or civilian, wear a white badge on hat or coat lettered ‘Defensores de las Leyes’ — the same white the patriots of 1811 had worn. Rivera's rebels answered with the sky blue of the national cockade, but sun and rain bleached it white within weeks, so they cut new ribbons from the red lining of their ponchos.\n\nOn the banks of the Carpintería stream in Durazno the two met at last: three thousand men under Oribe and Lavalleja against fourteen hundred under Rivera and the exiled Argentine unitarian Juan Lavalle. The government won the field. What was born there outlived every man on it — from this day the Republic has two parties, and every estancia, parish and regiment will be asked which ribbon it wears. The white ribbon makes a #b blanco#!, the red one a #b colorado#! — the plain Spanish for white and red, and the only names these two will answer to for the next century and a half."
  guerra_grande.1.f:0 "Blancos and Colorados, and the country between them."
  guerra_grande.1.a:0 "The white ribbon: the laws, the church and the countryside."
  guerra_grande.1.b:0 "The red ribbon: the port, the press and the liberal cause."
