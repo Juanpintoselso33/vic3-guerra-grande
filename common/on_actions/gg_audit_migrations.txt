@@ -18,6 +18,7 @@ on_monthly_pulse_country = {
 		gg_pact_negotiated_migration
 		gg_rebel_diplomacy_migration
 		gg_urquiza_prelude_migration
+		gg_oriental_left_out_migration
 	}
 }
 
@@ -105,5 +106,51 @@ gg_urquiza_prelude_migration = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza_prelude_migration" # GG_TRAZA
 		set_global_variable = gg_urquiza_prelude_seeded
 		trigger_event = { id = gg_argentina_cal.35 days = 0 }
+	}
+}
+
+# EN: 24/9/2026 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE; Juan's game, 22/12/1851) -- up to 0.1.1, gg_argentina.80.a
+#     incorporated the thirteen provinces and left the Oriental Province out, and with no constitution (gg_constitution.1.b)
+#     nothing took it later: Buenos Aires's provinces were all Argentine ground except the Banda Oriental. Such a save
+#     is asked the question again, once, now that the answer includes it: .80.a absorbs it (gg_oriental_province_join),
+#     .80.b keeps it as it is. Only after the constitution was answered (before that, the constitution takes it), with
+#     no other province still held as a subject (then .80.b was the answer, and it stays consistent), and never where
+#     gg_argentina.80 already knew of it (gg_pact_80_knows_oriental). A player's Oriental Province is not asked about.
+#     Not guarded by gg_new_game_no_migrations: Juan's game was begun on 24/9 and has that mark. A game begun with
+#     0.1.2 gets gg_pact_80_knows_oriental on its first day (guerra_grande_on_actions.txt; Codex review): a Pact settled
+#     with no province to ask about sends the constitution straight away, and a later Oriental Province is not a repair.
+# ES: hasta 0.1.1, gg_argentina.80.a incorporaba las trece provincias y dejaba afuera a la Provincia Oriental, y sin
+#     constitucion nada la tomaba despues. A esa partida se le repite la pregunta, una vez, ahora que la respuesta la
+#     incluye. Solo con la constitucion ya contestada, sin otra provincia todavia sujeta, y nunca si .80 ya la conocia.
+gg_oriental_left_out_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = gg_pact_settled
+		has_global_variable = gg_constitution_chosen
+		NOT = { has_global_variable = gg_pact_80_knows_oriental }
+		NOT = { has_global_variable = gg_pact_settlement_stalemate }
+		c:URU ?= { gg_is_oriental_pact_province = yes }
+		# EN/ES: Codex review -- a player's Oriental Province under an AI Argentina is asked about too (the answer offers him
+		#     Argentina's seat, gg_constitution.5); with both in human hands nothing would change
+		#     / con la Argentina en manos de la IA si; con las dos en manos de jugadores no cambiaria nada
+		NAND = {
+			is_player = yes
+			c:URU = { is_player = yes }
+		}
+		NOT = {
+			any_subject_or_below = {
+				OR = {
+					c:CLN ?= this
+					gg_is_province_country = yes
+				}
+				is_subject_of = c:ARG
+			}
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_left_out_migration" # GG_TRAZA
+		set_global_variable = gg_pact_80_knows_oriental
+		trigger_event = { id = gg_argentina.80 days = 0 popup = yes }
 	}
 }

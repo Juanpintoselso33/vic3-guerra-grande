@@ -3675,7 +3675,13 @@ gg_argentina.15 = {
 # SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md, seccion 11.
 # -------------------------------------------------------------------------------------------------
 gg_argentina.80 = {
-	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.80|" } # GG_TRAZA
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.80|" # GG_TRAZA
+		# EN/ES: 24/9 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE) -- this question now includes the Oriental Province; a save
+		#     whose question was asked without it is asked again (gg_oriental_left_out_migration)
+		#     / esta pregunta ya incluye a la Provincia Oriental; una partida que la contesto sin ella la recibe de nuevo
+		set_global_variable = gg_pact_80_knows_oriental
+	}
 	type = country_event
 	placement = ROOT
 	title = gg_argentina.80.t
@@ -4076,5 +4082,8 @@ gg_argentina.89 = {
 		#     Ejercito Grande (whose call later is a no-op) / los emigrados se suman cuando la cuestion del Pacto se
 		#     vuelve guerra, no con el Ejercito Grande
 		gg_emigres_join_ejercito_grande = yes
+		# EN/ES: 24/9/2026 (Juan) -- the Oriental Province, Oribe's, enters on Rosas's side (gg_cisplatina.txt)
+		#     / la Provincia Oriental, la de Oribe, entra del lado de Rosas
+		gg_oriental_province_joins_rosas = yes
 	}
 }

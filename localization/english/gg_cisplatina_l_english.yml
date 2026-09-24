@@ -56,5 +56,7 @@
  gg_pact_province_action_name:0 "Province of the Pact"
  gg_pact_province_action_propose_name:0 "Take in as a Province of the Pact"
  gg_pact_province_action_break_name:0 "Recognize Independence"
+ gg_pact_province_action_notification_name:0 "Province of the Pact"
+ gg_pact_province_action_notification_desc:0 "[INITIATOR_COUNTRY.GetName] takes us in as a province of the Pact: from today it conducts our foreign relations."
  gg_pact_province_action_notification_break_name:0 "Independence Recognized"
  gg_pact_province_action_notification_break_desc:0 "[INITIATOR_COUNTRY.GetName] recognizes our independence: we are no longer a province of the Pact."

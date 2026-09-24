@@ -27,6 +27,30 @@ gg_is_province_country = {
 	}
 }
 
+# EN: 24/9/2026 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE) -- the Banda Oriental taken in as a province of the Pact
+#     (gg_oriental_make_province: the URU tag, subject_type_gg_pact_province). It is NOT in gg_is_province_country:
+#     that list is the thirteen Argentine provinces, read by the journal, the Pact's rows and the AI, and URU is also
+#     the independent Republic. This trigger is true only while it is Buenos Aires's province, so everything keyed on
+#     it (the governor, the annexation, the side in Urquiza's war) turns off by itself when it is independent again.
+# ES: la Banda Oriental recibida como provincia del Pacto. NO esta en gg_is_province_country (las trece provincias
+#     argentinas, que leen el journal, las filas y la IA; URU es tambien la Republica independiente). Vale solo
+#     mientras es provincia de Buenos Aires: lo que depende de esto se apaga solo si vuelve a ser independiente.
+gg_is_oriental_pact_province = {
+	c:URU ?= this
+	exists = c:ARG
+	has_global_variable = gg_oriental_province
+	is_subject_of = c:ARG
+}
+
+# EN/ES: 24/9/2026 (AUD-ORIENTAL-PROVINCE) -- a country whose head is a governor (common/government_types/):
+#     the thirteen province countries and the Oriental Province / un pais cuya cabeza es un gobernador
+gg_has_province_governor = {
+	OR = {
+		gg_is_province_country = yes
+		gg_is_oriental_pact_province = yes
+	}
+}
+
 # EN: 24/9/2026 (Juan, AUD-ERR-CUARTELES) -- a country born from Argentina: the province countries, the Coalition
 #     and Buenos Aires (BUE). It holds Argentina's army model (common/laws/zz_gg_local_caudillos.txt,
 #     gg_argentina_inherit_army_model). By tag, so it is true at the moment of create_country.

@@ -220,6 +220,112 @@ gg_oriental_make_province = {
 	c:BRZ ?= { change_relations = { country = scope:gg_oriental_country value = -80 } }
 }
 
+# EN: 24/9/2026 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE; Juan, playing Argentina: «when I annexed the whole Pact, the
+#     Provincia Oriental was not annexed»). The Oriental Province joins the one country with the other provinces.
+#     Scope: Argentina. Called from gg_argentina_provinces_incorporate, so every road that incorporates the Pact takes
+#     it: gg_argentina.80.a, the constitution (gg_constitution_one_country) and the seat hand-over (gg_constitution.6).
+#     Same player rule as the provinces (AUD-SEAT-ANNEX, vanilla's Cuba): not a player's -> absorbed; a player's and
+#     Argentina not -> he is offered Argentina's seat and this runs again the day after; both players -> it stays a
+#     province of the Pact.
+# ES: la Provincia Oriental entra al pais unico con las demas provincias. Scope: la Argentina. La llama
+#     gg_argentina_provinces_incorporate, asi que la toma todo camino que incorpora el Pacto. Misma regla de jugadores
+#     que las provincias.
+gg_oriental_province_join = {
+	if = {
+		limit = {
+			# EN/ES: Codex review -- only Argentina takes it: gg_constitution_one_country is also reached from the State
+			#     of Buenos Aires (gg_ba.4) / solo la Argentina la toma: tambien se llega desde el Estado de Buenos Aires
+			c:ARG ?= this
+			c:URU ?= { gg_is_oriental_pact_province = yes }
+		}
+		if = {
+			limit = { c:URU = { is_player = no } }
+			gg_oriental_province_absorb = yes
+		}
+		else_if = {
+			limit = { is_player = no }
+			c:URU = { trigger_event = { id = gg_constitution.5 days = 0 popup = yes } }
+		}
+	}
+}
+
+# EN: The absorption itself, as the full reincorporation does it (gg_oriental_incorporate; Juan 23/9: «all the
+#     characters of Uruguay, it is an integration, let it work as one»). Scope: Argentina.
+#       - its army's size is read before the annexation (the engine drops the annexed country's formations) and the
+#         Army of the Oriental Province is raised after it, under Oribe (gg_oriental_army_raise);
+#       - its states keep the mark of the Oriental Province (gg_provincia_oriental), which the Cisplatine question
+#         reads to free them or hand them to Brazil (gg_cis_release, gg_cis_annex);
+#       - every character, Oribe included, passes to Buenos Aires before the annexation (gg_bring_characters_to);
+#       - the marks move from «province of the Pact» (gg_oriental_province) to «reincorporated» (gg_reincorporated):
+#         the Pact's row goes on showing Oribe as its governor, and Brazil's war (dp_gg_cisplatina) stays possible.
+#     annex_with_incorporation, as gg_oriental_incorporate: its states are Argentine ground at once.
+# ES: la absorcion, como la reincorporacion completa: el tamanio del ejercito antes de anexar y el Ejercito de la
+#     Provincia Oriental despues, bajo Oribe; los estados con la marca de la Provincia Oriental (la cuestion
+#     cisplatina los lee); todos los personajes a Buenos Aires antes de anexar; las marcas pasan de «provincia del
+#     Pacto» a «reincorporada», asi la fila sigue mostrando a Oribe y la guerra del Brasil sigue siendo posible.
+gg_oriental_province_absorb = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_province_absorb|" # GG_TRAZA
+	c:URU = {
+		save_scope_as = gg_oriental_country
+		if = { limit = { army_size >= 20 } set_global_variable = { name = gg_oriental_battalions value = 20 } }
+		else_if = { limit = { army_size >= 12 } set_global_variable = { name = gg_oriental_battalions value = 12 } }
+		else_if = { limit = { army_size >= 6 } set_global_variable = { name = gg_oriental_battalions value = 6 } }
+		else = { set_global_variable = { name = gg_oriental_battalions value = 3 } }
+		every_scope_state = {
+			limit = { NOT = { has_modifier = gg_provincia_oriental } }
+			add_modifier = { name = gg_provincia_oriental years = 30 }
+		}
+		gg_bring_characters_to = { TARGET = c:ARG }
+	}
+	remove_global_variable = gg_oriental_province
+	set_global_variable = gg_reincorporated
+	set_global_variable = gg_oriental_in_pact
+	annex_with_incorporation = scope:gg_oriental_country
+	gg_oriental_army_raise = yes
+	clear_saved_scope = gg_oriental_country
+}
+
+# EN: 24/9/2026 (Juan: «if the Provincia Oriental exists it must join the war on Rosas's side; Oribe was Rosas's ally,
+#     and Urquiza had to beat him first in October 1851»). Urquiza's war (dp_gg_pacto_federal, Buenos Aires against
+#     Entre Rios): the Oriental Province enters it on Buenos Aires's side, the mirror of Corrientes joining Entre Rios
+#     (gg_pact_join_urquiza_side). Scope: any. Called the day after the war starts (gg_argentina.89) and by the Pact's
+#     weekly pulse (gg_pact_governors_update), for a province made after the war began. A player's Oriental Province is
+#     not forced in. The subject type does not join its overlord's wars on its own (join_overlord_wars = no); this is
+#     the one war it is brought into.
+# SOURCE / FUENTE: design repo SOURCES_peace.md §1 (the peace of 8 October 1851, Oribe before Urquiza) and
+#     SOURCES_loans.md (Capitulacion del Pantanoso, 8/10/1851).
+# ES: la guerra de Urquiza: la Provincia Oriental entra del lado de Buenos Aires, el espejo de Corrientes con Entre
+#     Rios. Se llama al dia siguiente de empezar la guerra y en el pulso semanal del Pacto. La de un jugador no se fuerza.
+gg_oriental_province_joins_rosas = {
+	if = {
+		limit = {
+			exists = c:ENR
+			c:ARG ?= { has_war_with = c:ENR }
+			c:URU ?= {
+				gg_is_oriental_pact_province = yes
+				is_player = no
+				NOT = { has_war_with = c:ENR }
+			}
+		}
+		c:URU = {
+			if = { limit = { has_truce_with = c:ENR } end_truce = c:ENR }
+		}
+		c:ENR = {
+			if = { limit = { has_truce_with = c:URU } end_truce = c:URU }
+			every_scope_war = {
+				limit = {
+					# EN/ES: the Pact war itself: Buenos Aires attacks, Entre Rios defends / la guerra del Pacto misma
+					attacker_warleader ?= { c:ARG ?= this }
+					defender_warleader ?= { c:ENR ?= this }
+					NOT = { is_war_participant = c:URU }
+				}
+				join_war = { target = c:URU side = c:ARG }
+				debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_province_joins_rosas| JOINED=war " # GG_TRAZA
+			}
+		}
+	}
+}
+
 # EN: 23/9/2026 (Juan: "a war at once, me without the Pact, against a whole Brazil") -- Brazil protests and waits
 #     for its moment, as in 1851 when it waited for Urquiza: every month it checks whether Buenos Aires is at war or
 #     weaker than the Empire, and only then declares (gg_cisplatina.7). By 1853 it gives the question up.

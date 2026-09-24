@@ -1435,6 +1435,9 @@ gg_argentina_vassals_settle = {
 					OR = {
 						c:CLN ?= this
 						gg_is_province_country = yes
+						# EN/ES: 24/9 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE) -- the Oriental Province is asked about too
+						#     / tambien se pregunta por la Provincia Oriental
+						gg_is_oriental_pact_province = yes
 					}
 					is_subject_of = c:ARG
 				}
@@ -1479,6 +1482,12 @@ gg_argentina_provinces_incorporate = {
 	gg_argentina_province_join = { TAG = MZA ALLY = no }
 	gg_argentina_province_join = { TAG = SJN ALLY = no }
 	gg_argentina_province_join = { TAG = SNL ALLY = no }
+	# EN: 24/9/2026 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE; Juan: «the Provincia Oriental was not annexed») -- the Banda
+	#     Oriental taken in as a province of the Pact joins with the rest (common/scripted_effects/gg_cisplatina.txt).
+	#     Before, only the constitution took it, a month after gg_argentina.80.a had incorporated everyone else.
+	# ES: la Banda Oriental recibida como provincia del Pacto entra con las demas. Antes solo la tomaba la
+	#     constitucion, un mes despues de que gg_argentina.80.a incorporara a todas las otras.
+	gg_oriental_province_join = yes
 }
 
 # EN: One province into the one country. Scope: Argentina. Vanilla's rule for Cuba (cuba_independencia.6):

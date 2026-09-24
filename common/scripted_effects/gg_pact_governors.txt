@@ -193,6 +193,18 @@ gg_pact_governors_update = {
 		# EN/ES: 24/9 (hotfix 0.1.1, AUD-ORIENTAL-FREED) -- the night sweep reads that the province is still Buenos
 		#     Aires's and what it is called / el barrido nocturno lee que la provincia sigue sujeta y como se llama
 		c:URU = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update| ORIENTAL_PROVINCE_SUBJECT=yes NAME= [THIS.GetCountry.GetNameNoFlag]" } # GG_TRAZA
+		# EN/ES: 24/9 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE) -- its head is a governor (gov_gg_provincia), for the sweep
+		#     / su cabeza es un gobernador, para el barrido
+		if = {
+			limit = { c:URU = { has_government_type = gov_gg_provincia } }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update| ORIENTAL_GOVERNOR=yes" # GG_TRAZA
+		}
+		else = {
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update| ORIENTAL_GOVERNOR=no" # GG_TRAZA
+		}
+		# EN/ES: 24/9 (Juan) -- a province made after Urquiza's war began still joins it on Rosas's side
+		#     / una provincia hecha despues de empezar la guerra de Urquiza igual entra del lado de Rosas
+		gg_oriental_province_joins_rosas = yes
 	}
 	# EN/ES: 23/9 (Juan) -- fully reincorporated: Oribe governs it, found wherever he is or born from his template
 	#     (the Pact's own rule for governors) / reincorporada: la gobierna Oribe, donde este o nacido de su plantilla

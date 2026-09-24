@@ -1,11 +1,11 @@
 ﻿# EN: 23/9/2026 (headless run: Tucuman, Jujuy, Corrientes and La Rioja still showed "President") --
 #     the engine does not pick the "best" valid government type, so vanilla keeps its generic
 #     presidential types from ever matching a Peru-Bolivia member (NAND pbc_member, 02_presidential_
-#     republics.txt). Same method here: these eight generic types are vanilla's, copied whole, plus one
+#     republics.txt). Same method here: these nine generic types are vanilla's, copied whole, plus one
 #     line that leaves the Argentine province countries to gov_gg_provincia (governor).
-#     Re-copy from vanilla on a game update; only the gg_is_province_country line is ours.
+#     Re-copy from vanilla on a game update; only the gg_has_province_governor line is ours (was gg_is_province_country until 0.1.2).
 # ES: el motor no elige el "mejor" tipo valido, asi que vanilla impide a mano que los tipos presidenciales
-#     genericos le toquen a un miembro de la Confederacion Peru-Boliviana. Mismo metodo: estos ocho son
+#     genericos le toquen a un miembro de la Confederacion Peru-Boliviana. Mismo metodo: estos nueve son
 #     los de vanilla, copiados enteros, mas una linea que deja a las provincias argentinas en
 #     gov_gg_provincia (gobernador). Recopiar de vanilla si el juego se actualiza.
 
@@ -22,7 +22,7 @@ REPLACE:gov_technate_presidential = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 	}
 
 	on_government_type_change = {
@@ -46,7 +46,7 @@ REPLACE:gov_banana_republic = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 		gdp < 2000000
 		any_scope_state = {
 			has_building = building_banana_plantation
@@ -94,7 +94,7 @@ REPLACE:gov_military_dictatorship = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 	}
 
 	on_government_type_change = {
@@ -125,7 +125,7 @@ REPLACE:gov_presidential_dictatorship = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 	}
 
 	on_government_type_change = {
@@ -156,7 +156,7 @@ REPLACE:gov_junta = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 	}
 
 	on_government_type_change = {
@@ -183,7 +183,7 @@ REPLACE:gov_presidential_oligarchy = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 	}
 
 	on_government_type_change = {
@@ -221,7 +221,7 @@ REPLACE:gov_presidential_democracy = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 		NAND = {
 			c:EZO ?= this
 			has_variable = ezo_republic_var
@@ -249,7 +249,7 @@ REPLACE:gov_presidential_single_party_state = {
 			is_involved_in_journal_entry = je_peru_bolivia
 			has_variable = pbc_member
 		}
-		NOT = { gg_is_province_country = yes } # EN/ES: Argentine provinces have a governor / las provincias tienen gobernador
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
 		NAND = {
 			c:EZO ?= this
 			has_variable = ezo_republic_var
@@ -261,5 +261,36 @@ REPLACE:gov_presidential_single_party_state = {
 	}
 	on_post_government_type_change = {
 		post_change_to_presidential_elective = yes
+	}
+}
+
+# EN: 24/9/2026 (hotfix 0.1.2, Codex review of AUD-ORIENTAL-PROVINCE) -- the ninth generic type whose head is a
+#     President; it was missing from the list. Vanilla's, copied whole, plus the same line.
+# ES: el noveno tipo generico con Presidente, que faltaba en la lista. El de vanilla, entero, mas la misma linea.
+REPLACE:gov_fascist_state = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		OR = {
+			has_law_or_variant = law_type:law_presidential_republic
+			has_law_or_variant = law_type:law_parliamentary_republic
+		}
+		OR = {
+			has_law_or_variant = law_type:law_autocracy
+			has_law_or_variant = law_type:law_oligarchy
+			has_law_or_variant = law_type:law_single_party_state
+		}
+		coa_fascist_trigger = yes
+		NOT = { gg_has_province_governor = yes } # EN/ES: Argentine provinces (and the Oriental Province, AUD-ORIENTAL-PROVINCE) have a governor / las provincias tienen gobernador
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
 	}
 }

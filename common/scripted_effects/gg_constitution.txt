@@ -53,21 +53,10 @@ gg_unitario_rising = {
 #     scope / un solo pais: todas las provincias del Pacto incorporadas
 gg_constitution_one_country = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_one_country|" # GG_TRAZA
+	# EN/ES: 24/9 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE) -- the Oriental Province is in it now (gg_oriental_province_join,
+	#     same player rule as before, and its characters, army and state marks come too; the bare annex here left them
+	#     behind) / la Provincia Oriental ya esta adentro, con sus personajes, su ejercito y la marca de sus estados
 	gg_argentina_provinces_incorporate = yes
-	# EN/ES: 23/9 (Codex review of 743b851, AUD-SEAT-ANNEX) -- the Oriental province under the same player rule as the
-	#     others / la provincia oriental con la misma regla de jugadores que las demas
-	if = {
-		limit = { has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG } }
-		if = {
-			limit = { c:URU = { is_player = no } }
-			annex = c:URU
-			remove_global_variable = gg_oriental_province
-		}
-		else_if = {
-			limit = { is_player = no }
-			c:URU = { trigger_event = { id = gg_constitution.5 days = 0 popup = yes } }
-		}
-	}
 }
 
 # EN/ES: the federal constitution of 1853, with the universal male suffrage of the electoral law of 1857: a
