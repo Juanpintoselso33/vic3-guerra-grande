@@ -1,0 +1,761 @@
+﻿namespace = gg_ba
+
+# EN: THE STATE OF BUENOS AIRES, 1852-1861 (23/9/2026, Juan). After Urquiza's victory in the Pact, or with two
+#     governments, Buenos Aires and the Confederation live apart until Cepeda and Pavon settle which of them makes the
+#     Republic. Sides and wars in common/scripted_effects/gg_buenos_aires.txt; the plan and the dated sources in
+#     docs/guerra-grande-argentina/buenos-aires-separada-plan.md (design repo).
+#     The relays (.101-.108) are scheduled on ARG on the first day (common/on_actions/guerra_grande_on_actions.txt):
+#     no trigger on them, because a scheduled event's trigger is checked when it is scheduled.
+# ES: EL ESTADO DE BUENOS AIRES, 1852-1861. Despues de la victoria de Urquiza en el Pacto, o con dos gobiernos,
+#     Buenos Aires y la Confederacion viven aparte hasta que Cepeda y Pavon deciden cual de las dos hace la Republica.
+#     Los relevos se agendan sobre ARG el primer dia, sin trigger.
+# SOURCE / FUENTE: Canedo, M. (coord.), Un pais para los portenos (UNLP, 2023), https://doi.org/10.24215/978-950-34-2319-6 ;
+#     Garcia, C. F., «El tratado del 11 de noviembre de 1859», Humanidades 28 (1940); Moreno, G. R., «El Pacto de San
+#     Jose de Flores y la Union Nacional», Derechos en Accion 3 (2017); argentinahistorica.com.ar (Scobie-based chapter
+#     on the convivencia treaties and the differential duties); es.wikipedia, «Estado de Buenos Aires».
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 11/9/1852 (day 6093) -- the September revolution / la revolucion de septiembre
+# -------------------------------------------------------------------------------------------------
+gg_ba.101 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.101|" # GG_TRAZA
+		if = {
+			limit = {
+				c:ARG ?= this
+				NOT = { has_global_variable = gg_ba_split_active }
+				NOT = { has_global_variable = gg_ba_done }
+				has_global_variable = gg_pact_settlement_urquiza
+				has_state_in_state_region = STATE_BUENOS_AIRES
+				any_scope_state = { NOT = { state_region = s:STATE_BUENOS_AIRES } }
+				is_at_war = no
+			}
+			gg_ba_split_historical = yes
+			trigger_event = { id = gg_ba.1 days = 0 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ARG ?= this
+				NOT = { has_global_variable = gg_ba_split_active }
+				NOT = { has_global_variable = gg_ba_done }
+				has_global_variable = gg_pact_settlement_stalemate
+				c:ENR ?= { is_subject = no }
+			}
+			gg_ba_split_stalemate = yes
+			trigger_event = { id = gg_ba.2 days = 0 popup = yes }
+			c:ENR = { trigger_event = { id = gg_ba.2 days = 0 popup = yes } }
+		}
+		# EN/ES: the Pact may close later (a war still running): retry monthly through 1854 / se reintenta
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_ba_split_active }
+				NOT = { has_global_variable = gg_ba_done }
+				game_date < 1855.1.1
+				OR = {
+					NOT = { has_global_variable = gg_pact_settled }
+					has_global_variable = gg_pact_settlement_urquiza
+					has_global_variable = gg_pact_settlement_stalemate
+				}
+			}
+			trigger_event = { id = gg_ba.101 days = 30 }
+		}
+	}
+}
+
+gg_ba.1 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.1.t
+	desc = gg_ba.1.d
+	flavor = gg_ba.1.f
+	event_image = { video = "europenorthamerica_springtime_of_nations" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.1|" # GG_TRAZA
+	}
+
+	# EN/ES: let it go: the organisation goes on without it / dejarla ir
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.1.a|" # GG_TRAZA
+		name = gg_ba.1.a
+		custom_tooltip = gg_ba.1.a_tt
+		ai_chance = {
+			base = 40
+			modifier = { trigger = { gg_pact_historical = yes } add = -30 }
+		}
+	}
+	# EN/ES: back Lagos: besiege the city (war on 1/12, 81 days on) / apoyar a Lagos: sitiar la ciudad
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.1.b|" # GG_TRAZA
+		name = gg_ba.1.b
+		default_option = yes
+		custom_tooltip = gg_ba.1.b_tt
+		set_global_variable = gg_ba_lagos
+		trigger_event = { id = gg_ba.102 days = 81 }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { gg_pact_historical = yes } add = 100 }
+		}
+	}
+	# EN/ES: a player may follow Buenos Aires instead; play_as last / el jugador puede seguir a Buenos Aires
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.1.c|" # GG_TRAZA
+		name = gg_ba.1.c
+		trigger = {
+			is_player = yes
+			exists = c:BUE
+		}
+		custom_tooltip = gg_ba.1.c_tt
+		ai_chance = { base = 0 }
+		play_as = c:BUE
+	}
+}
+
+gg_ba.2 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.2.t
+	desc = gg_ba.2.d
+	flavor = gg_ba.2.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.2|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.2.a|" # GG_TRAZA
+		name = gg_ba.2.a
+		default_option = yes
+		custom_tooltip = gg_ba.2.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 1/12/1852 -- the rising of Lagos, and the siege (only if the Confederation backed it) / el sitio de Lagos
+# -------------------------------------------------------------------------------------------------
+gg_ba.102 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.102|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				has_global_variable = gg_ba_lagos
+				NOT = { has_global_variable = gg_ba_unifying }
+			}
+			gg_ba_open_war = { BY = conf PHASE = 1 }
+			# EN/ES: the squadron, 201 days on (20/6/1853, "June 1853") / la escuadra, 201 dias despues
+			global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.3 days = 201 popup = yes } }
+		}
+	}
+}
+
+gg_ba.3 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.3.t
+	desc = gg_ba.3.d
+	flavor = gg_ba.3.f
+	event_image = { video = "unspecific_naval_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		has_global_variable = gg_ba_split_active
+		NOT = { has_global_variable = gg_ba_unifying }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.3|" # GG_TRAZA
+		gg_ba_save_sides = yes
+	}
+
+	# EN/ES: buy the squadron: the siege is lifted / comprar la escuadra: se levanta el sitio
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.3.a|" # GG_TRAZA
+		name = gg_ba.3.a
+		default_option = yes
+		trigger = { exists = scope:gg_ba_conf has_war_with = scope:gg_ba_conf }
+		add_treasury = -25000
+		custom_tooltip = gg_ba.3.a_tt
+		set_global_variable = { name = gg_ba_ba_won value = 1 }
+		every_diplomatic_play = {
+			limit = { is_diplomatic_play_type = dp_gg_buenos_aires }
+			end_play = yes
+		}
+		ai_chance = { base = 90 }
+	}
+	# EN/ES: hold the walls without paying / resistir sin pagar
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.3.b|" # GG_TRAZA
+		name = gg_ba.3.b
+		custom_tooltip = gg_ba.3.b_tt
+		ai_chance = { base = 10 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: the day after one of their wars ends: who won, and what follows / el dia despues de una de sus guerras
+# -------------------------------------------------------------------------------------------------
+gg_ba.9 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.9|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				has_global_variable = gg_ba_phase
+			}
+			# EN/ES: the Pact's Historical rule keeps the history: Lagos and Pavon to Buenos Aires, Cepeda to the
+			#     Confederation / la regla historica: Lagos y Pavon para Buenos Aires, Cepeda para la Confederacion
+			gg_ba_save_sides = yes
+			if = {
+				limit = { gg_pact_historical = yes }
+				if = {
+					limit = { global_var:gg_ba_phase = 2 }
+					set_global_variable = { name = gg_ba_conf_won value = 1 }
+					set_global_variable = { name = gg_ba_ba_won value = 0 }
+				}
+				else = {
+					set_global_variable = { name = gg_ba_ba_won value = 1 }
+					set_global_variable = { name = gg_ba_conf_won value = 0 }
+				}
+			}
+			if = {
+				limit = { global_var:gg_ba_conf_won = 1 }
+				# EN/ES: Cepeda won: San Jose de Flores; Lagos or Pavon won: the State is absorbed
+				if = {
+					limit = { global_var:gg_ba_phase = 2 }
+					global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.8 days = 0 popup = yes } }
+					global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.8 days = 0 popup = yes } }
+					if = {
+						limit = { exists = scope:gg_ba_state }
+						global_var:gg_conf_side ?= {
+							create_diplomatic_pact = {
+								country = scope:gg_ba_state
+								type = vassal
+							}
+						}
+					}
+					global_var:gg_ba_side ?= {
+						every_scope_state = {
+							limit = { state_region = s:STATE_BUENOS_AIRES }
+							add_modifier = { name = gg_ba_flores_customs years = 5 }
+						}
+					}
+					set_global_variable = gg_ba_flores
+				}
+				else = {
+					gg_ba_unify = { WINNER = conf }
+				}
+			}
+			else_if = {
+				limit = { global_var:gg_ba_ba_won = 1 global_var:gg_ba_phase = 3 }
+				gg_ba_unify = { WINNER = ba }
+			}
+			else = {
+				# EN/ES: Buenos Aires held (or nobody won): it stays apart / Buenos Aires aguanto: sigue aparte
+				global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.12 days = 0 popup = yes } }
+				global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.12 days = 0 popup = yes } }
+			}
+			remove_global_variable = gg_ba_phase
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 12/4/1854 (day 6671) -- the constitution of the State / la constitucion del Estado
+# -------------------------------------------------------------------------------------------------
+gg_ba.103 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.103|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				exists = c:BUE
+				c:BUE = { is_subject = no }
+			}
+			c:BUE = { trigger_event = { id = gg_ba.4 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_ba.4 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.4.t
+	desc = gg_ba.4.d
+	flavor = gg_ba.4.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.4|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.4.a|" # GG_TRAZA
+		name = gg_ba.4.a
+		default_option = yes
+		gg_constitution_unitaria = yes
+		gg_ruler_set = { TEMPLATE = ARG_gg_pastor_obligado }
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 8/1/1855 (day 6942) -- the convivencia treaty / el tratado de convivencia
+# -------------------------------------------------------------------------------------------------
+gg_ba.104 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.104|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				global_var:gg_ba_side ?= { is_at_war = no }
+			}
+			global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.5 days = 0 popup = yes } }
+			global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.5 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_ba.5 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.5.t
+	desc = gg_ba.5.d
+	flavor = gg_ba.5.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.5|" # GG_TRAZA
+		gg_ba_save_sides = yes
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.5.a|" # GG_TRAZA
+		name = gg_ba.5.a
+		default_option = yes
+		if = {
+			limit = { global_var:gg_ba_side ?= this exists = scope:gg_ba_conf }
+			change_relations = { country = scope:gg_ba_conf value = 30 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 1/7/1856 (day 7481, "1856") -- the differential duties / los derechos diferenciales
+# -------------------------------------------------------------------------------------------------
+gg_ba.106 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.106|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				global_var:gg_ba_side ?= { is_subject = no }
+			}
+			global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.6 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_ba.6 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.6.t
+	desc = gg_ba.6.d
+	flavor = gg_ba.6.f
+	event_image = { video = "unspecific_steam_ship" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.6|" # GG_TRAZA
+		gg_ba_save_sides = yes
+	}
+
+	# EN/ES: pass the law / sancionar la ley
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.6.a|" # GG_TRAZA
+		name = gg_ba.6.a
+		default_option = yes
+		every_scope_state = {
+			limit = { OR = { state_region = s:STATE_SANTA_FE state_region = s:STATE_ENTRE_RIOS } }
+			add_modifier = { name = gg_ba_differential_duties_gain years = 3 }
+		}
+		global_var:gg_ba_side ?= {
+			every_scope_state = {
+				limit = { state_region = s:STATE_BUENOS_AIRES }
+				add_modifier = { name = gg_ba_differential_duties_hit years = 3 }
+			}
+		}
+		if = {
+			limit = { exists = scope:gg_ba_state }
+			change_relations = { country = scope:gg_ba_state value = -30 }
+		}
+		ai_chance = { base = 80 }
+	}
+	# EN/ES: keep the ports open to both / no sancionarla
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.6.b|" # GG_TRAZA
+		name = gg_ba.6.b
+		custom_tooltip = gg_ba.6.b_tt
+		ai_chance = { base = 20 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 20/5/1859 (day 8534) -- "by peaceful negotiation or by war" / «por negociaciones pacificas o por la guerra»
+# -------------------------------------------------------------------------------------------------
+gg_ba.107 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.107|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				global_var:gg_ba_side ?= { is_subject = no }
+			}
+			global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.7 days = 0 popup = yes } }
+		}
+	}
+}
+
+gg_ba.7 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.7.t
+	desc = gg_ba.7.d
+	flavor = gg_ba.7.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.7|" # GG_TRAZA
+	}
+
+	# EN/ES: war: Cepeda / la guerra
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.7.a|" # GG_TRAZA
+		name = gg_ba.7.a
+		default_option = yes
+		custom_tooltip = gg_ba.7.a_tt
+		gg_ba_open_war = { BY = conf PHASE = 2 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { gg_pact_historical = yes } add = 1000 }
+		}
+	}
+	# EN/ES: wait: Buenos Aires stays apart, and the question with it / esperar
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.7.b|" # GG_TRAZA
+		name = gg_ba.7.b
+		custom_tooltip = gg_ba.7.b_tt
+		ai_chance = { base = 30 }
+	}
+}
+
+# EN/ES: after Cepeda, the Confederation won: the Pact of San Jose de Flores (11/11/1859) / el Pacto de San Jose de Flores
+gg_ba.8 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.8.t
+	desc = gg_ba.8.d
+	flavor = gg_ba.8.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.8|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.8.a|" # GG_TRAZA
+		name = gg_ba.8.a
+		default_option = yes
+		custom_tooltip = gg_ba.8.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 22/8/1861 (day 9358) -- the break, and Pavon / la ruptura, y Pavon
+# -------------------------------------------------------------------------------------------------
+gg_ba.108 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.108|" # GG_TRAZA
+		gg_ba_save_sides = yes
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				exists = scope:gg_ba_conf
+				scope:gg_ba_state ?= {
+					is_at_war = no
+					NOT = { has_truce_with = scope:gg_ba_conf }
+				}
+			}
+			global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.10 days = 0 popup = yes } }
+		}
+		# EN/ES: a truce after Cepeda can outlast August 1861: retry monthly until the net / se reintenta cada mes
+		else_if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+				game_date < 1862.9.1
+			}
+			trigger_event = { id = gg_ba.108 days = 30 }
+		}
+	}
+}
+
+gg_ba.10 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.10.t
+	# EN/ES: with or without San Jose de Flores / con o sin San Jose de Flores
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_ba.10.d trigger = { has_global_variable = gg_ba_flores } }
+			triggered_desc = { desc = gg_ba.10.d_apart }
+		}
+	}
+	flavor = gg_ba.10.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.10|" # GG_TRAZA
+	}
+
+	# EN/ES: march on Santa Fe: Pavon / marchar sobre Santa Fe
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.10.a|" # GG_TRAZA
+		name = gg_ba.10.a
+		default_option = yes
+		custom_tooltip = gg_ba.10.a_tt
+		gg_ba_open_war = { BY = ba PHASE = 3 }
+		ai_chance = {
+			base = 70
+			modifier = { trigger = { gg_pact_historical = yes } add = 1000 }
+		}
+	}
+	# EN/ES: give in: the Confederation's terms / ceder
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.10.b|" # GG_TRAZA
+		name = gg_ba.10.b
+		custom_tooltip = gg_ba.10.b_tt
+		gg_ba_unify = { WINNER = conf }
+		ai_chance = { base = 30 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 12/10/1862 (day 9774, Mitre's presidency) -- the net: a question still open is closed / la red por fecha
+# -------------------------------------------------------------------------------------------------
+gg_ba.105 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.105|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ba_split_active
+				NOT = { has_global_variable = gg_ba_unifying }
+			}
+			if = {
+				limit = { gg_pact_historical = yes }
+				gg_ba_unify = { WINNER = ba }
+			}
+			else = {
+				gg_ba_unify = { WINNER = conf }
+			}
+		}
+	}
+}
+
+# EN/ES: the Republic made one, by whichever side won / la Republica hecha una
+gg_ba.11 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.11.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_ba.11.d_ba trigger = { global_var:gg_ba_winner_ba = 1 } }
+			triggered_desc = { desc = gg_ba.11.d_conf }
+		}
+	}
+	flavor = gg_ba.11.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.11|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.11.a|" # GG_TRAZA
+		name = gg_ba.11.a
+		default_option = yes
+		custom_tooltip = gg_ba.11.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN/ES: a war ended and Buenos Aires is still apart / termino una guerra y Buenos Aires sigue aparte
+gg_ba.12 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.12.t
+	desc = gg_ba.12.d
+	flavor = gg_ba.12.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.12|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.12.a|" # GG_TRAZA
+		name = gg_ba.12.a
+		default_option = yes
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN/ES: the player of the country that disappears takes the other seat; play_as last / el jugador cambia de sede
+gg_ba.13 = {
+	type = country_event
+	placement = ROOT
+	title = gg_ba.13.t
+	desc = gg_ba.13.d
+	flavor = gg_ba.13.f
+	event_image = { video = "europenorthamerica_political_extremism" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.13|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.13.a|" # GG_TRAZA
+		name = gg_ba.13.a
+		default_option = yes
+		trigger = { exists = global_var:gg_ba_remains }
+		ai_chance = { base = 100 }
+		# EN/ES: last, always, through a saved scope as in gg_argentina.1.b / ultimo, siempre
+		hidden_effect = {
+			global_var:gg_ba_remains ?= { save_scope_as = gg_ba_new_seat }
+			play_as = scope:gg_ba_new_seat
+		}
+	}
+}
+
+# EN: two days after the end: the country that remains absorbs the other, with its people. If Buenos Aires won in the
+#     Urquiza branch, Mitre governs the Republic from Buenos Aires (he took the national executive on 12/12/1861 and
+#     the presidency on 12/10/1862). If Entre Rios won with two governments, it takes the ARG tag the next day.
+# ES: dos dias despues: el pais que queda absorbe al otro, con su gente. Si gano Buenos Aires en la rama de Urquiza,
+#     Mitre gobierna la Republica desde Buenos Aires. Si gano Entre Rios con dos gobiernos, toma el tag ARG al dia
+#     siguiente.
+gg_ba.20 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.20|" # GG_TRAZA
+		if = {
+			limit = { has_global_variable = gg_ba_unifying NOT = { has_global_variable = gg_ba_done } }
+			set_global_variable = gg_ba_done
+			save_scope_as = gg_ba_keeper
+			if = {
+				limit = { global_var:gg_ba_side ?= this }
+				global_var:gg_conf_side ?= { save_scope_as = gg_ba_absorbed }
+			}
+			else = {
+				global_var:gg_ba_side ?= { save_scope_as = gg_ba_absorbed }
+			}
+			if = {
+				limit = { exists = scope:gg_ba_absorbed }
+				scope:gg_ba_absorbed = { gg_bring_characters_to = { TARGET = scope:gg_ba_keeper } }
+				annex = scope:gg_ba_absorbed
+			}
+			if = {
+				limit = { global_var:gg_ba_winner_ba = 1 }
+				if = {
+					limit = { has_state_in_state_region = STATE_BUENOS_AIRES }
+					set_capital = STATE_BUENOS_AIRES
+				}
+				if = {
+					limit = { has_global_variable = gg_ba_from_urquiza }
+					gg_ruler_set = { TEMPLATE = ARG_bartolome_mitre }
+				}
+			}
+			if = {
+				limit = { NOT = { c:ARG ?= this } }
+				trigger_event = { id = gg_ba.21 days = 1 }
+			}
+			remove_global_variable = gg_ba_split_active
+			clear_saved_scope = gg_ba_absorbed
+			clear_saved_scope = gg_ba_keeper
+		}
+	}
+}
+
+gg_ba.21 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.21|" # GG_TRAZA
+		if = {
+			limit = { NOT = { exists = c:ARG } }
+			change_tag = ARG
+		}
+	}
+}

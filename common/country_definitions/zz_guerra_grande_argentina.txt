@@ -222,3 +222,23 @@ SNL = {
 	cultures = { platinean }
 	capital = STATE_SAN_LUIS
 }
+
+# EN: 23/9/2026 (Juan) -- THE STATE OF BUENOS AIRES, 11/9/1852-1861: the province that broke with Urquiza after
+#     Caseros and gave itself a constitution of its own in 1854 (events/gg_buenos_aires.txt). The Argentine sky
+#     blue, which the Confederation also flew: on the map it is told apart by being lighter.
+# ES: EL ESTADO DE BUENOS AIRES, 11/9/1852-1861: la provincia que rompio con Urquiza despues de Caseros y se dio
+#     constitucion propia en 1854. El celeste argentino, que tambien usaba la Confederacion: en el mapa se lo
+#     distingue por mas claro.
+BUE = {
+	color = { 150 200 235 }
+
+	country_type = recognized
+
+	tier = principality
+
+	religion = catholic
+
+	cultures = { platinean }
+
+	capital = STATE_BUENOS_AIRES
+}

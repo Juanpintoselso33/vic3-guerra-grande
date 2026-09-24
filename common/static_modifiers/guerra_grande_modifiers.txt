@@ -448,3 +448,27 @@ gg_defensor_de_las_leyes = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	character_popularity_add = 25
 }
+
+# EN/ES: 23/9/2026 -- the State of Buenos Aires (events/gg_buenos_aires.txt) / el Estado de Buenos Aires
+# EN: the differential duties of 1856: goods landed straight at the Confederation's ports paid less than goods
+#     trans-shipped through Buenos Aires; Rosario began to see ocean-going ships (argentinahistorica.com.ar).
+# ES: los derechos diferenciales de 1856: lo que se descargaba directo en los puertos de la Confederacion pagaba
+#     menos que lo que pasaba por la aduana de Buenos Aires; Rosario empezo a ver buques de ultramar.
+gg_ba_differential_duties_hit = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.10
+	state_trade_capacity_mult = -0.10
+}
+gg_ba_differential_duties_gain = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	state_trade_capacity_add = 10
+	state_weekly_trades_add = 1
+}
+# EN: the Pact of San Jose de Flores: Buenos Aires rejoins but the Confederation takes over its customs house and
+#     guarantees its budget for five years (argentinahistorica.com.ar, clause e).
+# ES: el Pacto de San Jose de Flores: Buenos Aires vuelve pero la Confederacion toma su aduana y le garantiza el
+#     presupuesto por cinco anios (clausula e).
+gg_ba_flores_customs = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_capacity_mult = -0.10
+}

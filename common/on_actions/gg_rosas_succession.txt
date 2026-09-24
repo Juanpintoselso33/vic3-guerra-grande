@@ -9,6 +9,7 @@ gg_rosas_succession_monthly = {
 	trigger = {
 		c:ARG ?= this
 		has_modifier = gg_pais_sin_constitucion
+		NOT = { has_global_variable = gg_ba_split_active } # EN/ES: 23/9 -- waits while Buenos Aires is apart / espera mientras Buenos Aires esta aparte
 		NOT = { any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } } }
 	}
 	effect = {

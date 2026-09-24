@@ -273,3 +273,48 @@ CRR_gg_pedro_cabral = {
 	ideology = ideology_authoritarian
 	home_region = STATE_CORRIENTES
 }
+
+# EN/ES: 23/9/2026 -- the governors of the State of Buenos Aires (events/gg_buenos_aires.txt). No DNA yet: the
+#     faces are pending (vanilla's random generation meanwhile) / los gobernadores del Estado de Buenos Aires;
+#     sin ADN todavia.
+# EN/ES: Valentin Alsina: Buenos Aires 16/12/1802 - Buenos Aires 6/9/1869. Unitarian jurist and writer; governor
+#     in 1852 and 1858-1859 (es.wikipedia, «Valentin Alsina»).
+ARG_gg_valentin_alsina = {
+	first_name = gg_name_valentin
+	last_name = gg_name_alsina
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+	birth_date = 1802.12.16
+	home_region = STATE_BUENOS_AIRES
+	traits = {
+		honorable
+		experienced_political_operator
+	}
+	trait_generation = { }
+}
+
+# EN/ES: Pastor Obligado: Buenos Aires 9/8/1818 - Jesus Maria 12/3/1870. Lawyer; first constitutional governor of
+#     the State of Buenos Aires, 1853-1858 (es.wikipedia, «Pastor Obligado»).
+ARG_gg_pastor_obligado = {
+	first_name = gg_name_pastor
+	last_name = gg_name_obligado
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1818.8.9
+	home_region = STATE_BUENOS_AIRES
+	traits = {
+		ambitious
+		experienced_political_operator
+	}
+	trait_generation = { }
+}

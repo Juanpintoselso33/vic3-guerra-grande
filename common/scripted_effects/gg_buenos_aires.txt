@@ -1,0 +1,208 @@
+﻿# EN: The State of Buenos Aires, 1852-1861 (events/gg_buenos_aires.txt; plan in the design repo,
+#     docs/guerra-grande-argentina/buenos-aires-separada-plan.md). Two sides, kept in two global country
+#     variables so one chain serves both Pact endings that lead here:
+#       Urquiza won the Pact  -> Buenos Aires = BUE (new, cut from ARG) · Confederation = ARG (Urquiza)
+#       Two governments       -> Buenos Aires = ARG (Rosas)              · Confederation = ENR (Urquiza)
+# ES: El Estado de Buenos Aires, 1852-1861. Dos bandos, guardados en dos globales de pais para que una sola cadena
+#     sirva a los dos finales del Pacto que llevan aca:
+#       gano Urquiza   -> Buenos Aires = BUE (nuevo, recortado de ARG) · Confederacion = ARG (Urquiza)
+#       dos gobiernos  -> Buenos Aires = ARG (Rosas)                   · Confederacion = ENR (Urquiza)
+
+# EN: Scope ARG, Urquiza's Confederation after Caseros. The September revolution of 1852: Entre Rios joins the
+#     Confederation (unless a player holds it), the seat moves up the river, and Buenos Aires is born apart.
+#     create_country clones the roster, so the clones are killed first thing (the reasoning is in
+#     gg_argentina_new_country_people; this copy leaves out its Pact journal, which has nothing to do here).
+# ES: Scope ARG, la Confederacion de Urquiza despues de Caseros. La revolucion de septiembre: Entre Rios entra a la
+#     Confederacion (salvo que la lleve un jugador), la sede sube por el rio, y Buenos Aires nace aparte.
+gg_ba_split_historical = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_split_historical|" # GG_TRAZA
+	if = {
+		limit = { c:ENR ?= { is_player = no } }
+		c:ENR = { gg_bring_characters_to = { TARGET = c:ARG } }
+		annex = c:ENR
+	}
+	# EN/ES: Parana, capital of the Confederation; Santa Fe if Entre Rios is not ours / Parana; Santa Fe si no
+	if = {
+		limit = { has_state_in_state_region = STATE_ENTRE_RIOS }
+		set_capital = STATE_ENTRE_RIOS
+	}
+	else_if = {
+		limit = { has_state_in_state_region = STATE_SANTA_FE }
+		set_capital = STATE_SANTA_FE
+	}
+	create_country = {
+		tag = BUE
+		origin = this
+		state = s:STATE_BUENOS_AIRES.region_state:ARG
+	}
+	c:BUE ?= {
+		every_scope_character = {
+			kill_character = {
+				hidden = yes
+			}
+		}
+		set_capital = STATE_BUENOS_AIRES
+		gg_ruler_set = { TEMPLATE = ARG_gg_valentin_alsina }
+		gg_ba_raise_porteno_army = yes
+	}
+	set_global_variable = gg_ba_split_active
+	set_global_variable = gg_ba_from_urquiza
+	set_global_variable = { name = gg_ba_side value = c:BUE }
+	set_global_variable = { name = gg_conf_side value = c:ARG }
+}
+
+# EN: Two governments (the Pact ended with no victor): the split already exists. Rosas's Buenos Aires plays the
+#     State's part and Urquiza's Entre Rios the Confederation's.
+# ES: Dos gobiernos: la separacion ya existe. La Buenos Aires de Rosas hace de Estado y el Entre Rios de Urquiza de
+#     Confederacion.
+gg_ba_split_stalemate = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_split_stalemate|" # GG_TRAZA
+	set_global_variable = gg_ba_split_active
+	set_global_variable = { name = gg_ba_side value = c:ARG }
+	set_global_variable = { name = gg_conf_side value = c:ENR }
+}
+
+# EN: The State's army, in Buenos Aires's own scope. Game-scale units, not an order of battle: the source gives the
+#     porteno forces at Pavon as 15,400 against 17,000 (todo-argentina.net, Soubie), close enough to fight.
+# ES: El ejercito del Estado. Unidades a escala de juego, no un orden de batalla: en Pavon los portenios eran
+#     15.400 contra 17.000, lo bastante parejo para pelear.
+gg_ba_raise_porteno_army = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_raise_porteno_army|" # GG_TRAZA
+	random_scope_state = {
+		limit = { state_region = s:STATE_BUENOS_AIRES }
+		save_scope_as = gg_ba_hq
+	}
+	if = {
+		limit = { exists = scope:gg_ba_hq }
+		create_military_formation = {
+			type = army
+			hq_region = scope:gg_ba_hq.region
+			name = gg_ba_army_name
+			combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_BUENOS_AIRES count = 8 }
+			combat_unit = { type = unit_type:combat_unit_type_hussars state_region = s:STATE_BUENOS_AIRES count = 3 }
+			combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_BUENOS_AIRES count = 2 }
+		}
+	}
+	clear_saved_scope = gg_ba_hq
+}
+
+# EN: The two sides as saved scopes (scope:gg_ba_state, scope:gg_ba_conf). Arguments take a scope, the way vanilla
+#     and the rest of the mod pass countries (country = scope:x), never a global_var: link.
+# ES: Los dos bandos como scopes guardados. Los argumentos reciben un scope, como en vanilla y en el resto del mod.
+gg_ba_save_sides = {
+	if = {
+		limit = { NOT = { exists = scope:gg_ba_state } }
+		global_var:gg_ba_side ?= { save_scope_as = gg_ba_state }
+	}
+	if = {
+		limit = { NOT = { exists = scope:gg_ba_conf } }
+		global_var:gg_conf_side ?= { save_scope_as = gg_ba_conf }
+	}
+}
+
+# EN: A war between the two sides. $BY$ = conf (Lagos, Cepeda) or ba (Pavon). A Buenos Aires that is a subject
+#     (after San Jose de Flores) leaves the pact first: Pavon was fought by a province that had rejoined.
+#     A truce between them blocks it; the caller retries.
+# ES: Una guerra entre los dos bandos. Si Buenos Aires es sujeta (despues de San Jose de Flores), primero sale del
+#     pacto: Pavon la peleo una provincia que habia vuelto. Una tregua entre ellos la traba; quien llama reintenta.
+gg_ba_open_war = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_open_war| BY= $BY$ PHASE= $PHASE$ " # GG_TRAZA
+	gg_ba_save_sides = yes
+	if = {
+		limit = {
+			exists = scope:gg_ba_state
+			exists = scope:gg_ba_conf
+			scope:gg_ba_state = {
+				NOT = { has_war_with = scope:gg_ba_conf }
+				NOT = { has_truce_with = scope:gg_ba_conf }
+			}
+		}
+		scope:gg_ba_state = {
+			if = {
+				limit = { is_subject_of = scope:gg_ba_conf }
+				make_independent = yes
+			}
+		}
+		set_global_variable = { name = gg_ba_phase value = $PHASE$ }
+		set_global_variable = { name = gg_ba_ba_won value = 0 }
+		set_global_variable = { name = gg_ba_conf_won value = 0 }
+		gg_ba_open_war_$BY$ = yes
+	}
+}
+gg_ba_open_war_conf = {
+	scope:gg_ba_conf = {
+		create_diplomatic_play = {
+			name = gg_ba_play_name
+			target_country = scope:gg_ba_state
+			type = dp_gg_buenos_aires
+			war = yes
+		}
+	}
+}
+gg_ba_open_war_ba = {
+	scope:gg_ba_state = {
+		create_diplomatic_play = {
+			name = gg_ba_play_name
+			target_country = scope:gg_ba_conf
+			type = dp_gg_buenos_aires
+			war = yes
+		}
+	}
+}
+
+# EN: The end: $WINNER$ = ba or conf. Both governments hear it; a player on the losing side is offered the winner's
+#     seat (gg_ba.13); the annexation runs two days later (gg_ba.20), on the country that remains -- always ARG,
+#     except when Entre Rios wins in the two-governments branch, and then it takes the ARG tag (gg_ba.21).
+# ES: El final. Los dos gobiernos se enteran; al jugador del lado perdedor se le ofrece la sede del ganador; la
+#     anexion corre dos dias despues sobre el pais que queda -- siempre ARG, salvo que gane Entre Rios con dos
+#     gobiernos, y entonces toma el tag ARG.
+gg_ba_unify = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_unify| WINNER= $WINNER$ " # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_ba_unifying } }
+		set_global_variable = gg_ba_unifying
+		set_global_variable = { name = gg_ba_winner_ba value = 0 }
+		gg_ba_unify_mark_$WINNER$ = yes
+		every_diplomatic_play = {
+			limit = { is_diplomatic_play_type = dp_gg_buenos_aires }
+			end_play = yes
+		}
+		gg_ba_save_sides = yes
+		# EN/ES: the country that remains: ARG in the Urquiza branch (it absorbs BUE whoever won), the winner in the
+		#     two-governments branch / el que queda: ARG si gano Urquiza el Pacto; con dos gobiernos, el ganador
+		if = {
+			limit = { has_global_variable = gg_ba_from_urquiza }
+			set_global_variable = { name = gg_ba_remains value = c:ARG }
+		}
+		else_if = {
+			limit = { global_var:gg_ba_winner_ba = 1 exists = scope:gg_ba_state }
+			set_global_variable = { name = gg_ba_remains value = scope:gg_ba_state }
+		}
+		else_if = {
+			limit = { exists = scope:gg_ba_conf }
+			set_global_variable = { name = gg_ba_remains value = scope:gg_ba_conf }
+		}
+		global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.11 days = 0 popup = yes } }
+		global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.11 days = 0 popup = yes } }
+		# EN/ES: the player of the country that disappears may take the other seat / el jugador del que desaparece
+		global_var:gg_ba_side ?= {
+			if = {
+				limit = { is_player = yes NOT = { global_var:gg_ba_remains ?= this } }
+				trigger_event = { id = gg_ba.13 days = 1 popup = yes }
+			}
+		}
+		global_var:gg_conf_side ?= {
+			if = {
+				limit = { is_player = yes NOT = { global_var:gg_ba_remains ?= this } }
+				trigger_event = { id = gg_ba.13 days = 1 popup = yes }
+			}
+		}
+		global_var:gg_ba_remains ?= { trigger_event = { id = gg_ba.20 days = 2 } }
+	}
+}
+gg_ba_unify_mark_ba = {
+	set_global_variable = { name = gg_ba_winner_ba value = 1 }
+}
+gg_ba_unify_mark_conf = {
+	set_global_variable = { name = gg_ba_winner_ba value = 0 }
+}

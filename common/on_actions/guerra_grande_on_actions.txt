@@ -232,6 +232,14 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento
 			trigger_event = { id = gg_urquiza.3 days = 5873 }  # 1852-02-03 Caseros: the Pact's game rule closes it / la regla del Pacto lo cierra
+			# EN/ES: 23/9/2026 (Juan) -- the State of Buenos Aires (events/gg_buenos_aires.txt) / el Estado de Buenos Aires
+			trigger_event = { id = gg_ba.101 days = 6093 }  # 1852-09-11 la revolucion de septiembre
+			trigger_event = { id = gg_ba.103 days = 6671 }  # 1854-04-12 la constitucion del Estado
+			trigger_event = { id = gg_ba.104 days = 6942 }  # 1855-01-08 el tratado de convivencia
+			trigger_event = { id = gg_ba.106 days = 7481 }  # 1856-07-01 fecha de diseno: los derechos diferenciales ("1856")
+			trigger_event = { id = gg_ba.107 days = 8534 }  # 1859-05-20 la ley del Congreso de Parana
+			trigger_event = { id = gg_ba.108 days = 9358 }  # 1861-08-22 la ruptura
+			trigger_event = { id = gg_ba.105 days = 9774 }  # 1862-10-12 red por fecha: Mitre presidente
 			# EN/ES: la campania del interior, y el balance que hace el tandem / the interior campaign
 			trigger_event = { id = gg_argentina_cal.5 days = 1184 }  # 1839-03-31 Pago Largo
 			trigger_event = { id = gg_argentina_cal.6 days = 1791 }  # 1840-11-28 Quebracho Herrado
@@ -386,6 +394,7 @@ on_war_end = {
 		gg_corrientes_recovery_on_war_end
 		gg_pact_on_war_end
 		gg_cis_on_war_end
+		gg_ba_on_war_end
 		guerra_grande_on_war_end
 	}
 }

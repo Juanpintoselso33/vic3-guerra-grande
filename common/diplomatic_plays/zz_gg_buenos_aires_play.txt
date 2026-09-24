@@ -1,0 +1,31 @@
+﻿# EN: The wars between the Confederation and the State of Buenos Aires, 1852-1861 (events/gg_buenos_aires.txt): the
+#     siege of Lagos, Cepeda and Pavon. A humiliation, so the engine never takes ground itself; the settlement is
+#     scripted (gg_ba.9, the day after the war ends). Two countries only: nobody joins.
+# ES: Las guerras entre la Confederacion y el Estado de Buenos Aires: el sitio de Lagos, Cepeda y Pavon. Una
+#     humillacion, para que el motor no tome tierra solo; el arreglo lo aplica el script. Solo dos paises.
+dp_gg_buenos_aires = {
+	war_goal = humiliation
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/humiliation.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		has_global_variable = gg_ba_split_active
+	}
+
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}

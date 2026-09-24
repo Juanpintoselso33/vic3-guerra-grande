@@ -272,3 +272,15 @@ gg_flag_san_luis_1988 = {
 	color1 = "white"
 	textured_emblem = { texture = "te_gg_san_luis_1988.dds" }
 }
+
+# EN: 23/9/2026 -- "Flag of the State of Buenos Aires (1852-1861).svg" (Wikimedia Commons, CC BY-SA 3.0, User:Samhanin:
+#     "the flag used by Buenos Aires in its de facto independence from 1852 to 1861"). Downloaded and converted,
+#     not redrawn. / la bandera del Estado de Buenos Aires, bajada de Wikimedia y convertida, no redibujada.
+BUE = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_estado_buenos_aires.dds"
+	}
+}

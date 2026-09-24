@@ -1,11 +1,11 @@
 ﻿# EN: Capture the enforced side before on_war_end, then resolve the political settlement once.
 # ES: Registrar el lado que impuso su objetivo antes de on_war_end y resolver una sola vez.
 on_wargoal_enforced = {
-	on_actions = { gg_pact_wargoal_enforced gg_cis_wargoal_enforced }
+	on_actions = { gg_pact_wargoal_enforced gg_cis_wargoal_enforced gg_ba_wargoal_enforced }
 }
 
 on_capitulation = {
-	on_actions = { gg_pact_capitulation gg_cis_capitulation }
+	on_actions = { gg_pact_capitulation gg_cis_capitulation gg_ba_capitulation }
 }
 
 gg_pact_wargoal_enforced = {
@@ -105,7 +105,7 @@ gg_cis_on_war_end = {
 # ES: un retroceso en la jugada del Pacto con Entre Rios la decide como una guerra: el que retrocede pierde, y
 #     el arreglo se lee al dia siguiente, como despues de on_war_end.
 on_diplo_play_back_down = {
-	on_actions = { gg_pact_back_down }
+	on_actions = { gg_pact_back_down gg_ba_back_down }
 }
 
 gg_pact_back_down = {
@@ -126,5 +126,65 @@ gg_pact_back_down = {
 		}
 		else = { set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
 		c:ARG ?= { trigger_event = { id = gg_caseros.6 days = 1 } }
+	}
+}
+
+# EN: 23/9/2026 -- the wars between the Confederation and the State of Buenos Aires (events/gg_buenos_aires.txt):
+#     who won, recorded before the day-late reading (gg_ba.9), the same way as the Pact's wars.
+# ES: las guerras entre la Confederacion y el Estado de Buenos Aires: quien gano, anotado antes de la lectura del
+#     dia siguiente, igual que las del Pacto.
+gg_ba_wargoal_enforced = {
+	trigger = {
+		has_global_variable = gg_ba_split_active
+		exists = scope:diplomatic_play
+		scope:diplomatic_play = { is_diplomatic_play_type = dp_gg_buenos_aires }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_wargoal_enforced" # GG_TRAZA
+		if = { limit = { global_var:gg_ba_side ?= this } set_global_variable = { name = gg_ba_ba_won value = 1 } }
+		else_if = { limit = { global_var:gg_conf_side ?= this } set_global_variable = { name = gg_ba_conf_won value = 1 } }
+	}
+}
+
+gg_ba_capitulation = {
+	trigger = {
+		has_global_variable = gg_ba_split_active
+		OR = {
+			AND = { global_var:gg_ba_side ?= this global_var:gg_conf_side ?= { has_truce_with = root } }
+			AND = { global_var:gg_conf_side ?= this global_var:gg_ba_side ?= { has_truce_with = root } }
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_capitulation" # GG_TRAZA
+		if = { limit = { global_var:gg_ba_side ?= this } set_global_variable = { name = gg_ba_conf_won value = 1 } }
+		else = { set_global_variable = { name = gg_ba_ba_won value = 1 } }
+	}
+}
+
+gg_ba_on_war_end = {
+	trigger = {
+		has_global_variable = gg_ba_split_active
+		is_diplomatic_play_type = dp_gg_buenos_aires
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_on_war_end" # GG_TRAZA
+		c:ARG ?= { trigger_event = { id = gg_ba.9 days = 1 } }
+	}
+}
+
+gg_ba_back_down = {
+	trigger = {
+		has_global_variable = gg_ba_split_active
+		is_diplomatic_play_type = dp_gg_buenos_aires
+		exists = scope:actor
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_back_down" # GG_TRAZA
+		if = {
+			limit = { global_var:gg_ba_side ?= scope:actor }
+			set_global_variable = { name = gg_ba_conf_won value = 1 }
+		}
+		else = { set_global_variable = { name = gg_ba_ba_won value = 1 } }
+		c:ARG ?= { trigger_event = { id = gg_ba.9 days = 1 } }
 	}
 }
