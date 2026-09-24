@@ -44,3 +44,26 @@ gg_farrapos_sides_seen = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_sides_seen" # GG_TRAZA
 	}
 }
+
+# EN: 24/9/2026 (AUD-FARRAPOS-B, Codex review) -- the net under both hooks: a country can also be put straight into a
+#     standing war (vanilla join_war, e.g. enforce military access, violate sovereignty) without joining the play
+#     through any guard, and nothing proves that fires on_diplo_play_join_side. So on Brazil's monthly pulse: is PNI a
+#     participant of any of Brazil's wars? Same test as gg_farrapos.3 (every_scope_war + is_war_participant, which
+#     worked headless on 25-26/2/1845). Checks the war, not the play: any side, any door.
+# ES: la red debajo de los dos ganchos: a un pais tambien se lo puede meter directo en una guerra en curso (join_war)
+#     sin pasar por ninguna guarda. En el pulso mensual del Brasil: PNI participa de alguna guerra del Brasil?
+on_monthly_pulse_country = {
+	on_actions = { gg_farrapos_same_war_monthly }
+}
+
+gg_farrapos_same_war_monthly = {
+	trigger = {
+		c:BRZ ?= this
+		NOT = { has_global_variable = gg_farrapos_ponche_verde }
+		exists = c:PNI
+		any_scope_war = { is_war_participant = c:PNI }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_same_war" # GG_TRAZA
+	}
+}
