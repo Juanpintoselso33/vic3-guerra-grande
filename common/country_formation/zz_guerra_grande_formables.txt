@@ -7,6 +7,9 @@
 #     estado por cinco: pedir un estado que no existe vuelve imposible formar el pais. Los cinco
 #     estados orientales ocupan su lugar en la lista, asi que formar La Plata sigue queriendo decir
 #     tener toda la Banda Oriental.
+# EN/ES: 23/9/2026 (audit X3) -- the only REPLACE:PLT of this mod; an identical copy in
+#     zz_guerra_grande_uruguay_states.txt was removed. With la Argentina, the compatch's
+#     zzz_gg_x_arg_formables.txt wins / el unico REPLACE:PLT del mod; con la Argentina gana el del compatch.
 # -------------------------------------------------------------------------------------------------
 
 REPLACE:PLT = {
