@@ -1529,7 +1529,7 @@ gg_peace.4 = {
 
 	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_peace_parliament"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1597,7 +1597,7 @@ gg_peace.5 = {
 
 	# EN/ES: reused until T9 / reusado hasta T9
 	event_image = {
-		video = "gg_two_governments"
+		video = "gg_peace_casa_gobierno"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

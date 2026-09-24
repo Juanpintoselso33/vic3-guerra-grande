@@ -62,7 +62,7 @@ gg_arg_intro.1 = {
 	# EN/ES: IMAGEN PROVISORIA, como las cuatro del lado argentino y por la misma razon: falta la
 	#     tanda de imagenes propias. Anotado en PENDIENTES.md / provisional image, as noted
 	event_image = {
-		video = "gg_arg_pronunciamiento"
+		video = "gg_arg_rosas_1833"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"

@@ -15,7 +15,7 @@ gg_argentina.16 = {
 	flavor = gg_argentina.16.f
 	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
-	event_image = { video = "gg_arg_arana" }
+	event_image = { video = "gg_arg_fuerte_vidal" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.16|"  hidden_effect = {
@@ -109,7 +109,7 @@ gg_argentina.17 = {
 	flavor = gg_argentina.17.f
 	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
-	event_image = { video = "gg_arg_arana" }
+	event_image = { video = "gg_arg_estancia" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.17|"  hidden_effect = {
@@ -158,7 +158,7 @@ gg_argentina.18 = {
 	flavor = gg_argentina.18.f
 	# EN: Borrowed existing video (gg_arg_coalicion); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_coalicion); no representa este hecho. Video propio pendiente.
-	event_image = { video = "gg_arg_coalicion" }
+	event_image = { video = "gg_arg_25_mayo_1844" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.18|"  hidden_effect = {
@@ -222,7 +222,7 @@ gg_argentina.19 = {
 	flavor = gg_argentina.19.f
 	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
-	event_image = { video = "gg_arg_arana" }
+	event_image = { video = "gg_arg_saladero" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.19|"  hidden_effect = {
@@ -360,7 +360,7 @@ gg_argentina.28 = {
 	flavor = gg_argentina.28.f
 	# EN: Borrowed existing video (gg_arg_arana); not a depiction of this event. Dedicated video pending.
 	# ES: Video existente prestado (gg_arg_arana); no representa este hecho. Video propio pendiente.
-	event_image = { video = "gg_arg_arana" }
+	event_image = { video = "gg_arg_rada_montevideo" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.28|"  hidden_effect = {

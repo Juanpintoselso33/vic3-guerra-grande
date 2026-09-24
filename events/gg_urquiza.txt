@@ -23,7 +23,7 @@ gg_urquiza.1 = {
 	title = gg_urquiza.1.t
 	desc = gg_urquiza.1.d
 	flavor = gg_urquiza.1.f
-	event_image = { video = "unspecific_politicians_arguing" }
+	event_image = { video = "gg_urq_general" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -72,7 +72,7 @@ gg_urquiza.2 = {
 	title = gg_urquiza.2.t
 	desc = gg_urquiza.2.d
 	flavor = gg_urquiza.2.f
-	event_image = { video = "europenorthamerica_before_the_battle" }
+	event_image = { video = "gg_urq_mhn" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes

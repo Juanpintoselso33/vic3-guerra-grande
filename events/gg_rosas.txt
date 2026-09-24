@@ -52,7 +52,7 @@ gg_rosas.1 = {
 		}
 	}
 	flavor = gg_rosas.1.f
-	event_image = { video = "southamerica_war_civilians" }
+	event_image = { video = "gg_ros_cuartel" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -113,7 +113,7 @@ gg_rosas.2 = {
 	title = gg_rosas.2.t
 	desc = gg_rosas.2.d
 	flavor = gg_rosas.2.f
-	event_image = { video = "europenorthamerica_before_the_battle" }
+	event_image = { video = "gg_ros_santa_lucia" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -176,7 +176,7 @@ gg_rosas.3 = {
 	title = gg_rosas.3.t
 	desc = gg_rosas.3.d
 	flavor = gg_rosas.3.f
-	event_image = { video = "africa_diplomats_negotiating" }
+	event_image = { video = "gg_ros_ministro_ingles" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -240,7 +240,7 @@ gg_rosas.4 = {
 	title = gg_rosas.4.t
 	desc = gg_rosas.4.d
 	flavor = gg_rosas.4.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_ros_durand" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -304,7 +304,7 @@ gg_rosas.5 = {
 	title = gg_rosas.5.t
 	desc = gg_rosas.5.d
 	flavor = gg_rosas.5.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_ros_fuerte" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -343,7 +343,7 @@ gg_rosas.6 = {
 		}
 	}
 	flavor = gg_rosas.6.f
-	event_image = { video = "unspecific_politicians_arguing" }
+	event_image = { video = "gg_ros_coronel" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

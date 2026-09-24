@@ -32,7 +32,7 @@ gg_constitution.1 = {
 		}
 	}
 	flavor = gg_constitution.1.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_con_constituyentes" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -103,7 +103,7 @@ gg_constitution.2 = {
 	title = gg_constitution.2.t
 	desc = gg_constitution.2.d
 	flavor = gg_constitution.2.f
-	event_image = { video = "southamerica_public_figure_assassination" }
+	event_image = { video = "gg_con_rosas_exilio" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -175,7 +175,7 @@ gg_constitution.4 = {
 		}
 	}
 	flavor = gg_constitution.4.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_con_alberdi" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes

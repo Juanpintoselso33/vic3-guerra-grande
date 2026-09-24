@@ -298,7 +298,7 @@ gg_plata.20 = {
 			triggered_desc = { desc = gg_plata.20.d }
 		}
 	}
-	event_image = { video = "gg_nav_brown_montevideo" }
+	event_image = { video = "gg_plata_ba_vidal" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -342,7 +342,7 @@ gg_plata.21 = {
 			}
 		}
 	}
-	event_image = { video = "gg_f2_montevideo_port" }
+	event_image = { video = "gg_plata_corsetti" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -366,7 +366,7 @@ gg_plata.22 = {
 			triggered_desc = { desc = gg_plata.22.d }
 		}
 	}
-	event_image = { video = "gg_plata_guizot" }
+	event_image = { video = "gg_plata_ba_ouseley" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -393,7 +393,7 @@ gg_plata.23 = {
 			triggered_desc = { desc = gg_plata.23.d }
 		}
 	}
-	event_image = { video = "gg_squadrons" }
+	event_image = { video = "gg_plata_durand_combate" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -419,7 +419,7 @@ gg_plata.24 = {
 			triggered_desc = { desc = gg_plata.24.d }
 		}
 	}
-	event_image = { video = "gg_f2_palmerston" }
+	event_image = { video = "gg_plata_ba_adams" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -464,7 +464,7 @@ gg_plata.25 = {
 			triggered_desc = { desc = gg_plata.25.d }
 		}
 	}
-	event_image = { video = "gg_f2_montevideo_port" }
+	event_image = { video = "gg_plata_ba_pittaluga" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -488,7 +488,7 @@ gg_plata.26 = {
 			triggered_desc = { desc = gg_plata.26.d }
 		}
 	}
-	event_image = { video = "gg_squadrons" }
+	event_image = { video = "gg_plata_ulloa" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -514,7 +514,7 @@ gg_plata.27 = {
 			triggered_desc = { desc = gg_plata.27.d }
 		}
 	}
-	event_image = { video = "gg_f2_palmerston" }
+	event_image = { video = "gg_plata_russell" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -530,7 +530,7 @@ gg_plata.28 = {
 	placement = ROOT
 	title = gg_plata.28.t
 	desc = gg_plata.28.d
-	event_image = { video = "gg_plata_guizot" }
+	event_image = { video = "gg_plata_louis_napoleon" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -583,7 +583,7 @@ gg_plata.31 = {
 	title = gg_plata.31.t
 	desc = gg_plata.31.d
 	flavor = gg_plata.31.f
-	event_image = { video = "gg_nav_brown_montevideo" }
+	event_image = { video = "gg_plata_santa_fe" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -661,7 +661,7 @@ gg_plata.42 = {
 	title = gg_plata.42.t
 	desc = gg_plata.42.d
 	flavor = gg_plata.42.f
-	event_image = { video = "gg_f2_montevideo_port" }
+	event_image = { video = "gg_plata_ba_hastrel" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -679,7 +679,7 @@ gg_plata.43 = {
 	title = gg_plata.43.t
 	desc = gg_plata.43.d
 	flavor = gg_plata.43.f
-	event_image = { video = "gg_f2_mackau" }
+	event_image = { video = "gg_plata_africaine" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -709,7 +709,7 @@ gg_plata.44 = {
 	title = gg_plata.44.t
 	desc = gg_plata.44.d
 	flavor = gg_plata.44.f
-	event_image = { video = "gg_plata_alfred" }
+	event_image = { video = "gg_plata_cockatrice" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -728,7 +728,7 @@ gg_plata.45 = {
 	title = gg_plata.45.t
 	desc = gg_plata.45.d
 	flavor = gg_plata.45.f
-	event_image = { video = "gg_plata_alfred" }
+	event_image = { video = "gg_plata_aberdeen" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -764,7 +764,7 @@ gg_plata.46 = {
 			triggered_desc = { desc = gg_plata.46.d }
 		}
 	}
-	event_image = { video = "gg_plata_guizot" }
+	event_image = { video = "gg_plata_cavaignac" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes

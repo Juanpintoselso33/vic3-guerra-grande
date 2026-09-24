@@ -1602,7 +1602,7 @@ gg_rivera.7 = {
 	flavor = gg_rivera.7.f
 
 	event_image = {
-		video = "gg_rivera_return"
+		video = "gg_riv_capataz"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

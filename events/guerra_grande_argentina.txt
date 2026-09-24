@@ -467,7 +467,7 @@ gg_argentina.61 = {
 	title = gg_argentina.61.t
 	desc = gg_argentina.61.d
 	flavor = gg_argentina.61.f
-	event_image = { video = "southamerica_aristocrats" }
+	event_image = { video = "gg_arg_ferre" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -534,7 +534,7 @@ gg_argentina.62 = {
 	title = gg_argentina.62.t
 	desc = gg_argentina.62.d
 	flavor = gg_argentina.62.f
-	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	event_image = { video = "gg_arg_aduana_vidal" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -598,7 +598,7 @@ gg_argentina.63 = {
 	title = gg_argentina.63.t
 	desc = gg_argentina.63.d
 	flavor = gg_argentina.63.f
-	event_image = { video = "unspecific_devastation" }
+	event_image = { video = "gg_arg_martin_garcia" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -655,7 +655,7 @@ gg_argentina.64 = {
 	title = gg_argentina.64.t
 	desc = gg_argentina.64.d
 	flavor = gg_argentina.64.f
-	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	event_image = { video = "gg_arg_corrientes_ouseley" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -688,7 +688,7 @@ gg_argentina.65 = {
 	title = gg_argentina.65.t
 	desc = gg_argentina.65.d
 	flavor = gg_argentina.65.f
-	event_image = { video = "southamerica_public_figure_assassination" }
+	event_image = { video = "gg_arg_heredia" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -774,7 +774,7 @@ gg_argentina.68 = {
 	desc = gg_argentina.68.d
 	flavor = gg_argentina.68.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
-	event_image = { video = "southamerica_war_civilians" }
+	event_image = { video = "gg_arg_salta" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -861,7 +861,7 @@ gg_argentina.66 = {
 	title = gg_argentina.66.t
 	desc = gg_argentina.66.d
 	flavor = gg_argentina.66.f
-	event_image = { video = "unspecific_military_parade" }
+	event_image = { video = "gg_arg_lamadrid" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -948,7 +948,7 @@ gg_argentina.67 = {
 		}
 	}
 	flavor = gg_argentina.67.f
-	event_image = { video = "europenorthamerica_before_the_battle" }
+	event_image = { video = "gg_arg_urquiza_capitaine" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -1389,7 +1389,7 @@ gg_argentina.70 = {
 	desc = gg_argentina.70.d
 	flavor = gg_argentina.70.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
-	event_image = { video = "southamerica_election" }
+	event_image = { video = "gg_arg_tucuman_baz" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -1441,7 +1441,7 @@ gg_argentina.71 = {
 	}
 	flavor = gg_argentina.71.f
 	# EN/ES: unique provisional vanilla image / imagen provisoria unica de vanilla
-	event_image = { video = "unspecific_politicians_arguing" }
+	event_image = { video = "gg_arg_bajada" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -1494,7 +1494,7 @@ gg_argentina.10 = {
 	title = gg_argentina.10.t
 	desc = gg_argentina.10.d
 	flavor = gg_argentina.10.f
-	event_image = { video = "gg_arg_corrientes" }
+	event_image = { video = "gg_arg_beron" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -1560,7 +1560,7 @@ gg_argentina.11 = {
 	title = gg_argentina.11.t
 	desc = gg_argentina.11.d
 	flavor = gg_argentina.11.f
-	event_image = { video = "gg_arg_corrientes" }
+	event_image = { video = "gg_arg_sarandi" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -1620,7 +1620,7 @@ gg_argentina.12 = {
 	title = gg_argentina.12.t
 	desc = gg_argentina.12.d
 	flavor = gg_argentina.12.f
-	event_image = { video = "gg_arg_coalicion" }
+	event_image = { video = "gg_arg_lavalle_humahuaca" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -2509,7 +2509,7 @@ gg_argentina.30 = {
 	desc = gg_argentina.30.d
 	flavor = gg_argentina.30.f
 
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_arg_rosas_bicentenario" }
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 
@@ -2567,7 +2567,7 @@ gg_argentina.40 = {
 	title = gg_argentina.40.t
 	desc = gg_argentina.40.d
 	flavor = gg_argentina.40.f
-	event_image = { video = "gg_arg_corrientes" }
+	event_image = { video = "gg_arg_pacheco" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -2670,7 +2670,7 @@ gg_argentina.41 = {
 		}
 	}
 	flavor = gg_argentina.41.f
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_arg_casa_caseros" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -2743,7 +2743,7 @@ gg_argentina.51 = {
  title = gg_argentina.51.t
  desc = gg_argentina.51.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_corrientes_brayer" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2764,7 +2764,7 @@ gg_argentina.52 = {
  title = gg_argentina.52.t
  desc = gg_argentina.52.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_corrientes_hierra" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2785,7 +2785,7 @@ gg_argentina.53 = {
  title = gg_argentina.53.t
  desc = gg_argentina.53.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_tucuman_catedral" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2806,7 +2806,7 @@ gg_argentina.54 = {
  title = gg_argentina.54.t
  desc = gg_argentina.54.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_cordoba_catedral" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2827,7 +2827,7 @@ gg_argentina.55 = {
  title = gg_argentina.55.t
  desc = gg_argentina.55.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_tropa_carretas" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2848,7 +2848,7 @@ gg_argentina.56 = {
  title = gg_argentina.56.t
  desc = gg_argentina.56.d
  flavor = gg_argentina.50.f
- event_image = { video = "gg_arg_cordoba" }
+ event_image = { video = "gg_arg_carretas_ciudad" }
  icon = "gfx/interface/icons/event_icons/event_election.dds"
  duration = 12
  is_popup = yes
@@ -2897,7 +2897,7 @@ gg_argentina.5 = {
 	title = gg_argentina.5.t
 	desc = gg_argentina.5.d
 	flavor = gg_argentina.5.f
-	event_image = { video = "gg_arg_coalicion" }
+	event_image = { video = "gg_arg_tucuman_plaza" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -3025,7 +3025,7 @@ gg_argentina.6 = {
 	title = gg_argentina.6.t
 	desc = gg_argentina.6.d
 	flavor = gg_argentina.6.f
-	event_image = { video = "gg_arg_corrientes" }
+	event_image = { video = "gg_arg_paz_daguerrotipo" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3146,7 +3146,7 @@ gg_argentina.7 = {
 	title = gg_argentina.7.t
 	desc = gg_argentina.7.d
 	flavor = gg_argentina.7.f
-	event_image = { video = "gg_arg_corrientes" }
+	event_image = { video = "gg_arg_estanciero" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3283,7 +3283,7 @@ gg_argentina.60 = {
 	desc = gg_argentina.60.d
 	flavor = gg_argentina.60.f
 
-	event_image = { video = "gg_oribe_fall" }
+	event_image = { video = "gg_arg_desembarco" }
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 
 	duration = 12
@@ -3600,7 +3600,7 @@ gg_argentina.80 = {
 	title = gg_argentina.80.t
 	desc = gg_argentina.80.d
 	flavor = gg_argentina.80.f
-	event_image = { video = "gg_arg_cordoba" }
+	event_image = { video = "gg_arg_mendoza" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -3685,7 +3685,7 @@ gg_argentina.82 = {
 	title = gg_argentina.82.t
 	desc = gg_argentina.82.d
 	flavor = gg_argentina.82.f
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_arg_san_nicolas" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -3720,7 +3720,7 @@ gg_argentina.83 = {
 		}
 	}
 	flavor = gg_argentina.83.f
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_arg_caseros_penuti" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -3743,7 +3743,7 @@ gg_argentina.84 = {
 	title = gg_argentina.84.t
 	desc = gg_argentina.84.d
 	flavor = gg_argentina.84.f
-	event_image = { video = "gg_arg_cordoba" }
+	event_image = { video = "gg_arg_coraceros" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3776,7 +3776,7 @@ gg_argentina.85 = {
 		}
 	}
 	flavor = gg_argentina.85.f
-	event_image = { video = "gg_arg_clausula" }
+	event_image = { video = "gg_arg_caravana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

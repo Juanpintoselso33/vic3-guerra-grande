@@ -1,0 +1,567 @@
+﻿# Media aliases for the event videos of 23/9/2026: one own picture per event (repeated videos and vanilla placeholders).
+# Alias de los videos de eventos del 23/9/2026: una imagen propia por evento (videos repetidos y genericos de vanilla).
+# Sources / Fuentes: SOURCES_flujo_images.md (design repo), section "Lote de videos del 23/9/2026".
+
+# gg_ba.1: "Valentin Alsina (1802-1869) y su esposa, Antonia Maza.jpg" -- Unidentified photographer -- Public domain
+gg_ba_alsina = {
+	video = "gfx/media_aliases/gg_ba_alsina.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/springtime_of_nation"
+}
+
+# gg_ba.2: "Vista del Puerto de Parana - Entre Rios, segun Mousse.tif" -- Mousse -- Public domain
+gg_ba_parana = {
+	video = "gfx/media_aliases/gg_ba_parana.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_ba.3: "HilarioLagos.jpg" -- UnknownUnknown , photo on book Carlos Guastavino, scanned by Ezarate -- Public domain
+gg_ba_lagos = {
+	video = "gfx/media_aliases/gg_ba_lagos.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
+
+# gg_ba.4: "Gobernador Pastor Obligado.jpg" -- Unknown authorUnknown author -- Public domain
+gg_ba_obligado = {
+	video = "gfx/media_aliases/gg_ba_obligado.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_ba.5: "Poder otorgado por Urquiza a Cullen y Gowland para firmar tratados con el Estado de Buenos Aires.jpg" -- Justo Jose de Urquiza (1801-1870). -- Public domain
+gg_ba_convivencia = {
+	video = "gfx/media_aliases/gg_ba_convivencia.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_ba.6: "Vista de Rosario de Santa Fe, segun Brayer.tif" -- Lucien de Brayer (1802-1860) -- Public domain
+gg_ba_rosario = {
+	video = "gfx/media_aliases/gg_ba_rosario.bk2"
+	audio = "event:/SFX/Events/unspecific/steam_ship"
+}
+
+# gg_ba.7: "Justo J. Urquiza. Presidente of the Argentine Confederation.jpg" -- Thomas Jefferson Page -- Public domain
+gg_ba_urquiza_page = {
+	video = "gfx/media_aliases/gg_ba_urquiza_page.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/capitalists_meeting"
+}
+
+# gg_ba.8: "General Lopez,ministro de guerra y marina,mediador entre la confederacion Argentina y Buenos Aires.jpg" -- probably M. David -- Public domain
+gg_ba_lopez = {
+	video = "gfx/media_aliases/gg_ba_lopez.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_ba.10: "Bartolome Mitre by Mesnil 1862.jpg" -- Emil Mandel du Mesnil (1815-1890) -- Public domain
+gg_ba_mitre = {
+	video = "gfx/media_aliases/gg_ba_mitre.bk2"
+	audio = "event:/SFX/Events/unspecific/military_parade"
+}
+
+# gg_ba.11: "Partida Guardia Nacional Pavon Leon Paliere.jpg" -- Leon_Palliere (1823-1866) -- Public domain
+gg_ba_pavon = {
+	video = "gfx/media_aliases/gg_ba_pavon.bk2"
+	audio = "event:/SFX/Events/unspecific/leader_speaking_to_a_group_of_people"
+}
+
+# gg_ba.12: "Vista de Buenos Aires, segun Brayer.tif" -- Brayer -- Public domain
+gg_ba_brayer = {
+	video = "gfx/media_aliases/gg_ba_brayer.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_ba.13: "Santiago Derqui 1860.JPG" -- Unknown authorUnknown author -- Public domain
+gg_ba_derqui = {
+	video = "gfx/media_aliases/gg_ba_derqui.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/political_extremism"
+}
+
+# gg_cisplatina.1: "ManuelOribe2.jpg" -- oil on canvasmedium QS:P186,Q296955;P186,Q12321255,P518,Q861259 Amadeo -- CC BY-SA 4.0
+gg_cis_oribe = {
+	video = "gfx/media_aliases/gg_cis_oribe.bk2"
+	audio = "event:/SFX/Events/asia/politician_parliament_motion"
+}
+
+# gg_cisplatina.2: "Paco imperial 1840.jpg" -- Attributed to Louis Compte -- Public domain
+gg_cis_paco = {
+	video = "gfx/media_aliases/gg_cis_paco.bk2"
+	audio = "event:/SFX/DLC/1.3_ip1/Events/unspecific/gunboat_diplomacy"
+}
+
+# gg_cisplatina.4: "Adolphe D Hastrel - Azoteas de Montevideo.png" -- Adolphe Hastrel de Rivedoux -- Public domain
+gg_cis_azoteas = {
+	video = "gfx/media_aliases/gg_cis_azoteas.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_cisplatina.5: "The Roads, Montevideo, 1840.jpg" -- Adolphe D'Hastrel (1805-1875) -- Public domain
+gg_cis_roads = {
+	video = "gfx/media_aliases/gg_cis_roads.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_cisplatina.6: "Visconde d'Uruguay - Litografia.jpg" -- Sebastien Auguste Sisson -- Public domain
+gg_cis_paulino = {
+	video = "gfx/media_aliases/gg_cis_paulino.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_constitution.1: "Museo del Bicentenario - "Constituyentes de 1853".jpg" -- Destouches, Lemercier (engravers) -- Public domain
+gg_con_constituyentes = {
+	video = "gfx/media_aliases/gg_con_constituyentes.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_constitution.2: "Juan Manuel de Rosas exiled.JPG" -- Unknown (18??18??) -- Public domain
+gg_con_rosas_exilio = {
+	video = "gfx/media_aliases/gg_con_rosas_exilio.bk2"
+	audio = "event:/SFX/Events/southamerica/public_figure_assassination"
+}
+
+# gg_constitution.4: "JuanBautistaAlberdi1.jpg" -- UnknownUnknown , photo on book: Carlos A. Guastavino, scanned by Ezara -- Public domain
+gg_con_alberdi = {
+	video = "gfx/media_aliases/gg_con_alberdi.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_rosas.1: "Cuartel general de uno de los campamentos del ejercito de Juan Manuel de Rosas, Argentina, a partir de un dibujo de Jean-Baptiste Henri Durand-Brager (1814-1879).jpg" -- Durand Brager -- Public domain
+gg_ros_cuartel = {
+	video = "gfx/media_aliases/gg_ros_cuartel.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_rosas.2: "Pasaje del rio Santa Lucia - Corrientes, segun D'Orbigny.tif" -- Alcide d'Orbigny -- Public domain
+gg_ros_santa_lucia = {
+	video = "gfx/media_aliases/gg_ros_santa_lucia.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_rosas.3: "Residencia del Ministro ingles - Buenos Aires, segun Adams.tif" -- Richard Adams -- Public domain
+gg_ros_ministro_ingles = {
+	video = "gfx/media_aliases/gg_ros_ministro_ingles.bk2"
+	audio = "event:/SFX/Events/africa/diplomats_negotiating"
+}
+
+# gg_rosas.4: "Vista de Buenos Aires, segun Durand Brager.tif" -- Jean-Baptiste Henri Durand-Brager -- Public domain
+gg_ros_durand = {
+	video = "gfx/media_aliases/gg_ros_durand.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_rosas.5: "Fuerte de Buenos Aires, anonimo.tif" -- AnonymousUnknown author -- Public domain
+gg_ros_fuerte = {
+	video = "gfx/media_aliases/gg_ros_fuerte.bk2"
+	audio = "event:/SFX/Events/unspecific/signed_contract"
+}
+
+# gg_rosas.6: "Coronel federal - Buenos Aires, segun Revol.tif" -- Felix Revol -- Public domain
+gg_ros_coronel = {
+	video = "gfx/media_aliases/gg_ros_coronel.bk2"
+	audio = "event:/SFX/Events/asia/politician_parliament_motion"
+}
+
+# gg_urquiza.1: "Le General Urquiza.jpg" -- Unknown authorUnknown author -- Public domain
+gg_urq_general = {
+	video = "gfx/media_aliases/gg_urq_general.bk2"
+	audio = "event:/SFX/Events/asia/politician_parliament_motion"
+}
+
+# gg_urquiza.2: "Justo Jose de Urquiza MHN.JPG" -- Attributed to Charles DeForest Fredricks -- Public domain
+gg_urq_mhn = {
+	video = "gfx/media_aliases/gg_urq_mhn.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_argentina.61: "Brigadier General Pedro Ferre.jpg" -- Franciscojosemoreno -- CC0
+gg_arg_ferre = {
+	video = "gfx/media_aliases/gg_arg_ferre.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.62: "Frente a la Aduana - Buenos Aires, segun Vidal.tif" -- Emeric Essex Vidal -- Public domain
+gg_arg_aduana_vidal = {
+	video = "gfx/media_aliases/gg_arg_aduana_vidal.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/capitalists_meeting"
+}
+
+# gg_argentina.63: "Canal del Infiero - Martin Garcia, segun D Hastrel.tif" -- Adolphe Hastrel de Rivedoux -- CC BY-SA 4.0
+gg_arg_martin_garcia = {
+	video = "gfx/media_aliases/gg_arg_martin_garcia.bk2"
+	audio = "event:/SFX/Events/unspecific/devastation"
+}
+
+# gg_argentina.64: "Vista de la ciudad de Corrientes, segun Ouseley.tif" -- William Gore Ouseley -- Public domain
+gg_arg_corrientes_ouseley = {
+	video = "gfx/media_aliases/gg_arg_corrientes_ouseley.bk2"
+	audio = "event:/SFX/Events/unspecific/leader_speaking_to_a_group_of_people"
+}
+
+# gg_argentina.65: "Alejandro Heredia.JPG" -- Unknown authorUnknown author -- Public domain
+gg_arg_heredia = {
+	video = "gfx/media_aliases/gg_arg_heredia.bk2"
+	audio = "event:/SFX/Events/southamerica/public_figure_assassination"
+}
+
+# gg_argentina.66: "Araoz de Lamadrid Gregorio.jpg" -- Unknown authorUnknown author -- Public domain
+gg_arg_lamadrid = {
+	video = "gfx/media_aliases/gg_arg_lamadrid.bk2"
+	audio = "event:/SFX/Events/unspecific/military_parade"
+}
+
+# gg_argentina.67: "Don Justo Jose de Urquiza, capitaine general de la Republique Argentine.jpg" -- Unknown authorUnknown author -- Public domain
+gg_arg_urquiza_capitaine = {
+	video = "gfx/media_aliases/gg_arg_urquiza_capitaine.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_argentina.68: "Vista de la ciudad de Salta, segun Besnes e Irigoyen.tif" -- Juan Manuel Besnes e Irigoyen -- Public domain
+gg_arg_salta = {
+	video = "gfx/media_aliases/gg_arg_salta.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.70: "Alameda de Tucuman, segun Baz.tif" -- Ignacio Baz -- Public domain
+gg_arg_tucuman_baz = {
+	video = "gfx/media_aliases/gg_arg_tucuman_baz.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_argentina.71: "Bajada del Parana - Entre Rios, segun DOrbigny.tif" -- Alcide d'Orbigny -- Public domain
+gg_arg_bajada = {
+	video = "gfx/media_aliases/gg_arg_bajada.bk2"
+	audio = "event:/SFX/Events/asia/politician_parliament_motion"
+}
+
+# gg_international.2: "Fiestas mayas - Buenos Aires, segun Pellegrini.tif" -- Charles Pellegrini -- Public domain
+gg_int_fiestas_mayas = {
+	video = "gfx/media_aliases/gg_int_fiestas_mayas.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_international.10: "Monvoisin, Raymond - Soldado de la guardia de Rosas -1842.jpg" -- Raymond Monvoisin -- Public domain
+gg_int_guardia_rosas = {
+	video = "gfx/media_aliases/gg_int_guardia_rosas.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_international.11: "Gaucho federal - Buenos Aires, segun Monvoisin.tif" -- Raymond Monvoisin -- Public domain
+gg_int_gaucho_federal = {
+	video = "gfx/media_aliases/gg_int_gaucho_federal.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.16: "Fuerte de Buenos Aires, segun Vidal.tif" -- Emeric Essex Vidal -- Public domain
+gg_arg_fuerte_vidal = {
+	video = "gfx/media_aliases/gg_arg_fuerte_vidal.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.17: "Estacia portena - Buenos Aires, segun Schmidtmeyer.tif" -- Peter Schmidtmeyer -- Public domain
+gg_arg_estancia = {
+	video = "gfx/media_aliases/gg_arg_estancia.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.19: "El Saladero - Buenos Aires, segun Pellegrini.tif" -- Charles Pellegrini -- Public domain
+gg_arg_saladero = {
+	video = "gfx/media_aliases/gg_arg_saladero.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.28: "Edouard Weissandt Vue de la rade et de la ville de Montevideo sur la Rio de la Plata.jpg" -- Edouard Weissandt -- Public domain
+gg_arg_rada_montevideo = {
+	video = "gfx/media_aliases/gg_arg_rada_montevideo.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_caseros.4: "Vivac, segun Favier.tif" -- Auguste Alvin Favier (1800-1892) -- Public domain
+gg_cas_vivac = {
+	video = "gfx/media_aliases/gg_cas_vivac.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.85: "Caravana en el campo, segun Durand.tif" -- Alfonso Durand -- Public domain
+gg_arg_caravana = {
+	video = "gfx/media_aliases/gg_arg_caravana.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.12: "La conduccion del cadaver de Lavalle en la quebrada de Humahuaca.JPG" -- Nicanor Blanes -- Public domain
+gg_arg_lavalle_humahuaca = {
+	video = "gfx/media_aliases/gg_arg_lavalle_humahuaca.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_argentina.5: "Plaza de la Independencia - Tucuman, segun Palliere.tif" -- Juan Leon Palliere -- Public domain
+gg_arg_tucuman_plaza = {
+	video = "gfx/media_aliases/gg_arg_tucuman_plaza.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_argentina.18: "25 de mayo de 1844 - Buenos Aires, segun Isola.tif" -- Alberico Isola -- Public domain
+gg_arg_25_mayo_1844 = {
+	video = "gfx/media_aliases/gg_arg_25_mayo_1844.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_argentina.51: "Vista de Corrientes, segun Brayer.tif" -- Brayer -- Public domain
+gg_arg_corrientes_brayer = {
+	video = "gfx/media_aliases/gg_arg_corrientes_brayer.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.52: "Hierra en Rincon de Luna - Corrientes, segun D'Orbigny.tif" -- Alcide d'Orbigny -- Public domain
+gg_arg_corrientes_hierra = {
+	video = "gfx/media_aliases/gg_arg_corrientes_hierra.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.53: "Catedral -Tucuman, segun Palliere.tif" -- Juan Leon Palliere -- Public domain
+gg_arg_tucuman_catedral = {
+	video = "gfx/media_aliases/gg_arg_tucuman_catedral.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.54: "Catedral de Cordoba, segun Palliere.tif" -- Juan Leon Palliere -- Public domain
+gg_arg_cordoba_catedral = {
+	video = "gfx/media_aliases/gg_arg_cordoba_catedral.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.55: "Tropa de Carretas, segun Palliere.tif" -- Juan Leon Palliere -- Public domain
+gg_arg_tropa_carretas = {
+	video = "gfx/media_aliases/gg_arg_tropa_carretas.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.56: "Carretas entrando a la ciudad, segun Palliere.tif" -- Juan Leon Palliere -- Public domain
+gg_arg_carretas_ciudad = {
+	video = "gfx/media_aliases/gg_arg_carretas_ciudad.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.80: "Plaza de Mendoza, segun La Touanne.tif" -- Edmond Bigot de La Touanne -- Public domain
+gg_arg_mendoza = {
+	video = "gfx/media_aliases/gg_arg_mendoza.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.84: "Cuartel de coraceros - Buenos Aires, segun Durand Brager.tif" -- Jean-Baptiste Henri Durand-Brager -- Public domain
+gg_arg_coraceros = {
+	video = "gfx/media_aliases/gg_arg_coraceros.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_argentina.10: "Juan Genaro Beron de Astrada.jpg" -- HyDPL -- Public domain
+gg_arg_beron = {
+	video = "gfx/media_aliases/gg_arg_beron.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.11: "Battle of Sarandi, Juan Manuel Blanes.jpg" -- Juan Manuel Blanes -- Public domain
+gg_arg_sarandi = {
+	video = "gfx/media_aliases/gg_arg_sarandi.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.40: "AngelPachecho.jpg" -- Reinaldo Giudici -- Public domain
+gg_arg_pacheco = {
+	video = "gfx/media_aliases/gg_arg_pacheco.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.6: "Jose Maria Paz daguerreotipo.jpg" -- Unknown authorUnknown author -- Public domain
+gg_arg_paz_daguerrotipo = {
+	video = "gfx/media_aliases/gg_arg_paz_daguerrotipo.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.7: "Estanciero porteno, segun d Hastrel.tif" -- Adolphe Hastrel de Rivedoux -- CC BY-SA 4.0
+gg_arg_estanciero = {
+	video = "gfx/media_aliases/gg_arg_estanciero.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_caseros.2: "Rosas Juan Manuel de -Cayetano Descalzi, color.jpg" -- AnonymousUnknown author -- Public domain
+gg_cas_rosas_descalzi = {
+	video = "gfx/media_aliases/gg_cas_rosas_descalzi.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_caseros.3: "Vista de Buenos Aires desde el Sur, segun Borget.tif" -- Auguste Borget -- Public domain
+gg_cas_ba_borget = {
+	video = "gfx/media_aliases/gg_cas_ba_borget.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_caseros.5: "Combat de Santos-Lugares. - Defait de la cavalerie de Rosas.jpg" -- Unknown authorUnknown author -- Public domain
+gg_cas_santos_lugares = {
+	video = "gfx/media_aliases/gg_cas_santos_lugares.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.30: "Museo del Bicentenario - Retrato de Juan Manuel de Rosas.jpg" -- Unknown authorUnknown author -- Public domain
+gg_arg_rosas_bicentenario = {
+	video = "gfx/media_aliases/gg_arg_rosas_bicentenario.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.41: "Casa de Monte Caseros - Buenos Aires, segun Besnes Irigoyen.tif" -- Juan Manuel Besnes e Irigoyen -- Public domain
+gg_arg_casa_caseros = {
+	video = "gfx/media_aliases/gg_arg_casa_caseros.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.82: "Vista de San Nicolas de los Arroyos - Buenos Aires, segun Mousse.tif" -- Mousse -- Public domain
+gg_arg_san_nicolas = {
+	video = "gfx/media_aliases/gg_arg_san_nicolas.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.83: "Batalla de Caseros, Litografia de Carlo Penuti, ca. 1852.jpg" -- Carlo Penuti -- Public domain
+gg_arg_caseros_penuti = {
+	video = "gfx/media_aliases/gg_arg_caseros_penuti.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_arg_intro.1: "Juan Manuel de Rosas 1833.jpg" -- Carlos Enrique Pellegrini (180075) -- Public domain
+gg_arg_rosas_1833 = {
+	video = "gfx/media_aliases/gg_arg_rosas_1833.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_plata.43: "Africaine-Durand Brager img 3109.jpg" -- Jean-Baptiste Henri Durand-Brager -- Public domain
+gg_plata_africaine = {
+	video = "gfx/media_aliases/gg_plata_africaine.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.21: "Carlos Corsetti Blick auf Montevideo 1892.jpg" -- Carlos Corsetti -- Public domain
+gg_plata_corsetti = {
+	video = "gfx/media_aliases/gg_plata_corsetti.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.25: "Vista de Buenos Aires, segun Pittaluga.tif" -- Pittaluga -- Public domain
+gg_plata_ba_pittaluga = {
+	video = "gfx/media_aliases/gg_plata_ba_pittaluga.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.42: "Vista de Buenos Aires, segun D Hastrel.tif" -- Adolphe Hastrel de Rivedoux -- CC BY-SA 4.0
+gg_plata_ba_hastrel = {
+	video = "gfx/media_aliases/gg_plata_ba_hastrel.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_patron.2: "Franz Xaver Winterhalter - Portrait of the Young Queen Victoria - 1966.79.17 - Yale University Art Gallery.jpg" -- Franz Xaver Winterhalter -- Public domain
+gg_patron_victoria = {
+	video = "gfx/media_aliases/gg_patron_victoria.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.24: "Vista de Buenos Aires, segun Adams.tif" -- Richard Adams -- Public domain
+gg_plata_ba_adams = {
+	video = "gfx/media_aliases/gg_plata_ba_adams.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.27: "John Russell, 1st Earl Russell by Lowes Cato Dickinson.jpg" -- Lowes Cato Dickinson -- Public domain
+gg_plata_russell = {
+	video = "gfx/media_aliases/gg_plata_russell.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# guerra_grande.9: "Batalla de la Vuelta de Obligado.jpg" -- Manuel Larravide -- Public domain
+gg_gg_obligado_larravide = {
+	video = "gfx/media_aliases/gg_gg_obligado_larravide.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_patron.1: "Louis-Philippe I King of the French (by Franz Xaver Winterhalter).jpg" -- Franz Xaver Winterhalter -- Public domain
+gg_patron_louis_philippe = {
+	video = "gfx/media_aliases/gg_patron_louis_philippe.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_patron.3: "Eduard Hildebrandt - Bucht von Rio de Janeiro mit Corcovado (1844).jpg" -- Eduard Hildebrandt -- Public domain
+gg_patron_rio = {
+	video = "gfx/media_aliases/gg_patron_rio.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_plata.20: "Vista general de Buenos Aires, segun Vidal.tif" -- Emeric Essex Vidal -- Public domain
+gg_plata_ba_vidal = {
+	video = "gfx/media_aliases/gg_plata_ba_vidal.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_plata.31: "Vista del puerto de Santa Fe, segun Mousse.tif" -- Mousse -- Public domain
+gg_plata_santa_fe = {
+	video = "gfx/media_aliases/gg_plata_santa_fe.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_argentina.60: "Desembarco en Buenos Aires, segun Rugendas.tif" -- Johann Moritz Rugendas -- Public domain
+gg_arg_desembarco = {
+	video = "gfx/media_aliases/gg_arg_desembarco.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_plata.44: "Her Majesty's schooner Cockatrice On the English Bank Rio de la Plata May 26th 1840 RMG PU6153.jpg" -- Webb, W H (artist) -- Public domain
+gg_plata_cockatrice = {
+	video = "gfx/media_aliases/gg_plata_cockatrice.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_plata.45: "George Hamilton-Gordon cph.3b31157.jpg" -- After John Jabez Edwin Mayall / Daniel John Pound -- Public domain
+gg_plata_aberdeen = {
+	video = "gfx/media_aliases/gg_plata_aberdeen.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_plata.22: "Vista de Buenos Aires, segun Ouseley.tif" -- William Gore Ouseley -- Public domain
+gg_plata_ba_ouseley = {
+	video = "gfx/media_aliases/gg_plata_ba_ouseley.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.28: "Portrait de Louis Napoleon Bonaparte en Prince-President, futur empereur Napoleon III (1808-1873). PH21989.jpg" -- Le Gray, Gustave (Villiers-le-Bel, 30081820 - Caire, 29071884), photog -- CC0
+gg_plata_louis_napoleon = {
+	video = "gfx/media_aliases/gg_plata_louis_napoleon.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_plata.46: "Cavaignac par Guillaume Lepaule 1848.jpg" -- Francois Gabriel Guillaume Lepaulle -- Public domain
+gg_plata_cavaignac = {
+	video = "gfx/media_aliases/gg_plata_cavaignac.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_rivera.7: "El capataz.png" -- Juan Manuel Blanes -- Public domain
+gg_riv_capataz = {
+	video = "gfx/media_aliases/gg_riv_capataz.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_plata.23: "Durand Brager 1.jpg" -- Jean-Baptiste Henri Durand-Brager -- Public domain
+gg_plata_durand_combate = {
+	video = "gfx/media_aliases/gg_plata_durand_combate.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_plata.26: "Prise du fort de S.t Jean d'Ulloa - Les trois Fregates qui forment une ligne serree parallele au rescif (sic), et qui dirigent leur feu sur la Forteresse sont - La Gloire, Capitaine Laine, La Nereide, Capitaine... - btv1b532931988.jpg" -- Jazet, Jean-Pierre-Marie (1788-1871). Graveur de l'oeuvre reproduite G -- Public domain
+gg_plata_ulloa = {
+	video = "gfx/media_aliases/gg_plata_ulloa.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_peace.4: "The state opening of Parliament.jpg" -- Joseph Nash -- Public domain
+gg_peace_parliament = {
+	video = "gfx/media_aliases/gg_peace_parliament.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_peace.5: "Chute & Brooks - Casa de gobierno.jpg" -- Chute &amp; Brooks -- Public domain
+gg_peace_casa_gobierno = {
+	video = "gfx/media_aliases/gg_peace_casa_gobierno.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}

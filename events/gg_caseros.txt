@@ -127,7 +127,7 @@ gg_caseros.2 = {
 		}
 	}
 	flavor = gg_argentina.41.f
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_cas_rosas_descalzi" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -145,7 +145,7 @@ gg_caseros.3 = {
 	placement = ROOT
 	title = gg_caseros.3.t
 	desc = gg_caseros.3.d
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_cas_ba_borget" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -174,7 +174,7 @@ gg_caseros.4 = {
 			triggered_desc = { desc = gg_caseros.4.d }
 		}
 	}
-	event_image = { video = "gg_arg_clausula" }
+	event_image = { video = "gg_cas_vivac" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -205,7 +205,7 @@ gg_caseros.5 = {
 			triggered_desc = { desc = gg_caseros.5.d }
 		}
 	}
-	event_image = { video = "gg_arg_pronunciamiento" }
+	event_image = { video = "gg_cas_santos_lugares" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes

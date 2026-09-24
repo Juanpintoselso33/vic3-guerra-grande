@@ -105,7 +105,7 @@ gg_ba.1 = {
 	title = gg_ba.1.t
 	desc = gg_ba.1.d
 	flavor = gg_ba.1.f
-	event_image = { video = "europenorthamerica_springtime_of_nations" }
+	event_image = { video = "gg_ba_alsina" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -157,7 +157,7 @@ gg_ba.2 = {
 	title = gg_ba.2.t
 	desc = gg_ba.2.d
 	flavor = gg_ba.2.f
-	event_image = { video = "southamerica_aristocrats" }
+	event_image = { video = "gg_ba_parana" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -202,7 +202,7 @@ gg_ba.3 = {
 	title = gg_ba.3.t
 	desc = gg_ba.3.d
 	flavor = gg_ba.3.f
-	event_image = { video = "unspecific_naval_battle" }
+	event_image = { video = "gg_ba_lagos" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -338,7 +338,7 @@ gg_ba.4 = {
 	title = gg_ba.4.t
 	desc = gg_ba.4.d
 	flavor = gg_ba.4.f
-	event_image = { video = "southamerica_election" }
+	event_image = { video = "gg_ba_obligado" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -383,7 +383,7 @@ gg_ba.5 = {
 	title = gg_ba.5.t
 	desc = gg_ba.5.d
 	flavor = gg_ba.5.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_ba_convivencia" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -430,7 +430,7 @@ gg_ba.6 = {
 	title = gg_ba.6.t
 	desc = gg_ba.6.d
 	flavor = gg_ba.6.f
-	event_image = { video = "unspecific_steam_ship" }
+	event_image = { video = "gg_ba_rosario" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -495,7 +495,7 @@ gg_ba.7 = {
 	title = gg_ba.7.t
 	desc = gg_ba.7.d
 	flavor = gg_ba.7.f
-	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	event_image = { video = "gg_ba_urquiza_page" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -535,7 +535,7 @@ gg_ba.8 = {
 	title = gg_ba.8.t
 	desc = gg_ba.8.d
 	flavor = gg_ba.8.f
-	event_image = { video = "southamerica_war_civilians" }
+	event_image = { video = "gg_ba_lopez" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -597,7 +597,7 @@ gg_ba.10 = {
 		}
 	}
 	flavor = gg_ba.10.f
-	event_image = { video = "unspecific_military_parade" }
+	event_image = { video = "gg_ba_mitre" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -667,7 +667,7 @@ gg_ba.11 = {
 		}
 	}
 	flavor = gg_ba.11.f
-	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	event_image = { video = "gg_ba_pavon" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -700,7 +700,7 @@ gg_ba.12 = {
 	title = gg_ba.12.t
 	desc = gg_ba.12.d
 	flavor = gg_ba.12.f
-	event_image = { video = "southamerica_war_civilians" }
+	event_image = { video = "gg_ba_brayer" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -724,7 +724,7 @@ gg_ba.13 = {
 	title = gg_ba.13.t
 	desc = gg_ba.13.d
 	flavor = gg_ba.13.f
-	event_image = { video = "europenorthamerica_political_extremism" }
+	event_image = { video = "gg_ba_derqui" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

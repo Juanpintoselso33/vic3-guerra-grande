@@ -27,7 +27,7 @@ gg_cisplatina.1 = {
 	title = gg_cisplatina.1.t
 	desc = gg_cisplatina.1.d
 	flavor = gg_cisplatina.1.f
-	event_image = { video = "unspecific_politicians_arguing" }
+	event_image = { video = "gg_cis_oribe" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -92,7 +92,7 @@ gg_cisplatina.2 = {
 	title = gg_cisplatina.2.t
 	desc = gg_cisplatina.2.desc
 	flavor = gg_cisplatina.2.f
-	event_image = { video = "votp_gunboat_diplomacy" }
+	event_image = { video = "gg_cis_paco" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -216,7 +216,7 @@ gg_cisplatina.4 = {
 		}
 	}
 	flavor = gg_cisplatina.4.f
-	event_image = { video = "unspecific_signed_contract" }
+	event_image = { video = "gg_cis_azoteas" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -251,7 +251,7 @@ gg_cisplatina.5 = {
 		}
 	}
 	flavor = gg_cisplatina.5.f
-	event_image = { video = "southamerica_aristocrats" }
+	event_image = { video = "gg_cis_roads" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -307,7 +307,7 @@ gg_cisplatina.6 = {
 		}
 	}
 	flavor = gg_cisplatina.6.f
-	event_image = { video = "europenorthamerica_before_the_battle" }
+	event_image = { video = "gg_cis_paulino" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes

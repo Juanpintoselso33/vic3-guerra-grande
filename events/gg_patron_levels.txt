@@ -36,7 +36,7 @@ gg_patron.1 = {
 			triggered_desc = { desc = gg_patron.1.d_0 }
 		}
 	}
-	event_image = { video = "gg_money_french_convention" }
+	event_image = { video = "gg_patron_louis_philippe" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
@@ -73,7 +73,7 @@ gg_patron.2 = {
 			triggered_desc = { desc = gg_patron.2.d_0 }
 		}
 	}
-	event_image = { video = "gg_f2_palmerston" }
+	event_image = { video = "gg_patron_victoria" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
@@ -109,7 +109,7 @@ gg_patron.3 = {
 			triggered_desc = { desc = gg_patron.3.d_0 }
 		}
 	}
-	event_image = { video = "gg_money_maua" }
+	event_image = { video = "gg_patron_rio" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
