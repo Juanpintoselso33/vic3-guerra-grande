@@ -854,6 +854,25 @@ gg_argentina_cal.28 = {
 				c:ENR = { trigger_event = { id = gg_argentina.13 days = 0 popup = yes } }
 			}
 		}
+		# EN: 23/9/2026 (AUD-CONV-RETRY) -- a late Pronunciamiento (gg_urquiza.1.b, 90 days on) made Entre Rios after
+		#     29 May and the convention never came, nor the second one of November. While Entre Rios has not yet
+		#     answered with war (gg_montevideo_convention_enabled), the relay tries again every 7 days (the answer may
+		#     come any day: gg_argentina.3 waits a year); the last try lands before 21 November (gg_argentina_cal.29), so the two conventions keep their order. If the war of
+		#     the Plata ended meanwhile, the try takes the branch above: Urquiza alone (gg_urquiza.2).
+		# ES: un Pronunciamiento tardio creaba Entre Rios despues del 29 de mayo y la convencion no llegaba nunca, ni la
+		#     segunda de noviembre. Mientras Entre Rios no haya contestado con la guerra, el relevo reintenta cada 7
+		#     dias; el ultimo intento cae antes del 21 de noviembre.
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_28 }
+				exists = s:STATE_ENTRE_RIOS
+				c:ARG ?= this
+				game_date < 1851.11.14
+				NOT = { has_global_variable = gg_confederacion_negociada }
+				NOT = { has_global_variable = gg_montevideo_convention_refused }
+			}
+			trigger_event = { id = gg_argentina_cal.28 days = 7 }
+		}
 	} }
 }
 

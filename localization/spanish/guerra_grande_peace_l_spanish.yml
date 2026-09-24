@@ -18,13 +18,14 @@
  gg_peace.1.c:0 "Protectorado del Brasil: firmar los cinco tratados con el Imperio."
  gg_peace.1.d:0 "Protectorado europeo: pedírselo a Londres y a París."
  gg_peace.1.e:0 "Guerra a Rosas: pacificar la República y cruzar el río."
+ gg_peace_caseros_now_tt:0 "@battalions! Pacificado el país, la República manda una división contra Rosas: cruza el río ya y marcha a las órdenes de #b Entre Ríos#!, en la guerra que tiene abierta con Buenos Aires. La República no entra a esa guerra como beligerante, pero la caja paga la campaña y el ejército gana una causa del otro lado del río."
+ gg_peace_caseros_pledged_tt:0 "@battalions! Pacificado el país, la República compromete una división contra Rosas. Queda sobre las armas: cruza el río el día que se abra la guerra contra Buenos Aires en la otra orilla, y marcha con quien la pelee. La caja paga la campaña igual, llegue o no esa guerra, y el ejército gana una causa del otro lado del río."
  gg_peace.1.f:0 "Sin condiciones. Todavía no."
 
  gg_peace_formula_tt:0 "@information! La amnistía da iguales derechos y acceso a los empleos públicos a todos los orientales, asume la deuda de guerra del #blue_value Cerrito#! y no proscribe a Oribe. Las dos divisas quedan prohibidas en favor de la escarapela nacional."
  gg_peace_proscription_defensa_tt:0 "@warning! Los decretos de febrero de la #R Defensa#! alcanzan la campaña: los #blue_value jefes blancos#! van al destierro, las confiscaciones quedan en pie, y los fusilamientos y expulsiones siembran radicalismo en los pagos."
  gg_peace_treaties_tt:0 "@warning! El Imperio garantiza la Constitución y subsidia a la República contra la renta de aduana; se renuncia al reclamo de San Ildefonso y a navegar la Laguna Merín y el Yaguarón. El comercio brasileño gana diez años de franquicias, y los esclavos fugados deben devolverse pese a la ley de abolición."
  gg_peace_protectorate_asked_tt:0 "@information! Londres y París reciben el pedido de poner a la República bajo su protección conjunta. Las solicitudes anteriores fueron rechazadas, de modo que la respuesta es incierta."
- gg_peace_caseros_tt:0 "@battalions! Pacificado el país, la República compromete una división contra Rosas junto al Imperio, Entre Ríos y Corrientes. El ejército gana una causa del otro lado del río y la caja paga su costo."
 
 # ---------------------------------------------------------------------------------------------
 # gg_peace.2 -- el Cerrito dicta la paz
@@ -90,7 +91,7 @@
  gg_peace_protectorate_refused_desc:0 "El sexto pedido de la misma clase y el sexto rechazo. La República le pidió a una potencia extranjera que la gobernara, el pedido salió en los diarios antes que la respuesta, y la respuesta fue que no. No se ganó nada y lo dicho no se puede desdecir."
 
  gg_peace_march_on_buenos_aires:0 "Y después, al otro lado del río"
- gg_peace_march_on_buenos_aires_desc:0 "Una vez pacificado el territorio nacional se iniciará la acción militar contra Rosas: Herrera y Obes escribió exactamente eso a los encargados de negocios inglés y francés en setiembre de 1851. La República pone una división en la alianza que va a encontrarse con Rosas en Caseros. El ejército nunca estuvo más alto y el tesoro nunca estuvo más vacío."
+ gg_peace_march_on_buenos_aires_desc:0 "Una vez pacificado el territorio nacional se iniciará la acción militar contra Rosas: Herrera y Obes escribió exactamente eso a los encargados de negocios inglés y francés en setiembre de 1851. La República pone una división al servicio de la guerra contra Rosas, del otro lado del río. El ejército nunca estuvo más alto y el tesoro nunca estuvo más vacío."
 
  gg_peace_national_cockade:0 "La escarapela nacional"
  gg_peace_national_cockade_desc:0 "Se prohíben las divisas colorada y blanca y se declara la escarapela nacional el único distintivo que puede llevar un ciudadano, con el fin de hacer desaparecer las opiniones y signos que separaban de los otros a los hijos del pueblo oriental. La Villa de la Restauración pasa a ser la Villa de la Unión. Los dos partidos pierden algo a lo que le tenían cariño, y el Estado gana una autoridad que nunca tuvo."
@@ -121,5 +122,9 @@
  gg_peace.12.f:0 "«Pedir condiciones» y «rendirse» se escriben distinto."
  gg_peace.12.a:0 "Pedir condiciones. Que escriban ellos el pliego."
  gg_peace.12.b:0 "Seguir peleando. Todavía no."
+ gg_peace.13.t:0 "El cliente sin padrino"
+ gg_peace.13.d:0 "Rosas cayó, y el que gobierna ahora la Confederación es #b Urquiza#!. La cuenta que el Restaurador abrió con la República —la plata, las armas, la conducción de afuera— se cierra con él: el gobierno nuevo no la heredó ni la pidió.\n\nPara soltarla no necesita inventar nada. En la Convención Preliminar de 1828 el gobierno de las Provincias Unidas concordó «en declarar por su parte la independencia» de la Provincia de Montevideo, «y en que se constituya en Estado libre e independiente». Rosas lo había olvidado; en Paraná prefieren recordarlo.\n\nLa República vuelve a manejar sus relaciones exteriores. Lo que Buenos Aires pagaba deja de llegar, y lo que se dijo de ella mientras lo cobraba no se borra tan rápido."
+ gg_peace.13.f:0 "«Estado libre e independiente». Convención Preliminar de Paz, 27 de agosto de 1828, artículo 2."
+ gg_peace.13.a:0 "Las relaciones exteriores vuelven a Montevideo."
  gg_peace_ask_terms_tt:0 "@warning! El otro gobierno escribe el pliego de paz, y ahí se decide qué pasa con este gobierno."
  gg_peace_fight_on_tt:0 "@battalions! La guerra sigue, con algo de descontento, y por un año nadie vuelve a sentar a las partes."

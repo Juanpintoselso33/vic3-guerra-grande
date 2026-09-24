@@ -500,7 +500,20 @@ gg_peace.1 = {
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
-		custom_tooltip = gg_peace_caseros_tt
+		# EN: 23/9/2026 (Juan, AUD-WAR-ROSAS) -- the division marches for real: at once if Entre Rios is already at war
+		#     with Buenos Aires, otherwise the day that war starts (common/on_actions/gg_oriental_division.txt). The
+		#     tooltip says which, without saying whether or when that war comes.
+		# ES: la division marcha de verdad: ya, si Entre Rios esta en guerra con Buenos Aires; si no, el dia que esa
+		#     guerra empiece. El tooltip dice cual de las dos, sin decir si esa guerra llega ni cuando.
+		if = {
+			limit = { exists = c:ENR c:ARG ?= { has_war_with = c:ENR } }
+			custom_tooltip = gg_peace_caseros_now_tt
+		}
+		else = {
+			custom_tooltip = gg_peace_caseros_pledged_tt
+		}
+		set_global_variable = gg_oriental_division_pledged
+		gg_oriental_division_march = yes
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
@@ -2196,5 +2209,71 @@ gg_peace.12 = {
 		custom_tooltip = gg_peace_fight_on_tt
 		gg_peace_fight_on = yes
 		ai_chance = { base = 40 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.13 -- 23/9/2026 (AUD-RULES-CLIENT). THE CLIENT OUTLIVES ITS PATRON: NO LONGER. The Republic became
+#     Rosas's client (gg_peace.2.e); Rosas has fallen and Urquiza governs the Confederation. The new government does
+#     not keep a client it never asked for and releases it, on the title of 1828. Sent by gg_rosista_client_release
+#     (common/scripted_effects/gg_pact_resolution.txt). DESIGN: the release is a design decision (decisiones.md,
+#     23/9); the Rosista client never existed historically.
+# ES: gg_peace.13 -- EL CLIENTE YA NO SOBREVIVE A SU PADRINO. La Republica quedo como cliente de Rosas; Rosas cayo y
+#     Urquiza gobierna la Confederacion. El gobierno nuevo no conserva un cliente que no pidio y lo libera, con el
+#     titulo de 1828. DISENO.
+# SOURCE / FUENTE: Preliminary Convention of Peace, Rio de Janeiro, 27 August 1828, art. 2 (the United Provinces
+#     "concuerda en declarar por su parte la independencia de la Provincia de Montevideo ... y en que se constituya
+#     en Estado libre e independiente"), https://es.wikisource.org/wiki/Convenci%C3%B3n_Preliminar_de_Paz_(1828) ;
+#     the 1851 Convention invokes the same rights (preamble, https://www.dipublico.org/122098/).
+# -------------------------------------------------------------------------------------------------
+gg_peace.13 = {
+	type = country_event
+	placement = ROOT
+	title = gg_peace.13.t
+	desc = gg_peace.13.d
+	flavor = gg_peace.13.f
+	# EN/ES: reused until T9 (SOURCES_flujo_images.md): the Constitution of the State, which art. I invokes
+	#     / reusado hasta T9: la Constitucion del Estado, que invoca el art. I
+	event_image = { video = "gg_in_constitution" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:URU ?= this
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.13|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.13.a|" # GG_TRAZA
+		name = gg_peace.13.a
+		default_option = yes
+		if = {
+			limit = { exists = c:ARG }
+			if = {
+				limit = { is_subject_of = c:ARG }
+				make_independent = yes
+			}
+		}
+		remove_modifier = gg_peace_rosista_client
+		ai_chance = { base = 100 }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_peace.14 -- hidden, on Entre Rios, the day after the Pact's war starts: the division the Defensa pledged
+#     (gg_peace.1.e) marches now. See gg_oriental_division_march.
+# ES: gg_peace.14 -- oculto, sobre Entre Rios, al dia siguiente de que empieza la guerra del Pacto: la division que la
+#     Defensa comprometio marcha ahora.
+# -------------------------------------------------------------------------------------------------
+gg_peace.14 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.14|" # GG_TRAZA
+		gg_oriental_division_march = yes
 	}
 }

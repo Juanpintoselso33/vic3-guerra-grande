@@ -1,0 +1,23 @@
+﻿# EN: 23/9/2026 (Juan, AUD-WAR-ROSAS) -- the Defensa pledged a division against Rosas (gg_peace.1.e) before Entre Rios
+#     was at war with Buenos Aires: it marches the day the Pact's war with Entre Rios starts. Root = the diplomatic
+#     play (vanilla 00_code_on_actions.txt; the same root the Workshop's news mods read with initiator/target).
+#     The division is raised the next day by a hidden event on Entre Rios, with the war already standing.
+# ES: la Defensa comprometio una division contra Rosas antes de que Entre Rios estuviera en guerra con Buenos Aires:
+#     marcha el dia que empieza la guerra del Pacto con Entre Rios. Root = la jugada diplomatica. La division se
+#     levanta al dia siguiente, con un evento oculto sobre Entre Rios y la guerra ya en pie.
+on_diplo_play_war_start = {
+	on_actions = { gg_oriental_division_war_start }
+}
+
+gg_oriental_division_war_start = {
+	trigger = {
+		has_global_variable = gg_oriental_division_pledged
+		NOT = { has_global_variable = gg_oriental_division_sent }
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		target = { c:ENR ?= this }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_division_war_start" # GG_TRAZA
+		c:ENR ?= { trigger_event = { id = gg_peace.14 days = 1 } }
+	}
+}

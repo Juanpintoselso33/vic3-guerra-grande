@@ -18,13 +18,14 @@
  gg_peace.1.c:0 "Brazilian protectorate: sign the five treaties with the Empire."
  gg_peace.1.d:0 "European protectorate: ask London and Paris for it."
  gg_peace.1.e:0 "War on Rosas: pacify the Republic and cross the river."
+ gg_peace_caseros_now_tt:0 "@battalions! Once the country is pacified, the Republic sends a division against Rosas: it crosses the river now and marches under #b Entre Ríos#!, in the war it is already fighting with Buenos Aires. The Republic does not enter that war as a belligerent, but the treasury pays for the campaign and the army gains a cause across the river."
+ gg_peace_caseros_pledged_tt:0 "@battalions! Once the country is pacified, the Republic commits a division against Rosas. It stays under arms: it crosses the river the day a war against Buenos Aires opens on the other bank, and marches with whoever fights it. The treasury pays for the campaign all the same, whether or not that war comes, and the army gains a cause across the river."
  gg_peace.1.f:0 "No terms. Not yet."
 
  gg_peace_formula_tt:0 "@information! Amnesty gives every Uruguayan equal rights and access to public office, assumes the #blue_value Cerrito#!'s war debt and leaves Oribe unproscribed. The divisas are forbidden in favour of the national cockade."
  gg_peace_proscription_defensa_tt:0 "@warning! The #R Defensa#!'s February decrees reach the countryside: the #blue_value blanco chiefs#! are exiled, confiscations stand, and executions and expulsions spread radicalism through the rural districts."
  gg_peace_treaties_tt:0 "@warning! The Empire guarantees the Constitution and subsidises the Republic against its customs revenue; the San Ildefonso claim and navigation of the Laguna Merín and Yaguarón are surrendered. Brazilian trade gains ten years of exemptions, and fugitive slaves must be returned despite the Republic's abolition law."
  gg_peace_protectorate_asked_tt:0 "@information! London and Paris receive a request to place the Republic under their joint protection. Earlier petitions met refusal, so the answer is uncertain."
- gg_peace_caseros_tt:0 "@battalions! Once the country is pacified, the Republic commits a division against Rosas alongside the Empire, Entre Ríos and Corrientes. The army gains a cause across the river and the treasury bears its cost."
 
 # ---------------------------------------------------------------------------------------------
 # gg_peace.2 -- the Cerrito dictates the peace
@@ -90,7 +91,7 @@
  gg_peace_protectorate_refused_desc:0 "The sixth request of the same kind and the sixth refusal. The Republic asked a foreign power to govern it, the request was in the newspapers before the answer was, and the answer was no. Nothing has been gained and the asking cannot be unsaid."
 
  gg_peace_march_on_buenos_aires:0 "And Then Across the River"
- gg_peace_march_on_buenos_aires_desc:0 "Once the national territory is pacified, military action against Rosas begins — Herrera y Obes wrote exactly that to the British and French chargés in September 1851. The Republic puts a division into the alliance that will meet Rosas at Caseros. The army has never stood higher and the treasury has never been emptier."
+ gg_peace_march_on_buenos_aires_desc:0 "Once the national territory is pacified, military action against Rosas begins — Herrera y Obes wrote exactly that to the British and French chargés in September 1851. The Republic puts a division at the service of the war against Rosas, across the river. The army has never stood higher and the treasury has never been emptier."
 
  gg_peace_national_cockade:0 "The National Cockade"
  gg_peace_national_cockade_desc:0 "The divisas colorada and blanca are forbidden and the national cockade declared the only badge a citizen may wear, so that the opinions and emblems dividing the sons of Uruguay may disappear. The Villa de la Restauración becomes the Villa de la Unión. Both parties lose something to which they were attached, and the State gains an authority it never possessed."
@@ -121,5 +122,9 @@
  gg_peace.12.f:0 "‘Asking for terms’ and ‘surrendering’ are spelt differently."
  gg_peace.12.a:0 "Ask for terms. Let them draft the treaty."
  gg_peace.12.b:0 "Fight on. Not yet."
+ gg_peace.13.t:0 "The Client Without a Patron"
+ gg_peace.13.d:0 "Rosas has fallen, and the man who now governs the Confederation is #b Urquiza#!. The account the Restaurador opened with the Republic — the money, the arms, the direction from abroad — closes with him: the new government neither inherited it nor asked for it.\n\nTo let it go, it need invent nothing. In the Preliminary Convention of 1828 the government of the United Provinces agreed \"to declare for its part the independence\" of the Province of Montevideo, \"and that it be constituted a free and independent State\". Rosas had forgotten it; in Paraná they prefer to remember.\n\nThe Republic conducts its foreign relations again. What Buenos Aires paid stops arriving, and what was said of the Republic while it collected will not be erased so quickly."
+ gg_peace.13.f:0 "\"A free and independent State.\" Preliminary Convention of Peace, 27 August 1828, article 2."
+ gg_peace.13.a:0 "Foreign relations return to Montevideo."
  gg_peace_ask_terms_tt:0 "@warning! The other government draws up the peace terms, and with them the fate of this one."
  gg_peace_fight_on_tt:0 "@battalions! The war goes on, with some unrest, and for a year no one brings the parties to the table again."

@@ -188,15 +188,25 @@ gg_ba_unify = {
 		global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.11 days = 0 popup = yes } }
 		global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.11 days = 0 popup = yes } }
 		# EN/ES: the player of the country that disappears may take the other seat / el jugador del que desaparece
+		# EN/ES: 23/9 (AUD-SEAT-ANNEX, the rule of gg_argentina_province_join) -- only if the country that remains is
+		#     not a player's too; with two players nobody is annexed (gg_ba.20) / solo si el que queda no es de otro jugador
 		global_var:gg_ba_side ?= {
 			if = {
-				limit = { is_player = yes NOT = { global_var:gg_ba_remains ?= this } }
+				limit = {
+					is_player = yes
+					NOT = { global_var:gg_ba_remains ?= this }
+					NOT = { global_var:gg_ba_remains ?= { is_player = yes } }
+				}
 				trigger_event = { id = gg_ba.13 days = 1 popup = yes }
 			}
 		}
 		global_var:gg_conf_side ?= {
 			if = {
-				limit = { is_player = yes NOT = { global_var:gg_ba_remains ?= this } }
+				limit = {
+					is_player = yes
+					NOT = { global_var:gg_ba_remains ?= this }
+					NOT = { global_var:gg_ba_remains ?= { is_player = yes } }
+				}
 				trigger_event = { id = gg_ba.13 days = 1 popup = yes }
 			}
 		}

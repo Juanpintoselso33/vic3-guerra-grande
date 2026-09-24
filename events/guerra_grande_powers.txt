@@ -510,6 +510,12 @@ gg_powers.13 = {
 			base = 30
 			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
 			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
+			# EN: INTENTIONAL (AUD-AI-POWERS-DEAD, 23/9): this event fires 1845-1847 (Hood), so for the AI
+			#     this option is dead on purpose -- historically Montevideo refused the Hood bases, and an AI
+			#     peace in 1845 would end the war years before the plan's 1849-1853 window. Only a player takes it.
+			# ES: A PROPOSITO: el evento sale en 1845-1847 (Hood), asi que para la IA esta opcion esta
+			#     muerta adrede -- Montevideo rechazo las bases de Hood, y una paz de la IA en 1845 cerraria
+			#     la guerra anos antes de la ventana 1849-1853 del plan. Solo la toma un jugador.
 			modifier = { trigger = { year < 1849 } factor = 0 }
 		}
 	}
@@ -730,6 +736,12 @@ gg_powers.16 = {
 			base = 15
 			# EN/ES: 23/9 (audit R3) -- the AI does not take an early peace: the war ends 1849-1853
 			#     / la IA no toma una paz temprana: la guerra termina entre 1849 y 1853
+			# EN: INTENTIONAL (AUD-AI-POWERS-DEAD, 23/9): the Gore-Gros mission comes in 1846-1848 and failed
+			#     (Oribe refused on 18 May 1848 after Rosas's warning), so for the AI this option is dead on
+			#     purpose before 1849. Only a player takes it.
+			# ES: A PROPOSITO: la mision Gore-Gros llega en 1846-1848 y fracaso (Oribe rechazo el 18 de mayo
+			#     de 1848 tras la advertencia de Rosas), asi que para la IA esta opcion esta muerta adrede
+			#     antes de 1849. Solo la toma un jugador.
 			modifier = { trigger = { year < 1849 } factor = 0 }
 		}
 	}

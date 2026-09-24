@@ -30,7 +30,24 @@ gg_ba.101 = {
 				has_global_variable = gg_pact_settlement_urquiza
 				has_state_in_state_region = STATE_BUENOS_AIRES
 				any_scope_state = { NOT = { state_region = s:STATE_BUENOS_AIRES } }
-				is_at_war = no
+				# EN: 23/9/2026 (AUD-BA-WAR) -- was `is_at_war = no`: a war with Brazil over the Banda Oriental (the second
+				#     Cisplatine war, gg_cisplatina.2) kept the split waiting until it expired in 1855. Only a war with the
+				#     provinces themselves holds the revolution back; any other war goes on with the Confederation.
+				# ES: era `is_at_war = no`: una guerra con el Brasil por la Banda Oriental dejaba la particion esperando
+				#     hasta vencer en 1855. Solo una guerra con las provincias frena la revolucion; otra guerra sigue con
+				#     la Confederacion.
+				# EN/ES: the province countries (gg_is_province_country), the Coalition and the State of Buenos Aires
+				#     / las provincias-pais, la Coalicion y el Estado de Buenos Aires
+				NOT = {
+					any_country = {
+						OR = {
+							gg_is_province_country = yes
+							c:CLN ?= this
+							c:BUE ?= this
+						}
+						has_war_with = c:ARG
+					}
+				}
 			}
 			gg_ba_split_historical = yes
 			trigger_event = { id = gg_ba.1 days = 0 popup = yes }
@@ -46,6 +63,24 @@ gg_ba.101 = {
 			gg_ba_split_stalemate = yes
 			trigger_event = { id = gg_ba.2 days = 0 popup = yes }
 			c:ENR = { trigger_event = { id = gg_ba.2 days = 0 popup = yes } }
+		}
+		# EN: 23/9/2026 (AUD-BA-SUBJECT, buenos-aires-separada-plan.md) -- «two governments» with Entre Rios already a
+		#     subject: there are not two governments. Rosas beat Entre Rios in the real war before the rule closed the
+		#     Pact, so the Confederation has one government and nothing splits. Recorded once, and no retry.
+		# ES: «dos gobiernos» con Entre Rios ya sometido: no hay dos gobiernos. Rosas batio a Entre Rios en la guerra real
+		#     antes de que la regla cerrara el Pacto; la Confederacion tiene un solo gobierno y no se parte nada.
+		else_if = {
+			limit = {
+				c:ARG ?= this
+				NOT = { has_global_variable = gg_ba_split_active }
+				NOT = { has_global_variable = gg_ba_done }
+				has_global_variable = gg_pact_settlement_stalemate
+				OR = {
+					NOT = { exists = c:ENR }
+					c:ENR ?= { is_subject_of = c:ARG }
+				}
+			}
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.101|no_split_enr_subject|" # GG_TRAZA
 		}
 		# EN/ES: the Pact may close later (a war still running): retry monthly through 1854 / se reintenta
 		else_if = {
@@ -646,7 +681,15 @@ gg_ba.11 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.11.a|" # GG_TRAZA
 		name = gg_ba.11.a
 		default_option = yes
-		custom_tooltip = gg_ba.11.a_tt
+		# EN/ES: 23/9 (AUD-BA-SEATS) -- two players: a protectorate, not one country (gg_ba.20) / dos jugadores: protectorado
+		if = {
+			limit = {
+				global_var:gg_ba_side ?= { is_player = yes }
+				global_var:gg_conf_side ?= { is_player = yes }
+			}
+			custom_tooltip = gg_ba.11.a_tt_players
+		}
+		else = { custom_tooltip = gg_ba.11.a_tt }
 		ai_chance = { base = 100 }
 	}
 }
@@ -727,13 +770,46 @@ gg_ba.20 = {
 			else = {
 				global_var:gg_ba_side ?= { save_scope_as = gg_ba_absorbed }
 			}
+			# EN: 23/9/2026 (AUD-SEAT-ANNEX, the rule of gg_argentina_province_join) -- both countries are players': nobody
+			#     is annexed and nobody changes seat (gg_ba_unify sends no gg_ba.13). The side that lost the last war
+			#     becomes the winner's protectorate, which is what one country with two governments can be; the capital,
+			#     the ruler and the ARG tag are not touched.
+			# ES: los dos paises son de jugadores: no se anexa a nadie ni nadie cambia de sede. El lado que perdio la
+			#     ultima guerra queda protectorado del ganador; no se tocan capital, gobernante ni tag.
+			if = {
+				limit = {
+					exists = scope:gg_ba_absorbed
+					is_player = yes
+					scope:gg_ba_absorbed = { is_player = yes }
+				}
+				if = {
+					limit = { global_var:gg_ba_winner_ba = 1 }
+					global_var:gg_ba_side ?= { save_scope_as = gg_ba_overlord }
+					global_var:gg_conf_side ?= { save_scope_as = gg_ba_protected }
+				}
+				else = {
+					global_var:gg_conf_side ?= { save_scope_as = gg_ba_overlord }
+					global_var:gg_ba_side ?= { save_scope_as = gg_ba_protected }
+				}
+				if = {
+					limit = {
+						exists = scope:gg_ba_overlord
+						exists = scope:gg_ba_protected
+						scope:gg_ba_protected = { is_subject = no }
+					}
+					scope:gg_ba_overlord = { create_diplomatic_pact = { country = scope:gg_ba_protected type = protectorate } }
+				}
+				clear_saved_scope = gg_ba_overlord
+				clear_saved_scope = gg_ba_protected
+				clear_saved_scope = gg_ba_absorbed
+			}
 			if = {
 				limit = { exists = scope:gg_ba_absorbed }
 				scope:gg_ba_absorbed = { gg_bring_characters_to = { TARGET = scope:gg_ba_keeper } }
 				annex = scope:gg_ba_absorbed
 			}
 			if = {
-				limit = { global_var:gg_ba_winner_ba = 1 }
+				limit = { global_var:gg_ba_winner_ba = 1 exists = scope:gg_ba_absorbed }
 				if = {
 					limit = { has_state_in_state_region = STATE_BUENOS_AIRES }
 					set_capital = STATE_BUENOS_AIRES
@@ -744,7 +820,7 @@ gg_ba.20 = {
 				}
 			}
 			if = {
-				limit = { NOT = { c:ARG ?= this } }
+				limit = { NOT = { c:ARG ?= this } exists = scope:gg_ba_absorbed }
 				trigger_event = { id = gg_ba.21 days = 1 }
 			}
 			remove_global_variable = gg_ba_split_active

@@ -968,23 +968,29 @@ gg_argentina_complete_foreign_contingents = {
 	}
 	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
 	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
-	c:ENR ?= {
-		gg_select_formation_hq_state = yes
-		clear_saved_scope = gg_oriental_grand_army
-		# EN: Without an owned state there is no valid HQ; skip this formation.
-		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-		if = {
-			limit = { exists = scope:gg_formation_hq_state }
-			create_military_formation = {
-				type = army
-				hq_region = scope:gg_formation_hq_state.region
-				name = gg_arg_oriental_grand_army_contingent
-				save_scope_as = gg_oriental_grand_army
-				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
-				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
+	# EN/ES: 23/9 (AUD-WAR-ROSAS) -- unless the Republic's pledged division already marches (gg_oriental_division_march)
+	#     / salvo que la division comprometida por la Republica ya marche
+	if = {
+		limit = { NOT = { has_global_variable = gg_oriental_division_sent } }
+		set_global_variable = gg_oriental_division_sent
+		c:ENR ?= {
+			gg_select_formation_hq_state = yes
+			clear_saved_scope = gg_oriental_grand_army
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_oriental_grand_army_contingent
+					save_scope_as = gg_oriental_grand_army
+					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
+					combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				}
 			}
+			if = { limit = { exists = scope:gg_oriental_grand_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		}
-		if = { limit = { exists = scope:gg_oriental_grand_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 }
 
@@ -1013,22 +1019,75 @@ gg_argentina_limited_foreign_contingents = {
 	}
 	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
 	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
-	c:ENR ?= {
-		gg_select_formation_hq_state = yes
-		clear_saved_scope = gg_oriental_limited_army
-		# EN: Without an owned state there is no valid HQ; skip this formation.
-		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
-		if = {
-			limit = { exists = scope:gg_formation_hq_state }
-			create_military_formation = {
-				type = army
-				hq_region = scope:gg_formation_hq_state.region
-				name = gg_arg_oriental_limited_contingent
-				save_scope_as = gg_oriental_limited_army
-				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
+	# EN/ES: 23/9 (AUD-WAR-ROSAS) -- unless the Republic's pledged division already marches / salvo que ya marche
+	if = {
+		limit = { NOT = { has_global_variable = gg_oriental_division_sent } }
+		set_global_variable = gg_oriental_division_sent
+		c:ENR ?= {
+			gg_select_formation_hq_state = yes
+			clear_saved_scope = gg_oriental_limited_army
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_oriental_limited_contingent
+					save_scope_as = gg_oriental_limited_army
+					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				}
 			}
+			if = { limit = { exists = scope:gg_oriental_limited_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		}
-		if = { limit = { exists = scope:gg_oriental_limited_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 23/9/2026 (Juan, AUD-WAR-ROSAS) -- «WAR ON ROSAS» SENDS THE DIVISION FOR REAL. The Defensa that chose
+#     gg_peace.1.e pledged a division against Rosas (gg_oriental_division_pledged). It marches the way the 1851
+#     convention sends it: as Entre Rios's contingent under Cesar Diaz, raised on Entre Rios's ground (Juan, 23/9:
+#     «contingent, not belligerent» -- Buenos Aires cannot make the Republic capitulate). It marches only while Entre
+#     Rios is at war with Buenos Aires; called at once by gg_peace.1.e and again when the Pact's war starts
+#     (gg_oriental_division_war_start, common/on_actions/gg_oriental_division.txt). Once sent, the November convention
+#     does not raise a second Oriental contingent (gg_oriental_division_sent). Two battalions, as the full terms:
+#     the Republic's share was a division of two thousand men.
+# ES: «GUERRA A ROSAS» MANDA LA DIVISION DE VERDAD. La Defensa que eligio gg_peace.1.e comprometio una division; marcha
+#     como la manda la convencion de 1851: contingente de Entre Rios bajo Cesar Diaz, levantado en su suelo. Solo
+#     marcha si Entre Rios esta en guerra con Buenos Aires; se llama al elegir y otra vez cuando empieza la guerra
+#     del Pacto. Una vez enviada, la convencion de noviembre no levanta un segundo contingente oriental.
+# SOURCE / FUENTE: Herrera y Obes to the British and French charges, IX.1851 (events/guerra_grande_peace.txt,
+#     gg_peace.1.e); Convention of 21 November 1851, art. IV (https://www.dipublico.org/122100/).
+# -------------------------------------------------------------------------------------------------
+gg_oriental_division_march = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_division_march|" # GG_TRAZA
+	if = {
+		limit = {
+			has_global_variable = gg_oriental_division_pledged
+			NOT = { has_global_variable = gg_oriental_division_sent }
+			exists = c:ENR
+			exists = c:ARG
+			c:ARG = { has_war_with = c:ENR }
+		}
+		set_global_variable = gg_oriental_division_sent
+		c:ENR = {
+			gg_select_formation_hq_state = yes
+			clear_saved_scope = gg_oriental_pledged_army
+			# EN: Without an owned state there is no valid HQ; skip this formation.
+			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
+			if = {
+				limit = { exists = scope:gg_formation_hq_state }
+				create_military_formation = {
+					type = army
+					hq_region = scope:gg_formation_hq_state.region
+					name = gg_arg_oriental_grand_army_contingent
+					save_scope_as = gg_oriental_pledged_army
+					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
+					combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
+				}
+			}
+			if = { limit = { exists = scope:gg_oriental_pledged_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_pledged_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_pledged_army ENEMY = c:ARG } }
+		}
 	}
 }
 

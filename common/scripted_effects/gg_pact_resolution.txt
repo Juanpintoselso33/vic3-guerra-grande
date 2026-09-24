@@ -1,4 +1,23 @@
-﻿# EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
+﻿# EN/ES: defined first: gg_pact_resolve below uses it / definido primero: lo usa gg_pact_resolve
+# EN: 23/9/2026 (AUD-RULES-CLIENT, decisiones.md) -- the Republic made Rosas's client by the Cerrito's peace
+#     (gg_peace.2.e, modifier gg_peace_rosista_client) does not outlive Rosas: when his government falls to Urquiza
+#     the Republic is released (gg_peace.13, which it sees). A puppet made any other way is not touched.
+# ES: la Republica hecha cliente de Rosas por la paz del Cerrito no sobrevive a Rosas: cuando su gobierno cae ante
+#     Urquiza la Republica queda libre (gg_peace.13, que ve). Otra sujecion no se toca.
+gg_rosista_client_release = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosista_client_release|" # GG_TRAZA
+	c:URU ?= {
+		if = {
+			limit = {
+				has_modifier = gg_peace_rosista_client
+				exists = c:ARG
+			}
+			trigger_event = { id = gg_peace.13 days = 0 popup = yes }
+		}
+	}
+}
+
+# EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
 # ES: Scope pais (Argentina). Un escritor idempotente para todos los cierres del Pacto Federal.
 gg_pact_resolve = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_resolve|" # GG_TRAZA
@@ -57,6 +76,7 @@ gg_pact_resolve = {
 			set_global_variable = gg_pact_settlement_urquiza
 			remove_global_variable = gg_president_railroad
 			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
+			gg_rosista_client_release = yes # EN/ES: 23/9 (AUD-RULES-CLIENT) -- Rosas fell / cayo Rosas
 			# EN: Caseros (a) or (c) -- Rosas falls and goes into exile (historically he embarked on
 			#     HMS Centaur for England, February 1852). The Confederation remains.
 			# ES: Caseros (a) o (c) -- cae Rosas y se exilia (se embarco en el Centaur rumbo a
@@ -95,8 +115,8 @@ gg_pact_resolve = {
 			set_global_variable = gg_pact_settlement_mandate_collapsed
 			remove_global_variable = gg_president_railroad
 			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
+			gg_rosista_client_release = yes # EN/ES: 23/9 (AUD-RULES-CLIENT) -- Rosas fell / cayo Rosas
 			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
 		}
 	}
 }
-
