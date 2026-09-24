@@ -22,6 +22,9 @@ guerra_grande_on_game_start = {
 		# EN/ES: 23/9 (Juan) -- the Farrapos last until Ponche Verde, 1845 (common/scripted_effects/gg_farrapos.txt)
 		#     / los Farrapos duran hasta Ponche Verde
 		gg_farrapos_start = yes
+		# EN/ES: 23/9 (AUD-ARG-1850) -- Argentina stays the same country while its dated calendar is pending
+		#     / la Argentina sigue siendo el mismo pais mientras su calendario este pendiente (gg_arg_identity.txt)
+		gg_arg_identity_guard = yes
 		# EN: 22/9/2026 (Codex) -- Beron de Astrada governs Corrientes from 1837 (by the Pact's list from
 		#     the start): he exists in the Confederation from day one, and the Corrientes rising moves
 		#     him (gg_ruler_set) instead of creating him.
@@ -510,6 +513,22 @@ gg_historical_lives_monthly = {
 			gg_president_historical = yes
 			c:CER ?= { gg_president_historical = yes }
 		}
+	}
+}
+
+# EN/ES: 23/9/2026 (AUD-ARG-1850) -- no engine revolution replaces Argentina while its calendar is pending,
+#     and a watchdog if one does (common/scripted_effects/gg_arg_identity.txt). On Argentina's own pulse,
+#     not the Republic's: it must run whoever survives on the eastern bank.
+#     / ninguna revolucion del motor reemplaza a la Argentina bajo su calendario; en el pulso de la propia
+#     Argentina, no en el de la Republica
+on_monthly_pulse_country = {
+	on_actions = { gg_arg_identity_monthly }
+}
+gg_arg_identity_monthly = {
+	trigger = { c:ARG ?= this }
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_identity_monthly" # GG_TRAZA
+		gg_arg_identity_guard = yes
 	}
 }
 

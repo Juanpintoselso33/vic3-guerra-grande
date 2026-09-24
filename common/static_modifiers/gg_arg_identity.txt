@@ -1,0 +1,25 @@
+﻿# EN: AUD-ARG-1850 (23/9/2026). In headless run 20260923-231549 an ENGINE revolution broke out in Rosas's
+#     Argentina on 2/3/1850 (save: last_civil_war_date=1850.3.2.6 on the ARG country) and won within the
+#     month, with Rosas's army at the siege of Montevideo. A won revolution does not keep the country: the
+#     rebels' country takes the tag ARG as a NEW object (dynamic name dyn_c_argentina_republic, «Argentina»,
+#     ruled by the rebel interest group's leader -- Manuel Sola that time, Domingo Sarmiento in run
+#     20260923-135054, Sept 1850). Every event queued on the old object dies with it: the whole dated
+#     Argentine calendar (gg_argentina_cal.*, gg_rosas.10x, gg_urquiza.3, gg_ba.10x up to 12/10/1862) is
+#     queued on c:ARG on the first day, and none of it fired after March 1850.
+#     So while that calendar is pending, the engine's revolution clock does not advance in Argentina.
+#     Only the revolution: laws, movements, elections, coups and secessions work as before (Juan retired
+#     the law lock on 20/9/2026; this is not that lock). The Rio de la Plata's revolutions of the period
+#     -- the Pronouncement, Caseros, September 1852, Cepeda, Pavon -- are the mod's own chains.
+#     -2 rather than -1: the playset stacks +0.25 mults (sphere of influence, ADVCM), and -1 + 0.5 would
+#     only halve the clock.
+# ES: En la corrida 20260923-231549 estallo una revolucion DEL MOTOR en la Argentina de Rosas el 2/3/1850
+#     y gano en el mes, con el ejercito en el sitio. Una revolucion ganada no conserva el pais: el de los
+#     rebeldes toma el tag ARG como objeto NUEVO, y todo lo agendado sobre el viejo muere con el (el
+#     calendario argentino entero, hasta el 12/10/1862). Asi que mientras ese calendario este pendiente, el
+#     reloj de revolucion del motor no avanza en la Argentina. Solo la revolucion: leyes, movimientos,
+#     elecciones, golpes y secesiones siguen igual (no es el candado de leyes que Juan retiro el 20/9).
+#     Las revoluciones del periodo las cuenta el mod con sus propias cadenas.
+gg_arg_caudillos_grip = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	country_revolution_progress_mult = -2
+}
