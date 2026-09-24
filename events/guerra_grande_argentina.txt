@@ -3720,7 +3720,7 @@ gg_argentina.80 = {
 		custom_tooltip = gg_argentina.80.a_tt
 		gg_argentina_provinces_incorporate = yes
 		# EN/ES: 23/9 (Juan) -- and then the constitution / y despues la constitucion
-		trigger_event = { id = gg_constitution.1 days = 30 popup = yes }
+		gg_constitution_schedule = yes # EN/ES: AUD-CONST-CHOICE -- a month on, and never during a war with Brazil / al mes, y nunca en guerra con el Brasil
 		ai_chance = {
 			base = 20
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = 50 }
@@ -3756,7 +3756,7 @@ gg_argentina.80 = {
 			custom_tooltip = gg_argentina.80.b_tt
 		}
 		else = { custom_tooltip = gg_argentina.80.b_tt_until_constitution }
-		trigger_event = { id = gg_constitution.1 days = 30 popup = yes } # EN/ES: 23/9 (Juan) -- the constitution / la constitucion
+		gg_constitution_schedule = yes # EN/ES: 23/9 (Juan) -- the constitution; AUD-CONST-CHOICE: a month on, never during a war with Brazil / la constitucion, al mes, nunca en guerra con el Brasil
 		# EN/ES: the protectorates stay as they are, and the governors keep their seats
 		#     / los protectorados quedan como estan, con sus gobernadores
 		ai_chance = { base = 80 }

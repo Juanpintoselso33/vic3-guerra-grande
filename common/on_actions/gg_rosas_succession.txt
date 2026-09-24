@@ -2,7 +2,56 @@
 #     and the question between federales and unitarios opens (gg_constitution.2).
 # ES: mientras Rosas gobierne sin constitucion, el mes en que muere lo termina.
 on_monthly_pulse_country = {
-	on_actions = { gg_rosas_succession_monthly }
+	on_actions = { gg_rosas_succession_monthly gg_constitution_monthly gg_constitution_choice_migration gg_constitution_legacy_bootstrap }
+}
+
+# EN: 24/9/2026 (AUD-CONST-CHOICE) -- the monthly retry of the constitution: while it is pending (gg_constitution_schedule)
+#     and not yet shown, every month the Rosas seat asks again; gg_constitution_try holds it off while Buenos Aires is at
+#     war with Brazil. A pulse cannot be lost the way a queued event can.
+# ES: el reintento mensual de la constitucion: mientras este pendiente y no haya salido, la sede de Rosas vuelve a
+#     preguntar cada mes; gg_constitution_try la frena mientras Buenos Aires este en guerra con el Brasil.
+gg_constitution_monthly = {
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = gg_constitution_pending
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_monthly" # GG_TRAZA
+		gg_constitution_try = yes
+	}
+}
+
+# EN: 24/9/2026 (AUD-CONST-CHOICE) -- saves that already answered gg_constitution.1 with the one option 0.1.1 left
+#     Rosas (b, the sum of public power, after his victory or with two governments). The answer was forced, so a
+#     PLAYER Buenos Aires is asked again, once, with the options of today: same timing rules (after the war with
+#     Brazil). gg_constitution_offer_v2 marks the saves whose question already had them: a real choice is never
+#     reopened. Only while Rosas is alive and nothing has moved since (the modifier is still there, no succession
+#     crisis). Not guarded by gg_new_game_no_migrations: the games Juan is playing (started 23-24/9) carry that mark.
+# ES: partidas que ya contestaron con la unica opcion que 0.1.1 le dejaba a Rosas. La respuesta fue forzada: a una
+#     Buenos Aires JUGADOR se le vuelve a preguntar, una vez, con las opciones de hoy, con las mismas reglas (despues
+#     de la guerra con el Brasil). Una eleccion de verdad nunca se reabre.
+gg_constitution_choice_migration = {
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		is_player = yes
+		global_var:gg_constitution_chosen ?= 2
+		OR = {
+			has_global_variable = gg_pact_settlement_rosas
+			has_global_variable = gg_pact_settlement_stalemate
+		}
+		NOT = { has_global_variable = gg_constitution_offer_v2 }
+		NOT = { has_global_variable = gg_constitution_reoffered }
+		NOT = { has_global_variable = gg_rosas_succession_crisis }
+		has_modifier = gg_pais_sin_constitucion
+		gg_constitution_rosas_alive = yes # EN/ES: Codex -- the question is his to answer / la pregunta es suya
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_choice_migration" # GG_TRAZA
+		set_global_variable = gg_constitution_reoffered
+		remove_global_variable = gg_constitution_chosen
+		set_global_variable = gg_constitution_pending
+		gg_constitution_try = yes
+	}
 }
 
 gg_rosas_succession_monthly = {
@@ -17,6 +66,36 @@ gg_rosas_succession_monthly = {
 		remove_modifier = gg_pais_sin_constitucion
 		set_global_variable = gg_rosas_succession_crisis
 		trigger_event = { id = gg_constitution.2 days = 0 popup = yes }
+	}
+}
+
+# EN: 24/9/2026 (AUD-CONST-CHOICE, Codex) -- a save from 0.1.1 settled the Pact and queued gg_constitution.1 thirty days
+#     ahead, with no pending mark. If that copy comes during a war with Brazil its trigger drops it; so while the Pact
+#     is settled and the constitution neither answered nor pending, this puts the question on the pending path (a month
+#     of wait, then the monthly retry). In a new game it can only run between the settlement and gg_argentina.80's
+#     answer, and does what that answer does anyway. Once per save.
+# ES: una partida de 0.1.1 cerro el Pacto y encolo gg_constitution.1 a treinta dias, sin marca pendiente. Si esa copia
+#     llega en guerra con el Brasil, su trigger la tira; esto pone la pregunta en el camino pendiente. Una vez.
+gg_constitution_legacy_bootstrap = {
+	trigger = {
+		has_variable = gg_arg_rosas_seat
+		OR = {
+			has_global_variable = gg_pact_settlement_rosas
+			has_global_variable = gg_pact_settlement_stalemate
+			has_global_variable = gg_pact_settlement_urquiza
+			has_global_variable = gg_pact_settlement_constitutional
+			has_global_variable = gg_pact_settlement_mandate_collapsed
+		}
+		NOT = { has_global_variable = gg_constitution_chosen }
+		NOT = { has_global_variable = gg_constitution_pending }
+		NOT = { has_global_variable = gg_constitution_offer_v2 }
+		NOT = { has_global_variable = gg_constitution_legacy_seeded }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_legacy_bootstrap" # GG_TRAZA
+		set_global_variable = gg_constitution_legacy_seeded
+		set_global_variable = gg_constitution_pending
+		set_global_variable = { name = gg_constitution_wait days = 29 }
 	}
 }
 

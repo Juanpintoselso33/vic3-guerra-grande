@@ -1,0 +1,42 @@
+﻿# EN: 24/9/2026 (AUD-CONST-CHOICE) -- which answers gg_constitution.1 offers, by how the Pact was settled
+#     (gg_pact_settlement_*, gg_pact_resolve). The options and the trace (gg_constitution_offer_log) read the same ones.
+#     a) the Constitution of 1853: not after Rosas's victory (AUD-CONST-ROSAS) nor with two governments;
+#     b) the Pact without a constitution: not after Urquiza's victory;
+#     c) the Congress of the Pact, given by the Restorer: only after Rosas's victory (the AI never takes it);
+#     e) the constitution of the State of Buenos Aires: only with two governments (the AI never takes it).
+#     Rosas therefore always has two answers: b and c after his victory, b and e with two governments.
+# ES: que respuestas ofrece gg_constitution.1 segun como se cerro el Pacto. Rosas siempre tiene dos: b y c tras su
+#     victoria, b y e con dos gobiernos.
+gg_constitution_offers_1853 = {
+	NOT = { has_global_variable = gg_pact_settlement_rosas }
+	NOT = { has_global_variable = gg_pact_settlement_stalemate }
+}
+gg_constitution_offers_no_constitution = {
+	NOT = { has_global_variable = gg_pact_settlement_urquiza }
+}
+gg_constitution_offers_pact_congress = {
+	has_global_variable = gg_pact_settlement_rosas
+}
+gg_constitution_offers_state_constitution = {
+	has_global_variable = gg_pact_settlement_stalemate
+	NOT = { has_global_variable = gg_pact_settlement_rosas }
+}
+
+# EN: 24/9/2026 (AUD-CONST-CHOICE) -- what holds the constitution off: Buenos Aires at war with Brazil, or the
+#     Cisplatine play still on (its war goal is a humiliation of Argentina; between the play and the war the
+#     question waits too). Scope: the Rosas seat.
+# ES: lo que frena la constitucion: Buenos Aires en guerra con el Brasil, o la jugada cisplatina todavia abierta.
+gg_constitution_brazil_war = {
+	OR = {
+		AND = {
+			exists = c:BRZ
+			has_war_with = c:BRZ
+		}
+		any_diplomatic_play = { is_diplomatic_play_type = dp_gg_cisplatina }
+	}
+}
+
+# EN/ES: 24/9/2026 (Codex) -- the Restorer is alive, in whatever country / el Restaurador vive, en el pais que sea
+gg_constitution_rosas_alive = {
+	any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
+}

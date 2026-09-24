@@ -1449,7 +1449,7 @@ gg_argentina_vassals_settle = {
 		#     on, as it does after gg_argentina.80.
 		# ES: no queda provincia sobre la que preguntar: la constitucion llega igual, al mes, como despues de .80.
 		else = {
-			trigger_event = { id = gg_constitution.1 days = 30 popup = yes }
+			gg_constitution_schedule = yes # EN/ES: AUD-CONST-CHOICE -- a month on, and never during a war with Brazil / al mes, y nunca en guerra con el Brasil
 		}
 	}
 }

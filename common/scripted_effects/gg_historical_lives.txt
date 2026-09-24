@@ -79,6 +79,10 @@ gg_rosas_keeps_the_seat = {
 					has_global_variable = gg_pact_settlement_constitutional
 					has_global_variable = gg_pact_settlement_mandate_collapsed
 				}
+				# EN/ES: 24/9/2026 (AUD-CONST-CHOICE, Codex) -- nor once he has given a constitution (gg_constitution.1.c/.e): the
+				#     vote decides the government / ni despues de que dio una constitucion: el gobierno lo decide el voto
+				NOT = { global_var:gg_constitution_chosen ?= 1 }
+				NOT = { global_var:gg_constitution_chosen ?= 3 }
 				any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes }
 				NOT = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } }
 			}

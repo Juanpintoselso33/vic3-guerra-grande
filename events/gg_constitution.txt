@@ -8,6 +8,9 @@
 #        of association (art. 14). Free navigation of the rivers (art. 26) is already the mod's modifier.
 #     b) the Pact without a constitution: the Restorer's regime, the sum of public power (law of 7 March 1835),
 #        the Catholic religion of the State and the press under control. Not open if Urquiza won.
+#     c) 24/9/2026 (AUD-CONST-CHOICE) after Rosas's victory, for the player: the Restorer convenes the Pact's Congress.
+#     e) 24/9/2026 (AUD-CONST-CHOICE) with two governments, for the player: the constitution of the State of Buenos Aires.
+#     Asked through gg_constitution_schedule (a month on, never during a war with Brazil, retried monthly).
 # ES: LA CONSTITUCION. Un mes despues del arreglo del Pacto, el gobierno de Buenos Aires la escribe, o no.
 # SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), arts. 14, 15, 25, 26:
 #     https://es.wikisource.org/wiki/Constituci%C3%B3n_de_la_Naci%C3%B3n_Argentina_(1853)
@@ -42,10 +45,21 @@ gg_constitution.1 = {
 	trigger = {
 		has_variable = gg_arg_rosas_seat
 		NOT = { has_global_variable = gg_constitution_chosen }
+		# EN/ES: 24/9/2026 (AUD-CONST-CHOICE, Codex) -- last guard, also for a copy queued by 0.1.1 in an old save; the
+		#     pending mark (gg_constitution_legacy_bootstrap for old saves) asks again after the war
+		#     / ultima guarda, tambien para una copia encolada por 0.1.1; la marca pendiente vuelve a preguntar
+		NOT = { gg_constitution_brazil_war = yes }
 	}
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1|" # GG_TRAZA
+		# EN: 24/9/2026 (AUD-CONST-CHOICE) -- the question is on the table: the monthly retry stops, and the mark says this
+		#     save asks with the options of today (the old-save migration in gg_rosas_succession.txt reads it).
+		# ES: la pregunta esta sobre la mesa: se corta el reintento, y la marca dice que esta partida pregunta con las
+		#     opciones de hoy (la lee la migracion de partidas viejas).
+		if = { limit = { has_global_variable = gg_constitution_pending } remove_global_variable = gg_constitution_pending }
+		set_global_variable = gg_constitution_offer_v2
+		gg_constitution_offer_log = yes
 	}
 
 	option = {
@@ -59,11 +73,9 @@ gg_constitution.1 = {
 		# EN: 24/9/2026 (Juan, point 4) -- nor with two governments: the provinces this constitution would join are
 		#     Urquiza's Confederation now (gg_pact_stalemate_partition); a Rosas-led Buenos Aires has none to give it to.
 		# ES: tampoco con dos gobiernos: las provincias que esta constitucion uniria son ahora de la Confederacion.
-		trigger = {
-			NOT = { has_global_variable = gg_pact_settlement_rosas }
-			NOT = { has_global_variable = gg_pact_settlement_stalemate }
-		}
+		trigger = { gg_constitution_offers_1853 = yes } # EN/ES: not after Rosas's victory nor with two governments / ni tras la victoria de Rosas ni con dos gobiernos
 		set_global_variable = { name = gg_constitution_chosen value = 1 }
+		gg_constitution_clear_old_answer = yes # EN/ES: AUD-CONST-CHOICE -- an old save asked again / una partida vieja preguntada de nuevo
 		custom_tooltip = gg_constitution.1.a_tt
 		gg_constitution_federal = yes # EN/ES: 23/9 (Juan) -- a federation: one country, the autocracy ends / una federacion
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
@@ -80,14 +92,15 @@ gg_constitution.1 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.b|" # GG_TRAZA
 		name = gg_constitution.1.b
-		trigger = { NOT = { has_global_variable = gg_pact_settlement_urquiza } }
+		trigger = { gg_constitution_offers_no_constitution = yes }
 		set_global_variable = { name = gg_constitution_chosen value = 2 }
 		custom_tooltip = gg_constitution.1.b_tt
 		activate_law = law_type:law_autocracy
 		activate_law = law_type:law_state_religion
 		activate_law = law_type:law_censorship
 		# EN/ES: 23/9 (Juan) -- the question stays open under him / la cuestion sigue abierta por debajo
-		add_modifier = { name = gg_pais_sin_constitucion }
+		#     (AUD-CONST-CHOICE: an old save asked again already has it / una partida vieja preguntada de nuevo ya lo tiene)
+		if = { limit = { NOT = { has_modifier = gg_pais_sin_constitucion } } add_modifier = { name = gg_pais_sin_constitucion } }
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
 		add_loyalists = { value = small_radicals interest_group = ig:ig_devout }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
@@ -97,6 +110,68 @@ gg_constitution.1 = {
 			modifier = { trigger = { gg_pact_rosas = yes } add = 10000 } # EN/ES: the Pact's game rule / la regla del Pacto
 			modifier = { trigger = { OR = { gg_pact_historical = yes gg_pact_negotiated = yes } } factor = 0 } # EN/ES: 23/9 (AUD-RULES-AI) -- another setting of the rule: never for the AI / otra opcion de la regla: nunca para la IA
 		}
+	}
+	# EN: 24/9/2026 (Juan, playing Rosas on 0.1.1: "I could not choose"; AUD-CONST-CHOICE) -- after Rosas's victory the
+	#     event had one option. AUD-CONST-ROSAS (23/9) closed the Constitution of 1853 to him because the AI took it a
+	#     third of the time; that stays for the AI (weight 0: an AI Rosas keeps the sum of public power, as before), and
+	#     the player gets the Pact's own answer: the Restorer himself convenes the General Federative Congress of art. 16
+	#     and gives a federal constitution -- the same federation the federales write after his death
+	#     (gg_constitution.4.d_federal, gg_constitution_federal). Not the Bases of Alberdi: that text stays with option a.
+	# ES: tras la victoria de Rosas el evento tenia una sola opcion. La 1853 sigue cerrada para la IA (peso 0), y el
+	#     jugador tiene la respuesta del propio Pacto: el Restaurador convoca el Congreso General Federativo del art. 16
+	#     y da una constitucion federal, la misma federacion que escriben los federales tras su muerte.
+	# SOURCE / FUENTE: Pacto Federal, 4 Jan 1831, art. 16.5 (the flavour quote); ley de la Sala, 7 March 1835 (above).
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.c|" # GG_TRAZA
+		name = gg_constitution.1.c
+		trigger = { gg_constitution_offers_pact_congress = yes }
+		set_global_variable = { name = gg_constitution_chosen value = 1 } # EN/ES: a constitution: Rosas's era ends / una constitucion: termina la era de Rosas
+		gg_constitution_clear_old_answer = yes
+		custom_tooltip = gg_constitution.1.c_tt
+		gg_constitution_federal = yes
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = small_radicals interest_group = ig:ig_devout }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_landowners }
+		ai_chance = { base = 0 } # EN/ES: AUD-CONST-ROSAS -- never for the AI / nunca para la IA
+	}
+	# EN: 24/9/2026 (AUD-CONST-CHOICE) -- with two governments Buenos Aires stands alone, and the player can give it a
+	#     constitution of its own instead of the sum of public power: the State's, whose art. 1 kept "the free exercise of
+	#     its internal and external sovereignty, while it does not expressly delegate it to a federal government". The
+	#     laws are the ones gg_ba.4 already gives that constitution (gg_constitution_unitaria), without joining the
+	#     provinces: they are the Confederation's now. The AI keeps option b (weight 0 here).
+	# ES: con dos gobiernos Buenos Aires queda sola, y el jugador puede darle constitucion propia en vez de la suma del
+	#     poder publico: la del Estado, cuyo art. 1 guardaba "el libre ejercicio de su soberania interior y exterior".
+	#     Las leyes son las que gg_ba.4 ya le da a esa constitucion, sin sumar provincias. La IA sigue con la b.
+	# SOURCE / FUENTE: Constitucion del Estado de Buenos Aires, 11-12 April 1854, art. 1 (gg_ba.4.d;
+	#     docs/guerra-grande-argentina/buenos-aires-separada-plan.md, source [C]).
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.e|" # GG_TRAZA
+		name = gg_constitution.1.e
+		trigger = { gg_constitution_offers_state_constitution = yes }
+		set_global_variable = { name = gg_constitution_chosen value = 3 } # EN/ES: 3 = the State's constitution / la del Estado
+		gg_constitution_clear_old_answer = yes
+		custom_tooltip = gg_constitution.1.e_tt
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_census_voting
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_slavery_banned
+		activate_law = law_type:law_right_of_assembly
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
+		ai_chance = { base = 0 } # EN/ES: the AI keeps the sum of public power / la IA sigue con la suma del poder publico
+	}
+}
+
+# EN: 24/9/2026 (AUD-CONST-CHOICE) -- the relay a month after the settlement (gg_constitution_schedule): it asks only if
+#     Buenos Aires is not at war with Brazil; otherwise the monthly retry (gg_constitution_monthly) asks when that war ends.
+# ES: el relevo al mes del arreglo: pregunta solo si Buenos Aires no esta en guerra con el Brasil; si no, el reintento
+#     mensual pregunta cuando esa guerra termina.
+gg_constitution.10 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.10|" # GG_TRAZA
+		gg_constitution_try = yes
 	}
 }
 

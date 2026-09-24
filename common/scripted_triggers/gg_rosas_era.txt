@@ -16,6 +16,9 @@ gg_x_arg_rosas_era_over = {
 		# ES: una constitucion tambien termina la era: la de 1853 elegida tras el Pacto (2 = sin constitucion, sigue
 		#     el regimen de Rosas), o la que escribe el ganador tras la muerte de Rosas.
 		global_var:gg_constitution_chosen ?= 1
+		# EN/ES: 24/9/2026 (AUD-CONST-CHOICE) -- 3, the constitution of the State of Buenos Aires (gg_constitution.1.e),
+		#     ends it too: a written law with a vote / 3, la constitucion del Estado, tambien: una ley escrita con voto
+		global_var:gg_constitution_chosen ?= 3
 		has_global_variable = gg_constitution_outcome
 		# EN: 23/9/2026 (Juan) -- the reunion of Buenos Aires after Pavon also ends it: gg_ba_done is set when the
 		#     State of Buenos Aires and the Confederation become one country again (guerra_grande, gg_ba.20).

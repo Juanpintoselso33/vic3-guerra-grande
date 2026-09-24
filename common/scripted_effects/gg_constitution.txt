@@ -83,3 +83,98 @@ gg_constitution_unitaria = {
 	activate_law = law_type:law_slavery_banned
 	activate_law = law_type:law_right_of_assembly
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, playing Rosas on 0.1.1; AUD-CONST-CHOICE) -- THE CONSTITUTION WAITS FOR THE WAR WITH BRAZIL.
+#     In his game the Pact ended on 21/12/1851 and gg_constitution.1 came on 21/1/1852 in the middle of the second
+#     Cisplatine war (gg_cis_war, dp_gg_cisplatina, opened 19/6/1851). Juan: the constitution comes after that war.
+#     WHICH WAR (decided by Claude): a war or diplomatic play with Brazil -- the scripted Cisplatine one or any other
+#     between the two -- not every foreign war: the Guerra Grande itself, an AI border war with Chile or Bolivia or a
+#     Pact war with a province would hold it off for years, and the question Juan named is the war with the Empire.
+#     HOW IT CANNOT BE LOST: the settlement no longer queues gg_constitution.1 thirty days ahead. It sets the global
+#     gg_constitution_pending (globals survive a revolution that replaces Argentina) and a thirty-day wait; a hidden
+#     relay (gg_constitution.10) asks after the month, and the monthly pulse of the Rosas seat
+#     (gg_constitution_monthly, gg_rosas_succession.txt) asks again every month until gg_constitution.1 has been shown
+#     (it clears the mark in its immediate). gg_constitution_asking (20 days) stops the relay and the pulse from both
+#     asking in the same month; if the event was lost it expires and the next pulse asks.
+# ES: LA CONSTITUCION ESPERA A LA GUERRA CON EL BRASIL. En su partida el Pacto termino el 21/12/1851 y gg_constitution.1
+#     llego el 21/1/1852 en plena segunda guerra cisplatina. Juan: la constitucion viene despues de esa guerra.
+#     QUE GUERRA (decidido por Claude): guerra o jugada diplomatica con el Brasil, la cisplatina del mod u otra, no toda
+#     guerra exterior: la Guerra Grande, una guerra de frontera de la IA o una guerra del Pacto la frenarian por anios.
+#     COMO NO SE PIERDE: el arreglo ya no agenda gg_constitution.1 a treinta dias. Prende la global
+#     gg_constitution_pending (las globales sobreviven a una revolucion que reemplaza a la Argentina) y una espera de
+#     treinta dias; un relevo oculto pregunta al mes, y el pulso mensual de la sede de Rosas vuelve a preguntar cada mes
+#     hasta que el evento salio (lo borra en su immediate).
+# -------------------------------------------------------------------------------------------------
+gg_constitution_schedule = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_schedule|" # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_constitution_chosen } }
+		set_global_variable = gg_constitution_pending
+		set_global_variable = { name = gg_constitution_wait days = 29 } # EN/ES: expires the day before the relay / vence el dia antes del relevo
+		trigger_event = { id = gg_constitution.10 days = 30 }
+	}
+}
+
+# EN/ES: scope: the Rosas seat (Argentina). Asks now if nothing holds it off / pregunta ahora si nada lo frena
+gg_constitution_try = {
+	if = {
+		limit = {
+			has_variable = gg_arg_rosas_seat
+			has_global_variable = gg_constitution_pending
+			NOT = { has_global_variable = gg_constitution_chosen }
+			NOT = { has_global_variable = gg_constitution_wait }
+			NOT = { has_global_variable = gg_constitution_asking }
+			NOT = { has_global_variable = gg_rosas_succession_crisis } # EN/ES: his death already reopened the question / la muerte ya reabrio la cuestion
+		}
+		# EN: 24/9/2026 (Codex) -- Rosas died while the question waited, after his victory or with two governments: nobody
+		#     is left to give it or to refuse it. It becomes the question of his death: the country without a constitution
+		#     (answer 2) and its modifier, and gg_rosas_succession_monthly opens gg_constitution.2 on its next pulse.
+		# ES: Rosas murio mientras la pregunta esperaba: no queda quien la de ni quien la niegue. Pasa a ser la cuestion de
+		#     su muerte: el pais sin constitucion, y el pulso de la sucesion abre gg_constitution.2.
+		if = {
+			limit = {
+				OR = {
+					has_global_variable = gg_pact_settlement_rosas
+					has_global_variable = gg_pact_settlement_stalemate
+				}
+				gg_constitution_rosas_alive = no
+			}
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_try| ROSAS_DEAD=yes" # GG_TRAZA
+			remove_global_variable = gg_constitution_pending
+			set_global_variable = { name = gg_constitution_chosen value = 2 }
+			if = { limit = { NOT = { has_modifier = gg_pais_sin_constitucion } } add_modifier = { name = gg_pais_sin_constitucion } }
+		}
+		else_if = {
+			limit = { gg_constitution_brazil_war = yes }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_try| WAIT=brazil_war" # GG_TRAZA
+		}
+		else = {
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_try| ASK=yes" # GG_TRAZA
+			set_global_variable = { name = gg_constitution_asking days = 20 }
+			trigger_event = { id = gg_constitution.1 days = 0 popup = yes }
+		}
+	}
+}
+
+# EN: AUD-CONST-CHOICE -- what the event offers, one trace line per option shown (the options read the same triggers),
+#     and whether Buenos Aires is at war with Brazil as it asks (read with the engine's own has_war_with, not with the
+#     trigger that holds it off). The night sweep reads both (tools/barrido_nocturno.yaml).
+# ES: lo que ofrece el evento, una linea por opcion visible, y si Buenos Aires esta en guerra con el Brasil al preguntar.
+gg_constitution_offer_log = {
+	if = { limit = { gg_constitution_offers_1853 = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=a" } # GG_TRAZA
+	if = { limit = { gg_constitution_offers_no_constitution = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=b" } # GG_TRAZA
+	if = { limit = { gg_constitution_offers_pact_congress = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=c" } # GG_TRAZA
+	if = { limit = { gg_constitution_offers_state_constitution = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=e" } # GG_TRAZA
+	if = {
+		limit = { exists = c:BRZ has_war_with = c:BRZ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| BRAZIL_WAR=yes" # GG_TRAZA
+	}
+	else = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| BRAZIL_WAR=no" } # GG_TRAZA
+}
+
+# EN/ES: an old save asked again (gg_constitution_monthly migration): the answer it was forced into is undone before
+#     the new one / una partida vieja preguntada de nuevo: se deshace la respuesta forzada antes de la nueva
+gg_constitution_clear_old_answer = {
+	if = { limit = { has_modifier = gg_pais_sin_constitucion } remove_modifier = gg_pais_sin_constitucion }
+}
