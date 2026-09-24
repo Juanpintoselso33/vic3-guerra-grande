@@ -1,16 +1,28 @@
 {
   "name": "Guerra Grande",
-  "id": "",
-  "version": "0.3.0",
+  "id": "com.github.Juanpintoselso33.guerra-grande",
+  "version": "0.4.0-wip",
   "supported_game_version": "1.13.*",
-  "short_description": "Uruguay 1836-1852: la Guerra Grande. NO usar replace_paths sobre map_data/state_regions: el mod trae un solo archivo y reemplazar la carpeta entera borra los 17 restantes de vanilla, mares incluidos.",
+  "short_description": "[WIP] Uruguay's Guerra Grande (1836-1852): the Defensa of Montevideo, Oribe's Cerrito, Rosas and the Plata. Journals, the siege, the river, the Federal Pact. / [En desarrollo] La Guerra Grande del Uruguay: la Defensa, el Cerrito, Rosas y el Plata.",
   "tags": [
     "Historical",
     "Events",
     "Journal Entries",
-    "Map"
+    "Map",
+    "Warfare",
+    "Diplomacy",
+    "Flags",
+    "1.13"
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "rel_type": "dependency",
+      "id": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "display_name": "Community Mod Framework",
+      "resource_type": "mod",
+      "version": "1.*"
+    }
+  ],
   "game_custom_data": {
     "multiplayer_synchronized": true
   }
