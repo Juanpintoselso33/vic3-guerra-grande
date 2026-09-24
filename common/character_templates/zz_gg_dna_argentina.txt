@@ -1,0 +1,121 @@
+﻿# EN: The five Argentine templates of «la Argentina» that the Guerra Grande dresses with a face (22/9/2026):
+#     their own definition, verbatim, plus the dna line (guerra_grande/common/dna_data/gg_dna.txt).
+# ES: Las cinco plantillas argentinas de «la Argentina» a las que la Guerra Grande les pone cara: su
+#     definicion tal cual, mas la linea del ADN.
+
+REPLACE:ARG_Justo_Jose_de_Urquiza = {
+	dna = dna_gg_justo_jose_de_urquiza
+	# Justo José de Urquiza, future President of the Argentine Confederation (1854-1860), and governor of... several provinces, from 1842 to 1870
+	first_name = Justo_JosE_
+	last_name = de_Urquiza
+	historical = yes
+	culture = primary_culture
+	birth_date = 1801.10.18
+	# EN/ES: not ig_leader -- Rosas, the ruler, leads the landowners / Rosas, el gobernante, lidera a los terratenientes
+	# EN/ES: 22/9/2026, decided with Juan (docs/personajes-propuesta.md) / decidido con Juan -- the greatest estanciero of Entre Rios
+	interest_group = ig_landowners
+	is_general = yes
+	ideology = ideology_radical
+	role = character_role_magnate
+	holding_type = building_manor_house
+	home_region = STATE_SANTA_FE
+	traits = {
+		cruel
+		ambitious
+		innovative
+	}
+	trait_generation = { }
+}
+REPLACE:ARG_Gregorio_Araoz_de_Lamadrid = { # Unitary leader in opposition to the federal government, except for when he was working with the federal government.
+	dna = dna_gg_gregorio_araoz_de_lamadrid
+	is_general = yes
+	first_name = Gregorio
+	last_name = de_Lamadrid
+	historical = yes
+	culture = primary_culture
+	religion = rel:catholic
+	birth_date = 1795.11.28
+	commander_rank = commander_rank_2
+	interest_group = ig_armed_forces
+	home_region = STATE_TUCUMAN
+	traits = {
+		reckless # If I could make this guy double-reckless, I would
+		brave
+		celebrity_commander
+	}
+	trait_generation = { }
+}
+REPLACE:ARG_Alejandro_Heredia = {
+	dna = dna_gg_alejandro_heredia
+	# Alejandro Heredia, governor of Tucuman from 1831 to 1838
+	first_name = Alejandro
+	last_name = Heredia
+	historical = yes
+	culture = primary_culture
+	birth_date = 1788.11.4 # Only his birth year is actually known; the birth date is here is an arbitrary choice.
+	ig_leader = yes
+	is_general = yes # El Protector del Norte
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	home_region = STATE_TUCUMAN
+	traits = {
+		meticulous
+		experienced_political_operator
+		ambitious
+	}
+	trait_generation = { }
+}
+REPLACE:ARG_Angel_Pacheco = {
+	dna = dna_gg_angel_pacheco
+	# Ángel Pacheco, top general of Rosas
+	first_name = Angel
+	last_name = Pacheco
+	historical = yes
+	birth_date = 1793.4.13
+	ig_leader = yes
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	home_region = STATE_BUENOS_AIRES
+	commander_rank = commander_rank_3
+	is_general = yes
+	traits = {
+		basic_political_operator
+		persistent
+	}
+	trait_generation = { }
+}
+REPLACE:ARG_pedro_ferre = { #Pedro Juan Ferré
+	dna = dna_gg_pedro_ferre
+	first_name = Pedro
+	last_name = Ferre
+	historical = yes
+	female = no
+	role = character_role_politician
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+	home_region = STATE_CORRIENTES
+	birth_date = 1788.6.6
+	traits = {
+		innovative
+		basic_political_operator
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			OR = {
+				c:ARG ?= THIS
+				c:PLT ?= THIS
+			}
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+        }
+        earliest_usage_date = 1839.1.1
+        latest_usage_date = 1867.1.1
+        #guaranteed to spawn if possible
+    }
+}

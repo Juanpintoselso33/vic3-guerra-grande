@@ -1,0 +1,26 @@
+﻿# EN: Rosas's era is over once the war of the Federal Pact has an outcome that takes the government
+#     from him: Urquiza's victory, the constitutional settlement, or the collapse of the mandate. A
+#     negotiated stalemate or Rosas's own victory keeps him in power, so the vote stays shut.
+# ES: la era de Rosas termina cuando la guerra del Pacto tiene un desenlace que le quita el gobierno:
+#     la victoria de Urquiza, el arreglo constitucional o el derrumbe del mandato. Un empate negociado o
+#     la victoria de Rosas lo dejan en el poder, y el voto sigue cerrado.
+gg_x_arg_rosas_era_over = {
+	OR = {
+		has_global_variable = gg_pact_settlement_urquiza
+		has_global_variable = gg_pact_settlement_constitutional
+		has_global_variable = gg_pact_settlement_mandate_collapsed
+		# EN: 23/9/2026 (audit X5) -- a constitution also ends the era: the Constitution of 1853 chosen after the
+		#     Pact (gg_constitution.1.a sets 1; 2 is "the Pact without a constitution", which keeps Rosas's regime),
+		#     or the constitution written after Rosas's death by the winner of federales against unitarios
+		#     (gg_constitution.3, outcome 1 federal or 2 unitary).
+		# ES: una constitucion tambien termina la era: la de 1853 elegida tras el Pacto (2 = sin constitucion, sigue
+		#     el regimen de Rosas), o la que escribe el ganador tras la muerte de Rosas.
+		global_var:gg_constitution_chosen ?= 1
+		has_global_variable = gg_constitution_outcome
+		# EN: 23/9/2026 (Juan) -- the reunion of Buenos Aires after Pavon also ends it: gg_ba_done is set when the
+		#     State of Buenos Aires and the Confederation become one country again (guerra_grande, gg_ba.20).
+		# ES: la reunion de Buenos Aires despues de Pavon tambien la termina: gg_ba_done se prende cuando el Estado
+		#     de Buenos Aires y la Confederacion vuelven a ser un pais (gg_ba.20).
+		has_global_variable = gg_ba_done
+	}
+}

@@ -1,4 +1,20 @@
 ﻿# -------------------------------------------------------------------------------------------------
+# EN: THE CHILEAN HQ. Found 20 September 2026. Vanilla puts Chile's army and navy HQ in
+#     sr:region_la_plata, because in vanilla's map that region contains STATE_SANTIAGO and STATE_LOS_RIOS.
+#     «La Argentina» redraws the strategic regions and moves the Chilean states into a new
+#     sr:region_south_andes. This file overrides theirs by path (it has to: vanilla raises the Republic's
+#     army in STATE_URUGUAY, which this mod replaces), so it carries their two HQ lines. A formation whose HQ
+#     region holds no state of its country is never created: Chile was starting the game with no army and no
+#     navy, and a Chile with no army lets the Peru-Bolivian Confederation live into the 1840s and turn up in
+#     the Plata (Juan, 20/9/2026). Until 24/9/2026 this version lived in the compatch; with la Argentina a
+#     hard requirement it is the mod's own.
+# ES: EL HQ CHILENO. Vanilla pone el HQ de Chile en sr:region_la_plata; «la Argentina» se lleva los estados
+#     chilenos a sr:region_south_andes. Este archivo pisa el de ellos por ruta, asi que lleva sus dos lineas de
+#     HQ: sin ellas Chile arrancaba sin ejercito ni armada. Hasta el 24/9/2026 esta version vivia en el
+#     compatch; con la Argentina como requisito es la del mod.
+# -------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------
 # EN: Codex review 2026-09-19 -- this was a file of its own that ADDED the Republic's army, on the
 #     assumption that vanilla's entry would just log a line. It does not: history files merge, so
 #     vanilla still ran its own create_military_formation on a state that no longer exists, and the
@@ -110,7 +126,7 @@ MILITARY_FORMATIONS = {
 	c:CHL ?= {
 		create_military_formation = {
 			type = army
-			hq_region = sr:region_la_plata
+			hq_region = sr:region_south_andes
 			name = Ejrcito_de_Chile
 
 			combat_unit = {
@@ -140,7 +156,7 @@ MILITARY_FORMATIONS = {
 
 		create_military_formation = {
 			type = fleet
-			hq_region = sr:region_la_plata
+			hq_region = sr:region_south_andes
 			name = Armada_de_Chile
 
 			ship = { # Nothing the size of a frigate

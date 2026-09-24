@@ -9,6 +9,8 @@
 #     la expansion del Paraguay y su guerra dejarian de poder ganarse en silencio en cuanto la Banda
 #     Oriental sea parte del objetivo. Reemplazados por objeto, con los cinco estados orientales en
 #     su lugar: la misma exigencia, escrita en los estados que existen.
+# EN/ES: 24/9/2026 -- je_expanding_paraguay also carries la Argentina's Misiones and Entre Rios alternatives
+#     (compatch audit X4, merged here with the compatch) / tambien las alternativas de la Argentina.
 # -------------------------------------------------------------------------------------------------
 
 REPLACE:je_expanding_paraguay = {
@@ -30,7 +32,12 @@ REPLACE:je_expanding_paraguay = {
         OR = {
             AND = { country_or_subject_owns_entire_state_region = STATE_MONTEVIDEO country_or_subject_owns_entire_state_region = STATE_SAN_JOSE country_or_subject_owns_entire_state_region = STATE_MALDONADO country_or_subject_owns_entire_state_region = STATE_PAYSANDU country_or_subject_owns_entire_state_region = STATE_BANDA_ORIENTAL }
             country_or_subject_owns_entire_state_region = STATE_SANTA_FE
+            # EN/ES: la Argentina's states (03_paraguay.txt). Its Corrientes alternative stays out, as in GG: the
+            #     journal already demands Corrientes above, which made the whole OR always true
+            #     / la alternativa de Corrientes queda afuera, como en GG: ya se exige arriba y volvia el OR siempre cierto
+            country_or_subject_owns_entire_state_region = STATE_MISIONES
             country_or_subject_owns_entire_state_region = STATE_PARANA
+            country_or_subject_owns_entire_state_region = STATE_ENTRE_RIOS
             country_or_subject_owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
         }
     }

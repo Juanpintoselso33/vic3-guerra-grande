@@ -1,46 +1,46 @@
 ﻿# -------------------------------------------------------------------------------------------------
-# EN: The colonial region of la Plata (standalone, Codex review 19 September 2026). This file used to
-#     carry la Argentina's list, with nineteen states vanilla does not have (Formosa, Neuquen,
-#     Chubut, Tarija...) and without vanilla ones like Patagonia, Araucania or Potosi: pure
-#     contamination from the dependency the mod just dropped, and a database error on load.
-#     Rebuilt from vanilla's list, with STATE_URUGUAY replaced by the five oriental states -- the
-#     only thing this mod has any business changing here.
-# ES: la region colonial del Plata. Este archivo traia la lista de la Argentina, con diecinueve
-#     estados que vanilla no tiene y sin otros que si tiene: contaminacion pura de la dependencia que
-#     el mod acaba de soltar, y un error de base de datos al cargar. Reconstruido desde la lista de
-#     vanilla, con STATE_URUGUAY reemplazado por los cinco estados orientales, que es lo unico que
-#     este mod tiene por que tocar aca.
+# EN: The colonial region of la Plata on la Argentina's map (a hard requirement since 24/9/2026). la Argentina
+#     replaces the South American map (STATE_PATAGONIA and STATE_ARAUCANIA do not exist there), so this is
+#     la Argentina's own list (workshop 2982907360, duplicates removed) plus the two oriental states this mod
+#     adds (San Jose, Maldonado). Merged from the compatch (zzz_gg_x_arg_colonial_la_plata.txt) on 24/9/2026.
+# ES: la region colonial del Plata sobre el mapa de la Argentina: su lista (sin duplicados) mas San Jose y
+#     Maldonado. Venia del compatch; la lista de vanilla del mod solo se fue.
 # -------------------------------------------------------------------------------------------------
 
 REPLACE:geographic_region_colonial_la_plata = {
 	short_key = "colonial_la_plata"
 
 	state_regions = {
-		# La Plata Region
 		STATE_BUENOS_AIRES
-		STATE_SANTA_FE
-		STATE_CORRIENTES
 		STATE_CHACO
-		STATE_ALTO_PARAGUAY
+		STATE_FORMOSA_ARG
+		STATE_CHUBUT
+		STATE_SANTA_CRUZ_ARG
+		STATE_TIERRA_DEL_FUEGO
+		STATE_SANTA_FE
 		STATE_BAJO_PARAGUAY
+		STATE_ALTO_PARAGUAY
+		STATE_RIO_NEGRO
+		STATE_CORDOBA
+		STATE_NEUQUEN
+		STATE_LA_RIOJA
+		STATE_MENDOZA
+		STATE_SANTIAGO_DEL_ESTERO
+		STATE_CATAMARCA
+		STATE_ENTRE_RIOS
+		STATE_MISIONES
+		STATE_SAN_JUAN
+		STATE_SALTA
+		STATE_SAN_LUIS
 		STATE_LA_PAMPA
 		STATE_TUCUMAN
-		STATE_RIO_NEGRO
-		STATE_PATAGONIA
-		STATE_ARAUCANIA
-		STATE_SOUTH_ATLANTIC_ISLANDS
-		# Andes Region
-		STATE_SANTA_CRUZ
 		STATE_JUJUY
-		STATE_ANTOFAGASTA
-		STATE_POTOSI
-		STATE_LA_PAZ
-		# Brazil Region
+		STATE_CORRIENTES
 		STATE_MONTEVIDEO
 		STATE_SAN_JOSE
 		STATE_MALDONADO
-		STATE_PAYSANDU
 		STATE_BANDA_ORIENTAL
+		STATE_PAYSANDU
 		STATE_RIO_GRANDE_DO_SUL
 	}
 }

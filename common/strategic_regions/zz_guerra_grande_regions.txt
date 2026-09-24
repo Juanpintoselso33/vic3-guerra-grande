@@ -1,24 +1,15 @@
 ﻿# -------------------------------------------------------------------------------------------------
-# EN: The oriental states belong to a strategic region (standalone, 19 September 2026). Vanilla puts
-#     STATE_URUGUAY inside region_brazil; this mod replaces that state with five, so the region has
-#     to learn their names or the five belong nowhere -- and a state outside every strategic region
-#     has no HQ, which is what the naval HQ error of this same day was about.
-#     This is what REPLACE: is for: the region keeps existing, only its contents change, so the file
-#     does not shadow vanilla's and any other mod's regions survive. The list is vanilla's, minus
-#     STATE_URUGUAY, plus the five.
-# ES: los estados orientales tienen que pertenecer a una region estrategica. Vanilla mete
-#     STATE_URUGUAY dentro de region_brazil; este mod reemplaza ese estado por cinco, asi que la
-#     region tiene que aprender sus nombres o los cinco no pertenecen a ninguna -- y un estado fuera
-#     de toda region estrategica no tiene HQ, que es de lo que se trataba el error del HQ naval de
-#     este mismo dia.
-#     Para esto sirve REPLACE:: la region sigue existiendo y solo cambia su contenido, asi que el
-#     archivo no pisa el de vanilla y las regiones de cualquier otro mod sobreviven. La lista es la
-#     de vanilla, menos STATE_URUGUAY, mas los cinco.
+# EN: region_brazil has to know the five oriental states: la Argentina's three (Montevideo, Paysandu, Banda
+#     Oriental) and the two this mod adds (San Jose, Maldonado). A state outside every strategic region has no
+#     HQ. REPLACE: keeps the region and changes only its list. Merged from the compatch
+#     (zzz_compatch_regions.txt) on 24/9/2026; same states as the old vanilla-map version.
+# ES: region_brazil tiene que conocer los cinco estados orientales; un estado fuera de toda region
+#     estrategica no tiene HQ. Venia del compatch; los mismos estados que la version anterior.
 # -------------------------------------------------------------------------------------------------
 
 REPLACE:region_brazil = {
 	graphical_culture = "latin"
 	capital_province = x7600E6
 	map_color = { 0.222 1 0.362 }
-	states = { STATE_PARANA STATE_SAO_PAULO STATE_RIO_DE_JANEIRO STATE_RIO_GRANDE_DO_SUL STATE_MATO_GROSSO STATE_MINAS_GERAIS STATE_BAHIA STATE_PERNAMBUCO STATE_RIO_GRANDE_DO_NORTE STATE_MARANHAO STATE_GOIAS STATE_CEARA STATE_PIAUI STATE_PARAIBA STATE_SANTA_CATARINA STATE_PARA STATE_AMAZONAS STATE_MONTEVIDEO STATE_SAN_JOSE STATE_MALDONADO STATE_PAYSANDU STATE_BANDA_ORIENTAL }
+	states = { STATE_PARANA STATE_SAO_PAULO STATE_SANTA_CATARINA STATE_RIO_DE_JANEIRO STATE_RIO_GRANDE_DO_SUL STATE_MATO_GROSSO STATE_MINAS_GERAIS STATE_BAHIA STATE_PERNAMBUCO STATE_RIO_GRANDE_DO_NORTE STATE_MARANHAO STATE_GOIAS STATE_CEARA STATE_PIAUI STATE_PARAIBA STATE_PARA STATE_AMAZONAS STATE_MONTEVIDEO STATE_PAYSANDU STATE_BANDA_ORIENTAL STATE_SAN_JOSE STATE_MALDONADO }
 }

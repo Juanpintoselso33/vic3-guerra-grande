@@ -4,16 +4,20 @@ Victoria 3 (1.13). La Guerra Grande oriental: el nacimiento de las divisas blanc
 Carpintería, la partición de la República en el gobierno de la **Defensa** (Montevideo) y el del
 **Cerrito** (la campaña), los nueve años de sitio y la paz de 1851.
 
-**La guerra oriental se sostiene sola.** Trae sus cinco estados orientales, su historia y todo lo que
-necesita del juego base; lo que cambia de vanilla lo reemplaza por objeto con `REPLACE:` en vez de
-pisar archivos enteros, así que convive con otros mods.
+**Requisitos: Community Mod Framework y «la Argentina»** (Workshop 2982907360). Desde el 24/9/2026
+la Argentina es requisito y el compatch «Guerra Grande x la Argentina» quedó integrado en este mod:
+el mapa de la Argentina con los cinco estados orientales, su historia sudamericana, los localizadores,
+La Plata y la Gran Argentina, el HQ chileno, el candado del voto de Rosas y los objetivos de guerra de
+CMF viven acá. **Ese compatch ya no se carga**: si lo tenías en el playset, sacalo.
 
 ## Cómo cargarlo
 
-| Qué querés jugar | Cómo | Con qué país empezás |
-|---|---|---|
-| Sólo la guerra oriental | Guerra Grande. Nada más | **Uruguay** |
-| **La guerra entera, las dos orillas** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, en ese orden | **Uruguay** para la orilla oriental, **Argentina** para la otra |
+**Community Mod Framework → la Argentina → Guerra Grande**, en ese orden.
+
+| Con qué país | Qué se juega |
+|---|---|
+| **Uruguay** | la orilla oriental: Carpintería, la partición, el sitio, la paz de 1851 |
+| **Argentina** | la otra orilla: el Pacto Federal, Corrientes, la Coalición del Norte, Urquiza, Caseros |
 
 **El lado argentino se juega desde Argentina, y conviene decirlo porque no se deduce.** Todos sus
 eventos —la separación de Corrientes, el pronunciamiento de Tucumán, las batallas del interior, el
@@ -25,30 +29,13 @@ Y es desde Argentina de donde se puede **cambiar de asiento**: en el día de su 
 de los tres países ofrece pasarse a él —Corrientes el 6/3/1839, la Coalición el 7/4/1840, Entre Ríos
 el 1/5/1851—. Es una sola oportunidad por país y no se repite.
 
-### El lado argentino necesita «la Argentina», y no es opcional
+Por qué la Argentina es requisito: el lado argentino necesita la Argentina partida en sus provincias
+históricas, y vanilla no la parte. De los ocho estados que usa, vanilla tiene sólo `STATE_CORRIENTES`,
+`STATE_TUCUMAN` y `STATE_JUJUY`; Entre Ríos, Córdoba, Salta, Misiones, La Rioja y Catamarca los agrega
+«la Argentina».
 
-La orilla oriental —Carpintería, la partición, el sitio, la paz de 1851— **se juega sola**, como
-siempre. El **lado argentino** no: Corrientes, la Coalición del Norte y el Pronunciamiento de Entre
-Ríos necesitan que la Argentina esté partida en sus provincias históricas, y **vanilla no la parte**.
-
-De los ocho estados que ese lado usa, en vanilla existen sólo tres: `STATE_CORRIENTES`,
-`STATE_TUCUMAN` y `STATE_JUJUY`. Entre Ríos, Córdoba, Salta, Misiones, La Rioja y Catamarca **son
-provincias que agrega «la Argentina»**. *(Hasta el 20/9/2026 acá decía «sólo dos»: Jujuy sí está en
-vanilla. Lo agarró una revisión que chequeó el dato contra los archivos del mapa.)*
-
-Por eso todo lo que toca ese lado —los trece eventos fechados, los tres gobernadores federales y el
-journal de la delegación— pide un estado que sólo existe con ella cargada. **Sin «la Argentina», ese
-lado sencillamente no ocurre**: no se crea ningún país, no se abre ningún journal argentino, no se
-rompe nada, y la guerra oriental se juega exactamente igual que antes. Con ella y el compatch, se
-juegan las dos orillas.
-
-Una salvedad honesta: el **candado provisorio de Rosas** (`gg_rosas_provisional_lock`) sí se aplica
-siempre, con o sin «la Argentina», y es a propósito. No es una mecánica del lado argentino: es lo que
-mantiene a Rosas gobernando Buenos Aires durante los dieciséis años en que es el padrino del Cerrito,
-que es algo que el lado oriental necesita.
-
-⚠️ **Partidas viejas del submod**: si venías jugando con la Argentina, seguí con ella y agregá el
-compatch. Desactivarla saca contenido que ya es parte de tu guardado.
+⚠️ **Partidas viejas**: todo el contenido del compatch está ahora en este mod; no cargues los dos
+juntos.
 
 *English below the Spanish text — same content.*
 
@@ -98,19 +85,24 @@ Los textos salen de fuentes de época y académicas, con las citas y los enlaces
 ## Instalación
 
 Copiar la carpeta a `Documents/Paradox Interactive/Victoria 3/mod/` con su `.mod` apuntando
-ahí, y cargarla **después** de la Argentina.
+ahí, y cargarla **después** de Community Mod Framework y de la Argentina.
 
 ---
 
 ## How to load it (English)
 
-| What you want | How |
-|---|---|
-| The Guerra Grande alone | Guerra Grande. Nothing else |
-| With **la Argentina** | la Argentina → Guerra Grande → **Guerra Grande x la Argentina (compatch)**, in that order. Without the compatch the two mods overwrite each other's map and Uruguay starts with twice its population |
+**Requirements: Community Mod Framework and «la Argentina»** (Workshop 2982907360). Load order:
+**Community Mod Framework → la Argentina → Guerra Grande**. Since 24/9/2026 the old compatch
+«Guerra Grande x la Argentina» is part of this mod (la Argentina's map with the five oriental states,
+its South American history, the map locators, La Plata and Greater Argentina, the Chilean HQ, Rosas's
+vote lock and CMF's war goals). **Do not load that compatch any more**; remove it from your playset if you had it.
 
-⚠️ **Old saves from the submod**: if you were playing with la Argentina, keep it and add the
-compatch. Turning it off removes content that is already part of your save.
+| Play as | What you get |
+|---|---|
+| **Uruguay** | the oriental shore: Carpintería, the partition, the siege, the peace of 1851 |
+| **Argentina** | the other shore: the Federal Pact, Corrientes, the Northern Coalition, Urquiza, Caseros |
+
+⚠️ **Old saves**: all of the compatch's content is in this mod now; do not load both.
 
 ## What it does (English)
 

@@ -30,6 +30,10 @@
 #     humillacion con guion --, pero el return_state de vanilla si (has_claim_by = root): la IA del
 #     Brasil tenia una guerra legal contra un Uruguay de 300 hombres antes de la particion y se quedo
 #     con los cinco estados el 31/1/1842 en la corrida 211244, sin Guerra Grande.
+# EN/ES: 24/9/2026 -- la Argentina is a hard requirement now. The rest of South America's ownership and homelands comes from
+#     la Argentina's own file, shipped by this mod without its three oriental states (the sibling file in this
+#     folder, merged from the compatch); this file adds the five. / el resto sale del archivo de la Argentina
+#     que trae el mod sin sus tres estados orientales; este archivo pone la propiedad y las patrias de los cinco.
 # -------------------------------------------------------------------------------------------------
 
 STATES = {

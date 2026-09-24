@@ -193,6 +193,11 @@ coincidir la silueta del Uruguay del conjunto geoBoundaries ADM1 con el mapa de 
 llegando a un solapamiento de 0,95; las coordenadas de los pueblos salen del gazetteer nacional de
 GeoNames (`UY.txt`, bajado el 16 de septiembre de 2026, CC BY 4.0).
 
+**Base map / Mapa base.** Outside the five oriental states, the South American map, history and
+locators are «la Argentina»'s (Workshop 2982907360), merged from the old compatch on 24/9/2026; what each
+file takes from it is listed in [`CREDITS.md`](CREDITS.md). / Fuera de los cinco estados orientales, el mapa,
+la historia y los localizadores sudamericanos son de «la Argentina»; el detalle está en `CREDITS.md`.
+
 ### The nine departments of 1836 / Los nueve departamentos de 1836
 
 **EN.** The Constitution of 1830 recognised nine departments **without fixing a single boundary**;

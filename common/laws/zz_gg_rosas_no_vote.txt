@@ -1,0 +1,729 @@
+﻿# EN: 22/9/2026, decided with Juan -- in the playtest the Argentine AI enacted landed voting on
+#     14/1/1841; with a vote there are elections, and Rosas (ruler, no interest group leader) lost the
+#     government to Echague. This blocks only the vote, and only for ARG while Rosas's era lasts.
+#     REPLACE, not INJECT: an INJECT cannot add a second can_enact to a law that has one (the engine
+#     rejected it at load: "Trigger section already read earlier: can_enact", playtest 22/9). The four
+#     voting laws below are vanilla 1.13's definitions (common/laws/00_distribution_of_power.txt) unchanged,
+#     with the clause added at the end of their can_enact (or a can_enact added if they had none); no playset
+#     mod redefines them. law_oligarchy is Community Mod Framework's definition
+#     (common/laws/com_distribution_of_power.txt, REPLACE_OR_CREATE) with the same clause; this file sorts
+#     after CMF's, so it wins. Moved from the compatch into the mod on 24/9/2026 (was zz_gg_x_arg_rosas_no_vote.txt).
+# ES: la IA argentina aprobo el voto en 1841 y Rosas perdio el gobierno. Se bloquea solo el voto, solo
+#     para ARG, mientras dure la era de Rosas. REPLACE: un INJECT no puede sumar un segundo can_enact.
+
+REPLACE:law_landed_voting = {
+	group = lawgroup_distribution_of_power
+
+	icon = "gfx/interface/icons/law_icons/landed_voting.dds"
+
+	progressiveness = -25
+
+	unlocking_technologies = {
+		democracy
+	}
+
+	disallowing_laws = {
+		law_chiefdom
+		law_command_economy
+	}
+
+	modifier = {
+		country_legitimacy_govt_total_votes_add = 40
+		country_legitimacy_govt_total_clout_add = 100
+		country_legitimacy_govt_size_add = 1
+		country_legitimacy_ideological_incoherence_mult = 0.2
+		country_aristocrats_voting_power_add = 100
+		country_officers_voting_power_add = 50
+		country_clergymen_voting_power_add = 50
+		country_capitalists_voting_power_add = 50
+		country_authority_add = 100
+		country_electoral_confidence_impact_mult = -0.3
+	}
+
+	can_enact = {
+		trigger_if = {
+			limit = {
+				c:BIC ?= ROOT
+				is_subject = yes
+				NOT = { has_law = scope:law }
+			}
+			custom_tooltip = {
+				text = BIC_not_able_to_change_distribution_of_power_tt
+				has_variable = britain_granted_dop_permission
+			}
+		}
+		# EN/ES: Guerra Grande -- no vote in the Confederation while Rosas's era lasts / sin voto
+		#     mientras dure la era de Rosas
+		trigger_if = {
+			limit = { c:ARG ?= ROOT }
+			custom_tooltip = {
+				text = gg_x_arg_rosas_no_vote_tt
+				gg_x_arg_rosas_era_over = yes
+			}
+		}
+	}
+
+	on_activate = {
+		if = {
+			limit = {
+				game_date > 1836.1.1
+				country_has_voting_franchise = yes
+			}
+			initialize_electoral_confidence = yes
+		}
+		random_law = {
+			limit = {
+				type = law_type:law_landed_voting
+			}
+			save_scope_as = relevant_voting_law
+		}
+		handle_possible_absent_caciquismo_variables = yes
+		scripted_effect_parties_emergence = yes
+		inherit_caciquismo_effect = yes
+		inherit_free_elections_effect = yes
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				has_variable = king_in_parliament_possible
+				NOT = {
+					has_journal_entry = je_king_in_parliament
+				}
+			}
+			custom_tooltip = {
+				text = king_in_parliament_tt
+				add_journal_entry = { type = je_king_in_parliament }
+			}
+		}
+	}
+
+	can_impose = {
+		country_has_voting_franchise = yes # modification of the standard trigger, only countries with a voting franchise can impose democracy on others
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				AND = {
+					modifier:country_can_impose_same_lawgroup_distribution_of_power_in_power_bloc_bool = yes
+					has_law = scope:law
+				}
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	ai_enact_weight_modifier = { #Petitions
+		value = 0
+
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+	}
+
+	ai_impose_chance = {
+		value = 0
+
+		if = {
+			limit = {
+				has_law = law_type:law_landed_voting
+				OR = {
+					AND = {
+						power_bloc ?= { has_identity = identity:identity_ideological_union }
+						has_strategy = ai_strategy_conservative_agenda
+					}
+					has_strategy = ai_strategy_reactionary_agenda
+				}
+				scope:target_country = {
+					NOR = { # Is their law different enough from what we want to impose?
+						has_law_or_variant = law_type:law_oligarchy
+						has_law_or_variant = law_type:law_autocracy
+					}
+				}
+			}
+
+			add = base_impose_law_weight
+		}
+
+		if = {
+			limit = {
+				scope:target_country = {
+					c:BIC ?= ROOT
+					OR = {
+						has_journal_entry = je_british_dictate_plantations
+						has_journal_entry = je_british_dictate_military
+						has_journal_entry = je_british_dictate_universities
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
+REPLACE:law_wealth_voting = {
+	group = lawgroup_distribution_of_power
+
+	icon = "gfx/interface/icons/law_icons/wealth_voting.dds"
+
+	progressiveness = 0
+
+	unlocking_technologies = {
+		democracy
+	}
+
+	disallowing_laws = {
+		law_chiefdom
+		law_command_economy
+	}
+
+	modifier = {
+		country_legitimacy_govt_total_votes_add = 65
+		country_legitimacy_govt_total_clout_add = 75
+		country_legitimacy_govt_size_add = 1
+		country_legitimacy_ideological_incoherence_mult = 0.2
+		country_voting_power_base_add = 50
+		country_voting_power_wealth_threshold_add = 20
+		country_authority_add = 100
+		country_electoral_confidence_impact_mult = -0.2
+	}
+
+	can_enact = {
+		trigger_if = {
+			limit = {
+				c:BIC ?= ROOT
+				is_subject = yes
+				NOT = { has_law = scope:law }
+			}
+			custom_tooltip = {
+				text = BIC_not_able_to_change_distribution_of_power_tt
+				has_variable = britain_granted_dop_permission
+			}
+		}
+		# EN/ES: Guerra Grande -- no vote in the Confederation while Rosas's era lasts / sin voto
+		#     mientras dure la era de Rosas
+		trigger_if = {
+			limit = { c:ARG ?= ROOT }
+			custom_tooltip = {
+				text = gg_x_arg_rosas_no_vote_tt
+				gg_x_arg_rosas_era_over = yes
+			}
+		}
+	}
+
+	on_activate = {
+		if = {
+			limit = {
+				game_date > 1836.1.1
+				country_has_voting_franchise = yes
+			}
+			initialize_electoral_confidence = yes
+		}
+		random_law = {
+			limit = {
+				type = law_type:law_wealth_voting
+			}
+			save_scope_as = relevant_voting_law
+		}
+		handle_possible_absent_caciquismo_variables = yes
+		scripted_effect_parties_emergence = yes
+		inherit_caciquismo_effect = yes
+		inherit_free_elections_effect = yes
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				has_variable = king_in_parliament_possible
+				NOT = {
+					has_journal_entry = je_king_in_parliament
+				}
+			}
+			custom_tooltip = {
+				text = king_in_parliament_tt
+				add_journal_entry = { type = je_king_in_parliament }
+			}
+		}
+	}
+
+	can_impose = {
+		country_has_voting_franchise = yes # modification of the standard trigger, only countries with a voting franchise can impose democracy on others
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				AND = {
+					modifier:country_can_impose_same_lawgroup_distribution_of_power_in_power_bloc_bool = yes
+					has_law = scope:law
+				}
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	ai_enact_weight_modifier = { #Petitions
+		value = 0
+
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					has_journal_entry = je_zaibatsu
+					has_variable = ai_zaibatsu_cement
+				}
+			}
+			add = 500
+		}
+	}
+
+	ai_impose_chance = {
+		value = 0
+
+		if = {
+			limit = {
+				has_law = law_type:law_wealth_voting
+				has_strategy = ai_strategy_progressive_agenda
+				scope:target_country = { # Is their law different enough from what we want to impose?
+					NOR = {
+						has_law_or_variant = law_type:law_census_voting
+						has_law_or_variant = law_type:law_landed_voting
+					}
+				}
+			}
+
+			add = base_impose_law_weight
+		}
+
+		if = {
+			limit = {
+				scope:target_country = {
+					c:BIC ?= ROOT
+					OR = {
+						has_journal_entry = je_british_dictate_plantations
+						has_journal_entry = je_british_dictate_military
+						has_journal_entry = je_british_dictate_universities
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
+REPLACE:law_census_voting = {
+	group = lawgroup_distribution_of_power
+
+	icon = "gfx/interface/icons/law_icons/census_voting.dds"
+
+	progressiveness = 50
+
+	unlocking_technologies = {
+		democracy
+	}
+
+	disallowing_laws = {
+		law_chiefdom
+		law_command_economy
+	}
+
+	modifier = {
+		country_legitimacy_govt_total_votes_add = 85
+		country_legitimacy_govt_total_clout_add = 55
+		country_legitimacy_govt_size_add = 1
+		country_legitimacy_ideological_incoherence_mult = 0.1
+		country_voting_power_wealth_threshold_add = 10
+		country_voting_power_from_literacy_add = 50
+		country_authority_add = 50
+		country_electoral_confidence_impact_mult = -0.1
+	}
+
+	can_enact = {
+		trigger_if = {
+			limit = {
+				c:BIC ?= ROOT
+				is_subject = yes
+				NOT = { has_law = scope:law }
+			}
+			custom_tooltip = {
+				text = BIC_not_able_to_change_distribution_of_power_tt
+				has_variable = britain_granted_dop_permission
+			}
+		}
+		# EN/ES: Guerra Grande -- no vote in the Confederation while Rosas's era lasts / sin voto
+		#     mientras dure la era de Rosas
+		trigger_if = {
+			limit = { c:ARG ?= ROOT }
+			custom_tooltip = {
+				text = gg_x_arg_rosas_no_vote_tt
+				gg_x_arg_rosas_era_over = yes
+			}
+		}
+	}
+
+	on_activate = {
+		if = {
+			limit = {
+				game_date > 1836.1.1
+				country_has_voting_franchise = yes
+			}
+			initialize_electoral_confidence = yes
+		}
+		random_law = {
+			limit = {
+				type = law_type:law_census_voting
+			}
+			save_scope_as = relevant_voting_law
+		}
+		handle_possible_absent_caciquismo_variables = yes
+		scripted_effect_parties_emergence = yes
+		inherit_caciquismo_effect = yes
+		inherit_free_elections_effect = yes
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				has_variable = king_in_parliament_possible
+				NOT = {
+					has_journal_entry = je_king_in_parliament
+				}
+			}
+			custom_tooltip = {
+				text = king_in_parliament_tt
+				add_journal_entry = { type = je_king_in_parliament }
+			}
+		}
+	}
+
+	can_impose = {
+		country_has_voting_franchise = yes # modification of the standard trigger, only countries with a voting franchise can impose democracy on others
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				AND = {
+					modifier:country_can_impose_same_lawgroup_distribution_of_power_in_power_bloc_bool = yes
+					has_law = scope:law
+				}
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	ai_enact_weight_modifier = { #Petitions
+		value = 0
+
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+	}
+
+	ai_impose_chance = {
+		value = 0
+
+		if = {
+			limit = {
+				has_law = law_type:law_census_voting
+				has_strategy = ai_strategy_progressive_agenda
+				scope:target_country = { # Is their law different enough from what we want to impose?
+					NOR = {
+						has_law_or_variant = law_type:law_wealth_voting
+						has_law_or_variant = law_type:law_universal_suffrage
+					}
+				}
+			}
+
+			add = base_impose_law_weight
+		}
+
+		if = {
+			limit = {
+				scope:target_country = {
+					c:BIC ?= ROOT
+					OR = {
+						has_journal_entry = je_british_dictate_plantations
+						has_journal_entry = je_british_dictate_military
+						has_journal_entry = je_british_dictate_universities
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
+REPLACE:law_universal_suffrage = {
+	group = lawgroup_distribution_of_power
+
+	icon = "gfx/interface/icons/law_icons/universal_suffrage.dds"
+
+	progressiveness = 100
+
+	unlocking_technologies = {
+		egalitarianism
+	}
+
+	disallowing_laws = {
+		law_chiefdom
+		law_command_economy
+	}
+
+	modifier = {
+		country_legitimacy_govt_total_votes_add = 110
+		country_legitimacy_govt_total_clout_add = 25
+		country_voting_power_base_add = 50
+		country_legitimacy_govt_size_add = 1
+	}
+
+	can_enact = {
+		trigger_if = {
+			limit = {
+				c:BIC ?= ROOT
+				is_subject = yes
+				NOT = { has_law = scope:law }
+			}
+			custom_tooltip = {
+				text = BIC_not_able_to_change_distribution_of_power_tt
+				has_variable = britain_granted_dop_permission
+			}
+		}
+		# EN/ES: Guerra Grande -- no vote in the Confederation while Rosas's era lasts / sin voto
+		#     mientras dure la era de Rosas
+		trigger_if = {
+			limit = { c:ARG ?= ROOT }
+			custom_tooltip = {
+				text = gg_x_arg_rosas_no_vote_tt
+				gg_x_arg_rosas_era_over = yes
+			}
+		}
+	}
+
+	on_activate = {
+		if = {
+			limit = {
+				game_date > 1836.1.1
+				country_has_voting_franchise = yes
+			}
+			initialize_electoral_confidence = yes
+		}
+		random_law = {
+			limit = {
+				type = law_type:law_universal_suffrage
+			}
+			save_scope_as = relevant_voting_law
+		}
+		handle_possible_absent_caciquismo_variables = yes
+		scripted_effect_parties_emergence = yes
+		inherit_caciquismo_effect = yes
+		inherit_free_elections_effect = yes
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				has_variable = king_in_parliament_possible
+				NOT = {
+					has_journal_entry = je_king_in_parliament
+				}
+			}
+			custom_tooltip = {
+				text = king_in_parliament_tt
+				add_journal_entry = { type = je_king_in_parliament }
+			}
+		}
+	}
+
+	can_impose = {
+		country_has_voting_franchise = yes # modification of the standard trigger, only countries with a voting franchise can impose democracy on others
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				AND = {
+					modifier:country_can_impose_same_lawgroup_distribution_of_power_in_power_bloc_bool = yes
+					has_law = scope:law
+				}
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	ai_enact_weight_modifier = { #Petitions
+		value = 0
+
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+
+		if = {
+			limit = {
+				owner ?= {
+					has_journal_entry = je_zaibatsu
+					has_variable = ai_zaibatsu_curtail
+				}
+			}
+			add = 1000
+		}
+	}
+
+	ai_impose_chance = {
+		value = 0
+
+		if = {
+			limit = {
+				has_law = law_type:law_universal_suffrage
+				has_strategy = ai_strategy_egalitarian_agenda
+				scope:target_country = { # Is their law different enough from what we want to impose?
+					NOR = {
+						has_law_or_variant = law_type:law_census_voting
+						has_law_or_variant = law_type:law_anarchy
+					}
+				}
+			}
+
+			add = base_impose_law_weight
+		}
+
+		if = {
+			limit = {
+				scope:target_country = {
+					c:BIC ?= ROOT
+					OR = {
+						has_journal_entry = je_british_dictate_plantations
+						has_journal_entry = je_british_dictate_military
+						has_journal_entry = je_british_dictate_universities
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
+# Oligarchy: Community Mod Framework base (com_distribution_of_power.txt, which already
+# replaces vanilla), plus the Rosas lock. ES: en la prueba del 22/9/2026 la IA pasó de
+# Autocracia a Oligarquía el 16/7/1838 y el motor puso de gobernante al líder de los
+# terratenientes (Echagüe). Este archivo carga después del de CMF por orden de nombre.
+REPLACE:law_oligarchy = {
+	group = lawgroup_distribution_of_power
+	
+	icon = "gfx/interface/icons/law_icons/oligarchy.dds"
+	
+	progressiveness = -50
+	
+	is_visible = {
+		OR = {
+			AND = {
+				com_law_oligarchy_trigger = yes
+				NAND = {
+					country_has_primary_culture = cu:romanian
+					is_subject = yes
+				}
+			}
+			com_law_oligarchy_alternative_trigger = yes
+		}
+	}
+	
+	on_activate = {
+		scripted_effect_parties_disappearence = yes
+		handle_possible_absent_caciquismo_variables = yes
+		if = {
+			limit = {
+				has_modifier = missouri_compromise
+			}
+			remove_modifier = missouri_compromise
+		}
+	}
+	
+	modifier = {
+		country_legitimacy_headofstate_add = 10
+		country_legitimacy_govt_total_clout_add = 120
+		country_legitimacy_govt_size_add = 2
+		country_legitimacy_ideological_incoherence_mult = -0.1
+		country_officers_pol_str_mult = 0.5
+		country_aristocrats_pol_str_mult = 0.5
+		country_capitalists_pol_str_mult = 0.25
+		country_authority_add = 100
+	}
+	
+	can_enact = {
+		# Mientras dure la era de Rosas, Buenos Aires no cambia el reparto del poder:
+		# en una república sin elecciones, cambiar esta ley le da el gobierno a otro.
+		trigger_if = {
+			limit = { c:ARG ?= ROOT }
+			custom_tooltip = {
+				text = gg_x_arg_rosas_no_oligarchy_tt
+				gg_x_arg_rosas_era_over = yes
+			}
+		}
+		trigger_if = {
+			limit = {
+				c:BIC ?= ROOT
+				is_subject = yes
+				NOT = { has_law = scope:law }
+			}
+			custom_tooltip = {
+				text = BIC_not_able_to_change_distribution_of_power_tt
+				NOT = {
+					c:BIC ?= ROOT
+				}
+			}
+		}
+	}
+	
+	can_impose = {
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				AND = {
+					modifier:country_can_impose_same_lawgroup_distribution_of_power_in_power_bloc_bool = yes
+					has_law = scope:law
+				}
+			}
+			can_impose_law_default = yes
+		}
+	}
+	
+	ai_enact_weight_modifier = { #Petitions
+		value = 0
+		
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+	}
+	
+	ai_impose_chance = {
+		value = 0
+		
+		if = {
+			limit = {
+				has_law = law_type:law_oligarchy
+				OR = {
+					AND = {
+						power_bloc ?= { has_identity = identity:identity_ideological_union }
+						has_strategy = ai_strategy_conservative_agenda
+					}
+					has_strategy = ai_strategy_reactionary_agenda
+				}
+				scope:target_country = {
+					NOR = { # Is their law different enough from what we want to impose?
+						has_law_or_variant = law_type:law_autocracy
+						has_law_or_variant = law_type:law_landed_voting
+					}
+				}
+			}
+			
+			add = base_impose_law_weight
+		}
+		
+		if = {
+			limit = {
+				scope:target_country = {
+					c:BIC ?= ROOT
+					OR = {
+						has_journal_entry = je_british_dictate_plantations
+						has_journal_entry = je_british_dictate_military
+						has_journal_entry = je_british_dictate_universities
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}

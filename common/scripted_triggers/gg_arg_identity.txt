@@ -2,7 +2,7 @@
 #     same tag) while its dated calendar is pending: everything the first day queues on c:ARG, the last being
 #     gg_ba.105 on 12/10/1862. Three doors took that away or could: an engine revolution (the modifier
 #     gg_arg_caudillos_grip, common/static_modifiers/gg_arg_identity.txt), a formable that changes ARG's tag
-#     (La Plata, and la Argentina's Great_ARG in the compatch), and a third country annexing it
+#     (La Plata and la Argentina's Great_ARG, zz_guerra_grande_formables.txt), and a third country annexing it
 #     (guerra_grande_play_is_allowed, below). One date for all three, here.
 # ES: la Argentina tiene que seguir siendo el MISMO pais (mismo objeto, mismo tag) mientras su calendario fechado
 #     este pendiente: el ultimo evento agendado sobre c:ARG es gg_ba.105, el 12/10/1862. Tres puertas: la

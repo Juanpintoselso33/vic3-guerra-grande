@@ -5,15 +5,16 @@
 #     with one line at the TOP LEVEL of its possible block (the trigger vanilla documents as "is this goal
 #     listed when selecting a war goal": root = holder, scope:target_country): gg_war_goal_is_allowed, which is
 #     guerra_grande_play_is_allowed plus the engine's civil wars. valid is untouched, so a goal already on the
-#     table is not torn out of a running war. Community Mod Framework replaces 00_annex_country, 03_conquer_state
-#     and 21_return_state by file name; its versions, with the same line, are REPLACEd again by the compatch
-#     (zzz_gg_x_arg_war_goals.txt, which sorts after this file).
+#     table is not torn out of a running war. Community Mod Framework (a hard requirement) replaces
+#     00_annex_country, 03_conquer_state and 21_return_state by file name, so those three are CMF's versions,
+#     VERBATIM (tlim_land_grab_war_goal_possible_trigger kept), with the same guard line. They came from the
+#     compatch (zzz_gg_x_arg_war_goals.txt), merged here on 24/9/2026 when the compatch was folded into the mod.
 # ES: los objetivos de guerra. La jugada contra la Republica o un gobierno de guerra ya se rechaza, pero un
 #     enemigo todavia puede AGREGAR un objetivo contra uno de ellos si esta dentro de la jugada de otro (llamado
 #     como aliado, un pacto defensivo). Cada tipo de vanilla, copiado TAL CUAL con una linea en el NIVEL SUPERIOR
 #     de su possible: gg_war_goal_is_allowed. valid no se toca: un objetivo ya puesto no se arranca de una
-#     guerra en curso. CMF reemplaza tres por nombre de archivo; sus versiones, con la misma linea, las vuelve
-#     a reemplazar el compatch.
+#     guerra en curso. CMF (requisito) reemplaza tres por nombre de archivo: esos tres son las versiones de CMF,
+#     TAL CUAL, con la misma linea. Venian del compatch y se integraron aca el 24/9/2026.
 
 REPLACE:annex_country = {
 	icon = "gfx/interface/icons/war_goals/annex_country.dds"
@@ -47,6 +48,7 @@ REPLACE:annex_country = {
 	valid = {
 		# trigger in addition to some basic validation code-side
 		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		tlim_land_grab_war_goal_possible_trigger = yes
 	}
 
 	maneuvers = {
@@ -114,7 +116,7 @@ REPLACE:annex_country = {
 					}
 					scope:target_country = {
 						OR = {
-							is_country_type = unrecognized
+						    is_country_type = unrecognized
 							is_country_type = decentralized
 						}
 					}
@@ -504,6 +506,7 @@ REPLACE:conquer_state = {
 			owner = scope:target_country
 			NOT = { has_claim_by = root }
 		}
+		tlim_land_grab_war_goal_possible_trigger = yes
 	}
 
 	maneuvers = {
@@ -574,7 +577,7 @@ REPLACE:conquer_state = {
 					}
 					scope:target_country = {
 						OR = {
-							is_country_type = unrecognized
+						    is_country_type = unrecognized
 							is_country_type = decentralized
 						}
 					}
@@ -2763,6 +2766,7 @@ REPLACE:return_state = {
 			owner = scope:target_country
 			has_claim_by = root
 		}
+		tlim_land_grab_war_goal_possible_trigger = yes
 	}
 
 	maneuvers = {
@@ -2810,7 +2814,7 @@ REPLACE:return_state = {
 					}
 					scope:target_country = {
 						OR = {
-							is_country_type = unrecognized
+						    is_country_type = unrecognized
 							is_country_type = decentralized
 						}
 					}

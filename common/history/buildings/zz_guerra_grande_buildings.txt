@@ -15,6 +15,10 @@
 #     todo lo que el mod no nombra sigue viniendo de vanilla o del mod que este cargado. La entrada de
 #     vanilla para STATE_URUGUAY queda apuntando a un estado que ya no existe, lo que cuesta una linea
 #     en el log y nada en la partida.
+# EN/ES: 24/9/2026 -- la Argentina is a hard requirement now. The rest of South America's buildings comes from
+#     la Argentina's own file, shipped by this mod without its three oriental states (the sibling file in this
+#     folder, merged from the compatch); this file adds the five. / el resto sale del archivo de la Argentina
+#     que trae el mod sin sus tres estados orientales; este archivo pone los edificios de los cinco.
 # -------------------------------------------------------------------------------------------------
 
 BUILDINGS = {
