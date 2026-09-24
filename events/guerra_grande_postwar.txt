@@ -55,7 +55,8 @@ gg_postwar.1 = {
 			set_global_variable = gg_president_railroad
 			gg_ruler_set = { TEMPLATE = URU_joaquin_suarez }
 			hidden_effect = {
-				trigger_event = { id = gg_postwar.8 days = 365 }
+				# EN/ES: 23/9 (N5, decisiones.md §4) -- gg_postwar.8 walks to 15/2/1852 by itself / camina solo hasta la fecha
+				trigger_event = { id = gg_postwar.8 days = 1 }
 			}
 		}
 		if = {
@@ -508,8 +509,14 @@ gg_postwar.7 = {
 }
 
 # EN/ES: gg_postwar.8 -- the Defensa won: Suarez holds the interim until 15 February 1852 and hands
-#     it to Flores; checks once a year until the date arrives (hidden) / la Defensa gano: Suarez
-#     sostiene el interinato hasta 1852 y entrega a Flores; chequea una vez por anio
+#     it to Flores (hidden) / la Defensa gano: Suarez sostiene el interinato hasta el 15/2/1852 y entrega a Flores
+# EN: 23/9/2026 (N5 of the design-vs-code audit, decisiones.md §4: "15 de febrero de 1852") -- ON the date, not on the
+#     anniversary of the peace: it used to check once a year from the peace, so a peace in June 1849 handed over in
+#     June 1852. Now it steps down to the day (a year, a month, a week, a day), never past the date; a peace signed
+#     after it hands over the next day.
+# ES: EN la fecha, no en el aniversario de la paz: chequeaba una vez por anio desde la paz, asi que una paz en junio
+#     de 1849 entregaba en junio de 1852. Ahora baja hasta el dia (anio, mes, semana, dia) sin pasarse; una paz
+#     firmada despues de la fecha entrega al dia siguiente.
 gg_postwar.8 = {
 	type = country_event
 	hidden = yes
@@ -517,7 +524,7 @@ gg_postwar.8 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.8|" # GG_TRAZA
 		if = {
-			limit = { year >= 1852 }
+			limit = { game_date >= 1852.2.15 }
 			# EN/ES: only Suarez's historical interim may hand the office to Flores.
 			if = {
 				limit = { ruler = { has_template = URU_joaquin_suarez } }
@@ -525,10 +532,22 @@ gg_postwar.8 = {
 			}
 			remove_global_variable = gg_president_railroad
 		}
-		else = {
+		else_if = {
+			limit = { game_date < 1851.2.15 }
 			trigger_event = { id = gg_postwar.8 days = 365 }
 		}
 	}
+		else_if = {
+			limit = { game_date < 1852.1.16 }
+			trigger_event = { id = gg_postwar.8 days = 30 }
+		}
+		else_if = {
+			limit = { game_date < 1852.2.8 }
+			trigger_event = { id = gg_postwar.8 days = 7 }
+		}
+		else = {
+			trigger_event = { id = gg_postwar.8 days = 1 }
+		}
 }
 
 # EN/ES: gg_postwar.9 -- the four years the Assembly gave Oribe are up: the ballot decides again

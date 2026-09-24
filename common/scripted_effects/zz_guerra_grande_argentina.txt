@@ -447,19 +447,86 @@ gg_argentina_arm_urquiza_reserve = {
 	}
 }
 
+# EN: 23/9/2026 (Juan, §2 of decisiones-argentina.md; N2 of the design-vs-code audit) -- THE SEAT AT ALCARAZ. The
+#     player who governs Buenos Aires may take Entre Rios in August 1846 (gg_argentina.69.c), the documented rehearsal
+#     of 1851. Entre Rios is born here the way the Pronouncement makes it (the same create_country, the same emptying
+#     of the clones, the ORIGINAL Urquiza moved in and made its ruler), but it is born LOYAL: a protectorate of Buenos
+#     Aires that still delegates its foreign relations, because Urquiza did not break with Rosas until 1 May 1851. No
+#     army and no delegation lost: those are the Pronouncement's, and gg_argentina_create_entre_rios gives them when it
+#     finds this country already there (gg_enr_alcaraz_seat). Scope: Argentina.
+# ES: EL ASIENTO DE ALCARAZ. El jugador que gobierna Buenos Aires puede tomar Entre Rios en agosto de 1846, el ensayo
+#     documentado de 1851. Entre Rios nace aca como lo hace el Pronunciamiento (el mismo create_country, el mismo
+#     vaciado, el Urquiza ORIGINAL mudado y hecho gobernante), pero nace LEAL: protectorado de Buenos Aires que sigue
+#     delegando, porque Urquiza no rompio con Rosas hasta el 1/5/1851. Sin ejercito y sin delegacion perdida: eso es
+#     del Pronunciamiento, que lo da al encontrar este pais ya creado.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/decisiones-argentina.md §2; historia-argentina.md, «Los momentos de
+#     decision», punto 6 [D].
+gg_argentina_alcaraz_seat = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_alcaraz_seat|" # GG_TRAZA
+	if = {
+		limit = {
+			c:ARG ?= this
+			NOT = { exists = c:ENR }
+			exists = s:STATE_ENTRE_RIOS.region_state:ARG
+		}
+		random_scope_character = {
+			limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+			save_scope_as = gg_urquiza_alcaraz
+		}
+		create_country = {
+			tag = ENR
+			origin = this
+			state = s:STATE_ENTRE_RIOS.region_state:ARG
+			on_created = {
+				set_variable = gg_arg_entre_rios_seat
+				set_variable = gg_enr_alcaraz_seat
+			}
+		}
+		gg_argentina_new_country_people = { TAG = ENR }
+		c:ENR ?= {
+			set_capital = STATE_ENTRE_RIOS
+			if = {
+				limit = { exists = scope:gg_urquiza_alcaraz }
+				scope:gg_urquiza_alcaraz = {
+					transfer_character = c:ENR
+					set_character_as_ruler = yes
+				}
+			}
+			else = {
+				create_character = { template = ARG_Justo_Jose_de_Urquiza ruler = yes }
+			}
+		}
+		if = {
+			limit = { exists = c:ENR }
+			create_diplomatic_pact = { country = c:ENR type = protectorate }
+		}
+	}
+}
+
 # EN/ES: 1/5/1851 -- el Pronunciamiento de Urquiza.
 gg_argentina_create_entre_rios = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_create_entre_rios|" # GG_TRAZA
-	create_country = {
-		tag = ENR
-		origin = this
-		state = s:STATE_ENTRE_RIOS.region_state:ARG
-		on_created = {
-			set_variable = gg_arg_entre_rios_seat
+	# EN/ES: 23/9 (Juan, §2) -- an Entre Rios born loyal at Alcaraz (gg_argentina_alcaraz_seat) breaks away now instead
+	#     of being created: same country, same player / el Entre Rios leal de Alcaraz rompe ahora en vez de crearse
+	if = {
+		limit = { c:ENR ?= { has_variable = gg_enr_alcaraz_seat } }
+		c:ENR = {
+			remove_variable = gg_enr_alcaraz_seat
+			if = { limit = { is_subject = yes } make_independent = yes }
 		}
 	}
-	gg_argentina_new_country_people = {
-		TAG = ENR
+	else = {
+		create_country = {
+			tag = ENR
+			origin = this
+			state = s:STATE_ENTRE_RIOS.region_state:ARG
+			on_created = {
+				set_variable = gg_arg_entre_rios_seat
+			}
+		}
+		gg_argentina_new_country_people = {
+			TAG = ENR
+		}
 	}
 	c:ENR ?= {
 		set_capital = STATE_ENTRE_RIOS
@@ -626,6 +693,21 @@ gg_argentina_create_entre_rios = {
 				limit = { NOT = { has_role_of_type = general } }
 				add_character_role = general
 				set_commander_rank = 2
+			}
+		}
+	}
+	# EN/ES: 23/9 (Juan, §2) -- the Entre Rios of Alcaraz already has him (moved in 1846): no second Urquiza, only the
+	#     command / el Entre Rios de Alcaraz ya lo tiene: no hay segundo Urquiza, solo el mando
+	else_if = {
+		limit = { c:ENR ?= { any_scope_character = { has_template = ARG_Justo_Jose_de_Urquiza } } }
+		c:ENR = {
+			random_scope_character = {
+				limit = { has_template = ARG_Justo_Jose_de_Urquiza }
+				if = {
+					limit = { NOT = { has_role_of_type = general } }
+					add_character_role = general
+					set_commander_rank = 2
+				}
 			}
 		}
 	}

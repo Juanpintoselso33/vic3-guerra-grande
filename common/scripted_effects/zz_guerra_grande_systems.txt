@@ -373,14 +373,30 @@ gg_victory_clear = {
 #     contesto, asi la posguerra sabe que se decidio.
 gg_postwar_start = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar_start|" # GG_TRAZA
+	# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- the war is over for every ending, the reincorporation included: the siege
+	#     modifiers go here, not only when the Oriental postwar runs / la guerra termino para todo final
+	gg_wartime_modifiers_clear_once = yes
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_postwar_started }
 			NOT = { has_global_variable = gg_reincorporated }
 		}
 		set_global_variable = gg_postwar_started
-		gg_wartime_modifiers_clear = yes
 		gg_postwar_dispatch = yes
+	}
+}
+
+# EN: 23/9/2026 (AUD-MIGR-NEWGAME) -- gg_wartime_modifiers_clear, once per game, from each place where the war ends:
+#     gg_postwar_start (every ending) and gg_oriental_incorporate (the reincorporation, the day it happens, before
+#     Brazil is told: gg_brazil_stays_out must be gone for the Cisplatine question). Until today the reincorporation
+#     skipped the postwar and only the old-save migration cleared them, a month late.
+# ES: gg_wartime_modifiers_clear una sola vez, desde cada lugar donde termina la guerra. Hasta hoy la reincorporacion
+#     se salteaba la posguerra y solo la migracion de partidas viejas los sacaba, un mes tarde.
+gg_wartime_modifiers_clear_once = {
+	if = {
+		limit = { NOT = { has_global_variable = gg_wartime_cleared } }
+		set_global_variable = gg_wartime_cleared
+		gg_wartime_modifiers_clear = yes
 	}
 }
 

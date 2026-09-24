@@ -26,6 +26,7 @@
  gg_peace_proscription_defensa_tt:0 "@warning! The #R Defensa#!'s February decrees reach the countryside: the #blue_value blanco chiefs#! are exiled, confiscations stand, and executions and expulsions spread radicalism through the rural districts."
  gg_peace_treaties_tt:0 "@warning! The Empire guarantees the Constitution and subsidises the Republic against its customs revenue; the San Ildefonso claim and navigation of the Laguna Merín and Yaguarón are surrendered. Brazilian trade gains ten years of exemptions, and fugitive slaves must be returned despite the Republic's abolition law."
  gg_peace_protectorate_asked_tt:0 "@information! London and Paris receive a request to place the Republic under their joint protection. Earlier petitions met refusal, so the answer is uncertain."
+ gg_peace_protectorate_asked_rule_tt:0 "@information! London and Paris receive a request to place the Republic under their joint protection."
 
 # ---------------------------------------------------------------------------------------------
 # gg_peace.2 -- the Cerrito dictates the peace

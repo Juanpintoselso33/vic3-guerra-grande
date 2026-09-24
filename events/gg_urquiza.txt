@@ -30,8 +30,7 @@ gg_urquiza.1 = {
 
 	trigger = {
 		c:ARG ?= this
-		exists = s:STATE_ENTRE_RIOS
-		NOT = { exists = c:ENR }
+		gg_entre_rios_with_rosas = yes # EN/ES: 23/9 (Juan, §2) -- or the Entre Rios of Alcaraz / o el de Alcaraz
 	}
 
 	immediate = {
@@ -133,6 +132,23 @@ gg_urquiza.3 = {
 				}
 			}
 			gg_pact_resolve = yes
+		}
+		# EN: 23/9/2026 (P5 of the endings audit, AUD-PACT-NEG-NET) -- the negotiated rule's net: if the Pronouncement
+		#     never came (Entre Rios was not Argentine ground on 1/5/1851: Corrientes or the Coalition held it), the
+		#     Pact is closed today as the rule says, with the negotiated confederation. Otherwise it stayed open for
+		#     good: no constitution and no Buenos Aires apart.
+		# ES: la red de la regla negociada: si no hubo Pronunciamiento (Entre Rios no era suelo argentino el 1/5/1851),
+		#     el Pacto se cierra hoy como dice la regla, con la confederacion negociada. Si no, quedaba abierto para siempre.
+		else_if = {
+			limit = {
+				exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard / la guarda de «la Argentina»
+				c:ARG ?= this
+				gg_pact_negotiated = yes
+				NOT = { has_global_variable = gg_pact_settled }
+				NOT = { has_global_variable = gg_caseros_siege }
+				NOT = { has_global_variable = gg_confederacion_negociada }
+			}
+			gg_argentina_open_negotiated_confederation = yes
 		}
 	}
 }

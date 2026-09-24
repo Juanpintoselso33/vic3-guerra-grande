@@ -567,14 +567,13 @@ gg_ba.108 = {
 				has_global_variable = gg_ba_split_active
 				NOT = { has_global_variable = gg_ba_unifying }
 				exists = scope:gg_ba_conf
-				scope:gg_ba_state ?= {
-					is_at_war = no
-					NOT = { has_truce_with = scope:gg_ba_conf }
-				}
+				# EN/ES: 23/9 (AUD-BA-TRUCE) -- a truce no longer stops Pavon: gg_ba_open_war ends it
+				#     / una tregua ya no frena a Pavon: gg_ba_open_war la termina
+				scope:gg_ba_state ?= { is_at_war = no }
 			}
 			global_var:gg_ba_side ?= { trigger_event = { id = gg_ba.10 days = 0 popup = yes } }
 		}
-		# EN/ES: a truce after Cepeda can outlast August 1861: retry monthly until the net / se reintenta cada mes
+		# EN/ES: Buenos Aires still at war (another war): retry monthly until the net / en otra guerra: se reintenta cada mes
 		else_if = {
 			limit = {
 				has_global_variable = gg_ba_split_active

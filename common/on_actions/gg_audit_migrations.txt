@@ -1,5 +1,17 @@
 ﻿# EN: One-shot, reload-safe repairs for saves produced before the 20 September audit fixes.
-# ES: Reparaciones idempotentes para guardados anteriores a las correcciones de la auditoria.
+#     23/9/2026 (AUD-MIGR-NEWGAME, N1 of the design-vs-code audit) -- ONLY for old saves. Until today none of the three
+#     had a version guard, so they ran in every new game too: the postwar one killed every Rivera of the Republic a
+#     month after any punishing peace (a Rivera restored in 1846 who never left the Defensa, against the historical
+#     lives and the postwar that brings him back), and was the only thing clearing the siege modifiers after a
+#     reincorporation, a month late. A new game sets gg_new_game_no_migrations on its first day
+#     (guerra_grande_on_game_start); a save from before this commit does not have it, so it is still repaired.
+#     The jobs they were doing by accident now have their own places: the siege modifiers are cleared by
+#     gg_wartime_modifiers_clear_once (gg_postwar_start and gg_oriental_incorporate), and the Coalition born of the
+#     unitario rising of 1877 withdraws from Argentina's treaties when it is created (gg_unitario_rising).
+# ES: Reparaciones idempotentes para guardados anteriores a las correcciones de la auditoria. SOLO para partidas
+#     viejas: sin guarda corrian en toda partida nueva, mataban a todo Rivera de la Republica al mes de una paz con
+#     castigo y eran lo unico que sacaba los modificadores del sitio despues de una reincorporacion. Una partida nueva
+#     prende gg_new_game_no_migrations el primer dia; lo que hacian de casualidad tiene ahora su lugar propio.
 on_monthly_pulse_country = {
 	on_actions = {
 		gg_audit_postwar_migration
@@ -13,6 +25,7 @@ gg_audit_postwar_migration = {
 		c:ARG ?= this
 		has_global_variable = gg_peace_settled
 		NOT = { has_global_variable = gg_audit_postwar_cleanup_v2 }
+		NOT = { has_global_variable = gg_new_game_no_migrations } # EN/ES: old saves only / solo partidas viejas
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_audit_postwar_migration" # GG_TRAZA
@@ -56,6 +69,7 @@ gg_pact_negotiated_migration = {
 	trigger = {
 		c:ARG ?= this
 		has_global_variable = gg_confederacion_negociada
+		NOT = { has_global_variable = gg_new_game_no_migrations } # EN/ES: old saves only / solo partidas viejas
 		NOT = { has_global_variable = gg_pact_settled }
 	}
 	effect = { debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_negotiated_migration"  gg_pact_resolve = yes }
@@ -65,6 +79,7 @@ gg_rebel_diplomacy_migration = {
 	trigger = {
 		c:CLN ?= this
 		NOT = { has_variable = gg_rebel_diplomacy_reset }
+		NOT = { has_global_variable = gg_new_game_no_migrations } # EN/ES: old saves only / solo partidas viejas
 	}
 	effect = { debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rebel_diplomacy_migration"  gg_argentina_rebel_diplomacy_reset = yes }
 }

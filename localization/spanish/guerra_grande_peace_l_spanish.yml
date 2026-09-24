@@ -26,6 +26,7 @@
  gg_peace_proscription_defensa_tt:0 "@warning! Los decretos de febrero de la #R Defensa#! alcanzan la campaña: los #blue_value jefes blancos#! van al destierro, las confiscaciones quedan en pie, y los fusilamientos y expulsiones siembran radicalismo en los pagos."
  gg_peace_treaties_tt:0 "@warning! El Imperio garantiza la Constitución y subsidia a la República contra la renta de aduana; se renuncia al reclamo de San Ildefonso y a navegar la Laguna Merín y el Yaguarón. El comercio brasileño gana diez años de franquicias, y los esclavos fugados deben devolverse pese a la ley de abolición."
  gg_peace_protectorate_asked_tt:0 "@information! Londres y París reciben el pedido de poner a la República bajo su protección conjunta. Las solicitudes anteriores fueron rechazadas, de modo que la respuesta es incierta."
+ gg_peace_protectorate_asked_rule_tt:0 "@information! Londres y París reciben el pedido de poner a la República bajo su protección conjunta."
 
 # ---------------------------------------------------------------------------------------------
 # gg_peace.2 -- el Cerrito dicta la paz

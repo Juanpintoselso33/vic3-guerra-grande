@@ -105,12 +105,26 @@ gg_ba_save_sides = {
 
 # EN: A war between the two sides. $BY$ = conf (Lagos, Cepeda) or ba (Pavon). A Buenos Aires that is a subject
 #     (after San Jose de Flores) leaves the pact first: Pavon was fought by a province that had rejoined.
-#     A truce between them blocks it; the caller retries.
+#     23/9/2026 (AUD-BA-TRUCE, P1 of the endings audit) -- the calendar's war ends the engine's truce first. The
+#     truce lasts 60 months (vanilla DEFAULT_TRUCE_MONTHS), so the one Cepeda left (1859) outlived August 1861 and
+#     Pavon never came: the 1862 net unified without a war. The truces of 1852-1861 were pacts that both sides broke
+#     on the dates this chain keeps (Cepeda, Pavon), so the date rules, not the engine's timer.
 # ES: Una guerra entre los dos bandos. Si Buenos Aires es sujeta (despues de San Jose de Flores), primero sale del
-#     pacto: Pavon la peleo una provincia que habia vuelto. Una tregua entre ellos la traba; quien llama reintenta.
+#     pacto: Pavon la peleo una provincia que habia vuelto. La guerra del calendario termina antes la tregua del
+#     motor: dura 60 meses, y la de Cepeda (1859) pasaba agosto de 1861, asi que Pavon no llegaba nunca. Las treguas
+#     de 1852-1861 fueron pactos que los dos rompieron en las fechas que guarda esta cadena: manda la fecha.
 gg_ba_open_war = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_open_war| BY= $BY$ PHASE= $PHASE$ " # GG_TRAZA
 	gg_ba_save_sides = yes
+	if = {
+		limit = { exists = scope:gg_ba_state exists = scope:gg_ba_conf }
+		scope:gg_ba_state = {
+			if = { limit = { has_truce_with = scope:gg_ba_conf } end_truce = scope:gg_ba_conf }
+		}
+		scope:gg_ba_conf = {
+			if = { limit = { has_truce_with = scope:gg_ba_state } end_truce = scope:gg_ba_state }
+		}
+	}
 	if = {
 		limit = {
 			exists = scope:gg_ba_state

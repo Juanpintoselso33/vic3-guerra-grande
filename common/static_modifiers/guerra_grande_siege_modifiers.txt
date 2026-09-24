@@ -401,6 +401,8 @@ gg_cerrito_lives_off_the_land = {
 #     nacian vacios en el corte y la IA veia una ciudad debil. Montevideo en febrero de 1843 estaba en el
 #     cenit de su movilizacion: ~6.500 combatientes. La ciudad se arma rapido tras el corte, como el
 #     Cerrito, asi los dos quedan parejos y el sitio se estanca, como se estanco.
+# EN/ES: 23/9/2026 (Juan) -- RETIRED: nothing applies it since the siege without an engine war; kept only so old saves
+#     that carry it still load / RETIRADO: nadie lo aplica desde el sitio sin guerra; queda para partidas viejas
 gg_defensa_city_in_arms = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
 	building_training_rate_add = 1000

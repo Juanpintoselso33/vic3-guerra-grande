@@ -34,6 +34,9 @@ gg_unitario_rising = {
 		if = { limit = { exists = s:STATE_JUJUY.region_state:ARG } s:STATE_JUJUY.region_state:ARG = { set_state_owner = c:CLN } }
 		if = { limit = { exists = s:STATE_CATAMARCA.region_state:ARG } s:STATE_CATAMARCA.region_state:ARG = { set_state_owner = c:CLN } }
 		gg_argentina_new_country_people = { TAG = CLN }
+		# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- the rebel leaves the treaties it inherited, as the Coalition of 1840 does;
+		#     until today only the old-save migration did it, a month late / el rebelde sale de los tratados heredados
+		c:CLN ?= { gg_argentina_rebel_diplomacy_reset = yes }
 		c:CLN ?= { set_capital = STATE_TUCUMAN }
 		set_global_variable = gg_unitario_war
 		# EN/ES: AUD-CONST-PEACE -- the winner is recorded when it ends / el ganador se anota al terminar

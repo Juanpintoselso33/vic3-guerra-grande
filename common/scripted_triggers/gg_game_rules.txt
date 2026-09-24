@@ -63,6 +63,18 @@ gg_terms_cerrito_punish = { has_game_rule = gg_war_outcome_cerrito_punish }
 gg_terms_cerrito_pact_province = { has_game_rule = gg_war_outcome_cerrito_pact_province }
 gg_terms_cerrito_rosas_client = { has_game_rule = gg_war_outcome_cerrito_rosas_client }
 gg_terms_cerrito_reincorporation = { has_game_rule = gg_war_outcome_cerrito_reincorporation }
+# EN: 23/9/2026 (Juan, P2 of the endings audit, AUD-RULES-CLIENT2) -- Rosas has fallen: the Pact was settled with
+#     Urquiza's victory or the collapsed mandate (the two settlements that call gg_rosista_client_release). There is
+#     nobody left to be the client of, so the Cerrito's peace does not offer it (gg_peace.2.e) and the rule stops
+#     forcing it. Defined here, before its first reader below.
+# ES: Rosas cayo: el Pacto se cerro con la victoria de Urquiza o el mandato deshecho. No queda de quien ser cliente,
+#     asi que la paz del Cerrito no lo ofrece y la regla deja de forzarlo.
+gg_rosas_fallen = {
+	OR = {
+		has_global_variable = gg_pact_settlement_urquiza
+		has_global_variable = gg_pact_settlement_mandate_collapsed
+	}
+}
 # EN: 23/9/2026 (Codex audit, AUD-RULES-AI) -- a setting of the war's rule forces one option of the peace menu, and
 #     that option is open (its country exists). Used to give every other option AI weight zero, so the AI cannot take
 #     a contradictory ending; a human player still sees and may choose them.
@@ -85,7 +97,7 @@ gg_cerrito_terms_forced = {
 		gg_terms_cerrito_presidency = yes
 		gg_terms_cerrito_punish = yes
 		AND = { gg_terms_cerrito_pact_province = yes exists = c:ARG }
-		AND = { gg_terms_cerrito_rosas_client = yes exists = c:ARG }
+		AND = { gg_terms_cerrito_rosas_client = yes exists = c:ARG NOT = { gg_rosas_fallen = yes } }
 		AND = { gg_terms_cerrito_reincorporation = yes exists = c:ARG }
 	}
 }

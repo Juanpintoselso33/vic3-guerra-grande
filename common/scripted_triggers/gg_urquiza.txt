@@ -35,3 +35,24 @@ gg_urquiza_no_convention = {
 		NOT = { gg_international_open = yes }
 	}
 }
+
+# EN: 23/9/2026 (Juan, §2 of decisiones-argentina.md) -- Entre Rios is still Rosas's on the eve of the Pronouncement:
+#     Argentine ground with no country of its own, or the loyal Entre Rios a player took at Alcaraz
+#     (gg_argentina_alcaraz_seat), still a subject. The Pronouncement chain (gg_argentina_cal.4, gg_urquiza.1,
+#     gg_argentina.71) reads this instead of "ENR does not exist", so the seat of 1846 does not switch 1851 off.
+# ES: Entre Rios sigue siendo de Rosas en la vispera del Pronunciamiento: suelo argentino sin pais propio, o el Entre
+#     Rios leal que un jugador tomo en Alcaraz, todavia sujeto. La cadena del Pronunciamiento lee esto en vez de «no
+#     existe ENR», asi el asiento de 1846 no apaga el de 1851.
+gg_entre_rios_with_rosas = {
+	exists = s:STATE_ENTRE_RIOS
+	OR = {
+		AND = {
+			NOT = { exists = c:ENR }
+			exists = s:STATE_ENTRE_RIOS.region_state:ARG
+		}
+		c:ENR ?= {
+			has_variable = gg_enr_alcaraz_seat
+			is_subject_of = c:ARG
+		}
+	}
+}

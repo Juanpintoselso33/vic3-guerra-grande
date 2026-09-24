@@ -1208,6 +1208,43 @@ gg_argentina.8 = {
 	desc = gg_argentina.8.d
 	flavor = gg_argentina.8.f
 	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
+	# EN: 23/9/2026 (Juan, §2 of decisiones-argentina.md) -- the seat change of August 1846, offered only to the player,
+	#     the pattern of gg_argentina.1.b and .3.c. Buenos Aires gives Rosas's historical answer (option a, the same
+	#     effects) and the player crosses to the man who signed the treaty: Entre Rios is born loyal, a protectorate
+	#     that still delegates (gg_argentina_alcaraz_seat), and the Pronouncement of 1851 breaks it away.
+	# ES: el cambio de asiento de agosto de 1846, solo para el jugador, con el patron de .1.b y .3.c. Buenos Aires da la
+	#     respuesta historica de Rosas (los mismos efectos de a) y el jugador pasa al hombre que firmo el tratado: Entre
+	#     Rios nace leal, protectorado que sigue delegando, y el Pronunciamiento de 1851 lo separa.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.69.c|" # GG_TRAZA
+		name = gg_argentina.69.c
+		trigger = {
+			is_player = yes
+			NOT = { exists = c:ENR }
+			exists = s:STATE_ENTRE_RIOS.region_state:ARG
+		}
+		gg_reclamo_abre = { KEY = entre_rios }
+		hidden_effect = { set_global_variable = { name = gg_pact_claim_source_entre_rios value = 69 } }
+		custom_tooltip = gg_alcaraz_amendments_tt
+		set_global_variable = gg_alcaraz_rejected
+		set_global_variable = { name = gg_entre_rios_agravio value = 1 }
+		if = {
+			limit = {
+				exists = c:CRR
+				NOT = { has_war_with = c:CRR }
+			}
+			gg_argentina_open_war = { TAG = CRR }
+		}
+		ai_chance = { base = 0 }
+		custom_tooltip = gg_play_as_entre_rios_alcaraz_tt
+		# EN/ES: last, always, through a saved scope; Entre Rios does not exist when the preview is built
+		#     / ultimo, siempre, por un scope guardado; Entre Rios no existe cuando se arma la vista previa
+		hidden_effect = {
+			gg_argentina_alcaraz_seat = yes
+			c:ENR ?= { save_scope_as = gg_new_seat }
+			play_as = scope:gg_new_seat
+		}
+	}
 	event_image = { video = "gg_arg_vences" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
@@ -1378,8 +1415,7 @@ gg_argentina.71 = {
 
 	trigger = {
 		c:ARG ?= this
-		exists = s:STATE_ENTRE_RIOS
-		NOT = { exists = c:ENR }
+		gg_entre_rios_with_rosas = yes # EN/ES: 23/9 (Juan, §2) -- or the Entre Rios of Alcaraz / o el de Alcaraz
 	}
 
 	option = {
@@ -3563,15 +3599,29 @@ gg_argentina.80 = {
 		# EN: 23/9/2026 (Codex audit, AUD-PACT-80B) -- not after Urquiza's victory: his constitution makes one country
 		#     a month later (gg_constitution.1, only option a), so "each province keeps its government" would be undone.
 		# ES: no despues de la victoria de Urquiza: su constitucion hace un solo pais al mes, y esto se desharia.
-		trigger = { NOT = { has_global_variable = gg_pact_settlement_urquiza } }
-		custom_tooltip = gg_argentina.80.b_tt
+		# EN: 23/9/2026 (Juan, P3 of the endings audit, AUD-PACT-80B2: "the constitution rules") -- nor after the
+		#     negotiated confederation, whose constitution also makes one country (gg_constitution.1.a, +10000 under the
+		#     rules). It stays where nothing else is on offer (two governments, the mandate undone: gg_argentina.80.a is
+		#     closed there) and after Rosas's victory (no constitution); its text says the league lasts only while there
+		#     is no constitution, because under the first two the constitution may still come and join them.
+		# ES: tampoco despues de la confederacion negociada, cuya constitucion tambien hace un solo pais. Queda donde no
+		#     hay otra opcion (dos gobiernos, mandato deshecho) y tras la victoria de Rosas (sin constitucion); su texto
+		#     dice que la liga dura mientras no haya constitucion, porque en los dos primeros casos todavia puede llegar.
+		trigger = {
+			NOR = {
+				has_global_variable = gg_pact_settlement_urquiza
+				has_global_variable = gg_pact_settlement_constitutional
+			}
+		}
+		if = {
+			limit = { has_global_variable = gg_pact_settlement_rosas }
+			custom_tooltip = gg_argentina.80.b_tt
+		}
+		else = { custom_tooltip = gg_argentina.80.b_tt_until_constitution }
 		trigger_event = { id = gg_constitution.1 days = 30 popup = yes } # EN/ES: 23/9 (Juan) -- the constitution / la constitucion
 		# EN/ES: the protectorates stay as they are, and the governors keep their seats
 		#     / los protectorados quedan como estan, con sus gobernadores
-		ai_chance = {
-			base = 80
-			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = -50 }
-		}
+		ai_chance = { base = 80 }
 	}
 }
 

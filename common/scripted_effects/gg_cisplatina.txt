@@ -121,6 +121,9 @@ gg_oriental_incorporate = {
 	else = {
 		set_global_variable = gg_reincorporated
 		set_global_variable = gg_oriental_in_pact
+		# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- the siege is over: its modifiers go now, before Brazil hears of it (the
+		#     postwar that cleared them does not run after a reincorporation) / el sitio termino: sus modificadores se van ya
+		gg_wartime_modifiers_clear_once = yes
 		c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 		every_scope_state = {
 			add_modifier = {

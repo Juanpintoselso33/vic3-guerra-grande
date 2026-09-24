@@ -439,7 +439,12 @@ gg_peace.1 = {
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
-		custom_tooltip = gg_peace_protectorate_asked_tt
+		# EN/ES: under the rule the answer is not uncertain (AUD-RULES-EUROPE) / con la regla la respuesta no es incierta
+		if = {
+			limit = { gg_terms_defensa_europe = yes }
+			custom_tooltip = gg_peace_protectorate_asked_rule_tt
+		}
+		else = { custom_tooltip = gg_peace_protectorate_asked_tt }
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
@@ -455,9 +460,17 @@ gg_peace.1 = {
 			#     The odds are weighted accordingly, and the answer takes four months to arrive.
 			# ES: salieron seis pedidos entre 1838 y 1865 y Londres los rechazo todos. La tirada
 			#     esta cargada en consecuencia, y la respuesta tarda cuatro meses en llegar.
-			random_list = {
-				75 = { trigger_event = { id = gg_peace.4 days = 120 popup = yes } }
-				25 = { trigger_event = { id = gg_peace.3 days = 120 popup = yes } }
+			# EN/ES: 23/9/2026 (Juan, P4 of the endings audit, AUD-RULES-EUROPE) -- under the rule «the Defensa wins:
+			#     European protectorate» London and Paris accept; only there / con esa regla Londres y Paris aceptan
+			if = {
+				limit = { gg_terms_defensa_europe = yes }
+				trigger_event = { id = gg_peace.3 days = 120 popup = yes }
+			}
+			else = {
+				random_list = {
+					75 = { trigger_event = { id = gg_peace.4 days = 120 popup = yes } }
+					25 = { trigger_event = { id = gg_peace.3 days = 120 popup = yes } }
+				}
 			}
 		}
 
@@ -1232,6 +1245,9 @@ gg_peace.2 = {
 		set_global_variable = gg_peace_settled
 
 		custom_tooltip = gg_peace_rosista_client_tt
+			# EN/ES: 23/9 (Juan, AUD-RULES-CLIENT2) -- not with Rosas already fallen: nobody to be the client of
+			#     / no con Rosas ya caido: no queda de quien ser cliente
+			NOT = { gg_rosas_fallen = yes }
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 

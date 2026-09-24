@@ -13,10 +13,12 @@ gg_troops.1 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_troops.1|" # GG_TRAZA
 		gg_troops_split_armies_defensa = yes
-		# EN/ES: 23/9 -- the city arms fast after the split (~6,500 in Feb 1843) / la ciudad se arma rapido
-		add_modifier = { name = gg_defensa_city_in_arms months = 6 }
+		# EN/ES: 23/9 (Juan, #10 of the design-vs-code audit) -- «Defensa a la par» (gg_defensa_city_in_arms) is gone:
+		#     the siege without an engine war replaced it the same day. The modifier stays defined for old saves.
+		#     / «Defensa a la par» se fue: la reemplazo el sitio sin guerra; el modificador queda definido para partidas viejas
 		if = { limit = { NOT = { has_modifier = gg_siege_no_aggression } } add_modifier = { name = gg_siege_no_aggression } }
-		# EN/ES: 23/9 -- the Empire stays out until 1851 / el Imperio se queda afuera hasta 1851
+		# EN/ES: 23/9 -- the Empire stays out until the peace is signed (gg_wartime_modifiers_clear)
+		#     / el Imperio se queda afuera hasta la paz firmada
 		c:BRZ ?= { if = { limit = { NOT = { has_modifier = gg_brazil_stays_out } } add_modifier = { name = gg_brazil_stays_out } } }
 	}
 }

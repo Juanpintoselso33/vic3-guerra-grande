@@ -12,6 +12,9 @@ on_game_started = {
 guerra_grande_on_game_start = {
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_on_game_start" # GG_TRAZA
+		# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- a new game: the old-save repairs of gg_audit_migrations.txt never run
+		#     / partida nueva: las reparaciones de partidas viejas no corren nunca
+		set_global_variable = gg_new_game_no_migrations
 		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
 		gg_systems_init = yes
 		# EN/ES: 23/9 -- the historical men live until their date / viven hasta su fecha
