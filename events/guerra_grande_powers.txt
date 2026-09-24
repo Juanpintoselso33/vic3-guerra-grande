@@ -420,7 +420,13 @@ gg_powers.12 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.12.a|" # GG_TRAZA
 		name = gg_powers.12.a
-		custom_tooltip = gg_powers.12.a_tt
+		# EN/ES: 24/9/2026 (Codex review of Juan's decision 2) -- the Cerrito sat at the Hood table: gg_hood_done is set by
+		#     both answers, so the chiefs' arrangement (gg_powers.36.a) reads this mark instead
+		#     / el Cerrito se sento a la mesa Hood: gg_hood_done lo ponen las dos respuestas, asi que el arreglo de los jefes lee esta
+		custom_tooltip = {
+			text = gg_powers.12.a_tt
+			set_global_variable = gg_hood_accepted
+		}
 		trigger = {
 			OR = {
 				NOT = { has_global_variable = gg_hood_argentina_pending }
@@ -1739,11 +1745,13 @@ gg_powers.36 = {
 		gg_peace_chain_clear = yes
 		custom_tooltip = gg_powers.36.a_tt
 		# EN: do what the chiefs ask: sound out Oribe. The army is content; but a government that seeks terms from the
-		#     besieger frees the French commissioner from his duty to sustain the city. The arrangement only goes
-		#     anywhere under the old conditions of the Larranaga mediation, G0 included.
+		#     besieger weakens its claim that the French commissioner must sustain the city (Herrera's argument rested on
+		#     the negotiation with Oribe being broken). The arrangement only goes anywhere under the old conditions of
+		#     the Larranaga mediation, G0 included.
 		# ES: hacer lo que piden los jefes: tantear a Oribe. El ejercito queda conforme; pero un gobierno que busca
-		#     arreglo con el sitiador libera al comisario frances de su deber de sostener la plaza. El arreglo solo
-		#     prospera con las condiciones de la mediacion de Larranaga, G0 incluida.
+		#     arreglo con el sitiador debilita su reclamo de que el comisario frances sostenga la plaza (el argumento de
+		#     Herrera era que la negociacion con Oribe estaba rota). El arreglo solo prospera con las condiciones de la
+		#     mediacion de Larranaga, G0 incluida.
 		add_loyalists = { value = small_radicals interest_group = ig:ig_armed_forces }
 		gg_patron_change = { PATRON = francia DELTA = -10 }
 		if = {
@@ -1756,8 +1764,9 @@ gg_powers.36 = {
 				# ES: pedia una barra de facciones en 30. Ahora lo abre que alguien ya se haya sentado a
 				#     una mesa: las bases Hood, las ocho condiciones de Rivera o un Cerrito que pidio
 				#     condiciones. Las tres son cosas que hizo el jugador.
+				# EN/ES: 24/9/2026 (Codex) -- the Hood bases ACCEPTED by the Cerrito, not merely answered / aceptadas, no solo contestadas
 				OR = {
-					has_global_variable = gg_hood_done
+					has_global_variable = gg_hood_accepted
 					has_global_variable = gg_rivera_eight_conditions
 					has_global_variable = gg_cerrito_negotiates
 				}
