@@ -1489,7 +1489,7 @@ gg_rivera.6 = {
 	# Animated from a public-domain painting. Produced separately; alias declared in
 	# gfx/media_aliases/. Not created by this file.
 	event_image = {
-		video = "gg_rivera_death"
+		video = "gg_rivera_sayago"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"

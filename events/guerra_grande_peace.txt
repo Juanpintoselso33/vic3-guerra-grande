@@ -1842,7 +1842,7 @@ gg_peace.7 = {
 	flavor = gg_peace.7.flav
 
 	event_image = {
-		video = "gg_f2_oribe_indiscreto"
+		video = "gg_f2_oribe_rius"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"

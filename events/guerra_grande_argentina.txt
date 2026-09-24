@@ -1568,7 +1568,7 @@ gg_argentina.10 = {
 	title = gg_argentina.10.t
 	desc = gg_argentina.10.d
 	flavor = gg_argentina.10.f
-	event_image = { video = "gg_arg_beron" }
+	event_image = { video = "gg_arg_pago_largo" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3794,7 +3794,7 @@ gg_argentina.83 = {
 		}
 	}
 	flavor = gg_argentina.83.f
-	event_image = { video = "gg_arg_caseros_penuti" }
+	event_image = { video = "gg_arg_caseros_blanes" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	duration = 12
 	is_popup = yes
@@ -3817,7 +3817,7 @@ gg_argentina.84 = {
 	title = gg_argentina.84.t
 	desc = gg_argentina.84.d
 	flavor = gg_argentina.84.f
-	event_image = { video = "gg_arg_pago_largo" }
+	event_image = { video = "gg_arg_coraceros" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes

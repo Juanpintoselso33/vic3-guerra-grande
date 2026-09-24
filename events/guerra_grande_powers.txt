@@ -263,7 +263,7 @@ gg_powers.11 = {
 	flavor = gg_powers.11.f
 
 	event_image = {
-		video = "gg_fl_barry"
+		video = "gg_f2_castellanos_bloqueo"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -1501,7 +1501,7 @@ gg_powers.26 = {
 	flavor = gg_powers.26.f
 
 	event_image = {
-		video = "gg_fl_varela"
+		video = "gg_f2_varela_blanes"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

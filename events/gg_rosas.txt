@@ -245,7 +245,7 @@ gg_rosas.4 = {
 	title = gg_rosas.4.t
 	desc = gg_rosas.4.d
 	flavor = gg_rosas.4.f
-	event_image = { video = "gg_ros_durand" }
+	event_image = { video = "gg_ros_arana_morel" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

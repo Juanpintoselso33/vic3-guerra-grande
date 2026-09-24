@@ -1,0 +1,57 @@
+﻿# Media aliases for the event videos of 24/9/2026, re-audit batch (docs/guerra-grande-flujo/imagenes-reauditoria-2026-09-24.md).
+# Alias de los videos de eventos del 24/9/2026, tanda de la reauditoria.
+# Sources / Fuentes: SOURCES_flujo_images.md (design repo), section "Tanda de la reauditoria del 24/9/2026".
+
+# gg_powers.26: Juan Manuel Blanes, "Asesinato de Florencio Varela" (1870), period albumen photograph of the painting -- Biblioteca Nacional de Chile -- Public domain
+gg_f2_varela_blanes = {
+	video = "gfx/media_aliases/gg_f2_varela_blanes.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_argentina.83: Juan Manuel Blanes, "La batalla de Caseros" (1856-57), Palacio San Jose -- via Commons -- Public domain
+gg_arg_caseros_blanes = {
+	video = "gfx/media_aliases/gg_arg_caseros_blanes.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_rosas.4: Carlos Morel, Felipe Arana, lithograph, 1844 -- via Commons -- Public domain
+gg_ros_arana_morel = {
+	video = "gfx/media_aliases/gg_ros_arana_morel.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/london_center"
+}
+
+# gg_phase1.2: Pascual Echague, lithograph (Andrea Bacle), c. 1860 -- Museo Historico Nacional (AR), via Commons -- Public domain
+gg_f2_echague = {
+	video = "gfx/media_aliases/gg_f2_echague.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_peace.7: Vicente Rius, "Brigadier Gral. Manuel Oribe", oil, Palacio Legislativo (arte.parlamento.gub.uy/obra/view/297) -- date not catalogued: check rights before a Workshop release
+gg_f2_oribe_rius = {
+	video = "gfx/media_aliases/gg_f2_oribe_rius.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_prewar.9: Manuel Rose (1882-1961), "Gral. Fructuoso Rivera", equestrian oil, Palacio Legislativo (obra/view/306) -- likely under copyright: replace before a public Workshop release
+gg_fl_rivera_rose = {
+	video = "gfx/media_aliases/gg_fl_rivera_rose.bk2"
+	audio = "event:/SFX/Events/europenorthamerica/before_the_battle"
+}
+
+# gg_rivera.6: Luis Garcia Sayago, "Fructuoso Rivera", oil, Palacio Legislativo (obra/view/155) -- date not catalogued: check rights before a Workshop release
+gg_rivera_sayago = {
+	video = "gfx/media_aliases/gg_rivera_sayago.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_powers.11: Roberto Castellanos (1871-1942), "Bloqueo de Montevideo por el almirante Brown" -- 600x446 scan, blog unmardepintura -- likely public domain (d. 1942)
+gg_f2_castellanos_bloqueo = {
+	video = "gfx/media_aliases/gg_f2_castellanos_bloqueo.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
+
+# gg_plata.2: Juan Manuel Besnes e Irigoyen, the Gorgon aground at Montevideo, watercolour, 1844 -- Museo Historico Nacional (UY), via Commons -- Public domain
+gg_plata_gorgon_besnes = {
+	video = "gfx/media_aliases/gg_plata_gorgon_besnes.bk2"
+	audio = "event:/SFX/Events/unspecific/naval_battle"
+}
