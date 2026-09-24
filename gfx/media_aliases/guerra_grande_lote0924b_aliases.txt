@@ -1,0 +1,27 @@
+﻿# Media aliases for the event videos of 24/9/2026, second batch: images Juan chose for events still without their own picture.
+# Alias de los videos de eventos del 24/9/2026, segunda tanda: imagenes elegidas por Juan para eventos que seguian sin imagen propia.
+# Sources / Fuentes: SOURCES_flujo_images.md (design repo), section "Segunda tanda del 24/9/2026".
+
+# gg_prewar.1: El Moderador no. 1, Montevideo, 23/11/1835 (masthead) -- Biblioteca Nacional / Anaforas (MHN, Casa de Lavalleja) -- Public domain
+gg_fl_moderador = {
+	video = "gfx/media_aliases/gg_fl_moderador.bk2"
+	audio = "event:/SFX/Events/southamerica/election"
+}
+
+# gg_contingent.6: "Legion francaise (soldats)", L'Illustration no. 122, 28/6/1845 -- Gallica (BnF) -- Public domain
+gg_leg_legion_1845 = {
+	video = "gfx/media_aliases/gg_leg_legion_1845.bk2"
+	audio = "event:/SFX/Events/unspecific/military_parade"
+}
+
+# gg_rivera.5: "Fructuoso Rivera2.JPG" -- daguerreotype, c. 1850, Archivo Nacional de la Imagen (SODRE) -- Public domain
+gg_riv_daguerrotipo = {
+	video = "gfx/media_aliases/gg_riv_daguerrotipo.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}
+
+# gg_notice.11: "Florencio Varela.jpg" -- daguerreotype by Edmond Lebeaud, c. 1847, Biblioteca Nacional (Argentina) -- Public domain
+gg_ntc_varela_lebeaud = {
+	video = "gfx/media_aliases/gg_ntc_varela_lebeaud.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}

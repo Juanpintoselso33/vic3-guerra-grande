@@ -519,7 +519,7 @@ gg_contingent.6 = {
 
 	# EN: The Regimiento de Cazadores Vascos splits off.
 	event_image = {
-		video = "gg_leg_basque_chasseurs"
+		video = "gg_leg_legion_1845"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

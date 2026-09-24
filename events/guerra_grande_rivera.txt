@@ -1289,7 +1289,7 @@ gg_rivera.5 = {
 	flavor = gg_rivera.5.f
 
 	event_image = {
-		video = "gg_riv_triumvirate"
+		video = "gg_riv_daguerrotipo"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_election.dds"

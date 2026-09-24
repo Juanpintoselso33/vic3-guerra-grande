@@ -25,7 +25,7 @@ gg_prewar.1 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_fl_rosas"
+		video = "gg_fl_moderador"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"

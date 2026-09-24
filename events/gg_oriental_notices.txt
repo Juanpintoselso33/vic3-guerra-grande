@@ -222,7 +222,7 @@ gg_notice.11 = {
 	desc = gg_notice.11.d
 	flavor = gg_notice.11.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "votp_conspiring" }
+	event_image = { video = "gg_ntc_varela_lebeaud" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	duration = 12
 	is_popup = yes
