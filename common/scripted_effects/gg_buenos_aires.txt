@@ -116,9 +116,19 @@ gg_ba_save_sides = {
 gg_ba_open_war = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_open_war| BY= $BY$ PHASE= $PHASE$ " # GG_TRAZA
 	gg_ba_save_sides = yes
+	# EN/ES: independence first, then the truces: make_independent makes a fresh truce (Codex review of 64ca7e5;
+	#     vanilla's order, events/soi_events/00_ep1_kazakh_events.txt) / primero la independencia, despues las treguas
 	if = {
-		limit = { exists = scope:gg_ba_state exists = scope:gg_ba_conf }
+		limit = {
+			exists = scope:gg_ba_state
+			exists = scope:gg_ba_conf
+			scope:gg_ba_state = { NOT = { has_war_with = scope:gg_ba_conf } }
+		}
 		scope:gg_ba_state = {
+			if = {
+				limit = { is_subject_of = scope:gg_ba_conf }
+				make_independent = yes
+			}
 			if = { limit = { has_truce_with = scope:gg_ba_conf } end_truce = scope:gg_ba_conf }
 		}
 		scope:gg_ba_conf = {
@@ -132,12 +142,6 @@ gg_ba_open_war = {
 			scope:gg_ba_state = {
 				NOT = { has_war_with = scope:gg_ba_conf }
 				NOT = { has_truce_with = scope:gg_ba_conf }
-			}
-		}
-		scope:gg_ba_state = {
-			if = {
-				limit = { is_subject_of = scope:gg_ba_conf }
-				make_independent = yes
 			}
 		}
 		set_global_variable = { name = gg_ba_phase value = $PHASE$ }

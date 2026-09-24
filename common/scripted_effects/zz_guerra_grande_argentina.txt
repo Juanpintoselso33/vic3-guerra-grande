@@ -513,6 +513,12 @@ gg_argentina_create_entre_rios = {
 		c:ENR = {
 			remove_variable = gg_enr_alcaraz_seat
 			if = { limit = { is_subject = yes } make_independent = yes }
+			# EN/ES: make_independent leaves a truce, and gg_argentina_open_war (.3.b/.c) refuses a target under truce
+			#     (Codex review of 64ca7e5) / la independencia deja una tregua y la guerra del Pacto no se abriria
+			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
+		}
+		c:ARG ?= {
+			if = { limit = { has_truce_with = c:ENR } end_truce = c:ENR }
 		}
 	}
 	else = {
