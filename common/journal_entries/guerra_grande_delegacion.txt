@@ -282,7 +282,7 @@ je_gg_delegation = {
 			# after the final political window opens. No Oriental siege counter participates.
 			OR = {
 				has_global_variable = gg_pact_settled
-				AND = { year >= 1851 global_var:gg_delegating_provinces <= 6 }
+				AND = { year >= 1851 global_var:gg_delegating_provinces <= 6 gg_pact_dynamic = yes }
 			}
 		}
 	}

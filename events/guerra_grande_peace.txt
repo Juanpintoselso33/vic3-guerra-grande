@@ -155,7 +155,13 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.a|" # GG_TRAZA
 		name = gg_peace.1.a
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_outcome_historical = yes  }
+				AND = { NOT = { has_global_variable = gg_imperial_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 		default_option = yes
@@ -233,7 +239,13 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.b|" # GG_TRAZA
 		name = gg_peace.1.b
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_punish = yes  }
+				AND = { NOT = { has_global_variable = gg_imperial_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -292,6 +304,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
 		}
 	}
@@ -319,9 +332,15 @@ gg_peace.1 = {
 		name = gg_peace.1.c
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_brazil_treaties = yes exists = c:BRZ }
+				AND = {
 			OR = {
 				global_var:gg_patron_brasil > 0
 				has_global_variable = gg_imperial_pledged
+			}
+						}
 			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
@@ -374,6 +393,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_brazil_treaties = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 25
 		}
 	}
@@ -399,12 +419,18 @@ gg_peace.1 = {
 		name = gg_peace.1.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_europe = yes  }
+				AND = {
 			# EN/ES: C10 -- the patrons themselves, not the retired sea formula / los padrinos, no la formula
 			OR = {
 				global_var:gg_patron_francia > 0
 				global_var:gg_patron_britania > 0
 			}
 			NOT = { has_global_variable = gg_imperial_pledged }
+						}
+			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
@@ -432,6 +458,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_europe = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
 		}
 	}
@@ -458,7 +485,13 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.e|" # GG_TRAZA
 		name = gg_peace.1.e
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_imperial_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_war_rosas = yes exists = c:ARG }
+				AND = { NOT = { has_global_variable = gg_imperial_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -505,6 +538,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_war_rosas = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 15
 		}
 	}
@@ -516,7 +550,13 @@ gg_peace.1 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.g|" # GG_TRAZA
 		name = gg_peace.1.g
-		trigger = { has_global_variable = gg_imperial_pledged }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_brazil_vassal = yes exists = c:BRZ }
+				AND = { has_global_variable = gg_imperial_pledged 				}
+			}
+		}
 		set_global_variable = gg_peace_settled
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
@@ -552,6 +592,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_brazil_vassal = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 20
 		}
 	}
@@ -568,8 +609,14 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.h|" # GG_TRAZA
 		name = gg_peace.1.h
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_defensa_cisplatina = yes exists = c:BRZ }
+				AND = {
 			has_global_variable = gg_imperial_pledged
 			global_var:gg_patron_brasil >= 60
+						}
+			}
 		}
 		set_global_variable = gg_peace_settled
 
@@ -623,6 +670,7 @@ gg_peace.1 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_defensa_cisplatina = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
 		}
 	}
@@ -778,7 +826,13 @@ gg_peace.2 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.a|" # GG_TRAZA
 		name = gg_peace.2.a
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_amnesty = yes  }
+				AND = { NOT = { has_global_variable = gg_reunification_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 		default_option = yes
@@ -818,6 +872,7 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_amnesty = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 35
 		}
 	}
@@ -844,7 +899,13 @@ gg_peace.2 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.b|" # GG_TRAZA
 		name = gg_peace.2.b
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_presidency = yes  }
+				AND = { NOT = { has_global_variable = gg_reunification_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -900,6 +961,7 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_presidency = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 25
 		}
 	}
@@ -936,7 +998,13 @@ gg_peace.2 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.c|" # GG_TRAZA
 		name = gg_peace.2.c
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
-		trigger = { NOT = { has_global_variable = gg_reunification_pledged } }
+		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_punish = yes  }
+				AND = { NOT = { has_global_variable = gg_reunification_pledged } 				}
+			}
+		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
 		set_global_variable = gg_peace_settled
 
@@ -1002,6 +1070,7 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_punish = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
 		}
 	}
@@ -1032,9 +1101,15 @@ gg_peace.2 = {
 		name = gg_peace.2.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_pact_province = yes exists = c:ARG }
+				AND = {
 			OR = {
 				global_var:gg_patron_rosas > 0
 				has_global_variable = gg_reunification_pledged
+			}
+						}
 			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
@@ -1083,6 +1158,7 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_pact_province = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 15
 			# EN/ES: 23/9 (Juan) -- Rosas's support weighs / pesa el respaldo de Rosas
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 15 }
@@ -1114,10 +1190,16 @@ gg_peace.2 = {
 		name = gg_peace.2.e
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_rosas_client = yes exists = c:ARG }
+				AND = {
 			OR = {
 				global_var:gg_patron_rosas > 0
 				has_global_variable = gg_reunification_pledged
 				has_global_variable = gg_arg_republic_asked # EN/ES: 23/9 -- Argentina asked for it / lo pidio Argentina
+			}
+						}
 			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
@@ -1169,6 +1251,7 @@ gg_peace.2 = {
 		}
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_rosas_client = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 10
 			modifier = { trigger = { global_var:gg_patron_rosas >= 50 } add = 10 }
 			# EN/ES: 23/9 (Juan) -- Argentina asked for a republic apart / Argentina pidio una republica aparte
@@ -1189,6 +1272,10 @@ gg_peace.2 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.2.g|" # GG_TRAZA
 		name = gg_peace.2.g
 		trigger = {
+			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
+			OR = {
+				AND = { gg_terms_cerrito_reincorporation = yes exists = c:ARG }
+				AND = {
 			# EN/ES: 23/9 (Juan) -- the 1845 pledge or Argentina's request / la promesa de 1845 o el pedido argentino
 			OR = {
 				has_global_variable = gg_reunification_pledged
@@ -1196,6 +1283,8 @@ gg_peace.2 = {
 			}
 			global_var:gg_patron_rosas >= 60
 			exists = c:ARG
+						}
+			}
 		}
 		set_global_variable = gg_peace_settled
 
@@ -1215,6 +1304,7 @@ gg_peace.2 = {
 		else = { gg_oriental_incorporate = yes }
 
 		ai_chance = {
+			modifier = { trigger = { gg_terms_cerrito_reincorporation = yes } add = 100000 } # EN/ES: the war's game rule / la regla de la guerra
 			base = 5
 			# EN/ES: 23/9 (Juan) -- total support and Argentina's request make it his likeliest choice
 			#     / el respaldo total y el pedido argentino la vuelven su opcion mas probable

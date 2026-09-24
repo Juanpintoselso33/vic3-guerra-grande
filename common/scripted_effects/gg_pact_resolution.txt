@@ -19,6 +19,21 @@ gg_pact_resolve = {
 	else_if = {
 		limit = { NOT = { has_global_variable = gg_pact_settled } }
 		set_global_variable = gg_pact_settled
+		# EN: 23/9/2026 -- the Pact's game rule reads the war its way (common/game_rules/zz_gg_game_rules.txt),
+		#     unless Buenos Aires itself chose the negotiated confederation.
+		# ES: la regla del Pacto lee la guerra a su modo, salvo que Buenos Aires eligiera la confederacion negociada.
+		if = {
+			limit = {
+				gg_pact_forced_war = yes
+				NOT = { has_global_variable = gg_confederacion_negociada }
+			}
+			set_global_variable = { name = gg_pact_war_urquiza_won value = 0 }
+			set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
+			set_global_variable = { name = gg_pact_war_white_peace value = 0 }
+			if = { limit = { gg_pact_historical = yes } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
+			else_if = { limit = { gg_pact_rosas = yes } set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+			else = { set_global_variable = { name = gg_pact_war_white_peace value = 1 } }
+		}
 		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are annexed now, whatever the
 		#     settlement / las que quedaron protectorado se anexan ahora, sea cual sea el cierre
 		gg_argentina_vassals_settle = yes

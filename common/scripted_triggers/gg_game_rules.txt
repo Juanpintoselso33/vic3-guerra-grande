@@ -1,8 +1,28 @@
 ﻿# EN/ES: the game rule of how the war ends (common/game_rules/zz_gg_game_rules.txt) / la regla de como termina la guerra
 gg_outcome_dynamic = { has_game_rule = gg_war_outcome_dynamic }
 gg_outcome_historical = { has_game_rule = gg_war_outcome_historical }
-gg_outcome_defensa = { has_game_rule = gg_war_outcome_defensa }
-gg_outcome_cerrito = { has_game_rule = gg_war_outcome_cerrito }
+gg_outcome_defensa = {
+	OR = {
+		has_game_rule = gg_war_outcome_defensa
+		has_game_rule = gg_war_outcome_defensa_punish
+		has_game_rule = gg_war_outcome_defensa_brazil_treaties
+		has_game_rule = gg_war_outcome_defensa_europe
+		has_game_rule = gg_war_outcome_defensa_war_rosas
+		has_game_rule = gg_war_outcome_defensa_brazil_vassal
+		has_game_rule = gg_war_outcome_defensa_cisplatina
+	}
+}
+gg_outcome_cerrito = {
+	OR = {
+		has_game_rule = gg_war_outcome_cerrito
+		has_game_rule = gg_war_outcome_cerrito_amnesty
+		has_game_rule = gg_war_outcome_cerrito_presidency
+		has_game_rule = gg_war_outcome_cerrito_punish
+		has_game_rule = gg_war_outcome_cerrito_pact_province
+		has_game_rule = gg_war_outcome_cerrito_rosas_client
+		has_game_rule = gg_war_outcome_cerrito_reincorporation
+	}
+}
 # EN/ES: who may be called beaten / a quien se puede dar por batido
 gg_defensa_can_lose = {
 	OR = {
@@ -16,3 +36,30 @@ gg_cerrito_can_lose = {
 		gg_outcome_defensa = yes
 	}
 }
+# EN/ES: 23/9/2026 -- the game rule of how the Federal Pact ends / la regla de como termina el Pacto Federal
+gg_pact_dynamic = { has_game_rule = gg_pact_outcome_dynamic }
+gg_pact_historical = { has_game_rule = gg_pact_outcome_historical }
+gg_pact_negotiated = { has_game_rule = gg_pact_outcome_negotiated }
+gg_pact_rosas = { has_game_rule = gg_pact_outcome_rosas }
+gg_pact_stalemate = { has_game_rule = gg_pact_outcome_stalemate }
+# EN/ES: the rules that end the Pact by a war with Entre Rios / las reglas que cierran el Pacto con una guerra
+gg_pact_forced_war = {
+	OR = {
+		gg_pact_historical = yes
+		gg_pact_rosas = yes
+		gg_pact_stalemate = yes
+	}
+}
+# EN/ES: 23/9/2026 -- the terms each setting forces / las condiciones que fuerza cada opcion
+gg_terms_defensa_punish = { has_game_rule = gg_war_outcome_defensa_punish }
+gg_terms_defensa_brazil_treaties = { has_game_rule = gg_war_outcome_defensa_brazil_treaties }
+gg_terms_defensa_europe = { has_game_rule = gg_war_outcome_defensa_europe }
+gg_terms_defensa_war_rosas = { has_game_rule = gg_war_outcome_defensa_war_rosas }
+gg_terms_defensa_brazil_vassal = { has_game_rule = gg_war_outcome_defensa_brazil_vassal }
+gg_terms_defensa_cisplatina = { has_game_rule = gg_war_outcome_defensa_cisplatina }
+gg_terms_cerrito_amnesty = { has_game_rule = gg_war_outcome_cerrito_amnesty }
+gg_terms_cerrito_presidency = { has_game_rule = gg_war_outcome_cerrito_presidency }
+gg_terms_cerrito_punish = { has_game_rule = gg_war_outcome_cerrito_punish }
+gg_terms_cerrito_pact_province = { has_game_rule = gg_war_outcome_cerrito_pact_province }
+gg_terms_cerrito_rosas_client = { has_game_rule = gg_war_outcome_cerrito_rosas_client }
+gg_terms_cerrito_reincorporation = { has_game_rule = gg_war_outcome_cerrito_reincorporation }

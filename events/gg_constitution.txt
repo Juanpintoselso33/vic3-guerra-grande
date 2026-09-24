@@ -54,6 +54,7 @@ gg_constitution.1 = {
 			base = 50
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_urquiza } add = 100 }
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_constitutional } add = 30 }
+			modifier = { trigger = { OR = { gg_pact_historical = yes gg_pact_negotiated = yes } } add = 10000 } # EN/ES: the Pact's game rule / la regla del Pacto
 		}
 	}
 	option = {
@@ -73,6 +74,7 @@ gg_constitution.1 = {
 		ai_chance = {
 			base = 30
 			modifier = { trigger = { has_global_variable = gg_pact_settlement_rosas } add = 60 }
+			modifier = { trigger = { gg_pact_rosas = yes } add = 10000 } # EN/ES: the Pact's game rule / la regla del Pacto
 		}
 	}
 }

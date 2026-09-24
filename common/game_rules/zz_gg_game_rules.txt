@@ -19,4 +19,76 @@ gg_war_outcome = {
 
 	gg_war_outcome_cerrito = {
 	}
+
+	# EN/ES: 23/9/2026 (Juan: "every possible ending") -- the winner AND its terms: the winner's AI takes that option,
+	#     available even without the pledges it usually needs / el ganador Y sus condiciones, aunque falten las promesas
+
+	gg_war_outcome_defensa_punish = {
+	}
+
+	gg_war_outcome_defensa_brazil_treaties = {
+	}
+
+	gg_war_outcome_defensa_europe = {
+	}
+
+	gg_war_outcome_defensa_war_rosas = {
+	}
+
+	gg_war_outcome_defensa_brazil_vassal = {
+	}
+
+	gg_war_outcome_defensa_cisplatina = {
+	}
+
+	gg_war_outcome_cerrito_amnesty = {
+	}
+
+	gg_war_outcome_cerrito_presidency = {
+	}
+
+	gg_war_outcome_cerrito_punish = {
+	}
+
+	gg_war_outcome_cerrito_pact_province = {
+	}
+
+	gg_war_outcome_cerrito_rosas_client = {
+	}
+
+	gg_war_outcome_cerrito_reincorporation = {
+	}
+}
+
+# EN: 23/9/2026 (Juan: "the rule for the end of the Federal Pact, with every possible path") -- how the Pact ends.
+#     Dynamic: Urquiza weighs his grievances in May 1851 and the war, if any, decides. Historical: Urquiza
+#     pronounces and wins (Caseros by 3/2/1852 at the latest), and the Confederation takes the 1853 constitution.
+#     Negotiated: Rosas accepts Entre Rios's reassumption and calls the congress. Rosas prevails: Urquiza is beaten
+#     and Rosas rules without a constitution while he lives. Two governments: the war ends with no victor.
+#     A player's own choices stand; the rule steers the AI, reads every war's end its way, and on 3/2/1852 closes
+#     a Pact still open. (The collapsed mandate needs most provinces to withdraw, so it stays in Dynamic.)
+#     Read through common/scripted_triggers/gg_game_rules.txt.
+# ES: como termina el Pacto Federal. Dinamico: Urquiza pesa sus agravios en mayo de 1851 y decide la guerra.
+#     Historico: Urquiza se pronuncia y gana (Caseros a mas tardar el 3/2/1852) y la Confederacion se da la
+#     constitucion de 1853. Negociado: Rosas acepta la reasuncion de Entre Rios y convoca el congreso. Gana Rosas:
+#     Urquiza batido y Rosas gobierna sin constitucion mientras viva. Dos gobiernos: la guerra termina sin vencedor.
+#     Lo que elige el jugador vale; la regla guia a la IA, lee a su modo el final de toda guerra y el 3/2/1852 cierra
+#     el Pacto que siga abierto. (El mandato deshecho necesita que la mayoria retire la delegacion: queda en Dinamico.)
+gg_pact_outcome = {
+	default = gg_pact_outcome_dynamic
+
+	gg_pact_outcome_dynamic = {
+	}
+
+	gg_pact_outcome_historical = {
+	}
+
+	gg_pact_outcome_negotiated = {
+	}
+
+	gg_pact_outcome_rosas = {
+	}
+
+	gg_pact_outcome_stalemate = {
+	}
 }

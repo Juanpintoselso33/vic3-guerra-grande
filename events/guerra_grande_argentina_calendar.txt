@@ -195,7 +195,16 @@ gg_argentina_cal.4 = {
 				#     checklist: 4+ pronounces, 2-3 a formal representation, 1 or less the negotiated confederation.
 				# ES: Urquiza lo pesa, en vez de una lista de todo o nada.
 				set_global_variable = { name = gg_urquiza_discontent_now value = gg_urquiza_discontent }
+				# EN/ES: 23/9 -- the Pact's game rule decides before the weighing / la regla del Pacto decide antes de pesar
 				if = {
+					limit = { gg_pact_negotiated = yes }
+					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
+				}
+				else_if = {
+					limit = { gg_pact_forced_war = yes }
+					c:ARG = { trigger_event = { id = gg_argentina.3 days = 0 popup = yes } }
+				}
+				else_if = {
 					limit = { gg_urquiza_discontent <= 1 }
 					c:ARG = { trigger_event = { id = gg_argentina.71 days = 0 popup = yes } }
 				}

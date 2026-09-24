@@ -231,6 +231,7 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_argentina_cal.2 days = 1556 }  # 1840-04-07 Tucuman se pronuncia
 			trigger_event = { id = gg_argentina_cal.3 days = 1742 }  # 1840-10-10 Cordoba adhiere
 			trigger_event = { id = gg_argentina_cal.4 days = 5595 }  # 1851-05-01 el Pronunciamiento
+			trigger_event = { id = gg_urquiza.3 days = 5873 }  # 1852-02-03 Caseros: the Pact's game rule closes it / la regla del Pacto lo cierra
 			# EN/ES: la campania del interior, y el balance que hace el tandem / the interior campaign
 			trigger_event = { id = gg_argentina_cal.5 days = 1184 }  # 1839-03-31 Pago Largo
 			trigger_event = { id = gg_argentina_cal.6 days = 1791 }  # 1840-11-28 Quebracho Herrado

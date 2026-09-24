@@ -94,3 +94,33 @@ gg_urquiza.2 = {
 		custom_tooltip = gg_urquiza.2.a_tt
 	}
 }
+
+# EN: 3/2/1852, Caseros -- under a game rule that ends the Pact by war, a Pact still open is closed today the rule's
+#     way: the war with Entre Rios, if it lasts, ends, and the settlement is read (gg_pact_resolve). Hidden; no
+#     trigger, because a scheduled event's trigger is checked when it is scheduled. A siege of Buenos Aires
+#     (Caseros option c) resolves itself when it ends.
+# ES: 3/2/1852, Caseros -- con una regla que cierra el Pacto por la guerra, el Pacto que siga abierto se cierra hoy a
+#     su modo: termina la guerra con Entre Rios si dura, y se lee el arreglo. Oculto; sin trigger. Un sitio de
+#     Buenos Aires se resuelve solo al terminar.
+gg_urquiza.3 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.3|" # GG_TRAZA
+		if = {
+			limit = {
+				c:ARG ?= this
+				gg_pact_forced_war = yes
+				NOT = { has_global_variable = gg_pact_settled }
+				NOT = { has_global_variable = gg_caseros_siege }
+				NOT = { has_global_variable = gg_confederacion_negociada }
+			}
+			every_diplomatic_play = {
+				limit = { is_diplomatic_play_type = dp_gg_pacto_federal }
+				end_play = yes
+			}
+			gg_pact_resolve = yes
+		}
+	}
+}

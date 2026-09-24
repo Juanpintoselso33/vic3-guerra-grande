@@ -300,7 +300,10 @@ gg_argentina.3 = {
 		}
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
 		default_option = yes
-		ai_chance = { base = 20 }
+		ai_chance = {
+			base = 20
+			modifier = { trigger = { gg_pact_forced_war = yes } add = -20 } # EN/ES: the Pact's game rule / la regla del Pacto
+		}
 	}
 
 	option = {
