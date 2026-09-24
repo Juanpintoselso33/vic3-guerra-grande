@@ -188,6 +188,12 @@ flowcontainer = {
 				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_buceo_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_customs_house_at_the_buceo" }
 			}
 			flowcontainer = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_buceo_flags'), '(CFixedPoint)1')]"
+				direction = horizontal spacing = 6
+				icon = { size = { 32 32 } tooltip = "gg_siege_ui_buceo_flags_tt" texture = "gfx/interface/icons/generic_icons/trade.dds" }
+				textbox = { autoresize = yes multiline = yes minimumsize = { 204 -1 } maximumsize = { 204 -1 } tooltip = "gg_siege_ui_buceo_flags_tt" using = fontsize_medium align = left|nobaseline text = "gg_siege_buceo_open_to_all_flags" }
+			}
+			flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_siege_cer_trading'), '(CFixedPoint)1')]"
 				direction = horizontal spacing = 6
 				icon = { size = { 32 32 } tooltip = "gg_siege_ui_trading_cer_tt" texture = "gfx/interface/icons/generic_icons/trade.dds" }

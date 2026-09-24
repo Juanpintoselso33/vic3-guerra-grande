@@ -63,6 +63,7 @@ gg_endurance_add = {
 #       each foreign legion (Italian, French)    the Defensa        +1
 #       the French subsidy (1848 convention)     the Defensa        +5
 #       the Argentine auxiliaries                the Cerrito        +2
+#       the Buceo open to every flag (C3, 1848)  the Cerrito        +3  -- 36 months, gg_notice.12.a
 #     Their combat stats stay for the short wars of stage 2.
 # ES: lo que describe el sitio pasa a aguante; lo de pura batalla queda para la etapa 2. Mensual.
 gg_siege_modifiers_endurance = {
@@ -91,5 +92,8 @@ gg_siege_modifiers_endurance = {
 			}
 			gg_endurance_add = { SIDE = cerrito VALUE = 2 }
 		}
+		# EN/ES: 24/9/2026 (Juan, C3) -- the Buceo open to every flag (gg_notice.12.a, 36 months): +3 a month
+		#     / el Buceo abierto a toda bandera: +3 por mes
+		if = { limit = { has_modifier = gg_siege_buceo_open_to_all_flags } gg_endurance_add = { SIDE = cerrito VALUE = 3 } }
 	}
 }

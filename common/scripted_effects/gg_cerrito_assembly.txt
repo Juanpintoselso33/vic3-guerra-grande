@@ -1,0 +1,44 @@
+﻿# EN: 24/9/2026 (Juan, C5 «La Asamblea» of docs/guerra-grande-flujo/cerrito-mas-aire-propuestas.md, at half
+#     strength) -- the Cerrito convenes its chambers to speak for the Republic. One use, January 1849 to June
+#     1851, the months in which the lead the arbiter asks for comes down: +1 for the blancos and Rosas -5 (the
+#     Assembly was the Cerrito's shield against Buenos Aires: Oribe sent Rosas's 1845 reunification proposal
+#     to a commission of it that resolved nothing). A player presses the button in «La Guerra Grande»
+#     (common/scripted_buttons/gg_cerrito_assembly_button.txt); an AI Cerrito gets the same effect from the
+#     war journal's monthly pulse, 3 % a month (about 30 % a year), as the proposal simulated. The balance lab
+#     reads this file (tools/lab_balance/modelo.py, «assembly»).
+# ES: el Cerrito convoca a sus Camaras para que hablen por la Republica. Un uso, de enero de 1849 a junio de
+#     1851: +1 blancos y Rosas -5. El jugador aprieta el boton; la IA, desde el pulso mensual, 3 % por mes.
+# SOURCE / FUENTE: SOURCES_loans.md section 4 (elections of June 1845, the Asamblea General reinstalled on
+#     11/8/1845, Rosas's 1845 proposal sent to a commission that resolved nothing; Wikipedia ES «Gobierno del
+#     Cerrito»); M. J. Magarinos de Mello (comp.), El Gobierno del Cerrito, vol. II (actas de la Asamblea
+#     General, de las Camaras y de la Comision Permanente; su eleccion, integracion y funcionamiento), catalogue
+#     of the Biblioteca del Poder Legislativo, https://pmb.parlamento.gub.uy/pmb/opac_css/index.php?id=4141&lvl=notice_display;
+#     Parlamento del Uruguay, «Parlamentarios uruguayos» (the Defensa dissolved its chambers by decree of
+#     14/2/1846 and set up an Asamblea de Notables and a Consejo de Estado),
+#     https://parlamento.gub.uy/sites/default/files/documentos-generales/parlamentariosuruguayos_.pdf
+
+# EN/ES: the window and the single use, shared by the button and the AI / la ventana y el uso unico
+gg_cerrito_assembly_convene = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cerrito_assembly_convene|" # GG_TRAZA
+	set_global_variable = gg_cerrito_assembly_convened
+	gg_score_blanco = { AMOUNT = 1 }
+	gg_patron_change = { PATRON = rosas DELTA = -5 }
+}
+
+# EN: an AI Cerrito, once a month from the war journal's pulse (inside its 20-day tick): 3 % a month.
+# ES: un Cerrito de la IA, una vez por mes desde el pulso del journal de la guerra: 3 % por mes.
+gg_cerrito_assembly_ai = {
+	c:CER ?= {
+		if = {
+			limit = {
+				is_player = no
+				has_variable = guerra_grande_cerrito_government
+				gg_cerrito_assembly_open = yes
+			}
+			random = {
+				chance = 3
+				gg_cerrito_assembly_convene = yes
+			}
+		}
+	}
+}

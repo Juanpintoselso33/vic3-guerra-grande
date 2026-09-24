@@ -10,3 +10,8 @@
  guerra_grande_requires_river_unwatched:0 "Rosas tiene que tener su orilla del Plata con batería, y ninguna escuadra extranjera interviniendo en el río"
  gg_plata_requires_no_guarantee:0 "El río no puede estar bajo la garantía de las potencias (Rosas cedió a su ultimátum)"
  gg_plata_requires_no_refusal:0 "Rosas no puede haber negado el pedido en el último año"
+ gg_cerrito_assembly_button:0 "Convocar a la Asamblea"
+ gg_cerrito_assembly_button_desc:0 "Las Cámaras que el Cerrito hizo elegir en 1845 sesionan con la Constitución de 1830 en la mano; la plaza, desde 1846, se gobierna con una Asamblea de Notables creada por decreto. Cuando Rosas propuso «reunificar la patria», #b Oribe#! mandó la propuesta a una comisión de esas Cámaras, y la comisión no resolvió nada. Convocarlas otra vez es hacer hablar a la República por sí misma."
+ gg_cerrito_assembly_button_tt:0 "@information! Una sola vez. La balanza lo anota a favor de los blancos, y Buenos Aires, que esperaba otra cosa de esas Cámaras, también lo anota."
+ gg_cerrito_assembly_requires_once:0 "La Asamblea no puede haber sido convocada ya"
+ gg_cerrito_assembly_requires_window:0 "Tiene que ser antes de julio de 1851"

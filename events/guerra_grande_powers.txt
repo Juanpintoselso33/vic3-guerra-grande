@@ -1646,6 +1646,9 @@ gg_powers.28 = {
 					gg_war_balance_blanco >= gg_arbiter_balance_needed
 					gg_war_balance_colorado >= gg_arbiter_balance_needed
 				}
+				# EN/ES: 24/9/2026 (Juan, G0) -- the same date floor as the arbiter: no peace on the balance before 1849
+				#     / el mismo piso de fecha que el arbitro: ninguna paz por la balanza antes de 1849
+				gg_arbiter_asks = yes
 				NOT = { gg_outcome_historical = yes } # EN/ES: 23/9 -- the historical peace is October 1851 / la paz historica es en octubre de 1851
 			}
 			set_global_variable = gg_peace_offered

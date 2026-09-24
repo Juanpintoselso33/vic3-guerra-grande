@@ -270,6 +270,27 @@ gg_notice.11 = {
 #     compensate the city for the lifting of the French blockade, "une somme mensuelle de 40.000 piastres
 #     ... a titre d'avance"); SOURCES_loans.md (Gros, Le Predour and Devoize sign; "en dinero o en letras
 #     sobre Francia"), the text of gg_loan.1.
+# EN: 24/9/2026 (Juan, C3 «El Buceo» of docs/guerra-grande-flujo/cerrito-mas-aire-propuestas.md, at half
+#     strength) -- the notice becomes the Cerrito's choice: with the French blockade lifted, who may trade at
+#     the Buceo. a) every flag, even ships that touched the plaza: the Buceo's customs sustain the camp (+3
+#     endurance a month for 36 months, gg_siege_buceo_open_to_all_flags), Britain +5, Rosas -10 (Buenos Aires
+#     penalised whatever came from Montevideo). b) historical: only ships that did not touch the plaza, as the
+#     Cuartel General ordered for the Delmira: +1 blanco (half of the proposal's +2), Rosas +5. The -5 of the
+#     news (the city's French money) stays in both.
+# ES: el aviso pasa a ser la decision del Cerrito: con el bloqueo frances levantado, a quien se le abre el Buceo.
+#     a) a toda bandera: +3 de aguante por mes durante 36 meses, Gran Bretana +5, Rosas -10. b) la historica:
+#     solo lo que no toco la plaza: +1 blanco, Rosas +5.
+# SOURCE / FUENTE (C3): Atilio Cassinelli, «El Puerto del Buceo», El Dia (suplemento), 1972, no. 2077,
+#     Anaforas/FIC-UdelaR, https://anaforas.fic.edu.uy/jspui/bitstream/123456789/105543/1/Buceo_SDED1972_N2077.pdf
+#     -- 1848, the lifting of the blockade of the ports used by Oribe and Rosas; Maldonado abandoned by its
+#     garrison on 14/6/1848 aboard French steamers; Joaquin Idoyaga interim captain of the Buceo; the Brazilian
+#     sumaca Delmira, carrying goods from Montevideo, ordered out without trading (Cuartel General, 17/6/1848);
+#     Oribe's decree of 23/2/1847 (death to crews shipping cattle without permit); 26/8-24/11/1848: 112 ships
+#     (36 overseas, 76 coastal), 6,753 tons; "un ejercito de mas de catorce mil hombres" and the growing
+#     Restauracion. Roberto Schmit, «Los caminos del mercado en el alto Uruguay», Anuario del Centro de
+#     Estudios Historicos (UNC), https://revistas.unc.edu.ar/index.php/anuarioceh/article/download/23290/23023/66648
+#     -- Rosas's orders (Arana to Urquiza, 1/11/1846): goods transshipped from Montevideo only in national ships
+#     and under a bond "por el duplo del valor de los cargamentos".
 gg_notice.12 = {
 	type = country_event
 	placement = ROOT
@@ -298,11 +319,30 @@ gg_notice.12 = {
 		}
 	}
 
+	# EN: the Buceo open to every flag, whatever it touched: the customs sustain the camp; Buenos Aires resents it.
+	# ES: el Buceo abierto a toda bandera, toque lo que toque: la aduana sostiene al campo; Buenos Aires lo resiente.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.12.a|" # GG_TRAZA
 		name = gg_notice.12.a
-		default_option = yes
+		custom_tooltip = gg_notice.12.a_tt
 		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+		add_modifier = { name = gg_siege_buceo_open_to_all_flags months = 36 }
+		gg_patron_change = { PATRON = britania DELTA = 5 }
+		gg_patron_change = { PATRON = rosas DELTA = -10 }
+		ai_chance = { base = 45 }
+	}
+
+	# EN: historical: ships that touched the plaza are sent away, as the Delmira was on 17 June 1848.
+	# ES: lo historico: el buque que toco la plaza se va, como la Delmira el 17 de junio de 1848.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.12.b|" # GG_TRAZA
+		name = gg_notice.12.b
+		default_option = yes
+		custom_tooltip = gg_notice.12.b_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = -5 }
+		gg_score_blanco = { AMOUNT = 1 }
+		gg_patron_change = { PATRON = rosas DELTA = 5 }
+		ai_chance = { base = 55 }
 	}
 }
 
@@ -311,6 +351,16 @@ gg_notice.12 = {
 # SOURCE / FUENTE: SOURCES_powers.md section 6 (Arana and Southern sign; fifteen postponements; Martin
 #     Garcia evacuated, the warships returned, twenty-one guns; the Confederation's right to settle the
 #     Oriental question without foreign intervention, blockade included).
+# EN: 24/9/2026 (Juan, C4 «Orientales solos» of cerrito-mas-aire-propuestas.md, at half strength) -- the
+#     notice becomes the Cerrito's answer to article 3. a) historical: assent as an ally, the divisions stay
+#     until France disarms the legion: Rosas +10. b) assent, and the divisions recross now: +2 blanco (half of
+#     the proposal's +3), the Argentine auxiliaries go home (their +2 endurance a month ends), Rosas -20 -- the
+#     trade between standing alone and Rosas's backing in 1851. The +10 of the news stays in both.
+# ES: el aviso pasa a ser la respuesta del Cerrito al articulo 3. a) la historica: conforme como aliado, Rosas
+#     +10. b) conforme, y que las divisiones repasen ya el Uruguay: +2 blanco, se van los auxiliares, Rosas -20.
+# SOURCE / FUENTE (C4): text of the convention, 24/11/1849, https://es.wikisource.org/wiki/Convenci%C3%B3n_Arana_-_Southern
+#     -- art. 3 (the Argentine auxiliary divisions "repasaran el Uruguay cuando el gobierno frances desarme a la
+#     legion extranjera"), art. 6 (Oribe's prior assent, "una condicion indispensable"); SOURCES_loans.md section 4.
 gg_notice.13 = {
 	type = country_event
 	placement = ROOT
@@ -339,11 +389,35 @@ gg_notice.13 = {
 		}
 	}
 
+	# EN: historical: assent as the ally the treaty names; the divisions stay. ES: lo historico: conforme como aliado.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13.a|" # GG_TRAZA
 		name = gg_notice.13.a
 		default_option = yes
+		custom_tooltip = gg_notice.13.a_tt
 		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
+		gg_patron_change = { PATRON = rosas DELTA = 10 }
+		ai_chance = { base = 75 }
+	}
+
+	# EN: assent, and ask Buenos Aires to take the divisions back across the Uruguay now: the Republic alone.
+	# ES: conforme, y pedirle a Buenos Aires que las divisiones repasen ya el Uruguay: la Republica sola.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_notice.13.b|" # GG_TRAZA
+		name = gg_notice.13.b
+		custom_tooltip = gg_notice.13.b_tt
+		gg_endurance_change = { SIDE = cerrito VALUE = 10 }
+		gg_score_blanco = { AMOUNT = 2 }
+		if = {
+			limit = { has_modifier = guerra_grande_argentine_auxiliaries }
+			remove_modifier = guerra_grande_argentine_auxiliaries
+		}
+		every_scope_state = {
+			limit = { has_modifier = guerra_grande_argentine_auxiliaries }
+			remove_modifier = guerra_grande_argentine_auxiliaries
+		}
+		gg_patron_change = { PATRON = rosas DELTA = -20 }
+		ai_chance = { base = 25 }
 	}
 }
 

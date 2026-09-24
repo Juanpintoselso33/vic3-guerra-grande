@@ -267,6 +267,17 @@ gg_siege_customs_house_at_the_buceo = {
 	country_authority_add = 40
 }
 
+# EN: 24/9/2026 (Juan, C3 of cerrito-mas-aire-propuestas.md) -- the Buceo open to every flag once France
+#     lifts her blockade (1848): from 26 August to 24 November 1848, 112 ships and 6,753 tons (Cassinelli,
+#     «El Puerto del Buceo», El Dia 1972). Set by gg_notice.12.a for 36 months. Its whole effect is the
+#     Cerrito's endurance, +3 a month (gg_siege_modifiers_endurance, common/scripted_effects/gg_endurance.txt):
+#     like the French subsidy for the Defensa, but smaller. No other numbers here on purpose.
+# ES: el Buceo abierto a toda bandera cuando Francia levanta el bloqueo (1848). Lo pone gg_notice.12.a por 36
+#     meses; su unico efecto es el aguante del Cerrito, +3 por mes.
+gg_siege_buceo_open_to_all_flags = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+}
+
 # EN: and this is why neither could finish the other. Both governments banned all communication with
 #     the enemy -- Montevideo on 26 June 1843, Oribe more tightly in February 1845 -- and both
 #     licensed it anyway, because each needed exactly what the other had. Cattle walked into the

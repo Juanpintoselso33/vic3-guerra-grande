@@ -10,3 +10,8 @@
  guerra_grande_requires_river_unwatched:0 "Rosas must hold his shore of the Plata with its battery, with no foreign squadron intervening on the river"
  gg_plata_requires_no_guarantee:0 "The river must not be under the powers' guarantee (Rosas gave way to their ultimatum)"
  gg_plata_requires_no_refusal:0 "Rosas must not have refused the request within the past year"
+ gg_cerrito_assembly_button:0 "Convene the Assembly"
+ gg_cerrito_assembly_button_desc:0 "The chambers the Cerrito had elected in 1845 sit with the Constitution of 1830 in hand; since 1846 the plaza has been governed through an Assembly of Notables set up by decree. When Rosas proposed to ‘reunite the fatherland’, #b Oribe#! sent the proposal to a committee of those chambers, and the committee settled nothing. To convene them again is to let the Republic speak for itself."
+ gg_cerrito_assembly_button_tt:0 "@information! Once only. The balance marks it in the blancos’ favour, and Buenos Aires, which expected something else of those chambers, marks it too."
+ gg_cerrito_assembly_requires_once:0 "The Assembly must not have been convened already"
+ gg_cerrito_assembly_requires_window:0 "It must be before July 1851"

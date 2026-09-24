@@ -190,6 +190,22 @@ gg_defensa_ripe = {
 	}
 }
 
+# EN: 24/9/2026 (Juan, G0 of docs/guerra-grande-flujo/cerrito-mas-aire-propuestas.md) -- the arbiter does not
+#     put the question before 1 January 1849. With the committing answers scoring +2 (P1) and the river's
+#     pressure capped at 2 (P2), the balance lab showed a human Cerrito reaching the threshold in 1845-1847 in
+#     half of his games. The score keeps counting; only the question waits. Read by the weekly arbiter's
+#     three ripeness branches (common/journal_entries/guerra_grande.txt; the «asked for terms» branch already
+#     waits for 1849) and by the Larranaga mediation (gg_powers.28.a), the other path that ends the war on the
+#     balance. Not read by the powers' own peaces (gg_powers.13/.16), the rule dates or the 1852 draw.
+#     The balance lab reads the date (tools/lab_balance/modelo.py, «arbiter_floor»).
+# ES: el arbitro no pregunta antes del 1 de enero de 1849. Con P1 y P2 un Cerrito humano llegaba al umbral en
+#     1845-1847 en la mitad de sus partidas. El puntaje sigue sumando; solo la pregunta espera. Lo leen las tres
+#     ramas de madurez del arbitro semanal y la mediacion de Larranaga (gg_powers.28.a); no las paces de las
+#     potencias (gg_powers.13/.16), las fechas de la regla ni el empate de 1852.
+gg_arbiter_asks = {
+	game_date >= 1849.1.1
+}
+
 # EN: T1/T9, who won the war (playtest 2026-09-19). The closing used to read the winner off the
 #     political score (guerra_grande_blanco_lead), so a Cerrito that had taken Montevideo could be
 #     told there were neither victors nor vanquished, and the same position could hand the winner's
@@ -306,4 +322,16 @@ gg_cal_war_over = {
 			}
 		}
 	}
+}
+
+# EN: 24/9/2026 (Juan, C5) -- the Cerrito may convene its Assembly once, from January 1849 to June 1851, while
+#     the war runs (common/scripted_effects/gg_cerrito_assembly.txt). Read by the button and by the AI.
+# ES: el Cerrito puede convocar a su Asamblea una vez, de enero de 1849 a junio de 1851, mientras dura la guerra.
+gg_cerrito_assembly_open = {
+	has_global_variable = guerra_grande_open_war
+	has_global_variable = guerra_grande_split_done
+	NOT = { has_global_variable = gg_peace_settled }
+	NOT = { has_global_variable = gg_cerrito_assembly_convened }
+	game_date >= 1849.1.1
+	game_date < 1851.7.1
 }

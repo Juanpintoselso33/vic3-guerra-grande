@@ -40,6 +40,10 @@ je_guerra_grande = {
 
 	scripted_progress_bar = guerra_grande_war_score_bar
 
+	# EN/ES: 24/9/2026 (Juan, C5) -- the Cerrito's Assembly, once, 1849 to mid-1851; shown only to the Cerrito
+	#     / la Asamblea del Cerrito, una vez, de 1849 a mediados de 1851; solo la ve el Cerrito
+	scripted_button = gg_cerrito_assembly_button
+
 	# EN: by tag or by mark. If the player took the Cerrito, the tags swap around -- the mark each
 	#     government carries is what identifies it either way.
 	# ES: por tag o por marca. Si el jugador se fue al Cerrito los tags se dan vuelta: la marca que
@@ -265,6 +269,9 @@ je_guerra_grande = {
 							gg_river_blockade = yes
 						}
 					}
+					# EN/ES: 24/9/2026 (Juan, C5) -- an AI Cerrito convenes its Assembly, 3 % a month in 1849-mid 1851
+					#     (common/scripted_effects/gg_cerrito_assembly.txt) / un Cerrito de la IA convoca a su Asamblea
+					gg_cerrito_assembly_ai = yes
 					# EN: T3b, C19 -- the patrons, once a month. A side whose backing is under 40 bleeds
 					#     war support; France and Brazil pay the Defensa, Rosas pays the Cerrito.
 					# ES: T3b, C19 -- los padrinos, una vez por mes. El bando con menos de 40 de sosten
@@ -465,6 +472,7 @@ je_guerra_grande = {
 				#     lo mismo.
 				else_if = {
 					limit = {
+						gg_arbiter_asks = yes # EN/ES: 24/9/2026 (Juan, G0) -- not before 1849 / no antes de 1849
 						gg_defensa_ripe = yes
 						gg_cerrito_ripe = yes
 					}
@@ -493,7 +501,10 @@ je_guerra_grande = {
 					}
 				}
 				else_if = {
-					limit = { gg_defensa_ripe = yes }
+					limit = {
+						gg_arbiter_asks = yes # EN/ES: 24/9/2026 (Juan, G0) -- not before 1849 / no antes de 1849
+						gg_defensa_ripe = yes
+					}
 					gg_trace_arbiter = { BRANCH = defensa_madura } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					# EN: playtest 2026-09-17 -- the side that is beaten is asked first. It used to be annexed by
@@ -506,7 +517,10 @@ je_guerra_grande = {
 					}
 				}
 				else_if = {
-					limit = { gg_cerrito_ripe = yes }
+					limit = {
+						gg_arbiter_asks = yes # EN/ES: 24/9/2026 (Juan, G0) -- not before 1849 / no antes de 1849
+						gg_cerrito_ripe = yes
+					}
 					gg_trace_arbiter = { BRANCH = cerrito_maduro } # EN/ES: 23/9 -- why / por que
 					set_global_variable = gg_peace_offered
 					random_country = {

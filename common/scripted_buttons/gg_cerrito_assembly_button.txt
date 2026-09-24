@@ -1,0 +1,56 @@
+﻿# EN: 24/9/2026 (Juan, C5 «La Asamblea») -- the Cerrito convenes its chambers once, January 1849 to June 1851:
+#     +1 for the blancos, Rosas -5. Shown in «La Guerra Grande» (je_guerra_grande), where Rosas's card is. Built
+#     like guerra_grande_river_blockade_button: a visibility check, a gated possible block and a one-shot
+#     effect. The AI never presses a button: an AI Cerrito gets the same effect from the war journal's monthly
+#     pulse (gg_cerrito_assembly_ai, common/scripted_effects/gg_cerrito_assembly.txt). Sources there.
+# ES: el Cerrito convoca a sus Camaras una vez, de enero de 1849 a junio de 1851: +1 blancos, Rosas -5. En
+#     «La Guerra Grande», donde esta la tarjeta de Rosas. La IA no aprieta botones: la IA del Cerrito recibe el
+#     mismo efecto desde el pulso mensual del journal.
+gg_cerrito_assembly_button = {
+	name = gg_cerrito_assembly_button
+	desc = gg_cerrito_assembly_button_desc
+
+	# EN/ES: it appears when it can be used, and stays shown as done once used
+	#     / aparece cuando se puede usar, y queda a la vista como hecho una vez usado
+	visible = {
+		has_variable = guerra_grande_cerrito_government
+		game_date >= 1849.1.1
+		OR = {
+			has_global_variable = gg_cerrito_assembly_convened
+			game_date < 1851.7.1
+		}
+	}
+
+	possible = {
+		has_variable = guerra_grande_cerrito_government
+		custom_tooltip = {
+			text = guerra_grande_requires_open_war
+			has_global_variable = guerra_grande_open_war
+		}
+		custom_tooltip = {
+			text = gg_cerrito_assembly_requires_once
+			NOT = { has_global_variable = gg_cerrito_assembly_convened }
+		}
+		custom_tooltip = {
+			text = gg_cerrito_assembly_requires_window
+			game_date < 1851.7.1
+		}
+		hidden_trigger = {
+			gg_cerrito_assembly_open = yes
+		}
+	}
+
+	selected = {
+		has_global_variable = gg_cerrito_assembly_convened
+	}
+
+	effect = {
+		custom_tooltip = gg_cerrito_assembly_button_tt
+		gg_cerrito_assembly_convene = yes
+	}
+
+	ai_chance = {
+		# EN/ES: one road for the AI: the journal's pulse (gg_cerrito_assembly_ai) / un solo camino, el del journal
+		value = 0
+	}
+}
