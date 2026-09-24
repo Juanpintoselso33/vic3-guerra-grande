@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- **Rosas serves a first term under the Constitution of 1853:** if he is in the seat when he gives it, he governs the
+  six years its art. 74 sets, and is put back after every election until the term ends; after it the elections decide,
+  re-election neither forced nor forbidden. Before, the vote the constitution brings unseated him the next day. Games
+  that already gave the constitution with Rosas alive get his term back once, to 31 May 1857.
+- **The constitution comes about eleven months after the Pact is settled** (the distance between the San Nicolás
+  Agreement, 31 May 1852, and the Constitution, 1 May 1853), not one. After Urquiza's victory or the negotiated
+  confederation there is no separate question about the provinces any more: as in 1853, the constitution incorporates
+  them, and until then they stay Provinces of the Pact. «The Negotiated Confederation» is one event now, not two.
+- **The Cisplatine question comes first:** while Brazil waits for its moment over the Banda Oriental, neither the
+  constitution nor the question of the provinces is asked; they come once it is settled.
+- **Fewer duplicate notices at the end of the war:** a power's change of level is told in the event that caused it
+  (Arana-Southern, Arana-Lepredour) instead of in a window of its own; Buenos Aires no longer gets «The River Closed»
+  when its own shore closed it; the Arana-Southern treaty reaches Rosas the day it is signed, in the present tense.
+- **Fixes:** the historical lives (and Rosas's seat) are kept after the Oriental Province is absorbed; the loan
+  accounts come with the peace instead of up to four months later; the constitution no longer promises to
+  incorporate provinces already incorporated; the question of the provinces names the Oriental Province and has its
+  own text after a negotiated settlement.
+
 - **National territories become provinces under the confederation:** when Argentina chose the confederation, a
   territory Buenos Aires governs directly — La Pampa, Neuquén, Río Negro, Chubut, Santa Cruz, Tierra del Fuego,
   Misiones, Formosa or the Chaco — asks to become a province once its population reaches 60,000 (the figure of the
