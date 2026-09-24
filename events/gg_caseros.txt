@@ -235,7 +235,8 @@ gg_caseros.6 = {
 	}
 }
 
-# EN: 24/9/2026 (AUD-BA-STALEMATE-ENR) -- the day after a «two governments» reading of a Pact war Rosas won: the war's
+# EN: 24/9/2026 (AUD-BA-STALEMATE-ENR) -- the day after every «two governments» reading (since 24/9, Juan point 4, it
+#     also runs the partition again, gg_pact_sides.txt); for a Pact war Rosas won: the war's
 #     protectorate over Entre Rios is undone again, in case the engine applied the war goal after gg_pact_resolve read
 #     the war (common/scripted_effects/gg_pact_resolution.txt, gg_pact_stalemate_frees_enr). Hidden, on Argentina.
 # ES: el dia despues de leer en tablas una guerra del Pacto que gano Rosas: se deshace otra vez el protectorado sobre
@@ -250,8 +251,23 @@ gg_caseros.7 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.7|" # GG_TRAZA
 		if = {
 			limit = { has_global_variable = gg_pact_settlement_stalemate }
-			gg_pact_stalemate_frees_enr = yes
+			if = {
+				limit = { has_global_variable = gg_pact_war_enforced_rosas }
+				gg_pact_stalemate_frees_enr = yes
+			}
+			# EN/ES: 24/9 (Juan, point 4) -- and the partition again, now that Entre Rios is free: idempotent
+			#     / y otra vez la particion, ya libre Entre Rios: idempotente
+			gg_pact_stalemate_partition = yes
 		}
-		remove_global_variable = gg_pact_war_enforced_rosas
+		# EN/ES: 24/9 (Codex, round 2) -- Rosas won: the protectorates the same-tick reading could not make (gg_pact_resolve,
+		#     already settled, only reconciles) / gano Rosas: los protectorados que la lectura no pudo hacer
+		if = {
+			limit = { has_global_variable = gg_pact_settlement_rosas }
+			gg_pact_resolve = yes
+		}
+		if = {
+			limit = { has_global_variable = gg_pact_war_enforced_rosas }
+			remove_global_variable = gg_pact_war_enforced_rosas
+		}
 	}
 }

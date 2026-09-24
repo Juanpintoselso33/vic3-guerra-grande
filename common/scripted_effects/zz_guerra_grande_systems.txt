@@ -1438,6 +1438,10 @@ gg_argentina_vassals_settle = {
 	c:ARG ?= {
 		if = {
 			limit = {
+				# EN/ES: 24/9/2026 (Juan, point 4) -- not with two governments: the partition (gg_pact_sides.txt) gave the
+				#     provinces to Urquiza's Confederation, and neither answer of gg_argentina.80 applies to what is left
+				#     / no con dos gobiernos: la particion le dio las provincias a la Confederacion de Urquiza
+				NOT = { has_global_variable = gg_pact_settlement_stalemate }
 				any_subject_or_below = {
 					OR = {
 						c:CLN ?= this
@@ -1471,7 +1475,9 @@ gg_argentina_vassals_settle = {
 gg_argentina_provinces_incorporate = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_provinces_incorporate|" # GG_TRAZA
 	gg_argentina_province_join = { TAG = CRR ALLY = yes }
-	gg_argentina_province_join = { TAG = CLN ALLY = no }
+	# EN/ES: 24/9/2026 (Juan, point 3) -- a Coalition that lived to 1851 fought on Urquiza's side: incorporated like
+	#     Corrientes and Entre Rios / una Coalicion que llego a 1851 peleo del lado de Urquiza: se incorpora como ellas
+	gg_argentina_province_join = { TAG = CLN ALLY = yes }
 	gg_argentina_province_join = { TAG = ENR ALLY = yes }
 	gg_argentina_province_join = { TAG = TUC ALLY = no }
 	gg_argentina_province_join = { TAG = SLT ALLY = no }

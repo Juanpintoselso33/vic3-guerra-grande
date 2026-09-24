@@ -69,3 +69,32 @@ gg_argentine_play_is_allowed = {
 		}
 	}
 }
+
+# EN: 24/9/2026 (Juan, «two governments», common/scripted_effects/gg_pact_sides.txt) -- state scope: a state of one of
+#     the provinces that go to Urquiza's Confederation. Buenos Aires, La Pampa and Rio Negro are not in it (Rosas's
+#     province and its southern frontier); the Chaco goes with the provinces of the north. Parana and Santa Catarina
+#     are the Misiones lands «la Argentina» gives Argentina, which every birth of Corrientes takes.
+# ES: scope estado: un estado de las provincias que pasan a la Confederacion de Urquiza. Buenos Aires, La Pampa y Rio
+#     Negro no (la provincia de Rosas y su frontera sur); el Chaco va con el norte.
+gg_conf_province_state = {
+	OR = {
+		state_region = s:STATE_ENTRE_RIOS
+		state_region = s:STATE_CORRIENTES
+		state_region = s:STATE_MISIONES
+		state_region = s:STATE_PARANA
+		state_region = s:STATE_SANTA_CATARINA
+		state_region = s:STATE_SANTA_FE
+		state_region = s:STATE_CORDOBA
+		state_region = s:STATE_SANTIAGO_DEL_ESTERO
+		state_region = s:STATE_TUCUMAN
+		state_region = s:STATE_SALTA
+		state_region = s:STATE_TARIJA
+		state_region = s:STATE_JUJUY
+		state_region = s:STATE_CATAMARCA
+		state_region = s:STATE_LA_RIOJA
+		state_region = s:STATE_MENDOZA
+		state_region = s:STATE_SAN_JUAN
+		state_region = s:STATE_SAN_LUIS
+		state_region = s:STATE_CHACO
+	}
+}

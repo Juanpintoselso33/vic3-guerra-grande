@@ -47,6 +47,9 @@ gg_ba_split_historical = {
 		set_capital = STATE_BUENOS_AIRES
 		gg_ruler_set = { TEMPLATE = ARG_gg_valentin_alsina }
 		gg_ba_raise_porteno_army = yes
+		# EN/ES: 24/9/2026 (Juan, point 2) -- the emigres are in the city: Mitre with Alsina, Paz, Sarmiento
+		#     (gg_pact_sides.txt) / los emigrados estan en la ciudad
+		gg_emigres_to_buenos_aires = yes
 	}
 	set_global_variable = gg_ba_split_active
 	set_global_variable = gg_ba_from_urquiza
@@ -55,11 +58,15 @@ gg_ba_split_historical = {
 }
 
 # EN: Two governments (the Pact ended with no victor): the split already exists. Rosas's Buenos Aires plays the
-#     State's part and Urquiza's Entre Rios the Confederation's.
+#     State's part and Urquiza's Entre Rios the Confederation's -- since 24/9/2026 with every province but Buenos Aires
+#     (gg_pact_stalemate_partition), no longer Entre Rios alone.
 # ES: Dos gobiernos: la separacion ya existe. La Buenos Aires de Rosas hace de Estado y el Entre Rios de Urquiza de
 #     Confederacion.
 gg_ba_split_stalemate = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_split_stalemate|" # GG_TRAZA
+	# EN/ES: 24/9/2026 (Juan, point 4) -- the last net of the partition, idempotent: Buenos Aires is Rosas's province and
+	#     the Confederation every other (gg_pact_sides.txt) / la ultima red de la particion, idempotente
+	gg_pact_stalemate_partition = yes
 	set_global_variable = gg_ba_split_active
 	set_global_variable = { name = gg_ba_side value = c:ARG }
 	set_global_variable = { name = gg_conf_side value = c:ENR }

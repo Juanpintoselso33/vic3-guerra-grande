@@ -1,0 +1,500 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: WHO STANDS WITH WHOM WHEN URQUIZA PRONOUNCES, AND WHERE THEY END (Juan, 24/9/2026, decisiones.md).
+#     1. Corrientes pronounces with Entre Rios (21/5/1851, or the day of the Pronouncement if later), under every
+#        rule of the Pact: freed from Buenos Aires if it was its subject, Benjamin Virasoro governing, on Entre Rios's
+#        side of the Pact war. The treaty of 21/11/1851 is signed by «los Estados de Entre Rios y Corrientes».
+#     2. The Coalition of the North, only if it survived to 1851 (a counterfactual), joins the same side.
+#     3. The emigres: Mitre and Sarmiento march with the Ejercito Grande (and Paz, if the Defensa still has him);
+#        after Caseros, with a State of Buenos Aires, Mitre, Paz, Sarmiento and Alsina are in Buenos Aires.
+#     4. «Two governments»: Rosas keeps the province of Buenos Aires; every other province goes to Urquiza's
+#        Confederation (Entre Rios), capital Parana.
+#     WHY A PROTECTORATE DOES NOT FIGHT FOR ITS OVERLORD HERE: subject_type_protectorate has join_overlord_wars = no
+#     (vanilla common/subject_types/00_subject_types.txt:8; the playset's Dynamic Names override, Workshop 3507724904,
+#     keeps it). A Corrientes held by Rosas never stood in the Pact war on its own; only this file puts it in one.
+# ES: QUIEN ESTA CON QUIEN CUANDO URQUIZA SE PRONUNCIA, Y DONDE TERMINA CADA UNO. Corrientes se pronuncia con Entre
+#     Rios en todas las reglas; la Coalicion, si sobrevivio, se suma al mismo lado; los emigrados marchan con el
+#     Ejercito Grande y despues de Caseros estan en Buenos Aires; con «dos gobiernos», Rosas conserva la provincia de
+#     Buenos Aires y todas las demas pasan a la Confederacion de Urquiza. Un protectorado no pelea solo por su
+#     soberano (join_overlord_wars = no en vanilla y en el override del playset).
+# SOURCE / FUENTE: «Una lectura del pronunciamiento de Justo Jose de Urquiza de 1851: circulacion, adhesiones y
+#     rechazos», Almanack (UNIFESP), https://www.scielo.br/j/alm/a/sjhGsFChMMt49y8yC99B4yc/ (Corrientes withdrew the
+#     foreign relations, peace and war from the governor of Buenos Aires on 21 May 1851 and reassumed them «tal como
+#     habia hecho Urquiza»; only Corrientes adhered openly); Protocolo de Palermo, 6/4/1852 (UNNE,
+#     https://hum.unne.edu.ar/academica/departamentos/historia/catedras/hist_argen_indep/otros/pronunciamiento_protocolo.pdf:
+#     «los Gobiernos de Entre Rios y Corrientes autorizando plenamente esto en mayo de 1851» to the governor of
+#     Entre Rios; Virasoro, «Mayor general de dicho Ejercito»); Convention of 21/11/1851, https://www.dipublico.org/122100/;
+#     es.wikipedia «Benjamin Virasoro» (governor 14/12/1847-3/7/1852; signed the alliance with Urquiza; chief of staff
+#     at Caseros).
+# -------------------------------------------------------------------------------------------------
+
+# EN: One country onto Entre Rios's side of the Pact war with Buenos Aires. Scope: any. If the war stands, it joins it
+#     (war scope, as gg_argentina_join_ejercito_grande_allies does with Brazil); while it is still a play, it waits
+#     for the war to start (gg_argentina.89). The truces with Buenos Aires go first: make_independent leaves one
+#     (gg_ba_open_war, Codex review of 64ca7e5).
+# ES: Un pais al lado de Entre Rios en la guerra del Pacto. Si la guerra ya esta, entra a ella; si todavia es jugada,
+#     espera a que empiece la guerra. Primero se terminan las treguas con Buenos Aires: make_independent deja una.
+gg_pact_join_urquiza_side = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_join_urquiza_side| TAG= $TAG$ " # GG_TRAZA
+	# EN: 24/9/2026 (Codex review, round 1) -- a Corrientes or a Coalition still fighting its own Pact war with Buenos Aires
+	#     (the player may leave one open for years) is already Rosas's enemy but not in Entre Rios's war, and the same
+	#     pair cannot stand in two wars at once. That older war is closed without a victor (end_play, as gg_urquiza.3
+	#     closes the Pact's), and the ally joins the next day from gg_argentina.89, once the engine has ended it. Only
+	#     until March 1852: a war the engine will not end does not become a daily loop.
+	# ES: una Corrientes o una Coalicion que todavia pelea su propia guerra del Pacto con Buenos Aires ya es enemiga de
+	#     Rosas pero no esta en la guerra de Entre Rios, y el mismo par no puede estar en dos guerras. Esa guerra vieja se
+	#     cierra sin vencedor y el aliado entra al dia siguiente con gg_argentina.89. Solo hasta marzo de 1852.
+	if = {
+		limit = {
+			exists = c:$TAG$
+			exists = c:ENR
+			exists = c:ARG
+			game_date < 1852.3.1
+			c:$TAG$ = {
+				is_subject = no
+				has_war_with = c:ARG
+				NOT = { has_war_with = c:ENR }
+			}
+			# EN/ES: 24/9 (Codex, round 2) -- only its own Pact play, and not already in Entre Rios's war
+			#     / solo su propia jugada del Pacto, y sin estar ya en la guerra de Entre Rios
+			any_diplomatic_play = {
+				is_diplomatic_play_type = dp_gg_pacto_federal
+				initiator_is = c:ARG
+				target_is = c:$TAG$
+			}
+			NOT = {
+				c:ENR = {
+					any_scope_war = {
+						attacker_warleader ?= { c:ARG ?= this }
+						defender_warleader ?= { c:ENR ?= this }
+						is_war_participant = c:$TAG$
+					}
+				}
+			}
+		}
+		every_diplomatic_play = {
+			limit = {
+				is_diplomatic_play_type = dp_gg_pacto_federal
+				initiator_is = c:ARG
+				target_is = c:$TAG$
+			}
+			end_play = yes
+		}
+		c:ENR = { trigger_event = { id = gg_argentina.89 days = 1 } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_join_urquiza_side| TAG= $TAG$ OLD_WAR_CLOSED=yes " # GG_TRAZA
+	}
+	else_if = {
+		limit = {
+			exists = c:$TAG$
+			exists = c:ENR
+			exists = c:ARG
+			c:$TAG$ = {
+				is_subject = no
+				NOT = { has_war_with = c:ENR }
+				NOT = { has_war_with = c:ARG }
+			}
+		}
+		c:$TAG$ = {
+			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
+		}
+		c:ARG = {
+			if = { limit = { has_truce_with = c:$TAG$ } end_truce = c:$TAG$ }
+		}
+		if = {
+			limit = { c:ARG = { has_war_with = c:ENR } }
+			c:ENR = {
+				every_scope_war = {
+					limit = {
+						# EN/ES: the Pact war itself: Buenos Aires attacks, Entre Rios defends (Codex, round 2)
+						#     / la guerra del Pacto misma: ataca Buenos Aires, defiende Entre Rios
+						attacker_warleader ?= { c:ARG ?= this }
+						defender_warleader ?= { c:ENR ?= this }
+						NOT = { is_war_participant = c:$TAG$ }
+					}
+					join_war = { target = c:$TAG$ side = c:ENR }
+				}
+			}
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_join_urquiza_side| TAG= $TAG$ JOINED=war " # GG_TRAZA
+		}
+		# EN: while it is still a play nobody may join it (dp_gg_pacto_federal: additional_involvement_trigger always = no,
+		#     so an AI cannot wander into the Confederation's internal wars): the ally enters the day the war starts
+		#     (gg_pact_allies_war_start, common/on_actions/gg_pact_sides_on_actions.txt -> gg_argentina.89).
+		# ES: mientras es jugada no se suma nadie (la jugada lo prohibe, para que ninguna IA se meta en las guerras internas
+		#     de la Confederacion): el aliado entra el dia que empieza la guerra.
+		else = {
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_join_urquiza_side| TAG= $TAG$ WAITS_FOR_WAR=yes " # GG_TRAZA
+		}
+	}
+}
+
+# EN: 21/5/1851 -- CORRIENTES REASSUMES WHAT IT HAD DELEGATED. Scope: any (gg_argentina.88). Three cases:
+#     a subject of Buenos Aires is freed; Argentine ground with no country of its own becomes Corrientes again (the
+#     same birth as gg_argentina_revive_corrientes, with the governor FETCHED if he lives, never copied); a Corrientes
+#     already free stays as it is. Virasoro governs, the delegation is withdrawn, and it takes Entre Rios's side.
+#     A Corrientes that is some other country's subject, or ground of a third country, is left alone.
+# ES: 21/5/1851 -- CORRIENTES REASUME LO QUE HABIA DELEGADO. Sujeta de Buenos Aires: se libera; suelo argentino sin
+#     pais propio: vuelve a ser Corrientes (el mismo nacimiento que gg_argentina_revive_corrientes, con el gobernador
+#     traido si vive, nunca copiado); ya libre: queda como esta. Gobierna Virasoro, se retira la delegacion y se pone
+#     del lado de Entre Rios. Una Corrientes sujeta de otro, o suelo de un tercero, no se toca.
+gg_corrientes_pronounce = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_corrientes_pronounce|" # GG_TRAZA
+	if = {
+		limit = { c:CRR ?= { is_subject_of = c:ARG } }
+		c:CRR = { make_independent = yes }
+	}
+	else_if = {
+		limit = {
+			NOT = { exists = c:CRR }
+			exists = c:ARG
+			exists = s:STATE_CORRIENTES.region_state:ARG
+		}
+		c:ARG = {
+			create_country = {
+				tag = CRR
+				origin = this
+				state = s:STATE_CORRIENTES.region_state:ARG
+			}
+			# EN/ES: the same three as every birth of Corrientes / las mismas tres que en cada nacimiento
+			if = {
+				limit = { exists = s:STATE_MISIONES.region_state:ARG }
+				s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CRR }
+			}
+			if = {
+				limit = { exists = s:STATE_PARANA.region_state:ARG }
+				s:STATE_PARANA.region_state:ARG = { set_state_owner = c:CRR }
+			}
+			if = {
+				limit = { exists = s:STATE_SANTA_CATARINA.region_state:ARG }
+				s:STATE_SANTA_CATARINA.region_state:ARG = { set_state_owner = c:CRR }
+			}
+		}
+		gg_argentina_new_country_people = { TAG = CRR }
+		c:CRR ?= { set_capital = STATE_CORRIENTES }
+	}
+	if = {
+		limit = { c:CRR ?= { is_subject = no } }
+		set_global_variable = gg_corrientes_with_urquiza
+		c:CRR = {
+			gg_ruler_set = { TEMPLATE = CRR_gg_benjamin_virasoro }
+			if = {
+				limit = { exists = c:ENR }
+				change_relations = { country = c:ENR value = 50 }
+			}
+		}
+		gg_delegation_revoked = { KEY = corrientes COUNT = -1 }
+		gg_pact_join_urquiza_side = { TAG = CRR }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_corrientes_pronounce| WITH_URQUIZA=yes " # GG_TRAZA
+	}
+}
+
+# EN: THE COALITION, IF IT LIVED (Juan, 24/9/2026, point 3). Historically the league was destroyed in September 1841;
+#     a Coalition that survived to the Pronouncement is Rosas's enemy already, and it takes Urquiza's side. Only with
+#     a war (gg_argentina.3.b/.c); the negotiated road opens none. Scope: any. No war is opened against it here or
+#     anywhere in the 1840s: gg_argentina_open_war {TAG = CLN} is still called only from gg_argentina.4.
+# ES: LA COALICION, SI VIVIO. Historicamente la liga se deshizo en septiembre de 1841; una Coalicion que llego al
+#     Pronunciamiento ya es enemiga de Rosas y se pone del lado de Urquiza. Solo con guerra; no se le abre ninguna.
+gg_coalition_follows_urquiza = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_coalition_follows_urquiza|" # GG_TRAZA
+	if = {
+		limit = {
+			has_global_variable = gg_war_against_buenos_aires
+			c:CLN ?= { is_subject = no }
+		}
+		set_global_variable = gg_coalition_with_urquiza
+		gg_pact_join_urquiza_side = { TAG = CLN }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: «TWO GOVERNMENTS»: THE COUNTRY SPLITS ALONG THE ONE LINE HISTORY DREW (Juan, 24/9/2026, point 4). Rosas's
+#     Argentina keeps the province of Buenos Aires with its southern frontier (La Pampa, Rio Negro) and whatever lies
+#     outside the provinces; every other province goes to Urquiza's Confederation, which is Entre Rios, capital Parana.
+#     ANNEXATION, NOT PROTECTORATE (decided by Claude, decisiones.md): the Confederation that lived apart from Buenos
+#     Aires in 1852-1861 was one government -- the thirteen provinces sanctioned one Constitution on 1/5/1853 and sat
+#     in one Congress at Parana -- and the historical branch of this same chain already plays it as one country (ARG,
+#     gg_ba_split_historical). A protectorate is a country whose foreign relations another conducts; calling the
+#     provinces that would be to write «protectorate» where the design says «confederation» (CLAUDE.md, «Confederacion
+#     != federacion != protectorado»). One country per side also keeps gg_ba.20's annexation and the 1862 count of
+#     states meaningful.
+#     A player's province is not annexed from under him (AUD-SEAT-ANNEX): it leaves Rosas and stands free.
+#     Idempotent: gg_pact_resolve runs it, gg_caseros.7 the day after (if the engine enforced a war goal late), and
+#     gg_ba_split_stalemate as the last net; a later run finds nothing left to move. Scope: any.
+# ES: «DOS GOBIERNOS»: EL PAIS SE PARTE POR LA UNICA LINEA QUE TRAZO LA HISTORIA. La Argentina de Rosas conserva la
+#     provincia de Buenos Aires con su frontera sur (La Pampa, Rio Negro) y lo que quede fuera de las provincias; todas
+#     las demas pasan a la Confederacion de Urquiza, que es Entre Rios, capital Parana. ANEXION, NO PROTECTORADO: la
+#     Confederacion de 1852-1861 fue un gobierno -- trece provincias, una Constitucion, un Congreso en Parana --, y la
+#     rama historica de esta cadena ya la juega como un pais. Llamar protectorados a las provincias seria escribir
+#     «protectorado» donde el diseno dice «confederacion». La provincia de un jugador no se anexa: sale de Rosas y
+#     queda libre. Idempotente.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/buenos-aires-separada-plan.md (Canedo 2023; Garcia 1940); the frontier:
+#     the Constitution of the State of Buenos Aires (12/4/1854) gave it the land «desde el Arroyo del Medio hasta la
+#     entrada de la Cordillera en el mar» (gg_ba.4.d already tells it).
+# -------------------------------------------------------------------------------------------------
+gg_pact_stalemate_partition = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_partition|" # GG_TRAZA
+	if = {
+		limit = {
+			exists = c:ARG
+			exists = c:ENR
+			c:ENR = { is_subject = no }
+			NOT = { c:ARG = { has_war_with = c:ENR } }
+		}
+		set_global_variable = gg_pact_stalemate_partitioned
+		# EN/ES: the province countries, Rosas's subjects or free / las provincias-pais, sujetas de Rosas o libres
+		gg_conf_province_join = { TAG = CRR }
+		gg_conf_province_join = { TAG = CLN }
+		gg_conf_province_join = { TAG = TUC }
+		gg_conf_province_join = { TAG = SLT }
+		gg_conf_province_join = { TAG = JUJ }
+		gg_conf_province_join = { TAG = CTM }
+		gg_conf_province_join = { TAG = LRJ }
+		gg_conf_province_join = { TAG = CBA }
+		gg_conf_province_join = { TAG = SFE }
+		gg_conf_province_join = { TAG = SDE }
+		gg_conf_province_join = { TAG = MZA }
+		gg_conf_province_join = { TAG = SJN }
+		gg_conf_province_join = { TAG = SNL }
+		# EN/ES: and Rosas's own ground in those provinces / y el suelo del propio Rosas en esas provincias
+		c:ARG = {
+			every_scope_state = {
+				limit = { gg_conf_province_state = yes }
+				set_state_owner = c:ENR
+			}
+		}
+		c:ENR = {
+			if = {
+				limit = { has_state_in_state_region = STATE_ENTRE_RIOS }
+				set_capital = STATE_ENTRE_RIOS
+			}
+		}
+		# EN/ES: the trace the night sweep reads / la traza que lee el barrido nocturno
+		if = {
+			limit = { c:ARG = { NOT = { any_scope_state = { gg_conf_province_state = yes } } } }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_partition| ARG_ONLY_BUENOS_AIRES=yes " # GG_TRAZA
+		}
+		if = {
+			limit = { c:ENR = { any_scope_state = { count >= 2 } } }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_partition| ENR_MANY_STATES=yes " # GG_TRAZA
+		}
+	}
+}
+
+# EN: One province country into the Confederation (Entre Rios). Scope: any. Its war with Entre Rios (none is
+#     expected after the Pact) keeps it out.
+# ES: Una provincia-pais a la Confederacion (Entre Rios). Si esta en guerra con Entre Rios queda afuera.
+gg_conf_province_join = {
+	if = {
+		limit = {
+			exists = c:$TAG$
+			c:$TAG$ = {
+				OR = {
+					is_subject_of = c:ARG
+					is_subject = no
+				}
+				NOT = { has_war_with = c:ENR }
+			}
+		}
+		c:$TAG$ = {
+			if = { limit = { is_subject_of = c:ARG } make_independent = yes }
+		}
+		if = {
+			limit = { c:$TAG$ = { is_player = no } }
+			c:ENR = { annex = c:$TAG$ }
+		}
+		else = {
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_conf_province_join| TAG= $TAG$ PLAYER_KEPT=yes " # GG_TRAZA
+		}
+	}
+	# EN/ES: 24/9 (Codex review, round 1) -- a province another power holds as a subject, or at war with Entre Rios, stays
+	#     out; said in the trace / una provincia sujeta de otra potencia, o en guerra con Entre Rios, queda afuera
+	else_if = {
+		limit = { exists = c:$TAG$ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_conf_province_join| TAG= $TAG$ KEPT_OUT=yes " # GG_TRAZA
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE EMIGRES. Mitre and Sarmiento came back from Chile and marched with the Ejercito Grande: Mitre commanded
+#     artillery at Caseros, Sarmiento was its boletinero and wrote «Campana en el Ejercito Grande Aliado de Sud
+#     America» (Rio de Janeiro, 1852). Paz did NOT march: he was in Rio de Janeiro until 1851 and in Montevideo until
+#     September 1852 (SciELO, «Los ardides de la memoria: Jose Maria Paz...»); he goes only if the Defensa still has
+#     him in this game, which is already a counterfactual. After Caseros, with a State of Buenos Aires: Alsina and
+#     Mitre led the revolution of 11/9/1852, Paz defended the city against Lagos as its war minister; Sarmiento served
+#     the State from 1855 (brought forward: the mod has no event for his return from Chile). THE LEGION is not moved:
+#     it was dissolved after the mutiny of April 1846 (Etchechury 2017, gg_contingent.1) and the engine has no effect
+#     to hand a formation to another country; its battalion stays with the Defensa and only its chiefs leave.
+#     Every man is FETCHED where he lives, never copied (gg_character_fetch): never in two places at once.
+# ES: LOS EMIGRADOS. Mitre y Sarmiento volvieron de Chile y marcharon con el Ejercito Grande; Paz no (estaba en Rio de
+#     Janeiro y en Montevideo): va solo si en esta partida la Defensa todavia lo tiene. Despues de Caseros, con un
+#     Estado de Buenos Aires, Alsina y Mitre hacen la revolucion del 11/9/1852 y Paz defiende la ciudad. La Legion no
+#     se mueve (disuelta en 1846; el motor no pasa formaciones de un pais a otro): se van solo sus jefes. Cada hombre
+#     se trae de donde este, nunca se copia.
+# SOURCE / FUENTE: F. Pigna, «Bartolome Mitre», elhistoriador.com.ar («se incorporo al Ejercito Grande como jefe de
+#     artilleria»; with Alsina, the leaders of 11/9/1852); es.wikipedia «Bartolome Mitre»; D. F. Sarmiento, Campana en
+#     el Ejercito Grande (1852); es.wikipedia «Jose Maria Paz»; SciELO Argentina,
+#     https://www.scielo.org.ar/scielo.php?pid=S1669-90412007000100002&script=sci_arttext.
+# -------------------------------------------------------------------------------------------------
+
+# EN: Mitre, fetched to this country. The mod's own Mitre (URU_gg_bartolome_mitre, kept in the Defensa or Corrientes by
+#     gg_rivera.8.b/c) if he lives anywhere, else la Argentina's ARG_bartolome_mitre, which is created if nobody lives.
+# ES: Mitre, traido a este pais. El Mitre del mod (el que retuvo la Defensa o Corrientes) si vive; si no, el de «la
+#     Argentina», que se crea si no vive ninguno.
+gg_mitre_fetch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_fetch|" # GG_TRAZA
+	if = {
+		limit = {
+			OR = {
+				any_country = { any_scope_character = { has_template = URU_gg_bartolome_mitre } }
+				any_character_in_exile_pool = { has_template = URU_gg_bartolome_mitre }
+			}
+		}
+		gg_character_fetch = { TEMPLATE = URU_gg_bartolome_mitre }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				any_country = { any_scope_character = { has_template = ARG_bartolome_mitre } }
+				any_character_in_exile_pool = { has_template = ARG_bartolome_mitre }
+			}
+		}
+		gg_character_fetch = { TEMPLATE = ARG_bartolome_mitre }
+	}
+	# EN/ES: 24/9 (Codex review, round 1) -- when neither lives, la Argentina's ARG_bartolome_mitre, the template the
+	#     engine would also spawn from 1859 (commander_usage): one man, not a second from 1859 on (AUD-MITRE-DUP)
+	#     / si no vive ninguno, el ARG_bartolome_mitre de «la Argentina», el mismo que el motor sacaria desde 1859
+	else = {
+		create_character = { template = ARG_bartolome_mitre }
+	}
+}
+
+# EN: Paz, fetched to this country: the emigre of 1843 (gg_contingent.3, marked gg_foreign_commander) if he lives, the one
+#     who went with the Defensa and the Ejercito Grande; else the template's Paz (CRR_gg_jose_maria_paz); else from the
+#     exile pool; created only when CREATE = yes. (Two Paz can exist since 1843 -- AUD-PAZ-DUP, not this file's doing.)
+# ES: Paz, traido a este pais: el emigrado de 1843 si vive; si no el del template; se crea solo con CREATE. (Desde 1843
+#     pueden existir dos Paz: AUD-PAZ-DUP.)
+gg_paz_fetch = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_paz_fetch| CREATE= $CREATE$ " # GG_TRAZA
+	save_scope_as = gg_paz_to
+	if = {
+		limit = { any_scope_character = { OR = { has_template = CRR_gg_jose_maria_paz has_variable = gg_foreign_commander } } }
+	}
+	else_if = {
+		limit = { any_country = { any_scope_character = { has_variable = gg_foreign_commander } } }
+		random_country = {
+			limit = { any_scope_character = { has_variable = gg_foreign_commander } }
+			random_scope_character = {
+				limit = { has_variable = gg_foreign_commander }
+				transfer_character = scope:gg_paz_to
+			}
+		}
+	}
+	else_if = {
+		limit = { any_country = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } } }
+		gg_character_fetch = { TEMPLATE = CRR_gg_jose_maria_paz }
+	}
+	else_if = {
+		limit = { any_character_in_exile_pool = { has_template = CRR_gg_jose_maria_paz } }
+		gg_character_fetch = { TEMPLATE = CRR_gg_jose_maria_paz }
+	}
+	else_if = {
+		limit = { always = $CREATE$ }
+		create_character = { template = CRR_gg_jose_maria_paz }
+	}
+	clear_saved_scope = gg_paz_to
+}
+
+# EN: 21/11/1851 -- the emigres join the Ejercito Grande. Scope: Entre Rios, after gg_argentina_raise_ejercito_grande
+#     saved scope:gg_ejercito_grande_army. Mitre goes into the army as a general; Sarmiento comes as a politician; Paz
+#     only from the Defensa (c:URU).
+# ES: los emigrados se suman al Ejercito Grande. Mitre entra al ejercito como general; Sarmiento viene como politico;
+#     Paz solo si esta en la Defensa.
+gg_emigres_join_ejercito_grande = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_join_ejercito_grande|" # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_emigres_marched } }
+		set_global_variable = gg_emigres_marched
+		gg_mitre_fetch = yes
+		gg_character_fetch = { TEMPLATE = ARG_domingo_sarmiento }
+		# EN/ES: 24/9 (Codex review, round 1) -- the Paz who is in the Defensa, that very man (the one of 1843 first),
+		#     not a Paz elsewhere / el Paz que esta en la Defensa, ese mismo, no otro Paz de otra parte
+		save_scope_as = gg_eg_country
+		c:URU ?= {
+			if = {
+				limit = { any_scope_character = { has_variable = gg_foreign_commander } }
+				random_scope_character = {
+					limit = { has_variable = gg_foreign_commander }
+					transfer_character = scope:gg_eg_country
+				}
+			}
+			else_if = {
+				limit = { any_scope_character = { has_template = CRR_gg_jose_maria_paz } }
+				random_scope_character = {
+					limit = { has_template = CRR_gg_jose_maria_paz }
+					transfer_character = scope:gg_eg_country
+				}
+			}
+		}
+		clear_saved_scope = gg_eg_country
+		every_scope_character = {
+			limit = {
+				OR = {
+					has_template = URU_gg_bartolome_mitre
+					has_template = ARG_bartolome_mitre
+					has_template = CRR_gg_jose_maria_paz
+					has_variable = gg_foreign_commander
+				}
+				exists = scope:gg_ejercito_grande_army
+			}
+			if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+			transfer_to_formation = scope:gg_ejercito_grande_army
+		}
+	}
+}
+
+# EN: After Caseros, the State of Buenos Aires: the emigres are in the city (Alsina is seated as governor by
+#     gg_ba_split_historical). Scope: the State (BUE).
+# ES: Despues de Caseros, el Estado de Buenos Aires: los emigrados estan en la ciudad (Alsina ya gobierna).
+gg_emigres_to_buenos_aires = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_to_buenos_aires|" # GG_TRAZA
+	gg_mitre_fetch = yes
+	gg_paz_fetch = { CREATE = yes }
+	gg_character_fetch = { TEMPLATE = ARG_domingo_sarmiento }
+	if = {
+		limit = {
+			any_scope_character = { OR = { has_template = URU_gg_bartolome_mitre has_template = ARG_bartolome_mitre } }
+			any_scope_character = { has_template = ARG_gg_valentin_alsina }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_to_buenos_aires| MITRE_ALSINA_IN_BUE=yes " # GG_TRAZA
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE 1862 NET BY STATES (plan, point 7). Scope: any. Counts the states of each side into one signed global:
+#     +1 for each state of Buenos Aires, -1 for each of the Confederation. More states wins; a tie goes to the
+#     Confederation, the side that holds the most provinces' governments (only a tie of equal maps reaches it).
+# ES: LA RED DE 1862 POR ESTADOS. Suma los estados de cada lado en una global con signo; gana el que tenga mas; un
+#     empate va a la Confederacion.
+gg_ba_count_states = {
+	set_global_variable = { name = gg_ba_states_margin value = 0 }
+	global_var:gg_ba_side ?= {
+		every_scope_state = { change_global_variable = { name = gg_ba_states_margin add = 1 } }
+	}
+	global_var:gg_conf_side ?= {
+		every_scope_state = { change_global_variable = { name = gg_ba_states_margin add = -1 } }
+	}
+}
+
+# EN: Before gg_ba.20 annexes the side that lost, its subjects pass to the side that remains (transfer_subject,
+#     vanilla ep2_ezo_republic.txt:154), so what becomes of them does not depend on what the engine does with the
+#     subjects of an annexed country. Scope: the country that remains; scope:gg_ba_absorbed saved.
+# ES: Antes de que gg_ba.20 anexe al lado que perdio, sus sujetos pasan al que queda, asi su suerte no depende de lo
+#     que haga el motor con los sujetos de un pais anexado.
+gg_ba_take_subjects = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_take_subjects|" # GG_TRAZA
+	save_scope_as = gg_ba_subject_keeper
+	every_country = {
+		limit = { is_direct_subject_of = scope:gg_ba_absorbed }
+		scope:gg_ba_subject_keeper = { transfer_subject = prev }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba_take_subjects| SUBJECT_TRANSFERRED=yes " # GG_TRAZA
+	}
+	clear_saved_scope = gg_ba_subject_keeper
+}

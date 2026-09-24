@@ -385,7 +385,14 @@ gg_ba.5 = {
 	type = country_event
 	placement = ROOT
 	title = gg_ba.5.t
-	desc = gg_ba.5.d
+	# EN/ES: 24/9/2026 (Juan, point 4) -- Rosas's Buenos Aires: no Lagos, no Costa, no porteno merchants' statu quo
+	#     / la Buenos Aires de Rosas: sin Lagos ni Costa ni el statu quo de los comerciantes portenos
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_ba.5.d_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate } }
+			triggered_desc = { desc = gg_ba.5.d }
+		}
+	}
 	flavor = gg_ba.5.f
 	event_image = { video = "gg_ba_convivencia" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -497,7 +504,12 @@ gg_ba.7 = {
 	type = country_event
 	placement = ROOT
 	title = gg_ba.7.t
-	desc = gg_ba.7.d
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_ba.7.d_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate } }
+			triggered_desc = { desc = gg_ba.7.d }
+		}
+	}
 	flavor = gg_ba.7.f
 	event_image = { video = "gg_ba_urquiza_page" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -537,7 +549,12 @@ gg_ba.8 = {
 	type = country_event
 	placement = ROOT
 	title = gg_ba.8.t
-	desc = gg_ba.8.d
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_ba.8.d_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate } }
+			triggered_desc = { desc = gg_ba.8.d }
+		}
+	}
 	flavor = gg_ba.8.f
 	event_image = { video = "gg_ba_lopez" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -596,6 +613,9 @@ gg_ba.10 = {
 	# EN/ES: with or without San Jose de Flores / con o sin San Jose de Flores
 	desc = {
 		first_valid = {
+			# EN/ES: 24/9/2026 (Juan, point 4) -- Rosas's Buenos Aires: no Mitre at its head / sin Mitre al frente
+			triggered_desc = { desc = gg_ba.10.d_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate has_global_variable = gg_ba_flores } }
+			triggered_desc = { desc = gg_ba.10.d_apart_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate } }
 			triggered_desc = { desc = gg_ba.10.d trigger = { has_global_variable = gg_ba_flores } }
 			triggered_desc = { desc = gg_ba.10.d_apart }
 		}
@@ -648,12 +668,27 @@ gg_ba.105 = {
 				has_global_variable = gg_ba_split_active
 				NOT = { has_global_variable = gg_ba_unifying }
 			}
+			# EN: 24/9/2026 (Juan: plan point 7, «according to who holds more states») -- the Historical rule keeps
+			#     history (Mitre's presidency); any other reading counts the states: more wins, a tie goes to the
+			#     Confederation (gg_ba_count_states). Before, every other rule gave it to the Confederation, and with two
+			#     governments a one-state Entre Rios took Rosas's whole country.
+			# ES: la regla historica conserva la historia; cualquier otra cuenta estados: gana el que tenga mas, el
+			#     empate va a la Confederacion. Antes toda otra regla se la daba a la Confederacion.
 			if = {
 				limit = { gg_pact_historical = yes }
 				gg_ba_unify = { WINNER = ba }
 			}
 			else = {
-				gg_ba_unify = { WINNER = conf }
+				gg_ba_count_states = yes
+				if = {
+					limit = { global_var:gg_ba_states_margin > 0 }
+					debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.105| BY_STATES= ba " # GG_TRAZA
+					gg_ba_unify = { WINNER = ba }
+				}
+				else = {
+					debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ba.105| BY_STATES= conf " # GG_TRAZA
+					gg_ba_unify = { WINNER = conf }
+				}
 			}
 		}
 	}
@@ -666,6 +701,10 @@ gg_ba.11 = {
 	title = gg_ba.11.t
 	desc = {
 		first_valid = {
+			# EN/ES: 24/9/2026 (Juan, point 4) -- with two governments neither Pavon nor the Constitution of 1853 happened
+			#     / con dos gobiernos no hubo ni Pavon ni la Constitucion de 1853
+			triggered_desc = { desc = gg_ba.11.d_ba_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate global_var:gg_ba_winner_ba = 1 } }
+			triggered_desc = { desc = gg_ba.11.d_conf_rosas trigger = { has_global_variable = gg_pact_settlement_stalemate } }
 			triggered_desc = { desc = gg_ba.11.d_ba trigger = { global_var:gg_ba_winner_ba = 1 } }
 			triggered_desc = { desc = gg_ba.11.d_conf }
 		}
@@ -808,6 +847,12 @@ gg_ba.20 = {
 			}
 			if = {
 				limit = { exists = scope:gg_ba_absorbed }
+				# EN: 24/9/2026 (the report's open question) -- the loser's subjects are handed to the country that remains
+				#     BEFORE the annexation, so they never depend on what the engine does with an annexed country's
+				#     subjects (with two governments, Rosas's Argentina may still hold the Banda Oriental as a client).
+				# ES: los sujetos del perdedor pasan al que queda ANTES de la anexion, asi no dependen de lo que haga el
+				#     motor con los sujetos de un pais anexado.
+				gg_ba_take_subjects = yes
 				scope:gg_ba_absorbed = { gg_bring_characters_to = { TARGET = scope:gg_ba_keeper } }
 				annex = scope:gg_ba_absorbed
 			}
@@ -819,7 +864,13 @@ gg_ba.20 = {
 				}
 				if = {
 					limit = { has_global_variable = gg_ba_from_urquiza }
-					gg_ruler_set = { TEMPLATE = ARG_bartolome_mitre }
+					# EN/ES: 24/9 -- the one Mitre, fetched, never a second copy (gg_mitre_fetch: the mod's own, marched
+					#     with the Ejercito Grande) / el unico Mitre, traido, nunca una segunda copia
+					gg_mitre_fetch = yes
+					random_scope_character = {
+						limit = { OR = { has_template = URU_gg_bartolome_mitre has_template = ARG_bartolome_mitre } }
+						set_character_as_ruler = yes
+					}
 				}
 			}
 			if = {

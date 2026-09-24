@@ -97,13 +97,9 @@ gg_pact_resolve = {
 				if = {
 					limit = { has_global_variable = gg_pact_war_enforced_rosas }
 					gg_pact_stalemate_frees_enr = yes
-					trigger_event = { id = gg_caseros.7 days = 1 }
 				}
 			}
 		}
-		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are annexed now, whatever the
-		#     settlement / las que quedaron protectorado se anexan ahora, sea cual sea el cierre
-		gg_argentina_vassals_settle = yes
 		if = {
 			limit = { has_global_variable = gg_confederacion_negociada }
 			set_global_variable = gg_pact_settlement_constitutional
@@ -137,15 +133,46 @@ gg_pact_resolve = {
 		else_if = {
 			limit = { global_var:gg_pact_war_rosas_won = 1 }
 			set_global_variable = gg_pact_settlement_rosas
+			# EN: 24/9/2026 (Juan, points 1 and 3; gg_pact_sides.txt) -- the allies of Entre Rios end as Entre Rios does,
+			#     protectorates of Buenos Aires (the war goal, make_protectorate, only reached Entre Rios). Written here, in
+			#     the Pact's one settlement writer (inventario I19). The weekly observer of the Pact then installs the
+			#     federal governors and splits a beaten Coalition into its provinces, as after 1841.
+			# ES: los aliados de Entre Rios terminan como Entre Rios, protectorados de Buenos Aires. El observador semanal
+			#     pone despues a los gobernadores federales y parte a la Coalicion batida.
+			if = {
+				limit = {
+					has_global_variable = gg_corrientes_with_urquiza
+					c:CRR ?= { is_subject = no }
+					NOT = { has_war_with = c:CRR }
+				}
+				create_diplomatic_pact = { country = c:CRR type = protectorate }
+				gg_delegation_restored = { KEY = corrientes COUNT = 1 }
+			}
+			if = {
+				limit = {
+					has_global_variable = gg_coalition_with_urquiza
+					c:CLN ?= { is_subject = no }
+					NOT = { has_war_with = c:CLN }
+				}
+				create_diplomatic_pact = { country = c:CLN type = protectorate }
+			}
 			if = {
 				limit = { has_global_variable = gg_delegation_gone_entre_rios }
 				gg_delegation_restored = { KEY = entre_rios COUNT = 1 }
 			}
 			trigger_event = { id = gg_argentina.84 days = 0 popup = yes }
+			trigger_event = { id = gg_caseros.7 days = 1 } # EN/ES: 24/9 (Codex, round 2) -- the protectorates again tomorrow / otra vez manana
 		}
 		else_if = {
 			limit = { global_var:gg_pact_war_white_peace = 1 }
 			set_global_variable = gg_pact_settlement_stalemate
+			# EN: 24/9/2026 (Juan, point 4) -- two governments: Rosas keeps Buenos Aires, the rest goes to Urquiza's
+			#     Confederation (gg_pact_sides.txt), now and again tomorrow in case the engine enforces a war goal after
+			#     this reading (gg_caseros.7 also undoes the war's protectorate over Entre Rios, AUD-BA-STALEMATE-ENR).
+			# ES: dos gobiernos: Rosas conserva Buenos Aires y el resto pasa a la Confederacion de Urquiza; ahora y otra
+			#     vez manana, por si el motor impone un objetivo despues de esta lectura.
+			gg_pact_stalemate_partition = yes
+			trigger_event = { id = gg_caseros.7 days = 1 }
 			trigger_event = { id = gg_argentina.85 days = 0 popup = yes }
 			gg_caseros_notify_urquiza = { EVENT = gg_caseros.4 }
 		}
@@ -156,10 +183,49 @@ gg_pact_resolve = {
 			gg_rosista_client_release = yes # EN/ES: 23/9 (AUD-RULES-CLIENT) -- Rosas fell / cayo Rosas
 			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
 		}
+		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are settled now, whatever the settlement.
+		#     24/9/2026: after the settlement is written, not before: with two governments the partition above has
+		#     already taken them, and gg_argentina.80 has nothing to ask / despues de escrito el cierre: con dos
+		#     gobiernos la particion ya se las llevo, y gg_argentina.80 no tiene nada que preguntar
+		gg_argentina_vassals_settle = yes
 	}
 	# EN/ES: 24/9 -- a later call (the journal's on_complete the day after the war's reading) writes nothing; said so
 	#     in the trace, which read like a second settlement / una llamada posterior no escribe nada; se dice en la traza
 	else = {
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_resolve| ALREADY_SETTLED=yes " # GG_TRAZA
+		# EN: 24/9/2026 (Codex review, round 2) -- Rosas won: the day after (gg_caseros.7), the protectorates the reading
+		#     could not make because the war was still ending that same tick (end_play in gg_urquiza.3 / gg_caseros.1
+		#     runs in the same effect) are made now. Idempotent; written here, in the Pact's one settlement writer (I19).
+		# ES: gano Rosas: al dia siguiente se hacen los protectorados que la lectura no pudo hacer porque la guerra
+		#     todavia terminaba en ese mismo instante. Idempotente.
+		if = {
+			limit = { has_global_variable = gg_pact_settlement_rosas }
+			if = {
+				limit = {
+					gg_pact_rosas = yes
+					NOT = { has_global_variable = gg_confederacion_negociada }
+					c:ENR ?= { is_subject = no }
+					NOT = { has_war_with = c:ENR }
+				}
+				create_diplomatic_pact = { country = c:ENR type = protectorate }
+			}
+			if = {
+				limit = {
+					has_global_variable = gg_corrientes_with_urquiza
+					c:CRR ?= { is_subject = no }
+					NOT = { has_war_with = c:CRR }
+				}
+				create_diplomatic_pact = { country = c:CRR type = protectorate }
+				gg_delegation_restored = { KEY = corrientes COUNT = 1 }
+			}
+			if = {
+				limit = {
+					has_global_variable = gg_coalition_with_urquiza
+					c:CLN ?= { is_subject = no }
+					NOT = { has_war_with = c:CLN }
+				}
+				create_diplomatic_pact = { country = c:CLN type = protectorate }
+			}
+		}
 	}
 }

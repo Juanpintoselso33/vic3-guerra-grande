@@ -1,0 +1,25 @@
+﻿# EN: 24/9/2026 (Juan, points 1 and 3; common/scripted_effects/gg_pact_sides.txt) -- Corrientes and a living Coalition
+#     pronounced with Entre Rios while the Pact's quarrel with Buenos Aires was still a play, which nobody may join
+#     (dp_gg_pacto_federal). They enter the war the day it starts: a hidden event on Entre Rios the next day, with the
+#     war already standing (the pattern of gg_oriental_division_war_start). Root = the diplomatic play.
+# ES: Corrientes y una Coalicion viva se pronunciaron con Entre Rios cuando la cuestion con Buenos Aires todavia era
+#     jugada, a la que no se suma nadie. Entran a la guerra el dia que empieza: un evento oculto sobre Entre Rios al dia
+#     siguiente, con la guerra ya en pie. Root = la jugada diplomatica.
+on_diplo_play_war_start = {
+	on_actions = { gg_pact_allies_war_start }
+}
+
+gg_pact_allies_war_start = {
+	trigger = {
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		target = { c:ENR ?= this }
+		OR = {
+			has_global_variable = gg_corrientes_with_urquiza
+			has_global_variable = gg_coalition_with_urquiza
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_allies_war_start" # GG_TRAZA
+		c:ENR ?= { trigger_event = { id = gg_argentina.89 days = 1 } }
+	}
+}

@@ -991,6 +991,13 @@ gg_argentina_sign_montevideo_convention = {
 #     extranjeros entran como beligerantes contra Buenos Aires.
 gg_argentina_join_ejercito_grande_allies = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_join_ejercito_grande_allies|" # GG_TRAZA
+	# EN/ES: 24/9/2026 (Juan, point 1) -- Corrientes signs the convention of 21/11/1851 as a party: if it pronounced and is
+	#     not yet in the war, it enters now / Corrientes firma la convencion como parte: si se pronuncio y no esta en la
+	#     guerra, entra ahora
+	if = {
+		limit = { has_global_variable = gg_corrientes_with_urquiza }
+		gg_pact_join_urquiza_side = { TAG = CRR }
+	}
 	c:ENR ?= {
 		every_scope_war = {
 			limit = { is_war_participant = c:ARG }
@@ -1055,6 +1062,8 @@ gg_argentina_raise_ejercito_grande = {
 	# EN/ES: 23/9 -- mobilized the next day: a just-created army cannot be (gg_mobilize_next_day)
 	#     / se moviliza al dia siguiente: un ejercito recien creado no se puede movilizar
 	if = { limit = { exists = scope:gg_ejercito_grande_army } gg_mobilize_next_day = { ARMY = scope:gg_ejercito_grande_army ENEMY = c:ARG } }
+	# EN/ES: 24/9/2026 (Juan, point 2) -- the emigres march with it (gg_pact_sides.txt) / los emigrados marchan con el
+	c:ENR ?= { gg_emigres_join_ejercito_grande = yes }
 }
 
 # EN: Complete the documented foreign contingents and put the Brazilian fleet on the board. The

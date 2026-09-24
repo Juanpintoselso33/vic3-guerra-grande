@@ -28,6 +28,8 @@ gg_constitution.1 = {
 		first_valid = {
 			triggered_desc = { desc = gg_constitution.1.d_urquiza trigger = { has_global_variable = gg_pact_settlement_urquiza } }
 			triggered_desc = { desc = gg_constitution.1.d_rosas trigger = { has_global_variable = gg_pact_settlement_rosas } }
+			# EN/ES: 24/9/2026 (Juan, point 4) -- two governments: Buenos Aires alone / dos gobiernos: Buenos Aires sola
+			triggered_desc = { desc = gg_constitution.1.d_stalemate trigger = { has_global_variable = gg_pact_settlement_stalemate } }
 			triggered_desc = { desc = gg_constitution.1.d trigger = { always = yes } }
 		}
 	}
@@ -54,7 +56,13 @@ gg_constitution.1 = {
 		#     no constitution: autocracy while he lives, the question reopened at his death (gg_constitution.2). The
 		#     AI took this option about a third of the time, and the elections it brought kept putting Rosas back.
 		# ES: la victoria de Rosas es sin constitucion: autocracia mientras viva, la cuestion se reabre a su muerte.
-		trigger = { NOT = { has_global_variable = gg_pact_settlement_rosas } }
+		# EN: 24/9/2026 (Juan, point 4) -- nor with two governments: the provinces this constitution would join are
+		#     Urquiza's Confederation now (gg_pact_stalemate_partition); a Rosas-led Buenos Aires has none to give it to.
+		# ES: tampoco con dos gobiernos: las provincias que esta constitucion uniria son ahora de la Confederacion.
+		trigger = {
+			NOT = { has_global_variable = gg_pact_settlement_rosas }
+			NOT = { has_global_variable = gg_pact_settlement_stalemate }
+		}
 		set_global_variable = { name = gg_constitution_chosen value = 1 }
 		custom_tooltip = gg_constitution.1.a_tt
 		gg_constitution_federal = yes # EN/ES: 23/9 (Juan) -- a federation: one country, the autocracy ends / una federacion

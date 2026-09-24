@@ -297,6 +297,8 @@ gg_argentina.3 = {
 		hidden_effect = {
 			gg_argentina_create_entre_rios = yes
 			gg_argentina_open_negotiated_confederation = yes
+			# EN/ES: 24/9 (Juan, point 1) -- Corrientes follows Entre Rios (gg_argentina.87) / Corrientes sigue a Entre Rios
+			trigger_event = { id = gg_argentina.87 days = 1 }
 		}
 		gg_patron_change = { PATRON = rosas DELTA = -10 }
 		default_option = yes
@@ -330,6 +332,9 @@ gg_argentina.3 = {
 		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
 		set_global_variable = gg_war_against_buenos_aires
 		gg_argentina_open_war = { TAG = ENR }
+		# EN/ES: 24/9 (Juan, points 1 and 3) -- Corrientes and a living Coalition take Entre Rios's side (gg_argentina.87)
+		#     / Corrientes y una Coalicion viva se ponen del lado de Entre Rios
+		hidden_effect = { trigger_event = { id = gg_argentina.87 days = 1 } }
 		ai_chance = { base = 80 }
 	}
 
@@ -360,6 +365,7 @@ gg_argentina.3 = {
 		set_global_variable = { name = gg_pact_war_white_peace value = 0 }
 		set_global_variable = gg_war_against_buenos_aires
 		gg_argentina_open_war = { TAG = ENR }
+		hidden_effect = { trigger_event = { id = gg_argentina.87 days = 1 } } # EN/ES: 24/9 -- as in 3.b / como en 3.b
 		ai_chance = { base = 0 }
 		custom_tooltip = gg_play_as_entre_rios_tt
 		# EN/ES: 23/9 (preview audit) -- Entre Rios does not exist yet when the preview is built
@@ -3602,7 +3608,14 @@ gg_argentina.15 = {
 		}
 		add_modifier = { name = gg_ejercito_grande_imperial_letras months = 4 }
 		add_modifier = { name = gg_ejercito_grande_full_mortgage }
-		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_full_mortgage } }
+		# EN/ES: 24/9 (Juan, point 1) -- Corrientes mortgages only as a party to the alliance (the treaty of 21/11/1851 is
+		#     «los Estados de Entre Rios y Corrientes»), never while it is Rosas's / solo como parte de la alianza
+		c:CRR ?= {
+			if = {
+				limit = { is_subject = no NOT = { has_war_with = c:ENR } }
+				add_modifier = { name = gg_ejercito_grande_full_mortgage }
+			}
+		}
 		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize
 		#     / el Brasil entra ANTES de levantar su contingente: fuera de la guerra no se moviliza
 		gg_argentina_join_ejercito_grande_allies = yes
@@ -3629,7 +3642,14 @@ gg_argentina.15 = {
 			gg_ejercito_grande_pay_letra = yes
 		}
 		add_modifier = { name = gg_ejercito_grande_limited_mortgage }
-		c:CRR ?= { add_modifier = { name = gg_ejercito_grande_limited_mortgage } }
+		# EN/ES: 24/9 (Juan, point 1) -- Corrientes mortgages only as a party to the alliance (the treaty of 21/11/1851 is
+		#     «los Estados de Entre Rios y Corrientes»), never while it is Rosas's / solo como parte de la alianza
+		c:CRR ?= {
+			if = {
+				limit = { is_subject = no NOT = { has_war_with = c:ENR } }
+				add_modifier = { name = gg_ejercito_grande_limited_mortgage }
+			}
+		}
 		# EN/ES: 23/9 -- Brazil joins BEFORE its contingent is raised: a country outside the war cannot mobilize
 		#     / el Brasil entra ANTES de levantar su contingente: fuera de la guerra no se moviliza
 		gg_argentina_join_ejercito_grande_allies = yes
@@ -3686,6 +3706,9 @@ gg_argentina.80 = {
 
 	trigger = {
 		has_variable = gg_arg_rosas_seat
+		# EN/ES: 24/9/2026 (Juan, point 4) -- never with two governments: the partition already settled the provinces
+		#     (gg_pact_sides.txt) / nunca con dos gobiernos: la particion ya decidio las provincias
+		NOT = { has_global_variable = gg_pact_settlement_stalemate }
 	}
 
 	# EN: 23/9/2026 (Juan) -- what becomes of the provinces depends on how the Pact was settled.
@@ -3732,10 +3755,12 @@ gg_argentina.80 = {
 		# ES: tampoco despues de la confederacion negociada, cuya constitucion tambien hace un solo pais. Queda donde no
 		#     hay otra opcion (dos gobiernos, mandato deshecho) y tras la victoria de Rosas (sin constitucion); su texto
 		#     dice que la liga dura mientras no haya constitucion, porque en los dos primeros casos todavia puede llegar.
+		# EN/ES: 24/9/2026 (Juan, point 4) -- nor with two governments (the partition) / ni con dos gobiernos
 		trigger = {
 			NOR = {
 				has_global_variable = gg_pact_settlement_urquiza
 				has_global_variable = gg_pact_settlement_constitutional
+				has_global_variable = gg_pact_settlement_stalemate
 			}
 		}
 		if = {
@@ -3864,6 +3889,12 @@ gg_argentina.85 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.85.a|" # GG_TRAZA
 		name = gg_argentina.85.a
 		default_option = yes
+		# EN/ES: 24/9/2026 (Juan, point 4) -- what the division leaves on the map (gg_pact_stalemate_partition, run before
+		#     this event) / lo que la division deja en el mapa
+		if = {
+			limit = { has_global_variable = gg_pact_stalemate_partitioned }
+			custom_tooltip = gg_argentina.85.a_tt_partition
+		}
 		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
 		add_radicals = { value = small_radicals interest_group = ig:ig_rural_folk }
 		ai_chance = { base = 100 }
@@ -3938,6 +3969,126 @@ gg_argentina.86 = {
 		ai_chance = {
 			base = 20
 			modifier = { trigger = { gg_pact_historical = yes } factor = 0 } # EN/ES: the historical Pact rule: never for the AI / la regla historica del Pacto: nunca para la IA
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.87 -- THE DAY AFTER THE PRONOUNCEMENT (hidden, on Argentina, from every option of gg_argentina.3).
+#     24/9/2026 (Juan, points 1 and 3). The Coalition, if it lived, takes Urquiza's side at once (only with a war).
+#     Corrientes follows on 21/5/1851, its historical date, or at once if the Pronouncement came later: this event
+#     waits a day at a time until then (a finite date bound) and hands gg_argentina.88 to Entre Rios once.
+#     Why not a calendar relay: a relay queued on the first day would not reach the saves already running, and this
+#     one is born with the Pronouncement itself.
+# ES: gg_argentina.87 -- EL DIA DESPUES DEL PRONUNCIAMIENTO (oculto, sobre la Argentina, desde cada opcion de
+#     gg_argentina.3). La Coalicion, si vivio, se pone enseguida del lado de Urquiza (solo con guerra). Corrientes
+#     sigue el 21/5/1851, su fecha historica, o enseguida si el Pronunciamiento llego despues: este evento espera de a
+#     un dia hasta esa fecha y le entrega gg_argentina.88 a Entre Rios una sola vez. No es un relevo del calendario
+#     porque uno agendado el primer dia no llegaria a las partidas ya empezadas.
+# SOURCE / FUENTE: common/scripted_effects/gg_pact_sides.txt (Almanack/UNIFESP on the pronouncement of 1851).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.87 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.87|" # GG_TRAZA
+		if = {
+			limit = { NOT = { has_global_variable = gg_coalition_follow_checked } }
+			set_global_variable = gg_coalition_follow_checked
+			gg_coalition_follows_urquiza = yes
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = gg_corrientes_pronounced }
+				game_date < 1851.5.21
+			}
+			trigger_event = { id = gg_argentina.87 days = 1 }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_corrientes_pronounced }
+				exists = c:ENR
+			}
+			set_global_variable = gg_corrientes_pronounced
+			c:ENR = { trigger_event = { id = gg_argentina.88 days = 0 popup = yes } }
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_argentina.88 -- CORRIENTES PRONOUNCES, 21 May 1851. On Entre Rios. The legislature of Corrientes withdraws
+#     from the governor of Buenos Aires the foreign relations and the business of peace and war, and reassumes them
+#     as Entre Rios had done; Virasoro, governor since December 1847, signs the alliance. The pronouncement is done
+#     in the immediate, on its date: the option only acknowledges it.
+# ES: gg_argentina.88 -- CORRIENTES SE PRONUNCIA, 21 de mayo de 1851. Sobre Entre Rios. La Legislatura correntina le
+#     quita al gobernador de Buenos Aires las relaciones exteriores y los negocios de paz y guerra, y los reasume como
+#     habia hecho Entre Rios; Virasoro, gobernador desde diciembre de 1847, firma la alianza. El pronunciamiento se
+#     hace en el immediate, en su fecha: la opcion solo lo recibe.
+# SOURCE / FUENTE: «Una lectura del pronunciamiento de Justo Jose de Urquiza de 1851», Almanack (UNIFESP),
+#     https://www.scielo.br/j/alm/a/sjhGsFChMMt49y8yC99B4yc/ (21/5/1851; the envoy Nicanor Molinas; only Corrientes
+#     adhered openly); Protocolo de Palermo, 6/4/1852 (UNNE; the flavour quote: Entre Rios and Corrientes
+#     «autorizando plenamente esto en mayo de 1851»); es.wikipedia «Benjamin Virasoro» (governor from 14/12/1847; the
+#     post, the courts and the budget; the alliance with Urquiza). Image: Blanes, «Cabildo abierto» (gg_arg_coalicion,
+#     a legislature deliberating; not a depiction of this session).
+# -------------------------------------------------------------------------------------------------
+gg_argentina.88 = {
+	type = country_event
+	placement = ROOT
+	title = gg_argentina.88.t
+	# EN/ES: the date is only told when it is the date / la fecha solo se dice cuando es la fecha
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_argentina.88.d trigger = { game_date < 1851.5.23 } }
+			triggered_desc = { desc = gg_argentina.88.d_late }
+		}
+	}
+	flavor = gg_argentina.88.f
+	event_image = { video = "gg_arg_coalicion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.88|" # GG_TRAZA
+		hidden_effect = { gg_corrientes_pronounce = yes }
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.88.a|" # GG_TRAZA
+		name = gg_argentina.88.a
+		default_option = yes
+		if = {
+			limit = {
+				has_global_variable = gg_corrientes_with_urquiza
+				has_global_variable = gg_war_against_buenos_aires
+			}
+			custom_tooltip = gg_argentina.88.a_tt
+		}
+		else_if = {
+			limit = { has_global_variable = gg_corrientes_with_urquiza }
+			custom_tooltip = gg_argentina.88.a_tt_peace
+		}
+		else = { custom_tooltip = gg_argentina.88.a_tt_alone }
+		ai_chance = { base = 100 }
+	}
+}
+
+# EN: gg_argentina.89 -- the day after the Pact's war with Entre Rios starts: the allies that pronounced with it enter
+#     (hidden, on Entre Rios; common/on_actions/gg_pact_sides_on_actions.txt).
+# ES: gg_argentina.89 -- el dia despues de que empieza la guerra del Pacto con Entre Rios: entran los aliados que se
+#     pronunciaron con ella (oculto, sobre Entre Rios).
+gg_argentina.89 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.89|" # GG_TRAZA
+		if = {
+			limit = { has_global_variable = gg_corrientes_with_urquiza }
+			gg_pact_join_urquiza_side = { TAG = CRR }
+		}
+		if = {
+			limit = { has_global_variable = gg_coalition_with_urquiza }
+			gg_pact_join_urquiza_side = { TAG = CLN }
 		}
 	}
 }
