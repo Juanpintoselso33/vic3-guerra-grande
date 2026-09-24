@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## [Unreleased] 0.1.2-alpha
+## 0.1.2-alpha — 24/9/2026
 
 - **Oriental Province** (when the Cerrito wins and Argentina takes it as a province): annexed with the rest of
   the Pact by every incorporation path, with Oribe, his army and his characters; its ruler is Governor, not
@@ -14,6 +14,8 @@
   governments», a constitution for the State of Buenos Aires. It waits until the war with Brazil ends.
 - **The Brazilian loan:** if the Defensa takes it, the Empire enters the war against Oribe in 1851, with or
   without the convention with Entre Ríos.
+- **Urquiza alone:** if the Cerrito has won before 1 May 1851 and Brazil is not committed to him, Urquiza decides
+  whether to rise (AI: usually not; the player chooses). Under the forced Pact rules the rule still decides.
 - **Legions:** the Defensa AI reinforces them only under pressure.
 - **Cleanup:** the leftovers of the no-Argentina mode are gone; English thumbnail.
 
