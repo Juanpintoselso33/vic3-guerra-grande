@@ -72,7 +72,9 @@ gg_troops.10 = {
 		}
 		every_in_list = {
 			variable = gg_mob_queue
-			if = { limit = { is_mobilized = no } fully_mobilize_army = yes }
+			# EN: 24/9 -- the engine refuses to mobilize a formation with no units (headless sweep, gg_troops.txt:75)
+			# ES: el motor no moviliza una formacion sin unidades (barrido sin pantalla)
+			if = { limit = { is_army = yes is_mobilized = no num_units > 0 } fully_mobilize_army = yes }
 			# EN/ES: 23/9 -- only a mobilized army can go to a front; log the ones the engine refused
 			#     / solo un ejercito movilizado va al frente; se trazan los que el motor rechazo
 			if = {
