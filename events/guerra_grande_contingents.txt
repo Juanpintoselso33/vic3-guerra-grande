@@ -420,7 +420,7 @@ gg_contingent.5 = {
 	}
 
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|guerra_grande_italian_legion|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_contingent.5.a|" # GG_TRAZA
 		# EN/ES: 22/9/2026 (event audit, decided with Juan) -- Garibaldi is named only when he comes with
 		#     the legion (gg_garibaldi_famous) / Garibaldi se nombra solo cuando viene con la legion
 		name = {

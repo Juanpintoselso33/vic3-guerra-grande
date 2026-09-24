@@ -327,7 +327,7 @@ gg_plata.21 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.21.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -354,7 +354,7 @@ gg_plata.22 = {
 	#     / Rosas recibe el ultimatum mismo, no el aviso sobre el
 	trigger = { NOT = { has_variable = gg_arg_rosas_seat } }
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.22.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -378,7 +378,7 @@ gg_plata.23 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.23.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -404,7 +404,7 @@ gg_plata.24 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.24.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -449,7 +449,7 @@ gg_plata.25 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.25.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -473,7 +473,7 @@ gg_plata.26 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.26.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -499,7 +499,7 @@ gg_plata.27 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.27.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -515,7 +515,7 @@ gg_plata.28 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.28.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 	}
@@ -749,7 +749,7 @@ gg_plata.46 = {
 	duration = 12
 	is_popup = yes
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.20.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.46.a|" # GG_TRAZA
 		name = gg_plata.20.a
 		default_option = yes
 		custom_tooltip = gg_plata.46.a_tt

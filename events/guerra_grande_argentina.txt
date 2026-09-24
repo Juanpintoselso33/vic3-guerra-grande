@@ -2651,7 +2651,7 @@ gg_argentina.51 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.51.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2672,7 +2672,7 @@ gg_argentina.52 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.52.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2693,7 +2693,7 @@ gg_argentina.53 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.53.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2714,7 +2714,7 @@ gg_argentina.54 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.54.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2735,7 +2735,7 @@ gg_argentina.55 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.55.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }
@@ -2756,7 +2756,7 @@ gg_argentina.56 = {
  is_popup = yes
  trigger = { c:ARG ?= this }
  option = {
- 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.50.a|" # GG_TRAZA
+ 	debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.56.a|" # GG_TRAZA
   name = gg_argentina.50.a
   default_option = yes
   ai_chance = { base = 100 }

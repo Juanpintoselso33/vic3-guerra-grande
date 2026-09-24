@@ -40,7 +40,7 @@ gg_patron.1 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.1.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}
@@ -77,7 +77,7 @@ gg_patron.2 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.2.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}
@@ -113,7 +113,7 @@ gg_patron.3 = {
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	option = {
-		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.a|" # GG_TRAZA
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_patron.3.a|" # GG_TRAZA
 		name = gg_patron.a
 		default_option = yes
 	}
