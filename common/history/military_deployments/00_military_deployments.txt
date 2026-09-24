@@ -1,0 +1,134 @@
+﻿# EN: 24/9/2026 (AUD-ERR-LOAD). Vanilla's file (1.13.11) without the two deployments of the Ragamuffin War, which
+#     this mod removes from the start (common/history/diplomatic_plays/00_south_american_wars.txt, AUD-FARRAPOS-A):
+#     Bellegarde's army to the Santa Catarina front (p:x4538A5) and every Farrapos (PNI) army to the Rio Grande
+#     front (p:x529B8E). With no war there is no front, and the engine logged at every load
+#     "teleport_to_front effect [ Invalid target front ]" (lines 47 and 62) and "fully_mobilize_army effect
+#     [ Scope formation cannot be mobilized ]" (line 61). The armies stayed demobilized anyway: nothing changes in
+#     play. Everything else is vanilla, in vanilla's order. No mod of the playset ships this file (24/9/2026).
+#     If a patch changes vanilla's file, re-copy it and drop the same two blocks.
+# ES: el archivo de vanilla sin los dos despliegues de la guerra de los Farrapos, que este mod saca del arranque:
+#     sin guerra no hay frente y el motor lo registraba en cada carga. Los ejercitos quedaban desmovilizados igual:
+#     en la partida no cambia nada. El resto es vanilla, en su orden.
+MILITARY_DEPLOYMENTS = {
+	c:MEX ?= {
+		random_scope_general = {
+			limit = {
+				has_variable = is_santa_anna
+			}
+
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = p:xA3A810.front
+			}
+		}
+	}
+
+	c:TEX ?= {
+		random_scope_general = {
+			limit = {
+				has_template = TEX_William_Travis
+			}
+
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = p:xC369DB.front
+			}
+		}
+	}
+
+	c:BRZ ?= {
+		random_scope_general = {
+			limit = {
+				has_template = BRZ_pierre_labatut
+			}
+
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = p:x0787AA.front
+			}
+		}
+	}
+
+	c:PRA ?= {
+		every_military_formation = {
+			fully_mobilize_army = yes
+			teleport_to_front = p:xC3E90E.front
+		}
+	}
+
+	c:LAD ?= {
+		every_military_formation = {
+			fully_mobilize_army = yes
+			teleport_to_front = p:xF469BC.front
+		}
+	}
+
+	c:KAS ?= {
+		every_military_formation = {
+			fully_mobilize_army = yes
+			teleport_to_front = p:xF469BC.front
+		}
+	}
+
+	c:SPC ?= {
+		random_scope_general = {
+			limit = {
+				has_template = SPC_vicente_gonzalez_moreno_template
+			}
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = {
+					front = p:x9EC9B8.front
+					base_camp = p:x9EC9B8
+				}
+			}
+		}
+		random_scope_general = {
+			limit = {
+				has_template = SPC_ramon_cabrera_template
+			}
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = {
+					front = p:x506040.front
+					base_camp = p:x506040
+				}
+			}
+		}
+		random_scope_general = {
+			limit = {
+				has_template = SPC_juan_antonio_de_urbiztondo_template
+			}
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = {
+					front = p:x936FF3.front
+					base_camp = p:x936FF3
+				}
+			}
+		}
+	}
+
+	c:SPA ?= {
+		every_scope_general = {
+			commander_military_formation ?= {
+				fully_mobilize_army = yes
+				teleport_to_front = p:xAC1425.front
+			}
+		}
+	}
+
+	c:TRI ?= {
+		every_military_formation = {
+			limit = {
+				is_army = yes
+			}
+			fully_mobilize_army = yes
+		}
+	}
+	c:FZN ?= {
+		every_military_formation = {
+			fully_mobilize_army = yes
+		}
+	}
+}

@@ -30,7 +30,10 @@ gg_commander_marques_de_sousa = {
 		limit = { NOT = { any_scope_character = { has_variable = gg_marques_de_sousa } } }
 		create_character = {
 			first_name = "Manuel"
-			last_name = "Marques de Sousa"
+			# EN/ES: 24/9 (AUD-ERR-LOAD) -- a name the engine cannot find as a loc key is replaced by a random one
+			#     ("Missing localization key for character last name"): the key lives in guerra_grande_characters_l_*
+			#     / un apellido sin clave de localizacion lo reemplaza el motor por uno al azar
+			last_name = gg_name_marques_de_sousa
 			historical = yes
 			birth_date = 1804.6.13
 			is_general = yes
