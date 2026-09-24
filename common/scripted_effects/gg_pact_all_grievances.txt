@@ -1,0 +1,78 @@
+﻿# EN: 23/9/2026 (Juan, on gg_argentina.17: "it is Buenos Aires's own land policy, so it moves the Pact as a
+#     whole"). The Pact has no single all-provinces grievance: its collective measure is the three regional
+#     accounts the journal shows (Corrientes, the North, Entre Rios), the same ones gg_argentina.18.c opens
+#     together. These move all three by one, each only while that region still delegates, with the same
+#     petition rule as the regional decisions (+1 opens it; -1 down to 0 closes it only at 0).
+# ES: el Pacto no tiene un agravio comun: su medida colectiva son las tres cuentas regionales del journal,
+#     las mismas que abre juntas gg_argentina.18.c. Estas mueven las tres en uno, cada una solo si esa region
+#     todavia delega, con la misma regla de pliegos que las decisiones regionales.
+
+gg_pact_all_grievances_up = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_all_grievances_up|" # GG_TRAZA
+	custom_tooltip = gg_pact_all_grievances_up_tt
+	hidden_effect = {
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_corrientes } exists = s:STATE_CORRIENTES.region_state:ARG }
+			change_global_variable = { name = gg_corrientes_agravio add = 1 }
+			gg_reclamo_abre = { KEY = corrientes }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } exists = s:STATE_TUCUMAN.region_state:ARG }
+			change_global_variable = { name = gg_norte_agravio add = 1 }
+			gg_reclamo_abre = { KEY = coalicion_tucuman }
+			gg_reclamo_abre = { KEY = coalicion_salta }
+			gg_reclamo_abre = { KEY = coalicion_jujuy }
+			gg_reclamo_abre = { KEY = coalicion_catamarca }
+			gg_reclamo_abre = { KEY = coalicion_la_rioja }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
+			gg_reclamo_abre = { KEY = entre_rios }
+		}
+	}
+}
+
+gg_pact_all_grievances_down = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_all_grievances_down|" # GG_TRAZA
+	custom_tooltip = gg_pact_all_grievances_down_tt
+	hidden_effect = {
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_corrientes } exists = s:STATE_CORRIENTES.region_state:ARG }
+			if = {
+				limit = { has_global_variable = gg_corrientes_agravio global_var:gg_corrientes_agravio > 0 }
+				change_global_variable = { name = gg_corrientes_agravio add = -1 }
+			}
+			if = {
+				limit = { OR = { NOT = { has_global_variable = gg_corrientes_agravio } global_var:gg_corrientes_agravio = 0 } }
+				gg_reclamo_cierra = { KEY = corrientes }
+			}
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_coalicion_tucuman } exists = s:STATE_TUCUMAN.region_state:ARG }
+			if = {
+				limit = { has_global_variable = gg_norte_agravio global_var:gg_norte_agravio > 0 }
+				change_global_variable = { name = gg_norte_agravio add = -1 }
+			}
+			if = {
+				limit = { OR = { NOT = { has_global_variable = gg_norte_agravio } global_var:gg_norte_agravio = 0 } }
+				gg_reclamo_cierra = { KEY = coalicion_tucuman }
+				gg_reclamo_cierra = { KEY = coalicion_salta }
+				gg_reclamo_cierra = { KEY = coalicion_jujuy }
+				gg_reclamo_cierra = { KEY = coalicion_catamarca }
+				gg_reclamo_cierra = { KEY = coalicion_la_rioja }
+			}
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_delegation_gone_entre_rios } exists = s:STATE_ENTRE_RIOS.region_state:ARG }
+			if = {
+				limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 }
+				change_global_variable = { name = gg_entre_rios_agravio add = -1 }
+			}
+			if = {
+				limit = { OR = { NOT = { has_global_variable = gg_entre_rios_agravio } global_var:gg_entre_rios_agravio = 0 } }
+				gg_reclamo_cierra = { KEY = entre_rios }
+			}
+		}
+	}
+}

@@ -47,4 +47,5 @@
  gg_arg_flavour_corrientes_hard_tt:0 "@arrow_up! Agravio de #b Corrientes#!: #N +1#! si todavía delega; su pliego queda abierto."
  gg_arg_flavour_corrientes_relief_tt:0 "@arrow_down! Agravio de #b Corrientes#!: #P −1#!, hasta un mínimo de #V 0#!, si todavía delega. Su pliego se cierra sólo si no queda agravio."
  gg_arg_flavour_corrientes_gone_tt:0 "@information! #b Corrientes#! ya no está bajo esta delegación: la cuenta no mueve sus agravios."
- gg_arg_flavour_entre_rios_gone_tt:0 "@information! #b Entre Ríos#! ya no está bajo esta delegación: la cuenta no mueve sus agravios."
+ gg_pact_all_grievances_up_tt:0 "@arrow_up! Agravios de #b Corrientes#!, del #b Norte#! y de #b Entre Ríos#!: #N +1#! cada uno, en las que todavía delegan; sus pliegos quedan abiertos."
+ gg_pact_all_grievances_down_tt:0 "@arrow_down! Agravios de #b Corrientes#!, del #b Norte#! y de #b Entre Ríos#!: #P −1#! cada uno, hasta un mínimo de #V 0#!, en las que todavía delegan. Cada pliego se cierra sólo si no le queda agravio."
