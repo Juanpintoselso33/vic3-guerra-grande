@@ -1,0 +1,37 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE ORIENTAL PROVINCE (hotfix 0.1.1, 24/9/2026, Juan). While the Republic is a province of the Pact
+#     under Buenos Aires (gg_oriental_make_province: gg_oriental_province set, subject of Argentina), the
+#     country is called «Provincia Oriental», the name the Sala de Representantes used in the Law of Union
+#     of 25 August 1825 («Queda la Provincia Oriental del Rio de la Plata unida a las demas de este nombre»).
+#     «Banda Oriental» names the region, not the province. The same trigger as its Treinta y Tres flag
+#     (common/flag_definitions/zz_guerra_grande_flags.txt), so name and flag change together and both
+#     go back to «Uruguay» the moment it stops being Buenos Aires's subject: nothing to undo.
+#     INJECT, not REPLACE: vanilla's and Dynamic Names, Flags & Colours's names for URU stay; this file
+#     sorts after both (00_dynamic_country_names.txt, dnfc_brazil_country_names.txt), as the flag file
+#     sorts after DNFC's and wins in Juan's playset. INJECT on dynamic names is how the British Flavour
+#     Pack (Workshop 3713104798, INJECT:GBR) adds its own. Priority above DNFC's «dyn_c_URU_subject» (1).
+# ES: LA PROVINCIA ORIENTAL. Mientras la Republica sea provincia del Pacto bajo Buenos Aires, el pais se
+#     llama «Provincia Oriental», el nombre de la Ley de Union del 25 de agosto de 1825. «Banda Oriental»
+#     es la region. El mismo trigger que su bandera de los Treinta y Tres: nombre y bandera cambian juntos
+#     y vuelven a «Uruguay» apenas deja de ser sujeta de Buenos Aires. INJECT: se conservan los nombres
+#     de vanilla y de DNFC.
+# SOURCE / FUENTE: Ley de Union, Sala de Representantes de la Provincia Oriental, Florida, 25/8/1825
+#     (text: https://es.wikisource.org/wiki/Declaraci%C3%B3n_de_Independencia_de_Uruguay ; Uruguay Educa/ANEP,
+#     https://uruguayeduca.anep.edu.uy/efemerides/declaratoria-de-la-independencia ; printed in Armand Ugon et
+#     al., Compilacion de leyes y decretos 1825-1930, t. 1, pp. 84-89).
+# -------------------------------------------------------------------------------------------------
+INJECT:URU = {
+	dynamic_country_name = {
+		name = gg_dyn_provincia_oriental
+		adjective = gg_dyn_provincia_oriental_adj
+
+		is_main_tag_only = yes
+		priority = 150
+
+		trigger = {
+			exists = c:ARG
+			has_global_variable = gg_oriental_province
+			scope:actor ?= { is_subject_of = c:ARG }
+		}
+	}
+}

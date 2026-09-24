@@ -198,12 +198,21 @@ gg_oriental_make_province = {
 	c:BRZ ?= { trigger_event = { id = gg_cisplatina.2 days = 30 popup = yes } }
 	save_scope_as = gg_oriental_country
 	# EN/ES: a subject pact only with the peace signed (I17) / pacto de sujecion solo con la paz firmada
+	# EN: 24/9/2026 (hotfix 0.1.1, AUD-ORIENTAL-FREED) -- was type = vassal, which the engine drops at once: a vassal
+	#     needs an unrecognized overlord, and every recognized-overlord type needs Buenos Aires to outrank the
+	#     Republic (both were minor_power in Juan's game). Its own type has no rank rule (zz_gg_subject_types.txt).
+	#     Guarded on not being a subject already: gg_peace.10 may have rebuilt it after the tag change.
+	# ES: era type = vassal, que el motor tira enseguida (el vasallaje pide un soberano no reconocido, y los otros
+	#     tipos piden que Buenos Aires tenga mas rango que la Republica). Tipo propio, sin la regla del rango.
 	if = {
-		limit = { has_global_variable = gg_peace_settled }
+		limit = {
+			has_global_variable = gg_peace_settled
+			is_subject = no
+		}
 		c:ARG ?= {
 			create_diplomatic_pact = {
 				country = scope:gg_oriental_country
-				type = vassal
+				type = gg_pact_province
 			}
 			change_relations = { country = scope:gg_oriental_country value = 80 }
 		}

@@ -1,0 +1,87 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE PROVINCE OF THE PACT (hotfix 0.1.1, 24/9/2026). Juan, playing Argentina, took the Banda
+#     Oriental in as a province (gg_cisplatina.5.b): the flag changed to the Treinta y Tres one and
+#     then Uruguay «freed itself». Not a script: no make_independent ran (debug.log, 20-24/4/1851).
+#     The engine dropped the pact because it was not valid for the countries it joined:
+#       - subject_type_vassal only takes an UNRECOGNIZED overlord (valid_overlord_country_types =
+#         { unrecognized }), and the Confederation is recognized;
+#       - every other vanilla type that takes a recognized overlord (protectorate, puppet, dominion,
+#         tributary...) has overlord_must_be_higher_rank = yes, except the personal union (a shared
+#         monarch, which this is not), and in Juan's save Argentina and the
+#         Republic were both minor_power (the ranking block of the 1/1/1851 autosave). The Pact
+#         provinces of the interior survive as protectorates only because they are insignificant.
+#     So the Oriental Province gets its own type: a protectorate in everything (autonomy, wars,
+#     own diplomacy), minus the rank rule, with a recognized overlord allowed. The idea of a
+#     subject type without the rank rule comes from Gates of the Bosphorus (subject_type_gbbf_beylik,
+#     Workshop 3384997867); the definition below is vanilla's protectorate, changed where it says.
+#     Created only by script (gg_oriental_make_province, gg_peace.10); never offered by the AI.
+# ES: LA PROVINCIA DEL PACTO. Juan, jugando la Argentina, recibio a la Banda Oriental como provincia:
+#     cambio la bandera a la de los Treinta y Tres y enseguida el Uruguay «se libero». No fue un script:
+#     no corrio ningun make_independent. El motor tiro el pacto porque no era valido para esos paises:
+#     el vasallaje solo admite un soberano NO reconocido, y todo tipo que admite uno reconocido exige
+#     que el soberano tenga mas rango que el sujeto, y la Argentina y la Republica eran las dos
+#     potencias menores. La Provincia Oriental tiene entonces su propio tipo: un protectorado en todo,
+#     sin la regla del rango. La idea es de Gates of the Bosphorus; la definicion es el protectorado de
+#     vanilla, cambiado donde lo dice.
+# -------------------------------------------------------------------------------------------------
+subject_type_gg_pact_province = {
+	allow_change_country_flag = yes # EN/ES: the Treinta y Tres flag (zz_guerra_grande_flags.txt) / la bandera de los Treinta y Tres
+	use_overlord_map_color = no
+	use_overlord_ruler = no
+	annex_on_country_formation = no
+	can_start_own_diplomatic_plays = yes
+	breaks_if_subject_not_protected = yes
+	join_overlord_wars = no
+	can_have_subjects = no
+	overlord_must_be_higher_rank = no # EN/ES: the change / el cambio
+	overlord_must_be_same_country_type = no
+	use_for_release_country = no
+	gives_prestige_to_overlord = yes
+	can_target_with_transfer_wargoal = no
+	can_be_used_in_sway_offers = no
+
+	diplomatic_action = gg_pact_province
+
+	autonomy_level = 2
+	category = same_as_puppet
+
+	lower_autonomy_subject_type_alternatives = {
+		subject_type_puppet
+	}
+
+	same_autonomy_subject_type_alternatives = {
+		subject_type_protectorate
+	}
+
+	valid_overlord_country_types = {
+		recognized
+		unrecognized
+	}
+
+	valid_subject_country_types = {
+		recognized
+		unrecognized
+	}
+
+	valid_overlord_ranks = {
+		great_power
+		major_power
+		minor_power
+		insignificant_power
+		unrecognized_major_power
+		unrecognized_regional_power
+		unrecognized_power
+	}
+
+	valid_subject_ranks = {
+		major_power
+		minor_power
+		insignificant_power
+		unrecognized_regional_power
+		unrecognized_power
+	}
+
+	ai_value = {
+		value = 1
+	}
+}

@@ -1,0 +1,50 @@
+﻿# EN: The pact behind subject_type_gg_pact_province (common/subject_types/zz_gg_subject_types.txt): vanilla's
+#     protectorate action (19_subject_protectorate.txt, 1.13) with its own subject type. Only created by
+#     script; the overlord can release it, the province has to fight for it, as with a protectorate.
+# ES: el pacto detras de la Provincia del Pacto: la accion de protectorado de vanilla con su propio tipo.
+#     Solo lo crea el script; el soberano puede liberarla y la provincia tiene que pelear, como un protectorado.
+gg_pact_province = {
+	groups = {
+		general
+	}
+	show_in_lens = no
+
+	potential = { # EN/ES: only created by script / solo por script
+		always = no
+	}
+
+	pact = {
+		cost = 10
+		has_junior_participant = yes
+		maintenance_paid_by = first_country
+
+		relations_progress_per_day = 1
+		relations_improvement_max = 50
+
+		subject_type = subject_type_gg_pact_province
+
+		second_modifier = {}
+
+		actor_can_break = {
+			is_diplomatic_play_committed_participant = no
+		}
+
+		target_can_break = { # EN/ES: has to use a diplomatic play / tiene que usar una jugada diplomatica
+			always = no
+		}
+
+		manual_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+
+		auto_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+	}
+
+	ai = {
+		will_break = {
+			always = no
+		}
+	}
+}

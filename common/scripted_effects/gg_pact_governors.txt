@@ -190,12 +190,25 @@ gg_pact_governors_update = {
 	if = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG exists = ruler } }
 		c:URU = { ruler = { set_global_variable = { name = gg_pact_gov_oriental value = this } } }
+		# EN/ES: 24/9 (hotfix 0.1.1, AUD-ORIENTAL-FREED) -- the night sweep reads that the province is still Buenos
+		#     Aires's and what it is called / el barrido nocturno lee que la provincia sigue sujeta y como se llama
+		c:URU = { debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update| ORIENTAL_PROVINCE_SUBJECT=yes NAME= [THIS.GetCountry.GetNameNoFlag]" } # GG_TRAZA
 	}
 	# EN/ES: 23/9 (Juan) -- fully reincorporated: Oribe governs it, found wherever he is or born from his template
 	#     (the Pact's own rule for governors) / reincorporada: la gobierna Oribe, donde este o nacido de su plantilla
 	else_if = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_reincorporated exists = c:ARG }
 		gg_pact_gov_pick_or_create = { TEMPLATE = URU_Manuel_Oribe KEY = oriental STATE = STATE_MONTEVIDEO }
+	}
+	# EN/ES: 24/9 (AUD-ORIENTAL-FREED) -- the province marks are up but the Republic is free: the bug Juan saw
+	#     / las marcas de provincia siguen pero la Republica esta libre: lo que vio Juan
+	if = {
+		limit = {
+			has_global_variable = gg_oriental_in_pact
+			has_global_variable = gg_oriental_province
+			c:URU ?= { is_subject = no }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update| ORIENTAL_PROVINCE_FREED=yes" # GG_TRAZA
 	}
 	if = { limit = { exists = scope:gg_pact_gov_prev } clear_saved_scope = gg_pact_gov_prev }
 	gg_pact_gov_province = { KEY = corrientes TAG = CRR }

@@ -1953,6 +1953,12 @@ gg_peace.8 = {
 				limit = { is_subject_type = subject_type_protectorate }
 				set_global_variable = { name = gg_cerrito_subject_kind value = 3 }
 			}
+			# EN/ES: 24/9 (hotfix 0.1.1, AUD-ORIENTAL-FREED) -- the Oriental Province of the Pact (gg_oriental_make_province)
+			#     / la Provincia Oriental del Pacto
+			else_if = {
+				limit = { is_subject_type = subject_type_gg_pact_province }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 4 }
+			}
 		}
 		if = {
 			limit = { NOT = { exists = c:URU } }
@@ -2043,6 +2049,10 @@ gg_peace.10 = {
 				else_if = {
 					limit = { global_var:gg_cerrito_subject_kind = 3 }
 					create_diplomatic_pact = { country = c:URU type = protectorate }
+				}
+				else_if = {
+					limit = { global_var:gg_cerrito_subject_kind = 4 }
+					create_diplomatic_pact = { country = c:URU type = gg_pact_province }
 				}
 			}
 		}
