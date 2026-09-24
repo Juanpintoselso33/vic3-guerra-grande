@@ -146,3 +146,44 @@ gg_deduplicate_character_worldwide = {
 	}
 	clear_saved_scope = gg_character_canonical
 }
+
+# EN: THE LEGION COLONELS LEAVE WITH THEIR LEGIONS (bug hunt 23/9/2026, CB-05). Thiebaut (French Legion)
+#     and Garibaldi (Italian Legion) are created as historical generals of the armed forces, and nothing
+#     sent them away when the corps did: in run 205411 the elections made Thiebaut head of state in 1849
+#     and again in 1850, and after the peace nobody corrected it. The French colonel is kept in a global
+#     (the button that raises him runs in the Defensa, which may change hands at the peace); Garibaldi in
+#     the country variable gg_contingent.5 already used. Exiled, not killed: both lived on.
+# ES: LOS CORONELES DE LAS LEGIONES SE VAN CON SUS LEGIONES. Thiebaut y Garibaldi nacen como generales
+#     historicos de las fuerzas armadas y nada los despedia cuando se iba el cuerpo: en la corrida 205411
+#     las elecciones hicieron jefe de Estado a Thiebaut en 1849 y en 1850, y despues de la paz nadie lo
+#     corregia. El coronel frances se guarda en una global; Garibaldi en la variable de pais que ya usaba
+#     gg_contingent.5. Al exilio, no muertos: los dos siguieron vivos.
+gg_french_legion_commander_leaves = {
+	if = {
+		limit = { has_global_variable = gg_thiebaut_ref }
+		global_var:gg_thiebaut_ref ?= {
+			if = {
+				limit = { is_character_alive = yes }
+				exile_character = yes
+			}
+		}
+		remove_global_variable = gg_thiebaut_ref
+	}
+}
+
+# EN: called once from gg_wartime_modifiers_clear, the door every ending goes through.
+# ES: se llama una vez desde gg_wartime_modifiers_clear, la puerta por la que pasa todo final.
+gg_legion_commanders_leave = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_legion_commanders_leave|" # GG_TRAZA
+	gg_french_legion_commander_leaves = yes
+	every_country = {
+		limit = { has_variable = gg_garibaldi_ref }
+		var:gg_garibaldi_ref ?= {
+			if = {
+				limit = { is_character_alive = yes }
+				exile_character = yes
+			}
+		}
+		remove_variable = gg_garibaldi_ref
+	}
+}

@@ -90,7 +90,11 @@ guerra_grande_italian_legion_button = {
 		if = {
 			limit = { NOT = { has_variable = guerra_grande_italian_legion_raised } }
 			set_variable = guerra_grande_italian_legion_raised
+			# EN/ES: bug hunt 23/9/2026 (CB-05) -- the same reference gg_contingent.5 keeps, so 1848 and the peace
+			#     can send him away; raised by this button he stayed for ever / la misma referencia que guarda
+			#     gg_contingent.5, para que 1848 y la paz lo despidan; levantado por este boton se quedaba para siempre
 			create_character = {
+				save_scope_as = gg_garibaldi
 				first_name = "Giuseppe"
 				last_name = "Garibaldi"
 				historical = yes
@@ -105,6 +109,7 @@ guerra_grande_italian_legion_button = {
 					experienced_offensive_planner
 				}
 			}
+			set_variable = { name = gg_garibaldi_ref value = scope:gg_garibaldi }
 			add_modifier = {
 				name = guerra_grande_italian_legion
 				years = 10

@@ -916,6 +916,7 @@ gg_powers.18 = {
 			limit = { has_modifier = guerra_grande_foreign_legions }
 			remove_modifier = guerra_grande_foreign_legions
 		}
+		gg_french_legion_commander_leaves = yes # EN/ES: CB-05 -- Thiebaut goes with the Basques / Thiebaut se va con los vascos
 		c:URU ?= {
 			gg_endurance_change = { SIDE = defensa VALUE = -5 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 		}
@@ -962,6 +963,7 @@ gg_powers.18 = {
 			limit = { has_modifier = guerra_grande_foreign_legions }
 			remove_modifier = guerra_grande_foreign_legions
 		}
+		gg_french_legion_commander_leaves = yes # EN/ES: CB-05 -- Thiebaut goes with the Basques / Thiebaut se va con los vascos
 		if = {
 			limit = { has_modifier = guerra_grande_italian_legion }
 			remove_modifier = guerra_grande_italian_legion

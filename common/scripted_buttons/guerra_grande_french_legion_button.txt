@@ -108,7 +108,13 @@ guerra_grande_french_legion_button = {
 		if = {
 			limit = { NOT = { has_variable = guerra_grande_french_legion_raised } }
 			set_variable = guerra_grande_french_legion_raised
+			# EN: bug hunt 23/9/2026 (CB-05) -- kept in a global so he leaves with his legion (gg_powers.18,
+			#     gg_wartime_modifiers_clear): left in the roster, the elections made the legion's colonel
+			#     head of state after the peace (run 205411, 1849-1851).
+			# ES: guardado en una global para que se vaya con su legion: si quedaba en el plantel, las
+			#     elecciones hacian jefe de Estado al coronel de la legion despues de la paz.
 			create_character = {
+				save_scope_as = gg_thiebaut
 				first_name = "Jean-Chrysostome"
 				last_name = "Thiebaut"
 				historical = yes
@@ -127,6 +133,7 @@ guerra_grande_french_legion_button = {
 					meticulous
 				}
 			}
+			set_global_variable = { name = gg_thiebaut_ref value = scope:gg_thiebaut }
 			add_modifier = {
 				name = guerra_grande_foreign_legions
 				years = 10
