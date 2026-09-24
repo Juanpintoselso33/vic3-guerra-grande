@@ -1190,7 +1190,10 @@ gg_powers.21 = {
 		#     unless her guarantee or her squadron keeps her in the river. The mark goes first, so the
 		#     level notice fired by gg_patron_change is the final one (Codex) / renunciar saca a Francia,
 		#     salvo que su garantia o su escuadra la mantengan; la marca va primero
-		hidden_effect = {
+		# EN/ES: CB-10 (23/9/2026) -- shown: it also stops France's money while she stays in the river
+		#     / a la vista: tambien corta la plata francesa aunque Francia siga en el rio
+		custom_tooltip = {
+			text = gg_french_subsidy_renounced_tt
 			set_global_variable = gg_french_subsidy_renounced
 		}
 		if = {

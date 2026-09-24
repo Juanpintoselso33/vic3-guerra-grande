@@ -313,7 +313,13 @@ gg_argentina.3 = {
 		else = { custom_tooltip = gg_pronunciamiento_rebelion_tt }
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
-		set_global_variable = gg_montevideo_convention_enabled
+		# EN/ES: CB-10 (23/9/2026) -- the mark decides how the Pact closes and what the other bank may offer; the
+		#     player is told that much, not what follows / la marca decide como se cierra el Pacto y que puede
+		#     ofrecer la otra orilla; al jugador se le dice eso, no lo que viene
+		custom_tooltip = {
+			text = gg_montevideo_convention_enabled_tt
+			set_global_variable = gg_montevideo_convention_enabled
+		}
 		# EN: 23/9/2026 (Codex audit, AUD-PACT-MARK) -- the war of the Pact with Entre Rios starts here, so its mark and
 		#     its outcome start here too, whatever comes later: before, only Rosas declaring the alliance
 		#     (gg_argentina.14.b) or Urquiza fighting alone set them, and with the Convention refused or Oribe
@@ -337,7 +343,13 @@ gg_argentina.3 = {
 		else = { custom_tooltip = gg_pronunciamiento_rebelion_tt }
 		# EN/ES: 23/9 (preview audit) -- hidden: the option's own text tells it / oculto: lo cuenta el texto de la opcion
 		hidden_effect = { gg_argentina_create_entre_rios = yes }
-		set_global_variable = gg_montevideo_convention_enabled
+		# EN/ES: CB-10 (23/9/2026) -- the mark decides how the Pact closes and what the other bank may offer; the
+		#     player is told that much, not what follows / la marca decide como se cierra el Pacto y que puede
+		#     ofrecer la otra orilla; al jugador se le dice eso, no lo que viene
+		custom_tooltip = {
+			text = gg_montevideo_convention_enabled_tt
+			set_global_variable = gg_montevideo_convention_enabled
+		}
 		# EN: 23/9/2026 (Codex audit, AUD-PACT-MARK) -- the war of the Pact with Entre Rios starts here, so its mark and
 		#     its outcome start here too, whatever comes later: before, only Rosas declaring the alliance
 		#     (gg_argentina.14.b) or Urquiza fighting alone set them, and with the Convention refused or Oribe
