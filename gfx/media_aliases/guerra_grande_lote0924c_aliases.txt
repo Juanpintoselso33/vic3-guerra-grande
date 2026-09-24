@@ -109,3 +109,15 @@ gg_ba_pavon_manzoni = {
 	video = "gfx/media_aliases/gg_ba_pavon_manzoni.bk2"
 	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
+
+# gg_notice.14: Garibaldi at the fight of San Antonio, 8/2/1846, 19th-century watercolour (DeAgostini/Getty reproduction, 594x436) -- via Commons -- work PD; reproduction rights unclear: replace before a Workshop release
+gg_ntc_san_antonio = {
+	video = "gfx/media_aliases/gg_ntc_san_antonio.bk2"
+	audio = "event:/SFX/Events/southamerica/war_civilians"
+}
+
+# gg_notice.15: institutional building at the Cerrito de la Victoria, glass-plate photograph, undated -- Centro de Fotografia de Montevideo 0690FMHB, via Commons -- free access (CdF)
+gg_ntc_cerrito_escuela = {
+	video = "gfx/media_aliases/gg_ntc_cerrito_escuela.bk2"
+	audio = "event:/SFX/Events/southamerica/aristocrats"
+}

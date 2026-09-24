@@ -478,7 +478,7 @@ gg_notice.14 = {
 	}
 	flavor = gg_notice.14.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "southamerica_war_civilians" }
+	event_image = { video = "gg_ntc_san_antonio" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -560,7 +560,7 @@ gg_notice.15 = {
 	desc = gg_notice.15.d
 	flavor = gg_notice.15.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "southamerica_christianity" }
+	event_image = { video = "gg_ntc_cerrito_escuela" }
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
 	duration = 12
 	is_popup = yes
