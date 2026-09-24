@@ -1,0 +1,4119 @@
+﻿# EN: 23/9/2026 (Juan: "every war play against the Oriental governments guarded until the signed peace") -- the
+#     war goals. A play against the Republic or a wartime government is already refused (diplomatic_plays/), but
+#     an enemy can still ADD a goal against one of them once it is inside somebody else's play (called in as an
+#     ally, a defensive pact). Every vanilla war goal type, copied VERBATIM from game/common/war_goal_types/ (1.13)
+#     with one line at the TOP LEVEL of its possible block (the trigger vanilla documents as "is this goal
+#     listed when selecting a war goal": root = holder, scope:target_country): gg_war_goal_is_allowed, which is
+#     guerra_grande_play_is_allowed plus the engine's civil wars. valid is untouched, so a goal already on the
+#     table is not torn out of a running war. Community Mod Framework replaces 00_annex_country, 03_conquer_state
+#     and 21_return_state by file name; its versions, with the same line, are REPLACEd again by the compatch
+#     (zzz_gg_x_arg_war_goals.txt, which sorts after this file).
+# ES: los objetivos de guerra. La jugada contra la Republica o un gobierno de guerra ya se rechaza, pero un
+#     enemigo todavia puede AGREGAR un objetivo contra uno de ellos si esta dentro de la jugada de otro (llamado
+#     como aliado, un pacto defensivo). Cada tipo de vanilla, copiado TAL CUAL con una linea en el NIVEL SUPERIOR
+#     de su possible: gg_war_goal_is_allowed. valid no se toca: un objetivo ya puesto no se arranca de una
+#     guerra en curso. CMF reemplaza tres por nombre de archivo; sus versiones, con la misma linea, las vuelve
+#     a reemplazar el compatch.
+
+REPLACE:annex_country = {
+	icon = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	kind = annex_country
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+		annexes_entire_country
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_conflicts_annex_country
+	}
+
+	execution_priority = 80
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		always = no
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 5
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:ban_slavery = {
+	icon = "gfx/interface/icons/war_goals/ban_slavery.dds"
+
+	kind = ban_slavery
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			NOT = { has_law_or_variant = law_type:law_slavery_banned }
+		}
+		has_law_or_variant = law_type:law_slavery_banned
+	}
+
+	# Uses the same maneuvers and infamy values as law_commitment
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 2.5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 5
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:colonization_rights = {
+	icon = "gfx/interface/icons/war_goals/colonization_rights.dds"
+
+	kind = colonization_rights
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		#Validation
+		validate_conflicts_war_goals_all
+		validate_colonization_rights
+
+		can_target_decentralized
+	}
+
+	execution_priority = 15
+
+	contestion_type = control_any_target_country_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:conquer_state = {
+	icon = "gfx/interface/icons/war_goals/conquer_state.dds"
+
+	kind = conquer_state
+
+	settings = {
+		require_target_be_part_of_war
+		annexes_entire_state
+		can_add_for_other_country
+		requires_interest
+
+		# Validation
+		validate_target_not_treaty_port
+		validate_conflicts_conquer_state
+
+		conflicts_with_country_creation
+		conflicts_with_annex_state
+	}
+
+	execution_priority = 69
+
+	contestion_type = control_target_state
+
+	target_type = state
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_state = {
+			owner = scope:target_country
+			NOT = { has_claim_by = root }
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		multiply = {
+			desc = "MANEUVERS_TARGET_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+			max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 5
+		}
+
+		multiply = {
+			desc = "INFAMY_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+			add = 1
+			max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+
+		multiply = {
+			desc = "IG_OTHER_FACTORS_HEADER"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_homeland_of_country_cultures = root
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+			}
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_incorporated = no
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 5
+		}
+
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:contain_threat = {
+	icon = "gfx/interface/icons/war_goals/contain_threat.dds"
+
+	kind = contain_threat
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		# Validation
+		validate_contain_threat
+	}
+
+	execution_priority = 60
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:enforce_treaty_article = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = enforce_treaty_article
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		# script value
+		value = 0
+	}
+
+	infamy = {
+		# script value
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:force_nationalization = {
+	icon = "gfx/interface/icons/war_goals/force_nationalization.dds"
+
+	kind = force_nationalization
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+
+		#Validation
+		validate_conflicts_war_goals_all
+		validate_force_nationalization
+	}
+
+	execution_priority = 17
+
+	contestion_type = control_all_own_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		# script value
+		value = 5
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 5
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:foreign_investment_rights = {
+	icon = "gfx/interface/icons/war_goals/foreign_investment_rights.dds"
+
+	kind = foreign_investment_rights
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		## Validation
+		validate_conflicts_war_goals_all
+		validate_foreign_investment_rights
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		country_rank >= scope:target_country.country_rank
+
+		NOT = {
+			has_law_or_variant = law_type:law_isolationism
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 2.5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.25
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 0.25
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:humiliation = {
+	icon = "gfx/interface/icons/war_goals/humiliation.dds"
+
+	kind = humiliation
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	execution_priority = 18
+
+	contestion_type = control_any_target_country_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 20
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:increase_autonomy = {
+	icon = "gfx/interface/icons/war_goals/increase_autonomy.dds"
+
+	kind = increase_autonomy
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_subject_relation
+		validate_increase_autonomy
+	}
+
+	execution_priority = 40
+
+	contestion_type = control_all_own_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		root.overlord = scope:target_country
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:independence = {
+	icon = "gfx/interface/icons/war_goals/independence.dds"
+
+	kind = independence
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+		preserve_on_switching_sides
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_independence
+	}
+
+	execution_priority = 100
+
+	contestion_type = control_all_own_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		root.overlord = scope:target_country
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 20
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:join_power_bloc = {
+	icon = "gfx/interface/icons/war_goals/join_power_bloc.dds"
+
+	kind = join_power_bloc
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		conflicts_with_make_subject
+		validate_join_power_bloc
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 30
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+
+		is_power_bloc_leader = yes
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:leave_power_bloc = {
+	icon = "gfx/interface/icons/war_goals/leave_power_bloc.dds"
+
+	kind = leave_power_bloc
+
+	settings = {
+		require_target_be_part_of_war
+
+		#Validation
+		validate_conflicts_war_goals_all
+	}
+
+	execution_priority = 98
+
+	contestion_type = control_all_own_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+
+		is_subject = no
+		scope:target_country = {
+			is_power_bloc_leader = yes
+			is_in_same_power_bloc = root
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:liberate_country = {
+	icon = "gfx/interface/icons/war_goals/liberate_country.dds"
+
+	kind = liberate_country
+
+	settings = {
+		require_target_be_part_of_war
+		country_creation
+		requires_interest
+
+		# Validation
+		conflicts_with_country_creation
+		conflicts_with_annex_state
+		conflicts_with_annex_country
+		conflicts_with_existing_subject
+	}
+
+	execution_priority = 90
+
+	contestion_type = control_any_releasable_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 30
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:liberate_subject = {
+	icon = "gfx/interface/icons/war_goals/liberate_subject.dds"
+
+	kind = liberate_subject
+
+	settings = {
+		overlord_is_stakeholder
+		requires_interest
+		targets_enemy_subject
+
+		# Validation
+		has_other_stakeholder
+		validate_conflicts_war_goals_all
+		validate_conflicts_existing_subject
+	}
+
+	execution_priority = 58
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			overlord = scope:stakeholder
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 20
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:make_dominion = {
+	icon = "gfx/interface/icons/war_goals/make_dominion.dds"
+
+	kind = make_dominion
+
+	settings = {
+		require_target_be_part_of_war
+		turns_into_subject
+		can_add_for_other_country
+		requires_interest
+
+		# Validation
+		conflicts_with_make_subject
+		validate_subject_relation
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 14
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_homeland_of_country_cultures = root
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+								}
+							}
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:make_protectorate = {
+	icon = "gfx/interface/icons/war_goals/make_protectorate.dds"
+
+	kind = make_protectorate
+
+	settings = {
+		require_target_be_part_of_war
+		turns_into_subject
+		can_add_for_other_country
+		requires_interest
+
+		# Validation
+		conflicts_with_make_subject
+		validate_subject_relation
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 12
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_homeland_of_country_cultures = root
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+								}
+							}
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:make_tributary = {
+	icon = "gfx/interface/icons/war_goals/make_tributary.dds"
+
+	kind = make_tributary
+
+	settings = {
+		require_target_be_part_of_war
+		turns_into_subject
+		can_add_for_other_country
+		requires_interest
+
+		# Validation
+		conflicts_with_make_subject
+		validate_subject_relation
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 13
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_homeland_of_country_cultures = root
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+								}
+							}
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:open_market = {
+	icon = "gfx/interface/icons/war_goals/open_market.dds"
+
+	kind = open_market
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	execution_priority = 19
+
+	contestion_type = control_any_target_incorporated_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			has_law_or_variant = law_type:law_isolationism
+			is_junior_in_customs_union = no
+		}
+		NOT = {
+			has_law_or_variant = law_type:law_isolationism
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 20
+		}
+	}
+
+	infamy = {
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.1
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 0.1
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:reduce_autonomy = {
+	icon = "gfx/interface/icons/war_goals/reduce_autonomy.dds"
+
+	kind = reduce_autonomy
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		conflicts_with_make_subject
+		validate_subject_relation
+		validate_conflicts_war_goals_all
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 39
+
+	contestion_type = control_any_target_incorporated_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country.overlord = root
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_homeland_of_country_cultures = root
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+								}
+							}
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:regime_change = {
+	icon = "gfx/interface/icons/war_goals/regime_change.dds"
+
+	kind = regime_change
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_regime_change
+
+		debug
+	}
+
+	execution_priority = 20
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 0.5
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:return_state = {
+	icon = "gfx/interface/icons/war_goals/return_state.dds"
+
+	kind = return_state
+
+	settings = {
+		require_target_be_part_of_war
+		annexes_entire_state
+		can_add_for_other_country
+		requires_interest
+
+		# Validation
+		validate_conflicts_conquer_state
+		validate_target_not_treaty_port
+
+		conflicts_with_country_creation
+		conflicts_with_annex_state
+	}
+
+	execution_priority = 70
+
+	contestion_type = control_target_state
+
+	target_type = state
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_state = {
+			owner = scope:target_country
+			has_claim_by = root
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		multiply = {
+			desc = "MANEUVERS_TARGET_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+			max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		multiply = {
+			desc = "INFAMY_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+			add = 1
+			max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "IG_OTHER_FACTORS_HEADER"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_homeland_of_country_cultures = root
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+			}
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_incorporated = no
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:revoke_all_claims = {
+	icon = "gfx/interface/icons/war_goals/revoke_claim.dds"
+
+	kind = revoke_all_claims
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_holder
+		validate_revoke_claims
+	}
+
+	execution_priority = 50
+
+	contestion_type = control_all_target_country_claims
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:revoke_claim = {
+	icon = "gfx/interface/icons/war_goals/revoke_claim.dds"
+
+	kind = revoke_claim
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+		targets_enemy_claims
+
+		# Validation
+		validate_revoke_claims
+	}
+
+	execution_priority = 49
+
+	contestion_type = control_own_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 5
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:secession = {
+	icon = "gfx/interface/icons/war_goals/secession.dds"
+
+	kind = secession
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	execution_priority = 99
+
+	contestion_type = control_any_target_incorporated_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:take_treaty_port = {
+	icon = "gfx/interface/icons/war_goals/take_treaty_port.dds"
+
+	kind = take_treaty_port
+
+	settings = {
+		require_target_be_part_of_war
+		can_add_for_other_country
+		skip_build_list
+		requires_interest
+
+		# Validation
+		validate_conflicts_conquer_state
+		validate_take_treaty_port
+		conflicts_with_annex_state
+	}
+
+	target_type = state
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		OR = {
+			scope:target_state = {
+				state_region = {
+					any_scope_state = {
+						NOT = { owner = root }
+					}
+				}
+			}
+			NOT = { has_law_or_variant = law_type:law_isolationism }
+		}
+
+		scope:target_state = {
+			owner = scope:target_country
+			is_potential_treaty_port = root
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 5
+		}
+
+		multiply = {
+			desc = "MANEUVERS_TARGET_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+			max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		multiply = {
+			desc = "INFAMY_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+			add = 1
+			max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+		add = {
+			desc = "INFAMY_STATE_GDP_FACTOR"
+			value = scope:target_state.gdp
+			divide = 50000
+			max = 5
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "IG_OTHER_FACTORS_HEADER"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_homeland_of_country_cultures = root
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+			}
+
+			if = {
+				limit = {
+					scope:target_state = {
+						is_incorporated = no
+					}
+				}
+				add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:transfer_subject = {
+	icon = "gfx/interface/icons/war_goals/transfer_subject.dds"
+
+	kind = transfer_subject
+
+	settings = {
+		overlord_is_stakeholder
+		can_add_for_other_country
+		targets_enemy_subject
+
+		# Validation
+		has_other_stakeholder
+		validate_subject_relation
+		validate_conflicts_existing_subject
+		conflicts_with_existing_subject
+	}
+
+	execution_priority = 59
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			is_subject = yes
+			NOT = { overlord = root }
+			overlord = scope:stakeholder
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 8
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 2
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_homeland_of_country_cultures = root
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_HOMELAND_FACTOR
+								}
+							}
+							multiply = {
+								value = 1
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "country_infamy_generation_against_unrecognized_mult"
+			value = 1
+			if = {
+				limit = {
+					NOR = {
+						is_country_type = unrecognized
+						is_country_type = decentralized
+					}
+					scope:target_country = {
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+				add = modifier:country_infamy_generation_against_unrecognized_mult
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_LOYAL_SUBJECT"
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "INFAMY_FROM_REBELLIOUS_SUBJECT" # Rebellious as in they are the aggressor in the play
+			value = 1
+
+			if = {
+				limit = {
+					scope:target_country = {
+						is_subject_of = root
+						is_diplomatic_play_enemy_of = root
+						scope:diplomatic_play ?= {
+							initiator_is = scope:target_country
+						}
+					}
+				}
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_REBELLING_SUBJECT_MULT
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:unification = {
+	icon = "gfx/interface/icons/war_goals/unification.dds"
+
+	kind = unification
+
+	settings = {
+		require_target_be_part_of_war
+		annexes_entire_state
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_sole_formation_candidate
+		validate_conflicts_conquer_state
+		conflicts_with_country_creation
+		conflicts_with_annex_state
+	}
+
+	execution_priority = 200
+
+	contestion_type = control_target_state
+
+	target_type = state
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		multiply = {
+			desc = "MANEUVERS_TARGET_STATE_POPULATION_FACTOR"
+			value = scope:target_state.state_population
+			divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+			multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+			max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:unification_leadership = {
+	icon = "gfx/interface/icons/war_goals/unification.dds"
+
+	kind = unification_leadership
+
+	settings = {
+		require_target_be_part_of_war
+
+		# Validation
+		validate_conflicts_war_goals_all
+		validate_formation_candidate_self
+		validate_formation_candidate_target
+	}
+
+	execution_priority = 29
+
+	contestion_type = control_any_target_incorporated_state
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 30
+		}
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:restore_union = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = custom
+
+	settings = {
+		require_target_be_part_of_war
+		turns_into_subject
+		requires_interest
+
+		# Validation
+		conflicts_with_make_subject
+		validate_conflicts_make_subject
+	}
+
+	execution_priority = 12
+
+	contestion_type = control_half_target_country_states
+
+	target_type = country
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		ROOT = {
+			has_law = law_type:law_monarchy
+			has_variable = por_seeking_restore_union_var
+		}
+		scope:target_country ?= {
+			c:BRZ ?= this
+		}
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		ROOT = {
+			has_law = law_type:law_monarchy
+			has_variable = por_seeking_restore_union_var
+		}
+		scope:target_country ?= {
+			c:BRZ ?= this
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.5
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				add = {
+					every_scope_state = {
+						add = {
+							value = state_population
+							divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+							multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+							multiply = {
+								if = {
+									limit = {
+										is_incorporated = no
+									}
+									value = 1
+									add = define:NDiplomacy|WAR_GOAL_INFAMY_UNINCORPORATED_FACTOR
+								}
+							}
+							max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_PER_STATE
+						}
+					}
+				}
+				add = 1
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+
+		multiply = {
+			desc = "concept_interest_tier"
+			value = 1
+
+			# Tier 0-1 (none, observant): high infamy increase
+			if = {
+				limit = {
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 2
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_high_value
+			}
+
+			# Tier 2 (engaged): medium infamy increase
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 2
+					}
+					NOT = {
+						has_strategic_region_interest_tier = {
+							strategic_region = scope:target_region
+							value >= 3
+						}
+					}
+				}
+				add = interest_tier_effect_infamy_cost_increase_medium_value
+			}
+
+			# Tier 5 (hegemonic): medium infamy decrease
+			if = {
+				limit = {
+					has_strategic_region_interest_tier = {
+						strategic_region = scope:target_region
+						value >= 5
+					}
+				}
+				add = interest_tier_effect_infamy_cost_decrease_medium_value
+			}
+		}
+
+		min = {
+			desc = "INFAMY_MINIMUM_VALUE"
+			value = 2
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+		scope:target_country ?= {
+			activate_law = law_type:law_monarchy
+		}
+		ROOT = {
+			create_diplomatic_pact = {
+				country = scope:target_country
+				type = personal_union
+			}
+		}
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}
+
+REPLACE:demand_strait_access = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = demand_strait_access
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		## Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			has_any_strait_province = scope:target_country
+			has_any_strait_control = scope:target_country
+		}
+
+		NOT = {
+			has_military_strait_access_through = scope:target_country
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 1
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:demand_toll_exemption = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = demand_toll_exemption
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		## Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			charges_strait_toll = yes
+		}
+
+		NOT = {
+			has_strait_toll_exemption_from = scope:target_country
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 1
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.10
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:demand_no_tolls = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = demand_no_tolls
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		## Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			charges_strait_toll = yes
+			can_toll_straits = yes
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 1
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.25
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}
+
+REPLACE:demand_no_strait_closure = {
+	icon = "gfx/interface/icons/war_goals/enforce_treaty_article.dds"
+
+	kind = demand_no_strait_closure
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		## Validation
+		validate_conflicts_war_goals_all
+	}
+
+	target_type = treaty_article
+
+	possible = {
+		# trigger to determine if a goal with its target data is listed when selecting a war goal in the diplo play panel
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		gg_war_goal_is_allowed = yes # EN/ES: 23/9 (Juan) -- no goal against the Oriental governments until the signed peace / ninguno contra los gobiernos orientales hasta la paz firmada
+	}
+
+	valid = {
+		# trigger in addition to some basic validation code-side
+		# scopes: root = holder, creator_country, diplomatic_play, target_country, target_state, stakeholder, target_region, article_options
+		scope:target_country = {
+			has_any_strait_province = scope:target_country
+			has_any_strait_control = scope:target_country
+			can_close_straits = yes
+		}
+	}
+
+	maneuvers = {
+		value = 0
+
+		add = {
+			desc = "MANEUVERS_BASE_VALUE"
+			value = 1
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "MANEUVERS_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|SWAY_OFFER_WARGOAL_MANEUVERS_COST_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	infamy = {
+		value = 0
+
+		add = {
+			desc = "INFAMY_BASE_VALUE"
+			value = 0.25
+		}
+
+		scope:target_country = {
+			multiply = {
+				desc = "INFAMY_TARGET_COUNTRY_POPULATION_FACTOR"
+				value = total_population
+				divide = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_FACTOR
+				multiply = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER
+				max = define:NDiplomacy|WAR_GOAL_INFAMY_POPULATION_SCALING_MULTIPLIER_MAX_TOTAL
+			}
+		}
+	}
+
+	on_enforced = {
+		# script effect on top of the predefined code effect
+	}
+
+	ai = {
+		is_significant_demand = no
+	}
+}

@@ -517,7 +517,7 @@ gg_historical_lives_monthly = {
 # ES: el motor sento a un cualquiera en la Argentina sin cambio de ley ni script nuestro. El pulso
 #     mensual devolvia a Rosas dos semanas despues; esto lo devuelve en el acto. Sin bucle.
 on_new_ruler = {
-	on_actions = { gg_rosas_seat_on_new_ruler gg_president_seat_on_new_ruler }
+	on_actions = { gg_rosas_seat_on_new_ruler gg_president_seat_on_new_ruler gg_oriental_ruler_on_new_ruler }
 }
 gg_rosas_seat_on_new_ruler = {
 	trigger = {
@@ -551,5 +551,32 @@ gg_president_seat_on_new_ruler = {
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_president_seat_on_new_ruler" # GG_TRAZA
 		owner = { gg_president_historical = yes }
+	}
+}
+
+# EN: 23/9/2026 (Juan, CB-05: the French Legion's colonel was elected head of state in a run) -- after the signed
+#     peace the elections are free, but a foreigner (gg_is_foreigner) cannot govern the Republic. The same shape
+#     vanilla uses to keep the Emperor of Japan out of IG leadership (on_new_interest_group_leader ->
+#     character_handle_possible_emperor_ig_leader): the engine picks, the script undoes the one case it forbids.
+#     The Oriental leader of the strongest governing interest group takes the seat (or, if none is Oriental, a
+#     new Oriental politician of that group), and the foreigner loses the group's leadership so the next
+#     election does not hand it back. Root = the new ruler; an Oriental never triggers it, so no loop.
+# ES: despues de la paz firmada las elecciones son libres, pero un extranjero no gobierna la Republica. La misma
+#     forma que usa vanilla para que el Emperador del Japon no lidere un grupo de interes: el motor elige y el
+#     script deshace el unico caso prohibido. Asume el jefe oriental del grupo de gobierno con mas peso (o, si
+#     ninguno es oriental, un politico oriental nuevo de ese grupo), y el extranjero pierde la jefatura del grupo
+#     para que la eleccion siguiente no se la devuelva. Sin bucle: un oriental no lo dispara.
+gg_oriental_ruler_on_new_ruler = {
+	trigger = {
+		gg_is_foreigner = yes
+		owner ?= { OR = { c:URU ?= this c:CER ?= this } }
+		has_global_variable = gg_peace_settled
+		NOT = { has_global_variable = gg_president_railroad }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_oriental_ruler_on_new_ruler" # GG_TRAZA
+		debug_log = "GG_RULER|[TimeKeeper.GetCurrentDate.GetString]|foreigner_unseated|[THIS.GetCharacter.GetFirstNameNoFormatting] [THIS.GetCharacter.GetLastNameNoFormatting]"
+		save_scope_as = gg_foreign_ruler
+		owner = { gg_seat_oriental_ruler = yes }
 	}
 }

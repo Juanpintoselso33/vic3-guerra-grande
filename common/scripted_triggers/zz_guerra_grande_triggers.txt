@@ -92,6 +92,45 @@ gg_is_oriental_side = {
 	}
 }
 
+# EN: 23/9/2026 (Juan: every war play against the Oriental governments guarded until the signed peace) -- the
+#     same guard for WAR GOALS, which is what an enemy adds against a country already inside a play (an ally
+#     called in, a defensive pact). Scopes as in a war goal type: root = the holder, scope:target_country.
+#     Civil wars are the country against its own rebels, not a foreign power: they pass, as does a goal with
+#     no target country. Both directions, like the play guard: before the peace an Oriental government adds no
+#     goal either (the war is fought with contingents, never as a belligerent of the engine).
+# ES: la misma guarda para los OBJETIVOS DE GUERRA, que es lo que un enemigo agrega contra un pais que ya esta
+#     en una jugada (un aliado llamado, un pacto defensivo). Las guerras civiles son el pais contra sus propios
+#     rebeldes, no una potencia extranjera: pasan, igual que un objetivo sin pais objetivo. En los dos sentidos,
+#     como la guarda de jugadas: antes de la paz un gobierno oriental tampoco agrega objetivos.
+gg_war_goal_is_allowed = {
+	OR = {
+		NOT = { exists = scope:target_country }
+		is_revolutionary = yes
+		is_secessionist = yes
+		scope:target_country = {
+			OR = {
+				is_revolutionary = yes
+				is_secessionist = yes
+			}
+		}
+		guerra_grande_play_is_allowed = yes
+	}
+}
+
+# EN: 23/9/2026 (Juan: after the peace the elections stay free, but foreigners cannot govern) -- character
+#     scope. A foreigner is anyone whose culture is not the Oriental one (platinean: the Republic's only primary
+#     culture) -- the legion colonels, Garibaldi, Brown, any French or Italian the engine spawns -- or an
+#     Argentine the mod brought to the war (gg_foreign_commander: Paz, platinean by culture).
+# ES: despues de la paz las elecciones siguen libres, pero un extranjero no gobierna. Extranjero es quien no es
+#     de cultura oriental (platinean, la unica primaria de la Republica) o un argentino que el mod trajo a la
+#     guerra (gg_foreign_commander: Paz, rioplatense de cultura).
+gg_is_foreigner = {
+	OR = {
+		NOT = { has_culture = cu:platinean }
+		has_variable = gg_foreign_commander
+	}
+}
+
 # EN: C10 (22/9/2026) -- gg_sea_open (France + Britain - blockade >= 60) is gone. Whether the river
 #     is shut is gg_plata_closed, in common/scripted_triggers/gg_rio_plata.txt: the single place that
 #     decides it (invariant I16).

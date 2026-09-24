@@ -1640,6 +1640,61 @@ gg_president_historical = {
 	}
 }
 
+# EN: 23/9/2026 (Juan, CB-05) -- country scope, scope:gg_foreign_ruler = the foreigner the engine just seated
+#     (gg_oriental_ruler_on_new_ruler). The Oriental leader of the strongest governing interest group takes the
+#     seat; if no governing group has an Oriental leader, a new Oriental politician (the country's primary
+#     culture) is made that group's leader and seated. Then the foreigner loses the group's leadership.
+# ES: scope pais. Asume el jefe oriental del grupo de gobierno con mas peso; si ninguno tiene jefe oriental, se
+#     crea un politico oriental, se lo hace jefe de ese grupo y asume. Despues el extranjero pierde la jefatura.
+gg_seat_oriental_ruler = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_seat_oriental_ruler|" # GG_TRAZA
+	if = {
+		limit = {
+			any_interest_group = {
+				is_in_government = yes
+				leader ?= { gg_is_foreigner = no }
+			}
+		}
+		ordered_interest_group = {
+			limit = {
+				is_in_government = yes
+				leader ?= { gg_is_foreigner = no }
+			}
+			order_by = ig_clout
+			position = 0 # EN/ES: the strongest only / solo el de mas peso
+			check_range_bounds = no
+			leader = { set_character_as_ruler = yes }
+		}
+	}
+	else = {
+		ordered_interest_group = {
+			limit = { is_in_government = yes }
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			save_scope_as = gg_ruler_ig
+		}
+		if = {
+			limit = { exists = scope:gg_ruler_ig }
+			create_character = {
+				interest_group = scope:gg_ruler_ig
+				culture = cu:platinean
+				role = character_role_politician
+				on_created = {
+					set_as_interest_group_leader = yes
+					set_character_as_ruler = yes
+				}
+			}
+		}
+	}
+	scope:gg_foreign_ruler ?= {
+		if = {
+			limit = { is_interest_group_leader = yes }
+			remove_as_interest_group_leader = yes
+		}
+	}
+}
+
 # EN: fighting on after the arbiter declared this government beaten (playtest 2026-09-17): the
 #     exhaustion counter restarts, the arbiter is shut for a year, and the decision costs what such
 #     a decision costs.

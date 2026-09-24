@@ -229,6 +229,9 @@ gg_contingent.3 = {
 					experienced_defensive_strategist
 					meticulous
 				}
+				# EN/ES: 23/9/2026 (Juan) -- an Argentine brought to the war: never the Republic's head of state
+				#     (gg_is_foreigner) / un argentino traido a la guerra: nunca jefe de Estado de la Republica
+				on_created = { set_variable = gg_foreign_commander }
 			}
 		}
 		add_modifier = {
