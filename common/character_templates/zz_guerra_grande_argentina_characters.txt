@@ -326,6 +326,8 @@ ARG_gg_valentin_alsina = {
 
 # EN/ES: Pastor Obligado: Buenos Aires 9/8/1818 - Jesus Maria 12/3/1870. Lawyer; first constitutional governor of
 #     the State of Buenos Aires, 1853-1858 (es.wikipedia, «Pastor Obligado»).
+#     IG: ig_intelligentsia, the Partido Liberal of the State of Buenos Aires he governed for (Juan, 23/9/2026;
+#     was ig_landowners) / el Partido Liberal del Estado de Buenos Aires, por el que goberno (decision de Juan).
 ARG_gg_pastor_obligado = {
 	dna = dna_gg_pastor_obligado # EN/ES: from his portraits / segun sus retratos (gg_dna.txt)
 	first_name = gg_name_pastor
@@ -335,7 +337,7 @@ ARG_gg_pastor_obligado = {
 	role = character_role_politician
 	culture = primary_culture
 	religion = rel:catholic
-	interest_group = ig_landowners
+	interest_group = ig_intelligentsia
 	ideology = ideology_moderate
 	birth_date = 1818.8.9
 	home_region = STATE_BUENOS_AIRES
