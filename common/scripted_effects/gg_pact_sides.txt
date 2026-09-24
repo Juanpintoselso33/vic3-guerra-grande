@@ -489,15 +489,19 @@ gg_unique_characters_census = {
 	remove_global_variable = gg_debug_census_mitre
 }
 
-# EN: 21/11/1851 -- the emigres join the Ejercito Grande. Scope: Entre Rios, after gg_argentina_raise_ejercito_grande
-#     saved scope:gg_ejercito_grande_army. Mitre goes into the army as a general; Sarmiento comes as a politician; Paz
-#     only from the Defensa (c:URU).
-# ES: los emigrados se suman al Ejercito Grande. Mitre entra al ejercito como general; Sarmiento viene como politico;
-#     Paz solo si esta en la Defensa.
+# EN: The emigres join Urquiza. Scope: Entre Rios. Called the day the Pact's war with Entre Rios starts
+#     (gg_argentina.89, Juan 24/9/2026) and again from gg_argentina_raise_ejercito_grande (21/11/1851), which only
+#     matters when there was no war before (the negotiated or no-war routes keep the old timing). The join runs
+#     once (gg_emigres_marched): Mitre comes as a general, Sarmiento as a politician, Paz only from the Defensa
+#     (c:URU). Whenever scope:gg_ejercito_grande_army exists, Mitre and Paz are put in it.
+# ES: los emigrados se suman a Urquiza. Se llama el dia que empieza la guerra del Pacto con Entre Rios y otra vez
+#     al levantarse el Ejercito Grande, que solo cuenta si no hubo guerra antes. Se suman una sola vez; si existe el
+#     Ejercito Grande, Mitre y Paz entran en el.
 gg_emigres_join_ejercito_grande = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_join_ejercito_grande|" # GG_TRAZA
 	if = {
 		limit = { NOT = { has_global_variable = gg_emigres_marched } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_emigres_join_ejercito_grande| JOINED=yes " # GG_TRAZA
 		set_global_variable = gg_emigres_marched
 		gg_mitre_fetch = yes
 		gg_character_fetch = { TEMPLATE = ARG_domingo_sarmiento }
@@ -522,7 +526,19 @@ gg_emigres_join_ejercito_grande = {
 					gg_is_the_mitre = yes
 					gg_is_the_paz = yes
 				}
-				exists = scope:gg_ejercito_grande_army
+			}
+			if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+		}
+	}
+	# EN/ES: into the Ejercito Grande once it is raised, whenever they joined / al Ejercito Grande cuando se levanta
+	if = {
+		limit = { exists = scope:gg_ejercito_grande_army }
+		every_scope_character = {
+			limit = {
+				OR = {
+					gg_is_the_mitre = yes
+					gg_is_the_paz = yes
+				}
 			}
 			if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
 			transfer_to_formation = scope:gg_ejercito_grande_army

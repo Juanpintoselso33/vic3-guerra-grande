@@ -2,9 +2,13 @@
 #     pronounced with Entre Rios while the Pact's quarrel with Buenos Aires was still a play, which nobody may join
 #     (dp_gg_pacto_federal). They enter the war the day it starts: a hidden event on Entre Rios the next day, with the
 #     war already standing (the pattern of gg_oriental_division_war_start). Root = the diplomatic play.
+#     24/9/2026 (Juan): the same day the Argentine emigres (Mitre, Sarmiento, Paz from the Defensa) join Urquiza,
+#     without waiting for the Ejercito Grande (gg_emigres_join_ejercito_grande, a no-op the second time).
 # ES: Corrientes y una Coalicion viva se pronunciaron con Entre Rios cuando la cuestion con Buenos Aires todavia era
 #     jugada, a la que no se suma nadie. Entran a la guerra el dia que empieza: un evento oculto sobre Entre Rios al dia
 #     siguiente, con la guerra ya en pie. Root = la jugada diplomatica.
+#     24/9/2026 (Juan): ese mismo dia los emigrados argentinos (Mitre, Sarmiento, Paz desde la Defensa) se suman a
+#     Urquiza, sin esperar al Ejercito Grande.
 on_diplo_play_war_start = {
 	on_actions = { gg_pact_allies_war_start }
 }
@@ -13,10 +17,9 @@ gg_pact_allies_war_start = {
 	trigger = {
 		is_diplomatic_play_type = dp_gg_pacto_federal
 		target = { c:ENR ?= this }
-		OR = {
-			has_global_variable = gg_corrientes_with_urquiza
-			has_global_variable = gg_coalition_with_urquiza
-		}
+		# EN/ES: 24/9/2026 (Juan) -- no OR on Corrientes / the Coalition any more: the emigres join Urquiza the day
+		#     the war starts, whoever else pronounced (gg_argentina.89) / los emigrados se suman el dia que empieza la
+		#     guerra, se haya pronunciado quien se haya pronunciado
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_allies_war_start" # GG_TRAZA

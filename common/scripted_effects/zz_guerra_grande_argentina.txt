@@ -1107,7 +1107,9 @@ gg_argentina_raise_ejercito_grande = {
 	# EN/ES: 23/9 -- mobilized the next day: a just-created army cannot be (gg_mobilize_next_day)
 	#     / se moviliza al dia siguiente: un ejercito recien creado no se puede movilizar
 	if = { limit = { exists = scope:gg_ejercito_grande_army } gg_mobilize_next_day = { ARMY = scope:gg_ejercito_grande_army ENEMY = c:ARG } }
-	# EN/ES: 24/9/2026 (Juan, point 2) -- the emigres march with it (gg_pact_sides.txt) / los emigrados marchan con el
+	# EN/ES: 24/9/2026 (Juan, point 2) -- the emigres march with it (gg_pact_sides.txt) / los emigrados marchan con el.
+	#     24/9 (Juan): if they already joined at the war start (gg_argentina.89) this only puts Mitre and Paz in the
+	#     army / si ya se sumaron al empezar la guerra, esto solo pone a Mitre y a Paz en el ejercito
 	c:ENR ?= { gg_emigres_join_ejercito_grande = yes }
 }
 

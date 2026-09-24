@@ -4098,5 +4098,9 @@ gg_argentina.89 = {
 			limit = { has_global_variable = gg_coalition_with_urquiza }
 			gg_pact_join_urquiza_side = { TAG = CLN }
 		}
+		# EN/ES: 24/9/2026 (Juan) -- the emigres join Urquiza when the Pact's quarrel becomes a war, not with the
+		#     Ejercito Grande (whose call later is a no-op) / los emigrados se suman cuando la cuestion del Pacto se
+		#     vuelve guerra, no con el Ejercito Grande
+		gg_emigres_join_ejercito_grande = yes
 	}
 }
