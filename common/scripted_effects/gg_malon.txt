@@ -1,0 +1,37 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE MALON ROLL (24/9/2026, AUD-MALON-RATE). Called every month by la Argentina's je_mapuche_malones, which
+#     this mod overrides (common/journal_entries/00_malon.txt: why, the rate and the sources are there). Country
+#     scope (the journal's owner: ARG, Great_ARG or PLT). The limit is mapuche_malon.1's own trigger, plus the
+#     5-year cooldown; then la Argentina's 5% monthly chance. The event keeps its own trigger and 3-month cooldown.
+#     Trace: GG_EF gg_malon_pulse with FIRED=yes, the country object id (stable across Great_ARG/PLT tag changes) and
+#     name, one line per malon (tools/barrido_nocturno.yaml: at most 2 per country in any half-open 10-year window;
+#     a third exactly 10 engine years after the first is allowed: the cooldown makes that the earliest possible).
+# ES: LA TIRADA DEL MALON. La llama cada mes el journal je_mapuche_malones de la Argentina, que este mod sobrescribe
+#     (el porque, la tasa y las fuentes estan en ese archivo). El limite es el mismo trigger de mapuche_malon.1 mas el
+#     enfriamiento de 5 anios; despues, el 5% mensual de la Argentina.
+# -------------------------------------------------------------------------------------------------
+gg_malon_pulse = {
+	if = {
+		limit = {
+			NOT = { has_variable = gg_malon_cooldown }
+			OR = {
+				c:ARG ?= this
+				c:Great_ARG ?= this
+				c:PLT ?= this
+			}
+			exists = c:PAT
+			c:PAT ?= { NOT = { is_subject_of = ROOT } }
+			# EN/ES: the frontier: a state of ours next to a Mapuche state / la frontera: un estado propio junto a uno mapuche
+			any_scope_state = {
+				owner = ROOT
+				any_neighbouring_state = { owner = c:PAT }
+			}
+		}
+		random = {
+			chance = 5
+			set_variable = { name = gg_malon_cooldown years = 5 }
+			trigger_event = { id = mapuche_malon.1 }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_malon_pulse| FIRED=yes COUNTRY_ID= [ROOT.GetCountry.GetIDString] COUNTRY= [ROOT.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+	}
+}

@@ -1,5 +1,13 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **The great malón (la Argentina's `mapuche_malon.1`) is rarer:** at most once every 5 years per country, and only
+  for a country that borders an independent Mapuche country. It used to come about every two years (5% a month with
+  a 3-month cooldown, ~9 in 1836-1852); now ~3 in 1836-1852, never more than 2 in 10 years, in line with the relative
+  peace of the Buenos Aires frontier under Rosas's «Negocio Pacífico de Indios». Done by overriding la Argentina's
+  `common/journal_entries/00_malon.txt` (only its monthly pulse changes); their event and texts are untouched.
+
 ## 0.1.2-alpha — 24/9/2026
 
 - **Oriental Province** (when the Cerrito wins and Argentina takes it as a province): annexed with the rest of

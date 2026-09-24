@@ -1,0 +1,74 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: OVERRIDE OF la Argentina's common/journal_entries/00_malon.txt (Workshop 2982907360), 24/9/2026, AUD-MALON-RATE.
+#     Same file name on purpose: Guerra Grande loads after la Argentina, so this file replaces theirs whole. The
+#     journal is theirs, copied verbatim; the ONLY change is on_monthly_pulse (marked below). Their event
+#     mapuche_malon.1 (events/malon.txt) and every text are untouched.
+#     Why: their pulse rolled mapuche_malon.1 at 5% every month, and the event's own cooldown is only 3 months, so
+#     Argentina got a great malon about every 23 months (~0.5 a year, ~8 in 1836-1852, and a run of 4-month gaps is
+#     not rare). Each one devastates a frontier state (up to 45) and costs 5,000-30,000. The Buenos Aires frontier
+#     under Rosas's "Negocio Pacifico de Indios" (1829-1852) was in relative peace: the great malones of the period
+#     cluster in 1836-1839 (Tapalque, Azul, Tandil), and the collapse came after Caseros (1853, Sierra Chica 1855).
+#     Fix: the same 5% monthly roll, but only when the country really borders an independent Mapuche country (the
+#     event's own trigger, checked BEFORE the roll so no roll is wasted) and at most once every 5 years per country
+#     (country variable gg_malon_cooldown). Expected: one every ~6.7 years (~0.15 a year, 2-3 in 1836-1852), and
+#     never more than 2 in any 10 years. The roll lives in gg_malon_pulse (scripted_effects/gg_malon.txt), which
+#     writes one GG_EF trace per malon for the night sweep. Upstream note: docs/upstream-la-argentina.md (design repo).
+#     SOURCE / FUENTE: Ratto, "Una experiencia fronteriza exitosa: el negocio pacifico de indios en la provincia de
+#     Buenos Aires (1829-1852)", Revista de Indias 227 (2003), doi:10.3989/revindias.2003.i227.437; de Jong & Ratto,
+#     "Redes politicas en el area arauco-pampeana: la Confederacion indigena de Calfucura (1830-1870)"; Cutrera,
+#     "Sobre el fin del Negocio Pacifico de Indios despues de Caseros", Anuario IHA 13 (2013).
+# ES: SOBRESCRIBE el common/journal_entries/00_malon.txt de la Argentina. Mismo nombre a proposito: Guerra Grande
+#     carga despues, asi que este archivo reemplaza entero al de ellos. El journal es el de ellos, copiado tal cual; lo
+#     UNICO que cambia es on_monthly_pulse. Su evento mapuche_malon.1 y sus textos quedan intactos.
+#     Por que: tiraban el malon al 5% cada mes con un enfriamiento de 3 meses: un gran malon cada ~23 meses (~8 entre
+#     1836 y 1852). Bajo el Negocio Pacifico de Indios de Rosas la frontera estuvo en paz relativa: los grandes
+#     malones del periodo se concentran en 1836-1839 y el derrumbe llega despues de Caseros.
+#     Arreglo: la misma tirada del 5% mensual, solo si el pais linda de verdad con un pais mapuche independiente y a
+#     lo sumo una vez cada 5 anios por pais. Esperado: uno cada ~6,7 anios, nunca mas de 2 en 10 anios.
+# -------------------------------------------------------------------------------------------------
+je_mapuche_malones = {
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+    group = je_group_historical_content
+
+    is_shown_when_inactive = {
+        exists = c:PAT
+        OR = {
+            c:ARG ?= this
+            c:Great_ARG ?= this
+            c:PLT ?= this
+        }
+    }
+
+    possible = {
+        exists = c:PAT
+        OR = {
+            c:ARG ?= this
+            c:Great_ARG ?= this
+            c:PLT ?= this
+        }
+    }
+
+    complete = {
+        OR = {
+            custom_tooltip = {
+                text = je_mapuche_malones_tt_destroyed
+                NOT = { exists = c:PAT }
+            }
+            c:PAT = { is_subject_of = ROOT }
+        }
+    }
+
+    on_complete = {
+        trigger_event = { id = mapuche_after.1 }
+    }
+
+    # EN: CHANGED (AUD-MALON-RATE). Was: random_events = { 95 = 0  5 = mapuche_malon.1 }.
+    # ES: CAMBIADO. Antes: random_events = { 95 = 0  5 = mapuche_malon.1 }.
+    on_monthly_pulse = {
+        effect = {
+            gg_malon_pulse = yes
+        }
+    }
+
+    weight = 25
+}
