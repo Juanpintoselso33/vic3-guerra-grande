@@ -289,11 +289,11 @@ BUE = {
 # EN: 24/9/2026 (AUD-CONST-TERR) -- THE NINE TERRITORIES MADE PROVINCES (LPM NQN RNG CHB SCZ TDF MIS FMS CHO). As national
 #     territories they had no flag of their own: they flew the nation's. The key gg_flag_terr_<key> (namespaced: MIS is a coat-of-arms key
 #     Knowledge is Power reads for Mississippi; Codex review) is the Confederation's flag (te_gg_confederacion.dds, the same real image the nine provinces without a flag of their own
-#     use); from Caseros on, the national celeste and white (common/flag_definitions/zz_guerra_grande_flags.txt). Their
-#     provincial flags of today (all adopted after 1985) are pending (PENDIENTES.md).
+#     use); from Caseros on, the national celeste and white (common/flag_definitions/zz_guerra_grande_flags.txt). Under
+#     the confederation, their first provincial flag (gg_flag_prov_*, at the end of this file; AUD-FLAG-CONFED).
 # ES: LOS NUEVE TERRITORIOS HECHOS PROVINCIA. Como territorios nacionales no tuvieron bandera propia: izaban la de la
-#     nacion. La clave gg_flag_terr_<clave> es la de la Confederacion; desde Caseros, la celeste y blanca. Sus banderas
-#     provinciales de hoy (todas posteriores a 1985) quedan pendientes.
+#     nacion. La clave gg_flag_terr_<clave> es la de la Confederacion; desde Caseros, la celeste y blanca. Bajo la
+#     confederacion, su primera bandera provincial (gg_flag_prov_*, al final del archivo).
 # -------------------------------------------------------------------------------------------------
 gg_flag_terr_la_pampa = {
 	pattern = "pattern_solid.tga"
@@ -339,4 +339,171 @@ gg_flag_terr_chaco = {
 	pattern = "pattern_solid.tga"
 	color1 = "white"
 	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-FLAG-CONFED) -- THE FIRST PROVINCIAL FLAG OF EACH PROVINCE, flown while the confederation
+#     stands (common/flag_definitions/zz_guerra_grande_flags.txt, priority 40). A deliberate anachronism: «en la
+#     confederacion, todas las tags adquieren su primera bandera provincial historica, asi no vemos siempre la misma».
+#     The first flag of its own each province had, whenever it was adopted. Real Wikimedia images, rendered at 3840 px,
+#     cropped to the opaque area and converted with Pillow to 768x512 BGRA8888 without mipmaps (header byte for byte
+#     that of te_coalicion.dds), never redrawn. Where the first flag is one the mod already had, the key reuses that
+#     texture. Sources, dates and licences: SOURCES_flujo_images.md (design repo) and CREDITS.md.
+# ES: LA PRIMERA BANDERA PROVINCIAL DE CADA PROVINCIA, mientras la confederacion siga en pie. Anacronismo a proposito.
+#     La primera bandera propia que tuvo cada provincia, se haya adoptado cuando se haya adoptado. Imagenes reales de
+#     Wikimedia, nunca redibujadas; donde la primera ya estaba en el mod, la clave reusa esa textura.
+# -------------------------------------------------------------------------------------------------
+# EN: Tucuman: the «TUCUMAN 1814» flag of the Tucuman government (Commons «Bandera de la Provincia de Tucumán 1814.svg»)
+# ES: la bandera «TUCUMAN 1814» del gobierno de Tucuman
+gg_flag_prov_tucuman = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_tucuman_1814.dds" }
+}
+# EN: Salta: the 1997 flag (law 6946), the first it had; same texture as gg_flag_salta_1997
+# ES: la de 1997, la primera que tuvo
+gg_flag_prov_salta = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_salta_1997.dds" }
+}
+# EN: Jujuy: the 1813 Bandera de la Libertad Civil, provincial since 1994; same texture as gg_flag_jujuy_1994
+# ES: la Bandera de la Libertad Civil de 1813, provincial desde 1994
+gg_flag_prov_jujuy = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_jujuy_1994.dds" }
+}
+# EN: Catamarca: the 2011 flag, the first it had; same texture as gg_flag_catamarca_2011
+# ES: la de 2011, la primera que tuvo
+gg_flag_prov_catamarca = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_catamarca_2011.dds" }
+}
+# EN: La Rioja: the 1986 flag; Quiroga's flags were his, not the province's (Prando 2009)
+# ES: la de 1986; las de Quiroga eran suyas, no de la provincia
+gg_flag_prov_la_rioja = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_la_rioja_1986.dds" }
+}
+# EN: Cordoba: the 1815 tricolour; same texture as the CBA period flag
+# ES: la tricolor de 1815
+gg_flag_prov_cordoba = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_cordoba_1815.dds" }
+}
+# EN: Santa Fe: Candioti's 1815 flag (Commons «Flag of Santa Fe (1815-1821).svg»; FOTW ar-s, «Provincial flag in 1815»)
+# ES: la de Candioti de 1815
+gg_flag_prov_santa_fe = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_santa_fe_1815.dds" }
+}
+# EN: Santiago del Estero: the 1985 flag (law 5535), the first it had
+# ES: la de 1985, la primera que tuvo
+gg_flag_prov_santiago = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_santiago_1985.dds" }
+}
+# EN: Mendoza: the Army of the Andes flag of 1817, provincial since 1992
+# ES: la del Ejercito de los Andes de 1817, provincial desde 1992
+gg_flag_prov_mendoza = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_mendoza_1992.dds" }
+}
+# EN: San Juan: the 1997 flag (law 586-F), the first it had
+# ES: la de 1997, la primera que tuvo
+gg_flag_prov_san_juan = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_san_juan_1997.dds" }
+}
+# EN: San Luis: the 1988 flag (law 4810), the first it had
+# ES: la de 1988, la primera que tuvo
+gg_flag_prov_san_luis = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_san_luis_1988.dds" }
+}
+# EN: Entre Rios: the federal flag raised by Herenu on 13/3/1815 and kept by Ramirez's Republic of Entre Rios, 1820 (Commons «Flag of Artigas.svg»)
+# ES: la federal que izo Herenu el 13/3/1815 y mantuvo la Republica de Entre Rios de Ramirez en 1820
+gg_flag_prov_entre_rios = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_entre_rios_1815.dds" }
+}
+# EN: Corrientes: Basualdo's flag of January 1815, the first after the province was made on 10/9/1814 (Commons «Flag of Corrientes 1814.svg»; FOTW ar-w)
+# ES: la de Basualdo de enero de 1815, la primera despues de crearse la provincia el 10/9/1814
+gg_flag_prov_corrientes = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_corrientes_1815.dds" }
+}
+# EN: La Pampa: law 1513 of 1993
+# ES: ley 1513 de 1993
+gg_flag_prov_la_pampa = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_la_pampa_1993.dds" }
+}
+# EN: Neuquen: law 1817 of 31/10/1989
+# ES: ley 1817 del 31/10/1989
+gg_flag_prov_neuquen = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_neuquen_1989.dds" }
+}
+# EN: Rio Negro: the 2009 contest flag, first raised on 1/10/2009
+# ES: la del concurso de 2009, izada por primera vez el 1/10/2009
+gg_flag_prov_rio_negro = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_rio_negro_2009.dds" }
+}
+# EN: Chubut: law 5292 of 6/1/2005
+# ES: ley 5292 del 6/1/2005
+gg_flag_prov_chubut = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_chubut_2005.dds" }
+}
+# EN: Santa Cruz: law 2566 of 23/11/2000
+# ES: ley 2566 del 23/11/2000
+gg_flag_prov_santa_cruz = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_santa_cruz_2000.dds" }
+}
+# EN: Tierra del Fuego: the 1999 contest flag
+# ES: la del concurso de 1999
+gg_flag_prov_tierra_del_fuego = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_tierra_del_fuego_1999.dds" }
+}
+# EN: Misiones: the red, blue and white flag Artigas granted Andresito in 1815, the model of today's (Commons «Flag of Misiones (1815-1827).svg»; FOTW xl_andr)
+# ES: la roja, azul y blanca que Artigas le dio a Andresito en 1815, modelo de la de hoy
+gg_flag_prov_misiones = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_misiones_1815.dds" }
+}
+# EN: Formosa: chosen on 15/3/1991 and approved by Resolution 36 of the Constitutional Convention (dated 15/5/1991 by Wikipedia ES)
+# ES: elegida el 15/3/1991, aprobada por la resolucion 36 de la Convencion Constituyente
+gg_flag_prov_formosa = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_formosa_1991.dds" }
+}
+# EN: Chaco: approved 19/9/2007. It replaced a 1990s flag that was barely used and has no real image on Commons
+# ES: aprobada el 19/9/2007; la anterior, de los anos noventa, casi no se uso y no tiene imagen real en Commons
+gg_flag_prov_chaco = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_prov_chaco_2007.dds" }
 }

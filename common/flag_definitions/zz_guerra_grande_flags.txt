@@ -153,6 +153,9 @@ REPLACE:URU = {
 #          when it changed side» (the doc). Beaten provinces are born as provinces of the Pact under
 #          Buenos Aires (gg_province_split_off), so under the Pact they keep the federal flag.
 #       30 and 31 the provincial flag of today, from the date of the law that adopted it.
+#       40 while the confederation stands (gg_confederation_stands), the province's FIRST provincial flag,
+#          whatever its date (Juan, 24/9/2026, AUD-FLAG-CONFED; a deliberate anachronism). Same rule for the nine
+#          territories made provinces and for Corrientes and Entre Rios, at the end of this file.
 #     No other mod in the playset defines these eleven tags in flag_definitions (checked 22/9/2026
 #     against every downloaded Workshop item, DNFC's REPLACE_OR_CREATE lists included), so a plain
 #     block is not dropped at load. The DEFAULT list's communist (1000) and anarchist (2000) flags
@@ -171,6 +174,9 @@ REPLACE:URU = {
 #          cambiar de bando». Las provincias batidas nacen provincias del Pacto bajo Buenos Aires, asi que bajo
 #          el Pacto llevan la federal.
 #       30 y 31 la bandera provincial de hoy, desde la fecha de la ley que la adopto.
+#       40 mientras siga la confederacion, la PRIMERA bandera provincial de la provincia, sea de la fecha que
+#          sea (Juan, 24/9/2026; anacronismo a proposito). Lo mismo para los nueve territorios y para Corrientes y
+#          Entre Rios, al final del archivo.
 #     Ningun otro mod del playset define estos once tags en flag_definitions (verificado el 22/9/2026
 #     contra todo el Workshop descargado, incluidas las listas REPLACE_OR_CREATE de DNFC), asi que un
 #     bloque comun no se descarta al cargar.
@@ -178,6 +184,15 @@ REPLACE:URU = {
 
 # EN/ES: Tucuman
 TUC = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_tucuman
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = TUC
@@ -221,6 +236,15 @@ TUC = {
 
 # EN/ES: Salta
 SLT = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_salta
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = SLT
@@ -255,6 +279,15 @@ SLT = {
 
 # EN/ES: Jujuy
 JUJ = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_jujuy
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = JUJ
@@ -289,6 +322,15 @@ JUJ = {
 
 # EN/ES: Catamarca
 CTM = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_catamarca
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = CTM
@@ -323,6 +365,15 @@ CTM = {
 
 # EN/ES: La Rioja
 LRJ = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_la_rioja
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = LRJ
@@ -357,6 +408,15 @@ LRJ = {
 
 # EN/ES: Cordoba
 CBA = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_cordoba
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = CBA
@@ -390,6 +450,15 @@ CBA = {
 
 # EN/ES: Santa Fe
 SFE = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_santa_fe
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = SFE
@@ -415,6 +484,15 @@ SFE = {
 
 # EN/ES: Santiago del Estero
 SDE = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_santiago
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = SDE
@@ -440,6 +518,15 @@ SDE = {
 
 # EN/ES: Mendoza
 MZA = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_mendoza
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = MZA
@@ -465,6 +552,15 @@ MZA = {
 
 # EN/ES: San Juan
 SJN = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_san_juan
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = SJN
@@ -498,6 +594,15 @@ SJN = {
 
 # EN/ES: San Luis
 SNL = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_san_luis
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	# 1836: the period flag (coat of arms keyed on the tag) / la bandera del periodo
 	flag_definition = {
 		coa = SNL
@@ -523,12 +628,23 @@ SNL = {
 
 # EN: 24/9/2026 (AUD-CONST-TERR) -- THE NINE TERRITORIES MADE PROVINCES: the period flag (gg_flag_terr_<key>, the
 #     Confederation's), and the national celeste and white from Caseros (3/2/1852), the same cut as the eleven provinces.
-#     No other mod in the playset defines these tags (checked 24/9/2026). Their provincial flags of today: PENDIENTES.md.
+#     No other mod in the playset defines these tags (checked 24/9/2026). Under the confederation (priority 40), their
+#     first provincial flag: Misiones the 1815 flag of Andresito, the other eight the flag of today (AUD-FLAG-CONFED).
 # ES: LOS NUEVE TERRITORIOS HECHOS PROVINCIA: la bandera del periodo con la clave del tag y la celeste y blanca desde
-#     Caseros, el mismo corte que las once provincias. Sus banderas provinciales de hoy: PENDIENTES.md.
+#     Caseros, el mismo corte que las once provincias. Bajo la confederacion (prioridad 40), su primera bandera
+#     provincial: Misiones la de Andresito de 1815, las otras ocho la de hoy.
 
 # EN/ES: La Pampa
 LPM = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_la_pampa
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_la_pampa
 		priority = 1
@@ -544,6 +660,15 @@ LPM = {
 
 # EN/ES: Neuquén
 NQN = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_neuquen
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_neuquen
 		priority = 1
@@ -559,6 +684,15 @@ NQN = {
 
 # EN/ES: Río Negro
 RNG = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_rio_negro
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_rio_negro
 		priority = 1
@@ -574,6 +708,15 @@ RNG = {
 
 # EN/ES: Chubut
 CHB = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_chubut
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_chubut
 		priority = 1
@@ -589,6 +732,15 @@ CHB = {
 
 # EN/ES: Santa Cruz
 SCZ = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_santa_cruz
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_santa_cruz
 		priority = 1
@@ -604,6 +756,15 @@ SCZ = {
 
 # EN/ES: Tierra del Fuego
 TDF = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_tierra_del_fuego
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_tierra_del_fuego
 		priority = 1
@@ -619,6 +780,15 @@ TDF = {
 
 # EN/ES: Misiones
 MIS = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_misiones
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_misiones
 		priority = 1
@@ -634,6 +804,15 @@ MIS = {
 
 # EN/ES: Formosa
 FMS = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_formosa
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_formosa
 		priority = 1
@@ -649,6 +828,15 @@ FMS = {
 
 # EN/ES: Chaco
 CHO = {
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_chaco
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
 	flag_definition = {
 		coa = gg_flag_terr_chaco
 		priority = 1
@@ -658,6 +846,51 @@ CHO = {
 		priority = 10
 		trigger = {
 			game_date >= 1852.2.3
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-FLAG-CONFED) -- CORRIENTES AND ENTRE RIOS. Until now they had no list here: the engine fell
+#     back to the coat of arms keyed on the tag (common/coat_of_arms/coat_of_arms/zz_guerra_grande_argentina.txt), and
+#     the priority-1 definition keeps exactly that. Under the confederation, their first provincial flag. No other mod
+#     in the playset defines CRR or ENR in flag_definitions (checked 24/9/2026: every downloaded Workshop item, DNFC's
+#     la_plata lists and the local la-argentina-x-dnfc included), so a plain block is not dropped at load.
+# ES: CORRIENTES Y ENTRE RIOS. Hasta ahora no tenian lista: el motor usaba el escudo con la clave del tag, y la definicion
+#     de prioridad 1 mantiene exactamente eso. Bajo la confederacion, su primera bandera provincial. Ningun otro mod del
+#     playset define CRR ni ENR en flag_definitions.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: Corrientes
+CRR = {
+	flag_definition = {
+		coa = CRR
+		priority = 1
+	}
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_corrientes
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
+		}
+	}
+}
+
+# EN/ES: Entre Rios
+ENR = {
+	flag_definition = {
+		coa = ENR
+		priority = 1
+	}
+	# 24/9/2026 (Juan, AUD-FLAG-CONFED): while the confederation stands, its first provincial flag, over every
+	# other one here / mientras siga la confederacion, su primera bandera provincial, por encima de las demas
+	flag_definition = {
+		coa = gg_flag_prov_entre_rios
+		priority = 40
+		trigger = {
+			gg_confederation_stands = yes
 		}
 	}
 }
