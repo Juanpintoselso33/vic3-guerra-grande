@@ -1087,6 +1087,8 @@ gg_powers.19 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.a|" # GG_TRAZA
 		name = gg_powers.19.a
+		# EN/ES: 23/9/2026 (hidden consequences, row 9) -- London is out of the river / Londres sale del rio
+		custom_tooltip = gg_powers.19_britain_out_tt
 		custom_tooltip = gg_powers.19.a_tt2
 		default_option = yes
 		# EN: a mission to Paris (Pacheco y Obes): France falls more slowly. Cheaper with his line.
@@ -1109,6 +1111,8 @@ gg_powers.19 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.b|" # GG_TRAZA
 		name = gg_powers.19.b
+		# EN/ES: 23/9/2026 (hidden consequences, row 9) -- London is out of the river / Londres sale del rio
+		custom_tooltip = gg_powers.19_britain_out_tt
 		custom_tooltip = gg_powers.19.b_tt2
 		# EN: look for Brazil (Lamas): Brazil rises early, the treaties will be the price. Cheaper with Herrera.
 		# ES: buscar al Brasil (Lamas): el Brasil sube antes, el precio seran los tratados. Mas barato con Herrera.
@@ -1126,6 +1130,8 @@ gg_powers.19 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19.c|" # GG_TRAZA
 		name = gg_powers.19.c
+		# EN/ES: 23/9/2026 (hidden consequences, row 9) -- London is out of the river / Londres sale del rio
+		custom_tooltip = gg_powers.19_britain_out_tt
 		# EN: hold on alone: pride, and no patron.
 		# ES: aguantar solos: orgullo, y ningun padrino.
 		c:URU ?= {

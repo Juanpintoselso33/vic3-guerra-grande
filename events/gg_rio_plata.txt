@@ -278,6 +278,11 @@ gg_plata.20 = {
 					}
 				}
 			}
+			# EN/ES: 23/9/2026 (D3) -- after the settlement, from 1850, the Empire counts / despues del arreglo cuenta el Imperio
+			triggered_desc = {
+				desc = gg_plata.20.d_brazil
+				trigger = { gg_plata_brazil_counts = yes }
+			}
 			triggered_desc = {
 				desc = gg_plata.20.d_none
 				trigger = { has_global_variable = gg_plata_france_recognizes }
@@ -799,6 +804,9 @@ gg_plata.5 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.5|" # GG_TRAZA
 		gg_plata_southern_signs = yes
+		# EN/ES: 23/9/2026 (D2) -- Buenos Aires hears of the same treaty the same day (its relay checks the war)
+		#     / Buenos Aires se entera del mismo tratado el mismo dia (su relevo mira la guerra)
+		c:ARG ?= { trigger_event = { id = gg_rosas.104 days = 1 } }
 		# EN/ES: the Defensa's own answer to the treaty, while the war runs / la respuesta de la Defensa
 		if = {
 			limit = {

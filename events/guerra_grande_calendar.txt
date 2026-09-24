@@ -340,7 +340,11 @@ gg_cal.15 = {
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.15|" # GG_TRAZA
 		hidden_effect = {
-			gg_cal_fire = {
+			# EN/ES: 23/9/2026 (river, D2) -- Howden is a link of the intervention and waits for it: with one attempt,
+			#     the copy the intervention queues (+700 days) spent it before month 23 and 9/7/1847, and Howden never
+			#     reached the Cerrito (headless 20260923-225857) / Howden es un eslabon y espera: con un solo intento, la
+			#     copia de +700 dias lo gastaba antes del mes 23 y del 9/7/1847, y Howden no llegaba nunca al Cerrito
+			gg_cal_fire_wait = {
 				DONE = gg_cal_done_15
 				EVENT = gg_powers.14
 				SIDE = guerra_grande_cerrito_government
