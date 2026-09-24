@@ -830,6 +830,51 @@ gg_argentina_new_country_people = {
 			add_contextless_journal_entry = je_gg_delegation
 		}
 	}
+	# EN/ES: 24/9/2026 (Juan, AUD-ERR-CUARTELES) -- and Argentina's army model / y el modelo de ejercito de la Argentina
+	gg_argentina_inherit_army_model = { TAG = $TAG$ }
+}
+
+# EN: 24/9/2026 (Juan, AUD-ERR-CUARTELES) -- A COUNTRY BORN FROM ARGENTINA GETS ARGENTINA'S ARMY MODEL, the one ARG
+#     holds at that moment. create_country copies the origin's laws, but the origin is not always ARG (a split
+#     takes gg_split_origin: the Coalition, Buenos Aires...), and until today la Argentina's law_local_caudillos
+#     could not be held by anyone but ARG, so the newborn fell to law_national_militia and the engine cut its
+#     barracks to 5 a state. The law is visible to them now (common/laws/zz_gg_local_caudillos.txt); this sets it,
+#     in the same effect as the birth, before any building update. The five army models of the playset are vanilla's
+#     (common/laws/00_army_model.txt, warrior caste is Japan-only) and la Argentina's local caudillos. Uruguay,
+#     born from ARG in the Cisplatina, is not one of them (gg_is_born_of_argentina) and keeps what it gets.
+# ES: UN PAIS NACIDO DE LA ARGENTINA RECIBE EL MODELO DE EJERCITO QUE LA ARGENTINA TIENE EN ESE MOMENTO. Antes caia en
+#     la milicia nacional (5 cuarteles por estado) y el motor le recortaba los cuarteles. El Uruguay de la
+#     Cisplatina no entra.
+gg_argentina_inherit_army_model = {
+	c:$TAG$ ?= {
+		if = {
+			limit = {
+				gg_is_born_of_argentina = yes
+				exists = c:ARG
+				NOT = { c:ARG ?= this }
+			}
+			if = {
+				limit = { c:ARG = { has_law = law_type:law_local_caudillos } NOT = { has_law = law_type:law_local_caudillos } }
+				activate_law = law_type:law_local_caudillos
+			}
+			else_if = {
+				limit = { c:ARG = { has_law = law_type:law_peasant_levies } NOT = { has_law = law_type:law_peasant_levies } }
+				activate_law = law_type:law_peasant_levies
+			}
+			else_if = {
+				limit = { c:ARG = { has_law = law_type:law_professional_army } NOT = { has_law = law_type:law_professional_army } }
+				activate_law = law_type:law_professional_army
+			}
+			else_if = {
+				limit = { c:ARG = { has_law = law_type:law_national_militia } NOT = { has_law = law_type:law_national_militia } }
+				activate_law = law_type:law_national_militia
+			}
+			else_if = {
+				limit = { c:ARG = { has_law = law_type:law_mass_conscription } NOT = { has_law = law_type:law_mass_conscription } }
+				activate_law = law_type:law_mass_conscription
+			}
+		}
+	}
 }
 
 # -------------------------------------------------------------------------------------------------

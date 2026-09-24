@@ -51,6 +51,8 @@ gg_ba_split_historical = {
 		#     (gg_pact_sides.txt) / los emigrados estan en la ciudad
 		gg_emigres_to_buenos_aires = yes
 	}
+	# EN/ES: 24/9/2026 (Juan, AUD-ERR-CUARTELES) -- Argentina's army model / el modelo de ejercito de la Argentina
+	gg_argentina_inherit_army_model = { TAG = BUE }
 	set_global_variable = gg_ba_split_active
 	set_global_variable = gg_ba_from_urquiza
 	set_global_variable = { name = gg_ba_side value = c:BUE }

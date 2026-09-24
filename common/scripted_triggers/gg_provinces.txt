@@ -27,6 +27,44 @@ gg_is_province_country = {
 	}
 }
 
+# EN: 24/9/2026 (Juan, AUD-ERR-CUARTELES) -- a country born from Argentina: the province countries, the Coalition
+#     and Buenos Aires (BUE). It holds Argentina's army model (common/laws/zz_gg_local_caudillos.txt,
+#     gg_argentina_inherit_army_model). By tag, so it is true at the moment of create_country.
+# ES: un pais nacido de la Argentina: los paises provinciales, la Coalicion y Buenos Aires. Tiene el modelo de
+#     ejercito de la Argentina. Por tag, asi vale en el momento del create_country.
+gg_is_born_of_argentina = {
+	OR = {
+		gg_is_province_country = yes
+		c:CLN ?= this
+		c:BUE ?= this
+	}
+}
+
+# EN: 24/9/2026 (Juan, AUD-ERR-IDENTIDAD) -- countries that never open vanilla's South American national identity
+#     (je_south_american_national_identity_emergence, common/journal_entries/zzz_gg_south_american_identity.txt):
+#     its events map only vanilla's tags, so for these the old culture was never set (culture_south_america.txt:386
+#     and :890, ~210 error lines a run) and the conversion did nothing. The born countries of Argentina and the
+#     Cerrito for good; the Republic of the Defensa while the Guerra Grande lasts (guerra_grande_open_war).
+#     Argentina and Uruguay keep it.
+# ES: paises que nunca abren la identidad nacional sudamericana de vanilla: sus eventos solo conocen los tags de
+#     vanilla. Los nacidos de la Argentina y el Cerrito siempre; la Defensa mientras dure la guerra. La Argentina y
+#     el Uruguay la conservan.
+gg_no_south_american_identity_tag = {
+	OR = {
+		gg_is_born_of_argentina = yes
+		c:CER ?= this
+	}
+}
+gg_no_south_american_identity = {
+	OR = {
+		gg_no_south_american_identity_tag = yes
+		AND = {
+			c:URU ?= this
+			has_global_variable = guerra_grande_open_war
+		}
+	}
+}
+
 # EN: The eleven born only by defeat: they have no pronouncement, so they get the quiet AI.
 # ES: Las once que nacen solo por derrota: no tienen pronunciamiento, asi que llevan la IA quieta.
 gg_is_beaten_province_country = {
