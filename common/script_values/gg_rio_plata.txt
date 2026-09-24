@@ -1,13 +1,16 @@
 ﻿# EN: C. The river in the war balance (rio-plata-spec.md section 4). One signed counter replaces the
 #     old siege and relief stocks, which could both be positive and cancel out: +1 for each month the
 #     river is shut, -1 for each month it is open, between -16 and +16. Four months per point, capped
-#     at four -- below every threshold the arbiter reads, so the river never decides the war alone.
+#     at four a side: the river's weight as things stand. During the siege, every four months beyond
+#     that cap stay on the war's score for the side it favours (gg_siege_river_scores), up to
+#     gg_siege_river_bank_cap points a side (5, decided 23/9/2026: 4 + 5 = 9 stays under the 1849
+#     threshold of 10, so the river leans on the war but never decides it alone before 1851).
 #     Positive helps the blancos, negative the colorados.
-# ES: C. El rio en la balanza de la guerra. Un solo contador con signo reemplaza a los stocks del
-#     sitio y del auxilio, que podian ser positivos a la vez y cancelarse: +1 por mes de rio cerrado,
-#     -1 por mes abierto, entre -16 y +16. Cuatro meses por punto, techo cuatro: debajo de todos los
-#     umbrales del arbitro, asi el rio nunca decide la guerra solo. Positivo ayuda a los blancos,
-#     negativo a los colorados.
+# ES: C. El rio en la balanza de la guerra. Un solo contador con signo: +1 por mes de rio cerrado, -1 por
+#     mes abierto, entre -16 y +16. Cuatro meses por punto, techo cuatro por lado: el peso del rio hoy. En
+#     el sitio, cada cuatro meses mas alla de ese techo quedan en el puntaje del bando que favorece, hasta
+#     gg_siege_river_bank_cap puntos por lado (5, decidido el 23/9: 4 + 5 = 9 no llega al 10 de 1849, asi
+#     el rio inclina la guerra pero no la decide solo antes de 1851). Positivo ayuda a los blancos.
 gg_plata_pressure_blanco = {
 	value = global_var:gg_plata_months
 	divide = 4
@@ -33,6 +36,30 @@ gg_plata_patience_threshold = {
 		limit = { has_global_variable = gg_intervention_called }
 		value = 12
 	}
+	# EN/ES: 23/9/2026 (D3) -- after the settlement it is the Empire's patience, and it is short: six months
+	#     / despues del arreglo es la paciencia del Imperio, y es corta: seis meses
+	if = {
+		limit = { gg_plata_settled = yes }
+		value = 6
+	}
+}
+
+# EN: 23/9/2026 (Juan, D1; balance audit BAL-01) -- the most the siege banks for either side from the river.
+#     One number to tune: gg_ui_plata_more_body and gg_war_ui_sec_balance_tt print it.
+# ES: lo maximo que el sitio acumula del rio para cada lado. Un solo numero para ajustar.
+gg_siege_river_bank_cap = { value = 5 }
+
+# EN: 23/9/2026 (balance audit BAL-04) -- the lead the DECISIONS built: the war score without the points the
+#     siege banked from the river. The upper-hand modifiers read this (their T10 comment always said so).
+# ES: la ventaja que construyeron las DECISIONES: el puntaje sin los puntos que el sitio acumulo del rio.
+gg_decision_lead_blanco = {
+	value = guerra_grande_blanco_lead
+	if = { limit = { has_global_variable = gg_siege_river_banked_blanco } subtract = global_var:gg_siege_river_banked_blanco }
+	if = { limit = { has_global_variable = gg_siege_river_banked_colorado } add = global_var:gg_siege_river_banked_colorado }
+}
+gg_decision_lead_colorado = {
+	value = 0
+	subtract = gg_decision_lead_blanco
 }
 
 # EN/ES: -1 colorados, 0 even, 1 blancos / -1 colorados, 0 parejo, 1 blancos
@@ -91,6 +118,13 @@ gg_ui_plata_phase1_mode = {
 		}
 		value = 4
 	}
+	# EN/ES: 23/9/2026 (D3) -- after the settlement: 7 the Littoral pays for it, 6 and Brazil counts too
+	#     / despues del arreglo: 7 lo paga el Litoral, 6 y ademas cuenta el Brasil
+	# EN/ES: 23/9/2026 -- 8 the powers' patience is spent and they have not answered yet: hunger holds
+	#     / 8 se agoto la paciencia de las potencias y todavia no contestaron: el hambre se sostiene
+	if = { limit = { gg_plata_hunger_held = yes } value = 8 }
+	if = { limit = { gg_plata_settled = yes } value = 7 }
+	if = { limit = { gg_plata_brazil_counts = yes } value = 6 }
 	if = { limit = { has_global_variable = gg_plata_guarantee_grace } value = 3 }
 	if = { limit = { has_global_variable = gg_truce } value = 2 }
 	if = { limit = { NOT = { has_global_variable = guerra_grande_open_war } } value = 1 }
@@ -129,9 +163,9 @@ gg_ui_plata_phase3_mode = {
 #     / que enviado tiene Londres en el rio, por meses de intervencion
 gg_ui_plata_envoy = {
 	value = 0
-	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 12 } value = 1 }
-	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 23 } value = 2 }
-	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 31 } value = 3 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 12 game_date >= 1846.7.13 } value = 1 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 23 game_date >= 1847.7.9 } value = 2 }
+	if = { limit = { has_global_variable = gg_plata_intervention global_var:gg_plata_intervention_months >= 31 game_date >= 1848.3.25 } value = 3 }
 	# EN/ES: River audit 22/9 -- «Southern has signed» only once he has (gg_powers.19), not by the month
 	#     / «Southern ya firmo» solo cuando firmo, no por el mes
 	if = { limit = { has_global_variable = gg_plata_britain_settled } value = 4 }
@@ -260,6 +294,20 @@ gg_ui_plata_patience_shown = {
 		}
 		value = 0
 	}
+	# EN/ES: 23/9/2026 (D3) -- after the settlement the bar is Brazil's / despues del arreglo la barra es del Brasil
+	if = {
+		limit = {
+			gg_plata_brazil_counts = yes
+			has_global_variable = gg_plata_closed_total
+			global_var:gg_plata_closed_total > 0
+		}
+		value = 1
+	}
+}
+# EN/ES: which reading the patience bar gives: 1 Brazil's (after the settlement) / 1 la del Brasil
+gg_ui_plata_patience_brazil = {
+	value = 0
+	if = { limit = { gg_plata_brazil_counts = yes } value = 1 }
 }
 gg_ui_plata_hunger_shown = {
 	value = 0

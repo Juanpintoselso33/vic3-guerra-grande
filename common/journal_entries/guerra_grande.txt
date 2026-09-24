@@ -199,12 +199,14 @@ je_guerra_grande = {
 					# ES: estos leen la ventaja que construyeron las DECISIONES, no la balanza que ahora
 					#     incluye el sitio y el mar: con la balanza quedarian prendidos de un lado los seis
 					#     anios que el mar esta abierto. La barra y el arbitro si leen la balanza.
-					limit = { guerra_grande_blanco_lead >= 5 }
+					# EN/ES: 23/9/2026 (balance audit BAL-04) -- nor the points the siege banked from the river: this comment
+					#     always said DECISIONS, and the war score counts both / ni los puntos que el sitio acumulo del rio
+					limit = { gg_decision_lead_blanco >= 5 }
 					c:CER ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:URU ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
 				else_if = {
-					limit = { guerra_grande_colorado_lead >= 5 }
+					limit = { gg_decision_lead_colorado >= 5 }
 					c:URU ?= { add_modifier = { name = guerra_grande_upper_hand months = 2 } }
 					c:CER ?= { add_modifier = { name = guerra_grande_losing_ground months = 2 } }
 				}
@@ -255,6 +257,10 @@ je_guerra_grande = {
 									NOT = { has_global_variable = gg_plata_intervention }
 									has_global_variable = gg_plata_intervention_over
 								}
+								# EN/ES: 23/9/2026 (river audit B2, D3) -- an AI Cerrito does not ask again after the settlement: Rosas
+								#     never blockaded Montevideo again (SOURCES_powers.md section 12). A player still can, at a price
+								#     / un Cerrito de la IA no vuelve a pedir despues del arreglo; un jugador si, con un precio
+								NOT = { gg_plata_settled = yes }
 							}
 							gg_river_blockade = yes
 						}

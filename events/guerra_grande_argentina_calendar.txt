@@ -591,7 +591,7 @@ gg_argentina_cal.21 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_21 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
-				gg_plata_intervention_at = { MONTHS = 2 }
+				gg_plata_intervention_at = { MONTHS = 2 DATE = 1845.9.18 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = guerra_grande_open_war
@@ -622,7 +622,7 @@ gg_argentina_cal.22 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_22 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
-				gg_plata_intervention_at = { MONTHS = 4 }
+				gg_plata_intervention_at = { MONTHS = 4 DATE = 1845.11.20 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance
@@ -660,7 +660,7 @@ gg_argentina_cal.23 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_23 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
-				gg_plata_intervention_at = { MONTHS = 10 }
+				gg_plata_intervention_at = { MONTHS = 10 DATE = 1846.6.4 }
 				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance_continues
@@ -708,7 +708,7 @@ gg_argentina_cal.24 = {
 				NOT = { has_global_variable = gg_peace_offered }
 				NOT = { has_global_variable = gg_hood_done }
 				OR = {
-					gg_plata_intervention_at = { MONTHS = 12 }
+					gg_plata_intervention_at = { MONTHS = 12 DATE = 1846.7.13 }
 					has_global_variable = gg_powers_mediators
 				}
 			}

@@ -152,8 +152,20 @@ gg_rosas.103 = {
 				NOT = { has_global_variable = gg_peace_settled }
 				exists = c:ARG
 				any_country = { has_variable = guerra_grande_cerrito_government }
+				# EN/ES: 23/9/2026 (D2, one clock for both banks) -- Howden, month 23 of the intervention / Howden, mes 23 de la intervencion
+				gg_plata_intervention_at = { MONTHS = 23 DATE = 1847.7.1 }
 			}
 			c:ARG = { trigger_event = { id = gg_rosas.3 days = 0 popup = yes } }
+		}
+		# EN/ES: 23/9/2026 (D2) -- the link has not come yet: wait for it, month by month, while the war runs
+		#     / el eslabon todavia no llego: se espera mes a mes mientras dure la guerra
+		else_if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				year < 1856
+			}
+			trigger_event = { id = gg_rosas.103 days = 30 }
 		}
 	}
 }
@@ -204,8 +216,20 @@ gg_rosas.104 = {
 				NOT = { has_global_variable = gg_peace_settled }
 				exists = c:ARG
 				any_country = { has_variable = guerra_grande_cerrito_government }
+				# EN/ES: 23/9/2026 (D2, one clock for both banks) -- Arana-Southern signed (gg_plata.5, the same link the Defensa hears) / Arana-Southern firmado (gg_plata.5, el mismo eslabon)
+				has_global_variable = gg_plata_britain_settled
 			}
 			c:ARG = { trigger_event = { id = gg_rosas.4 days = 0 popup = yes } }
+		}
+		# EN/ES: 23/9/2026 (D2) -- the link has not come yet: wait for it, month by month, while the war runs
+		#     / el eslabon todavia no llego: se espera mes a mes mientras dure la guerra
+		else_if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				year < 1856
+			}
+			trigger_event = { id = gg_rosas.104 days = 30 }
 		}
 	}
 }
@@ -256,8 +280,20 @@ gg_rosas.105 = {
 				NOT = { has_global_variable = gg_peace_settled }
 				exists = c:ARG
 				any_country = { has_variable = guerra_grande_cerrito_government }
+				# EN/ES: 23/9/2026 (D2, one clock for both banks) -- Arana-Lepredour, month 45 (the same link as gg_powers.20) / Arana-Lepredour, mes 45 (el mismo eslabon)
+				gg_plata_intervention_at_any = { MONTHS = 45 DATE = 1850.8.31 }
 			}
 			c:ARG = { trigger_event = { id = gg_rosas.5 days = 0 popup = yes } }
+		}
+		# EN/ES: 23/9/2026 (D2) -- the link has not come yet: wait for it, month by month, while the war runs
+		#     / el eslabon todavia no llego: se espera mes a mes mientras dure la guerra
+		else_if = {
+			limit = {
+				has_global_variable = guerra_grande_open_war
+				NOT = { has_global_variable = gg_peace_settled }
+				year < 1856
+			}
+			trigger_event = { id = gg_rosas.105 days = 30 }
 		}
 	}
 }

@@ -95,6 +95,11 @@ gg_plata_intervention_due = {
 	# EN/ES: under the guarantee a closure is a broken word, not a matter of patience (gg_plata.26)
 	#     / bajo la garantia un cierre es faltar a la palabra, no cuestion de paciencia
 	NOT = { has_global_variable = gg_plata_guarantee }
+	# EN/ES: 23/9/2026 (Juan, D2) -- no ultimatum before 1 July 1845: the notes of May and June 1845 and the
+	#     ultimatum of 21 July (SOURCES_powers.md section 8) / ningun ultimatum antes del 1/7/1845
+	game_date >= 1845.7.1
+	# EN/ES: D3 -- after the settlement the answer is Brazil's, not an ultimatum / despues del arreglo responde el Brasil
+	NOT = { gg_plata_settled = yes }
 	gg_plata_patience_spent = yes
 }
 
@@ -104,9 +109,16 @@ gg_plata_intervention_due = {
 # ES: La cadena de la intervencion. Cada evento fechado de las potencias espera a la intervencion y a
 #     su propia distancia desde el ultimatum, asi una intervencion tardia conserva el orden
 #     historico. Los relevos ya reintentan cada mes hasta que el trigger del destinatario los deja.
+# EN: 23/9/2026 (Juan, D2) -- ONE CLOCK FOR BOTH BANKS. Every link also waits for its historical DATE:
+#     the intervention's events never fire before the day they happened, on either bank, and a late
+#     intervention still keeps its months between links.
+# ES: UN SOLO RELOJ PARA LAS DOS ORILLAS. Cada eslabon espera ademas su FECHA historica: los eventos de la
+#     intervencion nunca salen antes del dia en que pasaron, en ninguna orilla, y una intervencion tardia
+#     conserva sus meses entre eslabones.
 gg_plata_intervention_at = {
 	has_global_variable = gg_plata_intervention
 	global_var:gg_plata_intervention_months >= $MONTHS$
+	game_date >= $DATE$
 	# EN/ES: 22/9/2026 -- a French intervention alone (after Southern without a war) runs none of the
 	#     British links / una intervencion solo francesa no corre ningun eslabon britanico
 	NOT = { has_global_variable = gg_plata_france_alone }
@@ -116,6 +128,7 @@ gg_plata_intervention_at = {
 gg_plata_intervention_at_any = {
 	has_global_variable = gg_plata_intervention
 	global_var:gg_plata_intervention_months >= $MONTHS$
+	game_date >= $DATE$
 }
 
 # EN: 22/9/2026 -- THE POWERS' GUARANTEE (decided with Juan, alternative A of the review of the
@@ -156,5 +169,60 @@ gg_plata_lepredour_without_war_due = {
 	OR = {
 		game_date >= 1850.8.31
 		c:ARG ?= { c:FRA ?= { relations:prev >= relations_threshold:cordial } }
+	}
+}
+
+# EN: 23/9/2026 (Juan, D3) -- THE SETTLEMENT. Both powers have recognised the right of blockade (Lepredour,
+#     after the intervention or without it). A closure is still possible, but it is no longer free: the
+#     Littoral wants to navigate the Parana (Urquiza's backing and grievance) and, from 1850, the Empire of
+#     Brazil counts the shut months as the powers once did (SOURCES_powers.md section 12; Brazil broke with
+#     Rosas in 1850 and its squadron forced the Parana at Tonelero on 17/12/1851).
+# ES: EL ARREGLO. Las dos potencias reconocieron el derecho de bloqueo. Cerrar sigue siendo posible, pero ya
+#     no sale gratis: el Litoral quiere navegar el Parana y, desde 1850, el Imperio cuenta los meses cerrados.
+gg_plata_settled = {
+	OR = {
+		has_global_variable = gg_plata_intervention_over
+		has_global_variable = gg_plata_france_recognizes
+	}
+}
+gg_plata_brazil_counts = {
+	gg_plata_settled = yes
+	year >= 1850
+	exists = c:BRZ
+	NOT = { has_global_variable = gg_plata_brazil_forced }
+}
+# EN/ES: Brazil's patience is spent: its squadron forces the passage (gg_plata_brazil_forces)
+#     / se acabo la paciencia del Brasil: su escuadra fuerza el paso
+gg_plata_brazil_answer_due = {
+	gg_plata_brazil_counts = yes
+	gg_plata_closed = yes
+	has_global_variable = gg_plata_closed_total
+	global_var:gg_plata_closed_total >= gg_plata_patience_threshold
+}
+
+# EN: 23/9/2026 (consequence of D2) -- THE CITY IS NOT STARVING while the powers stand by it. With the
+#     ultimatum floored at 1/7/1845, a closure from mid-1843 would reach 24 months of hunger by mid-1845,
+#     before London and Paris could answer. Once their patience is spent, their stations escort the
+#     merchantmen into Montevideo while the ministers wait for instructions (the notes of May and June
+#     1845, SOURCES_powers.md section 12), and while their squadrons are in the river the city is supplied
+#     by them: the run of hunger holds, it neither grows nor resets. Calling the squadrons (patience 12)
+#     brings this sooner, so the Defensa's call is a real lever.
+# ES: LA PLAZA NO SE MUERE DE HAMBRE mientras las potencias la sostienen. Con el ultimatum desde el 1/7/1845,
+#     un cierre desde mediados de 1843 llegaba a 24 meses de hambre antes de que Londres y Paris pudieran
+#     contestar. Agotada su paciencia, sus estaciones escoltan a los mercantes mientras los ministros esperan
+#     instrucciones, y con sus escuadras en el rio la plaza se abastece: la racha del hambre se sostiene, ni
+#     crece ni se corta. Llamar a las escuadras lo adelanta: el llamado de la Defensa es una palanca real.
+gg_plata_hunger_held = {
+	OR = {
+		AND = {
+			NOT = { gg_plata_settled = yes }
+			NOT = { has_global_variable = gg_plata_intervention }
+			gg_plata_patience_spent = yes
+		}
+		has_global_variable = gg_plata_ultimatum_pending
+		AND = {
+			has_global_variable = gg_plata_intervention
+			NOT = { has_global_variable = gg_plata_intervention_over }
+		}
 	}
 }

@@ -208,7 +208,7 @@ gg_cal.9 = {
 	}
 }
 
-# 1845-07-21 -- la escuadra de Brown (gg_powers.11, el Cerrito)
+# 1845-07-21 -- la escuadra de Brown (gg_powers.11, Rosas desde el 23/9/2026, D4)
 gg_cal.10 = {
 	type = country_event
 	hidden = yes
@@ -217,10 +217,12 @@ gg_cal.10 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.10|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: CB-04 -- waits for the intervention (C10) / espera la intervencion
+			# EN/ES: 23/9/2026 (D4) -- the squadron is Rosas's: the choice goes to Buenos Aires
+			#     / la escuadra es de Rosas: la eleccion va a Buenos Aires
 			gg_cal_fire_wait = {
 				DONE = gg_cal_done_10
 				EVENT = gg_powers.11
-				SIDE = guerra_grande_cerrito_government
+				SIDE = gg_arg_rosas_seat
 				RETRY = gg_cal.10
 			}
 		}
@@ -478,7 +480,7 @@ gg_cal.22 = {
 	}
 }
 
-# 1849-11-24 -- Southern (gg_powers.19, la Defensa)
+# 1849-11-24 -- Southern (gg_plata.5, que entrega gg_powers.19 a la Defensa; sobrevive a la guerra)
 gg_cal.23 = {
 	type = country_event
 	hidden = yes
@@ -487,9 +489,15 @@ gg_cal.23 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.23|" # GG_TRAZA
 		hidden_effect = {
 			# EN/ES: CB-04 -- waits for the intervention (C10) / espera la intervencion
-			gg_cal_fire_wait = {
+			# EN: 23/9/2026 (B8) -- and outlives the war: the treaty's effect on the river (the battery back in
+			#     Buenos Aires) lives in the hidden gg_plata.5, which hands the Defensa its decision while the war
+			#     runs. With a war over before month 36, Southern used to never fire and the battery never came back.
+			# ES: y sobrevive a la guerra: el efecto del tratado sobre el rio vive en gg_plata.5, que le entrega su
+			#     decision a la Defensa mientras dura la guerra. Con la guerra terminada antes del mes 36, Southern no
+			#     salia nunca y la bateria no volvia.
+			gg_cal_fire_quiet_outlives_war = {
 				DONE = gg_cal_done_23
-				EVENT = gg_powers.19
+				EVENT = gg_plata.5
 				SIDE = guerra_grande_defensa_government
 				RETRY = gg_cal.23
 			}

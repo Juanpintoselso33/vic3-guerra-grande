@@ -76,6 +76,33 @@ widget = {
    using = fontsize_large align = center|nobaseline
    text = "gg_ui_plata_phase_1"
   }
+  # EN/ES: 23/9/2026 (river audit D3) -- a closure after the settlement / un cierre despues del arreglo
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)6'))]"
+   tooltip = "gg_ui_plata_phase_1_brazil_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  # EN/ES: 23/9/2026 (river audit D3) -- a closure after the settlement / un cierre despues del arreglo
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)7'))]"
+   tooltip = "gg_ui_plata_phase_1_settled_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
+  # EN/ES: 23/9/2026 -- the powers stand by the city while their answer waits / las potencias sostienen la plaza
+  textbox = {
+   visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_phase1_mode'), '(CFixedPoint)8'))]"
+   tooltip = "gg_ui_plata_phase_1_held_tt"
+   position = { 0 206 } size = { 520 40 }
+   background = { using = dark_area alpha = 0.8 }
+   using = fontsize_large align = center|nobaseline
+   text = "gg_ui_plata_phase_1"
+  }
   textbox = {
    visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_plata_phase'), '(CFixedPoint)2'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'))]"
    tooltip = "gg_ui_plata_phase_2_tt"
@@ -486,8 +513,10 @@ flowcontainer = {
   icon = { size = { 40 40 } texture = "gfx/interface/icons/generic_icons/diplomatic_treaties.dds" }
   flowcontainer = {
    direction = vertical spacing = 2
-   textbox = { multiline = yes visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
-   textbox = { multiline = yes visible = "[Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'))]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_france" }
+   textbox = { multiline = yes visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_brazil'), '(CFixedPoint)0'))]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc" }
+   textbox = { multiline = yes visible = "[And(Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_brazil'), '(CFixedPoint)0'))]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_france" }
+   # EN/ES: 23/9/2026 (river audit D3) -- after the settlement the bar is Brazil's / despues del arreglo la barra es del Brasil
+   textbox = { multiline = yes visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_patience_brazil'), '(CFixedPoint)1')]" autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_patience_bar_desc_brazil" }
    green_progressbar_horizontal = {
     size = { 472 22 }
     blockoverride "values" {

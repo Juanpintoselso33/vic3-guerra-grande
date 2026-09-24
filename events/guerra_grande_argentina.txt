@@ -2243,7 +2243,7 @@ gg_argentina.25 = {
 		NOT = { has_global_variable = gg_hood_done }
 		OR = {
 			# EN/ES: C10 -- a year into the intervention / al anio de la intervencion
-			gg_plata_intervention_at = { MONTHS = 12 }
+			gg_plata_intervention_at = { MONTHS = 12 DATE = 1846.7.13 }
 			has_global_variable = gg_powers_mediators
 		}
 	}

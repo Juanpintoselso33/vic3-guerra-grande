@@ -12,6 +12,17 @@ gg_urquiza_discontent = {
 	if = { limit = { NOT = { has_global_variable = gg_constituent_congress_route } } add = 1 }
 	if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 } add = global_var:gg_entre_rios_agravio }
 	if = { limit = { exists = c:BRZ NOT = { gg_brazil_beaten = yes } } add = 2 }
+	# EN/ES: 23/9/2026 (river audit D3) -- the river shut after the settlement: one per four months, up to 3
+	#     (the Littoral wants to navigate the Parana) / el rio cerrado despues del arreglo: uno cada cuatro meses, hasta 3
+	if = {
+		limit = { has_global_variable = gg_plata_litoral_agravio global_var:gg_plata_litoral_agravio >= 4 }
+		add = {
+			value = global_var:gg_plata_litoral_agravio
+			divide = 4
+			floor = yes
+			max = 3
+		}
+	}
 	# EN/ES: what holds him back / lo que lo frena
 	if = { limit = { gg_rosas_won_guerra_grande = yes } add = -2 }
 	if = { limit = { has_global_variable = gg_oriental_in_pact } add = -2 }

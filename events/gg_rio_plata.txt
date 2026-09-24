@@ -44,6 +44,11 @@ gg_plata.2 = {
 		name = gg_plata.2.a
 		default_option = yes
 		gg_plata_rosas_close = yes
+		# EN/ES: 23/9/2026 (D3) -- after the settlement a closure has a price / despues del arreglo cerrar tiene precio
+		if = {
+			limit = { gg_plata_settled = yes }
+			custom_tooltip = gg_plata_settled_close_cost_tt
+		}
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 	}
 
@@ -176,12 +181,16 @@ gg_plata.10 = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: gg_plata.4 -- the intervention's clock (Codex review 22/9/2026). One month per tick, on Britain,
-#     independent of the war journal and of truces, until France settles or the war is over. The
-#     links of the chain read it through gg_plata_intervention_at.
-# ES: gg_plata.4 -- el reloj de la intervencion. Un mes por vuelta, sobre Gran Bretania,
-#     independiente del journal de la guerra y de las treguas, hasta que Francia arregla o termina la
-#     guerra. Los eslabones de la cadena lo leen con gg_plata_intervention_at.
+# EN: gg_plata.4 -- the intervention's clock (Codex review 22/9/2026). One month per tick, independent
+#     of the war journal and of truces, until France settles. The links of the chain read it through
+#     gg_plata_intervention_at. 23/9/2026 (B1) -- two copies run, on Rosas's Argentina and on Britain,
+#     each rescheduling itself on its own country; gg_plata_clock_ticked (29 days) lets only one of them
+#     count each month, and gg_plata_clock_alive tells the watchdog in gg_plata_situation_monthly that
+#     the clock still runs. A British revolution no longer stops it.
+# ES: gg_plata.4 -- el reloj de la intervencion. Un mes por vuelta, independiente del journal de la
+#     guerra y de las treguas, hasta que Francia arregla. Corren dos copias, sobre la Argentina de Rosas
+#     y sobre Gran Bretania; una marca de 29 dias deja contar a una sola por mes, y otra le avisa al vigia
+#     que el reloj sigue vivo. Una revolucion britanica ya no lo frena.
 # -------------------------------------------------------------------------------------------------
 gg_plata.4 = {
 	type = country_event
@@ -192,7 +201,10 @@ gg_plata.4 = {
 			limit = {
 				has_global_variable = gg_plata_intervention
 				NOT = { has_global_variable = gg_plata_intervention_over }
+				NOT = { has_global_variable = gg_plata_clock_ticked }
 			}
+			set_global_variable = { name = gg_plata_clock_ticked days = 29 }
+			set_global_variable = { name = gg_plata_clock_alive days = 65 }
 			change_global_variable = { name = gg_plata_intervention_months add = 1 }
 			# EN: 22/9/2026, decided with Juan -- France lifts her blockade of Buenos Aires with Gore and
 			#     Gros: the convention of 12/6/1848 was arranged by Baron Gros to compensate Montevideo for
@@ -207,6 +219,8 @@ gg_plata.4 = {
 			if = {
 				limit = {
 					global_var:gg_plata_intervention_months >= 34
+					# EN/ES: 23/9/2026 (D2) -- never before Gros's convention / nunca antes del convenio de Gros
+					game_date >= 1848.6.12
 					NOT = { has_global_variable = gg_plata_ba_blockade_lifted }
 				}
 				set_global_variable = gg_plata_ba_blockade_lifted
@@ -214,10 +228,16 @@ gg_plata.4 = {
 				p:x365A5B.state ?= { if = { limit = { has_modifier = gg_plata_phase_intervention_port } remove_modifier = gg_plata_phase_intervention_port } }
 				gg_plata_notify = { EVENT = gg_plata.46 }
 			}
-			if = {
-				limit = { year < 1862 }
-				trigger_event = { id = gg_plata.4 days = 30 }
+		}
+		# EN/ES: every copy reschedules itself while the intervention runs (the tick above counts once a month)
+		#     / cada copia se reagenda mientras dure la intervencion (el tic de arriba cuenta una vez por mes)
+		if = {
+			limit = {
+				has_global_variable = gg_plata_intervention
+				NOT = { has_global_variable = gg_plata_intervention_over }
+				year < 1862
 			}
+			trigger_event = { id = gg_plata.4 days = 30 }
 		}
 	}
 }
@@ -753,5 +773,146 @@ gg_plata.46 = {
 		name = gg_plata.20.a
 		default_option = yes
 		custom_tooltip = gg_plata.46.a_tt
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.5 -- ARANA-SOUTHERN, the state of the river (23/9/2026, B8 of the river audit). Hidden
+#     and global: relay gg_cal.23 delivers it while the war runs (to the Defensa, which then gets its
+#     own decision, gg_powers.19) and after the war too (gg_cal_fire_quiet_outlives_war), so an
+#     intervention that outlasts the war still gives Buenos Aires its battery back. Month 36 of the
+#     intervention and never before 24/11/1849 (D2: one clock for both banks; gg_rosas.4 waits for the
+#     same link).
+# ES: ARANA-SOUTHERN, el estado del rio. Oculto y global: el relevo gg_cal.23 lo entrega durante la
+#     guerra (a la Defensa, que despues recibe su decision) y tambien despues, asi una intervencion que
+#     dura mas que la guerra igual le devuelve la bateria a Buenos Aires. Mes 36 y nunca antes del
+#     24/11/1849.
+# SOURCE / FUENTE: SOURCES_powers.md section 6 (Arana-Southern, 24/11/1849, article 1).
+# -------------------------------------------------------------------------------------------------
+gg_plata.5 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		gg_plata_intervention_at = { MONTHS = 36 DATE = 1849.11.24 }
+		NOT = { has_global_variable = gg_plata_britain_settled }
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.5|" # GG_TRAZA
+		gg_plata_southern_signs = yes
+		# EN/ES: the Defensa's own answer to the treaty, while the war runs / la respuesta de la Defensa
+		if = {
+			limit = {
+				has_variable = guerra_grande_defensa_government
+				has_global_variable = guerra_grande_open_war
+			}
+			trigger_event = { id = gg_powers.19 popup = yes }
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.47 -- THE SQUADRONS FORCE THE PASSAGE (23/9/2026, B3). A human Rosas shut his shore
+#     while the squadrons were in the river, after Brown's squadron had been settled: they take the
+#     battery. Notice to the players of the river (gg_plata_squadrons_force).
+# ES: LAS ESCUADRAS FUERZAN EL PASO. Un Rosas humano cerro su orilla con las escuadras en el rio: se
+#     llevan la bateria. Aviso a los jugadores del rio.
+# SOURCE / FUENTE: SOURCES_powers.md section 12 (the squadrons seized Brown's ships on 2/8/1845 when
+#     Rosas kept the blockade); what happens here is the game's answer to a closure history never saw.
+# -------------------------------------------------------------------------------------------------
+gg_plata.47 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.47|" } # GG_TRAZA
+	type = country_event
+	placement = ROOT
+	title = gg_plata.47.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.47.d_rosas
+				trigger = { has_variable = gg_arg_rosas_seat }
+			}
+			triggered_desc = { desc = gg_plata.47.d }
+		}
+	}
+	event_image = { video = "gg_squadrons" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.47.a|" # GG_TRAZA
+		name = gg_plata.20.a
+		default_option = yes
+		custom_tooltip = gg_plata.47.a_tt
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.48 -- THE EMPIRE FORCES THE RIVER (23/9/2026, D3). After the settlement, from 1850, the
+#     Empire of Brazil counts the months the river stays shut; at six its squadron forces the passage
+#     and the Buenos Aires battery goes (gg_plata_brazil_forces). History never saw the river closed
+#     again after the settlement (SOURCES_powers.md section 12); this is the counterplay to a closure
+#     the game allows, modelled on what Brazil did when it moved against Rosas: Grenfell's squadron
+#     forced the Parana at Tonelero on 17/12/1851 (section 13).
+# ES: EL IMPERIO FUERZA EL RIO. Despues del arreglo, desde 1850, el Brasil cuenta los meses de rio cerrado;
+#     a los seis su escuadra fuerza el paso y se pierde la bateria de Buenos Aires. Es la respuesta a un
+#     cierre que la historia no vio, sobre el modelo de lo que hizo el Brasil contra Rosas en el Tonelero.
+# SOURCE / FUENTE: SOURCES_powers.md sections 12 and 13.
+# -------------------------------------------------------------------------------------------------
+gg_plata.48 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.48|" } # GG_TRAZA
+	type = country_event
+	placement = ROOT
+	title = gg_plata.48.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.48.d_rosas
+				trigger = { has_variable = gg_arg_rosas_seat }
+			}
+			triggered_desc = { desc = gg_plata.48.d }
+		}
+	}
+	event_image = { video = "unspecific_naval_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.48.a|" # GG_TRAZA
+		name = gg_plata.20.a
+		default_option = yes
+		custom_tooltip = gg_plata.48.a_tt
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: gg_plata.49 -- WHAT ROSAS DID WITH BROWN'S SQUADRON, told to a player Cerrito (23/9/2026, D4). The
+#     choice is Rosas's now (gg_powers.11); Oribe learns of it.
+# ES: LO QUE HIZO ROSAS CON LA ESCUADRA DE BROWN, contado a un Cerrito jugador. La eleccion ahora es de
+#     Rosas; Oribe se entera.
+# SOURCE / FUENTE: SOURCES_powers.md section 12 (22/7/1845 Rosas orders Brown to lift the blockade;
+#     2/8/1845 the squadron is taken off Montevideo).
+# -------------------------------------------------------------------------------------------------
+gg_plata.49 = {
+	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.49|" } # GG_TRAZA
+	type = country_event
+	placement = ROOT
+	title = gg_plata.49.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_plata.49.d_lost
+				trigger = { has_global_variable = gg_brown_fleet_lost }
+			}
+			triggered_desc = { desc = gg_plata.49.d_saved }
+		}
+	}
+	event_image = { video = "gg_nav_brown_montevideo" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 12
+	is_popup = yes
+	trigger = { c:CER ?= this }
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_plata.49.a|" # GG_TRAZA
+		name = gg_plata.20.a
+		default_option = yes
 	}
 }

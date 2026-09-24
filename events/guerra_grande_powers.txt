@@ -57,7 +57,7 @@ gg_powers.3 = {
 	#     cuenta: acorta la paciencia de las potencias.
 	trigger = {
 		has_global_variable = guerra_grande_split_done
-		gg_plata_intervention_at_any = { MONTHS = 2 }
+		gg_plata_intervention_at_any = { MONTHS = 2 DATE = 1845.9.18 }
 	}
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.3|" # GG_TRAZA
@@ -266,12 +266,15 @@ gg_powers.11 = {
 
 	duration = 12
 
+	# EN/ES: 23/9/2026 (Juan, D4) -- the squadron is Rosas's, so the choice is his; the Cerrito hears of it
+	#     (gg_plata.49). It used to go to the Cerrito, and a human Rosas never saw it.
+	#     / la escuadra es de Rosas, asi que la eleccion es suya; el Cerrito se entera. Antes iba al Cerrito.
 	trigger = {
-		c:CER ?= this
+		c:ARG ?= this
 		has_global_variable = guerra_grande_open_war
 		# EN/ES: C10 -- the first link of the intervention: the squadron is detained the day after the
 		#     ultimatum / el primer eslabon: la escuadra queda detenida al dia siguiente del ultimatum
-		gg_plata_intervention_at = { MONTHS = 0 }
+		gg_plata_intervention_at = { MONTHS = 0 DATE = 1845.8.2 }
 	}
 
 	option = {
@@ -285,6 +288,7 @@ gg_powers.11 = {
 		# ES: levantar el bloqueo y salvar la escuadra: Rosas abre el rio, quedan el fuerte y los barcos.
 		#     Historicamente Rosas ordeno a Brown levantar el bloqueo el 22 de julio de 1845.
 		gg_plata_rosas_open = yes
+		c:CER ?= { if = { limit = { is_player = yes } trigger_event = { id = gg_plata.49 popup = yes } } }
 		ai_chance = { base = 45 }
 	}
 
@@ -328,7 +332,9 @@ gg_powers.11 = {
 			}
 		}
 		gg_patron_change = { PATRON = rosas DELTA = 10 }
-		add_modifier = { name = gg_powers_american_cause years = 10 is_decaying = yes }
+		# EN/ES: D4 -- the American cause is the Cerrito's gain, as before / la causa americana la gana el Cerrito, como antes
+		c:CER ?= { add_modifier = { name = gg_powers_american_cause years = 10 is_decaying = yes } }
+		c:CER ?= { if = { limit = { is_player = yes } trigger_event = { id = gg_plata.49 popup = yes } } }
 		ai_chance = {
 			base = 55
 			modifier = { trigger = { always = yes } factor = 1.5 } # gg_historical_weight -- 23/9 (Juan): the historical option weighs a little more / la historica pesa un poco mas
@@ -402,7 +408,7 @@ gg_powers.12 = {
 		}
 		OR = {
 			# EN/ES: C10 -- a year into the intervention (historically July 1846) / al anio de la intervencion
-			gg_plata_intervention_at = { MONTHS = 12 }
+			gg_plata_intervention_at = { MONTHS = 12 DATE = 1846.7.13 }
 			has_global_variable = gg_powers_mediators
 		}
 	}
@@ -563,7 +569,7 @@ gg_powers.14 = {
 		NOT = { has_global_variable = gg_peace_settled }
 		# EN/ES: C10 -- Howden comes to end an intervention (historically July 1847)
 		#     / Howden viene a terminar una intervencion
-		gg_plata_intervention_at = { MONTHS = 23 }
+		gg_plata_intervention_at = { MONTHS = 23 DATE = 1847.7.9 }
 	}
 
 	option = {
@@ -687,7 +693,7 @@ gg_powers.16 = {
 		NOT = { has_global_variable = gg_peace_offered }
 		NOT = { has_global_variable = gg_reunification_pledged }
 		# EN/ES: C10 -- Gore and Gros mediate an intervention (historically March 1848)
-		gg_plata_intervention_at = { MONTHS = 31 }
+		gg_plata_intervention_at = { MONTHS = 31 DATE = 1848.3.25 }
 	}
 
 	# EN: playtest 2026-09-19 -- when the mechanic of doctores and caudillos was removed this mark
@@ -1044,36 +1050,18 @@ gg_powers.19 = {
 	trigger = {
 		c:URU ?= this
 		has_global_variable = guerra_grande_open_war
-		# EN/ES: C10 -- the treaty that ends the British intervention (historically 24 November 1849)
-		gg_plata_intervention_at = { MONTHS = 36 }
+		# EN/ES: C10 -- the treaty that ends the British intervention (historically 24 November 1849).
+		#     23/9/2026 (B8) -- delivered by gg_plata.5 once it has signed (month 36, never before 24/11/1849)
+		#     / lo entrega gg_plata.5 una vez firmado (mes 36, nunca antes del 24/11/1849)
+		has_global_variable = gg_plata_britain_settled
 	}
 
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.19|" # GG_TRAZA
-		gg_patron_change = { PATRON = britania DELTA = -100 }
-		# EN: C10, A -- article 1: Britain returns the Argentine warships and evacuates Martin Garcia,
-		#     and recognises Rosas's right to blockade (SOURCES_powers.md section 6). The key goes back.
-		#     He did not blockade Montevideo again: from late 1847 Oribe already let his ports trade with
-		#     the city and Rosas tolerated it to keep Urquiza, and France kept the city until Lepredour
-		#     (SOURCES_powers.md section 12). So the key comes back with the river open; without this,
-		#     his 1843 stance would shut it again by itself the day the battery returned.
-		# ES: C10, A -- articulo 1: Gran Bretania devuelve los buques de guerra y evacua Martin Garcia, y
-		#     reconoce el derecho de bloqueo. La llave vuelve. No volvio a bloquear Montevideo: desde
-		#     fines de 1847 Oribe ya dejaba comerciar sus puertos con la ciudad y Rosas lo toleraba por
-		#     Urquiza, y Francia sostuvo la plaza hasta Lepredour. La llave vuelve con el rio abierto.
-		gg_plata_fort_restore = yes
-		gg_plata_rosas_open = yes
-		# EN/ES: Britain is out of the river; France stays until Lepredour / Gran Bretana sale del rio;
-		#     Francia sigue hasta Lepredour
-		set_global_variable = gg_plata_britain_settled
-		# EN/ES: 22/9/2026 -- Southern recognises the right of blockade / Southern reconoce el derecho de bloqueo
-		set_global_variable = gg_plata_britain_recognizes
-		hidden_effect = {
-			if = {
-				limit = { NOT = { has_global_variable = gg_cal_done_23 } }
-				set_global_variable = gg_cal_done_23
-			}
-		}
+		# EN/ES: 23/9/2026 (B8) -- what the treaty does to the river (Britain's backing, the battery back, the
+		#     right of blockade) now happens in gg_plata.5 (gg_plata_southern_signs), which outlives the war;
+		#     this event is the Defensa's answer / lo que el tratado le hace al rio pasa ahora en gg_plata.5,
+		#     que sobrevive a la guerra; este evento es la respuesta de la Defensa
 	}
 
 	option = {
@@ -1135,7 +1123,7 @@ gg_powers.20 = {
 
 	trigger = {
 		has_global_variable = guerra_grande_split_done
-		gg_plata_intervention_at_any = { MONTHS = 45 }
+		gg_plata_intervention_at_any = { MONTHS = 45 DATE = 1850.8.31 }
 	}
 
 	immediate = {
@@ -1147,6 +1135,8 @@ gg_powers.20 = {
 		#     squadron back / las dos potencias ya reconocieron el derecho de bloqueo
 		set_global_variable = gg_plata_britain_recognizes
 		set_global_variable = gg_plata_france_recognizes
+		# EN/ES: 23/9/2026 (D3) -- a fresh count for the Empire's patience / una cuenta nueva para la paciencia del Imperio
+		gg_plata_settlement_reset = yes
 		# EN/ES: 22/9/2026 -- tell the players of both governments / avisar a los jugadores de los dos gobiernos
 		gg_plata_notify = { EVENT = gg_plata.24 }
 		# EN/ES: the French squadron stops being sea; the Paris mission softens the fall

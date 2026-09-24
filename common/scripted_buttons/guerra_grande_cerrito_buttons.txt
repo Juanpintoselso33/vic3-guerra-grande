@@ -108,6 +108,11 @@ guerra_grande_river_blockade_button = {
 	}
 
 	effect = {
+		# EN/ES: 23/9/2026 (D3) -- after the settlement a closure has a price / despues del arreglo cerrar tiene precio
+		if = {
+			limit = { gg_plata_settled = yes }
+			custom_tooltip = gg_plata_settled_close_cost_tt
+		}
 		gg_river_blockade = yes
 	}
 

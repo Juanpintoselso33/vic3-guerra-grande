@@ -45,6 +45,9 @@ gg_plata_rosas_open = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_rosas_open|" # GG_TRAZA
 	custom_tooltip = gg_plata_rosas_open_tt
 	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+	# EN/ES: 23/9/2026 (B3) -- two months to open the shore before a closure during the intervention is a
+	#     broken word / dos meses para abrir la orilla antes de que un cierre en la intervencion sea faltar a la palabra
+	set_global_variable = { name = gg_plata_open_grace days = 60 }
 	gg_plata_rosas_stance_apply = yes
 }
 gg_plata_rosas_neutrals_pass = {
@@ -134,10 +137,18 @@ gg_plata_intervention_start = {
 			limit = { NOT = { has_global_variable = gg_plata_word_broken } }
 			gg_plata_notify = { EVENT = gg_plata.23 }
 		}
-		# EN: Codex review 22/9 -- the clock lives in its own hidden event on Britain (a tag that never
-		#     changes), not in the war journal: a truce or the end of the war must not stop it.
-		# ES: el reloj vive en su propio evento oculto sobre Gran Bretania (un tag que nunca cambia), no
-		#     en el journal de la guerra: ni una tregua ni el fin de la guerra lo pueden frenar.
+		# EN: Codex review 22/9 -- the clock lives in its own hidden event, not in the war journal: a truce
+		#     or the end of the war must not stop it. 23/9/2026 (B1, run 214510) -- it ran on Britain only,
+		#     and a British revolution (10/1/1847) replaced the country object and dropped the queued tick:
+		#     the clock stopped at month 31 for good. Now it runs on Rosas's Argentina too (a tag that never
+		#     changes), counting once a month through gg_plata_clock_ticked, and gg_plata_situation_monthly
+		#     re-arms it if both copies ever die (gg_plata_clock_alive).
+		# ES: el reloj vive en su propio evento oculto. Corria solo sobre Gran Bretania, y una revolucion
+		#     britanica reemplazo el objeto pais y se llevo el tic agendado: el reloj quedo en 31 para
+		#     siempre. Ahora corre tambien sobre la Argentina de Rosas, cuenta una vez por mes, y el pulso
+		#     del Plata lo rearma si mueren las dos copias.
+		set_global_variable = { name = gg_plata_clock_alive days = 65 }
+		c:ARG ?= { trigger_event = { id = gg_plata.4 days = 30 } }
 		c:GBR ?= { trigger_event = { id = gg_plata.4 days = 30 } }
 		# EN: Codex review 22/9 -- decision B lets the intervention come BEFORE 1845, so its links are
 		#     also scheduled from here, at their historical distance from the ultimatum. The dated
@@ -276,7 +287,12 @@ gg_plata_monthly = {
 				limit = { global_var:gg_plata_months < 16 }
 				change_global_variable = { name = gg_plata_months add = 1 }
 			}
-			change_global_variable = { name = gg_plata_closed_streak add = 1 }
+			# EN/ES: 23/9/2026 -- the run of hunger holds while the powers stand by the city (gg_plata_hunger_held)
+			#     / la racha del hambre se sostiene mientras las potencias sostienen la plaza
+			if = {
+				limit = { NOT = { gg_plata_hunger_held = yes } }
+				change_global_variable = { name = gg_plata_closed_streak add = 1 }
+			}
 			# EN/ES: 23/9 -- in the siege, what goes past the cap stays in the score / en el sitio lo que pasa del techo queda
 			if = { limit = { global_var:gg_plata_months >= 16 } gg_siege_river_scores = { STEP = 1 } }
 			# EN/ES: 22/9/2026 (Codex) -- the patience only runs while some power counts by its level: no
@@ -286,9 +302,18 @@ gg_plata_monthly = {
 					OR = {
 						gg_plata_france_counts = yes
 						gg_plata_britain_counts = yes
+						# EN/ES: 23/9/2026 (D3) -- after the settlement, from 1850, the Empire counts
+						#     / despues del arreglo, desde 1850, cuenta el Imperio
+						gg_plata_brazil_counts = yes
 					}
 				}
 				change_global_variable = { name = gg_plata_closed_total add = 1 }
+			}
+			# EN/ES: 23/9/2026 (D3) -- a closure after the settlement costs the Littoral's goodwill
+			#     / un cierre despues del arreglo le cuesta al Litoral
+			if = {
+				limit = { gg_plata_settled = yes }
+				gg_plata_littoral_cost = yes
 			}
 		}
 		else = {
@@ -302,6 +327,12 @@ gg_plata_monthly = {
 		if = {
 			limit = { gg_plata_intervention_due = yes }
 			gg_plata_ultimatum_send = yes
+		}
+		# EN/ES: 23/9/2026 (D3) -- the Empire's patience is spent: its squadron forces the passage
+		#     / se acabo la paciencia del Imperio: su escuadra fuerza el paso
+		if = {
+			limit = { gg_plata_brazil_answer_due = yes }
+			gg_plata_brazil_forces = yes
 		}
 	}
 	# EN: Codex review 22/9 -- once Rosas has opened the river (he yielded, or Brown's option a), the
@@ -492,6 +523,37 @@ gg_plata_situation_monthly = {
 	}
 	gg_plata_flags_sync = yes
 	gg_plata_guarantee_monthly = yes
+	# EN: 23/9/2026 (B3) -- a human Rosas who closes his shore while the squadrons are in the river, once
+	#     Brown's squadron has been settled and his two months to open have run out: the squadrons force the
+	#     passage at once. An AI Rosas obeys the stance the events set (open), so this is a player's choice.
+	# ES: un Rosas humano que cierra su orilla con las escuadras en el rio, ya resuelta la escuadra de Brown
+	#     y vencidos sus dos meses para abrir: las escuadras fuerzan el paso en el acto. La IA obedece la postura.
+	if = {
+		limit = {
+			has_global_variable = gg_plata_intervention
+			NOT = { has_global_variable = gg_plata_intervention_over }
+			OR = {
+				has_global_variable = gg_cal_done_10
+				has_global_variable = gg_plata_france_alone
+			}
+			NOT = { has_global_variable = gg_plata_open_grace }
+			c:ARG ?= { is_player = yes }
+			gg_plata_closed = yes
+		}
+		gg_plata_squadrons_force = yes
+	}
+	# EN/ES: 23/9/2026 (B1) -- the clock's watchdog: re-armed on Rosas's Argentina if no tick in two months
+	#     (also migrates saves whose clock already died) / el vigia del reloj: se rearma si no hubo tic en dos meses
+	if = {
+		limit = {
+			has_global_variable = gg_plata_intervention
+			NOT = { has_global_variable = gg_plata_intervention_over }
+			NOT = { has_global_variable = gg_plata_clock_alive }
+			year < 1862
+		}
+		set_global_variable = { name = gg_plata_clock_alive days = 65 }
+		c:ARG ?= { trigger_event = { id = gg_plata.4 days = 1 } }
+	}
 	gg_plata_notices = yes
 	# EN/ES: 22/9/2026 -- the powers' levels / los niveles de las potencias
 	gg_patron_levels_monthly = yes
@@ -622,6 +684,7 @@ gg_plata_guarantee_monthly = {
 			gg_plata_guarantee_france_only_clear = yes
 		}
 		set_global_variable = gg_plata_france_recognizes
+		gg_plata_settlement_reset = yes
 		gg_plata_notify = { EVENT = gg_plata.28 }
 	}
 }
@@ -666,8 +729,9 @@ gg_plata_fort_french_supply = {
 #     negotiated peace -- the design's main path -- never fired: only the battlefield decided. The river's
 #     running account stays as it was (four months a point, up to 4 a side: the journal's "river now");
 #     during the siege, each four months it runs PAST that cap stay in the score for the side it favours
-#     (closed: blancos; open: colorados), so years of siege add up. Called only at the cap, only while the
-#     war of the split is open; a signed tally, so only a sustained river banks points.
+#     (closed: blancos; open: colorados), so years of siege add up -- up to gg_siege_river_bank_cap points
+#     a side (23/9/2026, D1). Called only at the cap, only while the war of the split is open; a signed
+#     tally, so only a sustained river banks points.
 # ES: EL SITIO PUNTUA. La cuenta del rio queda como estaba (cuatro meses un punto, hasta 4 por lado); en el
 #     sitio, cada cuatro meses que corre MAS ALLA de ese techo quedan en el puntaje del bando que favorece.
 gg_siege_river_scores = {
@@ -683,9 +747,34 @@ gg_siege_river_scores = {
 			set_global_variable = { name = gg_siege_river_tally value = 0 }
 		}
 		change_global_variable = { name = gg_siege_river_tally add = $STEP$ }
+		# EN/ES: 23/9/2026 (Juan, D1; BAL-01) -- banked points are capped per side (gg_siege_river_bank_cap)
+		#     / los puntos acumulados tienen techo por lado
 		if = {
+			limit = { NOT = { has_global_variable = gg_siege_river_banked_blanco } }
+			set_global_variable = { name = gg_siege_river_banked_blanco value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gg_siege_river_banked_colorado } }
+			set_global_variable = { name = gg_siege_river_banked_colorado value = 0 }
+		}
+		if = {
+			limit = {
+				global_var:gg_siege_river_tally >= 4
+				global_var:gg_siege_river_banked_blanco >= gg_siege_river_bank_cap
+			}
+			set_global_variable = { name = gg_siege_river_tally value = 0 }
+		}
+		else_if = {
+			limit = {
+				global_var:gg_siege_river_tally <= -4
+				global_var:gg_siege_river_banked_colorado >= gg_siege_river_bank_cap
+			}
+			set_global_variable = { name = gg_siege_river_tally value = 0 }
+		}
+		else_if = {
 			limit = { global_var:gg_siege_river_tally >= 4 }
 			set_global_variable = { name = gg_siege_river_tally value = 0 }
+			change_global_variable = { name = gg_siege_river_banked_blanco add = 1 }
 			change_global_variable = { name = guerra_grande_blanco_score add = 1 }
 			change_global_variable = { name = gg_src_river_blanco add = 1 }
 			# EN/ES: the journal is reached from a country (this runs in the monthly pulse, no scope) / desde un pais
@@ -698,6 +787,7 @@ gg_siege_river_scores = {
 		else_if = {
 			limit = { global_var:gg_siege_river_tally <= -4 }
 			set_global_variable = { name = gg_siege_river_tally value = 0 }
+			change_global_variable = { name = gg_siege_river_banked_colorado add = 1 }
 			change_global_variable = { name = guerra_grande_colorado_score add = 1 }
 			change_global_variable = { name = gg_src_river_colorado add = 1 }
 			# EN/ES: the journal is reached from a country (this runs in the monthly pulse, no scope) / desde un pais
@@ -707,5 +797,98 @@ gg_siege_river_scores = {
 				}
 			}
 		}
+		# EN/ES: 23/9/2026 -- the banked points, for the night sweep (tools/barrido_nocturno.yaml checks the cap)
+		#     / los puntos acumulados, para el barrido nocturno (chequea el techo)
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_river_scores| banked blanco= [GetGlobalVariable('gg_siege_river_banked_blanco').GetValue|0] colorado= [GetGlobalVariable('gg_siege_river_banked_colorado').GetValue|0] " # GG_TRAZA
 	}
+}
+
+# EN: 23/9/2026 (B3) -- the squadrons force the passage: Rosas shut his shore while they were in the river
+#     and had pledged it open. They take the battery, as they took Brown's ships (SOURCES_powers.md section 12).
+# ES: las escuadras fuerzan el paso: Rosas cerro su orilla con ellas en el rio despues de comprometerse a
+#     abrirla. Se llevan la bateria, como se llevaron los barcos de Brown.
+gg_plata_squadrons_force = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_squadrons_force|" # GG_TRAZA
+	gg_plata_fort_remove = yes
+	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+	# EN/ES: announced by gg_plata.47, not again as «open» by gg_plata.21 / lo anuncia gg_plata.47
+	set_global_variable = { name = gg_plata_notice_closed value = 0 }
+	c:ARG ?= {
+		save_scope_as = gg_plata_rosas
+		c:FRA ?= { change_relations = { country = scope:gg_plata_rosas value = -20 } }
+		if = {
+			limit = { NOT = { has_global_variable = gg_plata_britain_settled } }
+			c:GBR ?= { change_relations = { country = scope:gg_plata_rosas value = -20 } }
+		}
+	}
+	gg_plata_notify = { EVENT = gg_plata.47 }
+}
+
+# EN: 23/9/2026 (D3) -- a month of the river shut after the settlement: the Littoral pays for it. Entre Rios
+#     and Corrientes live off the Parana, and Urquiza's pronouncement of 1/5/1851 demanded the free navigation
+#     of the rivers (SOURCES_powers.md section 12). Urquiza's weight moves against Rosas's side, and every four
+#     months add to his grievance (gg_urquiza_discontent).
+# ES: un mes de rio cerrado despues del arreglo: lo paga el Litoral. Baja el sosten de Urquiza, y cada cuatro
+#     meses suman a su agravio (gg_urquiza_discontent).
+gg_plata_littoral_cost = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_littoral_cost|" # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_plata_litoral_agravio } }
+		set_global_variable = { name = gg_plata_litoral_agravio value = 0 }
+	}
+	change_global_variable = { name = gg_plata_litoral_agravio add = 1 }
+	# EN/ES: his backing goes against Rosas's side: less for the Cerrito while he stands by it, more for the
+	#     Defensa once he has turned / su sosten va contra el lado de Rosas: menos al Cerrito, mas a la Defensa si ya se dio vuelta
+	if = {
+		limit = { has_global_variable = gg_urquiza_flipped }
+		gg_patron_change = { PATRON = urquiza DELTA = 5 }
+	}
+	else = {
+		gg_patron_change = { PATRON = urquiza DELTA = -5 }
+	}
+}
+
+# EN: 23/9/2026 (D3) -- the Empire's patience is spent: Grenfell's squadron forces the river, as it forced the
+#     Parana at Tonelero (17/12/1851). Brazil stands closer to the Defensa, and the Buenos Aires battery goes.
+# ES: se acabo la paciencia del Imperio: la escuadra de Grenfell fuerza el rio, como forzo el Parana en el
+#     Tonelero. El Brasil se acerca a la Defensa, y la bateria de Buenos Aires se pierde.
+gg_plata_brazil_forces = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_brazil_forces|" # GG_TRAZA
+	set_global_variable = gg_plata_brazil_forced
+	gg_plata_fort_remove = yes
+	set_global_variable = { name = gg_plata_rosas_stance value = 0 }
+	gg_plata_rosas_stance_apply = yes
+	gg_patron_change = { PATRON = brasil DELTA = 15 }
+	set_global_variable = { name = gg_plata_notice_closed value = 0 }
+	gg_plata_notify = { EVENT = gg_plata.48 }
+}
+
+# EN: 23/9/2026 (B8) -- ARANA-SOUTHERN, the state of the river. Article 1: Britain returns the Argentine
+#     warships, evacuates Martin Garcia and recognises the right of blockade (SOURCES_powers.md section 6).
+#     Moved out of gg_powers.19 (the Defensa's decision) into gg_plata.5, which outlives the war: an
+#     intervention that outlasts the war still ends with the battery back in Buenos Aires.
+# ES: ARANA-SOUTHERN, el estado del rio. Sacado de gg_powers.19 a gg_plata.5, que sobrevive a la guerra: una
+#     intervencion que dura mas que la guerra igual termina con la bateria de vuelta en Buenos Aires.
+gg_plata_southern_signs = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_southern_signs|" # GG_TRAZA
+	gg_patron_change = { PATRON = britania DELTA = -100 }
+	# EN: the key goes back with the river open. He did not blockade Montevideo again: from late 1847 Oribe
+	#     already let his ports trade with the city and Rosas tolerated it to keep Urquiza, and France kept
+	#     the city until Lepredour (SOURCES_powers.md section 12).
+	# ES: la llave vuelve con el rio abierto. No volvio a bloquear Montevideo (SOURCES_powers.md seccion 12).
+	gg_plata_fort_restore = yes
+	gg_plata_rosas_open = yes
+	set_global_variable = gg_plata_britain_settled
+	set_global_variable = gg_plata_britain_recognizes
+	if = {
+		limit = { NOT = { has_global_variable = gg_cal_done_23 } }
+		set_global_variable = gg_cal_done_23
+	}
+}
+
+# EN/ES: 23/9/2026 (D3) -- the settlement starts a fresh count: what the powers' patience had banked is not
+#     Brazil's / el arreglo empieza una cuenta nueva: lo que llevaba la paciencia de las potencias no es del Brasil
+gg_plata_settlement_reset = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_plata_settlement_reset|" # GG_TRAZA
+	set_global_variable = { name = gg_plata_closed_total value = 0 }
 }
