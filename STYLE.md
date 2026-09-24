@@ -1,4 +1,4 @@
-# Naming convention / Convención de nombres
+# Naming convention
 
 ## EN — Gloss once, then never translate
 
@@ -24,16 +24,16 @@ The same rule covers the other Spanish terms the mod uses as things rather than 
 translations: `divisa`, `saladero`, `estancia`, `caudillo`, `Villa de la Restauración`. Gloss
 on first use if the meaning is not obvious from context, then leave them alone.
 
-## ES — Nada que glosar
+## ES — Nothing to gloss
 
-En español no hay nada que explicar: blanco, colorado, la Defensa y el Cerrito son los
-nombres, a secas. La regla en español es la inversa — **no** anglicismos y **no**
-explicaciones de lo que el lector ya sabe.
+In the Spanish localization there is nothing to explain: blanco, colorado, la Defensa and el Cerrito
+are simply the names. The Spanish rule is the reverse — **no** anglicisms and **no** explanations of
+what the reader already knows.
 
-## Por qué existe este archivo
+## Why this file exists
 
-Cuatro agentes en paralelo escribieron texto para este mod el 2026-09-16 (abolición,
-asimetría del sitio, empréstitos, legiones) sin poder verse entre sí. Sin una convención
-escrita, cada uno resuelve el problema de nombrar a los bandos por su cuenta y el mod termina
-llamándole tres cosas distintas a lo mismo. `tools/validate_mod.py` verifica la parte
-mecánica de esta regla.
+On 2026-09-16 four agents working in parallel wrote text for this mod (abolition, the asymmetry of
+the siege, the loans, the legions) without being able to see one another's work. Without a written
+convention, each one settles the question of what to call the two sides on its own, and the mod ends
+up calling the same thing by three different names. `tools/validate_mod.py` checks the mechanical
+part of this rule.
