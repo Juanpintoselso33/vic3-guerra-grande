@@ -241,6 +241,6 @@ gg_constitution.6 = {
 	trigger = { c:ARG ?= this }
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.6|" # GG_TRAZA
-		gg_argentina_provinces_incorporate = yes
+		gg_constitution_one_country = yes # EN/ES: the provinces and the Oriental one / las provincias y la oriental
 	}
 }

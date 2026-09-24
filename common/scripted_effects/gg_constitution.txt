@@ -14,12 +14,14 @@
 #     como protectorados.
 gg_unitario_rising = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_rising|" # GG_TRAZA
-	# EN/ES: the unitario provinces that are Buenos Aires's subjects bring their ground first / primero su tierra
-	if = { limit = { c:CRR ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:CRR } }
-	if = { limit = { c:TUC ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:TUC } }
-	if = { limit = { c:SLT ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:SLT } }
-	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:JUJ } }
-	if = { limit = { c:CTM ?= { is_subject_of = c:ARG } } c:ARG = { annex = c:CTM } }
+	# EN/ES: the unitario provinces that are Buenos Aires's subjects bring their ground first; a player's province is
+	#     not annexed (AUD-SEAT-ANNEX): it stays a subject until the constitution offers the seat
+	#     / primero su tierra; la provincia de un jugador no se anexa: sigue sujeta hasta la constitucion
+	if = { limit = { c:CRR ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:CRR } }
+	if = { limit = { c:TUC ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:TUC } }
+	if = { limit = { c:SLT ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:SLT } }
+	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:JUJ } }
+	if = { limit = { c:CTM ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:CTM } }
 	if = {
 		limit = { exists = s:STATE_TUCUMAN.region_state:ARG NOT = { exists = c:CLN } }
 		create_country = {
@@ -49,10 +51,19 @@ gg_unitario_rising = {
 gg_constitution_one_country = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_one_country|" # GG_TRAZA
 	gg_argentina_provinces_incorporate = yes
+	# EN/ES: 23/9 (Codex review of 743b851, AUD-SEAT-ANNEX) -- the Oriental province under the same player rule as the
+	#     others / la provincia oriental con la misma regla de jugadores que las demas
 	if = {
 		limit = { has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG } }
-		annex = c:URU
-		remove_global_variable = gg_oriental_province
+		if = {
+			limit = { c:URU = { is_player = no } }
+			annex = c:URU
+			remove_global_variable = gg_oriental_province
+		}
+		else_if = {
+			limit = { is_player = no }
+			c:URU = { trigger_event = { id = gg_constitution.5 days = 0 popup = yes } }
+		}
 	}
 }
 

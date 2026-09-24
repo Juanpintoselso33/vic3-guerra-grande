@@ -32,6 +32,11 @@ gg_unitario_on_war_end = {
 	trigger = {
 		has_global_variable = gg_unitario_war
 		is_diplomatic_play_type = dp_gg_pacto_federal
+		# EN/ES: 23/9 (Codex review of 743b851) -- only Buenos Aires against the league, not another Pact war
+		#     / solo Buenos Aires contra la liga, no otra guerra del Pacto
+		exists = c:CLN
+		initiator_is = c:ARG
+		target_is = c:CLN
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_unitario_on_war_end" # GG_TRAZA
@@ -87,6 +92,9 @@ gg_unitario_back_down = {
 	trigger = {
 		has_global_variable = gg_unitario_war
 		is_diplomatic_play_type = dp_gg_pacto_federal
+		exists = c:CLN
+		initiator_is = c:ARG
+		target_is = c:CLN
 		exists = scope:actor
 		OR = {
 			c:ARG ?= scope:actor

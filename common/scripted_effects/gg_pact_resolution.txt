@@ -31,7 +31,17 @@ gg_pact_resolve = {
 			set_global_variable = { name = gg_pact_war_rosas_won value = 0 }
 			set_global_variable = { name = gg_pact_war_white_peace value = 0 }
 			if = { limit = { gg_pact_historical = yes } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
-			else_if = { limit = { gg_pact_rosas = yes } set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+			else_if = {
+				limit = { gg_pact_rosas = yes }
+				set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+				# EN/ES: 23/9 (Codex review of 743b851) -- the rule's victory has no enforced war goal: Entre Rios becomes
+				#     the protectorate the war would have made it, before the provinces are asked about
+				#     / la victoria de la regla no impuso objetivo: Entre Rios queda el protectorado que la guerra le daba
+				if = {
+					limit = { c:ENR ?= { is_subject = no } NOT = { has_war_with = c:ENR } }
+					create_diplomatic_pact = { country = c:ENR type = protectorate }
+				}
+			}
 			else = { set_global_variable = { name = gg_pact_war_white_peace value = 1 } }
 		}
 		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are annexed now, whatever the
