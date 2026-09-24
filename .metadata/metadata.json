@@ -21,6 +21,13 @@
       "display_name": "Community Mod Framework",
       "resource_type": "mod",
       "version": "1.*"
+    },
+    {
+      "rel_type": "dependency",
+      "id": "2982907360",
+      "display_name": "la Argentina",
+      "resource_type": "mod",
+      "version": ""
     }
   ],
   "game_custom_data": {
