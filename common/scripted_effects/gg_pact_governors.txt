@@ -19,10 +19,30 @@
 #     lista, salvo donde a esa fecha gobernaba un unitario -- Rosas no dejaba en la silla al que batia.
 # -------------------------------------------------------------------------------------------------
 
-# EN/ES: find a living man with this template, anywhere / busca un vivo con este template, donde sea
+# -------------------------------------------------------------------------------------------------
+# EN: PERFORMANCE (23/9/2026, rendimiento-2026-09-23.md, AUD-PERF-1). The list used to clear every row and
+#     search the whole world for its man every week: up to 14 world scans a week while the Pact is open.
+#     Now gg_pact_gov_province keeps the row's previous man in scope:gg_pact_gov_prev, and pick /
+#     pick_or_create reuse him while he is still a living man of the template the date asks for, outside
+#     the exile pool -- the same man the scan would have found, since the mod keeps one man per template
+#     (gg_character_fetch, "fetch a man, do not copy him"). Only when the date changes the template, or
+#     the man dies or goes into exile, does the old search run. That search looks only in South American
+#     countries (capital in geographic_region_south_america: Argentina, the Coalition, the provinces, both
+#     Uruguayan governments, Brazil, Paraguay, Chile, Bolivia) plus the exile pool: every place the mod
+#     creates or moves a governor. Saves need no migration: the first week reads the stored variable.
+# ES: RENDIMIENTO. La lista borraba cada fila y buscaba a su hombre en todo el mundo cada semana: hasta 14
+#     barridos mundiales por semana con el Pacto abierto. Ahora se conserva al hombre anterior mientras
+#     siga vivo, con la plantilla que pide la fecha y fuera del exilio (es el mismo que encontraria el
+#     barrido: el mod mantiene un hombre por plantilla). La busqueda corre solo cuando cambia la plantilla,
+#     el hombre muere o se exilia, y mira solo los paises sudamericanos y el pozo de exiliados: todos los
+#     lugares donde el mod crea o mueve un gobernador. Las partidas en curso no necesitan migracion.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: find a living man with this template in South America / busca un vivo con este template en Sudamerica
 gg_pact_gov_from_template = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_from_template| TEMPLATE= $TEMPLATE$  VAR= $VAR$ " # GG_TRAZA
 	every_country = {
+		limit = { capital ?= { is_in_geographic_region = geographic_region_south_america } }
 		every_scope_character = {
 			limit = { has_template = $TEMPLATE$ is_character_alive = yes }
 			set_global_variable = { name = $VAR$ value = this }
@@ -35,14 +55,24 @@ gg_pact_gov_from_template = {
 # ES: El gobernador de la fecha, si vive. Para personajes que ya crea el juego u otro evento.
 gg_pact_gov_pick = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_pick| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
-	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
-	# EN/ES: Codex 22/9 -- alive in exile still counts: shown, not moved (another event owns him)
-	#     / vivo en el exilio igual cuenta: se lo muestra, no se lo mueve
+	# EN/ES: 23/9 (AUD-PERF-1) -- last week's man, if he is still the one / el de la semana pasada, si sigue siendo el
 	if = {
-		limit = { NOT = { has_global_variable = gg_pact_gov_$KEY$ } }
-		random_character_in_exile_pool = {
-			limit = { has_template = $TEMPLATE$ }
-			set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+		limit = {
+			exists = scope:gg_pact_gov_prev
+			scope:gg_pact_gov_prev = { has_template = $TEMPLATE$ is_character_alive = yes is_in_exile_pool = no }
+		}
+		set_global_variable = { name = gg_pact_gov_$KEY$ value = scope:gg_pact_gov_prev }
+	}
+	else = {
+		gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
+		# EN/ES: Codex 22/9 -- alive in exile still counts: shown, not moved (another event owns him)
+		#     / vivo en el exilio igual cuenta: se lo muestra, no se lo mueve
+		if = {
+			limit = { NOT = { has_global_variable = gg_pact_gov_$KEY$ } }
+			random_character_in_exile_pool = {
+				limit = { has_template = $TEMPLATE$ }
+				set_global_variable = { name = gg_pact_gov_$KEY$ value = this }
+			}
 		}
 	}
 }
@@ -54,7 +84,17 @@ gg_pact_gov_pick = {
 #     gg_gov_born_<template> es lo que mantiene muerto a un gobernador muerto.
 gg_pact_gov_pick_or_create = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_pick_or_create| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
-	gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ }
+	# EN: 23/9 (AUD-PERF-1) -- last week's man, if he is still the one; else the search. Either way the
+	#     chain below runs as before (the found branch sets the birth mark if it is missing).
+	# ES: el de la semana pasada, si sigue siendo el; si no, la busqueda. La cadena de abajo corre igual.
+	if = {
+		limit = {
+			exists = scope:gg_pact_gov_prev
+			scope:gg_pact_gov_prev = { has_template = $TEMPLATE$ is_character_alive = yes is_in_exile_pool = no }
+		}
+		set_global_variable = { name = gg_pact_gov_$KEY$ value = scope:gg_pact_gov_prev }
+	}
+	else = { gg_pact_gov_from_template = { TEMPLATE = $TEMPLATE$ VAR = gg_pact_gov_$KEY$ } }
 	if = {
 		limit = { has_global_variable = gg_pact_gov_$KEY$ }
 		if = {
@@ -123,19 +163,30 @@ gg_pact_gov_pick_or_create = {
 # EN/ES: one row: the province country's ruler, else the historical governor / una fila
 gg_pact_gov_province = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_province|" # GG_TRAZA
-	if = { limit = { has_global_variable = gg_pact_gov_$KEY$ } remove_global_variable = gg_pact_gov_$KEY$ }
+	# EN/ES: 23/9 (AUD-PERF-1) -- the row's previous man, for pick / pick_or_create to reuse
+	#     / el hombre anterior de la fila, para que pick / pick_or_create lo reusen
+	if = {
+		limit = { has_global_variable = gg_pact_gov_$KEY$ }
+		global_var:gg_pact_gov_$KEY$ ?= { save_scope_as = gg_pact_gov_prev }
+		remove_global_variable = gg_pact_gov_$KEY$
+	}
 	if = {
 		limit = { exists = c:$TAG$ c:$TAG$ = { exists = ruler } }
 		c:$TAG$ = { ruler = { set_global_variable = { name = gg_pact_gov_$KEY$ value = this } } }
 	}
 	else = { gg_pact_gov_hist_$KEY$ = yes }
+	if = { limit = { exists = scope:gg_pact_gov_prev } clear_saved_scope = gg_pact_gov_prev }
 }
 
 gg_pact_governors_update = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_governors_update|" # GG_TRAZA
 	# EN/ES: 23/9/2026 (Juan) -- the Oriental Province of the Pact: its ruler (Oribe) governs the row
 	#     / la Provincia Oriental del Pacto: su gobernante (Oribe) encabeza la fila
-	if = { limit = { has_global_variable = gg_pact_gov_oriental } remove_global_variable = gg_pact_gov_oriental }
+	if = {
+		limit = { has_global_variable = gg_pact_gov_oriental }
+		global_var:gg_pact_gov_oriental ?= { save_scope_as = gg_pact_gov_prev } # EN/ES: AUD-PERF-1
+		remove_global_variable = gg_pact_gov_oriental
+	}
 	if = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_oriental_province c:URU ?= { is_subject_of = c:ARG exists = ruler } }
 		c:URU = { ruler = { set_global_variable = { name = gg_pact_gov_oriental value = this } } }
@@ -146,6 +197,7 @@ gg_pact_governors_update = {
 		limit = { has_global_variable = gg_oriental_in_pact has_global_variable = gg_reincorporated exists = c:ARG }
 		gg_pact_gov_pick_or_create = { TEMPLATE = URU_Manuel_Oribe KEY = oriental STATE = STATE_MONTEVIDEO }
 	}
+	if = { limit = { exists = scope:gg_pact_gov_prev } clear_saved_scope = gg_pact_gov_prev }
 	gg_pact_gov_province = { KEY = corrientes TAG = CRR }
 	gg_pact_gov_province = { KEY = tucuman TAG = TUC }
 	gg_pact_gov_province = { KEY = salta TAG = SLT }

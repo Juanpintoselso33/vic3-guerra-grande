@@ -4,17 +4,49 @@
 #     26/11/1868, Urquiza 11/4/1870, William Brown 3/3/1857, Lavalleja 22/10/1853.
 # ES: los hombres sobre los que gira la guerra no mueren antes de su fecha historica. Rivera murio en
 #     una partida de observador en 1840 y goberno el Uruguay un cualquiera.
+#
+# EN: PERFORMANCE (23/9/2026, AUD-PERF-2). It used to scan every character in the world seven times a month
+#     until 1936. Now, per man:
+#     - before his date, the monthly pass looks only in South American countries (capital in
+#       geographic_region_south_america), which is every place the mod creates one of these men (Argentina,
+#       both Uruguayan governments, Entre Rios, Brazil for Rivera's return). The flag stays on a character
+#       wherever he is moved afterwards, so men already flagged keep it abroad, as before;
+#     - on the first monthly pulse on or after his date -- the same day the old code first cleared it -- ONE
+#       world scan clears it, and the mark gg_hlife_over_<template> ends the work for him. After 14/3/1877
+#       the monthly cost is fourteen reads of a date and a mark.
+#     Saves: no migration. The marks are missing in an old save, so each man gets his one clearing scan.
+# ES: RENDIMIENTO. Antes eran siete barridos mundiales por mes hasta 1936. Ahora, por hombre: antes de su
+#     fecha, el pulso mensual mira solo los paises sudamericanos (donde el mod crea a estos hombres; la
+#     marca de inmortal viaja con el personaje); el primer pulso en o despues de su fecha -- el mismo dia
+#     que antes -- UN barrido mundial se la quita y la marca gg_hlife_over_<plantilla> cierra el trabajo.
+#     Sin migracion: en una partida vieja falta la marca y cada hombre recibe su unico barrido.
 gg_historical_life = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_life| TEMPLATE= $TEMPLATE$ " # GG_TRAZA
-	every_country = {
-		every_scope_character = {
-			limit = { has_template = $TEMPLATE$ }
-			if = {
-				limit = { game_date < $DIES$ }
+	if = {
+		limit = { game_date < $DIES$ }
+		every_country = {
+			limit = { capital ?= { is_in_geographic_region = geographic_region_south_america } }
+			every_scope_character = {
+				limit = { has_template = $TEMPLATE$ }
 				set_character_immortal = yes
 			}
-			else = { set_character_immortal = no }
 		}
+	}
+	else_if = {
+		limit = { NOT = { has_global_variable = gg_hlife_over_$TEMPLATE$ } }
+		every_country = {
+			every_scope_character = {
+				limit = { has_template = $TEMPLATE$ }
+				set_character_immortal = no
+			}
+		}
+		# EN/ES: Codex 23/9 -- and the exile pool: the old monthly pass cleared him once he came back;
+		#     with one pass he must be cleared where he is / y el exilio: el pase unico lo limpia donde este
+		every_character_in_exile_pool = {
+			limit = { has_template = $TEMPLATE$ }
+			set_character_immortal = no
+		}
+		set_global_variable = gg_hlife_over_$TEMPLATE$
 	}
 }
 gg_historical_lives = {

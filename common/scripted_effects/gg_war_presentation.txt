@@ -2,8 +2,24 @@
 # ES: Listas de presentacion de los caudillos vivos antes de la division.
 gg_ui_prewar_leaders_sync = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ui_prewar_leaders_sync|" # GG_TRAZA
+ # EN: 23/9/2026 (AUD-PERF-3) -- the lists are rebuilt only when one is empty or holds a dead man: two
+ #     world scans a week until the partition became two on the first week (and after a death). The
+ #     men are the same: one Rivera and one Oribe live at a time (gg_deduplicate_character_worldwide).
+ #     Saves: the lists they already hold are kept while valid; no migration.
+ # ES: las listas se rehacen solo si una esta vacia o tiene un muerto: dos barridos mundiales por semana
+ #     hasta la particion pasan a ser dos la primera semana (y tras una muerte). Sin migracion.
  if = {
-  limit = { NOT = { has_global_variable = guerra_grande_split_done } }
+  limit = {
+   NOT = { has_global_variable = guerra_grande_split_done }
+   c:URU ?= {
+    OR = {
+     NOT = { any_in_list = { variable = gg_ui_prewar_colorado always = yes } }
+     NOT = { any_in_list = { variable = gg_ui_prewar_blanco always = yes } }
+     any_in_list = { variable = gg_ui_prewar_colorado NOT = { is_character_alive = yes } }
+     any_in_list = { variable = gg_ui_prewar_blanco NOT = { is_character_alive = yes } }
+    }
+   }
+  }
   c:URU ?= {
    clear_variable_list = gg_ui_prewar_colorado
    clear_variable_list = gg_ui_prewar_blanco
