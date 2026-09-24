@@ -549,7 +549,11 @@ gg_calendar_close_wartime_relays = {
 	set_global_variable = gg_cal_done_21
 	# EN/ES: 22 (the University) is not closed: it outlives the war (23/9/2026, Juan)
 	#     / 22 (la Universidad) no se cierra: sobrevive a la guerra
-	set_global_variable = gg_cal_done_23
+	# EN: 23 (Arana-Southern, gg_plata.5) is not closed either: it outlives the war (decisiones.md B8, 23/9/2026).
+	#     Closing it here undid B8 -- a peace before 24/11/1849 marked it done and the battery never came back
+	#     (AUD-CAL-B8, 23/9/2026).
+	# ES: 23 (Arana-Southern) tampoco se cierra: sobrevive a la guerra (B8). Cerrarlo aca deshacia B8: una paz
+	#     antes del 24/11/1849 lo marcaba hecho y la bateria no volvia.
 	set_global_variable = gg_cal_done_24
 	set_global_variable = gg_cal_done_26
 	set_global_variable = gg_cal_done_27
