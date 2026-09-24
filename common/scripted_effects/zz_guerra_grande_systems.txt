@@ -1752,12 +1752,16 @@ gg_peace_fight_on = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_peace_fight_on|" # GG_TRAZA
 	remove_global_variable = gg_peace_offered
 	set_global_variable = { name = gg_peace_cooldown days = 365 }
+	# EN/ES: 23/9/2026 (Juan, BAL-02) -- one refusal per government: the next time the arbiter asks, this
+	#     government asks for terms (gg_peace.11.b / .12.b read the mark) / una sola negativa por gobierno
 	if = {
 		limit = { has_variable = guerra_grande_cerrito_government }
 		set_global_variable = { name = gg_cerrito_exhausted value = 0 }
+		set_global_variable = gg_fought_on_cerrito
 	}
 	else = {
 		set_global_variable = { name = gg_defensa_exhausted value = 0 }
+		set_global_variable = gg_fought_on_defensa
 	}
 	gg_endurance_change_self = { VALUE = -10 } # EN/ES: 23/9 -- was the engine war support / era el apoyo a la guerra
 	add_radicals = { value = small_radicals }

@@ -344,6 +344,42 @@ je_guerra_grande = {
 								}
 							}
 						}
+						# EN: 23/9/2026 (Juan, D3 of auditoria-balanza-2026-09-23.md) -- the dynamic rule used to have no
+						#     date: a war nobody won ran to the 1860 cut. A year after the historical peace (8 October
+						#     1852), a government that is beaten is asked now, even inside the year its refusal bought
+						#     (and a second time it cannot refuse, BAL-02); if nobody is beaten, the historical peace
+						#     follows, «neither victors nor vanquished»: the Defensa's menu with the formula alone
+						#     (gg_peace_draw, read by gg_peace.1), as the historical rule does on 8 October 1851.
+						# ES: la regla dinamica no tenia fecha: una guerra que nadie ganaba llegaba al tope de 1860. Un anio
+						#     despues de la paz historica, al gobierno batido se le pregunta ya, aunque este dentro del anio
+						#     que le compro su negativa; si nadie esta batido, sigue la paz historica: el menu de la
+						#     Defensa con la formula sola, como hace la regla historica el 8 de octubre de 1851.
+						if = {
+							limit = {
+								gg_outcome_dynamic = yes
+								game_date >= 1852.10.8
+								NOT = { has_global_variable = gg_peace_offered }
+								exists = c:CER
+								exists = c:URU
+							}
+							if = {
+								limit = {
+									OR = {
+										gg_defensa_ripe = yes
+										gg_cerrito_ripe = yes
+									}
+								}
+								remove_global_variable = gg_peace_cooldown
+							}
+							else = {
+								set_global_variable = gg_peace_offered
+								set_global_variable = gg_peace_draw
+								random_country = {
+									limit = { has_variable = guerra_grande_defensa_government }
+									trigger_event = { id = gg_peace.1 days = 1 popup = yes }
+								}
+							}
+						}
 					}
 					c:URU ?= { add_treasury = gg_defensa_subsidy }
 					c:CER ?= { add_treasury = gg_cerrito_subsidy }

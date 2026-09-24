@@ -52,6 +52,15 @@ gg_cerrito_backing = {
 		limit = { NOT = { has_global_variable = gg_urquiza_flipped } }
 		add = global_var:gg_patron_urquiza
 	}
+	# EN: 23/9/2026 (Juan, D2 of auditoria-balanza-2026-09-23.md) -- Urquiza's pronouncement of 1851 does not
+	#     just take him out of the Cerrito's backing: Entre Rios in arms against Rosas counts against it
+	#     (gg_urquiza_flip sets the mark only from 1851; a turn in 1847 stays as before).
+	# ES: el pronunciamiento de 1851 no solo saca a Urquiza del sosten del Cerrito: Entre Rios en armas contra
+	#     Rosas le resta (la marca se prende solo desde 1851; un vuelco en 1847 queda como antes).
+	else_if = {
+		limit = { has_global_variable = gg_urquiza_pronounced_1851 }
+		subtract = global_var:gg_patron_urquiza
+	}
 }
 
 # EN: T5, F0-5. How hard Rivera hits at Yucutuja: 2, +1 if the border stayed open to the
@@ -148,7 +157,7 @@ gg_split_trim = {
 #     the left since 2026-09-17) / el valor de la barra; lee la ventaja COLORADA
 gg_war_score_bar_value = {
 	# EN: 23/9/2026 (journal audit W1) -- the bar's end is the lead the arbiter asks for today
-	#     (gg_arbiter_balance_needed: 15, 10 from 1849, 5 from 1851), not a fixed 10: a full bar means the
+	#     (gg_arbiter_balance_needed: 15, then a point less a quarter from 1849 down to 5), not a fixed 10: a full bar means the
 	#     side behind is asked for terms, and before 1849 the bar no longer fills five points early.
 	# ES: el extremo de la barra es la ventaja que pide hoy el arbitro, no un 10 fijo: barra llena = al de
 	#     abajo se le pregunta; antes de 1849 la barra ya no se llena cinco puntos antes.
@@ -262,8 +271,16 @@ gg_libres_horse = {
 #     Urquiza y la alianza con el Brasil, una modesta (5, como antes).
 gg_arbiter_balance_needed = {
 	value = 15
-	if = { limit = { year >= 1849 } value = 10 }
-	if = { limit = { year >= 1851 } value = 5 }
+	if = { limit = { game_date >= 1849.1.1 } value = 14 }
+	if = { limit = { game_date >= 1849.4.1 } value = 13 }
+	if = { limit = { game_date >= 1849.7.1 } value = 12 }
+	if = { limit = { game_date >= 1849.10.1 } value = 11 }
+	if = { limit = { game_date >= 1850.1.1 } value = 10 }
+	if = { limit = { game_date >= 1850.4.1 } value = 9 }
+	if = { limit = { game_date >= 1850.7.1 } value = 8 }
+	if = { limit = { game_date >= 1850.10.1 } value = 7 }
+	if = { limit = { game_date >= 1851.1.1 } value = 6 }
+	if = { limit = { game_date >= 1851.4.1 } value = 5 }
 }
 
 # EN: 23/9/2026 (Juan: "the bar is in the middle and the blancos have 19, the colorados 17") -- the

@@ -76,6 +76,14 @@ gg_siege_modifiers_endurance = {
 	every_country = {
 		limit = { has_variable = guerra_grande_cerrito_government }
 		if = { limit = { has_modifier = gg_war_phase_truce } gg_endurance_add = { SIDE = cerrito VALUE = 5 } }
-		if = { limit = { has_modifier = guerra_grande_argentine_auxiliaries } gg_endurance_add = { SIDE = cerrito VALUE = 2 } }
+		# EN/ES: 23/9 (D2) -- not after Urquiza's pronouncement of 1851, even if a later event lends them again
+		#     / no despues del pronunciamiento de 1851, aunque un evento posterior los vuelva a prestar
+		if = {
+			limit = {
+				has_modifier = guerra_grande_argentine_auxiliaries
+				NOT = { has_global_variable = gg_urquiza_pronounced_1851 }
+			}
+			gg_endurance_add = { SIDE = cerrito VALUE = 2 }
+		}
 	}
 }

@@ -161,6 +161,8 @@ gg_peace.1 = {
 			OR = {
 				AND = { gg_outcome_historical = yes  }
 				AND = { NOT = { has_global_variable = gg_imperial_pledged } 				}
+				# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 in the dynamic rule / el empate del 8/10/1852
+				has_global_variable = gg_peace_draw
 			}
 		}
 		# EN/ES: T1, C6 -- the closing mark goes before any annex (I5).
@@ -242,6 +244,8 @@ gg_peace.1 = {
 		name = gg_peace.1.b
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_punish = yes  }
@@ -335,6 +339,8 @@ gg_peace.1 = {
 		name = gg_peace.1.c
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_brazil_treaties = yes exists = c:BRZ }
@@ -423,6 +429,8 @@ gg_peace.1 = {
 		name = gg_peace.1.d
 		# EN/ES: T4, FE-11 -- only with a patron to sign with / solo con un padrino con quien firmar
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_europe = yes  }
@@ -504,6 +512,8 @@ gg_peace.1 = {
 		name = gg_peace.1.e
 		# EN/ES: T8, FE-12/FE-13 -- a pledge restricts the menu / el compromiso recorta el menu
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_war_rosas = yes exists = c:ARG }
@@ -583,6 +593,8 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.g|" # GG_TRAZA
 		name = gg_peace.1.g
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_brazil_vassal = yes exists = c:BRZ }
@@ -642,6 +654,8 @@ gg_peace.1 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.h|" # GG_TRAZA
 		name = gg_peace.1.h
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 has only the formula / el empate solo tiene la formula
+			NOT = { has_global_variable = gg_peace_draw }
 			# EN/ES: 23/9 -- the war's game rule forces these terms / la regla de la guerra fuerza estas condiciones
 			OR = {
 				AND = { gg_terms_defensa_cisplatina = yes exists = c:BRZ }
@@ -723,6 +737,8 @@ gg_peace.1 = {
 		custom_tooltip = gg_peace_reject_tt
 		# EN/ES: T1, C7 -- after a white peace there is no war left to wait on.
 		trigger = {
+			# EN/ES: 23/9 (Juan, D3) -- the draw of 8/10/1852 cannot be refused either / el empate tampoco se rechaza
+			NOT = { has_global_variable = gg_peace_draw }
 			NOT = { has_global_variable = gg_white_peace }
 			NOT = { has_global_variable = gg_oribe_withdraws }
 			# EN/ES: 23/9 (audit R4) -- the game rule's peace of October 1851 cannot be refused: the monthly
@@ -2160,10 +2176,19 @@ gg_peace.11 = {
 		# ES: el motor puede terminar la guerra (paz blanca, jugada cedida) con este popup abierto.
 		#     Ofrecer "seguir peleando" ahi deja los dos gobiernos vivos, sin guerra y con el journal
 		#     esperando una oferta que no va a llegar.
+		# EN: 23/9/2026 (Juan, BAL-02) -- one refusal per government, the player's included: the second time
+		#     the arbiter asks, this option is shown greyed out with its reason, and only asking for terms is left.
+		# ES: una sola negativa por gobierno, tambien para el jugador: la segunda vez se ve gris, con el motivo.
 		trigger = {
 			has_global_variable = guerra_grande_open_war
+			custom_tooltip = {
+				text = gg_peace_refused_before_tt
+				NOT = { has_global_variable = gg_fought_on_defensa }
+			}
 		}
+		show_as_unavailable = { has_global_variable = guerra_grande_open_war }
 		custom_tooltip = gg_peace_fight_on_tt
+		custom_tooltip = gg_peace_last_refusal_tt
 		gg_peace_fight_on = yes
 		ai_chance = { base = 40 }
 	}
@@ -2219,10 +2244,19 @@ gg_peace.12 = {
 		# ES: el motor puede terminar la guerra (paz blanca, jugada cedida) con este popup abierto.
 		#     Ofrecer "seguir peleando" ahi deja los dos gobiernos vivos, sin guerra y con el journal
 		#     esperando una oferta que no va a llegar.
+		# EN: 23/9/2026 (Juan, BAL-02) -- one refusal per government, the player's included: the second time
+		#     the arbiter asks, this option is shown greyed out with its reason, and only asking for terms is left.
+		# ES: una sola negativa por gobierno, tambien para el jugador: la segunda vez se ve gris, con el motivo.
 		trigger = {
 			has_global_variable = guerra_grande_open_war
+			custom_tooltip = {
+				text = gg_peace_refused_before_tt
+				NOT = { has_global_variable = gg_fought_on_cerrito }
+			}
 		}
+		show_as_unavailable = { has_global_variable = guerra_grande_open_war }
 		custom_tooltip = gg_peace_fight_on_tt
+		custom_tooltip = gg_peace_last_refusal_tt
 		gg_peace_fight_on = yes
 		ai_chance = { base = 40 }
 	}

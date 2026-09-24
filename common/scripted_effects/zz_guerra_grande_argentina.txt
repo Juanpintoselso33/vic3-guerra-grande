@@ -926,8 +926,9 @@ gg_argentina_sign_montevideo_convention = {
 	# ES: el sitio ya no es guerra del motor: la convencion no puede sumar a Entre Rios y al Brasil ni
 	#     mandar los cuerpos adelantados a un frente. El Cerrito pierde 20 de aguante, y los dos cuerpos
 	#     se levantan y esperan en sus cuarteles.
-	# EN/ES: no tooltip line of its own: Urquiza's turn (gg_urquiza_flip) already prints "-20" and the
-	#     option's text gives this second -20 / sin renglon propio: el vuelco de Urquiza ya imprime un -20
+	# EN/ES: no tooltip line of its own: Urquiza's turn (gg_urquiza_flip) already prints its own line (-60 from
+	#     1851, D2 of 23/9) and the option's text gives this second -20 / sin renglon propio: el vuelco de Urquiza
+	#     ya imprime el suyo (-60 desde 1851)
 	gg_endurance_add = { SIDE = cerrito VALUE = -20 }
 	gg_patron_change = { PATRON = brasil DELTA = 20 }
 	gg_score_colorado = { AMOUNT = 2 }

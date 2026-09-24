@@ -1605,7 +1605,7 @@ gg_powers.28 = {
 				}
 				# EN: 23/9/2026 (headless run 30: the mediation closed the war in February 1848 with a lead of 2)
 				#     -- the powers only bring the parties to the table when one side has the lead the arbiter's
-				#     calendar asks for (gg_arbiter_balance_needed: 15 before 1849, 10 to 1851, 5 after). The
+				#     calendar asks for (gg_arbiter_balance_needed: 15 before 1849, then a point less a quarter down to 5). The
 				#     Gore-Gros mission of 1848 historically failed.
 				# ES: las potencias solo sientan a las partes si un bando tiene la ventaja que pide el calendario
 				#     del arbitro. La mision Gore-Gros de 1848 fracaso.
