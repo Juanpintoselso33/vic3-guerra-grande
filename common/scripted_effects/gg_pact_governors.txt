@@ -471,6 +471,20 @@ gg_pact_gov_federal_corrientes = {
 	else_if = { limit = { game_date >= 1847.12.14 } gg_pact_gov_pick_or_create = { TEMPLATE = CRR_gg_benjamin_virasoro KEY = corrientes STATE = STATE_CORRIENTES } }
 	else = { gg_pact_gov_hist_corrientes = yes }
 }
+# EN/ES: 24/9/2026 (AUD-CONST-CONFED) -- Entre Rios, remade by the confederation (gg_constitution_confed_ground) after
+#     gg_argentina.80.a took it in: the historical governor for the date (Urquiza from 7/4/1842, if he lives); no
+#     federal replacement is sourced, so none is invented. Never the man who governs Argentina itself (Urquiza after
+#     the fallen mandate, gg_pact_settlement_mandate_collapsed): the seat then stays as the engine leaves it.
+# ES: el gobernador historico de la fecha; no se inventa otro. Nunca el que gobierna la Argentina misma (Urquiza tras el
+#     mandato caido): entonces la silla queda como la deja el motor.
+gg_pact_gov_federal_entre_rios = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_entre_rios|" # GG_TRAZA
+	if = {
+		limit = { c:ARG ?= { ruler ?= { has_template = ARG_Justo_Jose_de_Urquiza } } }
+		if = { limit = { has_global_variable = gg_pact_gov_entre_rios } remove_global_variable = gg_pact_gov_entre_rios }
+	}
+	else = { gg_pact_gov_hist_entre_rios = yes }
+}
 gg_pact_gov_federal_santa_fe = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_santa_fe|" # GG_TRAZA
 	if = { limit = { game_date >= 1845.7.6 game_date < 1845.8.12 } gg_pact_gov_pick = { TEMPLATE = ARG_Pascual_EchagU_e KEY = santa_fe } }

@@ -200,3 +200,17 @@ gg_arg_historical_province_state = {
 		}
 	}
 }
+
+# EN: 24/9/2026 (Juan, AUD-CONST-CONFED) -- state scope: a state the confederation (gg_constitution.1.g) hands to a
+#     province: every state of gg_conf_province_state but the Chaco. Buenos Aires keeps its own province, La Pampa and
+#     Rio Negro as the «two governments» partition does, and the Chaco too: in 1851 no province governed it (Indian land
+#     beyond the frontier lines), so it stays with the government that keeps the foreign relations and the frontier.
+#     In the partition it follows the provinces because there they are one country; here there is no one province to
+#     hand it to, and naming one would be invented.
+# ES: scope estado: un estado que la confederacion le entrega a una provincia: todos los de gg_conf_province_state menos
+#     el Chaco, que ninguna provincia gobernaba en 1851 y queda, como La Pampa y Rio Negro, con el gobierno que lleva las
+#     relaciones exteriores y la frontera.
+gg_confed_province_state = {
+	gg_conf_province_state = yes
+	NOT = { state_region = s:STATE_CHACO }
+}

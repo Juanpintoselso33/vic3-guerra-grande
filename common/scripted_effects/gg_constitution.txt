@@ -34,6 +34,18 @@ gg_unitario_rising = {
 		if = { limit = { exists = s:STATE_SALTA.region_state:ARG } s:STATE_SALTA.region_state:ARG = { set_state_owner = c:CLN } }
 		if = { limit = { exists = s:STATE_JUJUY.region_state:ARG } s:STATE_JUJUY.region_state:ARG = { set_state_owner = c:CLN } }
 		if = { limit = { exists = s:STATE_CATAMARCA.region_state:ARG } s:STATE_CATAMARCA.region_state:ARG = { set_state_owner = c:CLN } }
+		# EN/ES: 24/9 (AUD-CONST-CONFED, Codex) -- the Misiones lands go with Corrientes and Tarija with Salta, as everywhere
+		#     else in the mod / las tierras de Misiones van con Corrientes y Tarija con Salta, como en el resto del mod
+		if = {
+			limit = { exists = s:STATE_CORRIENTES.region_state:CLN }
+			if = { limit = { exists = s:STATE_MISIONES.region_state:ARG } s:STATE_MISIONES.region_state:ARG = { set_state_owner = c:CLN } }
+			if = { limit = { exists = s:STATE_PARANA.region_state:ARG } s:STATE_PARANA.region_state:ARG = { set_state_owner = c:CLN } }
+			if = { limit = { exists = s:STATE_SANTA_CATARINA.region_state:ARG } s:STATE_SANTA_CATARINA.region_state:ARG = { set_state_owner = c:CLN } }
+		}
+		if = {
+			limit = { exists = s:STATE_TARIJA.region_state:ARG exists = s:STATE_SALTA.region_state:CLN }
+			s:STATE_TARIJA.region_state:ARG = { set_state_owner = c:CLN }
+		}
 		gg_argentina_new_country_people = { TAG = CLN }
 		# EN/ES: 23/9 (AUD-MIGR-NEWGAME) -- the rebel leaves the treaties it inherited, as the Coalition of 1840 does;
 		#     until today only the old-save migration did it, a month late / el rebelde sale de los tratados heredados
@@ -167,6 +179,7 @@ gg_constitution_offer_log = {
 	if = { limit = { gg_constitution_offers_no_constitution = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=b" } # GG_TRAZA
 	if = { limit = { gg_constitution_offers_pact_congress = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=c" } # GG_TRAZA
 	if = { limit = { gg_constitution_offers_state_constitution = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=e" } # GG_TRAZA
+	if = { limit = { gg_constitution_offers_confederation = yes } debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| OFFER=g" } # GG_TRAZA
 	if = {
 		limit = { exists = c:BRZ has_war_with = c:BRZ }
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_offer_log| BRAZIL_WAR=yes" # GG_TRAZA
@@ -178,4 +191,201 @@ gg_constitution_offer_log = {
 #     the new one / una partida vieja preguntada de nuevo: se deshace la respuesta forzada antes de la nueva
 gg_constitution_clear_old_answer = {
 	if = { limit = { has_modifier = gg_pais_sin_constitucion } remove_modifier = gg_pais_sin_constitucion }
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan: «a confederation with every province kept as a subject», and the same day: «also the provinces
+#     Argentina controls directly»; AUD-CONST-CONFED) -- THE CONFEDERATION (gg_constitution.1.g). No constitution: the
+#     Pact of 4/1/1831 is the only charter, a treaty between governments that recognise one another's «libertad,
+#     independencia, representacion y derechos» (art. 1). Every historical province is its own country again, a
+#     Province of the Pact (subject_type_gg_pact_province) under Buenos Aires, which keeps the foreign relations the
+#     provinces delegated to its governor; Buenos Aires keeps its own province, La Pampa, Rio Negro and the Chaco
+#     (gg_confed_province_state). Scope: Argentina (the Rosas seat). Idempotent: gg_constitution.11 runs the ground
+#     half again the next day, for a pact the engine only reads after this effect.
+#     THE MACHINERY IS THE MOD'S OWN, NOT A NEW ONE: the province countries that stand are kept or taken in
+#     (gg_constitution_confed_keep: gg_pact_protectorate_to_province for a protectorate of the war goal); the ground
+#     Argentina holds goes through gg_province_split_off with Argentina as the origin -- to the province if it stands
+#     as a subject, or a new country under the governor Buenos Aires installs (gg_province_install_governor,
+#     gg_pact_gov_federal_*), with the clones killed and Argentina's army law (gg_argentina_new_country_people,
+#     gg_argentina_inherit_army_model).
+#     A PLAYER'S PROVINCE IS NEVER FORCED: an independent one stays independent (PLAYER_KEPT in the trace); one that is
+#     already a subject only has its protectorate turned into the Province of the Pact, as the settlement already does.
+#     THE ORIENTAL PROVINCE: kept as it stands if it is one (it already is a Province of the Pact); one absorbed at
+#     gg_argentina.80.a is not rebuilt -- the Banda Oriental never signed the Pact of 1831, and its return is the
+#     Cisplatine question's (gg_cis_release).
+# ES: LA CONFEDERACION. Sin constitucion: el Pacto del 4/1/1831 es la unica ley, un tratado entre gobiernos que se
+#     reconocen «libertad, independencia, representacion y derechos» (art. 1). Cada provincia historica vuelve a ser un
+#     pais, provincia del Pacto bajo Buenos Aires, que conserva las relaciones exteriores que las provincias delegaron en
+#     su gobernador; Buenos Aires se queda con su provincia, La Pampa, Rio Negro y el Chaco. La maquinaria es la del mod:
+#     las provincias-pais que existen se conservan o se reciben; el suelo que tiene la Argentina pasa por
+#     gg_province_split_off con la Argentina como origen. La provincia de un jugador nunca se fuerza. La Provincia
+#     Oriental se conserva si existe; una ya absorbida no se rehace: la Banda Oriental no firmo el Pacto de 1831.
+# SOURCE / FUENTE: Pacto Federal, 4 Jan 1831, arts. 1, 4, 16 (https://es.wikisource.org/wiki/Pacto_Federal_(1831));
+#     the delegation of foreign relations to the governor of Buenos Aires, reassumed by Entre Rios in 1851: design repo
+#     docs/guerra-grande-argentina/historia-argentina.md («Por que las provincias podian pronunciarse», [D]).
+# -------------------------------------------------------------------------------------------------
+gg_constitution_confederation = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confederation|" # GG_TRAZA
+	set_global_variable = gg_constitution_confederation
+	# EN/ES: the provinces that stand as countries / las provincias que ya son paises
+	gg_constitution_confed_keep = { TAG = CRR }
+	gg_constitution_confed_keep = { TAG = ENR }
+	gg_constitution_confed_keep = { TAG = CLN }
+	gg_constitution_confed_keep = { TAG = TUC }
+	gg_constitution_confed_keep = { TAG = SLT }
+	gg_constitution_confed_keep = { TAG = JUJ }
+	gg_constitution_confed_keep = { TAG = CTM }
+	gg_constitution_confed_keep = { TAG = LRJ }
+	gg_constitution_confed_keep = { TAG = CBA }
+	gg_constitution_confed_keep = { TAG = SFE }
+	gg_constitution_confed_keep = { TAG = SDE }
+	gg_constitution_confed_keep = { TAG = MZA }
+	gg_constitution_confed_keep = { TAG = SJN }
+	gg_constitution_confed_keep = { TAG = SNL }
+	if = {
+		limit = { c:URU ?= { gg_is_oriental_pact_province = yes } }
+		gg_pact_protectorate_to_province = { TAG = URU }
+	}
+	# EN/ES: and the ground Buenos Aires holds / y el suelo que tiene Buenos Aires
+	gg_constitution_confed_ground = yes
+}
+
+# EN: One province country that stands. Scope: Argentina. Its subject pact becomes the Province of the Pact; an
+#     independent one at peace with Buenos Aires and not a player's is taken in (Corrientes, Entre Rios and the
+#     Coalition after the negotiated confederation). A subject of another power, or one at war with Buenos Aires,
+#     stays out; the trace says which.
+# ES: una provincia-pais que existe. Su pacto pasa a provincia del Pacto; una independiente, en paz con Buenos Aires y
+#     que no es de un jugador, se recibe. Una sujeta de otra potencia o en guerra con Buenos Aires queda afuera.
+gg_constitution_confed_keep = {
+	if = {
+		limit = { c:$TAG$ ?= { is_subject_of = c:ARG is_subject_type = subject_type_gg_pact_province } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_keep| TAG= $TAG$ KEPT=yes " # GG_TRAZA
+	}
+	# EN/ES: Codex review -- any other subject type (the war goal's protectorate, a puppet...) becomes the Province of the
+	#     Pact, released and taken in again in the same tick as gg_pact_protectorate_to_province does
+	#     / cualquier otro tipo de sujecion pasa a provincia del Pacto, como en gg_pact_protectorate_to_province
+	else_if = {
+		limit = {
+			c:$TAG$ ?= { is_subject_of = c:ARG }
+			NOT = { has_war_with = c:$TAG$ }
+		}
+		c:$TAG$ = {
+			make_independent = yes
+			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
+		}
+		if = { limit = { has_truce_with = c:$TAG$ } end_truce = c:$TAG$ }
+		create_diplomatic_pact = { country = c:$TAG$ type = gg_pact_province }
+		gg_subject_watch = { SUBJECT = c:$TAG$ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_keep| TAG= $TAG$ CONVERTED=yes " # GG_TRAZA
+	}
+	else_if = {
+		limit = {
+			c:$TAG$ ?= { is_subject = no is_player = no }
+			NOT = { has_war_with = c:$TAG$ }
+		}
+		c:$TAG$ = {
+			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
+		}
+		if = { limit = { has_truce_with = c:$TAG$ } end_truce = c:$TAG$ }
+		create_diplomatic_pact = { country = c:$TAG$ type = gg_pact_province }
+		gg_subject_watch = { SUBJECT = c:$TAG$ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_keep| TAG= $TAG$ JOINED=yes " # GG_TRAZA
+	}
+	else_if = {
+		limit = { c:$TAG$ ?= { is_subject = no is_player = yes } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_keep| TAG= $TAG$ PLAYER_KEPT=yes " # GG_TRAZA
+	}
+	else_if = {
+		limit = { exists = c:$TAG$ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_keep| TAG= $TAG$ KEPT_OUT=yes " # GG_TRAZA
+	}
+}
+
+# EN: The ground half. Scope: Argentina. Each province's state Argentina holds goes to that province (or makes it, as a
+#     Province of the Pact); the Misiones lands follow Corrientes (as gg_argentina_revive_corrientes gives them) and
+#     Tarija follows Salta (as gg_province_split_beaten does). Entre Rios is made only after its pronouncement date
+#     (1/5/1851), so its own birth never finds its state taken.
+# ES: la mitad del suelo. Cada estado provincial de la Argentina pasa a su provincia (o la crea); Misiones sigue a
+#     Corrientes y Tarija a Salta, como en el resto del mod. Entre Rios se crea solo despues del 1/5/1851.
+gg_constitution_confed_ground = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_ground|" # GG_TRAZA
+	# EN/ES: Codex review -- the seat of the government that keeps the foreign relations is Buenos Aires: a capital moved
+	#     to a province would keep that province out of the split (gg_province_split_off never splits the origin's capital)
+	#     / la sede es Buenos Aires: una capital mudada a una provincia la dejaria afuera de la particion
+	if = {
+		limit = {
+			has_state_in_state_region = STATE_BUENOS_AIRES
+			NOT = { capital ?= { state_region = s:STATE_BUENOS_AIRES } }
+		}
+		set_capital = STATE_BUENOS_AIRES
+	}
+	# EN/ES: Codex review -- a Coalition under Buenos Aires is a league, not a province: it splits into its provinces as
+	#     after 1841 (gg_argentina_split_coalition; gg_provinces.1 remakes the remainder's pact the next day). A player's
+	#     Coalition stays as it is / una Coalicion bajo Buenos Aires se parte en sus provincias; la de un jugador no
+	c:CLN ?= {
+		if = {
+			limit = {
+				is_subject_of = c:ARG
+				is_player = no
+			}
+			gg_argentina_split_coalition = yes
+		}
+	}
+	save_scope_as = gg_split_origin
+	gg_province_split_off = { STATE = STATE_CORRIENTES TAG = CRR KEY = corrientes }
+	if = {
+		limit = { game_date >= 1851.5.1 }
+		gg_province_split_off = { STATE = STATE_ENTRE_RIOS TAG = ENR KEY = entre_rios }
+	}
+	gg_province_split_off = { STATE = STATE_SANTA_FE TAG = SFE KEY = santa_fe }
+	gg_province_split_off = { STATE = STATE_CORDOBA TAG = CBA KEY = cordoba }
+	gg_province_split_off = { STATE = STATE_SANTIAGO_DEL_ESTERO TAG = SDE KEY = santiago_del_estero }
+	gg_province_split_off = { STATE = STATE_TUCUMAN TAG = TUC KEY = tucuman }
+	gg_province_split_off = { STATE = STATE_SALTA TAG = SLT KEY = salta }
+	gg_province_split_off = { STATE = STATE_JUJUY TAG = JUJ KEY = jujuy }
+	gg_province_split_off = { STATE = STATE_CATAMARCA TAG = CTM KEY = catamarca }
+	gg_province_split_off = { STATE = STATE_LA_RIOJA TAG = LRJ KEY = la_rioja }
+	gg_province_split_off = { STATE = STATE_MENDOZA TAG = MZA KEY = mendoza }
+	gg_province_split_off = { STATE = STATE_SAN_JUAN TAG = SJN KEY = san_juan }
+	gg_province_split_off = { STATE = STATE_SAN_LUIS TAG = SNL KEY = san_luis }
+	every_scope_state = {
+		limit = {
+			OR = {
+				state_region = s:STATE_MISIONES
+				state_region = s:STATE_PARANA
+				state_region = s:STATE_SANTA_CATARINA
+			}
+			c:CRR ?= { is_subject_of = c:ARG }
+		}
+		set_state_owner = c:CRR
+	}
+	every_scope_state = {
+		limit = {
+			state_region = s:STATE_TARIJA
+			c:SLT ?= { is_subject_of = c:ARG }
+		}
+		set_state_owner = c:SLT
+	}
+	clear_saved_scope = gg_split_origin
+	# EN/ES: the trace the night sweep reads / la traza que lee el barrido nocturno
+	if = {
+		limit = { NOT = { any_scope_state = { gg_confed_province_state = yes } } }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_ground| ARG_ONLY_BUENOS_AIRES=yes " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_ground| ARG_ONLY_BUENOS_AIRES=no " # GG_TRAZA
+	}
+	if = {
+		limit = {
+			any_subject_or_below = {
+				is_subject_of = c:ARG
+				OR = {
+					gg_is_province_country = yes
+					c:CLN ?= this
+				}
+				NOT = { is_subject_type = subject_type_gg_pact_province }
+			}
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_ground| NOT_PACT_PROVINCE=yes " # GG_TRAZA
+	}
 }

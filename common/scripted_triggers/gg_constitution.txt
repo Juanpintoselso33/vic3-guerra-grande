@@ -3,7 +3,9 @@
 #     a) the Constitution of 1853: not after Rosas's victory (AUD-CONST-ROSAS) nor with two governments;
 #     b) the Pact without a constitution: not after Urquiza's victory;
 #     c) the Congress of the Pact, given by the Restorer: only after Rosas's victory (the AI never takes it);
-#     e) the constitution of the State of Buenos Aires: only with two governments (the AI never takes it).
+#     e) the constitution of the State of Buenos Aires: only with two governments (the AI never takes it);
+#     g) the confederation, every province a Province of the Pact (24/9, AUD-CONST-CONFED): not after Urquiza's
+#        victory nor with two governments.
 #     Rosas therefore always has two answers: b and c after his victory, b and e with two governments.
 # ES: que respuestas ofrece gg_constitution.1 segun como se cerro el Pacto. Rosas siempre tiene dos: b y c tras su
 #     victoria, b y e con dos gobiernos.
@@ -20,6 +22,43 @@ gg_constitution_offers_pact_congress = {
 gg_constitution_offers_state_constitution = {
 	has_global_variable = gg_pact_settlement_stalemate
 	NOT = { has_global_variable = gg_pact_settlement_rosas }
+}
+# EN: 24/9/2026 (Juan: «a confederation with every province kept as a subject»; AUD-CONST-CONFED) -- g) the Pact
+#     itself as the only charter: every province its own country, a Province of the Pact under Buenos Aires, which keeps
+#     the foreign relations. Offered after Rosas's victory, the negotiated confederation and the fallen mandate (and so
+#     under the dynamic rule whenever it ends in one of those); NOT after Urquiza's victory (his cause was the National
+#     Organisation, and gg_argentina.80.b is closed there too) nor with two governments (the provinces are Urquiza's:
+#     Buenos Aires has none to confederate). It no longer needs a subject province: an Argentina that incorporated them
+#     at gg_argentina.80.a hands their ground back (gg_constitution_confederation). Scope: the Rosas seat.
+# ES: g) el Pacto como unica ley: cada provincia su propio pais, provincia del Pacto bajo Buenos Aires, que conserva las
+#     relaciones exteriores. Tras la victoria de Rosas, la confederacion negociada y el mandato caido; no tras la de
+#     Urquiza (su causa era la Organizacion Nacional) ni con dos gobiernos (las provincias son de Urquiza). Ya no pide una
+#     provincia sujeta: si .80.a las incorporo, les devuelve su suelo.
+gg_constitution_offers_confederation = {
+	NOT = { has_global_variable = gg_pact_settlement_urquiza }
+	NOT = { has_global_variable = gg_pact_settlement_stalemate }
+	OR = {
+		any_scope_state = { gg_confed_province_state = yes }
+		any_subject_or_below = {
+			is_subject_of = c:ARG
+			OR = {
+				gg_is_province_country = yes
+				c:CLN ?= this
+				gg_is_oriental_pact_province = yes
+			}
+		}
+		# EN/ES: Codex review -- an independent province at peace with Buenos Aires and not a player's is taken in too
+		#     / una provincia independiente en paz con Buenos Aires y que no es de un jugador tambien se recibe
+		any_country = {
+			OR = {
+				gg_is_province_country = yes
+				c:CLN ?= this
+			}
+			is_subject = no
+			is_player = no
+			NOT = { has_war_with = c:ARG }
+		}
+	}
 }
 
 # EN: 24/9/2026 (AUD-CONST-CHOICE) -- what holds the constitution off: Buenos Aires at war with Brazil, or the

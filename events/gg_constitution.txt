@@ -10,6 +10,7 @@
 #        the Catholic religion of the State and the press under control. Not open if Urquiza won.
 #     c) 24/9/2026 (AUD-CONST-CHOICE) after Rosas's victory, for the player: the Restorer convenes the Pact's Congress.
 #     e) 24/9/2026 (AUD-CONST-CHOICE) with two governments, for the player: the constitution of the State of Buenos Aires.
+#     g) 24/9/2026 (AUD-CONST-CONFED) the confederation: no constitution, every province a Province of the Pact.
 #     Asked through gg_constitution_schedule (a month on, never during a war with Brazil, retried monthly).
 # ES: LA CONSTITUCION. Un mes despues del arreglo del Pacto, el gobierno de Buenos Aires la escribe, o no.
 # SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), arts. 14, 15, 25, 26:
@@ -160,6 +161,91 @@ gg_constitution.1 = {
 		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
 		ai_chance = { base = 0 } # EN/ES: the AI keeps the sum of public power / la IA sigue con la suma del poder publico
 	}
+	# EN: 24/9/2026 (Juan: «a confederation with every province kept as a subject», and «also the provinces Argentina
+	#     controls directly»; AUD-CONST-CONFED) -- the Pact itself as the only charter. Every province its own country, a
+	#     Province of the Pact under Buenos Aires, which keeps the foreign relations (gg_constitution_confederation).
+	#     NOT A CONSTITUTION: a treaty between governments sets none of their laws, so no law of Buenos Aires changes.
+	#     After Rosas's victory it is his confederation and he keeps the sum of public power: the question stays open
+	#     while he lives (gg_pais_sin_constitucion, the same road as b: his death opens gg_constitution.2, whose rising and
+	#     constitution take the provinces in). After the negotiated confederation or the fallen mandate the Confederation
+	#     simply stands. gg_constitution_chosen = 4 does not end Rosas's era by itself (gg_x_arg_rosas_era_over,
+	#     gg_rosas_keeps_the_seat read 1 and 3), and the 0.1.1 migration (gg_constitution_choice_migration) only reopens 2.
+	#     AI: 10 -- rarely, since it takes Argentina apart; never under a Pact rule, which chooses a or b itself.
+	# ES: el Pacto mismo como unica ley. Cada provincia su propio pais, provincia del Pacto bajo Buenos Aires, que conserva
+	#     las relaciones exteriores. No es una constitucion: un tratado entre gobiernos no fija sus leyes, asi que no cambia
+	#     ninguna ley de Buenos Aires. Tras la victoria de Rosas es su confederacion y conserva la suma del poder publico:
+	#     la cuestion queda abierta mientras viva (el mismo camino que b). Tras la confederacion negociada o el mandato
+	#     caido, la Confederacion queda como esta. IA: 10; nunca con una regla del Pacto.
+	# SOURCE / FUENTE: Pacto Federal, 4 Jan 1831, arts. 1, 4 and 16 (https://es.wikisource.org/wiki/Pacto_Federal_(1831)):
+	#     art. 1 «reconociendo reciprocamente su libertad, independencia, representacion y derechos»; art. 4 no province
+	#     treats «con ningun otro Gobierno» without the others' express consent; art. 16.5 the Congress that was to settle
+	#     the general administration keeping «la soberania, libertad e independencia de cada una de las provincias». The
+	#     delegation of foreign relations to the governor of Buenos Aires, «la facultad concedida al gobernador de Buenos
+	#     Aires» that Entre Rios reassumed on 1/5/1851 (Convention of 29/5/1851): design repo
+	#     docs/guerra-grande-argentina/historia-argentina.md, [D].
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.1.g|" # GG_TRAZA
+		name = gg_constitution.1.g
+		trigger = { gg_constitution_offers_confederation = yes }
+		set_global_variable = { name = gg_constitution_chosen value = 4 } # EN/ES: 4 = the confederation / la confederacion
+		gg_constitution_clear_old_answer = yes
+		custom_tooltip = gg_constitution.1.g_tt
+		if = {
+			limit = { has_global_variable = gg_pact_settlement_rosas }
+			custom_tooltip = gg_constitution.1.g_rosas_tt
+			add_modifier = { name = gg_pais_sin_constitucion }
+		}
+		hidden_effect = {
+			gg_constitution_confederation = yes
+			trigger_event = { id = gg_constitution.11 days = 1 }
+		}
+		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
+		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { OR = { gg_pact_historical = yes gg_pact_negotiated = yes gg_pact_rosas = yes } } factor = 0 } # EN/ES: the Pact's game rule chooses / la regla del Pacto elige
+		}
+	}
+}
+
+# EN/ES: 24/9/2026 (AUD-CONST-CONFED) -- the day after the confederation: the ground half again (a pact made in the same
+#     effect may be read by the engine only afterwards), and the check the night sweep reads
+#     / el dia despues de la confederacion: otra vez el suelo, y el chequeo que lee el barrido
+gg_constitution.11 = {
+	type = country_event
+	hidden = yes
+	# EN/ES: the mark is set before this is queued (gg_constitution_confederation) / la marca se prende antes de agendarlo
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_constitution_confederation
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.11|" # GG_TRAZA
+		gg_constitution_confed_ground = yes
+		# EN/ES: the verdict the night sweep reads: Buenos Aires holds no province's ground and every province country
+		#     under it is a Province of the Pact / el veredicto que lee el barrido
+		if = {
+			limit = {
+				NOT = { any_scope_state = { gg_confed_province_state = yes } }
+				NOT = {
+					any_subject_or_below = {
+						is_subject_of = c:ARG
+						OR = {
+							gg_is_province_country = yes
+							c:CLN ?= this
+						}
+						NOT = { is_subject_type = subject_type_gg_pact_province }
+					}
+				}
+				# EN/ES: a league is not a province: an AI Coalition must have split / una liga no es una provincia
+				NOT = { c:CLN ?= { is_player = no } }
+			}
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.11| CONFED_OK=yes " # GG_TRAZA
+		}
+		else = {
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution.11| CONFED_OK=no " # GG_TRAZA
+		}
+	}
 }
 
 # EN: 24/9/2026 (AUD-CONST-CHOICE) -- the relay a month after the settlement (gg_constitution_schedule): it asks only if
@@ -241,7 +327,9 @@ gg_constitution.3 = {
 			gg_constitution_federal = yes
 		}
 		# EN/ES: the league's ground joins the one country too / la tierra de la liga tambien se incorpora
-		if = { limit = { exists = c:CLN } annex = c:CLN } # EN/ES: AUD-PROV-INCORP -- was annex_with_incorporation, which also took Tarija / incorporaba tambien Tarija
+		# EN/ES: 24/9 (AUD-CONST-CONFED, Codex) -- never a player's league: it stays a Province of the Pact, as
+		#     gg_argentina_province_join keeps a player's province / nunca la liga de un jugador
+		if = { limit = { c:CLN ?= { is_player = no } } annex = c:CLN } # EN/ES: AUD-PROV-INCORP -- was annex_with_incorporation, which also took Tarija / incorporaba tambien Tarija
 		# EN/ES: AUD-PROV-INCORP -- also what the engine's war annexed / tambien lo que anexo la guerra del motor
 		gg_incorporate_province_states = yes
 		trigger_event = { id = gg_constitution.4 days = 0 popup = yes }
