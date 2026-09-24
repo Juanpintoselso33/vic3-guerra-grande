@@ -13,6 +13,10 @@ gg_urquiza_discontent = {
 	if = { limit = { NOT = { has_global_variable = gg_constituent_congress_route } } add = 1 }
 	if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 } add = global_var:gg_entre_rios_agravio }
 	if = { limit = { exists = c:BRZ NOT = { gg_brazil_beaten = yes } } add = 2 }
+	# EN/ES: 24/9/2026 -- Buenos Aires's answer to the Imperial note (gg_cisplatina.9): rejected, the Empire has a quarrel
+	#     to offer the Littoral; answered, it has none / rechazada, el Imperio tiene un pleito que ofrecerle al Litoral
+	if = { limit = { has_global_variable = gg_cis_note_reply global_var:gg_cis_note_reply = 2 } add = 2 }
+	if = { limit = { has_global_variable = gg_cis_note_reply global_var:gg_cis_note_reply = 1 } add = -1 }
 	# EN/ES: 23/9/2026 (river audit D3) -- the river shut after the settlement: one per four months, up to 3
 	#     (the Littoral wants to navigate the Parana) / el rio cerrado despues del arreglo: uno cada cuatro meses, hasta 3
 	if = {

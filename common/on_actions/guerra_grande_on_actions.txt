@@ -21,6 +21,9 @@ guerra_grande_on_game_start = {
 		# EN/ES: 24/9 (AUD-PROV-INCORP) -- this game incorporates the provinces as it annexes them:
 		#     gg_province_incorporation_migration never runs / esta partida incorpora las provincias al anexarlas
 		set_global_variable = gg_province_incorporation_fixed
+		# EN/ES: 24/9 -- Brazil's note reaches Buenos Aires in this game (gg_cisplatina.9): gg_cis_note_migration never
+		#     runs / en esta partida la nota del Brasil llega a Buenos Aires
+		set_global_variable = gg_cis_note_known
 		# EN/ES: T3a -- patrons, the Defensa's line and the Cerrito's balance / padrinos, linea y balanza
 		gg_systems_init = yes
 		# EN/ES: 23/9 -- the historical men live until their date / viven hasta su fecha

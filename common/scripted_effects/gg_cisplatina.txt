@@ -341,3 +341,17 @@ gg_cis_wait = {
 	c:ARG ?= { change_relations = { country = ROOT value = -50 } }
 	trigger_event = { id = gg_cisplatina.7 days = 30 }
 }
+
+# EN: 24/9/2026 (Juan: Brazil protested and Buenos Aires never heard of it) -- Brazil's answer to the reincorporation
+#     reaches Buenos Aires (gg_cisplatina.9). Scope: Brazil. KIND 1 = the protest (gg_cisplatina.2.a), 2 = the rupture
+#     (.b/.c/.d, or a save still waiting, gg_cisplatina.10). The mark is set before the event is scheduled (its trigger
+#     is checked then), and only once.
+# ES: la respuesta del Brasil llega a Buenos Aires. KIND 1 protesta, 2 ruptura. La marca va antes de agendar, una vez.
+gg_cis_note_send = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_note_send| KIND= $KIND$ " # GG_TRAZA
+	if = {
+		limit = { NOT = { has_global_variable = gg_cis_note_kind } }
+		set_global_variable = { name = gg_cis_note_kind value = $KIND$ }
+		c:ARG ?= { trigger_event = { id = gg_cisplatina.9 days = 0 popup = yes } }
+	}
+}

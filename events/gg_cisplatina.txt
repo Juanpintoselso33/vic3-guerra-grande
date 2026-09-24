@@ -10,9 +10,12 @@
 #     .3 hidden, the day after the war ends: the result is applied by script (the engine war goal is
 #        a humiliation, so it never takes ground on its own).
 #     .4 the outcome, to both governments.
+#     .9 (24/9/2026) Brazil's answer reaches Buenos Aires: the protest (.2.a) or the rupture (.2.b/.c/.d); Buenos
+#        Aires answers it. .10 hidden, the catch-up for an older save.
 # ES: LA REINCORPORACION Y LA SEGUNDA GUERRA CISPLATINA. .1 Argentina insiste o no; .2 el Brasil
 #     responde a la reincorporacion; .3 oculto, aplica el resultado al dia siguiente del fin de la
-#     guerra; .4 el resultado.
+#     guerra; .4 el resultado; .9 la respuesta del Brasil llega a Buenos Aires, que contesta; .10 oculto, la puesta
+#     al dia de una partida vieja.
 # SOURCE / FUENTE: Convencion Preliminar de Paz, Rio de Janeiro, 27/8/1828, arts. 1-3 (independence of
 #     the Province of Montevideo, and both signatories bound to defend it):
 #     https://es.wikisource.org/wiki/Convenci%C3%B3n_Preliminar_de_Paz_(1828)
@@ -116,9 +119,15 @@ gg_cisplatina.2 = {
 		name = gg_cisplatina.2.a
 		custom_tooltip = gg_cisplatina.2.a_tt
 		c:ARG ?= { change_relations = { country = ROOT value = -30 } }
+		# EN/ES: 24/9/2026 (Juan: Buenos Aires never learned of the protest) -- the note reaches Buenos Aires
+		#     (gg_cisplatina.9); the mark goes first, its trigger is checked when scheduled
+		#     / la nota llega a Buenos Aires; la marca va primero
+		gg_cis_note_send = { KIND = 1 }
+		# EN/ES: 24/9/2026 (Juan: Brazil should intervene more often) -- was base 30 / +20; staying out now 13-28%
+		#     of the time instead of 23-43% / el Brasil tiene que intervenir mas: era base 30 / +20
 		ai_chance = {
-			base = 30
-			modifier = { trigger = { exists = c:ARG army_size < c:ARG.army_size } add = 20 }
+			base = 15
+			modifier = { trigger = { exists = c:ARG army_size < c:ARG.army_size } add = 10 }
 		}
 	}
 	# EN: free the Republic, the guarantee of 1828 enforced to the letter.
@@ -130,6 +139,7 @@ gg_cisplatina.2 = {
 		set_global_variable = { name = gg_cis_goal value = 1 }
 		custom_tooltip = gg_cisplatina.2.b_tt
 		gg_cis_wait = yes
+		gg_cis_note_send = { KIND = 2 } # EN/ES: 24/9 -- the rupture reaches Buenos Aires / la ruptura llega a Buenos Aires
 		ai_chance = {
 			base = 35
 			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 25 }
@@ -143,6 +153,7 @@ gg_cisplatina.2 = {
 		set_global_variable = { name = gg_cis_goal value = 2 }
 		custom_tooltip = gg_cisplatina.2.c_tt
 		gg_cis_wait = yes
+		gg_cis_note_send = { KIND = 2 } # EN/ES: 24/9 -- the rupture reaches Buenos Aires / la ruptura llega a Buenos Aires
 		ai_chance = { base = 10 }
 	}
 	# EN: free it under the Empire's protection.
@@ -153,6 +164,7 @@ gg_cisplatina.2 = {
 		set_global_variable = { name = gg_cis_goal value = 3 }
 		custom_tooltip = gg_cisplatina.2.d_tt
 		gg_cis_wait = yes
+		gg_cis_note_send = { KIND = 2 } # EN/ES: 24/9 -- the rupture reaches Buenos Aires / la ruptura llega a Buenos Aires
 		ai_chance = {
 			base = 20
 			modifier = { trigger = { global_var:gg_patron_brasil >= 50 } add = 10 }
@@ -398,6 +410,132 @@ gg_cisplatina.8 = {
 		random_country = {
 			limit = { has_variable = guerra_grande_cerrito_government NOT = { c:ARG ?= this } }
 			gg_oriental_incorporate = yes
+		}
+	}
+}
+
+# EN: 24/9/2026 (Juan, playing Argentina: Brazil protested on 20/1/1850 and he never heard of it) -- the Imperial note
+#     under the Convention of 1828 reaches Buenos Aires. KIND 1 (gg_cisplatina.2.a): a protest, and nothing more.
+#     KIND 2 (.b/.c/.d): the Empire breaks with Argentina and reserves its right to enforce the Convention; when, and
+#     for what, is not told (it waits for its moment, gg_cisplatina.7). Buenos Aires answers:
+#       .a a conciliatory note: relations with Brazil back up, Urquiza's discontent down (the Empire has no quarrel to
+#          offer the Littoral), but the provinces see the Restorer explain himself to the Empire (Pact grievances up);
+#       .b reject it (Rosas's line: the definitive peace was never signed): relations down, the provinces close ranks
+#          (grievances down), and the Empire has a quarrel to offer Entre Rios (Urquiza's discontent +2).
+#     The answer is read by gg_urquiza_discontent through gg_cis_note_reply (1 conciliatory, 2 rejected).
+# ES: la nota imperial llega a Buenos Aires. KIND 1: protesta y nada mas; KIND 2: el Imperio rompe y se reserva el
+#     derecho de hacer cumplir la Convencion, sin decir cuando ni para que. Buenos Aires contesta: .a nota
+#     conciliadora (relacion con el Brasil arriba, descontento de Urquiza abajo, agravios del Pacto arriba); .b
+#     rechazo (relacion abajo, agravios abajo, descontento de Urquiza +2).
+# SOURCE / FUENTE: Convencion Preliminar de Paz, Rio de Janeiro, 27/8/1828, arts. 1-3 (the head of this file).
+#     The Empire's notes and Buenos Aires's answers of the period: «Correspondencia canjeada en 1850 entre el senor
+#     Paulino Jose Soares de Souza, ministro de negocios extranjeros de S.M. el emperador del Brasil, y el senor D.
+#     Tomas Guido, ministro argentino», Montevideo, Publicacion oficial, 1851 (Biblioteca de la Academia Nacional de
+#     la Historia, RE 02-02-26); the rupture of 30/9/1850 (Guido's passports): J. M. Rosa, «El pronunciamiento de
+#     Urquiza» (Instituto Rosas). Felipe Arana, minister of foreign affairs of Buenos Aires 1835-1852: design repo
+#     SOURCES_flujo_images.md (gg_arg_arana). Rosas's reading that the definitive treaty was never signed, and the
+#     Littoral's alliance with the Empire of 29/5/1851: gg_cisplatina.2 and design repo SOURCES_peace.md.
+gg_cisplatina.9 = {
+	type = country_event
+	placement = ROOT
+	title = gg_cisplatina.9.t
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_cisplatina.9.d_2 trigger = { global_var:gg_cis_note_kind = 2 } }
+			triggered_desc = { desc = gg_cisplatina.9.d_1 trigger = { always = yes } }
+		}
+	}
+	flavor = gg_cisplatina.9.f
+	# EN/ES: every alias of the mod is in use; the bay of Rio de Janeiro (gg_patron.3) is where the note comes from.
+	#     A picture of its own is pending (SOURCES_flujo_images.md) / todos los alias estan en uso; la bahia de Rio
+	event_image = { video = "gg_patron_rio" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 12
+	is_popup = yes
+
+	trigger = {
+		c:ARG ?= this
+		has_global_variable = gg_cis_note_kind # EN/ES: sent once, by gg_cis_note_send / se manda una vez
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.9| KIND=[GetGlobalVariable('gg_cis_note_kind').GetValue|0] " # GG_TRAZA
+	}
+
+	# EN: a conciliatory note: the Confederation respects the Empire's frontiers and seeks no quarrel with it.
+	# ES: una nota conciliadora: la Confederacion respeta las fronteras del Imperio y no busca pleito.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.9.a|" # GG_TRAZA
+		name = gg_cisplatina.9.a
+		c:BRZ ?= { change_relations = { country = ROOT value = 20 } }
+		gg_pact_all_grievances_up = yes
+		# EN/ES: the answer is read by Urquiza's discontent (gg_urquiza_discontent), which counts until 1 May 1851; after
+		#     that the mark would change nothing, so it is not set / despues del 1/5/1851 no cambiaria nada y no se escribe
+		if = {
+			limit = { game_date < 1851.5.1 }
+			custom_tooltip = {
+				text = gg_cisplatina.9.a_tt
+				set_global_variable = { name = gg_cis_note_reply value = 1 }
+			}
+		}
+		if = {
+			limit = { global_var:gg_cis_note_kind = 2 }
+			custom_tooltip = gg_cisplatina.9.a_tt_2
+		}
+		ai_chance = { base = 30 }
+	}
+	# EN: reject it: the Convention was preliminary and the definitive treaty never signed. ES: rechazarla.
+	#     Net on Urquiza's discontent (Codex review): the reply's +2 less Entre Rios's grievance falling by 1 = +1 while
+	#     Entre Rios delegates; conciliation nets 0 (+1 grievance, -1 reply). The tooltips say «besides its grievance».
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.9.b|" # GG_TRAZA
+		name = gg_cisplatina.9.b
+		default_option = yes
+		c:BRZ ?= { change_relations = { country = ROOT value = -20 } }
+		gg_pact_all_grievances_down = yes
+		# EN/ES: the answer is read by Urquiza's discontent (gg_urquiza_discontent), which counts until 1 May 1851; after
+		#     that the mark would change nothing, so it is not set / despues del 1/5/1851 no cambiaria nada y no se escribe
+		if = {
+			limit = { game_date < 1851.5.1 }
+			custom_tooltip = {
+				text = gg_cisplatina.9.b_tt
+				set_global_variable = { name = gg_cis_note_reply value = 2 }
+			}
+		}
+		ai_chance = { base = 70 }
+	}
+}
+
+# EN: 24/9/2026 -- the catch-up for a save from before gg_cisplatina.9 existed (Juan's game: Brazil's .a on 20/1/1850).
+#     Queued once by gg_cis_note_migration, 45 days out, so that a gg_cisplatina.2 still pending in that save (30 days
+#     after the reincorporation) answers first and sends the note itself; then this finds gg_cis_note_kind and does
+#     nothing. Otherwise Brazil answered under the old code: still waiting (gg_cis_waiting) is the rupture, else the
+#     protest; a war already declared (gg_cisplatina.6 told it) or over sends nothing.
+# ES: la puesta al dia de una partida anterior a gg_cisplatina.9. La encola una vez la migracion, a 45 dias, asi un
+#     gg_cisplatina.2 todavia pendiente contesta primero y manda la nota el mismo; si no, el Brasil contesto con el
+#     codigo viejo: si sigue esperando es la ruptura, si no la protesta; con la guerra declarada o terminada no se manda.
+gg_cisplatina.10 = {
+	type = country_event
+	hidden = yes
+	trigger = { c:ARG ?= this }
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.10|" # GG_TRAZA
+		if = {
+			limit = {
+				exists = c:BRZ
+				has_global_variable = gg_oriental_in_pact
+				NOT = { has_global_variable = gg_cis_note_kind }
+				NOT = { has_global_variable = gg_cis_war }
+				NOT = { has_global_variable = gg_cis_outcome }
+				game_date < 1853.1.1
+			}
+			if = {
+				limit = { has_global_variable = gg_cis_waiting }
+				c:BRZ = { gg_cis_note_send = { KIND = 2 } }
+			}
+			else = {
+				c:BRZ = { gg_cis_note_send = { KIND = 1 } }
+			}
 		}
 	}
 }

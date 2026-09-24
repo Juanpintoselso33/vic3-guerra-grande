@@ -21,6 +21,7 @@ on_monthly_pulse_country = {
 		gg_oriental_left_out_migration
 		gg_brazil_deal_migration
 		gg_province_incorporation_migration
+		gg_cis_note_migration
 	}
 }
 
@@ -239,5 +240,29 @@ gg_province_incorporation_migration = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_province_incorporation_migration" # GG_TRAZA
 		set_global_variable = gg_province_incorporation_fixed
 		gg_incorporate_province_states = yes
+	}
+}
+
+# EN: 24/9/2026 (Juan's game: Brazil protested on 20/1/1850 and Buenos Aires never heard of it) -- a save from before
+#     gg_cisplatina.9 existed, with the Banda Oriental in the Confederation, is sent Brazil's note once: this queues the
+#     catch-up gg_cisplatina.10 45 days out, which reads Brazil's old answer then (a gg_cisplatina.2 still pending
+#     answers first under the new code, and the catch-up does nothing). A game begun with this version has
+#     gg_cis_note_known from its first day. Not guarded by gg_new_game_no_migrations: Juan's game has that mark.
+# ES: a una partida anterior a gg_cisplatina.9, con la Banda Oriental en la Confederacion, se le manda una vez la nota
+#     del Brasil: se encola la puesta al dia a 45 dias, que lee entonces la respuesta vieja del Brasil. Una partida
+#     empezada con esta version tiene gg_cis_note_known desde el primer dia.
+gg_cis_note_migration = {
+	trigger = {
+		c:ARG ?= this
+		NOT = { has_global_variable = gg_cis_note_known }
+		NOT = { has_global_variable = gg_cis_note_kind }
+		has_global_variable = gg_oriental_in_pact
+		exists = c:BRZ
+		game_date < 1853.1.1
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_note_migration" # GG_TRAZA
+		set_global_variable = gg_cis_note_known
+		trigger_event = { id = gg_cisplatina.10 days = 45 }
 	}
 }
