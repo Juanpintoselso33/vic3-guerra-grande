@@ -659,6 +659,31 @@ gg_cal.32 = {
 	}
 }
 
+# EN: 24/9/2026 (Codex review) -- TOMBSTONES. gg_cal.29 (Caxias crosses, gg_contingent.8) and gg_cal.33 (the Brazilian
+#     alliance, gg_powers.5) were the 1851 route for a game without la Argentina, removed with it. New games no longer
+#     schedule them, but a save started before the removal still has both queued (on Argentina and on the Republic)
+#     and would reach 1851 with unknown event ids. These do nothing, and nothing fires them any more.
+# ES: LAPIDAS. gg_cal.29 y gg_cal.33 eran la ruta de 1851 sin la Argentina, que se saco. Las partidas nuevas ya no
+#     los agendan, pero una partida empezada antes los tiene en cola y llegaria a 1851 con ids desconocidos. No hacen
+#     nada, y ya nadie los dispara.
+gg_cal.29 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.29|" # GG_TRAZA
+	}
+}
+
+gg_cal.33 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.33|" # GG_TRAZA
+	}
+}
+
 # 1846-11-12 -- Mitre deja Montevideo (gg_rivera.8, la Defensa)
 gg_cal.34 = {
 	type = country_event
