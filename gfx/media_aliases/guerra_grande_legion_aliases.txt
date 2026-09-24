@@ -23,11 +23,6 @@ gg_leg_rosista = {
 	audio = "event:/SFX/Events/southamerica/war_civilians"
 }
 
-gg_leg_caxias = {
-	video = "gfx/media_aliases/gg_leg_caxias.bk2"
-	audio = "event:/SFX/Events/europenorthamerica/london_center"
-}
-
 gg_leg_colours = {
 	video = "gfx/media_aliases/gg_leg_colours.bk2"
 	audio = "event:/SFX/Events/southamerica/election"

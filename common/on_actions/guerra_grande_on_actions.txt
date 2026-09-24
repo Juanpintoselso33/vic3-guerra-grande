@@ -122,25 +122,10 @@ guerra_grande_on_game_start = {
 		# EN/ES: la delegacion se abre el primer dia y se la queda Rosas: es SU cuenta, y los tres que
 		#     se la pueden retirar la reciben al nacer / the delegation opens on day one and belongs to
 		#     Rosas: it is HIS count, and the three who can take it from him get it when they are born
-		# EN: AND ONLY WITH «LA ARGENTINA» LOADED. Correction of 20/9/2026 (Codex): the README and the
-		#     calendar both promise that without the dependency the Argentine side «simply does not
-		#     happen». The ten relays did keep that promise; this line did not. In a standalone
-		#     Uruguayan game Rosas opened the delegation journal on day one, the siege started eating
-		#     a bar that stood for provinces that do not exist on that map, and the entry could never
-		#     complete because no country could ever be born to empty it. The probe is the same one
-		#     the relays use.
-		# ES: Y SOLO CON «LA ARGENTINA» CARGADA. Correccion del 20/9/2026 (Codex): el README y el
-		#     calendario prometen los dos que sin la dependencia el lado argentino «sencillamente no
-		#     ocurre». Los diez relevos cumplian esa promesa; esta linea no. En una partida oriental
-		#     sola, Rosas abria el journal de la delegacion el primer dia, el sitio empezaba a comerse
-		#     una barra que representa provincias que en ese mapa no existen, y la entrada no podia
-		#     cumplirse nunca porque no podia nacer ningun pais que la vaciara. La sonda es la misma
-		#     que usan los relevos.
-		# EN/ES: y la abre un evento que la explica, no esta linea. La regla del mod es que a cada
-		#     journal lo abre un evento: el lado oriental lo tiene desde el primer dia y a este le
-		#     faltaba, asi que el jugador argentino se encontraba el Pacto Federal fijado en pantalla
-		#     sin que nadie le dijera que era. La sonda de «la Argentina» ahora vive en el trigger del
-		#     evento / and an event that explains it opens it, not this line
+		# EN/ES: an event that explains it opens the journal (gg_arg_intro.1), not this line: every journal is opened by an
+		#     event. The «la Argentina» probe that used to guard it was removed on 24/9/2026 (la Argentina is a hard
+		#     requirement) / un evento que lo explica abre el journal, no esta linea; la sonda de «la Argentina» se saco
+		#     el 24/9/2026 (la Argentina es requisito).
 		# EN: DAY ONE, NOT DAY ZERO, and a safety net behind it. Fired with days = 0 from
 		#     on_game_started the entry simply never opened in Juan's game -- «ahora el journal de
 		#     pacto federal no aparece». The Uruguayan opening next to it has always used days = 1
@@ -168,74 +153,67 @@ guerra_grande_on_game_start = {
 		#     events/guerra_grande_argentina_calendar.txt. Corrimientos en anios de 365 dias desde el
 		#     1 de enero de 1836, calculados a mano y verificados uno por uno.
 		c:ARG ?= {
-			# EN: The Argentine prehistory is scheduled only when «la Argentina» is present. The
-			#     relays still repeat the probe on their delivery dates, because a dated event reads
-			#     its trigger when it is queued, not when it arrives.
-			# ES: La previa argentina se agenda solo cuando esta presente «la Argentina». Los relevos
-			#     repiten igual la sonda en la fecha de entrega, porque un evento fechado lee su
-			#     trigger cuando se encola, no cuando llega.
-			if = {
-				limit = { exists = s:STATE_ENTRE_RIOS }
-				set_global_variable = { name = gg_corrientes_agravio value = 0 }
-				set_global_variable = { name = gg_norte_agravio value = 0 }
-				set_global_variable = { name = gg_entre_rios_agravio value = 0 }
-				# EN: 365-day cross-checks: 1837-04-01 = (1837-1836)*365+(91-1) = 455 (.15); 1850-12-01 = (1850-1836)*365+(335-1) = 5444 (.19).
-				# ES: Controles con las entradas .15 y .19: 455 y 5444 días; sin bisiestos.
-				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
-				trigger_event = { id = gg_argentina_cal.30 days = 1338 } # 1839-09-01: (1839-1836)*365+(244-1) = 1338
-				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
-				trigger_event = { id = gg_argentina_cal.31 days = 2341 } # 1842-06-01: (1842-1836)*365+(152-1) = 2341
-				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
-				trigger_event = { id = gg_argentina_cal.32 days = 3101 } # 1844-07-01: (1844-1836)*365+(182-1) = 3101
-				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
-				trigger_event = { id = gg_argentina_cal.33 days = 3344 } # 1845-03-01: (1845-1836)*365+(60-1) = 3344
-				# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
-				trigger_event = { id = gg_argentina_cal.34 days = 4135 } # 1847-05-01: (1847-1836)*365+(121-1) = 4135
-				trigger_event = { id = gg_argentina_cal.14 days = 90 }   # 1836-04-01 primer pliego de Corrientes
-				trigger_event = { id = gg_argentina_cal.15 days = 455 }  # 1837-04-01 la renta de la aduana
-				trigger_event = { id = gg_argentina_cal.16 days = 816 }  # 1838-03-28 empieza el bloqueo frances
-				trigger_event = { id = gg_argentina_cal.17 days = 1064 } # 1838-12-01 llega la noticia de Heredia
-				trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 armas y Lamadrid a Tucuman
-				trigger_event = { id = gg_argentina_cal.19 days = 5444 } # 1850-12-01 las dos ordenes a Urquiza
-				trigger_event = { id = gg_argentina_cal.20 days = 3862 } # 1846-08-01 ancla mensual del Tratado de Alcaraz
-				trigger_event = { id = gg_argentina_cal.21 days = 3545 } # 1845-09-18 el bloqueo desde Buenos Aires
-				trigger_event = { id = gg_argentina_cal.22 days = 3608 } # 1845-11-20 despues de las cadenas
-				trigger_event = { id = gg_argentina_cal.23 days = 3804 } # 1846-06-04 el convoy vuelve por Quebracho
-				trigger_event = { id = gg_argentina_cal.24 days = 3843 } # 1846-07-13 bases Hood desde Buenos Aires
-				trigger_event = { id = gg_argentina_cal.25 days = 5428 } # 1850-11-15 fecha de diseno: testamento de San Martin
-				# EN: 27/11/1847. (1847-1836)*365 + (331-1) = 4015 + 330 = 4345.
-				#     Cross-check: 1/3/1847 = 4015+59 = 4074 (gg_cal.14) and 1/10/1847 =
-				#     4015+273 = 4288 (gg_cal.16).
-				# ES: 27/11/1847. (1847-1836)*365 + (331-1) = 4015 + 330 = 4345.
-				#     Control: 1/3/1847 = 4015+59 = 4074 (gg_cal.14) y 1/10/1847 =
-				#     4015+273 = 4288 (gg_cal.16).
-				trigger_event = { id = gg_argentina_cal.26 days = 4345 } # 1847-11-27 Vences, autoridad y frente
-				# EN: 5/1/1851. (1851-1836)*365 + (5-1) = 5475 + 4 = 5479.
-				#     Cross-checks: 1/12/1850 = 5110+334 = 5444 (gg_argentina_cal.19), and
-				#     1/5/1851 = 5475+120 = 5595 (gg_argentina_cal.4).
-				# ES: 5/1/1851. (1851-1836)*365 + (5-1) = 5475 + 4 = 5479.
-				#     Controles: 1/12/1850 = 5110+334 = 5444 (gg_argentina_cal.19), y
-				#     1/5/1851 = 5475+120 = 5595 (gg_argentina_cal.4).
-				trigger_event = { id = gg_argentina_cal.27 days = 5479 } # 1851-01-05 La Regeneracion
-				# EN: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
-				#     Cross-checks: 5/1/1851 = 5479 (gg_argentina_cal.27) and 1/5/1851 = 5595 (gg_argentina_cal.4).
-				# ES: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
-				#     Controles: 5/1/1851 = 5479 (gg_argentina_cal.27) y 1/5/1851 = 5595 (gg_argentina_cal.4).
-				trigger_event = { id = gg_argentina_cal.35 days = 5527 } # 1851-02-22 la carta de Urquiza (gg_urquiza.1)
-				set_global_variable = gg_urquiza_prelude_seeded # EN/ES: old saves get it from gg_urquiza_prelude_migration / las partidas viejas lo reciben de la migracion
-				# EN: 29/5/1851. (1851-1836)*365 + (149-1) = 5475 + 148 = 5623.
-				#     Cross-checks already in this file: 5/1/1851 = 5479 (gg_argentina_cal.27), and
-				#     4/9/1851 = 5721 (gg_cal.29).
-				# ES: 29/5/1851. (1851-1836)*365 + (149-1) = 5475 + 148 = 5623.
-				#     Controles ya presentes: 5/1/1851 = 5479 (gg_argentina_cal.27), y
-				#     4/9/1851 = 5721 (gg_cal.29).
-				trigger_event = { id = gg_argentina_cal.28 days = 5623 } # 1851-05-29 Convencion de Montevideo
-				# EN: 21/11/1851. (1851-1836)*365 + (325-1) = 5475 + 324 = 5799.
-				#     The same checks bracket it: 4/9/1851 = 5721 and 1/2/1852 = 5871.
-				# ES: 21/11/1851. (1851-1836)*365 + (325-1) = 5475 + 324 = 5799.
-				#     Los mismos controles lo encierran: 4/9/1851 = 5721 y 1/2/1852 = 5871.
-				trigger_event = { id = gg_argentina_cal.29 days = 5799 } # 1851-11-21 precio del Ejercito Grande
-			}
+			# EN: the Argentine prehistory (la Argentina is a hard requirement since 24/9/2026, so no probe).
+			# ES: la previa argentina (la Argentina es requisito desde el 24/9/2026: ya no hay sonda).
+			set_global_variable = { name = gg_corrientes_agravio value = 0 }
+			set_global_variable = { name = gg_norte_agravio value = 0 }
+			set_global_variable = { name = gg_entre_rios_agravio value = 0 }
+			# EN: 365-day cross-checks: 1837-04-01 = (1837-1836)*365+(91-1) = 455 (.15); 1850-12-01 = (1850-1836)*365+(335-1) = 5444 (.19).
+			# ES: Controles con las entradas .15 y .19: 455 y 5444 días; sin bisiestos.
+			# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+			trigger_event = { id = gg_argentina_cal.30 days = 1338 } # 1839-09-01: (1839-1836)*365+(244-1) = 1338
+			# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+			trigger_event = { id = gg_argentina_cal.31 days = 2341 } # 1842-06-01: (1842-1836)*365+(152-1) = 2341
+			# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+			trigger_event = { id = gg_argentina_cal.32 days = 3101 } # 1844-07-01: (1844-1836)*365+(182-1) = 3101
+			# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+			trigger_event = { id = gg_argentina_cal.33 days = 3344 } # 1845-03-01: (1845-1836)*365+(60-1) = 3344
+			# EN: Design date within the documented window; ES: fecha de diseño dentro de la ventana documentada.
+			trigger_event = { id = gg_argentina_cal.34 days = 4135 } # 1847-05-01: (1847-1836)*365+(121-1) = 4135
+			trigger_event = { id = gg_argentina_cal.14 days = 90 }   # 1836-04-01 primer pliego de Corrientes
+			trigger_event = { id = gg_argentina_cal.15 days = 455 }  # 1837-04-01 la renta de la aduana
+			trigger_event = { id = gg_argentina_cal.16 days = 816 }  # 1838-03-28 empieza el bloqueo frances
+			trigger_event = { id = gg_argentina_cal.17 days = 1064 } # 1838-12-01 llega la noticia de Heredia
+			trigger_event = { id = gg_argentina_cal.18 days = 1519 } # 1840-03-01 armas y Lamadrid a Tucuman
+			trigger_event = { id = gg_argentina_cal.19 days = 5444 } # 1850-12-01 las dos ordenes a Urquiza
+			trigger_event = { id = gg_argentina_cal.20 days = 3862 } # 1846-08-01 ancla mensual del Tratado de Alcaraz
+			trigger_event = { id = gg_argentina_cal.21 days = 3545 } # 1845-09-18 el bloqueo desde Buenos Aires
+			trigger_event = { id = gg_argentina_cal.22 days = 3608 } # 1845-11-20 despues de las cadenas
+			trigger_event = { id = gg_argentina_cal.23 days = 3804 } # 1846-06-04 el convoy vuelve por Quebracho
+			trigger_event = { id = gg_argentina_cal.24 days = 3843 } # 1846-07-13 bases Hood desde Buenos Aires
+			trigger_event = { id = gg_argentina_cal.25 days = 5428 } # 1850-11-15 fecha de diseno: testamento de San Martin
+			# EN: 27/11/1847. (1847-1836)*365 + (331-1) = 4015 + 330 = 4345.
+			#     Cross-check: 1/3/1847 = 4015+59 = 4074 (gg_cal.14) and 1/10/1847 =
+			#     4015+273 = 4288 (gg_cal.16).
+			# ES: 27/11/1847. (1847-1836)*365 + (331-1) = 4015 + 330 = 4345.
+			#     Control: 1/3/1847 = 4015+59 = 4074 (gg_cal.14) y 1/10/1847 =
+			#     4015+273 = 4288 (gg_cal.16).
+			trigger_event = { id = gg_argentina_cal.26 days = 4345 } # 1847-11-27 Vences, autoridad y frente
+			# EN: 5/1/1851. (1851-1836)*365 + (5-1) = 5475 + 4 = 5479.
+			#     Cross-checks: 1/12/1850 = 5110+334 = 5444 (gg_argentina_cal.19), and
+			#     1/5/1851 = 5475+120 = 5595 (gg_argentina_cal.4).
+			# ES: 5/1/1851. (1851-1836)*365 + (5-1) = 5475 + 4 = 5479.
+			#     Controles: 1/12/1850 = 5110+334 = 5444 (gg_argentina_cal.19), y
+			#     1/5/1851 = 5475+120 = 5595 (gg_argentina_cal.4).
+			trigger_event = { id = gg_argentina_cal.27 days = 5479 } # 1851-01-05 La Regeneracion
+			# EN: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
+			#     Cross-checks: 5/1/1851 = 5479 (gg_argentina_cal.27) and 1/5/1851 = 5595 (gg_argentina_cal.4).
+			# ES: 22/2/1851. (1851-1836)*365 + (53-1) = 5475 + 52 = 5527.
+			#     Controles: 5/1/1851 = 5479 (gg_argentina_cal.27) y 1/5/1851 = 5595 (gg_argentina_cal.4).
+			trigger_event = { id = gg_argentina_cal.35 days = 5527 } # 1851-02-22 la carta de Urquiza (gg_urquiza.1)
+			set_global_variable = gg_urquiza_prelude_seeded # EN/ES: old saves get it from gg_urquiza_prelude_migration / las partidas viejas lo reciben de la migracion
+			# EN: 29/5/1851. (1851-1836)*365 + (149-1) = 5475 + 148 = 5623.
+			#     Cross-checks already in this file: 5/1/1851 = 5479 (gg_argentina_cal.27), and
+			#     4/9/1851 = 5721 (gg_notice.101).
+			# ES: 29/5/1851. (1851-1836)*365 + (149-1) = 5475 + 148 = 5623.
+			#     Controles ya presentes: 5/1/1851 = 5479 (gg_argentina_cal.27), y
+			#     4/9/1851 = 5721 (gg_notice.101).
+			trigger_event = { id = gg_argentina_cal.28 days = 5623 } # 1851-05-29 Convencion de Montevideo
+			# EN: 21/11/1851. (1851-1836)*365 + (325-1) = 5475 + 324 = 5799.
+			#     The same checks bracket it: 4/9/1851 = 5721 and 1/2/1852 = 5871.
+			# ES: 21/11/1851. (1851-1836)*365 + (325-1) = 5475 + 324 = 5799.
+			#     Los mismos controles lo encierran: 4/9/1851 = 5721 y 1/2/1852 = 5871.
+			trigger_event = { id = gg_argentina_cal.29 days = 5799 } # 1851-11-21 precio del Ejercito Grande
 			trigger_event = { id = gg_argentina_cal.1 days = 1159 }  # 1839-03-06 Corrientes se separa o permanece
 			# EN/ES: 23/9/2026 (Juan) -- Buenos Aires and the siege (events/gg_rosas.txt) / Buenos Aires y el sitio
 			trigger_event = { id = gg_rosas.101 days = 2601 } # 1843-02-16 las divisiones argentinas ante Montevideo
@@ -300,11 +278,9 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.26 days = 5358 }   # 1850-09-06 contratos de setiembre
 			trigger_event = { id = gg_cal.27 days = 5623 }   # 1851-05-29 se renuncia al subsidio
 			trigger_event = { id = gg_cal.28 days = 5626 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian allia
-			trigger_event = { id = gg_cal.29 days = 5721 }   # 1851-09-04 Caxias cruza
 			trigger_event = { id = gg_cal.30 days = 2614 }   # 1843-03-01 el subsidio frances de la Asamblea
 			trigger_event = { id = gg_cal.31 days = 3545 }   # 1845-09-18 el bloqueo anglo-frances (FE-8)
 			trigger_event = { id = gg_cal.32 days = 4543 }   # 1848-06-13 la revolucion de febrero pega en el Plata
-			trigger_event = { id = gg_cal.33 days = 5623 }   # 1851-05-29 la alianza con el Brasil
 		}
 		c:URU ?= {
 			trigger_event = { id = gg_cal.1 days = 2601 }   # 1843-02-16 Los vascos se pasan al Cerrito
@@ -337,11 +313,9 @@ guerra_grande_on_game_start = {
 			trigger_event = { id = gg_cal.26 days = 5358 }   # 1850-09-06 contratos de setiembre
 			trigger_event = { id = gg_cal.27 days = 5623 }   # 1851-05-29 se renuncia al subsidio
 			trigger_event = { id = gg_cal.28 days = 5626 }   # 1851-06-01 Urquiza, 1851 (after the Brazilian allia
-			trigger_event = { id = gg_cal.29 days = 5721 }   # 1851-09-04 Caxias cruza
 			trigger_event = { id = gg_cal.30 days = 2614 }   # 1843-03-01 el subsidio frances de la Asamblea
 			trigger_event = { id = gg_cal.31 days = 3545 }   # 1845-09-18 el bloqueo anglo-frances (FE-8)
 			trigger_event = { id = gg_cal.32 days = 4543 }   # 1848-06-13 la revolucion de febrero pega en el Plata
-			trigger_event = { id = gg_cal.33 days = 5623 }   # 1851-05-29 la alianza con el Brasil
 		}
 		# EN: In 1836 the Republic has two borders at once, and the men of the time said so in
 		#     those words: Juan Manuel de la Sota's Catecismo geografico distinguishes the

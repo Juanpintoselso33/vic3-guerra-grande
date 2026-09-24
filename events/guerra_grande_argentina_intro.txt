@@ -76,8 +76,6 @@ gg_arg_intro.1 = {
 		#     / it is fired on Argentina and nowhere else, so ask for the country, not for a mark
 		c:ARG ?= this
 		NOT = { has_journal_entry = je_gg_delegation }
-		# EN/ES: la sonda de «la Argentina»: sin ella este lado no existe / the «la Argentina» probe
-		exists = s:STATE_ENTRE_RIOS
 	}
 
 	option = {
@@ -115,7 +113,6 @@ gg_arg_intro.2 = {
 				limit = {
 					c:ARG ?= this
 					NOT = { has_journal_entry = je_gg_delegation }
-					exists = s:STATE_ENTRE_RIOS
 				}
 				add_contextless_journal_entry = je_gg_delegation
 			}

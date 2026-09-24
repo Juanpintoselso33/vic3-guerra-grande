@@ -8,7 +8,7 @@
 #     Defensa, 55 mobilised against 14. That is the war ending in an afternoon, exactly as he said.
 #     This allows the play only when the two governments are fighting each other, or when it is
 #     1851 and the intervention is the historical one: Caxias crossing the border in September of
-#     that year, which is already scripted as gg_contingent.8.
+#     that year, which is told by events (gg_notice.2, after the Convention of Montevideo).
 # ES: esta jugada diplomatica, es una potencia extranjera metiendose en la Guerra Grande?
 #     La regla de diseño de Juan para este mod, dicha dos veces y sin lugar a dudas: "que no haya
 #     intervenciones directas de Brasil ni Argentina, sino mediante tropas o divisiones" y "que sea
@@ -18,8 +18,8 @@
 #     exigiendo Maldonado, Paysandu, Cerro Largo y San Jose para la Defensa, 55 movilizados contra
 #     14. Eso es la guerra terminada en una tarde, exactamente lo que el dijo.
 #     Esto permite la jugada solo si los dos gobiernos se pelean entre si, o si ya es 1851 y la
-#     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que ya
-#     esta escrita como gg_contingent.8.
+#     intervencion es la historica: Caxias cruzando la frontera en setiembre de ese anio, que la
+#     cuentan los eventos (gg_notice.2, despues de la Convencion de Montevideo).
 guerra_grande_play_is_allowed = {
 	# EN/ES: 24/9/2026 (Juan, AUD-ARG-1850) -- nobody annexes or conquers Argentina while its dated calendar is
 	#     pending (common/scripted_triggers/gg_arg_identity.txt) / nadie anexa ni conquista a la Argentina
@@ -67,18 +67,18 @@ guerra_grande_play_is_allowed = {
 		#     ANY country in the world open a play against either oriental government, not just the
 		#     historical intervention. That is also the main way a foreign power ends up holding
 		#     Montevideo, which is the war's failure state. The hour is Brazil's: Caxias crossing the
-		#     border in September, which is already written as gg_contingent.8.
+		#     border in September, which is told by events (gg_notice.2).
 		# ES: decia solo "year >= 1851", y desde el 1 de enero de 1851 cualquier pais del mundo podia
 		#     abrirle una jugada a cualquiera de los dos gobiernos orientales, no solo la intervencion
 		#     historica. Es ademas el camino principal por el que una potencia extranjera termina con
 		#     Montevideo, que es el fracaso de la guerra. La hora es la del Brasil: Caxias cruzando la
-		#     frontera en setiembre, que ya esta escrito como gg_contingent.8.
+		#     frontera en setiembre, que lo cuentan los eventos (gg_notice.2).
 		# EN: CB-01, Codex review 23/9/2026 -- the 1851 door for Brazil is closed: decisiones.md (23/9, "the siege
 		#     without the engine's war") keeps Brazil out until the signed peace, not until 1851, and Caxias's
-		#     crossing is gg_contingent.8, which opens no play. After the peace the Republic is an ordinary
+		#     crossing is told by gg_notice.2, which opens no play. After the peace the Republic is an ordinary
 		#     country again: the marks never go away, so without this it stayed untouchable for ever.
 		# ES: se cierra la puerta de 1851 para el Brasil: decisiones.md deja al Brasil afuera hasta la paz firmada,
-		#     no hasta 1851, y el cruce de Caxias es gg_contingent.8, que no abre ninguna jugada. Despues de la
+		#     no hasta 1851, y el cruce de Caxias lo cuenta gg_notice.2, que no abre ninguna jugada. Despues de la
 		#     paz la Republica vuelve a ser un pais comun: las marcas no se borran, y sin esto quedaba intocable.
 		has_global_variable = gg_peace_settled
 	}

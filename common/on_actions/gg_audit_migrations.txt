@@ -96,7 +96,6 @@ gg_rebel_diplomacy_migration = {
 gg_urquiza_prelude_migration = {
 	trigger = {
 		c:ARG ?= this
-		exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard / la guarda de «la Argentina»
 		NOT = { has_global_variable = gg_urquiza_prelude_seeded }
 		NOT = { has_global_variable = gg_arg_cal_done_35 }
 		game_date >= 1851.2.22

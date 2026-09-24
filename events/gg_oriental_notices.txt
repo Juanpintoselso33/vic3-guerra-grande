@@ -2,8 +2,8 @@
 
 # -------------------------------------------------------------------------------------------------
 # EN: 23/9/2026 (Juan) -- the Oriental side of two gaps of docs/grafo/historia-por-pais-2026-09-23.md:
-#     C4, the Defensa never heard how its war ended (the Convention of 29 May 1851 and Caxias's crossing,
-#     which with la Argentina loaded is switched off in gg_contingent.8), and G1, the Cerrito had almost
+#     C4, the Defensa never heard how its war ended (the Convention of 29 May 1851 and Caxias's crossing),
+#     and G1, the Cerrito had almost
 #     nothing from late 1846 to 1850. Each event here tells, in its own side's voice, something that the
 #     other side already gets, and only if it happened in this game: the trigger reads the mark the
 #     source event wrote. Delivery goes through gg_notice_relay (common/scripted_effects/gg_notices.txt),
@@ -27,11 +27,10 @@
 #     https://www.dipublico.org/122098/ -- signatories, arts. I, IV, V, VII, XIV, XIX, XXI, XXIV quoted
 #     literally; SOURCES_powers.md section 8.
 # EN: signed = the mark of the signature: Entre Rios's gg_argentina.13.a (gg_argentina_sign_montevideo_convention
-#     writes gg_montevideo_free_navigation, and nothing else does). Only with la Argentina: without it the
-#     Pronunciamiento that enables the convention never comes (its relay needs s:STATE_ENTRE_RIOS; Codex 23/9),
-#     and gg_contingent.8 carries the alliance and the crossing in one decision.
-# ES: firmada = la marca de la firma (gg_argentina.13.a). Solo con la Argentina: sin ella no hay Pronunciamiento
-#     que habilite la convencion, y gg_contingent.8 lleva la alianza y el cruce en una sola decision.
+#     writes gg_montevideo_free_navigation, and nothing else does). The 1851 route for a game without la Argentina
+#     (gg_contingent.8, gg_powers.5) was removed on 24/9/2026: la Argentina is a hard requirement.
+# ES: firmada = la marca de la firma (gg_argentina.13.a). La ruta de 1851 sin la Argentina (gg_contingent.8,
+#     gg_powers.5) se saco el 24/9/2026: la Argentina es requisito.
 gg_notice.1 = {
 	type = country_event
 	placement = ROOT
@@ -87,15 +86,13 @@ gg_notice.1 = {
 	}
 }
 
-# 9/1851 -- the Empire's army crosses, from the Defensa's side. Only with la Argentina loaded: without it
-#     gg_contingent.8 is this crossing and its treaties.
+# 9/1851 -- the Empire's army crosses, from the Defensa's side.
 # SOURCE / FUENTE: pt.wikipedia, Campanha do Uruguai (16,200 men in four divisions, by the Santana pass;
-#     the figures of gg_contingent.8); convention of 29/5/1851, arts. IV, V, VI, https://www.dipublico.org/122098/
+#     the figures of the removed gg_contingent.8); convention of 29/5/1851, arts. IV, V, VI, https://www.dipublico.org/122098/
 # EN: crossing = the convention signed (gg_montevideo_free_navigation) and the Empire in the game; the
-#     event itself is the crossing, and its first option lists the Allied Army in the siege journal, as
-#     gg_contingent.8.a does.
+#     event itself is the crossing, and its first option lists the Allied Army in the siege journal.
 # ES: el cruce = la convencion firmada y el Imperio en la partida; el evento es el cruce, y su primera
-#     opcion lista al Ejercito Aliado en el journal del sitio, como gg_contingent.8.a.
+#     opcion lista al Ejercito Aliado en el journal del sitio.
 gg_notice.2 = {
 	type = country_event
 	placement = ROOT
@@ -112,7 +109,6 @@ gg_notice.2 = {
 		has_variable = guerra_grande_defensa_government
 		has_global_variable = guerra_grande_open_war
 		any_country = { has_variable = guerra_grande_cerrito_government }
-		exists = s:STATE_ENTRE_RIOS
 		exists = c:BRZ
 		has_global_variable = gg_montevideo_free_navigation
 		NOT = { has_variable = gg_allied_army_arrived }

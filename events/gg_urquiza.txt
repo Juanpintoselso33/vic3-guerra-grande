@@ -169,7 +169,6 @@ gg_urquiza.3 = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_urquiza.3|" # GG_TRAZA
 		if = {
 			limit = {
-				exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard, as gg_argentina_cal.4 / la guarda de «la Argentina»
 				c:ARG ?= this
 				gg_pact_forced_war = yes
 				NOT = { has_global_variable = gg_pact_settled }
@@ -199,7 +198,6 @@ gg_urquiza.3 = {
 		#     el Pacto se cierra hoy como dice la regla, con la confederacion negociada. Si no, quedaba abierto para siempre.
 		else_if = {
 			limit = {
-				exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard / la guarda de «la Argentina»
 				c:ARG ?= this
 				gg_pact_negotiated = yes
 				NOT = { has_global_variable = gg_pact_settled }

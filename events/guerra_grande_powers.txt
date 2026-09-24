@@ -126,40 +126,6 @@ gg_powers.4 = {
 	}
 }
 
-# EN: T4, C20. 29 May 1851 -- the alliance of the Defensa, Brazil and Entre Rios. It weighs what
-#     the Defensa already agreed with the Empire (gg_loan.2).
-# ES: T4, C20. 29 de mayo de 1851 -- la alianza de la Defensa, el Brasil y Entre Rios. Pesa lo que
-#     la Defensa ya haya pactado con el Imperio.
-gg_powers.5 = {
-	type = country_event
-	hidden = yes
-	trigger = {
-	has_global_variable = guerra_grande_split_done
-	has_global_variable = gg_montevideo_convention_enabled
-	NOT = { has_global_variable = gg_confederacion_negociada }
-	# EN/ES: la Argentina's visible convention writes the patron change itself / la convencion
-	#     visible de la Argentina escribe ella misma el cambio de padrino.
-	NOT = { exists = s:STATE_ENTRE_RIOS }
-	}
-	immediate = {
-		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_powers.5|" # GG_TRAZA
-		if = {
-			limit = { has_global_variable = gg_brazil_deal }
-			gg_patron_change = { PATRON = brasil DELTA = 20 }
-		}
-		else = {
-			gg_patron_change = { PATRON = brasil DELTA = 5 }
-		}
-		hidden_effect = {
-			if = {
-				limit = { NOT = { has_global_variable = gg_cal_done_33 } }
-				set_global_variable = gg_cal_done_33
-			}
-		}
-	}
-}
-
-
 # F2-1 - Purvis does not recognise the blockade (April 1843)
 # SOURCE / FUENTE: SOURCES_powers.md s.1 (Purvis, Caillet-Bois via es.wikipedia, the Isla de
 #     Ratas powder, "Mr. Brown", Sarmiento, Aberdeen).
@@ -382,15 +348,11 @@ gg_powers.12 = {
 		has_global_variable = guerra_grande_open_war
 		NOT = { has_global_variable = gg_peace_settled }
 		NOT = { has_global_variable = gg_peace_offered }
-		# EN: With the Argentine side loaded, Buenos Aires owns the answer and hands it here. Without
-		#     that side, this is exactly the old gate and the oriental game is unchanged.
-		# ES: Con el lado argentino, Buenos Aires decide y entrega la respuesta aca. Sin ese lado, esta
-		#     es exactamente la guarda anterior y la partida oriental no cambia.
+		# EN: Buenos Aires owns the answer and hands it here (the branch for a game without la Argentina
+		#     was removed on 24/9/2026: la Argentina is a hard requirement).
+		# ES: Buenos Aires decide y entrega la respuesta aca (la rama para una partida sin la Argentina se
+		#     saco el 24/9/2026: la Argentina es requisito).
 		OR = {
-			AND = {
-				NOT = { exists = s:STATE_ENTRE_RIOS }
-				NOT = { has_global_variable = gg_hood_done }
-			}
 			AND = {
 				has_global_variable = gg_hood_argentina_pending
 				NOT = { has_global_variable = gg_hood_cerrito_received }
@@ -1153,7 +1115,6 @@ gg_powers.19 = {
 		# EN: look for Brazil (Lamas): Brazil rises early, the treaties will be the price. Cheaper with Herrera.
 		# ES: buscar al Brasil (Lamas): el Brasil sube antes, el precio seran los tratados. Mas barato con Herrera.
 		gg_patron_change = { PATRON = brasil DELTA = 15 }
-		set_global_variable = gg_brazil_deal
 		# EN/ES: playtest 2026-09-19 -- cheaper if Lamas is already in Rio: the mission is open, not new
 		#     / mas barato si Lamas ya esta en Rio: la mision esta abierta, no hay que empezarla
 		if = {

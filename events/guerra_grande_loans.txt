@@ -185,7 +185,6 @@ gg_loan.2 = {
 		custom_tooltip = gg_loan.2.a_tt2
 		# EN/ES: T4 -- FE-1: the Empire as ally / el Imperio como aliado
 		gg_patron_change = { PATRON = brasil DELTA = 25 }
-		set_global_variable = gg_brazil_deal
 		default_option = yes
 		add_treasury = 15000
 		add_modifier = {
@@ -221,7 +220,6 @@ gg_loan.2 = {
 		custom_tooltip = gg_loan.2.b_tt2
 		# EN/ES: T4 -- FE-1: through Souza's house, half the weight / por la casa de Souza, a medias
 		gg_patron_change = { PATRON = brasil DELTA = 10 }
-		set_global_variable = gg_brazil_deal
 		add_treasury = 10000
 		add_modifier = {
 			name = guerra_grande_maua_paper

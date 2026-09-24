@@ -424,7 +424,7 @@ gg_defensa_city_in_arms = {
 #     four departments in July 1844, outside the Guerra Grande. The Empire stayed out of the war until the
 #     alliance of 1851: Sinimbu's alliance of early 1845 remained a project (Acevedo, Anales II, in
 #     SOURCES_order_of_battle.md) and Caxias crossed on 4 September 1851, which the mod brings in by
-#     events (gg_contingent.8). Vanilla's switch for "no aggressive plays" (country_cut_down_to_size).
+#     events (gg_argentina.13, the convention, and gg_notice.2, the crossing). Vanilla's switch for "no aggressive plays" (country_cut_down_to_size).
 #     Placed at the split, removed with the other wartime modifiers.
 # ES: la IA del Brasil le abrio una guerra propia al Cerrito y se quedo con los cuatro departamentos en julio
 #     de 1844. El Imperio se mantuvo afuera hasta la alianza de 1851: la alianza de Sinimbu de 1845 quedo

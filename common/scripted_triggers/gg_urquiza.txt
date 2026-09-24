@@ -44,7 +44,6 @@ gg_urquiza_no_convention = {
 #     Rios leal que un jugador tomo en Alcaraz, todavia sujeto. La cadena del Pronunciamiento lee esto en vez de «no
 #     existe ENR», asi el asiento de 1846 no apaga el de 1851.
 gg_entre_rios_with_rosas = {
-	exists = s:STATE_ENTRE_RIOS
 	OR = {
 		AND = {
 			NOT = { exists = c:ENR }
@@ -65,7 +64,6 @@ gg_entre_rios_with_rosas = {
 #     de Rosas de 1847-1851 se entregan entonces a c:ENR, del lado de Urquiza; con Entre Rios argentino van a Buenos
 #     Aires como antes.
 gg_entre_rios_alcaraz_loyal = {
-	exists = s:STATE_ENTRE_RIOS
 	NOT = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }
 	c:ENR ?= {
 		has_variable = gg_enr_alcaraz_seat
@@ -88,7 +86,6 @@ gg_entre_rios_alcaraz_loyal = {
 #     asi que la carta llega igual. Lo que depende de la provincia (su reclamo, su cuenta de agravios) espera
 #     gg_entre_rios_with_rosas adentro del evento; la decision del 1/5 conserva su propia prueba, mas estricta.
 gg_urquiza_prelude_possible = {
-	exists = s:STATE_ENTRE_RIOS # EN/ES: the «la Argentina» guard / la guarda de «la Argentina»
 	exists = c:ARG
 	NOT = { has_global_variable = gg_pact_settled }
 	NOT = { has_global_variable = gg_delegation_gone_entre_rios }

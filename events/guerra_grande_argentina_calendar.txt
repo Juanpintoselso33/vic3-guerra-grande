@@ -83,8 +83,6 @@ gg_argentina_cal.1 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_1 }
-					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					NOT = { exists = c:CRR }
 					exists = s:STATE_CORRIENTES.region_state:ARG
@@ -120,8 +118,6 @@ gg_argentina_cal.2 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_2 }
-					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					NOT = { exists = c:CLN }
 					# EN/ES: Tucuman es la capital de la Coalicion: sin ella no hay pronunciamiento
@@ -157,8 +153,6 @@ gg_argentina_cal.3 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_3 }
-					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: no crea pais: le suma un estado a uno que ya existe. Si la Coalicion no
 					#     llego a nacer, o ya cayo, no hay a quien adherir.
@@ -184,8 +178,6 @@ gg_argentina_cal.4 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_4 }
-					# EN/ES: guarda de «la Argentina»: Entre Rios no existe sin ella / the guard
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: 23/9 (Juan, §2) -- or the loyal Entre Rios of Alcaraz / o el Entre Rios leal de Alcaraz
 					gg_entre_rios_with_rosas = yes
@@ -239,7 +231,6 @@ gg_argentina_cal.5 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_5 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
 				c:ARG = { trigger_event = { id = gg_argentina.10 days = 0 popup = yes } }
@@ -259,7 +250,6 @@ gg_argentina_cal.6 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_6 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
 				c:ARG = { trigger_event = { id = gg_argentina.11 days = 0 popup = yes } }
@@ -279,7 +269,6 @@ gg_argentina_cal.7 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_7 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
 				c:ARG = { trigger_event = { id = gg_argentina.12 days = 0 popup = yes } }
@@ -299,7 +288,6 @@ gg_argentina_cal.8 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_8 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 				}
 				c:ARG = { trigger_event = { id = gg_argentina.20 days = 0  } }
@@ -319,7 +307,6 @@ gg_argentina_cal.9 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_9 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN: only if there is a war to lose. The comment said this and the code did not:
 					#     it asked whether Entre Rios EXISTED, which is a different question. A 1851
@@ -354,7 +341,6 @@ gg_argentina_cal.10 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_10 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: la misma guarda que el relevo de Pacheco / the same guard as Pacheco's relay
 					exists = c:ENR
@@ -378,7 +364,6 @@ gg_argentina_cal.11 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_11 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: sin Liga no hay Director / no League, no Director
 					exists = c:CLN
@@ -400,7 +385,6 @@ gg_argentina_cal.12 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_12 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					# EN/ES: o la provincia esta en pie, o Rosas la tiene y se la pueden quitar. Si no
 					#     es ninguna de las dos, Caa Guazu no tiene donde pasar / either the province
@@ -427,7 +411,6 @@ gg_argentina_cal.13 = {
 			if = {
 				limit = {
 					NOT = { has_global_variable = gg_arg_cal_done_13 }
-					exists = s:STATE_ENTRE_RIOS
 					exists = c:ARG
 					OR = {
 						exists = c:CRR
@@ -458,7 +441,6 @@ gg_argentina_cal.14 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_14 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
@@ -475,7 +457,6 @@ gg_argentina_cal.15 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_15 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
@@ -492,7 +473,6 @@ gg_argentina_cal.16 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_16 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = s:STATE_CORRIENTES.region_state:ARG
 			}
@@ -510,7 +490,6 @@ gg_argentina_cal.17 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_17 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.65 days = 0 popup = yes } }
@@ -529,7 +508,6 @@ gg_argentina_cal.18 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_18 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = s:STATE_TUCUMAN.region_state:ARG
 			}
@@ -547,7 +525,6 @@ gg_argentina_cal.19 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_19 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
 				#     / o el Entre Rios leal de Alcaraz: la orden le llega a Urquiza alli
@@ -580,7 +557,6 @@ gg_argentina_cal.20 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_20 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = c:CRR
 				c:ARG = { has_war_with = c:CRR }
@@ -611,7 +587,6 @@ gg_argentina_cal.21 = {
 				NOT = { has_global_variable = gg_arg_cal_done_21 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
 				gg_plata_intervention_at = { MONTHS = 2 DATE = 1845.9.18 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = guerra_grande_open_war
 			}
@@ -624,7 +599,6 @@ gg_argentina_cal.21 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_21 }
 				year < 1856
-				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
 			}
 			trigger_event = { id = gg_argentina_cal.21 days = 30 }
@@ -642,7 +616,6 @@ gg_argentina_cal.22 = {
 				NOT = { has_global_variable = gg_arg_cal_done_22 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
 				gg_plata_intervention_at = { MONTHS = 4 DATE = 1845.11.20 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance
 			}
@@ -655,7 +628,6 @@ gg_argentina_cal.22 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_22 }
 				year < 1856
-				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
 				# EN/ES: CB-04 (23/9/2026) -- Buenos Aires answered the blockade without fortifying the Parana:
 				#     there is no Obligado to wait for (it used to retry a hundred times) / se contesto el
@@ -680,7 +652,6 @@ gg_argentina_cal.23 = {
 				NOT = { has_global_variable = gg_arg_cal_done_23 }
 				# EN/ES: C10 -- a link of the intervention chain / un eslabon de la cadena de la intervencion
 				gg_plata_intervention_at = { MONTHS = 10 DATE = 1846.6.4 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				has_global_variable = gg_parana_resistance_continues
 			}
@@ -693,7 +664,6 @@ gg_argentina_cal.23 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_23 }
 				year < 1856
-				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
 				# EN/ES: CB-04 -- the branch closed before Quebracho: no resistance on the Parana, or Obligado
 				#     answered by taking the mediation / la rama se cerro antes de Quebracho
@@ -719,7 +689,6 @@ gg_argentina_cal.24 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_24 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = c:CER
 				has_global_variable = guerra_grande_open_war
@@ -740,7 +709,6 @@ gg_argentina_cal.24 = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_24 }
 				year < 1856
-				exists = s:STATE_ENTRE_RIOS
 				NOT = { has_global_variable = gg_peace_settled }
 				# EN/ES: CB-04 -- the Hood bases were already put to the table (gg_powers.12 on the oriental side):
 				#     nothing left to wait for / las bases Hood ya se pusieron sobre la mesa
@@ -769,8 +737,6 @@ gg_argentina_cal.25 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_25 }
-				# EN/ES: the «la Argentina» guard; without that side, nothing changes / sin ese lado, nada cambia
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.26 days = 0 popup = yes } }
@@ -796,7 +762,6 @@ gg_argentina_cal.26 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_26 }
-				exists = s:STATE_ENTRE_RIOS
 				# EN/ES: 22/9/2026 (event audit) -- Vences's army is raised in Argentine Entre Rios
 				#     / el ejercito de Vences se levanta en Entre Rios argentino
 				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
@@ -837,7 +802,6 @@ gg_argentina_cal.27 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_27 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				# EN/ES: 23/9 (Juan, AUD-SEAT-ALCARAZ) -- or the loyal Entre Rios of Alcaraz: the order reaches Urquiza there
 				#     / o el Entre Rios leal de Alcaraz: la orden le llega a Urquiza alli
@@ -877,7 +841,6 @@ gg_argentina_cal.28 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_28 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = c:ENR
 				has_global_variable = gg_montevideo_convention_enabled
@@ -910,7 +873,6 @@ gg_argentina_cal.28 = {
 		else_if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_28 }
-				exists = s:STATE_ENTRE_RIOS
 				c:ARG ?= this
 				game_date < 1851.11.14
 				NOT = { has_global_variable = gg_confederacion_negociada }
@@ -936,7 +898,6 @@ gg_argentina_cal.29 = {
 		if = {
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_29 }
-				exists = s:STATE_ENTRE_RIOS
 				exists = c:ARG
 				exists = c:ENR
 				has_global_variable = guerra_grande_treaties_signed
@@ -960,7 +921,6 @@ gg_argentina_cal.30 = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_30 }
-    exists = s:STATE_ENTRE_RIOS
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
    }
@@ -979,7 +939,6 @@ gg_argentina_cal.31 = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_31 }
-    exists = s:STATE_ENTRE_RIOS
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
    }
@@ -998,7 +957,6 @@ gg_argentina_cal.32 = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_32 }
-    exists = s:STATE_ENTRE_RIOS
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
    }
@@ -1017,7 +975,6 @@ gg_argentina_cal.33 = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_33 }
-    exists = s:STATE_ENTRE_RIOS
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
      NOT = { has_global_variable = gg_delegation_gone_entre_rios }
@@ -1038,7 +995,6 @@ gg_argentina_cal.34 = {
   if = {
    limit = {
     NOT = { has_global_variable = gg_arg_cal_done_34 }
-    exists = s:STATE_ENTRE_RIOS
     exists = c:ARG
     c:ARG = { has_variable = gg_arg_rosas_seat }
      NOT = { has_global_variable = gg_delegation_gone_entre_rios }

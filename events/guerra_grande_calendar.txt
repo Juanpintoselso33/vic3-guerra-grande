@@ -601,27 +601,9 @@ gg_cal.28 = {
 	}
 }
 
-# 1851-09-04 -- Caxias cruza (gg_contingent.8, la Defensa)
-gg_cal.29 = {
-	type = country_event
-	hidden = yes
-
-	immediate = {
-		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.29|" # GG_TRAZA
-		hidden_effect = {
-			gg_cal_fire = {
-				DONE = gg_cal_done_29
-				EVENT = gg_contingent.8
-				SIDE = guerra_grande_defensa_government
-				RETRY = gg_cal.29
-			}
-		}
-	}
-}
-
-# EN: these four used to be scheduled on the Republic alone, through the dispatchers gg_powers.33
-#     to .35, and they are in the same danger: in the Cerrito branch the Republic changes tag.
-# ES: estos cuatro se agendaban solo sobre la Republica, por los despachadores gg_powers.33 a .35, y
+# EN: these three (a fourth, gg_cal.33, was removed on 24/9/2026 with the 1851 route without la Argentina) used to be
+#     scheduled on the Republic alone, through the dispatchers gg_powers.33 to .35, and they are in the same danger: in the Cerrito branch the Republic changes tag.
+# ES: estos tres (un cuarto, gg_cal.33, se saco el 24/9/2026 con la ruta de 1851 sin la Argentina) se agendaban solo sobre la Republica, por los despachadores gg_powers.33 a .35, y
 #     corren el mismo peligro: en la rama del Cerrito la Republica cambia de tag.
 
 # 1843-03-01 -- el subsidio frances de la Asamblea (gg_powers.2)
@@ -672,24 +654,6 @@ gg_cal.32 = {
 				EVENT = gg_powers.4
 				SIDE = guerra_grande_defensa_government
 				RETRY = gg_cal.32
-			}
-		}
-	}
-}
-
-# 1851-05-29 -- la alianza con el Brasil (gg_powers.5)
-gg_cal.33 = {
-	type = country_event
-	hidden = yes
-
-	immediate = {
-		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cal.33|" # GG_TRAZA
-		hidden_effect = {
-			gg_cal_fire_quiet = {
-				DONE = gg_cal_done_33
-				EVENT = gg_powers.5
-				SIDE = guerra_grande_defensa_government
-				RETRY = gg_cal.33
 			}
 		}
 	}

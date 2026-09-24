@@ -139,15 +139,6 @@ guerra_grande_argentine_auxiliaries = {
 	# EN/ES: 22/9/2026 -- paid through Rosas's monthly patron payment, not minted / lo paga el pago mensual de Rosas
 }
 
-# The treaties of 12 October 1851: 60,000 patacones a month, and the customs mortgaged for them.
-guerra_grande_brazilian_subsidy = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
-	# EN/ES: 22/9/2026 -- the money goes by the patron's monthly payment (gg_*_subsidy), not twice
-	#     / la plata va por el pago mensual del padrino, no dos veces (Brazil)
-	country_prestige_mult = -0.15
-	country_authority_add = -50
-}
-
 # Turning the Empire's money down: nobody's client, and nobody's ally either.
 guerra_grande_alone_against_the_siege = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"

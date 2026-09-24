@@ -260,7 +260,7 @@ gg_ui_siege_argentine = {
 	value = 0
 	if = { limit = { any_country = { has_variable = guerra_grande_argentine_legion_raised } } value = 1 }
 }
-# EN/ES: the Basque Chasseurs (gg_contingent.6) and the Allied Army of 1851 (gg_contingent.8)
+# EN/ES: the Basque Chasseurs (gg_contingent.6) and the Allied Army of 1851 (gg_notice.2)
 #     / los Cazadores Vascos y el Ejercito Aliado de 1851
 gg_ui_siege_brie = {
 	value = 0

@@ -175,7 +175,6 @@ gg_plata_intervention_start = {
 		c:ARG ?= {
 			if = {
 				limit = {
-					exists = s:STATE_ENTRE_RIOS
 					NOT = { has_global_variable = gg_plata_france_alone }
 				}
 				trigger_event = { id = gg_argentina_cal.21 days = 60 }    # the blockade from Buenos Aires
