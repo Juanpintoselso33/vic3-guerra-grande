@@ -67,8 +67,12 @@ gg_ba.101 = {
 		# EN: 23/9/2026 (AUD-BA-SUBJECT, buenos-aires-separada-plan.md) -- «two governments» with Entre Rios already a
 		#     subject: there are not two governments. Rosas beat Entre Rios in the real war before the rule closed the
 		#     Pact, so the Confederation has one government and nothing splits. Recorded once, and no retry.
+		#     24/9/2026 (AUD-BA-STALEMATE-ENR) -- the Pact war's own protectorate no longer reaches here: the draw undoes it
+		#     (gg_pact_stalemate_frees_enr). What is left is an Entre Rios that is gone, or a subject by another road.
 		# ES: «dos gobiernos» con Entre Rios ya sometido: no hay dos gobiernos. Rosas batio a Entre Rios en la guerra real
 		#     antes de que la regla cerrara el Pacto; la Confederacion tiene un solo gobierno y no se parte nada.
+		#     24/9: el protectorado de la propia guerra del Pacto ya no llega aca (las tablas lo deshacen); queda Entre Rios
+		#     desaparecido o sujeto por otro camino.
 		else_if = {
 			limit = {
 				c:ARG ?= this

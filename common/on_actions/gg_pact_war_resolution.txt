@@ -21,7 +21,12 @@ gg_pact_wargoal_enforced = {
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_wargoal_enforced" # GG_TRAZA
 		if = { limit = { c:ENR ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
-		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+		else = {
+			set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+			# EN/ES: 24/9/2026 (AUD-BA-STALEMATE-ENR) -- the engine made Entre Rios a protectorate; a «two governments»
+			#     reading undoes it (gg_pact_stalemate_frees_enr) / el motor hizo protectorado a Entre Rios; las tablas lo deshacen
+			set_global_variable = gg_pact_war_enforced_rosas
+		}
 	}
 }
 
@@ -40,7 +45,10 @@ gg_pact_capitulation = {
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_capitulation" # GG_TRAZA
 		if = { limit = { c:ARG ?= this } set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
-		else = { set_global_variable = { name = gg_pact_war_rosas_won value = 1 } }
+		else = {
+			set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+			set_global_variable = gg_pact_war_enforced_rosas # EN/ES: 24/9 (AUD-BA-STALEMATE-ENR) -- Entre Rios capitulated / capitulo Entre Rios
+		}
 	}
 }
 
@@ -123,6 +131,7 @@ gg_pact_back_down = {
 		if = {
 			limit = { c:ENR ?= scope:actor }
 			set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+			set_global_variable = gg_pact_war_enforced_rosas # EN/ES: 24/9 (AUD-BA-STALEMATE-ENR) -- Entre Rios backed down / retrocedio Entre Rios
 		}
 		else = { set_global_variable = { name = gg_pact_war_urquiza_won value = 1 } }
 		c:ARG ?= { trigger_event = { id = gg_caseros.6 days = 1 } }

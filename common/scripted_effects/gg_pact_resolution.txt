@@ -18,6 +18,33 @@ gg_rosista_client_release = {
 	}
 }
 
+# EN: 24/9/2026 (AUD-BA-STALEMATE-ENR, decided by Claude while Juan slept, decisiones.md) -- «two governments» means
+#     the Pact war ends in a draw (Juan, 23/9: "la guerra termina en tablas"). When the engine's war was actually won
+#     by Rosas (Entre Rios capitulated or backed down), its war goal (make_protectorate, dp_gg_pacto_federal) had
+#     already made Entre Rios a protectorate, and the rule's reading left that in place: night sweep 24/9, trace
+#     20260924-055131 -- capitulation 3/10/1851, stalemate the same day, gg_ba.101 found Entre Rios a subject on
+#     11/9/1852 and there were never two governments. The rule's draw undoes the protectorate the war just made, the
+#     mirror of the Rosas rule creating the one the war did not make (gg_pact_resolve below). Country scope (Argentina).
+#     Only a protectorate this Pact war enforced (gg_pact_war_enforced_rosas): an Entre Rios made a subject any other way
+#     keeps gg_ba.101's «no two governments» guard (buenos-aires-separada-plan.md, section 10).
+# ES: «dos gobiernos» es la guerra del Pacto terminada en tablas. Si Rosas gano de verdad la guerra del motor, su
+#     objetivo ya habia hecho protectorado a Entre Rios y la lectura de la regla lo dejaba: nunca habia dos gobiernos.
+#     Las tablas deshacen el protectorado que acaba de imponer esta guerra (espejo de la regla de Rosas, que crea el que
+#     la guerra no impuso). Solo el de esta guerra: otra sujecion conserva la guarda de gg_ba.101.
+gg_pact_stalemate_frees_enr = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_frees_enr|" # GG_TRAZA
+	c:ENR ?= {
+		if = {
+			limit = {
+				is_subject_of = c:ARG
+				NOT = { has_war_with = c:ARG }
+			}
+			make_independent = yes
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_frees_enr| FREED=yes " # GG_TRAZA
+		}
+	}
+}
+
 # EN: Country scope (Argentina). One idempotent settlement writer for the Federal Pact.
 # ES: Scope pais (Argentina). Un escritor idempotente para todos los cierres del Pacto Federal.
 gg_pact_resolve = {
@@ -62,7 +89,17 @@ gg_pact_resolve = {
 					create_diplomatic_pact = { country = c:ENR type = protectorate }
 				}
 			}
-			else = { set_global_variable = { name = gg_pact_war_white_peace value = 1 } }
+			else = {
+				set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+				# EN/ES: 24/9 (AUD-BA-STALEMATE-ENR) -- the draw undoes the protectorate the war just enforced, now and again
+				#     tomorrow in case the engine applies it after this reading (gg_caseros.7)
+				#     / las tablas deshacen el protectorado que acaba de imponer la guerra, ahora y otra vez manana
+				if = {
+					limit = { has_global_variable = gg_pact_war_enforced_rosas }
+					gg_pact_stalemate_frees_enr = yes
+					trigger_event = { id = gg_caseros.7 days = 1 }
+				}
+			}
 		}
 		# EN/ES: 22/9/2026 (Juan) -- the provinces held as protectorates are annexed now, whatever the
 		#     settlement / las que quedaron protectorado se anexan ahora, sea cual sea el cierre
@@ -119,5 +156,10 @@ gg_pact_resolve = {
 			gg_rosista_client_release = yes # EN/ES: 23/9 (AUD-RULES-CLIENT) -- Rosas fell / cayo Rosas
 			trigger_event = { id = gg_argentina.30 days = 0 popup = yes }
 		}
+	}
+	# EN/ES: 24/9 -- a later call (the journal's on_complete the day after the war's reading) writes nothing; said so
+	#     in the trace, which read like a second settlement / una llamada posterior no escribe nada; se dice en la traza
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_resolve| ALREADY_SETTLED=yes " # GG_TRAZA
 	}
 }
