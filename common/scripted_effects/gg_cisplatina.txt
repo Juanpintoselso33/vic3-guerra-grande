@@ -143,7 +143,8 @@ gg_oriental_incorporate = {
 			c:GBR ?= { change_relations = { country = prev value = -50 } }
 			c:FRA ?= { change_relations = { country = prev value = -50 } }
 			scope:gg_oriental_country = { gg_bring_characters_to = { TARGET = c:ARG } }
-			annex_with_incorporation = scope:gg_oriental_country
+			annex = scope:gg_oriental_country # EN/ES: AUD-PROV-INCORP -- incorporation only through the filter below / la incorporacion solo por el filtro de abajo
+			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
 			gg_oriental_army_raise = yes
 		}
 	}
@@ -259,7 +260,8 @@ gg_oriental_province_join = {
 #       - every character, Oribe included, passes to Buenos Aires before the annexation (gg_bring_characters_to);
 #       - the marks move from «province of the Pact» (gg_oriental_province) to «reincorporated» (gg_reincorporated):
 #         the Pact's row goes on showing Oribe as its governor, and Brazil's war (dp_gg_cisplatina) stays possible.
-#     annex_with_incorporation, as gg_oriental_incorporate: its states are Argentine ground at once.
+#     A bare annex and then gg_incorporate_province_states (AUD-PROV-INCORP), as gg_oriental_incorporate: its states are
+#     incorporated Argentine ground at once, and nothing outside the Banda Oriental is.
 # ES: la absorcion, como la reincorporacion completa: el tamanio del ejercito antes de anexar y el Ejercito de la
 #     Provincia Oriental despues, bajo Oribe; los estados con la marca de la Provincia Oriental (la cuestion
 #     cisplatina los lee); todos los personajes a Buenos Aires antes de anexar; las marcas pasan de «provincia del
@@ -281,7 +283,8 @@ gg_oriental_province_absorb = {
 	remove_global_variable = gg_oriental_province
 	set_global_variable = gg_reincorporated
 	set_global_variable = gg_oriental_in_pact
-	annex_with_incorporation = scope:gg_oriental_country
+	annex = scope:gg_oriental_country # EN/ES: AUD-PROV-INCORP -- incorporation only through the filter below / la incorporacion solo por el filtro de abajo
+	gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
 	gg_oriental_army_raise = yes
 	clear_saved_scope = gg_oriental_country
 }

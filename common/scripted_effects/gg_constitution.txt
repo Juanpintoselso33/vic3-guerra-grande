@@ -22,6 +22,7 @@ gg_unitario_rising = {
 	if = { limit = { c:SLT ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:SLT } }
 	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:JUJ } }
 	if = { limit = { c:CTM ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:CTM } }
+	c:ARG ?= { gg_incorporate_province_states = yes } # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
 	if = {
 		limit = { exists = s:STATE_TUCUMAN.region_state:ARG NOT = { exists = c:CLN } }
 		create_country = {

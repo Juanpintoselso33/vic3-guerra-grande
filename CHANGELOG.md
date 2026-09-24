@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Reincorporated provinces are incorporated states:** when Argentina (or Urquiza's Confederation, or the Argentina
+  that remains after the Buenos Aires war) annexes a province of the Pact — the national organisation of 1851, the
+  constitution, the Coalition, the Oriental Province — its states become incorporated at once instead of showing as
+  unincorporated. Only the historical provinces (and the Banda Oriental once it rejoined as a province) are affected.
+  Games in progress are repaired once on the next monthly tick.
 - **The great malón (la Argentina's `mapuche_malon.1`) is rarer:** at most once every 5 years per country, and only
   for a country that borders an independent Mapuche country. It used to come about every two years (5% a month with
   a 3-month cooldown, ~9 in 1836-1852); now ~3 in 1836-1852, never more than 2 in 10 years, in line with the relative

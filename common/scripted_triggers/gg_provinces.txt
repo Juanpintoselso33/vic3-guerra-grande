@@ -160,3 +160,43 @@ gg_conf_province_state = {
 		state_region = s:STATE_CHACO
 	}
 }
+
+# EN: 24/9/2026 (Juan, AUD-PROV-INCORP: «they were Argentine provinces, they should be incorporated at once») -- state
+#     scope: a state of a historical Argentine province, the ground a reincorporation makes incorporated
+#     (gg_incorporate_province_states). The fourteen provinces of the Federal Pact plus Misiones (Corrientes's
+#     lands). The Banda Oriental's five states count only once it rejoined the Confederation as a province
+#     (gg_reincorporated, set before its annexation by gg_oriental_incorporate and gg_oriental_province_absorb).
+#     Left out on purpose: the frontier (La Pampa, Rio Negro, the Chaco), Tarija (Bolivian ground) and la Argentina's
+#     Parana and Santa Catarina (in Brazil's region): none was a province of the Confederation.
+# ES: scope estado: un estado de una provincia argentina historica. Las catorce provincias del Pacto Federal y
+#     Misiones; la Banda Oriental solo despues de volver como provincia (gg_reincorporated). Afuera a proposito: la
+#     frontera (La Pampa, Rio Negro, el Chaco), Tarija y Parana y Santa Catarina: ninguna fue provincia.
+gg_arg_historical_province_state = {
+	OR = {
+		state_region = s:STATE_BUENOS_AIRES
+		state_region = s:STATE_SANTA_FE
+		state_region = s:STATE_ENTRE_RIOS
+		state_region = s:STATE_CORRIENTES
+		state_region = s:STATE_MISIONES
+		state_region = s:STATE_CORDOBA
+		state_region = s:STATE_SANTIAGO_DEL_ESTERO
+		state_region = s:STATE_TUCUMAN
+		state_region = s:STATE_SALTA
+		state_region = s:STATE_JUJUY
+		state_region = s:STATE_CATAMARCA
+		state_region = s:STATE_LA_RIOJA
+		state_region = s:STATE_SAN_JUAN
+		state_region = s:STATE_MENDOZA
+		state_region = s:STATE_SAN_LUIS
+		AND = {
+			has_global_variable = gg_reincorporated
+			OR = {
+				state_region = s:STATE_MONTEVIDEO
+				state_region = s:STATE_SAN_JOSE
+				state_region = s:STATE_MALDONADO
+				state_region = s:STATE_PAYSANDU
+				state_region = s:STATE_BANDA_ORIENTAL
+			}
+		}
+	}
+}

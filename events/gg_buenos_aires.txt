@@ -869,6 +869,7 @@ gg_ba.20 = {
 				gg_ba_take_subjects = yes
 				scope:gg_ba_absorbed = { gg_bring_characters_to = { TARGET = scope:gg_ba_keeper } }
 				annex = scope:gg_ba_absorbed
+				gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
 			}
 			if = {
 				limit = { global_var:gg_ba_winner_ba = 1 exists = scope:gg_ba_absorbed }

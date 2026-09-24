@@ -261,6 +261,7 @@ gg_pact_stalemate_partition = {
 			}
 		}
 		c:ENR = {
+			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- Rosas's ground goes as provinces / el suelo de Rosas pasa como provincias
 			if = {
 				limit = { has_state_in_state_region = STATE_ENTRE_RIOS }
 				set_capital = STATE_ENTRE_RIOS
@@ -298,7 +299,10 @@ gg_conf_province_join = {
 		}
 		if = {
 			limit = { c:$TAG$ = { is_player = no } }
-			c:ENR = { annex = c:$TAG$ }
+			c:ENR = {
+				annex = c:$TAG$
+				gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
+			}
 		}
 		else = {
 			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_conf_province_join| TAG= $TAG$ PLAYER_KEPT=yes " # GG_TRAZA

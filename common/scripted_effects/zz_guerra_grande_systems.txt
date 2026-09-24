@@ -1488,6 +1488,9 @@ gg_argentina_provinces_incorporate = {
 	# ES: la Banda Oriental recibida como provincia del Pacto entra con las demas. Antes solo la tomaba la
 	#     constitucion, un mes despues de que gg_argentina.80.a incorporara a todas las otras.
 	gg_oriental_province_join = yes
+	# EN/ES: AUD-PROV-INCORP -- and whatever province ground Argentina already held unincorporated (la Argentina's 1836
+	#     history leaves four of them so) / y la tierra provincial que la Argentina ya tenia sin incorporar
+	gg_incorporate_province_states = yes
 }
 
 # EN: One province into the one country. Scope: Argentina. Vanilla's rule for Cuba (cuba_independencia.6):
@@ -1517,6 +1520,7 @@ gg_argentina_province_join = {
 		if = {
 			limit = { c:$TAG$ = { is_player = no } }
 			annex = c:$TAG$
+			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- Argentine ground, not a colony / suelo argentino, no colonia
 		}
 		else_if = {
 			limit = { is_player = no }
@@ -1528,6 +1532,42 @@ gg_argentina_province_join = {
 			create_diplomatic_pact = { country = c:$TAG$ type = gg_pact_province }
 			gg_subject_watch = { SUBJECT = c:$TAG$ }
 		}
+	}
+}
+
+# EN: 24/9/2026 (Juan, AUD-PROV-INCORP; his game, 0.1.2: after gg_argentina.80.a on 16/5/1851 the Pact provinces and
+#     the Oriental Province showed as unincorporated states). An annexation hands the annexer the other country's
+#     states as unincorporated ground (a bare `annex`; and a save annexed with the old bare annex of the Oriental
+#     Province had it too), which for a province of the Confederation coming home is wrong: they were Argentine
+#     provinces. Scope: the country that just annexed (Argentina, Urquiza's Entre Rios, the one that remains of the
+#     two Buenos Aires governments). Every state it holds unincorporated in a historical province
+#     (gg_arg_historical_province_state) becomes incorporated, with vanilla's set_state_type (the Taiping defection,
+#     00_victoria_scripted_effects.txt, after its set_state_owner; the same loop in Mandate of Grace's subject
+#     incorporation, Workshop 3276243851, MoG_subject_state_incorporate_ib_00.txt).
+#     Nothing outside those provinces is touched. Idempotent. The trace says LEFT=yes if any is still unincorporated
+#     afterwards (the night sweep forbids it, tools/barrido_nocturno.yaml).
+# ES: una anexion le da al que anexa los estados del otro como tierra no incorporada, y para una provincia de la
+#     Confederacion que vuelve eso esta mal: eran provincias argentinas. Scope: el pais que acaba de anexar. Todo estado
+#     que tenga sin incorporar en una provincia historica pasa a incorporado. No toca nada fuera de esas provincias.
+gg_incorporate_province_states = {
+	every_scope_state = {
+		limit = {
+			is_incorporated = no
+			gg_arg_historical_province_state = yes
+		}
+		set_state_type = incorporated
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				is_incorporated = no
+				gg_arg_historical_province_state = yes
+			}
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_incorporate_province_states| LEFT=yes " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_incorporate_province_states| LEFT=no " # GG_TRAZA
 	}
 }
 

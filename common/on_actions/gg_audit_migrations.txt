@@ -20,6 +20,7 @@ on_monthly_pulse_country = {
 		gg_urquiza_prelude_migration
 		gg_oriental_left_out_migration
 		gg_brazil_deal_migration
+		gg_province_incorporation_migration
 	}
 }
 
@@ -200,5 +201,43 @@ gg_brazil_deal_migration = {
 			}
 			gg_brazil_marches_set = { ROUTE = migration }
 		}
+	}
+}
+
+# EN: 24/9/2026 (Juan, AUD-PROV-INCORP; his game, 0.1.2, played as Argentina) -- up to 0.1.2 every annexation of a
+#     province (gg_argentina.80.a on 16/5/1851, the constitution, the Coalition, the Buenos Aires chain) left its states
+#     unincorporated, and so did the old bare annex of the Oriental Province. Such a save is repaired once, on the next
+#     monthly pulse: Argentina's unincorporated states in a historical province (and the Banda Oriental once it rejoined,
+#     gg_arg_historical_province_state) become incorporated (gg_incorporate_province_states). Only where the provinces
+#     are one country already (the Pact settled and no province still Argentina's subject); a Pact that kept its
+#     provinces is not touched. A game begun with this fix has gg_province_incorporation_fixed from its first day
+#     (guerra_grande_on_game_start), so it never runs there. Not guarded by gg_new_game_no_migrations: Juan's game has it.
+# ES: hasta 0.1.2 toda anexion de una provincia dejaba sus estados sin incorporar. Esa partida se repara una vez, en el
+#     proximo pulso mensual: los estados no incorporados de la Argentina en una provincia historica pasan a incorporados.
+#     Solo si las provincias ya son un solo pais. Una partida nueva tiene la marca desde el primer dia.
+gg_province_incorporation_migration = {
+	trigger = {
+		c:ARG ?= this
+		NOT = { has_global_variable = gg_province_incorporation_fixed }
+		has_global_variable = gg_pact_settled
+		NOT = {
+			any_subject_or_below = {
+				OR = {
+					c:CLN ?= this
+					gg_is_province_country = yes
+					gg_is_oriental_pact_province = yes # EN/ES: Codex review -- a Pact that kept only the Oriental Province / un Pacto que solo conservo la Oriental
+				}
+				is_subject_of = c:ARG
+			}
+		}
+		any_scope_state = {
+			is_incorporated = no
+			gg_arg_historical_province_state = yes
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_province_incorporation_migration" # GG_TRAZA
+		set_global_variable = gg_province_incorporation_fixed
+		gg_incorporate_province_states = yes
 	}
 }

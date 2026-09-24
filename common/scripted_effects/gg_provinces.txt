@@ -143,6 +143,8 @@ gg_province_split_beaten = {
 	gg_province_split_off = { STATE = STATE_MENDOZA TAG = MZA KEY = mendoza }
 	gg_province_split_off = { STATE = STATE_SAN_JUAN TAG = SJN KEY = san_juan }
 	gg_province_split_off = { STATE = STATE_SAN_LUIS TAG = SNL KEY = san_luis }
+	# EN/ES: AUD-PROV-INCORP -- what went back to Buenos Aires is Argentine ground / lo que volvio a Buenos Aires es suelo argentino
+	c:ARG ?= { gg_incorporate_province_states = yes }
 	clear_saved_scope = gg_split_origin
 }
 
@@ -211,7 +213,10 @@ gg_argentina_split_coalition = {
 		scope:gg_split_league = { gg_province_install_governor = { KEY = cordoba } }
 	}
 	else = {
-		c:ARG ?= { annex = scope:gg_split_league }
+		c:ARG ?= {
+			annex = scope:gg_split_league
+			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
+		}
 	}
 	# EN: playtest 23/9 -- the remainder came out of the tag change with no protectorate (Tucuman stood
 	#     independent from June 1841). The league WAS a subject when it changed tag, so a check in this

@@ -241,7 +241,9 @@ gg_constitution.3 = {
 			gg_constitution_federal = yes
 		}
 		# EN/ES: the league's ground joins the one country too / la tierra de la liga tambien se incorpora
-		if = { limit = { exists = c:CLN } annex_with_incorporation = c:CLN }
+		if = { limit = { exists = c:CLN } annex = c:CLN } # EN/ES: AUD-PROV-INCORP -- was annex_with_incorporation, which also took Tarija / incorporaba tambien Tarija
+		# EN/ES: AUD-PROV-INCORP -- also what the engine's war annexed / tambien lo que anexo la guerra del motor
+		gg_incorporate_province_states = yes
 		trigger_event = { id = gg_constitution.4 days = 0 popup = yes }
 	}
 }
