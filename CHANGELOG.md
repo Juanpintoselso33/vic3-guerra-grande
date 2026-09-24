@@ -1,5 +1,18 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **The independence of Paraguay:** on 17 July 1852, the day Santiago Derqui signed the act of recognition in
+  Asunción, whoever conducts the Confederation's foreign relations once the Pact is settled is asked to recognize
+  Paraguay or withhold assent. Urquiza's Argentina gets it as history had it; with two governments, Urquiza's
+  Confederation, not Rosas's Buenos Aires; Rosas, if he is still in the seat, answers in the words of his note of
+  1843. Recognizing improves relations with Paraguay (+30) and Brazil (+10) and drops any Argentine claim on ground
+  wholly Paraguayan. Withholding costs 5 infamy, worsens relations with Paraguay (−30) and Brazil (−10), and claims
+  every region wholly Paraguayan as a rebel province; the Chaco and regions shared with Brazil are never touched.
+  The AI recognizes nine times in ten, unless Rosas rules. If the settlement comes late or Paraguay is at war with
+  the recipient, the question waits, until June 1856 at the latest. Games already past July 1852 get it on the next
+  monthly pulse.
+
 ## 0.1.3-alpha — 24/9/2026
 
 - **Rosas serves a first term under the Constitution of 1853:** if he is in the seat when he gives it, he governs the
