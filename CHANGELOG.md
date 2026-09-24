@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **National territories become provinces under the confederation:** when Argentina chose the confederation, a
+  territory Buenos Aires governs directly — La Pampa, Neuquén, Río Negro, Chubut, Santa Cruz, Tierra del Fuego,
+  Misiones, Formosa or the Chaco — asks to become a province once its population reaches 60,000 (the figure of the
+  1884 national territories law, art. 4) and its market access 75%. Granted, it becomes its own country, a Province
+  of the Pact under Buenos Aires, with its land incorporated. The AI always grants it; a player may make it wait five
+  years, at a cost in the territory's radicals. Checked once a year, only while the confederation stands and at peace.
+
 - **Brazil's note reaches Buenos Aires:** when the Banda Oriental rejoins the Confederation and Brazil answers under
   the Preliminary Peace Convention of 1828, Argentina now hears of it. If the Empire stays out, its protest arrives;
   if it chooses war, a note that breaks off relations and reserves the right to enforce the Convention. Buenos Aires
