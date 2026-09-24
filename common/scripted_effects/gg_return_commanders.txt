@@ -158,16 +158,21 @@ gg_deduplicate_character_worldwide = {
 #     las elecciones hicieron jefe de Estado a Thiebaut en 1849 y en 1850, y despues de la paz nadie lo
 #     corregia. El coronel frances se guarda en una global; Garibaldi en la variable de pais que ya usaba
 #     gg_contingent.5. Al exilio, no muertos: los dos siguieron vivos.
+# EN/ES: the reference is kept (once-only marks are never removed, invariant I7); a second call finds him
+#     already in the exile pool and does nothing / la referencia queda (I7); una segunda llamada lo encuentra
+#     ya en el exilio y no hace nada
 gg_french_legion_commander_leaves = {
 	if = {
 		limit = { has_global_variable = gg_thiebaut_ref }
 		global_var:gg_thiebaut_ref ?= {
 			if = {
-				limit = { is_character_alive = yes }
+				limit = {
+					is_character_alive = yes
+					is_in_exile_pool = no
+				}
 				exile_character = yes
 			}
 		}
-		remove_global_variable = gg_thiebaut_ref
 	}
 }
 
