@@ -1,5 +1,5 @@
 ﻿# EN: THE FEDERAL PACT, second redesign (22/9/2026 night, decided with Juan; the vic3-journals skill).
-#     A journal to follow Argentina's own politics: the map of the thirteen on top, the count on a band
+#     A journal to follow Argentina's own politics: the map of the thirteen (fourteen with the Oriental) on top, the count on a band
 #     below it, and -- after the daimyos of ep2's Meiji Restoration journal -- the list of the THIRTEEN
 #     (all of them since the third pass, 22/9/2026 night), each with who governs it and its state, and
 #     the grievances by section. No header picture and nothing about Oribe: the remittance to him is handled by
@@ -111,7 +111,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_tucuman').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -123,7 +123,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_salta').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -135,7 +135,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_jujuy').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -147,7 +147,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_catamarca').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -159,7 +159,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_la_rioja').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -171,7 +171,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)2')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_cordoba" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_cordoba" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_cordoba').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -187,66 +187,6 @@ flowcontainer = {
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_entre_rios').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_entre_rios').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_entre_rios').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_entre_rios').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_entre_rios').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
-			}
-			# EN/ES: santa_fe
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santa_fe'), '(CFixedPoint)2')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_santa_fe" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_santa_fe').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_santa_fe').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_santa_fe').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_santa_fe').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_santa_fe').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
-			}
-			# EN/ES: santiago_del_estero
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santiago_del_estero'), '(CFixedPoint)2')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_santiago_del_estero" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
-			}
-			# EN/ES: mendoza
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_mendoza'), '(CFixedPoint)2')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_mendoza" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_mendoza').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_mendoza').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_mendoza').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_mendoza').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_mendoza').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
-			}
-			# EN/ES: san_juan
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_juan'), '(CFixedPoint)2')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_san_juan" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_san_juan').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_san_juan').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_san_juan').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_san_juan').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_san_juan').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
-			}
-			# EN/ES: san_luis
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_luis'), '(CFixedPoint)2')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_san_luis" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_san_luis').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_san_luis').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_san_luis').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_san_luis').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_san_luis').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
 				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds" }
 				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_2" tooltip = "gg_pact_j_st_2_tt" }
 			}
@@ -267,7 +207,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)1')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_tucuman').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -279,7 +219,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)1')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_salta').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -291,7 +231,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)1')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_jujuy').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -303,7 +243,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)1')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_catamarca').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -315,22 +255,10 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)1')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_la_rioja').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
-			# EN/ES: cordoba
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_cordoba" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_cordoba').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
 				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
 				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
 			}
@@ -346,73 +274,16 @@ flowcontainer = {
 				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
 				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
 			}
-			# EN/ES: santa_fe
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santa_fe'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_santa_fe" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_santa_fe').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_santa_fe').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_santa_fe').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_santa_fe').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_santa_fe').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
-			# EN/ES: santiago_del_estero
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_santiago_del_estero'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_santiago_del_estero" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_santiago_del_estero').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_santiago_del_estero').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
-			# EN/ES: mendoza
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_mendoza'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_mendoza" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_mendoza').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_mendoza').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_mendoza').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_mendoza').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_mendoza').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
-			# EN/ES: san_juan
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_juan'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_san_juan" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_san_juan').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_san_juan').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_san_juan').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_san_juan').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_san_juan').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
-			# EN/ES: san_luis
-			widget = {
-				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_san_luis'), '(CFixedPoint)1')]"
-				size = { 520 88 }
-				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_san_luis" }
-				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_san_luis').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_san_luis').GetCharacter]" }
-				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_san_luis').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_san_luis').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
-				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_san_luis').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
-				icon = { position = { 396 30 } size = { 28 28 } texture = "gfx/interface/icons/generic_icons/maybe_icon.dds" }
-				textbox = { position = { 428 0 } size = { 86 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_st_1" tooltip = "gg_pact_j_st_1_tt" }
-			}
 			# EN/ES: 23/9 (Juan) -- oriental: the Banda Oriental as a province of the Pact, it delegates
 			#     / la Banda Oriental como provincia del Pacto, delega
 			widget = {
 				visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_oriental" tooltip = "gg_pact_j_name_oriental_tt" }
+				# EN/ES: 23/9/2026 (journal audit K6) -- province with its own government, or reincorporated outright
+				#     / provincia con gobierno propio, o reincorporada del todo
+				textbox = { visible = "[Not(GetGlobalVariable('gg_reincorporated').IsSet)]" position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_oriental" tooltip = "gg_pact_j_name_oriental_tt" }
+				textbox = { visible = "[GetGlobalVariable('gg_reincorporated').IsSet]" position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_oriental" tooltip = "gg_pact_j_name_oriental_reinc_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_oriental').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_oriental').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_oriental').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_oriental').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_oriental').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -436,7 +307,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_tucuman'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_tucuman" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_tucuman').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_tucuman').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_tucuman').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -448,7 +319,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_salta'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_salta" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_salta').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_salta').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_salta').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -460,7 +331,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_jujuy'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_jujuy" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_jujuy').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_jujuy').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_jujuy').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -472,7 +343,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_catamarca'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_catamarca" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_catamarca').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_catamarca').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_catamarca').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -484,7 +355,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_la_rioja'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_la_rioja" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_la_rioja').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_la_rioja').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_la_rioja').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -496,7 +367,7 @@ flowcontainer = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_cordoba'), '(CFixedPoint)0')]"
 				size = { 520 88 }
 				background = { using = dark_area alpha = 0.35 }
-				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_cordoba" }
+				textbox = { position = { 14 0 } size = { 150 88 } multiline = yes using = fontsize_medium align = left|vcenter text = "gg_pact_j_name_cordoba" tooltip = "gg_pact_j_norte_tt" }
 				character_portrait_medium = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" position = { 168 2 } datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" }
 				textbox = { visible = "[GetGlobalVariable('gg_pact_gov_cordoba').IsSet]" datacontext = "[GetGlobalVariable('gg_pact_gov_cordoba').GetCharacter]" position = { 256 0 } size = { 136 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_gov" }
 				textbox = { visible = "[Not(GetGlobalVariable('gg_pact_gov_cordoba').IsSet)]" position = { 168 0 } size = { 224 88 } multiline = yes using = fontsize_small align = left|vcenter text = "gg_pact_j_interim" tooltip = "gg_pact_j_interim_tt" }
@@ -579,12 +450,12 @@ flowcontainer = {
 			textbox = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_corrientes'), '(CFixedPoint)1')]"
 				autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } parentanchor = hcenter
-				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_corrientes"
+				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_corrientes" tooltip = "gg_pact_j_name_corrientes_tt"
 			}
 			textbox = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_norte'), '(CFixedPoint)1')]"
 				autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } parentanchor = hcenter
-				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_norte"
+				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_norte" tooltip = "gg_pact_j_norte_tt"
 			}
 			textbox = {
 				visible = "[GetGlobalVariable('gg_pact_gov_coalicion').IsSet]"
@@ -595,7 +466,7 @@ flowcontainer = {
 			textbox = {
 				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_grv_entre_rios'), '(CFixedPoint)1')]"
 				autoresize = yes multiline = yes minimumsize = { 480 -1 } maximumsize = { 480 -1 } parentanchor = hcenter
-				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_entre_rios"
+				using = fontsize_small align = center|nobaseline text = "gg_pact_j_grv_entre_rios" tooltip = "gg_pact_j_name_entre_rios_tt"
 			}
 	}
 	# EN/ES: the longer account behind the arrow / lo largo detras de la flechita
@@ -606,12 +477,22 @@ flowcontainer = {
 		blockoverride "onclick_showmore" { visible = "[Not(GetVariableSystem.Exists('gg_pact_about_open'))]" }
 		blockoverride "onclick_showless" { visible = "[GetVariableSystem.Exists('gg_pact_about_open')]" }
 	}
+	# EN/ES: 23/9/2026 (journal audit K8) -- the majority withdrawal closes the Pact only under its dynamic rule
+	#     / el retiro de la mayoria cierra el Pacto solo con su regla dinamica
 	textbox = {
-		visible = "[GetVariableSystem.Exists('gg_pact_about_open')]"
+		visible = "[And(GetVariableSystem.Exists('gg_pact_about_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_dynamic'), '(CFixedPoint)1'))]"
 		autoresize = yes multiline = yes
 		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
 		parentanchor = hcenter
 		using = fontsize_medium align = left|nobaseline
 		text = "gg_pact_j_more_body"
+	}
+	textbox = {
+		visible = "[And(GetVariableSystem.Exists('gg_pact_about_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_pact_dynamic'), '(CFixedPoint)0'))]"
+		autoresize = yes multiline = yes
+		minimumsize = { 480 -1 } maximumsize = { 480 -1 }
+		parentanchor = hcenter
+		using = fontsize_medium align = left|nobaseline
+		text = "gg_pact_j_more_body_fixed"
 	}
 }

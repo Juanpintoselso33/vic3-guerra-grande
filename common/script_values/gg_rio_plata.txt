@@ -324,6 +324,9 @@ gg_ui_plata_decree = {
 			NOT = { has_global_variable = gg_plata_guarantee_grace }
 		}
 		value = 1
+		# EN/ES: 23/9/2026 (journal audit P3) -- 3 when Rosas is the AI: the same line, without the player's
+		#     instruction to close the shore / 3 con un Rosas de la IA: el mismo renglon, sin la instruccion al jugador
+		if = { limit = { NOT = { c:ARG ?= { is_player = yes } } } value = 3 }
 	}
 	if = {
 		limit = {

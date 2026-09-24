@@ -147,7 +147,14 @@ gg_split_trim = {
 # EN/ES: the war bar's value, clamped to its range. The bar reads the COLORADO lead (colorados on
 #     the left since 2026-09-17) / el valor de la barra; lee la ventaja COLORADA
 gg_war_score_bar_value = {
+	# EN: 23/9/2026 (journal audit W1) -- the bar's end is the lead the arbiter asks for today
+	#     (gg_arbiter_balance_needed: 15, 10 from 1849, 5 from 1851), not a fixed 10: a full bar means the
+	#     side behind is asked for terms, and before 1849 the bar no longer fills five points early.
+	# ES: el extremo de la barra es la ventaja que pide hoy el arbitro, no un 10 fijo: barra llena = al de
+	#     abajo se le pregunta; antes de 1849 la barra ya no se llena cinco puntos antes.
 	value = gg_war_balance_colorado
+	multiply = 10
+	divide = gg_arbiter_balance_needed
 	min = -10
 	max = 10
 }
@@ -260,8 +267,8 @@ gg_arbiter_balance_needed = {
 }
 
 # EN: 23/9/2026 (Juan: "the bar is in the middle and the blancos have 19, the colorados 17") -- the
-#     numbers at the ends of the bar are each side's TOTAL on the bar: decisions plus the river. The
-#     bar is their difference (gg_war_score_bar_value), so ends and bar always agree.
+#     numbers under the bar are each side's TOTAL on the bar: decisions plus the river. The bar is
+#     their difference over the lead the arbiter asks for (gg_war_score_bar_value).
 # ES: los numeros de las puntas de la barra son el total de cada lado en la barra: decisiones mas el
 #     rio. La barra es su diferencia, asi puntas y barra coinciden siempre.
 gg_ui_bar_total_blanco = {

@@ -1,6 +1,13 @@
 ﻿gg_ui_call_squadrons = {
  scope = country
- is_shown = { c:URU ?= this has_global_variable = guerra_grande_split_done }
+ # EN/ES: 23/9/2026 (journal audit P7) -- gone once the squadrons were called or the powers intervene
+ #     / desaparece una vez llamadas las escuadras o con la intervencion en curso
+ is_shown = {
+  c:URU ?= this
+  has_global_variable = guerra_grande_split_done
+  NOT = { has_global_variable = gg_intervention_called }
+  NOT = { has_global_variable = gg_plata_intervention }
+ }
  is_valid = { gg_ui_can_call_squadrons = yes has_global_variable = guerra_grande_split_done }
  effect = { gg_ui_call_squadrons_effect = yes }
 }

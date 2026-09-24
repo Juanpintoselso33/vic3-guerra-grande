@@ -4,3 +4,4 @@
  gg_ui_empty:0 ""
  gg_ui_squadrons_action_tt:0 "Requires open war, both governments established, and the squadrons not yet requested. Available from #V 1843#! if a great power has an interest in the Plata, or from #V 1848#! regardless.\n\n[GetScriptedGui('gg_ui_call_squadrons').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_ui_backing_tt:0 "Backing runs from #V 0#! to #V 100#!. The figure alone is no treaty: commitments are entered into only when their terms are accepted."
+ gg_requires_no_imperial_pledge:0 "The Defensa has not pledged itself to the Empire"

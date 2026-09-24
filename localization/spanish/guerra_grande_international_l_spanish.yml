@@ -18,7 +18,7 @@
  gg_international.10.b:0 "Por ahora no."
  gg_international.10.b_tt:0 "El agente de Oribe no da el asunto por cerrado."
  gg_international.11.t:0 "Quién responde por el ejército de Oribe"
- gg_international.11.d:0 "Ya no delegan en Buenos Aires más que #N [GetGlobalVariable('gg_delegating_provinces').GetValue|0]#! provincias, y la Sala quiere saber si la Confederación puede seguir respondiendo por el ejército que está frente a Montevideo. Retirarle el respaldo corta también la plata de todos los meses."
+ gg_international.11.d:0 "Ya no delegan en Buenos Aires más que #N [GetPlayer.MakeScope.ScriptValue('gg_pact_delegating')|0]#! provincias, y la Sala quiere saber si la Confederación puede seguir respondiendo por el ejército que está frente a Montevideo. Retirarle el respaldo corta también la plata de todos los meses."
  gg_international.11.f:0 "Una pregunta de la Sala de Representantes."
  gg_international.11.a:0 "Retirarle el respaldo."
  gg_international.11.b:0 "Oribe sigue con nuestro respaldo."

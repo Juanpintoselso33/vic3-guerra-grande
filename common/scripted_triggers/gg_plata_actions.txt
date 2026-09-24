@@ -12,6 +12,12 @@ gg_ui_can_call_squadrons = {
 			# EN/ES: C10 -- pointless once the powers already intervene / inutil si ya intervienen
 			NOT = { has_global_variable = gg_plata_intervention }
 		}
+		# EN/ES: 23/9/2026 (journal audit W8) -- the pledge to the Empire says the Defensa can no longer turn to
+		#     London and Paris; this is what makes it so / el compromiso con el Imperio cierra el pedido a las escuadras
+		custom_tooltip = {
+			text = gg_requires_no_imperial_pledge
+			NOT = { has_global_variable = gg_imperial_pledged }
+		}
 		# EN/ES: T3b, FE-8 -- the button brings the powers forward, from 1843 / el boton las adelanta, desde 1843
 		year >= 1843.1.1
 		OR = {

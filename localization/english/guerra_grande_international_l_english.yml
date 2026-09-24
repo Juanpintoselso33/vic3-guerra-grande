@@ -18,7 +18,7 @@
  gg_international.10.b:0 "Not now."
  gg_international.10.b_tt:0 "Oribe's agent does not consider the matter closed."
  gg_international.11.t:0 "Who Answers for Oribe's Army"
- gg_international.11.d:0 "No more than #N [GetGlobalVariable('gg_delegating_provinces').GetValue|0]#! provinces still delegate to Buenos Aires, and the Sala wants to know whether the Confederation can go on answering for the army before Montevideo. Withdrawing the backing stops the monthly money as well."
+ gg_international.11.d:0 "No more than #N [GetPlayer.MakeScope.ScriptValue('gg_pact_delegating')|0]#! provinces still delegate to Buenos Aires, and the Sala wants to know whether the Confederation can go on answering for the army before Montevideo. Withdrawing the backing stops the monthly money as well."
  gg_international.11.f:0 "A question from the Sala de Representantes."
  gg_international.11.a:0 "Withdraw the backing."
  gg_international.11.b:0 "Oribe keeps our backing."

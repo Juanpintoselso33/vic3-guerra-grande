@@ -104,17 +104,19 @@ je_guerra_grande = {
 					gg_war_phase = 1
 				}
 			}
-			triggered_desc = {
-				desc = je_guerra_grande_status_before
-				trigger = {
-					NOT = { has_global_variable = guerra_grande_open_war }
-				}
-			}
+			# EN/ES: 23/9/2026 (journal audit W11) -- the "before the rising" branch is gone: guerra_grande.1 opens
+			#     the entry with gg_war_phase already at 1 / la rama «antes del alzamiento» era inalcanzable
 			# EN: playtest 2026-09-17 -- the race between the two governments' exhaustion decided who got
 			#     to dictate the peace, and the player could not see it. Now the journal prints it.
-			# ES: la carrera entre los agotamientos decidia quien dictaba la paz, y el jugador no la veia.
+			#     23/9 (audit W7): the "asked for terms at three" note only where the war's rule lets that happen.
+			# ES: la carrera entre los agotamientos decidia quien dictaba la paz, y el jugador no la veia. La
+			#     nota «a los tres se le pregunta» solo con la regla que lo permite.
 			triggered_desc = {
 				desc = je_guerra_grande_status_siege
+				trigger = { gg_outcome_dynamic = yes }
+			}
+			triggered_desc = {
+				desc = je_guerra_grande_status_siege_fixed
 				trigger = {
 					always = yes
 				}

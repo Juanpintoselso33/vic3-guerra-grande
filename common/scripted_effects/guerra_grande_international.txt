@@ -134,7 +134,7 @@ gg_int_arg_ai_pulse = {
 					has_global_variable = gg_int_arg_accepted
 					NOT = { has_global_variable = gg_int_arg_withdrawn }
 					NOT = { has_global_variable = gg_int_arg_player_kept }
-					global_var:gg_delegating_provinces <= 6
+					gg_pact_delegating <= 6 # EN/ES: 23/9 -- the Pact's count / la cuenta del Pacto
 				}
 				set_global_variable = { name = gg_int_arg_player_kept days = 335 }
 				trigger_event = { id = gg_international.11 days = 0 popup = yes }
@@ -149,7 +149,7 @@ gg_int_arg_ai_pulse = {
 			if = {
 				# EN/ES: 22/9/2026, decided with Juan -- 6 or fewer, the same line that closes the Pact from
 				#     1851; below 4 was unreachable (five legislatures never withdraw) / 6 o menos, como el Pacto
-				limit = { global_var:gg_delegating_provinces <= 6 }
+				limit = { gg_pact_delegating <= 6 } # EN/ES: 23/9 -- the Pact's count, as its closing / la cuenta del Pacto, como su cierre
 				gg_int_arg_withdraw = yes
 			}
 		}

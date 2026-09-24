@@ -39,10 +39,51 @@ gg_ui_war_endurance_cerrito_shown = {
 	value = 0
 	if = { limit = { has_global_variable = guerra_grande_open_war has_global_variable = gg_cerrito_exhausted global_var:gg_cerrito_exhausted > 0 } value = 1 }
 }
+# EN: 23/9/2026 (journal audit W3) -- endurance runs from the partition (100 down to -100), so the section and
+#     both governments' endurance show from then until the peace: the player watches it fall, not only once it
+#     is spent. The months-at-the-end-of-its-tether clock above still shows only while it counts.
+# ES: el aguante corre desde la particion, asi que la seccion y el aguante de los dos se ven desde entonces
+#     hasta la paz; el reloj de meses sin aguante sigue apareciendo solo mientras cuenta.
 gg_ui_war_endurance_shown = {
-	value = gg_ui_war_endurance_defensa_shown
-	add = gg_ui_war_endurance_cerrito_shown
-	max = 1
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = guerra_grande_split_done
+			has_global_variable = gg_endurance_defensa
+			has_global_variable = gg_endurance_cerrito
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		value = 1
+	}
+}
+# EN/ES: endurance on a 0-100 bar (-100 empty, 100 full) / el aguante en una barra de 0 a 100
+gg_ui_endurance_defensa_pct = {
+	value = 0
+	if = { limit = { has_global_variable = gg_endurance_defensa } value = global_var:gg_endurance_defensa add = 100 divide = 2 }
+	min = 0
+	max = 100
+}
+gg_ui_endurance_cerrito_pct = {
+	value = 0
+	if = { limit = { has_global_variable = gg_endurance_cerrito } value = global_var:gg_endurance_cerrito add = 100 divide = 2 }
+	min = 0
+	max = 100
+}
+# EN: 23/9/2026 (journal audit W7) -- the war's game rule, for the texts that say who is asked for terms:
+#     0 dynamic (either side), 1 historical (neither; peace on 8 October 1851), 2 the Defensa wins (only the
+#     Cerrito can be asked), 3 the Cerrito wins (only the Defensa). Mirrors common/scripted_triggers/gg_game_rules.txt.
+# ES: la regla de la guerra, para los textos que dicen a quien se le pregunta: 0 dinamica, 1 historica (a
+#     ninguno), 2 gana la Defensa (solo al Cerrito), 3 gana el Cerrito (solo a la Defensa).
+gg_ui_war_rule = {
+	value = 0
+	if = { limit = { gg_outcome_historical = yes } value = 1 }
+	if = { limit = { gg_outcome_defensa = yes } value = 2 }
+	if = { limit = { gg_outcome_cerrito = yes } value = 3 }
+}
+# EN/ES: 1 if the rule lets the Defensa be called beaten (the River Plate's hunger text) / 1 si la regla deja dar por batida a la Defensa
+gg_ui_defensa_can_lose = {
+	value = 0
+	if = { limit = { gg_defensa_can_lose = yes } value = 1 }
 }
 # EN/ES: the peace table shows when talks are suspended, on, in truce or done, or a pledge weighs on them
 #     / la mesa de paz se ve con conversaciones suspendidas, en curso, en tregua o cerradas, o con un compromiso encima

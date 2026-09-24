@@ -2,4 +2,4 @@
  je_gg_delegation:0 "The Federal Pact"
  je_gg_delegation_desc:0 ""
  je_gg_delegation_reason:0 ""
- je_gg_delegation_complete_tt:0 "The mandate ends with a negotiated Confederation, with the end of the war between Buenos Aires and Entre Ríos, or when, from 1851, no more than #N 6#! of the #V 13#! provinces still delegate to Buenos Aires."
+ je_gg_delegation_complete_tt:0 "The mandate ends with a negotiated Confederation, with the end of the war between Buenos Aires and Entre Ríos or, while the outcome is still open, once, from 1851, no more than #N 6#! provinces still delegate to Buenos Aires, the Oriental Province included if it is in the Pact."

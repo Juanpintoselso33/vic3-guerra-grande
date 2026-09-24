@@ -289,6 +289,14 @@ flowcontainer = {
   icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/warning.dds" }
   textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_decree_pending" }
  }
+ # EN/ES: 23/9/2026 (journal audit P3) -- an AI Rosas: the same fact, no instruction / Rosas de la IA: sin instruccion
+ flowcontainer = {
+  visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_decree'), '(CFixedPoint)3')]"
+  tooltip = "gg_ui_plata_decree_pending_ai_tt"
+  direction = horizontal spacing = 8 parentanchor = hcenter
+  icon = { size = { 32 32 } texture = "gfx/interface/icons/generic_icons/warning.dds" }
+  textbox = { autoresize = yes multiline = yes minimumsize = { 470 -1 } maximumsize = { 470 -1 } using = fontsize_medium align = left|nobaseline text = "gg_ui_plata_decree_pending_ai" }
+ }
  flowcontainer = {
   visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_decree'), '(CFixedPoint)2')]"
   tooltip = "gg_ui_plata_decree_neutrals_tt"
@@ -345,19 +353,35 @@ flowcontainer = {
       size = { 236 112 }
       background = { using = dark_area alpha = 0.3 }
       character_portrait_medium = { position = { 6 10 } datacontext = "[Country.GetRuler]" }
+      # EN/ES: 23/9/2026 (journal audit P4) -- the Empire's flag only while it counts / la bandera del Imperio solo si cuenta
       textbox = {
-       visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')]"
+       visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'), Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0')))]"
        position = { 96 8 } size = { 134 96 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_defensa"
       }
       textbox = {
-       visible = "[Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'))]"
+       visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'))]"
+       position = { 96 8 } size = { 134 96 }
+       datacontext = "[Country.GetRuler]"
+       multiline = yes using = fontsize_medium
+       text = "gg_ui_plata_leader_defensa_nobrz"
+      }
+      # EN/ES: 23/9/2026 (journal audit P4) -- the Empire's flag only while it counts / la bandera del Imperio solo si cuenta
+      textbox = {
+       visible = "[And(Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')), Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0')))]"
        position = { 96 8 } size = { 134 96 }
        datacontext = "[Country.GetRuler]"
        multiline = yes using = fontsize_medium
        text = "gg_ui_plata_leader_defensa_france"
+      }
+      textbox = {
+       visible = "[And(Not(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_plata_london_mode'), '(CFixedPoint)0')), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_patron_level_brasil'), '(CFixedPoint)0'))]"
+       position = { 96 8 } size = { 134 96 }
+       datacontext = "[Country.GetRuler]"
+       multiline = yes using = fontsize_medium
+       text = "gg_ui_plata_leader_defensa_france_nobrz"
       }
      }
     }
@@ -479,8 +503,11 @@ flowcontainer = {
   direction = horizontal spacing = 8 parentanchor = hcenter
   icon = { size = { 40 40 } texture = "gfx/interface/icons/famine_icons/famine_icon.dds" }
   flowcontainer = {
-   direction = vertical spacing = 2
-   textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_hunger_bar_desc" }
+   direction = vertical spacing = 2 ignoreinvisible = yes
+   # EN/ES: 23/9/2026 (journal audit W7) -- hunger seats the Defensa only where the war's rule lets it lose
+   #     / el hambre sienta a la Defensa solo si la regla la deja perder
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_defensa_can_lose'), '(CFixedPoint)1')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_hunger_bar_desc" }
+   textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_defensa_can_lose'), '(CFixedPoint)0')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_plata_hunger_bar_desc_fixed" }
    green_progressbar_horizontal = {
     size = { 472 22 }
     blockoverride "values" {

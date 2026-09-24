@@ -3,36 +3,74 @@
 types gg_pact_hover_types {
  type gg_pact_hover_map = widget {
   size = { 290 416 }
+  widget = { position = { 136 16 } size = { 5 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 122 17 } size = { 17 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 122 18 } size = { 16 5 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 91 25 } size = { 1 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 98 25 } size = { 1 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 107 25 } size = { 3 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 122 23 } size = { 17 3 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 90 26 } size = { 3 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 97 26 } size = { 3 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 107 26 } size = { 4 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 121 26 } size = { 18 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 90 27 } size = { 4 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 96 27 } size = { 5 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 107 27 } size = { 32 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 90 28 } size = { 12 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 106 28 } size = { 32 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 90 29 } size = { 48 3 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 89 32 } size = { 49 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 90 33 } size = { 47 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 89 34 } size = { 48 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 89 35 } size = { 47 3 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 88 38 } size = { 47 3 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 73 41 } size = { 2 1 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 89 41 } size = { 46 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 71 42 } size = { 6 1 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 90 42 } size = { 45 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 71 43 } size = { 7 1 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 90 43 } size = { 44 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 71 44 } size = { 8 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 110 44 } size = { 19 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 129 44 } size = { 5 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 70 45 } size = { 9 1 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 90 44 } size = { 20 2 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 68 46 } size = { 27 1 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 95 46 } size = { 15 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 110 45 } size = { 20 2 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 130 45 } size = { 2 2 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 65 47 } size = { 30 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 95 47 } size = { 4 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 99 47 } size = { 10 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 109 47 } size = { 22 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 131 47 } size = { 1 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 64 48 } size = { 31 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 95 48 } size = { 5 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 100 48 } size = { 9 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 109 48 } size = { 23 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 108 49 } size = { 25 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 64 49 } size = { 32 2 } tooltip = "gg_pact_hover_jujuy" }
+  widget = { position = { 101 49 } size = { 7 2 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 108 50 } size = { 26 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 107 51 } size = { 28 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 63 51 } size = { 33 2 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 96 49 } size = { 5 4 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 101 51 } size = { 6 2 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 107 52 } size = { 29 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 61 53 } size = { 34 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 95 53 } size = { 7 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 102 53 } size = { 4 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
+  widget = { position = { 103 54 } size = { 3 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 106 53 } size = { 31 2 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 60 54 } size = { 35 2 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 95 54 } size = { 8 2 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 103 55 } size = { 2 1 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 58 56 } size = { 37 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 95 56 } size = { 9 1 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 58 57 } size = { 38 1 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 96 57 } size = { 8 1 } tooltip = "gg_pact_hover_salta" }
+  widget = { position = { 104 56 } size = { 1 2 } tooltip = "gg_pact_hover_tarija" visible = "[GetGlobalVariable('gg_tarija_pact').IsSet]" }
   widget = { position = { 105 55 } size = { 32 3 } tooltip = "gg_pact_hover_salta" }
   widget = { position = { 57 58 } size = { 39 2 } tooltip = "gg_pact_hover_jujuy" }
   widget = { position = { 96 58 } size = { 41 2 } tooltip = "gg_pact_hover_salta" }
@@ -457,36 +495,44 @@ types gg_pact_hover_types {
   widget = { position = { 46 190 } size = { 41 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 87 190 } size = { 54 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 183 189 } size = { 36 2 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 226 190 } size = { 4 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 191 } size = { 35 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 47 191 } size = { 39 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 86 191 } size = { 55 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 183 191 } size = { 14 1 } tooltip = "gg_pact_hover_corrientes" }
   widget = { position = { 197 191 } size = { 6 1 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 203 191 } size = { 15 1 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 225 191 } size = { 7 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 192 } size = { 37 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 183 192 } size = { 13 1 } tooltip = "gg_pact_hover_corrientes" }
   widget = { position = { 196 192 } size = { 9 1 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 205 192 } size = { 11 1 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 216 192 } size = { 2 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 225 192 } size = { 8 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 11 193 } size = { 38 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 49 192 } size = { 36 2 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 183 193 } size = { 8 1 } tooltip = "gg_pact_hover_corrientes" }
   widget = { position = { 191 193 } size = { 16 1 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 207 193 } size = { 8 1 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 215 193 } size = { 20 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 10 194 } size = { 40 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 50 194 } size = { 35 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 141 188 } size = { 42 7 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 183 194 } size = { 6 1 } tooltip = "gg_pact_hover_corrientes" }
   widget = { position = { 189 194 } size = { 19 1 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 208 194 } size = { 6 1 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 214 194 } size = { 21 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 8 195 } size = { 49 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 57 195 } size = { 28 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 85 192 } size = { 56 4 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 7 196 } size = { 50 1 } tooltip = "gg_pact_hover_san_juan" }
+  widget = { position = { 213 195 } size = { 24 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 6 197 } size = { 51 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 57 196 } size = { 27 2 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 84 196 } size = { 57 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 184 195 } size = { 25 3 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 209 195 } size = { 4 3 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 213 197 } size = { 25 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 83 198 } size = { 58 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 141 195 } size = { 43 4 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 184 198 } size = { 26 1 } tooltip = "gg_pact_hover_entre_rios" }
@@ -497,10 +543,13 @@ types gg_pact_hover_types {
   widget = { position = { 142 199 } size = { 42 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 184 199 } size = { 27 1 } tooltip = "gg_pact_hover_entre_rios" }
   widget = { position = { 211 199 } size = { 1 1 } tooltip = "gg_pact_hover_corrientes" }
+  widget = { position = { 212 198 } size = { 29 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 82 200 } size = { 61 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 143 200 } size = { 40 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 183 200 } size = { 29 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 212 200 } size = { 30 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 183 201 } size = { 30 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 213 201 } size = { 30 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 82 201 } size = { 64 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 146 201 } size = { 37 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 183 202 } size = { 31 1 } tooltip = "gg_pact_hover_entre_rios" }
@@ -508,39 +557,55 @@ types gg_pact_hover_types {
   widget = { position = { 82 203 } size = { 63 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 145 203 } size = { 36 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 181 203 } size = { 33 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 214 202 } size = { 30 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 57 204 } size = { 24 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 81 204 } size = { 63 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 144 204 } size = { 37 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 181 204 } size = { 32 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 250 204 } size = { 2 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 249 205 } size = { 3 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 144 205 } size = { 36 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 180 205 } size = { 33 2 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 249 206 } size = { 4 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 178 207 } size = { 35 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 213 204 } size = { 31 4 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 200 } size = { 53 9 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 178 208 } size = { 34 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 212 208 } size = { 32 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 247 207 } size = { 8 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 1 209 } size = { 56 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 178 209 } size = { 33 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 211 209 } size = { 44 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 144 207 } size = { 34 4 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 178 210 } size = { 34 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 212 210 } size = { 44 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 80 205 } size = { 64 7 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 144 211 } size = { 33 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 177 211 } size = { 35 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 212 211 } size = { 45 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 175 212 } size = { 37 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 212 212 } size = { 46 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 143 212 } size = { 32 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 175 213 } size = { 36 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 211 213 } size = { 50 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 80 212 } size = { 63 3 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 143 214 } size = { 31 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 174 214 } size = { 37 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 211 214 } size = { 51 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 80 215 } size = { 62 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 142 215 } size = { 32 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 174 215 } size = { 35 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 209 215 } size = { 58 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 0 210 } size = { 57 7 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 57 205 } size = { 23 12 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 141 216 } size = { 33 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 174 216 } size = { 36 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 210 216 } size = { 57 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 0 217 } size = { 59 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 59 217 } size = { 21 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 141 217 } size = { 32 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 173 217 } size = { 37 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 210 217 } size = { 58 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 0 218 } size = { 60 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 60 218 } size = { 20 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 141 218 } size = { 30 1 } tooltip = "gg_pact_hover_santa_fe" }
@@ -550,15 +615,19 @@ types gg_pact_hover_types {
   widget = { position = { 80 216 } size = { 61 4 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 141 219 } size = { 29 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 170 219 } size = { 41 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 211 218 } size = { 58 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 1 220 } size = { 61 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 62 220 } size = { 18 1 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 80 220 } size = { 60 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 140 220 } size = { 29 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 169 220 } size = { 42 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 211 220 } size = { 59 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 166 221 } size = { 43 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 209 221 } size = { 63 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 1 221 } size = { 62 2 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 63 221 } size = { 17 2 } tooltip = "gg_pact_hover_la_rioja" }
   widget = { position = { 80 221 } size = { 59 2 } tooltip = "gg_pact_hover_cordoba" }
+  widget = { position = { 208 222 } size = { 65 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 223 } size = { 19 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 23 223 } size = { 1 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 24 223 } size = { 30 1 } tooltip = "gg_pact_hover_san_juan" }
@@ -566,6 +635,7 @@ types gg_pact_hover_types {
   widget = { position = { 85 223 } size = { 54 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 139 221 } size = { 27 3 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 166 222 } size = { 42 2 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 223 } size = { 71 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 224 } size = { 17 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 21 224 } size = { 3 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 24 224 } size = { 29 1 } tooltip = "gg_pact_hover_san_juan" }
@@ -577,12 +647,14 @@ types gg_pact_hover_types {
   widget = { position = { 25 225 } size = { 28 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 53 225 } size = { 35 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 88 224 } size = { 51 2 } tooltip = "gg_pact_hover_cordoba" }
+  widget = { position = { 208 224 } size = { 72 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 15 226 } size = { 14 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 29 226 } size = { 5 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 34 226 } size = { 9 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 43 226 } size = { 10 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 89 226 } size = { 50 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 139 224 } size = { 26 3 } tooltip = "gg_pact_hover_santa_fe" }
+  widget = { position = { 208 226 } size = { 74 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 3 226 } size = { 12 2 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 15 227 } size = { 15 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 30 227 } size = { 3 1 } tooltip = "gg_pact_hover_san_juan" }
@@ -597,6 +669,7 @@ types gg_pact_hover_types {
   widget = { position = { 89 228 } size = { 52 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 141 228 } size = { 24 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 165 224 } size = { 43 5 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 227 } size = { 75 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 229 } size = { 8 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 12 229 } size = { 39 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 51 229 } size = { 2 1 } tooltip = "gg_pact_hover_san_juan" }
@@ -606,21 +679,28 @@ types gg_pact_hover_types {
   widget = { position = { 52 230 } size = { 1 1 } tooltip = "gg_pact_hover_san_juan" }
   widget = { position = { 94 230 } size = { 48 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 142 229 } size = { 23 2 } tooltip = "gg_pact_hover_santa_fe" }
+  widget = { position = { 209 229 } size = { 74 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 5 231 } size = { 48 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 53 230 } size = { 41 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 94 231 } size = { 49 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 143 231 } size = { 22 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 165 229 } size = { 44 3 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 209 231 } size = { 75 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 164 232 } size = { 44 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 232 } size = { 78 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 95 232 } size = { 49 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 144 232 } size = { 20 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 164 233 } size = { 43 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 207 233 } size = { 79 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 146 234 } size = { 18 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 164 234 } size = { 42 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 206 234 } size = { 81 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 207 235 } size = { 82 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 6 232 } size = { 48 5 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 54 232 } size = { 41 5 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 95 234 } size = { 51 3 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 165 235 } size = { 42 3 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 207 236 } size = { 83 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 55 237 } size = { 39 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 94 237 } size = { 52 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 146 235 } size = { 19 4 } tooltip = "gg_pact_hover_santa_fe" }
@@ -628,9 +708,11 @@ types gg_pact_hover_types {
   widget = { position = { 93 239 } size = { 54 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 147 239 } size = { 18 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 165 238 } size = { 43 2 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 238 } size = { 81 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 9 240 } size = { 46 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 93 240 } size = { 55 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 148 240 } size = { 18 1 } tooltip = "gg_pact_hover_santa_fe" }
+  widget = { position = { 208 240 } size = { 79 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 10 241 } size = { 45 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 55 239 } size = { 38 3 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 9 242 } size = { 47 1 } tooltip = "gg_pact_hover_mendoza" }
@@ -638,19 +720,23 @@ types gg_pact_hover_types {
   widget = { position = { 93 241 } size = { 54 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 147 241 } size = { 19 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 166 240 } size = { 42 3 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 241 } size = { 78 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 8 243 } size = { 49 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 57 243 } size = { 36 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 93 243 } size = { 53 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 92 244 } size = { 54 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 146 243 } size = { 21 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 167 243 } size = { 41 2 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 208 243 } size = { 76 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 57 244 } size = { 35 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 92 245 } size = { 52 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 144 245 } size = { 24 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 168 245 } size = { 39 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 207 245 } size = { 76 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 7 244 } size = { 50 3 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 144 246 } size = { 26 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 170 246 } size = { 35 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 205 246 } size = { 78 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 8 247 } size = { 49 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 91 246 } size = { 53 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 144 247 } size = { 27 1 } tooltip = "gg_pact_hover_santa_fe" }
@@ -662,10 +748,12 @@ types gg_pact_hover_types {
   widget = { position = { 142 249 } size = { 30 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 141 250 } size = { 31 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 172 248 } size = { 33 3 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 205 247 } size = { 77 4 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 91 250 } size = { 50 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 141 251 } size = { 29 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 170 251 } size = { 6 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 176 251 } size = { 27 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 203 251 } size = { 81 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 91 252 } size = { 49 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 140 252 } size = { 29 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 169 252 } size = { 8 1 } tooltip = "gg_pact_hover_buenos_aires" }
@@ -676,14 +764,17 @@ types gg_pact_hover_types {
   widget = { position = { 139 253 } size = { 30 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 169 253 } size = { 9 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 178 253 } size = { 24 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 202 252 } size = { 83 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 254 } size = { 46 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 58 254 } size = { 33 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 169 254 } size = { 11 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 180 254 } size = { 23 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 203 254 } size = { 82 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 160 254 } size = { 6 2 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 166 254 } size = { 3 2 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 169 255 } size = { 12 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 181 255 } size = { 22 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 203 255 } size = { 83 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 255 } size = { 47 2 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 59 255 } size = { 32 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 91 254 } size = { 47 3 } tooltip = "gg_pact_hover_cordoba" }
@@ -694,17 +785,20 @@ types gg_pact_hover_types {
   widget = { position = { 137 257 } size = { 22 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 159 257 } size = { 28 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 187 257 } size = { 17 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 204 256 } size = { 82 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 257 } size = { 48 2 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 60 257 } size = { 31 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 91 258 } size = { 45 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 136 258 } size = { 22 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 158 258 } size = { 30 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 188 258 } size = { 16 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 204 258 } size = { 83 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 259 } size = { 49 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 61 259 } size = { 30 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 135 259 } size = { 23 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 158 259 } size = { 36 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 194 259 } size = { 8 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 202 259 } size = { 84 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 91 259 } size = { 44 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 135 260 } size = { 22 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 157 260 } size = { 38 1 } tooltip = "gg_pact_hover_buenos_aires" }
@@ -715,6 +809,7 @@ types gg_pact_hover_types {
   widget = { position = { 134 261 } size = { 22 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 156 261 } size = { 40 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 196 261 } size = { 7 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 203 260 } size = { 83 2 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 13 262 } size = { 50 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 63 262 } size = { 28 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 132 262 } size = { 23 1 } tooltip = "gg_pact_hover_santa_fe" }
@@ -728,43 +823,65 @@ types gg_pact_hover_types {
   widget = { position = { 132 264 } size = { 20 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 152 264 } size = { 45 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 197 262 } size = { 7 3 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 204 262 } size = { 80 3 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 12 265 } size = { 51 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 63 264 } size = { 28 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 91 265 } size = { 40 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 131 265 } size = { 20 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 151 265 } size = { 49 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 200 265 } size = { 2 1 } tooltip = "gg_pact_hover_entre_rios" }
+  widget = { position = { 206 265 } size = { 77 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 9 266 } size = { 53 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 130 266 } size = { 20 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 150 266 } size = { 52 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 207 266 } size = { 76 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 8 267 } size = { 54 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 62 266 } size = { 29 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 91 266 } size = { 39 2 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 130 267 } size = { 19 1 } tooltip = "gg_pact_hover_santa_fe" }
   widget = { position = { 149 267 } size = { 53 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 204 267 } size = { 1 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 208 267 } size = { 75 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 209 268 } size = { 73 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 210 269 } size = { 71 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 8 268 } size = { 55 3 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 120 268 } size = { 82 3 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 211 270 } size = { 69 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 120 271 } size = { 81 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 216 271 } size = { 1 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 219 271 } size = { 60 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 7 271 } size = { 56 2 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 63 268 } size = { 28 5 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 120 272 } size = { 82 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 222 272 } size = { 55 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 6 273 } size = { 59 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 65 273 } size = { 26 1 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 120 273 } size = { 83 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 226 273 } size = { 49 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 120 274 } size = { 84 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 227 274 } size = { 47 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 5 274 } size = { 61 2 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 120 275 } size = { 85 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 227 275 } size = { 45 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 120 276 } size = { 88 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 233 276 } size = { 37 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 120 277 } size = { 89 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 233 277 } size = { 36 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 276 } size = { 62 3 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 66 274 } size = { 25 5 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 91 268 } size = { 29 11 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 120 278 } size = { 91 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 234 278 } size = { 15 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 250 278 } size = { 18 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 4 279 } size = { 63 1 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 92 279 } size = { 28 1 } tooltip = "gg_pact_hover_cordoba" }
   widget = { position = { 120 279 } size = { 93 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 237 279 } size = { 6 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 255 279 } size = { 9 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 67 279 } size = { 25 2 } tooltip = "gg_pact_hover_san_luis" }
   widget = { position = { 120 280 } size = { 94 1 } tooltip = "gg_pact_hover_buenos_aires" }
+  widget = { position = { 238 280 } size = { 4 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
+  widget = { position = { 261 280 } size = { 2 1 } tooltip = "gg_pact_hover_oriental" visible = "[GetGlobalVariable('gg_oriental_in_pact').IsSet]" }
   widget = { position = { 120 281 } size = { 96 1 } tooltip = "gg_pact_hover_buenos_aires" }
   widget = { position = { 3 280 } size = { 64 3 } tooltip = "gg_pact_hover_mendoza" }
   widget = { position = { 120 282 } size = { 98 1 } tooltip = "gg_pact_hover_buenos_aires" }

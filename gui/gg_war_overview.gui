@@ -463,8 +463,20 @@ flowcontainer = {
 		ignoreinvisible = yes
 				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
+			# EN/ES: 23/9/2026 (journal audit W6) -- before the partition there is no Cerrito and no endurance
+			#     / antes de la particion no hay Cerrito ni aguante
 			textbox = {
+				visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 				tooltip = "gg_tt_backer_rosas"
+				size = { 124 62 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_rosas"
+			}
+			textbox = {
+				visible = "[Not(GetGlobalVariable('guerra_grande_split_done').IsSet)]"
+				tooltip = "gg_tt_backer_rosas_pre"
 				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
@@ -483,8 +495,20 @@ flowcontainer = {
 				flowcontainer = {
 			direction = vertical ignoreinvisible = yes
 			visible = "[Not(GetGlobalVariable('gg_urquiza_flipped').IsSet)]"
+			# EN/ES: 23/9/2026 (journal audit W6) -- before the partition there is no Cerrito and no endurance
+			#     / antes de la particion no hay Cerrito ni aguante
 			textbox = {
+				visible = "[GetGlobalVariable('guerra_grande_split_done').IsSet]"
 				tooltip = "gg_tt_backer_urquiza_cer"
+				size = { 124 62 }
+				background = { using = dark_area alpha = 0.3 }
+				multiline = yes
+				using = fontsize_medium align = center|nobaseline
+				text = "gg_war_ui_backer_urquiza_cer"
+			}
+			textbox = {
+				visible = "[Not(GetGlobalVariable('guerra_grande_split_done').IsSet)]"
+				tooltip = "gg_tt_backer_urquiza_cer_pre"
 				size = { 124 62 }
 				background = { using = dark_area alpha = 0.3 }
 				multiline = yes
@@ -518,10 +542,41 @@ flowcontainer = {
 	name = "gg_war_balance_head"
 	direction = vertical
 	parentanchor = hcenter
+	ignoreinvisible = yes
+	# EN/ES: 23/9/2026 (journal audit W7) -- one per war rule: who can be asked for terms
+	#     / uno por regla de la guerra: a quien se le puede preguntar
 	textbox = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)0')]"
 		size = { 520 34 }
 		parentanchor = hcenter
-		tooltip = "gg_war_ui_sec_balance_tt"
+		tooltip = "gg_war_ui_sec_balance_tt_0"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_balance"
+	}
+	textbox = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)1')]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_balance_tt_1"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_balance"
+	}
+	textbox = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)2')]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_balance_tt_2"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_balance"
+	}
+	textbox = {
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)3')]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_balance_tt_3"
 		using = fontsize_large align = center|nobaseline
 		background = { using = entry_bg_fancy_dark alpha = 0.6 }
 		text = "gg_war_ui_sec_balance"
@@ -546,25 +601,65 @@ flowcontainer = {
 	}
 	# EN/ES: each government's endurance, only while one of them is counting months
 	#     / el aguante de cada gobierno, solo mientras alguno cuenta meses
+	# EN/ES: 23/9/2026 (journal audit W3, W7) -- from the partition to the peace, one header per war rule
+	#     / desde la particion hasta la paz, un encabezado por regla de la guerra
 	textbox = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1')]"
+		visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)0'))]"
 		size = { 520 34 }
 		parentanchor = hcenter
-		tooltip = "gg_war_ui_sec_endurance_tt"
+		tooltip = "gg_war_ui_sec_endurance_tt_0"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_endurance"
+	}
+	textbox = {
+		visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)1'))]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_endurance_tt_1"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_endurance"
+	}
+	textbox = {
+		visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)2'))]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_endurance_tt_2"
+		using = fontsize_large align = center|nobaseline
+		background = { using = entry_bg_fancy_dark alpha = 0.6 }
+		text = "gg_war_ui_sec_endurance"
+	}
+	textbox = {
+		visible = "[And(EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)3'))]"
+		size = { 520 34 }
+		parentanchor = hcenter
+		tooltip = "gg_war_ui_sec_endurance_tt_3"
 		using = fontsize_large align = center|nobaseline
 		background = { using = entry_bg_fancy_dark alpha = 0.6 }
 		text = "gg_war_ui_sec_endurance"
 	}
 	flowcontainer = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_defensa_shown'), '(CFixedPoint)1')]"
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1')]"
 		tooltip = "gg_war_ui_sec_endurance_tt"
 		direction = horizontal spacing = 8 parentanchor = hcenter
 		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
 		flowcontainer = {
-			direction = vertical spacing = 2
-			textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa" }
+			direction = vertical spacing = 2 ignoreinvisible = yes
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_defensa_shown'), '(CFixedPoint)0')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa_now" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_defensa_shown'), '(CFixedPoint)1')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_defensa" }
+			# EN/ES: the endurance itself, -100 to 100 / el aguante mismo
 			green_progressbar_horizontal = {
 				size = { 472 22 }
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_endurance_defensa_pct')]"
+					min = 0 max = 100
+				}
+			}
+			# EN/ES: the months at the end of its tether, only while they count / los meses sin aguante, solo mientras cuentan
+			green_progressbar_horizontal = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_defensa_shown'), '(CFixedPoint)1')]"
+				size = { 472 8 }
 				blockoverride "values" {
 					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_exhaustion_defensa_pct')]"
 					min = 0 max = 100
@@ -573,15 +668,26 @@ flowcontainer = {
 		}
 	}
 	flowcontainer = {
-		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_cerrito_shown'), '(CFixedPoint)1')]"
+		visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_shown'), '(CFixedPoint)1')]"
 		tooltip = "gg_war_ui_sec_endurance_tt"
 		direction = horizontal spacing = 8 parentanchor = hcenter
 		icon = { size = { 40 40 } texture = "gfx/interface/icons/military_icons/morale.dds" }
 		flowcontainer = {
-			direction = vertical spacing = 2
-			textbox = { multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito" }
+			direction = vertical spacing = 2 ignoreinvisible = yes
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_cerrito_shown'), '(CFixedPoint)0')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito_now" }
+			textbox = { visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_cerrito_shown'), '(CFixedPoint)1')]" multiline = yes autoresize = yes minimumsize = { 472 -1 } maximumsize = { 472 -1 } using = fontsize_medium align = left|nobaseline text = "gg_war_ui_endurance_cerrito" }
+			# EN/ES: the endurance itself, -100 to 100 / el aguante mismo
 			green_progressbar_horizontal = {
 				size = { 472 22 }
+				blockoverride "values" {
+					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_endurance_cerrito_pct')]"
+					min = 0 max = 100
+				}
+			}
+			# EN/ES: the months at the end of its tether, only while they count / los meses sin aguante, solo mientras cuentan
+			green_progressbar_horizontal = {
+				visible = "[EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_endurance_cerrito_shown'), '(CFixedPoint)1')]"
+				size = { 472 8 }
 				blockoverride "values" {
 					value = "[JournalEntry.MakeScope.ScriptValue('gg_ui_exhaustion_cerrito_pct')]"
 					min = 0 max = 100
@@ -643,13 +749,41 @@ flowcontainer = {
 		blockoverride "onclick_showmore" { visible = "[Not(GetVariableSystem.Exists('gg_war_rules_open'))]" }
 		blockoverride "onclick_showless" { visible = "[GetVariableSystem.Exists('gg_war_rules_open')]" }
 	}
+	# EN/ES: 23/9/2026 (journal audit W7) -- one account per war rule / un texto por regla de la guerra
 	textbox = {
-		visible = "[GetVariableSystem.Exists('gg_war_rules_open')]"
+		visible = "[And(GetVariableSystem.Exists('gg_war_rules_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)0'))]"
 		autoresize = yes multiline = yes
 		minimumsize = { 500 -1 } maximumsize = { 500 -1 }
 		parentanchor = hcenter
 		align = left|nobaseline
 		using = fontsize_medium
 		text = "je_guerra_grande_reason"
+	}
+	textbox = {
+		visible = "[And(GetVariableSystem.Exists('gg_war_rules_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)1'))]"
+		autoresize = yes multiline = yes
+		minimumsize = { 500 -1 } maximumsize = { 500 -1 }
+		parentanchor = hcenter
+		align = left|nobaseline
+		using = fontsize_medium
+		text = "gg_war_ui_reason_1"
+	}
+	textbox = {
+		visible = "[And(GetVariableSystem.Exists('gg_war_rules_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)2'))]"
+		autoresize = yes multiline = yes
+		minimumsize = { 500 -1 } maximumsize = { 500 -1 }
+		parentanchor = hcenter
+		align = left|nobaseline
+		using = fontsize_medium
+		text = "gg_war_ui_reason_2"
+	}
+	textbox = {
+		visible = "[And(GetVariableSystem.Exists('gg_war_rules_open'), EqualTo_CFixedPoint(JournalEntry.MakeScope.ScriptValue('gg_ui_war_rule'), '(CFixedPoint)3'))]"
+		autoresize = yes multiline = yes
+		minimumsize = { 500 -1 } maximumsize = { 500 -1 }
+		parentanchor = hcenter
+		align = left|nobaseline
+		using = fontsize_medium
+		text = "gg_war_ui_reason_3"
 	}
 }

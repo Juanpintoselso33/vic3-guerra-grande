@@ -76,11 +76,25 @@ gg_ui_pact_grv_entre_rios = {
  if = { limit = { has_global_variable = gg_entre_rios_agravio global_var:gg_entre_rios_agravio > 0 NOT = { has_global_variable = gg_delegation_gone_entre_rios } } value = 1 }
 }
 
-# EN/ES: 23/9/2026 (Juan) -- the band counts the Banda Oriental when it is in the Pact; the mechanics keep
-#     gg_delegating_provinces over the thirteen / la franja cuenta la Banda Oriental; la mecanica sigue con trece
-gg_ui_pact_delegating_shown = {
-	value = global_var:gg_delegating_provinces
+# EN: 23/9/2026 (Juan: the Banda Oriental counts for the Pact when it is in it) -- THE PACT'S COUNT: the thirteen
+#     provinces' counter (gg_delegating_provinces, which the other systems read on their own terms) plus the
+#     Oriental while it is a province of the Pact (it always delegates). 14 with it, 13 without. The band shows it
+#     and the Pact's closing (je_gg_delegation complete) and the same line in Rosas's backing of Oribe
+#     (gg_int_arg_* <= 6) read it, so what the player sees is what closes the Pact.
+# ES: LA CUENTA DEL PACTO: las trece mas la Oriental mientras sea provincia del Pacto (siempre delega); 14 con
+#     ella, 13 sin ella. La muestra la franja y la leen el cierre del Pacto y la misma linea del respaldo a Oribe.
+gg_pact_delegating = {
+	value = 0
+	if = { limit = { has_global_variable = gg_delegating_provinces } value = global_var:gg_delegating_provinces }
 	if = { limit = { has_global_variable = gg_oriental_in_pact } add = 1 }
+}
+gg_ui_pact_delegating_shown = {
+	value = gg_pact_delegating
+}
+# EN/ES: 23/9/2026 (journal audit K8) -- 1 if the Pact's rule lets the majority withdrawal close it / 1 si la regla deja cerrarlo por retiros
+gg_ui_pact_dynamic = {
+	value = 0
+	if = { limit = { gg_pact_dynamic = yes } value = 1 }
 }
 gg_ui_pact_total = {
 	value = 13

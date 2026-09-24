@@ -25,3 +25,5 @@
  gg_pact_hover_santa_fe:0 "#b Santa Fe#!\n[GetScriptedGui('gg_pact_hover_santa_fe').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_pact_hover_corrientes:0 "#b Corrientes and Misiones#!\n[GetScriptedGui('gg_pact_hover_corrientes').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_pact_hover_entre_rios:0 "#b Entre Ríos#!\n[GetScriptedGui('gg_pact_hover_entre_rios').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ gg_pact_hover_oriental:0 "#b Oriental Province#!\n$gg_pact_state_delegated$"
+ gg_pact_hover_tarija:0 "#b Salta and Tarija#!\n[GetScriptedGui('gg_pact_hover_salta').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

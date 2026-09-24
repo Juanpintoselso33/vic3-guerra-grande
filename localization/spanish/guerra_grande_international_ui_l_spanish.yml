@@ -4,3 +4,4 @@
  gg_ui_empty:0 ""
  gg_ui_squadrons_action_tt:0 "Requiere guerra abierta, los dos gobiernos constituidos y no haber solicitado ya las escuadras. Disponible desde #V 1843#! con interés de una gran potencia en el Plata, o desde #V 1848#! sin ese requisito.\n\n[GetScriptedGui('gg_ui_call_squadrons').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  gg_ui_backing_tt:0 "El respaldo va de #V 0#! a #V 100#!. La cifra no equivale por sí sola a un tratado: los compromisos se contraen al aceptar sus condiciones."
+ gg_requires_no_imperial_pledge:0 "La Defensa no se comprometió con el Imperio"
