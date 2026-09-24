@@ -497,6 +497,9 @@ guerra_grande.3 = {
 		#     unico personaje real, corra antes o despues de create_country. Se usa despues de la
 		#     transferencia para distinguir al hombre de verdad del clon de create_country que esta por
 		#     acompaniarlo en c:CER -- ver el bloque de limpieza despues de las transferencias.
+		# EN/ES: CB-08 (23/9/2026) -- that clean-up is now the emptying right after create_country, so no clone
+		#     reaches the transfers; these scopes stay as handles on the originals / esa limpieza ahora es el
+		#     vaciado justo despues de create_country: ningun clon llega a las transferencias
 		random_scope_character = {
 			limit = { has_template = URU_Ignacio_Oribe }
 			save_scope_as = gg_ignacio_oribe
@@ -519,6 +522,22 @@ guerra_grande.3 = {
 			state = s:STATE_BANDA_ORIENTAL.region_state:URU
 			on_created = {
 				set_variable = guerra_grande_cerrito_government
+			}
+		}
+		# EN: bug hunt 23/9/2026 (CB-08) -- THE EMPTYING, the Argentine side's rule (gg_argentina_new_country_people):
+		#     create_country clones the whole roster onto the new country -- every interest-group leader and
+		#     general, not only the named men -- so each of them served both governments. Everyone the clone
+		#     brought along is removed now, before anybody is brought in; the men who belong to c:CER are the
+		#     originals saved and transferred below, and the engine generates the leaders it lacks. This
+		#     replaces the two template-list clean-ups that ran after the transfers and missed everyone else.
+		# ES: EL VACIADO, la regla del lado argentino: create_country clona el plantel entero en el pais nuevo
+		#     -- todos los lideres de grupo y generales, no solo los nombrados --, asi que cada uno servia a los
+		#     dos gobiernos. Todo lo que trajo el clonado se elimina ahora, antes de traer a nadie; los hombres
+		#     de c:CER son los originales guardados y transferidos abajo, y el motor genera los lideres que
+		#     falten. Reemplaza las dos limpiezas por lista de plantillas, que dejaban a todos los demas.
+		c:CER ?= {
+			every_scope_character = {
+				kill_character = { hidden = yes } # EN/ES: a generated copy, never a person / una copia generada, no una persona
 			}
 		}
 		if = {
@@ -566,50 +585,6 @@ guerra_grande.3 = {
 				}
 			}
 			transfer_character = c:CER
-		}
-		# EN: create_country cloned Oribe, Ignacio Oribe, Berro, Aparicio and Lavalleja onto CER along
-		#     with everyone else, and the transfers above then moved each ORIGINAL into CER too -- so
-		#     right now CER holds two of each of these five. The enemy-copy exile block further down
-		#     (has_template = URU_joaquin_suarez, etc.) does not touch this: those are a different set
-		#     of templates. Both instances share has_template, so filtering by template alone cannot
-		#     tell them apart anymore; the saved scopes from before create_country are what makes the
-		#     surviving original identifiable, via the this != scope:x idiom vanilla uses to exclude one
-		#     specific character from a limit (see events/commander_events.txt, arguing_commander_two's
-		#     limit: NOT = { this = scope:arguing_commander_one }). Excluding all five saved scopes here
-		#     leaves only the create_country clones matching, so this removes exactly the five copies.
-		# ES: create_country clono a Oribe, Ignacio Oribe, Berro, Aparicio y Lavalleja hacia CER junto
-		#     con todos los demas, y las transferencias de arriba despues movieron cada ORIGINAL tambien
-		#     a CER -- asi que ahora mismo CER tiene dos de cada uno de estos cinco. El bloque de exilio
-		#     de copias enemigas de mas abajo (has_template = URU_joaquin_suarez, etc.) no toca esto: es
-		#     otro conjunto de templates. Las dos instancias comparten has_template, asi que filtrar solo
-		#     por template ya no alcanza para distinguirlas; los scopes guardados antes de create_country
-		#     son lo que permite identificar al original que sobrevive, con el modismo this != scope:x
-		#     que vanilla usa para excluir a un personaje puntual de un limit (ver
-		#     events/commander_events.txt, el limit de arguing_commander_two: NOT = { this =
-		#     scope:arguing_commander_one }). Excluir aca los cinco scopes guardados deja matcheando solo
-		#     a los clones de create_country, asi que esto elimina justo a las cinco copias.
-		c:CER ?= {
-			every_scope_character = {
-				limit = {
-					OR = {
-						has_template = URU_Manuel_Oribe
-						has_template = URU_Ignacio_Oribe
-						has_template = URU_bernardo_prudencio_berro
-						has_template = URU_timoteo_aparicio
-						has_template = URU_Juan_Antonio_Lavalleja
-					}
-					# EN/ES: 22/9/2026 -- ?= compares only when the scope was saved; a missing scope made the old
-					#     comparison invalid (error.log) / ?= compara solo si el scope se guardo; si faltaba, era invalida
-					NOT = { scope:gg_oribe ?= this }
-					NOT = { scope:gg_ignacio_oribe ?= this }
-					NOT = { scope:gg_berro ?= this }
-					NOT = { scope:gg_aparicio ?= this }
-					NOT = { scope:gg_lavalleja ?= this }
-				}
-				# EN: Dispose of a generated copy, not a historical person or an exile.
-				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
-				kill_character = { hidden = yes }
-			}
 		}
 		# EN: the Defensa was presided over by Joaquin Suarez -- an interim presidency that lasted
 		#     eight years. Without naming him the engine picks a random character.
@@ -665,35 +640,6 @@ guerra_grande.3 = {
 			#     the journal (score, river, events, endurance) and the arbiter closes it on the calendar. Headless runs
 			#     1-27: with the engine war open, two or three AI battles ended it between 1843 and 1848.
 			# ES: sin guerra del motor en el corte: el sitio corre sobre el journal y lo cierra el arbitro con el calendario.
-		}
-		# EN: create_country copies the whole character roster from origin, so the new government
-		#     is born holding a duplicate of every man in the country -- including the enemy's.
-		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
-		#     Defensa. Transferring the other side's men is not enough: the transfers move the
-		#     originals, and these copies stay behind. Generated copies are removed silently, never sent to the exile pool.
-		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
-		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
-		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
-		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
-		#     estas copias quedan. Las copias se eliminan en silencio, nunca se mandan al exilio.
-		c:CER ?= {
-			every_scope_character = {
-				limit = {
-					OR = {
-					has_template = URU_joaquin_suarez
-					has_template = URU_Fructuoso_Rivera
-					has_template = URU_venancio_flores
-					has_template = URU_cesar_diaz
-					has_template = URU_anacleto_medina
-					has_template = URU_lorenzo_batlle
-					has_template = URU_manuel_herrera_y_obes
-					has_template = URU_andres_lamas
-					}
-				}
-				# EN: Dispose of a generated copy, not a historical person or an exile.
-				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
-				kill_character = { hidden = yes }
-			}
 		}
 		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.
 		#     Two things the research changed. First, the arm mix: Uruguay was a cavalry country
@@ -991,6 +937,9 @@ guerra_grande.3 = {
 		#     personaje real sin importar cuando corra respecto de create_country. Se usa despues de la
 		#     transferencia de abajo para distinguir al hombre de verdad de su clon de create_country;
 		#     ver el bloque de limpieza despues de las transferencias.
+		# EN/ES: CB-08 (23/9/2026) -- that clean-up is now the emptying right after create_country, so no clone
+		#     reaches the transfers; these scopes stay as handles on the originals / esa limpieza ahora es el
+		#     vaciado justo despues de create_country: ningun clon llega a las transferencias
 		random_scope_character = {
 			limit = { has_template = URU_Fructuoso_Rivera }
 			save_scope_as = gg_rivera
@@ -1053,6 +1002,22 @@ guerra_grande.3 = {
 				set_variable = guerra_grande_defensa_government
 			}
 		}
+		# EN: bug hunt 23/9/2026 (CB-08) -- THE EMPTYING, the Argentine side's rule (gg_argentina_new_country_people):
+		#     create_country clones the whole roster onto the new country -- every interest-group leader and
+		#     general, not only the named men -- so each of them served both governments. Everyone the clone
+		#     brought along is removed now, before anybody is brought in; the men who belong to c:URU are the
+		#     originals saved and transferred below, and the engine generates the leaders it lacks. This
+		#     replaces the two template-list clean-ups that ran after the transfers and missed everyone else.
+		# ES: EL VACIADO, la regla del lado argentino: create_country clona el plantel entero en el pais nuevo
+		#     -- todos los lideres de grupo y generales, no solo los nombrados --, asi que cada uno servia a los
+		#     dos gobiernos. Todo lo que trajo el clonado se elimina ahora, antes de traer a nadie; los hombres
+		#     de c:URU son los originales guardados y transferidos abajo, y el motor genera los lideres que
+		#     falten. Reemplaza las dos limpiezas por lista de plantillas, que dejaban a todos los demas.
+		c:URU ?= {
+			every_scope_character = {
+				kill_character = { hidden = yes } # EN/ES: a generated copy, never a person / una copia generada, no una persona
+			}
+		}
 		if = {
 			limit = { exists = scope:gg_suarez }
 			scope:gg_suarez = { transfer_character = c:URU }
@@ -1068,47 +1033,14 @@ guerra_grande.3 = {
 					has_template = URU_cesar_diaz
 					has_template = URU_anacleto_medina
 					has_template = URU_lorenzo_batlle
+					# EN/ES: CB-08 -- the Defensa's statesmen, who used to reach it only as clones / los
+					#     hombres de Estado de la Defensa, que antes llegaban solo como clones
+					has_template = URU_manuel_herrera_y_obes
+					has_template = URU_andres_lamas
+					has_template = URU_gg_gabriel_antonio_pereira
 				}
 			}
 			transfer_character = c:URU
-		}
-		# EN: mirror of guerra_grande.3.a's cleanup: create_country cloned Suarez, Rivera, Flores,
-		#     Diaz, Medina and Batlle onto URU along with everyone else, and the transfers above then
-		#     moved each ORIGINAL into URU too, so URU now holds two of each. Excluding the six saved
-		#     scopes leaves only the create_country clones matching, via the same this != scope:x
-		#     idiom vanilla uses to exclude one specific character from a limit (see
-		#     events/commander_events.txt, arguing_commander_two's limit).
-		# ES: espejo de la limpieza de guerra_grande.3.a: create_country clono a Suarez, Rivera,
-		#     Flores, Diaz, Medina y Batlle hacia URU junto con todos los demas, y las transferencias
-		#     de arriba despues movieron cada ORIGINAL tambien a URU, asi que URU tiene ahora dos de
-		#     cada uno. Excluir los seis scopes guardados deja matcheando solo a los clones de
-		#     create_country, con el mismo modismo this != scope:x que usa vanilla para excluir a un
-		#     personaje puntual de un limit (ver events/commander_events.txt, el limit de
-		#     arguing_commander_two).
-		c:URU ?= {
-			every_scope_character = {
-				limit = {
-					OR = {
-						has_template = URU_joaquin_suarez
-						has_template = URU_Fructuoso_Rivera
-						has_template = URU_venancio_flores
-						has_template = URU_cesar_diaz
-						has_template = URU_anacleto_medina
-						has_template = URU_lorenzo_batlle
-					}
-					# EN/ES: 22/9/2026 -- ?= compares only when the scope was saved; a missing scope made the old
-					#     comparison invalid (error.log) / ?= compara solo si el scope se guardo; si faltaba, era invalida
-					NOT = { scope:gg_suarez ?= this }
-					NOT = { scope:gg_rivera ?= this }
-					NOT = { scope:gg_flores ?= this }
-					NOT = { scope:gg_diaz ?= this }
-					NOT = { scope:gg_medina ?= this }
-					NOT = { scope:gg_batlle ?= this }
-				}
-				# EN: Dispose of a generated copy, not a historical person or an exile.
-				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
-				kill_character = { hidden = yes }
-			}
 		}
 		c:URU ?= {
 			set_capital = STATE_MONTEVIDEO
@@ -1127,32 +1059,6 @@ guerra_grande.3 = {
 					template = URU_joaquin_suarez
 					ruler = yes
 				}
-			}
-		}
-		# EN: create_country copies the whole character roster from origin, so the new government
-		#     is born holding a duplicate of every man in the country -- including the enemy's.
-		#     That is how Brigadier General Timoteo Aparicio, a blanco, turned up serving the
-		#     Defensa. Transferring the other side's men is not enough: the transfers move the
-		#     originals, and these copies stay behind. Generated copies are removed silently, never sent to the exile pool.
-		# ES: create_country copia la lista entera de personajes del origen, asi que el gobierno
-		#     nuevo nace con un duplicado de cada hombre del pais, incluidos los del enemigo. Asi
-		#     fue como el general Timoteo Aparicio, blanco, aparecio sirviendo a la Defensa.
-		#     Transferir a los del otro bando no alcanza: las transferencias mueven los originales y
-		#     estas copias quedan. Las copias se eliminan en silencio, nunca se mandan al exilio.
-		c:URU ?= {
-			every_scope_character = {
-				limit = {
-					OR = {
-					has_template = URU_Manuel_Oribe
-					has_template = URU_Ignacio_Oribe
-					has_template = URU_bernardo_prudencio_berro
-					has_template = URU_timoteo_aparicio
-					has_template = URU_Juan_Antonio_Lavalleja
-					}
-				}
-				# EN: Dispose of a generated copy, not a historical person or an exile.
-				# ES: Eliminar una copia generada, no una persona historica ni un exiliado.
-				kill_character = { hidden = yes }
 			}
 		}
 		# EN: THE ARMIES, SIZED FROM THE SOURCES. See SOURCES_order_of_battle.md.
