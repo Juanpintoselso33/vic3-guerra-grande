@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **The constitution can be a confederation:** a new answer to «The Constitution», «The Pact of 1831 and nothing
+  more». No constitution is written: every historical province becomes its own country again, a Province of the
+  Pact under Buenos Aires, which keeps the foreign relations; Buenos Aires keeps its own province and the frontier
+  lands (La Pampa, Río Negro, the Chaco). It also works after the provinces were incorporated in 1851, and a
+  Coalition under Buenos Aires splits into its provinces. Offered unless the Pact ended with Urquiza's victory or
+  with two governments; a player's province is never forced. After Rosas's victory he keeps the sum of public power
+  and the question reopens at his death. The AI takes it rarely, and never under a forced Pact rule.
 - **Reincorporated provinces are incorporated states:** when Argentina (or Urquiza's Confederation, or the Argentina
   that remains after the Buenos Aires war) annexes a province of the Pact — the national organisation of 1851, the
   constitution, the Coalition, the Oriental Province — its states become incorporated at once instead of showing as
