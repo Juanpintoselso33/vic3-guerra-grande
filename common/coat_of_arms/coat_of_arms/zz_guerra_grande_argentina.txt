@@ -284,3 +284,59 @@ BUE = {
 		texture = "te_gg_estado_buenos_aires.dds"
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (AUD-CONST-TERR) -- THE NINE TERRITORIES MADE PROVINCES (LPM NQN RNG CHB SCZ TDF MIS FMS CHO). As national
+#     territories they had no flag of their own: they flew the nation's. The key gg_flag_terr_<key> (namespaced: MIS is a coat-of-arms key
+#     Knowledge is Power reads for Mississippi; Codex review) is the Confederation's flag (te_gg_confederacion.dds, the same real image the nine provinces without a flag of their own
+#     use); from Caseros on, the national celeste and white (common/flag_definitions/zz_guerra_grande_flags.txt). Their
+#     provincial flags of today (all adopted after 1985) are pending (PENDIENTES.md).
+# ES: LOS NUEVE TERRITORIOS HECHOS PROVINCIA. Como territorios nacionales no tuvieron bandera propia: izaban la de la
+#     nacion. La clave gg_flag_terr_<clave> es la de la Confederacion; desde Caseros, la celeste y blanca. Sus banderas
+#     provinciales de hoy (todas posteriores a 1985) quedan pendientes.
+# -------------------------------------------------------------------------------------------------
+gg_flag_terr_la_pampa = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_neuquen = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_rio_negro = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_chubut = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_santa_cruz = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_tierra_del_fuego = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_misiones = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_formosa = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}
+gg_flag_terr_chaco = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_confederacion.dds" }
+}

@@ -47,6 +47,7 @@ gg_is_oriental_pact_province = {
 gg_has_province_governor = {
 	OR = {
 		gg_is_province_country = yes
+		gg_is_territory_province_country = yes # EN/ES: 24/9 (AUD-CONST-TERR) -- a territory made a province has a governor / un territorio hecho provincia tiene gobernador
 		gg_is_oriental_pact_province = yes
 	}
 }
@@ -59,6 +60,7 @@ gg_has_province_governor = {
 gg_is_born_of_argentina = {
 	OR = {
 		gg_is_province_country = yes
+		gg_is_territory_province_country = yes # EN/ES: 24/9 (AUD-CONST-TERR) -- the territories made provinces / los territorios hechos provincia
 		c:CLN ?= this
 		c:BUE ?= this
 	}
@@ -188,6 +190,16 @@ gg_arg_historical_province_state = {
 		state_region = s:STATE_SAN_JUAN
 		state_region = s:STATE_MENDOZA
 		state_region = s:STATE_SAN_LUIS
+		# EN/ES: 24/9/2026 (AUD-CONST-TERR) -- a national territory once it was declared a province under the confederation
+		#     (gg_territory_promote_one) / un territorio nacional despues de ser declarado provincia
+		AND = { state_region = s:STATE_LA_PAMPA has_global_variable = gg_terr_province_la_pampa }
+		AND = { state_region = s:STATE_NEUQUEN has_global_variable = gg_terr_province_neuquen }
+		AND = { state_region = s:STATE_RIO_NEGRO has_global_variable = gg_terr_province_rio_negro }
+		AND = { state_region = s:STATE_CHUBUT has_global_variable = gg_terr_province_chubut }
+		AND = { state_region = s:STATE_SANTA_CRUZ_ARG has_global_variable = gg_terr_province_santa_cruz }
+		AND = { state_region = s:STATE_TIERRA_DEL_FUEGO has_global_variable = gg_terr_province_tierra_del_fuego }
+		AND = { state_region = s:STATE_FORMOSA_ARG has_global_variable = gg_terr_province_formosa }
+		AND = { state_region = s:STATE_CHACO has_global_variable = gg_terr_province_chaco }
 		AND = {
 			has_global_variable = gg_reincorporated
 			OR = {

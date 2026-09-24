@@ -242,3 +242,107 @@ BUE = {
 
 	capital = STATE_BUENOS_AIRES
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-CONST-TERR) -- THE NINE NATIONAL TERRITORIES AS PROVINCES, under the confederation only
+#     (common/scripted_effects/gg_territories.txt). The nine gobernaciones of Ley 1.532 (1884), art. 1, with the names
+#     their provinces carry. None exists at game start; each is born a Province of the Pact under Buenos Aires when its
+#     census passes sixty thousand souls. TAGS VERIFIED FREE on 24/9/2026 against vanilla 1.13, every downloaded
+#     Workshop item and every local mod (country_definitions, c: references in common/events/history, localization
+#     keys): LPM NQN RNG CHB SCZ TDF MIS FMS CHO. Colours are map colours only (a Province of the Pact shows Buenos
+#     Aires's: use_overlord_map_color).
+# ES: LOS NUEVE TERRITORIOS NACIONALES COMO PROVINCIAS, solo bajo la confederacion. Las nueve gobernaciones del art. 1 de
+#     la Ley 1.532, con los nombres de sus provincias. Ninguna existe al empezar; cada una nace provincia del Pacto cuando
+#     su censo pasa las sesenta mil almas. Tags verificados libres el 24/9/2026 contra vanilla, el Workshop descargado y
+#     los mods locales. Colores solo de mapa.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: La Pampa
+LPM = {
+	color = { 196 160 96 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_LA_PAMPA
+}
+
+# EN/ES: Neuquén
+NQN = {
+	color = { 112 140 150 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_NEUQUEN
+}
+
+# EN/ES: Río Negro
+RNG = {
+	color = { 90 120 170 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_RIO_NEGRO
+}
+
+# EN/ES: Chubut
+CHB = {
+	color = { 150 170 120 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_CHUBUT
+}
+
+# EN/ES: Santa Cruz
+SCZ = {
+	color = { 170 110 130 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_SANTA_CRUZ_ARG
+}
+
+# EN/ES: Tierra del Fuego
+TDF = {
+	color = { 120 100 160 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_TIERRA_DEL_FUEGO
+}
+
+# EN/ES: Misiones
+MIS = {
+	color = { 80 150 90 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_MISIONES
+}
+
+# EN/ES: Formosa
+FMS = {
+	color = { 200 130 70 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_FORMOSA_ARG
+}
+
+# EN/ES: Chaco
+CHO = {
+	color = { 140 90 60 }
+	country_type = recognized
+	tier = principality
+	religion = catholic
+	cultures = { platinean }
+	capital = STATE_CHACO
+}

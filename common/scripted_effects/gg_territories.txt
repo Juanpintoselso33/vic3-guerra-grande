@@ -1,0 +1,160 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-CONST-TERR) -- A NATIONAL TERRITORY BECOMES A PROVINCE under the confederation. The triggers
+#     and the reasons are in common/scripted_triggers/gg_territories.txt; the yearly check in
+#     common/on_actions/gg_territories_on_actions.txt; the notices in events/gg_arg_territories.txt.
+#     THE MACHINERY IS THE MOD'S OWN: gg_province_split_off with Argentina as the origin makes the country (create_country
+#     on the state, the clones killed and Argentina's army model inherited through gg_argentina_new_country_people, the
+#     Province of the Pact with Buenos Aires, whose colour it shows on the map: use_overlord_map_color), exactly as the
+#     confederation hands the historical provinces their ground (gg_constitution_confed_ground). Then its state is
+#     incorporated (AUD-PROV-INCORP: gg_territory_made_<key> puts it in gg_arg_historical_province_state, so every later
+#     reincorporation into Argentina keeps it incorporated too).
+#     THE GOVERNOR: no man is sourced for any of the nine before 1884 (the first governors of the gobernaciones were named
+#     by the national executive under art. 6 of Ley 1.532, in another Argentina than this one), so none is invented: the
+#     seat stays as the engine leaves it, as for Entre Rios under the fallen mandate (gg_pact_gov_federal_entre_rios).
+# ES: UN TERRITORIO NACIONAL SE VUELVE PROVINCIA bajo la confederacion. La maquinaria es la del mod: gg_province_split_off
+#     con la Argentina como origen crea el pais (clones muertos, modelo de ejercito heredado, provincia del Pacto con el
+#     color de Buenos Aires en el mapa), igual que la confederacion con las provincias historicas. Despues se incorpora su
+#     estado. EL GOBERNADOR: ninguno tiene fuente antes de 1884, asi que no se inventa: la silla queda como la deja el motor.
+# SOURCE / FUENTE: Ley 1.532 (1884), arts. 1, 4 and 6 (https://es.wikisource.org/wiki/Ley_1.532_de_Organizaci%C3%B3n_de_los_Territorios_Nacionales).
+# -------------------------------------------------------------------------------------------------
+
+# EN: Scope: Argentina, with var:gg_terr_candidate (the state, set by gg_territories_yearly). Idempotent: a state that is
+#     no longer ready does nothing.
+# ES: Scope: la Argentina, con var:gg_terr_candidate. Idempotente: un estado que ya no esta listo no hace nada.
+gg_territory_promote = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_territory_promote|" # GG_TRAZA
+	if = {
+		# EN/ES: Codex review -- checked again when the answer is given: up to twelve days may pass after the notice
+		#     / se vuelve a chequear al contestar: pueden pasar doce dias desde el aviso
+		limit = {
+			gg_confederation_stands = yes
+			is_at_war = no
+			var:gg_terr_candidate ?= { gg_territory_ready = yes }
+		}
+		var:gg_terr_candidate = { save_scope_as = gg_terr_state }
+		if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_LA_PAMPA } }
+			gg_territory_promote_one = { STATE = STATE_LA_PAMPA TAG = LPM KEY = la_pampa }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_NEUQUEN } }
+			gg_territory_promote_one = { STATE = STATE_NEUQUEN TAG = NQN KEY = neuquen }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_RIO_NEGRO } }
+			gg_territory_promote_one = { STATE = STATE_RIO_NEGRO TAG = RNG KEY = rio_negro }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_CHUBUT } }
+			gg_territory_promote_one = { STATE = STATE_CHUBUT TAG = CHB KEY = chubut }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_SANTA_CRUZ_ARG } }
+			gg_territory_promote_one = { STATE = STATE_SANTA_CRUZ_ARG TAG = SCZ KEY = santa_cruz }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_TIERRA_DEL_FUEGO } }
+			gg_territory_promote_one = { STATE = STATE_TIERRA_DEL_FUEGO TAG = TDF KEY = tierra_del_fuego }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_MISIONES } }
+			gg_territory_promote_one = { STATE = STATE_MISIONES TAG = MIS KEY = misiones }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_FORMOSA_ARG } }
+			gg_territory_promote_one = { STATE = STATE_FORMOSA_ARG TAG = FMS KEY = formosa }
+		}
+		else_if = {
+			limit = { scope:gg_terr_state = { state_region = s:STATE_CHACO } }
+			gg_territory_promote_one = { STATE = STATE_CHACO TAG = CHO KEY = chaco }
+		}
+		clear_saved_scope = gg_terr_state
+	}
+	if = { limit = { has_variable = gg_terr_candidate } remove_variable = gg_terr_candidate }
+}
+
+# EN: One territory. Scope: Argentina. The mark gg_terr_province_<key> is set when the country exists after the split:
+#     gg_territory_ready asked for its tag not to exist, so it was born here. Not read from is_subject_of (Codex review):
+#     a pact made in the same effect may be read by the engine only afterwards; gg_subject_watch (called by
+#     gg_province_split_off) traces a month later whether the Province of the Pact holds.
+#     Misiones takes Parana and Santa Catarina, la Argentina's Misiones lands, as Corrientes does everywhere else.
+#     The province's notice is queued on the new country for the next day (gg_arg_territories.2); the trace says MADE.
+# ES: un territorio. La marca se prende solo si el pais nacio sujeto de Buenos Aires. Misiones se lleva Parana y Santa
+#     Catarina, como Corrientes en el resto del mod. El aviso de la provincia sale al dia siguiente.
+gg_territory_promote_one = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_territory_promote_one| KEY= $KEY$ " # GG_TRAZA
+	save_scope_as = gg_split_origin
+	gg_province_split_off = { STATE = $STATE$ TAG = $TAG$ KEY = $KEY$ }
+	clear_saved_scope = gg_split_origin
+	if = {
+		limit = { exists = c:$TAG$ }
+		set_global_variable = gg_terr_province_$KEY$
+		if = {
+			limit = { exists = c:MIS has_global_variable = gg_terr_province_misiones }
+			every_scope_state = {
+				limit = {
+					OR = {
+						state_region = s:STATE_PARANA
+						state_region = s:STATE_SANTA_CATARINA
+					}
+				}
+				set_state_owner = c:MIS
+			}
+		}
+		c:$TAG$ = {
+			gg_incorporate_province_states = yes
+			trigger_event = { id = gg_arg_territories.2 days = 1 popup = yes }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_territory_promote_one| KEY= $KEY$ MADE=yes " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_territory_promote_one| KEY= $KEY$ MADE=no " # GG_TRAZA
+	}
+}
+
+# EN: The governor Buenos Aires installs (gg_province_install_governor, scope: the new province). None is sourced, so
+#     none is invented: the row names whoever the engine seated (the province's own ruler, a no-op for the install), or
+#     nobody, and the seat stays as the engine leaves it.
+# ES: el gobernador que pone Buenos Aires. Ninguno tiene fuente, no se inventa: la variable apunta a quien sento el motor
+#     (su propio gobernante, sin efecto en la instalacion) o a nadie.
+gg_pact_gov_federal_la_pampa = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_la_pampa| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = la_pampa }
+}
+gg_pact_gov_federal_neuquen = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_neuquen| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = neuquen }
+}
+gg_pact_gov_federal_rio_negro = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_rio_negro| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = rio_negro }
+}
+gg_pact_gov_federal_chubut = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_chubut| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = chubut }
+}
+gg_pact_gov_federal_santa_cruz = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_santa_cruz| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = santa_cruz }
+}
+gg_pact_gov_federal_tierra_del_fuego = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_tierra_del_fuego| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = tierra_del_fuego }
+}
+gg_pact_gov_federal_misiones = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_misiones| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = misiones }
+}
+gg_pact_gov_federal_formosa = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_formosa| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = formosa }
+}
+gg_pact_gov_federal_chaco = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_gov_federal_chaco| NONE_SOURCED=yes " # GG_TRAZA
+	gg_territory_gov_seat = { KEY = chaco }
+}
+# EN/ES: the row of the governor Buenos Aires installs: the province's own ruler if the engine seated one / la fila: su
+#     propio gobernante si el motor sento uno
+gg_territory_gov_seat = {
+	ruler ?= { set_global_variable = { name = gg_pact_gov_$KEY$ value = this } }
+}

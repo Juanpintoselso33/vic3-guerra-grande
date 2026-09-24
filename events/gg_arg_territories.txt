@@ -1,0 +1,137 @@
+﻿namespace = gg_arg_territories
+
+# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-CONST-TERR) -- A NATIONAL TERRITORY ASKS TO BE A PROVINCE, under the confederation
+#     (gg_constitution.1.g). Queued by the yearly census (common/on_actions/gg_territories_on_actions.txt) with the
+#     candidate state in var:gg_terr_candidate; the machinery is common/scripted_effects/gg_territories.txt.
+#     Argentine side: the namespace is gg_arg_territories, never an Oriental one.
+#     PLAYER AND AI: the AI always grants it (the law's own word is «tendra derecho»). A player's Buenos Aires may make the
+#     territory wait five years, at a cost in the territory's radicals: nothing is forced on a player's country, and the
+#     choice has a price. The new province is never a player's at birth.
+# ES: UN TERRITORIO NACIONAL PIDE SER PROVINCIA bajo la confederacion. Lo encola el censo anual con el estado candidato en
+#     var:gg_terr_candidate. Lado argentino: namespace gg_arg_territories. La IA siempre lo concede («tendra derecho»); un
+#     jugador puede hacerlo esperar cinco anios, a costa de radicales en el territorio.
+# VIDEO: provisional vanilla videos (AUD-NOTICES-VIDEO; PENDIENTES.md) / videos vanilla provisorios.
+# -------------------------------------------------------------------------------------------------
+
+# SOURCE / FUENTE: Ley 1.532 de Organizacion de los Territorios Nacionales (1884; InfoLeg id 48923, legislation date
+#     1/10/1884), art. 4: «Cuando la poblacion de una Gobernacion alcance a sesenta mil habitantes, constatados por el
+#     censo general y los censos suplementarios sucesivos, tendra derecho para ser declarada provincia argentina»; art.
+#     46: a legislature at thirty thousand souls (https://es.wikisource.org/wiki/Ley_1.532_de_Organizaci%C3%B3n_de_los_Territorios_Nacionales).
+#     Pacto Federal of 4/1/1831, art. 1, «su libertad, independencia, representacion y derechos», and art. 12, a province
+#     enters the league «con el expreso y unanime consentimiento de cada una de las demas provincias federales»
+#     (https://es.wikisource.org/wiki/Pacto_Federal_(1831)). The quoted law is cited in the text only from its own date on.
+gg_arg_territories.1 = {
+	type = country_event
+	placement = ROOT
+	title = {
+		first_valid = {
+			triggered_desc = { desc = gg_arg_territories.1.t_la_pampa trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_LA_PAMPA } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_neuquen trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_NEUQUEN } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_rio_negro trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_RIO_NEGRO } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_chubut trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_CHUBUT } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_santa_cruz trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_SANTA_CRUZ_ARG } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_tierra_del_fuego trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_TIERRA_DEL_FUEGO } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_misiones trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_MISIONES } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_formosa trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_FORMOSA_ARG } } }
+			triggered_desc = { desc = gg_arg_territories.1.t_chaco trigger = { var:gg_terr_candidate ?= { state_region = s:STATE_CHACO } } }
+			triggered_desc = { desc = gg_arg_territories.1.t trigger = { always = yes } }
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = { desc = gg_arg_territories.1.d_ley trigger = { game_date >= 1884.10.1 } }
+			triggered_desc = { desc = gg_arg_territories.1.d trigger = { always = yes } }
+		}
+	}
+	flavor = gg_arg_territories.1.f
+	# EN/ES: provisional vanilla video / video vanilla provisorio
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 12
+	is_popup = yes
+
+	# EN/ES: the candidate is set before this is queued (gg_territories_yearly) / el candidato se anota antes de encolarlo
+	trigger = {
+		c:ARG ?= this
+		gg_confederation_stands = yes
+		var:gg_terr_candidate ?= { gg_territory_ready = yes }
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_territories.1|" # GG_TRAZA
+	}
+
+	# EN: granted: the territory becomes a Province of the Pact. ES: se concede: el territorio es provincia del Pacto.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_territories.1.a|" # GG_TRAZA
+		name = gg_arg_territories.1.a
+		default_option = yes
+		custom_tooltip = gg_arg_territories.1.a_tt
+		hidden_effect = { gg_territory_promote = yes }
+		ai_chance = { base = 100 }
+	}
+
+	# EN: a player's Buenos Aires makes it wait for the next census: five years, and the territory resents it.
+	# ES: el Buenos Aires de un jugador lo hace esperar al proximo censo: cinco anios, y el territorio lo resiente.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_territories.1.b|" # GG_TRAZA
+		name = gg_arg_territories.1.b
+		trigger = { is_player = yes }
+		custom_tooltip = gg_arg_territories.1.b_tt
+		var:gg_terr_candidate ?= {
+			add_radicals_in_state = { value = 0.1 }
+		}
+		hidden_effect = {
+			set_variable = { name = gg_terr_delay years = 5 }
+			remove_variable = gg_terr_candidate
+		}
+		ai_chance = { base = 0 }
+	}
+}
+
+# EN: The new province hears it, the day after (queued by gg_territory_promote_one on the new country).
+# ES: La nueva provincia lo recibe al dia siguiente.
+# SOURCE / FUENTE: as gg_arg_territories.1 (Pacto Federal, arts. 1 and 12; Ley 1.532, arts. 4 and 46).
+gg_arg_territories.2 = {
+	type = country_event
+	placement = ROOT
+	title = {
+		first_valid = {
+			triggered_desc = { desc = gg_arg_territories.2.t_la_pampa trigger = { c:LPM ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_neuquen trigger = { c:NQN ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_rio_negro trigger = { c:RNG ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_chubut trigger = { c:CHB ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_santa_cruz trigger = { c:SCZ ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_tierra_del_fuego trigger = { c:TDF ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_misiones trigger = { c:MIS ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_formosa trigger = { c:FMS ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t_chaco trigger = { c:CHO ?= this } }
+			triggered_desc = { desc = gg_arg_territories.2.t trigger = { always = yes } }
+		}
+	}
+	desc = gg_arg_territories.2.d
+	flavor = gg_arg_territories.2.f
+	# EN/ES: provisional vanilla video / video vanilla provisorio
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 12
+	is_popup = yes
+
+	# EN/ES: only the tag: the pact made in the same effect may be read by the engine only afterwards
+	#     / solo el tag: el pacto hecho en el mismo efecto el motor lo puede leer recien despues
+	trigger = {
+		gg_is_territory_province_country = yes
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_territories.2|" # GG_TRAZA
+	}
+
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_territories.2.a|" # GG_TRAZA
+		name = gg_arg_territories.2.a
+		default_option = yes
+		custom_tooltip = gg_arg_territories.2.a_tt
+	}
+}

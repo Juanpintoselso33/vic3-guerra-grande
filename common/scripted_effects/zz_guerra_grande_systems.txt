@@ -1482,6 +1482,17 @@ gg_argentina_provinces_incorporate = {
 	gg_argentina_province_join = { TAG = MZA ALLY = no }
 	gg_argentina_province_join = { TAG = SJN ALLY = no }
 	gg_argentina_province_join = { TAG = SNL ALLY = no }
+	# EN/ES: 24/9/2026 (AUD-CONST-TERR) -- the territories the confederation made provinces join the one country too
+	#     / los territorios que la confederacion hizo provincias tambien entran al pais unico
+	gg_argentina_province_join = { TAG = LPM ALLY = no }
+	gg_argentina_province_join = { TAG = NQN ALLY = no }
+	gg_argentina_province_join = { TAG = RNG ALLY = no }
+	gg_argentina_province_join = { TAG = CHB ALLY = no }
+	gg_argentina_province_join = { TAG = SCZ ALLY = no }
+	gg_argentina_province_join = { TAG = TDF ALLY = no }
+	gg_argentina_province_join = { TAG = MIS ALLY = no }
+	gg_argentina_province_join = { TAG = FMS ALLY = no }
+	gg_argentina_province_join = { TAG = CHO ALLY = no }
 	# EN: 24/9/2026 (hotfix 0.1.2, AUD-ORIENTAL-PROVINCE; Juan: «the Provincia Oriental was not annexed») -- the Banda
 	#     Oriental taken in as a province of the Pact joins with the rest (common/scripted_effects/gg_cisplatina.txt).
 	#     Before, only the constitution took it, a month after gg_argentina.80.a had incorporated everyone else.

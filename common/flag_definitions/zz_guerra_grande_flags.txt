@@ -520,3 +520,144 @@ SNL = {
 		}
 	}
 }
+
+# EN: 24/9/2026 (AUD-CONST-TERR) -- THE NINE TERRITORIES MADE PROVINCES: the period flag (gg_flag_terr_<key>, the
+#     Confederation's), and the national celeste and white from Caseros (3/2/1852), the same cut as the eleven provinces.
+#     No other mod in the playset defines these tags (checked 24/9/2026). Their provincial flags of today: PENDIENTES.md.
+# ES: LOS NUEVE TERRITORIOS HECHOS PROVINCIA: la bandera del periodo con la clave del tag y la celeste y blanca desde
+#     Caseros, el mismo corte que las once provincias. Sus banderas provinciales de hoy: PENDIENTES.md.
+
+# EN/ES: La Pampa
+LPM = {
+	flag_definition = {
+		coa = gg_flag_terr_la_pampa
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Neuquén
+NQN = {
+	flag_definition = {
+		coa = gg_flag_terr_neuquen
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Río Negro
+RNG = {
+	flag_definition = {
+		coa = gg_flag_terr_rio_negro
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Chubut
+CHB = {
+	flag_definition = {
+		coa = gg_flag_terr_chubut
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Santa Cruz
+SCZ = {
+	flag_definition = {
+		coa = gg_flag_terr_santa_cruz
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Tierra del Fuego
+TDF = {
+	flag_definition = {
+		coa = gg_flag_terr_tierra_del_fuego
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Misiones
+MIS = {
+	flag_definition = {
+		coa = gg_flag_terr_misiones
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Formosa
+FMS = {
+	flag_definition = {
+		coa = gg_flag_terr_formosa
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}
+
+# EN/ES: Chaco
+CHO = {
+	flag_definition = {
+		coa = gg_flag_terr_chaco
+		priority = 1
+	}
+	flag_definition = {
+		coa = gg_flag_argentina_celeste
+		priority = 10
+		trigger = {
+			game_date >= 1852.2.3
+		}
+	}
+}

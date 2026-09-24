@@ -1,0 +1,43 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-CONST-TERR) -- THE YEARLY CENSUS of the national territories, on Argentina's own pulse, only
+#     while the confederation stands (gg_confederation_stands; Juan asked it «para la confederacion»: under a
+#     constitution the provinces are one country and a territory's fate is its Congress's, outside this mod). Yearly,
+#     not monthly: Ley 1.532, art. 4 counts «por el censo general y los censos suplementarios sucesivos», and a
+#     population crossing 60,000 moves over years. Not at war (a province is not declared while the frontier is in
+#     arms), nor while a delay asked by the player runs (gg_terr_delay, gg_arg_territories.1.b). One territory a year:
+#     the most populous one ready. The candidate is set BEFORE the notice is queued (the notice's trigger reads it).
+# ES: EL CENSO ANUAL de los territorios nacionales, en el pulso de la propia Argentina, solo mientras siga la
+#     confederacion (Juan: «para la confederacion»; bajo una constitucion el pais es uno y el destino de un territorio es
+#     de su Congreso). Anual: el art. 4 cuenta por censos. No en guerra, ni mientras corra la espera que pidio el
+#     jugador. Un territorio por anio: el mas poblado. El candidato se anota ANTES de encolar el aviso.
+# -------------------------------------------------------------------------------------------------
+on_yearly_pulse_country = {
+	on_actions = { gg_territories_yearly }
+}
+gg_territories_yearly = {
+	trigger = {
+		c:ARG ?= this
+		gg_confederation_stands = yes
+		is_at_war = no
+		NOT = { has_variable = gg_terr_delay }
+		any_scope_state = { gg_territory_ready = yes }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_territories_yearly" # GG_TRAZA
+		ordered_scope_state = {
+			limit = { gg_territory_ready = yes }
+			order_by = state_population
+			position = 0
+			check_range_bounds = no
+			save_scope_as = gg_terr_pick
+		}
+		set_variable = { name = gg_terr_candidate value = scope:gg_terr_pick }
+		clear_saved_scope = gg_terr_pick
+		# EN/ES: the mark the notice's trigger requires, repeated as this fire's own guard (the on_action trigger already
+		#     holds it) / la marca que pide el trigger del aviso, repetida como guarda del propio disparo
+		if = {
+			limit = { has_global_variable = gg_constitution_confederation }
+			trigger_event = { id = gg_arg_territories.1 days = 0 popup = yes }
+		}
+	}
+}

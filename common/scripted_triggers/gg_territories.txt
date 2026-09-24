@@ -1,0 +1,102 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan, AUD-CONST-TERR) -- THE NATIONAL TERRITORIES BECOME PROVINCES under the confederation
+#     (gg_constitution.1.g). What is not a province stays confederal territory in Buenos Aires's hands (decisiones.md,
+#     «Que estados se incorporan al reincorporar»); a territory that grows becomes a province of its own, a Province
+#     of the Pact (subject_type_gg_pact_province) under Buenos Aires. The model is the national territories law, Ley
+#     1.532 of 1884: art. 1 names the nine gobernaciones (La Pampa, Neuquen, Rio Negro, Chubut, Santa Cruz, Tierra del
+#     Fuego, Misiones, Formosa, Chaco) and art. 4 gives a gobernacion the right to be declared a province «cuando la
+#     poblacion ... alcance a sesenta mil habitantes». The nine are exactly the map's nine state regions of the same
+#     names, and none of them but Misiones is in gg_arg_historical_province_state: these are its complement on the
+#     Argentine map. Misiones counts while Buenos Aires holds it directly (Corrientes did not get it back: the law of
+#     1881 and art. 1.7 of Ley 1.532 made it a gobernacion). Left out on purpose: Tarija (Bolivian ground), Parana and
+#     Santa Catarina (they follow Misiones, as they follow Corrientes everywhere else), the five Oriental states (their
+#     return is the Cisplatine question's) and any other conquest: no law made them provinces, and a name for one would
+#     be invented.
+# ES: LOS TERRITORIOS NACIONALES SE VUELVEN PROVINCIAS bajo la confederacion. Lo que no es provincia queda como territorio
+#     confederal en manos de Buenos Aires; un territorio que crece se vuelve provincia propia, provincia del Pacto. El
+#     modelo es la Ley 1.532 de 1884: el art. 1 nombra las nueve gobernaciones y el art. 4 da derecho a ser provincia al
+#     llegar a sesenta mil habitantes. Son las nueve regiones del mapa con esos nombres; fuera de Misiones, ninguna esta en
+#     gg_arg_historical_province_state. Misiones cuenta mientras Buenos Aires la tenga directamente. Afuera: Tarija,
+#     Parana y Santa Catarina (siguen a Misiones), los cinco estados orientales y cualquier otra conquista.
+# SOURCE / FUENTE: Ley 1.532 de Organizacion de los Territorios Nacionales (1884), arts. 1, 4 and 46
+#     (https://es.wikisource.org/wiki/Ley_1.532_de_Organizaci%C3%B3n_de_los_Territorios_Nacionales; InfoLeg id 48923,
+#     legislation date 1/10/1884).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: country scope: one of the nine territory provinces / uno de los nueve paises-territorio
+gg_is_territory_province_country = {
+	OR = {
+		c:LPM ?= this
+		c:NQN ?= this
+		c:RNG ?= this
+		c:CHB ?= this
+		c:SCZ ?= this
+		c:TDF ?= this
+		c:MIS ?= this
+		c:FMS ?= this
+		c:CHO ?= this
+	}
+}
+
+# EN/ES: the confederation stands: it was chosen and no later answer replaced it (gg_constitution_chosen 4), and no
+#     constitution came after Rosas's death (gg_constitution.3 sets gg_constitution_outcome and makes one country; Codex
+#     review) / la confederacion sigue: se eligio, nada la reemplazo y no hubo constitucion tras la muerte de Rosas
+gg_confederation_stands = {
+	has_global_variable = gg_constitution_confederation
+	global_var:gg_constitution_chosen ?= 4
+	NOT = { has_global_variable = gg_constitution_outcome }
+}
+
+# EN/ES: state scope: a state of one of the nine gobernaciones of Ley 1.532, art. 1 / un estado de las nueve
+gg_territory_state = {
+	OR = {
+		state_region = s:STATE_LA_PAMPA
+		state_region = s:STATE_NEUQUEN
+		state_region = s:STATE_RIO_NEGRO
+		state_region = s:STATE_CHUBUT
+		state_region = s:STATE_SANTA_CRUZ_ARG
+		state_region = s:STATE_TIERRA_DEL_FUEGO
+		state_region = s:STATE_MISIONES
+		state_region = s:STATE_FORMOSA_ARG
+		state_region = s:STATE_CHACO
+	}
+}
+
+# EN/ES: state scope: the territory's province already exists in this game, or its tag is taken (a province that left
+#     the Pact keeps its tag; the ground stays with Buenos Aires and is not offered again)
+#     / la provincia del territorio ya existe o su tag esta tomado: no se vuelve a ofrecer
+gg_territory_province_taken = {
+	OR = {
+		AND = { state_region = s:STATE_LA_PAMPA OR = { exists = c:LPM has_global_variable = gg_terr_province_la_pampa } }
+		AND = { state_region = s:STATE_NEUQUEN OR = { exists = c:NQN has_global_variable = gg_terr_province_neuquen } }
+		AND = { state_region = s:STATE_RIO_NEGRO OR = { exists = c:RNG has_global_variable = gg_terr_province_rio_negro } }
+		AND = { state_region = s:STATE_CHUBUT OR = { exists = c:CHB has_global_variable = gg_terr_province_chubut } }
+		AND = { state_region = s:STATE_SANTA_CRUZ_ARG OR = { exists = c:SCZ has_global_variable = gg_terr_province_santa_cruz } }
+		AND = { state_region = s:STATE_TIERRA_DEL_FUEGO OR = { exists = c:TDF has_global_variable = gg_terr_province_tierra_del_fuego } }
+		AND = { state_region = s:STATE_MISIONES OR = { exists = c:MIS has_global_variable = gg_terr_province_misiones } }
+		AND = { state_region = s:STATE_FORMOSA_ARG OR = { exists = c:FMS has_global_variable = gg_terr_province_formosa } }
+		AND = { state_region = s:STATE_CHACO OR = { exists = c:CHO has_global_variable = gg_terr_province_chaco } }
+	}
+}
+
+# EN: state scope: a territory that may be declared a province now. Buenos Aires holds it directly (never its capital),
+#     it is not already a province, and:
+#       - POPULATION: Ley 1.532, art. 4 -- «sesenta mil habitantes». Vic3 pops are headcounts (la Argentina's 1836
+#         history gives La Pampa 7,700 Argentine souls, Misiones 71,762), so the law's figure applies as written.
+#       - DEVELOPMENT: market access of at least 75%. The law asked only for the census; the game's census counts
+#         anyone, so the second condition stands for what made a gobernacion governable as a province -- roads, mail,
+#         courts and trade reaching it. Incorporation is NOT the condition: a territory is unincorporated by decision
+#         (AUD-PROV-INCORP) and becoming a province is what incorporates it.
+# ES: scope estado: un territorio que puede ser declarado provincia ahora. Lo tiene Buenos Aires directamente (nunca su
+#     capital), no es ya provincia, y: POBLACION, art. 4, sesenta mil habitantes (las pops del juego son personas, la
+#     cifra vale tal cual); DESARROLLO, acceso al mercado de al menos 75%, lo que hacia gobernable a una gobernacion
+#     como provincia: caminos, correo, justicia y comercio. La incorporacion NO es la condicion: el territorio queda sin
+#     incorporar por decision, y ser provincia es lo que lo incorpora.
+gg_territory_ready = {
+	gg_territory_state = yes
+	owner ?= { c:ARG ?= this }
+	is_capital = no
+	NOT = { gg_territory_province_taken = yes }
+	state_population >= 60000
+	market_access >= 0.75
+}
