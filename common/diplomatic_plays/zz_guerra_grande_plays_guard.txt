@@ -37,6 +37,12 @@ REPLACE:dp_default_treaty_article = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -61,6 +67,12 @@ REPLACE:dp_open_market = {
 	}
 
 	ai_acceptance_max = 100
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -89,6 +101,12 @@ REPLACE:dp_ban_slavery = {
 
 	ai_acceptance_max = 90
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -116,6 +134,12 @@ REPLACE:dp_liberate_subject = {
 
 	ai_acceptance_max = 90
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -137,6 +161,12 @@ REPLACE:dp_liberate_country = {
 	}
 
 	ai_acceptance_max = 90
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -170,6 +200,12 @@ REPLACE:dp_independence = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -191,6 +227,12 @@ REPLACE:dp_leave_power_bloc = {
 	}
 
 	ai_acceptance_max = 100
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -216,6 +258,12 @@ REPLACE:dp_increase_autonomy = {
 			}
 		}
 		guerra_grande_play_is_allowed = yes # EN/ES: 23/9 (Juan) -- the Oriental governments until the signed peace / los gobiernos orientales hasta la paz firmada
+	}
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
 	}
 
 	on_weekly_pulse = {}
@@ -254,6 +302,7 @@ REPLACE:dp_contain_threat = {
 	}
 
 	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
 		NOT = { is_country_type = decentralized }
 		country_rank >= rank_value:great_power
 		aggressive_diplomatic_plays_permitted = yes
@@ -288,6 +337,12 @@ REPLACE:dp_join_power_bloc = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -313,6 +368,12 @@ REPLACE:dp_force_nationalization = {
 	}
 
 	ai_acceptance_max = 100
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -341,6 +402,12 @@ REPLACE:dp_give_foreign_investment_rights = {
 	}
 
 	ai_acceptance_max = 100
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -376,6 +443,12 @@ REPLACE:dp_demand_strait_access = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -409,6 +482,12 @@ REPLACE:dp_demand_toll_exemption = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -441,6 +520,12 @@ REPLACE:dp_demand_no_tolls = {
 	}
 
 	ai_acceptance_max = 100
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -476,6 +561,12 @@ REPLACE:dp_demand_no_strait_closure = {
 
 	ai_acceptance_max = 100
 
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 	on_weekly_pulse = {}
 
 	on_war_begins = {}
@@ -506,6 +597,12 @@ REPLACE:dp_unify_andes = {
 		}
 		guerra_grande_play_is_allowed = yes # EN/ES: 23/9 (Juan) -- the Oriental governments until the signed peace / los gobiernos orientales hasta la paz firmada
 	}
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 }
 
 REPLACE:dp_leadership_andes = {
@@ -524,6 +621,12 @@ REPLACE:dp_leadership_andes = {
 		has_technology_researched = pan-nationalism
 		guerra_grande_play_is_allowed = yes # EN/ES: 23/9 (Juan) -- the Oriental governments until the signed peace / los gobiernos orientales hasta la paz firmada
 	}
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
+
 }
 
 REPLACE:dp_restore_union = {
@@ -542,6 +645,12 @@ REPLACE:dp_restore_union = {
 	}
 
 	ai_acceptance_max = 90
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
+	}
 
 	on_weekly_pulse = {}
 
@@ -595,6 +704,12 @@ REPLACE:dp_native_uprising = {
 	possible = {
 		is_country_type = decentralized
 		guerra_grande_play_is_allowed = yes # EN/ES: 23/9 (Juan) -- the Oriental governments until the signed peace / los gobiernos orientales hasta la paz firmada
+	}
+
+	# EN/ES: 23/9 (AUD-FARRAPOS-A) -- vanilla has no involvement trigger here (anyone may join); only the Brazil-PNI guard
+	#     / vanilla no tiene condicion de ingreso aca; solo la guarda Brasil-PNI
+	additional_involvement_trigger = {
+		gg_farrapos_involvement_is_allowed = yes # EN/ES: 23/9 (AUD-FARRAPOS-A) -- no Brazil-PNI war by joining before Ponche Verde / nadie se suma a una guerra Brasil-PNI antes de Ponche Verde
 	}
 
 	on_weekly_pulse = {}

@@ -21,3 +21,34 @@ gg_farrapos_play_is_allowed = {
 		}
 	}
 }
+
+# EN: 23/9/2026 (Codex review; AUD-FARRAPOS-A) -- the other door: JOINING someone else's play (a pact, a sway).
+#     At the top level of additional_involvement_trigger of every war play the mod REPLACEs (the 32 guarded
+#     vanilla plays); root = the country that would join. Before Ponche Verde neither Brazil nor PNI joins a play
+#     in which the other is the initiator, the target or already involved.
+# ES: la otra puerta: SUMARSE a la jugada de otro (un pacto, un soborno). En el nivel superior de
+#     additional_involvement_trigger de toda jugada de guerra que el mod reemplaza; root = el que se sumaria.
+gg_farrapos_involvement_is_allowed = {
+	OR = {
+		has_global_variable = gg_farrapos_ponche_verde
+		NOT = { exists = c:PNI }
+		NOR = {
+			AND = {
+				c:PNI ?= this
+				OR = {
+					scope:initiator ?= { c:BRZ ?= this }
+					scope:target_country ?= { c:BRZ ?= this }
+					scope:diplomatic_play ?= { any_scope_play_involved = { c:BRZ ?= this } }
+				}
+			}
+			AND = {
+				c:BRZ ?= this
+				OR = {
+					scope:initiator ?= { c:PNI ?= this }
+					scope:target_country ?= { c:PNI ?= this }
+					scope:diplomatic_play ?= { any_scope_play_involved = { c:PNI ?= this } }
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+﻿# EN: 23/9/2026 (AUD-FARRAPOS-A) -- the detector behind gg_farrapos_involvement_is_allowed. The 20 plays of the
+#     playset the mod does not REPLACE (the engine's civil wars and other regions' unifications) have no such
+#     guard; if Brazil and PNI ever end up in the same war before Ponche Verde, this leaves a trace
+#     (GG_OA gg_farrapos_pulled_in) that the night sweep forbids. Root = the diplomatic play.
+# ES: el detector: si el Brasil y PNI terminan en la misma guerra antes de Ponche Verde, deja una traza que el
+#     barrido nocturno prohibe. Root = la jugada.
+on_diplo_play_war_start = {
+	on_actions = { gg_farrapos_pulled_in }
+}
+
+on_diplo_play_join_side = {
+	on_actions = { gg_farrapos_pulled_in }
+}
+
+gg_farrapos_pulled_in = {
+	trigger = {
+		NOT = { has_global_variable = gg_farrapos_ponche_verde }
+		any_scope_play_involved = { c:BRZ ?= this }
+		any_scope_play_involved = { c:PNI ?= this }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_farrapos_pulled_in" # GG_TRAZA
+	}
+}
