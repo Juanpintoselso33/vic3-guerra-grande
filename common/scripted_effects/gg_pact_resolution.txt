@@ -40,8 +40,37 @@ gg_pact_stalemate_frees_enr = {
 				NOT = { has_war_with = c:ARG }
 			}
 			make_independent = yes
+			gg_subject_unwatch = yes # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose, not a dropped pact / liberacion a proposito
 			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_stalemate_frees_enr| FREED=yes " # GG_TRAZA
 		}
+	}
+}
+
+# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED, Codex review) -- a Pact war won by Rosas enforces its war goal
+#     (make_protectorate, dp_gg_pacto_federal): the engine's own protectorate, which keeps the rank rule and falls the
+#     day the province reaches Buenos Aires's rank. The settlement turns it into the Province of the Pact: released
+#     and taken in again the same tick (nothing of ours runs in between), the truces the release leaves ended, as the
+#     mod's other releases do (gg_argentina_create_entre_rios). Country scope (Argentina). TAG: the province.
+# ES: una guerra del Pacto ganada por Rosas impone su objetivo, el protectorado del motor, que conserva la regla del
+#     rango. El cierre lo convierte en provincia del Pacto: se libera y se vuelve a recibir en el mismo instante, y se
+#     terminan las treguas que deja la liberacion. Scope pais (Argentina).
+gg_pact_protectorate_to_province = {
+	if = {
+		limit = {
+			c:$TAG$ ?= {
+				is_subject_of = c:ARG
+				is_subject_type = subject_type_protectorate
+			}
+			NOT = { has_war_with = c:$TAG$ }
+		}
+		c:$TAG$ = {
+			make_independent = yes
+			if = { limit = { has_truce_with = c:ARG } end_truce = c:ARG }
+		}
+		if = { limit = { has_truce_with = c:$TAG$ } end_truce = c:$TAG$ }
+		create_diplomatic_pact = { country = c:$TAG$ type = gg_pact_province }
+		gg_subject_watch = { SUBJECT = c:$TAG$ }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_protectorate_to_province| CONVERTED=yes TAG= $TAG$ " # GG_TRAZA
 	}
 }
 
@@ -86,8 +115,13 @@ gg_pact_resolve = {
 				#     / la victoria de la regla no impuso objetivo: Entre Rios queda el protectorado que la guerra le daba
 				if = {
 					limit = { c:ENR ?= { is_subject = no } NOT = { has_war_with = c:ENR } }
-					create_diplomatic_pact = { country = c:ENR type = protectorate }
+					# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+					create_diplomatic_pact = { country = c:ENR type = gg_pact_province }
+					gg_subject_watch = { SUBJECT = c:ENR }
 				}
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED, Codex) -- the war goal's protectorate becomes the Province of the Pact
+				#     / el protectorado del objetivo de guerra pasa a provincia del Pacto
+				gg_pact_protectorate_to_province = { TAG = ENR }
 			}
 			else = {
 				set_global_variable = { name = gg_pact_war_white_peace value = 1 }
@@ -145,7 +179,9 @@ gg_pact_resolve = {
 					c:CRR ?= { is_subject = no }
 					NOT = { has_war_with = c:CRR }
 				}
-				create_diplomatic_pact = { country = c:CRR type = protectorate }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+				create_diplomatic_pact = { country = c:CRR type = gg_pact_province }
+				gg_subject_watch = { SUBJECT = c:CRR }
 				gg_delegation_restored = { KEY = corrientes COUNT = 1 }
 			}
 			if = {
@@ -154,7 +190,9 @@ gg_pact_resolve = {
 					c:CLN ?= { is_subject = no }
 					NOT = { has_war_with = c:CLN }
 				}
-				create_diplomatic_pact = { country = c:CLN type = protectorate }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+				create_diplomatic_pact = { country = c:CLN type = gg_pact_province }
+				gg_subject_watch = { SUBJECT = c:CLN }
 			}
 			if = {
 				limit = { has_global_variable = gg_delegation_gone_entre_rios }
@@ -207,15 +245,22 @@ gg_pact_resolve = {
 					c:ENR ?= { is_subject = no }
 					NOT = { has_war_with = c:ENR }
 				}
-				create_diplomatic_pact = { country = c:ENR type = protectorate }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+				create_diplomatic_pact = { country = c:ENR type = gg_pact_province }
+				gg_subject_watch = { SUBJECT = c:ENR }
 			}
+			# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED, Codex) -- the war goal enforced after yesterday's reading: its
+			#     protectorate becomes the Province of the Pact / el objetivo impuesto despues de la lectura de ayer
+			gg_pact_protectorate_to_province = { TAG = ENR }
 			if = {
 				limit = {
 					has_global_variable = gg_corrientes_with_urquiza
 					c:CRR ?= { is_subject = no }
 					NOT = { has_war_with = c:CRR }
 				}
-				create_diplomatic_pact = { country = c:CRR type = protectorate }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+				create_diplomatic_pact = { country = c:CRR type = gg_pact_province }
+				gg_subject_watch = { SUBJECT = c:CRR }
 				gg_delegation_restored = { KEY = corrientes COUNT = 1 }
 			}
 			if = {
@@ -224,7 +269,9 @@ gg_pact_resolve = {
 					c:CLN ?= { is_subject = no }
 					NOT = { has_war_with = c:CLN }
 				}
-				create_diplomatic_pact = { country = c:CLN type = protectorate }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+				create_diplomatic_pact = { country = c:CLN type = gg_pact_province }
+				gg_subject_watch = { SUBJECT = c:CLN }
 			}
 		}
 	}

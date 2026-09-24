@@ -283,11 +283,19 @@ gg_ba.9 = {
 					global_var:gg_conf_side ?= { trigger_event = { id = gg_ba.8 days = 0 popup = yes } }
 					if = {
 						limit = { exists = scope:gg_ba_state }
+						# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = vassal, which the engine dropped at once: the
+						#     Confederation is a recognized country and vanilla's vassal takes only an unrecognized overlord.
+						#     San Jose de Flores (11/11/1859) made Buenos Aires a province of the Confederation again: the
+						#     Province of the Pact, without the rank rule (the State may outrank Parana). Watched thirty days.
+						# ES: era type = vassal, que el motor tiraba enseguida (la Confederacion es un pais reconocido). San Jose
+						#     de Flores volvio a hacer de Buenos Aires una provincia de la Confederacion: la Provincia del Pacto,
+						#     sin la regla del rango (el Estado puede tener mas rango que Parana). Vigilado treinta dias.
 						global_var:gg_conf_side ?= {
 							create_diplomatic_pact = {
 								country = scope:gg_ba_state
-								type = vassal
+								type = gg_pact_province
 							}
+							gg_subject_watch = { SUBJECT = scope:gg_ba_state }
 						}
 					}
 					global_var:gg_ba_side ?= {
@@ -814,10 +822,10 @@ gg_ba.20 = {
 			}
 			# EN: 23/9/2026 (AUD-SEAT-ANNEX, the rule of gg_argentina_province_join) -- both countries are players': nobody
 			#     is annexed and nobody changes seat (gg_ba_unify sends no gg_ba.13). The side that lost the last war
-			#     becomes the winner's protectorate, which is what one country with two governments can be; the capital,
+			#     becomes the winner's Province of the Pact (a protectorate until 24/9/2026), which is what one country with two governments can be; the capital,
 			#     the ruler and the ARG tag are not touched.
 			# ES: los dos paises son de jugadores: no se anexa a nadie ni nadie cambia de sede. El lado que perdio la
-			#     ultima guerra queda protectorado del ganador; no se tocan capital, gobernante ni tag.
+			#     ultima guerra queda provincia del Pacto del ganador; no se tocan capital, gobernante ni tag.
 			if = {
 				limit = {
 					exists = scope:gg_ba_absorbed
@@ -839,7 +847,13 @@ gg_ba.20 = {
 						exists = scope:gg_ba_protected
 						scope:gg_ba_protected = { is_subject = no }
 					}
-					scope:gg_ba_overlord = { create_diplomatic_pact = { country = scope:gg_ba_protected type = protectorate } }
+					# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- was a protectorate, which needs the winner to outrank the loser
+					#     (both halves of one country are close in rank): the Province of the Pact, without the rank rule
+					#     / era un protectorado, que pide mas rango al ganador; la Provincia del Pacto, sin esa regla
+					scope:gg_ba_overlord = {
+						create_diplomatic_pact = { country = scope:gg_ba_protected type = gg_pact_province }
+						gg_subject_watch = { SUBJECT = scope:gg_ba_protected }
+					}
 				}
 				clear_saved_scope = gg_ba_overlord
 				clear_saved_scope = gg_ba_protected

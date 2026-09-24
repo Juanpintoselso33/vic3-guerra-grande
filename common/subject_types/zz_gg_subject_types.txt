@@ -32,7 +32,10 @@ subject_type_gg_pact_province = {
 	can_start_own_diplomatic_plays = yes
 	breaks_if_subject_not_protected = yes
 	join_overlord_wars = no
-	can_have_subjects = no
+	# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- yes, as vanilla's protectorate: the State of Buenos Aires can take this pact
+	#     after Cepeda (gg_ba.9) and may still hold the Banda Oriental as a client / si, como el protectorado de vanilla:
+	#     el Estado de Buenos Aires puede quedar con este pacto despues de Cepeda y tener todavia a la Banda Oriental
+	can_have_subjects = yes
 	overlord_must_be_higher_rank = no # EN/ES: the change / el cambio
 	overlord_must_be_same_country_type = no
 	use_for_release_country = no
@@ -75,6 +78,225 @@ subject_type_gg_pact_province = {
 
 	valid_subject_ranks = {
 		major_power
+		minor_power
+		insignificant_power
+		unrecognized_regional_power
+		unrecognized_power
+	}
+
+	ai_value = {
+		value = 1
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: THE OTHER SUBJECT RELATIONS OF THE PEACE (24/9/2026, AUD-VASSAL-RECOGNIZED; Juan: «arreglá los vasallos
+#     igual»). Same method as the Province of the Pact above: vanilla's closest type copied, only the rule that
+#     blocks it dropped, its own pact action (common/diplomatic_actions/zz_gg_subject_pacts.txt), its own name.
+#     Every overlord the mod makes is a recognized country, and the Plata's are not far apart in rank: in Juan's
+#     saves Argentina was minor_power (1846, prestige 50) and major_power (1853, 81), the Republic insignificant or
+#     minor, Brazil major_power (99-107; ranking block of cerrito government_1846_12_01 and argentine
+#     confederation_1853_05_16). So:
+#       - vanilla's vassal takes only an UNRECOGNIZED overlord: the Empire's vassal (gg_peace.1.g) never lived;
+#       - vanilla's puppet needs the overlord to outrank the subject: Rosas's client Republic (gg_peace.2.e) fell
+#         whenever both were minor powers, as the Oriental Province did.
+#     Created only by script, never offered by the AI (potential = always = no, ai_value 1).
+# ES: LAS OTRAS SUJECIONES DE LA PAZ. El mismo metodo que la Provincia del Pacto: el tipo de vanilla mas cercano,
+#     sin la regla que lo bloquea, con su propia accion y su nombre. Todo soberano que pone el mod es un pais
+#     reconocido y en el Plata los rangos estan cerca: el vasallaje de vanilla solo admite soberano NO reconocido
+#     (el vasallo del Imperio no vivia nunca), y el titere pide que el soberano tenga mas rango (la Republica cliente
+#     de Rosas caia cuando las dos eran potencias menores).
+# -------------------------------------------------------------------------------------------------
+
+# EN: THE VASSAL STATE (gg_peace.1.g, «Vassal of the Empire»; also the Cerrito's kind 1 in gg_peace.8/.10). Vanilla's
+#     subject_type_vassal (00_subject_types.txt, 1.13) with a recognized overlord allowed (and its ranks) and no rank
+#     rule; everything else, autonomy 1 and joining the overlord's wars, as vanilla. The Empire guarantees the
+#     Republic by holding it: it is not a province, it is a state under the Empire.
+# ES: EL ESTADO VASALLO. El vasallaje de vanilla con soberano reconocido y sin la regla del rango; lo demas igual.
+#     El Imperio garantiza la Republica teniendola: no es una provincia, es un estado bajo el Imperio.
+subject_type_gg_vassal_state = {
+	allow_change_country_flag = yes
+	use_overlord_map_color = yes
+	use_overlord_ruler = no
+	annex_on_country_formation = yes
+	can_start_own_diplomatic_plays = no
+	breaks_if_subject_not_protected = yes
+	join_overlord_wars = yes
+	can_have_subjects = no
+	overlord_must_be_higher_rank = no # EN/ES: the change / el cambio
+	overlord_must_be_same_country_type = no
+	use_for_release_country = no # EN/ES: only by script / solo por script
+	gives_prestige_to_overlord = yes
+
+	diplomatic_action = gg_vassal_state
+
+	autonomy_level = 1
+	category = same_as_vassal
+
+	higher_autonomy_subject_type_alternatives = {
+		subject_type_tributary
+	}
+
+	same_autonomy_subject_type_alternatives = {
+		subject_type_colony
+		subject_type_puppet
+		subject_type_crown_land
+	}
+
+	valid_overlord_country_types = { # EN/ES: the change: recognized added / el cambio: se agrega reconocido
+		recognized
+		unrecognized
+	}
+
+	valid_subject_country_types = {
+		unrecognized
+		recognized
+		colonial
+	}
+
+	valid_overlord_ranks = { # EN/ES: the change: the recognized ranks added / el cambio: se agregan los rangos reconocidos
+		great_power
+		major_power
+		minor_power
+		insignificant_power
+		unrecognized_major_power
+		unrecognized_regional_power
+	}
+
+	valid_subject_ranks = {
+		minor_power
+		insignificant_power
+		unrecognized_regional_power
+		unrecognized_power
+	}
+
+	ai_value = {
+		value = 1
+	}
+}
+
+# EN: THE CLIENT STATE (gg_peace.2.e, «the Republic under Rosas»; the Cerrito's kind 5 in gg_peace.8/.10). Vanilla's
+#     subject_type_puppet without the rank rule and with the overlord's ranks widened to insignificant_power. A
+#     Republic apart with its own flag (zz_guerra_grande_flags.txt: not the Treinta y Tres, which is the Province's),
+#     whose government answers to Buenos Aires: not a province of the Confederation, and not a protectorate.
+# ES: EL ESTADO CLIENTE. El titere de vanilla sin la regla del rango. Una Republica aparte, con su bandera, cuyo
+#     gobierno responde a Buenos Aires: no es provincia de la Confederacion ni protectorado.
+subject_type_gg_client_state = {
+	allow_change_country_flag = yes
+	use_overlord_map_color = yes
+	use_overlord_ruler = no
+	annex_on_country_formation = yes
+	can_start_own_diplomatic_plays = no
+	breaks_if_subject_not_protected = yes
+	join_overlord_wars = yes
+	can_have_subjects = no
+	overlord_must_be_higher_rank = no # EN/ES: the change / el cambio
+	overlord_must_be_same_country_type = no
+	use_for_release_country = no # EN/ES: only by script / solo por script
+	gives_prestige_to_overlord = yes
+
+	diplomatic_action = gg_client_state
+
+	autonomy_level = 1
+	category = same_as_puppet
+
+	higher_autonomy_subject_type_alternatives = {
+		subject_type_protectorate
+	}
+
+	same_autonomy_subject_type_alternatives = {
+		subject_type_vassal
+		subject_type_colony
+		subject_type_crown_land
+	}
+
+	valid_overlord_country_types = {
+		recognized
+		colonial
+		company
+	}
+
+	valid_subject_country_types = {
+		recognized
+		unrecognized
+	}
+
+	valid_overlord_ranks = { # EN/ES: the change: insignificant_power added / el cambio: se agrega potencia insignificante
+		great_power
+		major_power
+		minor_power
+		insignificant_power
+	}
+
+	valid_subject_ranks = {
+		minor_power
+		insignificant_power
+		unrecognized_regional_power
+		unrecognized_power
+	}
+
+	ai_value = {
+		value = 1
+	}
+}
+
+# EN: THE CISPLATINE PROVINCE (gg_peace.1.h, «the Provincia Cisplatina»; kind 6 in gg_peace.8/.10). Vanilla's
+#     subject_type_puppet without the rank rule, like the client state, but a PROVINCE OF THE EMPIRE: the name the
+#     province of Montevideo had inside the Empire until the Convention of 1828 parted it (its first article, quoted
+#     in gg_cisplatina.2). Brazil may complete the incorporation with its annexation play (dp_annex_subject,
+#     zz_gg_argentine_plays.txt, takes this pact as it takes a puppet); the Cisplatina flag already keys on being
+#     Brazil's subject (zz_guerra_grande_flags.txt).
+# ES: LA PROVINCIA CISPLATINA. El titere de vanilla sin la regla del rango, pero PROVINCIA DEL IMPERIO: el nombre que
+#     tuvo la provincia de Montevideo dentro del Imperio hasta que la separo la Convencion de 1828. El Brasil puede
+#     completar la incorporacion con su jugada de anexion, que acepta este pacto como un titere.
+subject_type_gg_cisplatine_province = {
+	allow_change_country_flag = yes
+	use_overlord_map_color = yes
+	use_overlord_ruler = no
+	annex_on_country_formation = yes
+	can_start_own_diplomatic_plays = no
+	breaks_if_subject_not_protected = yes
+	join_overlord_wars = yes
+	can_have_subjects = no
+	overlord_must_be_higher_rank = no # EN/ES: the change / el cambio
+	overlord_must_be_same_country_type = no
+	use_for_release_country = no # EN/ES: only by script / solo por script
+	gives_prestige_to_overlord = yes
+
+	diplomatic_action = gg_cisplatine_province
+
+	autonomy_level = 1
+	category = same_as_puppet
+
+	higher_autonomy_subject_type_alternatives = {
+		subject_type_protectorate
+	}
+
+	same_autonomy_subject_type_alternatives = {
+		subject_type_puppet
+		subject_type_colony
+		subject_type_crown_land
+	}
+
+	valid_overlord_country_types = {
+		recognized
+		colonial
+		company
+	}
+
+	valid_subject_country_types = {
+		recognized
+		unrecognized
+	}
+
+	valid_overlord_ranks = { # EN/ES: the change: insignificant_power added / el cambio: se agrega potencia insignificante
+		great_power
+		major_power
+		minor_power
+		insignificant_power
+	}
+
+	valid_subject_ranks = {
 		minor_power
 		insignificant_power
 		unrecognized_regional_power

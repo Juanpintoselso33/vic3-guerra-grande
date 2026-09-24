@@ -127,6 +127,12 @@ REPLACE:dp_annex_subject = {
 				has_diplomatic_pact = { who = root type = puppet }
 				has_diplomatic_pact = { who = root type = vassal }
 				has_diplomatic_pact = { who = root type = crown_land }
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the mod's own autonomy-1 types, annexable as the vassal and the
+				#     puppet they copy (the Cisplatine Province's incorporation, gg_peace.1.h) / los tipos propios de
+				#     autonomia 1, anexables como el vasallo y el titere que copian
+				has_diplomatic_pact = { who = root type = gg_vassal_state }
+				has_diplomatic_pact = { who = root type = gg_client_state }
+				has_diplomatic_pact = { who = root type = gg_cisplatine_province }
 			}
 		}
 		NAND = {

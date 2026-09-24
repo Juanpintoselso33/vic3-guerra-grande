@@ -1,0 +1,170 @@
+﻿# EN: The pacts behind the peace's own subject types (common/subject_types/zz_gg_subject_types.txt; 24/9/2026,
+#     AUD-VASSAL-RECOGNIZED): vanilla's pact actions (1.13), copied with their own subject type. Only created by script.
+# ES: los pactos detras de los tipos de sujecion propios de la paz: las acciones de vanilla con su propio tipo.
+#     Solo los crea el script.
+
+# EN: the Vassal State: vanilla's vassal pact (23_subject_vassal.txt), same income transfer and involvement.
+# ES: el Estado vasallo: el pacto de vasallaje de vanilla, con la misma transferencia de ingresos.
+gg_vassal_state = {
+	groups = {
+		general
+	}
+	show_in_lens = no
+
+	potential = { # EN/ES: only created by script / solo por script
+		always = no
+	}
+
+	pact = {
+		cost = 10
+		has_junior_participant = yes
+		maintenance_paid_by = first_country
+		income_transfer = 0.3
+		second_country_gets_income_transfer = no
+		income_transfer_based_on_second_country = yes
+
+		max_target_involvement = 5000
+		target_involvement_applies_to = source_country
+
+		relations_progress_per_day = 1
+		relations_improvement_max = 50
+
+		subject_type = subject_type_gg_vassal_state
+
+		second_modifier = {}
+
+		actor_can_break = {
+			is_diplomatic_play_committed_participant = no
+		}
+
+		target_can_break = { # EN/ES: has to use a diplomatic play / tiene que usar una jugada diplomatica
+			always = no
+		}
+
+		manual_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+
+		auto_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+	}
+
+	ai = {
+		will_break = {
+			always = no
+		}
+	}
+}
+
+# EN: the Client State: vanilla's puppet pact (20_subject_puppet.txt), same transfer and law imposition.
+# ES: el Estado cliente: el pacto de titere de vanilla, con la misma transferencia e imposicion de leyes.
+gg_client_state = {
+	groups = {
+		general
+	}
+	show_in_lens = no
+
+	potential = { # EN/ES: only created by script / solo por script
+		always = no
+	}
+
+	pact = {
+		cost = 10
+		has_junior_participant = yes
+		maintenance_paid_by = first_country
+		income_transfer = 0.3
+		second_country_gets_income_transfer = no
+		income_transfer_based_on_second_country = yes
+
+		max_target_involvement = 8000
+		target_involvement_applies_to = source_country
+
+		relations_progress_per_day = 1
+		relations_improvement_max = 50
+
+		subject_type = subject_type_gg_client_state
+
+		second_modifier = {
+			country_law_enactment_imposition_success_add = 0.1
+		}
+
+		actor_can_break = {
+			is_diplomatic_play_committed_participant = no
+		}
+
+		target_can_break = { # EN/ES: has to use a diplomatic play / tiene que usar una jugada diplomatica
+			always = no
+		}
+
+		manual_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+
+		auto_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+	}
+
+	ai = {
+		will_break = {
+			always = no
+		}
+	}
+}
+
+# EN: the Cisplatine Province: vanilla's puppet pact (20_subject_puppet.txt), same transfer and law imposition.
+# ES: la Provincia Cisplatina: el pacto de titere de vanilla, con la misma transferencia e imposicion de leyes.
+gg_cisplatine_province = {
+	groups = {
+		general
+	}
+	show_in_lens = no
+
+	potential = { # EN/ES: only created by script / solo por script
+		always = no
+	}
+
+	pact = {
+		cost = 10
+		has_junior_participant = yes
+		maintenance_paid_by = first_country
+		income_transfer = 0.3
+		second_country_gets_income_transfer = no
+		income_transfer_based_on_second_country = yes
+
+		max_target_involvement = 8000
+		target_involvement_applies_to = source_country
+
+		relations_progress_per_day = 1
+		relations_improvement_max = 50
+
+		subject_type = subject_type_gg_cisplatine_province
+
+		second_modifier = {
+			country_law_enactment_imposition_success_add = 0.1
+		}
+
+		actor_can_break = {
+			is_diplomatic_play_committed_participant = no
+		}
+
+		target_can_break = { # EN/ES: has to use a diplomatic play / tiene que usar una jugada diplomatica
+			always = no
+		}
+
+		manual_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+
+		auto_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+	}
+
+	ai = {
+		will_break = {
+			always = no
+		}
+	}
+}

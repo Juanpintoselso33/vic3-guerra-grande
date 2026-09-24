@@ -523,7 +523,9 @@ gg_argentina_alcaraz_seat = {
 		}
 		if = {
 			limit = { exists = c:ENR }
-			create_diplomatic_pact = { country = c:ENR type = protectorate }
+			# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+			create_diplomatic_pact = { country = c:ENR type = gg_pact_province }
+			gg_subject_watch = { SUBJECT = c:ENR }
 		}
 	}
 }
@@ -537,7 +539,7 @@ gg_argentina_create_entre_rios = {
 		limit = { c:ENR ?= { has_variable = gg_enr_alcaraz_seat } }
 		c:ENR = {
 			remove_variable = gg_enr_alcaraz_seat
-			if = { limit = { is_subject = yes } make_independent = yes }
+			if = { limit = { is_subject = yes } make_independent = yes gg_subject_unwatch = yes } # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose / liberacion a proposito
 			# EN: 23/9 (AUD-SEAT-ALCARAZ-ORDERS, Codex) -- if Urquiza marched on Corrientes at Buenos Aires's side
 			#     (gg_argentina.8.a from Entre Rios joins the ARG-CRR war) and that war is still open, he leaves it now,
 			#     as vanilla's Ezo does after independence; otherwise the Pact's war on him could not open.

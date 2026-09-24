@@ -1,0 +1,24 @@
+﻿namespace = gg_subjects
+
+# EN: gg_subjects.1 -- thirty days after a subject pact (gg_subject_watch, common/scripted_effects/gg_subject_watch.txt):
+#     is each subject this country watches still its subject? Hidden, on the overlord, no trigger (a scheduled event's
+#     trigger is read when it is queued). Only writes traces; changes nothing.
+# ES: treinta dias despues de un pacto de sujecion: cada sujeto vigilado, ¿sigue siendolo? Oculto, sobre el soberano,
+#     sin trigger. Solo escribe trazas; no cambia nada.
+gg_subjects.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_subjects.1|" # GG_TRAZA
+		every_country = {
+			limit = {
+				has_variable = gg_subject_watch_by
+				var:gg_subject_watch_by ?= root
+				NOT = { has_variable = gg_subject_watch_young } # EN/ES: its own thirty days are up / cumplio sus treinta dias
+			}
+			gg_subject_watch_check = { OVERLORD = root }
+			remove_variable = gg_subject_watch_by
+		}
+	}
+}

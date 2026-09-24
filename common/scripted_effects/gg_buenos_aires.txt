@@ -137,6 +137,7 @@ gg_ba_open_war = {
 			if = {
 				limit = { is_subject_of = scope:gg_ba_conf }
 				make_independent = yes
+				gg_subject_unwatch = yes # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose, not a dropped pact / liberacion a proposito
 			}
 			if = { limit = { has_truce_with = scope:gg_ba_conf } end_truce = scope:gg_ba_conf }
 		}

@@ -1524,7 +1524,9 @@ gg_argentina_province_join = {
 		}
 		else_if = {
 			limit = { c:$TAG$ = { is_subject = no } }
-			create_diplomatic_pact = { country = c:$TAG$ type = protectorate }
+			# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
+			create_diplomatic_pact = { country = c:$TAG$ type = gg_pact_province }
+			gg_subject_watch = { SUBJECT = c:$TAG$ }
 		}
 	}
 }

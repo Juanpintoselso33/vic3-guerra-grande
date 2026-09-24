@@ -1,0 +1,79 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE WATCH ON THE SUBJECT PACTS (24/9/2026, AUD-VASSAL-RECOGNIZED). The engine drops a subject pact it finds
+#     invalid for the two countries (wrong overlord type, overlord not outranking the subject) within days and in
+#     silence: no line in error.log, no event (AUD-ORIENTAL-FREED). So every subject pact the mod makes is watched:
+#     the overlord calls gg_subject_watch right after create_diplomatic_pact, and thirty days later gg_subjects.1
+#     (hidden, on the overlord) writes one trace per watched subject, HOLDS=yes with its type or DROPPED=yes. The
+#     night sweep expects the HOLDS line of each run's pact and forbids DROPPED everywhere
+#     (tools/barrido_nocturno.yaml). A pact ended on purpose inside the thirty days (make_independent, a war) also
+#     reads DROPPED: none of the mod's releases runs that soon after a creation.
+# ES: LA GUARDIA DE LOS PACTOS DE SUJECION. El motor tira en pocos dias y en silencio un pacto de sujecion que no es
+#     valido para esos dos paises. Asi que cada pacto que hace el mod queda vigilado: el soberano llama a
+#     gg_subject_watch apenas crea el pacto, y treinta dias despues gg_subjects.1 escribe una traza por sujeto:
+#     HOLDS=yes con su tipo o DROPPED=yes. El barrido nocturno espera la de cada corrida y prohibe DROPPED en todas.
+# -------------------------------------------------------------------------------------------------
+
+# EN: Overlord scope. SUBJECT: the subject's scope (root, c:ENR, scope:x...). Marks the subject with its overlord
+#     and queues the check on the overlord, which never changes tag in these relations (the subject may: gg_peace.8).
+# ES: Scope del soberano. Marca al sujeto con su soberano y agenda el chequeo sobre el soberano, que no cambia de tag.
+gg_subject_watch = {
+	save_scope_as = gg_subject_watch_overlord
+	$SUBJECT$ = {
+		set_variable = { name = gg_subject_watch_by value = scope:gg_subject_watch_overlord }
+		# EN/ES: 24/9 (Codex review) -- another watch of the same overlord firing sooner skips this subject until its own
+		#     thirty days are up / otro chequeo del mismo soberano que salga antes saltea a este sujeto hasta sus treinta dias
+		set_variable = { name = gg_subject_watch_young days = 29 }
+	}
+	trigger_event = { id = gg_subjects.1 days = 30 }
+	clear_saved_scope = gg_subject_watch_overlord
+}
+
+# EN: Subject scope; OVERLORD: the country that made the pact. One trace line: HOLDS=yes and the subject type, or
+#     DROPPED=yes. Fixed strings only (no localization function the trace would depend on) plus the country's name.
+# ES: Scope del sujeto. Una linea de traza: HOLDS=yes y el tipo, o DROPPED=yes.
+gg_subject_watch_check = {
+	if = {
+		limit = { is_subject_of = $OVERLORD$ }
+		if = {
+			limit = { is_subject_type = subject_type_gg_pact_province }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=gg_pact_province SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+		else_if = {
+			limit = { is_subject_type = subject_type_gg_vassal_state }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=gg_vassal_state SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+		else_if = {
+			limit = { is_subject_type = subject_type_gg_client_state }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=gg_client_state SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+		else_if = {
+			limit = { is_subject_type = subject_type_gg_cisplatine_province }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=gg_cisplatine_province SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+		else_if = {
+			limit = { is_subject_type = subject_type_protectorate }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=protectorate SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+		else = {
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| HOLDS=yes TYPE=other SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+		}
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_subject_watch_check| DROPPED=yes SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+	}
+}
+
+# EN: Subject scope, right after a release the mod makes on purpose (make_independent): the watch is dropped, so the
+#     thirty-day check does not read a deliberate release as the engine's DROPPED.
+# ES: Scope del sujeto, justo despues de una liberacion a proposito: se saca la guardia, asi el chequeo no la lee
+#     como un pacto que tiro el motor.
+gg_subject_unwatch = {
+	if = {
+		limit = { has_variable = gg_subject_watch_by }
+		remove_variable = gg_subject_watch_by
+	}
+	if = {
+		limit = { has_variable = gg_subject_watch_young }
+		remove_variable = gg_subject_watch_young
+	}
+}

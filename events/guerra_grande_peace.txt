@@ -605,11 +605,17 @@ gg_peace.1 = {
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
+		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = vassal, which the engine dropped at once: vanilla's vassal takes
+		#     only an unrecognized overlord and the Empire is recognized. Its own type, without that rule or the rank rule
+		#     (common/subject_types/zz_gg_subject_types.txt); watched thirty days (gg_subject_watch).
+		# ES: era type = vassal, que el motor tiraba enseguida: el vasallaje de vanilla solo admite soberano no reconocido.
+		#     Tipo propio, sin esa regla ni la del rango; vigilado treinta dias.
 		c:BRZ ?= {
 			create_diplomatic_pact = {
 				country = root
-				type = vassal
+				type = gg_vassal_state
 			}
+			gg_subject_watch = { SUBJECT = root }
 			change_relations = {
 				country = root
 				value = 80
@@ -643,12 +649,13 @@ gg_peace.1 = {
 	}
 
 	# EN: h -- T8, F15. THE PROVINCIA CISPLATINA. Nobody in the Defensa asked for this; it is the
-	#     outer limit of depending on the Empire. Uruguay stays a vassal (vanilla already names a
-	#     Brazilian subject "Cisplatina"), and the incorporation is left to vanilla's own annex
-	#     action. No reversal of the mod's own.
+	#     outer limit of depending on the Empire. Uruguay becomes the Cisplatine Province, a subject
+	#     of the Empire (its own subject type since 24/9/2026, AUD-VASSAL-RECOGNIZED; vanilla already
+	#     names a Brazilian subject "Cisplatina"), and the incorporation is left to the annex play
+	#     (dp_annex_subject). No reversal of the mod's own.
 	# ES: h -- T8, F15. LA PROVINCIA CISPLATINA. Nadie en la Defensa lo pidio: es el limite de
-	#     depender del Imperio. El Uruguay queda vasallo (vanilla ya llama "Cisplatina" a un
-	#     subdito del Brasil), y la incorporacion queda a la accion de anexion de vanilla. Sin
+	#     depender del Imperio. El Uruguay pasa a ser la Provincia Cisplatina, sujeta al Imperio
+	#     (tipo propio desde el 24/9/2026), y la incorporacion queda a la jugada de anexion. Sin
 	#     reversion propia del mod.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_peace.1.h|" # GG_TRAZA
@@ -671,11 +678,16 @@ gg_peace.1 = {
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
+		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = puppet, which needs the Empire to outrank the Republic; its own
+		#     type, the Cisplatine Province, without the rank rule (zz_gg_subject_types.txt); watched thirty days.
+		# ES: era type = puppet, que pide que el Imperio tenga mas rango que la Republica; tipo propio, la Provincia
+		#     Cisplatina, sin la regla del rango; vigilado treinta dias.
 		c:BRZ ?= {
 			create_diplomatic_pact = {
 				country = root
-				type = puppet
+				type = gg_cisplatine_province
 			}
+			gg_subject_watch = { SUBJECT = root }
 			change_relations = {
 				country = root
 				value = 100
@@ -1267,11 +1279,18 @@ gg_peace.2 = {
 
 		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
 
+		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = puppet, which needs Buenos Aires to outrank the Republic: in
+		#     Juan's saves Argentina was a minor power in 1846 and the Republic a minor power in 1851, and the engine drops
+		#     the pact between equals (as it dropped the Oriental Province). Its own type, the Client State, without the
+		#     rank rule (zz_gg_subject_types.txt); gg_peace.8/.10 carry it across CER -> URU (kind 5); watched thirty days.
+		# ES: era type = puppet, que pide que Buenos Aires tenga mas rango que la Republica; entre iguales el motor lo tira.
+		#     Tipo propio, el Estado cliente, sin la regla del rango; gg_peace.8/.10 lo llevan a traves del cambio de tag.
 		c:ARG ?= {
 			create_diplomatic_pact = {
 				country = root
-				type = puppet
+				type = gg_client_state
 			}
+			gg_subject_watch = { SUBJECT = root }
 			change_relations = {
 				country = root
 				value = 100
@@ -1941,8 +1960,15 @@ gg_peace.8 = {
 		if = {
 			limit = { is_subject = yes }
 			set_global_variable = { name = gg_cerrito_overlord value = overlord }
+			# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- kind 1 is any vassal: vanilla's (legacy) or the Vassal State, rebuilt
+			#     as the Vassal State (a vanilla vassal of a recognized overlord never lives) / cualquier vasallaje
 			if = {
-				limit = { is_subject_type = subject_type_vassal }
+				limit = {
+					OR = {
+						is_subject_type = subject_type_vassal
+						is_subject_type = subject_type_gg_vassal_state
+					}
+				}
 				set_global_variable = { name = gg_cerrito_subject_kind value = 1 }
 			}
 			else_if = {
@@ -1958,6 +1984,16 @@ gg_peace.8 = {
 			else_if = {
 				limit = { is_subject_type = subject_type_gg_pact_province }
 				set_global_variable = { name = gg_cerrito_subject_kind value = 4 }
+			}
+			# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Client State (gg_peace.2.e) and the Cisplatine Province
+			#     / el Estado cliente y la Provincia Cisplatina
+			else_if = {
+				limit = { is_subject_type = subject_type_gg_client_state }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 5 }
+			}
+			else_if = {
+				limit = { is_subject_type = subject_type_gg_cisplatine_province }
+				set_global_variable = { name = gg_cerrito_subject_kind value = 6 }
 			}
 		}
 		if = {
@@ -2038,9 +2074,11 @@ gg_peace.10 = {
 				c:URU = { is_subject = no }
 			}
 			global_var:gg_cerrito_overlord ?= {
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- was type = vassal, dropped by the engine at once with a recognized
+				#     overlord / era type = vassal, que el motor tiraba enseguida con un soberano reconocido
 				if = {
 					limit = { global_var:gg_cerrito_subject_kind = 1 }
-					create_diplomatic_pact = { country = c:URU type = vassal }
+					create_diplomatic_pact = { country = c:URU type = gg_vassal_state }
 				}
 				else_if = {
 					limit = { global_var:gg_cerrito_subject_kind = 2 }
@@ -2054,6 +2092,17 @@ gg_peace.10 = {
 					limit = { global_var:gg_cerrito_subject_kind = 4 }
 					create_diplomatic_pact = { country = c:URU type = gg_pact_province }
 				}
+				else_if = {
+					limit = { global_var:gg_cerrito_subject_kind = 5 }
+					create_diplomatic_pact = { country = c:URU type = gg_client_state }
+				}
+				else_if = {
+					limit = { global_var:gg_cerrito_subject_kind = 6 }
+					create_diplomatic_pact = { country = c:URU type = gg_cisplatine_province }
+				}
+				# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED, Codex review) -- the rebuilt pact is watched too (a legacy kind has no
+				#     earlier watch) / el pacto rehecho tambien queda vigilado
+				gg_subject_watch = { SUBJECT = c:URU }
 			}
 		}
 		if = {

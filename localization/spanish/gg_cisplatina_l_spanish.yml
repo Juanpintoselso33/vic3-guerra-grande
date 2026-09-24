@@ -51,7 +51,7 @@
  subject_type_gg_pact_province:0 "@protectorate! Provincia del Pacto"
  subject_type_gg_pact_province_no_icon:0 "Provincia del Pacto"
  gg_pact_province:0 "Provincia del Pacto"
- gg_pact_province_desc:0 "Una provincia del Pacto Federal bajo Buenos Aires, con su gobierno propio: Buenos Aires lleva sus relaciones exteriores."
+ gg_pact_province_desc:0 "Una provincia de la Confederación por el Pacto Federal, con su gobierno propio: delegó sus relaciones exteriores en el gobierno de la Confederación."
  gg_pact_province_pact_desc:0 "[SCOPE.GetRootScope.GetDiplomaticPact.GetSecondCountry.GetName] es una provincia del Pacto bajo [SCOPE.GetRootScope.GetDiplomaticPact.GetFirstCountry.GetName]."
  gg_pact_province_action_name:0 "Provincia del Pacto"
  gg_pact_province_action_propose_name:0 "Recibir como provincia del Pacto"

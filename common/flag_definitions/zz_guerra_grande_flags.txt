@@ -150,8 +150,8 @@ REPLACE:URU = {
 #          «Bandera de la provincia de Santa Fe»).
 #       20 Tucuman, Salta, Jujuy, Catamarca and La Rioja only: the celeste while the Coalition of the
 #          North stands and the province is on its side -- not under anyone. «Tucuman changed flag
-#          when it changed side» (the doc). Beaten provinces are born as protectorates of Buenos
-#          Aires (gg_province_split_off), so under the Pact they keep the federal flag.
+#          when it changed side» (the doc). Beaten provinces are born as provinces of the Pact under
+#          Buenos Aires (gg_province_split_off), so under the Pact they keep the federal flag.
 #       30 and 31 the provincial flag of today, from the date of the law that adopted it.
 #     No other mod in the playset defines these eleven tags in flag_definitions (checked 22/9/2026
 #     against every downloaded Workshop item, DNFC's REPLACE_OR_CREATE lists included), so a plain
@@ -168,7 +168,7 @@ REPLACE:URU = {
 #          santafesina se abandono en 1880 (Wikipedia ES).
 #       20 solo Tucuman, Salta, Jujuy, Catamarca y La Rioja: la celeste mientras la Coalicion del Norte
 #          siga en pie y la provincia este de su lado, sin nadie encima. «Tucuman cambio de bandera al
-#          cambiar de bando». Las provincias batidas nacen protectorado de Buenos Aires, asi que bajo
+#          cambiar de bando». Las provincias batidas nacen provincias del Pacto bajo Buenos Aires, asi que bajo
 #          el Pacto llevan la federal.
 #       30 y 31 la bandera provincial de hoy, desde la fecha de la ley que la adopto.
 #     Ningun otro mod del playset define estos once tags en flag_definitions (verificado el 22/9/2026

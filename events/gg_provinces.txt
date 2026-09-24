@@ -21,10 +21,12 @@ gg_provinces.1 = {
 				}
 				save_scope_as = gg_pending_league
 				ROOT = {
+					# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
 					create_diplomatic_pact = {
 						country = scope:gg_pending_league
-						type = protectorate
+						type = gg_pact_province
 					}
+					gg_subject_watch = { SUBJECT = scope:gg_pending_league } # EN/ES: a retry re-arms it / un reintento la rearma
 				}
 				if = { limit = { is_subject_of = ROOT } debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|protectorate made" }
 				else = { debug_log = "GG_PROVINCES|[TimeKeeper.GetCurrentDate.GetString]|gg_provinces.1|protectorate FAILED" }

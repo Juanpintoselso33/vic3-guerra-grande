@@ -183,7 +183,7 @@ gg_cisplatina.3 = {
 			else = {
 				if = {
 					limit = { c:URU ?= { is_subject_of = c:ARG } }
-					c:URU = { make_independent = yes }
+					c:URU = { make_independent = yes gg_subject_unwatch = yes } # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose / liberacion a proposito
 					remove_global_variable = gg_oriental_province
 				}
 				else = { gg_cis_release = yes }

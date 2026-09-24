@@ -139,7 +139,7 @@ gg_corrientes_pronounce = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_corrientes_pronounce|" # GG_TRAZA
 	if = {
 		limit = { c:CRR ?= { is_subject_of = c:ARG } }
-		c:CRR = { make_independent = yes }
+		c:CRR = { make_independent = yes gg_subject_unwatch = yes } # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose / liberacion a proposito
 	}
 	else_if = {
 		limit = {
@@ -294,7 +294,7 @@ gg_conf_province_join = {
 			}
 		}
 		c:$TAG$ = {
-			if = { limit = { is_subject_of = c:ARG } make_independent = yes }
+			if = { limit = { is_subject_of = c:ARG } make_independent = yes gg_subject_unwatch = yes } # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- a release on purpose / liberacion a proposito
 		}
 		if = {
 			limit = { c:$TAG$ = { is_player = no } }

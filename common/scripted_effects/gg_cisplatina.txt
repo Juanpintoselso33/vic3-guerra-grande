@@ -214,6 +214,7 @@ gg_oriental_make_province = {
 				country = scope:gg_oriental_country
 				type = gg_pact_province
 			}
+			gg_subject_watch = { SUBJECT = scope:gg_oriental_country } # EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- thirty-day check / chequeo a los treinta dias
 			change_relations = { country = scope:gg_oriental_country value = 80 }
 		}
 	}
