@@ -879,7 +879,7 @@ gg_plata.48 = {
 			triggered_desc = { desc = gg_plata.48.d }
 		}
 	}
-	event_image = { video = "unspecific_naval_battle" }
+	event_image = { video = "gg_plata_tonelero" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -913,7 +913,7 @@ gg_plata.49 = {
 			triggered_desc = { desc = gg_plata.49.d_saved }
 		}
 	}
-	event_image = { video = "gg_nav_brown_montevideo" }
+	event_image = { video = "gg_plata_iln_brown_capture" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes

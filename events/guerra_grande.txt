@@ -340,7 +340,7 @@ guerra_grande.3 = {
 
 	# "Vista de la Matriz", Montevideo lithograph, 1840, public domain.
 	event_image = {
-		video = "gg_two_governments"
+		video = "gg_gg_montevideo_martens"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

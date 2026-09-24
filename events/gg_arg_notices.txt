@@ -25,7 +25,7 @@ gg_arg_notice.1 = {
 	desc = gg_arg_notice.1.d
 	flavor = gg_arg_notice.1.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "votp_barricade" }
+	event_image = { video = "gg_argn_iln_montevideo" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -87,7 +87,7 @@ gg_arg_notice.2 = {
 	}
 	flavor = gg_arg_notice.2.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "asia_farmers_market" }
+	event_image = { video = "gg_argn_raleigh" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	duration = 12
 	is_popup = yes
@@ -132,7 +132,7 @@ gg_arg_notice.3 = {
 	desc = gg_arg_notice.3.d
 	flavor = gg_arg_notice.3.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "votp_agitator_speaking" }
+	event_image = { video = "gg_argn_varela_hija" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	duration = 12
 	is_popup = yes
@@ -185,7 +185,7 @@ gg_arg_notice.4 = {
 	desc = gg_arg_notice.4.d
 	flavor = gg_arg_notice.4.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "middleeast_upperclass_party" }
+	event_image = { video = "gg_argn_monserrat" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

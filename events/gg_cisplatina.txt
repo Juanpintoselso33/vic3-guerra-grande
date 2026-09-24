@@ -216,7 +216,7 @@ gg_cisplatina.4 = {
 		}
 	}
 	flavor = gg_cisplatina.4.f
-	event_image = { video = "gg_cis_azoteas" }
+	event_image = { video = "gg_cis_tonelero_1938" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -251,7 +251,7 @@ gg_cisplatina.5 = {
 		}
 	}
 	flavor = gg_cisplatina.5.f
-	event_image = { video = "gg_cis_roads" }
+	event_image = { video = "gg_cis_retiro" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

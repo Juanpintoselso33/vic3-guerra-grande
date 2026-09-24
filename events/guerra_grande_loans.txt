@@ -603,7 +603,7 @@ gg_loan.5 = {
 
 	# EN: The reckoning: what the Defensa signed for.
 	event_image = {
-		video = "gg_money_reckoning"
+		video = "gg_money_sao_cristovao"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -759,7 +759,7 @@ gg_loan.6 = {
 
 	# EN: The reckoning: the debts of the Cerrito.
 	event_image = {
-		video = "gg_money_cerrito_debts"
+		video = "gg_money_caseros"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"

@@ -588,7 +588,7 @@ gg_contingent.7 = {
 
 	# EN: Rosas' auxiliaries reach the Cerrito.
 	event_image = {
-		video = "gg_leg_rosista"
+		video = "gg_leg_general_hastrel"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"

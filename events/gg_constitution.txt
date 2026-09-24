@@ -201,7 +201,7 @@ gg_constitution.5 = {
 	title = gg_constitution.5.t
 	desc = gg_constitution.5.d
 	flavor = gg_constitution.5.f
-	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	event_image = { video = "gg_con_alice" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

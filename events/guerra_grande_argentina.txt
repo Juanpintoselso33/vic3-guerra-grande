@@ -1320,7 +1320,7 @@ gg_argentina.8 = {
 	}
 	flavor = gg_argentina.8.f
 	# EN/ES: later portrait of Juan Madariaga, not the battle / retrato posterior, no la batalla
-	event_image = { video = "gg_arg_vences" }
+	event_image = { video = "gg_arg_vences_blanes" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3817,7 +3817,7 @@ gg_argentina.84 = {
 	title = gg_argentina.84.t
 	desc = gg_argentina.84.d
 	flavor = gg_argentina.84.f
-	event_image = { video = "gg_arg_coraceros" }
+	event_image = { video = "gg_arg_pago_largo" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -3889,7 +3889,7 @@ gg_argentina.86 = {
 	desc = gg_argentina.86.d
 	flavor = gg_argentina.86.f
 	# EN/ES: reused until T9: Carneiro Leao, who negotiated the 1851 alliance / reusado: el negociador de 1851
-	event_image = { video = "gg_arg_convencion" }
+	event_image = { video = "gg_arg_urquiza_daguerrotipo" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

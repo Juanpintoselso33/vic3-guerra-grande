@@ -39,7 +39,7 @@ gg_notice.1 = {
 	desc = gg_notice.1.d
 	flavor = gg_notice.1.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "votp_monarch_holding_court" }
+	event_image = { video = "gg_ntc_suarez" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -103,7 +103,7 @@ gg_notice.2 = {
 	desc = gg_notice.2.d
 	flavor = gg_notice.2.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "votp_cops_march" }
+	event_image = { video = "gg_ntc_caxias_orden" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	duration = 12
 	is_popup = yes
@@ -318,7 +318,7 @@ gg_notice.13 = {
 	desc = gg_notice.13.d
 	flavor = gg_notice.13.f
 	# EN/ES: provisional vanilla video (video lane) / video vanilla provisorio
-	event_image = { video = "europenorthamerica_london_center" }
+	event_image = { video = "gg_ntc_recova" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

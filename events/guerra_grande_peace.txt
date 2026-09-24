@@ -1453,7 +1453,7 @@ gg_peace.3 = {
 
 	# Francois Pierre Barry, "Combate de la Vuelta de Obligado" (1845), public domain.
 	event_image = {
-		video = "gg_squadrons"
+		video = "gg_peace_rosario_hastrel"
 	}
 
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -2280,7 +2280,7 @@ gg_peace.13 = {
 	flavor = gg_peace.13.f
 	# EN/ES: reused until T9 (SOURCES_flujo_images.md): the Constitution of the State, which art. I invokes
 	#     / reusado hasta T9: la Constitucion del Estado, que invoca el art. I
-	event_image = { video = "gg_in_constitution" }
+	event_image = { video = "gg_peace_santos_logares" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes
@@ -2316,7 +2316,7 @@ gg_peace.15 = {
 	desc = gg_peace.15.d
 	flavor = gg_peace.15.f
 	# EN/ES: reused until T9, as gg_peace.13 (the two never fire together) / reusado, como gg_peace.13
-	event_image = { video = "gg_in_constitution" }
+	event_image = { video = "gg_peace_urquiza_1860" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 	duration = 12
 	is_popup = yes

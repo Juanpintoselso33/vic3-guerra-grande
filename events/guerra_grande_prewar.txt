@@ -506,7 +506,7 @@ gg_prewar.9 = {
 
 	# EN/ES: T5 reuses an existing video; the new picture lands in T9 (SOURCES_flujo_images.md).
 	event_image = {
-		video = "gg_fl_palmar"
+		video = "gg_fl_carga_litran"
 	}
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
