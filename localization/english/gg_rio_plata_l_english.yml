@@ -31,6 +31,7 @@
  gg_ai_strategy_plata_enemies_desc:0 "[COUNTRY.GetName] stops only its enemies' ships; neutrals make port."
  gg_ai_strategy_plata_defensa:0 "Open Port"
  gg_ai_strategy_plata_defensa_desc:0 "[COUNTRY.GetName] lives off its port and keeps it open to all comers."
+ strait_rio_de_la_plata:0 "Río de la Plata"
  gg_plata.20.t:0 "The River Closed"
  gg_plata.20.d:0 "Rosas has closed the River Plate from the Buenos Aires shore: no foreign ship now reaches Montevideo.\n\nFor as long as the closure lasts, the city suffers (mortality #N +5%#!). Outside a truce, each month also deepens its hunger, wears down the patience of the powers that back the Defensa and tips the war towards the #blue_value blancos#!. A single month with the river open breaks the run of hunger."
  gg_plata.20.a:0 "Let it be known along the lines."

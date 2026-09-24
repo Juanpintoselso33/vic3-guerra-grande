@@ -31,6 +31,7 @@
  gg_ai_strategy_plata_enemies_desc:0 "[COUNTRY.GetName] solo detiene a los barcos de sus enemigos; los neutrales entran al puerto."
  gg_ai_strategy_plata_defensa:0 "El puerto abierto"
  gg_ai_strategy_plata_defensa_desc:0 "[COUNTRY.GetName] vive de su puerto y lo mantiene abierto a todos."
+ strait_rio_de_la_plata:0 "Río de la Plata"
  gg_plata.20.t:0 "El río cerrado"
  gg_plata.20.d:0 "Rosas cerró el Plata desde la orilla de Buenos Aires: ningún barco extranjero llega ya a Montevideo.\n\nMientras dure el cierre, la plaza se aprieta (mortalidad #N +5%#!). Fuera de las treguas, además, cada mes suma a su hambre, gasta la paciencia de las potencias que respaldan a la Defensa y corre la guerra hacia los #blue_value blancos#!. Un solo mes de río abierto corta la racha del hambre."
  gg_plata.20.a:0 "Que se sepa en la línea."
