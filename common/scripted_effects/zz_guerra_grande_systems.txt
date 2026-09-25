@@ -377,7 +377,11 @@ gg_postwar_start = {
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_postwar_started }
-			gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- not for a Pact province nor an absorbed one (was: NOT gg_reincorporated) / ni provincia del Pacto ni absorbida
+			# EN/ES: 25/9 (AUD-POSTWAR-PROVINCE, headless regression) -- NOT gg_postwar_republic here: the dispatch also
+			#     restores the Cerrito as URU (gg_peace.8) and rebuilds the Pact province's subject pact (gg_peace.10), which
+			#     the Oriental Province needs; only the Republic's politics are skipped, by the trigger of each gg_postwar.*
+			#     / aca no: el despacho tambien devuelve el tag URU y el pacto de la provincia; solo la politica se saltea
+			NOT = { has_global_variable = gg_reincorporated }
 		}
 		set_global_variable = gg_postwar_started
 		gg_postwar_dispatch = yes

@@ -31,7 +31,8 @@ gg_malon_pulse = {
 			chance = 5
 			set_variable = { name = gg_malon_cooldown years = 5 }
 			trigger_event = { id = mapuche_malon.1 }
-			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_malon_pulse| FIRED=yes COUNTRY_ID= [ROOT.GetCountry.GetIDString] COUNTRY= [ROOT.GetCountry.GetNameNoFlag]" # GG_TRAZA
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_malon_pulse| FIRED=yes COUNTRY_ID= [THIS.GetCountry.GetIDString] COUNTRY= [THIS.GetCountry.GetNameNoFormatting]" # GG_TRAZA
+			# EN/ES: 25/9 -- THIS, the country the pulse runs in: in the debug_log ROOT is not a country (error.log) / THIS: en el debug_log ROOT no es un pais
 		}
 	}
 }

@@ -34,7 +34,8 @@
   own copies of figures the game already has (Berro, Sarmiento, Roca, four Peruvian presidents and 39 more worldwide,
   plus Artigas, who never came back from Paraguay) no longer appear; the game's or this mod's version stays.
 - **The Uruguayan postwar is the Republic's:** Oribe's four-year mandate, the handovers, «the caudillos come back» and
-  the elections no longer run on the Oriental Province of the Pact or on an absorbed Banda Oriental.
+  the elections no longer run on the Oriental Province of the Pact or on an absorbed Banda Oriental. The Cerrito still
+  takes back Uruguay's name and the Oriental Province keeps its Pact ties: only the Republic's politics are skipped.
 - **Urquiza's war mark is cleared after the Pact:** it stayed set for good, and a later Argentine capitulation to Entre
   Ríos (Cepeda, Pavón) would have been read as Urquiza winning the Pact.
 - **One ruler at a time:** a head of state moved into another country kept his office: Oribe (the Oriental
