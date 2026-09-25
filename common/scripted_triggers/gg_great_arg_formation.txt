@@ -1,0 +1,91 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan: Great Argentina «como La Plata», but bigger and harder) -- WHAT FORMING GREAT ARGENTINA (Great_ARG)
+#     ASKS FOR (common/country_formation/zz_guerra_grande_formables.txt). La Plata's design (gg_plata_formation.txt,
+#     whose "held" and "settled" tests it reuses) plus the south that defines Great Argentina. Three parts, all in possible:
+#     1. Mandatory: the five Oriental states and Paraguay's two, every one (as La Plata).
+#     2. At least 10 of the 14 historical Argentine provinces (70%, as La Plata). Each missing province can be made good
+#        by one frontier state held and at least 75% colonized; here the frontier is La Plata's ten (the national
+#        territories of Ley 1.532 and Rio Grande do Sul) plus the four states of Chile's south (Los Rios, Los Lagos,
+#        Aysen, Magallanes) and the South Atlantic Islands: fifteen. Below 75% a frontier state never counts, and no
+#        single frontier state is ever required.
+#     3. The extra requirement: over and above those ten, at least 3 lands of the SOUTH held and at least 75% colonized
+#        (Patagonia: La Pampa, Neuquen, Rio Negro, Chubut, Santa Cruz, Tierra del Fuego; Chile's south; the Islands:
+#        eleven). Written as: provinces held + frontier settled >= 13, and southern settled >= 3; the two together are
+#        exactly "ten, plus three southern lands that are not among them".
+#     WHY THE SOUTH, AND WHY 3: the south is what Great Argentina adds to La Plata -- of the 25 states of la Argentina's
+#     Great_ARG list, 11 are that southern frontier, while the Plata basin is La Plata's already. And 3 makes the
+#     minimum 7 + 10 + 3 = 20 states, the same size the old requirement asked for (25 x 0.80 = 20), against La Plata's
+#     17; the three extra states are the hardest kind to get (frontier colonized to 75%), so Great Argentina is always
+#     bigger and later than La Plata: whoever meets it meets La Plata's parts 1 and 2 too.
+# ES: LO QUE PIDE FORMAR LA GRAN ARGENTINA. El diseno de La Plata mas el sur que define a la Gran Argentina. Tres partes:
+#     1) obligatorios los cinco orientales y los dos del Paraguay; 2) al menos 10 de las 14 provincias historicas, donde
+#     cada una que falte la reemplaza un estado de frontera propio y colonizado al 75% (las diez de La Plata, los cuatro
+#     del sur de Chile y las islas del Atlantico Sur: quince); ninguno se exige; 3) ademas de esas diez, al menos 3
+#     tierras del sur (Patagonia, sur de Chile, islas: once) propias y colonizadas al 75%. Por que el sur y por que 3: el
+#     sur es lo que la Gran Argentina agrega a La Plata (11 de sus 25 estados), y 3 deja el minimo en 7 + 10 + 3 = 20,
+#     el mismo tamano que pedia la regla vieja (25 x 0,80), contra 17 de La Plata, con los tres mas dificiles de tener.
+# SOURCE / FUENTE: the provinces and Ley 1.532 as in gg_plata_formation.txt; the southern list is la Argentina's own
+#     Great_ARG (Workshop 2982907360, common/country_formation/99_formable_countries.txt).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: state region scope: a frontier state that can stand in for a missing province (never required): La Plata's ten,
+#     Chile's south and the South Atlantic Islands / un estado de frontera que puede reemplazar a una provincia
+gg_garg_frontier_region = {
+	OR = {
+		gg_plt_frontier_region = yes
+		gg_garg_south_region = yes
+	}
+}
+
+# EN/ES: state region scope: the southern frontier that part 3 asks for / la frontera sur que pide la parte 3
+gg_garg_south_region = {
+	OR = {
+		this = s:STATE_LA_PAMPA
+		this = s:STATE_NEUQUEN
+		this = s:STATE_RIO_NEGRO
+		this = s:STATE_CHUBUT
+		this = s:STATE_SANTA_CRUZ_ARG
+		this = s:STATE_TIERRA_DEL_FUEGO
+		this = s:STATE_LOS_RIOS
+		this = s:STATE_LOS_LAGOS
+		this = s:STATE_AYSEN
+		this = s:STATE_MAGALLANES
+		this = s:STATE_SOUTH_ATLANTIC_ISLANDS
+	}
+}
+
+# EN/ES: state region scope: a province held, or a frontier state settled / una provincia tenida o una frontera colonizada
+gg_garg_region_counts = {
+	OR = {
+		AND = {
+			gg_plt_core_province_region = yes
+			gg_plt_region_held = yes
+		}
+		AND = {
+			gg_garg_frontier_region = yes
+			gg_plt_region_settled = yes
+		}
+	}
+}
+
+# EN/ES: country scope (root = the forming country): part 2, >= 10 / parte 2, al menos 10
+gg_garg_formation_provinces = {
+	any_state_region = {
+		gg_garg_region_counts = yes
+		count >= 10
+	}
+}
+
+# EN/ES: country scope: part 3, three southern lands settled over and above the ten
+#     / parte 3, tres tierras del sur colonizadas ademas de las diez
+gg_garg_formation_south = {
+	any_state_region = {
+		gg_garg_region_counts = yes
+		count >= 13
+	}
+	any_state_region = {
+		gg_garg_south_region = yes
+		gg_plt_region_settled = yes
+		count >= 3
+	}
+}

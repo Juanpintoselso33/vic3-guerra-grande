@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **Great Argentina is formed like La Plata, and asks for more:** the old requirement (20 of 25 states, where a
+  one-province colony in Patagonia or in Chile counted as a whole state) is replaced by La Plata's rule plus the south.
+  All five Oriental states and Paraguay's two are required; at least 10 of the 14 historical Argentine provinces, where
+  each missing one can be made good by a frontier state (La Plata's frontier, Chile's south or the South Atlantic
+  Islands) held and at least 75% colonized; and, over and above those ten, at least 3 lands of the south (Patagonia,
+  Chile's south, the Islands) held and colonized to 75%. The minimum is 20 states against La Plata's 17, the formation
+  panel shows that number, and the conditions of each part are in the tooltips. Nationalism and the end of Argentina's
+  calendar are still required.
+
 - **A Brazilian victory in the Cisplatine war makes the Banda Oriental the Provincia Cisplatina:** of Brazil's three
   aims, «enforce the Convention» freed the Republic and «under the Empire's hand» made it a protectorate. Now both
   end, on a Brazilian win, in the Cisplatine Province: Brazil's subject with its own name, flag and modifier, the same

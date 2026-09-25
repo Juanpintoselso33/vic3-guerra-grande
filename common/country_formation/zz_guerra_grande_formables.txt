@@ -82,49 +82,86 @@ REPLACE:PLT = {
 }
 
 # -------------------------------------------------------------------------------------------------
-# EN: Compatch (23/9/2026, Juan). la Argentina's Great_ARG (99_formable_countries.txt of the Workshop copy the playset
-#     loads, 2982907360 -- 23 states, 0.80; the local la_argentina_fixed copy differs and is not loaded) lists the Uruguayan
-#     states of vanilla's map, without the two Guerra Grande adds: San Jose and Maldonado. Its list,
-#     fraction and requirements unchanged, plus those two states (the fix the old REPLACE:PLT had).
-# ES: el Great_ARG de la Argentina lista los estados orientales del mapa de vanilla, sin los dos que agrega
-#     GG (San Jose y Maldonado). Su lista, su fraccion y sus requisitos, mas esos dos estados.
+# EN: 25/9/2026 (Juan: «como La Plata», but bigger and harder) -- Great_ARG. The old requirement was la Argentina's list
+#     (23 states plus San Jose and Maldonado, 0.80: 20 of 25), where a one-province colony in Patagonia or Chile counted
+#     as a whole state. Now the real test is in possible (common/scripted_triggers/gg_great_arg_formation.txt): the
+#     seven Oriental and Paraguayan states, all of them; 10 of the 14 historical provinces, where a frontier state held
+#     and at least 75% colonized makes good a missing one; and over and above those, 3 southern lands (Patagonia,
+#     Chile's south, the South Atlantic Islands) held and colonized to 75%. Minimum 20 states, La Plata's is 17.
+#     states lists the 36 states that can count so the formation panel shows them; 36 x 0.55 = 19.8 -> 20, the real
+#     minimum (19 if the engine rounds down): the panel shows the true size and never asks for more than possible does.
+#     The conditions of la Argentina's Great_ARG (nationalism) and the mod's (gg_arg_chain_pending) are kept.
+# ES: la regla vieja era la lista de la Argentina (20 de 25), donde una colonia de una provincia contaba como un estado
+#     entero. Ahora la prueba real esta en possible: los siete orientales y paraguayos; 10 de las 14 provincias, donde una
+#     frontera propia y colonizada al 75% reemplaza a una que falte; y ademas 3 tierras del sur colonizadas al 75%.
+#     Minimo 20 estados, contra 17 de La Plata. states lista los 36 que pueden contar; 36 x 0,55 -> 20, el minimo real.
 # -------------------------------------------------------------------------------------------------
 
 REPLACE:Great_ARG = {
 	states = {
-		STATE_BUENOS_AIRES
-		STATE_CHACO
-		STATE_SANTA_FE
+		# EN/ES: mandatory / obligatorios
 		STATE_MONTEVIDEO
 		STATE_SAN_JOSE
 		STATE_MALDONADO
 		STATE_BANDA_ORIENTAL
 		STATE_PAYSANDU
-		STATE_RIO_NEGRO
+		STATE_ALTO_PARAGUAY
+		STATE_BAJO_PARAGUAY
+		# EN/ES: the fourteen historical provinces, 10 needed / las catorce provincias historicas, hacen falta 10
+		STATE_BUENOS_AIRES
+		STATE_SANTA_FE
+		STATE_ENTRE_RIOS
+		STATE_CORRIENTES
+		STATE_CORDOBA
+		STATE_SANTIAGO_DEL_ESTERO
+		STATE_TUCUMAN
+		STATE_SALTA
+		STATE_JUJUY
+		STATE_CATAMARCA
+		STATE_LA_RIOJA
+		STATE_SAN_JUAN
+		STATE_MENDOZA
+		STATE_SAN_LUIS
+		# EN/ES: northern frontier, counted only when >= 75% colonized / frontera norte, cuenta solo colonizada al 75%
+		STATE_MISIONES
+		STATE_CHACO
+		STATE_FORMOSA_ARG
+		STATE_RIO_GRANDE_DO_SUL
+		# EN/ES: the south, >= 75% colonized; 3 needed beyond the ten / el sur, colonizado al 75%; 3 ademas de las diez
+		STATE_LA_PAMPA
 		STATE_NEUQUEN
+		STATE_RIO_NEGRO
 		STATE_CHUBUT
 		STATE_SANTA_CRUZ_ARG
 		STATE_TIERRA_DEL_FUEGO
-		STATE_SOUTH_ATLANTIC_ISLANDS
-		STATE_LA_PAMPA
-		STATE_TUCUMAN
-		STATE_JUJUY
-		STATE_CORRIENTES
+		STATE_LOS_RIOS
 		STATE_LOS_LAGOS
 		STATE_AYSEN
 		STATE_MAGALLANES
-		STATE_LOS_RIOS
-		STATE_RIO_GRANDE_DO_SUL
-		STATE_BAJO_PARAGUAY
-		STATE_ALTO_PARAGUAY
+		STATE_SOUTH_ATLANTIC_ISLANDS
 	}
 
-	required_states_fraction = 0.80
+	# EN: 36 states x 0.55 -> 20 (7 mandatory + 10 provinces or settled frontier + 3 settled southern lands), the real
+	#     minimum. The exact rule stays in `possible`.
+	# ES: 36 x 0,55 -> 20, el minimo real; la regla exacta sigue en possible.
+	required_states_fraction = 0.55
 
 	ai_will_do = { always = yes }
 
 	possible = {
 		gg_arg_chain_pending = no # EN/ES: 24/9/2026 (Juan, AUD-ARG-1850) -- not while Argentina's calendar runs (to 13/10/1862): forming changes the tag and loses it / no mientras corre el calendario argentino: formar cambia el tag y lo pierde
 		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = gg_garg_form_mandatory_tt
+			gg_plt_formation_mandatory = yes
+		}
+		custom_tooltip = {
+			text = gg_garg_form_provinces_tt
+			gg_garg_formation_provinces = yes
+		}
+		custom_tooltip = {
+			text = gg_garg_form_south_tt
+			gg_garg_formation_south = yes
+		}
 	}
 }
