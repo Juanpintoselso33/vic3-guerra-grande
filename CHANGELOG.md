@@ -1,5 +1,12 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **Montevideo, the port-city:** splitting la Argentina's Montevideo left it 6 provinces and 8 arable land; it ran
+  short of infrastructure (8.8 against 23.8 in use by 1891) and stopped growing (132,000 people by 1891; the 1889
+  census counted 215,061). It now has a permanent «The Port-City» modifier: +25 infrastructure, +50% migration
+  attraction, +10% urban centre and port throughput. Also reaches games in progress within six months.
+
 ## 0.1.5-alpha — 25/9/2026
 
 - **The Malvinas journals work for La Plata:** la Argentina's two Malvinas journals checked only Argentina's tag;

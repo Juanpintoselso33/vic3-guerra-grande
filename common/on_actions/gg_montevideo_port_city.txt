@@ -1,0 +1,19 @@
+﻿# EN: 25/9/2026 (Juan) -- gives Montevideo its port-city modifier (static_modifiers/guerra_grande_postwar_modifiers.txt).
+#     Checked every half year so it reaches new games from their first pulse and saves in progress alike;
+#     idempotent. A state pulse, so every split state of the region gets it.
+# ES: le da a Montevideo su modificador de ciudad-puerto; cada medio año, sirve para partidas nuevas y en curso.
+on_half_yearly_pulse_state = {
+	on_actions = {
+		gg_montevideo_port_city_pulse
+	}
+}
+
+gg_montevideo_port_city_pulse = {
+	trigger = {
+		state_region = s:STATE_MONTEVIDEO
+		NOT = { has_modifier = gg_montevideo_port_city }
+	}
+	effect = {
+		add_modifier = { name = gg_montevideo_port_city }
+	}
+}

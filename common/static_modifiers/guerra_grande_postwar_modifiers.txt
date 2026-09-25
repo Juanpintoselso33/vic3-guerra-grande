@@ -110,3 +110,16 @@ gg_pais_sin_constitucion = {
 	interest_group_ig_intelligentsia_approval_add = -3
 	state_radicals_from_political_movements_mult = 0.25
 }
+
+# EN: 25/9/2026 (Juan) -- Montevideo, the port-city. The mod split la Argentina's 14-province Montevideo and left it
+#     6 provinces and 8 arable land: by 1891 it had 132,000 people (the 1889 census counted 215,061) and 8.8
+#     infrastructure against 23.8 in use. Permanent, on every state of STATE_MONTEVIDEO (gg_montevideo_port_city_pulse).
+#     SOURCE / FUENTE: Censo municipal de Montevideo, 1889; Barran y Nahum, Historia rural del Uruguay moderno I.
+# ES: Montevideo, la ciudad-puerto: con 6 provincias y 8 de tierra se quedaba sin infraestructura y sin gente.
+gg_montevideo_port_city = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	state_infrastructure_add = 25
+	state_migration_pull_mult = 0.5
+	building_urban_center_throughput_add = 0.10
+	building_port_throughput_add = 0.10
+}
