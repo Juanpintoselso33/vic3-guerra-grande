@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **More historical lives:** Mitre (to 1906), Venancio Flores (1868), Manuel Herrera y Obes (1890), Sarmiento (1888)
+  and Paz (1854) no longer die before their historical date, like Rosas, Oribe, Rivera and the others.
 - **Annexed provinces keep their men:** when Argentina (or Entre Ríos, or Brazil with the Farrapos) absorbed a
   province, the engine deleted every character the province had: in Juan's game Urquiza, Mitre, Sarmiento and Paz
   vanished with Entre Ríos. Every annexation of the mod now moves the province's characters to the annexer first,

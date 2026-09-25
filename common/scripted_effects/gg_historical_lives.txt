@@ -58,6 +58,15 @@ gg_historical_lives = {
 	gg_historical_life = { TEMPLATE = ARG_Justo_Jose_de_Urquiza DIES = 1870.4.11 }
 	gg_historical_life = { TEMPLATE = ARG_William_Brown DIES = 1857.3.3 }
 	gg_historical_life = { TEMPLATE = URU_Juan_Antonio_Lavalleja DIES = 1853.10.22 }
+	# EN/ES: 25/9/2026 (Juan) -- the men the war leaves alive and history needs later / los que la guerra deja vivos
+	#     y la historia necesita despues. Death dates (Wikipedia ES): Mitre 19/1/1906, Flores 19/2/1868, Herrera y Obes
+	#     17/9/1890, Sarmiento 11/9/1888, Paz 22/10/1854.
+	gg_historical_life = { TEMPLATE = URU_gg_bartolome_mitre DIES = 1906.1.19 }
+	gg_historical_life = { TEMPLATE = ARG_bartolome_mitre DIES = 1906.1.19 }
+	gg_historical_life = { TEMPLATE = URU_venancio_flores DIES = 1868.2.19 }
+	gg_historical_life = { TEMPLATE = URU_manuel_herrera_y_obes DIES = 1890.9.17 }
+	gg_historical_life = { TEMPLATE = ARG_domingo_sarmiento DIES = 1888.9.11 }
+	gg_historical_life = { TEMPLATE = CRR_gg_jose_maria_paz DIES = 1854.10.22 }
 }
 
 # EN: 23/9/2026 (headless playtests) -- while Rosas's era lasts, Argentina's head of state is Rosas, as
