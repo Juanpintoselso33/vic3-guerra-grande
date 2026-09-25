@@ -1,0 +1,23 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- Dynamic Names, Flags & Colours (DNFC, optional) defines Free Patagonia (DPT) on the base
+#     game's STATE_PATAGONIA and STATE_ARAUCANIA, which la Argentina's map -- the one this mod ships -- deletes. Carried over
+#     from Juan's local compatch «la Argentina x Dynamic Names, Flags & Colours», retired that day.
+#     TRY_REPLACE: without DNFC there is no DPT and this does nothing (a REPLACE would fail, a REPLACE_OR_CREATE would create a
+#     country with no flag or name). The file sorts after DNFC's («zz_» > «dnfc_»).
+#     Same definition as DNFC's (dnfc_countries.txt), with the capital moved to Chubut.
+# ES: DNFC (opcional) define la Patagonia Libre (DPT) sobre STATE_PATAGONIA y STATE_ARAUCANIA del juego base, que el mapa
+#     de la Argentina -- el que trae este mod -- borra. Viene del compatch local de Juan, retirado el 25/9/2026. TRY_REPLACE: sin
+#     DNFC no hay DPT y esto no hace nada. El archivo va despues del de DNFC.
+#     La misma definicion que la de DNFC, con la capital en Chubut.
+# -------------------------------------------------------------------------------------------------
+
+TRY_REPLACE:DPT = {
+	color = { 107 136 160 }
+
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { platinean patagonian }
+	capital = STATE_CHUBUT
+}

@@ -1,143 +1,11 @@
 ﻿# -------------------------------------------------------------------------------------------------
-# EN: THE DEFENSA'S FLAG IS A WARTIME FLAG, NOT URUGUAY'S FLAG.
-#     Playtest 2026-09-19: "when the war ends Uruguay is left with the Defensa's flag, it has to go
-#     back to normal". It did not go back because the Defensa's coat of arms was keyed URU in
-#     common/coat_of_arms/, which overrides Uruguay's arms for the entire game -- there is no end
-#     date on a coat of arms. Worse in the other branch: a Cerrito that won the war and took the URU
-#     tag ended up flying the flag of the government it had just beaten.
-#     A flag_definition is the right tool: it carries a trigger, so the flag is conditional and the
-#     vanilla arms stay untouched underneath. Two conditions, both needed:
-#       - the country is actually the Defensa government (the Cerrito never gets this flag), and
-#       - the war is still open (gg_peace_settled is the marker every ending sets, including the
-#         one the closing dispatch writes when a third country takes the war away from both).
-#     When either stops being true the definition stops applying and vanilla's URU flag returns, in
-#     the same frame, with no effect to call and nothing to remember to undo.
-# ES: LA BANDERA DE LA DEFENSA ES UNA BANDERA DE GUERRA, NO LA DEL URUGUAY.
-#     Prueba en partida 19/9/2026: "cuando termina la guerra Uruguay queda con la bandera de la
-#     Defensa, tiene que volver a lo normal". No volvia porque el escudo de la Defensa estaba con la
-#     clave URU en common/coat_of_arms/, que le pisa el escudo al Uruguay toda la partida: un escudo
-#     no tiene fecha de vencimiento. Peor en la otra rama: un Cerrito que ganaba la guerra y tomaba
-#     el tag URU terminaba con la bandera del gobierno que acababa de derrotar.
-#     Un flag_definition es la herramienta correcta: lleva trigger, asi que la bandera es
-#     condicional y el escudo de vanilla queda intacto abajo. Dos condiciones, las dos necesarias:
-#       - que el pais sea de verdad el gobierno de la Defensa (el Cerrito nunca lleva esta bandera), y
-#       - que la guerra siga abierta (gg_peace_settled es la marca que prende todo final, incluido
-#         el que escribe el despacho de cierre cuando un tercero les saca la guerra a los dos).
-#     Cuando cualquiera de las dos deja de ser cierta, la definicion deja de aplicar y vuelve la
-#     bandera de vanilla, en el mismo cuadro, sin ningun efecto que llamar ni nada que acordarse de
-#     deshacer.
-#
-#     SOURCE / FUENTE: "Flag of Uruguay (Rivera).svg", el archivo que ilustra el articulo "Gobierno
-#     de la Defensa" de Wikipedia con el epigrafe "Bandera de Uruguay usada por el Gobierno de la
-#     Defensa". La imagen bajada y convertida, no redibujada.
+# EN: 25/9/2026 -- Uruguay's flags (URU) moved to two files of their own: y_gg_uruguay_base_flags.txt (the base game list,
+#     REPLACE) and zzz_gg_uruguay_flags.txt (the Defensa, the Pact province, the Cisplatina, the flags by period and the
+#     party flags, INJECT). Why two, in the first one.
+# ES: las banderas del Uruguay (URU) pasaron a dos archivos propios: y_gg_uruguay_base_flags.txt (la lista del juego base,
+#     REPLACE) y zzz_gg_uruguay_flags.txt (la Defensa, la provincia del Pacto, la Cisplatina, las de cada periodo y las de
+#     los partidos, INJECT). Por que dos, en el primero.
 # -------------------------------------------------------------------------------------------------
-
-# EN: 22/9/2026 -- REPLACE, not a plain block. Vanilla already defines URU, and a second "URU = {"
-#     is dropped at load ("Duplicated key URU will not be created"), so the Defensa's flag never
-#     applied. REPLACE carries vanilla's definitions unchanged (00_flag_definitions.txt, 1.13) plus ours.
-# ES: REPLACE, no un bloque comun. Vanilla ya define URU y un segundo "URU = {" se descarta al cargar,
-#     asi que la bandera de la Defensa nunca se aplicaba. REPLACE lleva las definiciones de vanilla sin
-#     cambios mas la nuestra.
-# EN/ES: vanilla's canton scale, used by its URU block below / la escala del canton de vanilla
-@third = @[1/3]
-
-REPLACE:URU = {
-	# EN/ES: 23/9/2026 (Juan) -- the Pact province flies the Treinta y Tres flag; a republic apart under
-	#     Buenos Aires keeps the Uruguayan flag; under the Empire, the Cisplatina's / la provincia del Pacto
-	#     lleva la de los Treinta y Tres; la republica aparte, la uruguaya de siempre; bajo el Imperio, la Cisplatina
-	flag_definition = {
-		coa = gg_provincia_oriental
-		priority = 150
-		trigger = { exists = c:ARG has_global_variable = gg_oriental_province scope:actor ?= { is_subject_of = c:ARG } }
-	}
-	flag_definition = {
-		coa = gg_cisplatina
-		priority = 150
-		# EN/ES: 25/9/2026 (AUD-CIS-PUPPET) -- the Cisplatine Province only, as its name (zz_guerra_grande_country_names.txt):
-		#     a protectorate of the Empire (gg_cisplatina.3, goal 3) is a Republic under protection, not the province
-		#     / solo la Provincia Cisplatina, como su nombre: un protectorado del Imperio es una Republica protegida
-		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ is_subject_type = subject_type_gg_cisplatine_province } }
-	}
-	flag_definition = {
-		coa = gg_defensa_government
-		priority = 100
-		trigger = {
-			scope:actor ?= {
-				has_variable = guerra_grande_defensa_government
-				NOT = { has_global_variable = gg_peace_settled }
-			}
-		}
-	}
-	# EN/ES: vanilla 1.13, unchanged / sin cambios
-	flag_definition = {
-		coa = URU
-		subject_canton = URU
-		allow_overlord_canton = yes
-		coa_with_overlord_canton = URU_subject
-		overlord_canton_scale = { @third 0.557 }
-		priority = 1
-	}
-	flag_definition = {
-		coa = URU_monarchy
-		subject_canton = URU_monarchy
-		priority = 5
-		trigger = {
-			coa_def_monarchy_flag_trigger = yes
-		}
-	}
-	flag_definition = {
-		coa = URU_absolute_monarchy
-		subject_canton = URU_absolute_monarchy
-		priority = 20
-		trigger = {
-			coa_def_absolute_monarchy_flag_trigger = yes
-		}
-	}
-	flag_definition = {
-		coa = URU_dictatorship
-		subject_canton = URU_dictatorship
-		priority = 20
-		trigger = {
-			coa_def_dictatorship_flag_trigger = yes
-		}
-	}
-	flag_definition = {
-		coa = URU_communist
-		priority = 1500
-		trigger = {
-			coa_def_communist_flag_trigger = yes
-		}
-	}
-	flag_definition = {
-		coa = URU_subject_SPA
-		priority = 50
-		trigger = {
-			coa_def_spanish_ensign_trigger = yes
-		}
-	}
-	flag_definition = {
-		coa = URU_subject_BRZ
-		priority = 50
-		trigger = {
-			OR = {
-				coa_def_brazilian_ensign_trigger = yes
-				AND = {
-					exists = c:POR
-					scope:actor ?= {
-						is_subject_of = c:POR
-					}
-				}
-			}
-		}
-	}
-	flag_definition = {
-		coa = URU_subject_USA
-		priority = 50
-		trigger = {
-			coa_def_american_ensign_trigger = yes
-		}
-	}
-}
 
 # -------------------------------------------------------------------------------------------------
 # EN: THE ELEVEN PROVINCES AS COUNTRIES: WHICH FLAG, WHEN. Decided by Juan on 22/9/2026: «the
@@ -902,24 +770,24 @@ ENR = {
 # EN: LA PLATA (PLT): ONE FLAG FOR NOW. Juan, 24/9/2026: «for now the mod uses HPM's flag for La Plata;
 #     I don't like la Argentina's» -- the coat of arms gg_flag_plata_hpm, in every situation and under
 #     every government.
-#     REPLACE, like URU above: vanilla defines PLT, la Argentina REPLACEs it (arg_flag_definitions.txt:
+#     REPLACE: vanilla defines PLT, la Argentina REPLACEs it (arg_flag_definitions.txt:
 #     its own PLT.DDS, with ARG_subject as the overlord-canton version) and DNFC REPLACE_OR_CREATEs it
 #     (z_dnfc_la_plata_flag_definitions.txt: republic, monarchy, dictatorship, oligarchy, theocracy,
 #     communism and anarchy variants). Files load in filename order across mods, so this file
-#     (zz_guerra_grande_flags.txt) is read after both and its REPLACE is the list that stays; the only
-#     later flag_definitions file in the playset, la-argentina-x-dnfc's zzzz_arg_dnfc_flag_definitions.txt,
-#     does not touch PLT (checked 24/9/2026, with every downloaded Workshop item).
+#     (zz_guerra_grande_flags.txt) is read after both and its REPLACE is the list that stays; no later
+#     flag_definitions file in the playset touches PLT (checked 24/9/2026, with every downloaded Workshop item;
+#     the local la-argentina-x-dnfc compatch, which did not touch it either, was retired on 25/9/2026).
 #     Priority 3000 beats the DEFAULT list every country also reads (chartered company and communist
 #     1000, anarchy 2000), so the flag holds even under those governments. subject_canton makes it the
 #     canton PLT's own subjects carry. No overlord-canton variant for PLT as a subject: it would lay a
 #     canton over the top stripes, untested, and Juan asked for this flag in every situation.
 # ES: LA PLATA (PLT): UNA SOLA BANDERA POR AHORA. Juan, 24/9/2026: «por ahora el mod usa la bandera de HPM
 #     para La Plata; la del mod Argentina no me gusta» -- el escudo gg_flag_plata_hpm, en toda situacion y
-#     con todo gobierno. REPLACE, como URU arriba: vanilla define PLT, la Argentina lo reemplaza (su
+#     con todo gobierno. REPLACE: vanilla define PLT, la Argentina lo reemplaza (su
 #     PLT.DDS, con ARG_subject como version con canton del soberano) y DNFC lo reemplaza o crea (variantes
 #     por gobierno). Los archivos cargan por orden de nombre entre mods, asi que este se lee despues de los
-#     dos y su REPLACE es la lista que queda; el unico archivo posterior del playset, el zzzz_ de
-#     la-argentina-x-dnfc, no toca PLT (verificado el 24/9/2026). Prioridad 3000: le gana a la lista
+#     dos y su REPLACE es la lista que queda; ningun archivo posterior del playset toca PLT (verificado el
+#     24/9/2026). Prioridad 3000: le gana a la lista
 #     DEFAULT (compania con carta y comunista 1000, anarquia 2000). Sin variante con canton del soberano.
 # -------------------------------------------------------------------------------------------------
 REPLACE:PLT = {

@@ -1,0 +1,279 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- ARGENTINA'S FLAGS BY PERIOD, INJECTED on top of whichever ARG list the playset ends up with: la
+#     Argentina's (arg_flag_definitions.txt, REPLACE:ARG) or that of Dynamic Names, Flags & Colours (DNFC,
+#     z_dnfc_la_plata_flag_definitions.txt, REPLACE_OR_CREATE:ARG), which hides la Argentina's. Carried over from Juan's
+#     local compatch «la Argentina x Dynamic Names, Flags & Colours», retired that day («de ultima se pone el mod arriba
+#     de Dynamic Flags y listo»). INJECT, not REPLACE: DNFC's list stays whole when it is loaded (its subject, theocracy,
+#     communist flags), and nothing here names a key of DNFC, so without it every key resolves. This file sorts after
+#     DNFC's file («zzz» > «z_d»).
+#     Same triggers, dates and priorities as the compatch, except the monarchy (21: over DNFC's 20). The game counts
+#     dictatorships and oligarchies as republics, so a republic entry at 50 covers them, as it did in the compatch.
+#     Rosas's Confederation flag (zzzzz_gg_rosas_confederation_flag.txt, 6000) stays above everything here.
+#     DNFC ALSO LISTS, AT 1600, the Peru-Bolivian Confederation's coat of arms (Otto_perubolivian_confederation), which
+#     no mod defines, whenever Peru is Bolivia's subject -- for Argentina, whatever Argentina is. The compatch left it out;
+#     an INJECT cannot remove it, so the entries at 1601-1607 repeat this list under that same condition (written out,
+#     not DNFC's scripted trigger, which does not exist without DNFC). Without DNFC they pick the same flags as the lists
+#     would. With DNFC, under that condition a theocracy flies la Argentina's theocratic flag and a communist Argentina
+#     the DEFAULT communist template instead of DNFC's own, and an Argentina that is a subject (not of Spain or the USA)
+#     still gets DNFC's undefined entry, as with DNFC alone.
+#     Players without DNFC now see these period flags too, where la Argentina's list alone went by government: the
+#     federal flag until Caseros, the celeste with the sun of Parana to 1862, la Argentina's republic from then on, the
+#     base game's crowned flag for a monarchy and its dark blue of 1829 for the dictatorships from 1930.
+# ES: LAS BANDERAS DE LA ARGENTINA POR PERIODO, INYECTADAS sobre la lista ARG que quede en el playset: la de la Argentina o
+#     la de DNFC, que esconde las de la Argentina. Vienen del compatch local de Juan, retirado el 25/9/2026. INJECT: la lista
+#     de DNFC queda entera y nada nombra una clave de DNFC. Mismos triggers, fechas y prioridades que el compatch, salvo la
+#     monarquia (21, sobre el 20 de DNFC). La bandera de la Confederacion de Rosas (6000) sigue por encima de todo.
+#     DNFC ADEMAS PONE EN 1600 el escudo de la Confederacion Peru-Boliviana, que ningun mod define, cuando el Peru es
+#     sujeto de Bolivia: un INJECT no lo puede sacar, asi que las entradas 1601-1607 repiten esta lista bajo esa condicion
+#     (escrita, sin el trigger de DNFC); sin DNFC eligen lo mismo que las listas. Con DNFC y esa condicion, una Argentina
+#     sujeta (no de Espana ni de EE.UU.) sigue con la entrada rota de DNFC, como con DNFC solo. Los jugadores sin DNFC ahora tambien
+#     ven estas banderas por periodo, donde la lista de la Argentina iba por gobierno.
+# -------------------------------------------------------------------------------------------------
+
+INJECT:ARG = {
+	# EN/ES: a monarchy, absolute or not: the base game's crown and laurels / una monarquia: corona y laureles
+	flag_definition = {
+		coa = gg_flag_arg_crowned
+		subject_canton = gg_flag_arg_crowned
+		priority = 21
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			OR = {
+				coa_def_monarchy_flag_trigger = yes
+				coa_def_absolute_monarchy_flag_trigger = yes
+			}
+		}
+	}
+	# EN/ES: until Caseros (3/2/1852): the federal flag of Rosas's Confederation / hasta Caseros: la federal
+	flag_definition = {
+		coa = gg_flag_argentine_confederation
+		subject_canton = gg_flag_argentine_confederation
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date < 1852.2.3
+		}
+	}
+	# EN/ES: 1852-1861, the Parana Confederation: celeste and white with the sun / la Confederacion de Parana
+	flag_definition = {
+		coa = gg_flag_arg_celeste_sun
+		subject_canton = gg_flag_arg_celeste_sun
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1852.2.3
+			game_date < 1862.1.1
+		}
+	}
+	# EN/ES: 1862-1879, national organisation: la Argentina's republic / organizacion nacional: la de la Argentina
+	flag_definition = {
+		coa = gg_flag_arg_republic
+		subject_canton = gg_flag_arg_republic
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1862.1.1
+			game_date < 1880.1.1
+		}
+	}
+	# EN/ES: from 1880: ARG_republic, whichever mod defines it last (DNFC's or la Argentina's) / desde 1880: ARG_republic
+	flag_definition = {
+		coa = ARG_republic
+		subject_canton = ARG_republic
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1880.1.1
+		}
+	}
+	# EN/ES: dictatorships from the 1930 coup (6/9/1930): the base game's dark blue of 1829 / dictaduras desde 1930
+	flag_definition = {
+		coa = gg_flag_arg_military_1829
+		subject_canton = gg_flag_arg_military_1829
+		priority = 55
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_dictatorship_flag_trigger = yes
+			game_date >= 1930.9.6
+		}
+	}
+	# EN/ES: ensigns when Spain or the USA is the overlord (base game) / pabellones con Espana o EE.UU. de soberano
+	flag_definition = {
+		coa = ARG_subject_SPA
+		priority = 60
+		trigger = {
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = ARG_subject_USA
+		priority = 61
+		trigger = {
+			coa_def_american_ensign_trigger = yes
+		}
+	}
+	# EN/ES: fascism: la Argentina's flag / fascismo: la de la Argentina
+	flag_definition = {
+		coa = gg_flag_arg_fascist
+		subject_canton = gg_flag_arg_fascist
+		priority = 900
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_fascist_flag_trigger = yes
+		}
+	}
+	# EN/ES: anarchy: la Argentina's, over the DEFAULT list's anarchy (2000) / anarquia: la de la Argentina, sobre la del DEFAULT
+	flag_definition = {
+		coa = gg_flag_arg_anarchist
+		subject_canton = gg_flag_arg_anarchist
+		priority = 5000
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_anarchy_flag_trigger = yes
+		}
+	}
+
+	# EN/ES: the same flags while Peru is Bolivia's subject, over DNFC's undefined Peru-Bolivian entry (1600)
+	#     / las mismas mientras el Peru sea sujeto de Bolivia, sobre la entrada peru-boliviana de DNFC
+	flag_definition = {
+		coa = gg_flag_arg_crowned
+		subject_canton = gg_flag_arg_crowned
+		priority = 1602
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			OR = {
+				coa_def_monarchy_flag_trigger = yes
+				coa_def_absolute_monarchy_flag_trigger = yes
+			}
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_argentine_confederation
+		subject_canton = gg_flag_argentine_confederation
+		priority = 1603
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_republic_flag_trigger = yes
+			game_date < 1852.2.3
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_arg_celeste_sun
+		subject_canton = gg_flag_arg_celeste_sun
+		priority = 1603
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1852.2.3
+			game_date < 1862.1.1
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_arg_republic
+		subject_canton = gg_flag_arg_republic
+		priority = 1603
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1862.1.1
+			game_date < 1880.1.1
+		}
+	}
+	flag_definition = {
+		coa = ARG_republic
+		subject_canton = ARG_republic
+		priority = 1603
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1880.1.1
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_arg_military_1829
+		subject_canton = gg_flag_arg_military_1829
+		priority = 1604
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_dictatorship_flag_trigger = yes
+			game_date >= 1930.9.6
+		}
+	}
+	flag_definition = {
+		coa = ARG_subject_SPA
+		priority = 1605
+		trigger = {
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOT = { coa_def_communist_flag_trigger = yes }
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = ARG_subject_USA
+		priority = 1606
+		trigger = {
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOT = { coa_def_communist_flag_trigger = yes }
+			coa_def_american_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_arg_fascist
+		subject_canton = gg_flag_arg_fascist
+		priority = 1607
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			NOR = { coa_def_communist_flag_trigger = yes coa_def_theocracy_flag_trigger = yes }
+			coa_def_fascist_flag_trigger = yes
+		}
+	}
+	# EN/ES: a theocracy: la Argentina's flag; a communist Argentina: the DEFAULT list's communist template. Without DNFC
+	#     these are the flags the lists underneath give; with DNFC, its own theocratic and communist flags would, but the
+	#     undefined Peru-Bolivian entry sits above them / teocracia: la de la Argentina; comunista: la plantilla del DEFAULT
+	flag_definition = {
+		coa = ARG_theocracy
+		subject_canton = ARG_theocracy
+		priority = 1608
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			coa_def_theocracy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = list "communist"
+		priority = 1609
+		trigger = {
+			exists = c:PEU
+			c:PEU ?= { exists = c:BOL is_subject_of = c:BOL }
+			coa_def_communist_flag_trigger = yes
+		}
+	}
+}

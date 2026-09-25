@@ -14,6 +14,21 @@ Used as the end icons of the war bar (`gfx/interface/progressbar/twospains_*_mar
   - License: public domain.
   - Changes: rasterised, resized, framed and converted to DDS.
 
+Also flown by a revolutionary Uruguay (`gfx/coat_of_arms/textured_emblems/te_gg_uru_*.dds`, keys `gg_flag_uru_colorado`,
+`gg_flag_uru_nacional_revolution`, `gg_flag_uru_nacional_1897_revolution`; carried over on 25/9/2026 from the retired
+local compatch «la Argentina x Dynamic Names, Flags & Colours»):
+
+- `te_gg_uru_partido_colorado.dds`
+  - Source: [Flag of Colorado Party (Uruguay).svg](https://commons.wikimedia.org/wiki/File:Flag_of_Colorado_Party_(Uruguay).svg), Wikimedia Commons.
+  - Author: vectorised by Froztbyte.
+  - License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+  - Changes: rasterised, resized to 768x512 and converted to DDS. This texture is shared under the same license.
+- `te_gg_uru_partido_nacional_revolution.dds` and `te_gg_uru_partido_nacional_1897_revolution.dds`
+  - Source: [Flag of the National Party (Uruguay).svg](https://commons.wikimedia.org/wiki/File:Flag_of_the_National_Party_(Uruguay).svg)
+    and [Flag of the National Party (Uruguay) (1897-1904).svg](https://commons.wikimedia.org/wiki/File:Flag_of_the_National_Party_(Uruguay)_(1897-1904).svg), Wikimedia Commons.
+  - License: public domain.
+  - Changes: rasterised, resized to 768x512, flipped upside down (as the Blancos flew it in revolution) and converted to DDS.
+
 ## First provincial flags under the confederation
 
 Flown by the province countries while the confederation stands
@@ -123,6 +138,10 @@ la Argentina», now merged into this mod.
   alternatives of `je_expanding_paraguay`: la Argentina's definitions with the five oriental states.
 - `common/character_templates/zz_gg_dna_argentina.txt`: five of la Argentina's Argentine templates, verbatim
   plus a portrait (`dna`) line.
+
+The flags by period of Argentina and Uruguay (`common/coat_of_arms/coat_of_arms/zz_gg_period_flags.txt`) point at
+la Argentina's `ARGENTINA.dds`, `ARG_FACISTA.dds` and `ARG_ANARQUISTA.dds`; the rest are verbatim copies of base game
+coats of arms under `gg_` keys. Nothing is taken from Dynamic Names, Flags & Colours.
 
 ## Community Mod Framework (Steam Workshop 3385002128)
 

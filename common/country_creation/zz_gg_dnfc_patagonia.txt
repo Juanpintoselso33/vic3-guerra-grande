@@ -1,0 +1,24 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- Dynamic Names, Flags & Colours (DNFC, optional) defines Free Patagonia (DPT) on the base
+#     game's STATE_PATAGONIA and STATE_ARAUCANIA, which la Argentina's map -- the one this mod ships -- deletes. Carried over
+#     from Juan's local compatch «la Argentina x Dynamic Names, Flags & Colours», retired that day.
+#     TRY_REPLACE: without DNFC there is no DPT and this does nothing (a REPLACE would fail, a REPLACE_OR_CREATE would create a
+#     country with no flag or name). The file sorts after DNFC's («zz_» > «dnfc_»).
+#     Its releasable is made of the states that replace those two on la Argentina's map.
+# ES: DNFC (opcional) define la Patagonia Libre (DPT) sobre STATE_PATAGONIA y STATE_ARAUCANIA del juego base, que el mapa
+#     de la Argentina -- el que trae este mod -- borra. Viene del compatch local de Juan, retirado el 25/9/2026. TRY_REPLACE: sin
+#     DNFC no hay DPT y esto no hace nada. El archivo va despues del de DNFC.
+#     Su liberable se arma con los estados que reemplazan a esos dos en el mapa de la Argentina.
+# -------------------------------------------------------------------------------------------------
+
+TRY_REPLACE:DPT = {
+	states = {
+		STATE_NEUQUEN
+		STATE_CHUBUT
+		STATE_SANTA_CRUZ_ARG
+		STATE_TIERRA_DEL_FUEGO
+		STATE_AYSEN
+		STATE_MAGALLANES
+	}
+	ai_will_do = { always = no }
+}

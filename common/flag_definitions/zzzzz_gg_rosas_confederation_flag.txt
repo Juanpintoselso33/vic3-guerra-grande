@@ -7,19 +7,20 @@
 #       - la Argentina (arg_flag_definitions.txt, REPLACE:ARG): by government -- republic, dictatorship, monarchy...
 #       - More Dynamic Names And Flags (more_dynamic_names.txt, INJECT_OR_CREATE:ARG): the same, by government.
 #       - Dynamic Names, Flags & Colours (z_dnfc_la_plata_flag_definitions.txt, REPLACE_OR_CREATE:ARG): by government.
-#       - Juan's local compatch la-argentina-x-dnfc (zzzz_arg_dnfc_flag_definitions.txt, REPLACE_OR_CREATE:ARG): by date --
-#         Rosas's federal flag until Caseros (1852.2.3), the celeste of Parana to 1862, and so on. Its REPLACE wipes every
-#         ARG list read before it, so this file has to sort after it: «zzzzz_» > «zzzz_a» (character 5, «z» > «_»).
+#       - this mod's own flags by period (zzz_gg_argentina_flags.txt, INJECT:ARG, 25/9/2026, from Juan's retired local
+#         compatch la-argentina-x-dnfc): the federal flag until Caseros (1852.2.3), the celeste of Parana to 1862, and so on.
+#     This file must sort after DNFC's REPLACE_OR_CREATE (z_dnfc_la_plata_flag_definitions.txt), which wipes every ARG list
+#     read before it: «zzzzz_» > «z_d». (It was named to sort after the compatch's zzzz_ file, retired on 25/9/2026.)
 #     INJECT, not REPLACE: the list of whichever mods are loaded stays whole, and this definition is added on top. With only
 #     Community Mod Framework and la Argentina it lands on la Argentina's list. Priority 6000 beats everything in those
-#     lists, the compatch's anarchist flag (5000) and the DEFAULT list (1000, 2000) included: while the trigger holds,
+#     lists, the anarchist flag of zzz_gg_argentina_flags.txt (5000) and the DEFAULT list (1000, 2000) included: while the trigger holds,
 #     Rosas's regime is the government, whatever the laws say.
 # ES: mientras siga en pie la Confederacion de Rosas, la Argentina lleva su bandera por encima de todas las del playset: la
-#     de la Argentina y la de More Dynamic Names (por gobierno), la de DNFC (por gobierno) y la del compatch local (por
-#     fecha: la federal hasta Caseros, la celeste de Parana hasta 1862...). El REPLACE del compatch borra toda lista ARG
-#     leida antes, asi que este archivo tiene que ordenarse despues: «zzzzz_» > «zzzz_a». INJECT, no REPLACE: queda la
-#     lista de los mods cargados y esta se suma arriba; con solo el Framework y la Argentina cae sobre la de la Argentina.
-#     Prioridad 6000: le gana a todo, incluida la anarquista del compatch (5000). Cuando Rosas muere, se exilia o una
+#     de la Argentina y la de More Dynamic Names (por gobierno), la de DNFC (por gobierno) y las del propio mod por fecha
+#     (zzz_gg_argentina_flags.txt, del compatch local retirado el 25/9/2026: la federal hasta Caseros, la celeste de Parana
+#     hasta 1862...). El REPLACE de DNFC borra toda lista ARG leida antes, asi que este archivo va despues: «zzzzz_» > «z_d».
+#     INJECT, no REPLACE: queda la lista de los mods cargados y esta se suma arriba; con solo el Framework y la Argentina
+#     cae sobre la de la Argentina. Prioridad 6000: le gana a todo, incluida la anarquista de zzz_gg_argentina_flags (5000). Cuando Rosas muere, se exilia o una
 #     constitucion reemplaza su regimen, deja de aplicar y vuelve la seleccion normal, sin nada que deshacer.
 # -------------------------------------------------------------------------------------------------
 INJECT:ARG = {

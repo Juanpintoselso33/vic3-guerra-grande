@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **Argentina's and Uruguay's flags by period, and the Uruguayan party flags, now in the mod:** they lived in a local
+  compatch between la Argentina and Dynamic Names, Flags & Colours (DNFC), retired today. Argentina flies the federal flag
+  until Caseros (1852), the celeste and white with the sun of the Paraná Confederation until 1862 and la Argentina's
+  republic until 1880; a monarchy flies the crowned flag and the dictatorships from the 1930 coup the dark blue of 1829.
+  Uruguay flies the 1830 flag until Oribe resigns (1838) and the national arms until the October Peace (1851); a
+  revolutionary Uruguay flies the Colorado or the (upside-down) National Party flag, Artigas's with the rural folk, and
+  the Treinta y Tres flag in a war of independence. Rosas's Confederation flag still comes first while his regime lasts.
+  The flags are added on top of whatever list the playset has, so DNFC's own flags stay when it is loaded, and nothing
+  depends on DNFC when it is not. With DNFC, its Free Patagonia gets a capital and states that exist on la Argentina's
+  map, and a monarchic Argentina is no longer called «Río de Chile». Games in progress get it at once.
+
 - **Rosas's Argentina keeps the Confederation's flag and name while his regime lasts:** as long as Rosas is alive and
   in power -- holding the sum of public power after «the Pact without a Constitution», or never overthrown (his victory
   in the Pact war included) and with no constitution replacing his regime -- Argentina flies the Confederation flag

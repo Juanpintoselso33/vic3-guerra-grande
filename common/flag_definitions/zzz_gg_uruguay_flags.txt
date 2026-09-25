@@ -1,0 +1,243 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: THE DEFENSA'S FLAG IS A WARTIME FLAG, NOT URUGUAY'S FLAG.
+#     Playtest 2026-09-19: "when the war ends Uruguay is left with the Defensa's flag, it has to go
+#     back to normal". It did not go back because the Defensa's coat of arms was keyed URU in
+#     common/coat_of_arms/, which overrides Uruguay's arms for the entire game -- there is no end
+#     date on a coat of arms. Worse in the other branch: a Cerrito that won the war and took the URU
+#     tag ended up flying the flag of the government it had just beaten.
+#     A flag_definition is the right tool: it carries a trigger, so the flag is conditional and the
+#     vanilla arms stay untouched underneath. Two conditions, both needed:
+#       - the country is actually the Defensa government (the Cerrito never gets this flag), and
+#       - the war is still open (gg_peace_settled is the marker every ending sets, including the
+#         one the closing dispatch writes when a third country takes the war away from both).
+#     When either stops being true the definition stops applying and vanilla's URU flag returns, in
+#     the same frame, with no effect to call and nothing to remember to undo.
+# ES: LA BANDERA DE LA DEFENSA ES UNA BANDERA DE GUERRA, NO LA DEL URUGUAY.
+#     Prueba en partida 19/9/2026: "cuando termina la guerra Uruguay queda con la bandera de la
+#     Defensa, tiene que volver a lo normal". No volvia porque el escudo de la Defensa estaba con la
+#     clave URU en common/coat_of_arms/, que le pisa el escudo al Uruguay toda la partida: un escudo
+#     no tiene fecha de vencimiento. Peor en la otra rama: un Cerrito que ganaba la guerra y tomaba
+#     el tag URU terminaba con la bandera del gobierno que acababa de derrotar.
+#     Un flag_definition es la herramienta correcta: lleva trigger, asi que la bandera es
+#     condicional y el escudo de vanilla queda intacto abajo. Dos condiciones, las dos necesarias:
+#       - que el pais sea de verdad el gobierno de la Defensa (el Cerrito nunca lleva esta bandera), y
+#       - que la guerra siga abierta (gg_peace_settled es la marca que prende todo final, incluido
+#         el que escribe el despacho de cierre cuando un tercero les saca la guerra a los dos).
+#     Cuando cualquiera de las dos deja de ser cierta, la definicion deja de aplicar y vuelve la
+#     bandera de vanilla, en el mismo cuadro, sin ningun efecto que llamar ni nada que acordarse de
+#     deshacer.
+#
+#     SOURCE / FUENTE: "Flag of Uruguay (Rivera).svg", el archivo que ilustra el articulo "Gobierno
+#     de la Defensa" de Wikipedia con el epigrafe "Bandera de Uruguay usada por el Gobierno de la
+#     Defensa". La imagen bajada y convertida, no redibujada.
+# -------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- URUGUAY'S OWN FLAG DEFINITIONS, INJECTED on top of whichever URU list the playset ends up with:
+#     the base game's (y_gg_uruguay_base_flags.txt) or that of Dynamic Names, Flags & Colours (DNFC). INJECT, not REPLACE,
+#     so DNFC's list stays whole when it is loaded, and nothing here names a key of DNFC: without it every key resolves.
+#     This file sorts after DNFC's z_dnfc_brazil_flag_definitions.txt («zzz» > «z_d»).
+#     Besides the Defensa, the Pact province and the Cisplatina (moved here from zz_guerra_grande_flags.txt), the flags
+#     by period and the party flags of Juan's local compatch «la Argentina x Dynamic Names, Flags & Colours», retired
+#     on 25/9/2026 («de ultima se pone el mod arriba de Dynamic Flags y listo»). Its triggers and dates are kept; its
+#     priorities are raised where DNFC's list, now whole underneath, has entries the compatch had dropped (DNFC: republic
+#     10, dictatorship 15, monarchy 20, oligarchy 25): the game counts dictatorships and oligarchies as republics, so
+#     a republic entry at 50 covers them, as it did in the compatch.
+#     Accepted differences from the compatch, only with DNFC: after the October Peace (8/10/1851) an oligarchy, or a
+#     dictatorship outside 1876-1886 and before 1933, flies DNFC's own oligarchy or dictatorship flag, not DNFC's
+#     republic (URU_republic is a DNFC key: naming it would break every game without DNFC); DNFC's communist flags stay
+#     at DNFC's 1000 (the compatch raised them to 1500). The Treinta y Tres and Artigas flags are now the real images
+#     the mod already had (gg_provincia_oriental, gg_flag_prov_entre_rios), not the compatch's drawings.
+# ES: LAS DEFINICIONES PROPIAS DEL URUGUAY, INYECTADAS sobre la lista URU que quede en el playset: la del juego base o la de
+#     DNFC. INJECT, no REPLACE, para que la de DNFC quede entera; nada nombra una clave de DNFC. Este archivo va despues
+#     del z_dnfc_brazil de DNFC. Ademas de la Defensa, la provincia del Pacto y la Cisplatina, las banderas por periodo y
+#     las de los partidos del compatch local, retirado el 25/9/2026. Mismos triggers y fechas; prioridades subidas donde
+#     la lista de DNFC tiene entradas que el compatch habia sacado (el juego cuenta dictaduras y oligarquias como
+#     republicas). Diferencias aceptadas, solo con DNFC: despues de la Paz de Octubre una oligarquia, o una dictadura fuera
+#     de 1876-1886 y antes de 1933, lleva la bandera de oligarquia o dictadura de DNFC y no su republicana; las comunistas
+#     de DNFC quedan en 1000. Los Treinta y Tres y Artigas son ahora las imagenes reales que el mod ya tenia.
+# -------------------------------------------------------------------------------------------------
+
+INJECT:URU = {
+	# EN/ES: 23/9/2026 (Juan) -- the Pact province flies the Treinta y Tres flag; a republic apart under
+	#     Buenos Aires keeps the Uruguayan flag; under the Empire, the Cisplatina's / la provincia del Pacto
+	#     lleva la de los Treinta y Tres; la republica aparte, la uruguaya de siempre; bajo el Imperio, la Cisplatina
+	flag_definition = {
+		coa = gg_provincia_oriental
+		priority = 150
+		trigger = { exists = c:ARG has_global_variable = gg_oriental_province scope:actor ?= { is_subject_of = c:ARG } }
+	}
+	flag_definition = {
+		coa = gg_cisplatina
+		priority = 150
+		# EN/ES: 25/9/2026 (AUD-CIS-PUPPET) -- the Cisplatine Province only, as its name (zz_guerra_grande_country_names.txt):
+		#     a protectorate of the Empire (gg_cisplatina.3, goal 3) is a Republic under protection, not the province
+		#     / solo la Provincia Cisplatina, como su nombre: un protectorado del Imperio es una Republica protegida
+		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ is_subject_type = subject_type_gg_cisplatine_province } }
+	}
+	flag_definition = {
+		coa = gg_defensa_government
+		priority = 100
+		trigger = {
+			scope:actor ?= {
+				has_variable = guerra_grande_defensa_government
+				NOT = { has_global_variable = gg_peace_settled }
+			}
+		}
+	}
+	# EN/ES: monarchies: the base game's designs (over DNFC's 20) / monarquias: los disenos del juego base
+	flag_definition = {
+		coa = gg_flag_uru_monarchy
+		subject_canton = gg_flag_uru_monarchy
+		priority = 22
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_uru_absolute_monarchy
+		subject_canton = gg_flag_uru_absolute_monarchy
+		priority = 23
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}
+	# EN/ES: until Oribe resigns (24/10/1838): the national flag of 1830 / hasta la renuncia de Oribe: la de 1830
+	flag_definition = {
+		coa = gg_flag_uru_1830
+		subject_canton = gg_flag_uru_1830
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date < 1838.10.24
+		}
+	}
+	# EN/ES: the Guerra Grande years, until the October Peace (8/10/1851): the URU coat of arms / los anos de la Guerra
+	#     Grande, hasta la Paz de Octubre: el escudo URU. From then on, the republic flag of the list underneath / desde ahi,
+	#     la republicana de la lista de abajo
+	flag_definition = {
+		coa = URU
+		subject_canton = URU
+		priority = 50
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_republic_flag_trigger = yes
+			game_date >= 1838.10.24
+			game_date < 1851.10.8
+		}
+	}
+	# EN/ES: dictatorship from Terra's coup (31/3/1933) / dictadura desde el golpe de Terra
+	flag_definition = {
+		coa = gg_flag_uru_terra
+		subject_canton = gg_flag_uru_terra
+		priority = 55
+		trigger = {
+			scope:actor ?= { is_subject = no }
+			coa_def_dictatorship_flag_trigger = yes
+			game_date >= 1933.3.31
+		}
+	}
+	# EN/ES: ensigns when Spain, Brazil (or Portugal) or the USA is the overlord: base game, over DNFC's subject flag (5)
+	#     / pabellones cuando el soberano es Espana, Brasil (o Portugal) o Estados Unidos
+	flag_definition = {
+		coa = URU_subject_SPA
+		priority = 60
+		trigger = {
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = URU_subject_BRZ
+		priority = 61
+		trigger = {
+			OR = {
+				coa_def_brazilian_ensign_trigger = yes
+				AND = {
+					exists = c:POR
+					scope:actor ?= { is_subject_of = c:POR }
+				}
+			}
+		}
+	}
+	flag_definition = {
+		coa = URU_subject_USA
+		priority = 62
+		trigger = {
+			coa_def_american_ensign_trigger = yes
+		}
+	}
+	# EN/ES: a subject Uruguay fighting for its independence flies the Treinta y Tres flag (Liberating Crusade)
+	#     / un Uruguay sujeto que pelea por su independencia lleva la de los Treinta y Tres (Cruzada Libertadora)
+	flag_definition = {
+		coa = gg_provincia_oriental
+		allow_revolutionary_indicator = no
+		priority = 70
+		trigger = {
+			coa_def_independence_war_trigger = yes
+		}
+	}
+	# EN/ES: federal / Artiguist revolution, rural folk without the landowners: Artigas's flag (Flag of Artigas.svg)
+	#     / revolucion federal o artiguista, el campesinado sin los terratenientes: la de Artigas
+	flag_definition = {
+		coa = gg_flag_prov_entre_rios
+		subject_canton = gg_flag_prov_entre_rios
+		allow_revolutionary_indicator = no
+		priority = 80
+		trigger = {
+			scope:actor ?= {
+				is_revolutionary = yes
+				any_interest_group = { is_interest_group_type = ig_rural_folk is_in_government = yes }
+				NOT = { any_interest_group = { is_interest_group_type = ig_landowners is_in_government = yes } }
+			}
+		}
+	}
+	# EN/ES: Colorado revolution, petty bourgeoisie or intelligentsia without the landowners / revolucion colorada
+	flag_definition = {
+		coa = gg_flag_uru_colorado
+		subject_canton = gg_flag_uru_colorado
+		allow_revolutionary_indicator = no
+		priority = 81
+		trigger = {
+			scope:actor ?= {
+				is_revolutionary = yes
+				OR = {
+					any_interest_group = { is_interest_group_type = ig_petty_bourgeoisie is_in_government = yes }
+					any_interest_group = { is_interest_group_type = ig_intelligentsia is_in_government = yes }
+				}
+				NOT = { any_interest_group = { is_interest_group_type = ig_landowners is_in_government = yes } }
+			}
+		}
+	}
+	# EN/ES: Blanco revolution, the landowners: the National Party flag upside down; Saravia's in 1897-1904
+	#     / revolucion blanca, los terratenientes: la del Partido Nacional invertida; la de Saravia en 1897-1904
+	flag_definition = {
+		coa = gg_flag_uru_nacional_1897_revolution
+		subject_canton = gg_flag_uru_nacional_1897_revolution
+		allow_revolutionary_indicator = no
+		priority = 82
+		trigger = {
+			scope:actor ?= {
+				is_revolutionary = yes
+				any_interest_group = { is_interest_group_type = ig_landowners is_in_government = yes }
+			}
+			game_date >= 1897.1.1
+			game_date < 1905.1.1
+		}
+	}
+	flag_definition = {
+		coa = gg_flag_uru_nacional_revolution
+		subject_canton = gg_flag_uru_nacional_revolution
+		allow_revolutionary_indicator = no
+		priority = 82
+		trigger = {
+			scope:actor ?= {
+				is_revolutionary = yes
+				any_interest_group = { is_interest_group_type = ig_landowners is_in_government = yes }
+			}
+			NOT = { AND = { game_date >= 1897.1.1 game_date < 1905.1.1 } }
+		}
+	}
+}

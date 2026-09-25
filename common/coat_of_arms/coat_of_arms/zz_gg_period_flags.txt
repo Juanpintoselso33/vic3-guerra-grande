@@ -1,0 +1,313 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- ARGENTINA'S AND URUGUAY'S FLAGS BY PERIOD, and the Uruguayan party flags. Carried over from
+#     Juan's local compatch «la Argentina x Dynamic Names, Flags & Colours», retired that day («de ultima se pone el mod
+#     arriba de Dynamic Flags y listo»). Used by common/flag_definitions/zzz_gg_argentina_flags.txt and
+#     zzz_gg_uruguay_flags.txt. Every design here is a verbatim copy of a base game coat of arms, or points at a texture of
+#     la Argentina (a required mod), under a gg_ key: Dynamic Names, Flags & Colours redefines ARG_republic, URU,
+#     URU_dictatorship and the rest under their own keys, so a copy under a new key is the only way to show the base
+#     game's or la Argentina's design with it loaded. Nothing here comes from Dynamic Names, Flags & Colours.
+#     Where the mod already had the real flag, the flag definitions reuse it instead of a drawn one: Rosas's Confederation
+#     (gg_flag_argentine_confederation), the Treinta y Tres (gg_provincia_oriental) and Artigas (gg_flag_prov_entre_rios).
+#     The three party flags are Wikimedia images; sources and licences in CREDITS.md.
+# ES: LAS BANDERAS DE LA ARGENTINA Y DEL URUGUAY POR PERIODO, y las de los partidos uruguayos. Vienen del compatch local de
+#     Juan «la Argentina x Dynamic Names, Flags & Colours», retirado ese dia. Cada diseno es copia textual de un escudo del
+#     juego base, o apunta a una textura de la Argentina (mod requerido), con clave gg_: DNFC redefine ARG_republic, URU,
+#     URU_dictatorship y demas con sus claves, asi que la copia con clave nueva es la unica forma de mostrar el diseno del
+#     juego base o de la Argentina con DNFC cargado. Nada sale de DNFC. Donde el mod ya tenia la bandera real, se reusa
+#     (la Confederacion de Rosas, los Treinta y Tres, Artigas). Las tres de los partidos son imagenes de Wikimedia (CREDITS.md).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: base game file variables, renamed so they cannot clash / variables del juego base, renombradas
+@gg_pf_third = @[1/3]
+@gg_pf_uru_canton_height = 0.556
+
+# EN: 1852-1861, the Parana Confederation: celeste and white with the sun. Base game ARG_republic, verbatim
+# ES: 1852-1861, la Confederacion de Parana: celeste y blanca con sol. ARG_republic del juego base, textual
+gg_flag_arg_celeste_sun = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.5 } }
+	}
+}
+
+# EN: 1862-1879, national organisation: la Argentina's republic (its ARG_republic, texture ARGENTINA.dds from la Argentina)
+# ES: 1862-1879, organizacion nacional: la republica de la Argentina (textura ARGENTINA.dds de la Argentina)
+gg_flag_arg_republic = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	textured_emblem = {
+	texture = "ARGENTINA.dds"
+	}
+}
+
+# EN: dictatorships from the 1930 coup: the dark-blue 1829 flag with the sun. Base game ARG_dictatorship, verbatim
+# ES: dictaduras desde el golpe de 1930: la azul oscuro de 1829 con sol. ARG_dictatorship del juego base, textual
+gg_flag_arg_military_1829 = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.5 } }
+	}
+}
+
+# EN: a monarchy, absolute or not: crown and laurels over the sun. Base game ARG_absolute_monarchy, verbatim
+# ES: una monarquia, absoluta o no: corona y laureles sobre el sol. ARG_absolute_monarchy del juego base, textual
+gg_flag_arg_crowned = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "white"
+	color2 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "blue_light"
+		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }
+	}
+
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.42 0.52 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.4 0.5 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.4 0.5 } position = { 0.5 0.5 } }
+	mask = { 2 }
+	}
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_crown_cut.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.19 } }
+	}
+	colored_emblem = {
+		texture = "ce_laurel.dds"
+		instance = { scale = { 0.70 0.70 } position = { 0.5 0.58 } }
+		color1 = "green"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_laurel_knot.dds"
+		instance = { scale = { 0.16 0.16 } position = { 0.5 0.78 } }
+		color1 = "yellow"
+		color2 = "yellow"
+	}
+}
+
+# EN: fascism: la Argentina's flag (its ARG_fascist, texture ARG_FACISTA.dds from la Argentina)
+# ES: fascismo: la bandera de la Argentina (textura ARG_FACISTA.dds de la Argentina)
+gg_flag_arg_fascist = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	textured_emblem = {
+	texture = "ARG_FACISTA.dds"
+	}
+}
+
+# EN: anarchy: la Argentina's flag (its ARG_anarchist, texture ARG_ANARQUISTA.dds from la Argentina)
+# ES: anarquia: la bandera de la Argentina (textura ARG_ANARQUISTA.dds de la Argentina)
+gg_flag_arg_anarchist = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	textured_emblem = {
+	texture = "ARG_ANARQUISTA.dds"
+	}
+	
+}
+
+# EN: the national flag of 1830 (square canton, geometric sun), until Oribe resigns. Base game URU, verbatim
+# ES: la bandera nacional de 1830 (canton cuadrado, sol geometrico), hasta la renuncia de Oribe. URU del juego base, textual
+gg_flag_uru_1830 = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_stripes_9.dds"
+		color1 = "white"
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { @gg_pf_third @gg_pf_uru_canton_height } position = { @[gg_pf_third/2] @[gg_pf_uru_canton_height/2] } }
+	}
+	colored_emblem = {
+		texture = "ce_sol_de_mayo.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { @[gg_pf_uru_canton_height*0.8] @[gg_pf_uru_canton_height*0.8] } position = { @[gg_pf_third/2] @[gg_pf_uru_canton_height/2] } }
+	}
+}
+
+# EN: dictatorship from Terra's coup (1933): blue saltire with the sun. Base game URU_dictatorship, verbatim
+# ES: dictadura desde el golpe de Terra (1933): aspa azul con sol. URU_dictatorship del juego base, textual
+gg_flag_uru_terra = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	colored_emblem = {
+		texture = "ce_saltire.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.43 0.43 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		color1 = "yellow_dark"
+		color2 = "yellow_dark"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}
+}
+
+# EN: a monarchy. Base game URU_monarchy, verbatim
+# ES: una monarquia. URU_monarchy del juego base, textual
+gg_flag_uru_monarchy = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_laurel.dds"
+		color1 = "green"
+		color2 = "orange"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.65 } }
+	}
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.27 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_uruguay.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.55 } }
+	}
+	colored_emblem = {
+		texture = "ce_ribbon.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.12 0.12 } position = { 0.5 0.84 } }
+	}
+}
+
+# EN: an absolute monarchy. Base game URU_absolute_monarchy, verbatim
+# ES: una monarquia absoluta. URU_absolute_monarchy del juego base, textual
+gg_flag_uru_absolute_monarchy = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_laurel.dds"
+		color1 = "green"
+		color2 = "orange"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.66 } }
+	}
+	colored_emblem = {
+		texture = "ce_inti.dds"
+		instance = { scale = { 0.25 0.25 } position = { 0.15 0.2 } }
+		instance = { scale = { 0.25 0.25 } position = { 0.85 0.2 } }
+		instance = { scale = { 0.25 0.25 } position = { 0.15 0.8 } }
+		instance = { scale = { 0.25 0.25 } position = { 0.85 0.8 } }
+		color1 = "yellow"
+		color2 = "yellow"
+	}
+	textured_emblem = {
+		texture = "te_coa_uruguay.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.56 } }
+	}
+	textured_emblem = {
+		texture = "te_crown_cut.dds"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.26 } }
+	}
+	colored_emblem = {
+		texture = "ce_ribbon.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.12 0.12 } position = { 0.5 0.85 } }
+	}
+}
+
+# EN: a Blanco revolution: the National Party flag upside down, as the Blancos flew it in revolution
+# ES: revolucion blanca: la bandera del Partido Nacional invertida, como la usaban los blancos en revolucion
+gg_flag_uru_nacional_revolution = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_uru_partido_nacional_revolution.dds"
+	}
+}
+
+# EN: a Blanco revolution in 1897-1904 (Saravia): the 1897-1904 National Party flag upside down
+# ES: revolucion blanca de 1897-1904 (Saravia): la del Partido Nacional de 1897-1904 invertida
+gg_flag_uru_nacional_1897_revolution = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_uru_partido_nacional_1897_revolution.dds"
+	}
+}
+
+# EN: a Colorado revolution: the Colorado Party flag
+# ES: revolucion colorada: la bandera del Partido Colorado
+gg_flag_uru_colorado = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_gg_uru_partido_colorado.dds"
+	}
+}
