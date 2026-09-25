@@ -20,21 +20,21 @@ liberal_party = {
 			triggered_desc = { # GG
 				desc = gg_party_unitario
 				trigger = {
-					c:ARG ?= THIS
+					OR = { c:ARG ?= THIS c:PLT ?= THIS } # GG: La Plata keeps Argentina's names / La Plata conserva los nombres argentinos
 					game_date < 1862.1.1
 				}
 			}
 			triggered_desc = { # GG
 				desc = gg_party_nacionalista
 				trigger = {
-					c:ARG ?= THIS
+					OR = { c:ARG ?= THIS c:PLT ?= THIS } # GG: La Plata keeps Argentina's names / La Plata conserva los nombres argentinos
 					game_date < 1889.1.1
 				}
 			}
 			triggered_desc = {
 				desc = party_national_civic_union
 				trigger = {
-					c:ARG ?= THIS
+					OR = { c:ARG ?= THIS c:PLT ?= THIS } # GG: La Plata keeps Argentina's names / La Plata conserva los nombres argentinos
 					game_date >= 1889.1.1
 				}
 			}

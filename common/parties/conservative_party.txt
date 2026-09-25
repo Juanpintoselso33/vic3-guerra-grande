@@ -81,14 +81,14 @@ conservative_party = {
 			triggered_desc = { # GG
 				desc = gg_party_federal
 				trigger = {
-					c:ARG ?= THIS
+					OR = { c:ARG ?= THIS c:PLT ?= THIS } # GG: La Plata keeps Argentina's names / La Plata conserva los nombres argentinos
 					game_date < 1874.1.1
 				}
 			}
 			triggered_desc = {
 				desc = party_national_autonomist
 				trigger = {
-					c:ARG ?= THIS
+					OR = { c:ARG ?= THIS c:PLT ?= THIS } # GG: La Plata keeps Argentina's names / La Plata conserva los nombres argentinos
 					game_date >= 1874.1.1
 				}
 			}

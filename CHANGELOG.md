@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **La Plata keeps Argentina's party names:** a La Plata formed from Argentina now has the same period names (Federal
+  and Unitarian parties, then Nationalist and Autonomist) instead of the game's generic ones.
 - **La Plata's formation panel shows the real size:** it listed 21 states and asked for 7; it now lists the 31 that
   can count and asks for 17 (7 required + 10 provinces or settled frontier). The exact rule is unchanged.
 
