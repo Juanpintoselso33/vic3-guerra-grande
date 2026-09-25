@@ -174,6 +174,32 @@ gg_ejercito_grande_full_mortgage = {
 	country_loan_interest_rate_add = 0.06
 }
 
+# EN: 25/9/2026 (Juan, AUD-EG-EMPTY) -- room in the barracks of the state that raises the Ejercito Grande and its
+#     contingents (gg_ejercito_grande_barracks_room, common/scripted_effects/zz_guerra_grande_argentina.txt). A battalion
+#     is a level of barracks and the army model caps them per state; without room the engine drops the new battalions.
+#     Permanent: a lower cap later would cut the levels and the battalions with them. Not a historical figure.
+# ES: lugar en los cuarteles del estado que levanta el Ejercito Grande y sus contingentes. Un batallon es un nivel de
+#     cuartel y el modelo de ejercito los limita por estado; sin lugar, el motor descarta los batallones nuevos.
+#     Permanente: un tope menor despues cortaria los niveles y los batallones con ellos. No es una cifra historica.
+gg_ejercito_grande_barracks = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	state_building_barrack_max_level_add = 40
+}
+
+# EN: 25/9/2026 (Juan, AUD-EG-EMPTY: the Ejercito Grande «with its historical strength») -- new battalions are born with
+#     no men and fill over months (common/scripted_effects/gg_troops.txt). The 18,000 of Entre Rios and the allied
+#     divisions were troops already under arms in 1851, not recruits: they are mustered fast, with the answer the mod
+#     already gives the Cerrito's army of 1843 (gg_cerrito_army_forming) and vanilla gives the countries born of an
+#     uprising and the Taiping: training rate +1000 and x2. Three months, the crossing of the Parana and Caseros.
+# ES: los batallones nuevos nacen sin hombres y se llenan en meses. Los 18.000 de Entre Rios y las divisiones aliadas eran
+#     tropa ya en armas en 1851, no reclutas: se reunen rapido, con la misma respuesta que el mod da al ejercito del
+#     Cerrito de 1843 y vanilla a los paises nacidos de un levantamiento. Tres meses.
+gg_ejercito_grande_forming = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	building_training_rate_add = 1000
+	building_training_rate_mult = 2
+}
+
 # EN: DESIGN COUNTERFACTUAL. The limited branch takes one 100,000-patacon instalment under the same
 #     6% rate; the smaller fiscal penalty is a game-balance representation, not a historical clause.
 # ES: CONTRAFACTUAL DE DISENO. La rama limitada toma una mensualidad de 100.000 patacones al mismo

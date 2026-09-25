@@ -68,25 +68,69 @@ gg_troops.10 = {
 					random_scope_front = { save_scope_as = gg_mob_front }
 				}
 			}
-			remove_variable = gg_mob_enemy
 		}
 		every_in_list = {
 			variable = gg_mob_queue
 			# EN: 24/9 -- the engine refuses to mobilize a formation with no units (headless sweep, gg_troops.txt:75)
 			# ES: el motor no moviliza una formacion sin unidades (barrido sin pantalla)
 			if = { limit = { is_army = yes is_mobilized = no num_units > 0 } fully_mobilize_army = yes }
-			# EN/ES: 23/9 -- only a mobilized army can go to a front; log the ones the engine refused
-			#     / solo un ejercito movilizado va al frente; se trazan los que el motor rechazo
+			# EN: 25/9/2026 (Juan, AUD-EG-EMPTY) -- one try was not enough: the Ejercito Grande and its two contingents
+			#     were refused on 22/11/1851 in every headless run since 23/9 and never tried again. What the engine
+			#     refuses goes back to the queue and is tried again every week, eight times (about two months, the
+			#     crossing of the Parana on 24/12/1851 and short of Caseros). The trace says why: no units yet, or
+			#     units the engine still would not mobilize.
+			# ES: un intento no alcanzaba: el Ejercito Grande y sus contingentes eran rechazados el 22/11/1851 en todas las
+			#     corridas y nunca se reintentaban. Lo rechazado vuelve a la cola y se reintenta cada semana, ocho veces
+			#     (unos dos meses, el cruce del Parana del 24/12/1851 y antes de Caseros). La traza dice por que.
 			if = {
 				limit = { is_mobilized = no }
-				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|not_mobilized|" # GG_TRAZA
+				if = {
+					limit = { num_units > 0 }
+					debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|not_mobilized|units" # GG_TRAZA
+				}
+				else = {
+					debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|not_mobilized|no_units" # GG_TRAZA
+				}
+				save_scope_as = gg_mob_this
+				root = { add_to_variable_list = { name = gg_mob_retry target = scope:gg_mob_this } }
 			}
 			else_if = {
 				limit = { exists = scope:gg_mob_front }
 				deploy_to_front = scope:gg_mob_front
 				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|deployed|" # GG_TRAZA
 			}
+			else = {
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|mobilized_no_front|" # GG_TRAZA
+			}
 		}
 		clear_variable_list = gg_mob_queue
+		if = {
+			limit = {
+				has_variable_list = gg_mob_retry
+				OR = {
+					NOT = { has_variable = gg_mob_tries }
+					var:gg_mob_tries < 8
+				}
+			}
+			if = { limit = { NOT = { has_variable = gg_mob_tries } } set_variable = { name = gg_mob_tries value = 0 } }
+			change_variable = { name = gg_mob_tries add = 1 }
+			every_in_list = {
+				variable = gg_mob_retry
+				save_scope_as = gg_mob_this
+				root = { add_to_variable_list = { name = gg_mob_queue target = scope:gg_mob_this } }
+			}
+			clear_variable_list = gg_mob_retry
+			set_variable = gg_mob_pending
+			trigger_event = { id = gg_troops.10 days = 7 }
+		}
+		else = {
+			if = {
+				limit = { has_variable_list = gg_mob_retry }
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|gave_up|" # GG_TRAZA
+				clear_variable_list = gg_mob_retry
+			}
+			if = { limit = { has_variable = gg_mob_tries } remove_variable = gg_mob_tries }
+			if = { limit = { has_variable = gg_mob_enemy } remove_variable = gg_mob_enemy }
+		}
 	}
 }

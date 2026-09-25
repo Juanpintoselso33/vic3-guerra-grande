@@ -1022,6 +1022,10 @@ gg_argentina_sign_montevideo_convention = {
 			}
 		}
 	}
+	# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- room in the barracks of Entre Rios and Rio Grande for the November army,
+	#     six months ahead; hidden, so the convention does not announce November's army / lugar en los cuarteles de Entre
+	#     Rios y Rio Grande para el ejercito de noviembre; oculto, para que la convencion no anuncie ese ejercito
+	hidden_effect = { gg_ejercito_grande_make_room = yes }
 	# EN: 23/9/2026 (audit R1) -- the siege is no longer an engine war, so the convention cannot join
 	#     Entre Rios and Brazil to it nor send the advance corps to its front: the Cerrito loses 20 of
 	#     endurance instead, and the two corps are raised and wait in their barracks.
@@ -1065,6 +1069,70 @@ gg_argentina_join_ejercito_grande_allies = {
 }
 
 # -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-EG-EMPTY) -- ROOM IN THE BARRACKS. A battalion is a level of barracks in the state it is
+#     raised in, and the army model caps those levels (la Argentina's local caudillos: 10 a state; national militia: 5;
+#     common/laws/arg_army_model.txt, 00_army_model.txt). The Ejercito Grande's 18 battalions and the Oriental division
+#     are raised in Entre Rios, whose barracks already hold Urquiza's army of the pronouncement, and the engine drops
+#     what does not fit without a line in error.log: in the headless runs of 24-25/9 the three formations of 21/11/1851
+#     were empty the next day (gg_troops.10: not_mobilized x3; before the num_units guard, «Scope formation cannot be
+#     mobilized» x3). A permanent +40 to the cap of the state that raises them (AUD-ERR-CUARTELES showed the cap cuts
+#     barracks: Entre Rios 22 -> 5). Given at the Montevideo convention, six months ahead, and again where they are raised.
+# ES: LUGAR EN LOS CUARTELES. Un batallon es un nivel de cuartel en el estado donde se levanta, y el modelo de ejercito
+#     limita esos niveles (caudillos locales: 10 por estado; milicia nacional: 5). Los 18 batallones del Ejercito Grande y
+#     la division oriental se levantan en Entre Rios, cuyos cuarteles ya tienen el ejercito del pronunciamiento, y el
+#     motor descarta lo que no entra sin una linea en error.log: en las corridas del 24-25/9 los tres ejercitos del
+#     21/11/1851 estaban vacios al dia siguiente. +40 permanentes al tope del estado que los levanta. Se da en la
+#     convencion de Montevideo, seis meses antes, y otra vez donde se levantan.
+# -------------------------------------------------------------------------------------------------
+# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- the owner musters them fast (gg_ejercito_grande_forming, three months). Country scope
+#     / el duenio los reune rapido. Scope de pais
+gg_ejercito_grande_muster = {
+	if = { limit = { has_modifier = gg_ejercito_grande_forming } remove_modifier = gg_ejercito_grande_forming }
+	add_modifier = { name = gg_ejercito_grande_forming months = 3 }
+}
+
+# EN/ES: state scope / scope de estado
+gg_ejercito_grande_barracks_room = {
+	if = {
+		limit = { NOT = { has_modifier = gg_ejercito_grande_barracks } }
+		add_modifier = { name = gg_ejercito_grande_barracks }
+	}
+}
+
+gg_ejercito_grande_make_room = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_ejercito_grande_make_room|" # GG_TRAZA
+	c:ENR ?= {
+		gg_select_formation_hq_state = yes
+		if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
+	}
+	c:BRZ ?= {
+		gg_ejercito_grande_brazil_recruit_state = yes
+		if = { limit = { exists = scope:gg_eg_recruit_state } scope:gg_eg_recruit_state = { gg_ejercito_grande_barracks_room = yes } }
+	}
+}
+
+# EN: Brazil's contingent is raised in Rio Grande do Sul, where Marques de Sousa's division formed, if Brazil holds it;
+#     otherwise at its HQ state (gg_select_formation_hq_state), so a Rio Grande lost to the Farrapos or anyone else does
+#     not leave the contingent empty. Saves scope:gg_eg_recruit_state, with room in its barracks. Brazil's scope.
+# ES: el contingente del Brasil se levanta en Rio Grande do Sul si es del Brasil; si no, en su cuartel, asi un Rio
+#     Grande perdido no deja el contingente vacio. Guarda scope:gg_eg_recruit_state, con lugar en sus cuarteles.
+gg_ejercito_grande_brazil_recruit_state = {
+	clear_saved_scope = gg_eg_recruit_state
+	if = {
+		limit = { any_scope_state = { state_region = s:STATE_RIO_GRANDE_DO_SUL } }
+		random_scope_state = {
+			limit = { state_region = s:STATE_RIO_GRANDE_DO_SUL }
+			save_scope_as = gg_eg_recruit_state
+		}
+	}
+	else = {
+		gg_select_formation_hq_state = yes
+		if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { save_scope_as = gg_eg_recruit_state } }
+	}
+	if = { limit = { exists = scope:gg_eg_recruit_state } scope:gg_eg_recruit_state = { gg_ejercito_grande_barracks_room = yes } }
+}
+
+# -------------------------------------------------------------------------------------------------
 # EN: THE ARMY OF 21 NOVEMBER. Eighteen game battalions make Urquiza's documented 18,000 men and
 #     are created only after the player chooses how to finance the crossing. Corrientes keeps its
 #     existing army: the convention names the 18,000 as Urquiza's contribution, not as a new total
@@ -1086,6 +1154,9 @@ gg_argentina_raise_ejercito_grande = {
 	}
 	gg_select_formation_hq_state = yes
 	clear_saved_scope = gg_ejercito_grande_army
+	# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- the barracks of the state it is raised in have room for it (a save that signed
+	#     the convention before this fix) / los cuarteles del estado donde se levanta tienen lugar
+	if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
 	# EN: Without an owned state there is no valid HQ; skip this formation.
 	# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 	if = {
@@ -1112,7 +1183,7 @@ gg_argentina_raise_ejercito_grande = {
 	}
 	# EN/ES: 23/9 -- mobilized the next day: a just-created army cannot be (gg_mobilize_next_day)
 	#     / se moviliza al dia siguiente: un ejercito recien creado no se puede movilizar
-	if = { limit = { exists = scope:gg_ejercito_grande_army } gg_mobilize_next_day = { ARMY = scope:gg_ejercito_grande_army ENEMY = c:ARG } }
+	if = { limit = { exists = scope:gg_ejercito_grande_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_ejercito_grande_army ENEMY = c:ARG } }
 	# EN/ES: 24/9/2026 (Juan, point 2) -- the emigres march with it (gg_pact_sides.txt) / los emigrados marchan con el.
 	#     24/9 (Juan): if they already joined at the war start (gg_argentina.89) this only puts Mitre and Paz in the
 	#     army / si ya se sumaron al empezar la guerra, esto solo pone a Mitre y a Paz en el ejercito
@@ -1131,20 +1202,24 @@ gg_argentina_complete_foreign_contingents = {
 	c:BRZ ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_brazilian_grand_army
+		# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- raised in Rio Grande if Brazil holds it, otherwise at its HQ, with room in
+		#     the barracks; three battalions for the convention's 3,000 (art. IV) / en Rio Grande si es del Brasil, si no
+		#     en su cuartel, con lugar; tres batallones por los 3.000 de la convencion
+		gg_ejercito_grande_brazil_recruit_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 		if = {
-			limit = { exists = scope:gg_formation_hq_state }
+			limit = { exists = scope:gg_formation_hq_state exists = scope:gg_eg_recruit_state }
 			create_military_formation = {
 				type = army
 				hq_region = scope:gg_formation_hq_state.region
 				name = gg_arg_brazilian_grand_army_contingent
 				save_scope_as = gg_brazilian_grand_army
-				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
-				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_eg_recruit_state.state_region count = 2 }
+				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_eg_recruit_state.state_region count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_brazilian_grand_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_brazilian_grand_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_grand_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_brazilian_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
@@ -1170,6 +1245,9 @@ gg_argentina_complete_foreign_contingents = {
 		c:ENR ?= {
 			gg_select_formation_hq_state = yes
 			clear_saved_scope = gg_oriental_grand_army
+			# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- room in the barracks; three battalions for the documented 2,500
+			#     / lugar en los cuarteles; tres batallones por los 2.500 documentados
+			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {
@@ -1179,11 +1257,12 @@ gg_argentina_complete_foreign_contingents = {
 					hq_region = scope:gg_formation_hq_state.region
 					name = gg_arg_oriental_grand_army_contingent
 					save_scope_as = gg_oriental_grand_army
+					combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 1 }
 					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
 					combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
 				}
 			}
-			if = { limit = { exists = scope:gg_oriental_grand_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_grand_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+			if = { limit = { exists = scope:gg_oriental_grand_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_grand_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_oriental_grand_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		}
 	}
 }
@@ -1197,19 +1276,20 @@ gg_argentina_limited_foreign_contingents = {
 	c:BRZ ?= {
 		gg_select_formation_hq_state = yes
 		clear_saved_scope = gg_brazilian_limited_army
+		gg_ejercito_grande_brazil_recruit_state = yes # EN/ES: 25/9 (AUD-EG-EMPTY) -- as the full terms / como los terminos completos
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 		if = {
-			limit = { exists = scope:gg_formation_hq_state }
+			limit = { exists = scope:gg_formation_hq_state exists = scope:gg_eg_recruit_state }
 			create_military_formation = {
 				type = army
 				hq_region = scope:gg_formation_hq_state.region
 				name = gg_arg_brazilian_limited_contingent
 				save_scope_as = gg_brazilian_limited_army
-				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = s:STATE_RIO_GRANDE_DO_SUL count = 1 }
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_eg_recruit_state.state_region count = 1 }
 			}
 		}
-		if = { limit = { exists = scope:gg_brazilian_limited_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_brazilian_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+		if = { limit = { exists = scope:gg_brazilian_limited_army } gg_commander_marques_de_sousa = { ARMY = scope:gg_brazilian_limited_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_brazilian_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 	}
 	# EN/ES: 23/9 -- the Oriental division marches as Entre Rios's contingent, raised on its ground
 	#     / la division oriental marcha como contingente de Entre Rios, levantada en su suelo
@@ -1220,6 +1300,7 @@ gg_argentina_limited_foreign_contingents = {
 		c:ENR ?= {
 			gg_select_formation_hq_state = yes
 			clear_saved_scope = gg_oriental_limited_army
+			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } } # EN/ES: 25/9 (AUD-EG-EMPTY)
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {
@@ -1232,7 +1313,7 @@ gg_argentina_limited_foreign_contingents = {
 					combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 1 }
 				}
 			}
-			if = { limit = { exists = scope:gg_oriental_limited_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_limited_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
+			if = { limit = { exists = scope:gg_oriental_limited_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_limited_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_oriental_limited_army ENEMY = c:ARG } } # EN/ES: 23/9 -- the next day / al dia siguiente
 		}
 	}
 }
@@ -1267,6 +1348,7 @@ gg_oriental_division_march = {
 		c:ENR = {
 			gg_select_formation_hq_state = yes
 			clear_saved_scope = gg_oriental_pledged_army
+			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } } # EN/ES: 25/9 (AUD-EG-EMPTY)
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {
@@ -1280,7 +1362,7 @@ gg_oriental_division_march = {
 					combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_formation_hq_state.state_region count = 1 }
 				}
 			}
-			if = { limit = { exists = scope:gg_oriental_pledged_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_pledged_army } gg_mobilize_next_day = { ARMY = scope:gg_oriental_pledged_army ENEMY = c:ARG } }
+			if = { limit = { exists = scope:gg_oriental_pledged_army } gg_commander_cesar_diaz = { ARMY = scope:gg_oriental_pledged_army } gg_ejercito_grande_muster = yes gg_mobilize_next_day = { ARMY = scope:gg_oriental_pledged_army ENEMY = c:ARG } }
 		}
 	}
 }
