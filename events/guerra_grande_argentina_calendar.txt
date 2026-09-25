@@ -580,12 +580,23 @@ gg_argentina_cal.20 = {
 	hidden = yes
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_cal.20|"  hidden_effect = {
 		if = {
+			# EN: 25/9/2026 (Juan, AUD-ALCARAZ-CAL) -- from the calendar and the real situation, not from a war that AI games
+			#     no longer have: Corrientes goes back to Rosas in 1839 and in August 1846 there was no war with it in 0 of 69
+			#     headless traces, so Alcaraz never came and Urquiza's discontent always carried its +7. Alcaraz is Urquiza's
+			#     treaty: it comes whenever Entre Rios is still Argentine ground. With a war with Corrientes it is the treaty of
+			#     peace of 1846 (gg_alcaraz_at_war, set BEFORE the event, which reads it); without one it is its standing terms:
+			#     Corrientes excused from the war in Uruguay and a constituent congress (counterfactual context, historical terms).
+			# ES: desde el calendario y la situacion real, no desde una guerra que la IA ya no tiene: Corrientes vuelve a Rosas
+			#     en 1839 y en agosto de 1846 no habia guerra con ella en 0 de 69 trazas. Alcaraz es el tratado de Urquiza: llega
+			#     si Entre Rios sigue siendo suelo argentino. Con guerra, la paz de 1846; sin ella, sus terminos permanentes.
 			limit = {
 				NOT = { has_global_variable = gg_arg_cal_done_20 }
 				exists = c:ARG
-				exists = c:CRR
-				c:ARG = { has_war_with = c:CRR }
 				exists = s:STATE_ENTRE_RIOS.region_state:ARG
+			}
+			if = {
+				limit = { exists = c:CRR c:ARG = { has_war_with = c:CRR } }
+				set_global_variable = gg_alcaraz_at_war
 			}
 			c:ARG = { trigger_event = { id = gg_argentina.69 days = 0 popup = yes } }
 		}
@@ -796,9 +807,15 @@ gg_argentina_cal.26 = {
 					gg_entre_rios_alcaraz_loyal = yes
 				}
 				exists = c:ARG
-				exists = c:CRR
 				has_global_variable = gg_alcaraz_rejected
-				c:ARG = { has_war_with = c:CRR }
+			}
+			# EN: 25/9/2026 (Juan, AUD-ALCARAZ-CAL) -- Vences from the calendar too: with no war with Corrientes Rosas's order
+			#     has no front, and the refused terms of Alcaraz are what is left on the table (gg_vences_at_war, set BEFORE).
+			# ES: Vences tambien desde el calendario: sin guerra con Corrientes la orden no tiene frente, y lo que queda sobre
+			#     la mesa son los terminos rechazados de Alcaraz.
+			if = {
+				limit = { exists = c:CRR c:ARG = { has_war_with = c:CRR } }
+				set_global_variable = gg_vences_at_war
 			}
 			if = {
 				limit = { exists = s:STATE_ENTRE_RIOS.region_state:ARG }

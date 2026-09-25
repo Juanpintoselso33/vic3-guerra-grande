@@ -195,12 +195,8 @@ gg_caseros.5 = {
 		first_valid = {
 			triggered_desc = {
 				desc = gg_caseros.5.d_exile
-				trigger = {
-					OR = {
-						global_var:gg_caseros_choice ?= 1
-						global_var:gg_caseros_choice ?= 3
-					}
-				}
+				# EN/ES: 25/9/2026 (AUD-ROSAS-EXILE) -- every victory of Urquiza exiles Rosas / toda victoria de Urquiza exilia a Rosas
+				trigger = { has_global_variable = gg_rosas_exiled }
 			}
 			triggered_desc = { desc = gg_caseros.5.d }
 		}
@@ -268,6 +264,77 @@ gg_caseros.7 = {
 		if = {
 			limit = { has_global_variable = gg_pact_war_enforced_rosas }
 			remove_global_variable = gg_pact_war_enforced_rosas
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-PACT-TILT) -- THE WAR OF THE PACT LEANS TO URQUIZA, AS IT DID. Under the dynamic Pact rule the
+#     engine decides the war with Entre Rios; in the headless traces Rosas won half of them, every one before the Ejercito
+#     Grande existed (June-November 1851), by pushing a war goal into Entre Rios that history never saw him attempt. Two
+#     monthly pressures, on the war's own support (the engine still fights and still decides; nothing here ends the war):
+#       - while the war lasts, Buenos Aires stays on the defensive: Rosas "took no measure prudence advised", and only in
+#         mid-November 1851 did Pacheco organise a few militia regiments; the war of 1851 was fought in the Banda
+#         Oriental, never in Entre Rios. Entre Rios gains war support each month;
+#       - once the Ejercito Grande is raised (gg_ejercito_grande_created, 21/11/1851), Buenos Aires's ranks fall apart:
+#         Echague's Santa Fe troops rose, Mansilla's Rosario troops went over to Urquiza, Pacheco resigned the command on
+#         31/1-1/2/1852. Buenos Aires loses war support each month.
+#     Not certain: a Rosas who beats Entre Rios fast still wins, and the Aquino regiment deserted the other way.
+#     The Pact lab (tools/lab_balance/pacto.py) reads both numbers from this event. DESIGN: the monthly amounts are game
+#     scale, tuned by the lab to Juan's target (Urquiza wins about 65-75 % of the wars that happen).
+# ES: LA GUERRA DEL PACTO SE INCLINA HACIA URQUIZA, COMO FUE. Con la regla dinamica el motor decide la guerra con Entre
+#     Rios; en las trazas Rosas gano la mitad, todas antes de que existiera el Ejercito Grande, empujando un objetivo sobre
+#     Entre Rios que en la historia nunca intento. Dos presiones mensuales sobre el apoyo a la guerra (el motor sigue
+#     peleando y decidiendo): mientras dure la guerra Buenos Aires se queda a la defensiva y Entre Rios gana apoyo; con el
+#     Ejercito Grande en pie, las filas de Buenos Aires se desgranan (Santa Fe, Rosario, Pacheco) y pierde apoyo. No es
+#     seguro: un Rosas que bate rapido a Entre Rios sigue ganando. DISENO: los montos son escala de juego.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1850-1852 — Urquiza y Caseros» [D];
+#     es.wikipedia «Batalla de Caseros» (Santa Fe and Rosario troops rise and go over; Pacheco resigns); «Aniversario de la
+#     Batalla de Caseros», Municipalidad de Valle Maria (2/2/2021: «Rosas no tomaba ninguna medida... Recien a mediados de
+#     noviembre de 1851... Pacheco... organizo algunos regimientos de milicias»; the Aquino regiment, 10/1/1852);
+#     La Gazeta Federal, «Batalla de Caseros» (the Rosista forces «en una actitud pasiva a la espera del ataque final»).
+# Hidden, on Argentina; scheduled by gg_argentina.3.b/.c when the war of the Pact opens; reschedules itself monthly.
+# -------------------------------------------------------------------------------------------------
+gg_caseros.8 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8|" # GG_TRAZA
+		if = {
+			limit = {
+				gg_pact_dynamic = yes
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_pact_settled }
+				exists = c:ENR
+				game_date < 1855.1.1
+			}
+			if = {
+				limit = { has_war_with = c:ENR }
+				# EN/ES: Buenos Aires stays on the defensive / Buenos Aires se queda a la defensiva
+				every_scope_war = {
+					limit = {
+						is_war_participant = c:ENR
+						is_war_participant = c:ARG
+					}
+					add_war_war_support = { target = c:ENR value = 30 }
+				}
+				# EN/ES: the Ejercito Grande marches and Buenos Aires's ranks fall apart / marcha el Ejercito Grande y las filas se desgranan
+				if = {
+					limit = { has_global_variable = gg_ejercito_grande_created }
+					every_scope_war = {
+						limit = {
+							is_war_participant = c:ENR
+							is_war_participant = c:ARG
+						}
+						add_war_war_support = { target = c:ARG value = -40 }
+					}
+				}
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8| TILT=yes " # GG_TRAZA
+			}
+			trigger_event = { id = gg_caseros.8 days = 30 }
 		}
 	}
 }

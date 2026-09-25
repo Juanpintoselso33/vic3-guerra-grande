@@ -11,6 +11,24 @@
   even if Rosas had won). When Rosas dies, goes into exile or a constitution takes over, the usual flag and name come
   back on their own. Games in progress get it at once.
 
+- **Caseros becomes the likeliest end of the Federal Pact under the dynamic rules:** the balance lab gave the three
+  endings a third each (negotiated confederation 33 %, Urquiza 33 %, Rosas 34 %). Four changes, decided by Juan:
+  - **Rosas rarely accepts the Pronouncement:** the AI's weight for accepting Entre Ríos's reassumption drops from 20 to
+    10, and to nothing when Urquiza's discontent is high (8 or more). Historically he called it a rebellion.
+  - **The war of the Pact leans to Urquiza, as it did:** while it lasts, Buenos Aires stays on the defensive and Entre
+    Ríos gains +30 war support a month; once the Ejército Grande is raised, Buenos Aires's ranks fall apart (Santa Fe
+    and Rosario going over, Pacheco resigning) and it loses 40 a month. The engine still fights and decides the war: a
+    Rosas who beats Entre Ríos fast can still win. The option that answers the Pronouncement with war says so.
+  - **Rosas always goes into exile when Urquiza wins:** not only after giving battle or holding the city at Caseros.
+    When the war ended earlier he stayed deposed in the country. He dies on his date, 14/3/1877, in exile.
+  - **Alcaraz and Vences come in AI games:** both asked for a war with Corrientes that AI games no longer have (Corrientes
+    goes back to Rosas in 1839), so Urquiza's grievances never had a chance to be settled. Now the Treaty of Alcaraz
+    (August 1846) comes whenever Entre Ríos is still Argentine ground, and Vences (November 1847) whenever Alcaraz was
+    refused; without a war with Corrientes they bring Alcaraz's standing terms (Corrientes excused from the war in
+    Uruguay, a constituent congress) and their own texts.
+  - Lab (4000 stories, AI, dynamic rules): negotiated 36 %, Urquiza (Caseros) 43 %, Rosas 21 %; Urquiza wins about
+    two Pact wars in three. To be measured in headless runs.
+
 ## 0.1.7-alpha — 25/9/2026
 
 - **The Ejército Grande marches with its men:** the army Urquiza raises in November 1851 and the Brazilian and Oriental
@@ -46,7 +64,7 @@
   country that holds Buenos Aires as soon as Rosas no longer rules it (his term ends, he dies or he falls). On the
   Caseros path he still marches with the Ejército Grande, now coming from Chile as he did in 1851; there is only ever
   one Mitre. Saved games: from the next monthly pulse, if no Mitre was ever born.
-||||||| parent of 6aced6f (AUD-ROSAS-OCT: Rosas cannot reinforce the Cerrito once Urquiza has broken with him; CHANGELOG)
+
 
 - **A Brazilian victory in the Cisplatine war makes the Banda Oriental the Provincia Cisplatina:** of Brazil's three
   aims, «enforce the Convention» freed the Republic and «under the Empire's hand» made it a protectorate. Now both

@@ -146,22 +146,28 @@ gg_pact_resolve = {
 			remove_global_variable = gg_president_railroad
 			gg_ruler_set = { TEMPLATE = ARG_Justo_Jose_de_Urquiza }
 			gg_rosista_client_release = yes # EN/ES: 23/9 (AUD-RULES-CLIENT) -- Rosas fell / cayo Rosas
-			# EN: Caseros (a) or (c) -- Rosas falls and goes into exile (historically he embarked on
-			#     HMS Centaur for England, February 1852). The Confederation remains.
-			# ES: Caseros (a) o (c) -- cae Rosas y se exilia (se embarco en el Centaur rumbo a
-			#     Inglaterra). La Confederacion queda.
-			if = {
-				limit = {
-					OR = {
-						global_var:gg_caseros_choice ?= 1
-						global_var:gg_caseros_choice ?= 3
-					}
-				}
+			# EN: 25/9/2026 (Juan, AUD-ROSAS-EXILE) -- EVERY victory of Urquiza sends Rosas into exile, not only Caseros (a)
+			#     or (c): when the engine ended the war before 3/2/1852 (a capitulation, a war goal enforced, a backdown) he
+			#     stayed deposed in the country, which history never had. He signed his resignation, took refuge with the
+			#     British chargé Robert Gore and sailed for England (Locust -> Centaur -> Conflict, Plymouth 25/4/1852); he
+			#     died in Southampton on 14/3/1877, which gg_historical_lives keeps: the exile pool is searched on his date.
+			#     The exile pool is the mod's exile (Thiebaut, Garibaldi): nothing seats a man from it but gg_ruler_set, and
+			#     the seat keeper (gg_rosas_keeps_the_seat) only asks for a Rosas alive inside Argentina.
+			# ES: TODA victoria de Urquiza manda a Rosas al exilio, no solo Caseros (a) o (c): cuando el motor terminaba la
+			#     guerra antes del 3/2/1852 quedaba depuesto en el pais, cosa que la historia nunca tuvo. Firmo la renuncia,
+			#     se refugio con el encargado britanico Gore y se embarco para Inglaterra; murio en Southampton el 14/3/1877,
+			#     lo que conserva gg_historical_lives (busca tambien en el exilio en su fecha).
+			# SOURCE / FUENTE: SOURCES_peace.md, «Caseros y el exilio de Rosas» (Gore to Palmerston, 9/2/1852; Hansard,
+			#     30/4/1852); es.wikipedia «Batalla de Caseros» (renuncia y exilio en el Reino Unido).
+			every_country = {
+				limit = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
 				random_scope_character = {
-					limit = { has_template = ARG_Juan_Manuel_de_Rosas }
+					limit = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes }
 					exile_character_with_role_cleanup = yes
 				}
 			}
+			set_global_variable = gg_rosas_exiled
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_resolve| ROSAS_EXILED=yes " # GG_TRAZA
 			trigger_event = { id = gg_argentina.83 days = 0 popup = yes }
 			gg_caseros_notify_urquiza = { EVENT = gg_caseros.5 }
 		}

@@ -1388,21 +1388,25 @@ gg_oriental_division_march = {
 # -------------------------------------------------------------------------------------------------
 gg_argentina_accept_alcaraz = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_accept_alcaraz|" # GG_TRAZA
+	# EN/ES: 25/9/2026 (AUD-ALCARAZ-CAL) -- also with no Corrientes in arms (or none at all): the terms stand without a war
+	#     / tambien sin Corrientes en armas (o sin Corrientes): los terminos valen sin guerra
 	if = {
 		limit = {
-			exists = c:CRR
 			c:ARG ?= this
 		}
 		# EN: Settle the actual Federal Pact war through its own war goal. The engine enforces
 		#     make_protectorate; the weekly delegation observer then sees the subject relationship.
 		# ES: Resuelve la guerra real del Pacto Federal por su propio objetivo. El motor ejecuta
 		#     make_protectorate; despues el observador semanal ve la relacion de sujecion.
-		hidden_effect = { # EN/ES: 23/9 (preview audit) -- "the war with Corrientes ends" already says it / ya lo dice
-			every_scope_war = {
-				limit = { is_war_participant = c:CRR }
-				add_war_war_support = {
-					target = c:CRR
-					value = -1000
+		if = {
+			limit = { exists = c:CRR has_war_with = c:CRR }
+			hidden_effect = { # EN/ES: 23/9 (preview audit) -- "the war with Corrientes ends" already says it / ya lo dice
+				every_scope_war = {
+					limit = { is_war_participant = c:CRR }
+					add_war_war_support = {
+						target = c:CRR
+						value = -1000
+					}
 				}
 			}
 		}
