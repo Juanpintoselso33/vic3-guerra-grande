@@ -283,3 +283,31 @@ gg_oriental_brazil_subject_not_cisplatina = {
 	NOT = { is_subject_type = subject_type_protectorate }
 	NOT = { is_subject_type = subject_type_tributary }
 }
+
+# EN: 25/9/2026 (Juan: «if Brazil beats Argentina it should take Argentinian Parana and Santa Catarina as well as puppet
+#     Uruguay»). State scope: la Argentina's Misiones lands on the Brazilian side -- its split parts of Parana and Santa
+#     Catarina, the campos of Palmas that the treaties of 1750 and 1777 never marked on the ground (the Palmas/Misiones
+#     question, closed by Cleveland's award of 5/2/1895) -- held by Argentina or by one of its subjects (a province of
+#     the Pact: every birth of Corrientes or Misiones takes them, gg_conf_province_state). Read by the Cisplatine war
+#     (gg_cis_palmas_take). The war goals themselves are only against Argentina's own (gg_cis_palmas_war_goals): a
+#     province is not in that war.
+# ES: scope estado: las tierras misioneras de la Argentina del lado brasileno (sus partes de Parana y Santa Catarina,
+#     los campos de Palmas), de la Argentina o de una provincia sujeta a ella. Lo lee la guerra cisplatina.
+# SOURCE / FUENTE: Award of the President of the United States, 5/2/1895, RIAA vol. XXVIII pp. 277-282
+#     (https://legal.un.org/riaa/cases/vol_XXVIII/277-282.pdf); J. C. Radin and G. Corazza, «Questao de Palmas», Dicionario
+#     historico-social do Oeste catarinense, 2018 (https://doi.org/10.7476/9788564905658.0033); C. Karpinski and D. I.
+#     Galli Matiauda, «Paisagem e fronteira nas questoes territoriais entre Argentina e Brasil (1860-1914)», NUPEM 9:17,
+#     2017 (https://doi.org/10.33871/nupem.v9i17.321).
+gg_cis_palmas_state = {
+	OR = {
+		state_region = s:STATE_PARANA
+		state_region = s:STATE_SANTA_CATARINA
+	}
+	exists = c:ARG
+	owner ?= {
+		OR = {
+			c:ARG ?= this
+			is_subject_of = c:ARG
+		}
+	}
+}

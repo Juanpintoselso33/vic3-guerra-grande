@@ -12,6 +12,8 @@
 #     .4 the outcome, to both governments.
 #     .9 (24/9/2026) Brazil's answer reaches Buenos Aires: the protest (.2.a) or the rupture (.2.b/.c/.d); Buenos
 #        Aires answers it. .10 hidden, the catch-up for an older save.
+#     .11 (25/9/2026, Juan) hidden, the day after Brazil declares: the Misiones lands Argentina holds in Parana and Santa
+#        Catarina become Brazil's war goals; a Brazilian win takes them in any case (gg_cis_palmas_take in .3).
 # ES: LA REINCORPORACION Y LA SEGUNDA GUERRA CISPLATINA. .1 Argentina insiste o no; .2 el Brasil
 #     responde a la reincorporacion; .3 oculto, aplica el resultado al dia siguiente del fin de la
 #     guerra; .4 el resultado; .9 la respuesta del Brasil llega a Buenos Aires, que contesta; .10 oculto, la puesta
@@ -183,6 +185,7 @@ gg_cisplatina.3 = {
 		remove_global_variable = gg_cis_war
 		if = {
 			limit = { has_global_variable = gg_cis_brazil_won }
+			gg_cis_palmas_take = yes # EN/ES: 25/9 (Juan) -- the Misiones lands of Parana and Santa Catarina / las tierras misioneras
 			if = { limit = { has_global_variable = gg_oriental_in_pact } remove_global_variable = gg_oriental_in_pact }
 			if = {
 				limit = { global_var:gg_cis_goal = 2 }
@@ -221,6 +224,10 @@ gg_cisplatina.4 = {
 	title = gg_cisplatina.4.t
 	desc = {
 		first_valid = {
+			# EN/ES: 25/9 (Juan) -- a Brazilian win that also took the Misiones lands / una victoria que tambien tomo las tierras misioneras
+			triggered_desc = { desc = gg_cisplatina.4.d_1p trigger = { global_var:gg_cis_outcome = 1 has_global_variable = gg_cis_palmas_taken } }
+			triggered_desc = { desc = gg_cisplatina.4.d_2p trigger = { global_var:gg_cis_outcome = 2 has_global_variable = gg_cis_palmas_taken } }
+			triggered_desc = { desc = gg_cisplatina.4.d_3p trigger = { global_var:gg_cis_outcome = 3 has_global_variable = gg_cis_palmas_taken } }
 			triggered_desc = { desc = gg_cisplatina.4.d_1 trigger = { global_var:gg_cis_outcome = 1 } }
 			triggered_desc = { desc = gg_cisplatina.4.d_2 trigger = { global_var:gg_cis_outcome = 2 } }
 			triggered_desc = { desc = gg_cisplatina.4.d_3 trigger = { global_var:gg_cis_outcome = 3 } }
@@ -537,5 +544,25 @@ gg_cisplatina.10 = {
 				c:BRZ = { gg_cis_note_send = { KIND = 1 } }
 			}
 		}
+	}
+}
+
+# EN: 25/9/2026 (Juan: «if Brazil beats Argentina it should take Argentinian Parana and Santa Catarina as well as puppet
+#     Uruguay») -- the day after Brazil declares (gg_cis_open_war): the Misiones lands Argentina holds in Parana and
+#     Santa Catarina join the humiliation as Brazil's war goals (gg_cis_palmas_war_goals). Hidden; the goals show in the
+#     war itself, and gg_cisplatina.2 and .6 tell them in their tooltips.
+# ES: el dia despues de que el Brasil declara: las tierras misioneras de la Argentina en Parana y Santa Catarina se suman
+#     a la humillacion como objetivos de guerra del Brasil. Oculto; los objetivos se ven en la guerra.
+# SOURCE / FUENTE: common/scripted_triggers/gg_provinces.txt, gg_cis_palmas_state (the Palmas/Misiones question).
+gg_cisplatina.11 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:BRZ ?= this
+		has_global_variable = gg_cis_war # EN/ES: set before it is scheduled / se prende antes de agendar
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.11|" # GG_TRAZA
+		gg_cis_palmas_war_goals = yes
 	}
 }

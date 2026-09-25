@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **Brazil takes the campos of Palmas when it beats Argentina over the Banda Oriental:** in the second Cisplatine war
+  (Brazil against the Confederation after the Oriental Province rejoins it), a Brazilian victory now also takes the
+  Misiones lands Argentina holds in Paraná and Santa Catarina, the territory of the Palmas/Misiones boundary question
+  (settled by Cleveland's award, 1895), besides what the Empire went to war for (the Republic freed, the Cisplatina
+  annexed, or the Republic under its protection). The day after Brazil declares, those states become its war goals
+  (conquer state, or return state if it has a claim), visible in the war and enforced by the peace; whatever is still
+  Argentina's or a province of the Pact's when Brazil wins (Buenos Aires yields, a peace that enforced only the
+  humiliation) passes to the Empire in the settlement. Brazil's and Buenos Aires's tooltips and the outcome say so.
+  A war already under way in a saved game gets no war goals, but a Brazilian win still takes the lands.
+
 - **Rosas leaves power when his constitutional term ends, and cannot be re-elected for one term:** under the
   Constitution of 1853 (or the Pact's Congress he convenes) Rosas served his six-year first term, but nothing handed
   the seat over when it expired: he stayed until the engine's next election, which he could even win. Now, when the

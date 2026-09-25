@@ -34,6 +34,85 @@ gg_cis_open_war = {
 		}
 		# EN/ES: 23/9 (Juan) -- Buenos Aires hears of it and answers (gg_cisplatina.6) / Buenos Aires se entera
 		c:ARG ?= { trigger_event = { id = gg_cisplatina.6 days = 0 popup = yes } }
+		# EN/ES: 25/9 (Juan) -- the next day, the Misiones lands go on the table as war goals (gg_cisplatina.11); the
+		#     mark gg_cis_war is already set / al dia siguiente, las tierras misioneras entran como objetivos de guerra
+		trigger_event = { id = gg_cisplatina.11 days = 1 }
+	}
+}
+
+# EN: 25/9/2026 (Juan: «if Brazil beats Argentina it should take Argentinian Parana and Santa Catarina as well as puppet
+#     Uruguay») -- the Misiones lands Argentina itself holds in Parana and Santa Catarina (gg_cis_palmas_state) become
+#     Brazil's war goals in the Cisplatine play, beside the humiliation: the player sees them in the war, and a peace
+#     that enforces them hands them over. conquer_state, or return_state if the Empire has a claim there (the vanilla
+#     rule between the two). Added to the play in its own scope, as vanilla's Sepoy Mutiny does to a running war
+#     (sepoy_mutiny_events.txt), with the target as region_state:ARG, as vanilla's history plays and the Kazakh events
+#     name it. No infamy: the play gives none for the initiator's goals. The mark gg_cis_palmas_at_stake records that
+#     there were lands to take, for the settlement (gg_cisplatina.3) and its telling (gg_cisplatina.4). Scope: Brazil.
+# ES: las tierras misioneras que la Argentina misma tiene en Parana y Santa Catarina pasan a ser objetivos de guerra del
+#     Brasil en la jugada cisplatina, al lado de la humillacion: se ven en la guerra y una paz que los cumple las
+#     entrega. conquer_state, o return_state si el Imperio tiene reclamo. Se agregan en el scope de la jugada, como la
+#     Rebelion de los Cipayos de vanilla. La marca gg_cis_palmas_at_stake anota que habia tierras en juego.
+gg_cis_palmas_war_goals = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_palmas_war_goals|" # GG_TRAZA
+	if = {
+		limit = {
+			exists = c:ARG
+			any_state = { gg_cis_palmas_state = yes }
+		}
+		set_global_variable = gg_cis_palmas_at_stake
+	}
+	random_diplomatic_play = {
+		limit = { is_diplomatic_play_type = dp_gg_cisplatina }
+		if = {
+			limit = { c:ARG ?= { has_state_in_state_region = STATE_PARANA } }
+			if = {
+				limit = { s:STATE_PARANA.region_state:ARG = { has_claim_by = c:BRZ } }
+				add_war_goal = { holder = c:BRZ type = return_state target_state = s:STATE_PARANA.region_state:ARG }
+			}
+			else = {
+				add_war_goal = { holder = c:BRZ type = conquer_state target_state = s:STATE_PARANA.region_state:ARG }
+			}
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_palmas_war_goals| GOAL=STATE_PARANA " # GG_TRAZA
+		}
+		if = {
+			limit = { c:ARG ?= { has_state_in_state_region = STATE_SANTA_CATARINA } }
+			if = {
+				limit = { s:STATE_SANTA_CATARINA.region_state:ARG = { has_claim_by = c:BRZ } }
+				add_war_goal = { holder = c:BRZ type = return_state target_state = s:STATE_SANTA_CATARINA.region_state:ARG }
+			}
+			else = {
+				add_war_goal = { holder = c:BRZ type = conquer_state target_state = s:STATE_SANTA_CATARINA.region_state:ARG }
+			}
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_palmas_war_goals| GOAL=STATE_SANTA_CATARINA " # GG_TRAZA
+		}
+	}
+}
+
+# EN: 25/9/2026 (Juan) -- Brazil has won the Cisplatine war (gg_cisplatina.3): whatever of the Misiones lands is still
+#     Argentina's or a province's of the Pact passes to the Empire. It covers what the war goals do not: Buenos Aires
+#     yielding (gg_cisplatina.6.b ends the play before any peace), a peace that enforced only the humiliation, and the
+#     lands held by a province, which is not in the war. What the peace already handed over is not touched. The mark
+#     gg_cis_palmas_taken tells the outcome (gg_cisplatina.4). Scope: any.
+# ES: el Brasil gano la guerra cisplatina: lo que quede de las tierras misioneras en manos de la Argentina o de una
+#     provincia del Pacto pasa al Imperio. Cubre lo que los objetivos no cubren: que Buenos Aires ceda, una paz que solo
+#     cumplio la humillacion, y las tierras de una provincia, que no esta en la guerra.
+gg_cis_palmas_take = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cis_palmas_take|" # GG_TRAZA
+	if = {
+		limit = {
+			exists = c:BRZ
+			exists = c:ARG
+			any_state = { gg_cis_palmas_state = yes }
+		}
+		set_global_variable = gg_cis_palmas_at_stake
+		every_state = {
+			limit = { gg_cis_palmas_state = yes }
+			set_state_owner = c:BRZ
+		}
+	}
+	if = {
+		limit = { has_global_variable = gg_cis_palmas_at_stake }
+		set_global_variable = gg_cis_palmas_taken
 	}
 }
 
