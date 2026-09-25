@@ -149,7 +149,7 @@ REPLACE:URU_manuel_herrera_y_obes = { # Manuel Herrera y Obes
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -190,7 +190,7 @@ REPLACE:URU_andres_lamas = { # Andrés Lamas
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -230,7 +230,7 @@ REPLACE:URU_bernardo_prudencio_berro = { # Bernardo Prudencio Berro Larrañaga
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -269,7 +269,7 @@ REPLACE:URU_jose_pedro_varela = { # José Pedro Varela Berro
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -308,7 +308,7 @@ REPLACE:URU_lorenzo_latorre = { # Lorenzo Antonio Inocencio de la Torre Jampen
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -347,7 +347,7 @@ REPLACE:URU_inocencio_maria_yeregui = { # Inocencio María Yéregui Goichea
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -387,7 +387,7 @@ REPLACE:URU_jose_batlle = { # José Batlle y Ordóñez
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -427,7 +427,7 @@ REPLACE:URU_gabriel_terra = { # Gabriel Terra
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -466,7 +466,7 @@ REPLACE:URU_emilio_frugoni = { # Emilio Frugoni
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -505,7 +505,7 @@ REPLACE:URU_pedro_manini_rios = { # Pedro Manini Ríos
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -544,7 +544,7 @@ REPLACE:URU_cesar_diaz = { # César Díaz
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -582,7 +582,7 @@ REPLACE:URU_venancio_flores = { # Venancio Flores Barrios
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -620,7 +620,7 @@ REPLACE:URU_timoteo_aparicio = { # Timoteo Aparicio
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -657,7 +657,7 @@ REPLACE:URU_maximo_tajes = { # Máximo Tajes
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -694,7 +694,7 @@ REPLACE:URU_justino_muniz = { # Justino Muniz
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -732,7 +732,7 @@ REPLACE:URU_lorenzo_batlle = { # Lorenzo Cristóbal Manuel Batlle y Grau
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -770,7 +770,7 @@ REPLACE:URU_ruperto_elichiribehety = { # Ruperto Elichiribehety Arhancet
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -807,7 +807,7 @@ REPLACE:URU_angel_muniz = { #Ángel Muniz
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -847,7 +847,7 @@ REPLACE:URU_paulina_luisi = { #Paulina Luisi
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					# EN/ES: standalone -- the Republic's state is five states now / la Republica son cinco
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
@@ -890,7 +890,7 @@ REPLACE:URU_emilio_reus = { # Emilio Reus Bahamonde
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
 					}
@@ -933,7 +933,7 @@ REPLACE:URU_anacleto_medina = { # Anacleto Medina y Biera
 			OR = {
 				c:URU ?= THIS
 				AND = {
-					c:PLT ?= THIS
+					OR = { c:PLT ?= THIS c:ARG ?= THIS c:Great_ARG ?= THIS } # GG 25/9: also when Argentina absorbs the Banda Oriental / tambien si la Argentina absorbe la Banda Oriental
 					any_scope_state = {
 						state_region = s:STATE_MONTEVIDEO
 					}

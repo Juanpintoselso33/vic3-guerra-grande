@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Uruguay's historical figures still come when Argentina absorbs the Banda Oriental:** the 21 Uruguayan
+  politicians and generals the game brings over the years (Herrera y Obes, Lamas, Berro, Flores, Varela, Batlle…)
+  came only for Uruguay or a La Plata holding Montevideo; now also for Argentina or Great Argentina holding it.
 - **Rosas is mortal again:** the historical lives (Rosas until 1877, Urquiza until 1870…) were kept only while
   Uruguay or Argentina existed; with the Oriental Province absorbed and La Plata formed, nobody cleared them and Rosas
   reached 98. Now they are cleared whatever countries remain. Games in progress are fixed on the next month.
