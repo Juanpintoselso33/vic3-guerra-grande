@@ -86,6 +86,14 @@ The other seven provinces fly flags the mod already had, all public domain or CC
 `te_gg_la_rioja_1986.dds`, `te_gg_cordoba_1815.dds`, `te_gg_santiago_1985.dds`,
 `te_gg_mendoza_1992.dds`, `te_gg_san_juan_1997.dds`, `te_gg_san_luis_1988.dds`).
 
+## La Plata flag
+
+- `te_gg_plata_hpm.dds` (key `gg_flag_plata_hpm`, the flag of La Plata, PLT)
+  - La Plata flag: design from the althistory fandom wiki (file "Republic_of_la_plata_by_federalrepublic-d48pphf"),
+    also used by the Historical Project Mod (Victoria 2); original author unknown.
+  - Changes: the same design redrawn at 3:2 (the wiki image is 4:3) with the Sol de Mayo, resized to 768x512 and
+    converted to an uncompressed DDS.
+
 ## «la Argentina» (Steam Workshop 2982907360)
 
 The map and the South American history this mod ships are **la Argentina's**, by its authors, reworked

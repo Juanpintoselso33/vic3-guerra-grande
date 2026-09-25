@@ -507,3 +507,25 @@ gg_flag_prov_chaco = {
 	color1 = "white"
 	textured_emblem = { texture = "te_gg_prov_chaco_2007.dds" }
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: LA PLATA (PLT) -- Juan, 24/9/2026: «for now the mod uses HPM's flag for La Plata; I don't like
+#     la Argentina's». Five stripes 1:1:2:1:1 (red, white, celeste, white, red) with the Sol de Mayo:
+#     the design from the althistory fandom wiki (file «Republic_of_la_plata_by_federalrepublic-
+#     d48pphf»), also used by the Historical Project Mod (Victoria 2) as LPL; original author unknown.
+#     The wiki's image is 4:3; this is the same design redrawn at 3:2 with the real Sol de Mayo
+#     (stripes and colours checked pixel by pixel against it), resized to 768x512 BGRA8888 with the
+#     header of te_gg_confederacion.dds. Credit in CREDITS.md. Used by REPLACE:PLT in
+#     common/flag_definitions/zz_guerra_grande_flags.txt.
+# ES: LA PLATA (PLT) -- Juan, 24/9/2026: «por ahora el mod usa la bandera de HPM para La Plata; la del
+#     mod Argentina no me gusta». Cinco fajas 1:1:2:1:1 (colorada, blanca, celeste, blanca, colorada)
+#     con el Sol de Mayo: el diseno de la wiki althistory de fandom, que tambien usa el Historical
+#     Project Mod (Victoria 2) como LPL; autor original desconocido. La imagen de la wiki es 4:3; esta
+#     es el mismo diseno redibujado a 3:2 con el Sol de Mayo real (fajas y colores cotejados pixel a
+#     pixel), llevado a 768x512 BGRA8888 con la cabecera de te_gg_confederacion.dds.
+# -------------------------------------------------------------------------------------------------
+gg_flag_plata_hpm = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_plata_hpm.dds" }
+}

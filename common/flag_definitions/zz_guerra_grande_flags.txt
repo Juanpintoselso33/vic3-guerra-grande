@@ -894,3 +894,35 @@ ENR = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: LA PLATA (PLT): ONE FLAG FOR NOW. Juan, 24/9/2026: «for now the mod uses HPM's flag for La Plata;
+#     I don't like la Argentina's» -- the coat of arms gg_flag_plata_hpm, in every situation and under
+#     every government.
+#     REPLACE, like URU above: vanilla defines PLT, la Argentina REPLACEs it (arg_flag_definitions.txt:
+#     its own PLT.DDS, with ARG_subject as the overlord-canton version) and DNFC REPLACE_OR_CREATEs it
+#     (z_dnfc_la_plata_flag_definitions.txt: republic, monarchy, dictatorship, oligarchy, theocracy,
+#     communism and anarchy variants). Files load in filename order across mods, so this file
+#     (zz_guerra_grande_flags.txt) is read after both and its REPLACE is the list that stays; the only
+#     later flag_definitions file in the playset, la-argentina-x-dnfc's zzzz_arg_dnfc_flag_definitions.txt,
+#     does not touch PLT (checked 24/9/2026, with every downloaded Workshop item).
+#     Priority 3000 beats the DEFAULT list every country also reads (chartered company and communist
+#     1000, anarchy 2000), so the flag holds even under those governments. subject_canton makes it the
+#     canton PLT's own subjects carry. No overlord-canton variant for PLT as a subject: it would lay a
+#     canton over the top stripes, untested, and Juan asked for this flag in every situation.
+# ES: LA PLATA (PLT): UNA SOLA BANDERA POR AHORA. Juan, 24/9/2026: «por ahora el mod usa la bandera de HPM
+#     para La Plata; la del mod Argentina no me gusta» -- el escudo gg_flag_plata_hpm, en toda situacion y
+#     con todo gobierno. REPLACE, como URU arriba: vanilla define PLT, la Argentina lo reemplaza (su
+#     PLT.DDS, con ARG_subject como version con canton del soberano) y DNFC lo reemplaza o crea (variantes
+#     por gobierno). Los archivos cargan por orden de nombre entre mods, asi que este se lee despues de los
+#     dos y su REPLACE es la lista que queda; el unico archivo posterior del playset, el zzzz_ de
+#     la-argentina-x-dnfc, no toca PLT (verificado el 24/9/2026). Prioridad 3000: le gana a la lista
+#     DEFAULT (compania con carta y comunista 1000, anarquia 2000). Sin variante con canton del soberano.
+# -------------------------------------------------------------------------------------------------
+REPLACE:PLT = {
+	flag_definition = {
+		coa = gg_flag_plata_hpm
+		subject_canton = gg_flag_plata_hpm
+		priority = 3000
+	}
+}
