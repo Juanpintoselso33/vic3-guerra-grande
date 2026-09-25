@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **A Brazilian victory in the Cisplatine war makes the Banda Oriental the Provincia Cisplatina:** of Brazil's three
+  aims, «enforce the Convention» freed the Republic and «under the Empire's hand» made it a protectorate. Now both
+  end, on a Brazilian win, in the Cisplatine Province: Brazil's subject with its own name, flag and modifier, the same
+  as the peace's Cisplatina. Taking it back into the Empire still annexes it. A Brazilian defeat or a white peace
+  changes nothing. The options, tooltips and outcome texts say so. A protectorate the engine makes on its own, outside
+  this war, is still left as it is.
+
 - **Brazil takes the campos of Palmas when it beats Argentina over the Banda Oriental:** in the second Cisplatine war
   (Brazil against the Confederation after the Oriental Province rejoins it), a Brazilian victory now also takes the
   Misiones lands Argentina holds in Paraná and Santa Catarina, the territory of the Palmas/Misiones boundary question

@@ -5,10 +5,11 @@
 #     .1 Argentina, 11/8/1845: press Oribe to rejoin the Confederation, or leave it as an offer. It goes
 #        out before Rosas's offer reaches the Cerrito (gg_loan.4), so Oribe's answer knows.
 #     .2 Brazil, a month after a reincorporation (gg_peace.2.g): the Preliminary Peace Convention of
-#        1828 is broken. Stay out, or go to war to free the Republic, annex the Cisplatina, or make it
-#        a protectorate.
+#        1828 is broken. Stay out, or go to war to take the Banda Oriental out of the Confederation (won:
+#        the Provincia Cisplatina, 25/9/2026), or to annex it.
 #     .3 hidden, the day after the war ends: the result is applied by script (the engine war goal is
-#        a humiliation, so it never takes ground on its own).
+#        a humiliation, so it never takes ground on its own). 25/9/2026 (Juan): a Brazilian win annexes the Banda
+#        Oriental (goal 2) or makes it the Provincia Cisplatina (goals 1 and 3); lost or white peace, nothing changes.
 #     .4 the outcome, to both governments.
 #     .9 (24/9/2026) Brazil's answer reaches Buenos Aires: the protest (.2.a) or the rupture (.2.b/.c/.d); Buenos
 #        Aires answers it. .10 hidden, the catch-up for an older save.
@@ -132,8 +133,9 @@ gg_cisplatina.2 = {
 			modifier = { trigger = { exists = c:ARG army_size < c:ARG.army_size } add = 10 }
 		}
 	}
-	# EN: free the Republic, the guarantee of 1828 enforced to the letter.
-	# ES: liberar la Republica, la garantia de 1828 cumplida al pie de la letra.
+	# EN: take the Banda Oriental out of the Confederation, the Convention of 1828 invoked; won, it is the Provincia
+	#     Cisplatina (25/9/2026, Juan).
+	# ES: sacar la Banda Oriental de la Confederacion invocando la Convencion; ganada, es la Provincia Cisplatina.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.b|" # GG_TRAZA
 		name = gg_cisplatina.2.b
@@ -158,8 +160,8 @@ gg_cisplatina.2 = {
 		gg_cis_note_send = { KIND = 2 } # EN/ES: 24/9 -- the rupture reaches Buenos Aires / la ruptura llega a Buenos Aires
 		ai_chance = { base = 10 }
 	}
-	# EN: free it under the Empire's protection.
-	# ES: liberarla bajo la proteccion del Imperio.
+	# EN: take it out of the Confederation and keep it in the Empire's hand; won, it is the Provincia Cisplatina (25/9/2026).
+	# ES: sacarla de la Confederacion y dejarla en la mano del Imperio; ganada, es la Provincia Cisplatina.
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina.2.d|" # GG_TRAZA
 		name = gg_cisplatina.2.d
@@ -202,10 +204,24 @@ gg_cisplatina.3 = {
 					remove_global_variable = gg_oriental_province
 				}
 				else = { gg_cis_release = yes }
+				# EN: 25/9/2026 (Juan: «if Brazil wins, the Banda Oriental becomes the Provincia Cisplatina unless Brazil
+				#     chose to annex it») -- goals 1 and 3 (free it, protect it) both end in the Cisplatine Province, the
+				#     subject of gg_peace.1.h and AUD-CIS-PUPPET: the mod's type, its modifier and the thirty-day watch; name
+				#     and flag key on the type. Goal 3 made a vanilla protectorate until then. Outcome 1 (a free Republic) is
+				#     left only for a Republic the pact could not be made with.
+				# ES: los objetivos 1 y 3 terminan en la Provincia Cisplatina, el sujeto de gg_peace.1.h: tipo del mod,
+				#     modificador y guardia de treinta dias. El objetivo 3 hacia un protectorado de vanilla.
 				if = {
-					limit = { global_var:gg_cis_goal = 3 c:URU ?= { is_subject = no } }
-					create_diplomatic_pact = { country = c:URU type = protectorate }
-					set_global_variable = { name = gg_cis_outcome value = 3 }
+					limit = { c:URU ?= { is_subject = no } }
+					create_diplomatic_pact = { country = c:URU type = gg_cisplatine_province }
+					gg_subject_watch = { SUBJECT = c:URU }
+					c:URU = {
+						if = {
+							limit = { NOT = { has_modifier = gg_peace_cisplatina } }
+							add_modifier = { name = gg_peace_cisplatina years = 30 }
+						}
+					}
+					set_global_variable = { name = gg_cis_outcome value = 4 }
 				}
 				else = { set_global_variable = { name = gg_cis_outcome value = 1 } }
 			}
@@ -227,10 +243,10 @@ gg_cisplatina.4 = {
 			# EN/ES: 25/9 (Juan) -- a Brazilian win that also took the Misiones lands / una victoria que tambien tomo las tierras misioneras
 			triggered_desc = { desc = gg_cisplatina.4.d_1p trigger = { global_var:gg_cis_outcome = 1 has_global_variable = gg_cis_palmas_taken } }
 			triggered_desc = { desc = gg_cisplatina.4.d_2p trigger = { global_var:gg_cis_outcome = 2 has_global_variable = gg_cis_palmas_taken } }
-			triggered_desc = { desc = gg_cisplatina.4.d_3p trigger = { global_var:gg_cis_outcome = 3 has_global_variable = gg_cis_palmas_taken } }
+			triggered_desc = { desc = gg_cisplatina.4.d_4p trigger = { global_var:gg_cis_outcome = 4 has_global_variable = gg_cis_palmas_taken } }
 			triggered_desc = { desc = gg_cisplatina.4.d_1 trigger = { global_var:gg_cis_outcome = 1 } }
 			triggered_desc = { desc = gg_cisplatina.4.d_2 trigger = { global_var:gg_cis_outcome = 2 } }
-			triggered_desc = { desc = gg_cisplatina.4.d_3 trigger = { global_var:gg_cis_outcome = 3 } }
+			triggered_desc = { desc = gg_cisplatina.4.d_4 trigger = { global_var:gg_cis_outcome = 4 } } # EN/ES: 25/9 -- the Provincia Cisplatina / la Provincia Cisplatina
 			triggered_desc = { desc = gg_cisplatina.4.d_0 trigger = { always = yes } }
 		}
 	}
