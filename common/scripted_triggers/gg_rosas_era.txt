@@ -55,3 +55,28 @@ gg_rosas_holds_the_sum_of_power = {
 	NOT = { has_global_variable = gg_ba_done }
 	any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
 }
+
+# EN: 25/9/2026 (Juan: «if Rosas stays dictator until his death, having won, the flag is the Confederation's and it is
+#     still called Confederacion Argentina») -- Rosas's Argentine Confederation still stands: Rosas is alive and in
+#     Argentina, and either he holds the sum of public power («the Pact without a Constitution», above) or his era has
+#     not ended (gg_x_arg_rosas_era_over: no Urquiza victory, no fallen mandate, no constitution, no reunion after Pavon;
+#     his victory in the Pact war, gg_pact_settlement_rosas, keeps it). Left out: the two governments of a drawn Pact
+#     war (gg_pact_settlement_stalemate), where the Confederation is Urquiza's and Rosas keeps only Buenos Aires, and the
+#     succession crisis. Read by ARG's flag (common/flag_definitions/zzzzz_gg_rosas_confederation_flag.txt) and name
+#     (common/dynamic_country_names/zz_guerra_grande_country_names.txt). When Rosas dies, goes into exile or a
+#     constitution replaces his regime, it stops being true and the normal selection of the playset comes back.
+# ES: la Confederacion Argentina de Rosas sigue en pie: Rosas vivo y en la Argentina, y o tiene la suma del poder publico
+#     o su era no termino (su victoria en la guerra del Pacto la mantiene). Afuera: los dos gobiernos de unas tablas (la
+#     Confederacion es la de Urquiza) y la crisis de sucesion. Lo leen la bandera y el nombre de ARG. Cuando Rosas muere,
+#     se exilia o una constitucion reemplaza su regimen, deja de valer y vuelve la seleccion normal del playset.
+gg_rosas_confederation_endures = {
+	c:ARG ?= { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
+	OR = {
+		gg_rosas_holds_the_sum_of_power = yes
+		AND = {
+			NOT = { gg_x_arg_rosas_era_over = yes }
+			NOT = { has_global_variable = gg_pact_settlement_stalemate }
+			NOT = { has_global_variable = gg_rosas_succession_crisis }
+		}
+	}
+}

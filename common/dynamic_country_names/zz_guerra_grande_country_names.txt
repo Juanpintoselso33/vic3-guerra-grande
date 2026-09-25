@@ -80,3 +80,32 @@ CER = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan: «... and it is still called Confederacion Argentina») -- while Rosas's Confederation stands
+#     (gg_rosas_confederation_endures, the same trigger as its flag in zzzzz_gg_rosas_confederation_flag.txt), Argentina
+#     is «Confederacion Argentina» / «Argentine Confederation», whatever its laws. What it overrides (checked 25/9/2026):
+#     vanilla's dyn_c_argentine_confederation needs a dictatorship and Rosas as ruler (priority 0); Dynamic Names, Flags &
+#     Colours (dnfc_la_plata_country_names.txt, REPLACE_OR_CREATE:ARG) names it by laws -- a presidential republic with a
+#     vote is «Argentina»; More Dynamic Names And Flags (z_more_dynamic_names.txt, INJECT_OR_CREATE:ARG) has «Buenos
+#     Aires» for a small Rosas country and «Argentine Empire» or «People's Republic» up to priority 20; vanilla's
+#     «Argentina Legionaria» is 30. la Argentina defines no ARG name. This file sorts after all of them and nothing later
+#     touches ARG, so an INJECT at priority 1000 wins. Its own key, not vanilla's, so no mod's localization can move it.
+# ES: mientras siga la Confederacion de Rosas (el mismo trigger que su bandera), la Argentina se llama «Confederacion
+#     Argentina», tenga las leyes que tenga: le gana a vanilla (dictadura con Rosas, prioridad 0), a DNFC (por leyes: una
+#     republica presidencial con voto es «Argentina»), a More Dynamic Names («Buenos Aires», «Imperio», hasta 20) y a la
+#     «Argentina Legionaria» de vanilla (30). Clave propia, para que ninguna localizacion de otro mod la cambie.
+# -------------------------------------------------------------------------------------------------
+INJECT:ARG = {
+	dynamic_country_name = {
+		name = gg_dyn_confederacion_argentina
+		adjective = ARG_ADJ
+
+		is_main_tag_only = yes
+		priority = 1000
+
+		trigger = {
+			gg_rosas_confederation_endures = yes
+		}
+	}
+}

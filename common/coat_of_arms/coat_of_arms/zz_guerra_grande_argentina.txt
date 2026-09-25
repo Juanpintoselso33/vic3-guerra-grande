@@ -529,3 +529,23 @@ gg_flag_plata_hpm = {
 	color1 = "white"
 	textured_emblem = { texture = "te_gg_plata_hpm.dds" }
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- ROSAS'S ARGENTINE CONFEDERATION: dark blue, white, dark blue, the red sun and the four
+#     Phrygian caps (option B of docs/guerra-grande-argentina/banderas-provincias-opciones.md: «Rosas's and Buenos
+#     Aires's», Prando 2009 and Olle; the red sun from c.1840, Tracchia). The flag of the country while Rosas's regime
+#     lasts (gg_rosas_confederation_endures, common/flag_definitions/zzzzz_gg_rosas_confederation_flag.txt). The same
+#     Commons file la Argentina draws its ARG_dictatorship from (ARG_DICTADURA.dds), taken from Commons directly so the
+#     flag does not depend on a key another mod can redefine: rendered by Commons at 3840 px, resized to 768x512
+#     BGRA8888 with the header of te_gg_prov_tucuman_1814.dds. Nothing redrawn. Credit in CREDITS.md.
+# ES: LA CONFEDERACION ARGENTINA DE ROSAS: azul oscuro, blanco, azul oscuro, sol rojo y cuatro gorros frigios (opcion B:
+#     «la de Rosas y de Buenos Aires»). La bandera del pais mientras dure el regimen de Rosas. El mismo archivo de Commons
+#     del que la Argentina saca su ARG_dictatorship, bajado de Commons para no depender de una clave que otro mod puede
+#     redefinir. Nada redibujado.
+# SOURCE / FUENTE: https://commons.wikimedia.org/wiki/File:Flag_of_Argentina_(1840).svg (Guilherme Paula, CC BY-SA 3.0)
+# -------------------------------------------------------------------------------------------------
+gg_flag_argentine_confederation = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	textured_emblem = { texture = "te_gg_argentine_confederation_1840.dds" }
+}

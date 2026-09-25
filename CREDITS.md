@@ -86,6 +86,17 @@ The other seven provinces fly flags the mod already had, all public domain or CC
 `te_gg_la_rioja_1986.dds`, `te_gg_cordoba_1815.dds`, `te_gg_santiago_1985.dds`,
 `te_gg_mendoza_1992.dds`, `te_gg_san_juan_1997.dds`, `te_gg_san_luis_1988.dds`).
 
+## Rosas's Argentine Confederation flag
+
+Flown by Argentina while Rosas's Confederation stands (`gfx/coat_of_arms/textured_emblems/te_gg_argentine_confederation_1840.dds`,
+key `gg_flag_argentine_confederation`). Rendered by Commons at 3840 px, resized to 768x512 and converted to an
+uncompressed DDS. Nothing redrawn.
+
+- `te_gg_argentine_confederation_1840.dds`
+  - Source: [Flag of Argentina (1840).svg](https://commons.wikimedia.org/wiki/File:Flag_of_Argentina_(1840).svg), Wikimedia Commons.
+  - Author: Guilherme Paula.
+  - License: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); this texture is shared under the same license.
+
 ## La Plata flag
 
 - `te_gg_plata_hpm.dds` (key `gg_flag_plata_hpm`, the flag of La Plata, PLT)

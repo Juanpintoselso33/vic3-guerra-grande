@@ -1,0 +1,34 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan) -- «if Rosas stays dictator until his death, having won, then the flag is the Confederation's,
+#     and it is still called Confederacion Argentina». While gg_rosas_confederation_endures
+#     (common/scripted_triggers/gg_rosas_era.txt), Argentina flies Rosas's Confederation flag, gg_flag_argentine_confederation
+#     (common/coat_of_arms/coat_of_arms/zz_guerra_grande_argentina.txt), over every other ARG flag of the playset.
+#     What it overrides (checked 25/9/2026 against content_load.json):
+#       - la Argentina (arg_flag_definitions.txt, REPLACE:ARG): by government -- republic, dictatorship, monarchy...
+#       - More Dynamic Names And Flags (more_dynamic_names.txt, INJECT_OR_CREATE:ARG): the same, by government.
+#       - Dynamic Names, Flags & Colours (z_dnfc_la_plata_flag_definitions.txt, REPLACE_OR_CREATE:ARG): by government.
+#       - Juan's local compatch la-argentina-x-dnfc (zzzz_arg_dnfc_flag_definitions.txt, REPLACE_OR_CREATE:ARG): by date --
+#         Rosas's federal flag until Caseros (1852.2.3), the celeste of Parana to 1862, and so on. Its REPLACE wipes every
+#         ARG list read before it, so this file has to sort after it: «zzzzz_» > «zzzz_a» (character 5, «z» > «_»).
+#     INJECT, not REPLACE: the list of whichever mods are loaded stays whole, and this definition is added on top. With only
+#     Community Mod Framework and la Argentina it lands on la Argentina's list. Priority 6000 beats everything in those
+#     lists, the compatch's anarchist flag (5000) and the DEFAULT list (1000, 2000) included: while the trigger holds,
+#     Rosas's regime is the government, whatever the laws say.
+# ES: mientras siga en pie la Confederacion de Rosas, la Argentina lleva su bandera por encima de todas las del playset: la
+#     de la Argentina y la de More Dynamic Names (por gobierno), la de DNFC (por gobierno) y la del compatch local (por
+#     fecha: la federal hasta Caseros, la celeste de Parana hasta 1862...). El REPLACE del compatch borra toda lista ARG
+#     leida antes, asi que este archivo tiene que ordenarse despues: «zzzzz_» > «zzzz_a». INJECT, no REPLACE: queda la
+#     lista de los mods cargados y esta se suma arriba; con solo el Framework y la Argentina cae sobre la de la Argentina.
+#     Prioridad 6000: le gana a todo, incluida la anarquista del compatch (5000). Cuando Rosas muere, se exilia o una
+#     constitucion reemplaza su regimen, deja de aplicar y vuelve la seleccion normal, sin nada que deshacer.
+# -------------------------------------------------------------------------------------------------
+INJECT:ARG = {
+	flag_definition = {
+		coa = gg_flag_argentine_confederation
+		subject_canton = gg_flag_argentine_confederation
+		priority = 6000
+		trigger = {
+			gg_rosas_confederation_endures = yes
+		}
+	}
+}

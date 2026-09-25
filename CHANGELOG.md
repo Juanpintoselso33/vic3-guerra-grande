@@ -1,5 +1,16 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **Rosas's Argentina keeps the Confederation's flag and name while his regime lasts:** as long as Rosas is alive and
+  in power -- holding the sum of public power after «the Pact without a Constitution», or never overthrown (his victory
+  in the Pact war included) and with no constitution replacing his regime -- Argentina flies the Confederation flag
+  (dark blue and white with the red sun and the four Phrygian caps, from Wikimedia Commons) and is called «Argentine
+  Confederation» / «Confederación Argentina», whatever its laws or the date. Before, la Argentina, Dynamic Names, Flags &
+  Colours and More Dynamic Names switched them by government type or by date (the federal flag ended at Caseros in 1852
+  even if Rosas had won). When Rosas dies, goes into exile or a constitution takes over, the usual flag and name come
+  back on their own. Games in progress get it at once.
+
 ## 0.1.7-alpha — 25/9/2026
 
 - **The Ejército Grande marches with its men:** the army Urquiza raises in November 1851 and the Brazilian and Oriental
