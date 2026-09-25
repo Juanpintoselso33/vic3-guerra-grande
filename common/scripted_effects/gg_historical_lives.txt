@@ -186,5 +186,8 @@ gg_rosas_keeps_the_seat = {
 			}
 			gg_ruler_set = { TEMPLATE = ARG_Juan_Manuel_de_Rosas }
 		}
+		# EN/ES: 25/9/2026 (Juan, AUD-ROSAS-TERM) -- the end of the first term and the interval of art. 74: every month,
+		#     Rosas leaves the seat he no longer holds by right / cada mes, Rosas deja el sillon que ya no le corresponde
+		gg_rosas_term_limit = yes
 	}
 }

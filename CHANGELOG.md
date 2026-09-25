@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **Rosas leaves power when his constitutional term ends, and cannot be re-elected for one term:** under the
+  Constitution of 1853 (or the Pact's Congress he convenes) Rosas served his six-year first term, but nothing handed
+  the seat over when it expired: he stayed until the engine's next election, which he could even win. Now, when the
+  term ends, he leaves the seat that same month to the next in line (the heir, else the leader of the strongest
+  interest group in government, else the strongest group's leader), and for the following six years he may not hold
+  it: if an election or anything else seats him, he is replaced that same day (art. 74: «no pueden ser reelegidos
+  sino con intervalo de un período»). «The Pact without a Constitution» is unchanged: there he keeps the sum of public
+  power until his death. Games in progress past the end of the term: the next monthly pulse hands the seat over, and
+  the six years count from then.
+
 - **Brazil's Uruguay is always the Provincia Cisplatina:** when the engine made Uruguay Brazil's puppet on its own
   (a war goal, a play or an interaction, outside the peace of the Guerra Grande), the country showed up as
   «Brazilian Uruguay», with none of the Cisplatina's name or standing. Now, after the peace, any road that makes the

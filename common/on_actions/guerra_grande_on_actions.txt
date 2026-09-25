@@ -563,6 +563,25 @@ gg_rosas_seat_on_new_ruler = {
 	}
 }
 
+# EN: 25/9/2026 (Juan, AUD-ROSAS-TERM) -- the interval of art. 74: if an election (or anything) seats Rosas while he may
+#     not be re-elected, the next in line takes the seat that same day (gg_rosas_term_limit). No loop: the new ruler is
+#     not Rosas, and this fires only for him.
+# ES: el intervalo del art. 74: si una eleccion (o lo que sea) sienta a Rosas mientras no puede ser reelegido, asume el
+#     que sigue en el dia. Sin bucle.
+on_new_ruler = {
+	on_actions = { gg_rosas_term_limit_on_new_ruler }
+}
+gg_rosas_term_limit_on_new_ruler = {
+	trigger = {
+		has_template = ARG_Juan_Manuel_de_Rosas
+		owner ?= { c:ARG ?= this }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_term_limit_on_new_ruler" # GG_TRAZA
+		owner = { gg_rosas_term_limit = yes }
+	}
+}
+
 # EN: 23/9/2026 (headless run: the engine seated Lavalleja over Rivera on 16/11/1839 and the monthly check
 #     took a month to undo it) -- the same guard Rosas has, for the Oriental presidency: when anyone but a
 #     historical president takes the seat, the historical one is put back that day. Root = the new ruler;

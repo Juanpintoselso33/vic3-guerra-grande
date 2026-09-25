@@ -25,6 +25,7 @@ on_monthly_pulse_country = {
 		gg_rosas_first_term_migration
 		gg_paraguay_recognition_pulse
 		gg_rosas_sum_of_power_migration
+		gg_rosas_term_limit_migration
 	}
 }
 
@@ -442,5 +443,36 @@ gg_war_against_buenos_aires_end = {
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_war_against_buenos_aires_end" # GG_TRAZA
 		remove_global_variable = gg_war_against_buenos_aires
+	}
+}
+
+# EN: 25/9/2026 (Juan's decision, AUD-ROSAS-TERM; his Greece game: gg_constitution.1.a on 1/4/1852, the term over
+#     ~31/3/1858, Rosas still ruling in September 1858) -- a save that gave the Constitution with Rosas's first term before
+#     the interval of art. 74 existed. It gets the mark the answer writes today (gg_rosas_served_term: the answers that
+#     carried the term were given with Rosas in the seat, which the keeper held since the settlement), and
+#     gg_rosas_term_limit does the rest on this same pulse: if the term is over, the six-year interval starts now and
+#     Rosas hands the seat over. THE END OF THE TERM IS NOT IN THE SAVE, so in a game already past it the interval counts
+#     from this pulse (in Juan's, about six months later than the true end). Once per save (gg_rosas_term_limit_known,
+#     which the answer writes too). Not guarded by gg_new_game_no_migrations: Juan's game carries that mark.
+# ES: una partida que dio la Constitucion con el primer periodo de Rosas antes de que existiera el intervalo del art. 74.
+#     Recibe la marca que hoy escribe la respuesta, y en este mismo pulso, si el periodo termino, empieza el intervalo de
+#     seis anios y Rosas entrega el sillon. El fin del periodo no esta en la partida: en una partida ya pasada, el
+#     intervalo cuenta desde este pulso. Una vez por partida.
+gg_rosas_term_limit_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_variable = gg_arg_rosas_seat
+		global_var:gg_constitution_chosen ?= 1
+		NOT = { has_global_variable = gg_rosas_term_limit_known }
+		OR = {
+			has_global_variable = gg_rosas_first_term_known
+			has_global_variable = gg_rosas_first_term_legacy
+		}
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_term_limit_migration" # GG_TRAZA
+		set_global_variable = gg_rosas_term_limit_known
+		set_global_variable = gg_rosas_served_term
+		gg_rosas_term_limit = yes
 	}
 }

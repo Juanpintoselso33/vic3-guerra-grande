@@ -148,7 +148,10 @@ gg_constitution_schedule = {
 #     sostiene en cada eleccion hasta que termine; despues, las elecciones del motor.
 # SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), art. 74 (above, gg_rosas_first_term_running).
 gg_constitution_first_term = {
-	hidden_effect = { set_global_variable = gg_rosas_first_term_known }
+	hidden_effect = {
+		set_global_variable = gg_rosas_first_term_known
+		set_global_variable = gg_rosas_term_limit_known # EN/ES: AUD-ROSAS-TERM -- the old-save repair skips it / la reparacion de partidas viejas la saltea
+	}
 	if = {
 		limit = {
 			ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas }
@@ -156,6 +159,7 @@ gg_constitution_first_term = {
 		custom_tooltip = gg_constitution_rosas_first_term_tt
 		hidden_effect = {
 			set_global_variable = { name = gg_rosas_first_term days = 2190 }
+			set_global_variable = gg_rosas_served_term # EN/ES: AUD-ROSAS-TERM -- the interval of art. 74 follows it / le sigue el intervalo del art. 74
 			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_first_term| FIRST_TERM=yes " # GG_TRAZA
 		}
 	}
@@ -419,5 +423,94 @@ gg_constitution_confed_ground = {
 			}
 		}
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confed_ground| NOT_PACT_PROVINCE=yes " # GG_TRAZA
+	}
+}
+
+# EN: 25/9/2026 (Juan's decision, AUD-ROSAS-TERM: «Rosas deberia perder su proteccion ya, sigue en el poder
+#     artificialmente») -- scope: Argentina. The end of the first term, checked every month (gg_rosas_keeps_the_seat) and
+#     whenever Rosas is seated (gg_rosas_term_limit_on_new_ruler). Nothing handed the seat over when the term expired:
+#     Rosas stayed until the engine's next election, which he could win. Now:
+#     1. the first check after the term ends starts the interval of art. 74, six years (gg_rosas_no_reelection);
+#     2. while it runs, if Rosas holds the seat he leaves it that month (gg_rosas_hand_over_seat).
+#     Only where the mod gave him a term (gg_rosas_served_term: gg_constitution.1.a/.c with him in the seat, or the
+#     old-save repairs). The sum of public power (gg_constitution.1.b, AUD-ROSAS-SUMA) never reaches this: chosen = 2.
+# ES: el fin del primer periodo, revisado cada mes y cada vez que Rosas asume. Al vencer, nada entregaba el sillon: Rosas
+#     seguia hasta la proxima eleccion del motor, que podia ganar. Ahora el primer chequeo tras el fin abre el intervalo
+#     del art. 74 (seis anios), y mientras corre, si Rosas tiene el sillon lo deja ese mes. Solo donde el mod le dio un
+#     periodo; la suma del poder publico nunca llega aca.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), arts. 74-75 (gg_rosas_reelection_barred).
+gg_rosas_term_limit = {
+	if = {
+		limit = {
+			has_global_variable = gg_rosas_served_term
+			NOT = { has_global_variable = gg_rosas_interval_started }
+			global_var:gg_constitution_chosen ?= 1
+			gg_rosas_first_term_running = no
+		}
+		set_global_variable = gg_rosas_interval_started
+		set_global_variable = { name = gg_rosas_no_reelection days = 2190 }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_term_limit| INTERVAL=start " # GG_TRAZA
+	}
+	if = {
+		limit = {
+			has_variable = gg_arg_rosas_seat
+			gg_rosas_reelection_barred = yes
+			ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas }
+		}
+		gg_rosas_hand_over_seat = yes
+	}
+}
+
+# EN: 25/9/2026 (AUD-ROSAS-TERM) -- scope: Argentina, Rosas in the seat. The next in line takes it: the heir if there is
+#     one, else the leader of the strongest interest group in government that Rosas does not lead (as the Oriental seat
+#     does, gg_seat_oriental_ruler), else the strongest group's leader outside the government. No loop: the new ruler is
+#     not Rosas, and gg_rosas_keeps_the_seat does not put him back under chosen = 1.
+# ES: scope Argentina con Rosas en el sillon. Asume el que sigue: el heredero si lo hay; si no, el jefe del grupo de
+#     gobierno con mas peso que no lidere Rosas; si no, el del grupo con mas peso fuera del gobierno. Sin bucle.
+gg_rosas_hand_over_seat = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_hand_over_seat|" # GG_TRAZA
+	if = {
+		limit = { heir ?= { NOT = { has_template = ARG_Juan_Manuel_de_Rosas } } }
+		heir = { set_character_as_ruler = yes }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_hand_over_seat| TO=heir " # GG_TRAZA
+	}
+	else_if = {
+		limit = {
+			any_interest_group = {
+				is_in_government = yes
+				leader ?= { NOT = { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+		}
+		ordered_interest_group = {
+			limit = {
+				is_in_government = yes
+				leader ?= { NOT = { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+			order_by = ig_clout
+			position = 0 # EN/ES: the strongest only / solo el de mas peso
+			check_range_bounds = no
+			leader = { set_character_as_ruler = yes }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_hand_over_seat| TO=government_ig " # GG_TRAZA
+	}
+	else_if = {
+		limit = {
+			any_interest_group = {
+				leader ?= { NOT = { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+		}
+		ordered_interest_group = {
+			limit = {
+				leader ?= { NOT = { has_template = ARG_Juan_Manuel_de_Rosas } }
+			}
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			leader = { set_character_as_ruler = yes }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_hand_over_seat| TO=any_ig " # GG_TRAZA
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_hand_over_seat| TO=nobody " # GG_TRAZA
 	}
 }

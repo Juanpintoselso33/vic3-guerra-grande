@@ -146,3 +146,20 @@ gg_rosas_first_term_running = {
 		}
 	}
 }
+
+# EN: 25/9/2026 (Juan's decision, AUD-ROSAS-TERM; his Greece game: the term ended ~31/3/1858 and Rosas still ruled in
+#     September) -- the other half of art. 74: «no pueden ser reelegidos sino con intervalo de un periodo». Once the first
+#     term is over (gg_rosas_term_limit starts gg_rosas_no_reelection, six years, on the first check after it ends), Rosas
+#     may not hold the seat: whoever seats him -- an election, the engine, a script -- he is replaced that same day. Only
+#     under the Constitution (chosen = 1: gg_constitution.1.a/.c, the answers that give him a term); never under the sum
+#     of public power (chosen = 2, AUD-ROSAS-SUMA), which keeps him until he dies.
+# ES: la otra mitad del art. 74: no puede ser reelegido sino con intervalo de un periodo. Terminado el primer periodo,
+#     Rosas no puede ocupar el sillon durante seis anios: si lo sienta una eleccion, el motor o un script, se lo
+#     reemplaza en el dia. Solo bajo la Constitucion; nunca bajo la suma del poder publico, que lo sostiene hasta que muera.
+# SOURCE / FUENTE: Constitucion de la Nacion Argentina (1 May 1853), art. 74 (art. 77 after the reform of 1860):
+#     https://es.wikisource.org/wiki/Constituci%C3%B3n_de_la_Naci%C3%B3n_Argentina_(1853)
+gg_rosas_reelection_barred = {
+	global_var:gg_constitution_chosen ?= 1
+	has_global_variable = gg_rosas_no_reelection
+	gg_rosas_first_term_running = no
+}
