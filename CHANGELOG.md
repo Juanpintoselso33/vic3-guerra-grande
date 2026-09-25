@@ -4,6 +4,12 @@
 
 - **La Plata keeps Argentina's party names:** a La Plata formed from Argentina now has the same period names (Federal
   and Unitarian parties, then Nationalist and Autonomist) instead of the game's generic ones.
+- **Uruguay's roads follow its real routes:** the travel network of the five Oriental states is redrawn along
+  the national routes and old caminos reales — Ruta 1 to Colonia, Ruta 3 to Paysandú and Salto, Ruta 5 through
+  Florida and Durazno to Tacuarembó and Rivera, Ruta 7 and Ruta 8 to Minas, Treinta y Tres and Melo, Ruta 9 to
+  Maldonado, Rocha and the Chuy, Ruta 26 across the north — with natural curves instead of straight lines, and
+  crossings at Colón, Nueva Palmira, Bella Unión, Rivera, Aceguá, Jaguarão and the Chuy. Map data: takes effect in
+  a new game.
 - **La Plata's formation panel shows the real size:** it listed 21 states and asked for 7; it now lists the 31 that
   can count and asks for 17 (7 required + 10 provinces or settled frontier). The exact rule is unchanged.
 
