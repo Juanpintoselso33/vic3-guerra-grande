@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Annexed provinces keep their men:** when Argentina (or Entre Ríos, or Brazil with the Farrapos) absorbed a
+  province, the engine deleted every character the province had: in Juan's game Urquiza, Mitre, Sarmiento and Paz
+  vanished with Entre Ríos. Every annexation of the mod now moves the province's characters to the annexer first,
+  as the Oriental Province already did. Characters already lost in a save do not come back.
 - **Paraguay's, Bolivia's and Chile's historical figures come to the country that absorbs them:** their politicians
   and generals (and Paraguay's five commanders of 1855-1880) now also appear for Argentina, La Plata or Great
   Argentina holding Asunción, La Paz or Santiago. Chile's templates carry la Argentina's map home regions.

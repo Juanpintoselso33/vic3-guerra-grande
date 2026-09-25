@@ -342,7 +342,7 @@ gg_constitution.3 = {
 		# EN/ES: the league's ground joins the one country too / la tierra de la liga tambien se incorpora
 		# EN/ES: 24/9 (AUD-CONST-CONFED, Codex) -- never a player's league: it stays a Province of the Pact, as
 		#     gg_argentina_province_join keeps a player's province / nunca la liga de un jugador
-		if = { limit = { c:CLN ?= { is_player = no } } annex = c:CLN } # EN/ES: AUD-PROV-INCORP -- was annex_with_incorporation, which also took Tarija / incorporaba tambien Tarija
+		if = { limit = { c:CLN ?= { is_player = no } } save_scope_as = gg_annexer c:CLN = { gg_bring_characters_to = { TARGET = scope:gg_annexer } } annex = c:CLN } # AUD-CHAR-ANNEX # EN/ES: AUD-PROV-INCORP -- was annex_with_incorporation, which also took Tarija / incorporaba tambien Tarija
 		# EN/ES: AUD-PROV-INCORP -- also what the engine's war annexed / tambien lo que anexo la guerra del motor
 		gg_incorporate_province_states = yes
 		trigger_event = { id = gg_constitution.4 days = 0 popup = yes }

@@ -307,6 +307,8 @@ gg_farrapos.7 = {
 		if = {
 			limit = { exists = c:PNI }
 			debug_log = "GG_FARRAPOS|[TimeKeeper.GetCurrentDate.GetString]|PNI still alive: annexed by script|"
+			save_scope_as = gg_annexer
+			c:PNI = { gg_bring_characters_to = { TARGET = scope:gg_annexer } } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the amnesty keeps the Farrapo chiefs / la amnistia conserva a los jefes farrapos
 			annex = c:PNI
 			# EN/ES: what vanilla's on_wargoal_enforced would have done: the amnesty event
 			#     / lo que habria hecho on_wargoal_enforced de vanilla: el evento de la amnistia

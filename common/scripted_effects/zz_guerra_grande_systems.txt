@@ -1560,6 +1560,8 @@ gg_argentina_province_join = {
 		}
 		if = {
 			limit = { c:$TAG$ = { is_player = no } }
+			save_scope_as = gg_annexer
+			c:$TAG$ = { gg_bring_characters_to = { TARGET = scope:gg_annexer } } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- its men come along; a bare annex deletes them (Urquiza, Mitre, Sarmiento lost with Entre Rios) / sus hombres vienen con ella; la anexion pelada los borra
 			annex = c:$TAG$
 			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- Argentine ground, not a colony / suelo argentino, no colonia
 		}

@@ -17,11 +17,12 @@ gg_unitario_rising = {
 	# EN/ES: the unitario provinces that are Buenos Aires's subjects bring their ground first; a player's province is
 	#     not annexed (AUD-SEAT-ANNEX): it stays a subject until the constitution offers the seat
 	#     / primero su tierra; la provincia de un jugador no se anexa: sigue sujeta hasta la constitucion
-	if = { limit = { c:CRR ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:CRR } }
-	if = { limit = { c:TUC ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:TUC } }
-	if = { limit = { c:SLT ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:SLT } }
-	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:JUJ } }
-	if = { limit = { c:CTM ?= { is_subject_of = c:ARG is_player = no } } c:ARG = { annex = c:CTM } }
+	# EN/ES: 25/9 (AUD-CHAR-ANNEX) -- its men come along; a bare annex deletes them (Urquiza, Mitre, Sarmiento lost with Entre Rios) / sus hombres vienen con ella; la anexion pelada los borra
+	if = { limit = { c:CRR ?= { is_subject_of = c:ARG is_player = no } } c:CRR = { gg_bring_characters_to = { TARGET = c:ARG } } c:ARG = { annex = c:CRR } }
+	if = { limit = { c:TUC ?= { is_subject_of = c:ARG is_player = no } } c:TUC = { gg_bring_characters_to = { TARGET = c:ARG } } c:ARG = { annex = c:TUC } }
+	if = { limit = { c:SLT ?= { is_subject_of = c:ARG is_player = no } } c:SLT = { gg_bring_characters_to = { TARGET = c:ARG } } c:ARG = { annex = c:SLT } }
+	if = { limit = { c:JUJ ?= { is_subject_of = c:ARG is_player = no } } c:JUJ = { gg_bring_characters_to = { TARGET = c:ARG } } c:ARG = { annex = c:JUJ } }
+	if = { limit = { c:CTM ?= { is_subject_of = c:ARG is_player = no } } c:CTM = { gg_bring_characters_to = { TARGET = c:ARG } } c:ARG = { annex = c:CTM } }
 	c:ARG ?= { gg_incorporate_province_states = yes } # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
 	if = {
 		limit = { exists = s:STATE_TUCUMAN.region_state:ARG NOT = { exists = c:CLN } }

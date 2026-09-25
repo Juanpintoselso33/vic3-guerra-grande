@@ -213,6 +213,7 @@ gg_argentina_split_coalition = {
 		scope:gg_split_league = { gg_province_install_governor = { KEY = cordoba } }
 	}
 	else = {
+		c:ARG ?= { scope:gg_split_league = { gg_bring_characters_to = { TARGET = c:ARG } } } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- its men come along; a bare annex deletes them (Urquiza, Mitre, Sarmiento lost with Entre Rios) / sus hombres vienen con ella; la anexion pelada los borra
 		c:ARG ?= {
 			annex = scope:gg_split_league
 			gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas

@@ -299,6 +299,7 @@ gg_conf_province_join = {
 		}
 		if = {
 			limit = { c:$TAG$ = { is_player = no } }
+			c:$TAG$ = { gg_bring_characters_to = { TARGET = c:ENR } } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- its men come along; a bare annex deletes them (Urquiza, Mitre, Sarmiento lost with Entre Rios) / sus hombres vienen con ella; la anexion pelada los borra
 			c:ENR = {
 				annex = c:$TAG$
 				gg_incorporate_province_states = yes # EN/ES: AUD-PROV-INCORP -- the provinces come home incorporated / las provincias vuelven incorporadas
