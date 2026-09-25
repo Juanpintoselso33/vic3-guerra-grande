@@ -1,0 +1,6 @@
+﻿l_english:
+ # Argentine party names by period (common/parties). Before 1862, federales and unitarios.
+ gg_party_federal:0 "Federal Party"
+ gg_party_unitario:0 "Unitarian Party"
+ gg_party_nacionalista:0 "Nationalist Party"
+ gg_party_autonomista:0 "Autonomist Party"

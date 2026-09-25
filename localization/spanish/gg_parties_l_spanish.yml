@@ -1,0 +1,6 @@
+﻿l_spanish:
+ # Nombres de los partidos argentinos por epoca (common/parties). Antes de 1862, federales y unitarios.
+ gg_party_federal:0 "Partido Federal"
+ gg_party_unitario:0 "Partido Unitario"
+ gg_party_nacionalista:0 "Partido Nacionalista"
+ gg_party_autonomista:0 "Partido Autonomista"
