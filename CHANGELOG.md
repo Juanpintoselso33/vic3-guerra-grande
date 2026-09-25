@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.5-alpha — 25/9/2026
 
 - **The Malvinas journals work for La Plata:** la Argentina's two Malvinas journals checked only Argentina's tag;
   La Plata and Great Argentina now keep them.
