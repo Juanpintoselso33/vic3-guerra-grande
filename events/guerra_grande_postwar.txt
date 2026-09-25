@@ -11,6 +11,9 @@
 
 gg_postwar.1 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	hidden = yes
 
 	immediate = {
@@ -107,6 +110,9 @@ gg_postwar.1 = {
 #     design (a punitive peace did not happen; this branch is counterfactual).
 gg_postwar.2 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	placement = ROOT
 
 	title = gg_postwar.2.t
@@ -188,6 +194,9 @@ gg_postwar.2 = {
 gg_postwar.3 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.3|" } # GG_TRAZA
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	placement = ROOT
 
 	title = gg_postwar.3.t
@@ -257,6 +266,9 @@ gg_postwar.3 = {
 #     (Garzon expected, died XII.1851; Giro chosen on the fusion policy).
 gg_postwar.4 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	placement = ROOT
 
 	title = gg_postwar.4.t
@@ -382,6 +394,9 @@ gg_postwar.4 = {
 gg_postwar.5 = {
 	immediate = { debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_postwar.5|" } # GG_TRAZA
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	placement = ROOT
 
 	title = gg_postwar.5.t
@@ -473,6 +488,7 @@ gg_postwar.6 = {
 	duration = 12
 
 	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
 		NOT = { has_global_variable = gg_peace_punished } # EN/ES: 23/9 -- was gg_fusion_blocked, set only under it / era gg_fusion_blocked
 	}
 
@@ -500,6 +516,9 @@ gg_postwar.6 = {
 # EN/ES: gg_postwar.7 -- Giro takes office (hidden) / Giro asume (oculto)
 gg_postwar.7 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	hidden = yes
 
 	immediate = {
@@ -520,6 +539,9 @@ gg_postwar.7 = {
 #     firmada despues de la fecha entrega al dia siguiente.
 gg_postwar.8 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	hidden = yes
 
 	immediate = {
@@ -555,6 +577,9 @@ gg_postwar.8 = {
 #     (hidden) / se acabaron los cuatro anios que la Asamblea le dio a Oribe: vuelve a decidir la urna
 gg_postwar.9 = {
 	type = country_event
+	trigger = {
+		gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- the independent Republic only / solo la Republica independiente
+	}
 	hidden = yes
 
 	immediate = {

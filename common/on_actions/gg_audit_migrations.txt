@@ -334,7 +334,7 @@ gg_paraguay_recognition_pulse = {
 #     - AUD-SIEGE-GUNS: once the war's modifiers were cleared, the state modifier gg_siege_guns_of_the_plaza goes too
 #       (gg_wartime_modifiers_clear now removes it from states).
 #     - AUD-RAILROAD: the historical presidency of the Republic (gg_president_railroad) ends when neither Oriental
-#       government exists: it was cleared only by gg_postwar.8/.9, queued on URU, and an absorbed Oriental Province
+#       government exists, or the Banda Oriental is a Pact province or absorbed (AUD-POSTWAR-PROVINCE): it was cleared only by gg_postwar.8/.9, queued on URU, and an absorbed Oriental Province
 #       dropped them, so the mark stayed up for good (1851-1869 in Juan's game) and a Uruguay released later would
 #       have had Rivera forced into its chair (gg_president_seat_on_new_ruler -> gg_president_historical).
 # ES: tres reparaciones en el pulso mensual GLOBAL. Sin la guarda de partida nueva: las partidas empezadas antes de hoy
@@ -345,6 +345,7 @@ on_monthly_pulse = {
 		gg_stray_ruler_role_migration
 		gg_siege_guns_state_migration
 		gg_president_railroad_end
+		gg_war_against_buenos_aires_end
 	}
 }
 
@@ -375,11 +376,40 @@ gg_siege_guns_state_migration = {
 gg_president_railroad_end = {
 	trigger = {
 		has_global_variable = gg_president_railroad
-		NOT = { exists = c:URU }
-		NOT = { exists = c:CER }
+		OR = {
+			AND = {
+				NOT = { exists = c:URU }
+				NOT = { exists = c:CER }
+			}
+			# EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- a Pact province or an absorbed Banda Oriental has no Republic's
+			#     presidency: gg_postwar.9, which ended it, no longer runs there / sin presidencia de la Republica
+			gg_postwar_republic = no
+		}
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_president_railroad_end" # GG_TRAZA
 		remove_global_variable = gg_president_railroad
+	}
+}
+
+# EN: 25/9/2026 (AUD-BA-WARMARK, found by the 1869-1900 audit) -- gg_war_against_buenos_aires marks Urquiza's war on
+#     Rosas (1851-52) and nothing cleared it: it stayed up to 1900, and gg_pact_capitulation reads only it and a truce
+#     between Argentina and Entre Rios, so a later capitulation of Argentina to Entre Rios (Cepeda or Pavon in the Buenos
+#     Aires chain) would have written «Urquiza won the Pact» years after the Pact closed. Its readers all belong to that
+#     war and its settlement (the war-end hooks, .87/.88, gg_argentina_cal.29, and gg_caseros.7 the day after, which
+#     reads the settlement marks, not this one). It ends on the first monthly pulse with the Pact settled and Entre Rios
+#     at no war (or gone); games in progress are cleared the same way.
+# ES: la marca de la guerra de Urquiza contra Rosas no se apagaba nunca; una capitulacion posterior de la Argentina ante
+#     Entre Rios (Cepeda, Pavon) habria escrito que Urquiza gano el Pacto. Se apaga con el Pacto cerrado y sin guerra
+#     entre la Argentina y Entre Rios.
+gg_war_against_buenos_aires_end = {
+	trigger = {
+		has_global_variable = gg_war_against_buenos_aires
+		has_global_variable = gg_pact_settled
+		NOT = { c:ENR ?= { is_at_war = yes } } # EN/ES: Entre Rios at no war (or gone); safe whatever Argentina's tag / sin guerra (o sin Entre Rios)
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_war_against_buenos_aires_end" # GG_TRAZA
+		remove_global_variable = gg_war_against_buenos_aires
 	}
 }

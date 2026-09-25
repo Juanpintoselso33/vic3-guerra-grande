@@ -5,6 +5,18 @@
 - **Bernardino Caballero is spelt right:** the Paraguayan general (who also serves Argentina, La Plata or Great
   Argentina holding Asunción) was named «Cabellero», a typo inherited from vanilla's template. New games show
   Caballero; a Caballero already in a save keeps the old spelling.
+- **The historical men die on their date:** Rosas (1877), Oribe (1857), Rivera (1854), Suárez (1868), Urquiza (1870),
+  Brown (1857), Lavalleja (1853), Mitre (1906), Flores (1868), Herrera y Obes (1890), Sarmiento (1888), Paz (1854) and
+  now Nazario Benavídez (1858) die on the first month after their historical death; before, the game only stopped
+  protecting them and Oribe was still alive in 1869. A dead man is never recreated to fill a seat. Games in progress:
+  whoever is already past his date dies next month.
+- **No duplicate historical figures with «Expanded Characters & Commanders of Historical Importance Redux»:** that mod's
+  own copies of figures the game already has (Berro, Sarmiento, Roca, four Peruvian presidents and 39 more worldwide,
+  plus Artigas, who never came back from Paraguay) no longer appear; the game's or this mod's version stays.
+- **The Uruguayan postwar is the Republic's:** Oribe's four-year mandate, the handovers, «the caudillos come back» and
+  the elections no longer run on the Oriental Province of the Pact or on an absorbed Banda Oriental.
+- **Urquiza's war mark is cleared after the Pact:** it stayed set for good, and a later Argentine capitulation to Entre
+  Ríos (Cepeda, Pavón) would have been read as Urquiza winning the Pact.
 - **One ruler at a time:** a head of state moved into another country kept his office: Oribe (the Oriental
   Province's governor) and Joaquín Suárez (the Defensa's president) sat in Argentina from 1853 on still marked as
   rulers beside the real one. Characters brought over by an annexation now leave the ruler and heir roles behind;

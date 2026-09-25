@@ -35,6 +35,19 @@ gg_is_province_country = {
 # ES: la Banda Oriental recibida como provincia del Pacto. NO esta en gg_is_province_country (las trece provincias
 #     argentinas, que leen el journal, las filas y la IA; URU es tambien la Republica independiente). Vale solo
 #     mientras es provincia de Buenos Aires: lo que depende de esto se apaga solo si vuelve a ser independiente.
+# EN: 25/9/2026 (AUD-POSTWAR-PROVINCE, Juan's decision: option a) -- the Uruguayan postwar (events/guerra_grande_postwar.txt:
+#     Oribe's four-year mandate, the handovers, «the caudillos come back», the elections and the governing interest
+#     groups it fixes) belongs to the independent Republic. It does not run while the Banda Oriental is a Province of
+#     the Pact (gg_oriental_province) or once Argentina absorbed it (gg_reincorporated). In Juan's game it ran on Oribe's
+#     Oriental Province: «the caudillos come back» on 20/3/1853, eight years of gg_postwar_caudillos and the landowners
+#     and armed forces made its government.
+# ES: la posguerra uruguaya es de la Republica independiente: no corre con la Banda Oriental provincia del Pacto ni
+#     absorbida por la Argentina.
+gg_postwar_republic = {
+	NOT = { has_global_variable = gg_oriental_province }
+	NOT = { has_global_variable = gg_reincorporated }
+}
+
 gg_is_oriental_pact_province = {
 	c:URU ?= this
 	exists = c:ARG

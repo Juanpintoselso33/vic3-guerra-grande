@@ -377,7 +377,7 @@ gg_postwar_start = {
 	if = {
 		limit = {
 			NOT = { has_global_variable = gg_postwar_started }
-			NOT = { has_global_variable = gg_reincorporated }
+			gg_postwar_republic = yes # EN/ES: 25/9 (AUD-POSTWAR-PROVINCE) -- not for a Pact province nor an absorbed one (was: NOT gg_reincorporated) / ni provincia del Pacto ni absorbida
 		}
 		set_global_variable = gg_postwar_started
 		gg_postwar_dispatch = yes
@@ -1757,9 +1757,14 @@ gg_ruler_set = {
 # EN/ES: who should be sitting in the chair right now, in this country / quien deberia estar en el
 #     sillon ahora mismo, en este pais
 gg_president_historical = {
+	# EN/ES: 25/9/2026 (AUD-HLIFE-PAST) -- a historical president past his death date (gg_historical_death_now) is not
+	#     recreated by gg_ruler_set: the chair stays with the engine's pick / un presidente muerto en su fecha no se recrea
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_president_historical|" # GG_TRAZA
 	if = {
-		limit = { has_variable = guerra_grande_cerrito_government }
+		limit = {
+			has_variable = guerra_grande_cerrito_government
+			NOT = { has_global_variable = gg_hdeath_done_URU_Manuel_Oribe } # EN/ES: AUD-HLIFE-PAST
+		}
 		gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
 	}
 	else_if = {
@@ -1769,6 +1774,7 @@ gg_president_historical = {
 				NOT = { has_global_variable = gg_peace_settled }
 				has_global_variable = gg_president_railroad
 			}
+			NOT = { has_global_variable = gg_hdeath_done_URU_joaquin_suarez } # EN/ES: AUD-HLIFE-PAST
 		}
 		gg_ruler_set = { TEMPLATE = URU_joaquin_suarez }
 	}
@@ -1776,6 +1782,7 @@ gg_president_historical = {
 		limit = {
 			has_variable = guerra_grande_blanco_path
 			NOT = { has_global_variable = gg_rivera_presidency }
+			NOT = { has_global_variable = gg_hdeath_done_URU_Manuel_Oribe } # EN/ES: AUD-HLIFE-PAST
 		}
 		gg_ruler_set = { TEMPLATE = URU_Manuel_Oribe }
 	}
@@ -1783,11 +1790,15 @@ gg_president_historical = {
 		limit = {
 			has_global_variable = gg_rivera_presidency
 			year >= 1839
+			NOT = { has_global_variable = gg_hdeath_done_URU_Fructuoso_Rivera } # EN/ES: AUD-HLIFE-PAST
 		}
 		gg_ruler_set = { TEMPLATE = URU_Fructuoso_Rivera }
 	}
 	else_if = {
-		limit = { has_global_variable = gg_rivera_presidency }
+		limit = {
+			has_global_variable = gg_rivera_presidency
+			year < 1839 # EN/ES: 25/9 (AUD-HLIFE-PAST) -- was implicit; with Rivera dead the chair is not Pereira's / con Rivera muerto no es de Pereira
+		}
 		gg_ruler_set = { TEMPLATE = URU_gg_gabriel_antonio_pereira }
 	}
 }

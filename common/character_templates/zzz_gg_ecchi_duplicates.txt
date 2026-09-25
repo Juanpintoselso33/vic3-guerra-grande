@@ -1,0 +1,664 @@
+﻿# EN: 25/9/2026 (AUD-DUP-ECCHI, Juan's decision: option a) -- «Expanded Characters & Commanders of Historical Importance
+#     Redux» (Workshop 3261096208, ECCHI) brings its own templates of historical figures that the game already has (vanilla,
+#     la Argentina or this mod): in Juan's Argentina game two Bernardo Berros sat in the Oriental Province in 1853 and a
+#     second Sarmiento in Argentina from 1862. Ours stays (face, biography, historical life). Each ECCHI duplicate below is
+#     redefined WITHOUT its usage blocks (interest_group_leader_usage / commander_usage / ...), so the engine never picks
+#     it, and without its dna (so the copy is harmless when ECCHI is not loaded). ECCHI has no history nor events: its
+#     templates only ever appear through those usage blocks. REPLACE_OR_CREATE because ECCHI loads before this mod and
+#     defines them the same way; without ECCHI they are unused templates.
+#     The list: every ECCHI template with the same birth date and surname as a vanilla, la Argentina or Guerra Grande
+#     template (tools/ecchi_duplicates.py in the design repo regenerates it), plus Artigas, who never returned from
+#     Paraguay and whose letter the mod tells (gg_artigas_letter).
+# ES: el mod ECCHI trae sus propias plantillas de figuras que el juego ya tiene: dos Berro en la Provincia Oriental de 1853
+#     y un segundo Sarmiento desde 1862. Queda la nuestra. Cada duplicado se redefine SIN sus bloques de uso (el motor
+#     nunca lo elige) y sin ADN (inofensivo si ECCHI no esta cargado). Mas Artigas, que nunca volvio del Paraguay.
+
+# ecchi_arg_roca (ecchi_leaders_ARG.txt) -- duplicates / duplica: vanilla:ARG_alejo_roca
+REPLACE_OR_CREATE:ecchi_arg_roca = {
+    first_name = ecchi_Julio_Argentino
+    last_name = Roca
+    historical = yes
+    culture = cu:platinean
+    home_region = STATE_RIO_NEGRO
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1843.7.17
+    traits = { wrathful plains_commander }
+    commander_rank = default
+}
+
+# ecchi_arg_sarmiento (ecchi_leaders_ARG.txt) -- duplicates / duplica: vanilla:ARG_domingo_sarmiento
+REPLACE_OR_CREATE:ecchi_arg_sarmiento = {
+    first_name = ecchi_Domingo_Faustino
+    last_name = ecchi_Sarmiento
+    historical = yes
+    culture = cu:platinean
+    home_region = STATE_TUCUMAN
+    religion = rel:catholic
+    ideology = ideology_reformer
+    interest_group = ig_intelligentsia
+    birth_date = 1811.2.15
+    traits = { romantic charismatic }
+}
+
+# ecchi_aus_lueger (ecchi_leaders_AUS.txt) -- duplicates / duplica: vanilla:AUS_karl_lueger
+REPLACE_OR_CREATE:ecchi_aus_lueger = {
+    first_name = Karl
+    last_name = ecchi_Lueger
+    historical = yes
+    culture = cu:south_german
+    home_region = STATE_AUSTRIA
+    religion = rel:catholic
+    ideology = ideology_ethno_nationalist
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1844.10.24
+    traits = { bigoted demagogue }
+}
+
+# ecchi_bht_nehru (ecchi_leaders_BHT.txt) -- duplicates / duplica: vanilla:BIC_jawaharlal_nehru
+REPLACE_OR_CREATE:ecchi_bht_nehru = {
+    first_name = ecchi_Jawaharlal
+    last_name = ecchi_Nehru
+    historical = yes
+    culture = cu:kashmiri
+    religion = rel:hindu
+    ideology = ideology_republican_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1889.11.14
+    traits = { masterful_diplomat meticulous direct }
+}
+
+# ecchi_can_laurier (ecchi_leaders_CAN.txt) -- duplicates / duplica: vanilla:can_wilfrid_laurier
+REPLACE_OR_CREATE:ecchi_can_laurier = {
+    first_name = ecchi_Wilfrid
+    last_name = ecchi_Laurier
+    historical = yes
+    culture = cu:anglo_canadian
+    home_region = STATE_QUEBEC
+    religion = rel:protestant
+    ideology = ideology_moderate
+    interest_group = ig_intelligentsia
+    birth_date = 1841.11.20
+    traits = { tactful experienced_diplomat expert_political_operator }
+}
+
+# ecchi_can_macdonald (ecchi_leaders_CAN.txt) -- duplicates / duplica: vanilla:can_john_macdonald
+REPLACE_OR_CREATE:ecchi_can_macdonald = {
+    first_name = ecchi_John_A
+    last_name = Macdonald
+    historical = yes
+    culture = cu:anglo_canadian
+    home_region = STATE_ONTARIO
+    religion = rel:protestant
+    ideology = ideology_republican_leader
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1815.1.10
+    traits = { expert_political_operator tactful bigoted }
+}
+
+# ecchi_cub_de_cespedes (ecchi_leaders_0_caribbean.txt) -- duplicates / duplica: vanilla:CUB_carlos_manuel_de_cespedes
+REPLACE_OR_CREATE:ecchi_cub_de_cespedes = {
+    first_name = ecchi_Carlos_Manuel
+    last_name = de_Cespedes
+    historical = yes
+    culture = cu:caribeno
+    religion = rel:catholic
+    ideology = ideology_abolitionist
+    interest_group = ig_landowners
+    birth_date = 1819.4.18
+    traits = { arrogant persistent forest_commander }
+}
+
+# ecchi_cub_gomez (ecchi_leaders_0_caribbean.txt) -- duplicates / duplica: vanilla:CUB_maximo_gomez
+REPLACE_OR_CREATE:ecchi_cub_gomez = {
+    first_name = ecchi_Maximo
+    last_name = ecchi_Gomez
+    historical = yes
+    culture = cu:caribeno
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1836.11.18
+    traits = { brave reckless persistent }
+    commander_rank = default
+}
+
+# ecchi_cub_maceo (ecchi_leaders_0_caribbean.txt) -- duplicates / duplica: vanilla:CUB_antonio_maceo
+REPLACE_OR_CREATE:ecchi_cub_maceo = {
+    first_name = ecchi_Jose_Antonio
+    last_name = ecchi_Maceo
+    historical = yes
+    culture = cu:caribeno
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1845.6.14
+    traits = { forest_commander brave reckless }
+    commander_rank = default
+}
+
+# ecchi_cub_marti (ecchi_leaders_0_caribbean.txt) -- duplicates / duplica: vanilla:CUB_jose_marti
+REPLACE_OR_CREATE:ecchi_cub_marti = {
+    first_name = ecchi_Jose
+    last_name = ecchi_Marti
+    historical = yes
+    culture = cu:caribeno
+    religion = rel:catholic
+    ideology = ideology_reformer
+    interest_group = ig_intelligentsia
+    birth_date = 1853.1.28
+    traits = { romantic brave reckless }
+}
+
+# ecchi_dom_duarte (ecchi_leaders_0_central_america.txt) -- duplicates / duplica: vanilla:DOM_juan_pablo_duarte
+REPLACE_OR_CREATE:ecchi_dom_duarte = {
+    first_name = Juan_Pablo
+    last_name = Duarte
+    historical = yes
+    culture = cu:caribeno
+    religion = rel:catholic
+    ideology = ideology_radical
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1813.1.26
+    traits = { reckless meticulous demagogue }
+}
+
+# ecchi_fra_dreyfus (ecchi_leaders_FRA.txt) -- duplicates / duplica: vanilla:canonic_dreyfus_character_template
+REPLACE_OR_CREATE:ecchi_fra_dreyfus = {
+    first_name = Alfred
+    last_name = ecchi_Dreyfus
+    historical = yes
+    culture = cu:french
+    home_region = STATE_ALSACE_LORRAINE
+    religion = rel:jewish
+    ideology = ideology_moderate
+    interest_group = ig_armed_forces
+    birth_date = 1859.10.9
+    traits = { experienced_artillery_commander persistent }
+    commander_rank = default
+}
+
+# ecchi_gbr_cobden (ecchi_leaders_GBR.txt) -- duplicates / duplica: vanilla:GBR_richard_cobden
+REPLACE_OR_CREATE:ecchi_gbr_cobden = {
+    first_name = Richard
+    last_name = ecchi_Cobden
+    historical = yes
+    culture = cu:british
+    home_region = STATE_HOME_COUNTIES
+    religion = rel:protestant
+    ideology = ideology_radical
+    interest_group = ig_industrialists
+    birth_date = 1804.6.3
+    traits = { tactful masterful_diplomat }
+}
+
+# ecchi_gbr_john_russell (ecchi_leaders_GBR.txt) -- duplicates / duplica: vanilla:GBR_john_russell
+REPLACE_OR_CREATE:ecchi_gbr_john_russell = {
+    first_name = John
+    last_name = Russell
+    historical = yes
+    culture = cu:british
+    home_region = STATE_HOME_COUNTIES
+    religion = rel:protestant
+    ideology = ideology_reformer
+    interest_group = ig_intelligentsia
+    birth_date = 1792.8.18
+    traits = { reckless basic_political_operator }
+}
+
+# ecchi_ger_einstein (ecchi_leaders_GER.txt) -- duplicates / duplica: vanilla:albert_einstein_template
+REPLACE_OR_CREATE:ecchi_ger_einstein = {
+    first_name = Albert
+    last_name = ecchi_Einstein
+    historical = yes
+    culture = cu:south_german
+    religion = rel:jewish
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1879.3.14
+    traits = { meticulous reserved innovative }
+}
+
+# ecchi_ger_engels (ecchi_leaders_GER.txt) -- duplicates / duplica: vanilla:GBR_friedrich_engels
+REPLACE_OR_CREATE:ecchi_ger_engels = {
+	first_name = Friedrich
+	last_name = Engels
+	culture = cu:north_german
+	female = no
+	religion = rel:protestant
+	ideology = ideology_communist
+	interest_group = ig_trade_unions
+	birth_date = 1820.11.28
+	traits = { cancer romantic expensive_tastes }
+}
+
+# ecchi_ger_grimm (ecchi_leaders_GER.txt) -- duplicates / duplica: vanilla:HAN_jacob_grimm
+REPLACE_OR_CREATE:ecchi_ger_grimm = {
+	first_name = Jacob
+	last_name = ecchi_Grimm
+	culture = cu:north_german
+	religion = rel:protestant
+	historical = yes
+	female = no
+	ideology = ideology_corporatist
+	interest_group = ig_intelligentsia
+	birth_date = 1785.1.4
+	traits = { meticulous erudite literary }
+}
+
+# ecchi_ger_hugenberg (ecchi_leaders_GER.txt) -- duplicates / duplica: vanilla:agitator_alfred_hugenberg
+REPLACE_OR_CREATE:ecchi_ger_hugenberg = {
+	first_name = Alfred
+	last_name = ecchi_Hugenberg
+	culture = cu:north_german
+	female = no
+	religion = rel:protestant
+	ideology = ideology_jingoist_leader
+	interest_group = ig_industrialists
+	birth_date = 1865.6.19
+	traits = { ambitious bigoted imperious }
+}
+
+# ecchi_gre_paparrigopoulos (ecchi_leaders_0_europe.txt) -- duplicates / duplica: vanilla:GRE_constantine_paparrigopoulos
+REPLACE_OR_CREATE:ecchi_gre_paparrigopoulos = {
+    first_name = Constantine
+    last_name = ecchi_Paparrigopoulos
+    historical = yes
+    culture = cu:greek
+    home_region = STATE_ATTICA
+    religion = rel:orthodox
+    ideology = ideology_traditionalist
+    interest_group = ig_intelligentsia
+    birth_date = 1815.5.18
+    ig_leader = yes
+    traits = { cautious experienced_diplomat }
+}
+
+# ecchi_gwa_rani (ecchi_leaders_BHT.txt) -- duplicates / duplica: vanilla:jhn_rani_of_jhansi
+REPLACE_OR_CREATE:ecchi_gwa_rani = {
+    first_name = ecchi_Lakshmibai # Rani of Jhansi
+    last_name = Newalkar
+    historical = yes
+    culture = cu:marathi
+    female = yes
+    religion = rel:hindu
+    ideology = ideology_royalist
+    interest_group = ig_landowners
+    birth_date = 1828.11.19
+    traits = { demagogue inspirational_orator charismatic }
+}
+
+# ecchi_hai_soulouque (ecchi_leaders_0_caribbean.txt) -- duplicates / duplica: vanilla:HAI_faustin_soulouque
+REPLACE_OR_CREATE:ecchi_hai_soulouque = {
+    first_name = Faustin
+    last_name = Soulouque
+    historical = yes
+    culture = cu:afro_caribeno
+    religion = rel:animist #Vodou
+    ideology = ideology_royalist
+    interest_group = ig_rural_folk
+    birth_date = 1782.8.15
+    traits = { wrathful ambitious imperious }
+}
+
+# ecchi_ita_gentile (ecchi_leaders_ITA.txt) -- duplicates / duplica: vanilla:agitator_giovanni_gentile
+REPLACE_OR_CREATE:ecchi_ita_gentile = {
+    first_name = ecchi_Giovanni
+    last_name = ecchi_Gentile
+    historical = yes
+    culture = cu:south_italian
+    religion = rel:catholic
+    home_region = STATE_SICILY
+    ideology = ideology_fascist
+    interest_group = ig_intelligentsia
+    birth_date = 1875.5.30
+    traits = { erudite charismatic }
+}
+
+# ecchi_ont_strachan (ecchi_leaders_CAN.txt) -- duplicates / duplica: vanilla:ONT_john_strachan
+REPLACE_OR_CREATE:ecchi_ont_strachan = {
+    first_name = John
+    last_name = ecchi_Strachan
+    historical = yes
+    culture = cu:anglo_canadian
+    home_region = STATE_ONTARIO
+    religion = rel:protestant
+    ideology = ideology_humanitarian
+    interest_group = ig_devout
+    birth_date = 1778.4.12
+    traits = { erudite imposing pious }
+}
+
+# ecchi_peu_bermudez (ecchi_leaders_PEU.txt) -- duplicates / duplica: vanilla:PEU_pedro_pablo_bermudez_ascarza
+REPLACE_OR_CREATE:ecchi_peu_bermudez = {
+    first_name = ecchi_Pedro_Pablo
+    last_name = ecchi_Bermudez
+    historical = yes
+    culture = cu:south_andean
+    home_region = STATE_LIMA
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1793.6.27
+    traits = { reckless mountain_commander ambitious }
+}
+
+# ecchi_peu_de_san_roman (ecchi_leaders_PEU.txt) -- duplicates / duplica: vanilla:PEU_miguel_de_san_roman
+REPLACE_OR_CREATE:ecchi_peu_de_san_roman = {
+    first_name = Miguel
+    last_name = ecchi_de_San_Roman
+    historical = yes
+    culture = cu:south_andean
+    home_region = STATE_AREQUIPA
+    religion = rel:catholic
+    ideology = ideology_moderate
+    interest_group = ig_armed_forces
+    birth_date = 1802.5.17
+    traits = { traditionalist_commander surveyor }
+}
+
+# ecchi_peu_gamarra (ecchi_leaders_PEU.txt) -- duplicates / duplica: vanilla:PEU_Agustin_Gamarra
+REPLACE_OR_CREATE:ecchi_peu_gamarra = {
+    first_name = Agustin
+    last_name = Gamarra
+    historical = yes
+    culture = cu:south_andean
+    home_region = STATE_AREQUIPA
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1785.8.27
+    traits = { basic_offensive_planner persistent }
+}
+
+# ecchi_peu_salaverry (ecchi_leaders_PEU.txt) -- duplicates / duplica: vanilla:PEU_Felipe_Salaverry
+REPLACE_OR_CREATE:ecchi_peu_salaverry = {
+    first_name = ecchi_Felipe_Santiago
+    last_name = Salaverry
+    historical = yes
+    culture = cu:south_andean
+    home_region = STATE_LIMA
+    religion = rel:catholic
+    ideology = ideology_slaver
+    interest_group = ig_armed_forces
+    birth_date = 1806.5.3
+    traits = { resupply_commander ambitious imperious }
+}
+
+# ecchi_phi_aguinaldo (ecchi_leaders_PHI.txt) -- duplicates / duplica: vanilla:PHI_emilio_aguinaldo
+REPLACE_OR_CREATE:ecchi_phi_aguinaldo = {
+    first_name = Emilio
+    last_name = ecchi_Aguinaldo
+    historical = yes
+    culture = cu:filipino
+    home_region = STATE_LUZON
+    religion = rel:catholic
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    birth_date = 1869.3.22
+    traits = { cruel ambitious tactful basic_diplomat forest_commander }
+}
+
+# ecchi_phi_bonifacio (ecchi_leaders_PHI.txt) -- duplicates / duplica: vanilla:PHI_andres_bonifacio
+REPLACE_OR_CREATE:ecchi_phi_bonifacio = {
+    first_name = Andres
+    last_name = Bonifacio
+    historical = yes
+    culture = cu:filipino
+    home_region = STATE_LUZON
+    religion = rel:catholic
+    ideology = ideology_republican_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1863.11.30
+    traits = { popular_commander romantic persistent }
+}
+
+# ecchi_phi_rizal (ecchi_leaders_PHI.txt) -- duplicates / duplica: vanilla:PHI_jose_rizal
+REPLACE_OR_CREATE:ecchi_phi_rizal = {
+    first_name = ecchi_Jose
+    last_name = Rizal
+    historical = yes
+    culture = cu:filipino
+    home_region = STATE_LUZON
+    religion = rel:catholic
+    ideology = ideology_reformer
+    interest_group = ig_intelligentsia
+    birth_date = 1861.6.19
+    traits = { romantic tactful inspirational_orator }
+}
+
+# ecchi_pol_mieroslawski (ecchi_leaders_POL.txt) -- duplicates / duplica: vanilla:agitator_ludwik_mieroslawski
+REPLACE_OR_CREATE:ecchi_pol_mieroslawski = {
+    first_name = Ludwik
+    last_name = Mieroslawski
+    historical = yes
+    culture = cu:polish
+    home_region = STATE_MAZOVIA
+    religion = rel:catholic
+    ideology = ideology_jingoist_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1814.1.17
+    traits = { surveyor inspirational_orator experienced_offensive_planner }
+    commander_rank = default
+}
+
+# ecchi_que_cartier (ecchi_leaders_CAN.txt) -- duplicates / duplica: vanilla:can_george_etienne_cartier
+REPLACE_OR_CREATE:ecchi_que_cartier = {
+    first_name = ecchi_George-Etienne
+    last_name = Cartier
+    historical = yes
+    culture = cu:franco_canadian
+    home_region = STATE_QUEBEC
+    religion = rel:catholic
+    ideology = ideology_republican_leader
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1814.9.6
+    traits = { kidney_stones tactful romantic }
+}
+
+# ecchi_que_nelson (ecchi_leaders_CAN.txt) -- duplicates / duplica: vanilla:QUE_robert_nelson
+REPLACE_OR_CREATE:ecchi_que_nelson = {
+    first_name = Robert
+    last_name = Nelson
+    historical = yes
+    culture = cu:franco_canadian
+    home_region = STATE_QUEBEC
+    religion = rel:catholic
+    ideology = ideology_radical
+    interest_group = ig_rural_folk
+    birth_date = 1794.8.8
+    traits = { persistent reckless ambitious }
+}
+
+# ecchi_rus_bakunin (ecchi_leaders_RUS.txt) -- duplicates / duplica: vanilla:rus_mikhail_bakunin_character_template
+REPLACE_OR_CREATE:ecchi_rus_bakunin = {
+	first_name = Mikhail
+	last_name = Bakunin
+	historical = yes
+	culture = cu:russian
+	home_region = STATE_TVER
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_anarchist
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1814.5.30
+	traits = {
+		brave
+		persistent
+	}
+}
+
+# ecchi_sin_jinnah (ecchi_leaders_BHT.txt) -- duplicates / duplica: vanilla:BIC_muhammad_ali_jinnah
+REPLACE_OR_CREATE:ecchi_sin_jinnah = {
+    first_name = Muhammad_Ali
+    last_name = ecchi_Jinnah
+    historical = yes
+    culture = cu:gujarati
+    religion = rel:sunni
+    ideology = ideology_republican_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1876.12.25
+    traits = { tactful romantic demagogue }
+}
+
+# ecchi_spa_infante_carlos (ecchi_leaders_SPA.txt) -- duplicates / duplica: vanilla:SPC_carlos_v_de_borbon_template
+REPLACE_OR_CREATE:ecchi_spa_infante_carlos = {
+    first_name = ecchi_Infante_Carlos
+    last_name = de_Borbon
+    historical = yes
+    culture = cu:spanish
+    home_region = STATE_NEW_CASTILE
+    religion = rel:catholic
+    ideology = ideology_traditionalist
+    interest_group = ig_rural_folk
+    birth_date = 1788.3.29
+    traits = { persistent imperious }
+}
+
+# ecchi_tpg_hong_xiuquan (ecchi_leaders_CHI.txt) -- duplicates / duplica: vanilla:TPG_hong_xiuquan
+REPLACE_OR_CREATE:ecchi_tpg_hong_xiuquan = {
+    first_name = Xiuquan
+    last_name = Hong
+    home_region = STATE_GUANGDONG
+    historical = yes
+    culture = cu:hakka
+    religion = rel:protestant
+    ideology = ideology_theocrat
+    interest_group = ig_devout
+    birth_date = 1814.1.1
+    traits = { pious romantic popular_commander psychological_affliction }
+}
+
+# ecchi_ubd_von_bellingshausen (ecchi_leaders_UBD.txt) -- duplicates / duplica: vanilla:RUS_fabian_gottlieb_von_bellingshausen
+REPLACE_OR_CREATE:ecchi_ubd_von_bellingshausen = {
+    first_name = ecchi_Fabian_Gottlieb
+    last_name = ecchi_von_Bellingshausen
+    historical = yes
+    culture = cu:east_german
+    home_region = STATE_TALINN
+    religion = rel:protestant
+    ideology = ideology_moderate
+    interest_group = ig_armed_forces
+    birth_date = 1778.9.11
+    traits = { direct explorer }
+}
+
+# ecchi_uru_artigas (ecchi_leaders_0_south_america.txt) -- duplicates / duplica: none: exiled in Paraguay 1820-1850, never in Uruguayan politics
+REPLACE_OR_CREATE:ecchi_uru_artigas = {
+    first_name = ecchi_Jose_Gervasio
+    last_name = ecchi_Artigas
+    historical = yes
+    culture = cu:platinean
+    religion = rel:catholic
+    ideology = ideology_republican_leader
+    interest_group = ig_armed_forces
+    birth_date = 1764.6.19
+    traits = { pillager ambitious imperious }
+}
+
+# ecchi_uru_berro (ecchi_leaders_0_south_america.txt) -- duplicates / duplica: gg:URU_bernardo_prudencio_berro, vanilla:URU_bernardo_prudencio_berro
+REPLACE_OR_CREATE:ecchi_uru_berro = {
+    first_name = Bernardo
+    last_name = Berro
+    historical = yes
+    culture = cu:platinean
+    religion = rel:catholic
+    ideology = ideology_moderate
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1803.4.28
+    traits = { tactful basic_political_operator }
+}
+
+# ecchi_usa_brown (ecchi_leaders_USA.txt) -- duplicates / duplica: vanilla:usa_john_brown_character_template
+REPLACE_OR_CREATE:ecchi_usa_brown = {
+    first_name = John
+    last_name = Brown
+    historical = yes
+    culture = cu:yankee
+    home_region = STATE_CONNECTICUT
+    religion = rel:protestant
+    ideology = ideology_abolitionist
+    interest_group = ig_rural_folk
+    birth_date = 1800.5.9
+    traits = { reckless pious brave}
+}
+
+# ecchi_usa_jefferson_davis (ecchi_leaders_USA.txt) -- duplicates / duplica: vanilla:csa_jefferson_davis_template
+REPLACE_OR_CREATE:ecchi_usa_jefferson_davis = {
+    first_name = Jefferson
+    last_name = Davis
+    historical = yes
+    culture = cu:dixie
+    home_region = STATE_KENTUCKY
+    religion = rel:protestant
+    ideology = ideology_slaver
+    interest_group = ig_rural_folk
+    birth_date = 1808.6.3
+    traits = { meticulous arrogant persistent }
+}
+
+# ecchi_usa_norton (ecchi_leaders_USA.txt) -- duplicates / duplica: vanilla:usa_joshua_norton_character_template
+REPLACE_OR_CREATE:ecchi_usa_norton = {
+    first_name = Joshua
+    last_name = Norton
+    historical = yes
+    culture = cu:british
+    home_region = STATE_HOME_COUNTIES
+    religion = rel:protestant
+    ideology = ideology_royalist
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1818.2.4
+    traits = { psychological_affliction imperious romantic }
+}
+
+# ecchi_zul_zibhebhu (ecchi_leaders_0_africa.txt) -- duplicates / duplica: vanilla:ZUL_zibhebhu_kamaphitha
+REPLACE_OR_CREATE:ecchi_zul_zibhebhu = {
+    first_name = ecchi_Zibhebhu_kaMaphitha
+    last_name = ecchi_Zulu
+    historical = yes
+    culture = cu:zulu
+    religion = rel:animist
+    ideology = ideology_jingoist_leader
+    interest_group = ig_armed_forces
+    birth_date = 1841.1.8
+    traits = { ambitious reckless pillager }
+}
+
+# mr_ita_cavour (ecchi_leaders_ITA.txt) -- duplicates / duplica: vanilla:sar_benso_character_template
+REPLACE_OR_CREATE:mr_ita_cavour = {
+    first_name = ecchi_Camillo
+    last_name = ecchi_Benso
+    culture = cu:north_italian
+    home_region = STATE_PIEDMONT
+    interest_group = ig_industrialists
+    birth_date = 1810.8.10
+    historical = yes
+    ideology = ideology_corporatist_leader
+    religion = rel:catholic
+    traits = {
+        ambitious
+        masterful_diplomat
+    }
+}
+
+# mr_swi_dufour_guillaume_henri (ecchi_leaders_0_europe.txt) -- duplicates / duplica: vanilla:SWI_guillaume_henri_dufour
+REPLACE_OR_CREATE:mr_swi_dufour_guillaume_henri = {
+	first_name = "Guillaume_Henri"
+	last_name = "Dufour"
+	culture = cu:francoprovencal
+	home_region = STATE_WEST_SWITZERLAND
+	religion = rel:protestant # Not entirely sure, but his family was from Geneva
+	birth_date = 1787.9.15
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	historical = yes
+	traits = {
+		meticulous
+		surveyor
+		engineer
+		basic_diplomat
+	}
+	is_general = yes
+    commander_rank = default
+}
