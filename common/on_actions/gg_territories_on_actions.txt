@@ -16,7 +16,7 @@ on_yearly_pulse_country = {
 }
 gg_territories_yearly = {
 	trigger = {
-		c:ARG ?= this
+		gg_is_argentine_state = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from Argentina / tambien La Plata o la Gran Argentina
 		gg_confederation_stands = yes
 		is_at_war = no
 		NOT = { has_variable = gg_terr_delay }

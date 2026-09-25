@@ -18,19 +18,27 @@ on_diplo_play_war_start = {
 
 gg_arg_provinces_war_start = {
 	trigger = {
-		exists = c:ARG
 		# EN/ES: Argentina on either side, whoever started it and whatever the goal (a Brazilian AI play to humiliate
 		#     Argentina, Juan's game of 24/9/2026, is the case) / la Argentina de cualquier lado, lo haya empezado quien
 		#     sea y con el objetivo que sea (el caso es una jugada del Brasil de la IA para humillarla, 24/9/2026)
+		# EN/ES: 25/9 (AUD-PLT-ARGONLY) -- the Argentine state, also as La Plata / Great Argentina (gg_is_argentine_state);
+		#     a target is matched from the country side (is_diplomatic_play_target), the play's target link may be a state
+		#     / el estado argentino, tambien como La Plata o la Gran Argentina
 		OR = {
-			initiator_is = c:ARG
-			target_is = c:ARG
-			any_scope_play_involved = { c:ARG ?= this }
+			initiator ?= { gg_is_argentine_state = yes }
+			any_scope_play_involved = { gg_is_argentine_state = yes }
+			any_country = {
+				gg_is_argentine_state = yes
+				is_diplomatic_play_target = yes
+			}
 		}
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_war_start" # GG_TRAZA
-		c:ARG = { trigger_event = { id = gg_arg_allies.1 days = 7 } }
+		every_country = {
+			limit = { gg_is_argentine_state = yes }
+			trigger_event = { id = gg_arg_allies.1 days = 7 }
+		}
 	}
 }
 
@@ -40,7 +48,7 @@ on_monthly_pulse_country = {
 
 gg_arg_provinces_war_monthly = {
 	trigger = {
-		c:ARG ?= this
+		gg_is_argentine_state = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from Argentina / tambien La Plata o la Gran Argentina
 		is_at_war = yes
 		any_scope_war = { gg_arg_war_is_foreign = yes }
 		any_subject_or_below = { gg_arg_province_marches = yes }
@@ -60,7 +68,7 @@ on_monthly_pulse_country = {
 
 gg_arg_provinces_leave_monthly = {
 	trigger = {
-		c:ARG ?= this
+		gg_is_argentine_state = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from Argentina / tambien La Plata o la Gran Argentina
 		is_at_war = yes
 		any_scope_war = { NOT = { gg_arg_war_is_foreign = yes } }
 		any_country = { has_variable_list = gg_arg_marched_against }

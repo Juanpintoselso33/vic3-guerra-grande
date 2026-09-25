@@ -1,0 +1,68 @@
+﻿# EN: 25/9/2026 (Juan, AUD-PLT-ARGONLY) -- THE ARMY MODEL SURVIVES LA PLATA. la Argentina's law_local_caudillos is visible
+#     to the Argentine state (gg_is_argentine_state: Argentina, or La Plata / Great Argentina formed from it; the law is
+#     REPLACEd in common/laws/zz_gg_local_caudillos.txt), so the formation should keep it. In case the engine still drops
+#     it at the change of tag (its fallback army model cuts the barracks to 5 a state, as AUD-ERR-CUARTELES showed for the
+#     provinces), the monthly pulse remembers whether the Argentine state holds the law, and the formation puts it back:
+#     at once (on_country_formed) and once more on the next monthly pulse, in case the engine re-validates laws after it.
+#     Not enacted afresh: only a law the country held the month it formed.
+# ES: EL MODELO DE EJERCITO SOBREVIVE A LA PLATA. La ley de caudillos locales es visible para el estado argentino, asi
+#     que la formacion deberia conservarla. Por si el motor la saca igual al cambiar de tag, el pulso mensual anota si la
+#     tiene y la formacion la repone: en el momento y otra vez en el pulso siguiente.
+
+on_monthly_pulse_country = {
+	on_actions = { gg_arg_army_model_record }
+}
+
+gg_arg_army_model_record = {
+	trigger = {
+		gg_is_argentine_state = yes
+	}
+	effect = {
+		if = {
+			limit = { has_variable = gg_arg_formed_recheck }
+			if = {
+				limit = {
+					has_variable = gg_arg_local_caudillos
+					NOT = { has_law = law_type:law_local_caudillos }
+				}
+				debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_army_model_record| RESTORED=yes " # GG_TRAZA
+				activate_law = law_type:law_local_caudillos
+			}
+			remove_variable = gg_arg_formed_recheck
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_local_caudillos
+				NOT = { has_variable = gg_arg_local_caudillos }
+			}
+			set_variable = gg_arg_local_caudillos
+		}
+		else_if = {
+			limit = {
+				NOT = { has_law = law_type:law_local_caudillos }
+				has_variable = gg_arg_local_caudillos
+			}
+			remove_variable = gg_arg_local_caudillos
+		}
+	}
+}
+
+# EN/ES: Root = the country just formed (vanilla common/on_actions/00_code_on_actions.txt) / el pais recien formado
+on_country_formed = {
+	on_actions = { gg_arg_formed_keeps_army_model }
+}
+
+gg_arg_formed_keeps_army_model = {
+	trigger = {
+		gg_is_argentine_state = yes
+		has_variable = gg_arg_local_caudillos
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_formed_keeps_army_model" # GG_TRAZA
+		if = {
+			limit = { NOT = { has_law = law_type:law_local_caudillos } }
+			activate_law = law_type:law_local_caudillos
+		}
+		set_variable = gg_arg_formed_recheck
+	}
+}

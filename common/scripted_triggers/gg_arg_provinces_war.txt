@@ -27,12 +27,14 @@
 #     argentino (pais provincial, la Coalicion, el Estado de Buenos Aires) ni una revolucion o secesion. Se
 #     revisan todos los enemigos, no solo el lider: con un argentino entre ellos es guerra entre argentinos.
 gg_arg_war_is_foreign = {
-	exists = c:ARG
-	is_war_participant = c:ARG
-	any_war_participant = { has_war_with = c:ARG }
+	# EN/ES: 25/9 (AUD-PLT-ARGONLY) -- root is the Argentine state (gg_is_argentine_state) whose pulse or event asks
+	#     / root es el estado argentino cuyo pulso o evento pregunta
+	root = { gg_is_argentine_state = yes }
+	is_war_participant = root
+	any_war_participant = { has_war_with = root }
 	NOT = {
 		any_war_participant = {
-			has_war_with = c:ARG
+			has_war_with = root
 			OR = {
 				gg_is_born_of_argentina = yes
 				is_revolutionary = yes
@@ -51,8 +53,8 @@ gg_arg_war_is_foreign = {
 #     Oriental del Pacto, y no un jugador: a la provincia del jugador nunca la mete el script en una guerra; le
 #     quedan los medios de vanilla para respaldar la jugada de Buenos Aires.
 gg_arg_province_marches = {
-	exists = c:ARG
-	is_subject_of = c:ARG
+	root = { gg_is_argentine_state = yes } # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- root, as above / root, como arriba
+	is_subject_of = root
 	OR = {
 		gg_is_province_country = yes
 		is_subject_type = subject_type_gg_pact_province

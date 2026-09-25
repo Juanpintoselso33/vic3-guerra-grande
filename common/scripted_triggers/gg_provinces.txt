@@ -112,6 +112,29 @@ gg_is_beaten_province_country = {
 	NOT = { c:ENR ?= this }
 }
 
+# EN: 25/9/2026 (Juan, AUD-PLT-ARGONLY) -- THE ARGENTINE STATE: Argentina, or La Plata / Great Argentina formed from it
+#     (the same country object after the engine's change of tag, so its subjects, laws and states carry over). What
+#     outlives 1862 and belongs to that state -- the local-caudillos army model, the Pact provinces marching to its
+#     foreign wars, the national territories made provinces -- asks this instead of c:ARG, which stops resolving the
+#     day La Plata is proclaimed. A La Plata formed by Paraguay (vanilla's Patino path) is not it.
+# ES: EL ESTADO ARGENTINO: la Argentina, o La Plata / la Gran Argentina formadas desde ella. Lo que sobrevive a 1862 y
+#     es de ese estado pregunta esto en lugar de c:ARG, que deja de resolver el dia que se proclama La Plata.
+gg_is_argentine_state = {
+	OR = {
+		c:ARG ?= this
+		AND = {
+			OR = {
+				c:PLT ?= this
+				c:Great_ARG ?= this
+			}
+			OR = {
+				was_formed_from = ARG
+				was_formed_from = PLT # EN/ES: Great Argentina proclaimed by an Argentine La Plata / proclamada por La Plata
+			}
+		}
+	}
+}
+
 # EN: Who sees and moves the Federal Pact: Buenos Aires, the Coalition and every province country.
 # ES: Quien ve y mueve el Pacto Federal: Buenos Aires, la Coalicion y todo pais provincial.
 gg_is_pact_country = {

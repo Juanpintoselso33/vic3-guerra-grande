@@ -94,7 +94,7 @@ gg_territory_province_taken = {
 #     incorporar por decision, y ser provincia es lo que lo incorpora.
 gg_territory_ready = {
 	gg_territory_state = yes
-	owner ?= { c:ARG ?= this }
+	owner ?= { gg_is_argentine_state = yes } # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from Argentina / tambien La Plata o la Gran Argentina
 	is_capital = no
 	NOT = { gg_territory_province_taken = yes }
 	state_population >= 60000

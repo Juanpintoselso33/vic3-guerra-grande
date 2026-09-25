@@ -23,7 +23,7 @@ REPLACE:law_local_caudillos = {
 		# EN/ES: Guerra Grande -- also every country born from Argentina (AUD-ERR-CUARTELES)
 		#     / tambien todo pais nacido de la Argentina
 		OR = {
-			c:ARG ?= this
+			gg_is_argentine_state = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from it / tambien La Plata o la Gran Argentina formadas desde ella
 			gg_is_born_of_argentina = yes
 		}
 	}

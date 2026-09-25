@@ -20,8 +20,10 @@ gg_arg_provinces_join_foreign_wars = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars|" # GG_TRAZA
 	if = {
 		limit = {
-			exists = c:ARG
-			c:ARG = {
+			# EN/ES: 25/9 (AUD-PLT-ARGONLY) -- scope: the Argentine state (root of the pulse or of gg_arg_allies.1)
+			#     / scope: el estado argentino (root del pulso o de gg_arg_allies.1)
+			gg_is_argentine_state = yes
+			root = {
 				is_at_war = yes
 				any_scope_war = { gg_arg_war_is_foreign = yes }
 			}
@@ -29,7 +31,7 @@ gg_arg_provinces_join_foreign_wars = {
 		every_country = {
 			limit = { gg_arg_province_marches = yes }
 			save_scope_as = gg_arg_ally_province
-			c:ARG = {
+			root = {
 				every_scope_war = {
 					limit = {
 						gg_arg_war_is_foreign = yes
@@ -42,7 +44,7 @@ gg_arg_provinces_join_foreign_wars = {
 					save_scope_as = gg_arg_joined_war
 					every_country = {
 						limit = {
-							has_war_with = c:ARG
+							has_war_with = root
 							scope:gg_arg_joined_war = { is_war_participant = PREV }
 							NOT = { gg_is_born_of_argentina = yes }
 							is_revolutionary = no
@@ -58,7 +60,7 @@ gg_arg_provinces_join_foreign_wars = {
 							if = { limit = { has_truce_with = scope:gg_arg_truce_enemy } end_truce = scope:gg_arg_truce_enemy }
 						}
 					}
-					join_war = { target = scope:gg_arg_ally_province side = c:ARG }
+					join_war = { target = scope:gg_arg_ally_province side = root }
 					gg_arg_save_enemy_leader = yes
 					if = {
 						limit = { is_war_participant = scope:gg_arg_ally_province }
@@ -109,11 +111,11 @@ gg_arg_provinces_join_foreign_wars = {
 gg_arg_save_enemy_leader = {
 	clear_saved_scope = gg_arg_enemy_leader
 	if = {
-		limit = { attacker_warleader ?= { has_war_with = c:ARG } }
+		limit = { attacker_warleader ?= { has_war_with = root } }
 		attacker_warleader = { save_scope_as = gg_arg_enemy_leader }
 	}
 	else_if = {
-		limit = { defender_warleader ?= { has_war_with = c:ARG } }
+		limit = { defender_warleader ?= { has_war_with = root } }
 		defender_warleader = { save_scope_as = gg_arg_enemy_leader }
 	}
 }
@@ -131,7 +133,8 @@ gg_arg_save_enemy_leader = {
 #     entre argentinos (el Entre Rios de Alcaraz contra Corrientes) nunca marcho contra ese lider y se queda.
 gg_arg_provinces_leave_argentine_wars = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_leave_argentine_wars|" # GG_TRAZA
-	c:ARG ?= {
+	if = {
+		limit = { gg_is_argentine_state = yes } # EN/ES: 25/9 (AUD-PLT-ARGONLY)
 		every_scope_war = {
 			limit = { NOT = { gg_arg_war_is_foreign = yes } }
 			save_scope_as = gg_arg_turned_war
@@ -142,7 +145,7 @@ gg_arg_provinces_leave_argentine_wars = {
 					limit = {
 						has_variable_list = gg_arg_marched_against
 						is_target_in_variable_list = { name = gg_arg_marched_against target = scope:gg_arg_enemy_leader }
-						NOT = { has_war_with = c:ARG }
+						NOT = { has_war_with = root }
 						scope:gg_arg_turned_war = { is_war_participant = PREV }
 					}
 					save_scope_as = gg_arg_leaving_province

@@ -32,6 +32,7 @@
 #     capital: la provincia de la capital ES el pais.
 gg_province_split_off = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_province_split_off| KEY= $KEY$  STATE= $STATE$  TAG= $TAG$ " # GG_TRAZA
+	gg_arg_state_save = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- the overlord is the Argentine state / el soberano es el estado argentino
 	if = {
 		limit = {
 			has_state_in_state_region = $STATE$
@@ -46,15 +47,15 @@ gg_province_split_off = {
 		if = {
 			# EN/ES: the province already stands as a subject of Buenos Aires: the state goes home
 			#     / la provincia ya es sujeta de Buenos Aires: el estado vuelve a ella
-			limit = { c:$TAG$ ?= { is_subject_of = c:ARG } }
+			limit = { exists = scope:gg_arg_state c:$TAG$ ?= { is_subject_of = scope:gg_arg_state } }
 			scope:gg_split_state = { set_state_owner = c:$TAG$ }
 		}
 		else_if = {
 			# EN/ES: the tag lives but is not under the Pact (at war, or free): Buenos Aires keeps the
 			#     ground rather than hand it to an enemy / el tag vive pero no esta bajo el Pacto: la
 			#     tierra queda en Buenos Aires antes que darsela a un enemigo
-			limit = { exists = c:$TAG$ }
-			scope:gg_split_state = { set_state_owner = c:ARG }
+			limit = { exists = c:$TAG$ exists = scope:gg_arg_state }
+			scope:gg_split_state = { set_state_owner = scope:gg_arg_state }
 		}
 		else = {
 			create_country = {
@@ -69,7 +70,7 @@ gg_province_split_off = {
 				set_capital = $STATE$
 				gg_province_install_governor = { KEY = $KEY$ }
 			}
-			c:ARG ?= {
+			scope:gg_arg_state ?= {
 				if = {
 					limit = { c:$TAG$ ?= { is_subject = no } }
 					# EN/ES: 24/9 (AUD-VASSAL-RECOGNIZED) -- the Province of the Pact, not a protectorate: no rank rule (a province can reach minor_power like Buenos Aires) / provincia del Pacto, no protectorado: sin la regla del rango
@@ -287,4 +288,17 @@ gg_character_fetch = {
 		create_character = { template = $TEMPLATE$ }
 	}
 	clear_saved_scope = gg_fetch_to
+}
+
+# EN: 25/9/2026 (Juan, AUD-PLT-ARGONLY) -- saves the Argentine state (gg_is_argentine_state: Argentina, or La Plata /
+#     Great Argentina formed from it) as scope:gg_arg_state, once per effect chain. At most one country is it.
+# ES: guarda el estado argentino como scope:gg_arg_state, una vez por cadena de efectos.
+gg_arg_state_save = {
+	if = {
+		limit = { NOT = { exists = scope:gg_arg_state } }
+		random_country = {
+			limit = { gg_is_argentine_state = yes }
+			save_scope_as = gg_arg_state
+		}
+	}
 }

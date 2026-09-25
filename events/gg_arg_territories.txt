@@ -53,7 +53,7 @@ gg_arg_territories.1 = {
 
 	# EN/ES: the candidate is set before this is queued (gg_territories_yearly) / el candidato se anota antes de encolarlo
 	trigger = {
-		c:ARG ?= this
+		gg_is_argentine_state = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- also La Plata / Great Argentina formed from Argentina / tambien La Plata o la Gran Argentina
 		gg_confederation_stands = yes
 		var:gg_terr_candidate ?= { gg_territory_ready = yes }
 	}

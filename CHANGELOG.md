@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **La Plata is still Argentina:** after proclaiming La Plata or Great Argentina from Argentina, three things that
+  only recognised the Argentine tag stopped: the local-caudillos army model (the law became unavailable, and the
+  engine's fallback would have cut the barracks), the Pact provinces marching to their overlord's foreign wars, and
+  the national territories becoming provinces under the confederation. They now follow the Argentine state under
+  any of its names; if the formation still drops the local caudillos, the law is put back the same day and checked
+  again the next month. A La Plata formed by Paraguay is not affected.
 - **Bernardino Caballero is spelt right:** the Paraguayan general (who also serves Argentina, La Plata or Great
   Argentina holding Asunción) was named «Cabellero», a typo inherited from vanilla's template. New games show
   Caballero; a Caballero already in a save keeps the old spelling.

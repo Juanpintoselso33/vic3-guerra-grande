@@ -848,31 +848,32 @@ gg_argentina_new_country_people = {
 #     la milicia nacional (5 cuarteles por estado) y el motor le recortaba los cuarteles. El Uruguay de la
 #     Cisplatina no entra.
 gg_argentina_inherit_army_model = {
+	gg_arg_state_save = yes # EN/ES: 25/9 (AUD-PLT-ARGONLY) -- the model of the Argentine state, also as La Plata / Great Argentina / el del estado argentino
 	c:$TAG$ ?= {
 		if = {
 			limit = {
 				gg_is_born_of_argentina = yes
-				exists = c:ARG
-				NOT = { c:ARG ?= this }
+				exists = scope:gg_arg_state
+				NOT = { this = scope:gg_arg_state }
 			}
 			if = {
-				limit = { c:ARG = { has_law = law_type:law_local_caudillos } NOT = { has_law = law_type:law_local_caudillos } }
+				limit = { scope:gg_arg_state = { has_law = law_type:law_local_caudillos } NOT = { has_law = law_type:law_local_caudillos } }
 				activate_law = law_type:law_local_caudillos
 			}
 			else_if = {
-				limit = { c:ARG = { has_law = law_type:law_peasant_levies } NOT = { has_law = law_type:law_peasant_levies } }
+				limit = { scope:gg_arg_state = { has_law = law_type:law_peasant_levies } NOT = { has_law = law_type:law_peasant_levies } }
 				activate_law = law_type:law_peasant_levies
 			}
 			else_if = {
-				limit = { c:ARG = { has_law = law_type:law_professional_army } NOT = { has_law = law_type:law_professional_army } }
+				limit = { scope:gg_arg_state = { has_law = law_type:law_professional_army } NOT = { has_law = law_type:law_professional_army } }
 				activate_law = law_type:law_professional_army
 			}
 			else_if = {
-				limit = { c:ARG = { has_law = law_type:law_national_militia } NOT = { has_law = law_type:law_national_militia } }
+				limit = { scope:gg_arg_state = { has_law = law_type:law_national_militia } NOT = { has_law = law_type:law_national_militia } }
 				activate_law = law_type:law_national_militia
 			}
 			else_if = {
-				limit = { c:ARG = { has_law = law_type:law_mass_conscription } NOT = { has_law = law_type:law_mass_conscription } }
+				limit = { scope:gg_arg_state = { has_law = law_type:law_mass_conscription } NOT = { has_law = law_type:law_mass_conscription } }
 				activate_law = law_type:law_mass_conscription
 			}
 		}
