@@ -1,0 +1,127 @@
+﻿# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- the runtime play guard, for the plays of OPTIONAL mods of the playset (recognition
+#     wars, holy wars, Hispanoamerican unification, install-a-dictator, scripted revolutions...). Their `possible` does not
+#     call guerra_grande_play_is_allowed, and the public mod cannot REPLACE their files. So when a play of a type that is
+#     not statically guarded (gg_play_type_is_statically_guarded) starts, the same rule is checked here with the same
+#     scopes as in `possible` (the initiator as this, scope:target_country) and a play that breaks it is ended at once
+#     (end_play, play scope: Gates of the Bosphorus eqfm_balkans.008.b, Great Loot arabia_events, ZTR nuclear ultimatum).
+#     Root = the diplomatic play; scope:initiator, scope:target (vanilla 00_code_on_actions.txt; the Waddle war mod
+#     reads the same scopes here). The mod's own plays and every statically guarded type never reach the check, so a
+#     war the mod opens by script (dp_gg_*, the history dp_annex_war) is never touched.
+# ES: la guarda de jugadas en partida, para las jugadas de mods OPCIONALES del playset. Su `possible` no llama a
+#     guerra_grande_play_is_allowed y el mod publico no puede reemplazar sus archivos. Cuando empieza una jugada de un
+#     tipo sin guarda estatica, se chequea aca la misma regla con los mismos scopes y, si la rompe, se termina en el acto
+#     (end_play). Las jugadas del mod y los tipos con guarda estatica nunca llegan al chequeo.
+on_diplomatic_play_started = {
+	on_actions = { gg_playset_play_guard }
+}
+
+gg_playset_play_guard = {
+	trigger = {
+		NOT = { gg_play_type_is_statically_guarded = yes }
+		NOT = { gg_play_is_civil_war = yes }
+	}
+	effect = {
+		# EN/ES: the scopes guerra_grande_play_is_allowed reads in `possible` / los scopes que lee la guarda en possible
+		scope:target ?= { save_scope_as = target_country }
+		if = {
+			limit = {
+				exists = scope:target_country
+				scope:initiator ?= {
+					NOT = { guerra_grande_play_is_allowed = yes }
+				}
+			}
+			debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_playset_play_guard" # GG_TRAZA
+			end_play = yes
+		}
+	}
+}
+
+# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- the other door, joining (AUD-FARRAPOS-A): an optional mod's play has no
+#     gg_farrapos_involvement_is_allowed in additional_involvement_trigger, so before Ponche Verde Brazil or the
+#     Riograndense Republic could join a play in which the other is already on a side. The joiner is taken off both
+#     sides again (remove_initiator_backers / remove_target_backers, play scope: vanilla ep2_ezo_republic, and the
+#     Waddle war mod does both on scope:actor in on_diplo_play_abandon_side). Root = the play, scope:actor = the
+#     country that joined. Runs first in the same list as the gg_farrapos_pulled_in detector
+#     (gg_farrapos_on_actions.txt), so the detector sees the play already put right. A statically guarded play never
+#     gets here (its trigger refuses the join); the mod's own plays are left alone (dp_gg_farrapos is Ponche Verde's).
+# ES: la otra puerta, sumarse: la jugada de un mod opcional no tiene la guarda de ingreso, asi que antes de Ponche
+#     Verde el Brasil o la Republica Riograndense podian sumarse a una jugada donde el otro ya esta en un bando. Se saca
+#     al que se sumo de los dos bandos. Corre primero en la misma lista que el detector gg_farrapos_pulled_in.
+gg_playset_join_guard = {
+	trigger = {
+		NOT = { has_global_variable = gg_farrapos_ponche_verde }
+		exists = c:PNI
+		NOT = { gg_play_is_mod_own = yes }
+		scope:actor ?= {
+			OR = {
+				c:BRZ ?= this
+				c:PNI ?= this
+			}
+		}
+		gg_farrapos_play_side_has = { TAG = BRZ }
+		gg_farrapos_play_side_has = { TAG = PNI }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_playset_join_guard" # GG_TRAZA
+		remove_initiator_backers = { scope:actor }
+		remove_target_backers = { scope:actor }
+	}
+}
+
+# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- the third door, war goals. Every goal type of the required sources carries
+#     gg_war_goal_is_allowed; an optional mod's goal does not (stts_install_dictator has an empty `possible`, so it can
+#     be added to any play), and the engine gives no scope for the goal's target nor a way to remove a goal of an
+#     unknown type. So when a goal is added, any protected country on the other side of the holder (as a backer: as
+#     the leader it cannot be there, the play guard refuses it) is taken out of the play, and a goal aimed at it
+#     falls with it (require_target_be_part_of_war). A goal added under the static guard can never be aimed at such a
+#     country, so for it this only keeps a protected government out of a foreign engine war, which is the design
+#     rule anyway (contingents, never a belligerent). Root = the play, scope:actor = the goal holder (vanilla
+#     00_code_on_actions.txt). The mod's own plays and civil wars are left alone.
+# ES: la tercera puerta, los objetivos de guerra. Los objetivos de las fuentes requeridas llevan
+#     gg_war_goal_is_allowed; los de un mod opcional no, y el motor no da el objetivo del objetivo ni forma de quitar un
+#     objetivo de tipo desconocido. Cuando se agrega un objetivo, todo pais protegido del otro lado del dueno se saca
+#     de la jugada, y el objetivo contra el cae con el. Las jugadas del mod y las guerras civiles no se tocan.
+on_wargoal_added = {
+	on_actions = { gg_playset_wargoal_guard }
+}
+
+gg_playset_wargoal_guard = {
+	trigger = {
+		NOT = { gg_play_is_mod_own = yes }
+		NOT = { gg_play_is_civil_war = yes }
+		exists = scope:actor
+	}
+	effect = {
+		save_scope_as = gg_wg_play
+		every_country = {
+			limit = { gg_goal_enemy_is_protected = yes }
+			save_scope_as = gg_wg_enemy
+			scope:gg_wg_play = {
+				if = {
+					limit = {
+						OR = {
+							initiator ?= { this = scope:actor }
+							any_scope_initiator_ally = { this = scope:actor }
+						}
+						NOT = { target ?= { this = scope:gg_wg_enemy } }
+						any_scope_target_ally = { this = scope:gg_wg_enemy }
+					}
+					debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_playset_wargoal_guard" # GG_TRAZA
+					remove_target_backers = { scope:gg_wg_enemy }
+				}
+				else_if = {
+					limit = {
+						OR = {
+							target ?= { this = scope:actor }
+							any_scope_target_ally = { this = scope:actor }
+						}
+						NOT = { initiator ?= { this = scope:gg_wg_enemy } }
+						any_scope_initiator_ally = { this = scope:gg_wg_enemy }
+					}
+					debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_playset_wargoal_guard" # GG_TRAZA
+					remove_initiator_backers = { scope:gg_wg_enemy }
+				}
+			}
+		}
+	}
+}

@@ -18,7 +18,8 @@ on_diplo_play_war_start = {
 }
 
 on_diplo_play_join_side = {
-	on_actions = { gg_farrapos_pulled_in gg_farrapos_sides_seen }
+	# EN/ES: 25/9/2026 (AUD-PLAYSET-PLAYS) -- the join guard first, then the detector / primero la guarda de ingreso, despues el detector
+	on_actions = { gg_playset_join_guard gg_farrapos_pulled_in gg_farrapos_sides_seen }
 }
 
 gg_farrapos_pulled_in = {

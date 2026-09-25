@@ -1,0 +1,141 @@
+﻿# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- the play types whose guard is STATIC: every play of vanilla, the Community Mod
+#     Framework, la Argentina and this mod (the three required mods and the base game). Each one either carries
+#     guerra_grande_play_is_allowed / gg_farrapos_involvement_is_allowed at the top level (the mod REPLACEs vanilla's),
+#     is exempt with its reason (civil wars, other regions' unifications) or is the mod's own script-only play.
+#     Any other type comes from an optional mod of the player's playset, whose files we cannot override (players
+#     without that mod would get its plays): those are guarded at RUNTIME instead (on_actions/gg_playset_play_guard.txt).
+#     tools/validate_mod.py («war play guard») keeps this list equal to the plays of the required sources.
+#     Scope: a diplomatic play.
+# ES: los tipos de jugada con guarda ESTATICA: toda jugada de vanilla, del Community Mod Framework, de la Argentina y
+#     de este mod. Cualquier otro tipo viene de un mod opcional del playset, cuyos archivos no podemos reemplazar: esas
+#     jugadas se guardan EN PARTIDA (on_actions/gg_playset_play_guard.txt). validate_mod.py mantiene esta lista igual a
+#     las jugadas de las fuentes requeridas. Scope: una jugada diplomatica.
+gg_play_type_is_statically_guarded = {
+	OR = {
+		is_diplomatic_play_type = dp_annex_subject
+		is_diplomatic_play_type = dp_annex_war
+		is_diplomatic_play_type = dp_balkan_war
+		is_diplomatic_play_type = dp_ban_slavery
+		is_diplomatic_play_type = dp_conquer_state
+		is_diplomatic_play_type = dp_contain_threat
+		is_diplomatic_play_type = dp_default_treaty_article
+		is_diplomatic_play_type = dp_demand_no_strait_closure
+		is_diplomatic_play_type = dp_demand_no_tolls
+		is_diplomatic_play_type = dp_demand_strait_access
+		is_diplomatic_play_type = dp_demand_toll_exemption
+		is_diplomatic_play_type = dp_enforce_trialist_manifesto
+		is_diplomatic_play_type = dp_force_nationalization
+		is_diplomatic_play_type = dp_gg_buenos_aires
+		is_diplomatic_play_type = dp_gg_cisplatina
+		is_diplomatic_play_type = dp_gg_farrapos
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		is_diplomatic_play_type = dp_give_foreign_investment_rights
+		is_diplomatic_play_type = dp_guerra_grande
+		is_diplomatic_play_type = dp_humiliation
+		is_diplomatic_play_type = dp_hungarian_revolution
+		is_diplomatic_play_type = dp_increase_autonomy
+		is_diplomatic_play_type = dp_independence
+		is_diplomatic_play_type = dp_join_power_bloc
+		is_diplomatic_play_type = dp_leadership_andes
+		is_diplomatic_play_type = dp_leadership_germany
+		is_diplomatic_play_type = dp_leadership_italy
+		is_diplomatic_play_type = dp_leadership_scandinavia
+		is_diplomatic_play_type = dp_leadership_yugoslavia
+		is_diplomatic_play_type = dp_leave_power_bloc
+		is_diplomatic_play_type = dp_liberate_country
+		is_diplomatic_play_type = dp_liberate_subject
+		is_diplomatic_play_type = dp_make_dominion
+		is_diplomatic_play_type = dp_make_protectorate
+		is_diplomatic_play_type = dp_make_tributary
+		is_diplomatic_play_type = dp_native_uprising
+		is_diplomatic_play_type = dp_open_market
+		is_diplomatic_play_type = dp_reduce_autonomy
+		is_diplomatic_play_type = dp_regime_change
+		is_diplomatic_play_type = dp_restore_union
+		is_diplomatic_play_type = dp_return_state
+		is_diplomatic_play_type = dp_revolution
+		is_diplomatic_play_type = dp_secession
+		is_diplomatic_play_type = dp_sepoy_mutiny
+		is_diplomatic_play_type = dp_taiping_rebellion
+		is_diplomatic_play_type = dp_take_treaty_port
+		is_diplomatic_play_type = dp_transfer_subject
+		is_diplomatic_play_type = dp_unify_andes
+		is_diplomatic_play_type = dp_unify_arabia
+		is_diplomatic_play_type = dp_unify_china
+		is_diplomatic_play_type = dp_unify_ethiopia
+		is_diplomatic_play_type = dp_unify_germany
+		is_diplomatic_play_type = dp_unify_india
+		is_diplomatic_play_type = dp_unify_indonesia
+		is_diplomatic_play_type = dp_unify_italy
+		is_diplomatic_play_type = dp_unify_scandinavia
+		is_diplomatic_play_type = dp_unify_yugoslavia
+	}
+}
+
+# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- a civil war: the country against its own rebels, not a foreign power reaching
+#     into the Guerra Grande. The same exemption as gg_war_goal_is_allowed and as the static list (dp_revolution,
+#     dp_secession...), applied to an optional mod's revolution play. Scope: a diplomatic play (its initiator/target
+#     links, as in gg_farrapos_play_side_has).
+# ES: una guerra civil: el pais contra sus propios rebeldes, no una potencia extranjera. La misma excepcion que
+#     gg_war_goal_is_allowed y que la lista estatica, para la jugada de revolucion de un mod opcional. Scope: una jugada.
+gg_play_is_civil_war = {
+	OR = {
+		initiator ?= {
+			OR = {
+				is_revolutionary = yes
+				is_secessionist = yes
+			}
+		}
+		target ?= {
+			OR = {
+				is_revolutionary = yes
+				is_secessionist = yes
+			}
+		}
+	}
+}
+
+# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- one of the mod's own plays (script only; each has its own rules, and
+#     dp_gg_farrapos is Ponche Verde's). Scope: a diplomatic play.
+# ES: una de las jugadas propias del mod (solo por script). Scope: una jugada.
+gg_play_is_mod_own = {
+	OR = {
+		is_diplomatic_play_type = dp_guerra_grande
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		is_diplomatic_play_type = dp_gg_buenos_aires
+		is_diplomatic_play_type = dp_gg_cisplatina
+		is_diplomatic_play_type = dp_gg_farrapos
+	}
+}
+
+# EN: 25/9/2026 (AUD-PLAYSET-PLAYS) -- a country no war goal may be aimed at by scope:actor (the goal holder): an
+#     Oriental government (or the Republic before the partition) until the signed peace, and Brazil / the
+#     Riograndense Republic against each other until Ponche Verde -- the rules of gg_war_goal_is_allowed. Argentina's
+#     clause is left out on purpose: it only forbids annexing or conquering Argentina outright, which no goal of the
+#     optional mods of the playset does, and Argentina backs plays all over the continent. Country scope.
+# ES: un pais contra el que scope:actor (el dueno del objetivo) no puede apuntar un objetivo de guerra: un gobierno
+#     oriental hasta la paz, y el Brasil y la Republica Riograndense entre si hasta Ponche Verde. La clausula de la
+#     Argentina queda afuera a proposito: solo prohibe anexarla o conquistarla entera, cosa que ningun objetivo de los
+#     mods opcionales hace, y la Argentina respalda jugadas en todo el continente. Scope de pais.
+gg_goal_enemy_is_protected = {
+	OR = {
+		AND = {
+			gg_is_oriental_side = yes
+			NOT = { has_global_variable = gg_peace_settled }
+		}
+		AND = {
+			NOT = { has_global_variable = gg_farrapos_ponche_verde }
+			exists = c:PNI
+			OR = {
+				AND = {
+					c:PNI ?= this
+					scope:actor ?= { c:BRZ ?= this }
+				}
+				AND = {
+					c:BRZ ?= this
+					scope:actor ?= { c:PNI ?= this }
+				}
+			}
+		}
+	}
+}

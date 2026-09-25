@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Other mods' wars stay out of the Guerra Grande:** diplomatic plays and war goals added by optional mods of your
+  playset (recognition wars, holy wars, Hispanic American unification, installing a dictator, scripted revolutions...)
+  could open an engine war on the Oriental governments, or between Brazil and the Riograndense Republic before Ponche
+  Verde. The same rule the base game's plays follow is now enforced when any play starts, when a country joins one and
+  when a war goal is added, whatever mod the play comes from: a play that breaks it is called off, and a country that
+  must stay out is taken off its side. The mod's own wars, civil wars and the base game's plays are unchanged.
 - **La Plata is still Argentina:** after proclaiming La Plata or Great Argentina from Argentina, three things that
   only recognised the Argentine tag stopped: the local-caudillos army model (the law became unavailable, and the
   engine's fallback would have cut the barracks), the Pact provinces marching to their overlord's foreign wars, and
