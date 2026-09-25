@@ -1,4 +1,4 @@
-﻿# EN: 25/9/2026 (Juan) -- copy of vanilla's country_prg.txt (same file name, loaded last). Only the country triggers marked GG change:
+﻿# EN: 25/9/2026 (Juan) -- copy of vanilla's country_prg.txt (same file name, loaded last). Only the lines marked GG change (the country triggers, and Caballero's surname):
 #     Paraguay's men also come to Argentina, La Plata or Great Argentina holding Bajo Paraguay (Asuncion). Everything else is untouched; if the source updates, re-copy it and re-apply the GG lines.
 # ES: copia del archivo; solo cambian los disparadores marcados GG, para que los personajes sigan saliendo cuando la
 #     Argentina, La Plata o la Gran Argentina absorben el pais.
@@ -593,7 +593,7 @@ PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 
 PRG_bernardino_caballero = { # Bernardino Caballero de Añazco Melgarejo y Genes
 	first_name = Bernardino
-	last_name = Cabellero
+	last_name = Caballero # GG -- vanilla's key is misspelt (Cabellero); Caballero exists in vanilla's names / la clave de vanilla esta mal escrita
 	historical = yes
 	birth_date = 1839.5.20
 	home_region = STATE_BAJO_PARAGUAY

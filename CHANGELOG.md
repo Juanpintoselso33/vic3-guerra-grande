@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Bernardino Caballero is spelt right:** the Paraguayan general (who also serves Argentina, La Plata or Great
+  Argentina holding Asunción) was named «Cabellero», a typo inherited from vanilla's template. New games show
+  Caballero; a Caballero already in a save keeps the old spelling.
 - **One ruler at a time:** a head of state moved into another country kept his office: Oribe (the Oriental
   Province's governor) and Joaquín Suárez (the Defensa's president) sat in Argentina from 1853 on still marked as
   rulers beside the real one. Characters brought over by an annexation now leave the ruler and heir roles behind;
