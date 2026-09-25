@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.6-alpha — 25/9/2026
 
 - **Montevideo's immigrants arrive as people, with their nationalities, and many as soldiers:** the engine sends
   besieged Montevideo (8 arable land) no mass migration, so the immigrants are now created by events, in Montevideo and
