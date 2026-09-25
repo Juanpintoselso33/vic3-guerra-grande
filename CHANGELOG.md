@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **A new flag for La Plata:** the La Plata country (PLT) now flies five stripes — red, white, sky blue, white, red —
+  with the Sol de Mayo, in every situation and under every government, instead of la Argentina's and Dynamic
+  Names, Flags & Colours' flags. Credits in CREDITS.md.
 - **The independence of Paraguay:** on 17 July 1852, the day Santiago Derqui signed the act of recognition in
   Asunción, whoever conducts the Confederation's foreign relations once the Pact is settled is asked to recognize
   Paraguay or withhold assent. Urquiza's Argentina gets it as history had it; with two governments, Urquiza's
