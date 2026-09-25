@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Paraguay's, Bolivia's and Chile's historical figures come to the country that absorbs them:** their politicians
+  and generals (and Paraguay's five commanders of 1855-1880) now also appear for Argentina, La Plata or Great
+  Argentina holding Asunción, La Paz or Santiago. Chile's templates carry la Argentina's map home regions.
 - **Uruguay's historical figures still come when Argentina absorbs the Banda Oriental:** the 21 Uruguayan
   politicians and generals the game brings over the years (Herrera y Obes, Lamas, Berro, Flores, Varela, Batlle…)
   came only for Uruguay or a La Plata holding Montevideo; now also for Argentina or Great Argentina holding it.
