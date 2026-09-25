@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Brazil's Uruguay is always the Provincia Cisplatina:** when the engine made Uruguay Brazil's puppet on its own
+  (a war goal, a play or an interaction, outside the peace of the Guerra Grande), the country showed up as
+  «Brazilian Uruguay», with none of the Cisplatina's name or standing. Now, after the peace, any road that makes the
+  Oriental country Brazil's subject ends in the Cisplatine Province: its subject type, its name «Provincia
+  Cisplatina» (also with Dynamic Names, Flags & Colours and More Dynamic Names And Flags), its flag and its modifier,
+  the same as the peace's own Cisplatina. A protectorate of the Empire stays a protected Republic. Freed, it is
+  Uruguay again: name and flag go back and the modifier goes. Games in progress: the next monthly pulse converts it.
+
 - **«The Pact without a Constitution» keeps Rosas in power until his death:** after the negotiated confederation the
   mod read that answer as the end of Rosas's era, so the seat was no longer his and an engine coup could put another
   man in it (Ángel Pacheco, 1854, in a playtest); Entre Ríos and Corrientes, left independent to wait for a

@@ -57,6 +57,9 @@
  # ES/EN: hotfix 0.1.1 -- el nombre del pais mientras es provincia del Pacto (Ley de Union, 25/8/1825) y su tipo de sujecion
  gg_dyn_provincia_oriental:0 "Provincia Oriental"
  gg_dyn_provincia_oriental_adj:0 "oriental"
+ # ES/EN: 25/9/2026 (AUD-CIS-PUPPET) -- el nombre del pais mientras es la Provincia Cisplatina del Imperio, por cualquier camino
+ gg_dyn_provincia_cisplatina:0 "Provincia Cisplatina"
+ gg_dyn_provincia_cisplatina_adj:0 "cisplatino"
  subject_type_gg_pact_province:0 "@protectorate! Provincia del Pacto"
  subject_type_gg_pact_province_no_icon:0 "Provincia del Pacto"
  gg_pact_province:0 "Provincia del Pacto"

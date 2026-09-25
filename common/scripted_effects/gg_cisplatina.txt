@@ -381,3 +381,34 @@ gg_cis_note_send = {
 		c:ARG ?= { trigger_event = { id = gg_cisplatina.9 days = 0 popup = yes } }
 	}
 }
+
+# EN: 25/9/2026 (AUD-CIS-PUPPET) -- whatever made the Oriental country Brazil's subject (a war goal, a diplomatic play,
+#     an interaction: the engine's own roads), it becomes the Provincia Cisplatina, as by the peace (gg_peace.1.h): the
+#     mod's subject type (change_subject_type, the vanilla effect of on_country_released_as_own_subject; no release, so
+#     no truce and no independence in between), the Cisplatina modifier, and the thirty-day watch on the pact. The name
+#     and the flag key on the type (zz_guerra_grande_country_names.txt, zz_guerra_grande_flags.txt). Scope: the subject;
+#     callers check gg_oriental_brazil_subject_not_cisplatina.
+# ES: lo que sea que hizo al pais oriental sujeto del Brasil, pasa a ser la Provincia Cisplatina, como por la paz: el
+#     tipo de sujecion del mod (change_subject_type, sin liberarlo: ni tregua ni independencia en el medio), el
+#     modificador cisplatino y la guardia de treinta dias. Nombre y bandera salen del tipo. Scope: el sujeto.
+gg_cisplatina_convert = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina_convert| SUBJECT= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+	change_subject_type = subject_type_gg_cisplatine_province
+	if = {
+		limit = { NOT = { has_modifier = gg_peace_cisplatina } }
+		add_modifier = { name = gg_peace_cisplatina years = 30 }
+	}
+	save_scope_as = gg_cis_subject
+	c:BRZ ?= { gg_subject_watch = { SUBJECT = scope:gg_cis_subject } }
+	clear_saved_scope = gg_cis_subject
+}
+
+# EN: 25/9/2026 (AUD-CIS-PUPPET) -- the reverse: the Cisplatine Province freed (Brazil recognizes it, a war, a
+#     revolution) is the Republic again. Name and flag go back by themselves (they key on the subject type); the
+#     modifier, which says the country «bears the name of the occupation again», goes too. Scope: the country.
+# ES: al reves: la Provincia Cisplatina liberada vuelve a ser la Republica. Nombre y bandera vuelven solos; el
+#     modificador, que dice que el pais «vuelve a llevar el nombre de la ocupacion», tambien se va. Scope: el pais.
+gg_cisplatina_freed = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina_freed| COUNTRY= [THIS.GetCountry.GetNameNoFlag]" # GG_TRAZA
+	remove_modifier = gg_peace_cisplatina
+}

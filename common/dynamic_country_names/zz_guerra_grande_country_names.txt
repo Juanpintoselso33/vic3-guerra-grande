@@ -34,4 +34,49 @@ INJECT:URU = {
 			scope:actor ?= { is_subject_of = c:ARG }
 		}
 	}
+	# EN: 25/9/2026 (AUD-CIS-PUPPET; Juan, Brazil's AI took Uruguay after 1854: «it is not the Cisplatina, it is
+	#     "Brazilian Uruguay"»). While the country is the Cisplatine Province of the Empire (the subject type, reached by
+	#     the peace, gg_peace.1.h, or by any engine route through gg_cisplatina_convert), it is called «Provincia
+	#     Cisplatina». Needed with Dynamic Names, Flags & Colours: its REPLACE_OR_CREATE:URU drops vanilla's
+	#     dyn_c_cisplatina and names a Brazilian puppet «Brazilian Uruguay» (dyn_c_URU_subject, priority 1,
+	#     use_overlord_prefix); More Dynamic Names And Flags injects the Cisplatina back, but at priority 0, so it loses.
+	#     Same trigger as the Cisplatina flag (zz_guerra_grande_flags.txt): name and flag go back together on release.
+	# ES: mientras sea la Provincia Cisplatina del Imperio (el tipo de sujecion, por la paz o por cualquier camino del
+	#     motor), se llama «Provincia Cisplatina». Hace falta con DNFC, que reemplaza el bloque URU de vanilla (y su
+	#     dyn_c_cisplatina) y llama «Brazilian Uruguay» al titere del Brasil. Mismo trigger que la bandera cisplatina.
+	dynamic_country_name = {
+		name = gg_dyn_provincia_cisplatina
+		adjective = gg_dyn_provincia_cisplatina_adj
+
+		is_main_tag_only = yes
+		priority = 150
+
+		trigger = {
+			exists = c:BRZ
+			scope:actor ?= {
+				is_subject_of = c:BRZ
+				is_subject_type = subject_type_gg_cisplatine_province
+			}
+		}
+	}
+}
+
+# EN/ES: 25/9/2026 (AUD-CIS-PUPPET) -- the Cerrito's government, if it is ever the Empire's province (the mod's own tag:
+#     no other file names it) / el gobierno del Cerrito, si alguna vez es la provincia del Imperio (tag propio del mod)
+CER = {
+	dynamic_country_name = {
+		name = gg_dyn_provincia_cisplatina
+		adjective = gg_dyn_provincia_cisplatina_adj
+
+		is_main_tag_only = yes
+		priority = 150
+
+		trigger = {
+			exists = c:BRZ
+			scope:actor ?= {
+				is_subject_of = c:BRZ
+				is_subject_type = subject_type_gg_cisplatine_province
+			}
+		}
+	}
 }

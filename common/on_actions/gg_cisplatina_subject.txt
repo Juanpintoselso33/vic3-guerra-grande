@@ -1,0 +1,54 @@
+﻿# EN: 25/9/2026 (AUD-CIS-PUPPET; Juan, playing Greece with Brazil and Uruguay in the AI's hands, after 1854: «Uruguay
+#     was left Brazil's puppet but it is not the Cisplatina, it is "Brazilian Uruguay"»). The engine made the Republic a
+#     vanilla puppet of the Empire, outside every path of the mod. Now any road that makes the Oriental country Brazil's
+#     subject after the peace ends in the Provincia Cisplatina (gg_cisplatina_convert):
+#       - on_become_subject (vanilla code on_action, root = the new subject): at the moment it happens;
+#       - the monthly pulse: the same check, for games in progress (the puppet made before this fix) and for any road
+#         that does not pass through on_become_subject (an autonomy change to a puppet-level type, for one).
+#     And the reverse: on_become_independent takes the Cisplatina modifier off a freed province.
+# ES: el motor hizo a la Republica titere de vanilla del Imperio, fuera de todo camino del mod. Ahora todo camino que
+#     haga al pais oriental sujeto del Brasil despues de la paz termina en la Provincia Cisplatina: al momento
+#     (on_become_subject) y en el pulso mensual (partidas en curso y caminos que no pasan por aquel). Y al reves: la
+#     provincia liberada pierde el modificador cisplatino.
+on_become_subject = {
+	on_actions = { gg_cisplatina_on_become_subject }
+}
+
+on_monthly_pulse_country = {
+	on_actions = { gg_cisplatina_subject_monthly }
+}
+
+on_become_independent = {
+	on_actions = { gg_cisplatina_on_become_independent }
+}
+
+gg_cisplatina_on_become_subject = {
+	trigger = { gg_oriental_brazil_subject_not_cisplatina = yes }
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina_on_become_subject" # GG_TRAZA
+		gg_cisplatina_convert = yes
+	}
+}
+
+gg_cisplatina_subject_monthly = {
+	trigger = { gg_oriental_brazil_subject_not_cisplatina = yes }
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina_subject_monthly" # GG_TRAZA
+		gg_cisplatina_convert = yes
+	}
+}
+
+gg_cisplatina_on_become_independent = {
+	trigger = {
+		OR = {
+			c:URU ?= this
+			c:CER ?= this
+		}
+		has_modifier = gg_peace_cisplatina
+		is_subject = no
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_cisplatina_on_become_independent" # GG_TRAZA
+		gg_cisplatina_freed = yes
+	}
+}

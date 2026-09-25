@@ -53,7 +53,10 @@ REPLACE:URU = {
 	flag_definition = {
 		coa = gg_cisplatina
 		priority = 150
-		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ } }
+		# EN/ES: 25/9/2026 (AUD-CIS-PUPPET) -- the Cisplatine Province only, as its name (zz_guerra_grande_country_names.txt):
+		#     a protectorate of the Empire (gg_cisplatina.3, goal 3) is a Republic under protection, not the province
+		#     / solo la Provincia Cisplatina, como su nombre: un protectorado del Imperio es una Republica protegida
+		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ is_subject_type = subject_type_gg_cisplatine_province } }
 	}
 	flag_definition = {
 		coa = gg_defensa_government
@@ -924,5 +927,22 @@ REPLACE:PLT = {
 		coa = gg_flag_plata_hpm
 		subject_canton = gg_flag_plata_hpm
 		priority = 3000
+	}
+}
+
+# EN: 25/9/2026 (AUD-CIS-PUPPET) -- the Cerrito's government as the Cisplatine Province flies the Cisplatina flag too
+#     (gg_cisplatina_convert takes CER as well as URU). CER had no flag definitions (its flag was its coat of arms by
+#     tag), so the default goes here with it.
+# ES: el gobierno del Cerrito como Provincia Cisplatina tambien lleva la bandera cisplatina. CER no tenia definiciones
+#     de bandera (usaba su escudo por tag), asi que el default va aca con ella.
+CER = {
+	flag_definition = {
+		coa = gg_cisplatina
+		priority = 150
+		trigger = { exists = c:BRZ scope:actor ?= { is_subject_of = c:BRZ is_subject_type = subject_type_gg_cisplatine_province } }
+	}
+	flag_definition = {
+		coa = CER
+		priority = 1
 	}
 }

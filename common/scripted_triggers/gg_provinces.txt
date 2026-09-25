@@ -262,3 +262,24 @@ gg_confed_province_state = {
 	gg_conf_province_state = yes
 	NOT = { state_region = s:STATE_CHACO }
 }
+
+# EN: 25/9/2026 (AUD-CIS-PUPPET; Juan: «Uruguay was left Brazil's puppet but it is not the Cisplatina, it is "Brazilian
+#     Uruguay"»). Country scope: the Oriental country (URU, or the Cerrito's CER) is Brazil's direct subject by a type
+#     other than the Cisplatine Province, after the peace (before it, the mod's own paths govern the Empire's hand:
+#     gg_peace.1.h, the calendar). A protectorate is left alone: the Empire protecting a Republic is not the province
+#     (gg_cisplatina.3, goal 3, makes one on purpose); nor a tributary. Read by gg_cisplatina_convert's two callers
+#     (gg_cisplatina_subject.txt: on_become_subject and the monthly watch).
+# ES: el pais oriental es sujeto directo del Brasil por otro tipo que la Provincia Cisplatina, despues de la paz. El
+#     protectorado no se toca: el Imperio protegiendo a una Republica no es la provincia; tampoco el tributario.
+gg_oriental_brazil_subject_not_cisplatina = {
+	OR = {
+		c:URU ?= this
+		c:CER ?= this
+	}
+	has_global_variable = gg_peace_settled
+	exists = c:BRZ
+	is_direct_subject_of = c:BRZ
+	NOT = { is_subject_type = subject_type_gg_cisplatine_province }
+	NOT = { is_subject_type = subject_type_protectorate }
+	NOT = { is_subject_type = subject_type_tributary }
+}
