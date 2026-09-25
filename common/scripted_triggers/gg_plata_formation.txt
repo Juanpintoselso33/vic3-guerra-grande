@@ -49,9 +49,11 @@ gg_plt_region_held = {
 	any_scope_state = { gg_plt_state_held = yes }
 }
 
-# EN/ES: state region scope: root holds a state in it that covers at least 75% of the region's provinces -- the
-#     colonization ratio vanilla uses (common/on_actions/00_on_actions_monthly.txt, colonial_claims_check)
-#     / root tiene un estado que cubre al menos el 75% de las provincias de la region
+# EN/ES: state region scope: root holds a state in it that covers at least 75% of the region's provinces. The 75% is
+#     this mod's threshold (Juan, 24/9/2026); the comparison is written as vanilla's colonial_claims_check
+#     (common/on_actions/00_on_actions_monthly.txt), whose own threshold is 0.5
+#     / root tiene un estado que cubre al menos el 75% de las provincias de la region (umbral del mod; la forma de la
+#     comparacion es la de vanilla, cuyo umbral es 0.5)
 gg_plt_region_settled = {
 	any_scope_state = {
 		gg_plt_state_held = yes
