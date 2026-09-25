@@ -47,9 +47,23 @@ REPLACE:PLT = {
 		STATE_SAN_JUAN
 		STATE_MENDOZA
 		STATE_SAN_LUIS
+		# EN/ES: frontier, counted by the real check only when >= 75% colonized / frontera, cuenta en el chequeo real solo colonizada al 75%
+		STATE_LA_PAMPA
+		STATE_NEUQUEN
+		STATE_RIO_NEGRO
+		STATE_CHUBUT
+		STATE_SANTA_CRUZ_ARG
+		STATE_TIERRA_DEL_FUEGO
+		STATE_MISIONES
+		STATE_CHACO
+		STATE_FORMOSA_ARG
+		STATE_RIO_GRANDE_DO_SUL
 	}
 
-	required_states_fraction = 0.33
+	# EN: 31 states x 0.54 -> 17 (7 mandatory + 10 provinces or settled frontier), so the panel shows the real size
+	#     (Juan 25/9: 7 of 21 looked far too few). The exact rule stays in `possible`.
+	# ES: 31 x 0.54 -> 17, para que el panel muestre el tamaño real; la regla exacta sigue en possible.
+	required_states_fraction = 0.54
 
 	ai_will_do = { always = yes }
 

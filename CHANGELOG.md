@@ -1,5 +1,10 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **La Plata's formation panel shows the real size:** it listed 21 states and asked for 7; it now lists the 31 that
+  can count and asks for 17 (7 required + 10 provinces or settled frontier). The exact rule is unchanged.
+
 ## 0.1.4-alpha — 25/9/2026
 
 - **Armies can march into San José and Maldonado again:** the travel network (the roads and railways armies move
