@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **The Malvinas journals work for La Plata:** la Argentina's two Malvinas journals checked only Argentina's tag;
+  La Plata and Great Argentina now keep them.
 - **La Plata keeps Argentina's party names:** a La Plata formed from Argentina now has the same period names (Federal
   and Unitarian parties, then Nationalist and Autonomist) instead of the game's generic ones.
 - **Uruguay's roads follow its real routes:** the travel network of the five Oriental states is redrawn along

@@ -1,0 +1,42 @@
+﻿# EN: Copy of la Argentina's 01_malvinas.txt (Workshop 2982907360; same name, loaded after it). Only the ARG checks
+#     marked GG change, so La Plata and Great Argentina keep the Malvinas journals (Juan, 25/9/2026).
+# ES: copia del archivo de la Argentina; solo cambian los chequeos de ARG marcados GG.
+je_malvinas = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+group = je_group_historical_content
+	complete = {
+		owns_entire_state_region = STATE_SOUTH_ATLANTIC_ISLANDS # GG: any Argentine state (ARG, PLT, Great_ARG), not only c:ARG
+	}
+
+	on_complete = {
+		add_modifier = {
+				name = islas_malvinas
+		}
+	}
+
+	weight = 200
+
+	transferable = no
+}
+
+je_islas_malvinas = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+group = je_group_historical_content
+	is_shown_when_inactive = {
+		OR = { c:ARG ?= ROOT c:PLT ?= ROOT c:Great_ARG ?= ROOT } # GG
+	}
+
+	possible = {
+		is_subject = no
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_SOUTH_ATLANTIC_ISLANDS
+	}
+
+	on_complete = {
+		trigger_event = { id = islas_malvinas.1 }
+	}
+
+	weight = 10
+}
