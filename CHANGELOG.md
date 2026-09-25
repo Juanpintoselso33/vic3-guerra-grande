@@ -1,5 +1,14 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## Unreleased
+
+- **The peace no longer deletes the loser's men:** every peace settlement of the Guerra Grande annexed the losing
+  government outright, and the engine deletes an annexed country's characters -- Oribe, Lavalleja and the original
+  Giró vanished when the Cerrito was absorbed, although Oribe should live on at his quinta until 1857. The 15 peace
+  annexations that still did this (and Brazil's annexation of the Pact province after a Cisplatine war) now bring the
+  loser's characters over first, stripped of ruler and heir, as the province annexations already did. Characters
+  already lost in a game in progress do not come back.
+
 ## 0.1.6-alpha — 25/9/2026
 
 - **Montevideo's immigrants arrive as people, with their nationalities, and many as soldiers:** the engine sends

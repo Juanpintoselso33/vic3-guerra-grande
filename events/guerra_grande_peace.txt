@@ -171,7 +171,7 @@ gg_peace.1 = {
 
 		custom_tooltip = gg_peace_formula_tt
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = guerra_grande_no_victors_no_vanquished
@@ -270,7 +270,7 @@ gg_peace.1 = {
 			}
 		}
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = gg_peace_blancos_proscribed
@@ -357,7 +357,7 @@ gg_peace.1 = {
 
 		custom_tooltip = gg_peace_treaties_tt
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		c:BRZ ?= {
 			create_diplomatic_pact = {
@@ -454,7 +454,7 @@ gg_peace.1 = {
 		}
 		else = { custom_tooltip = gg_peace_protectorate_asked_tt }
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = guerra_grande_no_victors_no_vanquished
@@ -538,7 +538,7 @@ gg_peace.1 = {
 		set_global_variable = gg_oriental_division_pledged
 		gg_oriental_division_march = yes
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = guerra_grande_no_victors_no_vanquished
@@ -603,7 +603,7 @@ gg_peace.1 = {
 		}
 		set_global_variable = gg_peace_settled
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = vassal, which the engine dropped at once: vanilla's vassal takes
 		#     only an unrecognized overlord and the Empire is recognized. Its own type, without that rule or the rank rule
@@ -676,7 +676,7 @@ gg_peace.1 = {
 
 		custom_tooltip = gg_peace_cisplatina_tt
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = puppet, which needs the Empire to outrank the Republic; its own
 		#     type, the Cisplatine Province, without the rank rule (zz_gg_subject_types.txt); watched thirty days.
@@ -902,7 +902,7 @@ gg_peace.2 = {
 
 		custom_tooltip = gg_peace_oribe_pliego_tt
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = guerra_grande_no_victors_no_vanquished
@@ -997,7 +997,7 @@ gg_peace.2 = {
 				remove_variable = gg_garibaldi_ref
 			}
 		}
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = gg_peace_legal_presidency
@@ -1098,7 +1098,7 @@ gg_peace.2 = {
 			}
 		}
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		add_modifier = {
 			name = gg_peace_colorados_proscribed
@@ -1277,7 +1277,7 @@ gg_peace.2 = {
 
 		custom_tooltip = gg_peace_rosista_client_tt
 
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 
 		# EN: 24/9/2026 (AUD-VASSAL-RECOGNIZED) -- was type = puppet, which needs Buenos Aires to outrank the Republic: in
 		#     Juan's saves Argentina was a minor power in 1846 and the Republic a minor power in 1851, and the engine drops
@@ -1838,7 +1838,7 @@ gg_peace.6 = {
 		}
 		else = {
 			custom_tooltip = gg_peace.6.colorados_tt
-			if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+			if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 			set_ruling_interest_groups = { ig_petty_bourgeoisie ig_intelligentsia }
 			add_modifier = { name = gg_peace_powers_tutelage years = 10 is_decaying = yes }
 		}
@@ -1891,7 +1891,7 @@ gg_peace.7 = {
 		default_option = yes
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_peace_no_victors
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 		gg_patron_change = { PATRON = rosas DELTA = -100 }
 		gg_patron_change = { PATRON = francia DELTA = 10 }
 		gg_patron_change = { PATRON = britania DELTA = 10 }
@@ -1908,7 +1908,7 @@ gg_peace.7 = {
 		name = gg_peace.7.b
 		set_global_variable = gg_peace_settled
 		set_global_variable = gg_peace_no_victors
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 		gg_patron_change = { PATRON = rosas DELTA = -100 }
 		c:ARG ?= {
 			change_relations = { country = ROOT value = -100 }
@@ -2161,7 +2161,7 @@ gg_peace.9 = {
 		name = gg_peace.9.a
 		default_option = yes
 		custom_tooltip = gg_peace.9.a_tt
-		if = { limit = { exists = scope:gg_peace_loser } annex = scope:gg_peace_loser }
+		if = { limit = { exists = scope:gg_peace_loser } scope:gg_peace_loser = { gg_bring_characters_to = { TARGET = root } } annex = scope:gg_peace_loser } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- the loser's men come along; a bare annex deleted Oribe, Lavalleja and Giro / sus hombres vienen con el; la anexion pelada borro a Oribe, Lavalleja y Giro
 		set_ruling_interest_groups = { ig_landowners ig_rural_folk }
 		random_scope_character = {
 			limit = { has_template = URU_Manuel_Oribe }

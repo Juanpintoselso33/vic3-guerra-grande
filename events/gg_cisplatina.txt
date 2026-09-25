@@ -187,7 +187,7 @@ gg_cisplatina.3 = {
 			if = {
 				limit = { global_var:gg_cis_goal = 2 }
 				# EN/ES: the Pact province is a country: Brazil annexes it whole / la provincia del Pacto es un pais
-				if = { limit = { c:URU ?= { is_subject_of = c:ARG } } annex = c:URU }
+				if = { limit = { c:URU ?= { is_subject_of = c:ARG } } c:URU = { gg_bring_characters_to = { TARGET = root } } annex = c:URU } # EN/ES: 25/9 (AUD-CHAR-ANNEX) -- its men come along / sus hombres vienen con ella
 				else = { gg_cis_annex = yes }
 				remove_global_variable = gg_oriental_province
 				set_global_variable = { name = gg_cis_outcome value = 2 }
