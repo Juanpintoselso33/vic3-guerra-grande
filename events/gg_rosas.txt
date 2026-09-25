@@ -344,6 +344,9 @@ gg_rosas.6 = {
 	title = gg_rosas.6.t
 	desc = {
 		first_valid = {
+			# EN/ES: 25/9/2026 (Juan, AUD-ROSAS-OCT) -- Urquiza stands between Buenos Aires and the siege
+			#     / Urquiza esta entre Buenos Aires y el sitio
+			triggered_desc = { desc = gg_rosas.6.d_cut trigger = { gg_urquiza_cuts_off_oribe = yes } }
 			triggered_desc = { desc = gg_rosas.6.d_blanco trigger = { gg_war_balance_blanco > gg_war_balance_colorado } }
 			triggered_desc = { desc = gg_rosas.6.d_colorado trigger = { gg_war_balance_colorado > gg_war_balance_blanco } }
 			triggered_desc = { desc = gg_rosas.6.d trigger = { always = yes } }
@@ -360,6 +363,14 @@ gg_rosas.6 = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas.6.a|" # GG_TRAZA
 		name = gg_rosas.6.a
 		default_option = yes
+		# EN: 25/9/2026 (Juan, AUD-ROSAS-OCT) -- not once Urquiza has broken with Rosas, for the AI or a player: the
+		#     pronouncement cut the road to the siege, and the Cerrito's last effort from Buenos Aires (+15 endurance on
+		#     1/6/1851 in the headless run of AUD-PACT-CASEROS-SIEGE, IA 60) kept the peace from coming until November
+		#     when Oribe historically capitulated on 8/10/1851. Only the advice is left (.b).
+		# ES: no despues de que Urquiza rompio con Rosas, ni para la IA ni para un jugador: el pronunciamiento corto el
+		#     camino al sitio, y el ultimo esfuerzo de Buenos Aires demoraba la paz hasta noviembre cuando Oribe
+		#     capitulo el 8/10/1851. Queda solo el consejo (.b).
+		trigger = { NOT = { gg_urquiza_cuts_off_oribe = yes } }
 		custom_tooltip = gg_rosas.6.a_tt
 		gg_patron_change = { PATRON = rosas DELTA = 5 }
 		gg_endurance_add = { SIDE = cerrito VALUE = 15 }

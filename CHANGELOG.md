@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- **The Ejército Grande marches with its men:** the army Urquiza raises in November 1851 and the Brazilian and Oriental
+  divisions were created empty and never mobilized, so the crossing of the Paraná had no army behind it. The battalions
+  did not fit: Entre Ríos's barracks were already full with Urquiza's army of the pronouncement, and the army model
+  caps them per state. Now the states that raise them get room in their barracks (from the Montevideo convention on),
+  the Brazilian division is raised in Río Grande del Sur only if Brazil holds it (otherwise at its own seat), the
+  contingents have the convention's strength (18 battalions for Urquiza's 18,000, 3 for Brazil's 3,000, 3 for the
+  Orientals' 2,500), the veterans muster fast for three months, and an army the engine refuses to mobilize is tried
+  again every week for two months instead of once. Games past November 1851 keep the armies they have.
+
+- **Rosas cannot reinforce Oribe once Urquiza has broken with him:** after the pronouncement of 1 May 1851 (or
+  Urquiza's turn at the Montevideo convention), with Entre Ríos not back under Buenos Aires, «Back Oribe to the end»
+  is no longer offered to the AI or a player: the road to the siege is cut, and Buenos Aires can only advise Oribe to
+  negotiate. The event says so. Before, the AI could still give the Cerrito +15 endurance in June 1851 and hold off the
+  peace Oribe historically signed on 8 October.
+
+- **«The Pact without a Constitution» brings back every province standing on its own:** after the negotiated
+  confederation it took Entre Ríos and Corrientes back as Provinces of the Pact but left a Northern Coalition (or any
+  other province country) independent for good. Now all of them come back the same way, with the same exceptions (not
+  a player's, not at war with Buenos Aires). Games in progress: the next monthly pulse takes them in, once.
 - **Great Argentina is formed like La Plata, and asks for more:** the old requirement (20 of 25 states, where a
   one-province colony in Patagonia or in Chile counted as a whole state) is replaced by La Plata's rule plus the south.
   All five Oriental states and Paraguay's two are required; at least 10 of the 14 historical Argentine provinces, where
@@ -16,6 +35,7 @@
   country that holds Buenos Aires as soon as Rosas no longer rules it (his term ends, he dies or he falls). On the
   Caseros path he still marches with the Ejército Grande, now coming from Chile as he did in 1851; there is only ever
   one Mitre. Saved games: from the next monthly pulse, if no Mitre was ever born.
+||||||| parent of 6aced6f (AUD-ROSAS-OCT: Rosas cannot reinforce the Cerrito once Urquiza has broken with him; CHANGELOG)
 
 - **A Brazilian victory in the Cisplatine war makes the Banda Oriental the Provincia Cisplatina:** of Brazil's three
   aims, «enforce the Convention» freed the Republic and «under the Empire's hand» made it a protectorate. Now both

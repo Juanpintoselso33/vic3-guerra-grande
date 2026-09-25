@@ -140,3 +140,24 @@ gg_urquiza_between_oribe_and_rosas = {
 	NOT = { exists = c:CLN }
 	NOT = { c:CRR ?= { NOT = { is_subject_of = c:ARG } } }
 }
+
+# EN: 25/9/2026 (Juan, AUD-ROSAS-OCT) -- Urquiza has broken with Rosas and stands between him and Oribe: Entre Rios took
+#     back its foreign relations on 1 May 1851 (gg_delegation_gone_entre_rios) or Urquiza turned in 1851
+#     (gg_urquiza_pronounced_1851, the Montevideo convention), and Entre Rios is not back under Buenos Aires (the loyal
+#     seat of Alcaraz, or the Province of the Pact or protectorate a lost war makes of it). Historically the pronouncement
+#     cut the road from Buenos Aires to the siege: Urquiza crossed the Uruguay against Oribe and Oribe capitulated on
+#     8/10/1851 without Rosas's help. Read by gg_rosas.6: Buenos Aires can no longer send the Cerrito one last effort.
+# ES: Urquiza rompio con Rosas y esta entre el y Oribe: Entre Rios reasumio sus relaciones exteriores el 1/5/1851 o Urquiza
+#     se dio vuelta en 1851, y Entre Rios no volvio a manos de Buenos Aires. El pronunciamiento corto el camino de Buenos
+#     Aires al sitio: Urquiza cruzo el Uruguay contra Oribe y Oribe capitulo el 8/10/1851 sin ayuda de Rosas.
+# SOURCE / FUENTE: design repo docs/guerra-grande-argentina/historia-argentina.md, «1850-1852 -- Urquiza y Caseros»
+#     (Pronunciamiento 1/5/1851; Convencion del 29/5/1851, art. I; 8/10/1851, se disuelve el ejercito de Oribe).
+gg_urquiza_cuts_off_oribe = {
+	OR = {
+		has_global_variable = gg_delegation_gone_entre_rios
+		has_global_variable = gg_urquiza_pronounced_1851
+	}
+	NOT = { gg_entre_rios_with_rosas = yes }
+	NOT = { c:ENR ?= { is_subject_of = c:ARG } }
+}
+
