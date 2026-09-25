@@ -114,21 +114,20 @@ gg_constitution.1 = {
 		# ES: tras la confederacion negociada Entre Rios y Corrientes quedaban independientes esperando la constitucion que
 		#     las incorpora; sin ella quedaban afuera para siempre. Bajo la suma del poder publico vuelven a delegar, como
 		#     provincias del Pacto, por el camino de la confederacion. El sillon y la guarda contra golpes, en el acto.
+		# EN/ES: 25/9/2026 (Juan, AUD-ROSAS-SUMA-CLN) -- every province standing on its own, the Northern Coalition too,
+		#     not only Entre Rios and Corrientes (gg_constitution_confed_keep_standing) / toda provincia en pie, tambien la
+		#     Coalicion del Norte
 		if = {
 			limit = {
 				has_global_variable = gg_pact_settlement_constitutional
-				OR = {
-					c:ENR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
-					c:CRR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
-				}
+				gg_constitution_province_standing_out = yes
 			}
 			custom_tooltip = gg_constitution.1.b_confed_tt
 		}
 		hidden_effect = {
 			if = {
 				limit = { has_global_variable = gg_pact_settlement_constitutional }
-				gg_constitution_confed_keep = { TAG = ENR }
-				gg_constitution_confed_keep = { TAG = CRR }
+				gg_constitution_confed_keep_standing = yes
 			}
 			gg_arg_identity_guard = yes
 			gg_rosas_keeps_the_seat = yes

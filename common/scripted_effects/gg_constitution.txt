@@ -264,6 +264,24 @@ gg_constitution_confederation = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_constitution_confederation|" # GG_TRAZA
 	set_global_variable = gg_constitution_confederation
 	# EN/ES: the provinces that stand as countries / las provincias que ya son paises
+	gg_constitution_confed_keep_standing = yes
+	if = {
+		limit = { c:URU ?= { gg_is_oriental_pact_province = yes } }
+		gg_pact_protectorate_to_province = { TAG = URU }
+	}
+	# EN/ES: and the ground Buenos Aires holds / y el suelo que tiene Buenos Aires
+	gg_constitution_confed_ground = yes
+}
+
+# EN: 25/9/2026 (Juan, AUD-ROSAS-SUMA-CLN) -- every province country that can stand on its own, in one list: Corrientes,
+#     Entre Rios, the Northern Coalition (CLN) and the thirteen provinces a split or a league can raise. Read by the
+#     confederation (gg_constitution.1.g) and by «the Pact without a Constitution» (gg_constitution.1.b) after the
+#     negotiated confederation, and by its migration: the two used to name only Entre Rios and Corrientes, and a
+#     Coalition still standing stayed out for good (Juan, 25/9: «obvio que tiene que volver»). Scope: Argentina.
+# ES: toda provincia-pais que puede existir por su cuenta, en una sola lista. La leen la confederacion y «el Pacto sin
+#     Constitucion» tras la confederacion negociada, y su migracion: antes solo nombraban a Entre Rios y Corrientes, y
+#     una Coalicion en pie quedaba afuera para siempre.
+gg_constitution_confed_keep_standing = {
 	gg_constitution_confed_keep = { TAG = CRR }
 	gg_constitution_confed_keep = { TAG = ENR }
 	gg_constitution_confed_keep = { TAG = CLN }
@@ -278,12 +296,6 @@ gg_constitution_confederation = {
 	gg_constitution_confed_keep = { TAG = MZA }
 	gg_constitution_confed_keep = { TAG = SJN }
 	gg_constitution_confed_keep = { TAG = SNL }
-	if = {
-		limit = { c:URU ?= { gg_is_oriental_pact_province = yes } }
-		gg_pact_protectorate_to_province = { TAG = URU }
-	}
-	# EN/ES: and the ground Buenos Aires holds / y el suelo que tiene Buenos Aires
-	gg_constitution_confed_ground = yes
 }
 
 # EN: One province country that stands. Scope: Argentina. Its subject pact becomes the Province of the Pact; an

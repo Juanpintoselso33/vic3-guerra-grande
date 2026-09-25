@@ -163,3 +163,27 @@ gg_rosas_reelection_barred = {
 	has_global_variable = gg_rosas_no_reelection
 	gg_rosas_first_term_running = no
 }
+
+# EN: 25/9/2026 (Juan, AUD-ROSAS-SUMA-CLN) -- a province country of gg_constitution_confed_keep_standing is out on its own
+#     and would be taken in (independent, not a player's, at peace with Buenos Aires). Only for the tooltip of
+#     gg_constitution.1.b; the effect itself checks each one again.
+# ES: una provincia-pais de la lista esta afuera y seria recibida (independiente, no de un jugador, en paz con Buenos
+#     Aires). Solo para el tooltip; el efecto vuelve a chequear cada una.
+gg_constitution_province_standing_out = {
+	OR = {
+		c:CRR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:ENR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:CLN ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:TUC ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:SLT ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:JUJ ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:CTM ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:LRJ ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:CBA ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:SFE ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:SDE ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:MZA ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:SJN ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+		c:SNL ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+	}
+}
