@@ -11,6 +11,12 @@
   panel shows that number, and the conditions of each part are in the tooltips. Nationalism and the end of Argentina's
   calendar are still required.
 
+- **Mitre waits in Chile while Rosas rules:** on the paths without Caseros, Bartolomé Mitre did not exist until the
+  engine's own spawn in 1859. He now lives in Chile from his arrival in Valparaíso (24/4/1848) and goes home to the
+  country that holds Buenos Aires as soon as Rosas no longer rules it (his term ends, he dies or he falls). On the
+  Caseros path he still marches with the Ejército Grande, now coming from Chile as he did in 1851; there is only ever
+  one Mitre. Saved games: from the next monthly pulse, if no Mitre was ever born.
+
 - **A Brazilian victory in the Cisplatine war makes the Banda Oriental the Provincia Cisplatina:** of Brazil's three
   aims, «enforce the Convention» freed the Republic and «under the Empire's hand» made it a protectorate. Now both
   end, on a Brazilian win, in the Cisplatine Province: Brazil's subject with its own name, flag and modifier, the same

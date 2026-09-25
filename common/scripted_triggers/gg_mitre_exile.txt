@@ -1,0 +1,23 @@
+﻿# EN: 25/9/2026 (Juan's decision, AUD-MITRE-CHILE) -- Mitre in Chile while Rosas rules; see
+#     common/scripted_effects/gg_mitre_exile.txt.
+# ES: Mitre en Chile mientras gobierna Rosas; ver common/scripted_effects/gg_mitre_exile.txt.
+
+# EN/ES: any scope -- Rosas rules the country that holds Buenos Aires (ARG, or what it became: PLT, Great_ARG). The
+#     seat keeper (gg_rosas_seat_on_new_ruler) puts him back the same day while he holds it by right, so a ruler who is
+#     not Rosas means he is out: his term is over (AUD-ROSAS-TERM), he died, or he fell
+#     / Rosas gobierna el pais que tiene Buenos Aires; si no, termino su periodo, murio o cayo
+gg_mitre_rosas_rules_buenos_aires = {
+	s:STATE_BUENOS_AIRES = {
+		any_scope_state = {
+			owner = { ruler ?= { has_template = ARG_Juan_Manuel_de_Rosas } }
+		}
+	}
+}
+
+# EN/ES: character scope -- the one Mitre (gg_is_the_mitre), living in Chile with this mod's mark
+#     / el unico Mitre, en Chile y con la marca del exilio
+gg_mitre_in_chilean_exile = {
+	gg_is_the_mitre = yes
+	has_variable = gg_mitre_chile_exile
+	owner ?= { c:CHL ?= this }
+}

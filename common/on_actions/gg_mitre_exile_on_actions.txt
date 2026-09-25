@@ -1,0 +1,16 @@
+﻿# EN: 25/9/2026 (Juan's decision, AUD-MITRE-CHILE) -- Mitre in Chile while Rosas rules, and home when he no longer does
+#     (common/scripted_effects/gg_mitre_exile.txt). On Chile's own pulse: the man lives there.
+# ES: Mitre en Chile mientras gobierna Rosas, y de vuelta cuando ya no gobierna. En el pulso de Chile, donde vive.
+on_monthly_pulse_country = {
+	on_actions = { gg_mitre_chile_monthly }
+}
+gg_mitre_chile_monthly = {
+	trigger = {
+		c:CHL ?= this
+		game_date >= 1848.4.24
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_chile_monthly" # GG_TRAZA
+		gg_mitre_chile_exile = yes
+	}
+}

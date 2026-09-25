@@ -1,0 +1,79 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan's decision, AUD-MITRE-CHILE) -- MITRE IN CHILE WHILE ROSAS RULES. On the paths without Caseros
+#     (no Ejercito Grande: the negotiated settlement, Rosas kept) Mitre did not exist until vanilla's 1859 spawn. Now he
+#     lives where history put him: in Chile from his arrival in Valparaiso (24/4/1848), and when Rosas no longer rules
+#     Buenos Aires (the end of his term, AUD-ROSAS-TERM; his death; his fall) he goes home to the country that holds
+#     Buenos Aires. Monthly, on Chile's pulse (common/on_actions/gg_mitre_exile_on_actions.txt). Scope: Chile.
+#     One Mitre (AUD-MITRE-DUP): he is made only through gg_mitre_fetch and only if he never lived and lives nowhere,
+#     so a Mitre kept in the Defensa or sent to Corrientes (gg_rivera.8.b/c) is never doubled; the return moves only the
+#     man who is in Chile with this mark. On the Caseros path the emigres' join (gg_emigres_join_ejercito_grande) fetches
+#     him from Chile before Rosas falls, as history had it (he sailed on 2/10/1851), so the return never touches him
+#     there. He is made in the country that holds Buenos Aires and sent on to Chile, because the template's culture is
+#     that of the country that makes him (Chile would make him south_andean). His death stays gg_historical_lives'.
+# ES: MITRE EN CHILE MIENTRAS GOBIERNA ROSAS. En los caminos sin Caseros Mitre no existia hasta la aparicion de vanilla
+#     en 1859. Ahora vive donde lo puso la historia: en Chile desde que llega a Valparaiso (24/4/1848), y cuando Rosas
+#     deja de gobernar Buenos Aires (fin del periodo, muerte, caida) vuelve al pais que tiene Buenos Aires. Un solo
+#     Mitre: se hace solo por gg_mitre_fetch, solo si nunca vivio y no vive en ninguna parte; la vuelta mueve solo al
+#     que esta en Chile con la marca. En el camino de Caseros los emigrados lo sacan de Chile antes de que caiga Rosas.
+#     Se lo hace en el pais que tiene Buenos Aires y se lo manda a Chile, para que no salga con la cultura chilena.
+# SOURCE / FUENTE: F. Pigna, «Bartolome Mitre: como fue el largo y duro camino de su exilio», Clarin (24/1/2025): left
+#     Montevideo on 12/11/1846 for Bolivia; «El 24 de abril de 1848 llegaba a Valparaiso»; El Comercio de Valparaiso
+#     from May 1848, El Progreso from May 1849; sailed for Montevideo on 2/10/1851. La Nacion, «Mitre, ligado desde joven
+#     a la prensa de la region» (2/7/2022): in Chile «desde abril de 1848 hasta octubre de 1851». es.wikipedia
+#     «Bartolome Mitre» (Bolivia, Peru, Chile).
+# -------------------------------------------------------------------------------------------------
+gg_mitre_chile_exile = {
+	save_scope_as = gg_mitre_chile
+	# EN/ES: 1. he arrives in Valparaiso, if no Mitre ever lived / llega a Valparaiso, si nunca vivio un Mitre
+	if = {
+		limit = {
+			game_date >= 1848.4.24
+			game_date < 1906.1.19
+			NOT = { has_global_variable = gg_mitre_born }
+			gg_mitre_lives = no
+			s:STATE_BUENOS_AIRES = { any_scope_state = { NOT = { owner = scope:gg_mitre_chile } } }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_chile_exile| ARRIVES=yes " # GG_TRAZA
+		s:STATE_BUENOS_AIRES = {
+			ordered_scope_state = {
+				limit = { NOT = { owner = scope:gg_mitre_chile } }
+				order_by = state_population
+				position = 0 # EN/ES: the most populous only / solo el mas poblado
+				check_range_bounds = no
+				owner = {
+					gg_mitre_fetch = yes
+					random_scope_character = {
+						limit = { gg_is_the_mitre = yes }
+						set_variable = gg_mitre_chile_exile
+						transfer_character = scope:gg_mitre_chile
+					}
+				}
+			}
+		}
+	}
+	# EN/ES: 2. Rosas no longer rules Buenos Aires: he goes home / Rosas ya no gobierna Buenos Aires: vuelve
+	if = {
+		limit = {
+			any_scope_character = { gg_mitre_in_chilean_exile = yes }
+			gg_mitre_rosas_rules_buenos_aires = no
+			s:STATE_BUENOS_AIRES = { any_scope_state = { NOT = { owner = scope:gg_mitre_chile } } }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mitre_chile_exile| RETURNS=yes " # GG_TRAZA
+		s:STATE_BUENOS_AIRES = {
+			ordered_scope_state = {
+				limit = { NOT = { owner = scope:gg_mitre_chile } }
+				order_by = state_population
+				position = 0 # EN/ES: the most populous only / solo el mas poblado
+				check_range_bounds = no
+				owner = {
+					gg_mitre_fetch = yes
+					random_scope_character = {
+						limit = { gg_is_the_mitre = yes }
+						remove_variable = gg_mitre_chile_exile
+					}
+				}
+			}
+		}
+	}
+	clear_saved_scope = gg_mitre_chile
+}
