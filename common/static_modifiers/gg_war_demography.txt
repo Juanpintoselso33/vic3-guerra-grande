@@ -1,0 +1,55 @@
+﻿# EN: 25/9/2026 (Juan: «las dos») -- THE WAR MOVED THE PEOPLE OF THE BANDA ORIENTAL INTO MONTEVIDEO. Measured in Juan's
+#     game and the headless runs of 25/9: Montevideo starts 1836 with 36,000 (~19% of the five Oriental states) and ends
+#     1851-1852 with 23-26,000 (7-8%) while the countryside nearly doubles. The 1852 census counted the opposite:
+#     Montevideo 33,994 of ~132,000 (~26%). The war emptied the countryside (levies, cattle driven off, families to
+#     Brazil and Entre Rios, deaths) and filled the walled city with Europeans. Two state modifiers, on while the war
+#     lasts (gg_war_demography_on) and taken off with the rest of the wartime ones (gg_wartime_modifiers_clear).
+#     Calibration: a two-compartment model over the 1.13 pop-growth defines (birth 0.45%/month and mortality
+#     0.35%/month at SoL 8; 0.40% and 0.21% at SoL 12), on the measured baseline, gives 21-25% in 1852 for SoL 5-8
+#     in Montevideo and 10-12 in the countryside (16-18% if both are higher) from births and deaths alone, before the
+#     1839-1842 internal migration adds to it (design repo, tools/modelo_poblacion_oriental.py). To be verified with
+#     the GG_POP trace (gg_trace_oriental_population) in a headless run to 1853.
+#     SOURCE / FUENTE: Censo General Administrativo de 1852 (Montevideo 33,994: 18,590 Orientals, 15,404 foreigners),
+#     in Barrios Pintos, Montevideo: los barrios I (1971), p. 3; Uruguay ~132,000 in 1852 and 221,000 in 1860,
+#     Montevideo 34,000 and 58,000: N. Duffau, «¿El infierno en Babel?» (2011); padron of Montevideo of October 1843
+#     (Andres Lamas): 31,189, of whom 11,431 Orientals -- 5,324 French, 4,205 Italians, 3,406 Spaniards, 2,553
+#     Argentines --, and more than 33,000 European immigrants landed 1835-1842, total population 128,371 in 1835:
+#     M. Etchechury Barrera, «Defensores de la humanidad y la civilizacion», Historia 50/II (2017), n. 31-32; Oriental
+#     State 180-200,000 in 1842, ~10,000 people moved off the Rio Negro districts by Rivera in January 1843, 1.7-2.2
+#     million head of cattle sent to Rio Grande in 28 months, refugees of the countryside still in the city in November
+#     1851: M. Etchechury Barrera, «Chinas, guayaquises y jente que no es de armas» (Redalyc 3801/380157595006);
+#     A. Dumas, Montevideo ou une nouvelle Troie (Paris, 1850).
+# ES: LA GUERRA METIO A LA GENTE DE LA BANDA ORIENTAL EN MONTEVIDEO. Medido: 36.000 (19%) en 1836 y 23-26.000 (7-8%) en
+#     1851-1852, con la campaña casi duplicada; el censo de 1852 dio Montevideo 33.994 de ~132.000 (~26%). Dos
+#     modificadores de estado mientras dura la guerra, sacados con el resto de los de guerra.
+
+# EN: Montevideo while the Defensa (or, before the split, the Republic) holds it: the refugees of the countryside and
+#     the European immigrants crowd behind the walls. Dumas called the besieged city «une nouvelle Troie» (1850).
+#     Migration pull: the displaced of 1839-1843 come into the city while it shares a market with the countryside;
+#     birth and mortality: the growth the immigrants brought after the split, when no one can walk in from the
+#     countryside any more -- the sea lane stayed open and fed the plaza (gg_siege_the_sea_lane_stays_open).
+# ES: Montevideo mientras la tiene la Defensa: los refugiados de la campaña y los inmigrantes europeos se amontonan
+#     tras las murallas. Atraccion: los desplazados de 1839-1843; natalidad y mortalidad: el crecimiento que trajeron
+#     los inmigrantes despues del corte, cuando ya nadie puede entrar caminando desde la campaña.
+gg_war_montevideo_refuge = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_migration_pull_mult = 1.0
+	state_birth_rate_mult = 0.5
+	state_mortality_mult = -0.5
+}
+
+# EN: the other four Oriental states while the war lasts, whoever holds them: the levies take the men (lower births),
+#     the armies and the slaughter kill (higher mortality), and the families leave for the city, Brazil and Entre Rios
+#     (lower migration pull; after the split it stacks with gg_siege_countryside_without_a_port on the Cerrito's side).
+#     Vanilla's own war and famine modifiers stay well under these (state_mortality_mult 0.10-0.25, la Argentina's
+#     malon 0.25); these are larger because the countryside lost about 40% of its people in thirteen years
+#     (180-200,000 in 1842 to ~98,000 outside Montevideo in 1852).
+# ES: los otros cuatro estados orientales mientras dura la guerra, sea quien sea el dueño: las levas se llevan a los
+#     hombres, los ejercitos y las carneadas matan, y las familias se van a la ciudad, al Brasil y a Entre Rios. Mas
+#     fuertes que los de vanilla porque la campaña perdio cerca del 40% de su gente en trece años.
+gg_war_countryside_ravaged = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds"
+	state_migration_pull_mult = -0.5
+	state_birth_rate_mult = -0.5
+	state_mortality_mult = 0.75
+}

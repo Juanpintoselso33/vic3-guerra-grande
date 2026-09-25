@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **The war fills Montevideo and empties the countryside:** Montevideo started 1836 with 19% of the Banda Oriental's
+  people and was down to 7-8% by 1852, while the countryside nearly doubled; the 1852 census counted about 26%
+  (33,994 of ~132,000). From the declaration of war on Rosas (February 1839) until the peace, Montevideo -- while the
+  Cerrito does not hold it -- has «The New Troy» (+100% migration attraction, +50% births, -50% mortality: the
+  refugees and the European immigrants behind the walls) and the other four Oriental states have «The Ravaged
+  Countryside» (-50% migration attraction, -50% births, +75% mortality: levies, slaughtered herds, families gone to
+  Brazil and Entre Ríos). Both end with the peace. Games in progress in the middle of the war get them within six
+  months.
 - **Caseros keeps its date under the Pact rules:** with a Pact rule that ends it by war (Historical, Rosas wins, Two
   governments), an AI Rosas could still answer Caseros by holding Buenos Aires, a siege of six months or more that the
   rule's closing date does not cut short, and the Historical settlement came in August 1852. The AI no longer takes

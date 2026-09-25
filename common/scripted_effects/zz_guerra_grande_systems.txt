@@ -424,6 +424,7 @@ gg_wartime_modifiers_clear_once = {
 gg_wartime_modifiers_clear = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_wartime_modifiers_clear|" # GG_TRAZA
 	gg_legion_commanders_leave = yes # EN/ES: CB-05 -- the legion colonels do not stay to govern / los coroneles de las legiones no se quedan a gobernar
+	gg_war_demography_clear = yes # EN/ES: 25/9 (AUD-MVD-SHARE) -- the refuge of Montevideo and the ravaged countryside end with the war / terminan con la guerra
 	# EN: C10 (22/9/2026) -- the blockade of Montevideo was a siege measure: with the war over, Rosas
 	#     opens the river (otherwise his AI would keep the 1843 closure for good).
 	# ES: C10 -- el bloqueo de Montevideo era una medida del sitio: terminada la guerra, Rosas abre el

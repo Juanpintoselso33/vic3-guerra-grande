@@ -1,0 +1,21 @@
+﻿# EN: 25/9/2026 (Juan: «las dos») -- the war that moves the Oriental population is on (static_modifiers/gg_war_demography.txt).
+#     From Rivera's declaration of war on Rosas, 21 February 1839 -- the date the mod already uses for it (F1-1,
+#     gg_phase1.1, whose SOURCE line it shares), the start of the Guerra Grande proper -- until the war's modifiers are cleared by any ending (gg_wartime_cleared,
+#     gg_wartime_modifiers_clear_once). By date, not by an event, so no branch of 1838-1842 skips it.
+#     SOURCE / FUENTE: as gg_phase1.1 (events/guerra_grande_phase1.txt, F1-1) and docs historia.md, phase 1 (1839-1842).
+# ES: la guerra que mueve a la poblacion oriental esta en curso: desde la declaracion de guerra a Rosas (21/2/1839)
+#     hasta que cualquier final saca los modificadores de guerra. Por fecha, asi ninguna rama de 1838-1842 la saltea.
+gg_war_demography_on = {
+	game_date >= 1839.2.21
+	NOT = { has_global_variable = gg_wartime_cleared }
+}
+
+# EN/ES: the four Oriental states that are not Montevideo / los cuatro estados orientales que no son Montevideo
+gg_is_oriental_countryside_state = {
+	OR = {
+		state_region = s:STATE_BANDA_ORIENTAL
+		state_region = s:STATE_SAN_JOSE
+		state_region = s:STATE_MALDONADO
+		state_region = s:STATE_PAYSANDU
+	}
+}

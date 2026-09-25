@@ -1,0 +1,40 @@
+﻿# EN: 25/9/2026 (Juan: «las dos») -- the war's demographic modifiers (scripted_effects/gg_war_demography.txt), checked
+#     every half year on every Oriental state: on from 21 February 1839 while the war lasts, off with the peace. The
+#     same pulse is the migration for games in progress.
+# ES: los modificadores demograficos de la guerra, revisados cada medio año en cada estado oriental; el mismo pulso es
+#     la migracion para partidas en curso.
+on_half_yearly_pulse_state = {
+	on_actions = {
+		gg_war_demography_pulse
+	}
+}
+
+gg_war_demography_pulse = {
+	trigger = {
+		OR = {
+			state_region = s:STATE_MONTEVIDEO
+			gg_is_oriental_countryside_state = yes
+		}
+	}
+	effect = {
+		gg_war_demography_sync = yes
+	}
+}
+
+# EN/ES: the yearly population trace, once per game-year on Argentina (Rosas's Confederation never changes tag)
+#     / la traza anual de poblacion, sobre la Argentina
+on_yearly_pulse_country = {
+	on_actions = {
+		gg_trace_oriental_population_pulse
+	}
+}
+
+gg_trace_oriental_population_pulse = {
+	trigger = {
+		c:ARG ?= this
+		game_date < 1862.1.1
+	}
+	effect = {
+		gg_trace_oriental_population = yes
+	}
+}

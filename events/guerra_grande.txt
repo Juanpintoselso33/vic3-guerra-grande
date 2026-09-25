@@ -806,6 +806,17 @@ guerra_grande.3 = {
 				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
 			}
 		}
+		# EN/ES: 25/9/2026 (AUD-MVD-SHARE) -- the split makes new states: the war's demographic modifiers go back on the
+		#     same day, not at the next half-year pulse / el corte crea estados nuevos: los modificadores vuelven el mismo dia
+		every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_MONTEVIDEO
+					gg_is_oriental_countryside_state = yes
+				}
+			}
+			gg_war_demography_sync = yes
+		}
 		# EN: how each government paid for the war. Same three keys, opposite signs: the Defensa
 		#     has the cash and owes every peso of it; the Cerrito has a third of it, owes nobody,
 		#     and holds its own authority over the whole country.
@@ -1226,6 +1237,17 @@ guerra_grande.3 = {
 			s:STATE_PAYSANDU.region_state:CER = {
 				add_modifier = { name = gg_siege_countryside_without_a_port years = 15 }
 			}
+		}
+		# EN/ES: 25/9/2026 (AUD-MVD-SHARE) -- the split makes new states: the war's demographic modifiers go back on the
+		#     same day, not at the next half-year pulse / el corte crea estados nuevos: los modificadores vuelven el mismo dia
+		every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_MONTEVIDEO
+					gg_is_oriental_countryside_state = yes
+				}
+			}
+			gg_war_demography_sync = yes
 		}
 		# EN: how each government paid for the war. Same three keys, opposite signs: the Defensa
 		#     has the cash and owes every peso of it; the Cerrito has a third of it, owes nobody,

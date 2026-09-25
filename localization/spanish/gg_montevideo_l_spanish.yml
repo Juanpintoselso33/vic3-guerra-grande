@@ -1,3 +1,7 @@
 ﻿l_spanish:
  gg_montevideo_port_city:0 "La ciudad-puerto"
  gg_montevideo_port_city_desc:0 "Montevideo vive de su bahía: la aduana, las barracas y los buques que recalan en ella la hacen la puerta de toda la Banda Oriental."
+ gg_war_montevideo_refuge:0 "La Nueva Troya"
+ gg_war_montevideo_refuge_desc:0 "Tras las murallas se apiñan los vecinos de extramuros, las familias que bajaron de la campaña y los que desembarcan cada semana: franceses, italianos, españoles y vascos. El padrón de 1843 contó 31.189 almas en la plaza; 5.324 eran franceses y 4.205 italianos. Mientras el mar siga abierto, la ciudad sitiada no deja de llenarse."
+ gg_war_countryside_ravaged:0 "La campaña asolada"
+ gg_war_countryside_ravaged_desc:0 "Las levas se llevan a los hombres, las divisiones carnean las haciendas y arrean el ganado a la frontera, y las familias buscan amparo en el Brasil, en Entre Ríos o detrás de las murallas. En enero de 1843 se mandó despoblar los pagos del Río Negro: unas diez mil almas marcharon en carretas detrás del ejército."
