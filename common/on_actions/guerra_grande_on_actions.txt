@@ -614,3 +614,23 @@ gg_oriental_ruler_on_new_ruler = {
 		owner = { gg_seat_oriental_ruler = yes }
 	}
 }
+
+# EN: 25/9/2026 (Juan: «Rosas se volvió inmortal», 98 years old in 1891) -- the lives ran only on URU, or on ARG when
+#     URU is gone. With the Oriental Province absorbed and Argentina formed into La Plata (PLT) neither exists, nobody
+#     ran them, and Rosas (1877) and Urquiza (1870) were never cleared. When both are gone, the global monthly pulse
+#     runs them. Saves in progress: the next pulse clears whoever is past his date; no migration needed.
+# ES: sin URU ni ARG (Provincia Oriental absorbida y La Plata formada) nadie corria las vidas y Rosas quedo inmortal.
+#     Ahora las corre el pulso mensual global; en partidas en curso el proximo pulso lo arregla.
+on_monthly_pulse = {
+	on_actions = { gg_historical_lives_monthly_orphan }
+}
+gg_historical_lives_monthly_orphan = {
+	trigger = {
+		NOT = { exists = c:URU }
+		NOT = { exists = c:ARG }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly_orphan" # GG_TRAZA
+		gg_historical_lives = yes
+	}
+}

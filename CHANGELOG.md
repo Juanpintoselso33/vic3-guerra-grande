@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Rosas is mortal again:** the historical lives (Rosas until 1877, Urquiza until 1870…) were kept only while
+  Uruguay or Argentina existed; with the Oriental Province absorbed and La Plata formed, nobody cleared them and Rosas
+  reached 98. Now they are cleared whatever countries remain. Games in progress are fixed on the next month.
 - **Montevideo, the port-city:** splitting la Argentina's Montevideo left it 6 provinces and 8 arable land; it ran
   short of infrastructure (8.8 against 23.8 in use by 1891) and stopped growing (132,000 people by 1891; the 1889
   census counted 215,061). It now has a permanent «The Port-City» modifier: +25 infrastructure, +50% migration
