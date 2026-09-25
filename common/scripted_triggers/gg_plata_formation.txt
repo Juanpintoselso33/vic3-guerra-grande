@@ -1,0 +1,131 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 24/9/2026 (Juan) -- WHAT FORMING LA PLATA (PLT) ASKS FOR (common/country_formation/zz_guerra_grande_formables.txt).
+#     Juan: «la Banda Oriental seguro, Paraguay tambien, y los otros que te pide si los tenes o ya casi completaste la
+#     colonizacion». Two parts, both checked in PLT's possible:
+#     1. Mandatory: the five Oriental states and Paraguay's two, every one.
+#     2. At least 10 of the 14 historical Argentine provinces (70%, rounded up). Each missing province can be made good
+#        by one frontier state (the nine national territories of Ley 1.532, 1884, plus Rio Grande do Sul; the South
+#        Atlantic Islands are left out) that is held and at least 75% colonized. A frontier state below 75% never
+#        counts, and no frontier state is ever required.
+#     "Held" mirrors the engine's own formation count (interfaces_l_english.yml, FORM_NATION_STATE_CONTROL_REASON_*):
+#     a state region counts when the country owns a state in it or when the owner is a non-autonomous subject. Here a
+#     subject counts only if its type is autonomy_level 1 AND annex_on_country_formation = yes (puppet, vassal, crown
+#     land, and the mod's vassal, client and Cisplatine types), i.e. the ones the formation folds in. The Pact's
+#     provinces (subject_type_gg_pact_province, autonomy 2, not annexed) do not count, as the engine does not count them.
+# ES: LO QUE PIDE FORMAR LA PLATA. Dos partes: 1) obligatorios los cinco estados orientales y los dos del Paraguay;
+#     2) al menos 10 de las 14 provincias argentinas historicas (70%, redondeado hacia arriba); cada provincia que
+#     falte la reemplaza un estado de frontera propio y colonizado en al menos un 75%. La frontera por debajo del 75%
+#     no cuenta nunca y nunca es obligatoria. "Tener" copia la cuenta del motor: propio o de un sujeto no autonomo;
+#     aca solo los sujetos de autonomia 1 que la formacion anexa. Las provincias del Pacto no cuentan.
+# SOURCE / FUENTE: the fourteen provinces are those of the 1853 Constitution (deputies of thirteen provinces at the
+#     Santa Fe convention, 1852-1853) plus Buenos Aires, which joined with the reform of 1860 (Pacto de San Jose de
+#     Flores, 11/11/1859); Jujuy an autonomous province since 1834. The frontier list follows Ley 1.532 (1884), art. 1
+#     (see gg_territories.txt).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: state scope: the state counts for the country forming (root): owned by it, or by a subject the formation annexes
+#     / el estado cuenta para el pais que forma: propio o de un sujeto que la formacion anexa
+gg_plt_state_held = {
+	owner = {
+		OR = {
+			this = root
+			AND = {
+				is_subject_of = root
+				OR = {
+					is_subject_type = subject_type_puppet
+					is_subject_type = subject_type_vassal
+					is_subject_type = subject_type_crown_land
+					is_subject_type = subject_type_gg_vassal_state
+					is_subject_type = subject_type_gg_client_state
+					is_subject_type = subject_type_gg_cisplatine_province
+				}
+			}
+		}
+	}
+}
+
+# EN/ES: state region scope: root holds a state in it / root tiene un estado en la region
+gg_plt_region_held = {
+	any_scope_state = { gg_plt_state_held = yes }
+}
+
+# EN/ES: state region scope: root holds a state in it that covers at least 75% of the region's provinces -- the
+#     colonization ratio vanilla uses (common/on_actions/00_on_actions_monthly.txt, colonial_claims_check)
+#     / root tiene un estado que cubre al menos el 75% de las provincias de la region
+gg_plt_region_settled = {
+	any_scope_state = {
+		gg_plt_state_held = yes
+		num_provinces >= {
+			value = state_region.num_provinces
+			multiply = 0.75
+		}
+	}
+}
+
+# EN/ES: state region scope: one of the fourteen historical Argentine provinces / una de las catorce provincias historicas
+gg_plt_core_province_region = {
+	OR = {
+		this = s:STATE_BUENOS_AIRES
+		this = s:STATE_SANTA_FE
+		this = s:STATE_ENTRE_RIOS
+		this = s:STATE_CORRIENTES
+		this = s:STATE_CORDOBA
+		this = s:STATE_SANTIAGO_DEL_ESTERO
+		this = s:STATE_TUCUMAN
+		this = s:STATE_SALTA
+		this = s:STATE_JUJUY
+		this = s:STATE_CATAMARCA
+		this = s:STATE_LA_RIOJA
+		this = s:STATE_SAN_JUAN
+		this = s:STATE_MENDOZA
+		this = s:STATE_SAN_LUIS
+	}
+}
+
+# EN/ES: state region scope: a frontier state that can stand in for a missing province (never required)
+#     / un estado de frontera que puede reemplazar a una provincia que falte (nunca obligatorio)
+gg_plt_frontier_region = {
+	OR = {
+		this = s:STATE_LA_PAMPA
+		this = s:STATE_NEUQUEN
+		this = s:STATE_RIO_NEGRO
+		this = s:STATE_CHUBUT
+		this = s:STATE_SANTA_CRUZ_ARG
+		this = s:STATE_TIERRA_DEL_FUEGO
+		this = s:STATE_MISIONES
+		this = s:STATE_CHACO
+		this = s:STATE_FORMOSA_ARG
+		this = s:STATE_RIO_GRANDE_DO_SUL
+	}
+}
+
+# EN/ES: country scope (root = the forming country): part 1, all seven mandatory states
+#     / parte 1, los siete estados obligatorios
+gg_plt_formation_mandatory = {
+	s:STATE_MONTEVIDEO = { gg_plt_region_held = yes }
+	s:STATE_SAN_JOSE = { gg_plt_region_held = yes }
+	s:STATE_MALDONADO = { gg_plt_region_held = yes }
+	s:STATE_BANDA_ORIENTAL = { gg_plt_region_held = yes }
+	s:STATE_PAYSANDU = { gg_plt_region_held = yes }
+	s:STATE_ALTO_PARAGUAY = { gg_plt_region_held = yes }
+	s:STATE_BAJO_PARAGUAY = { gg_plt_region_held = yes }
+}
+
+# EN/ES: country scope: part 2, held provinces plus settled frontier states >= 10 (70% of 14, rounded up). A frontier
+#     state is only counted when settled, so each one makes good exactly one missing province
+#     / parte 2, provincias tenidas mas frontera colonizada >= 10; cada estado de frontera reemplaza una provincia
+gg_plt_formation_provinces = {
+	any_state_region = {
+		OR = {
+			AND = {
+				gg_plt_core_province_region = yes
+				gg_plt_region_held = yes
+			}
+			AND = {
+				gg_plt_frontier_region = yes
+				gg_plt_region_settled = yes
+			}
+		}
+		count >= 10
+	}
+}

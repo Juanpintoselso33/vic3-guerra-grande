@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Forming La Plata no longer waits on half-colonized frontier:** La Plata (PLT) now asks for all five Oriental
+  states and both Paraguayan states, plus 10 of the 14 historical Argentine provinces. Each missing province can be
+  made good by a frontier state (La Pampa, Neuquén, Río Negro, Chubut, Santa Cruz, Tierra del Fuego, Misiones, the
+  Chaco, Formosa or Rio Grande do Sul) that you hold and have colonized at least 75%; frontier land is never
+  required, and a colony below that share does not count. States held by a puppet, vassal or client that the
+  formation annexes count as yours.
 - **A new flag for La Plata:** the La Plata country (PLT) now flies five stripes — red, white, sky blue, white, red —
   with the Sol de Mayo, in every situation and under every government, instead of la Argentina's and Dynamic
   Names, Flags & Colours' flags. Credits in CREDITS.md.

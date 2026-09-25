@@ -1,46 +1,69 @@
 ﻿# -------------------------------------------------------------------------------------------------
 # EN: La Plata and Great Argentina on la Argentina's map (a hard requirement since 24/9/2026). Vanilla and
 #     la Argentina (99_formable_countries.txt) ask for their own oriental states; this mod has five. Both are
-#     la Argentina's definitions with the five oriental states: La Plata (its states, 0.70, nationalism) and
-#     Great_ARG (with San Jose and Maldonado). Merged from the compatch (zzz_gg_x_arg_formables.txt, audit X3)
+#     la Argentina's definitions with the five oriental states: La Plata (nationalism; its state requirement was
+#     rewritten on 24/9/2026, see below) and Great_ARG (with San Jose and Maldonado). Merged from the compatch (zzz_gg_x_arg_formables.txt, audit X3)
 #     on 24/9/2026; the vanilla-map version of the standalone mod is gone.
 # ES: La Plata y la Gran Argentina sobre el mapa de la Argentina (requisito desde el 24/9/2026): las
-#     definiciones de la Argentina con los cinco estados orientales. Venian del compatch; la version para el
+#     definiciones de la Argentina con los cinco estados orientales (el requisito de estados de La Plata se reescribio
+#     el 24/9/2026, ver abajo). Venian del compatch; la version para el
 #     mapa de vanilla del mod solo se fue.
 # -------------------------------------------------------------------------------------------------
 
+# EN: 24/9/2026 (Juan: «la Banda Oriental seguro, Paraguay tambien, y los otros que te pide si los tenes o ya casi
+#     completaste la colonizacion») -- the old list asked for 21 states at 0.70, several of them frontier still being
+#     colonized, and a one-province colony counted as a whole state. Now the real test is in possible
+#     (common/scripted_triggers/gg_plata_formation.txt): the five Oriental states and Paraguay's two, all of them, plus
+#     10 of the 14 historical provinces, where a frontier state held and at least 75% colonized makes good a missing one.
+#     states lists those 21 so the formation panel shows them; the fraction is set so the engine's own count (21 x 0.33
+#     = 6.93 -> 7 rounded up, 6 rounded down) never asks for more than the seven mandatory states, which possible
+#     already demands: the engine gate can never block what possible allows.
+# ES: la lista vieja pedia 21 estados al 0.70, varios de frontera todavia en colonizacion. Ahora la prueba real esta en
+#     possible: los cinco orientales y los dos del Paraguay, todos, mas 10 de las 14 provincias historicas, donde un
+#     estado de frontera propio y colonizado en al menos un 75% reemplaza a una que falte. states lista esos 21 para
+#     que el panel los muestre; la fraccion hace que la cuenta del motor nunca pida mas que los siete obligatorios.
 REPLACE:PLT = {
 	states = {
-		STATE_BUENOS_AIRES
-		STATE_CHACO
-		STATE_SANTA_FE
+		# EN/ES: mandatory / obligatorios
 		STATE_MONTEVIDEO
 		STATE_SAN_JOSE
 		STATE_MALDONADO
 		STATE_BANDA_ORIENTAL
 		STATE_PAYSANDU
-		STATE_BAJO_PARAGUAY
 		STATE_ALTO_PARAGUAY
-		STATE_RIO_NEGRO
-		STATE_NEUQUEN
-		STATE_CHUBUT
-		STATE_SANTA_CRUZ_ARG
-		STATE_TIERRA_DEL_FUEGO
-		STATE_SOUTH_ATLANTIC_ISLANDS
-		STATE_LA_PAMPA
-		STATE_TUCUMAN
-		STATE_JUJUY
+		STATE_BAJO_PARAGUAY
+		# EN/ES: the fourteen historical provinces, 10 needed / las catorce provincias historicas, hacen falta 10
+		STATE_BUENOS_AIRES
+		STATE_SANTA_FE
+		STATE_ENTRE_RIOS
 		STATE_CORRIENTES
-		STATE_RIO_GRANDE_DO_SUL
+		STATE_CORDOBA
+		STATE_SANTIAGO_DEL_ESTERO
+		STATE_TUCUMAN
+		STATE_SALTA
+		STATE_JUJUY
+		STATE_CATAMARCA
+		STATE_LA_RIOJA
+		STATE_SAN_JUAN
+		STATE_MENDOZA
+		STATE_SAN_LUIS
 	}
 
-	required_states_fraction = 0.70
+	required_states_fraction = 0.33
 
 	ai_will_do = { always = yes }
 
 	possible = {
 		gg_arg_chain_pending = no # EN/ES: 24/9/2026 (Juan, AUD-ARG-1850) -- not while Argentina's calendar runs (to 13/10/1862): forming changes the tag and loses it / no mientras corre el calendario argentino: formar cambia el tag y lo pierde
 		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = gg_plt_form_mandatory_tt
+			gg_plt_formation_mandatory = yes
+		}
+		custom_tooltip = {
+			text = gg_plt_form_provinces_tt
+			gg_plt_formation_provinces = yes
+		}
 	}
 }
 
@@ -48,7 +71,7 @@ REPLACE:PLT = {
 # EN: Compatch (23/9/2026, Juan). la Argentina's Great_ARG (99_formable_countries.txt of the Workshop copy the playset
 #     loads, 2982907360 -- 23 states, 0.80; the local la_argentina_fixed copy differs and is not loaded) lists the Uruguayan
 #     states of vanilla's map, without the two Guerra Grande adds: San Jose and Maldonado. Its list,
-#     fraction and requirements unchanged, plus those two states (the same fix as REPLACE:PLT above).
+#     fraction and requirements unchanged, plus those two states (the fix the old REPLACE:PLT had).
 # ES: el Great_ARG de la Argentina lista los estados orientales del mapa de vanilla, sin los dos que agrega
 #     GG (San Jose y Maldonado). Su lista, su fraccion y sus requisitos, mas esos dos estados.
 # -------------------------------------------------------------------------------------------------
