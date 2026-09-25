@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.4-alpha — 25/9/2026
 
 - **Armies can march into San José and Maldonado again:** the travel network (the roads and railways armies move
   along) came from la Argentina's map, which has no San José or Maldonado and still ran Montevideo's roads through
@@ -32,6 +32,10 @@
   Córdoba's 1815 tricolour, and the first provincial flag of the rest, however recent. A deliberate anachronism, so
   the confederation does not show the same flag twenty times. Outside the confederation nothing changes. Thirteen new
   flags, real Wikimedia images; credits in CREDITS.md.
+- **Argentine party names by period:** the game named Argentina's parties after organisations of 1874-1891 from
+  1836 on. Now the Federal Party (conservative) until 1874, the Unitarian Party (liberal) until 1862, the Nationalist
+  Party (liberal, Mitre) 1862-1889 and the Autonomist Party (radical, Alsina) 1862-1891; the game's own names follow.
+  Works in games in progress.
 
 ## 0.1.3-alpha — 24/9/2026
 
