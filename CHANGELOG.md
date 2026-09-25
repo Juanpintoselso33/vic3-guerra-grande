@@ -1,6 +1,6 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.7-alpha — 25/9/2026
 
 - **The Ejército Grande marches with its men:** the army Urquiza raises in November 1851 and the Brazilian and Oriental
   divisions were created empty and never mobilized, so the crossing of the Paraná had no army behind it. The battalions
