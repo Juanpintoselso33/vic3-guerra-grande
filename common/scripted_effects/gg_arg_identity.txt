@@ -15,9 +15,18 @@
 gg_arg_identity_guard = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_identity_guard|" # GG_TRAZA
 	c:ARG ?= {
+		# EN: 25/9/2026 (Juan, AUD-ROSAS-SUMA) -- also while Rosas holds the sum of public power (gg_constitution.1.b, until
+		#     his death): no engine revolution, and no coup either -- vanilla's coup (ip4_coup.1) never fires on a country
+		#     with the variable coup_immunity (the Carlist war sets it the same way, 06_the_carlist_wars.txt). In Juan's game
+		#     a coup seated Angel Pacheco on 4/10/1854. gg_rosas_coup_immunity marks the immunity as ours, so only ours is lifted.
+		# ES: tambien mientras Rosas tenga la suma del poder publico: ni revolucion del motor ni golpe (el golpe de vanilla no
+		#     sale en un pais con coup_immunity, como en la guerra carlista). La marca propia hace que solo se quite la nuestra.
 		if = {
 			limit = {
-				gg_arg_chain_pending = yes # EN/ES: until 13/10/1862 (gg_arg_identity triggers)
+				OR = {
+					gg_arg_chain_pending = yes # EN/ES: until 13/10/1862 (gg_arg_identity triggers)
+					gg_rosas_holds_the_sum_of_power = yes
+				}
 				NOT = { has_modifier = gg_arg_caudillos_grip }
 			}
 			add_modifier = { name = gg_arg_caudillos_grip }
@@ -25,9 +34,26 @@ gg_arg_identity_guard = {
 		else_if = {
 			limit = {
 				gg_arg_chain_pending = no
+				NOT = { gg_rosas_holds_the_sum_of_power = yes }
 				has_modifier = gg_arg_caudillos_grip
 			}
 			remove_modifier = gg_arg_caudillos_grip
+		}
+		if = {
+			limit = {
+				gg_rosas_holds_the_sum_of_power = yes
+				NOT = { has_variable = coup_immunity }
+			}
+			set_variable = coup_immunity
+			set_variable = gg_rosas_coup_immunity
+		}
+		else_if = {
+			limit = {
+				NOT = { gg_rosas_holds_the_sum_of_power = yes }
+				has_variable = gg_rosas_coup_immunity
+			}
+			remove_variable = gg_rosas_coup_immunity
+			if = { limit = { has_variable = coup_immunity } remove_variable = coup_immunity }
 		}
 		# EN: the identity is the country OBJECT kept in a global, not a variable on the country: a victorious
 		#     revolutionary country inherits its origin's country variables (Codex 23/9, seen in a 1.13 save),

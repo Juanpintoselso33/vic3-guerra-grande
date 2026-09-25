@@ -1372,8 +1372,12 @@ gg_rivera.5 = {
 			years = 5
 		}
 		hidden_effect = {
-			# 1854.1.13 - the arroyo Conventos, 110 days from here.
-			trigger_event = { id = gg_rivera.6 days = 110 popup = yes }
+			# EN: 1854.1.13 - the arroyo Conventos, ON its date (gg_rivera.60), not 110 days from here: this answer comes
+			#     587 days after Giro takes office, which counts from the peace, so in Juan's game (0.1.6) Rivera died on
+			#     16/12/1853, four weeks early (AUD-RIVERA-FLORES).
+			# ES: el arroyo Conventos, EN su fecha, no a 110 dias de aca: esta respuesta cuenta desde la paz, y en la partida
+			#     de Juan Rivera murio el 16/12/1853, cuatro semanas antes.
+			trigger_event = { id = gg_rivera.60 days = 1 }
 		}
 		ai_chance = {
 			base = 60
@@ -1422,7 +1426,7 @@ gg_rivera.5 = {
 			value = medium_radicals
 		}
 		hidden_effect = {
-			trigger_event = { id = gg_rivera.6 days = 110 popup = yes }
+			trigger_event = { id = gg_rivera.60 days = 1 } # EN/ES: AUD-RIVERA-FLORES -- on 13/1/1854 / el 13/1/1854
 		}
 		ai_chance = {
 			base = 40
@@ -1523,22 +1527,14 @@ gg_rivera.6 = {
 			# The triumvirate is down to one man, and the one man is Flores. Historically that is
 			# how he came to exercise the executive between 1853 and 1854, and then to be elected
 			# to finish Giro's term.
-			if = {
-				limit = { NOT = { exists = ruler } }
-				if = {
-					limit = { any_scope_character = { has_template = URU_venancio_flores } }
-					random_scope_character = {
-						limit = { has_template = URU_venancio_flores }
-						set_character_as_ruler = yes
-					}
-				}
-				else = {
-					create_character = {
-						template = URU_venancio_flores
-						ruler = yes
-					}
-				}
-			}
+			# EN: 25/9/2026 (Juan, AUD-RIVERA-FLORES) -- whoever holds the chair: it asked for an empty one, but the
+			#     engine fills the chair of a dead ruler at once with the leader of a ruling group (Melchor Pacheco y Obes in
+			#     Juan's game), so Flores never came. gg_ruler_set fetches the one Flores wherever he is (never a copy), and
+			#     gg_rivera.61 checks it again the day after, in case the engine seats someone after this.
+			# ES: sea quien sea el que tenga el sillon: pedia uno vacio, pero el motor llena en el acto el sillon del muerto
+			#     con el lider de un grupo gobernante (Pacheco y Obes en la partida de Juan), y Flores no llegaba nunca.
+			gg_ruler_set = { TEMPLATE = URU_venancio_flores }
+			trigger_event = { id = gg_rivera.61 days = 1 }
 		}
 	}
 
@@ -1588,6 +1584,67 @@ gg_rivera.6 = {
 		}
 		ai_chance = {
 			base = 45
+		}
+	}
+}
+
+# EN: 25/9/2026 (AUD-RIVERA-FLORES) -- the relay that brings the arroyo Conventos ON its date, 13/1/1854 (Rivera's
+#     historical death, gg_historical_lives): it steps down to the day as gg_postwar.8 does (a year, a month, a week, a
+#     day), never past it; an answer given after the date brings it the next day. Hidden, on the Defensa's government
+#     (the one gg_rivera.5 was asked on), and its trigger only needs that: the marks gg_rivera.6 reads are set before
+#     this is queued.
+# ES: el relevo que trae el arroyo Conventos EN su fecha, el 13/1/1854: baja hasta el dia como gg_postwar.8, sin pasarse;
+#     una respuesta dada despues de la fecha lo trae al dia siguiente.
+gg_rivera.60 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.60|" # GG_TRAZA
+		if = {
+			limit = { game_date >= 1854.1.13 }
+			trigger_event = { id = gg_rivera.6 days = 0 popup = yes }
+		}
+		else_if = {
+			limit = { game_date < 1853.1.13 }
+			trigger_event = { id = gg_rivera.60 days = 365 }
+		}
+		else_if = {
+			limit = { game_date < 1853.12.14 }
+			trigger_event = { id = gg_rivera.60 days = 30 }
+		}
+		else_if = {
+			limit = { game_date < 1854.1.6 }
+			trigger_event = { id = gg_rivera.60 days = 7 }
+		}
+		else = {
+			trigger_event = { id = gg_rivera.60 days = 1 }
+		}
+	}
+}
+
+# EN: 25/9/2026 (AUD-RIVERA-FLORES) -- the day after the arroyo Conventos: if the engine gave the chair to someone else
+#     after gg_rivera.6 seated Flores, it goes back to him (only while Flores lives and the Republic is the Defensa's).
+# ES: el dia despues del arroyo Conventos: si el motor le dio el sillon a otro despues de que gg_rivera.6 sento a
+#     Flores, vuelve a el.
+gg_rivera.61 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_variable = guerra_grande_defensa_government
+		has_global_variable = gg_rivera_death_settled
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.61|" # GG_TRAZA
+		if = {
+			limit = {
+				NOT = { ruler ?= { has_template = URU_venancio_flores } }
+				any_country = { any_scope_character = { has_template = URU_venancio_flores is_character_alive = yes } }
+			}
+			gg_ruler_set = { TEMPLATE = URU_venancio_flores }
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_rivera.61| RESEATED=yes " # GG_TRAZA
 		}
 	}
 }

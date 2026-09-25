@@ -99,6 +99,48 @@ gg_historical_lives = {
 	# EN/ES: 25/9/2026 (AUD-HLIFE-PAST) -- Nazario Benavidez, murdered in San Juan on 23/10/1858 (template header,
 	#     zz_guerra_grande_argentina_characters.txt); not protected before / asesinado el 23/10/1858; sin proteccion antes
 	gg_historical_death = { TEMPLATE = ARG_gg_nazario_benavidez DIES = 1858.10.23 }
+	# EN/ES: 25/9/2026 (Juan, AUD-PRG-LOPEZ) -- Carlos Antonio Lopez, first consul from 13/3/1841, president from 14/3/1844
+	#     to his death on 10/9/1862 (Wikipedia ES; Archivo Nacional de Asuncion, fondo Rio Branco, «Lopez, Carlos Antonio»)
+	#     / primer consul desde el 13/3/1841, presidente hasta su muerte el 10/9/1862
+	gg_historical_life = { TEMPLATE = PRG_carlos_antonio_lopez DIES = 1862.9.10 }
+	gg_prg_lopez_restore = yes
+}
+
+# EN: 25/9/2026 (Juan's decision, AUD-PRG-LOPEZ; his USA game on 0.1.6) -- «More Dynamic Names And Flags» (Workshop
+#     2902222948) replaces vanilla's «prg - paraguay.txt» (common/history/characters) with an old copy that only creates a
+#     Francia without template, so Carlos Antonio Lopez never exists: Paraguay was ruled by a generated «Ramon Lopez» in
+#     1847 and «Julio Ferrerari» from 1853. Without depending on that mod: from the day the Congress made him first consul
+#     (13/3/1841, with Mariano Roque Alonso) until his death (10/9/1862), if no Carlos Antonio Lopez exists anywhere -- in
+#     any country or in exile -- he is created from vanilla's template (PRG_carlos_antonio_lopez, common/character_templates/
+#     country_prg.txt, the mod's copy) and seated in Paraguay. Once per game (gg_prg_lopez_restored): a Lopez who dies
+#     later is not remade. In a game with vanilla's history he exists from 1836 and nothing happens; vanilla's own
+#     paraguay.1 seats him when Francia dies. Games in progress (Juan's, 1855) get him on the next monthly pulse.
+# ES: «More Dynamic Names And Flags» reemplaza el archivo de personajes iniciales del Paraguay por uno viejo que solo crea
+#     a Francia, y Carlos Antonio Lopez no existe nunca. Sin depender de ese mod: desde que el Congreso lo hizo primer
+#     consul (13/3/1841) hasta su muerte (10/9/1862), si no existe en ninguna parte se lo crea con la plantilla de vanilla y
+#     se lo sienta en el Paraguay. Una vez por partida. Con la historia de vanilla existe desde 1836 y no pasa nada.
+# SOURCE / FUENTE: es.wikipedia.org/wiki/Carlos_Antonio_Lopez (consul 13/3/1841-13/3/1844, president 14/3/1844-
+#     10/9/1862); riobranco.archivonacional.gov.py, «Lopez, Carlos Antonio» (consulate 1841-1844, died 10/9/1862).
+gg_prg_lopez_restore = {
+	if = {
+		limit = {
+			game_date >= 1841.3.13
+			game_date < 1862.9.10
+			exists = c:PRG
+			NOT = { has_global_variable = gg_prg_lopez_restored }
+			NOT = { has_global_variable = gg_hdeath_done_PRG_carlos_antonio_lopez }
+			NOT = { any_country = { any_scope_character = { has_template = PRG_carlos_antonio_lopez } } }
+			NOT = { any_character_in_exile_pool = { has_template = PRG_carlos_antonio_lopez } }
+		}
+		set_global_variable = gg_prg_lopez_restored
+		c:PRG = {
+			create_character = {
+				template = PRG_carlos_antonio_lopez
+				ruler = yes
+			}
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_prg_lopez_restore| CREATED=yes " # GG_TRAZA
+	}
 }
 
 # EN: 23/9/2026 (headless playtests) -- while Rosas's era lasts, Argentina's head of state is Rosas, as
@@ -123,6 +165,10 @@ gg_rosas_keeps_the_seat = {
 					# ES: la Constitucion de 1853 le da su primer periodo, seis anios, sea cual sea el cierre: el voto sento
 					#     al lider de un grupo al dia siguiente en la partida de Juan. Esto lo repone hasta que termine.
 					gg_rosas_first_term_running = yes
+					# EN/ES: 25/9/2026 (Juan, AUD-ROSAS-SUMA) -- «the Pact without a Constitution»: the seat is his until he
+					#     dies, also after the negotiated confederation / «el Pacto sin Constitucion»: el sillon es suyo hasta
+					#     que muera, tambien tras la confederacion negociada
+					gg_rosas_holds_the_sum_of_power = yes
 					AND = {
 						NOR = {
 							has_global_variable = gg_pact_settlement_urquiza

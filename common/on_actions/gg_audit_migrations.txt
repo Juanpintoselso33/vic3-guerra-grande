@@ -24,6 +24,7 @@ on_monthly_pulse_country = {
 		gg_cis_note_migration
 		gg_rosas_first_term_migration
 		gg_paraguay_recognition_pulse
+		gg_rosas_sum_of_power_migration
 	}
 }
 
@@ -299,6 +300,36 @@ gg_rosas_first_term_migration = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_first_term_migration" # GG_TRAZA
 		set_global_variable = gg_rosas_first_term_known
 		set_global_variable = gg_rosas_first_term_legacy
+		gg_rosas_keeps_the_seat = yes
+	}
+}
+
+# EN: 25/9/2026 (Juan's decision, AUD-ROSAS-SUMA; his USA game on 0.1.6) -- a save that answered «the Pact without a
+#     Constitution» (gg_constitution.1.b) after the negotiated confederation, with Rosas alive: the answer now keeps him
+#     in the seat until his death and brings Entre Rios and Corrientes back as Provinces of the Pact. This does what the
+#     answer does today: the two provinces are taken in (gg_constitution_confed_keep: not a player's, not at war with
+#     Buenos Aires), the guard against coups and revolutions goes up (gg_arg_identity_guard) and Rosas is put back in the
+#     seat (gg_rosas_keeps_the_seat; in Juan's game Angel Pacheco holds it since the coup of 4/10/1854). Once per save
+#     (gg_rosas_sum_migrated); in a new game the answer already did it, and this finds nothing to change. Not guarded by
+#     gg_new_game_no_migrations: Juan's game carries that mark.
+# ES: una partida que contesto «el Pacto sin Constitucion» tras la confederacion negociada, con Rosas vivo: hace lo que la
+#     respuesta hace hoy -- Entre Rios y Corrientes vuelven como provincias del Pacto, la guarda contra golpes y
+#     revoluciones, y Rosas de vuelta en el sillon (en la partida de Juan lo tiene Angel Pacheco desde el golpe del
+#     4/10/1854). Una vez por partida.
+gg_rosas_sum_of_power_migration = {
+	trigger = {
+		c:ARG ?= this
+		has_variable = gg_arg_rosas_seat
+		has_global_variable = gg_pact_settlement_constitutional
+		gg_rosas_holds_the_sum_of_power = yes
+		NOT = { has_global_variable = gg_rosas_sum_migrated }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_rosas_sum_of_power_migration" # GG_TRAZA
+		set_global_variable = gg_rosas_sum_migrated
+		gg_constitution_confed_keep = { TAG = ENR }
+		gg_constitution_confed_keep = { TAG = CRR }
+		gg_arg_identity_guard = yes
 		gg_rosas_keeps_the_seat = yes
 	}
 }

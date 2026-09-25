@@ -7,7 +7,15 @@
 gg_x_arg_rosas_era_over = {
 	OR = {
 		has_global_variable = gg_pact_settlement_urquiza
-		has_global_variable = gg_pact_settlement_constitutional
+		# EN: 25/9/2026 (Juan, AUD-ROSAS-SUMA) -- the negotiated confederation ends the era only if a constitution follows:
+		#     with «the Pact without a Constitution» (gg_constitution.1.b, gg_constitution_chosen = 2) Rosas keeps the sum
+		#     of public power until his death (gg_rosas_holds_the_sum_of_power, below).
+		# ES: la confederacion negociada termina la era solo si le sigue una constitucion: con «el Pacto sin Constitucion»
+		#     Rosas conserva la suma del poder publico hasta su muerte.
+		AND = {
+			has_global_variable = gg_pact_settlement_constitutional
+			NOT = { global_var:gg_constitution_chosen ?= 2 }
+		}
 		has_global_variable = gg_pact_settlement_mandate_collapsed
 		# EN: 23/9/2026 (audit X5) -- a constitution also ends the era: the Constitution of 1853 chosen after the
 		#     Pact (gg_constitution.1.a sets 1; 2 is "the Pact without a constitution", which keeps Rosas's regime),
@@ -26,4 +34,24 @@ gg_x_arg_rosas_era_over = {
 		#     de Buenos Aires y la Confederacion vuelven a ser un pais (gg_ba.20).
 		has_global_variable = gg_ba_done
 	}
+}
+
+# EN: 25/9/2026 (Juan's decision, AUD-ROSAS-SUMA; his USA game on 0.1.6) -- «the Pact without a Constitution»
+#     (gg_constitution.1.b) leaves Rosas with «la suma del poder publico» (law of the Sala, 7 March 1835) until he dies,
+#     whatever settlement came before, except the two that took the government from him (Urquiza's victory, which does
+#     not offer .1.b, and the fallen mandate, which seats Urquiza). In Juan's game the AI chose .1.b on 1/4/1852 after the
+#     negotiated confederation, the script read the era as over, and an engine coup seated Angel Pacheco on 4/10/1854.
+#     Ends with his death (gg_rosas_succession_monthly opens gg_constitution.2) or a later constitution. Read by the seat
+#     keeper (gg_rosas_keeps_the_seat) and by the guard that shuts coups and revolutions (gg_arg_identity_guard).
+# ES: «el Pacto sin Constitucion» deja a Rosas con la suma del poder publico hasta su muerte, sea cual sea el cierre
+#     previo, salvo los dos que le quitaron el gobierno. En la partida de Juan la IA eligio .1.b el 1/4/1852 tras la
+#     confederacion negociada, el script dio la era por terminada y un golpe del motor sento a Angel Pacheco el 4/10/1854.
+gg_rosas_holds_the_sum_of_power = {
+	global_var:gg_constitution_chosen ?= 2
+	NOT = { has_global_variable = gg_pact_settlement_urquiza }
+	NOT = { has_global_variable = gg_pact_settlement_mandate_collapsed }
+	NOT = { has_global_variable = gg_rosas_succession_crisis }
+	NOT = { has_global_variable = gg_constitution_outcome }
+	NOT = { has_global_variable = gg_ba_done }
+	any_country = { any_scope_character = { has_template = ARG_Juan_Manuel_de_Rosas is_character_alive = yes } }
 }

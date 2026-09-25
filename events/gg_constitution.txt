@@ -106,6 +106,33 @@ gg_constitution.1 = {
 		# EN/ES: 23/9 (Juan) -- the question stays open under him / la cuestion sigue abierta por debajo
 		#     (AUD-CONST-CHOICE: an old save asked again already has it / una partida vieja preguntada de nuevo ya lo tiene)
 		if = { limit = { NOT = { has_modifier = gg_pais_sin_constitucion } } add_modifier = { name = gg_pais_sin_constitucion } }
+		# EN: 25/9/2026 (Juan, AUD-ROSAS-SUMA) -- after the negotiated confederation Entre Rios and Corrientes were left
+		#     independent, waiting for the constitution that incorporates them (gg_argentina_provinces_incorporate, ALLY =
+		#     yes); without one they stayed out forever. Under the sum of public power they delegate again, as Provinces of
+		#     the Pact, by the confederation's own road (gg_constitution_confed_keep: not a player's, not at war). The seat
+		#     and the guard against coups and revolutions follow at once (gg_rosas_holds_the_sum_of_power).
+		# ES: tras la confederacion negociada Entre Rios y Corrientes quedaban independientes esperando la constitucion que
+		#     las incorpora; sin ella quedaban afuera para siempre. Bajo la suma del poder publico vuelven a delegar, como
+		#     provincias del Pacto, por el camino de la confederacion. El sillon y la guarda contra golpes, en el acto.
+		if = {
+			limit = {
+				has_global_variable = gg_pact_settlement_constitutional
+				OR = {
+					c:ENR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+					c:CRR ?= { is_subject = no is_player = no NOT = { has_war_with = c:ARG } }
+				}
+			}
+			custom_tooltip = gg_constitution.1.b_confed_tt
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_global_variable = gg_pact_settlement_constitutional }
+				gg_constitution_confed_keep = { TAG = ENR }
+				gg_constitution_confed_keep = { TAG = CRR }
+			}
+			gg_arg_identity_guard = yes
+			gg_rosas_keeps_the_seat = yes
+		}
 		add_loyalists = { value = medium_radicals interest_group = ig:ig_landowners }
 		add_loyalists = { value = small_radicals interest_group = ig:ig_devout }
 		add_radicals = { value = medium_radicals interest_group = ig:ig_intelligentsia }

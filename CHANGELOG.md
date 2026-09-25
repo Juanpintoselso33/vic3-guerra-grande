@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- **«The Pact without a Constitution» keeps Rosas in power until his death:** after the negotiated confederation the
+  mod read that answer as the end of Rosas's era, so the seat was no longer his and an engine coup could put another
+  man in it (Ángel Pacheco, 1854, in a playtest); Entre Ríos and Corrientes, left independent to wait for a
+  constitution that never came, stayed out for good. Now, whatever settlement came before (except Urquiza's victory
+  and the fallen mandate), Rosas keeps «la suma del poder público» until 14/3/1877: the seat returns to him, and
+  neither a coup nor a revolution can replace him. Entre Ríos and Corrientes come back as Provinces of the Pact
+  (not a player's, not at war with Buenos Aires). His death reopens the question, as before. Games in progress: the
+  next monthly pulse seats Rosas again and brings the two provinces back.
+- **Rivera dies on 13 January 1854 and Flores takes the government:** the arroyo Conventos came 110 days after the
+  triumvirate's answer, which counts from the peace, so Rivera could die weeks early (16/12/1853 in a playtest). It
+  now comes on its date. And Flores only took the chair if it was empty, but the engine fills a dead ruler's chair at
+  once, so the leader of a ruling group kept it (Melchor Pacheco y Obes); Flores is now seated whoever holds it, and
+  again the next day if the engine moves. Games already past January 1854 are not changed.
+- **Carlos Antonio López exists even with «More Dynamic Names And Flags»:** that mod replaces Paraguay's starting
+  characters with an old file that only creates Francia, so López never existed and Paraguay was ruled by generated
+  men. From 13/3/1841, when the Congress made him first consul, if López exists nowhere he is created from the game's
+  own template and seated in Paraguay, once per game; he lives until 10/9/1862. With the game's own history nothing
+  changes. Games in progress get him on the next monthly pulse.
+
 - **The peace no longer deletes the loser's men:** every peace settlement of the Guerra Grande annexed the losing
   government outright, and the engine deletes an annexed country's characters -- Oribe, Lavalleja and the original
   Giró vanished when the Cerrito was absorbed, although Oribe should live on at his quinta until 1857. The 15 peace
