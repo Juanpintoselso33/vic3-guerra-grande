@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- **One ruler at a time:** a head of state moved into another country kept his office: Oribe (the Oriental
+  Province's governor) and Joaquín Suárez (the Defensa's president) sat in Argentina from 1853 on still marked as
+  rulers beside the real one. Characters brought over by an annexation now leave the ruler and heir roles behind;
+  games in progress are fixed on the next month.
+- **The siege guns leave Montevideo with the peace:** the «Guns of the Plaza» (+250 bombardment resistance) sit on the
+  state of Montevideo and were never removed, lasting until 1858 after an 1850 peace. They now go with the rest of
+  the siege's modifiers, also in games in progress.
+- **The Republic's historical presidency ends with the Republic:** after the Oriental Province was absorbed, the mark
+  that keeps Uruguay's historical presidents in the chair stayed on for good, so a Uruguay released later would have
+  had Rivera forced into its presidency. It now ends when neither Oriental government exists.
 - **More historical lives:** Mitre (to 1906), Venancio Flores (1868), Manuel Herrera y Obes (1890), Sarmiento (1888)
   and Paz (1854) no longer die before their historical date, like Rosas, Oribe, Rivera and the others.
 - **Annexed provinces keep their men:** when Argentina (or Entre Ríos, or Brazil with the Farrapos) absorbed a

@@ -487,8 +487,15 @@ gg_wartime_modifiers_clear = {
 				has_modifier = gg_siege_countryside_without_a_port
 				has_modifier = gg_siege_the_land_frontier_stays_open
 				has_modifier = gg_naval_anglo_french_station
+				has_modifier = gg_siege_guns_of_the_plaza # EN/ES: 25/9 (AUD-SIEGE-GUNS) -- a state modifier (Montevideo) / modificador de estado (Montevideo)
 			}
 		}
+		# EN: 25/9/2026 (AUD-SIEGE-GUNS, Juan's Argentina game) -- the guns of the plaza are put on the STATE of Montevideo
+		#     (events/guerra_grande.txt), but were only looked for on countries above: after the 1850 peace Montevideo
+		#     kept +250 bombardment resistance until 1858, Argentine ground from 1853.
+		# ES: los canones de la plaza van en el ESTADO de Montevideo y solo se buscaban en los paises: tras la paz de 1850
+		#     Montevideo conservo +250 de resistencia al bombardeo hasta 1858.
+		if = { limit = { has_modifier = gg_siege_guns_of_the_plaza } remove_modifier = gg_siege_guns_of_the_plaza }
 		if = {
 			limit = { has_modifier = gg_siege_port_without_a_countryside }
 			remove_modifier = gg_siege_port_without_a_countryside

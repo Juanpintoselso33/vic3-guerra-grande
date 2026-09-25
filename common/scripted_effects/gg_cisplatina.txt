@@ -97,10 +97,36 @@ gg_cis_annex = {
 #     before the annexation. (The first version filtered by role with is_admiral, which is not a trigger: error.log.)
 # ES: cuando se absorbe la Republica, TODOS sus personajes vienen con ella, politicos y jefes de grupos de interes
 #     incluidos, antes de la anexion. (La primera version filtraba por rol con is_admiral, que no es trigger.)
+# EN: 25/9/2026 (AUD-RULER-ROLE, Juan's Argentina game) -- the head of state and the heir leave their office behind:
+#     transfer_character keeps the roles, so Oribe (ruler of the Oriental Province) and Suarez (ruler of the Defensa,
+#     brought to the Cerrito by the peace) sat in Argentina from 1853 to 1869 still holding the ruler role, a second
+#     «ruler» beside the real one. The same vanilla effect resign_and_retire uses (remove_character_role = ruler).
+# ES: el jefe de Estado y el heredero dejan el cargo al mudarse: transfer_character conserva los roles, y Oribe y
+#     Suarez quedaron en la Argentina de 1853 a 1869 con el rol de gobernante, un segundo «gobernante» al lado del real.
 gg_bring_characters_to = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_bring_characters_to|" # GG_TRAZA
 	every_scope_character = {
+		if = { limit = { has_role = character_role_ruler } remove_character_role = ruler }
+		if = { limit = { has_role = character_role_heir } remove_character_role = heir }
 		transfer_character = $TARGET$
+	}
+}
+
+# EN: 25/9/2026 (AUD-RULER-ROLE) -- games in progress: whoever still holds the ruler role in a South American country
+#     that he does not rule loses it, once (gg_stray_ruler_role_migration, gg_audit_migrations.txt). Not a new-game
+#     guard: a game started before this fix carries the bug too.
+# ES: partidas en curso: quien conserva el rol de gobernante en un pais sudamericano que no gobierna lo pierde, una vez.
+gg_stray_ruler_roles_clear = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_stray_ruler_roles_clear|" # GG_TRAZA
+	every_country = {
+		limit = { capital ?= { is_in_geographic_region = geographic_region_south_america } }
+		every_scope_character = {
+			limit = {
+				has_role = character_role_ruler
+				is_ruler_of_own_country = no
+			}
+			remove_character_role = ruler
+		}
 	}
 }
 

@@ -325,3 +325,61 @@ gg_paraguay_recognition_pulse = {
 		trigger_event = { id = gg_argentina_cal.36 days = 0 }
 	}
 }
+
+# EN: 25/9/2026 (audit of Juan's Argentina game, 1851-1869) -- three repairs on the GLOBAL monthly pulse, owned by no
+#     country (Argentina may be La Plata, Uruguay may be gone). None is guarded by gg_new_game_no_migrations: games
+#     begun before today carry the bugs too.
+#     - AUD-RULER-ROLE: once, the ruler role is taken from whoever holds it in a South American country he does not
+#       rule (Oribe and Suarez in Argentina, 1853-1869; gg_bring_characters_to no longer carries it).
+#     - AUD-SIEGE-GUNS: once the war's modifiers were cleared, the state modifier gg_siege_guns_of_the_plaza goes too
+#       (gg_wartime_modifiers_clear now removes it from states).
+#     - AUD-RAILROAD: the historical presidency of the Republic (gg_president_railroad) ends when neither Oriental
+#       government exists: it was cleared only by gg_postwar.8/.9, queued on URU, and an absorbed Oriental Province
+#       dropped them, so the mark stayed up for good (1851-1869 in Juan's game) and a Uruguay released later would
+#       have had Rivera forced into its chair (gg_president_seat_on_new_ruler -> gg_president_historical).
+# ES: tres reparaciones en el pulso mensual GLOBAL. Sin la guarda de partida nueva: las partidas empezadas antes de hoy
+#     tienen los errores. El rol de gobernante sobrante (una vez); los canones de la plaza en el estado de Montevideo
+#     despues de la paz (una vez); la presidencia historica de la Republica cuando no existe ningun gobierno oriental.
+on_monthly_pulse = {
+	on_actions = {
+		gg_stray_ruler_role_migration
+		gg_siege_guns_state_migration
+		gg_president_railroad_end
+	}
+}
+
+gg_stray_ruler_role_migration = {
+	trigger = { NOT = { has_global_variable = gg_stray_ruler_roles_cleared } }
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_stray_ruler_role_migration" # GG_TRAZA
+		set_global_variable = gg_stray_ruler_roles_cleared
+		gg_stray_ruler_roles_clear = yes
+	}
+}
+
+gg_siege_guns_state_migration = {
+	trigger = {
+		has_global_variable = gg_wartime_cleared
+		NOT = { has_global_variable = gg_siege_guns_state_cleared }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_siege_guns_state_migration" # GG_TRAZA
+		set_global_variable = gg_siege_guns_state_cleared
+		every_state = {
+			limit = { has_modifier = gg_siege_guns_of_the_plaza }
+			remove_modifier = gg_siege_guns_of_the_plaza
+		}
+	}
+}
+
+gg_president_railroad_end = {
+	trigger = {
+		has_global_variable = gg_president_railroad
+		NOT = { exists = c:URU }
+		NOT = { exists = c:CER }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_president_railroad_end" # GG_TRAZA
+		remove_global_variable = gg_president_railroad
+	}
+}
