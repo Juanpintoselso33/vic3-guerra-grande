@@ -2,7 +2,8 @@
 #     Argentina's names by period (24/9/2026, Juan): vanilla gives 1874-1891 names from 1836.
 #     SOURCE / FUENTE: Halperin Donghi, Proyecto y construccion de una nacion; Sabato, Buenos Aires en armas
 #     (Partido Autonomista and Partido Nacionalista split in 1862; PAN 1874; UCN 1889; UCR 1891).
-#     If CMF updates this file, re-copy it and re-apply only the ARG blocks marked GG.
+#     If CMF updates this file, re-copy it and re-apply only the blocks and lines marked GG (the ARG names; 25/9/2026
+#     the interest-group `leader ?=` guards: a revolt's group can have no leader, CMF and vanilla error there).
 # ES: Copia del archivo de CMF con los nombres argentinos por epoca.
 # Bastion of the Landowners
 # Can also appeal to the Devout, PB, and Industrialists
@@ -1152,7 +1153,7 @@ conservative_party = {
 		# His Highness Marshal Baldomero Espartero, Viceroy of Navarre, Prince of Vergara, Duke of la Victoria, Duke of Morella, Count of Luchana, and Viscount of Banderas will never, ever join the Moderate Party.
 		if = {
 			limit = {
-				leader = {
+				leader ?= { # GG: an interest group without a leader (a revolt) fails the link; CMF/vanilla use '=' / un grupo sin lider (una revuelta) rompe el enlace
 					has_template = SPA_baldomero_espartero
 				}
 			}
@@ -1163,7 +1164,7 @@ conservative_party = {
 		}
 		else_if = { # Narváez totally will, though
 			limit = {
-				leader = {
+				leader ?= { # GG: an interest group without a leader (a revolt) fails the link; CMF/vanilla use '=' / un grupo sin lider (una revuelta) rompe el enlace
 					has_template = SPA_ramon_maria_narvaez
 				}
 			}
@@ -1205,7 +1206,7 @@ conservative_party = {
 		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
 			limit = {
 				NOT = { owner = { has_technology_researched = corporatism } }
-				leader = {
+				leader ?= { # GG: an interest group without a leader (a revolt) fails the link; CMF/vanilla use '=' / un grupo sin lider (una revuelta) rompe el enlace
 					OR = {
 						character_has_carlist_ideology = yes
 						character_has_miguelist_ideology = yes

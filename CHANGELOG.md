@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Caseros keeps its date under the Pact rules:** with a Pact rule that ends it by war (Historical, Rosas wins, Two
+  governments), an AI Rosas could still answer Caseros by holding Buenos Aires, a siege of six months or more that the
+  rule's closing date does not cut short, and the Historical settlement came in August 1852. The AI no longer takes
+  that road under these rules, and under Historical it fights the battle, as on 3 February 1852. A player can still
+  choose any answer.
+- **No errors from leaderless interest groups in party choices:** when a revolt's interest group had no leader (East
+  India's radicals in 1857), the conservative and liberal parties' join weights, copied from the Community Mod
+  Framework, logged an error every day. The check now skips a group with no leader.
 - **Other mods' wars stay out of the Guerra Grande:** diplomatic plays and war goals added by optional mods of your
   playset (recognition wars, holy wars, Hispanic American unification, installing a dictator, scripted revolutions...)
   could open an engine war on the Oriental governments, or between Brazil and the Riograndense Republic before Ponche

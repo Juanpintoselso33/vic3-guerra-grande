@@ -2781,7 +2781,12 @@ gg_argentina.41 = {
 		set_global_variable = { name = gg_caseros_months value = 0 }
 		hidden_effect = { trigger_event = { id = gg_caseros.1 days = 30 } } # EN/ES: a hidden event / evento oculto
 		gg_caseros_notify_urquiza = { EVENT = gg_caseros.2 }
-		ai_chance = { base = 30 }
+		ai_chance = {
+			base = 30
+			# EN/ES: 25/9/2026 (AUD-PACT-CASEROS-SIEGE) -- the historical Pact rule: Caseros is lost on the day, never for the AI
+			#     / la regla historica del Pacto: Caseros se pierde ese dia, nunca para la IA
+			modifier = { trigger = { gg_pact_historical = yes } factor = 0 }
+		}
 	}
 
 	option = {
@@ -2796,7 +2801,15 @@ gg_argentina.41 = {
 		set_global_variable = gg_caseros_siege
 		hidden_effect = { trigger_event = { id = gg_caseros.1 days = 30 } } # EN/ES: a hidden event / evento oculto
 		gg_caseros_notify_urquiza = { EVENT = gg_caseros.2 }
-		ai_chance = { base = 20 }
+		ai_chance = {
+			base = 20
+			# EN: 25/9/2026 (AUD-PACT-CASEROS-SIEGE) -- under a Pact rule that ends it by war the AI never holds the city: the
+			#     siege is the one road gg_urquiza.3's net (4/2/1852) leaves open, and it put the settlement in August 1852
+			#     (headless sweep 25/9, pacto_historico: .41.c on 3/2/1852, gg_argentina.83 on 2/8/1852). A player may.
+			# ES: con una regla que cierra el Pacto por la guerra la IA nunca sitia la ciudad: es el unico camino que deja
+			#     abierto la red de gg_urquiza.3 y llevo el cierre a agosto de 1852. El jugador si puede.
+			modifier = { trigger = { gg_pact_forced_war = yes } factor = 0 }
+		}
 	}
 
 	immediate = {

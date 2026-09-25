@@ -155,12 +155,13 @@ gg_urquiza.2 = {
 # EN: 4/2/1852, the day after Caseros -- under a game rule that ends the Pact by war, a Pact still open is closed
 #     today the rule's way: the war with Entre Rios, if it lasts, ends, and the settlement is read (gg_pact_resolve).
 #     Hidden; no trigger, because a scheduled event's trigger is checked when it is scheduled. A siege of Buenos
-#     Aires (Caseros option c) resolves itself when it ends. 23/9 (rules/AI audit): a day after Caseros
+#     Aires (Caseros option c) resolves itself when it ends; under these rules only a player chooses it (the AI's
+#     weight is 0, AUD-PACT-CASEROS-SIEGE, 25/9). 23/9 (rules/AI audit): a day after Caseros
 #     (gg_argentina_cal.10, day 5873) because the order of two events on the same day is not guaranteed.
 # ES: 4/2/1852, el dia despues de Caseros -- con una regla que cierra el Pacto por la guerra, el Pacto que siga
 #     abierto se cierra hoy a su modo: termina la guerra con Entre Rios si dura, y se lee el arreglo. Oculto; sin
-#     trigger. Un sitio de Buenos Aires se resuelve solo al terminar. Un dia despues de Caseros porque el orden de
-#     dos eventos del mismo dia no esta garantizado.
+#     trigger. Un sitio de Buenos Aires se resuelve solo al terminar; con estas reglas solo lo elige un jugador. Un
+#     dia despues de Caseros porque el orden de dos eventos del mismo dia no esta garantizado.
 gg_urquiza.3 = {
 	type = country_event
 	hidden = yes
