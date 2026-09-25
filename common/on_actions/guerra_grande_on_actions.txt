@@ -497,7 +497,7 @@ gg_historical_lives_monthly = {
 	trigger = { c:URU ?= this }
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly" # GG_TRAZA
-		gg_historical_lives = yes
+		# EN/ES: 25/9/2026 -- the lives moved to the global pulse (gg_historical_lives_monthly_global) / las vidas pasaron al pulso global
 		gg_rosas_keeps_the_seat = yes
 		# EN/ES: 23/9 (headless) -- the engine seated Lavalleja over Rivera in August 1839: the Republic's
 		#     presidency follows history every month, not only from its events / la presidencia sigue la
@@ -523,7 +523,6 @@ gg_historical_lives_monthly_arg = {
 	}
 	effect = {
 		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly_arg" # GG_TRAZA
-		gg_historical_lives = yes
 		gg_rosas_keeps_the_seat = yes
 	}
 }
@@ -615,22 +614,19 @@ gg_oriental_ruler_on_new_ruler = {
 	}
 }
 
-# EN: 25/9/2026 (Juan: «Rosas se volvió inmortal», 98 years old in 1891) -- the lives ran only on URU, or on ARG when
-#     URU is gone. With the Oriental Province absorbed and Argentina formed into La Plata (PLT) neither exists, nobody
-#     ran them, and Rosas (1877) and Urquiza (1870) were never cleared. When both are gone, the global monthly pulse
-#     runs them. Saves in progress: the next pulse clears whoever is past his date; no migration needed.
-# ES: sin URU ni ARG (Provincia Oriental absorbida y La Plata formada) nadie corria las vidas y Rosas quedo inmortal.
-#     Ahora las corre el pulso mensual global; en partidas en curso el proximo pulso lo arregla.
+# EN: 25/9/2026 (Juan: «Rosas se volvió inmortal», 98 years old in 1891) -- the historical lives run on the GLOBAL
+#     monthly pulse, owned by no country. They used to run on URU, or on ARG when URU was gone: with the Oriental
+#     Province absorbed and Argentina formed into La Plata neither existed, and Rosas (1877) and Urquiza (1870) were
+#     never cleared. Monthly because the men appear and move during the game (Rivera back from Brazil, Oribe to Buenos
+#     Aires); past each date it costs one mark read. Saves in progress: the next month clears whoever is past his date.
+# ES: las vidas historicas corren en el pulso mensual GLOBAL, sin depender de ningun pais (antes URU, o ARG sin URU: con
+#     La Plata no existia ninguno y Rosas quedo inmortal). En partidas en curso, el mes siguiente lo arregla.
 on_monthly_pulse = {
-	on_actions = { gg_historical_lives_monthly_orphan }
+	on_actions = { gg_historical_lives_monthly_global }
 }
-gg_historical_lives_monthly_orphan = {
-	trigger = {
-		NOT = { exists = c:URU }
-		NOT = { exists = c:ARG }
-	}
+gg_historical_lives_monthly_global = {
 	effect = {
-		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly_orphan" # GG_TRAZA
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_historical_lives_monthly_global" # GG_TRAZA
 		gg_historical_lives = yes
 	}
 }
