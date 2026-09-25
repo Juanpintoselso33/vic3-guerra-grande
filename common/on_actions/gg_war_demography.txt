@@ -38,3 +38,46 @@ gg_trace_oriental_population_pulse = {
 		gg_trace_oriental_population = yes
 	}
 }
+
+# EN: 25/9/2026 (AUD-MVD-POPS) -- the two dated immigration waves (events/gg_immigration.txt), checked every month on
+#     the Republic or the Defensa (tag URU): each fires once, inside a one-year window from its date, the first month
+#     Montevideo is URU's. The mark goes on before the event is fired (a scheduled event's trigger is read when it is
+#     scheduled), and the event's own trigger does not read it. If Montevideo is not URU's for the whole year -- the
+#     Cerrito, Rosas or anyone else holds it -- nobody lands and the wave is lost.
+# ES: las dos oleadas de inmigracion fechadas, revisadas cada mes sobre la Republica o la Defensa: cada una sale una
+#     vez, dentro de un año desde su fecha, el primer mes en que Montevideo es de URU. Si en todo ese año no lo es, no
+#     desembarca nadie.
+on_monthly_pulse_country = {
+	on_actions = {
+		gg_immigration_pulse
+	}
+}
+
+gg_immigration_pulse = {
+	trigger = {
+		c:URU ?= this
+		game_date >= 1839.9.1
+		game_date < 1843.5.1
+		gg_montevideo_held_by_uru = yes
+	}
+	effect = {
+		# EN/ES: September 1839, the Argentine emigres, at Echague's invasion / los emigrados argentinos
+		if = {
+			limit = {
+				game_date < 1840.9.1
+				NOT = { has_global_variable = gg_immigration_done_1 }
+			}
+			set_global_variable = gg_immigration_done_1
+			trigger_event = { id = gg_immigration.1 popup = yes }
+		}
+		# EN/ES: May 1842, the colonists' ships (Los Aguerridos) / los barcos de colonos
+		if = {
+			limit = {
+				game_date >= 1842.5.1
+				NOT = { has_global_variable = gg_immigration_done_2 }
+			}
+			set_global_variable = gg_immigration_done_2
+			trigger_event = { id = gg_immigration.2 popup = yes }
+		}
+	}
+}

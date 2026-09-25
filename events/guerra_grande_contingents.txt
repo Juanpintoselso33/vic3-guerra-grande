@@ -297,6 +297,9 @@ gg_contingent.4 = {
 		gg_patron_change = { PATRON = francia DELTA = 5 }
 		set_variable = guerra_grande_french_legion_raised
 		default_option = yes
+		# EN/ES: 25/9/2026 (Juan; AUD-MVD-POPS) -- the legion's men as pops of their culture in Montevideo
+		#     (scripted_effects/gg_montevideo_immigrants.txt) / los hombres de la legion como pops de su cultura
+		gg_mvd_french_legion_men = yes
 		gg_select_formation_hq_state = yes
 		# EN: Without an owned state there is no valid HQ; skip this formation.
 		# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
@@ -356,6 +359,9 @@ gg_contingent.4 = {
 		# EN/ES: T4 -- FE-4: Paris would rather they went home / Paris prefiere que vuelvan
 		gg_patron_change = { PATRON = francia DELTA = -5 }
 		set_variable = guerra_grande_french_legion_refused
+		# EN/ES: 25/9/2026 (AUD-MVD-POPS) -- refused, the same men stay in the city at their trades / negada, los mismos
+		#     hombres se quedan en la ciudad en sus oficios
+		gg_mvd_french_legion_refused_men = yes
 		c:FRA ?= {
 			change_relations = { country = ROOT value = 40 }
 		}
@@ -436,6 +442,9 @@ gg_contingent.5 = {
 		gg_score_colorado = { AMOUNT = 1 }
 		default_option = yes
 		set_variable = guerra_grande_italian_legion_raised
+		# EN/ES: 25/9/2026 (Juan; AUD-MVD-POPS) -- the legion's men as pops of their culture in Montevideo
+		#     (scripted_effects/gg_montevideo_immigrants.txt) / los hombres de la legion como pops de su cultura
+		gg_mvd_italian_legion_men = yes
 		# EN/ES: FN-3 -- Costa Brava (gg_naval.3.a) made Garibaldi's name in the city: he commands the
 		#     legion. 22/9/2026: always one battalion (500-700 men at best, docs/tropas-iniciales)
 		#     / Costa Brava le hizo el nombre: la manda el. Siempre un batallon (500 a 700 hombres)
@@ -535,6 +544,8 @@ gg_contingent.6 = {
 		name = gg_contingent.6.a
 		# EN/ES: 22/9/2026 -- the siege journal lists the Chasseurs / el journal del sitio lista a los Cazadores
 		set_variable = gg_basque_chasseurs_raised
+		# EN/ES: 25/9/2026 (AUD-MVD-POPS) -- no new pops: the Basques were in the French Legion from 1843 and came
+		#     with it (gg_mvd_french_legion_men, Etchechury 2017 n. 59) / sin pops nuevos: ya vinieron con la Legion Francesa
 		# EN/ES: playtest 2026-09-19 -- the war bar has to move during the war: the Basque Chasseurs fill the ranks again /
 		#     la barra tiene que moverse durante la guerra: los Cazadores Vascos vuelven a llenar los cuadros
 		gg_score_colorado = { AMOUNT = 1 }

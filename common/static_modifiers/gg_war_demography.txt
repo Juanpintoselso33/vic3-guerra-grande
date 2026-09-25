@@ -34,8 +34,11 @@
 gg_war_montevideo_refuge = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	state_migration_pull_mult = 1.0
-	state_birth_rate_mult = 0.5
-	state_mortality_mult = -0.5
+	# EN/ES: 25/9/2026 (AUD-MVD-POPS) -- 0.5/-0.5 -> 0.35/-0.35: with the immigrants arriving as pops
+	#     (gg_montevideo_immigrants.txt) the model gives 32% at SoL 5; now 22-28% (tools/modelo_poblacion_oriental.py)
+	#     / con los inmigrantes como pops el modelo daba 32%; ahora 22-28%
+	state_birth_rate_mult = 0.35
+	state_mortality_mult = -0.35
 }
 
 # EN: the other four Oriental states while the war lasts, whoever holds them: the levies take the men (lower births),

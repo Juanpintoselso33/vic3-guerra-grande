@@ -90,6 +90,9 @@ guerra_grande_italian_legion_button = {
 		if = {
 			limit = { NOT = { has_variable = guerra_grande_italian_legion_raised } }
 			set_variable = guerra_grande_italian_legion_raised
+			# EN/ES: 25/9/2026 (Juan; AUD-MVD-POPS) -- the legion's men as pops of their culture in Montevideo
+			#     (scripted_effects/gg_montevideo_immigrants.txt) / los hombres de la legion como pops de su cultura
+			gg_mvd_italian_legion_men = yes
 			# EN/ES: bug hunt 23/9/2026 (CB-05) -- the same reference gg_contingent.5 keeps, so 1848 and the peace
 			#     can send him away; raised by this button he stayed for ever / la misma referencia que guarda
 			#     gg_contingent.5, para que 1848 y la paz lo despidan; levantado por este boton se quedaba para siempre
@@ -111,6 +114,9 @@ guerra_grande_italian_legion_button = {
 		else = {
 			# EN/ES: T4, FE-10 -- reinforce: money and French goodwill / reforzar: plata y buena voluntad francesa
 			set_variable = guerra_grande_italian_legion_reinforced
+			# EN/ES: 25/9/2026 (Juan; AUD-MVD-POPS) -- the legion's men as pops of their culture in Montevideo
+			#     (scripted_effects/gg_montevideo_immigrants.txt) / los hombres de la legion como pops de su cultura
+			gg_mvd_italian_legion_reinforcement = yes
 			# EN/ES: 22/9/2026 (Juan) -- France paid the legions: with France backing the Defensa (30 or
 			#     more) the reinforcement costs the treasury nothing / Francia pagaba las legiones
 			if = {

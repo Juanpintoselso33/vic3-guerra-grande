@@ -19,3 +19,20 @@ gg_is_oriental_countryside_state = {
 		state_region = s:STATE_PAYSANDU
 	}
 }
+
+# EN: 25/9/2026 (AUD-MVD-POPS) -- the state is the Republic's (before the split) or the Defensa's: tag URU, never the
+#     Cerrito. State scope. Immigrants land only here (scripted_effects/gg_montevideo_immigrants.txt).
+# ES: el estado es de la Republica o de la Defensa (tag URU), nunca del Cerrito. Solo aca desembarcan inmigrantes.
+gg_state_held_by_uru = {
+	owner = {
+		c:URU ?= this
+		NOT = { c:CER ?= this }
+	}
+}
+
+# EN/ES: Montevideo is held by the Republic or the Defensa. Any scope / Montevideo es de la Republica o la Defensa
+gg_montevideo_held_by_uru = {
+	s:STATE_MONTEVIDEO ?= {
+		any_scope_state = { gg_state_held_by_uru = yes }
+	}
+}

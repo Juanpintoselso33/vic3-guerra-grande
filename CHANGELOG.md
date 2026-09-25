@@ -2,10 +2,21 @@
 
 ## Unreleased
 
+- **Montevideo's immigrants arrive as people, with their nationalities, and many as soldiers:** the engine sends
+  besieged Montevideo (8 arable land) no mass migration, so the immigrants are now created by events, in Montevideo and
+  only while the Republic or the Defensa holds it. The Argentine emigrés of September 1839 (3,800, clerks); the
+  colonists' ships of May 1842 (1,000 Italians and 5,100 Spaniards, a third of them enrolled in the Guardia Nacional
+  if you choose to); the French Legion's men when it is raised (3,600 French and 750 Basque soldiers, or the same men
+  as labourers if Paris is obeyed), the Italian Legion's (750 soldiers), and a few more when either legion is
+  reinforced. Sizes follow Montevideo's 1843 census (5,324 French, 4,205 Italians, 3,406 Spaniards, 2,553 Argentines)
+  and the legions' strengths, on the same scale as the rest of the Oriental population; soldiers shrink with
+  casualties. With them in the city, «The New Troy» below gives +35% births and -35% mortality (not ±50%), to keep
+  Montevideo near a quarter of the country in 1852.
+
 - **The war fills Montevideo and empties the countryside:** Montevideo started 1836 with 19% of the Banda Oriental's
   people and was down to 7-8% by 1852, while the countryside nearly doubled; the 1852 census counted about 26%
   (33,994 of ~132,000). From the declaration of war on Rosas (February 1839) until the peace, Montevideo -- while the
-  Cerrito does not hold it -- has «The New Troy» (+100% migration attraction, +50% births, -50% mortality: the
+  Cerrito does not hold it -- has «The New Troy» (+100% migration attraction, +35% births, -35% mortality: the
   refugees and the European immigrants behind the walls) and the other four Oriental states have «The Ravaged
   Countryside» (-50% migration attraction, -50% births, +75% mortality: levies, slaughtered herds, families gone to
   Brazil and Entre Ríos). Both end with the peace. Games in progress in the middle of the war get them within six

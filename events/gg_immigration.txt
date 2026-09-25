@@ -1,0 +1,138 @@
+﻿namespace = gg_immigration
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan: the immigrants arrive by events, with their nationalities; AUD-MVD-POPS) -- the two dated
+#     waves that filled Montevideo before the siege. Fired by gg_immigration_pulse (on_actions/gg_war_demography.txt)
+#     on the Republic or the Defensa (tag URU), inside a one-year window from their date and only while Montevideo is
+#     theirs (gg_montevideo_held_by_uru). The legions bring their own men (gg_contingent.4/.5, the legion buttons).
+#     The pops are created by scripted_effects/gg_montevideo_immigrants.txt, where the sizes and their sources are.
+# ES: las dos oleadas fechadas que llenaron Montevideo antes del sitio. Salen sobre la Republica o la Defensa, dentro
+#     de un año desde su fecha y solo si Montevideo es suya. Las legiones traen sus propios hombres.
+#
+# SOURCE / FUENTE: Mario Etchechury Barrera, «"Defensores de la humanidad y la civilizacion". Las legiones extranjeras
+#     de Montevideo (1838-1851)», Historia (PUC Chile) 50:II, 2017, pp. 491-524: more than 33,000 European immigrants
+#     landed 1835-1842 against a population of 128,371 in 1835 (n. 31); the padron of 1843 (n. 32); the Argentine
+#     emigres in Rivera's army and Lavalle's «legion libertadora», and their offer of a legion in September 1839,
+#     at Echague's invasion (n. 33-35); May 1842, the Basque-Navarrese battalion Los Aguerridos under the Carlist
+#     veteran Jose Guerra, raised with the colonists the house of Genaro Rivas shipped from the Peninsula in exchange
+#     for their passages (n. 37); the Spaniards -- Canarians, Basques, Catalans -- enrolled in the Guardia Nacional
+#     «como si se tratara de ciudadanos legales» until Carlos Creus, Spain's first representative, arrived at the end
+#     of 1845. Arana's instructions to Correa Morales (1836) against «los Unitarios o perfidos Federales que han
+#     emigrado»: as gg_contingent.1.
+# -------------------------------------------------------------------------------------------------
+
+# 1839.9 -- the Argentine emigres (Echague's invasion) / los emigrados argentinos
+gg_immigration.1 = {
+	type = country_event
+	placement = ROOT
+	is_popup = yes
+
+	title = gg_immigration.1.t
+	desc = gg_immigration.1.d
+	flavor = gg_immigration.1.f
+
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 12
+
+	trigger = {
+		c:URU ?= this
+		gg_montevideo_held_by_uru = yes
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.1|" # GG_TRAZA
+	}
+
+	# EN: the asylum: the emigres stay, and Buenos Aires writes it down.
+	# ES: el asilo: los emigrados se quedan y Buenos Aires lo anota.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.1.a|" # GG_TRAZA
+		name = gg_immigration.1.a
+		default_option = yes
+		gg_mvd_argentine_emigres = yes
+		c:ARG ?= {
+			change_relations = { country = ROOT value = -15 }
+		}
+		ai_chance = {
+			base = 90
+		}
+	}
+
+	# EN: what Arana asked for in 1836: the emigres are sent on, and Buenos Aires notices.
+	# ES: lo que Arana pedia en 1836: a los emigrados se los hace seguir viaje, y Buenos Aires lo nota.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.1.b|" # GG_TRAZA
+		name = gg_immigration.1.b
+		custom_tooltip = gg_immigration.1.b_tt
+		c:ARG ?= {
+			change_relations = { country = ROOT value = 15 }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# 1842.5 -- the colonists' ships / los barcos de colonos
+gg_immigration.2 = {
+	type = country_event
+	placement = ROOT
+	is_popup = yes
+
+	title = gg_immigration.2.t
+	desc = gg_immigration.2.d
+	flavor = gg_immigration.2.f
+
+	event_image = {
+		video = "unspecific_steam_ship"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 12
+
+	trigger = {
+		c:URU ?= this
+		gg_montevideo_held_by_uru = yes
+	}
+
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.2|" # GG_TRAZA
+	}
+
+	# EN: what the government did: the islanders and peninsulars go into the Guardia Nacional as if they were citizens.
+	# ES: lo que hizo el gobierno: isleños y peninsulares a la Guardia Nacional como si fueran ciudadanos.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.2.a|" # GG_TRAZA
+		name = gg_immigration.2.a
+		default_option = yes
+		gg_mvd_european_ships = yes
+		gg_mvd_spaniards_enrolled = yes
+		c:SPA ?= {
+			change_relations = { country = ROOT value = -10 }
+		}
+		ai_chance = {
+			base = 80
+		}
+	}
+
+	# EN: they are foreigners and are left to their trades: more hands, no more muskets.
+	# ES: son extranjeros y se los deja en sus oficios: mas brazos, ningun fusil mas.
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_immigration.2.b|" # GG_TRAZA
+		name = gg_immigration.2.b
+		gg_mvd_european_ships = yes
+		gg_mvd_spaniards_foreigners = yes
+		c:SPA ?= {
+			change_relations = { country = ROOT value = 10 }
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}

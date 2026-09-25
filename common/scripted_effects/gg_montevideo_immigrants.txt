@@ -1,0 +1,139 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan: the immigrants arrive by events, as soldiers, with their nationalities; AUD-MVD-POPS) -- THE
+#     PEOPLE WHO FILLED MONTEVIDEO. The war modifiers (static_modifiers/gg_war_demography.txt) only move births,
+#     deaths and migration pull; with 8 arable land after the partition the engine sends Montevideo no mass
+#     migration, so the Europeans and the Argentine emigres are created here, as pops of their own culture, when
+#     the dated immigration events (events/gg_immigration.txt) and the legions (events/guerra_grande_contingents.txt,
+#     the two legion buttons) bring them. Only in a Montevideo state that the Republic -- before the split -- or the
+#     Defensa holds (tag URU): if the Cerrito, Rosas or anyone else holds the city, nobody lands and nothing is created.
+#     Soldiers are soldiers pops: casualties shrink them like any other soldiers, which is what happened (the French
+#     Legion fell from more than 3,000 to 1,134 by March 1850).
+#
+#     SIZES. Same scale as the mod's own 1836 population (common/history/pops/zz_guerra_grande_pops.txt): the five
+#     Oriental states start with 192,610 against the 128,371 estimated for 1835 (Etchechury 2017, n. 31), so every
+#     figure from the sources is multiplied by 1.5 and rounded.
+#       padron of Montevideo, October 1843 (Andres Lamas): 31,189 inhabitants -- 5,324 French, 4,205 Italians,
+#         3,406 Spaniards, 2,553 Argentines, 11,431 Orientals (Etchechury 2017, n. 32)
+#       more than 33,000 European immigrants landed 1835-1842 (Etchechury 2017, n. 31)
+#       French Legion: 2,904 men in May 1843 (docs/tropas-iniciales-2026-09-22.md, the sizing of gg_contingent.4),
+#         a Basque battalion of 400-600 inside it from the start (Etchechury 2017, n. 59 and 61; 500 used), "more
+#         than 3,000" at its height (n. 61)
+#       Italian Legion: 500-700 men, about 700 at its best (Etchechury 2017, n. 63 and 68)
+#       the resident foreigners who formed these militias were "artesanos, tenderos, comerciantes y jornaleros"
+#         (Etchechury 2017, on militias of resident foreigners in Latin America): civilians come as laborers
+#     The mod's 1836 Montevideo already holds 4,500 French and 4,500 Italians (3,000 and 3,000 at source scale), so
+#     what the events add is what the 1843 padron has on top of that: the French through their legion, the Italians
+#     through theirs and the 1842 ships, the Spaniards (none at start) and the Argentines through the two waves.
+# ES: LA GENTE QUE LLENO MONTEVIDEO. Los modificadores de guerra solo mueven natalidad, mortalidad y atraccion; con 8
+#     de tierra cultivable el motor no le manda migracion masiva, asi que los europeos y los emigrados argentinos se
+#     crean aca, como pops de su cultura, cuando los traen los eventos de inmigracion fechados y las legiones. Solo en
+#     un Montevideo de la Republica o de la Defensa (tag URU): si la ciudad es del Cerrito o de cualquier otro, no
+#     desembarca nadie. Los soldados son pops de soldados y se achican con las bajas, como paso.
+#     TAMAÑOS: la escala de la poblacion de 1836 del mod (192.610 contra 128.371 en 1835), o sea las cifras de las
+#     fuentes por 1,5; lo que se agrega es lo que el padron de 1843 tiene de mas sobre la poblacion inicial.
+# -------------------------------------------------------------------------------------------------
+
+# EN: one pop in Montevideo, if the Republic or the Defensa holds it. Any scope. $TYPE$ is a pop type (soldiers,
+#     laborers, clerks), $CULTURE$ a culture key; all the immigrants of these years were Catholic.
+# ES: un pop en Montevideo, si la tiene la Republica o la Defensa. Cualquier scope.
+gg_mvd_create_pop = {
+	s:STATE_MONTEVIDEO ?= {
+		random_scope_state = {
+			limit = { gg_state_held_by_uru = yes }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mvd_create_pop| $CULTURE$ $TYPE$ $SIZE$" # GG_TRAZA
+			create_pop = {
+				pop_type = $TYPE$
+				culture = $CULTURE$
+				religion = catholic
+				size = $SIZE$
+			}
+		}
+	}
+}
+
+# EN: the French Legion takes up arms (gg_contingent.4.a, or the button): 2,904 men x 1.5 -- 2,400 French and the
+#     500 Basques of Brie de Laustan's battalion. If the legion is refused (gg_contingent.4.b), the same men stay in
+#     the city as what they were, artisans and day labourers: the padron of October 1843 counts them either way.
+# ES: la Legion Francesa toma las armas: 2.904 hombres por 1,5, 2.400 franceses y los 500 vascos de Brie de Laustan.
+#     Si se la niega, los mismos hombres se quedan en la ciudad como lo que eran: el padron los cuenta igual.
+gg_mvd_french_legion_men = {
+	custom_tooltip = {
+		text = gg_mvd_french_legion_men_tt
+		gg_mvd_create_pop = { CULTURE = french TYPE = soldiers SIZE = 3600 }
+		gg_mvd_create_pop = { CULTURE = basque TYPE = soldiers SIZE = 750 }
+	}
+}
+gg_mvd_french_legion_refused_men = {
+	custom_tooltip = {
+		text = gg_mvd_french_legion_refused_men_tt
+		gg_mvd_create_pop = { CULTURE = french TYPE = laborers SIZE = 3600 }
+		gg_mvd_create_pop = { CULTURE = basque TYPE = laborers SIZE = 750 }
+	}
+}
+# EN: reinforcing it takes it to its height, "more than 3,000" (Etchechury 2017, n. 61): ~100 more men x 1.5.
+# ES: reforzarla la lleva a su maximo, «mas de tres mil»: unos 100 hombres mas.
+gg_mvd_french_legion_reinforcement = {
+	custom_tooltip = {
+		text = gg_mvd_french_legion_reinforcement_tt
+		gg_mvd_create_pop = { CULTURE = french TYPE = soldiers SIZE = 150 }
+	}
+}
+
+# EN: the Italian Legion (gg_contingent.5, or the button): 500 men x 1.5 at its raising; reinforcing it takes it to
+#     the ~700 of its best moment. North Italian, Garibaldi's Ligurian and exile legion: its officers sent its flag
+#     to the municipality of Genoa after the siege (Etchechury 2017, n. 105).
+# ES: la Legion Italiana: 500 hombres por 1,5 al levantarse; reforzarla la lleva a los ~700 de su mejor momento.
+gg_mvd_italian_legion_men = {
+	custom_tooltip = {
+		text = gg_mvd_italian_legion_men_tt
+		gg_mvd_create_pop = { CULTURE = north_italian TYPE = soldiers SIZE = 750 }
+	}
+}
+gg_mvd_italian_legion_reinforcement = {
+	custom_tooltip = {
+		text = gg_mvd_italian_legion_reinforcement_tt
+		gg_mvd_create_pop = { CULTURE = north_italian TYPE = soldiers SIZE = 300 }
+	}
+}
+
+# EN: the Argentine emigres (gg_immigration.1): the padron's 2,553 Argentines x 1.5. They were the press, the
+#     offices and the officers of the Defensa (Etchechury 2017, n. 33-35), so they come as clerks; the Argentine
+#     Legion of 1839-1846 was raised out of them and no source gives its strength (SOURCES_order_of_battle.md), so
+#     it creates no soldiers of its own.
+# ES: los emigrados argentinos: los 2.553 del padron por 1,5, como empleados (prensa, oficinas, oficialidades); la
+#     Legion Argentina salio de ellos y ninguna fuente da su numero, asi que no crea soldados propios.
+gg_mvd_argentine_emigres = {
+	custom_tooltip = {
+		text = gg_mvd_argentine_emigres_tt
+		gg_mvd_create_pop = { CULTURE = platinean TYPE = clerks SIZE = 3800 }
+	}
+}
+
+# EN: the European ships of 1835-1842 (gg_immigration.2): the padron's 3,406 Spaniards x 1.5 (none at the start of
+#     the game) and the ~700 Italians the padron has beyond the 1836 population and the legion, split like the mod's
+#     1836 Italians (three south to two north). Enrolled in the Guardia Nacional as if they were citizens -- what the
+#     government did with the Canarians until Carlos Creus arrived at the end of 1845 (Etchechury 2017) -- a third of
+#     the Spaniards come as soldiers (a design share: the source gives no count of the enrolled); respected as
+#     foreigners, all as laborers.
+# ES: los barcos europeos de 1835-1842: los 3.406 españoles del padron por 1,5 y los ~700 italianos que faltan. Si se
+#     los enrola en la Guardia Nacional como a ciudadanos, un tercio de los españoles viene como soldados.
+gg_mvd_european_ships = {
+	custom_tooltip = {
+		text = gg_mvd_european_ships_tt
+		gg_mvd_create_pop = { CULTURE = south_italian TYPE = laborers SIZE = 600 }
+		gg_mvd_create_pop = { CULTURE = north_italian TYPE = laborers SIZE = 400 }
+	}
+}
+gg_mvd_spaniards_enrolled = {
+	custom_tooltip = {
+		text = gg_mvd_spaniards_enrolled_tt
+		gg_mvd_create_pop = { CULTURE = spanish TYPE = laborers SIZE = 3400 }
+		gg_mvd_create_pop = { CULTURE = spanish TYPE = soldiers SIZE = 1700 }
+	}
+}
+gg_mvd_spaniards_foreigners = {
+	custom_tooltip = {
+		text = gg_mvd_spaniards_foreigners_tt
+		gg_mvd_create_pop = { CULTURE = spanish TYPE = laborers SIZE = 5100 }
+	}
+}
