@@ -942,10 +942,41 @@ gg_argentina_open_war = {
 		# ES: la Coalicion tambien se pelea por un protectorado, y batida se parte en sus provincias, cada
 		#     una protectorado de Buenos Aires. La liga se sigue disolviendo, pero en provincias con
 		#     gobernador federal, no en suelo de Buenos Aires. dp_gg_liga_disuelta se retira.
-		create_diplomatic_play = {
-			name = gg_argentina_play_$TAG$
-			target_country = c:$TAG$
-			type = dp_gg_pacto_federal
+		# EN: 25/9/2026 (AUD-PACT-PLAY-BACKDOWN) -- the war of the Pronouncement (Entre Rios, gg_argentina.3.b/.c, which set
+		#     gg_war_against_buenos_aires first) opens as a WAR, with no play stage. As a play it sat a hundred days (to
+		#     9/8/1851 in every headless trace) and an AI side could back down: in 4 of 40 traces it did (sweep 25/9,
+		#     traza_20260925-191226: Entre Rios backed down on 7/7/1851, Rosas's protectorate was enforced, gg_caseros.6 read
+		#     it as his victory). The tilt (gg_caseros.8) and the guard (gg_caseros.9) act on war support, which a play does
+		#     not have. Historically there was no such stage: Rosas answered the Pronouncement as a rebellion, and Urquiza
+		#     was in arms from May 1851. escalation = 100: the play is born at its end, so nothing that joins plays in
+		#     their escalation (another mod's treaty obligations) drags a third country into the Confederation's internal
+		#     war, which nobody may join (dp_gg_pacto_federal). The other Pact wars (Corrientes, the Coalition) keep
+		#     their play stage.
+		# ES: la guerra del Pronunciamiento (Entre Rios) se abre como GUERRA, sin etapa de jugada. Como jugada duraba cien
+		#     dias y un lado de la IA podia retroceder: en 4 de 40 trazas lo hizo (Entre Rios el 7/7/1851, se impuso el
+		#     protectorado de Rosas). La inclinacion y la guardia actuan sobre el apoyo a la guerra, que una jugada no
+		#     tiene. Historicamente no hubo esa etapa: Rosas contesto con la guerra y Urquiza estuvo en armas desde mayo.
+		#     escalation = 100 para que nada que sume paises a jugadas en escalada meta a un tercero en una guerra
+		#     interna. Las otras guerras del Pacto conservan su jugada.
+		if = {
+			limit = {
+				c:ENR ?= c:$TAG$
+				has_global_variable = gg_war_against_buenos_aires
+			}
+			create_diplomatic_play = {
+				name = gg_argentina_play_$TAG$
+				target_country = c:$TAG$
+				type = dp_gg_pacto_federal
+				escalation = 100
+				war = yes
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = gg_argentina_play_$TAG$
+				target_country = c:$TAG$
+				type = dp_gg_pacto_federal
+			}
 		}
 	}
 }

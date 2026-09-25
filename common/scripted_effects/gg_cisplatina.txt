@@ -30,6 +30,11 @@ gg_cis_open_war = {
 			name = gg_cis_play_name
 			target_country = c:ARG
 			type = dp_gg_cisplatina
+			# EN/ES: 25/9/2026 (AUD-ERR-WTE-BACKERS) -- born at the end of its escalation: another mod's treaty obligations
+			#     (on_diplomatic_play_started, `escalation < 100`) drafted a third country into this two-country war and
+			#     failed on its notification (sweep 25/9, caseros_1) / nace al final de su escalada: las obligaciones de
+			#     tratado de otro mod sumaban un tercero a esta guerra de dos y fallaban en su notificacion
+			escalation = 100
 			war = yes
 		}
 		# EN/ES: 23/9 (Juan) -- Buenos Aires hears of it and answers (gg_cisplatina.6) / Buenos Aires se entera

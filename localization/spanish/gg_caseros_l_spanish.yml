@@ -20,3 +20,4 @@
  gg_caseros.5.d_exile:0 "Buenos Aires fue vencida y el gobierno de Rosas cayó con ella: Rosas partió al exilio en un buque inglés. Urquiza toma el mando de la Confederación, y Entre Ríos conserva su gobierno dentro del arreglo que ahora hay que organizar."
  gg_caseros.5.a:0 "Entrar en Buenos Aires."
  gg_pact_war_tilt_tt:0 "@warning! Buenos Aires no sale de la defensiva: mientras dure esta guerra, #b Entre Ríos#! gana #P +30#! de apoyo a la guerra por mes. Si el Litoral cruza en armas, las filas de Buenos Aires se desgranan: #N -40#! por mes."
+ gg_pact_war_hold_tt:0 "@warning! Ningún bando deja las armas antes de tiempo: hasta el verano de 1852, el apoyo a la guerra de #b Entre Ríos#! y de #b Buenos Aires#! se repone cada semana que baja de #V 50#!."

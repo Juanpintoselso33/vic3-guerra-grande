@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- **The war of the Pronouncement is fought until Caseros:** in the test runs, the war between Rosas and Urquiza often
+  ended in mid-1851, long before the Ejército Grande: Entre Ríos backed down while the quarrel was still a diplomatic
+  play (a hundred days in which war support, and so the tilt towards Urquiza, did not exist yet), or capitulated between
+  August and November. Now, when Rosas answers the Pronouncement with war, it is a war from that day, with no play to
+  back down from; and until the day of Caseros (3 February 1852) neither Entre Ríos nor Buenos Aires breaks for
+  exhaustion: each week their war support is propped back up when it falls below 50. The engine still fights: a side
+  whose whole ground is occupied still falls, and from Caseros on the tilt and the battles decide. The option that
+  answers the Pronouncement with war says so. The other wars of the Pact (Corrientes, the Coalition) keep their play.
+  Lab (4000 stories, AI, dynamic rules): negotiated 38 %, Urquiza (Caseros) 41 %, Rosas 21 %; Urquiza wins 67 % of the
+  wars that happen, none of them before Caseros. Games in progress: a war of the Pronouncement already open gets the
+  weekly guard at the next monthly pulse (it keeps its play stage if it is still in it).
+
+- **No third country is drafted into the Cisplatine war or the wars of Buenos Aires:** with a mod that enforces treaty
+  obligations on every diplomatic play that starts, a country bound to Brazil or Argentina could be added to a war only
+  the two of them may fight, and that mod's notification failed in the error log. These wars (and the war of the
+  Pronouncement) now start at the end of their escalation, where such obligations no longer apply.
+
 - **Argentina's and Uruguay's flags by period, and the Uruguayan party flags, now in the mod:** they lived in a local
   compatch between la Argentina and Dynamic Names, Flags & Colours (DNFC), retired today. Argentina flies the federal flag
   until Caseros (1852), the celeste and white with the sun of the Paraná Confederation until 1862 and la Argentina's

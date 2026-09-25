@@ -166,6 +166,7 @@ gg_ba_open_war_conf = {
 			name = gg_ba_play_name
 			target_country = scope:gg_ba_state
 			type = dp_gg_buenos_aires
+			escalation = 100 # EN/ES: 25/9 (AUD-ERR-WTE-BACKERS) -- as gg_cis_open_war: nobody drafted in / nadie se suma
 			war = yes
 		}
 	}
@@ -176,6 +177,7 @@ gg_ba_open_war_ba = {
 			name = gg_ba_play_name
 			target_country = scope:gg_ba_conf
 			type = dp_gg_buenos_aires
+			escalation = 100 # EN/ES: 25/9 (AUD-ERR-WTE-BACKERS) -- as gg_cis_open_war: nobody drafted in / nadie se suma
 			war = yes
 		}
 	}

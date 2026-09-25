@@ -27,6 +27,7 @@ on_monthly_pulse_country = {
 		gg_rosas_sum_of_power_migration
 		gg_rosas_sum_standing_migration
 		gg_rosas_term_limit_migration
+		gg_pact_guard_migration
 	}
 }
 
@@ -499,5 +500,28 @@ gg_rosas_term_limit_migration = {
 		set_global_variable = gg_rosas_term_limit_known
 		set_global_variable = gg_rosas_served_term
 		gg_rosas_term_limit = yes
+	}
+}
+
+# EN: 25/9/2026 (AUD-PACT-EARLY) -- a save already in the war of the Pronouncement before the guard existed: the weekly
+#     guard (events/gg_caseros.txt, gg_caseros.9) starts now, once, if the war is still on and Caseros has not come.
+#     Old saves only (a new game schedules it from gg_argentina.3.b/.c). A war still in its play stage (the old opening)
+#     keeps it; the guard acts once the war starts.
+# ES: una partida que ya estaba en la guerra del Pronunciamiento antes de la guardia: la guardia semanal arranca ahora,
+#     una vez, si la guerra sigue y no llego Caseros. Solo partidas viejas.
+gg_pact_guard_migration = {
+	trigger = {
+		c:ARG ?= this
+		NOT = { has_global_variable = gg_new_game_no_migrations } # EN/ES: old saves only / solo partidas viejas
+		NOT = { has_global_variable = gg_pact_guard_migrated }
+		has_global_variable = gg_war_against_buenos_aires
+		NOT = { has_global_variable = gg_pact_settled }
+		exists = c:ENR
+		game_date < 1852.2.3
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_guard_migration" # GG_TRAZA
+		set_global_variable = gg_pact_guard_migrated
+		trigger_event = { id = gg_caseros.9 days = 0 }
 	}
 }

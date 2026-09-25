@@ -338,3 +338,73 @@ gg_caseros.8 = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-PACT-EARLY) -- NEITHER SIDE BREAKS BEFORE CASEROS. In the headless traces the engine's war of the
+#     Pact ended before the Ejercito Grande existed in most of the wars Rosas won (Entre Rios capitulated between August and
+#     November 1851, or the AI made a white peace), which history never saw: in 1851 Urquiza fought Oribe in the Banda
+#     Oriental, Buenos Aires waited on the defensive, and the war with Rosas was decided on 3 February 1852 at Caseros
+#     after the Ejercito Grande crossed the Parana (December 1851-January 1852). So, weekly while the war of the Pronouncement lasts and
+#     until the day of Caseros, the war support of Entre Rios and of Buenos Aires is propped back up when it falls under
+#     50 (+50 below 0, +25 between 0 and 50): the AI of neither side capitulates or signs a white peace for exhaustion
+#     before then. The engine still fights: a side whose whole ground is occupied still falls, and from 3/2/1852 the tilt
+#     (gg_caseros.8) and the engine decide. Every Pact rule (the forced ones close the Pact on 4/2/1852, gg_urquiza.3).
+#     The Pact lab (tools/lab_balance/pacto.py) reads the threshold, the bands and the end date from this event.
+# ES: NINGUN LADO SE QUIEBRA ANTES DE CASEROS. En las trazas la guerra del Pacto terminaba antes de que existiera el
+#     Ejercito Grande en casi todas las que gano Rosas (Entre Rios capitulaba entre agosto y noviembre de 1851, o la IA
+#     firmaba una paz blanca), cosa que la historia no vio: la guerra con Rosas se decidio en Caseros el 3/2/1852. Asi que,
+#     cada semana mientras dure la guerra del Pronunciamiento y hasta el dia de Caseros, el apoyo a la guerra de Entre Rios
+#     y de Buenos Aires se repone cuando baja de 50 (+50 bajo 0, +25 entre 0 y 50). El motor sigue peleando: un lado
+#     ocupado entero igual cae, y desde el 3/2/1852 deciden la inclinacion y el motor. Con toda regla del Pacto.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1850-1852 — Urquiza y Caseros» [D] (the Ejercito
+#     Grande crosses the Parana at Diamante, 24/12/1851-6/1/1852; Caseros, 3/2/1852); es.wikipedia «Batalla de Caseros».
+#     DESIGN / DISENO: the threshold and the bands are game scale.
+# Hidden, on Argentina; scheduled by gg_argentina.3.b/.c when the war of the Pact opens; reschedules itself weekly.
+# -------------------------------------------------------------------------------------------------
+gg_caseros.9 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.9|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_pact_settled }
+				exists = c:ENR
+				game_date < 1852.2.3
+			}
+			if = {
+				limit = { has_war_with = c:ENR }
+				every_scope_war = {
+					limit = {
+						is_war_participant = c:ENR
+						is_war_participant = c:ARG
+					}
+					# EN/ES: Entre Rios / Entre Rios
+					if = {
+						limit = { has_war_support = { target = c:ENR value < 0 } }
+						add_war_war_support = { target = c:ENR value = 50 }
+					}
+					else_if = {
+						limit = { has_war_support = { target = c:ENR value < 50 } }
+						add_war_war_support = { target = c:ENR value = 25 }
+					}
+					# EN/ES: Buenos Aires / Buenos Aires
+					if = {
+						limit = { has_war_support = { target = c:ARG value < 0 } }
+						add_war_war_support = { target = c:ARG value = 50 }
+					}
+					else_if = {
+						limit = { has_war_support = { target = c:ARG value < 50 } }
+						add_war_war_support = { target = c:ARG value = 25 }
+					}
+				}
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.9| GUARD=yes " # GG_TRAZA
+			}
+			trigger_event = { id = gg_caseros.9 days = 7 }
+		}
+	}
+}
