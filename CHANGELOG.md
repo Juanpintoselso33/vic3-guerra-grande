@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Armies can march into San José and Maldonado again:** the travel network (the roads and railways armies move
+  along) came from la Argentina's map, which has no San José or Maldonado and still ran Montevideo's roads through
+  land that is now theirs; the two states had no travel node at all, and Paysandú was linked to Montevideo, which it
+  no longer borders. The mod now ships its own network: every Oriental state has its hubs where its towns are, roads
+  inside each state and one road to every neighbouring state. Map data: takes effect in a new game.
 - **Forming La Plata no longer waits on half-colonized frontier:** La Plata (PLT) now asks for all five Oriental
   states and both Paraguayan states, plus 10 of the 14 historical Argentine provinces. Each missing province can be
   made good by a frontier state (La Pampa, Neuquén, Río Negro, Chubut, Santa Cruz, Tierra del Fuego, Misiones, the
