@@ -928,6 +928,17 @@ gg_argentina_cal.28 = {
 # -------------------------------------------------------------------------------------------------
 # EN: 21 November 1851 (day 5799) -- the second convention is offered only after Entre Rios signed
 #     in May and Rosas activated the alliance against Buenos Aires. The visible event has no trigger.
+#     26/9/2026 (AUD-EG-ALONE) -- without the May convention (the Guerra Grande already over, the Convention refused:
+#     gg_urquiza_no_convention, gg_urquiza.2) the war of the Pronouncement still goes on, and Urquiza raises the
+#     Ejercito Grande alone the same day: gg_argentina.15 in its «alone» form (only its road c). Until then nothing
+#     raised it on that road, so gg_ejercito_grande_created never came, Pacheco's relay and the hour of Caseros
+#     (gg_argentina_cal.9/.10) never delivered and the war was decided by the engine alone, whenever (headless
+#     20260926: 3 of 4 wars of the Pronouncement, all with the Guerra Grande ended in 1848-1850). The texts of that
+#     road were already written (gg_ejercito_grande_alone_tt, gg_argentina.41.d_alone). Oribe abandoned
+#     (gg_argentina.14.a) keeps its own road: no Ejercito Grande, and Buenos Aires's ranks fall apart (gg_caseros.8).
+# ES: 26/9/2026 -- sin la convencion de mayo la guerra del Pronunciamiento sigue, y Urquiza levanta el Ejercito Grande
+#     solo el mismo dia (gg_argentina.15 en su forma «solo», con su camino c). Antes nadie lo levantaba por esa via:
+#     no llegaban ni la renuncia de Pacheco ni la hora de Caseros, y la guerra la decidia el motor cuando fuera.
 # ES: 21 de noviembre de 1851 (dia 5799) -- la segunda convencion se ofrece solo si Entre Rios firmo
 #     en mayo y Rosas activo la alianza contra Buenos Aires. El evento visible no tiene trigger.
 # SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Convencion del 21/11/1851»;
@@ -946,6 +957,23 @@ gg_argentina_cal.29 = {
 				has_global_variable = gg_montevideo_free_navigation
 				has_global_variable = gg_war_against_buenos_aires
 				NOT = { has_global_variable = gg_rosas_abandoned_oribe }
+				c:ARG = { has_war_with = c:ENR }
+			}
+			c:ENR = { trigger_event = { id = gg_argentina.15 days = 0 popup = yes } }
+		}
+		# EN/ES: 26/9/2026 (AUD-EG-ALONE) -- no convention, the war goes on: Urquiza raises the army alone (gg_argentina.15
+		#     reads guerra_grande_treaties_signed for its form) / sin convencion y con la guerra en pie: Urquiza lo levanta solo
+		else_if = {
+			limit = {
+				NOT = { has_global_variable = gg_arg_cal_done_29 }
+				exists = c:ARG
+				exists = c:ENR
+				NOT = { has_global_variable = guerra_grande_treaties_signed }
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_pact_settled }
+				NOT = { has_global_variable = gg_confederacion_negociada }
+				NOT = { has_global_variable = gg_rosas_abandoned_oribe }
+				NOT = { has_global_variable = gg_ejercito_grande_created }
 				c:ARG = { has_war_with = c:ENR }
 			}
 			c:ENR = { trigger_event = { id = gg_argentina.15 days = 0 popup = yes } }

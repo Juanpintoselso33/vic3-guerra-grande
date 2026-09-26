@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- **The Ejército Grande and the day of Caseros no longer depend on the Montevideo convention:** in three of four test
+  runs with the Pronouncement's war the Guerra Grande had already ended (1848 or 1850), so there was no convention of
+  29/5/1851 (Urquiza fights alone, as designed) — and nothing raised the Ejército Grande on 21/11/1851 on that road, so
+  Pacheco's resignation and the hour of Caseros never came and the war dragged on to 1853 or ended whenever the engine
+  decided. Now, with the war still on and no convention, Urquiza raises the Ejército Grande alone that day: "The Price of
+  the Ejército Grande" appears in its "without a convention" form, with only the road of Entre Ríos and Corrientes (no
+  loan, no mortgage, no foreign contingent; the reckoning of Caseros weighs 10 more for Rosas, as that road always did).
+  Rosas abandoning Oribe keeps its own road. Games in progress: applies from 21/11/1851 on.
+
+- **Buenos Aires can no longer capitulate before Caseros through the monthly tilt:** in a test run the daily guard
+  propped Buenos Aires's war support on 27/11/1851, the monthly "ranks fall apart" tilt took 40 off the same day, and the
+  AI capitulated in that same instant — Urquiza won on 28/11/1851, before Caseros. Before 3/2/1852 the tilt now puts
+  Buenos Aires back on the guard's floor in the same effect: it still arrives at Caseros worn down, but never under the
+  floor. Also: an army queued to mobilize is no longer mobilized (or retried) once its owner's war with that enemy is
+  over (a script error in the same run).
+
 - **Rosas no longer overruns Entre Ríos before Caseros:** in a test run the Pronouncement's war opened on 1/5/1851 and
   Buenos Aires's AI invaded Entre Ríos, occupied all of it and destroyed Urquiza's army; at Caseros the Ejército Grande had
   one battalion. History never saw that war: Rosas waited on the defensive in Buenos Aires and Santa Fe, Urquiza fought

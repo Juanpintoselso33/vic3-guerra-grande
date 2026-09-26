@@ -351,6 +351,43 @@ gg_caseros.8 = {
 								is_war_participant = c:ARG
 							}
 							add_war_war_support = { target = c:ARG value = -40 }
+							# EN: 26/9/2026 (AUD-PACT-TILT-FLOOR) -- before the day of Caseros the guard's floor holds IN THIS SAME
+							#     EFFECT, with gg_caseros.9's bands: the monthly drain still leaves Buenos Aires at the floor on the day,
+							#     as before, but never under it for the rest of the tick. In caseros_5 (traza_20260926-011753) the floor
+							#     propped Buenos Aires on 27/11/1851, this tilt took 40 off the same day and Buenos Aires capitulated in
+							#     that very tick (gg_pact_wargoal_enforced, gg_pact_capitulation; gg_caseros.6 -> Urquiza on 28/11/1851,
+							#     six days after the Ejercito Grande and before Caseros): the next day's prop came too late.
+							# ES: antes del dia de Caseros el piso de la guardia vale EN ESTE MISMO EFECTO, con las bandas de
+							#     gg_caseros.9: el desgaste mensual sigue dejando a Buenos Aires en el piso, pero nunca debajo durante
+							#     el resto del instante. En caseros_5 el piso lo levanto el 27/11/1851, esta inclinacion le saco 40 el
+							#     mismo dia y Buenos Aires capitulo en ese mismo instante, antes de Caseros.
+							if = {
+								limit = { game_date < 1852.2.3 }
+								if = {
+									limit = { has_war_support = { target = c:ARG value < -75 } }
+									add_war_war_support = { target = c:ARG value = 150 }
+								}
+								else_if = {
+									limit = { has_war_support = { target = c:ARG value < -50 } }
+									add_war_war_support = { target = c:ARG value = 125 }
+								}
+								else_if = {
+									limit = { has_war_support = { target = c:ARG value < -25 } }
+									add_war_war_support = { target = c:ARG value = 100 }
+								}
+								else_if = {
+									limit = { has_war_support = { target = c:ARG value < 0 } }
+									add_war_war_support = { target = c:ARG value = 75 }
+								}
+								else_if = {
+									limit = { has_war_support = { target = c:ARG value < 25 } }
+									add_war_war_support = { target = c:ARG value = 50 }
+								}
+								else_if = {
+									limit = { has_war_support = { target = c:ARG value < 50 } }
+									add_war_war_support = { target = c:ARG value = 25 }
+								}
+							}
 						}
 					}
 				}

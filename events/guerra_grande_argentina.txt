@@ -3651,9 +3651,43 @@ gg_argentina.14 = {
 gg_argentina.15 = {
 	type = country_event
 	placement = ROOT
-	title = gg_argentina.15.t
-	desc = gg_argentina.15.d
-	flavor = gg_argentina.15.f
+	# EN: 26/9/2026 (AUD-EG-ALONE) -- two forms. With the conventions signed (guerra_grande_treaties_signed), the price
+	#     of the second one, three roads. Without them (gg_argentina_cal.29's second branch: the Guerra Grande already
+	#     over, the Convention refused), nobody offers a loan and only road c exists: Urquiza raises the army alone.
+	#     DESIGN COUNTERFACTUAL: the historical army came from the convention; its 18,000 are Urquiza's own share.
+	# ES: dos formas. Con las convenciones firmadas, el precio de la segunda y tres caminos. Sin ellas nadie ofrece
+	#     prestamo y queda solo el camino c: Urquiza levanta el ejercito solo. CONTRAFACTUAL DE DISENO.
+	# SOURCE / FUENTE (the «alone» text / el texto «solo»): historia-argentina.md, «Convencion del 21/11/1851» (Urquiza's
+	#     18,000; 100,000 patacones a month) and «1850-1852» (only Corrientes adhered to the Pronouncement); Municipalidad
+	#     de Valle Maria, «Aniversario de la Batalla de Caseros» (2/2/2021: «Rosas no tomaba ninguna medida...»;
+	#     Rosas "took no measure prudence advised"), as in gg_caseros.8.
+	title = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.15.t_alone
+				trigger = { NOT = { has_global_variable = guerra_grande_treaties_signed } }
+			}
+			triggered_desc = { desc = gg_argentina.15.t }
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.15.d_alone
+				trigger = { NOT = { has_global_variable = guerra_grande_treaties_signed } }
+			}
+			triggered_desc = { desc = gg_argentina.15.d }
+		}
+	}
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				desc = gg_argentina.15.f_alone
+				trigger = { NOT = { has_global_variable = guerra_grande_treaties_signed } }
+			}
+			triggered_desc = { desc = gg_argentina.15.f }
+		}
+	}
 	# EN/ES: 1816 Brazilian patacao, not the 1851 loan instrument / patacao de 1816, no el emprestito
 	event_image = { video = "gg_arg_patacao" }
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -3663,6 +3697,7 @@ gg_argentina.15 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.a|" # GG_TRAZA
 		name = gg_argentina.15.a
+		trigger = { has_global_variable = guerra_grande_treaties_signed } # EN/ES: 26/9 (AUD-EG-ALONE) -- no convention, no loan / sin convencion no hay prestamo
 		default_option = yes
 		custom_tooltip = gg_ejercito_grande_full_tt
 		set_global_variable = gg_ejercito_grande_full_terms
@@ -3699,6 +3734,7 @@ gg_argentina.15 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.b|" # GG_TRAZA
 		name = gg_argentina.15.b
+		trigger = { has_global_variable = guerra_grande_treaties_signed } # EN/ES: 26/9 (AUD-EG-ALONE) -- no convention, no loan / sin convencion no hay prestamo
 		custom_tooltip = gg_ejercito_grande_limited_tt
 		# EN: DESIGN COUNTERFACTUAL: one documented monthly instalment, not a claimed historical offer.
 		# ES: CONTRAFACTUAL DE DISENO: una mensualidad documentada, no una oferta historica atribuida.
@@ -3733,6 +3769,7 @@ gg_argentina.15 = {
 	option = {
 		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.c|" # GG_TRAZA
 		name = gg_argentina.15.c
+		trigger = { has_global_variable = guerra_grande_treaties_signed } # EN/ES: 26/9 (AUD-EG-ALONE) -- the convention's form / la forma con convencion
 		# EN/ES: 23/9 (AUD-WAR-ROSAS) -- the Oriental division already marching stays / la division oriental que ya marcha sigue
 		if = { limit = { has_global_variable = gg_oriental_division_sent } custom_tooltip = gg_ejercito_grande_alone_oriental_tt }
 		else = { custom_tooltip = gg_ejercito_grande_alone_tt }
@@ -3744,6 +3781,21 @@ gg_argentina.15 = {
 			#     21/11/1851; never for the AI / con los contratos de setiembre el Imperio va a la convencion historica; nunca para la IA
 			modifier = { trigger = { has_global_variable = gg_brazil_deal } factor = 0 }
 		}
+	}
+	option = {
+		debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina.15.c|" # GG_TRAZA
+		name = gg_argentina.15.c
+		# EN: 26/9/2026 (AUD-EG-ALONE) -- road c in the «without a convention» form: the only road, so the default (a hidden
+		#     default_option does not resolve a timeout; vanilla gives each exclusive branch its own default, resignation.1).
+		# ES: el camino c en la forma «sin convencion»: el unico, y por eso el default (un default oculto no resuelve).
+		trigger = { NOT = { has_global_variable = guerra_grande_treaties_signed } }
+		default_option = yes
+		# EN/ES: 23/9 (AUD-WAR-ROSAS) -- the Oriental division already marching stays / la division oriental que ya marcha sigue
+		if = { limit = { has_global_variable = gg_oriental_division_sent } custom_tooltip = gg_ejercito_grande_alone_oriental_tt }
+		else = { custom_tooltip = gg_ejercito_grande_alone_tt }
+		set_global_variable = gg_ejercito_grande_alone
+		gg_argentina_raise_ejercito_grande = yes
+		ai_chance = { base = 10 }
 	}
 
 	immediate = {
