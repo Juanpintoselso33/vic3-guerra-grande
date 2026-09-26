@@ -127,6 +127,27 @@ gg_pact_war_probe = {
 				change_global_variable = { name = gg_debug_probe_adv_urq add = 1 }
 			}
 		}
+		# EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK) -- HELD_ADV: generals of either side with an advance order that the hold forbids
+		#     now (> 0: the engine keeps an order its `possible` no longer allows); NF_ADV: those with no front and an advance order
+		#     / generales con orden de avance que la retencion prohibe ahora, y los que no tienen frente y tienen orden de avance
+		set_global_variable = { name = gg_debug_probe_held_adv value = 0 }
+		set_global_variable = { name = gg_debug_probe_nf_adv value = 0 }
+		every_country = {
+			limit = {
+				OR = {
+					AND = { gg_pact_rosas_side = yes has_war_with = c:ENR }
+					AND = { gg_pact_urquiza_side = yes has_war_with = c:ARG }
+				}
+			}
+			every_scope_general = {
+				limit = { character_has_advance_order = yes gg_pact_front_hold = yes }
+				change_global_variable = { name = gg_debug_probe_held_adv add = 1 }
+			}
+			every_scope_general = {
+				limit = { character_has_advance_order = yes NOT = { front ?= { always = yes } } }
+				change_global_variable = { name = gg_debug_probe_nf_adv add = 1 }
+			}
+		}
 		c:ARG = { set_global_variable = { name = gg_debug_probe_occ_arg value = enemy_occupation } }
 		c:ENR = { set_global_variable = { name = gg_debug_probe_occ_enr value = enemy_occupation } }
 		change_global_variable = { name = gg_debug_probe_occ_arg multiply = 100 }
@@ -144,7 +165,7 @@ gg_pact_war_probe = {
 			change_global_variable = { name = gg_debug_probe_lost_arg multiply = 100 }
 			change_global_variable = { name = gg_debug_probe_lost_enr multiply = 100 }
 		}
-		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] " # GG_TRAZA
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] HELD_ADV=[GetGlobalVariable('gg_debug_probe_held_adv').GetValue|0] NF_ADV=[GetGlobalVariable('gg_debug_probe_nf_adv').GetValue|0] " # GG_TRAZA
 		# EN: 26/9/2026 (Juan, AUD-PACT-ARMY-MELTS) -- WHERE THE BATTALIONS GO. BN_* above counts raised conscripts; here each part
 		#     apart: REG_* standing battalions (army_size) of each side, CRR Corrientes's battalions, BRK/CC the barracks and
 		#     conscription-centre levels of Entre Rios, WANT the army its AI wants (the default strategy plus

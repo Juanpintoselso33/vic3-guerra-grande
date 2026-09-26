@@ -223,9 +223,45 @@ gg_caseros.6 = {
 	}
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6|" # GG_TRAZA
+		# EN: 26/9/2026 (Juan, AUD-PACT-DAY-READS) -- a war the engine closes with a white peace AFTER the day of Caseros was fought
+		#     is read as the day decided it (gg_caseros_battle: 1 Urquiza, 2 Buenos Aires). In traza_20260926-134933 Urquiza carried
+		#     the day (SCORE=18, gg_caseros.10.a) and the engine's white peace of 27/4/1852 wrote «two governments, no victor»
+		#     (gg_argentina.85): the day meant nothing. History: Rosas resigned on the afternoon of Caseros; the day decided the war,
+		#     and the lab already reads it so (pacto.py caseros_day: the day's loser is the one who falls). Only when nothing else was
+		#     recorded: a capitulation or an enforced war goal still says who won, and the manoeuvre's draw (gg_caseros.1) and the
+		#     siege resolve on their own. A white peace before the day stays a draw.
+		# ES: una guerra que el motor cierra con paz blanca DESPUES de pelearse la jornada se lee como la decidio la jornada. En
+		#     134933 Urquiza gano la jornada y la paz blanca del motor escribio «dos gobiernos, ningun vencedor». Historia: Rosas
+		#     renuncio la tarde de Caseros; la jornada decidio la guerra, y el laboratorio ya la lee asi. Solo si no se anoto otra
+		#     cosa; una paz blanca antes de la jornada sigue siendo tablas.
+		# SOURCE / FUENTE: es.wikipedia «Batalla de Caseros» (Rosas resigned the same day and sailed for England).
 		if = {
 			limit = { NOT = { global_var:gg_pact_war_urquiza_won = 1 } NOT = { global_var:gg_pact_war_rosas_won = 1 } }
-			set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+			# EN/ES: only a pitched day (gg_argentina.41.a) decides the war: the manoeuvre (.b, a draw at six months in gg_caseros.1)
+			#     and the siege (.c, resolved when it ends) keep their own reading, and nothing is rewritten once settled (Codex review)
+			#     / solo una jornada campal decide la guerra: la maniobra y el sitio conservan su lectura, y nada se reescribe ya cerrado
+			if = {
+				limit = {
+					global_var:gg_caseros_battle ?= 1
+					global_var:gg_caseros_choice ?= 1
+					NOT = { has_global_variable = gg_pact_settled }
+				}
+				set_global_variable = { name = gg_pact_war_urquiza_won value = 1 }
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6| READ=day_urquiza " # GG_TRAZA
+			}
+			else_if = {
+				limit = {
+					global_var:gg_caseros_battle ?= 2
+					global_var:gg_caseros_choice ?= 1
+					NOT = { has_global_variable = gg_pact_settled }
+				}
+				set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6| READ=day_rosas " # GG_TRAZA
+			}
+			else = {
+				set_global_variable = { name = gg_pact_war_white_peace value = 1 }
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6| READ=white_peace " # GG_TRAZA
+			}
 		}
 		gg_pact_resolve = yes
 	}

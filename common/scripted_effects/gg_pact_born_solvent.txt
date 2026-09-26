@@ -1,0 +1,29 @@
+﻿# EN/ES: loads before gg_pact_sides.txt and zz_guerra_grande_argentina.txt, which use it / carga antes de los que lo usan
+# EN: 26/9/2026 (Juan, AUD-PACT-DEBT) -- A PROVINCE THAT REASSUMES ITS SOVEREIGNTY IS NOT BORN WITH BUENOS AIRES'S DEBT.
+#     create_country hands the newborn the origin's debt in proportion: in the six caseros runs on 6cb1e2f Entre Rios's first
+#     sample (31/5/1851) carries Argentina's debt ratio of that spring (ARG 23-24 % -> ENR 30 %, 41 -> 48 %, 13 -> 12 %, 0 -> 0 %).
+#     From there the deficit of a one-state country with 16-22 battalions grows it every month (30 -> 72 %, 48 -> 88 %), the
+#     engine's AI disbands barracks for money (BRK_ENR 20 -> 1, 16 -> 1 before the Ejercito Grande) and its peace desire rises
+#     with the debt (00_ai.txt AI_PEACE_DESIRE_FROM_DEBT_LEVEL = 200 at 100 %): the war ended in a white peace on 20/1/1852,
+#     before Caseros (traza_20260926-142308, ENR 88 %), and after a day Urquiza carried (-134933, ENR 72 %). The run that
+#     started with no debt (-134931) kept its 22 battalions until Rosas's army occupied the province. History: the
+#     Confederation had no common treasury -- the debt was the Province of Buenos Aires's own (the Baring loan of 1824, the
+#     paper money of its Casa de Moneda) -- and the convention of 29/5/1851 (art. XII) left each ally to pay its own troops out
+#     of its own revenue. So the province is born solvent. Country scope (the newborn); the debt it had is logged.
+# ES: UNA PROVINCIA QUE REASUME SU SOBERANIA NO NACE CON LA DEUDA DE BUENOS AIRES. create_country le pasa al nuevo pais la
+#     deuda del origen en proporcion: en las seis corridas Entre Rios arranca con la de la Argentina de ese otonio, el deficit
+#     la agranda cada mes, la IA disuelve cuarteles por plata y su deseo de paz sube con la deuda: paz blanca el 20/1/1852,
+#     antes de Caseros, y despues de una jornada ganada por Urquiza. La Confederacion no tenia tesoro comun: la deuda era de
+#     la provincia de Buenos Aires (el emprestito Baring de 1824, el papel de su Casa de Moneda), y la convencion del 29/5/1851
+#     (art. XII) dejaba a cada aliado pagar sus tropas con sus rentas. La provincia nace sin deuda.
+# SOURCE / FUENTE: Convencion del 29/5/1851, art. XII («Los gastos como sueldo, manutencion de boca y guerra, y vestuario de
+#     las tropas aliadas, seran hechos por cuenta de los Estados respectivos»), dipublico.org/122098; es.wikipedia «Emprestito
+#     Baring» (contracted by the Province of Buenos Aires, 1824).
+gg_pact_province_born_solvent = {
+	set_global_variable = { name = gg_debug_born_debt value = scaled_debt }
+	change_global_variable = { name = gg_debug_born_debt multiply = 100 }
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_province_born_solvent| DEBT_BEFORE=[GetGlobalVariable('gg_debug_born_debt').GetValue|0] " # GG_TRAZA
+	remove_global_variable = gg_debug_born_debt
+	clear_debt = yes
+}
+

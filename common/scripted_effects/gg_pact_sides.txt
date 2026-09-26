@@ -168,7 +168,7 @@ gg_corrientes_pronounce = {
 			}
 		}
 		gg_argentina_new_country_people = { TAG = CRR }
-		c:CRR ?= { set_capital = STATE_CORRIENTES }
+		c:CRR ?= { set_capital = STATE_CORRIENTES gg_pact_province_born_solvent = yes } # EN/ES: 26/9/2026 (AUD-PACT-DEBT) -- born solvent, as Entre Rios / nace sin deuda, como Entre Rios
 	}
 	if = {
 		limit = { c:CRR ?= { is_subject = no } }

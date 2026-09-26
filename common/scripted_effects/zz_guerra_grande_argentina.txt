@@ -571,6 +571,7 @@ gg_argentina_create_entre_rios = {
 		gg_argentina_new_country_people = {
 			TAG = ENR
 		}
+		c:ENR ?= { gg_pact_province_born_solvent = yes } # EN/ES: 26/9/2026 (AUD-PACT-DEBT)
 	}
 	c:ENR ?= {
 		set_capital = STATE_ENTRE_RIOS

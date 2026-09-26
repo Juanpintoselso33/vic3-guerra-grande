@@ -94,6 +94,30 @@ gg_pact_general_faces = {
 	}
 }
 
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-LEAK) -- character scope: a general with no front at all (in his headquarters, just raised
+#     or just recalled). In the six caseros runs on 6cb1e2f the probe found held generals WITH an advance order on the Pact
+#     front: ADV_ROSAS=1 from 31/5/1851 to January 1852 in traza_20260926-134931 (Entre Rios occupied 100 %, LOST_ENR 82 at
+#     Caseros), ADV_ROSAS=1 from 27/12/1851 in -145836 (OCC_ENR 90, LOST_ENR 100) and after the day Urquiza carried in -134933,
+#     ADV_URQ=1 on 31/5/1851 in three runs (Rosas's LOST_ARG 100 in -134933). Each first shows right after the script sent an army
+#     to the front (GG_MOB deployed on 2, 9 and 22/5/1851): the AI picks a general's order while he has no front, when the hold
+#     could not see where he was going, and the order goes with him to the front. So a held side's general with no front may not
+#     take an advance order either; the probe's HELD_ADV/NF_ADV say whether that closes it.
+# ES: un general sin ningun frente (en su cuartel, recien levantado o recien llamado). En las seis corridas de caseros sobre
+#     6cb1e2f la sonda encontro generales retenidos CON orden de avance en el frente del Pacto; cada caso aparece justo despues
+#     de que el script mando un ejercito al frente: la IA elige la orden mientras el general no tiene frente, cuando la
+#     retencion no podia ver adonde iba, y la orden viaja con el. Asi que un general sin frente del lado retenido tampoco puede
+#     tomar una orden de avance; HELD_ADV/NF_ADV de la sonda dicen si eso lo cierra.
+#     Only when the Pact war is the owner's ONLY war (Codex review 26/9: a general with no front may be bound for another war, and
+#     every other war keeps vanilla's orders): `$ENEMY$` is the other side's leader (c:ENR for Rosas's side, c:ARG for Urquiza's).
+#     / Solo si la guerra del Pacto es la UNICA del duenio: un general sin frente puede ir a otra guerra, y las demas guerras
+#     conservan las ordenes de vanilla.
+gg_pact_general_no_front = {
+	NOT = { front ?= { always = yes } }
+	owner ?= {
+		NOT = { any_scope_war = { NOT = { is_war_participant = $ENEMY$ } } }
+	}
+}
+
 # EN/ES: global: the day of Caseros is still to be fought / la jornada de Caseros todavia no se peleo
 gg_pact_before_caseros_day = {
 	NOT = { has_global_variable = gg_caseros_battle }
@@ -133,7 +157,10 @@ gg_pact_front_hold = {
 				gg_pact_before_caseros_day = yes
 				global_var:gg_caseros_battle ?= 1
 			}
-			gg_pact_general_faces = { SIDE = gg_pact_urquiza_side }
+			OR = {
+				gg_pact_general_faces = { SIDE = gg_pact_urquiza_side }
+				gg_pact_general_no_front = { ENEMY = c:ENR } # EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK)
+			}
 		}
 		# EN/ES: Urquiza keeps his army for the crossing, and after a lost day the Ejercito Grande is gone
 		#     / Urquiza guarda su ejercito para el cruce, y despues de perder la jornada el Ejercito Grande ya no esta
@@ -143,7 +170,10 @@ gg_pact_front_hold = {
 				gg_pact_before_crossing = yes
 				global_var:gg_caseros_battle ?= 2
 			}
-			gg_pact_general_faces = { SIDE = gg_pact_rosas_side }
+			OR = {
+				gg_pact_general_faces = { SIDE = gg_pact_rosas_side }
+				gg_pact_general_no_front = { ENEMY = c:ARG } # EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK)
+			}
 		}
 	}
 }

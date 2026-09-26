@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- **Why the Pact war swung to Rosas, and three fixes at the root:** after Buenos Aires got its army, the six test runs
+  gave Rosas two wars, two white peaces and Urquiza none. Three causes, read from the monthly debug lines:
+  - *Generals slipping the defensive hold.* The AI picks a general's order while he is still in his headquarters, before
+    he has a front, and the order goes with him when the army is sent to the Paraná: Rosas's generals advanced for months
+    and occupied all of Entre Ríos in one run (and Urquiza's attacked in May 1851 in three). While the Pact war is its side's
+    only war, a general of a held side with no front may no longer take an advance order either; the debug line now counts any held general still advancing.
+  - *Entre Ríos born in Buenos Aires's debt.* A new country inherits its origin's debt in proportion, so Entre Ríos started
+    the war with Argentina's debt ratio (up to 48 %); the deficit of a one-province army pushed it to 70–88 %, its AI
+    disbanded barracks for money and, with the engine's peace desire rising with debt, accepted white peaces — once before
+    Caseros, which is why "the hour of Caseros" never came in one run. The Confederation had no common treasury (the debt
+    was the Province of Buenos Aires's), and the alliance of 29 May 1851 left each ally to pay its own troops: Entre Ríos
+    and Corrientes are now born without debt.
+  - *A won day that meant nothing.* An engine white peace after the day of Caseros wrote "two governments, no victor" even
+    when Urquiza had carried the day. Now a white peace after a pitched day is read as the day decided it (Rosas resigned on
+    the afternoon of Caseros); if Buenos Aires held the day, Entre Ríos returns to the Pact. A white peace before the day,
+    and Rosas's manoeuvre and siege roads, keep their own reading.
+  Games in progress: the debt fix applies to a Pronouncement not yet made; the other two apply at once.
+
 - **Buenos Aires raises its army for Caseros:** in every recent test run Rosas reached Caseros with 3–14 battalions and
   almost no standing ones, and lost every battle. The field army the mod raises for him against Brazil in December 1850
   is quartered in Entre Ríos and, as in history, goes over to Urquiza with the province; nothing ever raised the other
