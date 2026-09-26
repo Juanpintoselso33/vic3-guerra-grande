@@ -471,6 +471,11 @@ gg_caseros.9 = {
 			}
 			if = {
 				limit = { has_war_with = c:ENR }
+				# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS; Codex review) -- each week, under every rule of the Pact, the provinces' AI
+				#     keeps its army (an older save, or a strategy re-picked) / cada semana, con toda regla del Pacto, la IA de las
+				#     provincias conserva su ejercito (una partida vieja, o una estrategia re-elegida)
+				c:ENR ?= { gg_pact_army_keep = yes }
+				c:CRR ?= { if = { limit = { has_war_with = c:ARG } gg_pact_army_keep = yes } }
 				every_scope_war = {
 					limit = {
 						is_war_participant = c:ENR

@@ -145,5 +145,110 @@ gg_pact_war_probe = {
 			change_global_variable = { name = gg_debug_probe_lost_enr multiply = 100 }
 		}
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] " # GG_TRAZA
+		# EN: 26/9/2026 (Juan, AUD-PACT-ARMY-MELTS) -- WHERE THE BATTALIONS GO. BN_* above counts raised conscripts; here each part
+		#     apart: REG_* standing battalions (army_size) of each side, CRR Corrientes's battalions, BRK/CC the barracks and
+		#     conscription-centre levels of Entre Rios, WANT the army its AI wants (the default strategy plus
+		#     gg_pact_field_army_wanted), STRAT 1 if it has its own strategy, GOLD its gold reserves and DEBT its debt (hundredths
+		#     of the ceiling), EG/BRZDIV/ORIDIV the battalions left in the Ejercito Grande and the allied divisions of the
+		#     convention (Brazil's, the Oriental one). If BN_ENR falls with BRK and REG, the AI disbanded barracks; if REG holds and
+		#     BN falls, conscripts were sent home. Trace only.
+		# ES: DONDE VAN LOS BATALLONES. BN_* de arriba cuenta los conscriptos levantados; aca cada parte por separado: batallones
+		#     permanentes de cada lado, los de Corrientes, niveles de cuartel y de centro de conscripcion de Entre Rios, el
+		#     ejercito que quiere su IA, si tiene su estrategia, reservas y deuda, y lo que queda en el Ejercito Grande y en las
+		#     divisiones aliadas. Si BN_ENR cae con BRK y REG, la IA disolvio cuarteles; si REG se sostiene, volvieron conscriptos.
+		set_global_variable = { name = gg_debug_probe_reg_arg value = 0 }
+		set_global_variable = { name = gg_debug_probe_reg_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_bn_crr value = 0 }
+		set_global_variable = { name = gg_debug_probe_brk_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_cc_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_want_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_strat_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_gold_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_debt_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_bn_eg value = 0 }
+		set_global_variable = { name = gg_debug_probe_bn_brzdiv value = 0 }
+		set_global_variable = { name = gg_debug_probe_bn_oridiv value = 0 }
+		every_country = {
+			limit = {
+				gg_pact_rosas_side = yes
+				has_war_with = c:ENR
+			}
+			change_global_variable = { name = gg_debug_probe_reg_arg add = army_size }
+		}
+		c:CRR ?= {
+			if = {
+				limit = { has_war_with = c:ARG }
+				set_global_variable = { name = gg_debug_probe_bn_crr value = army_size_including_raised_conscripts }
+			}
+		}
+		c:ENR = {
+			set_global_variable = { name = gg_debug_probe_reg_enr value = army_size }
+			every_scope_building = {
+				limit = { is_building_type = building_barrack }
+				change_global_variable = { name = gg_debug_probe_brk_enr add = this.level }
+			}
+			every_scope_building = {
+				limit = { is_building_type = building_conscription_center }
+				change_global_variable = { name = gg_debug_probe_cc_enr add = this.level }
+			}
+			set_global_variable = { name = gg_debug_probe_want_enr value = wanted_army_size_script_value }
+			# EN/ES: the province's share only if its strategy is on (Codex review) / la parte de la provincia solo con su estrategia
+			if = {
+				limit = { has_strategy = gg_ai_strategy_entre_rios }
+				set_global_variable = { name = gg_debug_probe_strat_enr value = 1 }
+				change_global_variable = { name = gg_debug_probe_want_enr add = gg_pact_field_army_wanted }
+			}
+			set_global_variable = { name = gg_debug_probe_gold_enr value = gold_reserves }
+			set_global_variable = { name = gg_debug_probe_debt_enr value = scaled_debt }
+			change_global_variable = { name = gg_debug_probe_debt_enr multiply = 100 }
+		}
+		every_in_global_list = {
+			variable = gg_eg_probe_ejercito_grande
+			every_combat_unit = { change_global_variable = { name = gg_debug_probe_bn_eg add = 1 } }
+		}
+		every_in_global_list = {
+			variable = gg_eg_probe_brazil
+			every_combat_unit = { change_global_variable = { name = gg_debug_probe_bn_brzdiv add = 1 } }
+		}
+		every_in_global_list = {
+			variable = gg_eg_probe_oriental
+			every_combat_unit = { change_global_variable = { name = gg_debug_probe_bn_oridiv add = 1 } }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| ARMY REG_ARG=[GetGlobalVariable('gg_debug_probe_reg_arg').GetValue|0] REG_ENR=[GetGlobalVariable('gg_debug_probe_reg_enr').GetValue|0] CRR=[GetGlobalVariable('gg_debug_probe_bn_crr').GetValue|0] BRK_ENR=[GetGlobalVariable('gg_debug_probe_brk_enr').GetValue|0] CC_ENR=[GetGlobalVariable('gg_debug_probe_cc_enr').GetValue|0] WANT_ENR=[GetGlobalVariable('gg_debug_probe_want_enr').GetValue|0] STRAT_ENR=[GetGlobalVariable('gg_debug_probe_strat_enr').GetValue|0] GOLD_ENR=[GetGlobalVariable('gg_debug_probe_gold_enr').GetValue|0] DEBT_ENR=[GetGlobalVariable('gg_debug_probe_debt_enr').GetValue|0] EG=[GetGlobalVariable('gg_debug_probe_bn_eg').GetValue|0] BRZDIV=[GetGlobalVariable('gg_debug_probe_bn_brzdiv').GetValue|0] ORIDIV=[GetGlobalVariable('gg_debug_probe_bn_oridiv').GetValue|0] " # GG_TRAZA
+	}
+}
+
+# EN: 26/9/2026 (Juan, AUD-PACT-ARMY-MELTS) -- the province's AI takes its own strategy, whose wanted army is the army it has
+#     while the war of the Pronouncement lasts (gg_pact_field_army_wanted). The AI re-picks strategies rarely and weight alone
+#     is not enough (gg_rio_plata.txt, verified 21/9/2026), so the script sets it: when the field army musters, when the
+#     Ejercito Grande is raised and every week of the war (gg_caseros.9, under every rule of the Pact). Country scope (Entre Rios or Corrientes).
+# ES: la IA de la provincia toma su estrategia, cuyo ejercito deseado es el que tiene mientras dura la guerra. La IA re-elige
+#     estrategias pocas veces y el peso solo no alcanza, asi que la fija el script: al reunirse el ejercito de campania, al
+#     levantarse el Ejercito Grande y cada mes de la guerra. Scope de pais.
+gg_pact_army_keep = {
+	# EN/ES: never a province Rosas made his subject; the war mark, not has_war_with, which the
+	#     war declared in the same effect may not have set yet / nunca una provincia sujeta; la marca de la guerra, no
+	#     has_war_with, que la guerra declarada en el mismo efecto puede no haber puesto todavia
+	if = {
+		limit = {
+			is_player = no
+			is_subject = no
+			has_global_variable = gg_war_against_buenos_aires
+			c:ENR ?= this
+			NOT = { has_strategy = gg_ai_strategy_entre_rios }
+		}
+		set_strategy = gg_ai_strategy_entre_rios
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_army_keep| STRATEGY=entre_rios " # GG_TRAZA
+	}
+	else_if = {
+		limit = {
+			is_player = no
+			is_subject = no
+			has_global_variable = gg_war_against_buenos_aires
+			c:CRR ?= this
+			NOT = { has_strategy = gg_ai_strategy_corrientes }
+		}
+		set_strategy = gg_ai_strategy_corrientes
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_army_keep| STRATEGY=corrientes " # GG_TRAZA
 	}
 }

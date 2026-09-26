@@ -56,8 +56,17 @@ gg_ai_strategy_corrientes = {
 		make_tributary = 0.0
 	}
 
+	# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS) -- while the war of the Pronouncement lasts it keeps the army it has instead of
+	#     disbanding it to the size of a one-state country (common/script_values/gg_caseros.txt)
+	#     / mientras dura la guerra del Pronunciamiento conserva el ejercito que tiene en vez de reducirlo al de un pais de un estado
+	wanted_army_size = {
+		value = gg_pact_field_army_wanted
+	}
 	possible = {
 		c:CRR ?= this
+		# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS; Codex review) -- not once Rosas made it his: a beaten province does not keep
+		#     the war strategy / no cuando Rosas la hizo suya: una provincia batida no conserva la estrategia de guerra
+		is_subject = no
 	}
 
 	weight = {
@@ -122,8 +131,17 @@ gg_ai_strategy_entre_rios = {
 		bg_army = 2.0
 	}
 
+	# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS) -- while the war of the Pronouncement lasts it keeps the army it has instead of
+	#     disbanding it to the size of a one-state country (common/script_values/gg_caseros.txt)
+	#     / mientras dura la guerra del Pronunciamiento conserva el ejercito que tiene en vez de reducirlo al de un pais de un estado
+	wanted_army_size = {
+		value = gg_pact_field_army_wanted
+	}
 	possible = {
 		c:ENR ?= this
+		# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS; Codex review) -- not once Rosas made it his: a beaten province does not keep
+		#     the war strategy / no cuando Rosas la hizo suya: una provincia batida no conserva la estrategia de guerra
+		is_subject = no
 	}
 
 	weight = {

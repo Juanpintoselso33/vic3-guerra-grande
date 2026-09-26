@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- **Urquiza's army no longer melts away before Caseros:** in the last six test runs the holds worked (almost no general
+  advanced before his milestone), yet Entre Ríos's battalions fell from 22 to 10, 6 and finally 5 between October 1851
+  and January 1852 without a single battle or occupied province, and the Ejército Grande raised on 21/11 was empty the
+  next day. Rosas then won the day on numbers (14 battalions against 5). The logs rule out the barracks cap (nothing
+  was cut in those months), battles, occupation and the Oriental campaign; what is left is the engine's AI: Entre Ríos
+  and Corrientes keep only the army a one-province country "wants" — about four battalions — and, short of money after
+  months of paying for a mobilized army, disband the rest (to be confirmed by the new debug line in the next runs). Now, while the
+  war of the Pronouncement lasts, both provinces' AI wants exactly the army it has: it neither disbands it nor builds more,
+  and when the Ejército Grande is raised the wish grows with it. When the war ends it drops back and they demobilize, as the
+  Ejército Grande did after Caseros. Rosas's 14 battalions at Caseros stay as they are (his real army was about 22,000).
+  The monthly debug line now also records standing battalions against conscripts, Corrientes, Entre Ríos's barracks,
+  money and debt, and what is left of the Ejército Grande and of the Brazilian and Oriental divisions.
+  Games in progress: an ongoing war picks this up within a week.
+
 - **The war with Rosas follows the campaign, not the calendar, and Caseros decides it:** in the last six test runs the
   chain of the Pronouncement worked every time (war, Ejército Grande, Pacheco, the hour of Caseros), but Urquiza won only
   one war in five: in three he reached Caseros with one to nine battalions, and in another he carried the day and still

@@ -80,3 +80,39 @@ gg_caseros_day_score = {
 	add = gg_caseros_day_numbers
 	add = gg_caseros_day_spirit
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-ARMY-MELTS) -- THE ARMY URQUIZA'S GOVERNMENT WANTS TO KEEP. In the caseros runs of 26/9 (mod
+#     525d532) Entre Rios's battalions went from 22 to 10 in October 1851, 6 in November and 5 in January with no battle, no
+#     occupation and no barracks cut by the army model (no «can only support» line in error.log for those months), and the
+#     Ejercito Grande raised on 21/11 had no units the next day in spite of its room in the barracks. The engine's AI keeps
+#     the number of barracks levels its strategy «wants» (wanted_army_size) and, short of money, disbands what is above it;
+#     for a country of one state the Knowledgeable AI playset caps that at four battalions a state (kai_script_values.txt,
+#     `max = num_states * 4`; vanilla: one per 250,000 people, ai_script_values.txt), and a newborn Entre Rios paying for a
+#     mobilized army of 22 is broke in a few months. This value is what the provinces' own strategies add
+#     (gg_ai_strategy_entre_rios / _corrientes, common/ai_strategies/zz_guerra_grande_argentina.txt): while the war of the
+#     Pronouncement lasts, the army they have, less what the default strategy already asks (wanted_army_size is additive
+#     across strategies), so the total is exactly the army on the board: the AI neither disbands it nor builds more. When
+#     the Ejercito Grande is raised the army grows and the wish grows with it; when the war ends it falls to zero and the
+#     provinces demobilize as the Ejercito Grande did after Caseros. Idea from Better Politics Mod's world-revolution
+#     strategy (a wanted_army_size in a diplomatic strategy, 2932134122); the numbers are the mod's. Country scope.
+# ES: EL EJERCITO QUE EL GOBIERNO DE URQUIZA QUIERE CONSERVAR. En las corridas del 26/9 los batallones de Entre Rios pasaron
+#     de 22 a 10 en octubre de 1851, 6 en noviembre y 5 en enero sin batalla, sin ocupacion y sin recorte de cuarteles por el
+#     modelo de ejercito, y el Ejercito Grande del 21/11 no tenia unidades al dia siguiente pese a tener lugar. La IA del
+#     motor conserva los niveles de cuartel que su estrategia «quiere» y, corta de plata, disuelve lo que sobra; para un pais
+#     de un estado el playset (Knowledgeable AI) lo topea en cuatro batallones por estado, y una Entre Rios recien nacida que
+#     paga un ejercito movilizado de 22 se funde en meses. Este valor es lo que suman las estrategias de las provincias:
+#     mientras dura la guerra del Pronunciamiento, el ejercito que tienen menos lo que ya pide la estrategia por defecto (el
+#     valor se suma entre estrategias), asi el total es justo el ejercito en el tablero: la IA ni lo disuelve ni hace mas.
+#     Al levantarse el Ejercito Grande crece el ejercito y crece el deseo; al terminar la guerra cae a cero y las provincias
+#     desmovilizan, como el Ejercito Grande despues de Caseros. Scope de pais.
+# -------------------------------------------------------------------------------------------------
+gg_pact_field_army_wanted = {
+	value = 0
+	if = {
+		limit = { gg_pact_keeps_field_army = yes }
+		add = army_size
+		subtract = wanted_army_size_script_value
+		min = 0
+	}
+}

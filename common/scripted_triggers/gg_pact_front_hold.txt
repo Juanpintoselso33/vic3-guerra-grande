@@ -147,3 +147,16 @@ gg_pact_front_hold = {
 		}
 	}
 }
+
+# EN/ES: 26/9/2026 (AUD-PACT-ARMY-MELTS) -- Entre Rios or Corrientes while the war of the Pronouncement lasts: its AI keeps the
+#     army it has (gg_pact_field_army_wanted, common/script_values/gg_caseros.txt). Country scope
+#     / Entre Rios o Corrientes mientras dura la guerra del Pronunciamiento: su IA conserva el ejercito que tiene
+gg_pact_keeps_field_army = {
+	exists = c:ARG
+	has_global_variable = gg_war_against_buenos_aires
+	OR = {
+		c:ENR ?= this
+		c:CRR ?= this
+	}
+	has_war_with = c:ARG
+}
