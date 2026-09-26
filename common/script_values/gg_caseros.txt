@@ -91,7 +91,7 @@ gg_caseros_day_score = {
 #     `max = num_states * 4`; vanilla: one per 250,000 people, ai_script_values.txt), and a newborn Entre Rios paying for a
 #     mobilized army of 22 is broke in a few months. This value is what the provinces' own strategies add
 #     (gg_ai_strategy_entre_rios / _corrientes, common/ai_strategies/zz_guerra_grande_argentina.txt): while the war of the
-#     Pronouncement lasts, the army they have, less what the default strategy already asks (wanted_army_size is additive
+#     Pronouncement lasts, the army they have (its barracks levels, AUD-PACT-WANT-LAGS below), less what the default strategy already asks (wanted_army_size is additive
 #     across strategies), so the total is exactly the army on the board: the AI neither disbands it nor builds more. When
 #     the Ejercito Grande is raised the army grows and the wish grows with it; when the war ends it falls to zero and the
 #     provinces demobilize as the Ejercito Grande did after Caseros. Idea from Better Politics Mod's world-revolution
@@ -107,11 +107,38 @@ gg_caseros_day_score = {
 #     Al levantarse el Ejercito Grande crece el ejercito y crece el deseo; al terminar la guerra cae a cero y las provincias
 #     desmovilizan, como el Ejercito Grande despues de Caseros. Scope de pais.
 # -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (AUD-PACT-WANT-LAGS) -- BARRACKS LEVELS, NOT army_size. The wanted army is counted in barracks levels
+#     (wanted_army_size_script_value: «how many levels of barracks should the AI have»), but army_size counts only the
+#     battalions that are already manned. In the six caseros runs on b690118 (traza_20260926-071038/-071040/-074438/-074451/
+#     -081848/-081906) the probe showed it: on 27/11/1851, six days after the Ejercito Grande was raised with 18 empty
+#     battalions, Entre Rios had 20-26 barracks levels but an army_size of 6-11, so its AI wanted 6-11 and disbanded the
+#     rest within the month (BRK_ENR 22 -> 13, 26 -> 14, 20 -> 8; EG 18 -> 10, 13, 8). Before that, from July-September,
+#     the same loop turned every cut into a lower wish (20 -> 10 -> 7 -> 3, WANT_ENR = REG_ENR = BRK_ENR after each one):
+#     nothing held the wish up. What made the FIRST cut then is not in the probe (army_size was at most 2 under the barracks;
+#     debt 23-66 % of the ceiling). With this value the wish equals the barracks by construction, so if BRK_ENR still falls
+#     it is not the wish: look at the money (DEBT_ENR, GOLD_ENR). Counting the barracks the province has keeps the wish at the army it raised,
+#     empty battalions included, and still neither builds nor disbands on its own account.
+# ES: NIVELES DE CUARTEL, NO army_size. El ejercito deseado se cuenta en niveles de cuartel, pero army_size cuenta solo los
+#     batallones ya con hombres. En las seis corridas de caseros el 27/11/1851, seis dias despues de levantar el Ejercito
+#     Grande con 18 batallones vacios, Entre Rios tenia 20-26 niveles de cuartel y un army_size de 6-11: su IA queria 6-11 y
+#     disolvio el resto en el mes. Antes, de julio a septiembre, el mismo lazo convertia cada recorte en un deseo menor
+#     (20 -> 10 -> 7 -> 3): nada sostenia el deseo. Que hizo el PRIMER recorte no esta en la sonda (army_size a lo sumo 2
+#     debajo de los cuarteles; deuda 23-66 % del techo). Con este valor el deseo es igual a los cuarteles por construccion:
+#     si BRK_ENR igual baja, no es el deseo, es la plata (DEBT_ENR, GOLD_ENR). Contar los cuarteles de la provincia sostiene el deseo en el ejercito
+#     que levanto, con los batallones vacios, y sigue sin construir ni disolver por su cuenta.
+gg_pact_field_army_barracks = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_barrack }
+		add = this.level
+	}
+}
+
 gg_pact_field_army_wanted = {
 	value = 0
 	if = {
 		limit = { gg_pact_keeps_field_army = yes }
-		add = army_size
+		add = gg_pact_field_army_barracks
 		subtract = wanted_army_size_script_value
 		min = 0
 	}

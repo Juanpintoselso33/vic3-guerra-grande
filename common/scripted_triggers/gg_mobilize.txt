@@ -1,0 +1,22 @@
+﻿# EN: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, third case) -- THE RULES FOR SENDING AN ARMY TO A FRONT, in one place. The engine
+#     refuses deploy_to_front with a script error ("due to: red_cross!") when the army has no battalions, when it is already
+#     on the road or at a front, or when its owner holds no ground on that front. In caseros_3 (barrido_20260926-070959,
+#     traza_20260926-074451, 2/5/1851) gg_troops.10 sent an Army of Entre Rios that was mobilized but had no battalions
+#     ("Army of Entre Rios has no battalions") to the Buenos Aires - Entre Rios front: the muster queues every army of the
+#     province, and an empty one passed because the old check tested num_units only before mobilizing. Every
+#     deploy_to_front of the mod goes through this trigger. Formation scope; FRONT a front, OWNER the owner country.
+# ES: LAS REGLAS PARA MANDAR UN EJERCITO A UN FRENTE, en un solo lugar. El motor rechaza deploy_to_front con un error de
+#     script cuando el ejercito no tiene batallones, cuando ya va en camino o esta en un frente, o cuando el duenio no
+#     controla suelo en ese frente. En caseros_3 gg_troops.10 mando un Ejercito de Entre Rios movilizado pero sin batallones
+#     al frente Buenos Aires - Entre Rios: la reunion encola todos los ejercitos de la provincia, y uno vacio pasaba porque
+#     el chequeo viejo miraba num_units solo antes de movilizar. Todo deploy_to_front del mod pasa por este trigger.
+#     Scope de formacion; FRONT un frente, OWNER el pais duenio.
+gg_formation_can_deploy = {
+	is_army = yes
+	num_units > 0
+	is_on_front = no
+	# EN/ES: a general's front is the one he is at or marching to (AUD-ERR-DEPLOY-RED-CROSS, second case)
+	#     / el frente de un general es aquel en el que esta o hacia el que marcha
+	NOT = { any_scope_general = { front ?= { always = yes } } }
+	$FRONT$ = { any_scope_state = { controller ?= $OWNER$ } }
+}

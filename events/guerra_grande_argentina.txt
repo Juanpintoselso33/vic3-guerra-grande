@@ -1456,7 +1456,11 @@ gg_argentina.8 = {
 			}
 			scope:gg_vences_army = {
 				if = { limit = { is_mobilized = no } fully_mobilize_army = yes } # EN/ES: 23/9 -- only an idle army / solo si no esta movilizada
-				deploy_to_front = scope:gg_corrientes_front
+				# EN/ES: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, third case) -- the mod's deploy rules / las reglas del mod para mandar al frente
+				if = {
+					limit = { gg_formation_can_deploy = { FRONT = scope:gg_corrientes_front OWNER = root } }
+					deploy_to_front = scope:gg_corrientes_front
+				}
 			}
 		}
 		ai_chance = { base = 80 }
@@ -2283,7 +2287,11 @@ gg_argentina.24 = {
 					# EN/ES: 23/9 -- mobilized only here, with a war and a front to go to / solo aca, con guerra y frente
 					var:gg_parana_column_ref ?= {
 						if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes }
-						deploy_to_front = scope:gg_parana_target_front
+						# EN/ES: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, third case) -- the mod's deploy rules / las reglas del mod para mandar al frente
+						if = {
+							limit = { gg_formation_can_deploy = { FRONT = scope:gg_parana_target_front OWNER = root } }
+							deploy_to_front = scope:gg_parana_target_front
+						}
 					}
 				}
 			}
@@ -2311,7 +2319,11 @@ gg_argentina.24 = {
 					# EN/ES: 23/9 -- mobilized only here, with a war and a front to go to / solo aca, con guerra y frente
 					var:gg_parana_column_ref ?= {
 						if = { limit = { is_army = yes is_mobilized = no } mobilize_army = yes }
-						deploy_to_front = scope:gg_parana_target_front
+						# EN/ES: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, third case) -- the mod's deploy rules / las reglas del mod para mandar al frente
+						if = {
+							limit = { gg_formation_can_deploy = { FRONT = scope:gg_parana_target_front OWNER = root } }
+							deploy_to_front = scope:gg_parana_target_front
+						}
 					}
 				}
 			}

@@ -156,11 +156,19 @@ gg_troops.10 = {
 			# ES: ni un ejercito que ya va en camino: is_on_front es verdadero recien al LLEGAR, y la IA ya habia mandado al
 			#     Ejercito de Entre Rios al frente cuando el reintento semanal lo movilizo. El `front` de un general es aquel en
 			#     el que esta o hacia el que marcha: cualquier general con frente quiere decir que el ejercito ya tiene destino.
+			# EN: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, third case) -- nor a mobilized army with no battalions: in caseros_3
+			#     (traza_20260926-074451, 2/5/1851) the muster queued an empty Army of Entre Rios and the engine refused it
+			#     ("has no battalions"). Left alone, with its own line in the trace.
+			# ES: ni un ejercito movilizado sin batallones: en caseros_3 la reunion encolo un Ejercito de Entre Rios vacio y el
+			#     motor lo rechazo. Se deja, con su linea en la traza.
+			else_if = {
+				limit = { NOT = { num_units > 0 } }
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|empty_army|" # GG_TRAZA
+			}
 			else_if = {
 				limit = {
 					exists = scope:gg_mob_front
-					is_on_front = no
-					NOT = { any_scope_general = { front ?= { always = yes } } }
+					gg_formation_can_deploy = { FRONT = scope:gg_mob_front OWNER = root }
 				}
 				deploy_to_front = scope:gg_mob_front
 				set_global_variable = { name = gg_mob_front_ref value = scope:gg_mob_front }

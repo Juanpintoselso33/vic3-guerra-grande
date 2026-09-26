@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- **The Ejército Grande is no longer disbanded while it musters:** in the six test runs on the last version Urquiza won
+  five wars in six, but Entre Ríos's AI still dismantled its barracks — never its conscripts — and the Ejército Grande
+  lost half its battalions within a month of being raised. The province's wish was counted in battalions that already
+  had men, while the engine compares it against barracks levels: the eighteen new, still-empty battalions looked
+  superfluous and were disbanded. The wish now counts the province's barracks, empty battalions included; it still
+  neither builds nor disbands on its own. The earlier cut of July–September 1851, before the Ejército Grande, follows a
+  debt that grows every month and looks like the engine cutting spending; it is documented, not changed. Replaying the
+  six days of Caseros with Urquiza's army intact changes no winner. The monthly debug line now also records Buenos
+  Aires's barracks and conscription centres.
+- **No more "Cannot deploy" error for an empty army:** when the Pronouncement mustered every army of Entre Ríos, an
+  empty one could be sent to the front and the engine refused it. Every order to march to a front in the mod now goes
+  through the same rules (battalions, not already on the road, ground held on that front).
+  Games in progress: nothing to do.
+
 - **Urquiza's army no longer melts away before Caseros:** in the last six test runs the holds worked (almost no general
   advanced before his milestone), yet Entre Ríos's battalions fell from 22 to 10, 6 and finally 5 between October 1851
   and January 1852 without a single battle or occupied province, and the Ejército Grande raised on 21/11 was empty the

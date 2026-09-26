@@ -168,6 +168,20 @@ gg_pact_war_probe = {
 		set_global_variable = { name = gg_debug_probe_bn_eg value = 0 }
 		set_global_variable = { name = gg_debug_probe_bn_brzdiv value = 0 }
 		set_global_variable = { name = gg_debug_probe_bn_oridiv value = 0 }
+		# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- Buenos Aires's barracks and conscription centres: REG_ARG is 0 in four of
+		#     the six caseros runs on b690118 / cuarteles y centros de conscripcion de Buenos Aires: REG_ARG es 0 en cuatro de seis
+		set_global_variable = { name = gg_debug_probe_brk_arg value = 0 }
+		set_global_variable = { name = gg_debug_probe_cc_arg value = 0 }
+		c:ARG ?= {
+			every_scope_building = {
+				limit = { is_building_type = building_barrack }
+				change_global_variable = { name = gg_debug_probe_brk_arg add = this.level }
+			}
+			every_scope_building = {
+				limit = { is_building_type = building_conscription_center }
+				change_global_variable = { name = gg_debug_probe_cc_arg add = this.level }
+			}
+		}
 		every_country = {
 			limit = {
 				gg_pact_rosas_side = yes
@@ -214,7 +228,7 @@ gg_pact_war_probe = {
 			variable = gg_eg_probe_oriental
 			every_combat_unit = { change_global_variable = { name = gg_debug_probe_bn_oridiv add = 1 } }
 		}
-		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| ARMY REG_ARG=[GetGlobalVariable('gg_debug_probe_reg_arg').GetValue|0] REG_ENR=[GetGlobalVariable('gg_debug_probe_reg_enr').GetValue|0] CRR=[GetGlobalVariable('gg_debug_probe_bn_crr').GetValue|0] BRK_ENR=[GetGlobalVariable('gg_debug_probe_brk_enr').GetValue|0] CC_ENR=[GetGlobalVariable('gg_debug_probe_cc_enr').GetValue|0] WANT_ENR=[GetGlobalVariable('gg_debug_probe_want_enr').GetValue|0] STRAT_ENR=[GetGlobalVariable('gg_debug_probe_strat_enr').GetValue|0] GOLD_ENR=[GetGlobalVariable('gg_debug_probe_gold_enr').GetValue|0] DEBT_ENR=[GetGlobalVariable('gg_debug_probe_debt_enr').GetValue|0] EG=[GetGlobalVariable('gg_debug_probe_bn_eg').GetValue|0] BRZDIV=[GetGlobalVariable('gg_debug_probe_bn_brzdiv').GetValue|0] ORIDIV=[GetGlobalVariable('gg_debug_probe_bn_oridiv').GetValue|0] " # GG_TRAZA
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| ARMY REG_ARG=[GetGlobalVariable('gg_debug_probe_reg_arg').GetValue|0] REG_ENR=[GetGlobalVariable('gg_debug_probe_reg_enr').GetValue|0] CRR=[GetGlobalVariable('gg_debug_probe_bn_crr').GetValue|0] BRK_ENR=[GetGlobalVariable('gg_debug_probe_brk_enr').GetValue|0] CC_ENR=[GetGlobalVariable('gg_debug_probe_cc_enr').GetValue|0] WANT_ENR=[GetGlobalVariable('gg_debug_probe_want_enr').GetValue|0] STRAT_ENR=[GetGlobalVariable('gg_debug_probe_strat_enr').GetValue|0] GOLD_ENR=[GetGlobalVariable('gg_debug_probe_gold_enr').GetValue|0] DEBT_ENR=[GetGlobalVariable('gg_debug_probe_debt_enr').GetValue|0] EG=[GetGlobalVariable('gg_debug_probe_bn_eg').GetValue|0] BRZDIV=[GetGlobalVariable('gg_debug_probe_bn_brzdiv').GetValue|0] ORIDIV=[GetGlobalVariable('gg_debug_probe_bn_oridiv').GetValue|0] BRK_ARG=[GetGlobalVariable('gg_debug_probe_brk_arg').GetValue|0] CC_ARG=[GetGlobalVariable('gg_debug_probe_cc_arg').GetValue|0] " # GG_TRAZA
 	}
 }
 
