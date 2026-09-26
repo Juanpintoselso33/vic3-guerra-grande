@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **The day of Caseros is no longer written in advance:** in the test runs every war of the Pronouncement that reached
+  Caseros ended with Urquiza's victory (four of four): after the Ejército Grande marched, Buenos Aires lost 40 war
+  support a month with nothing to turn it. Now the day itself is decided when Rosas answers the hour of Caseros, whichever
+  road he takes: the Ejército Grande carries it 70 times against 30 (+10 for Urquiza if Brazil and the Republic march
+  with him in full; +20 for Rosas if Urquiza marches alone; +10 for Rosas if he manoeuvres, +5 if he holds the city).
+  Whoever carries the day gains 30 war support a month from then on and the other loses 40: if Buenos Aires holds, the
+  allied army comes apart and the war turns to Rosas. Both sides see the result as a modifier for a year; the answers
+  at Caseros and the Ejército Grande's terms say the odds. Only under the dynamic Pact rule. Lab (4000 stories, AI):
+  Urquiza wins about 68 % of the wars that happen and Rosas about 29 % of those that reach Caseros. Games in progress: a
+  war already past Caseros rolls the day at its next monthly tilt.
+
 - **The war of the Pronouncement is fought until Caseros:** in the test runs, the war between Rosas and Urquiza often
   ended in mid-1851, long before the Ejército Grande: Entre Ríos backed down while the quarrel was still a diplomatic
   play (a hundred days in which war support, and so the tilt towards Urquiza, did not exist yet), or capitulated between

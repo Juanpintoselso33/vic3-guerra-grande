@@ -315,6 +315,21 @@ gg_caseros_hold_the_city = {
 	country_authority_add = -50
 }
 
+# EN/ES: 25/9/2026 (AUD-CASEROS-DAY) -- the day of Caseros (gg_caseros.10): the side that carried it and the side that
+#     lost it. The war support that follows is gg_caseros.8's; these carry the day into the field for a year
+#     / la jornada de Caseros: quien la gano y quien la perdio; el apoyo a la guerra que sigue es el de gg_caseros.8
+gg_caseros_day_carried = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+}
+
+gg_caseros_day_lost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_offense_mult = -0.10
+	unit_morale_loss_mult = 0.10
+}
+
 # -------------------------------------------------------------------------------------------------
 # EN: THE PRICE OF A BATTLE LOST, and why it is a modifier and not an annexation. On 20 September 2026
 #     these three battles were given the power to end their wars: Pago Largo annexed Corrientes,

@@ -313,24 +313,55 @@ gg_caseros.8 = {
 			}
 			if = {
 				limit = { has_war_with = c:ENR }
-				# EN/ES: Buenos Aires stays on the defensive / Buenos Aires se queda a la defensiva
-				every_scope_war = {
-					limit = {
-						is_war_participant = c:ENR
-						is_war_participant = c:ARG
-					}
-					add_war_war_support = { target = c:ENR value = 30 }
-				}
-				# EN/ES: the Ejercito Grande marches and Buenos Aires's ranks fall apart / marcha el Ejercito Grande y las filas se desgranan
+				# EN/ES: 25/9/2026 (AUD-CASEROS-DAY, Codex review) -- a game past Caseros before the day was rolled (a save of an
+				#     older version: .41 answered, no gg_caseros_battle) rolls it now; gg_caseros.10 rolls only once
+				#     / una partida que paso Caseros antes de la tirada la tira ahora; gg_caseros.10 tira una sola vez
 				if = {
-					limit = { has_global_variable = gg_ejercito_grande_created }
+					limit = {
+						has_global_variable = gg_caseros_choice
+						NOT = { has_global_variable = gg_caseros_battle }
+					}
+					trigger_event = { id = gg_caseros.10 days = 0 }
+				}
+				# EN/ES: 25/9/2026 (AUD-CASEROS-DAY) -- unless Buenos Aires held the day of Caseros (gg_caseros.10.b)
+				#     / salvo que Buenos Aires haya sostenido la jornada de Caseros
+				if = {
+					limit = { NOT = { global_var:gg_caseros_battle ?= 2 } }
+					# EN/ES: Buenos Aires stays on the defensive / Buenos Aires se queda a la defensiva
 					every_scope_war = {
 						limit = {
 							is_war_participant = c:ENR
 							is_war_participant = c:ARG
 						}
-						add_war_war_support = { target = c:ARG value = -40 }
+						add_war_war_support = { target = c:ENR value = 30 }
 					}
+					# EN/ES: the Ejercito Grande marches and Buenos Aires's ranks fall apart / marcha el Ejercito Grande y las filas se desgranan
+					if = {
+						limit = { has_global_variable = gg_ejercito_grande_created }
+						every_scope_war = {
+							limit = {
+								is_war_participant = c:ENR
+								is_war_participant = c:ARG
+							}
+							add_war_war_support = { target = c:ARG value = -40 }
+						}
+					}
+				}
+				# EN: 25/9/2026 (AUD-CASEROS-DAY) -- Buenos Aires held the day: the war turns. The allied contingents go home, the
+				#     Ejercito Grande comes apart and the Littoral's governors look again to Buenos Aires; Rosas takes the field.
+				#     Mirror of the branch above: Buenos Aires +N a month, Entre Rios -M a month.
+				# ES: Buenos Aires sostuvo la jornada: la guerra se da vuelta. Los contingentes aliados se vuelven, el Ejercito
+				#     Grande se deshace y los gobernadores del Litoral vuelven a mirar a Buenos Aires. Espejo de la rama de arriba.
+				else = {
+					every_scope_war = {
+						limit = {
+							is_war_participant = c:ENR
+							is_war_participant = c:ARG
+						}
+						add_war_war_support = { target = c:ARG value = 30 }
+						add_war_war_support = { target = c:ENR value = -40 }
+					}
+					debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8| TILT=held " # GG_TRAZA
 				}
 				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8| TILT=yes " # GG_TRAZA
 			}
@@ -405,6 +436,74 @@ gg_caseros.9 = {
 				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.9| GUARD=yes " # GG_TRAZA
 			}
 			trigger_event = { id = gg_caseros.9 days = 7 }
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-CASEROS-DAY) -- THE DAY OF CASEROS IS NOT WRITTEN. With the guard (gg_caseros.9) to 3/2/1852 and
+#     the tilt (gg_caseros.8: Entre Rios +30, Buenos Aires -40 a month once the Ejercito Grande marched), every war that
+#     reached Caseros ended with Urquiza's victory (headless sweep 25/9: 4 of 4; Pact lab: 100 %). Juan wants Urquiza
+#     favoured, about 65-75 %, never certain. So the day itself is a weighted roll, rolled when Rosas answers the hour of
+#     Caseros (gg_argentina.41, any of the three roads): whoever carries the day gets the tilt from then on (the
+#     Ejercito Grande's side: gg_caseros.8 as before; Buenos Aires's: +30 for Buenos Aires, -40 for Entre Rios). The
+#     engine still fights and ends the war; the roll only decides which way the monthly pressure points.
+#     Weights: Urquiza 70 / Rosas 30; the allied army complete (gg_ejercito_grande_full_terms, Brazil's and the
+#     Republic's divisions) +10 to Urquiza; Urquiza marching alone (gg_ejercito_grande_alone) +20 to Rosas; Rosas refusing
+#     battle to manoeuvre (+10) or holding the city (+5) makes the day harder to force. The Pact lab
+#     (tools/lab_balance/pacto.py) reads these weights and the tooltips gg_argentina.41.*_day_tt say the same numbers.
+#     Only under the dynamic Pact rule: the forced rules read the war their own way (gg_pact_resolve).
+# ES: LA JORNADA DE CASEROS NO ESTA ESCRITA. Con la guardia hasta el 3/2/1852 y la inclinacion, toda guerra que llegaba a
+#     Caseros la ganaba Urquiza (barrido 25/9: 4 de 4; laboratorio: 100 %). Juan quiere a Urquiza favorito, 65-75 %, nunca
+#     seguro. La jornada es una tirada con pesos, cuando Rosas responde a la hora de Caseros (cualquiera de las tres
+#     salidas): quien la gana se lleva la inclinacion desde entonces. El motor sigue peleando y cerrando la guerra.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Caseros» [D]: ~22.000-25.000 de Rosas contra al
+#     menos 24.000 de Urquiza (3.500 brasilenos y 1.500 uruguayos) -- two armies of like size; the day was decided by
+#     the Rosista army's disarray (Pacheco's resignation, the Santa Fe and Rosario defections), not by numbers.
+#     DESIGN / DISENO: the weights are game scale, tuned with the Pact lab to Juan's target.
+# Hidden, on Argentina; fired by gg_argentina.41.a/.b/.c. The result is shown on both sides as a timed modifier.
+# -------------------------------------------------------------------------------------------------
+gg_caseros.10 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.10|" # GG_TRAZA
+		if = {
+			limit = {
+				gg_pact_dynamic = yes
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_pact_settled }
+				NOT = { has_global_variable = gg_caseros_battle }
+				exists = c:ENR
+				has_war_with = c:ENR
+			}
+			hidden_effect = {
+				random_list = {
+					70 = {
+						modifier = {
+							if = { limit = { has_global_variable = gg_ejercito_grande_full_terms } add = 10 }
+						}
+						debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.10.a|" # GG_TRAZA
+						set_global_variable = { name = gg_caseros_battle value = 1 }
+						add_modifier = { name = gg_caseros_day_lost years = 1 }
+						c:ENR ?= { add_modifier = { name = gg_caseros_day_carried years = 1 } }
+					}
+					30 = {
+						modifier = {
+							if = { limit = { has_global_variable = gg_ejercito_grande_alone } add = 20 }
+							if = { limit = { global_var:gg_caseros_choice ?= 2 } add = 10 }
+							if = { limit = { global_var:gg_caseros_choice ?= 3 } add = 5 }
+						}
+						debug_log = "GG_OPC|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.10.b|" # GG_TRAZA
+						set_global_variable = { name = gg_caseros_battle value = 2 }
+						add_modifier = { name = gg_caseros_day_carried years = 1 }
+						c:ENR ?= { add_modifier = { name = gg_caseros_day_lost years = 1 } }
+					}
+				}
+			}
 		}
 	}
 }
