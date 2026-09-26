@@ -592,6 +592,23 @@ gg_argentina_create_entre_rios = {
 		#     no second one is raised. In the Buenos Aires path those armies stay with Rosas and this one replaces them.
 		# ES: el Entre Rios de Alcaraz ya levanto su ejercito al obedecer Vences o tomar el mando contra el Brasil: ese
 		#     es el que conserva Urquiza y no se levanta otro. Por Buenos Aires, esos quedan con Rosas y este los reemplaza.
+		# EN: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- the army of the Pronouncement is the Confederation's Ejercito de
+		#     Operaciones, "concienzudamente entrenado, equipado y armado" for the war with Brazil, 15,000-16,000 men in
+		#     Entre Rios and Corrientes (O'Donnell): troops under arms, not recruits. Before, its battalions were born
+		#     empty in a state whose barracks were already full (AUD-EG-EMPTY's cap) and were never mobilized, and Rosas's
+		#     mobilized army walked over them. Room in the barracks of the state it is raised in and a fast muster
+		#     (gg_ejercito_grande_forming, three months); it is mobilized when the war opens (gg_pact_field_army_muster).
+		# ES: el ejercito del Pronunciamiento es el Ejercito de Operaciones de la Confederacion, entrenado y armado para la
+		#     guerra con el Brasil: tropa en armas, no reclutas. Antes nacia vacio, sin lugar en los cuarteles y sin
+		#     movilizar, y el ejercito movilizado de Rosas le pasaba por encima. Lugar en los cuarteles y reunion rapida;
+		#     se moviliza cuando empieza la guerra.
+		# SOURCE / FUENTE: Pacho O'Donnell, «Caseros, la traicion a la patria», Infobae 3/2/2018 (the Ejercito de
+		#     Operaciones «acantonado en Entre Rios y Corrientes... podia poner entre 15 o 16 mil hombres sobre las
+		#     armas»); es.wikipedia «Ejército Grande» (2,900 + 2,170 Entre Rios horse and 1,500 Correntines crossed the
+		#     Uruguay in July 1851; the Correntine army stayed as the reserve). Game scale: one battalion ~ 1,000 men.
+		gg_select_formation_hq_state = yes
+		if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
+		gg_ejercito_grande_muster = yes
 		if = {
 			limit = { has_variable = gg_enr_orders_army }
 			remove_variable = gg_enr_orders_army
@@ -1120,6 +1137,29 @@ gg_argentina_join_ejercito_grande_allies = {
 gg_ejercito_grande_muster = {
 	if = { limit = { has_modifier = gg_ejercito_grande_forming } remove_modifier = gg_ejercito_grande_forming }
 	add_modifier = { name = gg_ejercito_grande_forming months = 3 }
+}
+
+# EN: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- THE FIELD ARMY OF THE PRONOUNCEMENT TAKES THE FIELD. When the war of the
+#     Pronouncement opens (gg_argentina.3.b/.c) or Corrientes joins it (gg_corrientes_pronounce), every army of the country
+#     is mustered fast and mobilized the next day (gg_mobilize_next_day, gg_troops.10: it goes to a front it can reach or
+#     is left to the AI). Urquiza was in arms from May 1851; an AI Entre Rios left its army at the barracks while Rosas's
+#     AI mobilized. Country scope (Entre Rios or Corrientes).
+# ES: EL EJERCITO DEL PRONUNCIAMIENTO SALE A CAMPANIA. Cuando empieza la guerra del Pronunciamiento o Corrientes entra en
+#     ella, cada ejercito del pais se reune rapido y se moviliza al dia siguiente. Urquiza estuvo en armas desde mayo de
+#     1851; una IA de Entre Rios dejaba su ejercito en el cuartel mientras la de Rosas movilizaba. Scope de pais.
+gg_pact_field_army_muster = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_field_army_muster|" # GG_TRAZA
+	if = {
+		# EN/ES: the war was just declared in the same effect: its mark, not has_war_with, which may not be set yet
+		#     / la guerra se declaro en el mismo efecto: su marca, no has_war_with, que puede no estar todavia
+		limit = { exists = c:ARG has_global_variable = gg_war_against_buenos_aires }
+		gg_ejercito_grande_muster = yes
+		every_military_formation = {
+			limit = { is_army = yes }
+			save_scope_as = gg_field_army
+			prev = { gg_mobilize_next_day = { ARMY = scope:gg_field_army ENEMY = c:ARG } }
+		}
+	}
 }
 
 # EN/ES: state scope / scope de estado

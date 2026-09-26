@@ -349,6 +349,9 @@ gg_argentina.3 = {
 		#     / ningun lado se quiebra antes de Caseros
 		custom_tooltip = gg_pact_war_hold_tt
 		hidden_effect = { trigger_event = { id = gg_caseros.9 days = 1 } }
+		# EN/ES: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- Urquiza's army takes the field (gg_pact_field_army_muster)
+		#     / el ejercito de Urquiza sale a campania
+		hidden_effect = { c:ENR ?= { gg_pact_field_army_muster = yes } }
 		ai_chance = { base = 80 }
 	}
 
@@ -384,6 +387,7 @@ gg_argentina.3 = {
 		hidden_effect = { trigger_event = { id = gg_caseros.8 days = 30 } }
 		custom_tooltip = gg_pact_war_hold_tt # EN/ES: 25/9 (AUD-PACT-EARLY) -- as in 3.b / como en 3.b
 		hidden_effect = { trigger_event = { id = gg_caseros.9 days = 1 } }
+		hidden_effect = { c:ENR ?= { gg_pact_field_army_muster = yes } } # EN/ES: 26/9 (AUD-PACT-ROSAS-INVADES) -- as in 3.b / como en 3.b
 		ai_chance = { base = 0 }
 		custom_tooltip = gg_play_as_entre_rios_tt
 		# EN/ES: 23/9 (preview audit) -- Entre Rios does not exist yet when the preview is built

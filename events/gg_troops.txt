@@ -69,13 +69,26 @@ gg_troops.10 = {
 					#     Ejercito Grande, gg_mob_front_ref), not each to a random front of its own
 					# ES: los contingentes marchan adonde fue el primero de la tanda (el Ejercito Grande de Urquiza), no cada
 					#     uno a un frente al azar
+					# EN: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS) -- only a front the owner can reach: one with ground it holds. In
+					#     caseros_1 (barrido_20260925-231841) the Brazilian contingent was sent to the Santa Fe-Corrientes front, where
+					#     Brazil holds nothing, and the engine refused it ("Cannot deploy ... due to: red_cross!"). With no such front
+					#     the army stays mobilized and the AI moves it (the trace says mobilized_no_front).
+					# ES: solo un frente al que el duenio llega: uno con suelo que controla. El contingente brasileno iba al frente
+					#     Santa Fe-Corrientes, donde el Brasil no tiene nada, y el motor lo rechazaba. Sin ese frente, queda
+					#     movilizado y lo mueve la IA.
 					random_scope_front = {
-						limit = { global_var:gg_mob_front_ref ?= this }
+						limit = {
+							global_var:gg_mob_front_ref ?= this
+							any_scope_state = { controller ?= root }
+						}
 						save_scope_as = gg_mob_front
 					}
 					if = {
 						limit = { NOT = { exists = scope:gg_mob_front } }
-						random_scope_front = { save_scope_as = gg_mob_front }
+						random_scope_front = {
+							limit = { any_scope_state = { controller ?= root } }
+							save_scope_as = gg_mob_front
+						}
 					}
 				}
 			}

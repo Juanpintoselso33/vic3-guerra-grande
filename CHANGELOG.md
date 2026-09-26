@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **Rosas no longer overruns Entre Ríos before Caseros:** in a test run the Pronouncement's war opened on 1/5/1851 and
+  Buenos Aires's AI invaded Entre Ríos, occupied all of it and destroyed Urquiza's army; at Caseros the Ejército Grande had
+  one battalion. History never saw that war: Rosas waited on the defensive in Buenos Aires and Santa Fe, Urquiza fought
+  Oribe in the Banda Oriental (July-October 1851) and crossed the Paraná only in December. Three fixes: (1) the army of
+  the Pronouncement (the Confederation's Ejército de Operaciones, 15,000-16,000 men in Entre Ríos and Corrientes) is now
+  raised with room in its barracks, mustered fast and mobilized when the war opens (before, it was born empty and stayed
+  in barracks while Rosas mobilized); a Corrientes born at its pronouncement gets Virasoro's army (three battalions) and
+  takes the field too. (2) Before the day of Caseros, an AI general of Rosas's side facing Entre Ríos or Corrientes
+  cannot take an advance order, and one of Urquiza's facing Buenos Aires cannot either until the Ejército Grande is
+  raised (21/11/1851) or the Paraná is crossed (24/12/1851): the field army is kept for the Ejército Grande. The seven
+  vanilla advance orders are replaced with one added line each; players are never held, and every other war is untouched.
+  (3) The mod now sends a newly mobilized army only to a front where its owner holds ground: the Brazilian contingent was
+  refused the Santa Fe-Corrientes front ("red_cross"); with no such front the AI moves it. Games in progress: the hold
+  applies at once; an Entre Ríos army already raised keeps its state until its next mobilization.
+
 - **Neither side of the Pronouncement war can break before Caseros, now for real:** in a test run Rosas abandoned Oribe
   (the answer to the Montevideo convention, May 1851) and the next day Buenos Aires capitulated to Entre Ríos: that answer
   took 1,000 war support from Buenos Aires at once, which no weekly guard could stop. Abandoning Oribe now makes Buenos

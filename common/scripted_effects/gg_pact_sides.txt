@@ -182,6 +182,37 @@ gg_corrientes_pronounce = {
 		}
 		gg_delegation_revoked = { KEY = corrientes COUNT = -1 }
 		gg_pact_join_urquiza_side = { TAG = CRR }
+		# EN: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- VIRASORO'S ARMY. The Correntine army was the reserve of 1851, left on
+		#     the arroyo Las Conchillas near Parana while Urquiza crossed the Uruguay, and 1,500 Correntine horse crossed with
+		#     him. A Corrientes born today has no army at all (create_country brings none): three battalions, mostly horse,
+		#     raised with room in the barracks. Then, in the war, every Correntine army takes the field.
+		# ES: EL EJERCITO DE VIRASORO. El ejercito correntino fue la reserva de 1851, sobre el arroyo Las Conchillas, y 1.500
+		#     jinetes correntinos cruzaron con Urquiza. Una Corrientes nacida hoy no tiene ejercito: tres batallones, sobre
+		#     todo caballeria, con lugar en los cuarteles. Despues, en la guerra, cada ejercito correntino sale a campania.
+		# SOURCE / FUENTE: es.wikipedia «Ejército Grande» (the Correntine contingent of col. Jose A. Virasoro, 1,500 horse,
+		#     Paso de los Higos, 18/7/1851; «Dejo en su provincia como Ejercito de Reserva al Ejercito Correntino»).
+		#     Game scale: one battalion ~ 1,000 men.
+		if = {
+			limit = { has_global_variable = gg_war_against_buenos_aires }
+			c:CRR = {
+				if = {
+					limit = { NOT = { any_military_formation = { is_army = yes } } }
+					gg_select_formation_hq_state = yes
+					if = {
+						limit = { exists = scope:gg_formation_hq_state }
+						scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes }
+						create_military_formation = {
+							type = army
+							hq_region = scope:gg_formation_hq_state.region
+							name = gg_arg_ejercito_correntino
+							combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_formation_hq_state.state_region count = 1 }
+							combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_formation_hq_state.state_region count = 2 }
+						}
+					}
+				}
+				gg_pact_field_army_muster = yes
+			}
+		}
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_corrientes_pronounce| WITH_URQUIZA=yes " # GG_TRAZA
 	}
 }

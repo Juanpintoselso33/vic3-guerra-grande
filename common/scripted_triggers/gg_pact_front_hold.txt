@@ -1,0 +1,98 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- WHO HOLDS THE LINE OF THE PARANA BEFORE CASEROS. Measured
+#     (traza_20260925-231915): the Pronouncement's war opened on 1/5/1851 and Rosas's AI invaded Entre Rios, occupied all
+#     of it and destroyed Urquiza's army before the Ejercito Grande existed; at Caseros Entre Rios had one battalion left.
+#     History never saw that war: Rosas "took no measure prudence advised" and waited on the defensive in Buenos Aires
+#     and Santa Fe; the war of 1851 was fought in the Banda Oriental (Urquiza crossed the Uruguay on 18-19/7/1851, Oribe
+#     capitulated on 8/10/1851), and the war with Rosas was the crossing of the Parana at Diamante (24/12/1851) and
+#     Caseros (3/2/1852). The engine's AI advances wherever it has 0.8 times the enemy's power on a front
+#     (defines NAI FRONT_MIN_OVERALL_STRENGTH_FACTOR_TO_ATTACK); an AI strategy only weighs plays and war goals.
+#     What holds a general is his order: the advance orders (common/commander_orders/zz_gg_pact_front_hold.txt) are not
+#     possible for a general, of an AI country, on a front of this war:
+#       - on Rosas's side (Argentina and its subject provinces) facing Entre Rios or Corrientes, until the day of Caseros;
+#       - on Urquiza's side (Entre Rios, Corrientes at war with Buenos Aires) facing Rosas's side, until the Ejercito
+#         Grande is raised (21/11/1851) or the date of the crossing of the Parana (24/12/1851): the field army of 1851
+#         is not spent before the Ejercito Grande marches.
+#     Defending, battles on the defence and the war elsewhere (the Banda Oriental, Brazil) are untouched; a player is
+#     never held. Character scope (the general). DESIGN: which side holds and until when is from the history above.
+# ES: QUIEN SOSTIENE LA LINEA DEL PARANA ANTES DE CASEROS. Medido: la IA de Rosas invadio Entre Rios entero y deshizo
+#     el ejercito de Urquiza antes del Ejercito Grande. La historia no vio esa guerra: Rosas espero a la defensiva en
+#     Buenos Aires y Santa Fe, la guerra de 1851 se peleo en la Banda Oriental y la de Rosas fue el cruce del Parana y
+#     Caseros. La IA del motor avanza donde tiene 0,8 veces el poder del enemigo; una estrategia solo pesa jugadas y
+#     objetivos. Lo que frena a un general es su orden: las ordenes de avance no son posibles para un general de un pais
+#     de la IA en un frente de esta guerra: del lado de Rosas frente a Entre Rios o Corrientes hasta el dia de Caseros;
+#     del lado de Urquiza frente al de Rosas hasta que se levanta el Ejercito Grande o hasta el cruce del Parana.
+#     Defender, pelear a la defensiva y la guerra en otros frentes no se tocan; un jugador nunca queda frenado.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1850-1852 — Urquiza y Caseros» [D];
+#     es.wikipedia «Ejército Grande» (the crossings of the Uruguay on 18-19/7/1851; the Correntine army left as the
+#     reserve on the arroyo Las Conchillas, near Parana; Oribe's surrender of 8/10/1851); «Aniversario de la Batalla de
+#     Caseros», Municipalidad de Valle Maria (2/2/2021: «Rosas no tomaba ninguna medida... Recien a mediados de
+#     noviembre de 1851... Pacheco... organizo algunos regimientos de milicias»); La Gazeta Federal, «Batalla de
+#     Caseros» (the Rosista forces «en una actitud pasiva a la espera del ataque final»).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: country scope / scope de pais
+gg_pact_rosas_side = {
+	exists = c:ARG
+	OR = {
+		c:ARG ?= this
+		is_subject_of = c:ARG
+	}
+}
+
+# EN/ES: country scope / scope de pais
+gg_pact_urquiza_side = {
+	exists = c:ARG
+	OR = {
+		c:ENR ?= this
+		AND = {
+			c:CRR ?= this
+			has_war_with = c:ARG
+		}
+	}
+}
+
+# EN/ES: character scope: this general may not take an advance order now / este general no puede tomar una orden de avance
+gg_pact_front_hold = {
+	has_role_of_type = general
+	has_global_variable = gg_war_against_buenos_aires
+	NOT = { has_global_variable = gg_pact_settled }
+	exists = c:ENR
+	exists = c:ARG
+	c:ARG = { has_war_with = c:ENR }
+	owner ?= { is_player = no }
+	OR = {
+		# EN/ES: Rosas waits for the attack until the day of Caseros / Rosas espera el ataque hasta el dia de Caseros
+		AND = {
+			NOT = { has_global_variable = gg_caseros_battle }
+			game_date < 1852.2.3
+			owner ?= { gg_pact_rosas_side = yes }
+			commander_military_formation ?= {
+				front ?= {
+					any_scope_state = {
+						OR = {
+							owner ?= { gg_pact_urquiza_side = yes }
+							controller ?= { gg_pact_urquiza_side = yes }
+						}
+					}
+				}
+			}
+		}
+		# EN/ES: Urquiza keeps his field army for the Ejercito Grande / Urquiza guarda su ejercito para el Ejercito Grande
+		AND = {
+			NOT = { has_global_variable = gg_ejercito_grande_created }
+			game_date < 1851.12.24
+			owner ?= { gg_pact_urquiza_side = yes }
+			commander_military_formation ?= {
+				front ?= {
+					any_scope_state = {
+						OR = {
+							owner ?= { gg_pact_rosas_side = yes }
+							controller ?= { gg_pact_rosas_side = yes }
+						}
+					}
+				}
+			}
+		}
+	}
+}
