@@ -5,6 +5,12 @@
 #     dia siguiente y lo manda al frente de su guerra contra ENEMY.
 gg_mobilize_next_day = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_mobilize_next_day| ARMY= $ARMY$  ENEMY= $ENEMY$ " # GG_TRAZA
+	# EN/ES: 25/9/2026 (AUD-ERR-DEPLOY-BRZ-DIV) -- a new wave forgets the last wave's front (gg_troops.10)
+	#     / una tanda nueva olvida el frente de la anterior
+	if = {
+		limit = { NOT = { has_variable = gg_mob_pending } has_global_variable = gg_mob_front_ref }
+		remove_global_variable = gg_mob_front_ref
+	}
 	add_to_variable_list = { name = gg_mob_queue target = $ARMY$ }
 	set_variable = { name = gg_mob_enemy value = $ENEMY$ }
 	if = {

@@ -65,7 +65,18 @@ gg_troops.10 = {
 				limit = { exists = scope:gg_mob_enemy_scope }
 				random_scope_war = {
 					limit = { is_war_participant = scope:gg_mob_enemy_scope }
-					random_scope_front = { save_scope_as = gg_mob_front }
+					# EN: 25/9/2026 (AUD-ERR-DEPLOY-BRZ-DIV) -- the contingents march where the first of the wave went (Urquiza's
+					#     Ejercito Grande, gg_mob_front_ref), not each to a random front of its own
+					# ES: los contingentes marchan adonde fue el primero de la tanda (el Ejercito Grande de Urquiza), no cada
+					#     uno a un frente al azar
+					random_scope_front = {
+						limit = { global_var:gg_mob_front_ref ?= this }
+						save_scope_as = gg_mob_front
+					}
+					if = {
+						limit = { NOT = { exists = scope:gg_mob_front } }
+						random_scope_front = { save_scope_as = gg_mob_front }
+					}
 				}
 			}
 		}
@@ -94,10 +105,22 @@ gg_troops.10 = {
 				save_scope_as = gg_mob_this
 				root = { add_to_variable_list = { name = gg_mob_retry target = scope:gg_mob_this } }
 			}
+			# EN: 25/9/2026 (AUD-ERR-DEPLOY-BRZ-DIV) -- an army its owner already mobilized and sent is left where it goes: in
+			#     caseros_1/3 the Brazilian AI had mobilized its division during the week and sent it to the very front
+			#     picked here, and deploy_to_front refused it ("is already being deployed to", DEPLOY_..._REDUNDANT)
+			# ES: un ejercito que su duenio ya movilizo y mando se deja donde va: en caseros_1/3 la IA del Brasil ya lo habia
+			#     movilizado en la semana y mandado al mismo frente elegido aca, y deploy_to_front lo rechazaba
+			#     (is_on_front below, true from the order on: the vanilla tutorial's "send a general to the front")
+			#     / (is_on_front abajo, verdadero desde la orden)
+			else_if = {
+				limit = { exists = scope:gg_mob_front is_on_front = no }
+				deploy_to_front = scope:gg_mob_front
+				set_global_variable = { name = gg_mob_front_ref value = scope:gg_mob_front }
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|deployed|" # GG_TRAZA
+			}
 			else_if = {
 				limit = { exists = scope:gg_mob_front }
-				deploy_to_front = scope:gg_mob_front
-				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|deployed|" # GG_TRAZA
+				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|already_on_front|" # GG_TRAZA
 			}
 			else = {
 				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|mobilized_no_front|" # GG_TRAZA

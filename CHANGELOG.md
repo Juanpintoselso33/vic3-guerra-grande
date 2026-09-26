@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **The Brazilian division marches with Urquiza, without a script error:** in two test runs the division of the
+  Ejército Grande that Brazil raises was refused by `deploy_to_front` ("is already being deployed to" that front): the
+  Brazilian AI had mobilized it during the week, while the mod was still waiting for its battalions, and sent it to the
+  very front the mod then ordered again. Now an army its owner has already sent is left where it goes, and the
+  contingents of the convention of 21 November 1851 are sent to the front where the first of them went (Urquiza's
+  Ejército Grande) instead of each to a random front of the war. Games in progress: nothing to migrate.
+
 - **The day of Caseros is no longer written in advance:** in the test runs every war of the Pronouncement that reached
   Caseros ended with Urquiza's victory (four of four): after the Ejército Grande marched, Buenos Aires lost 40 war
   support a month with nothing to turn it. Now the day itself is decided when Rosas answers the hour of Caseros, whichever
