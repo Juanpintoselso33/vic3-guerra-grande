@@ -148,8 +148,20 @@ gg_troops.10 = {
 			#     movilizado en la semana y mandado al mismo frente elegido aca, y deploy_to_front lo rechazaba
 			#     (is_on_front below, true from the order on: the vanilla tutorial's "send a general to the front")
 			#     / (is_on_front abajo, verdadero desde la orden)
+			# EN: 26/9/2026 (AUD-ERR-DEPLOY-RED-CROSS, second case) -- nor an army already on the road: is_on_front is true only
+			#     once it ARRIVED, and in caseros_4 (barrido_20260926-023643, 9/5/1851) the AI had already sent the Army of Entre
+			#     Rios to the Buenos Aires - Entre Rios front when the weekly retry mobilized it ("is already being deployed to").
+			#     A general's `front` is the one he is at or marching to (the character link), so any general with a front means
+			#     the army is taken care of.
+			# ES: ni un ejercito que ya va en camino: is_on_front es verdadero recien al LLEGAR, y la IA ya habia mandado al
+			#     Ejercito de Entre Rios al frente cuando el reintento semanal lo movilizo. El `front` de un general es aquel en
+			#     el que esta o hacia el que marcha: cualquier general con frente quiere decir que el ejercito ya tiene destino.
 			else_if = {
-				limit = { exists = scope:gg_mob_front is_on_front = no }
+				limit = {
+					exists = scope:gg_mob_front
+					is_on_front = no
+					NOT = { any_scope_general = { front ?= { always = yes } } }
+				}
 				deploy_to_front = scope:gg_mob_front
 				set_global_variable = { name = gg_mob_front_ref value = scope:gg_mob_front }
 				debug_log = "GG_MOB|[TimeKeeper.GetCurrentDate.GetString]|deployed|" # GG_TRAZA

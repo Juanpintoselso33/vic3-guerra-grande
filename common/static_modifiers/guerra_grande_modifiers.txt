@@ -288,6 +288,18 @@ gg_naval_port_under_blockade = {
 #     decida que sale de cada una. Ninguna decreta un ganador: son condiciones.
 # -------------------------------------------------------------------------------------------------
 
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-MILESTONES) -- Buenos Aires's ranks after the Ejercito Grande crosses the Parana
+#     (gg_caseros.11) until the day of Caseros: the Santa Fe and Rosario troops rose or went over, Pacheco resigned the
+#     command. On Argentina; three months at most, removed by the day (gg_caseros_day_decide). Game scale.
+# ES: las filas de Buenos Aires desde el cruce del Parana hasta la jornada: se alzaron o se pasaron las tropas de Santa Fe
+#     y de Rosario, Pacheco renuncio al mando. Tres meses como mucho; la jornada lo saca. Escala de juego.
+gg_rosas_army_disarray = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_defense_mult = -0.15
+	unit_morale_loss_mult = 0.20
+	unit_morale_recovery_mult = -0.20
+}
+
 # EN/ES: presentar batalla donde el enemigo quiera / give battle where the enemy chooses
 gg_caseros_pitched_battle = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"

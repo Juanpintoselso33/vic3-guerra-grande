@@ -362,7 +362,7 @@ gg_caseros.8 = {
 							#     el resto del instante. En caseros_5 el piso lo levanto el 27/11/1851, esta inclinacion le saco 40 el
 							#     mismo dia y Buenos Aires capitulo en ese mismo instante, antes de Caseros.
 							if = {
-								limit = { game_date < 1852.2.3 }
+								limit = { gg_pact_before_caseros_day = yes } # EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- until the day, not a date / hasta la jornada, no una fecha
 								if = {
 									limit = { has_war_support = { target = c:ARG value < -75 } }
 									add_war_war_support = { target = c:ARG value = 150 }
@@ -408,6 +408,20 @@ gg_caseros.8 = {
 					debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8| TILT=held " # GG_TRAZA
 				}
 				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.8| TILT=yes " # GG_TRAZA
+				# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- the war as it stands, each month, for the sweep and the lab
+				#     / la guerra como esta, cada mes, para el barrido y el laboratorio
+				gg_pact_war_probe = yes
+			}
+			# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- a game whose Ejercito Grande was raised before the crossing existed (an
+			#     older save): it crosses a month from now / una partida cuyo Ejercito Grande se levanto antes de que existiera el
+			#     cruce: cruza dentro de un mes
+			if = {
+				limit = {
+					has_global_variable = gg_ejercito_grande_created
+					NOT = { has_global_variable = gg_ejercito_grande_crossing_due }
+				}
+				set_global_variable = gg_ejercito_grande_crossing_due
+				trigger_event = { id = gg_caseros.11 days = 30 }
 			}
 			trigger_event = { id = gg_caseros.8 days = 30 }
 		}
@@ -450,7 +464,10 @@ gg_caseros.9 = {
 				has_global_variable = gg_war_against_buenos_aires
 				NOT = { has_global_variable = gg_pact_settled }
 				exists = c:ENR
-				game_date < 1852.2.3
+				# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- until the day of Caseros is fought (without an Ejercito Grande, the
+				#     old date); never past 1853 / hasta que se pelea la jornada (sin Ejercito Grande, la fecha vieja); nunca despues de 1853
+				gg_pact_before_caseros_day = yes
+				game_date < 1853.1.1
 			}
 			if = {
 				limit = { has_war_with = c:ENR }
@@ -632,6 +649,26 @@ gg_caseros.10 = {
 				# EN/ES: the battalions under arms, raised conscripts included / los batallones en armas, con los conscriptos levantados
 				set_global_variable = { name = gg_caseros_in_bn_arg value = army_size_including_raised_conscripts }
 				c:ENR = { set_global_variable = { name = gg_caseros_in_bn_enr value = army_size_including_raised_conscripts } }
+				# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- each SIDE's battalions: the Argentine provinces in arms with each
+				#     (Corrientes with Urquiza, the Pact's provinces with Rosas) count; Brazil's division is the allies' +10 of
+				#     gg_caseros_day_numbers, the Oriental one is Entre Rios's own / los batallones de cada LADO: cuentan las provincias
+				#     argentinas en armas con cada uno; la division brasilena es el +10 de los aliados, la oriental es de Entre Rios
+				every_country = {
+					limit = {
+						NOT = { c:ARG ?= this }
+						is_subject_of = c:ARG
+						has_war_with = c:ENR
+					}
+					change_global_variable = { name = gg_caseros_in_bn_arg add = army_size_including_raised_conscripts }
+				}
+				every_country = {
+					limit = {
+						NOT = { c:ENR ?= this }
+						gg_is_born_of_argentina = yes
+						has_war_with = c:ARG
+					}
+					change_global_variable = { name = gg_caseros_in_bn_enr add = army_size_including_raised_conscripts }
+				}
 				set_global_variable = { name = gg_caseros_in_bn_all value = global_var:gg_caseros_in_bn_arg }
 				change_global_variable = { name = gg_caseros_in_bn_all add = global_var:gg_caseros_in_bn_enr }
 				# EN/ES: each camp's war support, in bands of 25 (0-4) / el apoyo a la guerra de cada campo, en bandas de 25
@@ -691,6 +728,55 @@ gg_caseros.10 = {
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-MILESTONES) -- THE EJERCITO GRANDE CROSSES THE PARANA. A milestone of the campaign, not a
+#     date: 33 days after the Ejercito Grande is raised (gg_argentina_raise_ejercito_grande; 21/11 -> 24/12/1851, the crossing
+#     at Diamante), or a month after the monthly tilt finds an army raised by an older version. From here Urquiza's generals
+#     may advance (gg_pact_front_hold), and Buenos Aires's ranks come apart until the day is fought: Echague's Santa Fe
+#     troops rose, Mansilla's Rosario troops went over to Urquiza, Pacheco resigned the command on 31/1-1/2/1852
+#     (gg_rosas_army_disarray: defence and morale; removed by the day, gg_caseros_day_decide, or after three months).
+# ES: EL EJERCITO GRANDE CRUZA EL PARANA. Un hito de la campania, no una fecha: 33 dias despues de levantarse el Ejercito
+#     Grande (21/11 -> 24/12/1851, el cruce por Diamante). Desde aca los generales de Urquiza pueden avanzar, y las filas de
+#     Buenos Aires se desgranan hasta la jornada: se alzaron las tropas santafesinas de Echague, las de Rosario de Mansilla
+#     se pasaron a Urquiza, Pacheco renuncio al mando. La jornada lo saca, o se va a los tres meses.
+# SOURCE / FUENTE: es.wikipedia «Ejército Grande» (the crossing of the Parana at Diamante, 24/12/1851-6/1/1852);
+#     es.wikipedia «Batalla de Caseros» (Santa Fe and Rosario troops rise and go over; Pacheco resigns); «Aniversario de la
+#     Batalla de Caseros», Municipalidad de Valle Maria (2/2/2021). DESIGN / DISENO: the 33 days and the modifier's size are
+#     game scale.
+# Hidden, on Argentina (never changes tag).
+# -------------------------------------------------------------------------------------------------
+gg_caseros.11 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.11|" # GG_TRAZA
+		if = {
+			limit = {
+				has_global_variable = gg_ejercito_grande_created
+				NOT = { has_global_variable = gg_ejercito_grande_crossed }
+				NOT = { has_global_variable = gg_caseros_battle }
+			}
+			set_global_variable = gg_ejercito_grande_crossed
+			if = {
+				limit = {
+					has_global_variable = gg_war_against_buenos_aires
+					NOT = { has_global_variable = gg_pact_settled }
+					exists = c:ENR
+					has_war_with = c:ENR
+				}
+				if = {
+					limit = { NOT = { has_modifier = gg_rosas_army_disarray } }
+					add_modifier = { name = gg_rosas_army_disarray months = 3 }
+				}
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.11| CROSSED=yes " # GG_TRAZA
 			}
 		}
 	}

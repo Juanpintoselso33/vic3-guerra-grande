@@ -11,8 +11,8 @@
 #     possible for a general, of an AI country, on a front of this war:
 #       - on Rosas's side (Argentina and its subject provinces) facing Entre Rios or Corrientes, until the day of Caseros;
 #       - on Urquiza's side (Entre Rios, Corrientes at war with Buenos Aires) facing Rosas's side, until the Ejercito
-#         Grande is raised (21/11/1851) or the date of the crossing of the Parana (24/12/1851): the field army of 1851
-#         is not spent before the Ejercito Grande marches.
+#         Grande crosses the Parana: the field army of 1851 is not spent before the Ejercito Grande marches
+#         (26/9/2026, AUD-PACT-HOLD-MILESTONES below: milestones, not dates, and the day consolidated).
 #     Defending, battles on the defence and the war elsewhere (the Banda Oriental, Brazil) are untouched; a player is
 #     never held. Character scope (the general). DESIGN: which side holds and until when is from the history above.
 # ES: QUIEN SOSTIENE LA LINEA DEL PARANA ANTES DE CASEROS. Medido: la IA de Rosas invadio Entre Rios entero y deshizo
@@ -52,6 +52,69 @@ gg_pact_urquiza_side = {
 	}
 }
 
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-MILESTONES; «secuencia antes que fechas») -- THE HOLDS FOLLOW THE CAMPAIGN, NOT THE
+#     CALENDAR, AND THE DAY OF CASEROS IS CONSOLIDATED. In the six caseros runs of 26/9 (mod 1d7c3d7) Entre Rios came to the
+#     day with 1-9 battalions in three of five wars (LOST_ENR 89-100, OCC_ENR up to 42), and in 030959 Urquiza carried the
+#     day and still lost the war six weeks later (gg_pact_wargoal_enforced for Rosas, 18/3/1852). Three changes:
+#       - the general's OWN front (the character link: the front he is at OR travelling towards), not his formation's (the
+#         front it is at): the AI gives its order when it sends a general, and a general still on the road had no
+#         formation front, so the hold did not apply to him;
+#       - Rosas's side is held until the day of Caseros is fought (gg_caseros_battle), not until a date; and, once Urquiza
+#         carried it (gg_caseros_battle = 1), for the rest of this war: Rosas's army dispersed that afternoon and never took
+#         the field again. Mirror: once Buenos Aires held the day (= 2), Urquiza's side is held (the allied contingents went
+#         home and the Ejercito Grande broke up);
+#       - Urquiza's side is held until the Ejercito Grande crosses the Parana (gg_ejercito_grande_crossed, gg_caseros.11,
+#         33 days after it is raised: 21/11 -> 24/12/1851 at Diamante): its battalions muster first and are not spent
+#         piecemeal before the crossing.
+#     A war with no Ejercito Grande keeps the old fallback dates (the crossing 24/12/1851, the day 3/2/1852); the holds
+#     before the day end on 1/1/1853 at the latest (a safety cap); the holds after the day last as long as that war
+#     (Codex review 26/9).
+# ES: LAS RETENCIONES SIGUEN A LA CAMPANIA, NO AL CALENDARIO, Y LA JORNADA SE CONSOLIDA. En las seis corridas del 26/9
+#     Entre Rios llego a la jornada con 1-9 batallones en tres de cinco guerras, y en 030959 Urquiza gano la jornada y
+#     perdio la guerra seis semanas despues. El frente PROPIO del general (al que esta o hacia el que marcha), no el de su
+#     formacion; Rosas retenido hasta que se pelea la jornada y, si la gano Urquiza, por el resto de la guerra (su ejercito
+#     se disperso esa tarde), y el espejo si la sostuvo Buenos Aires; Urquiza retenido hasta que el Ejercito Grande cruza
+#     el Parana. Sin Ejercito Grande valen las fechas viejas; antes de la jornada nada retiene despues del 1/1/1853;
+#     despues de la jornada la retencion dura lo que dure esa guerra.
+# SOURCE / FUENTE: es.wikipedia «Batalla de Caseros» (the Rosista army dispersed; Rosas resigned the same day);
+#     es.wikipedia «Ejército Grande» (the crossing of the Parana at Diamante, 24/12/1851-6/1/1852).
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: character scope: the front this general is at or marching to holds ground of `SIDE` (gg_pact_rosas_side /
+#     gg_pact_urquiza_side) / el frente de este general tiene suelo de ese lado
+gg_pact_general_faces = {
+	front ?= {
+		any_scope_state = {
+			OR = {
+				owner ?= { $SIDE$ = yes }
+				controller ?= { $SIDE$ = yes }
+			}
+		}
+	}
+}
+
+# EN/ES: global: the day of Caseros is still to be fought / la jornada de Caseros todavia no se peleo
+gg_pact_before_caseros_day = {
+	NOT = { has_global_variable = gg_caseros_battle }
+	game_date < 1853.1.1 # EN/ES: a safety cap, never a milestone / un tope de seguridad, nunca un hito
+	OR = {
+		has_global_variable = gg_ejercito_grande_created
+		game_date < 1852.2.3
+	}
+}
+
+# EN/ES: global: Urquiza's side has not crossed yet / el lado de Urquiza todavia no cruzo
+gg_pact_before_crossing = {
+	NOT = { has_global_variable = gg_ejercito_grande_crossed }
+	NOT = { has_global_variable = gg_caseros_battle }
+	game_date < 1853.1.1 # EN/ES: a safety cap / un tope de seguridad
+	OR = {
+		has_global_variable = gg_ejercito_grande_created
+		game_date < 1851.12.24
+	}
+}
+
 # EN/ES: character scope: this general may not take an advance order now / este general no puede tomar una orden de avance
 gg_pact_front_hold = {
 	has_role_of_type = general
@@ -62,37 +125,25 @@ gg_pact_front_hold = {
 	c:ARG = { has_war_with = c:ENR }
 	owner ?= { is_player = no }
 	OR = {
-		# EN/ES: Rosas waits for the attack until the day of Caseros / Rosas espera el ataque hasta el dia de Caseros
+		# EN/ES: Rosas waits for the attack until the day, and after a lost day his army is gone
+		#     / Rosas espera el ataque hasta la jornada, y despues de perderla su ejercito ya no esta
 		AND = {
-			NOT = { has_global_variable = gg_caseros_battle }
-			game_date < 1852.2.3
 			owner ?= { gg_pact_rosas_side = yes }
-			commander_military_formation ?= {
-				front ?= {
-					any_scope_state = {
-						OR = {
-							owner ?= { gg_pact_urquiza_side = yes }
-							controller ?= { gg_pact_urquiza_side = yes }
-						}
-					}
-				}
+			OR = {
+				gg_pact_before_caseros_day = yes
+				global_var:gg_caseros_battle ?= 1
 			}
+			gg_pact_general_faces = { SIDE = gg_pact_urquiza_side }
 		}
-		# EN/ES: Urquiza keeps his field army for the Ejercito Grande / Urquiza guarda su ejercito para el Ejercito Grande
+		# EN/ES: Urquiza keeps his army for the crossing, and after a lost day the Ejercito Grande is gone
+		#     / Urquiza guarda su ejercito para el cruce, y despues de perder la jornada el Ejercito Grande ya no esta
 		AND = {
-			NOT = { has_global_variable = gg_ejercito_grande_created }
-			game_date < 1851.12.24
 			owner ?= { gg_pact_urquiza_side = yes }
-			commander_military_formation ?= {
-				front ?= {
-					any_scope_state = {
-						OR = {
-							owner ?= { gg_pact_rosas_side = yes }
-							controller ?= { gg_pact_rosas_side = yes }
-						}
-					}
-				}
+			OR = {
+				gg_pact_before_crossing = yes
+				global_var:gg_caseros_battle ?= 2
 			}
+			gg_pact_general_faces = { SIDE = gg_pact_rosas_side }
 		}
 	}
 }

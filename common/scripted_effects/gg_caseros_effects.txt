@@ -23,6 +23,10 @@ gg_caseros_notify_urquiza = {
 # -------------------------------------------------------------------------------------------------
 gg_caseros_day_decide = {
 	set_global_variable = { name = gg_caseros_battle value = $VALUE$ }
+	# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- the disarray of Buenos Aires's ranks after the crossing ends with the day:
+	#     from here the day's own modifiers and the holds of gg_pact_front_hold say what is left of each army
+	#     / el desbande de las filas de Buenos Aires termina con la jornada: desde aca mandan los de la jornada y las retenciones
+	c:ARG ?= { if = { limit = { has_modifier = gg_rosas_army_disarray } remove_modifier = gg_rosas_army_disarray } }
 	set_global_variable = { name = gg_caseros_w_battles value = global_var:gg_caseros_c_battles }
 	set_global_variable = { name = gg_caseros_w_ground value = global_var:gg_caseros_c_ground }
 	set_global_variable = { name = gg_caseros_w_numbers value = global_var:gg_caseros_c_numbers }
@@ -66,5 +70,80 @@ gg_caseros_day_decide = {
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=spirit " # GG_TRAZA
 		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried_spirit years = 1 } }
 		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost_spirit years = 1 } }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-MILESTONES) -- THE WAR OF THE PRONOUNCEMENT AS IT STANDS, for the trace (monthly, from the
+#     tilt, gg_caseros.8). The six caseros runs of 26/9 left no record of the war between the Pronouncement and Caseros:
+#     who fought, who advanced, how many battalions each side kept. Each side is its countries at war with the other's
+#     leader (Rosas: Argentina and its provinces; Urquiza: Entre Rios and Corrientes): battalions under arms, the engine's
+#     occupation and lost battles (in hundredths), and ADV_* the AI generals of each side with an advance order on a front
+#     against the other (gg_pact_front_hold must keep ADV_ROSAS at 0 before the day and ADV_URQ at 0 before the crossing:
+#     if not, the engine ignores the orders' `possible` for the AI). Trace only; changes nothing.
+# ES: LA GUERRA DEL PRONUNCIAMIENTO COMO ESTA, para la traza, cada mes. Las corridas del 26/9 no dejaron registro de la
+#     guerra entre el Pronunciamiento y Caseros. Cada lado: batallones, ocupacion y batallas perdidas (en centesimos), y
+#     ADV_* los generales de la IA de cada lado con orden de avance contra el otro (la retencion tiene que dejar ADV_ROSAS en
+#     0 antes de la jornada y ADV_URQ en 0 antes del cruce). Solo traza; no cambia nada.
+# -------------------------------------------------------------------------------------------------
+gg_pact_war_probe = {
+	if = {
+		limit = {
+			exists = c:ARG
+			exists = c:ENR
+			c:ARG = { has_war_with = c:ENR }
+		}
+		set_global_variable = { name = gg_debug_probe_bn_arg value = 0 }
+		set_global_variable = { name = gg_debug_probe_bn_enr value = 0 }
+		set_global_variable = { name = gg_debug_probe_adv_rosas value = 0 }
+		set_global_variable = { name = gg_debug_probe_adv_urq value = 0 }
+		set_global_variable = { name = gg_debug_probe_lost_arg value = 0 }
+		set_global_variable = { name = gg_debug_probe_lost_enr value = 0 }
+		every_country = {
+			limit = {
+				gg_pact_rosas_side = yes
+				has_war_with = c:ENR
+			}
+			change_global_variable = { name = gg_debug_probe_bn_arg add = army_size_including_raised_conscripts }
+			every_scope_general = {
+				limit = {
+					character_has_advance_order = yes
+					gg_pact_general_faces = { SIDE = gg_pact_urquiza_side }
+				}
+				change_global_variable = { name = gg_debug_probe_adv_rosas add = 1 }
+			}
+		}
+		every_country = {
+			limit = {
+				gg_pact_urquiza_side = yes
+				has_war_with = c:ARG
+			}
+			change_global_variable = { name = gg_debug_probe_bn_enr add = army_size_including_raised_conscripts }
+			every_scope_general = {
+				limit = {
+					character_has_advance_order = yes
+					gg_pact_general_faces = { SIDE = gg_pact_rosas_side }
+				}
+				change_global_variable = { name = gg_debug_probe_adv_urq add = 1 }
+			}
+		}
+		c:ARG = { set_global_variable = { name = gg_debug_probe_occ_arg value = enemy_occupation } }
+		c:ENR = { set_global_variable = { name = gg_debug_probe_occ_enr value = enemy_occupation } }
+		change_global_variable = { name = gg_debug_probe_occ_arg multiply = 100 }
+		change_global_variable = { name = gg_debug_probe_occ_enr multiply = 100 }
+		c:ARG = {
+			random_scope_war = {
+				limit = { is_war_participant = c:ENR }
+				save_scope_as = gg_probe_war
+			}
+		}
+		if = {
+			limit = { exists = scope:gg_probe_war }
+			c:ARG = { set_global_variable = { name = gg_debug_probe_lost_arg value = "size_weighted_lost_battles_fraction(scope:gg_probe_war)" } }
+			c:ENR = { set_global_variable = { name = gg_debug_probe_lost_enr value = "size_weighted_lost_battles_fraction(scope:gg_probe_war)" } }
+			change_global_variable = { name = gg_debug_probe_lost_arg multiply = 100 }
+			change_global_variable = { name = gg_debug_probe_lost_enr multiply = 100 }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] " # GG_TRAZA
 	}
 }

@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+- **The war with Rosas follows the campaign, not the calendar, and Caseros decides it:** in the last six test runs the
+  chain of the Pronouncement worked every time (war, Ejército Grande, Pacheco, the hour of Caseros), but Urquiza won only
+  one war in five: in three he reached Caseros with one to nine battalions, and in another he carried the day and still
+  lost the war six weeks later. Now:
+  - the advance hold applies to a general from the moment he is sent, not only once he reaches the front (the AI gave
+    its advance orders on the road);
+  - Rosas's generals wait on the defensive until the day of Caseros is fought — no longer until a date — and, if Urquiza
+    carries the day, for the rest of the war: Rosas's army dispersed that afternoon. If Buenos Aires holds the day, it is
+    Urquiza's army that can no longer advance;
+  - Urquiza's generals wait until the Ejército Grande crosses the Paraná (33 days after it is raised: 24/12/1851 at
+    Diamante), so its battalions muster before they fight. From the crossing to the day, Buenos Aires's ranks come apart
+    ("Ranks Coming Apart": -15 % defence, more morale loss, slower recovery), as the Santa Fe and Rosario troops rose or
+    went over;
+  - the floor that keeps both sides from laying down their arms early now lasts until the day of Caseros is fought, not
+    until 3/2/1852;
+  - the reckoning of the day counts each side's battalions: Corrientes with Urquiza, the Pact's provinces with Rosas;
+  - a monthly line in the debug log records each side's battalions, occupation, lost battles and how many generals are
+    advancing, to check all of this in the next runs.
+  Also fixed: the weekly mobilization retry tried to send an army to a front it was already marching to (a script error).
+  Games in progress: an Ejército Grande raised before this version crosses a month after loading.
+
 - **The Ejército Grande and the day of Caseros no longer depend on the Montevideo convention:** in three of four test
   runs with the Pronouncement's war the Guerra Grande had already ended (1848 or 1850), so there was no convention of
   29/5/1851 (Urquiza fights alone, as designed) — and nothing raised the Ejército Grande on 21/11/1851 on that road, so

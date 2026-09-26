@@ -1217,6 +1217,14 @@ gg_ejercito_grande_brazil_recruit_state = {
 gg_argentina_raise_ejercito_grande = {
 	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_argentina_raise_ejercito_grande|" # GG_TRAZA
 	set_global_variable = gg_ejercito_grande_created
+	# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- the crossing of the Parana, 33 days on (21/11 -> 24/12/1851), on Argentina
+	#     (never changes tag); the mark goes first so the monthly tilt does not schedule a second one
+	#     / el cruce del Parana, 33 dias despues, sobre la Argentina; la marca va antes para que la inclinacion no agende otro
+	if = {
+		limit = { NOT = { has_global_variable = gg_ejercito_grande_crossing_due } }
+		set_global_variable = gg_ejercito_grande_crossing_due
+		c:ARG ?= { trigger_event = { id = gg_caseros.11 days = 33 } }
+	}
 	c:ARG ?= {
 		every_scope_war = {
 			limit = { is_war_participant = c:ENR }
