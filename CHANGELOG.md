@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- **Caseros is decided by the armies, in proportion:** with the line of the Paraná holding, no battle is fought before
+  the day of Caseros, so the day came down to a few flat weights and a near-tie decided by chance even when one side had
+  twice the other's battalions (in one test run Urquiza, 24 battalions against Rosas's 12, lost the day to the dice: "Urquiza
+  marching without the allies" took off more than his numbers put on). Now each side's strength on the field is weighed
+  against the other's: Urquiza's battalions plus those of Brazil's division that are actually on the board (the allies count
+  by what marches, not by the terms signed), and Rosas's with a quarter lost while his ranks are coming apart after the
+  Ejército Grande crosses the Paraná. Twice the enemy's strength carries the day on its own; like armies lean to Urquiza;
+  chance decides only when the two are close. A clear day breaks the loser's army (its generals stay on the defensive for
+  the rest of the war); a day chance decided breaks neither, and both armies fight on with the war support leaning to the
+  side that held the field. The option tooltips of "The Hour of Caseros" say it.
+- **Rosas abandoning Oribe no longer ends in "two governments" by accident:** with Oribe abandoned there is no Ejército
+  Grande and no day, and Buenos Aires's ranks come apart month after month; in one test run the game closed that war with a
+  white peace three months later, before Buenos Aires gave in, and wrote "two governments, no victor". That peace is now
+  read as the war the ranks were deciding: Urquiza's.
+  Games in progress: a day of Caseros already fought keeps its result; the rest applies at once.
+
 - **The line of the Paraná holds:** before the day of Caseros Rosas's generals, and before the Ejército Grande crosses
   Urquiza's, could still march on the enemy: the game only checks an order when a general takes it, keeps the one he
   already has, and gives every new general the order to advance. In the last test runs one or two restrained generals

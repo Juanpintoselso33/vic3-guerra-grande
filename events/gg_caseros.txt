@@ -240,9 +240,13 @@ gg_caseros.6 = {
 			# EN/ES: only a pitched day (gg_argentina.41.a) decides the war: the manoeuvre (.b, a draw at six months in gg_caseros.1)
 			#     and the siege (.c, resolved when it ends) keep their own reading, and nothing is rewritten once settled (Codex review)
 			#     / solo una jornada campal decide la guerra: la maniobra y el sitio conservan su lectura, y nada se reescribe ya cerrado
+			# EN: 26/9/2026 (Juan, AUD-CASEROS-FORCES) -- only a day carried by a clear lead (gg_pact_day_broke_army): after a
+			#     near-tie fortune decided, both armies fought on (gg_pact_front_hold), and a white peace means the fighting settled
+			#     nothing: two governments. ES: solo una jornada clara; despues de un empate que decidio la suerte los dos ejercitos
+			#     siguieron peleando, y una paz blanca quiere decir que la pelea no decidio nada: dos gobiernos.
 			if = {
 				limit = {
-					global_var:gg_caseros_battle ?= 1
+					gg_pact_day_broke_army = { VALUE = 1 }
 					global_var:gg_caseros_choice ?= 1
 					NOT = { has_global_variable = gg_pact_settled }
 				}
@@ -251,12 +255,33 @@ gg_caseros.6 = {
 			}
 			else_if = {
 				limit = {
-					global_var:gg_caseros_battle ?= 2
+					gg_pact_day_broke_army = { VALUE = 2 }
 					global_var:gg_caseros_choice ?= 1
 					NOT = { has_global_variable = gg_pact_settled }
 				}
 				set_global_variable = { name = gg_pact_war_rosas_won value = 1 }
 				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6| READ=day_rosas " # GG_TRAZA
+			}
+			# EN: 26/9/2026 (Juan, AUD-CASEROS-FORCES; traza_20260926-185320) -- Rosas abandoned Oribe (gg_argentina.14.a): no
+			#     Ejercito Grande, no day, and from the guard's end (3/2/1852) Buenos Aires's ranks come apart at -40 a month while
+			#     Entre Rios gains +30 (gg_caseros.8). In 185320 the engine closed that war with a white peace on 2/5/1852, three
+			#     months after the guard, after three monthly drains of 40 on Buenos Aires (25/2, 27/3, 26/4) and nothing fought
+			#     (OCC 0, LOST 0): «two governments» (gg_argentina.85), which neither the design
+			#     (gg_argentina.14.a: «decisive after it») nor the Pact lab (pacto.py, fight: an abandoned war goes to Urquiza)
+			#     reads. The war the tilt was deciding is read as decided: Urquiza's, unless the engine recorded something else.
+			# ES: Rosas abandono a Oribe: sin Ejercito Grande ni jornada, y desde el fin de la guardia las filas de Buenos Aires se
+			#     desgranan a -40 por mes. En 185320 el motor cerro esa guerra con paz blanca el 2/5/1852, tras tres desgastes de 40 a
+			#     Buenos Aires y sin pelear: «dos gobiernos». La guerra que la inclinacion decidia se lee
+			#     decidida: de Urquiza, salvo que el motor haya anotado otra cosa.
+			else_if = {
+				limit = {
+					gg_pact_dynamic = yes
+					has_global_variable = gg_rosas_abandoned_oribe
+					NOT = { has_global_variable = gg_caseros_battle }
+					NOT = { has_global_variable = gg_pact_settled }
+				}
+				set_global_variable = { name = gg_pact_war_urquiza_won value = 1 }
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.6| READ=abandoned_urquiza " # GG_TRAZA
 			}
 			else = {
 				set_global_variable = { name = gg_pact_war_white_peace value = 1 }
@@ -595,11 +620,14 @@ gg_caseros.9 = {
 #     engine knows of the war between Buenos Aires and Entre Rios -- the battles each side lost, the ground each holds
 #     (Buenos Aires, Santa Fe, Entre Rios and the weighted share of each country), the battalions under arms and each
 #     camp's war support -- into the gg_caseros_in_* globals, and gg_caseros_day_score (common/script_values/
-#     gg_caseros.txt) weighs them with the allies' terms and the field Rosas chose. Whoever leads by gg_caseros_decisive
+#     gg_caseros.txt) weighs them with the allies' battalions, Buenos Aires's ranks coming apart and the field Rosas chose
+#     (since 26/9/2026, AUD-CASEROS-FORCES: each side's strength against the other's, in proportion). Whoever leads by gg_caseros_decisive
 #     or more carries the day; a closer reckoning is a near-tie and only then fortune decides: 70/30 for the side ahead
 #     from gg_caseros_close up, an even roll below. Whoever carries the day gets the tilt from then on (gg_caseros.8, as
 #     before) and both sides see for a year what carried it (gg_caseros_day_decide). The engine still fights and ends
-#     the war. Every input goes to the trace (GG_EV gg_caseros.10 SCORE=...) so the Pact lab calibrates the reckoning from
+#     the war. 26/9/2026 (Juan, AUD-CASEROS-FORCES): a day carried by a clear lead breaks the loser's army (its generals
+#     are held for the rest of the war, gg_pact_front_hold); a near-tie carried by fortune breaks neither, and both armies
+#     fight on with the tilt behind the side fortune favoured (gg_caseros_tie). Every input goes to the trace (GG_EV gg_caseros.10 SCORE=...) so the Pact lab calibrates the reckoning from
 #     the runs (tools/lab_balance/pacto.py). Only under the dynamic Pact rule: the forced rules read the war their own
 #     way (gg_pact_resolve).
 # ES: LA JORNADA DE CASEROS LA DECIDE LA GUERRA COMO SE PELEO, NO UNA TIRADA. Hasta hoy era una tirada 70/30; Juan quiere
@@ -651,6 +679,8 @@ gg_caseros.10 = {
 				set_global_variable = { name = gg_caseros_in_ba value = 0 }
 				set_global_variable = { name = gg_caseros_in_sf value = 0 }
 				set_global_variable = { name = gg_caseros_in_er value = 0 }
+				set_global_variable = { name = gg_caseros_in_bn_brz value = 0 } # EN/ES: 26/9/2026 (AUD-CASEROS-FORCES)
+				set_global_variable = { name = gg_caseros_in_dis value = 0 } # EN/ES: 26/9/2026 (AUD-CASEROS-FORCES)
 				# EN/ES: the battles each side lost in this war, weighted by the men engaged, in hundredths
 				#     / las batallas que perdio cada lado en esta guerra, pesadas por los hombres, en centesimos
 				if = {
@@ -695,9 +725,9 @@ gg_caseros.10 = {
 				set_global_variable = { name = gg_caseros_in_bn_arg value = army_size_including_raised_conscripts }
 				c:ENR = { set_global_variable = { name = gg_caseros_in_bn_enr value = army_size_including_raised_conscripts } }
 				# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- each SIDE's battalions: the Argentine provinces in arms with each
-				#     (Corrientes with Urquiza, the Pact's provinces with Rosas) count; Brazil's division is the allies' +10 of
-				#     gg_caseros_day_numbers, the Oriental one is Entre Rios's own / los batallones de cada LADO: cuentan las provincias
-				#     argentinas en armas con cada uno; la division brasilena es el +10 de los aliados, la oriental es de Entre Rios
+				#     (Corrientes with Urquiza, the Pact's provinces with Rosas) count; the Oriental division is Entre Rios's own
+				#     (AUD-CASEROS-FORCES: Brazil's division is counted below, in battalions) / los batallones de cada LADO: cuentan
+				#     las provincias argentinas en armas con cada uno; la division oriental es de Entre Rios
 				every_country = {
 					limit = {
 						NOT = { c:ARG ?= this }
@@ -714,8 +744,28 @@ gg_caseros.10 = {
 					}
 					change_global_variable = { name = gg_caseros_in_bn_enr add = army_size_including_raised_conscripts }
 				}
-				set_global_variable = { name = gg_caseros_in_bn_all value = global_var:gg_caseros_in_bn_arg }
-				change_global_variable = { name = gg_caseros_in_bn_all add = global_var:gg_caseros_in_bn_enr }
+				# EN: 26/9/2026 (Juan, AUD-CASEROS-FORCES) -- the allies count by what marches: the battalions of Brazil's division
+				#     of the convention (full or limited terms) still on the board while Brazil is at war with Buenos Aires, where
+				#     the reckoning used to add a flat 10 for the terms (and take 10 off Urquiza alone). And whether Buenos Aires's
+				#     ranks are coming apart (gg_rosas_army_disarray, from the crossing to this day): a quarter of its battalions
+				#     does not count (gg_caseros_day_strength_rosas).
+				# ES: los aliados cuentan por lo que marcha: los batallones de la division brasilena que siguen en el tablero con el
+				#     Brasil en guerra con Buenos Aires, donde la cuenta sumaba 10 fijos por las condiciones. Y si las filas de
+				#     Buenos Aires se desgranan: un cuarto de sus batallones no cuenta.
+				if = {
+					limit = { c:BRZ ?= { has_war_with = c:ARG } }
+					every_in_global_list = {
+						variable = gg_eg_probe_brazil
+						every_combat_unit = { change_global_variable = { name = gg_caseros_in_bn_brz add = 1 } }
+					}
+				}
+				if = {
+					limit = { has_modifier = gg_rosas_army_disarray }
+					set_global_variable = { name = gg_caseros_in_dis value = 1 }
+				}
+				# EN/ES: both sides' strength on the field, the whole the numbers weigh against / la fuerza de los dos lados
+				set_global_variable = { name = gg_caseros_in_bn_all value = gg_caseros_day_strength_urquiza }
+				change_global_variable = { name = gg_caseros_in_bn_all add = gg_caseros_day_strength_rosas }
 				# EN/ES: each camp's war support, in bands of 25 (0-4) / el apoyo a la guerra de cada campo, en bandas de 25
 				scope:gg_caseros_war ?= {
 					if = { limit = { has_war_support = { target = c:ENR value > 75 } } set_global_variable = { name = gg_caseros_in_ws_enr value = 4 } }
@@ -738,7 +788,7 @@ gg_caseros.10 = {
 					limit = { global_var:gg_caseros_score < 0 }
 					change_global_variable = { name = gg_caseros_lead multiply = -1 }
 				}
-				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.10| SCORE=[GetGlobalVariable('gg_caseros_score').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_caseros_in_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_caseros_in_lost_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_caseros_in_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_caseros_in_occ_enr').GetValue|0] BA=[GetGlobalVariable('gg_caseros_in_ba').GetValue|0] SF=[GetGlobalVariable('gg_caseros_in_sf').GetValue|0] ER=[GetGlobalVariable('gg_caseros_in_er').GetValue|0] BN_ARG=[GetGlobalVariable('gg_caseros_in_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_caseros_in_bn_enr').GetValue|0] WS_ARG=[GetGlobalVariable('gg_caseros_in_ws_arg').GetValue|0] WS_ENR=[GetGlobalVariable('gg_caseros_in_ws_enr').GetValue|0] " # GG_TRAZA
+				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.10| SCORE=[GetGlobalVariable('gg_caseros_score').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_caseros_in_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_caseros_in_lost_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_caseros_in_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_caseros_in_occ_enr').GetValue|0] BA=[GetGlobalVariable('gg_caseros_in_ba').GetValue|0] SF=[GetGlobalVariable('gg_caseros_in_sf').GetValue|0] ER=[GetGlobalVariable('gg_caseros_in_er').GetValue|0] BN_ARG=[GetGlobalVariable('gg_caseros_in_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_caseros_in_bn_enr').GetValue|0] WS_ARG=[GetGlobalVariable('gg_caseros_in_ws_arg').GetValue|0] WS_ENR=[GetGlobalVariable('gg_caseros_in_ws_enr').GetValue|0] BN_BRZ=[GetGlobalVariable('gg_caseros_in_bn_brz').GetValue|0] DIS=[GetGlobalVariable('gg_caseros_in_dis').GetValue|0] " # GG_TRAZA
 				# EN/ES: a clear lead decides; a near-tie goes to fortune / una ventaja clara decide; un empate, la suerte
 				if = {
 					limit = { global_var:gg_caseros_lead >= gg_caseros_decisive }

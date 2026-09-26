@@ -10,9 +10,8 @@
 #       - ground: the weighted share of each country under the enemy (enemy_occupation, the engine's own measure), 30
 #         for all of it; Buenos Aires in the enemy's hands 15, Rosas's Santa Fe 5, Entre Rios 15 the other way; and the
 #         field Rosas chose: manoeuvring away from battle 10 for him, holding the city 5;
-#       - numbers: each side's battalions under arms, raised conscripts included (army_size_including_raised_conscripts),
-#         20 for all of them on one side; Brazil's division and the Oriental one marching complete 10 for Urquiza,
-#         Urquiza marching without the allies 10 for Rosas (their battalions are not Entre Rios's, so they count here);
+#       - numbers: each side's strength on the field, one against the other, 80 for all of it on one side (26/9/2026,
+#         AUD-CASEROS-FORCES, below: Brazil's division counted in battalions, Buenos Aires's ranks coming apart a quarter off);
 #       - spirit: each side's war support in bands of 25 (above 0, 25, 50, 75), 5 a band of difference.
 # ES: LA JORNADA DE CASEROS LA DECIDE LA GUERRA COMO SE PELEO. gg_caseros.10 lee los hechos del motor (batallas perdidas,
 #     suelo en manos enemigas, batallones en armas, apoyo a la guerra) y estos cuatro valores los pesan. Positivo es de
@@ -50,20 +49,57 @@ gg_caseros_day_ground = {
 	if = { limit = { global_var:gg_caseros_choice ?= 3 } add = -5 }
 }
 
-# EN/ES: the troops under arms, and the allies / las tropas en armas y los aliados
+# EN: 26/9/2026 (Juan, AUD-CASEROS-FORCES) -- THE ARMIES AS THEY STAND DECIDE THE DAY, IN PROPORTION. The sweep on 832c5cb
+#     (barrido_20260926-181706/-181726) fought no battle before Caseros in any war, so the day was the troops, the spirit and
+#     the allies' flags only, and it came out a near-tie the dice decided even when one side doubled the other: traza_20260926-
+#     181813 Urquiza 24 battalions against Rosas's 12 scored +1 (the troops' +6.7 ate by «Urquiza marching alone» -10, although
+#     his battalions already counted without the allies) and went to Rosas by fortune; -181750 Rosas 9 against 4 scored -2.
+#     Now each side's strength on the field is weighed against the other's, 80 for all of it on one side:
+#       - Urquiza's: the battalions of Entre Rios and of the provinces in arms with it (the Oriental division is Entre Rios's
+#         own), plus the battalions of Brazil's division of the convention still on the board (gg_caseros_in_bn_brz: the allies
+#         count by what marches, not by a flag);
+#       - Rosas's: the battalions of Buenos Aires and its provinces in arms, less a quarter while its ranks are coming apart
+#         (gg_rosas_army_disarray, «Filas que se desgranan», from the crossing of the Parana to the day: Santa Fe's troops
+#         rose, Rosario's went over, Pacheco resigned).
+#     Twice the other side's strength is decisive on its own against the spirit and the field chosen (2:1 is 27 points; with
+#     the quarter, Rosas's 2:1 in battalions is still 16), and like armies with Buenos Aires's ranks thinning lean to Urquiza
+#     (26 against 24 battalions: +15). On the twenty measured days with the crossing (their armies, their allied divisions,
+#     no battles) this gives Urquiza about two days in three, three in four decided without fortune.
+# ES: LOS EJERCITOS COMO ESTAN DECIDEN LA JORNADA, EN PROPORCION. El barrido sobre 832c5cb no peleo ninguna batalla antes de
+#     Caseros, asi que la jornada eran las tropas, el animo y las banderas de los aliados, y salia un empate que decidia la
+#     suerte aun cuando un lado duplicaba al otro: en 181813 Urquiza 24 batallones contra 12 de Rosas saco +1 (el -10 de
+#     «Urquiza solo» se comia el +6,7 de las tropas, aunque sus batallones ya contaban sin los aliados) y fue de Rosas por
+#     suerte. Ahora la fuerza de cada lado en el campo se pesa contra la del otro, 80 si es toda de un lado: la de Urquiza,
+#     sus batallones y los de las provincias con el mas los de la division brasilena que siguen en el tablero; la de Rosas,
+#     los suyos y los de sus provincias, menos un cuarto mientras sus filas se desgranan. El doble del otro decide solo; dos
+#     ejercitos parejos con las filas portenas desgranandose se inclinan a Urquiza.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Caseros» [D] (see the header); es.wikipedia «Batalla de
+#     Caseros» (Santa Fe and Rosario troops rise and go over; Pacheco resigns the command). DESIGN / DISENO: the 80 and the
+#     quarter are game scale, tuned with the Pact lab (tools/lab_balance/pacto.py) on the measured armies.
+# EN/ES: Urquiza's strength on the field / la fuerza de Urquiza en el campo
+gg_caseros_day_strength_urquiza = {
+	value = global_var:gg_caseros_in_bn_enr
+	add = global_var:gg_caseros_in_bn_brz
+}
+
+# EN/ES: Rosas's strength on the field: a quarter less while his ranks come apart / la de Rosas: un cuarto menos si sus filas se desgranan
+gg_caseros_day_strength_rosas = {
+	value = global_var:gg_caseros_in_bn_arg
+	if = { limit = { global_var:gg_caseros_in_dis = 1 } multiply = 0.75 }
+}
+
+# EN/ES: the troops, one side's strength against the other's / las tropas, la fuerza de un lado contra la del otro
 gg_caseros_day_numbers = {
 	value = 0
 	if = {
 		limit = { global_var:gg_caseros_in_bn_all > 0 }
 		add = {
-			value = global_var:gg_caseros_in_bn_enr
+			value = gg_caseros_day_strength_urquiza
+			subtract = gg_caseros_day_strength_rosas
 			divide = global_var:gg_caseros_in_bn_all
-			subtract = 0.5
-			multiply = 40
+			multiply = 80
 		}
 	}
-	if = { limit = { has_global_variable = gg_ejercito_grande_full_terms } add = 10 }
-	if = { limit = { has_global_variable = gg_ejercito_grande_alone } add = -10 }
 }
 
 # EN/ES: the spirit of each camp / el animo de cada campo

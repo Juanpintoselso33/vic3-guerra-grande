@@ -139,6 +139,21 @@ gg_pact_before_crossing = {
 	}
 }
 
+# EN: 26/9/2026 (Juan, AUD-CASEROS-FORCES) -- global: the day of Caseros went to `VALUE` (gg_caseros_battle: 1 Urquiza, 2 Buenos
+#     Aires) by a clear lead, so the loser's army is broken and its generals are held for the rest of the war. A near-tie carried
+#     by fortune (gg_caseros_tie) breaks neither army: both fight on, and the tilt (gg_caseros.8) still leans to the side fortune
+#     favoured. Why: with the holds, no battle is fought before the day, so a fortune's day that also froze the loser decided the
+#     whole war by the dice (traza_20260926-181813: Rosas by fortune against twice his battalions, then his free army against a
+#     held Entre Rios, LOST_ENR 100 and OCC_ENR 27 by 27/3, and Rosas's war goal on 1/4/1852); now only a clear balance of forces ends the fighting, as at Caseros, where Rosas's army dispersed.
+# ES: la jornada fue de `VALUE` por una ventaja clara: el ejercito del que perdio queda deshecho y sus generales retenidos el resto
+#     de la guerra. Un empate que decidio la suerte no deshace ninguno: los dos siguen peleando y la inclinacion sigue del lado
+#     que favorecio la suerte. Con las retenciones ninguna batalla se pelea antes de la jornada, asi que una jornada de la suerte
+#     que ademas congelaba al que perdio decidia la guerra entera a los dados.
+gg_pact_day_broke_army = {
+	global_var:gg_caseros_battle ?= $VALUE$
+	NOT = { has_global_variable = gg_caseros_tie }
+}
+
 # EN/ES: character scope: this general may not take an advance order now / este general no puede tomar una orden de avance
 gg_pact_front_hold = {
 	has_role_of_type = general
@@ -155,7 +170,7 @@ gg_pact_front_hold = {
 			owner ?= { gg_pact_rosas_side = yes }
 			OR = {
 				gg_pact_before_caseros_day = yes
-				global_var:gg_caseros_battle ?= 1
+				gg_pact_day_broke_army = { VALUE = 1 } # EN/ES: 26/9/2026 (AUD-CASEROS-FORCES) -- a clear day, not fortune's / una jornada clara, no la de la suerte
 			}
 			OR = {
 				gg_pact_general_faces = { SIDE = gg_pact_urquiza_side }
@@ -168,7 +183,7 @@ gg_pact_front_hold = {
 			owner ?= { gg_pact_urquiza_side = yes }
 			OR = {
 				gg_pact_before_crossing = yes
-				global_var:gg_caseros_battle ?= 2
+				gg_pact_day_broke_army = { VALUE = 2 } # EN/ES: 26/9/2026 (AUD-CASEROS-FORCES)
 			}
 			OR = {
 				gg_pact_general_faces = { SIDE = gg_pact_rosas_side }
