@@ -74,6 +74,71 @@ gg_caseros_day_decide = {
 }
 
 # -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-LEAK) -- THE HOLD ON THE GENERAL, NOT ON HIS ORDER. Every general the hold restrains now
+#     (gg_pact_front_hold) carries gg_pact_line_held (advancement speed -100 %: an advancing general never launches a battle);
+#     every other general that still carries it loses it. Daily from gg_caseros.12. Why not the order:
+#     the engine keeps an order already given and hands every general the default order «advance» (defines NMilitary
+#     DEFAULT_ORDER), and no script effect sets a general's order in 1.13 (the effects on commanders are set_commander_rank,
+#     create_military_formation, transfer_to_formation, unassign_from_formation, teleport_to_front, mobilize_army): in the
+#     caseros runs on 271e2ec the probe found 1-2 held generals advancing for months (HELD_ADV), Urquiza's field army attacked
+#     in July 1851 and lost 71 % of its battles before the Ejercito Grande (caseros_5), and the day went to Buenos Aires
+#     (SCORE=-22). GG_DEBUG gg_debug_line_held: how many generals carry it after this pass (the probe's LINE=). Any scope.
+# ES: LA RETENCION SOBRE EL GENERAL, NO SOBRE SU ORDEN. Todo general que la retencion frena lleva gg_pact_line_held (velocidad
+#     de avance -100 %: un general que avanza nunca da batalla); el que ya no esta frenado la pierde. Cada dia desde
+#     gg_caseros.12 y antes de cada sonda. Por que no la orden: el motor conserva la orden ya dada y a todo general le da la
+#     orden por defecto «avanzar», y en 1.13 ningun efecto de script fija la orden de un general. En las corridas de caseros
+#     sobre 271e2ec la sonda encontro 1-2 generales retenidos avanzando durante meses, el ejercito de Urquiza ataco en julio
+#     de 1851 y perdio el 71 % de sus batallas antes del Ejercito Grande, y la jornada fue de Buenos Aires.
+# -------------------------------------------------------------------------------------------------
+# EN/ES: Argentina's scope: start the daily line (gg_caseros.12) if the war of the Pronouncement is on and the pulse is not
+#     running; gg_pact_line_running lasts three days and each pulse renews it, so a lost pulse is restarted by the next caller
+#     (gg_caseros.9 daily until the day, gg_caseros.8 monthly: also an older save past Caseros) / arranca la linea si no corre
+gg_pact_line_start = {
+	if = {
+		limit = {
+			has_global_variable = gg_war_against_buenos_aires
+			NOT = { has_global_variable = gg_pact_settled }
+			NOT = { has_global_variable = gg_pact_line_running }
+			exists = c:ENR
+			c:ARG ?= { has_war_with = c:ENR }
+		}
+		set_global_variable = { name = gg_pact_line_running days = 3 }
+		c:ARG = { trigger_event = { id = gg_caseros.12 days = 0 } }
+	}
+}
+
+gg_pact_hold_line_sync = {
+	set_global_variable = { name = gg_debug_line_held value = 0 }
+	every_country = {
+		limit = {
+			any_scope_general = {
+				OR = {
+					gg_pact_front_hold = yes
+					has_modifier = gg_pact_line_held
+				}
+			}
+		}
+		every_scope_general = {
+			if = {
+				limit = { gg_pact_front_hold = yes }
+				# EN/ES: refreshed each day for three days (Codex review): if the pulse ever stops, or the general retires out of
+				#     every_scope_general, the line runs out on its own / se renueva cada dia por tres: si el pulso se corta, se vence sola
+				if = {
+					limit = { has_modifier = gg_pact_line_held }
+					remove_modifier = gg_pact_line_held
+				}
+				add_modifier = { name = gg_pact_line_held days = 3 }
+				change_global_variable = { name = gg_debug_line_held add = 1 }
+			}
+			else_if = {
+				limit = { has_modifier = gg_pact_line_held }
+				remove_modifier = gg_pact_line_held
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
 # EN: 26/9/2026 (Juan, AUD-PACT-HOLD-MILESTONES) -- THE WAR OF THE PRONOUNCEMENT AS IT STANDS, for the trace (monthly, from the
 #     tilt, gg_caseros.8). The six caseros runs of 26/9 left no record of the war between the Pronouncement and Caseros:
 #     who fought, who advanced, how many battalions each side kept. Each side is its countries at war with the other's
@@ -131,6 +196,7 @@ gg_pact_war_probe = {
 		#     now (> 0: the engine keeps an order its `possible` no longer allows); NF_ADV: those with no front and an advance order
 		#     / generales con orden de avance que la retencion prohibe ahora, y los que no tienen frente y tienen orden de avance
 		set_global_variable = { name = gg_debug_probe_held_adv value = 0 }
+		set_global_variable = { name = gg_debug_probe_held_free value = 0 }
 		set_global_variable = { name = gg_debug_probe_nf_adv value = 0 }
 		every_country = {
 			limit = {
@@ -142,6 +208,11 @@ gg_pact_war_probe = {
 			every_scope_general = {
 				limit = { character_has_advance_order = yes gg_pact_front_hold = yes }
 				change_global_variable = { name = gg_debug_probe_held_adv add = 1 }
+				# EN/ES: HELD_FREE: of those, the ones the line does not hold (must be 0) / los que la linea no sostiene (0)
+				if = {
+					limit = { NOT = { has_modifier = gg_pact_line_held } }
+					change_global_variable = { name = gg_debug_probe_held_free add = 1 }
+				}
 			}
 			every_scope_general = {
 				limit = { character_has_advance_order = yes NOT = { front ?= { always = yes } } }
@@ -165,7 +236,13 @@ gg_pact_war_probe = {
 			change_global_variable = { name = gg_debug_probe_lost_arg multiply = 100 }
 			change_global_variable = { name = gg_debug_probe_lost_enr multiply = 100 }
 		}
-		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] HELD_ADV=[GetGlobalVariable('gg_debug_probe_held_adv').GetValue|0] NF_ADV=[GetGlobalVariable('gg_debug_probe_nf_adv').GetValue|0] " # GG_TRAZA
+		# EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK) -- measured BEFORE any repair (Codex review): a held general advancing without the
+		#     line means the daily pulse missed him; its own line, forbidden in the sweep / medido antes de reparar nada
+		if = {
+			limit = { global_var:gg_debug_probe_held_free > 0 }
+			debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| LINE_MISSED=[GetGlobalVariable('gg_debug_probe_held_free').GetValue|0] " # GG_TRAZA
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| BN_ARG=[GetGlobalVariable('gg_debug_probe_bn_arg').GetValue|0] BN_ENR=[GetGlobalVariable('gg_debug_probe_bn_enr').GetValue|0] OCC_ARG=[GetGlobalVariable('gg_debug_probe_occ_arg').GetValue|0] OCC_ENR=[GetGlobalVariable('gg_debug_probe_occ_enr').GetValue|0] LOST_ARG=[GetGlobalVariable('gg_debug_probe_lost_arg').GetValue|0] LOST_ENR=[GetGlobalVariable('gg_debug_probe_lost_enr').GetValue|0] ADV_ROSAS=[GetGlobalVariable('gg_debug_probe_adv_rosas').GetValue|0] ADV_URQ=[GetGlobalVariable('gg_debug_probe_adv_urq').GetValue|0] HELD_ADV=[GetGlobalVariable('gg_debug_probe_held_adv').GetValue|0] NF_ADV=[GetGlobalVariable('gg_debug_probe_nf_adv').GetValue|0] HELD_FREE=[GetGlobalVariable('gg_debug_probe_held_free').GetValue|0] LINE=[GetGlobalVariable('gg_debug_line_held').GetValue|0] " # GG_TRAZA
 		# EN: 26/9/2026 (Juan, AUD-PACT-ARMY-MELTS) -- WHERE THE BATTALIONS GO. BN_* above counts raised conscripts; here each part
 		#     apart: REG_* standing battalions (army_size) of each side, CRR Corrientes's battalions, BRK/CC the barracks and
 		#     conscription-centre levels of Entre Rios, WANT the army its AI wants (the default strategy plus

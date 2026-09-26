@@ -447,6 +447,7 @@ gg_caseros.8 = {
 				# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- the war as it stands, each month, for the sweep and the lab
 				#     / la guerra como esta, cada mes, para el barrido y el laboratorio
 				gg_pact_war_probe = yes
+				gg_pact_line_start = yes # EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK) -- restarts a lost line, or an older save's / reanuda la linea
 			}
 			# EN/ES: 26/9/2026 (AUD-PACT-HOLD-MILESTONES) -- a game whose Ejercito Grande was raised before the crossing existed (an
 			#     older save): it crosses a month from now / una partida cuyo Ejercito Grande se levanto antes de que existiera el
@@ -495,6 +496,9 @@ gg_caseros.9 = {
 	}
 	immediate = {
 		debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.9|" # GG_TRAZA
+		# EN/ES: 26/9/2026 (AUD-PACT-HOLD-LEAK) -- the war of the Pronouncement is on: the line (gg_caseros.12) starts once, and
+		#     outlives this guard (the holds after the day last as long as the war) / arranca la linea una vez; dura mas que esta guardia
+		gg_pact_line_start = yes
 		if = {
 			limit = {
 				has_global_variable = gg_war_against_buenos_aires
@@ -819,6 +823,52 @@ gg_caseros.11 = {
 				}
 				debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.11| CROSSED=yes " # GG_TRAZA
 			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-LEAK) -- THE LINE, DAILY. Puts gg_pact_line_held on every general the hold restrains and
+#     takes it off the rest (gg_pact_hold_line_sync), every day while Argentina and Entre Rios are at war over the Pronouncement;
+#     the last pass takes every line off and stops. Started by gg_pact_line_start (gg_caseros.9, gg_caseros.8).
+#     Hidden, on Argentina (the one country that never changes tag).
+# ES: LA LINEA, CADA DIA. Pone gg_pact_line_held a todo general que la retencion frena y se la saca al resto, cada dia
+#     mientras la Argentina y Entre Rios esten en guerra por el Pronunciamiento; la ultima pasada saca todas y se detiene.
+#     La arranca gg_pact_line_start (gg_caseros.9, gg_caseros.8). Oculto, sobre la Argentina.
+# -------------------------------------------------------------------------------------------------
+gg_caseros.12 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		c:ARG ?= this
+	}
+	immediate = {
+		gg_pact_hold_line_sync = yes
+		# EN/ES: while the war lasts: the holds after the day last as long as the war (Codex review); the cap is the tilt's own
+		#     (gg_caseros.8 stops in 1855), not a milestone / mientras dure la guerra; el tope es el de la inclinacion, no un hito
+		if = {
+			limit = {
+				has_global_variable = gg_war_against_buenos_aires
+				NOT = { has_global_variable = gg_pact_settled }
+				exists = c:ENR
+				has_war_with = c:ENR
+				game_date < 1855.1.1
+			}
+			remove_global_variable = gg_pact_line_running # EN/ES: then set anew, so its three days restart / y de nuevo, para que sus tres dias vuelvan a correr
+			set_global_variable = { name = gg_pact_line_running days = 3 }
+			trigger_event = { id = gg_caseros.12 days = 1 }
+		}
+		else = {
+			# EN/ES: no line outlives the pulse / ninguna linea sobrevive al pulso
+			every_country = {
+				limit = { any_scope_general = { has_modifier = gg_pact_line_held } }
+				every_scope_general = {
+					limit = { has_modifier = gg_pact_line_held }
+					remove_modifier = gg_pact_line_held
+				}
+			}
+			remove_global_variable = gg_pact_line_running
+			debug_log = "GG_EV|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros.12| LINE_END=[GetGlobalVariable('gg_debug_line_held').GetValue|0] " # GG_TRAZA
 		}
 	}
 }

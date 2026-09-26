@@ -300,6 +300,27 @@ gg_rosas_army_disarray = {
 	unit_morale_recovery_mult = -0.20
 }
 
+# EN: 26/9/2026 (Juan, AUD-PACT-HOLD-LEAK) -- THE LINE OF THE PARANA, ON THE GENERAL. A general the hold of the Pact war
+#     restrains (gg_pact_front_hold: Rosas's side until the day of Caseros, Urquiza's until the Ejercito Grande crosses) carries
+#     it while the hold applies; gg_pact_hold_line_sync (gg_caseros.12, daily) puts it on for three days, renewed each day, and takes it off. Why: the advance
+#     orders' `possible` only governs the order a general TAKES -- the engine keeps an order already given and gives every
+#     general the default order (defines NMilitary DEFAULT_ORDER = "advance"), so held generals kept advancing (probe
+#     HELD_ADV 1-2 for months in the caseros runs on 271e2ec). An advancing general launches a battle when the front's
+#     advancement progress reaches 100 (BATTLE_PLAN_ADVANCE_PROGRESS_TO_LAUNCH), and that progress grows with his
+#     advancement speed: at -100 % it never does, whatever his order says. Defending and battles on the defence are
+#     untouched. Character modifier (vanilla puts modifiers on commanders: master_of_the_himalayas, tibetan_expedition.txt;
+#     character_advancement_speed_mult = -0.9 in vanilla's carlist_war_guerilla_warfare).
+# ES: LA LINEA DEL PARANA, SOBRE EL GENERAL. La lleva el general que la retencion de la guerra del Pacto frena, mientras lo
+#     frena; gg_pact_hold_line_sync la pone y la saca cada dia. Por que: el `possible` de las ordenes de avance solo gobierna
+#     la orden que el general TOMA; el motor conserva la orden ya dada y a todo general le da la orden por defecto (avanzar),
+#     asi que los generales retenidos seguian avanzando. Un general que avanza da batalla cuando el progreso de avance del
+#     frente llega a 100, y ese progreso crece con su velocidad de avance: a -100 % nunca llega, diga lo que diga su orden.
+#     Defender y pelear a la defensiva no cambian.
+gg_pact_line_held = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	character_advancement_speed_mult = -1
+}
+
 # EN/ES: presentar batalla donde el enemigo quiera / give battle where the enemy chooses
 gg_caseros_pitched_battle = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds"

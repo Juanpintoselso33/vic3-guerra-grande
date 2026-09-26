@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **The line of the Paraná holds:** before the day of Caseros Rosas's generals, and before the Ejército Grande crosses
+  Urquiza's, could still march on the enemy: the game only checks an order when a general takes it, keeps the one he
+  already has, and gives every new general the order to advance. In the last test runs one or two restrained generals
+  kept advancing for months, and in one of them Urquiza's army attacked in July 1851, lost most of its battles and
+  reached Caseros beaten. Now every general the campaign restrains carries "Hold the Line" (advancement speed −100 %),
+  checked every day: whatever his order says, he never launches an attack; he still fights when attacked, and it comes
+  off as soon as the restraint ends (the crossing, the day of Caseros, or the end of the war). Players are never
+  restrained. Games in progress: applies from the next day of the Pronouncement's war.
+
 - **Why the Pact war swung to Rosas, and three fixes at the root:** after Buenos Aires got its army, the six test runs
   gave Rosas two wars, two white peaces and Urquiza none. Three causes, read from the monthly debug lines:
   - *Generals slipping the defensive hold.* The AI picks a general's order while he is still in his headquarters, before
