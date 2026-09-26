@@ -1163,6 +1163,144 @@ gg_pact_field_army_muster = {
 	}
 }
 
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, option A of AUD-PACT-ROSAS-SMALL) -- THE ARMY OF BUENOS AIRES. In every caseros run of 26/9 Rosas came
+#     to Caseros with 3-14 battalions and 0-3 standing ones: the field army the mod raises for him against Brazil in December
+#     1850 (gg_argentina.67.a/.b) is quartered in Entre Rios and goes to Urquiza with the state on 1 May 1851 (historically
+#     right: the Ejercito de Operaciones was Urquiza's), and nothing ever raised the other one, the army of the province of
+#     Buenos Aires, concentrated at Santos Lugares. When Urquiza pronounces and Rosas answers with war (the milestone, not a
+#     date: gg_argentina.3.b/.c), Buenos Aires raises it: TEN battalions at Santos Lugares under Angel Pacheco, mobilized the
+#     next day against Entre Rios, as the Pronouncement's field army is (gg_pact_field_army_muster). Ten is the veteran half
+#     of the 22,000-25,000 of Caseros at the mod's scale (one battalion ~ 1,000 men, as the Ejercito Grande's 18 for 18,000):
+#     the militia half is the conscription Buenos Aires already raises by itself (CC_ARG 3-8 in the runs). Cavalry-heavy as it
+#     was: 4 line infantry, 5 horse, 1 artillery for the 56-60 guns. Ten is also the balance knob (Juan, 26/9: Urquiza wins
+#     about 65-75 % of the Pact wars; the lab reads the count from here). Room in the Buenos Aires barracks for exactly this
+#     army (gg_buenos_aires_army_barracks, +10; the caudillos' cap of 10 a state is full in some runs), bound to the Pact war:
+#     it goes when the war does (gg_santos_lugares_room_end), not on a timer. Its AI keeps it while the war lasts through
+#     the wanted army of the Plata strategies Argentina always holds (common/ai_strategies/gg_rio_plata.txt), the rule of
+#     Entre Rios and Corrientes (AUD-PACT-WANT-LAGS: wanted army = barracks levels). Rosas's defensive hold until Caseros is
+#     untouched (gg_pact_front_hold). Country scope (Argentina).
+# ES: EL EJERCITO DE BUENOS AIRES. En todas las corridas de caseros del 26/9 Rosas llegaba a Caseros con 3-14 batallones y
+#     0-3 permanentes: el ejercito de campania que el mod le levanta contra el Brasil en diciembre de 1850 esta acuartelado en
+#     Entre Rios y se va con Urquiza el 1/5/1851 (historicamente bien: el Ejercito de Operaciones era de Urquiza), y nada
+#     levantaba nunca el otro, el de la provincia de Buenos Aires, concentrado en Santos Lugares. Cuando Urquiza se pronuncia
+#     y Rosas contesta con la guerra (el hito, no una fecha), Buenos Aires lo levanta: DIEZ batallones en Santos Lugares al
+#     mando de Angel Pacheco, movilizados al dia siguiente contra Entre Rios. Diez es la mitad veterana de los 22.000-25.000
+#     de Caseros a la escala del mod (un batallon ~ 1.000 hombres); la mitad miliciana es la conscripcion que Buenos Aires ya
+#     levanta sola. Con mucha caballeria, como era: 4 de infanteria de linea, 5 de caballeria, 1 de artilleria por los 56-60
+#     canones. Diez es tambien la perilla del balance (Urquiza gana ~65-75 % de las guerras del Pacto). Lugar en los cuarteles
+#     de Buenos Aires para este ejercito, atado a la guerra del Pacto (se va con ella, no con un plazo). Su IA lo conserva
+#     mientras dura la guerra por el ejercito deseado de las estrategias del Plata. La retencion defensiva de Rosas no cambia.
+# SOURCE / FUENTE: Agustin Galimberti, «Los ultimos soldados del Restaurador. Movilizacion militar y miliciana hacia el
+#     ocaso del rosismo», Revista Universitaria de Historia Militar (ruhm.es), n. 4: «entre los 22.000 y los 25.000 hombres
+#     en armas... de 12.000 a 15.000 efectivos de caballeria y entre 8.000 y 10.000 de infanteria, acompaniados por 56 a 60
+#     piezas de artilleria... Aproximadamente la mitad del total de las fuerzas era veterana y el resto miliciana»;
+#     Canciani, Rabinovich y Zubizarreta, «La batalla de Caseros» (ASAIH, 3/2/2022): the army of the province, «con la mayor
+#     parte de las milicias de la campania bonaerense y algunas fuerzas de Linea que Rosas mantenia reunidas en su cuartel de
+#     Santos Lugares»; es.wikipedia «Batalla de Caseros» (10,000 infantry, 12,000 horse, 60 guns); La Gazeta Federal,
+#     «Batalla de Caseros» (Pacheco commanding the army of the province until his resignation).
+# -------------------------------------------------------------------------------------------------
+gg_pact_buenos_aires_army = {
+	debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_buenos_aires_army|" # GG_TRAZA
+	if = {
+		limit = {
+			c:ARG ?= this
+			NOT = { has_global_variable = gg_santos_lugares_raised }
+		}
+		set_global_variable = gg_santos_lugares_raised
+		# EN/ES: the war is declared in the same option; the room is not taken back before it is on the board
+		#     (gg_santos_lugares_room_end) / la guerra se declara en la misma opcion; el lugar no se saca antes de que exista
+		set_global_variable = { name = gg_santos_lugares_fresh days = 30 }
+		clear_saved_scope = gg_santos_lugares_state
+		if = {
+			limit = { exists = s:STATE_BUENOS_AIRES.region_state:ARG }
+			s:STATE_BUENOS_AIRES.region_state:ARG = { save_scope_as = gg_santos_lugares_state }
+		}
+		else = {
+			gg_select_formation_hq_state = yes
+			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { save_scope_as = gg_santos_lugares_state } }
+		}
+		if = {
+			limit = { exists = scope:gg_santos_lugares_state }
+			scope:gg_santos_lugares_state = {
+				if = {
+					limit = { NOT = { has_modifier = gg_buenos_aires_army_barracks } }
+					add_modifier = { name = gg_buenos_aires_army_barracks }
+				}
+			}
+			clear_saved_scope = gg_santos_lugares_army
+			create_military_formation = {
+				type = army
+				hq_region = scope:gg_santos_lugares_state.region
+				name = gg_arg_ejercito_santos_lugares
+				save_scope_as = gg_santos_lugares_army
+				combat_unit = { type = unit_type:combat_unit_type_line_infantry state_region = scope:gg_santos_lugares_state.state_region count = 4 }
+				combat_unit = { type = unit_type:combat_unit_type_hussars state_region = scope:gg_santos_lugares_state.state_region count = 5 }
+				combat_unit = { type = unit_type:combat_unit_type_cannon_artillery state_region = scope:gg_santos_lugares_state.state_region count = 1 }
+			}
+		}
+		if = {
+			limit = { exists = scope:gg_santos_lugares_army }
+			gg_santos_lugares_commander = { ARMY = scope:gg_santos_lugares_army }
+			add_to_global_variable_list = { name = gg_sl_probe_army target = scope:gg_santos_lugares_army }
+			# EN/ES: troops of the line, not recruits: mustered fast, mobilized the next day / tropa de linea: reunion rapida y
+			#     movilizada al dia siguiente
+			gg_ejercito_grande_muster = yes
+			gg_mobilize_next_day = { ARMY = scope:gg_santos_lugares_army ENEMY = c:ENR }
+		}
+		# EN/ES: its AI keeps it: the Plata strategy is put back if the AI re-rolled it / su IA lo conserva
+		gg_plata_rosas_stance_apply = yes
+	}
+}
+
+# EN: the commander of the army of Buenos Aires: Angel Pacheco while he holds his command (gg_argentina.40 strips it two days
+#     before Caseros), otherwise Martiniano Chilavert, who commanded the Rosista centre and artillery at Caseros; created once
+#     and reused. Argentina's scope.
+# ES: el jefe del ejercito de Buenos Aires: Pacheco mientras tenga el mando; si no, Chilavert, que mando el centro y la
+#     artilleria rosista en Caseros; se crea una vez y se reutiliza. Scope de la Argentina.
+# SOURCE / FUENTE: es.wikipedia «Martiniano Chilavert» (Buenos Aires 16/10/1798 - Caseros 4/2/1852); en.wikipedia «Battle of
+#     Caseros» (Chilavert's centre, the last to fight).
+gg_santos_lugares_commander = {
+	clear_saved_scope = gg_sl_chief
+	random_scope_character = {
+		limit = {
+			has_template = ARG_Angel_Pacheco
+			is_ruler_of_own_country = no
+			NOT = { has_global_variable = gg_arg_cal_done_9 }
+		}
+		save_scope_as = gg_sl_chief
+	}
+	if = {
+		limit = { NOT = { exists = scope:gg_sl_chief } }
+		if = {
+			limit = { NOT = { any_scope_character = { has_variable = gg_chilavert_chief } } }
+			create_character = {
+				first_name = "Martiniano"
+				# EN/ES: a loc key, as gg_name_marques_de_sousa (AUD-ERR-LOAD; Codex review) / clave de localizacion
+				last_name = gg_name_chilavert
+				historical = yes
+				birth_date = 1798.10.16
+				is_general = yes
+				interest_group = ig_armed_forces
+				ideology = ideology_moderate
+				culture = primary_culture
+				religion = rel:catholic
+				traits = { persistent }
+				save_scope_as = gg_new_commander
+			}
+			scope:gg_new_commander = { set_variable = gg_chilavert_chief }
+		}
+		random_scope_character = {
+			limit = { has_variable = gg_chilavert_chief }
+			save_scope_as = gg_sl_chief
+		}
+	}
+	scope:gg_sl_chief ?= {
+		if = { limit = { NOT = { has_role_of_type = general } } add_character_role = general }
+		transfer_to_formation = $ARMY$
+	}
+}
+
 # EN/ES: state scope / scope de estado
 gg_ejercito_grande_barracks_room = {
 	if = {

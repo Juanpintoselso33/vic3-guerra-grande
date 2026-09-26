@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **Buenos Aires raises its army for Caseros:** in every recent test run Rosas reached Caseros with 3–14 battalions and
+  almost no standing ones, and lost every battle. The field army the mod raises for him against Brazil in December 1850
+  is quartered in Entre Ríos and, as in history, goes over to Urquiza with the province; nothing ever raised the other
+  one, the army of the province of Buenos Aires. Now, when Rosas answers the Pronouncement with war, Buenos Aires gathers
+  ten battalions of the line at Santos Lugares under Ángel Pacheco (four infantry, five cavalry, one artillery),
+  mobilized at once, with room in the Buenos Aires barracks for as long as the war lasts. Ten is the veteran half of the
+  22,000–25,000 men of Caseros at the mod's scale; the militia half is the conscription Buenos Aires already raises. Its
+  AI keeps that army while the war lasts, as Entre Ríos and Corrientes keep theirs, and Rosas still waits on the
+  defensive until the day. If Pacheco resigns before Caseros the army passes to Martiniano Chilavert instead of being left
+  without a commander. A yearly debug line now records Buenos Aires's barracks, its AI's wanted army, money and debt from
+  1836, to find out why its AI cuts the army it starts with. Games in progress: applies to a Pronouncement not yet
+  answered.
+
 - **The Ejército Grande is no longer disbanded while it musters:** in the six test runs on the last version Urquiza won
   five wars in six, but Entre Ríos's AI still dismantled its barracks — never its conscripts — and the Ejército Grande
   lost half its battalions within a month of being raised. The province's wish was counted in battalions that already

@@ -31,6 +31,14 @@ gg_ai_strategy_plata_open = {
 			}
 		}
 	}
+	# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- while the war of the Pronouncement lasts Buenos Aires keeps the army it has
+	#     (gg_pact_field_army_wanted, common/script_values/gg_caseros.txt; 0 otherwise). Argentina's AI always holds one of these
+	#     three (gg_plata_rosas_stance_apply), and wanted_army_size adds across strategies as in the provinces' diplomatic ones
+	#     / mientras dura la guerra del Pronunciamiento Buenos Aires conserva el ejercito que tiene; la IA argentina siempre
+	#     tiene una de estas tres
+	wanted_army_size = {
+		value = gg_pact_field_army_wanted
+	}
 	possible = { c:ARG ?= this }
 	weight = { value = 0 }
 }
@@ -56,6 +64,14 @@ gg_ai_strategy_plata_closed = {
 			}
 		}
 	}
+	# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- while the war of the Pronouncement lasts Buenos Aires keeps the army it has
+	#     (gg_pact_field_army_wanted, common/script_values/gg_caseros.txt; 0 otherwise). Argentina's AI always holds one of these
+	#     three (gg_plata_rosas_stance_apply), and wanted_army_size adds across strategies as in the provinces' diplomatic ones
+	#     / mientras dura la guerra del Pronunciamiento Buenos Aires conserva el ejercito que tiene; la IA argentina siempre
+	#     tiene una de estas tres
+	wanted_army_size = {
+		value = gg_pact_field_army_wanted
+	}
 	possible = { c:ARG ?= this }
 	weight = { value = 0 }
 }
@@ -80,6 +96,14 @@ gg_ai_strategy_plata_enemies = {
 				if = { limit = { scope:strait = { type = strait_type:strait_rio_de_la_plata } } add = 1000 }
 			}
 		}
+	}
+	# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- while the war of the Pronouncement lasts Buenos Aires keeps the army it has
+	#     (gg_pact_field_army_wanted, common/script_values/gg_caseros.txt; 0 otherwise). Argentina's AI always holds one of these
+	#     three (gg_plata_rosas_stance_apply), and wanted_army_size adds across strategies as in the provinces' diplomatic ones
+	#     / mientras dura la guerra del Pronunciamiento Buenos Aires conserva el ejercito que tiene; la IA argentina siempre
+	#     tiene una de estas tres
+	wanted_army_size = {
+		value = gg_pact_field_army_wanted
 	}
 	possible = { c:ARG ?= this }
 	weight = { value = 0 }

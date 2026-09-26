@@ -229,6 +229,68 @@ gg_pact_war_probe = {
 			every_combat_unit = { change_global_variable = { name = gg_debug_probe_bn_oridiv add = 1 } }
 		}
 		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_pact_war_probe| ARMY REG_ARG=[GetGlobalVariable('gg_debug_probe_reg_arg').GetValue|0] REG_ENR=[GetGlobalVariable('gg_debug_probe_reg_enr').GetValue|0] CRR=[GetGlobalVariable('gg_debug_probe_bn_crr').GetValue|0] BRK_ENR=[GetGlobalVariable('gg_debug_probe_brk_enr').GetValue|0] CC_ENR=[GetGlobalVariable('gg_debug_probe_cc_enr').GetValue|0] WANT_ENR=[GetGlobalVariable('gg_debug_probe_want_enr').GetValue|0] STRAT_ENR=[GetGlobalVariable('gg_debug_probe_strat_enr').GetValue|0] GOLD_ENR=[GetGlobalVariable('gg_debug_probe_gold_enr').GetValue|0] DEBT_ENR=[GetGlobalVariable('gg_debug_probe_debt_enr').GetValue|0] EG=[GetGlobalVariable('gg_debug_probe_bn_eg').GetValue|0] BRZDIV=[GetGlobalVariable('gg_debug_probe_bn_brzdiv').GetValue|0] ORIDIV=[GetGlobalVariable('gg_debug_probe_bn_oridiv').GetValue|0] BRK_ARG=[GetGlobalVariable('gg_debug_probe_brk_arg').GetValue|0] CC_ARG=[GetGlobalVariable('gg_debug_probe_cc_arg').GetValue|0] " # GG_TRAZA
+		# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- Buenos Aires's own line: its AI's wish, money and the army of Santos Lugares
+		#     / la linea de Buenos Aires: deseo de su IA, plata y el ejercito de Santos Lugares
+		gg_arg_army_probe = { WHEN = pact }
+	}
+}
+
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (Juan, AUD-PACT-ROSAS-SMALL) -- WHY BUENOS AIRES CUTS ITS ARMY, for the trace. Between 1836 and 1851 Buenos
+#     Aires's barracks fall from 6 to 0-3 and no script touches them; the hypothesis is the engine's AI: the wish of the
+#     playset (Kuromi's/Knowledgeable AI, kai_script_values.txt: tope num_states x 4) and the money (1845: money 0). One line
+#     with what closes it: BRK_ARG/CC_ARG Argentina's barracks and conscription-centre levels, BRK_BA those of the Buenos
+#     Aires state, REG_ARG its standing battalions (army_size), WANT_ARG the army its AI wants (the default strategy's
+#     wanted_army_size_script_value plus gg_pact_field_army_wanted when it holds a Plata strategy, STRAT_ARG 1), GOLD_ARG and
+#     DEBT_ARG (hundredths of the ceiling), SL the battalions left in the army of Santos Lugares. Monthly in the Pact war
+#     (WHEN=pact, gg_pact_war_probe) and once a year from 1836 (WHEN=year, gg_arg_army_sample). Trace only; changes nothing.
+# ES: POR QUE BUENOS AIRES RECORTA SU EJERCITO, para la traza. Entre 1836 y 1851 los cuarteles de Buenos Aires bajan de 6 a
+#     0-3 sin que ningun script los toque; la hipotesis es la IA del motor: el deseo del playset y la plata. Una linea con lo
+#     que la cierra: cuarteles y centros de la Argentina y del estado de Buenos Aires, permanentes, deseo de la IA, oro,
+#     deuda y lo que queda del ejercito de Santos Lugares. Cada mes en la guerra del Pacto y una vez por anio desde 1836.
+# -------------------------------------------------------------------------------------------------
+gg_arg_army_probe = {
+	c:ARG ?= {
+		set_global_variable = { name = gg_debug_arg_brk value = 0 }
+		set_global_variable = { name = gg_debug_arg_cc value = 0 }
+		set_global_variable = { name = gg_debug_arg_brk_ba value = 0 }
+		set_global_variable = { name = gg_debug_arg_strat value = 0 }
+		set_global_variable = { name = gg_debug_arg_sl value = 0 }
+		every_scope_building = {
+			limit = { is_building_type = building_barrack }
+			change_global_variable = { name = gg_debug_arg_brk add = this.level }
+		}
+		every_scope_building = {
+			limit = { is_building_type = building_conscription_center }
+			change_global_variable = { name = gg_debug_arg_cc add = this.level }
+		}
+		s:STATE_BUENOS_AIRES.region_state:ARG ?= {
+			every_scope_building = {
+				limit = { is_building_type = building_barrack }
+				change_global_variable = { name = gg_debug_arg_brk_ba add = this.level }
+			}
+		}
+		set_global_variable = { name = gg_debug_arg_reg value = army_size }
+		set_global_variable = { name = gg_debug_arg_want value = wanted_army_size_script_value }
+		if = {
+			limit = {
+				OR = {
+					has_strategy = gg_ai_strategy_plata_open
+					has_strategy = gg_ai_strategy_plata_closed
+					has_strategy = gg_ai_strategy_plata_enemies
+				}
+			}
+			set_global_variable = { name = gg_debug_arg_strat value = 1 }
+			change_global_variable = { name = gg_debug_arg_want add = gg_pact_field_army_wanted }
+		}
+		set_global_variable = { name = gg_debug_arg_gold value = gold_reserves }
+		set_global_variable = { name = gg_debug_arg_debt value = scaled_debt }
+		change_global_variable = { name = gg_debug_arg_debt multiply = 100 }
+		every_in_global_list = {
+			variable = gg_sl_probe_army
+			every_combat_unit = { change_global_variable = { name = gg_debug_arg_sl add = 1 } }
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_army_probe| WHEN=$WHEN$ BRK_ARG=[GetGlobalVariable('gg_debug_arg_brk').GetValue|0] BRK_BA=[GetGlobalVariable('gg_debug_arg_brk_ba').GetValue|0] CC_ARG=[GetGlobalVariable('gg_debug_arg_cc').GetValue|0] REG_ARG=[GetGlobalVariable('gg_debug_arg_reg').GetValue|0] WANT_ARG=[GetGlobalVariable('gg_debug_arg_want').GetValue|0] STRAT_ARG=[GetGlobalVariable('gg_debug_arg_strat').GetValue|0] GOLD_ARG=[GetGlobalVariable('gg_debug_arg_gold').GetValue|0] DEBT_ARG=[GetGlobalVariable('gg_debug_arg_debt').GetValue|0] SL=[GetGlobalVariable('gg_debug_arg_sl').GetValue|0] " # GG_TRAZA
 	}
 }
 

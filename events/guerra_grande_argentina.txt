@@ -352,6 +352,10 @@ gg_argentina.3 = {
 		# EN/ES: 26/9/2026 (Juan, AUD-PACT-ROSAS-INVADES) -- Urquiza's army takes the field (gg_pact_field_army_muster)
 		#     / el ejercito de Urquiza sale a campania
 		hidden_effect = { c:ENR ?= { gg_pact_field_army_muster = yes } }
+		# EN/ES: 26/9/2026 (Juan, option A of AUD-PACT-ROSAS-SMALL) -- Buenos Aires raises its army at Santos Lugares
+		#     (gg_pact_buenos_aires_army) / Buenos Aires levanta su ejercito en Santos Lugares
+		custom_tooltip = gg_pact_buenos_aires_army_tt
+		hidden_effect = { gg_pact_buenos_aires_army = yes }
 		ai_chance = { base = 80 }
 	}
 
@@ -388,6 +392,8 @@ gg_argentina.3 = {
 		custom_tooltip = gg_pact_war_hold_tt # EN/ES: 25/9 (AUD-PACT-EARLY) -- as in 3.b / como en 3.b
 		hidden_effect = { trigger_event = { id = gg_caseros.9 days = 1 } }
 		hidden_effect = { c:ENR ?= { gg_pact_field_army_muster = yes } } # EN/ES: 26/9 (AUD-PACT-ROSAS-INVADES) -- as in 3.b / como en 3.b
+		custom_tooltip = gg_pact_buenos_aires_army_tt # EN/ES: 26/9 (AUD-PACT-ROSAS-SMALL) -- as in 3.b / como en 3.b
+		hidden_effect = { gg_pact_buenos_aires_army = yes }
 		ai_chance = { base = 0 }
 		custom_tooltip = gg_play_as_entre_rios_tt
 		# EN/ES: 23/9 (preview audit) -- Entre Rios does not exist yet when the preview is built
@@ -2735,6 +2741,9 @@ gg_argentina.40 = {
 				limit = { has_template = ARG_Angel_Pacheco }
 				if = {
 					limit = { exists = this.commander_military_formation }
+					# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- the army he leaves is not left without a chief two days before
+					#     the day (gg_santos_lugares_commander, below) / el ejercito que deja no queda sin jefe
+					this.commander_military_formation = { save_scope_as = gg_pacheco_army }
 					unassign_from_formation = yes
 				}
 				# EN/ES: se le saca el mando y nada mas. remove_all = yes en vanilla viene siempre
@@ -2749,6 +2758,11 @@ gg_argentina.40 = {
 			if = {
 				limit = { NOT = { has_global_variable = gg_arg_cal_done_9 } }
 				set_global_variable = gg_arg_cal_done_9
+			}
+			# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- after the mark, so Pacheco is not picked again / despues de la marca
+			if = {
+				limit = { exists = scope:gg_pacheco_army }
+				gg_santos_lugares_commander = { ARMY = scope:gg_pacheco_army }
 			}
 		}
 	}

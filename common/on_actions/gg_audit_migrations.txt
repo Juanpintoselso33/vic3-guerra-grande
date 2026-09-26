@@ -404,6 +404,42 @@ on_monthly_pulse = {
 		gg_siege_guns_state_migration
 		gg_president_railroad_end
 		gg_war_against_buenos_aires_end
+		gg_arg_army_sample
+		gg_santos_lugares_room_end
+	}
+}
+
+# EN: 26/9/2026 (AUD-PACT-ROSAS-SMALL; Codex review) -- the room for the army of Santos Lugares (gg_buenos_aires_army_barracks)
+#     goes with the war between Buenos Aires and Entre Rios, the month it ends, whatever other war either one is in: not
+#     with gg_war_against_buenos_aires_end, which waits for the Pact to settle and for Entre Rios to be at no war at all.
+# ES: el lugar del ejercito de Santos Lugares se va con la guerra entre Buenos Aires y Entre Rios, el mes en que termina,
+#     este quien este en otra guerra.
+gg_santos_lugares_room_end = {
+	trigger = {
+		has_global_variable = gg_santos_lugares_raised
+		NOT = { has_global_variable = gg_santos_lugares_fresh }
+		any_state = { has_modifier = gg_buenos_aires_army_barracks }
+		NOT = { c:ARG ?= { exists = c:ENR has_war_with = c:ENR } }
+	}
+	effect = {
+		debug_log = "GG_OA|[TimeKeeper.GetCurrentDate.GetString]|gg_santos_lugares_room_end" # GG_TRAZA
+		every_state = {
+			limit = { has_modifier = gg_buenos_aires_army_barracks }
+			remove_modifier = gg_buenos_aires_army_barracks
+		}
+	}
+}
+
+# EN/ES: 26/9/2026 (AUD-PACT-ROSAS-SMALL) -- Buenos Aires's army once a year from 1836, for the trace (gg_arg_army_probe)
+#     / el ejercito de Buenos Aires una vez por anio desde 1836, para la traza
+gg_arg_army_sample = {
+	trigger = {
+		exists = c:ARG
+		NOT = { has_global_variable = gg_arg_army_sample_wait }
+	}
+	effect = {
+		set_global_variable = { name = gg_arg_army_sample_wait days = 360 }
+		gg_arg_army_probe = { WHEN = year }
 	}
 }
 

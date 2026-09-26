@@ -155,8 +155,19 @@ gg_pact_keeps_field_army = {
 	exists = c:ARG
 	has_global_variable = gg_war_against_buenos_aires
 	OR = {
-		c:ENR ?= this
-		c:CRR ?= this
+		AND = {
+			OR = {
+				c:ENR ?= this
+				c:CRR ?= this
+			}
+			has_war_with = c:ARG
+		}
+		# EN/ES: 26/9/2026 (Juan, option A of AUD-PACT-ROSAS-SMALL) -- and Buenos Aires, the same rule, through its Plata
+		#     strategies (common/ai_strategies/gg_rio_plata.txt) / y Buenos Aires, la misma regla
+		AND = {
+			c:ARG ?= this
+			exists = c:ENR
+			has_war_with = c:ENR
+		}
 	}
-	has_war_with = c:ARG
 }

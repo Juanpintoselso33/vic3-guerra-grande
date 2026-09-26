@@ -186,6 +186,19 @@ gg_ejercito_grande_barracks = {
 	state_building_barrack_max_level_add = 40
 }
 
+# EN: 26/9/2026 (Juan, option A of AUD-PACT-ROSAS-SMALL) -- room in the Buenos Aires barracks for the army of the province,
+#     raised at Santos Lugares when Rosas answers the Pronouncement with war (gg_pact_buenos_aires_army,
+#     common/scripted_effects/zz_guerra_grande_argentina.txt): exactly its ten battalions, so the caudillos' cap of 10 a
+#     state (full in some runs) does not drop them. Bound to the Pact war, not a timer: gg_santos_lugares_room_end
+#     removes it the month the war ends, and the barracks above the cap go with it (the army of Caseros was disbanded). Not a figure.
+# ES: lugar en los cuarteles de Buenos Aires para el ejercito de la provincia levantado en Santos Lugares: justo sus diez
+#     batallones, asi el tope de caudillos (10 por estado, lleno en algunas corridas) no los descarta. Atado a la guerra del
+#     Pacto, no a un plazo: se saca con la guerra, y los cuarteles por encima del tope se van con el. No es una cifra.
+gg_buenos_aires_army_barracks = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds"
+	state_building_barrack_max_level_add = 10
+}
+
 # EN: 25/9/2026 (Juan, AUD-EG-EMPTY: the Ejercito Grande «with its historical strength») -- new battalions are born with
 #     no men and fill over months (common/scripted_effects/gg_troops.txt). The 18,000 of Entre Rios and the allied
 #     divisions were troops already under arms in 1851, not recruits: they are mustered fast, with the answer the mod
