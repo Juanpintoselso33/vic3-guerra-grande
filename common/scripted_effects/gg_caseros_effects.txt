@@ -11,3 +11,60 @@ gg_caseros_notify_urquiza = {
 		}
 	}
 }
+
+# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-CASEROS-WAR) -- who carried the day of Caseros (gg_caseros.10) and what carried it. WINNER and
+#     LOSER are the two countries, VALUE is gg_caseros_battle (1 Urquiza, 2 Rosas), SIGN turns the reckoning to the
+#     winner's side (1 Urquiza, -1 Rosas). The caller logs GG_OPC gg_caseros.10.a/.b. What carried it is the part of
+#     the reckoning (gg_caseros_day_battles/_ground/_numbers/_spirit) that weighed most for the winner; a near-tie
+#     (gg_caseros_tie) was carried by fortune. The winner and the loser see it for a year.
+# ES: quien se llevo la jornada de Caseros y que se la dio: la parte de la cuenta que mas peso para el ganador; un
+#     empate lo decidio la suerte. Ganador y perdedor lo ven durante un ano.
+# -------------------------------------------------------------------------------------------------
+gg_caseros_day_decide = {
+	set_global_variable = { name = gg_caseros_battle value = $VALUE$ }
+	set_global_variable = { name = gg_caseros_w_battles value = global_var:gg_caseros_c_battles }
+	set_global_variable = { name = gg_caseros_w_ground value = global_var:gg_caseros_c_ground }
+	set_global_variable = { name = gg_caseros_w_numbers value = global_var:gg_caseros_c_numbers }
+	set_global_variable = { name = gg_caseros_w_spirit value = global_var:gg_caseros_c_spirit }
+	change_global_variable = { name = gg_caseros_w_battles multiply = $SIGN$ }
+	change_global_variable = { name = gg_caseros_w_ground multiply = $SIGN$ }
+	change_global_variable = { name = gg_caseros_w_numbers multiply = $SIGN$ }
+	change_global_variable = { name = gg_caseros_w_spirit multiply = $SIGN$ }
+	if = {
+		limit = { has_global_variable = gg_caseros_tie }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=fortune " # GG_TRAZA
+		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried years = 1 } }
+		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost years = 1 } }
+	}
+	else_if = {
+		limit = {
+			global_var:gg_caseros_w_battles >= global_var:gg_caseros_w_ground
+			global_var:gg_caseros_w_battles >= global_var:gg_caseros_w_numbers
+			global_var:gg_caseros_w_battles >= global_var:gg_caseros_w_spirit
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=battles " # GG_TRAZA
+		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried_battles years = 1 } }
+		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost_battles years = 1 } }
+	}
+	else_if = {
+		limit = {
+			global_var:gg_caseros_w_ground >= global_var:gg_caseros_w_numbers
+			global_var:gg_caseros_w_ground >= global_var:gg_caseros_w_spirit
+		}
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=ground " # GG_TRAZA
+		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried_ground years = 1 } }
+		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost_ground years = 1 } }
+	}
+	else_if = {
+		limit = { global_var:gg_caseros_w_numbers >= global_var:gg_caseros_w_spirit }
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=numbers " # GG_TRAZA
+		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried_numbers years = 1 } }
+		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost_numbers years = 1 } }
+	}
+	else = {
+		debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_caseros_day_decide| BY=spirit " # GG_TRAZA
+		$WINNER$ ?= { add_modifier = { name = gg_caseros_day_carried_spirit years = 1 } }
+		$LOSER$ ?= { add_modifier = { name = gg_caseros_day_lost_spirit years = 1 } }
+	}
+}

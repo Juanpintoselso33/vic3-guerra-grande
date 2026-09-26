@@ -1,0 +1,82 @@
+﻿# -------------------------------------------------------------------------------------------------
+# EN: 25/9/2026 (Juan, AUD-CASEROS-WAR) -- THE DAY OF CASEROS IS DECIDED BY THE WAR AS IT WAS FOUGHT. gg_caseros.10 reads
+#     the engine's own facts of the war between Buenos Aires and Entre Rios into the gg_caseros_in_* globals (battles
+#     lost, ground under the enemy, battalions under arms, war support) and these four values weigh them. Positive is
+#     Urquiza's, negative Rosas's. The day goes to whoever leads by gg_caseros_decisive or more; closer than that is a
+#     near-tie and only then fortune decides (gg_caseros.10). The Pact lab (tools/lab_balance/pacto.py) reads every
+#     number of this file, and the tooltips gg_argentina.41.*_day_tt say the ones the player can move.
+#       - battles: the share of the war's fighting (weighted by the men engaged) each side lost, from the engine
+#         (size_weighted_lost_battles_fraction); a war whose battles all went one way is worth 40;
+#       - ground: the weighted share of each country under the enemy (enemy_occupation, the engine's own measure), 30
+#         for all of it; Buenos Aires in the enemy's hands 15, Rosas's Santa Fe 5, Entre Rios 15 the other way; and the
+#         field Rosas chose: manoeuvring away from battle 10 for him, holding the city 5;
+#       - numbers: each side's battalions under arms, raised conscripts included (army_size_including_raised_conscripts),
+#         20 for all of them on one side; Brazil's division and the Oriental one marching complete 10 for Urquiza,
+#         Urquiza marching without the allies 10 for Rosas (their battalions are not Entre Rios's, so they count here);
+#       - spirit: each side's war support in bands of 25 (above 0, 25, 50, 75), 5 a band of difference.
+# ES: LA JORNADA DE CASEROS LA DECIDE LA GUERRA COMO SE PELEO. gg_caseros.10 lee los hechos del motor (batallas perdidas,
+#     suelo en manos enemigas, batallones en armas, apoyo a la guerra) y estos cuatro valores los pesan. Positivo es de
+#     Urquiza, negativo de Rosas. Se lleva la jornada quien saca gg_caseros_decisive o mas; mas parejo que eso es un
+#     empate y solo ahi decide la suerte. El laboratorio del Pacto lee cada numero de este archivo.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «Caseros» [D]: ~22.000-25.000 de Rosas contra al
+#     menos 24.000 de Urquiza (3.500 brasilenos y 1.500 uruguayos) -- two armies of like size; the day was decided by the
+#     Rosista army's disarray (Pacheco's resignation, the Santa Fe and Rosario defections), which is what the ground held
+#     and the war support measure here. DESIGN / DISENO: the weights are game scale, tuned with the Pact lab.
+# -------------------------------------------------------------------------------------------------
+
+# EN/ES: the lead that decides the day without fortune / la ventaja que decide la jornada sin la suerte
+gg_caseros_decisive = 10
+
+# EN/ES: within a near-tie, from this lead the side ahead has fortune 70/30; below it, an even roll (gg_caseros.10)
+#     / dentro del empate, desde esta ventaja el que va adelante tiene la suerte 70/30; debajo, una tirada pareja
+gg_caseros_close = 5
+
+# EN/ES: the battles of this war / las batallas de esta guerra
+gg_caseros_day_battles = {
+	value = global_var:gg_caseros_in_lost_arg
+	subtract = global_var:gg_caseros_in_lost_enr
+	multiply = 0.4
+}
+
+# EN/ES: the ground each side holds, and the field Rosas chose / el suelo que tiene cada lado y el campo que eligio Rosas
+gg_caseros_day_ground = {
+	value = global_var:gg_caseros_in_occ_arg
+	subtract = global_var:gg_caseros_in_occ_enr
+	multiply = 0.3
+	if = { limit = { global_var:gg_caseros_in_ba = 1 } add = 15 }
+	if = { limit = { global_var:gg_caseros_in_sf = 1 } add = 5 }
+	if = { limit = { global_var:gg_caseros_in_er = 1 } add = -15 }
+	if = { limit = { global_var:gg_caseros_choice ?= 2 } add = -10 }
+	if = { limit = { global_var:gg_caseros_choice ?= 3 } add = -5 }
+}
+
+# EN/ES: the troops under arms, and the allies / las tropas en armas y los aliados
+gg_caseros_day_numbers = {
+	value = 0
+	if = {
+		limit = { global_var:gg_caseros_in_bn_all > 0 }
+		add = {
+			value = global_var:gg_caseros_in_bn_enr
+			divide = global_var:gg_caseros_in_bn_all
+			subtract = 0.5
+			multiply = 40
+		}
+	}
+	if = { limit = { has_global_variable = gg_ejercito_grande_full_terms } add = 10 }
+	if = { limit = { has_global_variable = gg_ejercito_grande_alone } add = -10 }
+}
+
+# EN/ES: the spirit of each camp / el animo de cada campo
+gg_caseros_day_spirit = {
+	value = global_var:gg_caseros_in_ws_enr
+	subtract = global_var:gg_caseros_in_ws_arg
+	multiply = 5
+}
+
+# EN/ES: the reckoning of the day: positive Urquiza, negative Rosas / la cuenta de la jornada: positivo Urquiza, negativo Rosas
+gg_caseros_day_score = {
+	value = gg_caseros_day_battles
+	add = gg_caseros_day_ground
+	add = gg_caseros_day_numbers
+	add = gg_caseros_day_spirit
+}

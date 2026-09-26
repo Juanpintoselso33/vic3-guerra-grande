@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+- **Neither side of the Pronouncement war can break before Caseros, now for real:** in a test run Rosas abandoned Oribe
+  (the answer to the Montevideo convention, May 1851) and the next day Buenos Aires capitulated to Entre Ríos: that answer
+  took 1,000 war support from Buenos Aires at once, which no weekly guard could stop. Abandoning Oribe now makes Buenos
+  Aires's ranks start falling apart (-40 war support a month, as when the Ejército Grande marches), held up until the
+  summer of 1852 and decisive after it. The guard itself is now a true floor, checked daily: until 3/2/1852 the war
+  support of Entre Ríos and of Buenos Aires is put back between 50 and 75 whenever it falls under 50 (before, a side at -90
+  was only lifted to -40, and in another run Buenos Aires capitulated nine days before Caseros). Games in progress: the
+  guard switches to daily at its next weekly check.
+
+- **The day of Caseros is decided by the war, not by a dice roll:** until now the day was a weighted roll (the Ejército
+  Grande 70 against Buenos Aires 30). Now, when Rosas answers the hour of Caseros, the day goes to whoever the war has
+  favoured: the battles each side has lost in this war (weighted by the men engaged), the ground each holds (Buenos Aires,
+  Santa Fe and Entre Ríos, and the share of each country under the enemy), the battalions under arms and each camp's war
+  support, plus the allies' terms (complete +10 for Urquiza, Urquiza alone +10 for Rosas) and the field Rosas chose
+  (manoeuvre +10 for him, holding the city +5). A lead of 10 decides the day; closer than that is a near-tie, and only then
+  does fortune decide (70/30 for the side ahead by 5 or more, even below). The winner still takes the monthly tilt, the
+  guard still holds until 3/2/1852, and both sides now see for a year what carried the day: the battles, the ground held,
+  the troops, the spirit of the camp, or fortune. Only under the dynamic Pact rule. Every input is written to the debug
+  log so test runs can calibrate the reckoning. Lab (AI, the engine's part not yet measured, assumed even): Urquiza wins
+  about 60 % of the Pact wars and Buenos Aires holds about 38 % of the days of Caseros. Games in progress: a day already
+  rolled stays as it was; a war past Caseros without one is decided at its next monthly tilt.
+
 - **The Brazilian division marches with Urquiza, without a script error:** in two test runs the division of the
   Ejército Grande that Brazil raises was refused by `deploy_to_front` ("is already being deployed to" that front): the
   Brazilian AI had mobilized it during the week, while the mod was still waiting for its battalions, and sent it to the

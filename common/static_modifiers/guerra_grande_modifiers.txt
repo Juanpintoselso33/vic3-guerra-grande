@@ -330,6 +330,58 @@ gg_caseros_day_lost = {
 	unit_morale_loss_mult = 0.10
 }
 
+# EN/ES: 25/9/2026 (AUD-CASEROS-WAR) -- the day decided by the war itself (gg_caseros_day_decide): the same weight as
+#     above, and the name of what carried it -- the battles, the ground held, the troops, the spirit of the camp. The two
+#     above are now the near-tie, carried by fortune / la jornada decidida por la guerra: el mismo peso, y el nombre de lo
+#     que la decidio; los dos de arriba quedan para el empate que decide la suerte
+gg_caseros_day_carried_battles = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+}
+
+gg_caseros_day_lost_battles = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_offense_mult = -0.10
+	unit_morale_loss_mult = 0.10
+}
+
+gg_caseros_day_carried_ground = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+}
+
+gg_caseros_day_lost_ground = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_offense_mult = -0.10
+	unit_morale_loss_mult = 0.10
+}
+
+gg_caseros_day_carried_numbers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+}
+
+gg_caseros_day_lost_numbers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_offense_mult = -0.10
+	unit_morale_loss_mult = 0.10
+}
+
+gg_caseros_day_carried_spirit = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+}
+
+gg_caseros_day_lost_spirit = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_offense_mult = -0.10
+	unit_morale_loss_mult = 0.10
+}
+
 # -------------------------------------------------------------------------------------------------
 # EN: THE PRICE OF A BATTLE LOST, and why it is a modifier and not an annexation. On 20 September 2026
 #     these three battles were given the power to end their wars: Pago Largo annexed Corrientes,
