@@ -1229,6 +1229,13 @@ gg_pact_buenos_aires_army = {
 					add_modifier = { name = gg_buenos_aires_army_barracks }
 				}
 			}
+			# EN: 27/9/2026 (AUD-PACT-BA-MELTS) -- the floor Entre Rios already has (AUD-PACT-ARMY-FLOOR), for the same leak: in
+			#     the twelve runs of 26-27/9 Buenos Aires's AI cut these barracks within two months (16 -> 8, 13 -> 7, 10 -> 4)
+			#     and Rosas reached Caseros with 5-15 battalions against 19-28. Entre Rios is already split off here, so the
+			#     floor is Buenos Aires's own barracks plus these ten; it keeps what was raised and adds nothing.
+			# ES: el mismo piso que ya tiene Entre Rios, por la misma fuga: la IA de Buenos Aires recortaba estos cuarteles en dos
+			#     meses y Rosas llegaba a Caseros con 5-15 batallones contra 19-28. Conserva lo levantado y no suma nada.
+			gg_pact_army_floor_add = { COUNT = 10 }
 			clear_saved_scope = gg_santos_lugares_army
 			create_military_formation = {
 				type = army

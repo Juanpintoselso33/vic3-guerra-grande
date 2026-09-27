@@ -180,15 +180,16 @@ gg_pact_field_army_barracks = {
 #     Corrientes want twice their FLOOR plus one: the barracks the mod mustered or raised for them (gg_pact_army_floor, set at
 #     the Pronouncement's muster, +18 for the Ejercito Grande, +3 for the Oriental division: gg_pact_army_floor_add), not the
 #     barracks they have today. Under the floor the AI keeps every level; with money it may add one above it, and there the
-#     wish is the barracks again (as before), so it never grows further. Buenos Aires keeps the old wish (the barracks it has):
-#     Rosas must not grow by script, and the probe shows its barracks steady. Country scope.
+#     wish is the barracks again (as before), so it never grows further. 27/9/2026 (AUD-PACT-BA-MELTS): Buenos Aires too,
+#     with its floor set when it raises Santos Lugares (its barracks plus those ten); the cuts it made were the same leak.
+#     Country scope.
 # ES: EL DESEO YA NO SIGUE A LOS RECORTES. Con el deseo igual a los cuarteles, cada recorte que la IA hacia por plata bajaba el
 #     deseo con el y nada lo devolvia (213354: Entre Rios 10 -> 5 -> 4, el Ejercito Grande 18 -> 9 -> 0, sin oro y con deuda
 #     minima; Caseros leyo 12 contra 6). La IA recorta cuarteles cuando el ingreso no cubre el gasto, y nunca mientras tenga
 #     menos de la mitad de lo que quiere. Asi que, mientras dura la guerra del Pronunciamiento, Entre Rios y Corrientes quieren
 #     el doble de su PISO mas uno: los cuarteles que el mod les reunio o levanto, no los que tienen hoy. Debajo del piso la IA
 #     conserva todo; con plata puede sumar uno arriba, y ahi el deseo vuelve a ser los cuarteles, asi que no crece mas.
-#     Buenos Aires conserva el deseo viejo: Rosas no crece por script.
+#     Desde el 27/9, Buenos Aires tambien: su piso se fija al levantar Santos Lugares (sus cuarteles mas esos diez).
 gg_pact_field_army_wanted = {
 	value = 0
 	if = {
@@ -196,7 +197,7 @@ gg_pact_field_army_wanted = {
 		add = gg_pact_field_army_barracks
 		if = {
 			limit = {
-				NOT = { c:ARG ?= this }
+				# EN/ES: 27/9/2026 (AUD-PACT-BA-MELTS) -- Buenos Aires too, since Santos Lugares / Buenos Aires tambien
 				has_variable = gg_pact_army_floor
 				gg_pact_field_army_barracks <= var:gg_pact_army_floor
 			}
