@@ -12,7 +12,7 @@ gg_pact_wargoal_enforced = {
 	trigger = {
 		has_global_variable = gg_war_against_buenos_aires
 		exists = scope:diplomatic_play
-		scope:diplomatic_play = { is_diplomatic_play_type = dp_gg_pacto_federal }
+		scope:diplomatic_play = { gg_is_pact_play = yes }
 		OR = {
 			AND = { c:ENR ?= this c:ARG ?= scope:target }
 			AND = { c:ARG ?= this c:ENR ?= scope:target }
@@ -55,7 +55,7 @@ gg_pact_capitulation = {
 gg_pact_on_war_end = {
 	trigger = {
 		has_global_variable = gg_war_against_buenos_aires
-		is_diplomatic_play_type = dp_gg_pacto_federal
+		gg_is_pact_play = yes
 		c:ARG ?= scope:actor
 		c:ENR ?= scope:target
 	}
@@ -119,7 +119,7 @@ on_diplo_play_back_down = {
 gg_pact_back_down = {
 	trigger = {
 		has_global_variable = gg_war_against_buenos_aires
-		is_diplomatic_play_type = dp_gg_pacto_federal
+		gg_is_pact_play = yes
 		exists = scope:actor
 		OR = {
 			c:ENR ?= scope:actor

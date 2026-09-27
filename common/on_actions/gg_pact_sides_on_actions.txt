@@ -15,7 +15,7 @@ on_diplo_play_war_start = {
 
 gg_pact_allies_war_start = {
 	trigger = {
-		is_diplomatic_play_type = dp_gg_pacto_federal
+		gg_is_pact_play = yes
 		target = { c:ENR ?= this }
 		# EN/ES: 24/9/2026 (Juan) -- no OR on Corrientes / the Coalition any more: the emigres join Urquiza the day
 		#     the war starts, whoever else pronounced (gg_argentina.89) / los emigrados se suman el dia que empieza la

@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- **The war of the Pronouncement runs to Caseros, three leaks closed:**
+  - *The Pact no longer "collapses" four days into the war.* Once fewer than seven provinces delegated to Buenos Aires,
+    the Federal Pact journal closed as "the mandate collapses" even with Urquiza's war just declared (one test run: 5 May
+    1851). Rosas fell on paper, the war went on unattended, the Ejército Grande was never raised and the war was still open
+    in 1853. Once that war is opened, it — not the count — settles the Pact.
+  - *No white peace before Caseros.* Buenos Aires had paid Oribe's war for years and entered 1851 at its debt ceiling; the
+    game's AI wants peace hard when bankrupt, and in one test run the two sides signed a white peace in November 1851,
+    before the Ejército Grande existed. The war of the Pronouncement is now a war nobody negotiates out of (as the
+    Guerra Grande itself): it ends when one side gives in or by the campaign's own readings (Caseros, the manoeuvre, the
+    siege, the game rules). The earlier wars of the Pact (Corrientes, the Coalition) keep their negotiated peace.
+  - *Urquiza's army no longer melts away in camp.* A province with no gold reserves cuts its barracks every month it
+    runs a deficit, and the army it "wanted" followed every cut down: in one run Entre Ríos went from 10 battalions to 4
+    by August, and the Ejército Grande from 18 to none in two months, so Caseros was fought 12 against 6. Now, while the
+    war lasts, Entre Ríos and Corrientes want twice the army the campaign raised for them (the Pronouncement's field army,
+    plus the Ejército Grande's 18 and the Oriental division): under that the AI never disbands a battalion, and with
+    money it adds at most one. Buenos Aires keeps the army it has, as before.
+  Games in progress: a Pronouncement war already open keeps its negotiated peace (the new rule applies to wars declared
+  from now on); the other two apply at once.
+
 - **Caseros is decided by the armies, in proportion:** with the line of the Paraná holding, no battle is fought before
   the day of Caseros, so the day came down to a few flat weights and a near-tie decided by chance even when one side had
   twice the other's battalions (in one test run Urquiza, 24 battalions against Rosas's 12, lost the day to the dice: "Urquiza

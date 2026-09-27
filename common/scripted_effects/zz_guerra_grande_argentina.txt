@@ -984,7 +984,7 @@ gg_argentina_open_war = {
 			create_diplomatic_play = {
 				name = gg_argentina_play_$TAG$
 				target_country = c:$TAG$
-				type = dp_gg_pacto_federal
+				type = dp_gg_pronunciamiento # EN/ES: 26/9/2026 (AUD-PACT-NEGOTIATED-EARLY) -- no negotiated peace / sin paz negociada
 				escalation = 100
 				war = yes
 			}
@@ -1376,6 +1376,9 @@ gg_argentina_raise_ejercito_grande = {
 	# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- the barracks of the state it is raised in have room for it (a save that signed
 	#     the convention before this fix) / los cuarteles del estado donde se levanta tienen lugar
 	if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
+	# EN/ES: 26/9/2026 (AUD-PACT-ARMY-FLOOR) -- Entre Rios's AI keeps these 18 too: the floor grows before they exist
+	#     / la IA de Entre Rios conserva tambien estos 18: el piso crece antes de que existan
+	if = { limit = { exists = scope:gg_formation_hq_state } c:ENR ?= { gg_pact_army_floor_add = { COUNT = 18 } } }
 	# EN: Without an owned state there is no valid HQ; skip this formation.
 	# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 	if = {
@@ -1472,6 +1475,8 @@ gg_argentina_complete_foreign_contingents = {
 			# EN/ES: 25/9/2026 (AUD-EG-EMPTY) -- room in the barracks; three battalions for the documented 2,500
 			#     / lugar en los cuarteles; tres batallones por los 2.500 documentados
 			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } }
+			# EN/ES: 26/9/2026 (AUD-PACT-ARMY-FLOOR) -- Entre Rios's AI keeps these 3 too / la IA de Entre Rios conserva tambien estos 3
+			if = { limit = { exists = scope:gg_formation_hq_state } gg_pact_army_floor_add = { COUNT = 3 } }
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {
@@ -1527,6 +1532,8 @@ gg_argentina_limited_foreign_contingents = {
 			gg_select_formation_hq_state = yes
 			clear_saved_scope = gg_oriental_limited_army
 			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } } # EN/ES: 25/9 (AUD-EG-EMPTY)
+			# EN/ES: 26/9/2026 (AUD-PACT-ARMY-FLOOR; Codex review) -- Entre Rios's AI keeps these 1 too / la IA de Entre Rios conserva tambien estos 1
+			if = { limit = { exists = scope:gg_formation_hq_state } gg_pact_army_floor_add = { COUNT = 1 } }
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {
@@ -1576,6 +1583,8 @@ gg_oriental_division_march = {
 			gg_select_formation_hq_state = yes
 			clear_saved_scope = gg_oriental_pledged_army
 			if = { limit = { exists = scope:gg_formation_hq_state } scope:gg_formation_hq_state = { gg_ejercito_grande_barracks_room = yes } } # EN/ES: 25/9 (AUD-EG-EMPTY)
+			# EN/ES: 26/9/2026 (AUD-PACT-ARMY-FLOOR; Codex review) -- Entre Rios's AI keeps these 2 too / la IA de Entre Rios conserva tambien estos 2
+			if = { limit = { exists = scope:gg_formation_hq_state } gg_pact_army_floor_add = { COUNT = 2 } }
 			# EN: Without an owned state there is no valid HQ; skip this formation.
 			# ES: Sin un estado propio no hay cuartel valido; se omite esta formacion.
 			if = {

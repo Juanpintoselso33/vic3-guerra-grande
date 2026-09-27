@@ -182,7 +182,7 @@ gg_urquiza.3 = {
 				limit = { exists = c:ENR }
 				every_diplomatic_play = {
 					limit = {
-						is_diplomatic_play_type = dp_gg_pacto_federal
+						gg_is_pact_play = yes
 						initiator_is = c:ARG
 						target_is = c:ENR
 					}

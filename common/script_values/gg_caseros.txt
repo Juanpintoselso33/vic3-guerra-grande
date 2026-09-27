@@ -170,11 +170,41 @@ gg_pact_field_army_barracks = {
 	}
 }
 
+# EN: 26/9/2026 (AUD-PACT-ARMY-FLOOR) -- THE WISH NO LONGER FOLLOWS THE CUTS. With the wish equal to the barracks, every cut
+#     the engine's AI made for money lowered the wish with it, and nothing brought it back: traza_20260926-213354, Entre Rios
+#     BRK 10 (31/5/1851) -> 5 -> 4, the Ejercito Grande 18 (27/11) -> 9 -> 0 (26/1/1852), WANT = BRK after every cut, GOLD 0,
+#     debt 2-6 %; Caseros read BN 12 against 6. The AI cuts barracks when its income does not cover its expenses (00_ai.txt
+#     MONEY_SPENDING_MAX_RATIO_TO_REMOVE_*), which a province with no gold reserves meets every month, and never while its
+#     barracks are under half of what it wants (MONEY_SPENDING_MILITARY_CRITICAL_THRESHOLD = 0.5: «AI will not consider
+#     downsizing them further»; the playset does not change it). So, while the war of the Pronouncement lasts, Entre Rios and
+#     Corrientes want twice their FLOOR plus one: the barracks the mod mustered or raised for them (gg_pact_army_floor, set at
+#     the Pronouncement's muster, +18 for the Ejercito Grande, +3 for the Oriental division: gg_pact_army_floor_add), not the
+#     barracks they have today. Under the floor the AI keeps every level; with money it may add one above it, and there the
+#     wish is the barracks again (as before), so it never grows further. Buenos Aires keeps the old wish (the barracks it has):
+#     Rosas must not grow by script, and the probe shows its barracks steady. Country scope.
+# ES: EL DESEO YA NO SIGUE A LOS RECORTES. Con el deseo igual a los cuarteles, cada recorte que la IA hacia por plata bajaba el
+#     deseo con el y nada lo devolvia (213354: Entre Rios 10 -> 5 -> 4, el Ejercito Grande 18 -> 9 -> 0, sin oro y con deuda
+#     minima; Caseros leyo 12 contra 6). La IA recorta cuarteles cuando el ingreso no cubre el gasto, y nunca mientras tenga
+#     menos de la mitad de lo que quiere. Asi que, mientras dura la guerra del Pronunciamiento, Entre Rios y Corrientes quieren
+#     el doble de su PISO mas uno: los cuarteles que el mod les reunio o levanto, no los que tienen hoy. Debajo del piso la IA
+#     conserva todo; con plata puede sumar uno arriba, y ahi el deseo vuelve a ser los cuarteles, asi que no crece mas.
+#     Buenos Aires conserva el deseo viejo: Rosas no crece por script.
 gg_pact_field_army_wanted = {
 	value = 0
 	if = {
 		limit = { gg_pact_keeps_field_army = yes }
 		add = gg_pact_field_army_barracks
+		if = {
+			limit = {
+				NOT = { c:ARG ?= this }
+				has_variable = gg_pact_army_floor
+				gg_pact_field_army_barracks <= var:gg_pact_army_floor
+			}
+			subtract = gg_pact_field_army_barracks
+			add = var:gg_pact_army_floor
+			add = var:gg_pact_army_floor
+			add = 1
+		}
 		subtract = wanted_army_size_script_value
 		min = 0
 	}

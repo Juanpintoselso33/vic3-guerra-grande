@@ -281,7 +281,30 @@ je_gg_delegation = {
 				has_global_variable = gg_pact_settled
 				# EN/ES: 23/9/2026 (Juan) -- the Pact's count, the Oriental included while it is in the Pact
 				#     (common/script_values/gg_pact_ui.txt) / la cuenta del Pacto, con la Oriental si esta adentro
-				AND = { year >= 1851 gg_pact_delegating <= 6 gg_pact_dynamic = yes }
+				AND = {
+					year >= 1851
+					gg_pact_delegating <= 6
+					gg_pact_dynamic = yes
+					# EN: 26/9/2026 (AUD-PACT-MANDATE-IN-WAR) -- not once the war of the Pronouncement was opened: that war, not the
+					#     count, settles the Pact (gg_caseros.6 the day after it ends). In traza_20260926-205801 the count fell to 6
+					#     four days after the Pronouncement (5/5/1851), this completed, gg_pact_resolve wrote «the mandate collapses»
+					#     (gg_argentina.30) with the war still on, and gg_pact_settled stopped the guard and the Ejercito Grande
+					#     (gg_argentina_cal.29 asks NOT gg_pact_settled): the war was still open in 1853. The truce too: the day the
+					#     war ends the reading is still one day away.
+					# ES: no despues de abierta la guerra del Pronunciamiento: esa guerra, no la cuenta, cierra el Pacto. En 205801 la
+					#     cuenta cayo a 6 cuatro dias despues del Pronunciamiento, esto se cumplio, se escribio «cae el mandato» con la
+					#     guerra en pie, y gg_pact_settled freno la guardia y el Ejercito Grande: la guerra seguia abierta en 1853.
+					NAND = {
+						has_global_variable = gg_war_against_buenos_aires
+						exists = c:ENR
+						c:ARG ?= {
+							OR = {
+								has_war_with = c:ENR
+								has_truce_with = c:ENR
+							}
+						}
+					}
+				}
 			}
 		}
 	}

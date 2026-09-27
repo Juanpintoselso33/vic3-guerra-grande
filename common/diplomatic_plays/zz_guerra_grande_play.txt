@@ -116,6 +116,59 @@ dp_gg_pacto_federal = {
 	on_war_end = {}
 }
 
+# -------------------------------------------------------------------------------------------------
+# EN: 26/9/2026 (AUD-PACT-NEGOTIATED-EARLY) -- dp_gg_pronunciamiento -- THE WAR OF THE PRONOUNCEMENT, Buenos Aires against
+#     Entre Rios from 1 May 1851: dp_gg_pacto_federal with no negotiated peace, as dp_guerra_grande. In traza_20260926-205805
+#     the two AIs signed a white peace on 2/11/1851, three months before the Ejercito Grande and Caseros, with the guard
+#     holding both war supports at 50-75: the engine's peace desire adds up to 200 for debt and 200 for bankruptcy
+#     (00_ai.txt AI_PEACE_DESIRE_FROM_DEBT_LEVEL / _FROM_BANKRUPTCY), and Buenos Aires was at 100 % of its ceiling from
+#     May 1851 (Rosas had paid Oribe's war for eight years). The guard props war support, not the treasury, so it could
+#     not stop it. History: Rosas answered the Pronouncement as a rebellion and nobody negotiated; the war was decided
+#     at Caseros (3/2/1852). The war now ends only by the engine's capitulation or war goal, or by the mod's own
+#     readings (the manoeuvre's draw, the siege, the rules of the Pact): the guard holds both sides until the day, and
+#     after it the tilt (gg_caseros.8) decides. The other Pact wars (Corrientes, the Coalition) keep their play and
+#     their negotiated peace. Every «is it a Pact play» check reads both types (gg_is_pact_play).
+# ES: LA GUERRA DEL PRONUNCIAMIENTO, Buenos Aires contra Entre Rios desde el 1/5/1851: dp_gg_pacto_federal sin paz
+#     negociada, como dp_guerra_grande. En 205805 las dos IA firmaron una paz blanca el 2/11/1851, tres meses antes del
+#     Ejercito Grande y de Caseros, con la guardia sosteniendo los dos apoyos entre 50 y 75: el deseo de paz del motor suma
+#     200 por la deuda y 200 por la bancarrota, y Buenos Aires estaba al 100 % de su techo desde mayo de 1851. La guardia
+#     sostiene el apoyo, no el tesoro. Historia: Rosas contesto el Pronunciamiento como una rebelion y nadie negocio; la
+#     guerra se decidio en Caseros. Ahora termina solo por capitulacion u objetivo del motor, o por las lecturas del mod
+#     (el empate de la maniobra, el sitio, las reglas del Pacto). Las otras guerras del Pacto conservan su paz negociada.
+# SOURCE / FUENTE: docs/guerra-grande-argentina/historia-argentina.md, «1850-1852 — Urquiza y Caseros».
+# -------------------------------------------------------------------------------------------------
+dp_gg_pronunciamiento = {
+	allow_negotiated_peace = no
+	war_goal = make_protectorate
+	add_infamy_for_starting_initiator_wargoals = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+
+	texture = "gfx/interface/icons/war_goals/make_protectorate.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		exists = c:ARG
+		scope:target_country = {
+			c:ENR ?= THIS
+		}
+	}
+
+	# EN/ES: guerra interna de la Confederacion: no se suma nadie / an internal war: nobody joins
+	additional_involvement_trigger = {
+		always = no
+	}
+
+	on_weekly_pulse = {}
+
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
 # EN: dp_gg_liga_disuelta (the war against the League, ending in annexation) was retired on 22/9/2026:
 #     the Coalition is fought with dp_gg_pacto_federal like the provinces, and a beaten Coalition is
 #     split into its provinces (common/scripted_effects/gg_provinces.txt).

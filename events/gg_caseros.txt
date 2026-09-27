@@ -46,7 +46,7 @@ gg_caseros.1 = {
 				#     / solo la jugada Buenos Aires - Entre Rios; otra guerra del Pacto sigue
 				every_diplomatic_play = {
 					limit = {
-						is_diplomatic_play_type = dp_gg_pacto_federal
+						gg_is_pact_play = yes
 						initiator_is = c:ARG
 						target_is = c:ENR
 					}

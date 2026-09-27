@@ -13,7 +13,7 @@ gg_oriental_division_war_start = {
 	trigger = {
 		has_global_variable = gg_oriental_division_pledged
 		NOT = { has_global_variable = gg_oriental_division_sent }
-		is_diplomatic_play_type = dp_gg_pacto_federal
+		gg_is_pact_play = yes
 		target = { c:ENR ?= this }
 	}
 	effect = {

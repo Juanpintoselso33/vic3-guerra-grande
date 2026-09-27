@@ -57,7 +57,7 @@ gg_pact_join_urquiza_side = {
 			# EN/ES: 24/9 (Codex, round 2) -- only its own Pact play, and not already in Entre Rios's war
 			#     / solo su propia jugada del Pacto, y sin estar ya en la guerra de Entre Rios
 			any_diplomatic_play = {
-				is_diplomatic_play_type = dp_gg_pacto_federal
+				gg_is_pact_play = yes
 				initiator_is = c:ARG
 				target_is = c:$TAG$
 			}
@@ -73,7 +73,7 @@ gg_pact_join_urquiza_side = {
 		}
 		every_diplomatic_play = {
 			limit = {
-				is_diplomatic_play_type = dp_gg_pacto_federal
+				gg_is_pact_play = yes
 				initiator_is = c:ARG
 				target_is = c:$TAG$
 			}

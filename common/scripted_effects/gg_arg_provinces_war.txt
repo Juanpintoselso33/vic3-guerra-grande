@@ -75,7 +75,7 @@ gg_arg_provinces_join_foreign_wars = {
 						#     por su cuenta, para que el barrido prohiba una entrada en una guerra del Pacto o de Buenos Aires
 						diplomatic_play = {
 							if = {
-								limit = { is_diplomatic_play_type = dp_gg_pacto_federal }
+								limit = { gg_is_pact_play = yes }
 								debug_log = "GG_EF|[TimeKeeper.GetCurrentDate.GetString]|gg_arg_provinces_join_foreign_wars| JOINED= yes PLAY= pacto " # GG_TRAZA
 							}
 							else_if = {

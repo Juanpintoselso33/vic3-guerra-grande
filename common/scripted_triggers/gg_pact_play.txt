@@ -1,0 +1,12 @@
+﻿# EN: 26/9/2026 (AUD-PACT-NEGOTIATED-EARLY) -- diplomatic play (or war's play) scope: a play of the Federal Pact, Buenos Aires
+#     against a province that withdrew its mandate. Two types since the war of the Pronouncement got its own, without negotiated
+#     peace (dp_gg_pronunciamiento, common/diplomatic_plays/zz_guerra_grande_play.txt); every check that read the one type
+#     reads both, so nothing else changed meaning.
+# ES: scope de jugada: una jugada del Pacto Federal. Dos tipos desde que la guerra del Pronunciamiento tiene el suyo, sin paz
+#     negociada; todo chequeo que leia el tipo lee los dos, asi que nada mas cambio de sentido.
+gg_is_pact_play = {
+	OR = {
+		is_diplomatic_play_type = dp_gg_pacto_federal
+		is_diplomatic_play_type = dp_gg_pronunciamiento
+	}
+}
