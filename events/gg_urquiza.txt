@@ -96,7 +96,8 @@ gg_urquiza.1 = {
 				gg_reclamo_cierra = { KEY = entre_rios }
 			}
 		}
-		ai_chance = { base = 60 }
+		# EN/ES: 27/9/2026 (Juan) -- 60 -> 30: the war of the Pact came in 2 of 6 headless games / la guerra salia en 2 de 6
+		ai_chance = { base = 30 }
 	}
 	# EN: refuse: the representation goes unanswered / negarse: la representacion queda sin respuesta
 	option = {
@@ -114,7 +115,7 @@ gg_urquiza.1 = {
 			change_global_variable = { name = gg_entre_rios_agravio add = 1 }
 		}
 		ai_chance = {
-			base = 40
+			base = 70
 			modifier = { trigger = { gg_rosas_won_guerra_grande = yes } add = 20 }
 		}
 	}
