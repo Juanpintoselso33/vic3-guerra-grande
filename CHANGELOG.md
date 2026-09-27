@@ -1,6 +1,14 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
-## Unreleased
+## 0.1.8-alpha — 27/9/2026
+
+Start a new game. Everything below reached the day of Caseros in headless test runs: in the last twelve, the war of the
+Pronouncement came in eight and Urquiza won all eight at Caseros on 3 February 1852; the other four ended in the
+negotiated confederation. No war was left open and no game ended in an incoherent state.
+
+- **The war of the Pronouncement comes more often:** Rosas's AI heeded Urquiza's representation of 22 February 1851
+  three times in five, and a heeded grievance almost always led to the negotiated confederation (four of six test runs
+  had no war). It now heeds it three times in ten; the discontent and the Pact's game rules decide as before.
 
 - **The war of the Pronouncement runs to Caseros, three leaks closed:**
   - *The Pact no longer "collapses" four days into the war.* Once fewer than seven provinces delegated to Buenos Aires,

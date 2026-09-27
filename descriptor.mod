@@ -1,4 +1,4 @@
-version="0.1.7-alpha"
+version="0.1.8-alpha"
 tags={
 	"Historical"
 	"Events"
