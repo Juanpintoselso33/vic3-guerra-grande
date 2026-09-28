@@ -1,5 +1,16 @@
 # Changelog — The Guerra Grande · the Río de la Plata, 1836-1862
 
+## 0.1.9-alpha — 27/9/2026
+
+Start a new game.
+
+- **Rosas can win the war of the Pronouncement:** Buenos Aires's AI dismantled the army of Santos Lugares within two months of raising it
+  (barracks 16 → 8, 13 → 7, 10 → 4), so Rosas reached Caseros with 5–15 battalions against Urquiza's 19–28 and lost all
+  eight Pact wars in the test runs. Buenos Aires now keeps the army it raised until the war ends, under the same rule that
+  already held Entre Ríos's army together; nothing is added to it. In twelve headless test runs with this fix the war of
+  the Pronouncement came in eight: Urquiza won six and Rosas two, every war ended by mid-1852, and the other four games
+  ended in the negotiated confederation.
+
 ## 0.1.8-alpha — 27/9/2026
 
 Start a new game. Everything below reached the day of Caseros in headless test runs: in the last twelve, the war of the
